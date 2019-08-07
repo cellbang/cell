@@ -5,7 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.1.1",
+    "@malagu/core": "^0.0.1",
     "@alicloud/pop-core": "^1.7.6",
     "@webserverless/fc-browser-sdk": "^0.1.1",
     "raw-body": "^2.3.3"
@@ -45,7 +45,7 @@
     }
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.1.1"
+    "@malagu/ext-scripts": "^0.0.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

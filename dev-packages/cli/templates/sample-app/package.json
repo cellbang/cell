@@ -15,6 +15,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@malagu/cli": "next",
     "@types/react-dom": "^16.8.5",
     "rimraf": "latest",
     "typescript": "latest"

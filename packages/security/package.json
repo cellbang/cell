@@ -1,18 +1,18 @@
 {
   "name": "@malagu/security",
-  "version": "0.1.1",
+  "version": "0.0.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@types/jsonwebtoken": "^8.3.2",
-    "@malagu/core": "^0.1.1",
+    "@malagu/core": "^0.0.1",
     "jsonwebtoken": "^8.5.1"
   },
   "publishConfig": {
     "access": "public"
   },
-  "malaguExtension": {
+  "malaguComponent": {
     "frontends": [
       "lib/browser/security-frontend-module"
     ],
@@ -21,7 +21,7 @@
     ]
   },
   "keywords": [
-    "malagu-extension"
+    "malagu-component"
   ],
   "license": "MIT",
   "repository": {
@@ -45,7 +45,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.1.1"
+    "@malagu/ext-scripts": "^0.0.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
