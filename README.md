@@ -13,6 +13,21 @@ malagu build
 malagu deploy
 ```
 
+## Project structure
+```
+.
+├── package.json
+└── src
+    ├── browser
+    │   ├── demo-frontend-module.ts
+    │   └── hello-world-service.ts
+    ├── common
+    │   └── hello-world-protocol.ts
+    └── node
+        ├── demo-backend-module.ts
+        └── hello-world-server.ts
+```
+
 ## Defining interface
 
 ```typescript
