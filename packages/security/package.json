@@ -1,0 +1,53 @@
+{
+  "name": "@malagu/security",
+  "version": "0.1.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.3.2",
+    "@malagu/core": "^0.1.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "malaguExtension": {
+    "frontends": [
+      "lib/browser/security-frontend-module"
+    ],
+    "backends": [
+      "lib/node/security-backend-module"
+    ]
+  },
+  "keywords": [
+    "malagu-extension"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.1.1"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

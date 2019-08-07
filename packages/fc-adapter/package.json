@@ -1,0 +1,53 @@
+{
+  "name": "@malagu/fc-adapter",
+  "version": "0.1.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "^0.1.1",
+    "@alicloud/pop-core": "^1.7.6",
+    "@webserverless/fc-browser-sdk": "^0.1.1",
+    "raw-body": "^2.3.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "malaguExtension": {
+    "config": {
+      "backend": {
+        "entry": "lib/node/http-application-entry"
+      }
+    }
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.1.1"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "@malagu/koa-adapter",
+  "version": "0.1.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@alicloud/pop-core": "^1.7.6",
+    "@malagu/core": "^0.1.1",
+    "@types/koa": "^2.0.49",
+    "koa": "^2.7.0",
+    "koa-route": "^3.2.0",
+    "koa-websocket": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-extension"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "malaguExtension": {
+    "config": {
+      "backend": {
+        "entry": "lib/node/web-socket-application-entry"
+      }
+    }
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.1.1",
+    "@types/koa": "^2.0.49",
+    "@types/koa-route": "^3.2.4",
+    "@types/koa-websocket": "^5.0.4"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

@@ -1,0 +1,1 @@
+# Malagu - KOA Adapter extension

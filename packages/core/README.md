@@ -1,0 +1,1 @@
+# Malagu - Core extension

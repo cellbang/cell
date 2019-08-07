@@ -1,0 +1,1 @@
+# Malagu - FC Adapter extension
