@@ -1,17 +1,16 @@
-# WebServerless
+# Malagu
 
-Serverless based web development framework.
+Web development framework.
 
 ## Getting Started
 
 ```bash
 npm install @malagu/cli@next -g
-malagu init demo                # init template
-npm install -g yarn                    # install yarn tool
-yarn build                             # build project
-yarn start:backend                     # start local backend for frontend
-yarn start:frontend                    # start loacl frontend
-yarn deploy                            # deploy project to cloud, need to configure AK with yarn config
+npm install -g yarn
+malagu init demo
+malagu serve
+malagu build
+malagu deploy
 ```
 
 ## Defining interface
