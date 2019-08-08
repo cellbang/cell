@@ -1,2 +1,2 @@
 export * from './context';
-export * from './koa-adapter-backend-module';
+export * from './backend-module';

@@ -21,7 +21,7 @@ export class ConfigFactory {
         }
 
         if (configurations.length === 0) {
-            throw new Error();
+            throw new Error('No malagu module found.');
         }
         
         return configurations;

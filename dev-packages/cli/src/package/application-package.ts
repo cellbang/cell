@@ -119,10 +119,10 @@ export class ApplicationPackage {
         if (config) {
             const prefix = isModule ? name : '.'
             if (config.frontend && config.frontend.entry) {
-                config.frontend.entry = paths.join(prefix, config.frontend.entry);
+                config.frontend.entry = `${prefix}/${config.frontend.entry}`;
             }
             if (config.backend && config.backend.entry) {
-                config.backend.entry = paths.join(prefix, config.backend.entry);
+                config.backend.entry =`${prefix}/${config.backend.entry}`;
             }
         }
 
@@ -132,10 +132,13 @@ export class ApplicationPackage {
     protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
         component.frontends = component.frontends || [];
         component.backends = component.backends || [];
-        const frontendModulePath = paths.join('lib', 'browser', `${name}-${FRONTEND_TARGET}-module`);
-        const backendModulePath = paths.join('lib', 'node', `${name}-${BACKEND_TARGET}-module`);
+        const prefix = isModule ? name : '.'
+        const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
+        const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
+        const fullFrontendModulePath = `${prefix}/${frontendModulePath}`;
+        const fullBackendModulePath = `${prefix}/${backendModulePath}`;
         try {
-            this.resolveModule(frontendModulePath);
+            this.resolveModule(fullFrontendModulePath);
             if (component.frontends.indexOf(frontendModulePath) === -1) {
                 component.frontends.push(frontendModulePath);
             }
@@ -143,7 +146,7 @@ export class ApplicationPackage {
             // noop
         }
         try {
-            this.resolveModule(backendModulePath);
+            this.resolveModule(fullBackendModulePath);
             if (component.backends.indexOf(backendModulePath) === -1) {
                 component.backends.push(backendModulePath);
             }

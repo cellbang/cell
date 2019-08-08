@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "0.0.1",
+"version": "0.0.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -59,7 +59,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.1",
+    "@malagu/ext-scripts":"^0.0.1",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },

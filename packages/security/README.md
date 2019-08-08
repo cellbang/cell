@@ -1,1 +1,1 @@
-# Malagu - Security extension
+# Malagu - Security component

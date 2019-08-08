@@ -1,2 +1,2 @@
 export * from './context';
-export * from './fc-adapter-backend-module';
+export * from './backend-module';

@@ -1,12 +1,12 @@
 import { resolve } from "path";
 import { existsSync, copy, readJSON, writeJSON } from "fs-extra";
-import { prompt, registerPrompt } from 'inquirer';
+const inquirer = require('inquirer');
 import request = require("request-promise");
 import { templates } from "./templates";
 import { spawnSync } from "child_process";
 const chalk = require('chalk');
 
-registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const SEARCH_TEMPLATE_REPO_URI = 'https://api.github.com/search/repositories?q=topic:malagu-template&sort=stars&order=desc';
 
@@ -48,7 +48,7 @@ export class InitManager {
 
     protected async checkOutputDir() {
         if (existsSync(this.outputDir)) {
-            const answers = await prompt([{
+            const answers = await inquirer.prompt([{
                 name: 'overwrite',
                 type: 'confirm',
                 message: 'App already exists, overwrite the app'
@@ -68,7 +68,7 @@ export class InitManager {
     }
 
     protected async selectTemplate(): Promise<void> {
-        const answers = await prompt([{
+        const answers = await inquirer.prompt([{
             name: 'location',
             type: 'autocomplete',
             message: 'Select a template to init',
