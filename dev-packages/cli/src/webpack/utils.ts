@@ -1,8 +1,6 @@
 const url = require('url');
 const ip = require('internal-ip');
 const chalk = require('chalk');
-const open = require('open');
-const isAbsoluteUrl = require('is-absolute-url');
 
 export function getUri(options: any) {
     const protocol = options.https ? 'https' : 'http';
@@ -46,30 +44,5 @@ export function getDevSuccessInfo(options: any): string[] {
             'Broadcasting "http" with subtype of "webpack" via ZeroConf DNS (Bonjour)'
         );
     }
-
-    if (options.open) {
-        runOpen(uri, options, infos);
-    }
     return infos;
-}
-
-export function runOpen(uri: any, options: any, infos: string[]) {
-    let openOptions = { wait: false };
-    let openMessage = 'Unable to open browser';
-
-    if (typeof options.open === 'string') {
-        openOptions = Object.assign({}, openOptions, { app: options.open });
-        openMessage += `: ${options.open}`;
-    }
-
-    const pageUrl =
-        options.openPage && isAbsoluteUrl(options.openPage)
-            ? options.openPage
-            : `${uri}${options.openPage || ''}`;
-
-    return open(pageUrl, openOptions).catch(() => {
-        infos.push(
-            `${openMessage}. If you are running in a headless environment, please do not use the --open flag`
-        );
-    });
 }

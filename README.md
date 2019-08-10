@@ -10,31 +10,33 @@ npm install -g yarn
 malagu init demo
 malagu serve
 malagu build
-malagu deploy
+malagu deploy  # not support
 ```
 
 ## Project structure
 ```
 .
 ├── package.json
-└── src
-    ├── browser
-    │   ├── demo-frontend-module.ts
-    │   └── hello-world-service.ts
-    ├── common
-    │   └── hello-world-protocol.ts
-    └── node
-        ├── demo-backend-module.ts
-        └── hello-world-server.ts
+├── src
+│   ├── browser
+│   │   ├── app.tsx
+│   │   ├── frontend-module.ts
+│   │   └── shell.tsx
+│   ├── common
+│   │   └── welcome-protocol.ts
+│   └── node
+│       ├── backend-module.ts
+│       └── welcome-server.ts
+└── tsconfig.json
 ```
 
 ## Defining interface
 
 ```typescript
-// src/common/hello-world-protocol.ts
-export const HelloWorldServer = Symbol('HelloWorldServer');
+// src/common/welcome-protocol.ts
+export const WelcomeServer = Symbol('WelcomeServer');
 
-export interface HelloWorldServer {
+export interface WelcomeServer {
     say(): Promise<string>;
 }
 
@@ -42,51 +44,51 @@ export interface HelloWorldServer {
 ## Defining server
 
 ```typescript
-// src/node/hello-world-server.ts
+// src/node/welcome-server.ts
+import { WelcomeServer } from '../common/welcome-protocol';
 import { rpc } from '@malagu/core/lib/common/annotation';
-import { HelloWorldServer } from '../common/hello-world-protocol';
 
-@rpc(HelloWorldServer)
-export class HelloWorldServerImpl implements HelloWorldServer {
+@rpc(WelcomeServer)
+export class WelcomeServerImpl implements WelcomeServer {
     say(): Promise<string> {
-        return Promise.resolve('Hello world.');
+        return Promise.resolve('Welcome to Malagu');
     }
 }
 ```
 
-## Binding server
+## Using Server
 
 ```typescript
-// src/node/demo-backend-module.ts
-export { HelloWorldServerImpl } from './hello-world-server';
-import { buildProviderModule } from 'inversify-binding-decorators';
-export default buildProviderModule()
-```
+// src/browser/app.tsx
+import * as React from 'react';
+import { autorpc } from '@malagu/core/lib/common/annotation/detached';
+import { WelcomeServer } from '../common/welcome-protocol';
 
-## Using client proxy
-
-```typescript
-// src/browser/hello-world-service.ts
-import { rpcInject, component } from '@malagu/core/lib/common/annotation';
-import { HelloWorldServer } from "../common/hello-world-protocol";
-
-@component(HelloWorldService)
-export class HelloWorldService {
-
-    constructor(
-        @rpcInject(HelloWorldServer) protected readonly helloWorldServer: HelloWorldServer
-    ) {}
-    
+interface Prop {}
+interface State {
+    response: string
 }
+
+export class App extends React.Component<Prop, State> {
+
+    @autorpc(WelcomeServer)
+    protected welcomeServer!: WelcomeServer;
+
+    constructor(prop: Prop) {
+        super(prop);
+        this.state = { response: 'Loading' };
+    }
+
+    async componentDidMount() {
+        const response = await this.welcomeServer.say();
+        this.setState({
+            response
+        });
+    }
+
+    render() {
+        return <div>{this.state.response}</div>
+    }
+}
+
 ```
-
-## Binding service
-
-```typescript
-// src/browser/demo-frontend-module.ts
-export { HelloWorldService } from './hello-world-service';
-import { buildProviderModule } from 'inversify-binding-decorators';
-export default buildProviderModule()
-```
-
-
