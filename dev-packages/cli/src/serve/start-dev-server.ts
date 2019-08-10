@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as net from 'net';
 import * as vm from 'vm';
-import * as path from 'path';
+import { resolve, basename, dirname } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
 const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
@@ -12,79 +12,77 @@ const findPort = require('webpack-dev-server/lib/utils/findPort');
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { getDevSuccessInfo } from '../webpack/utils';
 import * as expressWs from 'express-ws';
+const webpackDevMiddleware = require('webpack-dev-middleware');
 
 let server: any;
 
 setupExitSignals(server);
 
-function doStartDevServer(config: any, options: any, mfs: any) {
-    const log = createLogger(options);
-
-    let compiler: webpack.Compiler;
-
+function createCompiler(configuration: webpack.Configuration, options: any, log: any) {
     try {
-        compiler = webpack(config);
-        compiler.outputFileSystem = mfs;
-        new FriendlyErrorsWebpackPlugin({
-            compilationSuccessInfo: {
-                messages: getDevSuccessInfo(config.devServer),
-                notes: []
-            }
-        }).apply(compiler);
+        return webpack(configuration);
     } catch (err) {
         if (err instanceof (webpack as any).WebpackOptionsValidationError) {
             log.error(colors.error(options.stats.colors, err.message));
             process.exit(1);
         }
-
         throw err;
     }
 
+}
+
+function getEntryPath(configuration: webpack.Configuration) {
+    const { path, filename } = configuration.output as any;
+    return resolve(path, filename);
+}
+
+function attachBackendServerIfNeed(server: any, configuration: webpack.Configuration, options: any, log: any) {
+    const compiler = createCompiler(configuration, options, log);
+    server.app.use(webpackDevMiddleware(compiler));
+    const ws = expressWs(server.app, server.listeningApp);
+            
+    server.app.ws('/api', (s: any) => {
+        const entryPath = getEntryPath(configuration);
+        const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
+        const wrapper = `(function (exports, require, module, __filename, __dirname, __request) { 
+            ${source}
+        })`;
+        const filename = basename(entryPath);
+        const compiled = vm.runInThisContext(wrapper, {
+            filename,
+            lineOffset: 0,
+            displayErrors: true
+        });
+        const exports: any = {};
+        const module = { exports };
+        compiled(exports, require, module, filename, dirname(filename));
+        const { container, Context, WebSocketContext, Dispatcher } = module.exports;
+        container.then((c: any) => {
+            const dispatcher = c.get(Dispatcher);
+            Context.run(() => new WebSocketContext(ws.getWss(), s, dispatcher));
+        });
+    });
+
+}
+
+function doStartDevServer(configurations: webpack.Configuration[], options: any) {
+    const log = createLogger(options);
+
+    const [configuration, backendConfiguration] = configurations;
+
+    let compiler: webpack.Compiler;
+
+    compiler = createCompiler(configuration, options, log);
+    new FriendlyErrorsWebpackPlugin({
+        compilationSuccessInfo: {
+            messages: getDevSuccessInfo(configuration.devServer),
+            notes: []
+        }
+    }).apply(compiler);
+
     try {
         server = new Server(compiler, options, log);
-        const ws = expressWs(server.app, server.listeningApp);
-        const oldCreateReadStream = fs.createReadStream;
-        (fs as any).createReadStream = (path: any, options: any) => {
-            if (path.toString().startsWith(config.devServer.contentBase)) {
-                return mfs.createReadStream(path, options);
-            }
-            return oldCreateReadStream(path, options);
-        };
-        const oldStat = fs.stat;
-
-        (fs as any).stat = (path: fs.PathLike, callback: (err: NodeJS.ErrnoException, stats: fs.Stats) => void) => {
-            if (path.toString().startsWith(config.devServer.contentBase)) {
-                mfs.stat(path, (err: any, stat: any) => {
-                    if (!err) {
-                        stat.mtime = new Date();
-                    }
-                    callback(err, stat);
-                });
-            } else {
-                oldStat(path, callback);
-            }
-        };
-        server.app.ws('/api', (s: any) => {
-            const entryPath = path.resolve(config.output.path, config.output.filename);
-            const source = mfs.readFileSync(entryPath, 'utf8');
-            const wrapper = `(function (exports, require, module, __filename, __dirname, __request) { 
-                ${source}
-            })`;
-            const filename = path.basename(entryPath);
-            const compiled = vm.runInThisContext(wrapper, {
-                filename,
-                lineOffset: 0,
-                displayErrors: true
-            });
-            const exports: any = {};
-            const module = { exports };
-            compiled(exports, require, module, filename, path.dirname(filename));
-            const { container, Context, WebSocketContext, Dispatcher } = module.exports;
-            container.then((c: any) => {
-                const dispatcher = c.get(Dispatcher);
-                Context.run(() => new WebSocketContext(ws.getWss(), s, dispatcher));
-            });
-        });
+        attachBackendServerIfNeed(server, backendConfiguration, options, log);
     } catch (err) {
         if (err.name === 'ValidationError') {
             log.error(colors.error(options.stats.colors, err.message));
@@ -150,8 +148,8 @@ function doStartDevServer(config: any, options: any, mfs: any) {
     return compiler;
 }
 
-export function startDevServer(config: any, options: any, mfs: any) {
-    processOptions(config, options, (config: any, options: any) => {
-        doStartDevServer(config, options, mfs);
+export function startDevServer(configurations: webpack.Configuration[]) {
+    processOptions(configurations, { info: false }, (configurations: any, options: any) => {
+        doStartDevServer(configurations, options);
     });
 }

@@ -2,14 +2,13 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import { Context } from './context';
-import { BACKEND_TARGET, FRONTEND_TARGET } from '../../constants';
+import { BACKEND_TARGET } from '../../constants';
 import mergeWith = require('lodash.mergewith');
 import { customizer } from '../../package';
 
 export class BackendConfigFactory {
     create(context: Context): webpack.Configuration {
         const { pkg, port, open, dev } = context;
-        const frontendOutputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
         const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
         let appConfig = { ...pkg.props };
         delete appConfig.backend;
@@ -32,10 +31,6 @@ export class BackendConfigFactory {
                 libraryTarget: 'umd'
             },
             devServer: {
-                contentBase: frontendOutputPath,
-                staticOptions: {
-                    etag: !dev
-                },
                 port,
                 open,
                 stats: 'errors-only'

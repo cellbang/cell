@@ -3,7 +3,7 @@ import { ProxyProvider, ProxyCreator } from './jsonrpc/proxy-protocol';
 import { ConnnectionFactory, ConnnectionFactoryImpl } from '../common/jsonrpc/connection-factory';
 import { ConfigProvider } from '../common/config-provider';
 import { ConfigProviderImpl } from './config-provider';
-import { RPC } from '../common/annotation/rpc-inject';
+import { RPC } from '../common/annotation/autowired';
 import { ProxyProviderImpl, HttpProxyCreator, WebSocketProxyCreator } from './jsonrpc';
 import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';

@@ -16,6 +16,9 @@ export class FrontendConfigFactory {
         delete appConfig.frontend;
         appConfig = mergeWith(appConfig, pkg.props.frontend, customizer);
         const entry = pkg.resolveModule(appConfig.entry);
+        if (!appConfig.endpoint) {
+            appConfig.endpoint = `ws://localhost:${port}/api`;
+        }
         return {
             name: FRONTEND_TARGET,
             entry: entry,

@@ -10,20 +10,22 @@
   ],
   "dependencies": {
     "@malagu/core": "next",
-    "antd": "^3.20.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@malagu/cli": "next",
     "@types/react-dom": "^16.8.5",
-    "rimraf": "latest",
-    "typescript": "latest"
+    "bufferutil": "^4.0.1",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.5.3",
+    "utf-8-validate": "^5.0.2"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
-    "clean": "rimraf lib",
+    "clean": "rimraf lib dist",
     "build": "tsc",
+    "start": "malagu serve",
     "watch": "tsc -w"
   }
 }

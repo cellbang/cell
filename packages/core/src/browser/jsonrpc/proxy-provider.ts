@@ -16,9 +16,9 @@ export class ProxyProviderImpl implements ProxyProvider {
     }
 
     protected prioritize(path: string): ProxyCreator[] {
-        const prioritized = Prioritizeable.prioritizeAllSync(this.proxyCreators, client => {
+        const prioritized = Prioritizeable.prioritizeAllSync(this.proxyCreators, proxyCreator => {
             try {
-                return client.support(path);
+                return proxyCreator.support(path);
             } catch {
                 return 0;
             }
