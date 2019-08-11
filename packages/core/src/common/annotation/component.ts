@@ -2,15 +2,19 @@ import { fluentProvide } from 'inversify-binding-decorators';
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { ConnectionHandler, JsonRpcConnectionHandler } from '../jsonrpc';
+
+export enum Scope {
+    Request, Singleton, Transient
+}
 export interface ComponentOption {
     id?: interfaces.ServiceIdentifier<any>,
-    singleton?: boolean,
+    scope?: Scope,
     rebind?: boolean,
     rpc?: boolean
 }
 export namespace ComponentOption {
     export function is(options: any): options is ComponentOption {
-        return options && (options.id !== undefined || options.singleton !== undefined || options.rebind !== undefined);
+        return options && (options.id !== undefined || options.scope !== undefined || options.rebind !== undefined);
     }
 }
 
@@ -39,7 +43,7 @@ export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any
 export function applyComponentDecorator(option: ComponentOption, target: any): void {
     const defaultComponentOption: ComponentOption = {
         id: target,
-        singleton: true,
+        scope: Scope.Singleton,
         rebind: false,
         rpc: false,
     };
@@ -47,8 +51,10 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
 
     const id = <interfaces.ServiceIdentifier<any>>opt.id;
     const p = fluentProvide(id);
-    if (opt.singleton) {
+    if (opt.scope === Scope.Singleton) {
         p.inSingletonScope();
+    } else if (opt.scope === Scope.Transient) {
+        p.inTransientScope();
     }
     if (opt.rebind) {
         const metadata = true;
