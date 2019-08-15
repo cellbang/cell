@@ -4,7 +4,7 @@ import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
 import { Component, ComponentPackage } from './component-package';
 import { ComponentPackageCollector } from './component-package-collector';
 import { ApplicationProps } from './application-props';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs-extra';
 import mergeWith = require('lodash.mergewith');
 import yaml = require('js-yaml');
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
@@ -58,14 +58,14 @@ export class ApplicationPackage {
 
         const appConfigPath = this.path('app.yml');
         if (existsSync(appConfigPath)) {
-            const appConfig = yaml.safeLoad(appConfigPath);
+            const appConfig = yaml.safeLoad(readFileSync(appConfigPath, { encoding: 'utf8' }));
             props = mergeWith(props, appConfig);
         }
 
         if (props.mode) {
             const appConfigPathForMode = this.path(`app-${props.mode}.yml`);
             if (existsSync(appConfigPathForMode)) {
-                const appConfigForMode = yaml.safeLoad(appConfigPathForMode);
+                const appConfigForMode = yaml.safeLoad(readFileSync(appConfigPathForMode, { encoding: 'utf8' }));
                 props = mergeWith(props, appConfigForMode);
             }
         }

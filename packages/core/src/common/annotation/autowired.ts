@@ -56,7 +56,7 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
         if (index !== undefined) {
             throw new Error(`The ${target.constructor.name} itself is not injected into the container, so the parameter injection of the constructor is not supported.`);
         }
-        createProperty(opt, isMulti, target, targetKey);
+        createAutowiredProperty(opt, isMulti, target, targetKey);
         return;
     }
 
@@ -73,7 +73,7 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
     }
 }
 
-export function createProperty(option: AutowiredOption, isMulti: boolean, target: any, property: string) {
+export function createAutowiredProperty(option: AutowiredOption, isMulti: boolean, target: any, property: string) {
     let value: any;
     Object.defineProperty(target, property, {
         enumerable: true,

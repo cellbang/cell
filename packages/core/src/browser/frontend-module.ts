@@ -10,6 +10,7 @@ import { LogLevelDesc, getLogger } from 'loglevel';
 import { ApplicationShell, ApplicationShellImpl } from './application-shell';
 import { FrontendApplication, FrontendApplicationLifecycle, EmptyFrontendApplicationLifecycle } from './frontend-application';
 import { FrontendApplicationStateService } from './frontend-application-state';
+import { VALUE } from '../common/annotation/value';
 
 export const CoreFrontendModule = new ContainerModule(bind => {
     bind(ProxyProvider).to(ProxyProviderImpl).inSingletonScope();
@@ -36,6 +37,13 @@ export const CoreFrontendModule = new ContainerModule(bind => {
         const path = namedMetadata!.value.toString();
         const proxyProvider = ctx.container.get<ProxyProvider>(ProxyProvider);
         return proxyProvider.provide(path);
+    });
+
+    bind(VALUE).toDynamicValue(ctx => {
+        const namedMetadata = ctx.currentRequest.target.getNamedTag();
+        const el = namedMetadata!.value.toString();
+        const configProvider = ctx.container.get<ConfigProvider>(ConfigProvider);
+        return configProvider.get(el);
     });
 
 });

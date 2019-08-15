@@ -56,8 +56,9 @@ function attachBackendServerIfNeed(server: any, configuration: webpack.Configura
         const exports: any = {};
         const module = { exports };
         compiled(exports, require, module, filename, dirname(filename));
-        const { container, Context, WebSocketContext, Dispatcher } = module.exports;
+        const { container, Context, WebSocketContext, Dispatcher, ContainerProvider } = module.exports;
         container.then((c: any) => {
+            ContainerProvider.set(c);
             const dispatcher = c.get(Dispatcher);
             Context.run(() => new WebSocketContext(ws.getWss(), s, dispatcher));
         });

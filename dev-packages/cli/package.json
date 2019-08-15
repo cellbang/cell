@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-"version": "0.0.1",
+  "version": "0.0.1",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
