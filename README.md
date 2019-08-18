@@ -2,6 +2,13 @@
 
 Web development framework.
 
+## Document
+
+* [Malagu Annotaion](https://github.com/muxiangqiu/malagu/blob/master/doc/annotation.md)
+* [Malagu Component](https://github.com/muxiangqiu/malagu/blob/master/doc/component.md)
+* [Malagu Configuration](https://github.com/muxiangqiu/malagu/blob/master/doc/config.md)
+
+
 ## Getting Started
 
 ```bash
