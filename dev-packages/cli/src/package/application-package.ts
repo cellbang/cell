@@ -83,6 +83,8 @@ export class ApplicationPackage {
 
     protected _frontendModules: Map<string, string> | undefined;
     protected _backendModules: Map<string, string> | undefined;
+    protected _initHookModules: Map<string, string> | undefined;
+    protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
 
     /**
@@ -179,6 +181,20 @@ export class ApplicationPackage {
             this._backendModules = this.computeModules('backends');
         }
         return this._backendModules;
+    }
+
+    get initHookModules() {
+        if (!this._initHookModules) {
+            this._initHookModules = this.computeModules('initHooks');
+        }
+        return this._initHookModules;
+    }
+
+    get deployHookModules() {
+        if (!this._deployHookModules) {
+            this._deployHookModules = this.computeModules('deployHooks');
+        }
+        return this._deployHookModules;
     }
 
     protected computeModules<P extends keyof Component>(tagret: P): Map<string, string> {

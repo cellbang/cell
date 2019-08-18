@@ -6,6 +6,9 @@ export interface Component {
     config?: ApplicationProps;
     frontends?: string[];
     backends?: string[];
+    initHooks?: string[];
+    deployHooks?: string[];
+    
 }
 
 export class ComponentPackage {

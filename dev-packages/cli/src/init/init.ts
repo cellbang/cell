@@ -21,5 +21,5 @@ program
     await initManager.output();
     await initManager.render();
     await initManager.install();
+    await initManager.executeHooks();
 })();
-

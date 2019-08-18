@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 import request = require("request-promise");
 import { templates } from "./templates";
 import { spawnSync } from "child_process";
+import { HookExecutor } from "../hook/hook-executor";
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -40,6 +41,10 @@ export class InitManager {
 
     async install(): Promise<void> {
         spawnSync('yarn', ['install'], { cwd: this.outputDir, stdio: 'inherit' });
+    }
+
+    async executeHooks(): Promise<void> {
+        await new HookExecutor().executeInitHooks();
     }
 
     protected get outputDir(): string {
