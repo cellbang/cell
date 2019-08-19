@@ -1,13 +1,18 @@
 {
   "name": "@malagu/fc-adapter",
-"version": "0.0.1",
+  "version": "0.0.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
+    "@alicloud/fc2": "^2.1.1",
     "@alicloud/pop-core": "^1.7.6",
-    "@malagu/core":"^0.0.1",
+    "@malagu/cli": "^0.0.1",
+    "@malagu/core": "^0.0.1",
     "@webserverless/fc-browser-sdk": "^0.1.1",
+    "adm-zip": "^0.4.13",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.1",
     "raw-body": "^2.3.3"
   },
   "publishConfig": {
@@ -37,15 +42,19 @@
     "test": "malaguext test",
     "docs": "malaguext docs"
   },
-  "malaguExtension": {
+  "malaguComponent": {
     "config": {
       "backend": {
         "entry": "lib/node/http-application-entry"
       }
-    }
+    },
+    "deployHooks": [
+      "lib/cli/deploy"
+    ]
   },
   "devDependencies": {
-    "@malagu/ext-scripts":"^0.0.1"
+    "@malagu/ext-scripts": "^0.0.1",
+    "@types/inquirer": "^6.5.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
