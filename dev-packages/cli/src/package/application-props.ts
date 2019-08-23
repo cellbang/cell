@@ -34,7 +34,7 @@ export interface ApplicationConfig {
     // tslint:disable-next-line:no-any
     readonly [key: string]: any;
 
-    entry?: string;
+    entry?: any;
 }
 
 export interface FrontendApplicationConfig extends ApplicationConfig {

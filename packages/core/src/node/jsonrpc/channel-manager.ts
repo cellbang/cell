@@ -20,7 +20,7 @@ export class ChannelManager {
      }
 
     async handleChannels(ctx: Context): Promise<void> {
-        ctx.handleChannels(async () => {
+        await ctx.handleChannels(async () => {
             const { id, path } = (await ctx.getMessage() as any);
             if (path) {
                 const handler = this._handlers.get(this.getRealPath(path));

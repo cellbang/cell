@@ -14,9 +14,9 @@ export interface Context {
 }
 
 export namespace Context {
-    export async function create(): Promise<Context> {
-        const pkg = new ApplicationPackage({ projectPath: process.cwd() });
-        const configPath = path.resolve(process.cwd(), CONFIG_FILE);
+    export async function create(projectPath: string = process.cwd()): Promise<Context> {
+        const pkg = new ApplicationPackage({ projectPath });
+        const configPath = path.resolve(projectPath, CONFIG_FILE);
         const config = fs.existsSync(configPath) ? require(configPath) : {};
         return <Context> {
             pkg,

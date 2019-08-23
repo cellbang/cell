@@ -1,5 +1,4 @@
 import {  Context } from '@malagu/core/lib/node/jsonrpc';
-import * as getRawBody from 'raw-body';
 import { HttpChannel } from '@malagu/core/lib/common/jsonrpc/http-channel';
 import { Channel } from '@malagu/core/lib/common/jsonrpc/channel-protocol';
 
@@ -32,7 +31,8 @@ export abstract class AbstractContext implements Context {
     }
 
     async handleChannels(channelFactory: () => Promise<Channel>): Promise<void> {
-        await channelFactory();
+        const channel = await channelFactory();
+        channel.handleMessage(this.message);
     }
 
 }
@@ -73,7 +73,7 @@ export class HttpContext extends AbstractContext {
     }
 
     async doGetMessage(): Promise<string> {
-        return (await getRawBody(this.request)).toString();
+        return this.request.body;
     }
     async handleError(err: Error): Promise<void> {
         this.response.statusCode = 500;

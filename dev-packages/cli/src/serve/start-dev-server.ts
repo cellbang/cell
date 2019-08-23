@@ -16,8 +16,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 
 let server: any;
 
-setupExitSignals(server);
-
 function createCompiler(configuration: webpack.Configuration, options: any, log: any) {
     try {
         return webpack(configuration);
@@ -76,13 +74,14 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any)
     compiler = createCompiler(configuration, options, log);
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
-            messages: getDevSuccessInfo(configuration.devServer),
+            messages: getDevSuccessInfo((configuration as any).devServer),
             notes: []
         }
     }).apply(compiler);
 
     try {
         server = new Server(compiler, options, log);
+        setupExitSignals(server);
         attachBackendServerIfNeed(server, backendConfiguration, options, log);
     } catch (err) {
         if (err.name === 'ValidationError') {

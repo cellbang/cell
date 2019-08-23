@@ -44,7 +44,7 @@ export class InitManager {
     }
 
     async executeHooks(): Promise<void> {
-        await new HookExecutor().executeInitHooks();
+        await new HookExecutor().executeInitHooks(this.outputDir);
     }
 
     protected get outputDir(): string {

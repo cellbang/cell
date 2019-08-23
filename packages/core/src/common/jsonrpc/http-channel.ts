@@ -8,7 +8,11 @@ export class HttpChannel extends AbstractChannel {
         protected readonly path?: string
     ) {
         super(id, doSend);
-     }
+    }
+
+    protected checkNotDisposed(): void {
+        // noop
+    }
 
     handleMessage(message: Channel.HttpMessage) {
         this.fireMessage(message.content);

@@ -14,14 +14,19 @@ export class BackendConfigFactory {
         delete appConfig.backend;
         delete appConfig.frontend;
         appConfig = mergeWith(appConfig, pkg.props.backend, customizer);
-        let entry: string = appConfig.entry;
+        let entry = appConfig.entry;
         if (dev) {
-            if (entry && !entry.includes('dev-')) {
+            if (entry && (typeof entry !== 'string' || !entry.includes('dev-'))) {
                 entry = '@malagu/core/lib/node/dev-application-entry';
+            }
+        } else {
+            const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;
+            if (type && typeof entry !== 'string') {
+                entry = entry[type];
             }
         }
         entry = pkg.resolveModule(entry.split(path.sep).join('/'));
-        return {
+        return <webpack.Configuration>{
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',

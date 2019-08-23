@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "@malagu/core": "next",
+    "@malagu/fc-adapter": "next",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },

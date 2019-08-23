@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@alicloud/cloudapi@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npm.taobao.org/@alicloud/cloudapi/download/@alicloud/cloudapi-1.1.0.tgz#66d4af2c9f5f43a445a6185958484c2f6149aa1d"
+  dependencies:
+    "@alicloud/pop-core" "^1.4.0"
+
 "@alicloud/fc2@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/@alicloud/fc2/download/@alicloud/fc2-2.1.1.tgz#7ff01337ac73ae152e7a4164047ee94ae4a700d4"
@@ -11,7 +17,7 @@
     httpx "^2.1.1"
     kitx "^1.2.0"
 
-"@alicloud/pop-core@^1.7.6":
+"@alicloud/pop-core@^1.3.3", "@alicloud/pop-core@^1.4.0", "@alicloud/pop-core@^1.7.6":
   version "1.7.7"
   resolved "https://registry.npm.taobao.org/@alicloud/pop-core/download/@alicloud/pop-core-1.7.7.tgz#4f6cf72257d9decb1ff5712a3cf7b79afdc41e1c"
   dependencies:
@@ -20,6 +26,12 @@
     json-bigint "^0.2.3"
     kitx "^1.2.1"
     xml2js "^0.4.17"
+
+"@alicloud/ram@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/@alicloud/ram/download/@alicloud/ram-1.0.0.tgz#5f24254a5e3fa1c84c7b153540030a31eb516f28"
+  dependencies:
+    "@alicloud/pop-core" "^1.3.3"
 
 "@babel/code-frame@^7.0.0":
   version "7.5.5"
@@ -219,6 +231,12 @@
 "@types/jsonwebtoken@^8.3.2":
   version "8.3.2"
   resolved "https://registry.npm.taobao.org/@types/jsonwebtoken/download/@types/jsonwebtoken-8.3.2.tgz#e3d5245197152346fae7ee87d5541aa5a92d0362"
+  dependencies:
+    "@types/node" "*"
+
+"@types/jszip@^3.1.6":
+  version "3.1.6"
+  resolved "https://registry.npm.taobao.org/@types/jszip/download/@types/jszip-3.1.6.tgz#0512574a2b35f3194b41769c56e4b35065e67000"
   dependencies:
     "@types/node" "*"
 
@@ -602,10 +620,6 @@ acorn@^6.0.1, acorn@^6.2.1:
 add-stream@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/add-stream/download/add-stream-1.0.0.tgz#6a7990437ca736d5e1288db92bd3266d5f5cb2aa"
-
-adm-zip@^0.4.13:
-  version "0.4.13"
-  resolved "https://registry.npm.taobao.org/adm-zip/download/adm-zip-0.4.13.tgz#597e2f8cc3672151e1307d3e95cddbc75672314a"
 
 ajv-errors@^1.0.0:
   version "1.0.1"
@@ -3644,6 +3658,10 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
+immediate@~3.0.5:
+  version "3.0.6"
+  resolved "https://registry.npm.taobao.org/immediate/download/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
+
 import-local@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/import-local/download/import-local-2.0.0.tgz#55070be38a5993cf18ef6db7e961f5bee5c5a09d"
@@ -4314,6 +4332,15 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jszip@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.npm.taobao.org/jszip/download/jszip-3.2.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjszip%2Fdownload%2Fjszip-3.2.2.tgz#b143816df7e106a9597a94c77493385adca5bd1d"
+  dependencies:
+    lie "~3.3.0"
+    pako "~1.0.2"
+    readable-stream "~2.3.6"
+    set-immediate-shim "~1.0.1"
+
 just-extend@^4.0.2:
   version "4.0.2"
   resolved "https://registry.npm.taobao.org/just-extend/download/just-extend-4.0.2.tgz#f3f47f7dfca0f989c55410a7ebc8854b07108afc"
@@ -4525,6 +4552,12 @@ levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+lie@~3.3.0:
+  version "3.3.0"
+  resolved "https://registry.npm.taobao.org/lie/download/lie-3.3.0.tgz#dcf82dee545f46074daf200c7c1c5a08e0f40f6a"
+  dependencies:
+    immediate "~3.0.5"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -5649,7 +5682,7 @@ package-json@^4.0.1:
     registry-url "^3.0.3"
     semver "^5.1.0"
 
-pako@~1.0.5:
+pako@~1.0.2, pako@~1.0.5:
   version "1.0.10"
   resolved "https://registry.npm.taobao.org/pako/download/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
 
@@ -6595,6 +6628,10 @@ serve-static@1.14.1:
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/set-blocking/download/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
+
+set-immediate-shim@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/set-immediate-shim/download/set-immediate-shim-1.0.1.tgz#4b2b1b27eb808a9f8dcc481a58e5e56f599f3f61"
 
 set-value@^2.0.0, set-value@^2.0.1:
   version "2.0.1"

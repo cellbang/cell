@@ -35,7 +35,7 @@ export class ApplicationPackage {
     constructor(
         protected readonly options: ApplicationPackageOptions
     ) {
-        this.projectPath = options.projectPath;
+        this.projectPath = options.projectPath || process.cwd();
         this.log = options.log || console.log.bind(console);
         this.error = options.error || console.error.bind(console);
     }
@@ -121,10 +121,26 @@ export class ApplicationPackage {
         if (config) {
             const prefix = isModule ? name : '.'
             if (config.frontend && config.frontend.entry) {
-                config.frontend.entry = `${prefix}/${config.frontend.entry}`;
+                if (typeof config.frontend.entry === 'string') {
+                    config.frontend.entry = `${prefix}/${config.frontend.entry}`;
+                } else {
+                    for (const key in config.frontend.entry) {
+                        if (config.frontend.entry.hasOwnProperty(key)) {
+                            config.frontend.entry[key] = `${prefix}/${config.frontend.entry[key]}`;
+                        }
+                    }
+                }
             }
             if (config.backend && config.backend.entry) {
-                config.backend.entry =`${prefix}/${config.backend.entry}`;
+                if (typeof config.backend.entry === 'string') {
+                    config.backend.entry =`${prefix}/${config.backend.entry}`;
+                } else {
+                    for (const key in config.backend.entry) {
+                        if (config.backend.entry.hasOwnProperty(key)) {
+                            config.backend.entry[key] = `${prefix}/${config.backend.entry[key]}`;
+                        }
+                    }
+                }
             }
         }
 
@@ -137,8 +153,8 @@ export class ApplicationPackage {
         const prefix = isModule ? name : '.'
         const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
         const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
-        const fullFrontendModulePath = `${prefix}/${frontendModulePath}`;
-        const fullBackendModulePath = `${prefix}/${backendModulePath}`;
+        const fullFrontendModulePath = `${this.projectPath}/${prefix}/${frontendModulePath}`;
+        const fullBackendModulePath = `${this.projectPath}/${prefix}/${backendModulePath}`;
         try {
             this.resolveModule(fullFrontendModulePath);
             if (component.frontends.indexOf(frontendModulePath) === -1) {

@@ -8,18 +8,22 @@ import { customizer } from '../../package';
 
 export class FrontendConfigFactory {
     create(context: Context): webpack.Configuration {
-        const outputPath = path.resolve(process.cwd(), context.dest, FRONTEND_TARGET);
         const { pkg, open, port } = context;
+        const outputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
 
         let appConfig = { ...pkg.props };
         delete appConfig.backend;
         delete appConfig.frontend;
         appConfig = mergeWith(appConfig, pkg.props.frontend, customizer);
-        const entry = pkg.resolveModule(appConfig.entry);
+        let entry = pkg.resolveModule(appConfig.entry);
+        const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;
+        if (type && typeof entry !== 'string') {
+            entry = entry[type];
+        }
         if (!appConfig.endpoint) {
             appConfig.endpoint = `ws://localhost:${port}/api`;
         }
-        return {
+        return <webpack.Configuration>{
             name: FRONTEND_TARGET,
             entry: entry,
             target: 'web',

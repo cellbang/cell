@@ -15,16 +15,6 @@ export class WebSocketChannel extends AbstractChannel implements IWebSocket {
         this.toDispose.push(this.closeEmitter);
     }
 
-    dispose(): void {
-        this.toDispose.dispose();
-    }
-
-    protected checkNotDisposed(): void {
-        if (this.toDispose.disposed) {
-            throw new Error('The channel has been disposed.');
-        }
-    }
-
     handleMessage(message: Channel.Message) {
         if (message.kind === 'ready') {
             this.fireOpen();

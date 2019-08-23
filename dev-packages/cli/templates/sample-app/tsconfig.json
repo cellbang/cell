@@ -10,9 +10,6 @@
     "strictNullChecks": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": [
-      "reflect-metadata"
-    ],
     "downlevelIteration": true,
     "module": "commonjs",
     "moduleResolution": "node",
