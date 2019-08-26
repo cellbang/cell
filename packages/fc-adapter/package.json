@@ -46,10 +46,10 @@
   },
   "malaguComponent": {
     "config": {
+      "deployConfig": {
+        "type": "http"
+      },
       "backend": {
-        "deployConfig": {
-          "type": "http"
-        },
         "entry": {
           "http": "lib/node/http-application-entry",
           "event": "lib/node/event-application-entry",
