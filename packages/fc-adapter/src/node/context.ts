@@ -48,7 +48,7 @@ export class ApiGatewayContext extends AbstractContext {
 
     async doGetMessage(): Promise<string> {
         if (this.request.isBase64Encoded) {
-            return Buffer.from(this.request.body).toString('base64');
+            return Buffer.from(this.request.body, 'base64').toString('utf8');
         }
         return this.request.body;
     }

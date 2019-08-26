@@ -313,7 +313,7 @@ async function createOrUpdateAPI(ag: any, group: any, conf: any, role: any) {
         ServiceParametersMap: JSON.stringify(serviceParametersMap),
         ServiceConfig: JSON.stringify({
             'ServiceProtocol': 'FunctionCompute',
-            'ContentTypeValue': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'ContentTypeValue': 'application/json; charset=UTF-8',
             'Mock': 'FALSE',
             'MockResult': '',
             'ServiceTimeout': (conf.timeout || 3) * 1000,
