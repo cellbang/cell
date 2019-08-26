@@ -30,6 +30,7 @@ export class BackendConfigFactory {
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',
+            devtool: 'inline-source-map',
             output: {
                 path: outputPath,
                 filename: 'index.js',

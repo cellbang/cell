@@ -19,11 +19,6 @@ export class ConfigFactory {
                 configurations.push(webpackHook(config, context));
             } 
         }
-
-        if (configurations.length === 0) {
-            throw new Error('No malagu module found.');
-        }
-        
         return configurations;
     }
 }

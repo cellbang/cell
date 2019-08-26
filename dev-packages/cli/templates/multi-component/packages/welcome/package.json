@@ -1,0 +1,37 @@
+{
+  "name": "@app/welcome",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "next"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "malaguComponent": {
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "next"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

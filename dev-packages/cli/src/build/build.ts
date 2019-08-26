@@ -21,7 +21,10 @@ program
     }
     const configFactory = new ConfigFactory();
     const configurations = await configFactory.create(context);
-
+    if (configurations.length === 0) {
+        throw new Error('No malagu module found.');
+    }
+    
     for (const configuration of configurations) {
         const compiler = webpack(configuration);
         new FriendlyErrorsWebpackPlugin({

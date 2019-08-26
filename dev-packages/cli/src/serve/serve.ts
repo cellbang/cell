@@ -21,6 +21,9 @@ program
     context.port = program.port;
     const configFactory = new ConfigFactory();
     const configurations = await configFactory.create(context);
+    if (configurations.length === 0) {
+        throw new Error('No malagu module found.');
+    }
     startDevServer(configurations);
 
 })();
