@@ -27,7 +27,6 @@
           "chai-string",
           "inversify",
           "jsdom",
-          "monaco-languageclient",
           "react",
           "react-dom",
           "react-virtualized",

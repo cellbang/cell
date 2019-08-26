@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@malagu/ext-scripts",
   "version": "0.0.1",
   "license": "MIT",
@@ -9,6 +8,9 @@
   ],
   "bin": {
     "malaguext": "malaguext"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "prepare": "echo 'skip'",
