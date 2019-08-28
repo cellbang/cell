@@ -6,9 +6,11 @@ import * as websockify from 'koa-websocket';
 import { ConfigProvider } from '@malagu/core/lib/common/config-provider';
 import { DEFAULT_SERVER_OPTIONS } from './context';
 import { ContainerProvider } from '@malagu/core/lib/common';
+import { Application } from '@malagu/core/lib/common/application-protocol';
 
-container.then(c => {
+container.then(async c => {
     ContainerProvider.set(c);
+    await c.get<Application>(Application).start();
     const configProvider = c.get<ConfigProvider>(ConfigProvider);
     const { port, path, wsOptions, httpsOptions  } = configProvider.get<any>('server', DEFAULT_SERVER_OPTIONS);
     const app = websockify(new Koa(), wsOptions, httpsOptions);

@@ -8,9 +8,10 @@ import { ProxyProviderImpl, HttpProxyCreator, WebSocketProxyCreator } from './js
 import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';
 import { ApplicationShell, ApplicationShellImpl } from './application-shell';
-import { FrontendApplication, FrontendApplicationLifecycle, EmptyFrontendApplicationLifecycle } from './frontend-application';
+import { FrontendApplication } from './frontend-application';
 import { FrontendApplicationStateService } from './frontend-application-state';
 import { VALUE } from '../common/annotation/value';
+import { ApplicationLifecycle, ApplicationStateService, Application, EmptyApplicationLifecycle } from '../common/application-protocol';
 
 export const CoreFrontendModule = new ContainerModule(bind => {
     bind(ProxyProvider).to(ProxyProviderImpl).inSingletonScope();
@@ -22,8 +23,9 @@ export const CoreFrontendModule = new ContainerModule(bind => {
     bind(ConfigProvider).to(ConfigProviderImpl).inSingletonScope();
     bind(ApplicationShell).to(ApplicationShellImpl).inSingletonScope();
     bind(FrontendApplication).toSelf().inSingletonScope();
-    bind(FrontendApplicationStateService).toSelf().inSingletonScope();
-    bind(FrontendApplicationLifecycle).to(EmptyFrontendApplicationLifecycle).inSingletonScope();
+    bind(Application).toService(FrontendApplication);
+    bind(ApplicationStateService).to(FrontendApplicationStateService).inSingletonScope();
+    bind(ApplicationLifecycle).to(EmptyApplicationLifecycle).inSingletonScope();
     bind(Logger).toDynamicValue(ctx => {
         const configProvider = ctx.container.get<ConfigProvider>(ConfigProvider);
         const level = configProvider.get<LogLevelDesc>(LOGGER_LEVEL, 'ERROR');

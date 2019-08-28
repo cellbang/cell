@@ -1,57 +1,18 @@
-import { inject, injectable, multiInject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { ApplicationShell } from './application-shell';
 import { FrontendApplicationStateService } from './frontend-application-state';
 import { MaybePromise } from '../common/prioritizeable';
-import { Logger } from '../common/logger';
 import { parseCssTime } from './browser';
-
-export const FrontendApplicationLifecycle = Symbol('FrontendApplicationLifecycle');
-export interface FrontendApplicationLifecycle {
-
-    /**
-     * Called on application startup before configure is called.
-     */
-    initialize?(): void;
-
-    /**
-     * Called when the application is started. The application shell is not attached yet when this method runs.
-     * Should return a promise if it runs asynchronously.
-     */
-    onStart?(app: FrontendApplication): MaybePromise<void>;
-
-    /**
-     * Called when an application is stopped or unloaded.
-     *
-     * Note that this is implemented using `window.unload` which doesn't allow any asynchronous code anymore.
-     * I.e. this is the last tick.
-     */
-    onStop?(app: FrontendApplication): void;
-
-}
+import { ApplicationStateService, AbstractApplication } from '../common/application-protocol';
 
 @injectable()
-export class EmptyFrontendApplicationLifecycle implements FrontendApplicationLifecycle {
-
-    initialize() {
-        // NOOP
-    }
-
-}
-
-@injectable()
-export class FrontendApplication {
-
-    @multiInject(FrontendApplicationLifecycle)
-    protected readonly lifecycles: FrontendApplicationLifecycle[];
+export class FrontendApplication extends AbstractApplication {
 
     @inject(ApplicationShell)
     protected readonly _shell: ApplicationShell;
 
-    @inject(FrontendApplicationStateService)
+    @inject(ApplicationStateService)
     protected readonly stateService: FrontendApplicationStateService;
-
-    @inject(Logger)
-    protected readonly logger: Logger;
 
     get shell(): ApplicationShell {
         return this._shell;
@@ -127,9 +88,6 @@ export class FrontendApplication {
         }
     }
 
-    /**
-     * Initialize and start the frontend application.
-     */
     protected async doStart(): Promise<void> {
         for (const lifecycle of this.lifecycles) {
             if (lifecycle.initialize) {
@@ -151,21 +109,6 @@ export class FrontendApplication {
                     );
                 } catch (error) {
                     this.logger.error('Could not start lifecycle', error);
-                }
-            }
-        }
-    }
-
-    /**
-     * Stop the frontend application lifecycle. This is called when the window is unloaded.
-     */
-    protected doStop(): void {
-        for (const lifecycle of this.lifecycles) {
-            if (lifecycle.onStop) {
-                try {
-                    lifecycle.onStop(this);
-                } catch (error) {
-                    this.logger.error('Could not stop lifecycle', error);
                 }
             }
         }

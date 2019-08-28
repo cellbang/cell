@@ -5,9 +5,11 @@ import * as route from 'koa-route';
 import { ConfigProvider } from '@malagu/core/lib/common/config-provider';
 import { HttpContext, DEFAULT_SERVER_OPTIONS } from './context';
 import { ContainerProvider } from '@malagu/core';
+import { Application } from '@malagu/core/lib/common/application-protocol';
 
-container.then(c => {
+container.then(async c => {
     ContainerProvider.set(c);
+    await c.get<Application>(Application).start();
     const configProvider = c.get<ConfigProvider>(ConfigProvider);
     const { port, path  } = configProvider.get<any>('server', DEFAULT_SERVER_OPTIONS);
     const app = new Koa();
