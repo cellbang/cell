@@ -2,7 +2,7 @@
 import * as program from 'commander';
 import { ConfigFactory } from '../webpack/config/config-factory';
 import { Context } from '../webpack/config/context';
-import { startDevServer } from './start-dev-server';
+import { ServeManager } from './serve-manager';
 
 program
     .name('malagu serve')
@@ -24,7 +24,7 @@ program
     if (configurations.length === 0) {
         throw new Error('No malagu module found.');
     }
-    startDevServer(configurations);
+    new ServeManager(context, configurations).start();
 
 })();
 

@@ -30,7 +30,8 @@
       "backend": {
         "entry": "lib/node/dev-application-entry"
       }
-    }
+    },
+    "serveHooks": ["lib/hooks/serve"]
   },
   "publishConfig": {
     "access": "public"

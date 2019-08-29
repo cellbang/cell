@@ -7,6 +7,7 @@ export interface Component {
     frontends?: string[];
     backends?: string[];
     initHooks?: string[];
+    serveHooks?: string[];
     deployHooks?: string[];
     
 }

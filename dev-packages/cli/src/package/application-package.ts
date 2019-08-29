@@ -84,6 +84,7 @@ export class ApplicationPackage {
     protected _frontendModules: Map<string, string> | undefined;
     protected _backendModules: Map<string, string> | undefined;
     protected _initHookModules: Map<string, string> | undefined;
+    protected _serveHookModules: Map<string, string> | undefined;
     protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
 
@@ -202,6 +203,13 @@ export class ApplicationPackage {
     get initHookModules() {
         if (!this._initHookModules) {
             this._initHookModules = this.computeModules('initHooks');
+        }
+        return this._initHookModules;
+    }
+
+    get serveHookModules() {
+        if (!this._initHookModules) {
+            this._initHookModules = this.computeModules('serveHooks');
         }
         return this._initHookModules;
     }
