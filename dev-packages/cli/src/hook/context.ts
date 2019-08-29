@@ -6,13 +6,14 @@ import * as http from 'http';
 
 
 export interface Context {
-    pkg: ApplicationPackage,
-    buildContext: BuildContext,
-    configurations: webpack.Configuration[]
+    pkg: ApplicationPackage;
+    buildContext: BuildContext;
+    configurations: webpack.Configuration[];
 }
 
 export interface ServeContext extends Context {
     server: http.Server | https.Server;
-    app: Express.Application,
-    compiler: webpack.Compiler
+    app: Express.Application;
+    compiler: webpack.Compiler;
+    entryContextProvider: () => any;
 }

@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import * as net from 'net';
+import * as vm from 'vm';
+import { resolve, basename, dirname } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
 const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
@@ -27,10 +29,33 @@ function createCompiler(configuration: webpack.Configuration, options: any, log:
 
 }
 
+function getEntryPath(configuration: webpack.Configuration) {
+    const { path, filename } = configuration.output as any;
+    return resolve(path, filename);
+}
+
 function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, server: any, configuration: webpack.Configuration, options: any, log: any) {
     const compiler = createCompiler(configuration, options, log);
     server.app.use(webpackDevMiddleware(compiler));
-    executeServeHooks(server.listeningApp, server.app, compiler);
+    const entryContextProvider = () => {
+        const entryPath = getEntryPath(configuration);
+        const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
+        const wrapper = `(function (exports, require, module, __filename, __dirname, __request) {
+            ${source}
+        })`;
+        const filename = basename(entryPath);
+        const compiled = vm.runInThisContext(wrapper, {
+            filename,
+            lineOffset: 0,
+            displayErrors: true
+        });
+        const exports: any = {};
+        const module = { exports };
+        compiled(exports, require, module, filename, dirname(filename));
+        return module.exports;
+    };
+    executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
+
 }
 
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {

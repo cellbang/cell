@@ -3,25 +3,20 @@ import * as webpack from 'webpack';
 import { Context } from './context';
 import { FRONTEND_TARGET } from '../../constants';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-import mergeWith = require('lodash.mergewith');
-import { customizer } from '../../package';
 
 export class FrontendConfigFactory {
     create(context: Context): webpack.Configuration {
         const { pkg, open, port } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
 
-        let appConfig = { ...pkg.props };
-        delete appConfig.backend;
-        delete appConfig.frontend;
-        appConfig = mergeWith(appConfig, pkg.props.frontend, customizer);
+        let appConfig = pkg.frontendConfig;
         let entry = pkg.resolveModule(appConfig.entry);
         const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;
         if (type && typeof entry !== 'string') {
             entry = entry[type];
         }
-        if (!appConfig.endpoint) {
-            appConfig.endpoint = `ws://localhost:${port}/api`;
+        if (appConfig.endpoint) {
+            appConfig = { ...appConfig, ...{ endpoint: appConfig.endpoint.replace('{port}', port) } };
         }
         return <webpack.Configuration>{
             name: FRONTEND_TARGET,

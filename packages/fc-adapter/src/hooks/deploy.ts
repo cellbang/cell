@@ -43,10 +43,8 @@ export default async (context: Context) => {
         }
 
     };
-    const appConfig = { ...pkg.props };
-    delete appConfig.backend;
-    delete appConfig.frontend;
-    const appBackendConfig = mergeWith(appConfig, pkg.props.backend, customizer);
+
+    const appBackendConfig = pkg.backendConfig;
     const deployConfig = mergeWith(defaultDeployConfig, appBackendConfig.deployConfig, customizer);
     const profileProvider = new ProfileProvider();
     const profile = deployConfig.profile ? <Profile>deployConfig.profile : await profileProvider.provide();
@@ -61,7 +59,7 @@ export default async (context: Context) => {
     const serviceName = service.name;
     const functionName = funciton.name;
 
-    console.log(`Deploying ${serviceName}/${functionName} to function compute...`);
+    console.log(`Deploying ${profile.defaultRegion}/${serviceName}/${functionName} to function compute...`);
 
     try {
         delete service.name;
@@ -163,7 +161,6 @@ export default async (context: Context) => {
             apiDetail.RequestConfig.RequestHttpMethod,
             apiGroup.SubDomain,
             apiDetail.RequestConfig.RequestPath);
-        console.log(`    - ${api.function}`);
         apiDetail.DeployedInfos.DeployedInfo.forEach((info: any) => {
             if (info.DeployedStatus === 'DEPLOYED') {
                 console.log(`    - stage: ${info.StageName}, deployed, version: ${info.EffectiveVersion}`);

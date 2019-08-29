@@ -73,6 +73,28 @@ export class ApplicationPackage {
         return props;
     }
 
+    protected _frontendConfig: ApplicationProps | undefined;
+    get frontendConfig(): ApplicationProps {
+        if (this._frontendConfig) {
+            return this._frontendConfig;
+        }
+        const config = { ...this.props };
+        delete config.backend;
+        delete config.frontend;
+        return mergeWith(config, this.props.frontend, customizer);
+    }
+
+    protected _backendConfig: ApplicationProps | undefined;
+    get backendConfig(): ApplicationProps {
+        if (this._frontendConfig) {
+            return this._frontendConfig;
+        }
+        const config = { ...this.props };
+        delete config.backend;
+        delete config.frontend;
+        return mergeWith(config, this.props.backend, customizer);
+    }
+
     protected _pkg: NodePackage | undefined;
     get pkg(): NodePackage {
         if (this._pkg) {
@@ -236,7 +258,7 @@ export class ApplicationPackage {
                         } else {
                             componentPath = paths.join(componentPackage.name, modulePath).split(paths.sep).join('/');
                         }
-                        result.set(`${tagret}_${moduleIndex}`, componentPath);
+                        result.set(componentPackage.name, componentPath);
                         moduleIndex = moduleIndex + 1;
                     }
                 }

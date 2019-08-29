@@ -20,9 +20,7 @@ export class HookExecutor {
     async executeInitHooks(projectPath?: string) {
         const context = await this.buildContext(projectPath)
         const modules = context.pkg.initHookModules;
-        for (const modulePath of modules.values()) {
-            await require(modulePath).default(context);
-        }
+        await this.doExecuteHooks(modules, context, 'initHooks');
     }
 
     async executeDeployHooks(projectPath?: string) {
@@ -32,9 +30,7 @@ export class HookExecutor {
             console.log(chalk.yellow('Please provide the deploy hook first.'));
             return;
         }
-        for (const modulePath of modules.values()) {
-            await require(modulePath).default(context);
-        }
+        await this.doExecuteHooks(modules, context, 'deployHooks');
     }
 
     async executeServeHooks(context: ServeContext) {
@@ -43,8 +39,17 @@ export class HookExecutor {
             console.log(chalk.yellow('Please provide the serve hook first.'));
             return;
         }
-        for (const modulePath of modules.values()) {
-            await require(modulePath).default(context);
+        await this.doExecuteHooks(modules, context, 'serveHooks');
+    }
+
+    protected async doExecuteHooks(modules: Map<string, string>, context: Context, hookName: string): Promise<void> {
+
+        for (const m of modules.entries()) {
+            const [moduleName, modulePath] = m;
+            const config = context.pkg.backendConfig[moduleName];
+            if (!config || config[hookName] !== false) {
+                await require(modulePath).default(context);
+            }
         }
     }
 }

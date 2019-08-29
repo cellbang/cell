@@ -23,6 +23,7 @@
   },
   "malaguComponent": {
     "config": {
+      "endpoint": "ws://localhost:{port}/api",
       "auto": false,
       "frontend": {
         "entry": "lib/browser/application-entry"

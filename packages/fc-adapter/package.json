@@ -46,6 +46,10 @@
   },
   "malaguComponent": {
     "config": {
+      "endpoint": "http://localhost:{port}",
+      "core": {
+        "serveHooks": false
+      },
       "deployConfig": {
         "type": "http"
       },
@@ -58,7 +62,10 @@
       }
     },
     "deployHooks": [
-      "lib/cli/deploy"
+      "lib/hooks/deploy"
+    ],
+    "serveHooks": [
+      "lib/hooks/serve"
     ]
   },
   "devDependencies": {

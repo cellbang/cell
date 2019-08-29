@@ -14,10 +14,10 @@ export interface Profile {
 
 export class ProfileProvider {
 
-    async provide(): Promise<Profile> {
+    async provide(quiet: boolean = false): Promise<Profile> {
         const profile = await this.getProfile();
 
-        if (!this.isAllRequiredExist(profile)) {
+        if (!quiet && !this.isAllRequiredExist(profile)) {
             await this.promptForProfile();
             return await this.getProfile();
         }

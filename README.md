@@ -17,7 +17,7 @@ npm install -g yarn
 malagu init demo
 malagu serve
 malagu build
-malagu deploy  # not support
+malagu deploy
 ```
 
 ## Project structure
