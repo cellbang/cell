@@ -8,6 +8,7 @@ import { existsSync, readFileSync } from 'fs-extra';
 import mergeWith = require('lodash.mergewith');
 import yaml = require('js-yaml');
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+const chalk = require('chalk');
 
 // tslint:disable:no-implicit-dependencies
 
@@ -35,7 +36,7 @@ export class ApplicationPackage {
     constructor(
         protected readonly options: ApplicationPackageOptions
     ) {
-        this.projectPath = options.projectPath || process.cwd();
+        this.projectPath = options.projectPath;
         this.log = options.log || console.log.bind(console);
         this.error = options.error || console.error.bind(console);
     }
@@ -121,8 +122,9 @@ export class ApplicationPackage {
             );
             this._componentPackages = collector.collect(this.pkg);
             for (const componentPackage of this._componentPackages) {
+                console.log(chalk`malagu {green component} - ${ componentPackage.name }@${ componentPackage.version }`);
                 const malaguComponent = <Component>componentPackage.malaguComponent;
-                if (malaguComponent.config && malaguComponent.config.auto !== false) {
+                if (!malaguComponent.config || malaguComponent.config && malaguComponent.config.auto !== false) {
                     this.addModuleIfExists(componentPackage.name, malaguComponent, true);
                 }
                 this.parseEntry(componentPackage.name, malaguComponent, true);
@@ -135,7 +137,15 @@ export class ApplicationPackage {
                 this.pkg.malaguComponent = malaguComponent;
                 this._componentPackages.push(<ComponentPackage>this.pkg);
             }
+
+            for (const componentPackage of this._componentPackages) {
+                const malaguComponent = <Component>componentPackage.malaguComponent;
+                for (const modulePath of [...malaguComponent.frontends || [], ...malaguComponent.backends || []]) {
+                    console.log(chalk`malagu {cyan module} - ${componentPackage.name}/${ modulePath }`);
+                }
+            }
         }
+
         return this._componentPackages;
     }
 
@@ -169,30 +179,27 @@ export class ApplicationPackage {
 
     }
 
+    protected doAddModuleIfExists(modulePaths: string[], fullModulePath: string, modulePath: string): void {
+        try {
+            this.resolveModule(fullModulePath);
+            if (modulePaths.indexOf(modulePath) === -1) {
+                modulePaths.push(modulePath);
+            }
+        } catch (error) {
+            // noop
+        }
+    }
+
     protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
         component.frontends = component.frontends || [];
         component.backends = component.backends || [];
         const prefix = isModule ? name : '.';
         const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
         const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
-        const fullFrontendModulePath = `${this.projectPath}/${prefix}/${frontendModulePath}`;
-        const fullBackendModulePath = `${this.projectPath}/${prefix}/${backendModulePath}`;
-        try {
-            this.resolveModule(fullFrontendModulePath);
-            if (component.frontends.indexOf(frontendModulePath) === -1) {
-                component.frontends.push(frontendModulePath);
-            }
-        } catch (error) {
-            // noop
-        }
-        try {
-            this.resolveModule(fullBackendModulePath);
-            if (component.backends.indexOf(backendModulePath) === -1) {
-                component.backends.push(backendModulePath);
-            }
-        } catch (error) {
-            // noop
-        }
+        const fullFrontendModulePath = `${prefix}/${frontendModulePath}`;
+        const fullBackendModulePath = `${prefix}/${backendModulePath}`;
+        this.doAddModuleIfExists(component.frontends, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(component.backends, fullBackendModulePath, backendModulePath);
     }
 
     getComponentPackage(component: string): ComponentPackage | undefined {

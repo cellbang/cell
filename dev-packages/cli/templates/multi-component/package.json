@@ -57,6 +57,7 @@
   },
   "workspaces": [
     "dev-packages/*",
-    "packages/*"
+    "packages/*",
+    "malagu-app"
   ]
 }

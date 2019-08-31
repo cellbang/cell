@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "malagu serve",
             "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu-serve",
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}/malagu-app"
         }
     ]
 }
