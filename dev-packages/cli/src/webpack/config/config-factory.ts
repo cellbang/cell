@@ -15,9 +15,9 @@ export class ConfigFactory {
         for (const configFactory of configFactories) {
             if (configFactory.support(context)) {
                 const config = merge(baseConfig, configFactory.create(context));
-                const webpackHook = context.config.webpack || ((config: webpack.Configuration, context: Context) => config);
+                const webpackHook = context.config.webpack || ((c: webpack.Configuration, ctx: Context) => config);
                 configurations.push(webpackHook(config, context));
-            } 
+            }
         }
         return configurations;
     }

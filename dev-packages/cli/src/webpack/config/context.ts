@@ -25,6 +25,6 @@ export namespace Context {
             copy: false,
             open: false,
             dest: 'dist'
-        }
+        };
     }
 }

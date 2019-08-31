@@ -73,16 +73,16 @@ export class FrontendConfigFactory {
                     },
                     {
                         test: /\.woff(2)?(\\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+                        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
                     },
                     {
                         test: /\.wasm$/,
-                        loader: "file-loader",
-                        type: "javascript/auto",
+                        loader: 'file-loader',
+                        type: 'javascript/auto',
                     },
                     {
                         test: /\.plist$/,
-                        loader: "file-loader",
+                        loader: 'file-loader',
                     },
                     {
                         test: /malagu([\\/]packages)?[\\/]core[\\/]lib[\\/]common[\\/]dynamic-container\.js$/,

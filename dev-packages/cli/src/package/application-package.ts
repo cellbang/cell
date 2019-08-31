@@ -142,7 +142,7 @@ export class ApplicationPackage {
     protected parseEntry(name: string, component: Component, isModule: boolean) {
         const config = component.config;
         if (config) {
-            const prefix = isModule ? name : '.'
+            const prefix = isModule ? name : '.';
             if (config.frontend && config.frontend.entry) {
                 if (typeof config.frontend.entry === 'string') {
                     config.frontend.entry = `${prefix}/${config.frontend.entry}`;
@@ -156,7 +156,7 @@ export class ApplicationPackage {
             }
             if (config.backend && config.backend.entry) {
                 if (typeof config.backend.entry === 'string') {
-                    config.backend.entry =`${prefix}/${config.backend.entry}`;
+                    config.backend.entry = `${prefix}/${config.backend.entry}`;
                 } else {
                     for (const key in config.backend.entry) {
                         if (config.backend.entry.hasOwnProperty(key)) {
@@ -169,11 +169,10 @@ export class ApplicationPackage {
 
     }
 
-
     protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
         component.frontends = component.frontends || [];
         component.backends = component.backends || [];
-        const prefix = isModule ? name : '.'
+        const prefix = isModule ? name : '.';
         const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
         const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
         const fullFrontendModulePath = `${this.projectPath}/${prefix}/${frontendModulePath}`;

@@ -18,13 +18,13 @@ export class HookExecutor {
     }
 
     async executeInitHooks(projectPath?: string) {
-        const context = await this.buildContext(projectPath)
+        const context = await this.buildContext(projectPath);
         const modules = context.pkg.initHookModules;
         await this.doExecuteHooks(modules, context, 'initHooks');
     }
 
     async executeDeployHooks(projectPath?: string) {
-        const context = await this.buildContext(projectPath)
+        const context = await this.buildContext(projectPath);
         const modules = context.pkg.deployHookModules;
         if (modules.size === 0) {
             console.log(chalk.yellow('Please provide the deploy hook first.'));

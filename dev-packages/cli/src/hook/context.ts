@@ -4,7 +4,6 @@ import webpack = require('webpack');
 import * as https from 'https';
 import * as http from 'http';
 
-
 export interface Context {
     pkg: ApplicationPackage;
     buildContext: BuildContext;

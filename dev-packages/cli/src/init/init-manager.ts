@@ -1,10 +1,10 @@
-import { resolve } from "path";
-import { existsSync, copy, readJSON, writeJSON } from "fs-extra";
+import { resolve } from 'path';
+import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
-import request = require("request-promise");
-import { templates } from "./templates";
-import { spawnSync } from "child_process";
-import { HookExecutor } from "../hook/hook-executor";
+import request = require('request-promise');
+import { templates } from './templates';
+import { spawnSync } from 'child_process';
+import { HookExecutor } from '../hook/hook-executor';
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -15,14 +15,14 @@ const PLACEHOLD = '{{ templatePath }}';
 
 export interface Template {
     name: string;
-    location: string; 
+    location: string;
 }
 
 export class InitManager {
 
     protected source: any[];
     protected location: string;
-    constructor(protected readonly context: any){
+    constructor(protected readonly context: any) {
 
     }
 

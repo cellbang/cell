@@ -34,7 +34,7 @@ function getEntryPath(configuration: webpack.Configuration) {
     return resolve(path, filename);
 }
 
-function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, server: any, configuration: webpack.Configuration, options: any, log: any) {
+function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any) {
     const compiler = createCompiler(configuration, options, log);
     server.app.use(webpackDevMiddleware(compiler));
     const entryContextProvider = () => {
@@ -76,7 +76,7 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     try {
         server = new Server(compiler, options, log);
         setupExitSignals(server);
-        attachBackendServerIfNeed(executeServeHooks, server, backendConfiguration, options, log);
+        attachBackendServerIfNeed(executeServeHooks, backendConfiguration, options, log);
     } catch (err) {
         if (err.name === 'ValidationError') {
             log.error(colors.error(options.stats.colors, err.message));
@@ -118,9 +118,9 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
             // chmod 666 (rw rw rw)
             const READ_WRITE = 438;
 
-            fs.chmod(options.socket, READ_WRITE, (err) => {
-                if (err) {
-                    throw err;
+            fs.chmod(options.socket, READ_WRITE, e => {
+                if (e) {
+                    throw e;
                 }
             });
         });
@@ -143,7 +143,7 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
 }
 
 export function startDevServer(configurations: webpack.Configuration[], executeServeHooks: ExecuteServeHooks) {
-    processOptions(configurations, { info: false }, (configurations: any, options: any) => {
-        doStartDevServer(configurations, options, executeServeHooks);
+    processOptions(configurations, { info: false }, (cs: any, options: any) => {
+        doStartDevServer(cs, options, executeServeHooks);
     });
 }

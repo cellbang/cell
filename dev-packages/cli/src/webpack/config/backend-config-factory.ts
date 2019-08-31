@@ -8,7 +8,7 @@ export class BackendConfigFactory {
     create(context: Context): webpack.Configuration {
         const { pkg, port, open, dev } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
-        
+
         const appConfig = pkg.backendConfig;
         let entry = appConfig.entry;
         const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;

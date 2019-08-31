@@ -2,7 +2,7 @@ import { loader } from 'webpack';
 import { FRONTEND_TARGET } from '../../constants';
 
 function generateImports(modules: string[], fn: 'import' | 'require'): string {
-	let targetModules: string[] = [];
+    let targetModules: string[] = [];
     targetModules = modules.map((m: string) => {
         if (fn === 'require') {
             return `Promise.resolve(require('${m}'))`;
@@ -63,8 +63,8 @@ module.exports.container = Promise.resolve()
   });`;
 }
 
-const componentLoader: loader.Loader = function(source) {
-	const { target, modules } = this.query;
+const componentLoader: loader.Loader = function (source) {
+    const { target, modules } = this.query;
     if (target === FRONTEND_TARGET) {
         return `
         ${source}
@@ -76,6 +76,6 @@ const componentLoader: loader.Loader = function(source) {
         ${generateBackendComponents(modules)}
         `;
     }
-}
+};
 
 export default componentLoader;

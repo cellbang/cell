@@ -9,7 +9,6 @@ export interface Component {
     initHooks?: string[];
     serveHooks?: string[];
     deployHooks?: string[];
-    
 }
 
 export class ComponentPackage {
@@ -32,7 +31,7 @@ export class ComponentPackage {
     get malaguComponent(): Component | undefined {
         return this.raw.malaguComponent;
     }
-    
+
     getAuthor(): string {
         if (this.raw.publisher) {
             return this.raw.publisher.username;
