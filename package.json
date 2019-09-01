@@ -58,6 +58,6 @@
   "workspaces": [
     "dev-packages/*",
     "packages/*",
-    "malagu-app"
+    "app"
   ]
 }

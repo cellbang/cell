@@ -14,7 +14,7 @@ export class BaseConfigFactory {
         return {
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js') ,
             mode: webpackMode,
-            devtool: dev ? 'inline-source-map' : undefined,
+            devtool: dev ? 'source-map' : undefined,
             resolveLoader: {
                 modules: [
                   path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
@@ -28,7 +28,7 @@ export class BaseConfigFactory {
                         test: /\.js$/,
                         enforce: 'pre',
                         loader: 'source-map-loader',
-                        exclude: /jsonc-parser|node_modules/
+                        exclude: /jsonc-parser/
                     }
                 ]
             }

@@ -12,7 +12,7 @@ lerna-debug.log
 coverage
 errorShots
 /browser-app
-/malagu-app
+/app
 .browser_modules
 **/docs/api
 package-backup.json

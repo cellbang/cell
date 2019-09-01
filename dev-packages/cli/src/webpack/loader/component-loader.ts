@@ -63,18 +63,19 @@ module.exports.container = Promise.resolve()
   });`;
 }
 
-const componentLoader: loader.Loader = function (source) {
+const componentLoader: loader.Loader = function (source, sourceMap) {
     const { target, modules } = this.query;
     if (target === FRONTEND_TARGET) {
-        return `
+        this.callback(undefined, `
         ${source}
         ${generateFrontendComponents(modules)}
-        `;
+        `, sourceMap);
+
     } else {
-        return `
+        this.callback(undefined, `
         ${source}
         ${generateBackendComponents(modules)}
-        `;
+        `, sourceMap);
     }
 };
 

@@ -3,6 +3,7 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { Context } from './context';
 import { BACKEND_TARGET } from '../../constants';
+const WebpackSourceMapSupport = require('webpack-source-map-support');
 
 export class BackendConfigFactory {
     create(context: Context): webpack.Configuration {
@@ -31,11 +32,12 @@ export class BackendConfigFactory {
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',
-            devtool: 'inline-source-map',
+            devtool: 'source-map',
             output: {
                 path: outputPath,
                 filename: 'index.js',
-                libraryTarget: 'umd'
+                libraryTarget: 'umd',
+                devtoolModuleFilenameTemplate: '[absolute-resource-path]'
             },
             devServer: {
                 port,
@@ -45,7 +47,8 @@ export class BackendConfigFactory {
             plugins: [
                 new webpack.DefinePlugin({
                     'process.env': JSON.stringify(appConfig)
-                })
+                }),
+                new WebpackSourceMapSupport()
             ],
             module: {
                 rules: [
@@ -58,7 +61,7 @@ export class BackendConfigFactory {
                                 modules: Array.from(pkg.backendModules.values())
                             }
                         }
-                    }
+                    },
                 ]
             }
         };

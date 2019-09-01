@@ -36,24 +36,34 @@ function getEntryPath(configuration: webpack.Configuration) {
 
 function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any) {
     const compiler = createCompiler(configuration, options, log);
-    server.app.use(webpackDevMiddleware(compiler));
-    const entryContextProvider = () => {
-        const entryPath = getEntryPath(configuration);
-        const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
-        const wrapper = `(function (exports, require, module, __filename, __dirname, __request) {
-            ${source}
-        })`;
-        const filename = basename(entryPath);
-        const compiled = vm.runInThisContext(wrapper, {
-            filename,
-            lineOffset: 0,
-            displayErrors: true
-        });
-        const exports: any = {};
-        const module = { exports };
-        compiled(exports, require, module, filename, dirname(filename));
-        return module.exports;
-    };
+    const isDebug = process.env.NODE_ENV === 'development';
+    let entryContextProvider: () => any;
+    if (isDebug) {
+        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
+        entryContextProvider = () => {
+            const entryPath = getEntryPath(configuration);
+            return require(entryPath);
+        };
+    } else {
+        server.app.use(webpackDevMiddleware(compiler));
+        entryContextProvider = () => {
+            const entryPath = getEntryPath(configuration);
+            const source = compiler.inputFileSystem.readFileSync(entryPath);
+            const wrapper = `(function (exports, require, module, __filename, __dirname, __request) {
+                ${source}
+            })`;
+            const filename = basename(entryPath);
+            const compiled = vm.runInThisContext(wrapper, {
+                filename,
+                lineOffset: 0,
+                displayErrors: true
+            });
+            const exports: any = {};
+            const module = { exports };
+            compiled(exports, require, module, filename, dirname(filename));
+            return module.exports;
+        };
+    }
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
 
 }
