@@ -48,7 +48,7 @@ function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, configu
         server.app.use(webpackDevMiddleware(compiler));
         entryContextProvider = () => {
             const entryPath = getEntryPath(configuration);
-            const source = compiler.inputFileSystem.readFileSync(entryPath);
+            const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
             const wrapper = `(function (exports, require, module, __filename, __dirname, __request) {
                 ${source}
             })`;
