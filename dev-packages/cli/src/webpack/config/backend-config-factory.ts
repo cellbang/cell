@@ -10,9 +10,9 @@ export class BackendConfigFactory {
         const { pkg, port, open, dev } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
 
-        const appConfig = pkg.backendConfig;
-        let entry = appConfig.entry;
-        const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;
+        const config = pkg.backendConfig;
+        let entry = config.entry;
+        const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && typeof entry !== 'string') {
             entry = entry[type];
         }
@@ -45,7 +45,7 @@ export class BackendConfigFactory {
             },
             plugins: [
                 new webpack.DefinePlugin({
-                    'process.env': JSON.stringify(appConfig)
+                    'process.env': JSON.stringify(config)
                 }),
                 new WebpackSourceMapSupport()
             ],
@@ -67,6 +67,9 @@ export class BackendConfigFactory {
     }
 
     support(context: Context): boolean {
-        return context.pkg.backendModules.size > 0;
+        const { pkg: { backendConfig } } = context;
+        const config = backendConfig;
+
+        return context.pkg.backendModules.size > 0 && (!config.targets || config.targets.includes(BACKEND_TARGET));
     }
 }

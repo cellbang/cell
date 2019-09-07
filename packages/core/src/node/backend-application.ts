@@ -15,7 +15,6 @@ export class BackendApplication extends AbstractApplication {
         this.stateService.state = 'ready';
     }
 
-
     protected setupExitSignals() {
         process.on('SIGINT', () => {
             this.doStop();

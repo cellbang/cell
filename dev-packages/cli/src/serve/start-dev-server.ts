@@ -13,6 +13,7 @@ import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { getDevSuccessInfo } from '../webpack/utils';
 const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
+import { BACKEND_TARGET } from '../constants';
 
 let server: any;
 
@@ -34,18 +35,22 @@ function getEntryPath(configuration: webpack.Configuration) {
     return resolve(path, filename);
 }
 
-function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any) {
-    const compiler = createCompiler(configuration, options, log);
+function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
+    const compiler = c || createCompiler(configuration, options, log);
     const isDebug = process.env.NODE_ENV === 'development';
     let entryContextProvider: () => any;
     if (isDebug) {
-        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
+        if (!c) {
+            server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
+        }
         entryContextProvider = () => {
             const entryPath = getEntryPath(configuration);
             return require(entryPath);
         };
     } else {
-        server.app.use(webpackDevMiddleware(compiler));
+        if (!c) {
+            server.app.use(webpackDevMiddleware(compiler));
+        }
         entryContextProvider = () => {
             const entryPath = getEntryPath(configuration);
             const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
@@ -71,7 +76,7 @@ function attachBackendServerIfNeed(executeServeHooks: ExecuteServeHooks, configu
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
 
-    const [configuration, backendConfiguration] = configurations;
+    const [ configuration, backendCnfiguration ] = configurations;
 
     let compiler: webpack.Compiler;
 
@@ -86,7 +91,11 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     try {
         server = new Server(compiler, options, log);
         setupExitSignals(server);
-        attachBackendServerIfNeed(executeServeHooks, backendConfiguration, options, log);
+        if (backendCnfiguration) {
+            attachBackendServer(executeServeHooks, backendCnfiguration, options, log);
+        } else if (configuration.name === BACKEND_TARGET) {
+            attachBackendServer(executeServeHooks, configuration, options, log, compiler);
+        }
     } catch (err) {
         if (err.name === 'ValidationError') {
             log.error(colors.error(options.stats.colors, err.message));

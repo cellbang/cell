@@ -5,18 +5,30 @@ import { FRONTEND_TARGET } from '../../constants';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 export class FrontendConfigFactory {
+
+    private _config: any;
+
+    getConfig(context: Context) {
+        if (this._config) {
+            return this._config;
+        }
+        const { pkg, port } = context;
+        this._config = pkg.frontendConfig;
+        if (this._config.endpoint) {
+            this._config = { ...this._config, ...{ endpoint: this._config.endpoint.replace('{port}', port) } };
+        }
+        return this._config;
+    }
+
     create(context: Context): webpack.Configuration {
         const { pkg, open, port } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
 
-        let appConfig = pkg.frontendConfig;
-        let entry = pkg.resolveModule(appConfig.entry);
-        const type = appConfig.deployConfig ? appConfig.deployConfig.type : undefined;
+        const config = this.getConfig(context);
+        let entry = pkg.resolveModule(config.entry);
+        const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && typeof entry !== 'string') {
             entry = entry[type];
-        }
-        if (appConfig.endpoint) {
-            appConfig = { ...appConfig, ...{ endpoint: appConfig.endpoint.replace('{port}', port) } };
         }
         return <webpack.Configuration>{
             name: FRONTEND_TARGET,
@@ -97,16 +109,17 @@ export class FrontendConfigFactory {
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                    title: 'Malagu App'
+                    title: config.appTitle || 'Malagu App'
                 }),
                 new webpack.DefinePlugin({
-                    'process.env': JSON.stringify(appConfig)
+                    'process.env': JSON.stringify(config)
                 })
             ]
         };
     }
 
     support(context: Context): boolean {
-        return context.pkg.frontendModules.size > 0;
+        const config = this.getConfig(context);
+        return context.pkg.frontendModules.size > 0 && (!config.targets || config.targets.includes(FRONTEND_TARGET));
     }
 }
