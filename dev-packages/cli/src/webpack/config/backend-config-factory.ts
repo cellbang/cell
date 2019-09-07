@@ -41,8 +41,7 @@ export class BackendConfigFactory {
             },
             devServer: {
                 port,
-                open,
-                stats: 'errors-only'
+                open
             },
             plugins: [
                 new webpack.DefinePlugin({

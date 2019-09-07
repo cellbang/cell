@@ -32,8 +32,7 @@ export class FrontendConfigFactory {
             devServer: {
                 contentBase: outputPath,
                 port,
-                open,
-                stats: 'errors-only'
+                open
             },
             output: {
                 path: outputPath,

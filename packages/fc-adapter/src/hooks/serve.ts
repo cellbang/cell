@@ -50,6 +50,8 @@ export default (context: any) => {
                     doHandler(req, res, context);
                 }
             });
+            context.compiler.hooks.done.tap('FCAdapterServe', () => initialized = false);
+
         } else {
             doHandler(req, res, context);
         }
