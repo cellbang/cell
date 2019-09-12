@@ -1,7 +1,8 @@
 import { fluentProvide } from 'inversify-binding-decorators';
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '../jsonrpc';
+import { ConnectionHandler } from '../jsonrpc/handler';
+import { JsonRpcConnectionHandler } from '../jsonrpc/proxy-factory';
 
 export enum Scope {
     Request, Singleton, Transient
@@ -22,7 +23,7 @@ export interface ComponentDecorator {
     (option?: interfaces.ServiceIdentifier<any> | ComponentOption): (target: any) => any;
 }
 
-export const component = <ComponentDecorator>function (idOrOption?: interfaces.ServiceIdentifier<any> | ComponentOption): (target: any) => any {
+export const Component = <ComponentDecorator>function (idOrOption?: interfaces.ServiceIdentifier<any> | ComponentOption): (target: any) => any {
     const option = getComponentOption(idOrOption);
     return (t: any) => {
         applyComponentDecorator(option, t);
@@ -52,9 +53,9 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
     const id = <interfaces.ServiceIdentifier<any>>opt.id;
     const p = fluentProvide(id);
     if (opt.scope === Scope.Singleton) {
-        p.inSingletonScope();
+        p.inSingletonScope().done(true)(target);
     } else if (opt.scope === Scope.Transient) {
-        p.inTransientScope();
+        p.inTransientScope().done(true)(target);
     }
     if (opt.rebind) {
         const metadata = true;
@@ -64,7 +65,6 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
             target
         );
     }
-    p.done(true)(target);
 
     if (opt.rpc) {
         fluentProvide(ConnectionHandler).inSingletonScope().onActivation((context, t) =>

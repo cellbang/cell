@@ -17,10 +17,14 @@ export async function init(context: any, callback: any) {
 }
 
 export async function handler(request: any, response: any, context: any) {
-    request.body = await getRawBody(request).then(body => body.toString());
-    const httpContext = new HttpContext(request, response, context);
-    container.then(c => {
+    try {
+        request.body = await getRawBody(request).then(body => body.toString());
+        const httpContext = new HttpContext(request, response, context);
+        const c = await container;
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         Context.run(() => dispatcher.dispatch(httpContext));
-    });
+    } catch (err) {
+        response.statusCode = 500;
+        response.send(err);
+    }
 }

@@ -1,7 +1,9 @@
 import { Context } from './context';
 import { Prioritizeable } from '../../common/prioritizeable';
-import { injectable, multiInject, optional, inject } from 'inversify';
 import { ChannelManager } from './channel-manager';
+import { Component, Autowired } from '../../common/annotation';
+import { injectable } from 'inversify';
+import { HttpError } from '../error/http-error';
 
 export const ErrorHandler = Symbol('ErrorHandler');
 
@@ -16,7 +18,8 @@ export interface ErrorHandler {
 @injectable()
 export abstract class AbstractErrorHandler implements ErrorHandler {
     readonly priority: number = DEFALUT_ERROR_HANDlER_PRIORITY;
-    @inject(ChannelManager)
+
+    @Autowired
     protected readonly channelManager: ChannelManager;
 
     canHandle(ctx: Context, err: Error): Promise<boolean> {
@@ -25,7 +28,7 @@ export abstract class AbstractErrorHandler implements ErrorHandler {
 
     async handle(ctx: Context, err: Error): Promise<void> {
         console.error(err);
-        ctx.handleError(err);
+        await ctx.handleError(err);
         await this.doHandle(ctx, err);
     }
 
@@ -34,17 +37,31 @@ export abstract class AbstractErrorHandler implements ErrorHandler {
     }
 }
 
-@injectable()
+@Component(ErrorHandler)
 export class DefaultErrorHandler extends AbstractErrorHandler {
 }
 
-@injectable()
+@Component(ErrorHandler)
+export class HttpErrorHandler implements ErrorHandler {
+    readonly priority: number = DEFALUT_ERROR_HANDlER_PRIORITY + 100;
+
+    canHandle(ctx: Context, err: Error): Promise<boolean> {
+        return Promise.resolve(err instanceof HttpError);
+    }
+
+    async handle(ctx: Context, err: HttpError): Promise<void> {
+        ctx.response.statusCode = err.statusCode;
+        ctx.response.end(err.message);
+    }
+}
+
+@Component()
 export class ErrorHandlerProvider {
 
     protected prioritized: ErrorHandler[];
 
     constructor(
-        @multiInject(ErrorHandler) @optional()
+        @Autowired(ErrorHandler)
         protected readonly handlers: ErrorHandler[]
     ) { }
 

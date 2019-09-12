@@ -1,4 +1,4 @@
-import {  Context, Dispatcher } from '@malagu/core/lib/node/jsonrpc';
+import {  Context, Dispatcher, Request, Response } from '@malagu/core/lib/node/web';
 import { HttpChannel } from '@malagu/core/lib/common/jsonrpc/http-channel';
 import { Channel } from '@malagu/core/lib/common/jsonrpc/channel-protocol';
 import * as ws from 'ws';
@@ -15,8 +15,12 @@ interface CheckAliveWS extends ws {
 }
 
 export class HttpContext implements Context {
+    request: Request;
+    response: Response;
 
     constructor(public context: KoaContext) {
+        this.request = context.request.req as any;
+        this.response = context.response.res;
     }
 
     getMessage(): Promise<Channel.Message> {
@@ -124,6 +128,14 @@ export class WebSocketContext implements Context {
         } catch (error) {
             console.error('Failed to handle message', { error, data: JSON.stringify(this.message) });
         }
+    }
+
+    get request(): Request {
+        throw new Error('Method not supported.');
+    }
+
+    get response(): Response {
+        throw new Error('Method not supported.');
     }
 
 }

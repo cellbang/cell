@@ -11,10 +11,11 @@ container.then(async c => {
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
     const configProvider = c.get<ConfigProvider>(ConfigProvider);
-    const { port, path  } = configProvider.get<any>('server', DEFAULT_SERVER_OPTIONS);
+    const { port } = configProvider.get<any>('server', DEFAULT_SERVER_OPTIONS);
+    const rootPath = configProvider.get<string>('rootPath');
     const app = new Koa();
 
-    app.use(route.all(path, ctx => {
+    app.use(route.all(rootPath, ctx => {
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(ctx);
         Context.run(() => dispatcher.dispatch(httpContext));

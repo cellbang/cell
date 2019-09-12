@@ -405,6 +405,10 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/url-join@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/@types/url-join/download/@types/url-join-4.0.0.tgz#72eff71648a429c7d4acf94e03780e06671369bd"
+
 "@types/webdriverio@^4.7.0":
   version "4.13.3"
   resolved "https://registry.npm.taobao.org/@types/webdriverio/download/@types/webdriverio-4.13.3.tgz#c1571c4e62724135c0b11e7d7e36b07af5168856"
@@ -6846,13 +6850,7 @@ source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
     source-map-url "^0.4.0"
     urix "^0.1.0"
 
-source-map-support@0.4.11:
-  version "0.4.11"
-  resolved "https://registry.npm.taobao.org/source-map-support/download/source-map-support-0.4.11.tgz#647f939978b38535909530885303daf23279f322"
-  dependencies:
-    source-map "^0.5.3"
-
-source-map-support@~0.5.12:
+source-map-support@^0.5.13, source-map-support@~0.5.12:
   version "0.5.13"
   resolved "https://registry.npm.taobao.org/source-map-support/download/source-map-support-0.5.13.tgz#31b24a9c2e73c2de85066c0feb7d44767ed52932"
   dependencies:
@@ -7429,6 +7427,10 @@ triple-beam@^1.2.0, triple-beam@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npm.taobao.org/triple-beam/download/triple-beam-1.3.0.tgz#a595214c7298db8339eeeee083e4d10bd8cb8dd9"
 
+ts-custom-error@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/ts-custom-error/download/ts-custom-error-3.1.1.tgz#d30c7415461dac93dc2cc9e9eb2dae92e6423901"
+
 tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
@@ -7619,6 +7621,10 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npm.taobao.org/urix/download/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
 
+url-join@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/url-join/download/url-join-4.0.1.tgz?cache=0&sync_timestamp=1562483530532&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Furl-join%2Fdownload%2Furl-join-4.0.1.tgz#b642e21a2646808ffa178c4c5fda39844e12cde7"
+
 url-loader@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/url-loader/download/url-loader-2.1.0.tgz?cache=0&sync_timestamp=1563455134437&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Furl-loader%2Fdownload%2Furl-loader-2.1.0.tgz#bcc1ecabbd197e913eca23f5e0378e24b4412961"
@@ -7639,6 +7645,10 @@ url-parse@^1.4.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
+
+url-pattern@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/url-pattern/download/url-pattern-1.0.3.tgz#0409292471b24f23c50d65a47931793d2b5acfc1"
 
 url@^0.11.0, url@~0.11.0:
   version "0.11.0"
@@ -7892,12 +7902,6 @@ webpack-merge@^4.2.1:
   resolved "https://registry.npm.taobao.org/webpack-merge/download/webpack-merge-4.2.1.tgz#5e923cf802ea2ace4fd5af1d3247368a633489b4"
   dependencies:
     lodash "^4.17.5"
-
-webpack-source-map-support@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npm.taobao.org/webpack-source-map-support/download/webpack-source-map-support-2.0.1.tgz#6c9b9f782ae84f86fb4b2f7032a298e63e8ad43d"
-  dependencies:
-    source-map-support "0.4.11"
 
 webpack-sources@^1.4.0, webpack-sources@^1.4.1:
   version "1.4.3"

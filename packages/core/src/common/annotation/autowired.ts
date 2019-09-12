@@ -19,9 +19,9 @@ export interface AutowiredDecorator {
 }
 
 export const RPC = Symbol('RPC');
-export const autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
+export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
     const option = getAutowiredOption(target, targetKey, index);
-    if (targetKey === undefined) {
+    if (targetKey === undefined && index === undefined) {
         return (t: any, tk: string, i?: number) => {
             applyAutowiredDecorator(option, t, tk, i);
         };
@@ -44,7 +44,13 @@ export function getAutowiredOption(target: any, targetKey: string, index?: numbe
 }
 
 export function applyAutowiredDecorator(option: AutowiredOption, target: any, targetKey: string, index?: number): void {
-    const type = (Reflect as any).getMetadata('design:type', target, targetKey);
+    let type: any;
+    if (index !== undefined)  {
+        type = Reflect.getMetadata('design:paramtypes', target, targetKey)[index];
+
+    } else {
+        type = Reflect.getMetadata('design:type', target, targetKey);
+    }
     const isMulti = type === Array;
     const defaultAutowiredOption: AutowiredOption = {
         id: type,

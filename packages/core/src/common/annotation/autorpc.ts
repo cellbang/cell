@@ -1,6 +1,6 @@
 import { AutowiredDecorator, getAutowiredOption, applyAutowiredDecorator } from './autowired';
 
-export const autorpc = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
+export const Autorpc = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
     const option = getAutowiredOption(target, targetKey, index);
     option.rpc = true;
     if (targetKey === undefined) {

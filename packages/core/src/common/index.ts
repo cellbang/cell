@@ -1,4 +1,5 @@
 export * from './disposable';
+export * from './annotation';
 export * from './jsonrpc';
 export * from './application-error';
 export * from './logger';

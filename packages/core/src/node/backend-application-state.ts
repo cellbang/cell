@@ -1,9 +1,9 @@
-import { injectable } from 'inversify';
-import { ApplicationState, AbstractApplicationStateService } from '../common/application-protocol';
+import { ApplicationState, AbstractApplicationStateService, ApplicationStateService } from '../common/application-protocol';
+import { Component } from '../common/annotation/component';
 
 export type BackendApplicationState = ApplicationState;
 
-@injectable()
+@Component(ApplicationStateService)
 export class BackendApplicationStateService extends AbstractApplicationStateService<BackendApplicationState> {
 
 }

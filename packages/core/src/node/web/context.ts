@@ -2,6 +2,7 @@ import * as requestContext from 'express-http-context';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
 import { WebSocketChannel } from '../../common/jsonrpc/web-socket-channel';
 import ws = require('ws');
+import * as http from 'http';
 import { Dispatcher } from './dispatcher-protocol';
 
 export enum AttributeScope { App, Request }
@@ -10,13 +11,35 @@ export const CURRENT_CONTEXT_REQUEST_KEY = 'CurrentContextRequest';
 
 const appAttrs = new Map<string, any>();
 
+export interface Request {
+    method: string;
+    headers: http.IncomingHttpHeaders;
+    body: any;
+    url: string;
+    path: string;
+    query: { [key: string]: string };
+}
+
+export interface Response {
+    statusCode: number;
+    setHeader(name: string, value: number | string | string[]): void;
+    getHeader(name: string): number | string | string[] | undefined;
+    getHeaders(): http.OutgoingHttpHeaders;
+    end(chunk: any, encoding?: string, cb?: Function): void;
+    body?: any;
+}
+
 export interface Context {
+
+    readonly request: Request;
+
+    readonly response: Response;
 
     getMessage(): Promise<Channel.Message>;
 
     handleError(err: Error): Promise<void>;
 
-    handleMessage(message: string): Promise<void>;
+    handleMessage(message: any): Promise<void>;
 
     createChannel(id: number): Promise<Channel>
 
@@ -112,7 +135,7 @@ export class WebSocketContext implements Context {
         throw err;
     }
 
-    async handleMessage(message: string): Promise<void> {
+    async handleMessage(message: any): Promise<void> {
         if (this.socket.readyState < ws.CLOSING) {
             this.socket.send(message, err => {
                 if (err) {
@@ -147,6 +170,14 @@ export class WebSocketContext implements Context {
         } catch (error) {
             console.error('Failed to handle message', { error, data: JSON.stringify(this.message) });
         }
+    }
+
+    get request(): Request {
+        throw new Error('Method not supported.');
+    }
+
+    get response(): Response {
+        throw new Error('Method not supported.');
     }
 
 }

@@ -1,12 +1,12 @@
-import { injectable } from 'inversify';
-import { ApplicationState, AbstractApplicationStateService } from '../common/application-protocol';
+import { ApplicationState, AbstractApplicationStateService, ApplicationStateService } from '../common/application-protocol';
+import { Component } from '../common/annotation';
 
 export type FrontendApplicationState =
     ApplicationState
     | 'attached_shell'
     | 'closing_window';
 
-@injectable()
+@Component(ApplicationStateService)
 export class FrontendApplicationStateService extends AbstractApplicationStateService<FrontendApplicationState> {
 
 }

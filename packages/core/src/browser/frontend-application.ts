@@ -1,17 +1,17 @@
-import { inject, injectable } from 'inversify';
 import { ApplicationShell } from './application-shell';
 import { FrontendApplicationStateService } from './frontend-application-state';
 import { MaybePromise } from '../common/prioritizeable';
 import { parseCssTime } from './browser';
-import { ApplicationStateService, AbstractApplication } from '../common/application-protocol';
+import { ApplicationStateService, AbstractApplication, Application } from '../common/application-protocol';
+import { Component, Autowired } from '../common/annotation';
 
-@injectable()
+@Component(Application)
 export class FrontendApplication extends AbstractApplication {
 
-    @inject(ApplicationShell)
+    @Autowired(ApplicationShell)
     protected readonly _shell: ApplicationShell;
 
-    @inject(ApplicationStateService)
+    @Autowired(ApplicationStateService)
     protected readonly stateService: FrontendApplicationStateService;
 
     get shell(): ApplicationShell {

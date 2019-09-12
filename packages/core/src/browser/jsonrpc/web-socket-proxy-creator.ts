@@ -1,17 +1,18 @@
-import { injectable, decorate, unmanaged, inject } from 'inversify';
+import { injectable, decorate, unmanaged } from 'inversify';
 import { createWebSocketConnection, Logger, ConsoleLogger } from 'vscode-ws-jsonrpc/lib';
 import { Emitter, Event } from 'vscode-jsonrpc';
 import { WebSocketChannel } from '../../common/jsonrpc/web-socket-channel';
 import { JsonRpcProxyFactory, JsonRpcProxy, ConnectionHandler } from '../../common/jsonrpc';
-import { ConnectionOptions, ProxyCreator, ENDPOINT } from './proxy-protocol';
-import { ConfigProvider } from '../../common/config-provider';
+import { ConnectionOptions, ProxyCreator } from './proxy-protocol';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import { Component, Value } from '../../common/annotation';
+const urlJoin = require('url-join');
 
 decorate(injectable(), JsonRpcProxyFactory);
 decorate(unmanaged(), JsonRpcProxyFactory, 0);
 
-@injectable()
+@Component(ProxyCreator)
 export class WebSocketProxyCreator implements ProxyCreator {
 
     protected channelIdSeq = 0;
@@ -21,15 +22,17 @@ export class WebSocketProxyCreator implements ProxyCreator {
     protected readonly onIncomingMessageActivityEmitter: Emitter<void> = new Emitter();
     public onIncomingMessageActivity: Event<void> = this.onIncomingMessageActivityEmitter.event;
 
-    @inject(ConfigProvider)
-    protected readonly configProvider: ConfigProvider;
+    @Value
+    protected readonly endpoint: string;
+
+    @Value
+    protected readonly rpcPath: string;
 
     protected createWebSocketIfNeed(): void {
         if (this.socket) {
             return;
         }
-        const url = this.configProvider.get<string>(ENDPOINT);
-        const socket = this.createWebSocket(url);
+        const socket = this.createWebSocket(urlJoin(this.endpoint, this.rpcPath));
         socket.onerror = console.error;
         socket.onclose = ({ code, reason }) => {
             for (const channel of [...this.channels.values()]) {
@@ -60,8 +63,7 @@ export class WebSocketProxyCreator implements ProxyCreator {
     }
 
     support(path: string): number {
-        const endpoint = this.configProvider.get<string>(ENDPOINT);
-        return endpoint && endpoint.startsWith('ws') ? 500 : 0;
+        return this.endpoint && this.endpoint.startsWith('ws') ? 500 : 0;
     }
 
     listen(handler: ConnectionHandler, options?: ConnectionOptions): void {

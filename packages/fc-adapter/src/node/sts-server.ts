@@ -1,7 +1,7 @@
 import { Config } from '@webserverless/fc-browser-sdk/lib/browser';
 import * as Client from '@alicloud/pop-core';
 import { inject, injectable } from 'inversify';
-import { Context } from '@malagu/core/lib/node/jsonrpc';
+import { Context } from '@malagu/core/lib/node';
 import { ConfigProvider } from '@malagu/core/lib/common/config-provider';
 import { STSServer } from '../common/sts-protocol';
 import { AbstractContext } from './context';

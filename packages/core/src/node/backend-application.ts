@@ -1,11 +1,11 @@
-import { inject, injectable } from 'inversify';
-import { ApplicationStateService, AbstractApplication } from '../common/application-protocol';
+import { ApplicationStateService, AbstractApplication, Application } from '../common/application-protocol';
 import { BackendApplicationStateService } from './backend-application-state';
+import { Component, Autowired } from '../common/annotation';
 
-@injectable()
+@Component(Application)
 export class BackendApplication extends AbstractApplication {
 
-    @inject(ApplicationStateService)
+    @Autowired(ApplicationStateService)
     protected readonly stateService: BackendApplicationStateService;
 
     async start(): Promise<void> {

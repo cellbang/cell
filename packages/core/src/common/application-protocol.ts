@@ -1,8 +1,9 @@
 import { MaybePromise } from './prioritizeable';
 import { Emitter, Event } from 'vscode-jsonrpc';
 import { Deferred } from '../common/promise-uil';
-import { injectable, multiInject, inject } from 'inversify';
+import { injectable } from 'inversify';
 import { Logger } from './logger';
+import { Autowired, Component } from './annotation';
 
 export const ApplicationLifecycle = Symbol('ApplicationLifecycle');
 export const Application = Symbol('Application');
@@ -24,7 +25,7 @@ export interface Application {
 
 }
 
-@injectable()
+@Component(ApplicationLifecycle)
 export class EmptyApplicationLifecycle implements ApplicationLifecycle<Application> {
 
     initialize() {
@@ -36,10 +37,10 @@ export class EmptyApplicationLifecycle implements ApplicationLifecycle<Applicati
 @injectable()
 export abstract class AbstractApplication implements Application {
 
-    @multiInject(ApplicationLifecycle)
+    @Autowired(ApplicationLifecycle)
     protected readonly lifecycles: ApplicationLifecycle<Application>[];
 
-    @inject(Logger)
+    @Autowired(Logger)
     protected readonly logger: Logger;
 
     abstract start(): Promise<void>;

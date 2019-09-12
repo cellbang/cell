@@ -2,10 +2,14 @@ import { interfaces as inversifyInterfaces, ContainerModule } from 'inversify';
 import interfaces from 'inversify-binding-decorators/dts/interfaces/interfaces';
 import { METADATA_KEY } from './constants';
 
-export function autoBind(): inversifyInterfaces.ContainerModule {
+export function autoBind(registry?: inversifyInterfaces.ContainerModuleCallBack): inversifyInterfaces.ContainerModule {
     return new ContainerModule((bind, unbind, isBound, rebind) => {
-        const provideMetadata: interfaces.ProvideSyntax[] = (Reflect as any).getMetadata(METADATA_KEY.provide, Reflect) || [];
+        const provideMetadata: interfaces.ProvideSyntax[] = Reflect.getMetadata(METADATA_KEY.provide, Reflect) || [];
         provideMetadata.map(metadata => resolve(metadata, bind, rebind));
+        Reflect.defineMetadata(METADATA_KEY.provide, [], Reflect);
+        if (registry) {
+            registry(bind, unbind, isBound, rebind);
+        }
     });
 }
 

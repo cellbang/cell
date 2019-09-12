@@ -65,8 +65,8 @@ function getCallback(res: any, type: string) {
         if (e) {
             const output = formatErr(e);
             console.error(output);
-            res.statusCode(417);
-            res.send(output);
+            res.statusCode = 417;
+            res.end(output);
         } else {
             if (data) {
                 if (type === 'api-gateway') {

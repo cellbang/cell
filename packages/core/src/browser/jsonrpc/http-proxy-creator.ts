@@ -1,24 +1,28 @@
-import { injectable, inject } from 'inversify';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
 import { Logger } from 'vscode-jsonrpc';
 import { ConsoleLogger } from '../../common/logger';
 import { JsonRpcProxy, JsonRpcProxyFactory } from '../../common/jsonrpc/proxy-factory';
 import { ConnectionHandler } from '../../common/jsonrpc/handler';
 import { ConnnectionFactory } from '../../common/jsonrpc/connection-factory';
-import { ProxyCreator, ENDPOINT, ConnectionOptions } from './proxy-protocol';
-import { ConfigProvider } from '../../common/config-provider';
+import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
 import { HttpChannel } from '../../common/jsonrpc/http-channel';
+import { Component, Autowired, Value } from '../../common/annotation';
+const urlJoin = require('url-join');
 
-@injectable()
+@Component(ProxyCreator)
 export class HttpProxyCreator implements ProxyCreator {
 
     protected channelIdSeq = 0;
     protected readonly channels = new Map<number, Channel>();
 
-    @inject(ConnnectionFactory)
+    @Autowired(ConnnectionFactory)
     protected connnectionFactory: ConnnectionFactory<Channel>;
-    @inject(ConfigProvider)
-    protected readonly configProvider: ConfigProvider;
+
+    @Value
+    protected readonly endpoint: string;
+
+    @Value
+    protected readonly rpcPath: string;
 
     create<T extends object>(path: string, target?: object | undefined): JsonRpcProxy<T> {
         const factory = new JsonRpcProxyFactory<T>(target);
@@ -30,8 +34,7 @@ export class HttpProxyCreator implements ProxyCreator {
     }
 
     support(path: string): number {
-        const endpoint = this.configProvider.get<string>(ENDPOINT);
-        return endpoint && endpoint.startsWith('http') ? 500 : 0;
+        return this.endpoint && this.endpoint.startsWith('http') ? 500 : 0;
     }
 
     listen(handler: ConnectionHandler, options?: ConnectionOptions): void {
@@ -54,11 +57,14 @@ export class HttpProxyCreator implements ProxyCreator {
 
     protected createChannel(id: number, path: string): Channel {
         const channel = new HttpChannel(id, async content => {
-            const response = await fetch(this.configProvider.get<string>(ENDPOINT), {
+            const response = await fetch(urlJoin(this.endpoint, this.rpcPath), {
                 method: 'POST',
-                body: content
+                body: content,
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
             });
-            channel.handleMessage(JSON.parse(await response.text()));
+            channel.handleMessage(await response.json());
         }, path);
         return channel;
     }

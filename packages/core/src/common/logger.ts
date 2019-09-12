@@ -1,14 +1,11 @@
 import { Logger as ILoger } from 'vscode-jsonrpc';
 import * as log from 'loglevel';
-import { component } from './annotation';
 
 export const LOGGER_LEVEL = 'logger.level';
-
 export const Logger = Symbol('Logger');
 
 export interface Logger extends log.Logger {
 }
-@component({ rpc: true })
 export class ConsoleLogger implements ILoger {
     public error(message: string): void {
         console.error(message);

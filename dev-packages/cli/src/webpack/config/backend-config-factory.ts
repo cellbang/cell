@@ -3,7 +3,6 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { Context } from './context';
 import { BACKEND_TARGET } from '../../constants';
-const WebpackSourceMapSupport = require('webpack-source-map-support');
 
 export class BackendConfigFactory {
     create(context: Context): webpack.Configuration {
@@ -41,13 +40,13 @@ export class BackendConfigFactory {
             },
             devServer: {
                 port,
-                open
+                open,
+                writeToDisk: true
             },
             plugins: [
                 new webpack.DefinePlugin({
                     'process.env': JSON.stringify(config)
-                }),
-                new WebpackSourceMapSupport()
+                })
             ],
             module: {
                 rules: [

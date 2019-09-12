@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as net from 'net';
-import * as vm from 'vm';
-import { resolve, basename, dirname } from 'path';
+import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
 const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
@@ -37,38 +36,13 @@ function getEntryPath(configuration: webpack.Configuration) {
 
 function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
-    const isDebug = process.env.NODE_ENV === 'development';
-    let entryContextProvider: () => any;
-    if (isDebug) {
-        if (!c) {
-            server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
-        }
-        entryContextProvider = () => {
-            const entryPath = getEntryPath(configuration);
-            return require(entryPath);
-        };
-    } else {
-        if (!c) {
-            server.app.use(webpackDevMiddleware(compiler));
-        }
-        entryContextProvider = () => {
-            const entryPath = getEntryPath(configuration);
-            const source = (compiler.outputFileSystem as any).readFileSync(entryPath);
-            const wrapper = `(function (exports, require, module, __filename, __dirname, __request) {
-                ${source}
-            })`;
-            const filename = basename(entryPath);
-            const compiled = vm.runInThisContext(wrapper, {
-                filename,
-                lineOffset: 0,
-                displayErrors: true
-            });
-            const exports: any = {};
-            const module = { exports };
-            compiled(exports, require, module, filename, dirname(filename));
-            return module.exports;
-        };
+    if (!c) {
+        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
     }
+    const entryContextProvider = () => {
+        const entryPath = getEntryPath(configuration);
+        return require(entryPath);
+    };
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
 
 }

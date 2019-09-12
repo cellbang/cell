@@ -18,9 +18,9 @@ export interface ValueDecorator {
     (target: any, targetKey: string, index?: number): any;
 }
 
-export const value = <ValueDecorator>function (target: any, targetKey: string, index?: number) {
+export const Value = <ValueDecorator>function (target: any, targetKey: string, index?: number) {
     const option = getValueOption(target, targetKey, index);
-    if (targetKey === undefined) {
+    if (targetKey === undefined && index === undefined) {
         return (t: any, tk: string, i?: number) => {
             applyValueDecorator(option, t, tk, i);
         };

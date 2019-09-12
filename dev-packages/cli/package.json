@@ -54,7 +54,6 @@
     "webpack": "^4.36.1",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
-    "webpack-source-map-support": "^2.0.1",
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {

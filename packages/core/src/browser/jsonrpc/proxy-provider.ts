@@ -1,13 +1,13 @@
-import { injectable, multiInject } from 'inversify';
 import { Prioritizeable } from '../../common/prioritizeable';
 import { ProxyProvider, ProxyCreator } from './proxy-protocol';
 import { JsonRpcProxy } from '../../common/jsonrpc/proxy-factory';
+import { Component, Autowired } from '../../common/annotation';
 
-@injectable()
+@Component(ProxyProvider)
 export class ProxyProviderImpl implements ProxyProvider {
 
     constructor(
-        @multiInject(ProxyCreator)
+        @Autowired(ProxyCreator)
         protected readonly proxyCreators: ProxyCreator[]
     ) { }
 

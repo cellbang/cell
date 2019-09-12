@@ -1,5 +1,4 @@
-import { Context } from '../jsonrpc/context';
-
+import { Context } from '../web/context';
 import { Middleware } from './middleware-provider';
 
 export function compose(middlewares: Middleware[]) {
@@ -18,7 +17,7 @@ export function compose(middlewares: Middleware[]) {
                 return Promise.resolve();
             }
             try {
-                return Promise.resolve(middleware.handle(ctx, (): Promise<void> => dispatch(i + 1)));
+                return middleware.handle(ctx, (): Promise<void> => dispatch(i + 1));
             } catch (err) {
                 return Promise.reject(err);
             }

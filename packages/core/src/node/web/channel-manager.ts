@@ -1,25 +1,27 @@
 import { Context } from './context';
-import { injectable, multiInject, optional, inject } from 'inversify';
+import { optional } from 'inversify';
 import { ConnectionHandler, ConnnectionFactory, ConsoleLogger } from '../../common';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
+import { Component, Autowired } from '../../common/annotation';
 
 // tslint:disable:no-any
-@injectable()
+@Component()
 export class ChannelManager {
 
     protected _handlers = new Map<string, ConnectionHandler>();
 
     constructor(
-        @multiInject(ConnectionHandler) @optional()
+        @Autowired(ConnectionHandler) @optional()
         protected readonly handlers: ConnectionHandler[],
-        @inject(ConnnectionFactory) protected connnectionFactory: ConnnectionFactory<Channel>
+        @Autowired(ConnnectionFactory) protected connnectionFactory: ConnnectionFactory<Channel>
     ) {
         for (const handler of handlers) {
             this._handlers.set(handler.path, handler);
         }
      }
 
-    async handleChannels(ctx: Context): Promise<void> {
+    async handleChannels(): Promise<void> {
+        const ctx = Context.getCurrent();
         await ctx.handleChannels(async () => {
             const { id, path } = (await ctx.getMessage() as any);
             if (path) {

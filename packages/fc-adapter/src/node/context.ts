@@ -1,10 +1,13 @@
-import {  Context } from '@malagu/core/lib/node/jsonrpc';
+import {  Context, Request, Response } from '@malagu/core/lib/node';
 import { HttpChannel } from '@malagu/core/lib/common/jsonrpc/http-channel';
 import { Channel } from '@malagu/core/lib/common/jsonrpc/channel-protocol';
+import * as http from 'http';
 
 export type Callback = (err: Error | undefined, data: any) => void;
 
 export abstract class AbstractContext implements Context {
+    request: Request;
+    response: Response;
 
     protected message: Channel.Message;
 
@@ -13,12 +16,10 @@ export abstract class AbstractContext implements Context {
 
     async getMessage(): Promise<Channel.Message> {
         if (!this.message) {
-            this.message = JSON.parse(await this.doGetMessage());
+            this.message = this.request.body;
         }
         return this.message;
     }
-
-    protected abstract doGetMessage(): Promise<string>;
 
     abstract handleError(err: Error): Promise<void>;
 
@@ -39,18 +40,59 @@ export abstract class AbstractContext implements Context {
 
 export class ApiGatewayContext extends AbstractContext {
 
-    readonly request: any;
+    _response: { [key: string]: any } = {
+        headers: {},
+        isBase64Encoded: false
+    };
 
     constructor(public event: string, public context: any, public callback: Callback) {
         super(context);
-        this.request = JSON.parse(event);
-    }
+        const e = JSON.parse(event);
+        this.request = {
+            method: e.method,
+            path: e.path,
+            url: e.path,
+            query: e.queryParameters || {},
+            headers: e.headers,
+            get body() {
+                const body = e.isBase64Encoded ? Buffer.from(e.body, 'base64').toString('utf8') : e.body;
+                if (e.headers['content-type'] === 'application/json') {
+                    return JSON.parse(body);
+                }
+            }
 
-    async doGetMessage(): Promise<string> {
-        if (this.request.isBase64Encoded) {
-            return Buffer.from(this.request.body, 'base64').toString('utf8');
-        }
-        return this.request.body;
+        };
+        const res = this._response;
+        this.response = {
+            setHeader(name: string, value: number | string | string[]): void {
+                res.headers[name] = value;
+            },
+
+            getHeader(name: string): number | string | string[] | undefined {
+                return this.getHeaders()[name];
+            },
+
+            getHeaders(): http.OutgoingHttpHeaders {
+                return res.headers;
+            },
+
+            get statusCode(): number {
+                return res.statusCode;
+            },
+
+            set statusCode(statusCode: number) {
+                res.statusCode = statusCode;
+            },
+
+            end: (chunk: any, encoding?: string, cb?: Function): void => {
+                this.callback(undefined, {
+                    ...res,
+                    body: chunk
+                });
+            }
+
+        };
+
     }
 
     async handleError(err: Error): Promise<void> {
@@ -68,8 +110,39 @@ export class ApiGatewayContext extends AbstractContext {
 
 export class HttpContext extends AbstractContext {
 
-    constructor(public request: any, public response: any, public context: Context) {
+    constructor(public _request: any, public _response: any, public context: Context) {
         super(context);
+        this.request = _request;
+        if (_request.headers['content-type'] === 'application/json') {
+            this.request.body = JSON.parse(this.request.body);
+        }
+        this.response = {
+            setHeader(name: string, value: number | string | string[]): void {
+                _response.setHeader(name, value);
+            },
+
+            getHeader(name: string): number | string | string[] | undefined {
+                return this.getHeaders()[name];
+            },
+
+            getHeaders(): http.OutgoingHttpHeaders {
+                return _response.headers || _response.getHeaders();
+            },
+
+            get statusCode(): number {
+                return _response.statusCode;
+            },
+
+            set statusCode(statusCode: number) {
+                _response.statusCode = statusCode;
+            },
+
+            end(chunk: any, encoding?: string, cb?: Function): void {
+                _response.send(chunk);
+            }
+
+        };
+
     }
 
     async doGetMessage(): Promise<string> {
@@ -77,10 +150,10 @@ export class HttpContext extends AbstractContext {
     }
     async handleError(err: Error): Promise<void> {
         this.response.statusCode = 500;
-        this.response.send(err.message);
+        this.response.end(err.message);
     }
     async handleMessage(message: string): Promise<void> {
-        this.response.send(message);
+        this.response.end(message);
     }
 }
 export class EventContext extends AbstractContext {

@@ -1,6 +1,6 @@
-import { injectable, multiInject, optional } from 'inversify';
-import { Context } from '../jsonrpc';
+import { Context } from '../web';
 import { Prioritizeable } from '../../common/prioritizeable';
+import { Component, Autowired, Optional } from '../../common/annotation';
 
 export const Middleware = Symbol('Middleware');
 
@@ -11,13 +11,13 @@ export interface Middleware {
     readonly priority: number;
 }
 
-@injectable()
+@Component()
 export class MiddlewareProvider {
 
     protected prioritized: Middleware[];
 
     constructor(
-        @multiInject(Middleware) @optional()
+        @Autowired(Middleware) @Optional
         protected readonly middlewares: Middleware[]
     ) { }
 

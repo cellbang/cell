@@ -1,31 +1,14 @@
-import { ContainerModule } from 'inversify';
-import { ProxyProvider, ProxyCreator } from './jsonrpc/proxy-protocol';
-import { ConnnectionFactory, ConnnectionFactoryImpl } from '../common/jsonrpc/connection-factory';
-import { ConfigProvider } from '../common/config-provider';
-import { ConfigProviderImpl } from './config-provider';
+export * from '../common';
 import { RPC } from '../common/annotation/autowired';
-import { ProxyProviderImpl, HttpProxyCreator, WebSocketProxyCreator } from './jsonrpc';
 import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';
-import { ApplicationShell, ApplicationShellImpl } from './application-shell';
-import { FrontendApplication } from './frontend-application';
-import { FrontendApplicationStateService } from './frontend-application-state';
 import { VALUE } from '../common/annotation/value';
-import { ApplicationLifecycle, ApplicationStateService, Application, EmptyApplicationLifecycle } from '../common/application-protocol';
+import { autoBind } from '../common/auto-bind';
+import { ConfigProvider } from '../common/config-provider';
+import { ProxyProvider } from './jsonrpc/proxy-protocol';
+export * from '.';
 
-export const CoreFrontendModule = new ContainerModule(bind => {
-    bind(ProxyProvider).to(ProxyProviderImpl).inSingletonScope();
-    bind(HttpProxyCreator).toSelf().inSingletonScope();
-    bind(ProxyCreator).toService(HttpProxyCreator);
-    bind(WebSocketProxyCreator).toSelf().inSingletonScope();
-    bind(ProxyCreator).toService(WebSocketProxyCreator);
-    bind(ConnnectionFactory).to(ConnnectionFactoryImpl).inSingletonScope();
-    bind(ConfigProvider).to(ConfigProviderImpl).inSingletonScope();
-    bind(ApplicationShell).to(ApplicationShellImpl).inSingletonScope();
-    bind(FrontendApplication).toSelf().inSingletonScope();
-    bind(Application).toService(FrontendApplication);
-    bind(ApplicationStateService).to(FrontendApplicationStateService).inSingletonScope();
-    bind(ApplicationLifecycle).to(EmptyApplicationLifecycle).inSingletonScope();
+export const CoreFrontendModule = autoBind(bind => {
     bind(Logger).toDynamicValue(ctx => {
         const configProvider = ctx.container.get<ConfigProvider>(ConfigProvider);
         const level = configProvider.get<LogLevelDesc>(LOGGER_LEVEL, 'ERROR');

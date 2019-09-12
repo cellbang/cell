@@ -14,11 +14,18 @@ export async function init(context: any, callback: any) {
     }
 }
 
-export function handler(event: string, context: any, callback: Callback) {
-    container.then(c => {
+export async function handler(event: string, context: any, callback: Callback) {
+    try {
+        const c = await container;
         ContainerProvider.set(c);
         const dispatcher = c.get<Dispatcher<ApiGatewayContext>>(Dispatcher);
         const apiGatewayContext = new ApiGatewayContext(event, context, callback);
         Context.run(() => dispatcher.dispatch(apiGatewayContext));
-    });
+    } catch (err) {
+        callback(undefined, {
+            isBase64Encoded: false,
+            statusCode: 500,
+            body: err
+        });
+    }
 }

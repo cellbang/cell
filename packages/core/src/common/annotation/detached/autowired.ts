@@ -1,6 +1,6 @@
 import { AutowiredDecorator, applyAutowiredDecorator, getAutowiredOption } from '../autowired';
 
-export const autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
+export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
     const option = getAutowiredOption(target, targetKey, index);
     option.detached = true;
     if (targetKey === undefined) {
