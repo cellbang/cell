@@ -42,8 +42,10 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     }
     const entryContextProvider = () => {
         const entryPath = getEntryPath(configuration);
+        for (const key of Object.keys(require.cache)) {
+            decache(key);
+        }
         const entry = require(entryPath);
-        decache(entryPath);
         return entry;
     };
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
