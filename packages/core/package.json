@@ -22,7 +22,7 @@
     "ts-custom-error": "^3.1.1",
     "url-join": "^4.0.1",
     "url-pattern": "^1.0.3",
-    "vscode-ws-jsonrpc": "^0.0.2-1",
+    "vscode-ws-jsonrpc": "^0.1.1",
     "ws": "^7.1.1"
   },
   "malaguComponent": {
