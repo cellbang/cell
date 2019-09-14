@@ -1,9 +1,20 @@
 import { ProfileProvider } from './profile-provider';
 
+export class Deferred<T> {
+    resolve: (value?: T) => void;
+    reject: (err?: any) => void; // tslint:disable-line
+
+    promise = new Promise<T>((resolve, reject) => {
+        this.resolve = resolve;
+        this.reject = reject;
+    });
+}
+
 export default (context: any) => {
     const { app, entryContextProvider, pkg } = context;
     let initialized = false;
     let funcHandler: any;
+    let deferred = new Deferred<void>();
     const type = pkg.backendConfig.deployConfig.type;
     console.log(`Serve ${type} type for function compute.`);
     if (type !== 'http') {
@@ -38,6 +49,8 @@ export default (context: any) => {
             credentials: new ProfileProvider().provide(true)
         };
         if (!initialized) {
+            initialized = true;
+            deferred = new Deferred<void>();
             const { init, handler } = entryContextProvider();
 
             funcHandler = handler;
@@ -46,15 +59,14 @@ export default (context: any) => {
                 if (err) {
                     callback(err);
                 } else {
-                    initialized = true;
-                    doHandler(req, res, context);
+                    deferred.resolve();
                 }
             });
             context.compiler.hooks.done.tap('FCAdapterServe', () => initialized = false);
 
-        } else {
-            doHandler(req, res, context);
         }
+        await deferred.promise;
+        doHandler(req, res, context);
 
     });
 
