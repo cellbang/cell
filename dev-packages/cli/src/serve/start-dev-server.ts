@@ -13,6 +13,7 @@ import { getDevSuccessInfo } from '../webpack/utils';
 const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET } from '../constants';
+const decache = require('decache');
 
 let server: any;
 
@@ -41,7 +42,9 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     }
     const entryContextProvider = () => {
         const entryPath = getEntryPath(configuration);
-        return require(entryPath);
+        const entry = require(entryPath);
+        decache(entryPath);
+        return entry;
     };
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
 

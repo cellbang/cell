@@ -46,9 +46,12 @@ export class HookExecutor {
 
         for (const m of modules.entries()) {
             const [moduleName, modulePath] = m;
-            const config = context.pkg.backendConfig[moduleName];
-            if (!config || config[hookName] !== false) {
-                await require(modulePath).default(context);
+            const name = moduleName.split('/').pop();
+            if (name) {
+                const config = context.pkg.backendConfig[name];
+                if (!config || config[hookName] !== false) {
+                    await require(modulePath).default(context);
+                }
             }
         }
     }

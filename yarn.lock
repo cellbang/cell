@@ -1349,6 +1349,10 @@ caller-id@^0.1.0:
   dependencies:
     stack-trace "~0.0.7"
 
+callsite@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/callsite/download/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
+
 camel-case@3.0.x:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/camel-case/download/camel-case-3.0.0.tgz#ca3c3688a4e9cf3a4cda777dc4dcbc713249cf73"
@@ -2188,6 +2192,12 @@ debug@^3.1.0, debug@^3.2.5, debug@^3.2.6:
   resolved "https://registry.npm.taobao.org/debug/download/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   dependencies:
     ms "^2.1.1"
+
+decache@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.npm.taobao.org/decache/download/decache-4.5.1.tgz#94a977a88a4188672c96550ec4889582ceecdf49"
+  dependencies:
+    callsite "^1.0.0"
 
 decamelize-keys@^1.0.0:
   version "1.1.0"
