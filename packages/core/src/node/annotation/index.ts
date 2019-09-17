@@ -5,3 +5,5 @@ export * from './method';
 export * from './param';
 export * from './query';
 export * from './view';
+export * from './cookie';
+export * from './session';

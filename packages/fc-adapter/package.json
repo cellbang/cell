@@ -56,7 +56,6 @@
       "backend": {
         "entry": {
           "http": "lib/node/http-application-entry",
-          "event": "lib/node/event-application-entry",
           "api-gateway": "lib/node/api-gateway-application-entry"
         }
       }

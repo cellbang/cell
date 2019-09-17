@@ -1,10 +1,9 @@
-import { container } from '@malagu/core/lib/common/dynamic-container';
-import { Dispatcher, Context } from '@malagu/core/lib/node';
+import { Dispatcher, Context, HttpContext, Response, Request } from '@malagu/core/lib/node';
 import * as Koa from 'koa';
 import * as route from 'koa-route';
 import { ConfigProvider } from '@malagu/core/lib/common/config-provider';
-import { HttpContext, DEFAULT_SERVER_OPTIONS } from './context';
-import { ContainerProvider } from '@malagu/core';
+import { DEFAULT_SERVER_OPTIONS } from './context';
+import { ContainerProvider, container } from '@malagu/core/lib/common';
 import { Application } from '@malagu/core/lib/common/application-protocol';
 
 container.then(async c => {
@@ -17,7 +16,7 @@ container.then(async c => {
 
     app.use(route.all(rootPath, ctx => {
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
-        const httpContext = new HttpContext(ctx);
+        const httpContext = new HttpContext(ctx.request as unknown as Request, ctx.response as unknown as Response);
         Context.run(() => dispatcher.dispatch(httpContext));
     }));
 

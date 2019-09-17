@@ -1,4 +1,4 @@
-import { Context } from '../web/context';
+import { Context } from '../context';
 import { Middleware } from './middleware-provider';
 
 export function compose(middlewares: Middleware[]) {

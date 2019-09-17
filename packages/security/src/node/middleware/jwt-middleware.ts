@@ -16,7 +16,7 @@ export class JWTMiddleWare implements Middleware {
     protected readonly configProvider: ConfigProvider;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        const token = (await ctx.getMessage() as any).token;
+        const token = (await Context.getChannalStrategy().getMessage() as any).token;
         if (token) {
             Context.setAttr(TOKEN_DECODED, verify(token, await this.configProvider.get<string>(JWT_SECRET_OR_PUBLIC_KEY, '123456')));
         } else {
