@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { autorpc } from '@malagu/core/lib/common/annotation/detached';
+import { Autorpc } from '@malagu/core/lib/common/annotation/detached';
 import { WelcomeServer } from '../common/welcome-protocol';
 
 interface Prop {}
@@ -9,7 +9,7 @@ interface State {
 
 export class App extends React.Component<Prop, State> {
 
-    @autorpc(WelcomeServer)
+    @Autorpc(WelcomeServer)
     protected welcomeServer!: WelcomeServer;
 
     constructor(prop: Prop) {

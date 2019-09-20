@@ -1,7 +1,7 @@
 import { WelcomeServer } from '../common/welcome-protocol';
-import { rpc } from '@malagu/core/lib/common/annotation';
+import { Rpc } from '@malagu/core/lib/common/annotation';
 
-@rpc(WelcomeServer)
+@Rpc(WelcomeServer)
 export class WelcomeServerImpl implements WelcomeServer {
     say(): Promise<string> {
         return Promise.resolve('Welcome to Malagu');
