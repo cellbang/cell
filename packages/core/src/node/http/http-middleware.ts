@@ -1,6 +1,7 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Deferred } from '../../common';
+import { HTTP_MIDDLEWARE_PRIORITY } from './http-protocol';
 
 @Component(Middleware)
 export class HttpMiddleware implements Middleware {
@@ -18,6 +19,6 @@ export class HttpMiddleware implements Middleware {
         }
     }
 
-    readonly priority = 1500;
+    readonly priority = HTTP_MIDDLEWARE_PRIORITY;
 
 }

@@ -5,7 +5,7 @@ import { Context } from '../context';
 @Component(SessionManager)
 export class SessionManagerImpl implements SessionManager {
 
-    @Value('session.sessionIdKey')
+    @Value('malagu.session.sessionIdKey')
     protected readonly sessionIdKey: string;
 
     @Autowired(SessionStrategy)

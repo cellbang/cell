@@ -1,18 +1,33 @@
 {
   "name": "@malagu/security",
-"version": "0.0.1",
+  "version": "0.0.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core":"^0.0.1",
-    "@types/jsonwebtoken": "^8.3.2",
-    "jsonwebtoken": "^8.5.1"
+    "@malagu/core": "^0.0.1",
+    "crypto-js": "^3.1.9-1"
   },
   "publishConfig": {
     "access": "public"
   },
-  "malaguComponent": {},
+  "malaguComponent": {
+    "config": {
+      "malagu": {
+        "security": {
+          "contextKey": "malagu:securityContext",
+          "username": "admin",
+          "password": "123456",
+          "usernameKey": "username",
+          "passwordKey": "password",
+          "passwordEncoder": {
+            "secret": "123456",
+            "encodeHashAsBase64": true
+          }
+        }
+      }
+    }
+  },
   "keywords": [
     "malagu-component"
   ],
@@ -38,7 +53,8 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts":"^0.0.1"
+    "@malagu/ext-scripts": "^0.0.1",
+    "@types/jexl": "^2.1.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

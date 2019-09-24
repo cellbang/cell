@@ -7,7 +7,7 @@ export class CookieSessionStore implements SessionStore {
 
     protected session: Session | undefined;
 
-    @Value('session')
+    @Value('malagu.session')
     protected readonly sessionOptions: any;
 
     @Autowired(SessionStrategy)
