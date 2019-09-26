@@ -1,6 +1,5 @@
 export * from './middleware';
 export * from './config-provider';
-export * from './constants';
 export * from './backend-application';
 export * from './backend-application-state';
 export * from './config-provider';
@@ -16,3 +15,4 @@ export * from './view';
 export * from './cookies';
 export * from './session';
 export * from './http';
+export * from './matcher';

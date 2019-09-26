@@ -1,4 +1,7 @@
 import * as http from 'http';
+import { CHANNEL_MIDDLEWARE_PRIORITY } from '../channel';
+
+export const HTTP_MIDDLEWARE_PRIORITY = CHANNEL_MIDDLEWARE_PRIORITY - 100;
 
 export interface Request {
     method: string;

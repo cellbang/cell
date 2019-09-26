@@ -6,7 +6,7 @@ import { JsonRpcProxyFactory, JsonRpcProxy, ConnectionHandler } from '../../comm
 import { ConnectionOptions, ProxyCreator } from './proxy-protocol';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
 import ReconnectingWebSocket from 'reconnecting-websocket';
-import { Component, Value } from '../../common/annotation';
+import { Component, Value, ENDPOINT, RPC_PATH, Autowired, PathResolver } from '../../common';
 const urlJoin = require('url-join');
 
 decorate(injectable(), JsonRpcProxyFactory);
@@ -22,17 +22,20 @@ export class WebSocketProxyCreator implements ProxyCreator {
     protected readonly onIncomingMessageActivityEmitter: Emitter<void> = new Emitter();
     public onIncomingMessageActivity: Event<void> = this.onIncomingMessageActivityEmitter.event;
 
-    @Value
+    @Value(ENDPOINT)
     protected readonly endpoint: string;
 
-    @Value
+    @Value(RPC_PATH)
     protected readonly rpcPath: string;
 
-    protected createWebSocketIfNeed(): void {
+    @Autowired(PathResolver)
+    protected pathResolver: PathResolver;
+
+    protected async createWebSocketIfNeed(): Promise<void> {
         if (this.socket) {
             return;
         }
-        const socket = this.createWebSocket(urlJoin(this.endpoint, this.rpcPath));
+        const socket = this.createWebSocket(urlJoin(this.endpoint, await this.pathResolver.resolve(this.rpcPath)));
         socket.onerror = console.error;
         socket.onclose = ({ code, reason }) => {
             for (const channel of [...this.channels.values()]) {

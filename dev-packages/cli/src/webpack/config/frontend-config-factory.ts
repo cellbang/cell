@@ -14,8 +14,9 @@ export class FrontendConfigFactory {
         }
         const { pkg, port } = context;
         this._config = pkg.frontendConfig;
-        if (this._config.endpoint) {
-            this._config = { ...this._config, ...{ endpoint: this._config.endpoint.replace('{port}', port) } };
+        const endpoint = this._config.malagu.server.endpoint;
+        if (endpoint) {
+            this._config.malagu.server.endpoint = endpoint.replace('{port}', port);
         }
         return this._config;
     }

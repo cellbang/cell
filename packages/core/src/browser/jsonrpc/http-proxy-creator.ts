@@ -6,7 +6,7 @@ import { ConnectionHandler } from '../../common/jsonrpc/handler';
 import { ConnnectionFactory } from '../../common/jsonrpc/connection-factory';
 import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
 import { HttpChannel } from '../../common/jsonrpc/http-channel';
-import { Component, Autowired, Value } from '../../common/annotation';
+import { PathResolver, Component, Autowired, Value, ENDPOINT, RPC_PATH } from '../../common';
 const urlJoin = require('url-join');
 
 @Component(ProxyCreator)
@@ -18,10 +18,13 @@ export class HttpProxyCreator implements ProxyCreator {
     @Autowired(ConnnectionFactory)
     protected connnectionFactory: ConnnectionFactory<Channel>;
 
-    @Value
+    @Autowired(PathResolver)
+    protected pathResolver: PathResolver;
+
+    @Value(ENDPOINT)
     protected readonly endpoint: string;
 
-    @Value
+    @Value(RPC_PATH)
     protected readonly rpcPath: string;
 
     create<T extends object>(path: string, target?: object | undefined): JsonRpcProxy<T> {
@@ -57,7 +60,7 @@ export class HttpProxyCreator implements ProxyCreator {
 
     protected createChannel(id: number, path: string): Channel {
         const channel = new HttpChannel(id, async content => {
-            const response = await fetch(urlJoin(this.endpoint, this.rpcPath), {
+            const response = await fetch(urlJoin(this.endpoint, await this.pathResolver.resolve(this.rpcPath)), {
                 method: 'POST',
                 body: content,
                 headers: new Headers({

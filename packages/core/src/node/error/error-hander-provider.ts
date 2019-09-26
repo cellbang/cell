@@ -1,17 +1,13 @@
 import { Context } from '../context';
 import { Prioritizeable } from '../../common/prioritizeable';
-import { ChannelManager } from '../channel';
 import { Component, Autowired } from '../../common/annotation';
 import { injectable } from 'inversify';
-import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY } from './error-protocol';
+import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
 
 @injectable()
 export abstract class AbstractErrorHandler implements ErrorHandler {
     readonly priority: number = DEFALUT_ERROR_HANDlER_PRIORITY;
-
-    @Autowired
-    protected readonly channelManager: ChannelManager;
 
     canHandle(ctx: Context, err: Error): Promise<boolean> {
         return Promise.resolve(true);
@@ -34,7 +30,7 @@ export class DefaultErrorHandler extends AbstractErrorHandler {
 
 @Component(ErrorHandler)
 export class HttpErrorHandler implements ErrorHandler {
-    readonly priority: number = DEFALUT_ERROR_HANDlER_PRIORITY + 100;
+    readonly priority: number = HTTP_ERROR_HANDlER_PRIORITY;
 
     canHandle(ctx: Context, err: Error): Promise<boolean> {
         return Promise.resolve(err instanceof HttpError);

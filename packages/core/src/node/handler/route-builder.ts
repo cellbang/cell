@@ -2,7 +2,7 @@ import { Component, Autowired, Optional, Value } from '../../common/annotation';
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
-const urlJoin = require('url-join');
+import { PathResolver } from '../../common';
 
 @Component()
 export class RouteBuilder {
@@ -10,23 +10,27 @@ export class RouteBuilder {
     @Autowired(CONTROLLER) @Optional
     protected readonly controllers: any[] = [];
 
-    @Value
-    protected readonly rootPath?: string;
+    @Autowired(PathResolver)
+    protected readonly pathResolver: PathResolver;
 
-    @Value
+    @Value('malagu.mvc.defaultViewName')
     protected readonly defaultViewName: string;
 
-    build() {
+    async build() {
         const routeMap: Map<string, Map<StrOrRegex, any>> = new Map<string, Map<StrOrRegex, any>>();
+
         for (const controller of this.controllers) {
-            const controllerMetadata = <ControllerMetadata>Reflect.getOwnMetadata(METADATA_KEY.controller, controller.constructor);
+            const targetConstructor = controller.target ? controller.target.constructor : controller.constructor;
+
+            const controllerMetadata = <ControllerMetadata>Reflect.getOwnMetadata(METADATA_KEY.controller, targetConstructor);
             const methodMetadata: MethodMetadata[] = Reflect.getOwnMetadata(
                 METADATA_KEY.controllerMethod,
-                controller.constructor
-            );
+                targetConstructor
+            ) || [];
             for (const metadata of methodMetadata) {
                 const routeOptions: any = (typeof metadata.options === 'string' || metadata.options instanceof RegExp) ? { path: metadata.options } : metadata.options;
                 const method = metadata.method;
+                metadata.target = controller;
                 let pathMap = routeMap.get(method);
                 if (!pathMap) {
                     pathMap = new Map<StrOrRegex, any>();
@@ -34,9 +38,9 @@ export class RouteBuilder {
                 }
                 let path: StrOrRegex = routeOptions.path;
                 if (typeof path === 'string' ) {
-                    path = urlJoin(this.rootPath, controllerMetadata.path, path);
+                    path = await this.pathResolver.resolve(controllerMetadata.path, path);
                 } else if (path instanceof RegExp) {
-                    path = new RegExp(urlJoin(this.rootPath, controllerMetadata.path, path.source));
+                    path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
                 }
                 pathMap.set(path, {
                     controllerMetadata,
