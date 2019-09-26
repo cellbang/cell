@@ -15,14 +15,22 @@
     "config": {
       "malagu": {
         "security": {
-          "contextKey": "malagu:securityContext",
-          "username": "admin",
-          "password": "123456",
           "usernameKey": "username",
-          "passwordKey": "password",
-          "passwordEncoder": {
-            "secret": "123456",
-            "encodeHashAsBase64": true
+          "passwordKey": "password"
+        }
+      },
+      "backend": {
+        "malagu": {
+          "security": {
+            "contextKey": "malagu:securityContext",
+            "username": "admin",
+            "password": "123456",
+            "usernameKey": "username",
+            "passwordKey": "password",
+            "passwordEncoder": {
+              "secret": "123456",
+              "encodeHashAsBase64": true
+            }
           }
         }
       }
