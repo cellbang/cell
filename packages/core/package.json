@@ -29,19 +29,28 @@
   },
   "malaguComponent": {
     "config": {
-      "cookies": {
+      "malagu": {
+        "cookies": {
 
+        },
+        "session": {
+          "autoCommit": true,
+          "maxAge": 86400000,
+          "sessionIdKey": "malagu:sessionId",
+          "sessionKey": "malagu:session"
+        },
+        "server": {
+          "path": "/",
+          "endpoint": "ws://localhost:{port}"
+        },
+        "mvc": {
+          "path": "/*",
+          "defaultViewName": "json"
+        },
+        "rpc": {
+          "path": "api"
+        }
       },
-      "session": {
-        "autoCommit": true,
-        "maxAge": 86400000,
-        "sessionIdKey": "malagu:sessionId",
-        "sessionKey": "malagu:session"
-      },
-      "rootPath": "/",
-      "rpcPath": "rpc",
-      "defaultViewName": "json",
-      "endpoint": "ws://localhost:{port}",
       "auto": false,
       "frontend": {
         "entry": "lib/browser/application-entry"

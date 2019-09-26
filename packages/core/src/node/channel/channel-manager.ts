@@ -3,6 +3,7 @@ import { optional } from 'inversify';
 import { ConnectionHandler, ConnnectionFactory, ConsoleLogger } from '../../common';
 import { Channel } from '../../common/jsonrpc/channel-protocol';
 import { Component, Autowired } from '../../common/annotation';
+import { HttpError } from '../error';
 
 // tslint:disable:no-any
 @Component()
@@ -32,7 +33,7 @@ export class ChannelManager {
                     return channel;
                 }
             }
-            throw new Error('Cannot find a service for the path: ' + path);
+            throw new HttpError(404, `Cannot find a service for the path: ${path}`);
         });
     }
 

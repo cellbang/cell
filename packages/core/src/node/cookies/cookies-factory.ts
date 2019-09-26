@@ -6,10 +6,10 @@ import { Cookies } from './cookies-protocol';
 @Component()
 export class CookiesFactory {
 
-    @Value('cookies.keys')
+    @Value('malagu.cookies.keys')
     protected keys?: string[];
 
-    @Value('cookies.secure')
+    @Value('malagu.cookies.secure')
     protected secure?: boolean;
 
     async create(): Promise<Cookies> {

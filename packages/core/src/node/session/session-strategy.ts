@@ -5,7 +5,7 @@ import { Value, Component } from '../../common/annotation';
 @Component(SessionStrategy)
 export class SessionStrategyImpl implements SessionStrategy {
 
-    @Value('session')
+    @Value('malagu.session')
     protected readonly sessionOptions: any;
 
     async valid(session: Session): Promise<boolean> {

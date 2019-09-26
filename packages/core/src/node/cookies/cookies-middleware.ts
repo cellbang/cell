@@ -3,6 +3,7 @@ import { Context } from '../context';
 import { Component, Autowired } from '../../common';
 import * as _Cookies from 'cookies';
 import { CookiesFactory } from './cookies-factory';
+import { COOKIES_MIDDLEWARE_PRIORITY } from './cookies-protocol';
 
 @Component(Middleware)
 export class CookiesMiddleware implements Middleware {
@@ -17,6 +18,6 @@ export class CookiesMiddleware implements Middleware {
         await next();
     }
 
-    readonly priority = 1000;
+    readonly priority = COOKIES_MIDDLEWARE_PRIORITY;
 
 }

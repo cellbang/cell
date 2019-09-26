@@ -1,7 +1,7 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Value, Autowired } from '../../common';
-import { SessionManager } from './session-protocol';
+import { SessionManager, SESSION_MIDDLEWARE_PRIORITY } from './session-protocol';
 
 @Component(Middleware)
 export class SessionMiddleware implements Middleware {
@@ -9,7 +9,7 @@ export class SessionMiddleware implements Middleware {
     @Autowired(SessionManager)
     protected readonly sessionManager: SessionManager;
 
-    @Value('session')
+    @Value('malagu.session')
     protected readonly sessionOptions: any;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
@@ -23,6 +23,6 @@ export class SessionMiddleware implements Middleware {
         }
     }
 
-    readonly priority = 500;
+    readonly priority = SESSION_MIDDLEWARE_PRIORITY;
 
 }

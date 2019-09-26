@@ -1,9 +1,13 @@
+import { COOKIES_MIDDLEWARE_PRIORITY } from '../cookies';
+
 export const Session = Symbol('Session');
 export const SessionStore = Symbol('SessionStore');
 export const SessionManager = Symbol('SessionManager');
 export const SessionStrategy = Symbol('SessionStrategy');
 
 export const COOKIE_EXP_DATE = new Date('Thu, 01 Jan 1970 00:00:00 GMT');
+
+export const SESSION_MIDDLEWARE_PRIORITY = COOKIES_MIDDLEWARE_PRIORITY - 100;
 
 export interface Session {
     id: string;

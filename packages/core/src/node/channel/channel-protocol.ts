@@ -3,6 +3,8 @@ import ws = require('ws');
 
 export const ChannelStrategy = Symbol('ChannelStrategy');
 
+export const CHANNEL_MIDDLEWARE_PRIORITY = 2000;
+
 export interface ChannelStrategy {
 
     getMessage(): Promise<Channel.Message>;

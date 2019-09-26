@@ -9,3 +9,6 @@ export * from './auto-bind';
 export * from './dynamic-container';
 export * from './container-provider';
 export * from './application-protocol';
+export * from './aop';
+export * from './resolver';
+export * from './constants';

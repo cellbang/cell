@@ -1,7 +1,7 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Autowired } from '../../common';
-import { ChannelStrategy } from './channel-protocol';
+import { ChannelStrategy, CHANNEL_MIDDLEWARE_PRIORITY } from './channel-protocol';
 
 @Component(Middleware)
 export class ChannelMiddleware implements Middleware {
@@ -17,6 +17,6 @@ export class ChannelMiddleware implements Middleware {
         await next();
     }
 
-    readonly priority = 2000;
+    readonly priority = CHANNEL_MIDDLEWARE_PRIORITY;
 
 }

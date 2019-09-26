@@ -24,6 +24,7 @@ export async function handler(request: any, response: any, context: any) {
         const dispatcher = c.get<Dispatcher<HttpTriggerContext>>(Dispatcher);
         Context.run(() => dispatcher.dispatch(httpContext));
     } catch (err) {
+        console.log(err);
         response.statusCode = 500;
         response.send(err);
     }

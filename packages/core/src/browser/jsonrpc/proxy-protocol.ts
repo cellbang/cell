@@ -1,7 +1,5 @@
 import { JsonRpcProxy } from '../../common/jsonrpc';
 
-export const ENDPOINT = 'endpoint';
-
 export const ProxyProvider = Symbol('ProxyProvider');
 
 export interface ProxyProvider {
