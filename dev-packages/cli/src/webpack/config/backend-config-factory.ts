@@ -1,11 +1,12 @@
 
 import * as webpack from 'webpack';
 import * as path from 'path';
-import { Context } from './context';
+import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
+const nodeExternals = require('webpack-node-externals');
 
 export class BackendConfigFactory {
-    create(context: Context): webpack.Configuration {
+    create(context: CliContext): webpack.Configuration {
         const { pkg, port, open, dev } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
 
@@ -44,8 +45,8 @@ export class BackendConfigFactory {
                 writeToDisk: true
             },
             plugins: [
-                new webpack.DefinePlugin({
-                    'process.env': JSON.stringify(config)
+                new webpack.EnvironmentPlugin({
+                    'MALAGU_CONFIG': config
                 })
             ],
             module: {
@@ -61,11 +62,12 @@ export class BackendConfigFactory {
                         }
                     },
                 ]
-            }
+            },
+            externals: [nodeExternals()]
         };
     }
 
-    support(context: Context): boolean {
+    support(context: CliContext): boolean {
         const { pkg: { backendConfig } } = context;
         const config = backendConfig;
 

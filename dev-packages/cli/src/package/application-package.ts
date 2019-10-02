@@ -110,6 +110,7 @@ export class ApplicationPackage {
     protected _serveHookModules: Map<string, string> | undefined;
     protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
+    protected _webpackHookModules: Map<string, string> | undefined;
 
     /**
      * Component packages in the topological order.
@@ -249,13 +250,20 @@ export class ApplicationPackage {
         return this._deployHookModules;
     }
 
-    protected computeModules<P extends keyof Component>(tagret: P): Map<string, string> {
+    get webpackHookModules() {
+        if (!this._webpackHookModules) {
+            this._webpackHookModules = this.computeModules('webpackHooks');
+        }
+        return this._webpackHookModules;
+    }
+
+    computeModules(tagret: string): Map<string, string> {
         const result = new Map<string, string>();
         let moduleIndex = 1;
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
-                const modulePaths = <string[]>component[tagret] || [];
+                const modulePaths = <string[]>(component as any)[tagret] || [];
                 for (const modulePath of modulePaths) {
                     if (typeof modulePath === 'string') {
                         let componentPath: string;

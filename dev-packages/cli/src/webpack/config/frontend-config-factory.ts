@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import { Context } from './context';
+import { CliContext } from '../../context';
 import { FRONTEND_TARGET } from '../../constants';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -8,7 +8,7 @@ export class FrontendConfigFactory {
 
     private _config: any;
 
-    getConfig(context: Context) {
+    getConfig(context: CliContext) {
         if (this._config) {
             return this._config;
         }
@@ -21,7 +21,7 @@ export class FrontendConfigFactory {
         return this._config;
     }
 
-    create(context: Context): webpack.Configuration {
+    create(context: CliContext): webpack.Configuration {
         const { pkg, open, port } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
 
@@ -119,7 +119,7 @@ export class FrontendConfigFactory {
         };
     }
 
-    support(context: Context): boolean {
+    support(context: CliContext): boolean {
         const config = this.getConfig(context);
         return context.pkg.frontendModules.size > 0 && (!config.targets || config.targets.includes(FRONTEND_TARGET));
     }

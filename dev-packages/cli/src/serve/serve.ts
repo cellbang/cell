@@ -1,8 +1,8 @@
 
 import * as program from 'commander';
 import { ConfigFactory } from '../webpack/config/config-factory';
-import { Context } from '../webpack/config/context';
 import { ServeManager } from './serve-manager';
+import { CliContext } from '../context';
 
 program
     .name('malagu serve')
@@ -14,7 +14,7 @@ program
     .parse(process.argv);
 
 (async () => {
-    const context = await Context.create();
+    const context = await CliContext.create();
     context.dev = true;
     context.open = program.open;
     context.copy = program.copy;

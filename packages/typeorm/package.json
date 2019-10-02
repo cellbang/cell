@@ -1,0 +1,71 @@
+{
+  "name": "@malagu/typeorm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "^0.0.1",
+    "mysql": "^2.17.1",
+    "typeorm": "^0.2.19"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "malaguComponent": {
+    "config": {
+      "backend": {
+        "malagu": {
+          "typeorm": {
+            "ormConfig": [
+              {
+                "type": "mysql",
+                "host": "localhost",
+                "port": 3306,
+                "synchronize": true,
+                "username": "root",
+                "password": "root",
+                "database": "test"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "webpackHooks": [
+      "lib/hooks/webpack"
+    ]
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/cli": "^0.0.1",
+    "@malagu/ext-scripts": "^0.0.1",
+    "webpack-filter-warnings-plugin": "^1.2.1"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}
