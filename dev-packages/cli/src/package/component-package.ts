@@ -9,6 +9,7 @@ export interface Component {
     initHooks?: string[];
     serveHooks?: string[];
     deployHooks?: string[];
+    webpackHooks?: string[];
 }
 
 export class ComponentPackage {

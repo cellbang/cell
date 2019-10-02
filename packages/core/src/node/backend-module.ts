@@ -4,7 +4,7 @@ import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';
 import 'reflect-metadata';
 import { autoBind } from '../common/auto-bind';
-import { ConfigProvider } from '../common/config-provider';
+import { ConfigProvider } from '../common/config';
 export * from '.';
 
 export const CoreBackendModule = autoBind(bind => {

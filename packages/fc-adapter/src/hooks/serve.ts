@@ -1,4 +1,5 @@
 import { ProfileProvider } from './profile-provider';
+import { ServeContext } from '@malagu/cli';
 
 export class Deferred<T> {
     resolve: (value?: T) => void;
@@ -10,13 +11,13 @@ export class Deferred<T> {
     });
 }
 
-export default (context: any) => {
+export default (context: ServeContext) => {
     const { app, entryContextProvider, pkg } = context;
     let initialized = false;
     let funcHandler: any;
     let deferred = new Deferred<void>();
     const type = pkg.backendConfig.deployConfig.type;
-    console.log(`Serve ${type} type for function compute.`);
+    console.log(`Serve ${type} type for function compute`);
     if (type !== 'http') {
         app.use((req: any, res: any, next: any) => {
             req.rawBody = '';

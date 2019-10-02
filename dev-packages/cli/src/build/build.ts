@@ -2,8 +2,8 @@
 import * as program from 'commander';
 import * as webpack from 'webpack';
 import { ConfigFactory } from '../webpack/config/config-factory';
-import { Context } from '../webpack/config/context';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import { CliContext } from '../context';
 const chalk = require('chalk');
 
 program
@@ -14,7 +14,7 @@ program
     .parse(process.argv);
 
 (async () => {
-    const context = await Context.create();
+    const context = await CliContext.create();
     context.dev = false;
     if (program.dir) {
         context.dest = program.dir;

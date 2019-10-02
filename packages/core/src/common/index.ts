@@ -12,3 +12,4 @@ export * from './application-protocol';
 export * from './aop';
 export * from './resolver';
 export * from './constants';
+export * from './config';

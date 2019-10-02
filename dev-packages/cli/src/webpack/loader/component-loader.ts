@@ -19,12 +19,9 @@ require('reflect-metadata');
 const { Container } = require('inversify');
 const { FrontendApplication } = require('@malagu/core/lib/browser');
 const { CoreFrontendModule } = require('@malagu/core/lib/browser/frontend-module');
-const { CONFIG } = require('@malagu/core/lib/common/config-provider');
-const config = process.env;
 
 const container = new Container();
 container.load(CoreFrontendModule);
-window[CONFIG] = config;
 
 function load(raw) {
   return Promise.resolve(raw.default).then(module => container.load(module));

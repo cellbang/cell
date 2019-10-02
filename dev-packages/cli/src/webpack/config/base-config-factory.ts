@@ -1,6 +1,6 @@
 
 import * as webpack from 'webpack';
-import { Context } from './context';
+import { CliContext } from '../../context';
 import * as path from 'path';
 
 const nodePathList = (process.env.NODE_PATH || '')
@@ -8,7 +8,7 @@ const nodePathList = (process.env.NODE_PATH || '')
     .filter(p => !!p);
 
 export class BaseConfigFactory {
-    create(context: Context): webpack.Configuration {
+    create(context: CliContext): webpack.Configuration {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
         return {
@@ -36,7 +36,7 @@ export class BaseConfigFactory {
                 ]
             },
             plugins: [
-            ],
+            ]
         };
     }
 }

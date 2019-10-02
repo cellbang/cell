@@ -1,15 +1,14 @@
-import { Context } from '@malagu/cli/lib/hook/context';
+import { HookContext, customizer } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
 import { resolve, join } from 'path';
 import mergeWith = require('lodash.mergewith');
 import { readdirSync, statSync, readFileSync } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
 import  * as JSZip from 'jszip';
-import { customizer } from '@malagu/cli/lib/package/application-package';
 const CloudAPI = require('@alicloud/cloudapi');
 const Ram = require('@alicloud/ram');
 
-export default async (context: Context) => {
+export default async (context: HookContext) => {
     const { pkg } = context;
     const defaultDeployConfig = {
         type: 'http',
