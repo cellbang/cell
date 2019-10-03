@@ -53,7 +53,6 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
         } else {
             return request.query[key];
         }
-        return '';
     }
 
     async support(): Promise<boolean> {
