@@ -5,7 +5,7 @@ import { FrontendConfigFactory } from './frontend-config-factory';
 import { BackendConfigFactory } from './backend-config-factory';
 import { CliContext } from '../../context';
 import * as merge from 'webpack-merge';
-import { HookExecutor } from '../../hook';
+import { HookExecutor } from '../../hook/hook-executor';
 const chalk = require('chalk');
 
 export class ConfigFactory {
