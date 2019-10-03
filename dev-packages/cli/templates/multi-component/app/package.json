@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.1",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "next",
+    "@malagu/fc-adapter": "next",
+    "@app/welcome": "^0.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@malagu/cli": "next",
+    "@types/react-dom": "^16.8.5",
+    "bufferutil": "^4.0.1",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.5.3",
+    "utf-8-validate": "^5.0.2"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "rimraf lib dist",
+    "build": "tsc",
+    "start": "malagu serve",
+    "watch": "tsc -w"
+  }
+}

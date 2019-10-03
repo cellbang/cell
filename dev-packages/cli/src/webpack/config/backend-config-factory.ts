@@ -3,7 +3,6 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
-const nodeExternals = require('webpack-node-externals');
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
@@ -62,8 +61,7 @@ export class BackendConfigFactory {
                         }
                     },
                 ]
-            },
-            externals: [nodeExternals()]
+            }
         };
     }
 
