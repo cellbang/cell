@@ -52,7 +52,7 @@ export default (context: ServeContext) => {
         if (!initialized) {
             initialized = true;
             deferred = new Deferred<void>();
-            const { init, handler } = entryContextProvider();
+            const { init, handler } = await entryContextProvider();
 
             funcHandler = handler;
             await init(ctx, (err: any) => {

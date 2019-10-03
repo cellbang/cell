@@ -53,18 +53,18 @@ function doProxy (context: interfaces.Context, t: any) {
                     try {
                         const beforeAdvices = context.container.getAll<MethodBeforeAdvice>(MethodBeforeAdvice) || [];
                         for (const advice of beforeAdvices) {
-                            await advice.before(method, args, target);
+                            await advice.before(method, args, t);
                         }
                         const returnValue = await func.apply(target, args);
                         const afterReturningAdvices = context.container.getAll<AfterReturningAdvice>(AfterReturningAdvice) || [];
                         for (const advice of afterReturningAdvices) {
-                            await advice.afterReturning(returnValue, method, args, target);
+                            await advice.afterReturning(returnValue, method, args, t);
                         }
                         return returnValue;
                     } catch (error) {
                         const afterThrowsAdvices = context.container.getAll<AfterThrowsAdvice>(AfterThrowsAdvice) || [];
                         for (const advice of afterThrowsAdvices) {
-                            await advice.afterThrows(error, method, args, target);
+                            await advice.afterThrows(error, method, args, t);
                         }
                         throw error;
                     }
@@ -124,7 +124,7 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
     if (opt.rpc) {
         fluentProvide(ConnectionHandler).inSingletonScope().onActivation(context => {
             const t = context.container.get(id);
-            return new JsonRpcConnectionHandler(id.toString(), proxy => doProxy(context, t));
+            return new JsonRpcConnectionHandler(id.toString(), () => t);
         }).done(true)(NoOpConnectionHandler);
     }
 }

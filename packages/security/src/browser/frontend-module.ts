@@ -1,17 +1,3 @@
-import { ContainerModule } from 'inversify';
-import { UserServer, userPath, AuthServer, authPath } from '../common';
-import { ProxyProvider } from '@malagu/core/lib/browser';
+import { autoBind } from '@malagu/core';
 
-export default new ContainerModule(bind => {
-
-    bind(UserServer).toDynamicValue(ctx => {
-        const provider = ctx.container.get<ProxyProvider>(ProxyProvider);
-        return provider.provide<UserServer>(userPath);
-    }).inSingletonScope();
-
-    bind(AuthServer).toDynamicValue(ctx => {
-        const provider = ctx.container.get<ProxyProvider>(ProxyProvider);
-        return provider.provide<AuthServer>(authPath);
-    }).inSingletonScope();
-
-});
+export default autoBind();

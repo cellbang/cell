@@ -4,8 +4,8 @@ export default (context: any) => {
     const { server, app, entryContextProvider, pkg } = context;
 
     const ws = expressWs(app, server);
-    app.ws(pkg.backendConfig.rpcPath, (s: any) => {
-        const { Dispatcher, Context, WebSocketContext, ContainerProvider, Application, container } = entryContextProvider();
+    app.ws(pkg.backendConfig.rpcPath, async (s: any) => {
+        const { Dispatcher, Context, WebSocketContext, ContainerProvider, Application, container } = await entryContextProvider();
         container.then((c: any) => {
             ContainerProvider.set(c);
             c.get(Application).start();
