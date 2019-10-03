@@ -1,5 +1,5 @@
 import { WelcomeServer } from '../common/welcome-protocol';
-import { Rpc } from '@malagu/core/lib/common/annotation';
+import { Rpc } from '@malagu/core';
 
 @Rpc(WelcomeServer)
 export class WelcomeServerImpl implements WelcomeServer {

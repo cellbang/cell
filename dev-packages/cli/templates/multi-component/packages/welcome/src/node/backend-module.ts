@@ -1,3 +1,3 @@
 export { WelcomeServerImpl } from './welcome-server';
-import { autoBind } from '@malagu/core/lib/common';
+import { autoBind } from '@malagu/core';
 export default autoBind();
