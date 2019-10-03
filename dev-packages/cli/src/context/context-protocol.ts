@@ -42,5 +42,5 @@ export interface ServeContext extends HookContext {
     server: http.Server | https.Server;
     app: any;
     compiler: webpack.Compiler;
-    entryContextProvider: () => any;
+    entryContextProvider: () => Promise<any>;
 }

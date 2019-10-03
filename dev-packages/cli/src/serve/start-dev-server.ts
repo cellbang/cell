@@ -13,6 +13,7 @@ import { getDevSuccessInfo } from '../webpack/utils';
 const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET } from '../constants';
+import * as delay from 'delay';
 const decache = require('decache');
 
 let server: any;
@@ -40,13 +41,18 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     if (!c) {
         server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
     }
-    const entryContextProvider = () => {
+    const entryContextProvider = async() => {
         const entryPath = getEntryPath(configuration);
         for (const key of Object.keys(require.cache)) {
             decache(key);
         }
-        const entry = require(entryPath);
-        return entry;
+        while (true) {
+            try {
+                return require(entryPath);
+            } catch (e) {
+                await delay(100);
+            }
+        }
     };
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
 

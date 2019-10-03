@@ -5,7 +5,8 @@ import * as https from 'https';
 import * as http from 'http';
 import { ServeContext, CliContext } from '../context';
 
-export type ExecuteServeHooks = (server: http.Server | https.Server, app: Express.Application, compiler: webpack.Compiler, entryContextProvider: () => any) => Promise<void>;
+export type ExecuteServeHooks = (server: http.Server | https.Server, app: Express.Application,
+    compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => Promise<void>;
 
 export class ServeManager {
 
