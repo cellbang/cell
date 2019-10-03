@@ -45,16 +45,16 @@ export class RouteBuilder {
                 pathMap.set(path, {
                     controllerMetadata,
                     methodMetadata: metadata,
-                    paramMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerParam, controller.constructor, metadata.key),
-                    bodyMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerBody, controller.constructor, metadata.key),
-                    queryMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, controller.constructor, metadata.key),
-                    requestHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestHeader, controller.constructor, metadata.key),
-                    responseHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseHeader, controller.constructor, metadata.key),
-                    requestCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestCookie, controller.constructor, metadata.key),
-                    responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, controller.constructor, metadata.key),
-                    requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, controller.constructor, metadata.key),
-                    responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, controller.constructor, metadata.key),
-                    viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, controller.constructor, metadata.key) || { viewName: this.defaultViewName }
+                    paramMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, metadata.key),
+                    bodyMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, metadata.key),
+                    queryMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, metadata.key),
+                    requestHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestHeader, targetConstructor, metadata.key),
+                    responseHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseHeader, targetConstructor, metadata.key),
+                    requestCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestCookie, targetConstructor, metadata.key),
+                    responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, metadata.key),
+                    requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, metadata.key),
+                    responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, metadata.key),
+                    viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, metadata.key) || { viewName: this.defaultViewName }
                 });
             }
         }
