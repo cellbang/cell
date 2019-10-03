@@ -112,8 +112,8 @@ export class FrontendConfigFactory {
                 new HtmlWebpackPlugin({
                     title: config.appTitle || 'Malagu App'
                 }),
-                new webpack.DefinePlugin({
-                    'process.env': JSON.stringify(config)
+                new webpack.EnvironmentPlugin({
+                    'MALAGU_CONFIG': config
                 })
             ]
         };
