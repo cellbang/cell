@@ -1,6 +1,5 @@
 import { Context } from '../context';
-import { Prioritizeable } from '../../common/prioritizeable';
-import { Component, Autowired, Optional } from '../../common/annotation';
+import { Component, Autowired, Optional, Prioritizeable } from '../../common';
 
 export const Middleware = Symbol('Middleware');
 

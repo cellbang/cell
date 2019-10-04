@@ -1,6 +1,5 @@
 export * from './middleware';
-export * from './backend-application';
-export * from './backend-application-state';
+export * from './application';
 export * from './middleware';
 export * from './annotation';
 export * from './dispatcher';

@@ -1,3 +1,3 @@
 export { Shell } from './shell';
-import { autoBind } from '@malagu/core/lib/common';
+import { autoBind } from '@malagu/core';
 export default autoBind();

@@ -1,12 +1,10 @@
-import { container } from '@malagu/core/lib/common/dynamic-container';
+import { container } from '@malagu/core/lib/common/container/dynamic-container';
+import { Application, ContainerProvider, PathResolver, ConfigProvider } from '@malagu/core';
 import { Dispatcher, WebSocketContext, Context, Request, Response, HttpContext } from '@malagu/core/lib/node';
 import * as Koa from 'koa';
 import * as route from 'koa-route';
 import * as websockify from 'koa-websocket';
-import { ConfigProvider } from '@malagu/core/lib/common';
 import { DEFAULT_SERVER_OPTIONS } from './context';
-import { ContainerProvider, PathResolver } from '@malagu/core/lib/common';
-import { Application } from '@malagu/core/lib/common/application-protocol';
 
 container.then(async c => {
     ContainerProvider.set(c);

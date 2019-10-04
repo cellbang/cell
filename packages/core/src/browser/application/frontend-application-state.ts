@@ -1,5 +1,4 @@
-import { ApplicationState, AbstractApplicationStateService, ApplicationStateService } from '../common/application-protocol';
-import { Component } from '../common/annotation';
+import { Component, ApplicationState, AbstractApplicationStateService, ApplicationStateService } from '../../common';
 
 export type FrontendApplicationState =
     ApplicationState

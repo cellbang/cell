@@ -1,9 +1,8 @@
-import { ApplicationShell } from './application-shell';
+import { ApplicationShell } from '../shell';
 import { FrontendApplicationStateService } from './frontend-application-state';
-import { MaybePromise } from '../common/prioritizeable';
-import { parseCssTime } from './browser';
-import { ApplicationStateService, AbstractApplication, Application } from '../common/application-protocol';
-import { Component, Autowired } from '../common/annotation';
+import { parseCssTime } from '../browser';
+import { Component, Autowired, MaybePromise,
+    ApplicationStateService, AbstractApplication, Application } from '../../common';
 
 @Component(Application)
 export class FrontendApplication extends AbstractApplication {

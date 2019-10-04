@@ -1,12 +1,10 @@
 import { injectable, decorate, unmanaged } from 'inversify';
 import { createWebSocketConnection, Logger, ConsoleLogger } from 'vscode-ws-jsonrpc/lib';
 import { Emitter, Event } from 'vscode-jsonrpc';
-import { WebSocketChannel } from '../../common/jsonrpc/web-socket-channel';
-import { JsonRpcProxyFactory, JsonRpcProxy, ConnectionHandler } from '../../common/jsonrpc';
 import { ConnectionOptions, ProxyCreator } from './proxy-protocol';
-import { Channel } from '../../common/jsonrpc/channel-protocol';
 import ReconnectingWebSocket from 'reconnecting-websocket';
-import { Component, Value, ENDPOINT, RPC_PATH, Autowired, PathResolver } from '../../common';
+import { Component, Value, ENDPOINT, RPC_PATH, Autowired, PathResolver, Channel,
+    JsonRpcProxyFactory, JsonRpcProxy, ConnectionHandler, WebSocketChannel } from '../../common';
 const urlJoin = require('url-join');
 
 decorate(injectable(), JsonRpcProxyFactory);

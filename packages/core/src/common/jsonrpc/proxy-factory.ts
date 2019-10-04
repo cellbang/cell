@@ -1,7 +1,7 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
 import { ConnectionHandler } from './handler';
-import { ApplicationError } from '../application-error';
-import { Disposable } from '../disposable';
+import { ApplicationError } from '../application/application-error';
+import { Disposable } from '../utils/disposable';
 
 export type JsonRpcServer<Client> = Disposable & {
     /**

@@ -1,6 +1,6 @@
 import { interfaces as inversifyInterfaces, ContainerModule } from 'inversify';
 import interfaces from 'inversify-binding-decorators/dts/interfaces/interfaces';
-import { METADATA_KEY } from './constants';
+import { METADATA_KEY } from '../constants';
 import { CustomError } from 'ts-custom-error';
 
 class NoOpError extends CustomError {

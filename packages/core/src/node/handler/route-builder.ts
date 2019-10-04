@@ -40,7 +40,9 @@ export class RouteBuilder {
                 if (typeof path === 'string' ) {
                     path = await this.pathResolver.resolve(controllerMetadata.path, path);
                 } else if (path instanceof RegExp) {
-                    path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
+                    if (controllerMetadata.path) {
+                        path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
+                    }
                 }
                 pathMap.set(path, {
                     controllerMetadata,

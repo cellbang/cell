@@ -1,6 +1,5 @@
-import { container } from '../common/dynamic-container';
-import { ContainerProvider } from '../common/container-provider';
-import { Application } from '../common/application-protocol';
+import { container } from '../../common/container/dynamic-container';
+import { ContainerProvider, Application } from '../../common';
 container.then(c => {
     ContainerProvider.set(c);
     const application = c.get<Application>(Application);

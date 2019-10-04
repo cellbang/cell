@@ -1,6 +1,5 @@
-import { Component, Autowired } from '../../common/annotation';
+import { Component, Autowired, Prioritizeable } from '../../common';
 import { MethodArgsResolver } from './resolver-protocol';
-import { Prioritizeable } from '../../common/prioritizeable';
 
 @Component()
 export class MethodArgsResolverProvider {

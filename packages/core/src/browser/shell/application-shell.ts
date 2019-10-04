@@ -1,9 +1,5 @@
-import { Component } from '../common/annotation';
-
-export const ApplicationShell = Symbol('ApplicationShell');
-export interface ApplicationShell {
-    attach(host: HTMLElement): void;
-}
+import { Component } from '../../common';
+import { ApplicationShell } from './shell-protocol';
 
 @Component(ApplicationShell)
 export class ApplicationShellImpl implements ApplicationShell {

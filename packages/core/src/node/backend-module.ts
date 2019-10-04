@@ -1,10 +1,7 @@
 export * from '../common';
-import { VALUE } from '../common/annotation/value';
-import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';
 import 'reflect-metadata';
-import { autoBind } from '../common/auto-bind';
-import { ConfigProvider } from '../common/config';
+import { autoBind, ConfigProvider, Logger, LOGGER_LEVEL, VALUE } from '../common';
 export * from '.';
 
 export const CoreBackendModule = autoBind(bind => {

@@ -1,5 +1,5 @@
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
-import { Disposable } from '../disposable';
+import { Disposable } from '../utils/disposable';
 import { Emitter } from 'vscode-jsonrpc';
 import { AbstractChannel, Channel } from './channel-protocol';
 

@@ -11,7 +11,7 @@ export interface ControllerMetadata {
     target: any;
 }
 
-export function Controller(path: string = '/', ...middleware: interfaces.ServiceIdentifier<Middleware>[]) {
+export function Controller(path: string = '', ...middleware: interfaces.ServiceIdentifier<Middleware>[]) {
     return function (target: any) {
         const metadata: ControllerMetadata = { path, middleware, target };
         Reflect.defineMetadata(METADATA_KEY.controller, metadata, target);

@@ -1,6 +1,5 @@
 import { Context } from '../context';
-import { Prioritizeable } from '../../common/prioritizeable';
-import { Component, Autowired } from '../../common/annotation';
+import { Component, Autowired, Prioritizeable } from '../../common';
 import { injectable } from 'inversify';
 import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
