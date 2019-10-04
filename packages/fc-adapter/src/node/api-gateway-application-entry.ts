@@ -1,8 +1,7 @@
-import { container } from '@malagu/core/lib/common/dynamic-container';
+import { container } from '@malagu/core/lib/common/container/dynamic-container';
+import { ContainerProvider, Application } from '@malagu/core';
 import { Dispatcher, Context } from '@malagu/core/lib/node';
 import { ApiGatewayContext, Callback } from './context';
-import { ContainerProvider } from '@malagu/core/lib/common/container-provider';
-import { Application } from '@malagu/core/lib/common/application-protocol';
 
 export async function init(context: any, callback: any) {
     try {

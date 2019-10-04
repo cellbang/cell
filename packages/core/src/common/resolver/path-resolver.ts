@@ -1,6 +1,6 @@
 import { PathResolver } from './resolver-protocol';
 import { Value, Component } from '../annotation';
-import urlJoin  =  require('url-join');
+import urlJoin = require('url-join');
 
 @Component(PathResolver)
 export class PathResolverImpl implements PathResolver {

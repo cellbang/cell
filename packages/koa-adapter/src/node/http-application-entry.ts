@@ -1,10 +1,9 @@
+import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { Dispatcher, Context, HttpContext, Response, Request } from '@malagu/core/lib/node';
 import * as Koa from 'koa';
 import * as route from 'koa-route';
-import { ConfigProvider } from '@malagu/core/lib/common';
 import { DEFAULT_SERVER_OPTIONS } from './context';
-import { ContainerProvider, container, PathResolver } from '@malagu/core/lib/common';
-import { Application } from '@malagu/core/lib/common/application-protocol';
+import { ContainerProvider, PathResolver, Application, ConfigProvider } from '@malagu/core';
 
 container.then(async c => {
     ContainerProvider.set(c);

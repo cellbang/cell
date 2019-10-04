@@ -1,5 +1,5 @@
 import { inject, named } from 'inversify';
-import { ContainerProvider } from '../container-provider';
+import { ContainerProvider } from '../container';
 
 export const VALUE = Symbol('Value');
 

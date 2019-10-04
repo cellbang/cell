@@ -1,6 +1,5 @@
-import { Autowired, Component } from '../../common/annotation';
+import { Autowired, Component, Prioritizeable } from '../../common';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
-import { Prioritizeable } from '../../common/prioritizeable';
 import { HttpError } from '../error';
 
 @Component(HandlerMapping)

@@ -1,6 +1,5 @@
 import * as requestContext from 'express-http-context';
-import { Channel } from '../common/jsonrpc/channel-protocol';
-import { WebSocketChannel } from '../common/jsonrpc/web-socket-channel';
+import { WebSocketChannel, Channel } from '../common';
 import ws = require('ws');
 import { Dispatcher } from './dispatcher';
 import { Session } from './session/session-protocol';

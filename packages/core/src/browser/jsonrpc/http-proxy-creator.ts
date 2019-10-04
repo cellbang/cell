@@ -1,12 +1,7 @@
-import { Channel } from '../../common/jsonrpc/channel-protocol';
+import { Channel, ConsoleLogger, HttpChannel, JsonRpcProxy, JsonRpcProxyFactory,
+    ConnectionHandler, ConnnectionFactory, PathResolver, Component, Autowired, Value, ENDPOINT, RPC_PATH } from '../../common';
 import { Logger } from 'vscode-jsonrpc';
-import { ConsoleLogger } from '../../common/logger';
-import { JsonRpcProxy, JsonRpcProxyFactory } from '../../common/jsonrpc/proxy-factory';
-import { ConnectionHandler } from '../../common/jsonrpc/handler';
-import { ConnnectionFactory } from '../../common/jsonrpc/connection-factory';
 import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
-import { HttpChannel } from '../../common/jsonrpc/http-channel';
-import { PathResolver, Component, Autowired, Value, ENDPOINT, RPC_PATH } from '../../common';
 const urlJoin = require('url-join');
 
 @Component(ProxyCreator)

@@ -53,10 +53,10 @@
       },
       "auto": false,
       "frontend": {
-        "entry": "lib/browser/application-entry"
+        "entry": "lib/browser/application/application-entry"
       },
       "backend": {
-        "entry": "lib/node/dev-application-entry"
+        "entry": "lib/node/application/dev-application-entry"
       }
     },
     "serveHooks": [

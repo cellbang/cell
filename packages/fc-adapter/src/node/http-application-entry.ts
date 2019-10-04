@@ -1,9 +1,8 @@
-import { container } from '@malagu/core/lib/common/dynamic-container';
+import { container } from '@malagu/core/lib/common/container/dynamic-container';
+import { ContainerProvider, Application } from '@malagu/core';
 import { Dispatcher, Context } from '@malagu/core/lib/node';
 import { HttpTriggerContext } from './context';
-import { ContainerProvider } from '@malagu/core/lib/common/container-provider';
 import * as getRawBody from 'raw-body';
-import { Application } from '@malagu/core/lib/common/application-protocol';
 
 export async function init(context: any, callback: any) {
     try {

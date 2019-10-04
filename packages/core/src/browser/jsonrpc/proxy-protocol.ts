@@ -1,4 +1,4 @@
-import { JsonRpcProxy } from '../../common/jsonrpc';
+import { JsonRpcProxy } from '../../common';
 
 export const ProxyProvider = Symbol('ProxyProvider');
 

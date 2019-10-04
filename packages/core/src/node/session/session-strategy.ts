@@ -1,6 +1,6 @@
 import { SessionStrategy, Session } from './session-protocol';
 import { SessionImpl } from './session';
-import { Value, Component } from '../../common/annotation';
+import { Value, Component } from '../../common';
 
 @Component(SessionStrategy)
 export class SessionStrategyImpl implements SessionStrategy {

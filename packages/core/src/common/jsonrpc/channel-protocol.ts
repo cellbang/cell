@@ -1,5 +1,5 @@
 import { Disposable } from 'vscode-jsonrpc';
-import { DisposableCollection } from '../disposable';
+import { DisposableCollection } from '../utils/disposable';
 
 export interface Channel {
     handleMessage(message: Channel.Message): void;

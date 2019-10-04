@@ -1,6 +1,6 @@
 import { inject, named, interfaces, multiInject } from 'inversify';
 import { ServiceIdentifierOrFunc } from 'inversify/dts/annotation/inject';
-import { ContainerProvider } from '../container-provider';
+import { ContainerProvider } from '../container';
 
 export interface AutowiredOption {
     id?: ServiceIdentifierOrFunc,

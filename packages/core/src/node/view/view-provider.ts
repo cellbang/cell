@@ -1,5 +1,4 @@
-import { Component, Autowired } from '../../common/annotation';
-import { Prioritizeable } from '../../common/prioritizeable';
+import { Component, Autowired, Prioritizeable } from '../../common';
 import { View } from './view-protocol';
 
 @Component()

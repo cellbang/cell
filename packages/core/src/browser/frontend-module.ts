@@ -1,11 +1,7 @@
 export * from '../common';
-import { RPC } from '../common/annotation/autowired';
-import { Logger, LOGGER_LEVEL } from '../common/logger';
 import { LogLevelDesc, getLogger } from 'loglevel';
-import { VALUE } from '../common/annotation/value';
-import { autoBind } from '../common/auto-bind';
-import { ProxyProvider } from './jsonrpc/proxy-protocol';
-import { ConfigProvider } from '../common/config';
+import { autoBind, ConfigProvider, VALUE, Logger, LOGGER_LEVEL, RPC } from '../common';
+import { ProxyProvider } from './jsonrpc';
 export * from '.';
 
 export const CoreFrontendModule = autoBind(bind => {

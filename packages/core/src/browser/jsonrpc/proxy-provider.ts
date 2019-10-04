@@ -1,7 +1,5 @@
-import { Prioritizeable } from '../../common/prioritizeable';
+import { Prioritizeable, JsonRpcProxy, Component, Autowired } from '../../common';
 import { ProxyProvider, ProxyCreator } from './proxy-protocol';
-import { JsonRpcProxy } from '../../common/jsonrpc/proxy-factory';
-import { Component, Autowired } from '../../common/annotation';
 
 @Component(ProxyProvider)
 export class ProxyProviderImpl implements ProxyProvider {

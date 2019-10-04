@@ -10,7 +10,7 @@ interface State {
 export class App extends React.Component<Prop, State> {
 
     @Autorpc(WelcomeServer)
-    protected welcomeServer!: WelcomeServer;
+    protected welcomeServer: WelcomeServer;
 
     constructor(prop: Prop) {
         super(prop);

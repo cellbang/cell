@@ -1,6 +1,5 @@
-import { ApplicationStateService, AbstractApplication, Application } from '../common/application-protocol';
+import { ApplicationStateService, AbstractApplication, Application, Component, Autowired } from '../../common';
 import { BackendApplicationStateService } from './backend-application-state';
-import { Component, Autowired } from '../common/annotation';
 
 @Component(Application)
 export class BackendApplication extends AbstractApplication {
@@ -16,13 +15,15 @@ export class BackendApplication extends AbstractApplication {
     }
 
     protected setupExitSignals() {
-        process.on('SIGINT', () => {
-            this.doStop();
-            process.exit(0);
-        });
-        process.on('SIGTERM', () => {
-            this.doStop();
-            process.exit(0);
-        });
+        process.removeListener('SIGINT', this.doExit);
+        process.removeListener('SIGTERM', this.doExit);
+
+        process.on('SIGINT', this.doExit.bind(this));
+        process.on('SIGTERM', this.doExit.bind(this));
+    }
+
+    protected doExit() {
+        this.doStop();
+        process.exit(0);
     }
 }

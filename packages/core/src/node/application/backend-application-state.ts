@@ -1,5 +1,4 @@
-import { ApplicationState, AbstractApplicationStateService, ApplicationStateService } from '../common/application-protocol';
-import { Component } from '../common/annotation/component';
+import { ApplicationState, AbstractApplicationStateService, ApplicationStateService, Component } from '../../common';
 
 export type BackendApplicationState = ApplicationState;
 

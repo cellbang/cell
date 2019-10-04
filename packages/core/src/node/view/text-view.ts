@@ -1,4 +1,4 @@
-import { Component } from '../../common/annotation';
+import { Component } from '../../common';
 import { View } from './view-protocol';
 import { Context } from '../context';
 
