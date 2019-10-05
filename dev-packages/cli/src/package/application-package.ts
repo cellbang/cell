@@ -1,32 +1,17 @@
 import * as paths from 'path';
 import { readJsonFile } from './json-file';
 import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
-import { Component, ComponentPackage } from './component-package';
+import { Component, ComponentPackage, Props, ApplicationLog, ApplicationPackageOptions, customizer, ApplicationModuleResolver } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
-import { ApplicationProps } from './application-props';
 import { existsSync, readFileSync } from 'fs-extra';
 import mergeWith = require('lodash.mergewith');
 import yaml = require('js-yaml');
-import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 const chalk = require('chalk');
 
 // tslint:disable:no-implicit-dependencies
 
 // tslint:disable-next-line:no-any
-export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
-export class ApplicationPackageOptions {
-    readonly projectPath: string;
-    readonly log?: ApplicationLog;
-    readonly error?: ApplicationLog;
-}
-
-export type ApplicationModuleResolver = (modulePath: string) => string;
-
-export function customizer(objValue: any, srcValue: any) {
-    if (Array.isArray(objValue)) {
-      return srcValue;
-    }
-  }
 
 export class ApplicationPackage {
     readonly projectPath: string;
@@ -41,41 +26,24 @@ export class ApplicationPackage {
         this.error = options.error || console.error.bind(console);
     }
 
-    protected _props: ApplicationProps | undefined;
-    get props(): ApplicationProps {
+    protected _props: Component | undefined;
+    get props(): Component {
         if (this._props) {
             return this._props;
         }
-        let props = mergeWith({}, ApplicationProps.DEFAULT, customizer);
+        let props = <Component>{};
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
-                const { config } = component;
-                if (config) {
-                    props = mergeWith(props, config, customizer);
-                }
-            }
-        }
-
-        const appConfigPath = this.path('app.yml');
-        if (existsSync(appConfigPath)) {
-            const appConfig = yaml.safeLoad(readFileSync(appConfigPath, { encoding: 'utf8' }));
-            props = mergeWith(props, appConfig);
-        }
-
-        if (props.mode) {
-            const appConfigPathForMode = this.path(`app-${props.mode}.yml`);
-            if (existsSync(appConfigPathForMode)) {
-                const appConfigForMode = yaml.safeLoad(readFileSync(appConfigPathForMode, { encoding: 'utf8' }));
-                props = mergeWith(props, appConfigForMode);
+                props = mergeWith(props, component, customizer);
             }
         }
 
         return props;
     }
 
-    protected _frontendConfig: ApplicationProps | undefined;
-    get frontendConfig(): ApplicationProps {
+    protected _frontendConfig: Props | undefined;
+    get frontendConfig(): Props {
         if (this._frontendConfig) {
             return this._frontendConfig;
         }
@@ -85,8 +53,8 @@ export class ApplicationPackage {
         return mergeWith(config, this.props.frontend, customizer);
     }
 
-    protected _backendConfig: ApplicationProps | undefined;
-    get backendConfig(): ApplicationProps {
+    protected _backendConfig: Props | undefined;
+    get backendConfig(): Props {
         if (this._frontendConfig) {
             return this._frontendConfig;
         }
@@ -112,36 +80,60 @@ export class ApplicationPackage {
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Map<string, string> | undefined;
 
+    protected initRootComponent() {
+        const configPath = this.path(CONFIG_FILE);
+        let malaguComponent = {
+            frontend: {},
+            backend: {}
+        } as any;
+        if (existsSync(configPath)) {
+            malaguComponent = { ...malaguComponent, ...yaml.safeLoad(readFileSync(configPath, { encoding: 'utf8' })) };
+        }
+        const { mode } = malaguComponent;
+        if (mode) {
+            const configPathForMode = this.path(`malagu-${mode}.yml`);
+            if (existsSync(configPathForMode)) {
+                const configForMode = yaml.safeLoad(readFileSync(configPathForMode, { encoding: 'utf8' }));
+                malaguComponent = mergeWith(malaguComponent, configForMode, customizer);
+            }
+        }
+
+        const name = this.pkg.name || paths.basename(this.projectPath);
+        this.addModuleIfExists(name, malaguComponent, false);
+        this.parseEntry(name, malaguComponent, false);
+        this.pkg.malaguComponent = malaguComponent;
+    }
+
     /**
      * Component packages in the topological order.
      */
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
+
+            this.initRootComponent();
+
+            const { mode } = this.pkg.malaguComponent;
+
             const collector = new ComponentPackageCollector(
                 raw => this.newComponentPackage(raw),
-                this.resolveModule
+                this.resolveModule,
+                mode
             );
             this._componentPackages = collector.collect(this.pkg);
             for (const componentPackage of this._componentPackages) {
                 console.log(chalk`malagu {green component} - ${ componentPackage.name }@${ componentPackage.version }`);
                 const malaguComponent = <Component>componentPackage.malaguComponent;
-                if (!malaguComponent.config || malaguComponent.config && malaguComponent.config.auto !== false) {
+                if (malaguComponent.auto !== false) {
                     this.addModuleIfExists(componentPackage.name, malaguComponent, true);
                 }
                 this.parseEntry(componentPackage.name, malaguComponent, true);
             }
-            if (!(this.pkg.private === true && this.pkg.workspaces)) {
-                const malaguComponent = { ...this.pkg.malaguComponent };
-                const name = this.pkg.name || paths.basename(this.projectPath);
-                this.addModuleIfExists(name, malaguComponent, false);
-                this.parseEntry(name, malaguComponent, false);
-                this.pkg.malaguComponent = malaguComponent;
-                this._componentPackages.push(<ComponentPackage>this.pkg);
-            }
+
+            this._componentPackages.push(<ComponentPackage>this.pkg);
 
             for (const componentPackage of this._componentPackages) {
                 const malaguComponent = <Component>componentPackage.malaguComponent;
-                for (const modulePath of [...malaguComponent.frontends || [], ...malaguComponent.backends || []]) {
+                for (const modulePath of [...malaguComponent.frontend.modules || [], ...malaguComponent.backend.modules || []]) {
                     console.log(chalk`malagu {cyan module} - ${componentPackage.name}/${ modulePath }`);
                 }
             }
@@ -151,33 +143,26 @@ export class ApplicationPackage {
     }
 
     protected parseEntry(name: string, component: Component, isModule: boolean) {
-        const config = component.config;
-        if (config) {
-            const prefix = isModule ? name : '.';
-            if (config.frontend && config.frontend.entry) {
-                if (typeof config.frontend.entry === 'string') {
-                    config.frontend.entry = `${prefix}/${config.frontend.entry}`;
-                } else {
-                    for (const key in config.frontend.entry) {
-                        if (config.frontend.entry.hasOwnProperty(key)) {
-                            config.frontend.entry[key] = `${prefix}/${config.frontend.entry[key]}`;
-                        }
+        component.frontend.entry = this.doParseEntity(component.frontend.entry || component.entry, name, isModule);
+        component.backend.entry = this.doParseEntity(component.backend.entry || component.entry, name, isModule);
+
+    }
+
+    protected doParseEntity(entry: any, name: string, isModule: boolean) {
+        const prefix = isModule ? name : '.';
+        if (entry) {
+            if (typeof entry === 'string') {
+                return `${prefix}/${entry}`;
+            } else {
+                const result: { [key: string]: string } = {};
+                for (const key in entry) {
+                    if (entry.hasOwnProperty(key)) {
+                        result[key] = `${prefix}/${entry[key]}`;
                     }
                 }
-            }
-            if (config.backend && config.backend.entry) {
-                if (typeof config.backend.entry === 'string') {
-                    config.backend.entry = `${prefix}/${config.backend.entry}`;
-                } else {
-                    for (const key in config.backend.entry) {
-                        if (config.backend.entry.hasOwnProperty(key)) {
-                            config.backend.entry[key] = `${prefix}/${config.backend.entry[key]}`;
-                        }
-                    }
-                }
+                return result;
             }
         }
-
     }
 
     protected doAddModuleIfExists(modulePaths: string[], fullModulePath: string, modulePath: string): void {
@@ -192,15 +177,15 @@ export class ApplicationPackage {
     }
 
     protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
-        component.frontends = component.frontends || [];
-        component.backends = component.backends || [];
+        component.frontend.modules = [ ...component.modules || [],  ...component.frontend.modules || [] ];
+        component.backend.modules = [ ...component.modules || [],  ...component.backend.modules || [] ];
         const prefix = isModule ? name : '.';
         const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
         const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
         const fullFrontendModulePath = `${prefix}/${frontendModulePath}`;
         const fullBackendModulePath = `${prefix}/${backendModulePath}`;
-        this.doAddModuleIfExists(component.frontends, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(component.backends, fullBackendModulePath, backendModulePath);
+        this.doAddModuleIfExists(component.frontend.modules, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(component.backend.modules, fullBackendModulePath, backendModulePath);
     }
 
     getComponentPackage(component: string): ComponentPackage | undefined {
@@ -212,19 +197,21 @@ export class ApplicationPackage {
     }
 
     protected newComponentPackage(raw: PublishedNodePackage): ComponentPackage {
+        raw.malaguComponent.frontend = raw.malaguComponent.frontend || {};
+        raw.malaguComponent.backend = raw.malaguComponent.backend || {};
         return new ComponentPackage(raw);
     }
 
     get frontendModules(): Map<string, string> {
         if (!this._frontendModules) {
-            this._frontendModules = this.computeModules('frontends');
+            this._frontendModules = this.computeModules('modules', FRONTEND_TARGET);
         }
         return this._frontendModules;
     }
 
     get backendModules(): Map<string, string> {
         if (!this._backendModules) {
-            this._backendModules = this.computeModules('backends');
+            this._backendModules = this.computeModules('modules', BACKEND_TARGET);
         }
         return this._backendModules;
     }
@@ -257,13 +244,13 @@ export class ApplicationPackage {
         return this._webpackHookModules;
     }
 
-    computeModules(tagret: string): Map<string, string> {
+    computeModules(type: string, target?: string): Map<string, string> {
         const result = new Map<string, string>();
         let moduleIndex = 1;
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
-                const modulePaths = <string[]>(component as any)[tagret] || [];
+                const modulePaths = (target ? component[target][type] : component[type]) || [];
                 for (const modulePath of modulePaths) {
                     if (typeof modulePath === 'string') {
                         let componentPath: string;

@@ -29,7 +29,8 @@
   "homepage": "https://github.com/muxiangqiu/malagu",
   "files": [
     "lib",
-    "src"
+    "src",
+    "malagu.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
@@ -38,13 +39,6 @@
     "watch": "malaguext watch",
     "test": "malaguext test",
     "docs": "malaguext docs"
-  },
-  "malaguComponent": {
-    "config": {
-      "backend": {
-        "entry": "lib/node/web-socket-application-entry"
-      }
-    }
   },
   "devDependencies": {
     "@malagu/ext-scripts":"^0.0.1",

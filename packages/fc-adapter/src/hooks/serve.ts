@@ -17,6 +17,7 @@ export default (context: ServeContext) => {
     let funcHandler: any;
     let deferred = new Deferred<void>();
     const type = pkg.backendConfig.deployConfig.type;
+    entryContextProvider();
     console.log(`Serve ${type} type for function compute`);
     if (type !== 'http') {
         app.use((req: any, res: any, next: any) => {

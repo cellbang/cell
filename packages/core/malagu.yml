@@ -1,0 +1,25 @@
+auto: false
+malagu: 
+  session: 
+    autoCommit: true
+    maxAge: 86400000
+    sessionIdKey: malagu:sessionId
+    sessionKey: malagu:session
+  server: 
+    path: /
+    endpoint: ws://localhost:{port}
+  mvc: 
+    path: /*
+    defaultViewName: json
+  rpc: 
+    path: api
+frontend: 
+  entry: lib/browser/application/application-entry
+backend: 
+  malagu: 
+    cookies: 
+      keys: 
+        - abcdef
+  entry: lib/node/application/dev-application-entry
+serveHooks:
+  - lib/hooks/serve

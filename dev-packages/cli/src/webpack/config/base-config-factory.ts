@@ -15,6 +15,7 @@ export class BaseConfigFactory {
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
             devtool: dev ? 'source-map' : undefined,
+            stats: 'errors-only',
             resolveLoader: {
                 modules: [
                     path.join(__dirname, '..', 'loader'), // The loaders Malagu provides

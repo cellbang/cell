@@ -1,15 +1,49 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
-import { ApplicationProps } from './application-props';
 
-export interface Component {
+export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
+export class ApplicationPackageOptions {
+    readonly projectPath: string;
+    readonly log?: ApplicationLog;
+    readonly error?: ApplicationLog;
+}
+
+export type ApplicationModuleResolver = (modulePath: string) => string;
+
+export function customizer(objValue: any, srcValue: any) {
+    if (Array.isArray(objValue)) {
+      return srcValue;
+    }
+}
+
+export interface Props {
+
+    readonly [key: string]: any;
+
+    malagu: any;
+
+    entry?: { [key: string]: string } | string;
+
+    modules?: string[];
+
+}
+
+export interface Component extends Props {
     name: any;
-    config?: ApplicationProps;
-    frontends?: string[];
-    backends?: string[];
-    initHooks?: string[];
-    serveHooks?: string[];
-    deployHooks?: string[];
-    webpackHooks?: string[];
+
+    auto?: boolean;
+
+    mode?: string;
+
+    /**
+     * Frontend related properties.
+     */
+    readonly frontend: Props;
+
+    /**
+     * Backend specific properties.
+     */
+    readonly backend: Props;
+
 }
 
 export class ComponentPackage {
@@ -55,6 +89,6 @@ export interface RawComponentPackage extends PublishedNodePackage {
 }
 export namespace RawComponentPackage {
     export function is(pck: NodePackage | undefined): pck is RawComponentPackage {
-        return PublishedNodePackage.is(pck) && !!pck.malaguComponent;
+        return PublishedNodePackage.is(pck) && !!pck.keywords && pck.keywords.indexOf('malagu-component') !== -1;
     }
 }

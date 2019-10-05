@@ -21,14 +21,14 @@ export function getUri(options: any) {
     });
 }
 
-export function getDevSuccessInfo(options: any): string[] {
+export function getDevSuccessInfo(options: any, name: string): string[] {
     const uri = getUri(options);
     const infos = [];
 
     if (options.socket) {
         infos.push(`Listening to socket at ${chalk.green(options.socket)}`);
     } else {
-        infos.push(`Project is running at ${chalk.green(uri)}`);
+        infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.green(uri)}`);
     }
 
     if (options.historyApiFallback) {
