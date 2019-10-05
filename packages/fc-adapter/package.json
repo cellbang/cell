@@ -34,7 +34,8 @@
   "homepage": "https://github.com/muxiangqiu/malagu",
   "files": [
     "lib",
-    "src"
+    "src",
+    "malagu.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
@@ -43,33 +44,6 @@
     "watch": "malaguext watch",
     "test": "malaguext test",
     "docs": "malaguext docs"
-  },
-  "malaguComponent": {
-    "config": {
-      "malagu": {
-        "server": {
-          "endpoint": "http://localhost:{port}"
-        },
-        "core": {
-          "serveHooks": false
-        }
-      },
-      "deployConfig": {
-        "type": "http"
-      },
-      "backend": {
-        "entry": {
-          "http": "lib/node/http-application-entry",
-          "api-gateway": "lib/node/api-gateway-application-entry"
-        }
-      }
-    },
-    "deployHooks": [
-      "lib/hooks/deploy"
-    ],
-    "serveHooks": [
-      "lib/hooks/serve"
-    ]
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^0.0.1",

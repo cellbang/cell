@@ -17,8 +17,7 @@ export class ConfigFactory {
         for (const configFactory of configFactories) {
             if (configFactory.support(context)) {
                 const config = merge(baseConfig, configFactory.create(context));
-                const webpackHook = context.config.webpack || ((c: webpack.Configuration, ctx: CliContext) => config);
-                configurations.push(webpackHook(config, context));
+                configurations.push(config);
                 console.log(chalk`malagu {green target} - ${ configurations[configurations.length - 1].name }`);
             }
         }

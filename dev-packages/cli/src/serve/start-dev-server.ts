@@ -39,7 +39,13 @@ function getEntryPath(configuration: webpack.Configuration) {
 function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
-        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem }));
+        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem, logLevel: 'error' }));
+        new FriendlyErrorsWebpackPlugin({
+            compilationSuccessInfo: {
+                messages: getDevSuccessInfo((configuration as any).devServer, configuration.name!),
+                notes: []
+            }
+        }).apply(compiler);
     }
     const entryContextProvider = async() => {
         const entryPath = getEntryPath(configuration);
@@ -61,14 +67,14 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
 
-    const [ configuration, backendCnfiguration ] = configurations;
+    const [ configuration, backendConfiguration ] = configurations;
 
     let compiler: webpack.Compiler;
 
     compiler = createCompiler(configuration, options, log);
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
-            messages: getDevSuccessInfo((configuration as any).devServer),
+            messages: getDevSuccessInfo((configuration as any).devServer, configuration.name!),
             notes: []
         }
     }).apply(compiler);
@@ -76,8 +82,8 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     try {
         server = new Server(compiler, options, log);
         setupExitSignals(server);
-        if (backendCnfiguration) {
-            attachBackendServer(executeServeHooks, backendCnfiguration, options, log);
+        if (backendConfiguration) {
+            attachBackendServer(executeServeHooks, backendConfiguration, options, log);
         } else if (configuration.name === BACKEND_TARGET) {
             attachBackendServer(executeServeHooks, configuration, options, log, compiler);
         }

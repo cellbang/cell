@@ -16,7 +16,8 @@
   "license": "MIT",
   "files": [
     "lib",
-    "src"
+    "src",
+    "malagu.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
@@ -25,8 +26,6 @@
     "watch": "malaguext watch",
     "test": "malaguext test",
     "docs": "malaguext docs"
-  },
-  "malaguComponent": {
   },
   "devDependencies": {
     "@malagu/ext-scripts": "next"

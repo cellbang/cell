@@ -27,42 +27,6 @@
     "vscode-ws-jsonrpc": "^0.1.1",
     "ws": "^7.1.1"
   },
-  "malaguComponent": {
-    "config": {
-      "malagu": {
-        "cookies": {
-
-        },
-        "session": {
-          "autoCommit": true,
-          "maxAge": 86400000,
-          "sessionIdKey": "malagu:sessionId",
-          "sessionKey": "malagu:session"
-        },
-        "server": {
-          "path": "/",
-          "endpoint": "ws://localhost:{port}"
-        },
-        "mvc": {
-          "path": "/*",
-          "defaultViewName": "json"
-        },
-        "rpc": {
-          "path": "api"
-        }
-      },
-      "auto": false,
-      "frontend": {
-        "entry": "lib/browser/application/application-entry"
-      },
-      "backend": {
-        "entry": "lib/node/application/dev-application-entry"
-      }
-    },
-    "serveHooks": [
-      "lib/hooks/serve"
-    ]
-  },
   "publishConfig": {
     "access": "public"
   },
@@ -80,7 +44,8 @@
   "homepage": "https://github.com/muxiangqiu/malagu",
   "files": [
     "lib",
-    "src"
+    "src",
+    "malagu.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",

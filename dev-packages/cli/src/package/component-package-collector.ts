@@ -1,6 +1,10 @@
 import { readJsonFile } from './json-file';
 import { NodePackage, PublishedNodePackage } from './npm-registry';
-import { ComponentPackage, RawComponentPackage } from './component-package';
+import { ComponentPackage, RawComponentPackage, customizer } from './package-protocol';
+import yaml = require('js-yaml');
+import { readFileSync } from 'fs';
+import { CONFIG_FILE } from '../constants';
+import mergeWith = require('lodash.mergewith');
 
 export class ComponentPackageCollector {
 
@@ -9,7 +13,8 @@ export class ComponentPackageCollector {
 
     constructor(
         protected readonly componentPackageFactory: (raw: PublishedNodePackage) => ComponentPackage,
-        protected readonly resolveModule: (modulePath: string) => string
+        protected readonly resolveModule: (modulePath: string) => string,
+        protected readonly mode?: string
     ) { }
 
     protected root: NodePackage;
@@ -56,6 +61,33 @@ export class ComponentPackageCollector {
         const pck: NodePackage = readJsonFile(packagePath);
         if (RawComponentPackage.is(pck)) {
             pck.version = versionRange;
+            pck.malaguComponent = {} as any;
+            let configPath: string | undefined = undefined;
+            try {
+                configPath = this.resolveModule(name + `/${CONFIG_FILE}`);
+
+            } catch (err) {
+                // noop
+            }
+            if (configPath) {
+                pck.malaguComponent = { ...pck.malaguComponent, ...yaml.safeLoad(readFileSync(configPath, { encoding: 'utf8' })) };
+            }
+            if (this.mode) {
+
+                let configPathForMode: string | undefined = undefined;
+
+                try {
+                    configPathForMode = this.resolveModule(name + `/malagu-${this.mode}.yml`);
+
+                } catch (err) {
+                    // noop
+                }
+                if (configPathForMode) {
+                    const configForMode = yaml.safeLoad(readFileSync(configPathForMode, { encoding: 'utf8' }));
+                    pck.malaguComponent = mergeWith(pck.malaguComponent, configForMode, customizer);
+                }
+            }
+
             const componentPackage = this.componentPackageFactory(pck);
             this.collectPackagesWithParent(pck, componentPackage);
             this.sorted.push(componentPackage);

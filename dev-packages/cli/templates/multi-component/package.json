@@ -9,6 +9,9 @@
   "resolution": {
     "**/@types/node": "8.10.20"
   },
+  "malagu": {
+    "rootComponent": "app"
+  },
   "devDependencies": {
     "@malagu/ext-scripts": "next",
     "@types/chai": "^4.0.1",

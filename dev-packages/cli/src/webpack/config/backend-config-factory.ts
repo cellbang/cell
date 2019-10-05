@@ -6,26 +6,16 @@ import { BACKEND_TARGET } from '../../constants';
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
-        const { pkg, port, open, dev } = context;
+        const { pkg, port, open } = context;
         const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
 
         const config = pkg.backendConfig;
-        let entry = config.entry;
+        let entry: any = config.entry;
         const type = config.deployConfig ? config.deployConfig.type : undefined;
-        if (type && typeof entry !== 'string') {
+        if (type && entry && typeof entry !== 'string') {
             entry = entry[type];
         }
-        if (dev) {
-            if (entry && !entry.includes('dev-')) {
-                const devEntry = path.join(path.dirname(entry), `dev-${path.basename(entry)}`);
-                try {
-                    pkg.resolveModule(devEntry.split(path.sep).join('/'));
-                    entry = devEntry;
-                } catch (error) {
-                    // noop
-                }
-            }
-        }
+
         entry = pkg.resolveModule(entry.split(path.sep).join('/'));
         return <webpack.Configuration>{
             name: BACKEND_TARGET,
@@ -35,8 +25,7 @@ export class BackendConfigFactory {
             output: {
                 path: outputPath,
                 filename: 'index.js',
-                libraryTarget: 'umd',
-                devtoolModuleFilenameTemplate: '[absolute-resource-path]'
+                libraryTarget: 'umd'
             },
             devServer: {
                 port,
