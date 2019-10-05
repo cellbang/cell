@@ -1,5 +1,5 @@
 import { Context, AttributeScope } from '@malagu/core/lib/node';
-import { EntityManager } from 'typeorm';
+import { EntityManager, ObjectType, EntitySchema, Repository, TreeRepository, MongoRepository } from 'typeorm';
 import { DEFAULT_CONNECTION_NAME } from '../../common';
 
 export const CURRENT_ORM_CONTEXT_REQUEST_KEY = 'CurrentOrmContextRequest';
@@ -15,6 +15,22 @@ export namespace OrmContext {
             }
         }
         return <EntityManager><unknown>undefined;
+    }
+
+    export function getRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): Repository<Entity>  {
+        return getEntityManager(name).getRepository(target);
+    }
+
+    export function getTreeRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): TreeRepository<Entity>  {
+        return getEntityManager(name).getTreeRepository(target);
+    }
+
+    export function getMongoRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): MongoRepository<Entity>  {
+        return getEntityManager(name).getMongoRepository(target);
+    }
+
+    export function getCustomRepository<T>(customRepository: ObjectType<T>, name?: string): T {
+        return getEntityManager(name).getCustomRepository(customRepository);
     }
 
     export function pushEntityManager(name: string, entityManager: EntityManager): void {
