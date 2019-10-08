@@ -22,9 +22,8 @@ export class ConfigFactory {
             }
         }
         await new HookExecutor().executeWebpackHooks({
-            pkg: context.pkg,
-            cliContext: context,
-            configurations: configurations
+            ...context,
+            configurations
         });
         return configurations;
     }

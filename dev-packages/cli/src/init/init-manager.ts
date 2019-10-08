@@ -5,6 +5,7 @@ import request = require('request-promise');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
+import { CliContext, HookContext } from '../context';
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -21,14 +22,15 @@ export interface Template {
 export class InitManager {
 
     protected source: any[];
+    protected name: string;
     protected location: string;
     constructor(protected readonly context: any) {
 
     }
 
     async output(): Promise<void> {
-        await this.checkOutputDir();
         await this.selectTemplate();
+        await this.checkOutputDir();
         await this.doOutput();
     }
 
@@ -45,7 +47,11 @@ export class InitManager {
 
     async executeHooks(): Promise<void> {
         process.chdir(this.outputDir);
-        await new HookExecutor().executeInitHooks();
+        const cliContext = await CliContext.create(this.context.program);
+        cliContext.name = this.context.name;
+        cliContext.outputDir = this.context.outputDir;
+        await new HookExecutor().executeInitHooks(await HookContext.create(cliContext));
+        console.log(chalk`{green Success!} Initialized "${ this.name }" example in ${this.outputDir}.`);
     }
 
     protected get outputDir(): string {
@@ -66,7 +72,7 @@ export class InitManager {
     }
 
     protected toOfficialTemplate(name: string, location: string) {
-        return { name: `${name} ${chalk.italic.gray('Official')}`, value: location };
+        return { name: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
     }
 
     protected toThirdPartyTemplate(item: any) {
@@ -75,7 +81,7 @@ export class InitManager {
 
     protected async selectTemplate(): Promise<void> {
         const answers = await inquirer.prompt([{
-            name: 'location',
+            name: 'item',
             type: 'autocomplete',
             message: 'Select a template to init',
             source: async (answersSoFar: any, input: string) => {
@@ -101,7 +107,9 @@ export class InitManager {
                 return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
             }
         }]);
-        this.location = answers.location;
+        this.name = answers.item.name;
+        this.context.name = this.context.name || answers.item.name;
+        this.location = answers.item.location;
     }
 
     protected isLocalTemplate() {

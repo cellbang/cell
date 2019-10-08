@@ -1,8 +1,7 @@
 
 import * as program from 'commander';
-import { ConfigFactory } from '../webpack/config/config-factory';
 import { ServeManager } from './serve-manager';
-import { CliContext } from '../context';
+import { CliContext, HookContext } from '../context';
 
 program
     .name('malagu serve')
@@ -14,16 +13,15 @@ program
     .parse(process.argv);
 
 (async () => {
-    const context = await CliContext.create();
-    context.dev = true;
-    context.open = program.open;
-    context.copy = program.copy;
-    context.port = program.port;
-    const configFactory = new ConfigFactory();
-    const configurations = await configFactory.create(context);
-    if (configurations.length === 0) {
+    const cliContext = await CliContext.create(program);
+    cliContext.dev = true;
+    cliContext.open = program.open;
+    cliContext.copy = program.copy;
+    cliContext.port = program.port;
+    const hookContext = await HookContext.create(cliContext);
+    if (hookContext.configurations.length === 0) {
         throw new Error('No malagu module found.');
     }
-    new ServeManager(context, configurations).start();
+    new ServeManager(hookContext).start();
 
 })();

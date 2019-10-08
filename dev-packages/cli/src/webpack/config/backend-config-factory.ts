@@ -6,8 +6,8 @@ import { BACKEND_TARGET } from '../../constants';
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
-        const { pkg, port, open } = context;
-        const outputPath = path.resolve(pkg.projectPath, context.dest, BACKEND_TARGET);
+        const { pkg, port, open, dest } = context;
+        const outputPath = path.resolve(pkg.projectPath, dest || 'dist', BACKEND_TARGET);
 
         const config = pkg.backendConfig;
         let entry: any = config.entry;

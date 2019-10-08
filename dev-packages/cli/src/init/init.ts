@@ -10,14 +10,12 @@ program
     .parse(process.argv);
 
 (async () => {
-    const context: any = {
-        name: 'malagu-app'
-    };
+    let name = undefined;
     if (program.args.length > 0) {
-        context.name = program.args[0];
+        name = program.args[0];
     }
-    context.outputDir = program.outputDir;
-    const initManager = new InitManager(context);
+    const outputDir = program.outputDir;
+    const initManager = new InitManager({ name, outputDir, program });
     await initManager.output();
     await initManager.render();
     await initManager.install();

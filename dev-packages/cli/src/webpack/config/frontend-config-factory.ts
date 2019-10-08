@@ -22,8 +22,8 @@ export class FrontendConfigFactory {
     }
 
     create(context: CliContext): webpack.Configuration {
-        const { pkg, open, port } = context;
-        const outputPath = path.resolve(pkg.projectPath, context.dest, FRONTEND_TARGET);
+        const { pkg, open, port, dest } = context;
+        const outputPath = path.resolve(pkg.projectPath, dest || 'dist', FRONTEND_TARGET);
 
         const config = this.getConfig(context);
         let entry = pkg.resolveModule(config.entry);
