@@ -1,29 +1,14 @@
-import { ConfigFactory } from '../webpack/config';
-import { CliContext, HookContext, ServeContext } from '../context';
+import { HookContext, ServeContext } from '../context';
 const chalk = require('chalk');
 
 export class HookExecutor {
 
-    protected async buildHookContext(projectPath: string = process.cwd()): Promise<HookContext> {
-        const context = await CliContext.create(projectPath);
-        context.dev = false;
-        const configFactory = new ConfigFactory();
-        const configurations = await configFactory.create(context);
-        return {
-            pkg: context.pkg,
-            cliContext: context,
-            configurations: configurations
-        };
-    }
-
-    async executeInitHooks(projectPath?: string) {
-        const context = await this.buildHookContext(projectPath);
+    async executeInitHooks(context: HookContext) {
         const modules = context.pkg.initHookModules;
         await this.doExecuteHooks(modules, context, 'initHooks');
     }
 
-    async executeDeployHooks(projectPath?: string) {
-        const context = await this.buildHookContext(projectPath);
+    async executeDeployHooks(context: HookContext) {
         const modules = context.pkg.deployHookModules;
         if (modules.size === 0) {
             console.log(chalk.yellow('Please provide the deploy hook first.'));

@@ -4,19 +4,17 @@ import * as https from 'https';
 import * as http from 'http';
 import { RawComponentPackage } from '../package';
 import { join } from 'path';
+import { ConfigFactory } from '../webpack';
+import { CommanderStatic } from 'commander';
 
 export interface CliContext {
-    pkg: ApplicationPackage,
-    dev: boolean;
-    copy: boolean,
-    open: boolean,
-    dest: string,
-    port: number,
-    entry?: string
+    program: CommanderStatic;
+    pkg: ApplicationPackage;
+    [key: string]: any;
 }
 
 export namespace CliContext {
-    export async function create(projectPath: string = process.cwd()): Promise<CliContext> {
+    export async function create(program: CommanderStatic, projectPath: string = process.cwd()): Promise<CliContext> {
         let pkg = new ApplicationPackage({ projectPath });
         if (!RawComponentPackage.is(pkg.pkg)) {
             const { malagu } = pkg.pkg;
@@ -26,17 +24,24 @@ export namespace CliContext {
         }
         return <CliContext> {
             pkg,
-            dev: false,
-            copy: false,
-            open: false,
-            dest: 'dist'
+            program
         };
     }
 }
-export interface HookContext {
-    pkg: ApplicationPackage;
-    cliContext: CliContext;
+export interface HookContext extends CliContext {
     configurations: webpack.Configuration[];
+}
+
+export namespace HookContext {
+    export async function create(cliContext: CliContext): Promise<HookContext> {
+        const configFactory = new ConfigFactory();
+        const configurations = await configFactory.create(cliContext);
+        return {
+            ...cliContext,
+            dest: 'dist',
+            configurations: configurations
+        };
+    }
 }
 
 export interface ServeContext extends HookContext {
