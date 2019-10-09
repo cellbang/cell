@@ -1,19 +1,27 @@
-import { HookContext, customizer, BACKEND_TARGET } from '@malagu/cli';
+import { HookContext, customizer, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
-import { resolve, join } from 'path';
+import { resolve, join, relative } from 'path';
 import mergeWith = require('lodash.mergewith');
-import { readdirSync, statSync, readFileSync } from 'fs-extra';
+import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
+const OSSClient = require('ali-oss');
 import  * as JSZip from 'jszip';
 const CloudAPI = require('@alicloud/cloudapi');
 const Ram = require('@alicloud/ram');
+const chalk = require('chalk');
 
 let client: any;
+let ossClient: any;
+let profile: Profile;
+let frontendCodeDir: string;
+let devAlias: string;
+let prodAlias: string;
 
 export default async (context: HookContext) => {
-    const { pkg, prod, dest } = context;
+    const { pkg, configurations } = context;
     const defaultDeployConfig = {
         type: 'http',
+        bucket: `malagu-${pkg.pkg.name}`,
         service: {
             name: 'malagu'
         },
@@ -51,31 +59,110 @@ export default async (context: HookContext) => {
     const deployConfig = mergeWith(defaultDeployConfig, appBackendConfig.deployConfig, customizer);
 
     const profileProvider = new ProfileProvider();
-    const profile = deployConfig.profile ? <Profile>deployConfig.profile : await profileProvider.provide();
+    profile = deployConfig.profile ? <Profile>deployConfig.profile : await profileProvider.provide();
 
+    devAlias = deployConfig.devAlias;
+    prodAlias = deployConfig.prodAlias;
+
+    for (const c of configurations) {
+        if (c.name === FRONTEND_TARGET) {
+            await deployFrontend(context, deployConfig);
+        } else {
+            await deployBackend(context, deployConfig);
+        }
+    }
+
+};
+
+async function deployFrontend(context: HookContext, deployConfig: any) {
+    const { pkg, prod, dest } = context;
+    frontendCodeDir = resolve(pkg.projectPath, dest, FRONTEND_TARGET);
+    if (!existsSync(frontendCodeDir)) {
+        console.log(chalk`{yellow Please build the project first with "malagu build"}`);
+        return;
+    }
+    console.log(`Deploying ${chalk.yellow('frontend')} to Object Storage Service...`);
+    const { bucket } = deployConfig;
+    ossClient = new OSSClient({
+        region: `oss-${profile.defaultRegion}`,
+        accessKeyId: profile.accessKeyId,
+        accessKeySecret: profile.accessKeySecret
+    });
+    await uploadFrontendCode(frontendCodeDir, bucket, new Date().toISOString());
+    await uploadFrontendCode(frontendCodeDir, `${bucket}-${devAlias}`);
+    if (prod) {
+        await uploadFrontendCode(frontendCodeDir, `${bucket}-${prodAlias}`);
+    }
+    console.log('Deploy finished');
+}
+
+async function uploadFrontendCode(codeDir: string, bucket: string, prefix?: string) {
+    try {
+        await ossClient.getBucketInfo(bucket);
+    } catch (error) {
+        await ossClient.putBucket(bucket);
+        await ossClient.putBucketACL(bucket, 'public-read');
+        console.log(`- Create ${bucket} bucket`);
+    }
+    console.log(`- Upload to ${bucket} bucket`);
+
+    ossClient.useBucket(bucket);
+    await doUploadFrontendCode(codeDir, prefix);
+
+    if (!prefix) {
+        try {
+            await ossClient.getBucketWebsite(bucket);
+        } catch (error) {
+            await ossClient.putBucketWebsite(bucket, {
+                index: 'index.html'
+            });
+        }
+        console.log(`    - Url: ${chalk.green.bold(`http://${bucket}.oss-${profile.defaultRegion}.aliyuncs.com`)}`);
+    }
+
+}
+
+async function doUploadFrontendCode(codeDir: string, prefix: string = '') {
+    const files = readdirSync(codeDir);
+    await Promise.all(files.map(async fileName => {
+        const fullPath = join(codeDir, fileName);
+        const file = statSync(fullPath);
+        if (file.isDirectory()) {
+            await doUploadFrontendCode(fullPath, prefix);
+        } else {
+            await ossClient.put(join(prefix, relative(frontendCodeDir, fullPath)), fullPath);
+        }
+    }));
+}
+
+async function deployBackend(context: HookContext, deployConfig: any) {
+    const { pkg, prod, dest } = context;
+    const backendCodeDir = resolve(pkg.projectPath, dest, BACKEND_TARGET);
+    if (!existsSync(backendCodeDir)) {
+        console.log(chalk`{yellow Please build the project first with "malagu build"}`);
+        return;
+    }
     client = new FCClient(profile.accountId, {
         accessKeyID: profile.accessKeyId,
         accessKeySecret: profile.accessKeySecret,
         region: profile.defaultRegion,
-        timeout: 60000
+        timeout: 600000
     });
 
     const { service, funciton, trigger, apiGateway, type } = deployConfig;
     const serviceName = service.name;
     const functionName = funciton.name;
 
-    console.log(`Deploying ${profile.defaultRegion}/${serviceName}/${functionName} to function compute...`);
+    console.log(`Deploying ${chalk.yellow('backend')} to Function Compute...`);
 
     await createOrUpdateService(serviceName, service);
 
     const zip = new JSZip();
-    await loadCode(resolve(pkg.projectPath, dest, BACKEND_TARGET), zip);
+    await loadCode(backendCodeDir, zip);
 
     await createOrUpdateFunction(serviceName, functionName, funciton, zip);
 
     const { data: { versionId } } = await client.publishVersion(serviceName);
-    const devAlias = deployConfig.devAlias;
-    const prodAlias = deployConfig.prodAlias;
 
     await createOrUpdateAlias(serviceName, devAlias, versionId);
 
@@ -84,33 +171,25 @@ export default async (context: HookContext) => {
     }
 
     if (type === 'http') {
-        await createOrUpdateHttpTrigger(serviceName, functionName, trigger);
-        console.log(`    - Methods: ${trigger.triggerConfig.methods}`);
-        console.log(`    - Version url: https://${profile.accountId}.${profile.defaultRegion}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${versionId}/${functionName}/`);
-        console.log(`    - Dev url: https://${profile.accountId}.${profile.defaultRegion}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${devAlias}/${functionName}/`);
+        await createOrUpdateHttpTrigger(serviceName, functionName, trigger, devAlias);
         if (prod) {
-            console.log(`    - Prod url: https://${profile.accountId}.${profile.defaultRegion}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${prodAlias}/${functionName}/`);
+            await createOrUpdateHttpTrigger(serviceName, functionName, trigger, prodAlias);
         }
     }
 
     if (type === 'api-gateway') {
         console.log('- API Gateway:');
-        const apiGroup = await createGroupIfNeed(profile, apiGateway.group);
-        const { apiName } = apiGateway.api;
-        apiGateway.api.name = `${apiName}_${versionId}`;
-        await deployApi(`${serviceName}.${versionId}`, functionName, apiGateway, profile, apiGroup);
-        apiGateway.api.name = `${apiName}_${devAlias}`;
-        await deployApi(`${serviceName}.${devAlias}`, functionName, apiGateway, profile, apiGroup);
+        const apiGroup = await createGroupIfNeed(apiGateway.group);
+        await deployApi(serviceName, functionName, apiGateway, apiGroup, devAlias);
         if (prod) {
-            apiGateway.api.name = `${apiName}_${prodAlias}`;
-            await deployApi(`${serviceName}.${prodAlias}`, functionName, apiGateway, profile, apiGroup);
+            await deployApi(`${serviceName}.${prodAlias}`, functionName, apiGateway, apiGroup, prodAlias);
         }
     }
     console.log('Deploy finished');
 
-};
+}
 
-function createCloudAPI(profile: Profile) {
+function createCloudAPI() {
     return new CloudAPI({
         accessKeyId: profile.accessKeyId,
         accessKeySecret: profile.accessKeySecret,
@@ -119,10 +198,12 @@ function createCloudAPI(profile: Profile) {
 
 }
 
-async function deployApi(serviceName: string, functionName: string, option: any, profile: Profile, apiGroup: any) {
+async function deployApi(serviceName: string, functionName: string, option: any, apiGroup: any, alias: string) {
     const { api, stage } = option;
-    api['function'] = `${profile.defaultRegion}/${serviceName}/${functionName}`;
-    const ag = createCloudAPI(profile);
+    const opt = { ...api };
+    opt.name = `${opt.name}_${alias}`;
+    opt['function'] = `${profile.defaultRegion}/${serviceName}.${alias}/${functionName}`;
+    const ag = createCloudAPI();
 
     const ram = new Ram({
         accessKeyId: profile.accessKeyId,
@@ -132,7 +213,7 @@ async function deployApi(serviceName: string, functionName: string, option: any,
 
     const role = await createRoleIfNeed(ram, 'apigatewayAccessFC');
 
-    const _api = await createOrUpdateAPI(ag, apiGroup, api, role);
+    const _api = await createOrUpdateAPI(ag, apiGroup, opt, role);
 
     await ag.deployApi({
         GroupId: apiGroup.GroupId,
@@ -159,23 +240,27 @@ async function deployApi(serviceName: string, functionName: string, option: any,
     });
 }
 
-async function createOrUpdateHttpTrigger(serviceName: string, functionName: string, option: any) {
-    const triggerName = option.name;
+async function createOrUpdateHttpTrigger(serviceName: string, functionName: string, option: any, alias: string) {
+    const opt = { ...option };
+    opt.triggerName = `${opt.name}-${alias}`;
+    delete opt.name;
+    opt.qualifier = alias;
 
     try {
-        delete option.name;
-        option.triggerName = triggerName;
-        await client.getTrigger(serviceName, functionName, triggerName);
-        await client.updateTrigger(serviceName, functionName, triggerName, option);
-        console.log(`- Update ${triggerName} trigger`);
+        await client.getTrigger(serviceName, functionName, opt.triggerName);
+        await client.updateTrigger(serviceName, functionName, opt.triggerName, opt);
+        console.log(`- Update ${opt.triggerName} trigger`);
     } catch (ex) {
         if (ex.code === 'TriggerNotFound') {
-            await client.createTrigger(serviceName, functionName, option);
-            console.log(`- Create a ${triggerName} trigger`);
+            await client.createTrigger(serviceName, functionName, opt);
+            console.log(`- Create a ${opt.triggerName} trigger`);
         } else {
             throw ex;
         }
     }
+    console.log(`    - Methods: ${opt.triggerConfig.methods}`);
+    console.log(chalk`    - Url: ${chalk.green.bold(
+        `https://${profile.accountId}.${profile.defaultRegion}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${alias}/${functionName}/`)}`);
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {
@@ -225,11 +310,11 @@ async function createOrUpdateAlias(serviceName: string, aliasName: string, versi
     try {
         await client.getAlias(serviceName, aliasName);
         await client.updateAlias(serviceName, aliasName, versionId);
-        console.log(`- Update ${aliasName} alias`);
+        console.log(`- Update ${aliasName} alias to version ${versionId}`);
     } catch (ex) {
         if (ex.code === 'AliasNotFound') {
             await client.createAlias(serviceName, aliasName, versionId);
-            console.log(`- Create a ${aliasName} alias`);
+            console.log(`- Create a ${aliasName} alias to version ${versionId}`);
         } else {
             throw ex;
         }
@@ -239,19 +324,19 @@ async function createOrUpdateAlias(serviceName: string, aliasName: string, versi
 async function loadCode(codeDir: string, zip: JSZip) {
     const files = readdirSync(codeDir);
     await Promise.all(files.map(async fileName => {
-        const fillPath = join(codeDir, fileName);
-        const file = statSync(fillPath);
+        const fullPath = join(codeDir, fileName);
+        const file = statSync(fullPath);
         if (file.isDirectory()) {
             const dir = zip.folder(fileName);
-            await loadCode(fillPath, dir);
+            await loadCode(fullPath, dir);
         } else {
-            zip.file(fileName, readFileSync(fillPath));
+            zip.file(fileName, readFileSync(fullPath));
         }
     }));
 }
 
-async function createGroupIfNeed(profile: Profile, group: any) {
-    const ag = createCloudAPI(profile);
+async function createGroupIfNeed(group: any) {
+    const ag = createCloudAPI();
     const groupName = group.name;
     const groupDescription = group.description;
 
