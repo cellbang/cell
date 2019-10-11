@@ -6,6 +6,7 @@ import { templates } from './templates';
 import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
 import { CliContext, HookContext } from '../context';
+import * as ora from 'ora';
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -95,6 +96,7 @@ export class InitManager {
                         }
                     };
                     const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
+                    const spinner = ora('loading...').start();
                     try {
                         const { items } = await request(options);
                         const thirdPartyTemplates = items.map((item: any) => this.toThirdPartyTemplate(item));
@@ -102,6 +104,8 @@ export class InitManager {
                     } catch (error) {
                         this.source = officialTemplates;
                         return this.source;
+                    } finally {
+                        spinner.stop();
                     }
                 }
                 return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));

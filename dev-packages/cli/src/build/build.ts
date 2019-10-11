@@ -22,11 +22,12 @@ program
         throw new Error('No malagu module found.');
     }
 
+    console.log('compiling...');
     for (const configuration of hookContext.configurations) {
         const compiler = webpack(configuration);
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
-                messages: [ `The ${configuration.name} application code output to ${chalk.green(configuration.output && configuration.output.path)}` ],
+                messages: [ `The ${configuration.name} code output to ${chalk.green(configuration.output && configuration.output.path)}` ],
                 notes: []
             },
             clearConsole: false
