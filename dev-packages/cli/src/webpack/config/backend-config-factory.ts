@@ -31,7 +31,8 @@ export class BackendConfigFactory {
             devServer: {
                 port,
                 open,
-                writeToDisk: true
+                writeToDisk: true,
+                contentBase: false
             },
             plugins: [
                 new webpack.EnvironmentPlugin({
