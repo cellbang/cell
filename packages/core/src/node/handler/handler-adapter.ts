@@ -106,7 +106,7 @@ export class MvcHandlerAdapter implements HandlerAdapter {
                 }
             }
         }
-        throw new HttpError(404, `Path not found: ${path}`);
+        throw new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
     }
 
     async canHandle(): Promise<boolean> {
