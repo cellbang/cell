@@ -9,7 +9,10 @@ export class AuthenticationMiddleWare implements Middleware {
     protected readonly authenticationManager: AuthenticationManager;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        await this.authenticationManager.authenticate();
+        if (await this.authenticationManager.support()) {
+            await this.authenticationManager.authenticate();
+            return;
+        }
         await next();
     }
 

@@ -22,7 +22,7 @@ export namespace ComponentOption {
 }
 
 export interface ComponentDecorator {
-    (option?: interfaces.ServiceIdentifier<any> | ComponentOption): (target: any) => any;
+    (option?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): (target: any) => any;
 }
 
 export const Component =
