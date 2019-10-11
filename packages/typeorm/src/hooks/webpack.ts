@@ -10,9 +10,6 @@ export default (context: HookContext) => {
                 exclude: [/mongodb/, /mssql/, /mysql/, /oracledb/, /pg/, /pg-native/, /pg-query-stream/, /sql.js/,
                     /redis/, /sqlite3/, /eact-native-sqlite-storage/, /cli-highlight/, /Critical dependency/]
             }));
-            c.optimization = {
-                minimize: false,
-            };
         }
     }
 };

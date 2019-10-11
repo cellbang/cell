@@ -2,6 +2,7 @@
 import * as webpack from 'webpack';
 import { CliContext } from '../../context';
 import * as path from 'path';
+const TerserPlugin = require('terser-webpack-plugin');
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
@@ -14,6 +15,18 @@ export class BaseConfigFactory {
         return {
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
+            optimization: {
+                minimize: !dev,
+                minimizer: [
+                    new TerserPlugin({
+                        terserOptions: {
+                            keep_classnames: true,
+                            keep_fnames: true
+                        },
+                        extractComments: false
+                    })
+                ]
+            },
             devtool: dev ? 'source-map' : undefined,
             stats: 'errors-only',
             resolveLoader: {

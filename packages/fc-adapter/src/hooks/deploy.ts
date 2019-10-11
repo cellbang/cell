@@ -6,6 +6,7 @@ import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
 const OSSClient = require('ali-oss');
 import  * as JSZip from 'jszip';
+import * as ora from 'ora';
 const CloudAPI = require('@alicloud/cloudapi');
 const Ram = require('@alicloud/ram');
 const chalk = require('chalk');
@@ -100,14 +101,16 @@ async function uploadFrontendCode(codeDir: string, bucket: string, prefix?: stri
     try {
         await ossClient.getBucketInfo(bucket);
     } catch (error) {
+        const s = ora(`Create ${bucket} bucket`).start();
         await ossClient.putBucket(bucket);
         await ossClient.putBucketACL(bucket, 'public-read');
-        console.log(`- Create ${bucket} bucket`);
+        s.succeed();
     }
-    console.log(`- Upload to ${bucket} bucket`);
 
     ossClient.useBucket(bucket);
+    const spinner = ora(`Upload to ${bucket} bucket`).start();
     await doUploadFrontendCode(codeDir, prefix);
+    spinner.succeed();
 
     if (!prefix) {
         try {
@@ -247,13 +250,16 @@ async function createOrUpdateHttpTrigger(serviceName: string, functionName: stri
     opt.qualifier = alias;
 
     try {
+        const spinner = ora(`Update ${opt.triggerName} trigger`).start();
         await client.getTrigger(serviceName, functionName, opt.triggerName);
         await client.updateTrigger(serviceName, functionName, opt.triggerName, opt);
-        console.log(`- Update ${opt.triggerName} trigger`);
+        spinner.succeed();
+
     } catch (ex) {
         if (ex.code === 'TriggerNotFound') {
+            const spinner = ora(`Create ${opt.triggerName} trigger`).start();
             await client.createTrigger(serviceName, functionName, opt);
-            console.log(`- Create a ${opt.triggerName} trigger`);
+            spinner.succeed();
         } else {
             throw ex;
         }
@@ -266,13 +272,15 @@ async function createOrUpdateHttpTrigger(serviceName: string, functionName: stri
 async function createOrUpdateService(serviceName: string, option: any) {
     try {
         delete option.name;
+        const spinner = ora(`Update ${serviceName} service`).start();
         await client.getService(serviceName);
         await client.updateService(serviceName, option);
-        console.log(`- Update ${serviceName} service`);
+        spinner.succeed();
     } catch (ex) {
         if (ex.code === 'ServiceNotFound') {
+            const spinner = ora(`Create a ${serviceName} service`).start();
             await client.createService(serviceName, option);
-            console.log(`- Create a ${serviceName} service`);
+            spinner.succeed();
         } else {
             throw ex;
         }
@@ -281,6 +289,7 @@ async function createOrUpdateService(serviceName: string, option: any) {
 
 async function createOrUpdateFunction(serviceName: string, functionName: string, option: any, code: JSZip) {
     try {
+        const spinner = ora(`Update ${functionName} function`).start();
         await client.getFunction(serviceName, functionName);
         await client.updateFunction(serviceName, functionName, {
             ...option,
@@ -288,18 +297,20 @@ async function createOrUpdateFunction(serviceName: string, functionName: string,
                 zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
             },
         });
-        console.log(`- Update ${functionName} function`);
+        spinner.succeed();
+
     } catch (ex) {
         if (ex.code === 'FunctionNotFound') {
             delete option.name;
             option.functionName = functionName;
+            const spinner = ora(`Create ${functionName} function`).start();
             await client.createFunction(serviceName, {
                 ...option,
                 code: {
                     zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
                 },
             });
-            console.log(`- Create ${functionName} function`);
+            spinner.succeed();
         } else {
             throw ex;
         }
@@ -308,13 +319,15 @@ async function createOrUpdateFunction(serviceName: string, functionName: string,
 
 async function createOrUpdateAlias(serviceName: string, aliasName: string, versionId: string) {
     try {
+        const spinner = ora(`Update ${aliasName} alias to version ${versionId}`).start();
         await client.getAlias(serviceName, aliasName);
         await client.updateAlias(serviceName, aliasName, versionId);
-        console.log(`- Update ${aliasName} alias to version ${versionId}`);
+        spinner.succeed();
     } catch (ex) {
         if (ex.code === 'AliasNotFound') {
+            const spinner = ora(`Create ${aliasName} alias to version ${versionId}`).start();
             await client.createAlias(serviceName, aliasName, versionId);
-            console.log(`- Create a ${aliasName} alias to version ${versionId}`);
+            spinner.succeed();
         } else {
             throw ex;
         }
@@ -348,11 +361,12 @@ async function createGroupIfNeed(group: any) {
     let findGroup = list.find((item: any) => item.GroupName === groupName);
 
     if (!findGroup) {
+        const spinner = ora({ indent: 4, text: `Create ${groupName} group` }).start();
         findGroup = await ag.createApiGroup({
             GroupName: groupName,
             Description: groupDescription
         }, { timeout: 10000 });
-        console.log(`    - Create ${groupName} group`);
+        spinner.succeed();
     } else {
         console.log(`    - Skip ${groupName} group creation`);
     }
@@ -373,6 +387,7 @@ async function createRoleIfNeed(ram: any, roleName: string) {
     }
 
     if (!role) {
+        const spinner = ora({ indent: 4, text: `Create ${roleName} role` }).start();
         role = await ram.createRole({
             RoleName: roleName,
             Description: 'API网关访问 FunctionCompute',
@@ -391,7 +406,7 @@ async function createRoleIfNeed(ram: any, roleName: string) {
                 'Version': '1'
             })
         });
-        console.log(`    - Create ${roleName} role`);
+        spinner.succeed();
     }
 
     const policyName = 'AliyunFCInvocationAccess';
@@ -490,13 +505,15 @@ async function createOrUpdateAPI(ag: any, group: any, conf: any, role: any) {
     }
 
     if (!api) {
+        const spinner = ora({ indent: 4, text: `Create ${apiName} api` }).start();
         api = await ag.createApi(params);
-        console.log(`    - Create ${apiName} api`);
+        spinner.succeed();
     } else {
+        const spinner = ora({ indent: 4, text: `Update ${apiName} api` }).start();
         await ag.modifyApi(Object.assign(params, {
             ApiId: api.ApiId
         }));
-        console.log(`    - Update ${apiName} api`);
+        spinner.succeed();
     }
 
     return api;
