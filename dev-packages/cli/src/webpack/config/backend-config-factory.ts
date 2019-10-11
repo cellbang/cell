@@ -25,7 +25,8 @@ export class BackendConfigFactory {
             output: {
                 path: outputPath,
                 filename: 'index.js',
-                libraryTarget: 'umd'
+                libraryTarget: 'umd',
+                devtoolModuleFilenameTemplate: '[absolute-resource-path]'
             },
             devServer: {
                 port,

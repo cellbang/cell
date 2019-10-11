@@ -9,6 +9,7 @@ export const DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY =  2000;
 
 export interface AuthenticationManager {
     authenticate(): Promise<void>;
+    support(): Promise<boolean>;
 }
 
 export interface AuthenticationProvider {

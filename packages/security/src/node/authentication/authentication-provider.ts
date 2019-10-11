@@ -33,9 +33,12 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
         }
         const user = await this.userStore.load(username);
         await this.userChecker.check(user);
-        if (!this.passwordEncoder.matches(password, user.password)) {
+        if (!await this.passwordEncoder.matches(password, user.password)) {
             throw new BadCredentialsError('Bad credentials');
         }
+
+        Context.getResponse().statusCode = 302;
+        Context.getResponse().setHeader('Location', this.options.loginSuccessUrl);
 
         return {
             principal: user,
@@ -56,7 +59,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     }
 
     async support(): Promise<boolean> {
-       return this.requestMatcher.match('/login');
+       return !!await this.requestMatcher.match(this.options.loginUrl, 'POST');
     }
 
 }

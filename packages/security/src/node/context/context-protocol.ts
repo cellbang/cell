@@ -23,7 +23,7 @@ export interface SecurityContextStrategy {
 
 export namespace SecurityContext {
 
-    export function setCurrent(context: SecurityContext) {
+    export function setCurrent(context: SecurityContext | undefined ) {
         Context.setAttr(CURRENT_SECURITY_CONTEXT_REQUEST_KEY, context);
     }
 

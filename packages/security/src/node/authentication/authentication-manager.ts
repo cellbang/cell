@@ -41,4 +41,13 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
            throw lastError;
         }
     }
+
+    async support(): Promise<boolean> {
+        for (const authenticationProvider of this.prioritized) {
+            if (await authenticationProvider.support()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
