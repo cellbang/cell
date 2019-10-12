@@ -49,9 +49,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     }
     const entryContextProvider = async() => {
         const entryPath = getEntryPath(configuration);
-        for (const key of Object.keys(require.cache)) {
-            decache(key);
-        }
+        decache(entryPath);
         while (true) {
             if (fs.existsSync(entryPath)) {
                 return require(entryPath);
