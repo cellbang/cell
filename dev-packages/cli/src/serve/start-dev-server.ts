@@ -53,11 +53,10 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
             decache(key);
         }
         while (true) {
-            try {
+            if (fs.existsSync(entryPath)) {
                 return require(entryPath);
-            } catch (e) {
-                await delay(100);
             }
+            await delay(200);
         }
     };
     executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);

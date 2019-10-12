@@ -21,14 +21,12 @@
     "@types/react-dom": "^16.8.5",
     "bufferutil": "^4.0.1",
     "rimraf": "^2.6.3",
-    "typescript": "^3.5.3",
     "utf-8-validate": "^5.0.2"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
     "clean": "rimraf lib dist",
-    "build": "tsc",
+    "build": "malagu build",
     "start": "malagu serve",
-    "watch": "tsc -w"
+    "deploy": "malagu deploy"
   }
 }
