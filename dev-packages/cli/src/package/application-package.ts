@@ -201,6 +201,13 @@ export class ApplicationPackage {
         this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
         this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
 
+        frontendModulePath = paths.join(libOrSrc, 'browser', 'module');
+        backendModulePath = paths.join(libOrSrc, 'node', 'module');
+        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
+        fullBackendModulePath = paths.join(prefix, backendModulePath);
+        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
+
         frontendModulePath = paths.join(libOrSrc, `${FRONTEND_TARGET}-module`);
         backendModulePath = paths.join(libOrSrc, `${BACKEND_TARGET}-module`);
         fullFrontendModulePath = paths.join(prefix, frontendModulePath);
