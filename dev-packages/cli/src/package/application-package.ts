@@ -172,20 +172,41 @@ export class ApplicationPackage {
                 modulePaths.push(modulePath);
             }
         } catch (error) {
-            // noop
+            if (fullModulePath.indexOf(this.projectPath) === 0 && existsSync(`${fullModulePath}.ts`)) {
+                if (modulePaths.indexOf(modulePath) === -1) {
+                    modulePaths.push(modulePath);
+                }
+            }
         }
     }
 
     protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
         component.frontend.modules = [ ...component.modules || [],  ...component.frontend.modules || [] ];
         component.backend.modules = [ ...component.modules || [],  ...component.backend.modules || [] ];
-        const prefix = isModule ? name : '.';
-        const frontendModulePath = paths.join('lib', 'browser', `${FRONTEND_TARGET}-module`);
-        const backendModulePath = paths.join('lib', 'node', `${BACKEND_TARGET}-module`);
-        const fullFrontendModulePath = `${prefix}/${frontendModulePath}`;
-        const fullBackendModulePath = `${prefix}/${backendModulePath}`;
-        this.doAddModuleIfExists(component.frontend.modules, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(component.backend.modules, fullBackendModulePath, backendModulePath);
+        const frontendModules = component.frontend.modules;
+        const backendModules = component.backend.modules;
+        const prefix = isModule ? name : this.projectPath;
+        const libOrSrc = isModule ? 'lib' : 'src';
+        let frontendModulePath = paths.join(libOrSrc, 'browser', `${FRONTEND_TARGET}-module`);
+        let backendModulePath = paths.join(libOrSrc, 'node', `${BACKEND_TARGET}-module`);
+        let fullFrontendModulePath = paths.join(prefix, frontendModulePath);
+        let fullBackendModulePath = paths.join(prefix, backendModulePath);
+        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
+
+        frontendModulePath = paths.join(libOrSrc, 'module');
+        backendModulePath = frontendModulePath;
+        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
+        fullBackendModulePath = paths.join(prefix, backendModulePath);
+        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
+
+        frontendModulePath = paths.join(libOrSrc, `${FRONTEND_TARGET}-module`);
+        backendModulePath = paths.join(libOrSrc, `${BACKEND_TARGET}-module`);
+        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
+        fullBackendModulePath = paths.join(prefix, backendModulePath);
+        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
+        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
     }
 
     getComponentPackage(component: string): ComponentPackage | undefined {

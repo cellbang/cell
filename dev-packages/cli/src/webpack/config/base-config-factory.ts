@@ -32,12 +32,16 @@ export class BaseConfigFactory {
             resolveLoader: {
                 modules: [
                     path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
+                    path.join(__dirname, '..', '..', '..', 'node_modules'),
                     'node_modules',
                     ...nodePathList, // Support for NODE_PATH environment variable
                 ]
             },
             devServer: {
                 stats: 'errors-only'
+            },
+            resolve: {
+                extensions: [ '.tsx', '.ts', '.js' ]
             },
             module: {
                 rules: [
@@ -46,6 +50,11 @@ export class BaseConfigFactory {
                         enforce: 'pre',
                         loader: 'source-map-loader',
                         exclude: /jsonc-parser/
+                    },
+                    {
+                        test: /\.tsx?$/,
+                        use: 'ts-loader',
+                        exclude: /node_modules/
                     }
                 ]
             },
