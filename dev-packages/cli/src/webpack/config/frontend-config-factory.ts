@@ -97,7 +97,7 @@ export class FrontendConfigFactory {
                         loader: 'file-loader',
                     },
                     {
-                        test: /malagu([\\/]packages)?[\\/]core[\\/]lib[\\/]common[\\/]container[\\/]dynamic-container\.js$/,
+                        test: /core[\\/]lib[\\/]common[\\/]container[\\/]dynamic-container\.js$/,
                         use: {
                             loader: 'component-loader',
                             options: {

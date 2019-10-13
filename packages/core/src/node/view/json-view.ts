@@ -13,7 +13,7 @@ export class JsonView implements View {
 
     async render(model: any): Promise<void> {
         const response = Context.getCurrent().response;
-        response.body = model;
+        response.body = JSON.stringify(model);
     }
 
     support(viewName: string): Promise<boolean> {
