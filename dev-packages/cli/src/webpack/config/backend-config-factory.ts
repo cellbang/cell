@@ -42,7 +42,7 @@ export class BackendConfigFactory {
             module: {
                 rules: [
                     {
-                        test: /malagu([\\/]packages)?[\\/]core[\\/]lib[\\/]common[\\/]container[\\/]dynamic-container\.js$/,
+                        test: /core[\\/]lib[\\/]common[\\/]container[\\/]dynamic-container\.js$/,
                         use: {
                             loader: 'component-loader',
                             options: {
