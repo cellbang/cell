@@ -2,6 +2,7 @@ import { ViewResolver } from './resolver-protocol';
 import { Component, Autowired } from '../../common/annotation';
 import { ViewProvider } from '../view/view-provider';
 import { ViewMetadata } from '../annotation/view';
+import { Context } from '../context';
 
 @Component(ViewResolver)
 export class ViewResolverImpl implements ViewResolver {
@@ -14,6 +15,7 @@ export class ViewResolverImpl implements ViewResolver {
         for (const view of this.viewProvider.provide()) {
             if (await view.support(viewMetadata.viewName)) {
                 await view.render(model);
+                Context.getResponse().setHeader('Content-type', view.contentType);
                 return;
             }
         }
