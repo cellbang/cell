@@ -17,7 +17,7 @@ export function customizer(objValue: any, srcValue: any) {
 
 export interface Props {
 
-    readonly [key: string]: any;
+    [key: string]: any;
 
     malagu: any;
 
@@ -37,12 +37,12 @@ export interface Component extends Props {
     /**
      * Frontend related properties.
      */
-    readonly frontend: Props;
+    frontend: Props;
 
     /**
      * Backend specific properties.
      */
-    readonly backend: Props;
+    backend: Props;
 
 }
 

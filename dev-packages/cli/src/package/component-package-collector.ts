@@ -1,21 +1,21 @@
 import { readJsonFile } from './json-file';
-import { NodePackage, PublishedNodePackage } from './npm-registry';
-import { ComponentPackage, RawComponentPackage, customizer } from './package-protocol';
-import yaml = require('js-yaml');
-import { readFileSync } from 'fs';
-import { CONFIG_FILE } from '../constants';
-import mergeWith = require('lodash.mergewith');
+import { NodePackage } from './npm-registry';
+import { ComponentPackage, RawComponentPackage } from './package-protocol';
+import { ApplicationPackage } from './application-package';
+import { ComponentPackageLoader } from './component-config-loader';
 
 export class ComponentPackageCollector {
 
     protected readonly sorted: ComponentPackage[] = [];
     protected readonly visited = new Map<string, boolean>();
+    protected componentPackageLoader: ComponentPackageLoader;
 
     constructor(
-        protected readonly componentPackageFactory: (raw: PublishedNodePackage) => ComponentPackage,
-        protected readonly resolveModule: (modulePath: string) => string,
+        protected readonly pkg: ApplicationPackage,
         protected readonly mode?: string
-    ) { }
+    ) {
+        this.componentPackageLoader = new ComponentPackageLoader(pkg);
+    }
 
     protected root: NodePackage;
     collect(pck: NodePackage): ComponentPackage[] {
@@ -51,7 +51,7 @@ export class ComponentPackageCollector {
 
         let packagePath: string | undefined;
         try {
-            packagePath = this.resolveModule(name + '/package.json');
+            packagePath = this.pkg.resolveModule(name + '/package.json');
         } catch (error) {
             console.warn(`Failed to resolve module: ${name}`);
         }
@@ -62,33 +62,8 @@ export class ComponentPackageCollector {
         if (RawComponentPackage.is(pck)) {
             pck.version = versionRange;
             pck.malaguComponent = {} as any;
-            let configPath: string | undefined = undefined;
-            try {
-                configPath = this.resolveModule(name + `/${CONFIG_FILE}`);
-
-            } catch (err) {
-                // noop
-            }
-            if (configPath) {
-                pck.malaguComponent = { ...pck.malaguComponent, ...yaml.safeLoad(readFileSync(configPath, { encoding: 'utf8' })) };
-            }
-            if (this.mode) {
-
-                let configPathForMode: string | undefined = undefined;
-
-                try {
-                    configPathForMode = this.resolveModule(name + `/malagu-${this.mode}.yml`);
-
-                } catch (err) {
-                    // noop
-                }
-                if (configPathForMode) {
-                    const configForMode = yaml.safeLoad(readFileSync(configPathForMode, { encoding: 'utf8' }));
-                    pck.malaguComponent = mergeWith(pck.malaguComponent, configForMode, customizer);
-                }
-            }
-
-            const componentPackage = this.componentPackageFactory(pck);
+            this.componentPackageLoader.load(pck, this.mode);
+            const componentPackage = this.pkg.newComponentPackage(pck);
             this.collectPackagesWithParent(pck, componentPackage);
             this.sorted.push(componentPackage);
         }

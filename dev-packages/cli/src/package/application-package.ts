@@ -3,10 +3,10 @@ import { readJsonFile } from './json-file';
 import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
 import { Component, ComponentPackage, Props, ApplicationLog, ApplicationPackageOptions, customizer, ApplicationModuleResolver } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
-import { existsSync, readFileSync } from 'fs-extra';
 import mergeWith = require('lodash.mergewith');
-import yaml = require('js-yaml');
-import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
+import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { ComponentPackageLoader } from './component-config-loader';
+import { ComponentPackageResolver } from './component-package-resolver';
 const chalk = require('chalk');
 
 // tslint:disable:no-implicit-dependencies
@@ -17,6 +17,8 @@ export class ApplicationPackage {
     readonly projectPath: string;
     readonly log: ApplicationLog;
     readonly error: ApplicationLog;
+    protected componentPackageLoader = new ComponentPackageLoader(this);
+    protected componentPackageResolver = new ComponentPackageResolver(this);
 
     constructor(
         protected readonly options: ApplicationPackageOptions
@@ -64,12 +66,14 @@ export class ApplicationPackage {
         return mergeWith(config, this.props.backend, customizer);
     }
 
-    protected _pkg: NodePackage | undefined;
-    get pkg(): NodePackage {
-        if (this._pkg) {
-            return this._pkg;
+    protected _pkg: PublishedNodePackage | undefined;
+    get pkg(): PublishedNodePackage {
+        if (!this._pkg) {
+            this._pkg = readJsonFile(this.packagePath);
+            this._pkg!.name = this._pkg!.name || paths.basename(this.projectPath);
+            this._pkg!.name = this._pkg!.name || 'latest';
         }
-        return this._pkg = readJsonFile(this.packagePath);
+        return this._pkg!;
     }
 
     protected _frontendModules: Map<string, string> | undefined;
@@ -79,29 +83,15 @@ export class ApplicationPackage {
     protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Map<string, string> | undefined;
+    protected _rootComponentPackage: ComponentPackage;
 
-    protected initRootComponent() {
-        const configPath = this.path(CONFIG_FILE);
-        let malaguComponent = {
-            frontend: {},
-            backend: {}
-        } as any;
-        if (existsSync(configPath)) {
-            malaguComponent = { ...malaguComponent, ...yaml.safeLoad(readFileSync(configPath, { encoding: 'utf8' })) };
+    protected rootComponentPackage() {
+        if (!this._rootComponentPackage) {
+            this.pkg.malaguComponent = {};
+            this.componentPackageLoader.load(this.pkg);
+            this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
-        const { mode } = malaguComponent;
-        if (mode) {
-            const configPathForMode = this.path(`malagu-${mode}.yml`);
-            if (existsSync(configPathForMode)) {
-                const configForMode = yaml.safeLoad(readFileSync(configPathForMode, { encoding: 'utf8' }));
-                malaguComponent = mergeWith(malaguComponent, configForMode, customizer);
-            }
-        }
-
-        const name = this.pkg.name || paths.basename(this.projectPath);
-        this.addModuleIfExists(name, malaguComponent, false);
-        this.parseEntry(name, malaguComponent, false);
-        this.pkg.malaguComponent = malaguComponent;
+        return this._rootComponentPackage;
     }
 
     /**
@@ -110,26 +100,17 @@ export class ApplicationPackage {
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
 
-            this.initRootComponent();
-
-            const { mode } = this.pkg.malaguComponent;
+            const { mode } = this.rootComponentPackage().malaguComponent!;
 
             const collector = new ComponentPackageCollector(
-                raw => this.newComponentPackage(raw),
-                this.resolveModule,
+                this,
                 mode
             );
             this._componentPackages = collector.collect(this.pkg);
+            this._componentPackages.push(this.rootComponentPackage());
             for (const componentPackage of this._componentPackages) {
-                console.log(chalk`malagu {green component} - ${ componentPackage.name }@${ componentPackage.version }`);
-                const malaguComponent = <Component>componentPackage.malaguComponent;
-                if (malaguComponent.auto !== false) {
-                    this.addModuleIfExists(componentPackage.name, malaguComponent, true);
-                }
-                this.parseEntry(componentPackage.name, malaguComponent, true);
+               this.componentPackageResolver.resolve(componentPackage);
             }
-
-            this._componentPackages.push(<ComponentPackage>this.pkg);
 
             for (const componentPackage of this._componentPackages) {
                 const malaguComponent = <Component>componentPackage.malaguComponent;
@@ -142,80 +123,6 @@ export class ApplicationPackage {
         return this._componentPackages;
     }
 
-    protected parseEntry(name: string, component: Component, isModule: boolean) {
-        component.frontend.entry = this.doParseEntity(component.frontend.entry || component.entry, name, isModule);
-        component.backend.entry = this.doParseEntity(component.backend.entry || component.entry, name, isModule);
-
-    }
-
-    protected doParseEntity(entry: any, name: string, isModule: boolean) {
-        const prefix = isModule ? name : '.';
-        if (entry) {
-            if (typeof entry === 'string') {
-                return `${prefix}/${entry}`;
-            } else {
-                const result: { [key: string]: string } = {};
-                for (const key in entry) {
-                    if (entry.hasOwnProperty(key)) {
-                        result[key] = `${prefix}/${entry[key]}`;
-                    }
-                }
-                return result;
-            }
-        }
-    }
-
-    protected doAddModuleIfExists(modulePaths: string[], fullModulePath: string, modulePath: string): void {
-        try {
-            this.resolveModule(fullModulePath);
-            if (modulePaths.indexOf(modulePath) === -1) {
-                modulePaths.push(modulePath);
-            }
-        } catch (error) {
-            if (fullModulePath.indexOf(this.projectPath) === 0 && existsSync(`${fullModulePath}.ts`)) {
-                if (modulePaths.indexOf(modulePath) === -1) {
-                    modulePaths.push(modulePath);
-                }
-            }
-        }
-    }
-
-    protected addModuleIfExists(name: string, component: Component, isModule: boolean): void {
-        component.frontend.modules = [ ...component.modules || [],  ...component.frontend.modules || [] ];
-        component.backend.modules = [ ...component.modules || [],  ...component.backend.modules || [] ];
-        const frontendModules = component.frontend.modules;
-        const backendModules = component.backend.modules;
-        const prefix = isModule ? name : this.projectPath;
-        const libOrSrc = isModule ? 'lib' : 'src';
-        let frontendModulePath = paths.join(libOrSrc, 'browser', `${FRONTEND_TARGET}-module`);
-        let backendModulePath = paths.join(libOrSrc, 'node', `${BACKEND_TARGET}-module`);
-        let fullFrontendModulePath = paths.join(prefix, frontendModulePath);
-        let fullBackendModulePath = paths.join(prefix, backendModulePath);
-        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
-
-        frontendModulePath = paths.join(libOrSrc, 'module');
-        backendModulePath = frontendModulePath;
-        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
-        fullBackendModulePath = paths.join(prefix, backendModulePath);
-        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
-
-        frontendModulePath = paths.join(libOrSrc, 'browser', 'module');
-        backendModulePath = paths.join(libOrSrc, 'node', 'module');
-        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
-        fullBackendModulePath = paths.join(prefix, backendModulePath);
-        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
-
-        frontendModulePath = paths.join(libOrSrc, `${FRONTEND_TARGET}-module`);
-        backendModulePath = paths.join(libOrSrc, `${BACKEND_TARGET}-module`);
-        fullFrontendModulePath = paths.join(prefix, frontendModulePath);
-        fullBackendModulePath = paths.join(prefix, backendModulePath);
-        this.doAddModuleIfExists(frontendModules, fullFrontendModulePath, frontendModulePath);
-        this.doAddModuleIfExists(backendModules, fullBackendModulePath, backendModulePath);
-    }
-
     getComponentPackage(component: string): ComponentPackage | undefined {
         return this.componentPackages.find(pkg => pkg.name === component);
     }
@@ -224,7 +131,7 @@ export class ApplicationPackage {
         return this.getComponentPackage(component);
     }
 
-    protected newComponentPackage(raw: PublishedNodePackage): ComponentPackage {
+    newComponentPackage(raw: PublishedNodePackage): ComponentPackage {
         raw.malaguComponent.frontend = raw.malaguComponent.frontend || {};
         raw.malaguComponent.backend = raw.malaguComponent.backend || {};
         return new ComponentPackage(raw);
@@ -270,6 +177,13 @@ export class ApplicationPackage {
             this._webpackHookModules = this.computeModules('webpackHooks');
         }
         return this._webpackHookModules;
+    }
+
+    isRoot(componentPackage: ComponentPackage | NodePackage) {
+        if (componentPackage.name === this.pkg.name) {
+            return true;
+        }
+        return false;
     }
 
     computeModules(type: string, target?: string): Map<string, string> {
