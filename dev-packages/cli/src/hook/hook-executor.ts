@@ -1,4 +1,5 @@
 import { HookContext, ServeContext } from '../context';
+require('ts-node').register();
 const chalk = require('chalk');
 
 export class HookExecutor {
