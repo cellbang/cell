@@ -47,11 +47,11 @@ export function Head(options?: RouteOptions, ...middleware: interfaces.ServiceId
 }
 
 export function Delete(options?: RouteOptions, ...middleware: interfaces.ServiceIdentifier<Middleware>[]): HandlerDecorator {
-    return Method('del', options, ...middleware);
+    return Method('delete', options, ...middleware);
 }
 
 export function Options(options?: RouteOptions, ...middleware: interfaces.ServiceIdentifier<Middleware>[]): HandlerDecorator {
-    return Method('opts', options, ...middleware);
+    return Method('options', options, ...middleware);
 }
 
 export const Method = <MethodDecorator>function (
