@@ -23,11 +23,6 @@ export class HttpChannelStrategy implements ChannelStrategy {
         Context.getResponse().body = new Deferred<any>();
     }
 
-    async handleError(err: Error): Promise<void> {
-        console.error(err);
-        throw err;
-    }
-
     async handleMessage(message: string): Promise<void> {
         const deferred = Context.getResponse().body;
         deferred.resolve(message);

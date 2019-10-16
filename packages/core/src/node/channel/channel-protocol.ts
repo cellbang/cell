@@ -9,8 +9,6 @@ export interface ChannelStrategy {
 
     getMessage(): Promise<Channel.Message>;
 
-    handleError(err: Error): Promise<void>;
-
     handleMessage(message: any): Promise<void>;
 
     createChannel(id: number): Promise<Channel>
