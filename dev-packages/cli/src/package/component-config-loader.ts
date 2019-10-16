@@ -15,7 +15,7 @@ export class ComponentPackageLoader {
         let config: any = {};
         config = this.loadConfig(nodePackage);
 
-        if (!mode) {
+        if (!mode && config) {
             mode = config.mode;
         }
 
