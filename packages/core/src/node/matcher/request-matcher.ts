@@ -13,6 +13,7 @@ export class RequestMatcherImpl implements RequestMatcher {
         if (method && request.method && method.toLowerCase() !== request.method.toLowerCase()) {
             return false;
         }
+        pattern = pattern || '/';
         let urlPathern: UrlPattern | undefined;
         if (typeof pattern === 'string') {
             urlPathern = this.caches.get(pattern);

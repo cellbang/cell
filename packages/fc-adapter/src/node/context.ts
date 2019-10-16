@@ -66,18 +66,6 @@ export class ApiGatewayContext extends AbstractContext {
         };
 
     }
-
-    async handleError(err: Error): Promise<void> {
-        this.callback(err, undefined);
-    }
-
-    async handleMessage(message: string): Promise<void> {
-        this.callback(undefined, {
-            isBase64Encoded: false,
-            statusCode: 200,
-            body: message
-        });
-    }
 }
 
 export class HttpTriggerContext extends AbstractContext {

@@ -14,7 +14,8 @@ export abstract class AbstractErrorHandler implements ErrorHandler {
 
     async handle(ctx: Context, err: Error): Promise<void> {
         console.error(err);
-        await Context.getChannalStrategy().handleError(err);
+        ctx.response.statusCode = 500;
+        ctx.response.end(err.message);
         await this.doHandle(ctx, err);
     }
 
