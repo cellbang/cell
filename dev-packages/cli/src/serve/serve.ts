@@ -9,7 +9,7 @@ program
     .option('-o, --open [open]', 'Open browser')
     .option('-c, --copy [copy]', 'Copy local url to clipboard')
     .option('-p, --port [port]', 'Port used by the server', 3000)
-    .option('-m, --mode [mode]', 'Specify deployment mode')
+    .option('-m, --mode [mode]', 'Specify application mode')
     .description('serve a applicaton')
     .parse(process.argv);
 

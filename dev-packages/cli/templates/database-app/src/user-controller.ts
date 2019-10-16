@@ -1,7 +1,6 @@
 import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/core/lib/node';
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
 import { User } from './entity';
-import { DeleteResult, UpdateResult } from 'typeorm';
 
 @Controller('users')
 export class UserController {
@@ -22,16 +21,16 @@ export class UserController {
 
     @Delete(':id')
     @Transactional()
-    reomve(@Param('id') id: number): Promise<DeleteResult> {
+    async reomve(@Param('id') id: number): Promise<void> {
         const repo = OrmContext.getRepository(User);
-        return repo.delete(id);
+        await repo.delete(id);
     }
 
     @Put()
     @Transactional()
-    async modify(@Body() user: User): Promise<UpdateResult> {
+    async modify(@Body() user: User): Promise<void> {
         const repo = OrmContext.getRepository(User);
-        return repo.update(user.id, user);
+        await repo.update(user.id, user);
     }
 
     @Post()

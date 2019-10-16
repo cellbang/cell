@@ -9,7 +9,7 @@ program
     .name('malagu build')
     .usage('[options]')
     .option('-d, --dest [dir]', 'output directory', 'dist')
-    .option('-m, --mode [mode]', 'Specify deployment mode')
+    .option('-m, --mode [mode]', 'Specify application mode')
     .description('build a application')
     .parse(process.argv);
 
