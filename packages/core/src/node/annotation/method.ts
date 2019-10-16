@@ -56,7 +56,7 @@ export function Options(options?: RouteOptions, ...middleware: interfaces.Servic
 
 export const Method = <MethodDecorator>function (
     method: string,
-    options: RouteOptions = '',
+    options: RouteOptions = '/',
     ...middleware: interfaces.ServiceIdentifier<Middleware>[]
 ): HandlerDecorator {
     return function (target: any, key: string, descriptor: TypedPropertyDescriptor<Function>) {
