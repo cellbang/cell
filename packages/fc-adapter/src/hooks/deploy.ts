@@ -79,7 +79,7 @@ async function deployFrontend(context: HookContext, deployConfig: any) {
     const { pkg, prod, dest } = context;
     frontendCodeDir = resolve(pkg.projectPath, dest, FRONTEND_TARGET);
     if (!existsSync(frontendCodeDir)) {
-        console.log(chalk`{yellow Please build the project first with "malagu build"}`);
+        console.log(chalk`{yellow Please build frontend first with "malagu build"}`);
         return;
     }
     console.log(`Deploying ${chalk.yellow('frontend')} to Object Storage Service...`);
@@ -101,16 +101,16 @@ async function uploadFrontendCode(codeDir: string, bucket: string, prefix?: stri
     try {
         await ossClient.getBucketInfo(bucket);
     } catch (error) {
-        const s = ora(`Create ${bucket} bucket`).start();
-        await ossClient.putBucket(bucket);
-        await ossClient.putBucketACL(bucket, 'public-read');
-        s.succeed();
+        await spinner(`Create ${bucket} bucket`, async () => {
+            await ossClient.putBucket(bucket);
+            await ossClient.putBucketACL(bucket, 'public-read');
+        });
     }
 
     ossClient.useBucket(bucket);
-    const spinner = ora(`Upload to ${bucket} bucket`).start();
-    await doUploadFrontendCode(codeDir, prefix);
-    spinner.succeed();
+    await spinner(`Upload to ${bucket} bucket`, async () => {
+        await doUploadFrontendCode(codeDir, prefix);
+    });
 
     if (!prefix) {
         try {
@@ -142,7 +142,7 @@ async function deployBackend(context: HookContext, deployConfig: any) {
     const { pkg, prod, dest } = context;
     const backendCodeDir = resolve(pkg.projectPath, dest, BACKEND_TARGET);
     if (!existsSync(backendCodeDir)) {
-        console.log(chalk`{yellow Please build the project first with "malagu build"}`);
+        console.log(chalk`{yellow Please build backend first with "malagu build"}`);
         return;
     }
     client = new FCClient(profile.accountId, {
@@ -250,16 +250,16 @@ async function createOrUpdateHttpTrigger(serviceName: string, functionName: stri
     opt.qualifier = alias;
 
     try {
-        const spinner = ora(`Update ${opt.triggerName} trigger`).start();
         await client.getTrigger(serviceName, functionName, opt.triggerName);
-        await client.updateTrigger(serviceName, functionName, opt.triggerName, opt);
-        spinner.succeed();
+        await spinner(`Update ${opt.triggerName} trigger`, async () => {
+            await client.updateTrigger(serviceName, functionName, opt.triggerName, opt);
+        });
 
     } catch (ex) {
         if (ex.code === 'TriggerNotFound') {
-            const spinner = ora(`Create ${opt.triggerName} trigger`).start();
-            await client.createTrigger(serviceName, functionName, opt);
-            spinner.succeed();
+            await spinner(`Create ${opt.triggerName} trigger`, async () => {
+                await client.createTrigger(serviceName, functionName, opt);
+            });
         } else {
             throw ex;
         }
@@ -272,15 +272,15 @@ async function createOrUpdateHttpTrigger(serviceName: string, functionName: stri
 async function createOrUpdateService(serviceName: string, option: any) {
     try {
         delete option.name;
-        const spinner = ora(`Update ${serviceName} service`).start();
         await client.getService(serviceName);
-        await client.updateService(serviceName, option);
-        spinner.succeed();
+        await spinner(`Update ${serviceName} service`, async () => {
+            await client.updateService(serviceName, option);
+        });
     } catch (ex) {
         if (ex.code === 'ServiceNotFound') {
-            const spinner = ora(`Create a ${serviceName} service`).start();
-            await client.createService(serviceName, option);
-            spinner.succeed();
+            await spinner(`Create a ${serviceName} service`, async () => {
+                await client.createService(serviceName, option);
+            });
         } else {
             throw ex;
         }
@@ -289,28 +289,28 @@ async function createOrUpdateService(serviceName: string, option: any) {
 
 async function createOrUpdateFunction(serviceName: string, functionName: string, option: any, code: JSZip) {
     try {
-        const spinner = ora(`Update ${functionName} function`).start();
         await client.getFunction(serviceName, functionName);
-        await client.updateFunction(serviceName, functionName, {
-            ...option,
-            code: {
-                zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
-            },
-        });
-        spinner.succeed();
-
-    } catch (ex) {
-        if (ex.code === 'FunctionNotFound') {
-            delete option.name;
-            option.functionName = functionName;
-            const spinner = ora(`Create ${functionName} function`).start();
-            await client.createFunction(serviceName, {
+        await spinner(`Update ${functionName} function`, async () => {
+            await client.updateFunction(serviceName, functionName, {
                 ...option,
                 code: {
                     zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
                 },
             });
-            spinner.succeed();
+        });
+
+    } catch (ex) {
+        if (ex.code === 'FunctionNotFound') {
+            delete option.name;
+            option.functionName = functionName;
+            await spinner(`Create ${functionName} function`, async () => {
+                await client.createFunction(serviceName, {
+                    ...option,
+                    code: {
+                        zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
+                    },
+                });
+            });
         } else {
             throw ex;
         }
@@ -319,15 +319,15 @@ async function createOrUpdateFunction(serviceName: string, functionName: string,
 
 async function createOrUpdateAlias(serviceName: string, aliasName: string, versionId: string) {
     try {
-        const spinner = ora(`Update ${aliasName} alias to version ${versionId}`).start();
         await client.getAlias(serviceName, aliasName);
-        await client.updateAlias(serviceName, aliasName, versionId);
-        spinner.succeed();
+        await spinner(`Update ${aliasName} alias to version ${versionId}`, async () => {
+            await client.updateAlias(serviceName, aliasName, versionId);
+        });
     } catch (ex) {
         if (ex.code === 'AliasNotFound') {
-            const spinner = ora(`Create ${aliasName} alias to version ${versionId}`).start();
-            await client.createAlias(serviceName, aliasName, versionId);
-            spinner.succeed();
+            await spinner(`Create ${aliasName} alias to version ${versionId}`, async () => {
+                await client.createAlias(serviceName, aliasName, versionId);
+            });
         } else {
             throw ex;
         }
@@ -361,12 +361,12 @@ async function createGroupIfNeed(group: any) {
     let findGroup = list.find((item: any) => item.GroupName === groupName);
 
     if (!findGroup) {
-        const spinner = ora({ indent: 4, text: `Create ${groupName} group` }).start();
-        findGroup = await ag.createApiGroup({
-            GroupName: groupName,
-            Description: groupDescription
-        }, { timeout: 10000 });
-        spinner.succeed();
+        await spinner({ indent: 4, text: `Create ${groupName} group` }, async () => {
+            findGroup = await ag.createApiGroup({
+                GroupName: groupName,
+                Description: groupDescription
+            }, { timeout: 10000 });
+        });
     } else {
         console.log(`    - Skip ${groupName} group creation`);
     }
@@ -387,26 +387,26 @@ async function createRoleIfNeed(ram: any, roleName: string) {
     }
 
     if (!role) {
-        const spinner = ora({ indent: 4, text: `Create ${roleName} role` }).start();
-        role = await ram.createRole({
-            RoleName: roleName,
-            Description: 'API网关访问 FunctionCompute',
-            AssumeRolePolicyDocument: JSON.stringify({
-                'Statement': [
-                    {
-                        'Action': 'sts:AssumeRole',
-                        'Effect': 'Allow',
-                        'Principal': {
-                            'Service': [
-                                'apigateway.aliyuncs.com'
-                            ]
+        await spinner({ indent: 4, text: `Create ${roleName} role` }, async () => {
+            role = await ram.createRole({
+                RoleName: roleName,
+                Description: 'API网关访问 FunctionCompute',
+                AssumeRolePolicyDocument: JSON.stringify({
+                    'Statement': [
+                        {
+                            'Action': 'sts:AssumeRole',
+                            'Effect': 'Allow',
+                            'Principal': {
+                                'Service': [
+                                    'apigateway.aliyuncs.com'
+                                ]
+                            }
                         }
-                    }
-                ],
-                'Version': '1'
-            })
+                    ],
+                    'Version': '1'
+                })
+            });
         });
-        spinner.succeed();
     }
 
     const policyName = 'AliyunFCInvocationAccess';
@@ -505,16 +505,27 @@ async function createOrUpdateAPI(ag: any, group: any, conf: any, role: any) {
     }
 
     if (!api) {
-        const spinner = ora({ indent: 4, text: `Create ${apiName} api` }).start();
-        api = await ag.createApi(params);
-        spinner.succeed();
+        await spinner({ indent: 4, text: `Create ${apiName} api` }, async () => {
+            api = await ag.createApi(params);
+        });
     } else {
-        const spinner = ora({ indent: 4, text: `Update ${apiName} api` }).start();
-        await ag.modifyApi(Object.assign(params, {
-            ApiId: api.ApiId
-        }));
-        spinner.succeed();
+        await spinner({ indent: 4, text: `Update ${apiName} api` }, async () => {
+            await ag.modifyApi(Object.assign(params, {
+                ApiId: api.ApiId
+            }));
+        });
     }
 
     return api;
+}
+
+async function spinner(options: string | ora.Options | undefined, cb: () => any) {
+    const s = ora(options).start();
+    try {
+        await cb();
+        s.succeed();
+    } catch (error) {
+        s.fail(error);
+        throw error;
+    }
 }
