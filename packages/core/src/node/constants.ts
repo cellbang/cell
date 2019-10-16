@@ -10,6 +10,7 @@ export const METADATA_KEY = {
     controllerResponseSession: 'malagu:controller-response-session',
     controllerQuery: 'malagu:controller-query',
     controllerBody: 'malagu:controller-body',
-    controllerView: 'malagu:controller-view'
+    controllerView: 'malagu:controller-view',
+    controllerCatch: 'malagu:controller-catch'
 
 };

@@ -1,4 +1,6 @@
 import { Middleware } from '../middleware';
+import { StrOrRegex } from '../annotation';
+import { ErrorType } from '../error';
 
 export const HandlerExecutionChain = Symbol('HandlerExecutionChain');
 
@@ -21,4 +23,9 @@ export interface HandlerAdapter {
 
 export interface HandlerMapping {
     getHandler(): Promise<HandlerAdapter>;
+}
+
+export interface Route {
+    mapping: Map<string, Map<StrOrRegex, any>>;
+    errorMapping: Map<ErrorType, any>;
 }

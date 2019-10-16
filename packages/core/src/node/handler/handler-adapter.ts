@@ -1,11 +1,10 @@
 import { Component, Autowired, Value } from '../../common/annotation';
 import { ChannelManager } from '../channel';
 import { Context } from '../context';
-import { StrOrRegex, MethodMetadata } from '../annotation/method';
 import { RouteBuilder } from './route-builder';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { HttpError } from '../error';
-import { HandlerAdapter, MVC_HANDLER_ADAPTER_PRIORITY, RPC_HANDLER_ADAPTER_PRIORITY } from './handler-protocol';
+import { HandlerAdapter, MVC_HANDLER_ADAPTER_PRIORITY, RPC_HANDLER_ADAPTER_PRIORITY, Route } from './handler-protocol';
 import { RequestMatcher } from '../matcher';
 import { PathResolver, RPC_PATH, MVC_PATH } from '../../common';
 import { postConstruct } from 'inversify';
@@ -60,14 +59,14 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     @Value(MVC_PATH)
     protected readonly mvcPath: string;
 
-    protected routeMap: Map<string, Map<StrOrRegex, any>> = new Map<string, Map<StrOrRegex, any>>();
+    protected route: Route;
 
     @Autowired(RouteBuilder)
     protected readonly routeBuilder: RouteBuilder;
 
     @postConstruct()
     protected async init() {
-        this.routeMap = await this.routeBuilder.build();
+        this.route = await this.routeBuilder.build();
     }
 
     protected async resolveMethodArgs(metadata: any) {
@@ -87,26 +86,57 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     async handle(): Promise<void> {
         const ctx = Context.getCurrent();
         const path = ctx.request.path;
-        const pathMap = this.routeMap.get(ctx.request.method!.toLowerCase());
+        const pathMap = this.route.mapping.get(ctx.request.method!.toLowerCase());
         if (pathMap) {
             for (const entry of pathMap) {
                 const [ p, metadata ] = entry;
                 const pathParams = await this.requestMatcher.match(p);
                 if (pathParams) {
                     Context.setAttr(PATH_PARMAS_ATTR, pathParams);
-                    const args = await this.resolveMethodArgs(metadata);
-                    const methodMetadata = <MethodMetadata>metadata.methodMetadata;
-                    const target = methodMetadata.target;
-                    const model = await target[methodMetadata.key](...args);
-                    if (model) {
-                        await this.viewResolver.resolve(metadata, model);
-                    }
-                    await this.resolveResponse(metadata);
+                    await this.doHandle(metadata);
                     return;
                 }
             }
         }
         throw new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
+    }
+
+    protected async doHandle(metadata: any, err?: Error): Promise<void> {
+        let args = await this.resolveMethodArgs(metadata);
+        if (err) {
+            args = [err, ...args];
+        }
+        const methodMetadata = metadata.methodMetadata;
+        const target = methodMetadata.target;
+        let model: any;
+        try {
+            model = await target[methodMetadata.key](...args);
+        } catch (error) {
+            if (!err) {
+                const errorMetadata = this.getErrorMetadata(error);
+                await this.doHandle(errorMetadata, error);
+            } else {
+                throw error;
+            }
+        }
+        if (model) {
+            await this.viewResolver.resolve(metadata, model);
+        }
+        await this.resolveResponse(metadata);
+    }
+
+    protected getErrorMetadata(error: Error) {
+        const metadata = this.route.errorMapping.get(error.constructor);
+        if (metadata) {
+            return metadata;
+        } else {
+            for (const entry of this.route.errorMapping) {
+                if (error instanceof <any>entry[0]) {
+                    return entry[1];
+                }
+            }
+        }
+        throw error;
     }
 
     async canHandle(): Promise<boolean> {
