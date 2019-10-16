@@ -15,7 +15,7 @@ export interface CliContext {
 
 export namespace CliContext {
     export async function create(program: CommanderStatic, projectPath: string = process.cwd()): Promise<CliContext> {
-        let pkg = new ApplicationPackage({ projectPath });
+        let pkg = new ApplicationPackage({ projectPath, mode: program.mode });
         if (!RawComponentPackage.is(pkg.pkg)) {
             const { malagu } = pkg.pkg;
             if (malagu && malagu.rootComponent) {

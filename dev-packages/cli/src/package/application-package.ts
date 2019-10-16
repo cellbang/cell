@@ -88,7 +88,7 @@ export class ApplicationPackage {
     protected rootComponentPackage() {
         if (!this._rootComponentPackage) {
             this.pkg.malaguComponent = {};
-            this.componentPackageLoader.load(this.pkg);
+            this.componentPackageLoader.load(this.pkg, this.options.mode);
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
@@ -100,7 +100,11 @@ export class ApplicationPackage {
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
 
-            const { mode } = this.rootComponentPackage().malaguComponent!;
+            const { mode } = this.options || this.rootComponentPackage().malaguComponent!;
+
+            if (mode) {
+                console.log(chalk`malagu {yellow mode} - ${mode}`);
+            }
 
             const collector = new ComponentPackageCollector(
                 this,

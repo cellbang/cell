@@ -13,43 +13,42 @@ export class ComponentPackageLoader {
 
     load(nodePackage: NodePackage, mode?: string) {
         let config: any = {};
-        let configPath: string | undefined = undefined;
-        try {
-            if (this.pkg.isRoot(nodePackage)) {
-                if (existsSync(this.pkg.path(CONFIG_FILE))) {
-                    configPath = this.pkg.path(CONFIG_FILE);
-                }
+        config = this.loadConfig(nodePackage);
 
-            } else {
-                configPath = this.pkg.resolveModule(nodePackage.name + `/${CONFIG_FILE}`);
-            }
-
-        } catch (err) {
-            // noop
-        }
-        if (configPath) {
-            config = { ...config, ...yaml.safeLoad(readFileSync(configPath, { encoding: 'utf8' })) };
-        }
-
-        if (mode) {
+        if (!mode) {
             mode = config.mode;
         }
 
         if (mode) {
 
-            let configPathForMode: string | undefined = undefined;
+            const configForMode = this.loadConfig(nodePackage, mode);
 
-            try {
-                configPathForMode = this.pkg.resolveModule(name + `/malagu-${mode}.yml`);
-
-            } catch (err) {
-                // noop
-            }
-            if (configPathForMode) {
-                const configForMode = yaml.safeLoad(readFileSync(configPathForMode, { encoding: 'utf8' }));
+            if (configForMode) {
                 config = mergeWith(config, configForMode, customizer);
             }
         }
         nodePackage.malaguComponent = config;
+    }
+
+    loadConfig(nodePackage: NodePackage, mode?: string) {
+        const configPath = mode ? `malagu-${mode}.yml` : CONFIG_FILE;
+        let fullConfigPath: string | undefined = undefined;
+
+        try {
+            if (this.pkg.isRoot(nodePackage)) {
+                if (existsSync(this.pkg.path(configPath))) {
+                    fullConfigPath = this.pkg.path(configPath);
+                }
+
+            } else {
+                fullConfigPath = this.pkg.resolveModule(nodePackage.name + `/${configPath}`);
+            }
+
+        } catch (err) {
+            // noop
+        }
+        if (fullConfigPath) {
+            return yaml.safeLoad(readFileSync(fullConfigPath, { encoding: 'utf8' }));
+        }
     }
 }

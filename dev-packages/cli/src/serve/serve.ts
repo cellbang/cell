@@ -9,6 +9,7 @@ program
     .option('-o, --open [open]', 'Open browser')
     .option('-c, --copy [copy]', 'Copy local url to clipboard')
     .option('-p, --port [port]', 'Port used by the server', 3000)
+    .option('-m, --mode [mode]', 'Specify deployment mode')
     .description('serve a applicaton')
     .parse(process.argv);
 
@@ -18,6 +19,7 @@ program
     cliContext.open = program.open;
     cliContext.copy = program.copy;
     cliContext.port = program.port;
+    cliContext.mode = program.mode;
     const hookContext = await HookContext.create(cliContext);
     if (hookContext.configurations.length === 0) {
         throw new Error('No malagu module found.');

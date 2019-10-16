@@ -5,6 +5,7 @@ export class ApplicationPackageOptions {
     readonly projectPath: string;
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
+    readonly mode?: string;
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;

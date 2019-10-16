@@ -9,6 +9,7 @@ program
     .name('malagu build')
     .usage('[options]')
     .option('-d, --dest [dir]', 'output directory', 'dist')
+    .option('-m, --mode [mode]', 'Specify deployment mode')
     .description('build a application')
     .parse(process.argv);
 
@@ -16,6 +17,7 @@ program
     const cliContext = await CliContext.create(program);
     cliContext.dev = false;
     cliContext.dest = program.dir;
+    cliContext.mode = program.mode;
     const hookContext = await HookContext.create(cliContext);
 
     if (hookContext.configurations.length === 0) {
