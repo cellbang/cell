@@ -3,6 +3,8 @@ import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
 import { PathResolver } from '../../common';
+import { ErrorType } from '../error';
+import { CatchMetadata } from '../annotation';
 
 @Component()
 export class RouteBuilder {
@@ -17,49 +19,82 @@ export class RouteBuilder {
     protected readonly defaultViewName: string;
 
     async build() {
-        const routeMap: Map<string, Map<StrOrRegex, any>> = new Map<string, Map<StrOrRegex, any>>();
+        const mapping: Map<string, Map<StrOrRegex, any>> = new Map<string, Map<StrOrRegex, any>>();
+        const errorMapping: Map<ErrorType, any> = new Map<ErrorType, any>();
 
         for (const controller of this.controllers) {
             const targetConstructor = controller.target ? controller.target.constructor : controller.constructor;
 
             const controllerMetadata = <ControllerMetadata>Reflect.getOwnMetadata(METADATA_KEY.controller, targetConstructor);
-            const methodMetadata: MethodMetadata[] = Reflect.getOwnMetadata(
-                METADATA_KEY.controllerMethod,
-                targetConstructor
-            ) || [];
-            for (const metadata of methodMetadata) {
-                const routeOptions: any = (typeof metadata.options === 'string' || metadata.options instanceof RegExp) ? { path: metadata.options } : metadata.options;
-                const method = metadata.method;
-                metadata.target = controller;
-                let pathMap = routeMap.get(method);
-                if (!pathMap) {
-                    pathMap = new Map<StrOrRegex, any>();
-                    routeMap.set(method, pathMap);
+            await this.doBuildRouteMap(mapping, targetConstructor, controller, controllerMetadata);
+            await this.doBuildErrorRouteMap(errorMapping, targetConstructor, controller, controllerMetadata);
+
+        }
+        return {
+            mapping,
+            errorMapping
+        };
+    }
+
+    protected async doBuildRouteMap(mapping: Map<string, Map<StrOrRegex, any>>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
+        const methodMetadata: MethodMetadata[] = Reflect.getOwnMetadata(
+            METADATA_KEY.controllerMethod,
+            targetConstructor
+        ) || [];
+        for (const metadata of methodMetadata) {
+            const routeOptions: any = (typeof metadata.options === 'string' || metadata.options instanceof RegExp) ? { path: metadata.options } : metadata.options;
+            const method = metadata.method;
+            metadata.target = controller;
+            let pathMap = mapping.get(method);
+            if (!pathMap) {
+                pathMap = new Map<StrOrRegex, any>();
+                mapping.set(method, pathMap);
+            }
+            let path: StrOrRegex = routeOptions.path;
+            if (typeof path === 'string' ) {
+                path = await this.pathResolver.resolve(controllerMetadata.path, path);
+            } else if (path instanceof RegExp) {
+                if (controllerMetadata.path) {
+                    path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
                 }
-                let path: StrOrRegex = routeOptions.path;
-                if (typeof path === 'string' ) {
-                    path = await this.pathResolver.resolve(controllerMetadata.path, path);
-                } else if (path instanceof RegExp) {
-                    if (controllerMetadata.path) {
-                        path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
-                    }
-                }
-                pathMap.set(path, {
+            }
+            pathMap.set(path, {
+                controllerMetadata,
+                methodMetadata: metadata,
+                ...this.doRouteMetadata(targetConstructor, metadata.key)
+            });
+        }
+    }
+
+    protected async doBuildErrorRouteMap(errorMapping: Map<ErrorType, any>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
+        const methodMetadata: CatchMetadata[] = Reflect.getOwnMetadata(
+            METADATA_KEY.controllerCatch,
+            targetConstructor
+        ) || [];
+        for (const metadata of methodMetadata) {
+            metadata.target = controller;
+            for (const errorType of metadata.errorTypes) {
+                errorMapping.set(errorType, {
                     controllerMetadata,
                     methodMetadata: metadata,
-                    paramMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, metadata.key),
-                    bodyMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, metadata.key),
-                    queryMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, metadata.key),
-                    requestHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestHeader, targetConstructor, metadata.key),
-                    responseHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseHeader, targetConstructor, metadata.key),
-                    requestCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestCookie, targetConstructor, metadata.key),
-                    responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, metadata.key),
-                    requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, metadata.key),
-                    responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, metadata.key),
-                    viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, metadata.key) || { viewName: this.defaultViewName }
+                    ...this.doRouteMetadata(targetConstructor, metadata.key)
                 });
             }
         }
-        return routeMap;
+    }
+
+    protected doRouteMetadata(targetConstructor: any, method: string) {
+        return {
+            paramMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
+            bodyMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
+            queryMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, method),
+            requestHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestHeader, targetConstructor, method),
+            responseHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseHeader, targetConstructor, method),
+            requestCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestCookie, targetConstructor, method),
+            responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
+            requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
+            responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
+            viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { viewName: this.defaultViewName }
+        };
     }
 }

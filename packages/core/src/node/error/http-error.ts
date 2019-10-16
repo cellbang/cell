@@ -1,4 +1,4 @@
-import { CustomError } from 'ts-custom-error';
+import { CustomError } from './cutom-error';
 
 export class HttpError extends CustomError {
 

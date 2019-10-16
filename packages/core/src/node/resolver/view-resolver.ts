@@ -14,8 +14,8 @@ export class ViewResolverImpl implements ViewResolver {
         const viewMetadata = <ViewMetadata>metadata.viewMetadata;
         for (const view of this.viewProvider.provide()) {
             if (await view.support(viewMetadata.viewName)) {
-                await view.render(model);
                 Context.getResponse().setHeader('Content-type', view.contentType);
+                await view.render(model);
                 return;
             }
         }
