@@ -136,6 +136,7 @@ export class ApplicationPackage {
     }
 
     newComponentPackage(raw: PublishedNodePackage): ComponentPackage {
+        raw.malaguComponent = raw.malaguComponent || {};
         raw.malaguComponent.frontend = raw.malaguComponent.frontend || {};
         raw.malaguComponent.backend = raw.malaguComponent.backend || {};
         return new ComponentPackage(raw);
