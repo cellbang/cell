@@ -98,7 +98,8 @@ export class MvcHandlerAdapter implements HandlerAdapter {
                 }
             }
         }
-        throw new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
+        const error = new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
+        await this.doHandle(this.getErrorMetadata(error), error);
     }
 
     protected async doHandle(metadata: any, err?: Error): Promise<void> {
@@ -114,6 +115,9 @@ export class MvcHandlerAdapter implements HandlerAdapter {
         } catch (error) {
             if (!err) {
                 const errorMetadata = this.getErrorMetadata(error);
+                if (!errorMetadata.viewMetadata.viewName) {
+                    errorMetadata.viewMetadata.viewName = metadata.viewMetadata.viewName;
+                }
                 await this.doHandle(errorMetadata, error);
             } else {
                 throw error;
