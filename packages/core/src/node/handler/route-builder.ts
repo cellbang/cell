@@ -1,4 +1,4 @@
-import { Component, Autowired, Optional, Value } from '../../common/annotation';
+import { Component, Autowired, Optional } from '../../common/annotation';
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
@@ -14,9 +14,6 @@ export class RouteBuilder {
 
     @Autowired(PathResolver)
     protected readonly pathResolver: PathResolver;
-
-    @Value('malagu.mvc.defaultViewName')
-    protected readonly defaultViewName: string;
 
     async build() {
         const mapping: Map<string, Map<StrOrRegex, any>> = new Map<string, Map<StrOrRegex, any>>();
@@ -94,7 +91,7 @@ export class RouteBuilder {
             responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
             requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
             responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
-            viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { viewName: this.defaultViewName }
+            viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { }
         };
     }
 }

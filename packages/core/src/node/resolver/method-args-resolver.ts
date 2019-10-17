@@ -39,7 +39,7 @@ export class ParamMethodArgsResolver implements MethodArgsResolver {
     async resolve(metadata: any, args: any[]): Promise<void> {
         const params: any = Context.getAttr(PATH_PARMAS_ATTR);
         const paramMetadatas = <ParamMetadata[]>metadata.paramMetadata;
-        if (paramMetadatas) {
+        if (paramMetadatas && params) {
             for (const m of paramMetadatas) {
                 args[m.parameterIndex] = m.name ? params[m.name] : params;
             }
