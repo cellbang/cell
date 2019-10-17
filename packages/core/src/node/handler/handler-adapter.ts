@@ -1,13 +1,12 @@
 import { Component, Autowired, Value } from '../../common/annotation';
 import { ChannelManager } from '../channel';
 import { Context } from '../context';
-import { RouteBuilder } from './route-builder';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { HttpError } from '../error';
-import { HandlerAdapter, MVC_HANDLER_ADAPTER_PRIORITY, RPC_HANDLER_ADAPTER_PRIORITY, Route } from './handler-protocol';
+import { HandlerAdapter, MVC_HANDLER_ADAPTER_PRIORITY, RPC_HANDLER_ADAPTER_PRIORITY } from './handler-protocol';
 import { RequestMatcher } from '../matcher';
 import { PathResolver, RPC_PATH, MVC_PATH } from '../../common';
-import { postConstruct } from 'inversify';
+import { RouteProvider } from './route-provider';
 
 export const PATH_PARMAS_ATTR = 'pathParams';
 
@@ -59,15 +58,8 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     @Value(MVC_PATH)
     protected readonly mvcPath: string;
 
-    protected route: Route;
-
-    @Autowired(RouteBuilder)
-    protected readonly routeBuilder: RouteBuilder;
-
-    @postConstruct()
-    protected async init() {
-        this.route = await this.routeBuilder.build();
-    }
+    @Autowired(RouteProvider)
+    protected readonly routeProvider: RouteProvider;
 
     protected async resolveMethodArgs(metadata: any) {
         const args: any[] = [];
@@ -86,7 +78,8 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     async handle(): Promise<void> {
         const ctx = Context.getCurrent();
         const path = ctx.request.path;
-        const pathMap = this.route.mapping.get(ctx.request.method!.toLowerCase());
+        const route = await this.routeProvider.provide();
+        const pathMap = route.mapping.get(ctx.request.method!.toLowerCase());
         if (pathMap) {
             for (const entry of pathMap) {
                 const [ p, metadata ] = entry;
@@ -99,7 +92,7 @@ export class MvcHandlerAdapter implements HandlerAdapter {
             }
         }
         const error = new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
-        await this.doHandle(this.getErrorMetadata(error), error);
+        await this.doHandle(await this.getErrorMetadata(error), error);
     }
 
     protected async doHandle(metadata: any, err?: Error): Promise<void> {
@@ -114,7 +107,7 @@ export class MvcHandlerAdapter implements HandlerAdapter {
             model = await target[methodMetadata.key](...args);
         } catch (error) {
             if (!err) {
-                const errorMetadata = this.getErrorMetadata(error);
+                const errorMetadata = await this.getErrorMetadata(error);
                 if (!errorMetadata.viewMetadata.viewName) {
                     errorMetadata.viewMetadata.viewName = metadata.viewMetadata.viewName;
                 }
@@ -129,12 +122,13 @@ export class MvcHandlerAdapter implements HandlerAdapter {
         await this.resolveResponse(metadata);
     }
 
-    protected getErrorMetadata(error: Error) {
-        const metadata = this.route.errorMapping.get(error.constructor);
+    protected async getErrorMetadata(error: Error) {
+        const route = await this.routeProvider.provide();
+        const metadata = route.errorMapping.get(error.constructor);
         if (metadata) {
             return metadata;
         } else {
-            for (const entry of this.route.errorMapping) {
+            for (const entry of route.errorMapping) {
                 if (error instanceof <any>entry[0]) {
                     return entry[1];
                 }
