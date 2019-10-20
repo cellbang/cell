@@ -20,7 +20,7 @@ export namespace AuthorizeOption {
     }
 }
 
-export const Authorize = function (elOrAuthorizeOption: string | AuthorizeOption): any {
+export const Authorize = function (elOrAuthorizeOption: string | AuthorizeOption) {
     const option = getAuthorizeOption(elOrAuthorizeOption);
     return (target: any, targetKey?: string, descriptor?: TypedPropertyDescriptor<Function>) => {
         if (targetKey) {

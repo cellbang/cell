@@ -1,4 +1,4 @@
-import { Component, Autowired, Optional } from '@malagu/core';
+import { Component, Autowired, Optional, getOwnMetadata } from '@malagu/core';
 import { SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
     SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, ElPoliy } from './access-protocol';
 import { SecurityContext } from '../context';
@@ -13,8 +13,8 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
     protected readonly securityExpressionContextHandler: SecurityExpressionContextHandler;
 
     async load(context: MethodSecurityMetadataContext): Promise<SecurityMetadata> {
-        const classMetadatas: AuthorizeMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.authorize, context.target.constructor) || [];
-        const methodMetadatas: AuthorizeMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.authorize, context.target.constructor, context.method) || [];
+        const classMetadatas: AuthorizeMetadata[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor);
+        const methodMetadatas: AuthorizeMetadata[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor, context.method);
         const ctx = {
             ...context,
             ...SecurityContext.getAuthentication()
