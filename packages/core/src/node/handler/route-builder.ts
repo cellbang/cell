@@ -1,8 +1,7 @@
-import { Component, Autowired, Optional } from '../../common/annotation';
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
-import { PathResolver } from '../../common';
+import { PathResolver, getOwnMetadata, Component, Autowired, Optional } from '../../common';
 import { ErrorType } from '../error';
 import { CatchMetadata } from '../annotation';
 
@@ -34,10 +33,11 @@ export class RouteBuilder {
     }
 
     protected async doBuildRouteMap(mapping: Map<string, Map<StrOrRegex, any>>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
-        const methodMetadata: MethodMetadata[] = Reflect.getOwnMetadata(
+
+        const methodMetadata: MethodMetadata[] = getOwnMetadata(
             METADATA_KEY.controllerMethod,
             targetConstructor
-        ) || [];
+        );
         for (const metadata of methodMetadata) {
             const routeOptions: any = (typeof metadata.options === 'string' || metadata.options instanceof RegExp) ? { path: metadata.options } : metadata.options;
             const method = metadata.method;
@@ -64,10 +64,10 @@ export class RouteBuilder {
     }
 
     protected async doBuildErrorRouteMap(errorMapping: Map<ErrorType, any>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
-        const methodMetadata: CatchMetadata[] = Reflect.getOwnMetadata(
+        const methodMetadata: CatchMetadata[] = getOwnMetadata(
             METADATA_KEY.controllerCatch,
             targetConstructor
-        ) || [];
+        );
         for (const metadata of methodMetadata) {
             metadata.target = controller;
             for (const errorType of metadata.errorTypes) {
@@ -82,16 +82,16 @@ export class RouteBuilder {
 
     protected doRouteMetadata(targetConstructor: any, method: string) {
         return {
-            paramMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
-            bodyMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
-            queryMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, method),
-            requestHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestHeader, targetConstructor, method),
-            responseHeaderMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseHeader, targetConstructor, method),
-            requestCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestCookie, targetConstructor, method),
-            responseCookieMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
-            requestSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
-            responseSessionMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
-            viewMetadata: Reflect.getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { }
+            paramMetadata: getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
+            bodyMetadata: getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
+            queryMetadata: getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, method),
+            requestHeaderMetadata: getOwnMetadata(METADATA_KEY.controllerRequestHeader, targetConstructor, method),
+            responseHeaderMetadata: getOwnMetadata(METADATA_KEY.controllerResponseHeader, targetConstructor, method),
+            requestCookieMetadata: getOwnMetadata(METADATA_KEY.controllerRequestCookie, targetConstructor, method),
+            responseCookieMetadata: getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
+            requestSessionMetadata: getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
+            responseSessionMetadata: getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
+            viewMetadata: getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { }
         };
     }
 }

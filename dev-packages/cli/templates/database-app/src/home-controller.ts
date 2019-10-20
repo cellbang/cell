@@ -1,7 +1,7 @@
 import { Controller, Get, View, TextView } from '@malagu/core/lib/node';
 
 @Controller('/')
-export class UserController {
+export class HomeController {
     
     @Get()
     @View(TextView.VIEW_NAME)
