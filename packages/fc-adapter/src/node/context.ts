@@ -73,6 +73,9 @@ export class HttpTriggerContext extends AbstractContext {
     constructor(req: any, res: any, public context: any) {
         super();
         this.request = req;
+        if (req.queries) {
+            this.request.query = req.queries;
+        }
         if (req.headers['content-type'] === 'application/json') {
             this.request.body = JSON.parse(this.request.body);
         }
