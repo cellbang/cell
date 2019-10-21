@@ -77,7 +77,7 @@ export class InitManager {
     }
 
     protected toThirdPartyTemplate(item: any) {
-        return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: item.clone_url};
+        return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
     }
 
     protected async selectTemplate(): Promise<void> {
