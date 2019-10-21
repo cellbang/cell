@@ -24,8 +24,8 @@ export class DispatcherImpl implements Dispatcher<Context> {
         try {
             Context.setCurrent(ctx);
             const middlewares = this.middlewareProvider.provide();
-            const hander = await this.handlerMapping.getHandler();
-            await this.handlerExecutionChain.execute(hander, middlewares);
+            const handler = await this.handlerMapping.getHandler();
+            await this.handlerExecutionChain.execute(handler, middlewares);
         } catch (err) {
             await this.handleError(ctx, err);
         }
