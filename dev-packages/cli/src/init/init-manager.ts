@@ -7,6 +7,7 @@ import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
 import { CliContext, HookContext } from '../context';
 import * as ora from 'ora';
+import { getPackager } from '../packager';
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -25,6 +26,7 @@ export class InitManager {
     protected source: any[];
     protected name: string;
     protected location: string;
+    protected cliContext: CliContext;
     constructor(protected readonly context: any) {
 
     }
@@ -43,16 +45,26 @@ export class InitManager {
     }
 
     async install(): Promise<void> {
-        spawnSync('yarn', ['install'], { cwd: this.outputDir, stdio: 'inherit' });
+        const ctx = await this.getCliContext();
+
+        const packagerId = ctx.pkg.backendConfig.malagu.packager || ctx.pkg.frontendConfig.malagu.packager;
+        await getPackager(packagerId).install(this.outputDir, {});
     }
 
     async executeHooks(): Promise<void> {
         process.chdir(this.outputDir);
-        const cliContext = await CliContext.create(this.context.program);
-        cliContext.name = this.context.name;
-        cliContext.outputDir = this.context.outputDir;
-        await new HookExecutor().executeInitHooks(await HookContext.create(cliContext));
+        await new HookExecutor().executeInitHooks(await HookContext.create(await this.getCliContext()));
         console.log(chalk`{green Success!} Initialized "${ this.name }" example in ${this.outputDir}.`);
+        process.exit(0);
+    }
+
+    protected async getCliContext() {
+        if (!this.cliContext) {
+            this.cliContext = await CliContext.create(this.context.program);
+            this.cliContext.name = this.context.name;
+            this.cliContext.outputDir = this.context.outputDir;
+        }
+        return this.cliContext;
     }
 
     protected get outputDir(): string {
@@ -87,6 +99,7 @@ export class InitManager {
             message: 'Select a template to init',
             source: async (answersSoFar: any, input: string) => {
                 if (!this.source) {
+                    const spinner = ora('loading...').start();
                     const options = {
                         uri: SEARCH_TEMPLATE_REPO_URI,
                         json: true,
@@ -96,7 +109,6 @@ export class InitManager {
                         }
                     };
                     const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
-                    const spinner = ora('loading...').start();
                     try {
                         const { items } = await request(options);
                         const thirdPartyTemplates = items.map((item: any) => this.toThirdPartyTemplate(item));

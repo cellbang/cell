@@ -1,20 +1,21 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readJSON, writeJSON } from 'fs-extra';
+import * as ora from 'ora';
 
 export class NPM {
-    static get lockfileName() {
+    get lockfileName() {
         return 'package-lock.json';
     }
 
-    static get copyPackageSectionNames() {
+    get copyPackageSectionNames() {
         return [];
     }
 
-    static get mustCopyModules() {
+    get mustCopyModules() {
         return true;
     }
 
-    static async getProdDependencies(cwd: string, depth: number) {
+    async getProdDependencies(cwd: string, depth: number) {
         // Get first level dependency graph
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = [
@@ -60,15 +61,15 @@ export class NPM {
         return JSON.parse(processOutput.stdout);
     }
 
-    static readLockfile(lockfilePath: string) {
+    readLockfile(lockfilePath: string) {
         return readJSON(lockfilePath);
     }
 
-    static writeLockfile(lockfilePath: string, content: any) {
+    writeLockfile(lockfilePath: string, content: any) {
         return writeJSON(lockfilePath, content, { spaces: 2 });
     }
 
-    static _rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string) {
+    _rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string) {
         if (/^file:[^/]{2}/.test(moduleVersion)) {
             const filePath = moduleVersion.replace(/^file:/, '');
             return `file:${pathToPackageRoot}/${filePath}`.replace(/\\/g, '/');
@@ -84,35 +85,39 @@ export class NPM {
      * Rebase package-lock is a temporary workaround and must be
      * removed as soon as https://github.com/npm/npm/issues/19183 gets fixed.
      */
-    static rebaseLockfile(pathToPackageRoot: string, lockfile: any) {
+    rebaseLockfile(pathToPackageRoot: string, lockfile: any) {
         if (lockfile.version) {
-            lockfile.version = NPM._rebaseFileReferences(pathToPackageRoot, lockfile.version);
+            lockfile.version = this._rebaseFileReferences(pathToPackageRoot, lockfile.version);
         }
 
         if (lockfile.dependencies) {
             for (const lockedDependency of lockfile.dependencies) {
-                NPM.rebaseLockfile(pathToPackageRoot, lockedDependency);
+                this.rebaseLockfile(pathToPackageRoot, lockedDependency);
             }
         }
 
         return lockfile;
     }
 
-    static install(cwd: string) {
+    async install(cwd: string) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['install'];
-
-        return spawnProcess(command, args, { cwd });
+        const spinner = ora('npm install...').start();
+        try {
+            return await spawnProcess(command, args, { cwd });
+        } finally {
+            spinner.stop();
+        }
     }
 
-    static prune(cwd: string) {
+    prune(cwd: string) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['prune'];
 
         return spawnProcess(command, args, { cwd });
     }
 
-    static runScripts(cwd: string, scriptNames: string[]) {
+    runScripts(cwd: string, scriptNames: string[]) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const promises = scriptNames.map(scriptName => {
             const args = ['run', scriptName];

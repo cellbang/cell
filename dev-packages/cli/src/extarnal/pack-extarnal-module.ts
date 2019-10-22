@@ -200,7 +200,7 @@ export async function packExternalModules(context: HookContext, stats: webpack.S
     const pkg = context.pkg;
     const config = pkg.backendConfig.malagu;
     const configuration = HookContext.getConfiguration(BACKEND_TARGET, context.configurations);
-    const packagerId = config.packager || 'yarn';
+    const packagerId = config.packager;
     const includes = config.includeModules;
     const packagerOptions = config.packagerOptions || {};
     const scripts: any[] = packagerOptions.scripts || [];
@@ -292,6 +292,13 @@ export async function packExternalModules(context: HookContext, stats: webpack.S
     await packager.install(compositeModulePath, packagerOptions);
     if (verbose) {
         console.log(`Package took [${now() - start} ms]`);
+    }
+
+    // Prune extraneous packages - removes not needed ones
+    const startPrune = now();
+    await packager.prune(compositeModulePath, packagerOptions);
+    if (verbose) {
+        console.log(`Prune: ${compositeModulePath} [${now() - startPrune} ms]`);
     }
 
     // Prune extraneous packages - removes not needed ones

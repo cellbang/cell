@@ -1,7 +1,7 @@
 import { NPM } from './npm';
 import { Yarn } from './yarn';
 
-const childProcess = require('child_process');
+import { spawn } from 'child_process';
 
 export class SpawnError extends Error {
     constructor(message: string, public stdout: any, public stderr: any) {
@@ -15,7 +15,7 @@ export class SpawnError extends Error {
 
 export function spawnProcess(command: string, args: string[], options: any) {
     return new Promise<any>((resolve, reject) => {
-        const child = childProcess.spawn(command, args, options);
+        const child = spawn(command, args, options);
         let stdout = '';
         let stderr = '';
         child.stdout.setEncoding('utf8');
@@ -39,16 +39,15 @@ export function spawnProcess(command: string, args: string[], options: any) {
     });
 }
 
-const registeredPackagers = {
-    npm: NPM,
-    yarn: Yarn
-};
-
-export function getPackager(packagerId: string) {
+export function getPackager(packagerId: string = 'yarn'): NPM | Yarn {
+    const registeredPackagers = {
+        npm: new NPM(),
+        yarn: new Yarn()
+    };
     if (packagerId in registeredPackagers) {
         return (registeredPackagers as any)[packagerId];
     }
-      const message = `Could not find packager '${packagerId}'`;
-      console.log(`ERROR: ${message}`);
-      throw new Error(message);
+    const message = `Could not find packager '${packagerId}'`;
+    console.log(`ERROR: ${message}`);
+    throw new Error(message);
 }
