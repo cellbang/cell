@@ -1,20 +1,21 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readFile, writeFile } from 'fs-extra';
+import * as ora from 'ora';
 
 export class Yarn {
-    static get lockfileName() {
+    get lockfileName() {
         return 'yarn.lock';
     }
 
-    static get copyPackageSectionNames() {
+    get copyPackageSectionNames() {
         return ['resolutions'];
     }
 
-    static get mustCopyModules() {
+    get mustCopyModules() {
         return false;
     }
 
-    static async getProdDependencies(cwd: string, depth: number) {
+    async getProdDependencies(cwd: string, depth: number) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const args = ['list', `--depth=${depth || 1}`, '--json', '--production'];
         // If we need to ignore some errors add them here
@@ -68,15 +69,15 @@ export class Yarn {
         };
     }
 
-    static readLockfile(lockfilePath: string) {
+    readLockfile(lockfilePath: string) {
         return readFile(lockfilePath, 'utf8');
     }
 
-    static writeLockfile(lockfilePath: string, content: string) {
+    writeLockfile(lockfilePath: string, content: string) {
         return writeFile(lockfilePath, content, 'utf8');
     }
 
-    static rebaseLockfile(pathToPackageRoot: string, lockfile: string) {
+    rebaseLockfile(pathToPackageRoot: string, lockfile: string) {
         const fileVersionMatcher = /[^"/]@(?:file:)?((?:\.\/|\.\.\/).*?)[":,]/gm;
         const replacements = [];
         let match;
@@ -93,7 +94,7 @@ export class Yarn {
         return replacements.reduce((__, replacement) => __.replace(replacement.oldRef, replacement.newRef), lockfile);
     }
 
-    static install(cwd: string, packagerOptions: any) {
+    async install(cwd: string, packagerOptions: any) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const args = ['install', '--frozen-lockfile', '--non-interactive'];
 
@@ -101,16 +102,20 @@ export class Yarn {
         if (packagerOptions.ignoreScripts) {
             args.push('--ignore-scripts');
         }
-
-        return spawnProcess(command, args, { cwd });
+        const spinner = ora('yarn install...').start();
+        try {
+            return await spawnProcess(command, args, { cwd });
+        } finally {
+            spinner.stop();
+        }
     }
 
     // "Yarn install" prunes automatically
-    static prune(cwd: string, packagerOptions: any) {
-        return Yarn.install(cwd, packagerOptions);
+    prune(cwd: string, packagerOptions: any) {
+        return this.install(cwd, packagerOptions);
     }
 
-    static runScripts(cwd: string, scriptNames: string[]) {
+    runScripts(cwd: string, scriptNames: string[]) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const promises = scriptNames.map(scriptName => {
             const args = ['run', scriptName];
