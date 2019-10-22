@@ -3,6 +3,8 @@ import * as program from 'commander';
 import * as webpack from 'webpack';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { CliContext, HookContext } from '../context';
+import { packExternalModules } from '../extarnal';
+import { BACKEND_TARGET } from '../constants';
 const chalk = require('chalk');
 
 program
@@ -34,6 +36,10 @@ program
             },
             clearConsole: false
         }).apply(compiler);
-        compiler.run((err, stats) => {});
+        compiler.run((err, stats) => {
+            if (configuration.name === BACKEND_TARGET) {
+                packExternalModules(hookContext, stats);
+            }
+        });
     }
 })();
