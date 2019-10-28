@@ -1,4 +1,5 @@
 import * as http from 'http';
+import * as net from 'net';
 import { CHANNEL_MIDDLEWARE_PRIORITY } from '../channel';
 
 export const HTTP_MIDDLEWARE_PRIORITY = CHANNEL_MIDDLEWARE_PRIORITY - 100;
@@ -10,6 +11,7 @@ export interface Request {
     url: string;
     path: string;
     query: { [key: string]: string };
+    connection: net.Socket;
 }
 
 export interface Response {

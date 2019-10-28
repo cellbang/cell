@@ -46,8 +46,7 @@ export class InitManager {
 
     async install(): Promise<void> {
         const ctx = await this.getCliContext();
-
-        const packagerId = ctx.pkg.backendConfig.malagu.packager || ctx.pkg.frontendConfig.malagu.packager;
+        const packagerId = ctx.pkg.rootConfig.malagu.packager;
         await getPackager(packagerId).install(this.outputDir, {});
     }
 
@@ -60,7 +59,7 @@ export class InitManager {
 
     protected async getCliContext() {
         if (!this.cliContext) {
-            this.cliContext = await CliContext.create(this.context.program);
+            this.cliContext = await CliContext.create(this.context.program, this.outputDir);
             this.cliContext.name = this.context.name;
             this.cliContext.outputDir = this.context.outputDir;
         }

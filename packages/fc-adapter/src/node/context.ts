@@ -22,6 +22,7 @@ export class ApiGatewayContext extends AbstractContext {
             method: e.method,
             path: e.path,
             url: e.path,
+            connection: {} as any,
             query: e.queryParameters || {},
             headers: e.headers,
             get body() {
@@ -75,6 +76,7 @@ export class HttpTriggerContext extends AbstractContext {
         this.request = req;
         if (req.queries) {
             this.request.query = req.queries;
+            this.request.connection = {} as any;
         }
         if (req.headers['content-type'] === 'application/json') {
             this.request.body = JSON.parse(this.request.body);
