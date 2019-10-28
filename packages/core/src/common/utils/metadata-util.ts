@@ -1,6 +1,6 @@
 import { getSuperClasses } from './class-util';
 
-export function getOwnMetadata(metadataKey: string, constructor: Object, propertyKey?: string | symbol): any[] {
+export function getOwnMetadata(metadataKey: string, constructor: Object, propertyKey?: string | symbol): any {
     const constructors = [ constructor, ...getSuperClasses(constructor) ];
     let result: any[] = [];
     for (let index = 0; index < constructors.length; index++) {
@@ -12,7 +12,13 @@ export function getOwnMetadata(metadataKey: string, constructor: Object, propert
             metadata = Reflect.getOwnMetadata(metadataKey, c);
         }
 
-        result = [ ...result, ...metadata || []];
+        if (metadata) {
+            if (Array.isArray(metadata)) {
+                result = [ ...result, ...metadata ];
+            } else {
+                return metadata;
+            }
+        }
     }
     return result;
 }

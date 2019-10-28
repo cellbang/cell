@@ -40,8 +40,9 @@ export class RouteBuilder {
         );
         for (const metadata of methodMetadata) {
             const routeOptions: any = (typeof metadata.options === 'string' || metadata.options instanceof RegExp) ? { path: metadata.options } : metadata.options;
-            const method = metadata.method;
-            metadata.target = controller;
+            const m = { ...metadata };
+            const method = m.method;
+            m.target = controller;
             let pathMap = mapping.get(method);
             if (!pathMap) {
                 pathMap = new Map<StrOrRegex, any>();
@@ -57,8 +58,8 @@ export class RouteBuilder {
             }
             pathMap.set(path, {
                 controllerMetadata,
-                methodMetadata: metadata,
-                ...this.doRouteMetadata(targetConstructor, metadata.key)
+                methodMetadata: m,
+                ...this.doRouteMetadata(targetConstructor, m.key)
             });
         }
     }
@@ -69,12 +70,13 @@ export class RouteBuilder {
             targetConstructor
         );
         for (const metadata of methodMetadata) {
-            metadata.target = controller;
+            const m = { ...metadata };
+            m.target = controller;
             for (const errorType of metadata.errorTypes) {
                 errorMapping.set(errorType, {
                     controllerMetadata,
-                    methodMetadata: metadata,
-                    ...this.doRouteMetadata(targetConstructor, metadata.key)
+                    methodMetadata: m,
+                    ...this.doRouteMetadata(targetConstructor, m.key)
                 });
             }
         }

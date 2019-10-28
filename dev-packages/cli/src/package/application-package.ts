@@ -4,10 +4,12 @@ import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
 import { Component, ComponentPackage, Props, ApplicationLog, ApplicationPackageOptions, customizer, ApplicationModuleResolver } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import mergeWith = require('lodash.mergewith');
-import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 import { ComponentPackageLoader } from './component-config-loader';
 import { ComponentPackageResolver } from './component-package-resolver';
+import { existsSync, readFileSync } from 'fs-extra';
 const chalk = require('chalk');
+import yaml = require('js-yaml');
 
 // tslint:disable:no-implicit-dependencies
 
@@ -42,6 +44,20 @@ export class ApplicationPackage {
         }
 
         return props;
+    }
+
+    protected _rootConfig: Props | undefined;
+    get rootConfig(): Props {
+        if (this._rootConfig) {
+            return this._rootConfig;
+        }
+        if (existsSync(this.path(CONFIG_FILE))) {
+            this._rootConfig = yaml.safeLoad(readFileSync(this.path(CONFIG_FILE), { encoding: 'utf8' }));
+        }
+        if (this._rootConfig && !this._rootConfig.malagu) {
+            this._rootConfig.malagu = {};
+        }
+        return this._rootConfig || { malagu: {} };
     }
 
     protected _frontendConfig: Props | undefined;
