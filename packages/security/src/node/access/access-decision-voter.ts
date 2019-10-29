@@ -20,7 +20,7 @@ export class PolicyBasedVoter implements AccessDecisionVoter {
     async vote(securityMetadata: SecurityMetadata): Promise<number> {
 
         const principalPolicies = await this.principalPolicyProvider.provide(securityMetadata.principal, securityMetadata.type);
-        const resourcePolicies = await this.principalPolicyProvider.provide(securityMetadata.resource, securityMetadata.type);
+        const resourcePolicies = await this.resourcePolicyProvider.provide(securityMetadata.resource, securityMetadata.type);
         const policies = [ ...principalPolicies, ...resourcePolicies, ...securityMetadata.policies ];
         let grant = 0;
         for (const policy of policies) {
