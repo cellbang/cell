@@ -1,8 +1,6 @@
 import { fluentProvide } from 'inversify-binding-decorators';
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { ConnectionHandler, NoOpConnectionHandler } from '../jsonrpc/handler';
-import { JsonRpcConnectionHandler } from '../jsonrpc/proxy-factory';
 import { MethodBeforeAdvice, AfterReturningAdvice, AfterThrowsAdvice } from '../aop/aop-protocol';
 
 export enum Scope {
@@ -12,7 +10,6 @@ export interface ComponentOption {
     id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
     scope?: Scope;
     rebind?: boolean;
-    rpc?: boolean;
     proxy?: boolean;
 }
 export namespace ComponentOption {
@@ -83,7 +80,6 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
         id: target,
         scope: Scope.Singleton,
         rebind: false,
-        rpc: false,
         proxy: false
     };
     const opt = { ...defaultComponentOption, ...option };
@@ -119,12 +115,5 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
             metadata,
             target
         );
-    }
-
-    if (opt.rpc) {
-        fluentProvide(ConnectionHandler).inSingletonScope().onActivation(context => {
-            const t = context.container.get(id);
-            return new JsonRpcConnectionHandler(id.toString(), () => t);
-        }).done(true)(NoOpConnectionHandler);
     }
 }

@@ -1,10 +1,11 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { Application, ContainerProvider, PathResolver, ConfigProvider } from '@malagu/core';
-import { Dispatcher, WebSocketContext, Context, Request, Response, HttpContext } from '@malagu/core/lib/node';
+import { Application, ContainerProvider, ConfigProvider } from '@malagu/core';
+import { Dispatcher, WebSocketContext, Context, Request, Response, HttpContext } from '@malagu/web/lib/node';
 import * as Koa from 'koa';
 import * as route from 'koa-route';
 import * as websockify from 'koa-websocket';
 import { DEFAULT_SERVER_OPTIONS } from './context';
+import { PathResolver } from '@malagu/web';
 
 container.then(async c => {
     ContainerProvider.set(c);
@@ -20,8 +21,7 @@ container.then(async c => {
     app.ws.use(route.post(await pathResolver.resolve(path), ctx => {
         const dispatcher = c.get<Dispatcher<WebSocketContext>>(Dispatcher);
         if (app.ws.server) {
-            new WebSocketContext(ctx.request as unknown as Request, ctx.response as unknown as Response, app.ws.server, ctx.websocket, dispatcher);
-        }
+            new WebSocketContext(ctx.request as unknown as Request, ctx.response as unknown as Response, app.ws.server, ctx.websocket, dispatcher);        }
     }));
 
     app.use(route.all(await pathResolver.resolve(), ctx => {

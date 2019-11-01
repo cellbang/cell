@@ -18,7 +18,7 @@ require('es6-promise/auto');
 require('reflect-metadata');
 const { Container } = require('inversify');
 const { FrontendApplication } = require('@malagu/core/lib/browser');
-const { CoreFrontendModule } = require('@malagu/core/lib/browser/frontend-module');
+const { CoreFrontendModule } = require('@malagu/core/lib/browser/module');
 
 const container = new Container();
 container.load(CoreFrontendModule);
@@ -41,7 +41,7 @@ function generateBackendComponents(modules: string[]) {
     return `
 require('reflect-metadata');
 const { Container } = require('inversify');
-const { CoreBackendModule } = require('@malagu/core/lib/node/backend-module');
+const { CoreBackendModule } = require('@malagu/core/lib/node/module');
 require('source-map-support').install();
 
 const container = new Container();

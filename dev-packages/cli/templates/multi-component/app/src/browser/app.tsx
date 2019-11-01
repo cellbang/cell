@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Autorpc } from '@malagu/core/lib/common/annotation/detached';
+import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { WelcomeServer } from '@app/welcome';
 
 interface Prop {}

@@ -1,6 +1,6 @@
 import { Policy, ElPoliy, PolicyFactory, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
 import { Component } from '@malagu/core';
-import { Context } from '@malagu/core/lib/node';
+import { Context } from '@malagu/web/lib/node';
 
 @Component(PolicyFactory)
 export class ElPolicyFactory implements PolicyFactory {

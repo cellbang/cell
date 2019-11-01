@@ -1,4 +1,4 @@
-import { HTTP_ERROR_HANDlER_PRIORITY } from '@malagu/core/lib/node';
+import { HTTP_ERROR_HANDlER_PRIORITY } from '@malagu/web/lib/node';
 
 export const ACCESS_DENIED_ERROR_HANDlER_PRIORITY = HTTP_ERROR_HANDlER_PRIORITY + 100;
 

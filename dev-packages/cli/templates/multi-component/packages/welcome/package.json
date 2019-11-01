@@ -5,7 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "next"
+    "@malagu/rpc": "next"
   },
   "publishConfig": {
     "access": "public"

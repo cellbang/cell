@@ -1,4 +1,4 @@
-import { Middleware, Context } from '@malagu/core/lib/node';
+import { Middleware, Context } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
 import { SecurityContextStore, SecurityContext, SECURITY_CONTEXT_MIDDLEWARE_PRIORITY } from './context-protocol';
 

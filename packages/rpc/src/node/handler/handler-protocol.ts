@@ -1,0 +1,1 @@
+export const RPC_HANDLER_ADAPTER_PRIORITY = 2000;

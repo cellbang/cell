@@ -1,6 +1,6 @@
 import { LogoutSuccessHandler } from './logout-protocol';
 import { Component, Value } from '@malagu/core';
-import { Context } from '@malagu/core/lib/node';
+import { Context } from '@malagu/web/lib/node';
 
 @Component([SimpleUrlLogoutSuccessHandler, LogoutSuccessHandler])
 export class SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {

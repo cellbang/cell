@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/core/lib/node';
+import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/mvc/lib/node';
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
 import { User } from './entity';
 

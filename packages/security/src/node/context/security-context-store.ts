@@ -1,6 +1,6 @@
 import { Component, Value, Autowired } from '@malagu/core';
 import { SecurityContextStore, SecurityContext, SecurityContextStrategy } from './context-protocol';
-import { Context } from '@malagu/core/lib/node';
+import { Context } from '@malagu/web/lib/node';
 
 @Component(SecurityContextStore)
 export class SessionSecurityContextStore implements SecurityContextStore {
