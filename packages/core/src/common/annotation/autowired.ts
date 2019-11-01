@@ -1,15 +1,14 @@
-import { inject, named, interfaces, multiInject } from 'inversify';
+import { inject, interfaces, multiInject, Container } from 'inversify';
 import { ServiceIdentifierOrFunc } from 'inversify/dts/annotation/inject';
 import { ContainerProvider } from '../container';
 
 export interface AutowiredOption {
     id?: ServiceIdentifierOrFunc,
-    rpc?: boolean,
     detached?: boolean
 }
 export namespace AutowiredOption {
     export function is(options: any): options is AutowiredOption {
-        return options && (options.id !== undefined || options.rpc !== undefined || options.detached !== undefined);
+        return options && (options.id !== undefined || options.detached !== undefined);
     }
 }
 
@@ -18,7 +17,6 @@ export interface AutowiredDecorator {
     (target: any, targetKey: string, index?: number): any;
 }
 
-export const RPC = Symbol('RPC');
 export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
     const option = getAutowiredOption(target, targetKey, index);
     if (targetKey === undefined && index === undefined) {
@@ -43,7 +41,21 @@ export function getAutowiredOption(target: any, targetKey: string, index?: numbe
     return option;
 }
 
-export function applyAutowiredDecorator(option: AutowiredOption, target: any, targetKey: string, index?: number): void {
+export function applyAutowiredDecorator(option: AutowiredOption, target: any, targetKey: string, index?: number,
+    doInject = (id: ServiceIdentifierOrFunc, isMulti: boolean, t: any, k: string, i?: number) => {
+        if (isMulti) {
+            multiInject(<interfaces.ServiceIdentifier<any>>id)(t, k, i);
+        } else {
+            inject(id)(target, targetKey, index);
+        }
+    },
+    doGetValue = (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, container: Container, t: any, property: string) => {
+        if (isMulti) {
+            return container.getAll(id);
+        } else {
+            return container.get(id);
+        }
+    }): void {
     let type: any;
     if (index !== undefined)  {
         type = Reflect.getMetadata('design:paramtypes', target, targetKey)[index];
@@ -51,35 +63,28 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
     } else {
         type = Reflect.getMetadata('design:type', target, targetKey);
     }
-    const isMulti = type === Array;
+    const isMlt = type === Array;
     const defaultAutowiredOption: AutowiredOption = {
         id: type,
-        rpc: false,
         detached: false
     };
+
     const opt = { ...defaultAutowiredOption, ...option };
+
+    doInject( <ServiceIdentifierOrFunc>opt.id, isMlt, target, targetKey, index);
+
     if (opt.detached) {
         if (index !== undefined) {
             throw new Error(`The ${target.constructor.name} itself is not injected into the container, so the parameter injection of the constructor is not supported.`);
         }
-        createAutowiredProperty(opt, isMulti, target, targetKey);
+        createAutowiredProperty(opt, isMlt, doGetValue, target, targetKey);
         return;
-    }
-
-    const id = <ServiceIdentifierOrFunc>opt.id;
-    if (opt.rpc) {
-        inject(RPC)(target, targetKey, index);
-        named(id.toString())(target, targetKey, index);
-    } else {
-        if (isMulti) {
-            multiInject(<interfaces.ServiceIdentifier<any>>id)(target, targetKey, index);
-        } else {
-            inject(id)(target, targetKey, index);
-        }
     }
 }
 
-export function createAutowiredProperty(option: AutowiredOption, isMulti: boolean, target: any, property: string) {
+export function createAutowiredProperty(option: AutowiredOption, isMulti: boolean,
+    doGetValue: (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, container: Container, target: any, property: string) => any,
+    target: any, property: string) {
     let value: any;
     Object.defineProperty(target, property, {
         enumerable: true,
@@ -89,15 +94,7 @@ export function createAutowiredProperty(option: AutowiredOption, isMulti: boolea
             }
             const container = ContainerProvider.provide();
             const id = <interfaces.ServiceIdentifier<any>>option.id;
-            if (option.rpc) {
-                value = container.getNamed(RPC, id.toString());
-            } else {
-                if (isMulti) {
-                    value = container.getAll(id);
-                } else {
-                    value = container.get(id);
-                }
-            }
+            value = doGetValue(id, true, container, target, property);
 
             return value;
         }

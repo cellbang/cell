@@ -1,7 +1,8 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { ContainerProvider, Application } from '@malagu/core';
-import { Dispatcher, Context } from '@malagu/core/lib/node';
-import { ApiGatewayContext, Callback } from './context';
+import { Dispatcher, Context } from '@malagu/web/lib/node';
+import { parseApiGatewayContext, Callback } from './context';
+import { HttpContext } from '@malagu/web/src/node';
 
 export async function init(context: any, callback: any) {
     try {
@@ -17,8 +18,8 @@ export async function handler(event: string, context: any, callback: Callback) {
     try {
         const c = await container;
         ContainerProvider.set(c);
-        const dispatcher = c.get<Dispatcher<ApiGatewayContext>>(Dispatcher);
-        const apiGatewayContext = new ApiGatewayContext(event, context, callback);
+        const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
+        const apiGatewayContext = parseApiGatewayContext(event, context, callback);
         Context.run(() => dispatcher.dispatch(apiGatewayContext));
     } catch (err) {
         callback(undefined, {

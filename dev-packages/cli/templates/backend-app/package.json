@@ -9,7 +9,7 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "next",
+    "@malagu/mvc": "next",
     "@malagu/fc-adapter": "next"
   },
   "devDependencies": {

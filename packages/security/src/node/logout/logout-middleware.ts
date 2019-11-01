@@ -1,4 +1,4 @@
-import { Middleware, Context, RequestMatcher } from '@malagu/core/lib/node';
+import { Middleware, Context, RequestMatcher } from '@malagu/web/lib/node';
 import { Component, Autowired, Value } from '@malagu/core';
 import { LogoutHandler, LogoutSuccessHandler, LOGOUT_MIDDLEWARE_PRIORITY } from './logout-protocol';
 

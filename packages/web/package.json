@@ -1,0 +1,52 @@
+{
+  "name": "@malagu/web",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "^0.0.1",
+    "@types/express": "^4.16.1",
+    "cookies": "^0.7.3",
+    "crc": "^3.8.0",
+    "url-pattern": "^1.0.3",
+    "ws": "^7.1.1",
+    "express-http-context": "^1.2.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.0.1",
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

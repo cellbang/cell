@@ -9,5 +9,3 @@ backend:
           username: root
           password: root
           database: test
-webpackHooks: 
-  - lib/hooks/webpack

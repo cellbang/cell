@@ -1,0 +1,15 @@
+malagu: 
+  session: 
+    autoCommit: true
+    maxAge: 86400000
+    sessionIdKey: malagu:sessionId
+    sessionKey: malagu:session
+  server: 
+    path: /
+    endpoint: ws://localhost:{port}
+backend: 
+  entry: lib/node/application/dev-application-entry
+  malagu: 
+    cookies: 
+      keys: 
+        - abcdef

@@ -1,7 +1,7 @@
 malagu: 
   server: 
     endpoint: http://localhost:{port}
-  core: 
+  web: 
     serveHooks: false
 backend: 
   entry: 
@@ -9,7 +9,3 @@ backend:
     api-gateway: lib/node/api-gateway-application-entry
 deployConfig: 
       type: http
-deployHooks: 
-  - lib/hooks/deploy
-serveHooks: 
-  - lib/hooks/serve

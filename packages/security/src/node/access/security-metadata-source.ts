@@ -4,7 +4,7 @@ import { SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext
 import { SecurityContext } from '../context';
 import { METADATA_KEY } from '../constants';
 import { AuthorizeMetadata } from '../annotation/authorize';
-import { Context } from '@malagu/core/lib/node';
+import { Context } from '@malagu/web/lib/node';
 
 @Component(SecurityMetadataSource)
 export class MethodSecurityMetadataSource implements SecurityMetadataSource {

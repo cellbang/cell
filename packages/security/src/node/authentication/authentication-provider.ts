@@ -1,6 +1,6 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { AuthenticationProvider, Authentication, DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY } from './authentication-protocol';
-import { Context, RequestMatcher } from '@malagu/core/lib/node';
+import { Context, RequestMatcher } from '@malagu/web/lib/node';
 import { PasswordEncoder } from '../crypto';
 import { UserStore, UserChecker } from '../user';
 import { BadCredentialsError } from '../error';

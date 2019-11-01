@@ -1,4 +1,4 @@
-import { Controller, Get, View, TextView } from '@malagu/core/lib/node';
+import { Controller, Get, View, TextView } from '@malagu/mvc/lib/node';
 
 @Controller('/')
 export class HomeController {

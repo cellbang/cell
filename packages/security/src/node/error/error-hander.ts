@@ -1,6 +1,6 @@
 import { AUTHENTICATION_ERROR_HANDlER_PRIORITY, ACCESS_DENIED_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { AuthenticationError, AccessDeniedError } from './error';
-import { ErrorHandler, Context } from '@malagu/core/lib/node';
+import { ErrorHandler, Context } from '@malagu/web/lib/node';
 import { Component, Value } from '@malagu/core';
 import { SecurityContext } from '../context';
 

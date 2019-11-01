@@ -1,0 +1,1 @@
+# Malagu - Web extension

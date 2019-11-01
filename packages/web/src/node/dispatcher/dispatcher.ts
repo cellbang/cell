@@ -1,0 +1,46 @@
+import { Context } from '../context';
+import { MiddlewareProvider } from '../middleware';
+import { ErrorHandlerProvider } from '../error/error-hander-provider';
+import { Dispatcher } from './dispatcher-protocol';
+import { Component, Autowired } from '@malagu/core';
+import { HandlerMapping, HandlerExecutionChain } from '../handler/handler-protocol';
+
+@Component(Dispatcher)
+export class DispatcherImpl implements Dispatcher<Context> {
+    @Autowired(HandlerMapping)
+    protected readonly handlerMapping: HandlerMapping;
+
+    @Autowired(HandlerExecutionChain)
+    protected handlerExecutionChain: HandlerExecutionChain;
+
+    @Autowired
+    protected middlewareProvider: MiddlewareProvider;
+
+    @Autowired
+    protected errorHandlerProvider: ErrorHandlerProvider;
+
+    async dispatch(ctx: Context): Promise<void> {
+        try {
+            Context.setCurrent(ctx);
+            const middlewares = this.middlewareProvider.provide();
+            const handler = await this.handlerMapping.getHandler();
+            await this.handlerExecutionChain.execute(handler, middlewares);
+        } catch (err) {
+            await this.handleError(ctx, err);
+        }
+    }
+
+    protected async handleError(ctx: Context, err: Error): Promise<void> {
+        const errorHandlers = this.errorHandlerProvider.provide();
+        for (const handler of errorHandlers) {
+            if (await handler.canHandle(ctx, err)) {
+                try {
+                    await handler.handle(ctx, err);
+                } catch (error) {
+                    continue;
+                }
+                return;
+            }
+        }
+    }
+}
