@@ -1,5 +1,5 @@
-import { Policy, PrincipalPolicyProvider, ResourcePolicyProvider, PolicyFactory } from './access-protocol';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Policy, PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
+import { Component, Value } from '@malagu/core';
 import { postConstruct } from 'inversify';
 import { AuthorizeType } from '../annotation';
 
@@ -8,7 +8,7 @@ export class PrincipalPolicyProviderImpl implements PrincipalPolicyProvider {
 
     async provide(principal: any, type: AuthorizeType): Promise<Policy[]> {
         const policies: Policy[] = principal && principal.policies || [];
-        return policies.filter(p => p.type === type);
+        return policies.filter(p => p.authorizeType === type);
     }
 }
 
@@ -19,9 +19,6 @@ export class ResourcePolicyProviderImpl implements ResourcePolicyProvider {
     protected readonly policies?: any;
 
     protected readonly policyMap: Map<string, Map<string, Policy[]>> = new Map<string, Map<string, Policy[]>>();
-
-    @Autowired(PolicyFactory)
-    protected readonly policyFactories: PolicyFactory[];
 
     @postConstruct()
     protected async init(): Promise<void> {
@@ -36,18 +33,13 @@ export class ResourcePolicyProviderImpl implements ResourcePolicyProvider {
                     const postResult: Policy[] = [];
                     const result = new Map<string, Policy[]>();
                     for (const opt of opts) {
-                        for (const factory of this.policyFactories) {
-                            if (await factory.support(opt)) {
-                                if (!opt.type || opt.type === AuthorizeType.Pre) {
-                                    preResult.push(await factory.create(opt));
-                                } else if (opt.type === AuthorizeType.Post) {
-                                    postResult.push(await factory.create(opt));
-                                }
-                                result.set(AuthorizeType.Pre, preResult);
-                                result.set(AuthorizeType.Post, postResult);
-                                break;
-                            }
+                        if (!opt.type || opt.type === AuthorizeType.Pre) {
+                            preResult.push(opt);
+                        } else if (opt.type === AuthorizeType.Post) {
+                            postResult.push(opt);
                         }
+                        result.set(AuthorizeType.Pre, preResult);
+                        result.set(AuthorizeType.Post, postResult);
                     }
                     this.policyMap.set(resource, result);
                 }

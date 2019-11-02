@@ -6,17 +6,17 @@ export enum AuthorizeType {
 
 export interface AuthorizeMetadata {
     el: string;
-    type: AuthorizeType;
+    authorizeType: AuthorizeType;
 }
 
 export interface AuthorizeOption {
     el: string;
-    type: AuthorizeType;
+    authorizeType: AuthorizeType;
 }
 
 export namespace AuthorizeOption {
     export function is(option: any): option is AuthorizeOption {
-        return option && (option.el !== undefined || option.type);
+        return option && (option.el !== undefined || option.authorizeType);
     }
 }
 
@@ -30,7 +30,7 @@ export const Authorize = function (elOrAuthorizeOption: string | AuthorizeOption
         } else {
             const metadatas: AuthorizeMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.authorize, target.constructor) || [];
             metadatas.push({ ...option });
-            Reflect.defineMetadata(METADATA_KEY.authorize, metadatas, target.constructor);
+            Reflect.defineMetadata(METADATA_KEY.authorize, metadatas, target);
         }
     };
 
@@ -39,9 +39,9 @@ export const Authorize = function (elOrAuthorizeOption: string | AuthorizeOption
 export function getAuthorizeOption(elOrAuthorizeOption: string | AuthorizeOption) {
     let option: AuthorizeOption;
     if (AuthorizeOption.is(elOrAuthorizeOption)) {
-        option = { ...{ type: AuthorizeType.Pre }, ...elOrAuthorizeOption };
+        option = { ...{ authorizeType: AuthorizeType.Pre }, ...elOrAuthorizeOption };
     } else {
-        option = { type: AuthorizeType.Pre, el: elOrAuthorizeOption };
+        option = { authorizeType: AuthorizeType.Pre, el: elOrAuthorizeOption };
     }
     return option;
 }

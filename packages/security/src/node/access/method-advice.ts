@@ -15,7 +15,7 @@ export class SecurityMethodBeforeAdivice implements MethodBeforeAdvice {
         if (typeof method !== 'string') {
             return;
         }
-        const securityMetadata = await this.securityMetadataSource.load({ method, args, target, type: AuthorizeType.Pre });
+        const securityMetadata = await this.securityMetadataSource.load({ method, args, target, authorizeType: AuthorizeType.Pre });
         await this.accessDecisionManager.decide(securityMetadata);
     }
 
@@ -34,7 +34,7 @@ export class SecurityAfterReturningAdvice implements AfterReturningAdvice {
         if (typeof method !== 'string') {
             return;
         }
-        const securityMetadata = await this.securityMetadataSource.load({ method, args, target, returnValue, type: AuthorizeType.Post });
+        const securityMetadata = await this.securityMetadataSource.load({ method, args, target, returnValue, authorizeType: AuthorizeType.Post });
         await this.accessDecisionManager.decide(securityMetadata);
     }
 
