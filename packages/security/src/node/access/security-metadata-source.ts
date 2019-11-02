@@ -1,6 +1,8 @@
 import { Component, Autowired, Optional, getOwnMetadata } from '@malagu/core';
-import { SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
-    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, ElPoliy } from './access-protocol';
+import {
+    SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
+    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, PolicyType
+} from './access-protocol';
 import { SecurityContext } from '../context';
 import { METADATA_KEY } from '../constants';
 import { AuthorizeMetadata } from '../annotation/authorize';
@@ -24,18 +26,16 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
             await this.securityExpressionContextHandler.handle(ctx);
         }
         const policies = classMetadatas.concat(...methodMetadatas)
-            .filter(item => item.type === context.type)
-            .map(item => {
-                const policy = new ElPoliy();
-                policy.type = item.type;
-                policy.el = item.el,
-                policy.context = ctx;
-                return policy;
-            });
+            .filter(item => item.authorizeType === context.authorizeType)
+            .map(item => ({
+                type: PolicyType.El,
+                authorizeType: item.authorizeType,
+                el: item.el
+            }));
 
         const resource = context.target.name;
         return {
-            type: context.type,
+            authorizeType: context.authorizeType,
             principal: SecurityContext.getAuthentication().principal,
             action: context.method,
             resource,

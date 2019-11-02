@@ -1,6 +1,8 @@
 import { UserStore, User } from './user-protocol';
 import { Value, Component } from '@malagu/core';
 import { UsernameNotFoundError } from '../error';
+import { ElPolicy, PolicyType } from '../access';
+import { AuthorizeType } from '../annotation';
 
 @Component(UserStore)
 export class UserStoreImpl implements UserStore {
@@ -17,7 +19,11 @@ export class UserStoreImpl implements UserStore {
                 accountNonLocked: true,
                 credentialsNonExpired: true,
                 enabled: true,
-                policies: []
+                policies: [ <ElPolicy>{
+                    type: PolicyType.El,
+                    authorizeType: AuthorizeType.Pre,
+                    el: 'true'
+                } ]
             };
         }
 

@@ -17,8 +17,13 @@ export const ACCESS_DENIED = -1;
 
 export const POLICY_BASED_VOTER_PRIORITY = 2000;
 
+export enum PolicyType {
+    El= 'el'
+}
+
 export interface Policy {
-    type: AuthorizeType;
+    type: PolicyType
+    authorizeType: AuthorizeType;
 }
 
 export interface ResourcePolicyProvider {
@@ -39,8 +44,7 @@ export interface PolicyResolver<> {
     support(policy: Policy): Promise<boolean>;
 }
 
-export class ElPoliy implements Policy {
-    type: AuthorizeType;
+export interface ElPolicy extends Policy {
     context: any;
     el: string;
 }
@@ -50,7 +54,7 @@ export interface SecurityExpressionContextHandler {
 }
 
 export interface SecurityMetadata {
-    type: AuthorizeType;
+    authorizeType: AuthorizeType;
     action: string;
     resource: string;
     principal: any;
@@ -61,7 +65,7 @@ export interface SecurityMetadataContext {
 }
 
 export interface MethodSecurityMetadataContext extends SecurityMetadataContext {
-    type: AuthorizeType
+    authorizeType: AuthorizeType
     method: string;
     args: any[];
     target: any;

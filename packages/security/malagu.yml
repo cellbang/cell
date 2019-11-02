@@ -8,8 +8,6 @@ backend:
       contextKey: malagu:securityContext
       username: admin
       password: MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk # raw password 123456
-      usernameKey: username
-      passwordKey: password
       passwordEncoder:
         secret: 123456
         encodeHashAsBase64: true
