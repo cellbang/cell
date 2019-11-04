@@ -1,6 +1,7 @@
 import { Middleware, Context, RequestMatcher } from '@malagu/web/lib/node';
 import { Component, Autowired, Value } from '@malagu/core';
-import { LogoutHandler, LogoutSuccessHandler, LOGOUT_MIDDLEWARE_PRIORITY } from './logout-protocol';
+import { LogoutHandler, LOGOUT_MIDDLEWARE_PRIORITY } from './logout-protocol';
+import { LogoutSuccessHandlerProvider } from './logout-success-handler-provider';
 
 @Component(Middleware)
 export class LogoutMiddleWare implements Middleware {
@@ -8,11 +9,14 @@ export class LogoutMiddleWare implements Middleware {
     @Autowired(LogoutHandler)
     protected readonly logoutHandlers: LogoutHandler[];
 
-    @Autowired(LogoutSuccessHandler)
-    protected readonly logoutSuccessHandlers: LogoutSuccessHandler[];
+    @Autowired(LogoutSuccessHandlerProvider)
+    protected readonly logoutSuccessHandlerProvider: LogoutSuccessHandlerProvider;
 
     @Value('malagu.security.logoutUrl')
     protected readonly logoutUrl: string;
+
+    @Value('malagu.security.logoutMethod')
+    protected readonly logoutMethod: string;
 
     @Autowired(RequestMatcher)
     protected readonly requestMatcher: RequestMatcher;
@@ -23,7 +27,7 @@ export class LogoutMiddleWare implements Middleware {
                 await logoutHandler.logout();
             }
 
-            for (const logoutSuccessHandler of this.logoutSuccessHandlers) {
+            for (const logoutSuccessHandler of this.logoutSuccessHandlerProvider.provide()) {
                 await logoutSuccessHandler.onLogoutSuccess();
             }
             return;
@@ -33,7 +37,7 @@ export class LogoutMiddleWare implements Middleware {
     }
 
     protected async requiresLogout(): Promise<boolean> {
-        return !!await this.requestMatcher.match(this.logoutUrl, 'POST');
+        return !!await this.requestMatcher.match(this.logoutUrl, this.logoutMethod);
     }
 
     readonly priority: number = LOGOUT_MIDDLEWARE_PRIORITY;

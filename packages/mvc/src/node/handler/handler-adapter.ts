@@ -2,11 +2,8 @@ import { Component, Autowired, Value } from '@malagu/core';
 import { PathResolver } from '@malagu/web';
 import { Context, HttpError, RequestMatcher, HandlerAdapter } from '@malagu/web/lib/node';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
-import { MVC_HANDLER_ADAPTER_PRIORITY } from './handler-protocol';
-import { RouteProvider } from './route-provider';
+import { MVC_HANDLER_ADAPTER_PRIORITY, RouteMetadataMatcher } from './handler-protocol';
 import { MVC_PATH } from '../../common';
-
-export const PATH_PARMAS_ATTR = 'pathParams';
 
 @Component(HandlerAdapter)
 export class MvcHandlerAdapter implements HandlerAdapter {
@@ -30,8 +27,8 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     @Value(MVC_PATH)
     protected readonly mvcPath: string;
 
-    @Autowired(RouteProvider)
-    protected readonly routeProvider: RouteProvider;
+    @Autowired(RouteMetadataMatcher)
+    protected readonly routeMetadataMatcher: RouteMetadataMatcher;
 
     protected async resolveMethodArgs(metadata: any) {
         const args: any[] = [];
@@ -50,21 +47,13 @@ export class MvcHandlerAdapter implements HandlerAdapter {
     async handle(): Promise<void> {
         const ctx = Context.getCurrent();
         const path = ctx.request.path;
-        const route = await this.routeProvider.provide();
-        const pathMap = route.mapping.get(ctx.request.method!.toLowerCase());
-        if (pathMap) {
-            for (const entry of pathMap) {
-                const [ p, metadata ] = entry;
-                const pathParams = await this.requestMatcher.match(p);
-                if (pathParams) {
-                    Context.setAttr(PATH_PARMAS_ATTR, pathParams);
-                    await this.doHandle(metadata);
-                    return;
-                }
-            }
+        const routeMetadata = await this.routeMetadataMatcher.match();
+        if (routeMetadata) {
+            await this.doHandle(routeMetadata);
+        } else {
+            const error = new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
+            await this.doHandle(await this.getErrorMetadata(error), error);
         }
-        const error = new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
-        await this.doHandle(await this.getErrorMetadata(error), error);
     }
 
     protected async doHandle(metadata: any, err?: any): Promise<void> {
@@ -94,17 +83,10 @@ export class MvcHandlerAdapter implements HandlerAdapter {
         await this.resolveResponse(metadata);
     }
 
-    protected async getErrorMetadata(error: any) {
-        const route = await this.routeProvider.provide();
-        const metadata = route.errorMapping.get(error.constructor);
-        if (metadata) {
-            return metadata;
-        } else {
-            for (const entry of route.errorMapping) {
-                if (error instanceof <any>entry[0]) {
-                    return entry[1];
-                }
-            }
+    protected async getErrorMetadata(error: Error) {
+        const routeMetadata = await this.routeMetadataMatcher.match(error);
+        if (routeMetadata) {
+            return routeMetadata;
         }
         throw error;
     }

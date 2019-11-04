@@ -17,4 +17,5 @@ backend:
       loginUrl: /login
       loginSuccessUrl: /
       logoutUrl: /logout
+      logoutMethod: POST
       logoutSuccessUrl: /login
