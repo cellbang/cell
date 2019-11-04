@@ -3,6 +3,9 @@ import * as net from 'net';
 
 export const HTTP_MIDDLEWARE_PRIORITY =  2000;
 
+export const XML_HTTP_REQUEST = 'XMLHttpRequest';
+export const X_REQUESTED_WITH = 'X-Requested-With';
+
 export interface Request {
     method: string;
     headers: http.IncomingHttpHeaders;

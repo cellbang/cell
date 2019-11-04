@@ -1,10 +1,10 @@
 import { Component, Autowired, Deferred } from '@malagu/core';
-import { Route } from './handler-protocol';
+import { Route, RouteProvider } from './handler-protocol';
 import { RouteBuilder } from './route-builder';
 import { postConstruct } from 'inversify';
 
-@Component()
-export class RouteProvider {
+@Component(RouteProvider)
+export class RouteProviderImpl implements RouteProvider {
 
     protected route: Route;
 

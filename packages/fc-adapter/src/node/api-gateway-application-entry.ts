@@ -2,7 +2,7 @@ import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { ContainerProvider, Application } from '@malagu/core';
 import { Dispatcher, Context } from '@malagu/web/lib/node';
 import { parseApiGatewayContext, Callback } from './context';
-import { HttpContext } from '@malagu/web/src/node';
+import { HttpContext } from '@malagu/web/lib/node';
 
 export async function init(context: any, callback: any) {
     try {
