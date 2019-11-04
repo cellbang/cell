@@ -78,7 +78,7 @@ export function ParseHttpTriggerContext(req: any, res: any, context: any) {
         },
 
         getHeader(name: string): number | string | string[] | undefined {
-            return res.getHeader ? res.getHeader(name) : this.getHeaders()[name];
+            return res.getHeader ? res.getHeader(name) : (this.getHeaders()[name] ? this.getHeaders()[name] : res.headersMap[name]);
         },
 
         getHeaders(): http.OutgoingHttpHeaders {
