@@ -15,6 +15,7 @@ backend:
         realm: realm
       loginPage: /login
       loginUrl: /login
+      loginMethod: POST
       loginSuccessUrl: /
       logoutUrl: /logout
       logoutMethod: POST
