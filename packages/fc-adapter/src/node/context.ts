@@ -97,7 +97,7 @@ export function ParseHttpTriggerContext(req: any, res: any, context: any) {
 
         end(chunk: any, encoding?: string, cb?: Function): void {
             this.finished = true;
-            res.send(chunk);
+            res.send(chunk === undefined || chunk === null ? '' : chunk);
         }
     };
     const ctx = new HttpContext(request, response);
