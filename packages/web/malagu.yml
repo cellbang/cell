@@ -6,6 +6,7 @@ malagu:
     sessionKey: malagu:session
   server: 
     path: /
+    port: 3000
     endpoint: ws://localhost:{port}
 backend: 
   entry: lib/node/application/dev-application-entry

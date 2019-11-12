@@ -29,7 +29,7 @@ export class BackendConfigFactory {
                 devtoolModuleFilenameTemplate: '[absolute-resource-path]'
             },
             devServer: {
-                port,
+                port: port || config.malagu && config.malagu.server.port,
                 open,
                 writeToDisk: true,
                 contentBase: false
