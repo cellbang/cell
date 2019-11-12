@@ -1,5 +1,6 @@
 malagu:
   security:
+    enabled: true
     usernameKey: username
     passwordKey: password
 backend:

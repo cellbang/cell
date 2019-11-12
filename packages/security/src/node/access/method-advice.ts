@@ -1,4 +1,4 @@
-import { MethodBeforeAdvice, Autowired, Component, AfterReturningAdvice } from '@malagu/core';
+import { MethodBeforeAdvice, Autowired, Component, AfterReturningAdvice, Value } from '@malagu/core';
 import { AccessDecisionManager, SecurityMetadataSource } from './access-protocol';
 import { AuthorizeType } from '../annotation/authorize';
 
@@ -11,7 +11,13 @@ export class SecurityMethodBeforeAdivice implements MethodBeforeAdvice {
     @Autowired(SecurityMetadataSource)
     protected readonly securityMetadataSource: SecurityMetadataSource;
 
+    @Value('malagu.security.enabled')
+    protected readonly enabled: boolean;
+
     async before(method: string | number | symbol, args: any[], target: any): Promise<void> {
+        if (this.enabled !== true) {
+            return;
+        }
         if (typeof method !== 'string') {
             return;
         }

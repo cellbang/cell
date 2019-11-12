@@ -51,9 +51,10 @@ export class InitManager {
     }
 
     async executeHooks(): Promise<void> {
-        process.chdir(this.outputDir);
+        const outputDir = this.outputDir;
+        process.chdir(outputDir);
         await new HookExecutor().executeInitHooks(await HookContext.create(await this.getCliContext()));
-        console.log(chalk`{green Success!} Initialized "${ this.name }" example in ${this.outputDir}.`);
+        console.log(chalk`{bold.green Success!} Initialized "${ this.name }" example in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }
 
