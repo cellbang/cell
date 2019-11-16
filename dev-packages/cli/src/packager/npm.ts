@@ -1,6 +1,5 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readJSON, writeJSON } from 'fs-extra';
-import * as ora from 'ora';
 
 export class NPM {
     get lockfileName() {
@@ -102,12 +101,7 @@ export class NPM {
     async install(cwd: string) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['install'];
-        const spinner = ora('npm install...').start();
-        try {
-            return await spawnProcess(command, args, { cwd });
-        } finally {
-            spinner.stop();
-        }
+        return await spawnProcess(command, args, { cwd, stdio: 'inherit' });
     }
 
     prune(cwd: string) {

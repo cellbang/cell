@@ -1,7 +1,7 @@
 import { NPM } from './npm';
 import { Yarn } from './yarn';
 
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 
 export class SpawnError extends Error {
     constructor(message: string, public stdout: any, public stderr: any) {
@@ -15,27 +15,32 @@ export class SpawnError extends Error {
 
 export function spawnProcess(command: string, args: string[], options: any) {
     return new Promise<any>((resolve, reject) => {
-        const child = spawn(command, args, options);
-        let stdout = '';
-        let stderr = '';
-        child.stdout.setEncoding('utf8');
-        child.stderr.setEncoding('utf8');
-        child.stdout.on('data', (data: any) => {
-            stdout += data;
-        });
-        child.stderr.on('data', (data: any) => {
-            stderr += data;
-        });
-        child.on('error', (err: any) => {
-            reject(err);
-        });
-        child.on('close', (exitCode: number) => {
-            if (exitCode !== 0) {
-                reject(new SpawnError(`${command} ${args.join(' ')} failed with code ${exitCode}`, stdout, stderr));
-            } else {
-                resolve({ stdout, stderr });
-            }
-        });
+        if (options && options.stdio === 'inherit') {
+            spawnSync(command, args, options);
+            resolve({});
+        } else {
+            const child = spawn(command, args, options);
+            let stdout = '';
+            let stderr = '';
+            child.stdout.setEncoding('utf8');
+            child.stderr.setEncoding('utf8');
+            child.stdout.on('data', (data: any) => {
+                stdout += data;
+            });
+            child.stderr.on('data', (data: any) => {
+                stderr += data;
+            });
+            child.on('error', (err: any) => {
+                reject(err);
+            });
+            child.on('close', (exitCode: number) => {
+                if (exitCode !== 0) {
+                    reject(new SpawnError(`${command} ${args.join(' ')} failed with code ${exitCode}`, stdout, stderr));
+                } else {
+                    resolve({ stdout, stderr });
+                }
+            });
+        }
     });
 }
 
