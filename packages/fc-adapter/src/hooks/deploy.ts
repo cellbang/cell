@@ -520,7 +520,13 @@ async function createOrUpdateAPI(ag: any, group: any, conf: any, role: any) {
 }
 
 async function spinner(options: string | ora.Options | undefined, cb: () => any) {
-    const s = ora(options).start();
+    let opts: any = options;
+    if (typeof options === 'string') {
+        opts = { text: options, discardStdin: false };
+    } else {
+        opts.discardStdin = false;
+    }
+    const s = ora(opts).start();
     try {
         await cb();
         s.succeed();

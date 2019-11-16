@@ -1,6 +1,5 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readFile, writeFile } from 'fs-extra';
-import * as ora from 'ora';
 
 export class Yarn {
     get lockfileName() {
@@ -102,12 +101,7 @@ export class Yarn {
         if (packagerOptions.ignoreScripts) {
             args.push('--ignore-scripts');
         }
-        const spinner = ora('yarn install...').start();
-        try {
-            return await spawnProcess(command, args, { cwd });
-        } finally {
-            spinner.stop();
-        }
+        return await spawnProcess(command, args, { cwd, stdio: 'inherit' });
     }
 
     // "Yarn install" prunes automatically

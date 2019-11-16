@@ -99,7 +99,7 @@ export class InitManager {
             message: 'Select a template to init',
             source: async (answersSoFar: any, input: string) => {
                 if (!this.source) {
-                    const spinner = ora('loading...').start();
+                    const spinner = ora({ text: 'loading...', discardStdin: false }).start();
                     const options = {
                         uri: SEARCH_TEMPLATE_REPO_URI,
                         json: true,
