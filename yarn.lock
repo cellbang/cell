@@ -51,6 +51,92 @@
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/@improved/node/download/@improved/node-1.1.1.tgz#7be3d401b7cd2f848d5bb8713d2826b84fc51817"
 
+"@phosphor/algorithm@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/@phosphor/algorithm/download/@phosphor/algorithm-1.2.0.tgz#4a19aa59261b7270be696672dc3f0663f7bef152"
+
+"@phosphor/collections@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/@phosphor/collections/download/@phosphor/collections-1.2.0.tgz#a8cdd0edc0257de7c33306a91caf47910036307f"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+
+"@phosphor/commands@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.npm.taobao.org/@phosphor/commands/download/@phosphor/commands-1.7.2.tgz#df724f2896ae43c4a3a9e2b5a6445a15e0d60487"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+    "@phosphor/coreutils" "^1.3.1"
+    "@phosphor/disposable" "^1.3.1"
+    "@phosphor/domutils" "^1.1.4"
+    "@phosphor/keyboard" "^1.1.3"
+    "@phosphor/signaling" "^1.3.1"
+
+"@phosphor/coreutils@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npm.taobao.org/@phosphor/coreutils/download/@phosphor/coreutils-1.3.1.tgz#441e34f42340f7faa742a88b2a181947a88d7226"
+
+"@phosphor/disposable@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npm.taobao.org/@phosphor/disposable/download/@phosphor/disposable-1.3.1.tgz#be98fe12bd8c9a4600741cb83b0a305df28628f3"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+    "@phosphor/signaling" "^1.3.1"
+
+"@phosphor/domutils@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/@phosphor/domutils/download/@phosphor/domutils-1.1.4.tgz#4c6aecf7902d3793b45db325319340e0a0b5543b"
+
+"@phosphor/dragdrop@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npm.taobao.org/@phosphor/dragdrop/download/@phosphor/dragdrop-1.4.1.tgz#45887dfe8f5849db2b4d1c0329a377f0f0854464"
+  dependencies:
+    "@phosphor/coreutils" "^1.3.1"
+    "@phosphor/disposable" "^1.3.1"
+
+"@phosphor/keyboard@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/@phosphor/keyboard/download/@phosphor/keyboard-1.1.3.tgz#e5fd13af0479034ef0b5fffcf43ef2d4a266b5b6"
+
+"@phosphor/messaging@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.npm.taobao.org/@phosphor/messaging/download/@phosphor/messaging-1.3.0.tgz#a140e6dd28a496260779acf74860f738c654c65e"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+    "@phosphor/collections" "^1.2.0"
+
+"@phosphor/properties@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.npm.taobao.org/@phosphor/properties/download/@phosphor/properties-1.1.3.tgz#63e4355be5e22a411c566fd1860207038f171598"
+
+"@phosphor/signaling@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.npm.taobao.org/@phosphor/signaling/download/@phosphor/signaling-1.3.1.tgz#1cd10b069bdb2c9adb3ba74245b30141e5afc2d7"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+
+"@phosphor/virtualdom@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/@phosphor/virtualdom/download/@phosphor/virtualdom-1.2.0.tgz#6a233312f817eb02555a0359c4ae3e501fa62bca"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+
+"@phosphor/widgets@^1.9.3":
+  version "1.9.3"
+  resolved "https://registry.npm.taobao.org/@phosphor/widgets/download/@phosphor/widgets-1.9.3.tgz#b8b7ad69fd7cc7af8e8c312ebead0e0965a4cefd"
+  dependencies:
+    "@phosphor/algorithm" "^1.2.0"
+    "@phosphor/commands" "^1.7.2"
+    "@phosphor/coreutils" "^1.3.1"
+    "@phosphor/disposable" "^1.3.1"
+    "@phosphor/domutils" "^1.1.4"
+    "@phosphor/dragdrop" "^1.4.1"
+    "@phosphor/keyboard" "^1.1.3"
+    "@phosphor/messaging" "^1.3.0"
+    "@phosphor/properties" "^1.1.3"
+    "@phosphor/signaling" "^1.3.1"
+    "@phosphor/virtualdom" "^1.2.0"
+
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.3.0":
   version "1.6.0"
   resolved "https://registry.npm.taobao.org/@sinonjs/commons/download/@sinonjs/commons-1.6.0.tgz#ec7670432ae9c8eb710400d112c201a362d83393"
@@ -430,7 +516,7 @@
 
 "@types/prop-types@*":
   version "15.7.3"
-  resolved "https://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
+  resolved "https://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.7.3.tgz?cache=0&sync_timestamp=1572464318358&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fprop-types%2Fdownload%2F%40types%2Fprop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -438,13 +524,13 @@
 
 "@types/react-dom@^16.8.5":
   version "16.9.4"
-  resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz?cache=0&sync_timestamp=1573057865896&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
+  resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz?cache=0&sync_timestamp=1573057568068&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
   dependencies:
     "@types/react" "*"
 
 "@types/react@*":
   version "16.9.11"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.11.tgz?cache=0&sync_timestamp=1572464320120&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -2469,7 +2555,7 @@ cssstyle@^1.0.0:
 
 csstype@^2.2.0:
   version "2.6.7"
-  resolved "https://registry.npm.taobao.org/csstype/download/csstype-2.6.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcsstype%2Fdownload%2Fcsstype-2.6.7.tgz#20b0024c20b6718f4eda3853a1f5a1cce7f5e4a5"
+  resolved "https://registry.npm.taobao.org/csstype/download/csstype-2.6.7.tgz#20b0024c20b6718f4eda3853a1f5a1cce7f5e4a5"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -6715,6 +6801,10 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/pend/download/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
 
+perfect-scrollbar@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/perfect-scrollbar/download/perfect-scrollbar-1.4.0.tgz#5d014ef9775e1f43058a1dbae9ed1daf0e7091f1"
+
 performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -7060,7 +7150,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
 
 react-dom@^16.8.6:
   version "16.12.0"
-  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
+  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.12.0.tgz?cache=0&sync_timestamp=1573775844336&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-dom%2Fdownload%2Freact-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -7069,11 +7159,11 @@ react-dom@^16.8.6:
 
 react-is@^16.8.1:
   version "16.12.0"
-  resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.12.0.tgz?cache=0&sync_timestamp=1573776899085&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
+  resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.12.0.tgz?cache=0&sync_timestamp=1573775845737&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
 
 react@^16.8.6:
   version "16.12.0"
-  resolved "https://registry.npm.taobao.org/react/download/react-16.12.0.tgz?cache=0&sync_timestamp=1573776076272&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+  resolved "https://registry.npm.taobao.org/react/download/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -7486,7 +7576,7 @@ sax@>=0.6.0, sax@^1.2.4:
 
 scheduler@^0.18.0:
   version "0.18.0"
-  resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.18.0.tgz#5901ad6659bc1d8f3fdaf36eb7a67b0d6746b1c4"
+  resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.18.0.tgz?cache=0&sync_timestamp=1573775848977&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fscheduler%2Fdownload%2Fscheduler-0.18.0.tgz#5901ad6659bc1d8f3fdaf36eb7a67b0d6746b1c4"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
