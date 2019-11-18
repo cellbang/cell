@@ -1,4 +1,5 @@
 import { HookContext, ServeContext } from '../context';
+import { resolve } from 'path';
 require('ts-node').register();
 const chalk = require('chalk');
 
@@ -46,7 +47,7 @@ export class HookExecutor {
                 const malagu = context.pkg.backendConfig['malagu'];
                 const config = malagu[name];
                 if (!config || config[hookName] !== false) {
-                    await require(modulePath).default(context);
+                    await require(resolve(context.pkg.projectPath, 'node_modules', modulePath)).default(context);
                 }
             }
         }
