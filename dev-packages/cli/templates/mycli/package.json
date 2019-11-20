@@ -1,0 +1,32 @@
+{
+  "name": "mycli",
+  "version": "0.0.0",
+  "files": [
+    "lib",
+    "bin",
+    "src",
+    "templates"
+  ],
+  "bin": {
+    "mycli": "./bin/mycli"
+  },
+  "dependencies": {
+    "@malagu/core": "next",
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
+    "inquirer-autocomplete-prompt": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "prepare": "yarn run clean & yarn run build",
+    "clean": "rimraf lib",
+    "build": "tsc",
+    "watch": "tsc -w"
+  }
+}
