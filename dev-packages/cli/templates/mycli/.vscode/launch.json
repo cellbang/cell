@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "mycli init",
+            "program": "${workspaceRoot}/bin/mycli-init",
+            "cwd": "${workspaceFolder}",
+            "sourceMaps": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outputCapture": "std"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "mycli deploy",
+            "program": "${workspaceRoot}/bin/mycli-deploy",
+            "cwd": "${workspaceFolder}",
+            "sourceMaps": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outputCapture": "std"
+        }
+    ]
+}
