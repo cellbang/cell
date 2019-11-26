@@ -35,6 +35,6 @@ export interface SessionManager {
 
 export interface SessionStrategy {
     valid(session: Session): Promise<boolean>;
-    create(obj?: any): Promise<Session>
+    create(obj?: any): Promise<Session>;
     shouldSaveSession(session: Session): Promise<boolean>;
 }
