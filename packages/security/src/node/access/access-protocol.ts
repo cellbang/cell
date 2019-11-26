@@ -81,10 +81,6 @@ export interface AccessDecisionManager {
     decide(securityMetadata: SecurityMetadata): Promise<void>;
 }
 
-export interface AccessDecisionManager {
-    decide(securityMetadata: SecurityMetadata): Promise<void>;
-}
-
 export interface AccessDecisionVoter {
     vote(securityMetadata: SecurityMetadata): Promise<number>;
     support(securityMetadata: SecurityMetadata): Promise<boolean>;
