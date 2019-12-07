@@ -1,101 +1,118 @@
 # Malagu
 
-Web development framework.
+Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
 
-## Document
+**主要特点：**
 
-* [Malagu Annotaion](https://github.com/muxiangqiu/malagu/blob/master/doc/annotation.md)
-* [Malagu Component](https://github.com/muxiangqiu/malagu/blob/master/doc/component.md)
-* [Malagu Configuration](https://github.com/muxiangqiu/malagu/blob/master/doc/config.md)
+1. 基于 TypeScript
+1. 零配置
+1. NodeJs 版 Spring Boot
+1. Serverless First
+1. 组件化
+1. 前后端一体化
+1. 面向切面编程（AOP）
+1. 集成了 ORM 框架
+1. 命令工具插件化
 
+Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意思，小石头堆砌起来可以建成高楼大厦、道路桥梁，而 Malagu 组件编排可以实现千变万化的应用。
 
-## Getting Started
-
-```bash
-npm install @malagu/cli@next -g
-npm install -g yarn
-malagu init demo
-malagu serve
-malagu build
-malagu deploy
-```
-
-## Project structure
-```
-.
-├── package.json
-├── src
-│   ├── browser
-│   │   ├── app.tsx
-│   │   ├── frontend-module.ts
-│   │   └── shell.tsx
-│   ├── common
-│   │   └── welcome-protocol.ts
-│   └── node
-│       ├── backend-module.ts
-│       └── welcome-server.ts
-└── tsconfig.json
-```
-
-## Defining interface
+## 依赖注入
 
 ```typescript
-// src/common/welcome-protocol.ts
-export const WelcomeServer = Symbol('WelcomeServer');
+@Component()
+export class A {
 
-export interface WelcomeServer {
-    say(): Promise<string>;
 }
 
-```
-## Defining server
-
-```typescript
-// src/node/welcome-server.ts
-import { WelcomeServer } from '../common/welcome-protocol';
-import { rpc } from '@malagu/core/lib/common/annotation';
-
-@rpc(WelcomeServer)
-export class WelcomeServerImpl implements WelcomeServer {
-    say(): Promise<string> {
-        return Promise.resolve('Welcome to Malagu');
-    }
+@Component()
+export class B {
+    @Autowired()
+    protected a: A;
 }
 ```
 
-## Using Server
+## 属性注入
 
 ```typescript
-// src/browser/app.tsx
-import * as React from 'react';
-import { autorpc } from '@malagu/core/lib/common/annotation/detached';
-import { WelcomeServer } from '../common/welcome-protocol';
-
-interface Prop {}
-interface State {
-    response: string
+@Component()
+export class A {
+    @Value('foo') // 支持 EL 表达式语法，如 @Value('obj.xxx')、@Value('arr[1]') 等等
+    protected foo: string;
 }
+```
 
-export class App extends React.Component<Prop, State> {
+## MVC
 
-    @autorpc(WelcomeServer)
-    protected welcomeServer!: WelcomeServer;
-
-    constructor(prop: Prop) {
-        super(prop);
-        this.state = { response: 'Loading' };
+```typescript
+@Controller('users')
+export class UserController {
+    
+    @Get()
+    list(): Promise<User[]> {
+        ...
     }
 
-    async componentDidMount() {
-        const response = await this.welcomeServer.say();
-        this.setState({
-            response
-        });
+    @Get(':id')
+    get(@Param('id') id: number): Promise<User | undefined> {
+        ...
     }
 
-    render() {
-        return <div>{this.state.response}</div>
+    @Delete(':id')
+    async reomve(@Param('id') id: number): Promise<void> {
+        ...
+    }
+
+    @Put()
+    async modify(@Body() user: User): Promise<void> {
+        ...
+    }
+
+    @Post()
+    create(@Body() user: User): Promise<User> {
+        ...
+    }
+
+}
+```
+
+## 数据库操作
+
+```typescript
+import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/mvc/lib/node';
+import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
+import { User } from './entity';
+@Controller('users')
+export class UserController {
+    
+    @Get()
+    @Transactional({ readOnly: true })
+    list(): Promise<User[]> {
+        const repo = OrmContext.getRepository(User);
+        return repo.find();
+    }
+    @Get(':id')
+    @Transactional({ readOnly: true })
+    get(@Param('id') id: number): Promise<User | undefined> {
+        const repo = OrmContext.getRepository(User);
+        return repo.findOne(id);
+    }
+    @Delete(':id')
+    @Transactional()
+    async reomve(@Param('id') id: number): Promise<void> {
+        const repo = OrmContext.getRepository(User);
+        await repo.delete(id);
+    }
+    @Put()
+    @Transactional()
+    async modify(@Body() user: User): Promise<void> {
+        const repo = OrmContext.getRepository(User);
+        await repo.update(user.id, user);
+    }
+    @Post()
+    @Transactional()
+    create(@Body() user: User): Promise<User> {
+        const repo = OrmContext.getRepository(User);
+        return repo.save(user);
     }
 }
-
 ```
