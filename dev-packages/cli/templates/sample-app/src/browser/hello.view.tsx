@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { WelcomeServer } from '../common/welcome-protocol';
+import { View } from '@malagu/react/lib/browser';
 
 interface Prop {}
 interface State {
     response: string
 }
-
-export class App extends React.Component<Prop, State> {
+@View('/hello')
+export class Hello extends React.Component<Prop, State> {
 
     @Autorpc(WelcomeServer)
-    protected welcomeServer: WelcomeServer;
+    protected welcomeServer!: WelcomeServer;
 
     constructor(prop: Prop) {
         super(prop);

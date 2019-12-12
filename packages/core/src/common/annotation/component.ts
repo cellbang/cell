@@ -14,7 +14,8 @@ export interface ComponentOption {
 }
 export namespace ComponentOption {
     export function is(options: any): options is ComponentOption {
-        return options && (options.id !== undefined || options.scope !== undefined || options.rebind !== undefined || options.proxy !== undefined);
+        return options && (options.id !== undefined || options.scope !== undefined ||
+            options.rebind !== undefined || options.proxy !== undefined);
     }
 }
 
@@ -110,7 +111,7 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
     }
     if (opt.rebind) {
         const metadata = true;
-        (Reflect as any).defineMetadata(
+        Reflect.defineMetadata(
             METADATA_KEY.rebind,
             metadata,
             target

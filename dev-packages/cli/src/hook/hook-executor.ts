@@ -47,7 +47,11 @@ export class HookExecutor {
                 const malagu = context.pkg.backendConfig['malagu'];
                 const config = malagu[name];
                 if (!config || config[hookName] !== false) {
-                    await require(resolve(context.pkg.projectPath, 'node_modules', modulePath)).default(context);
+                    try {
+                        await require(resolve(context.pkg.projectPath, 'node_modules', modulePath)).default(context);
+                    } catch (error) {
+                        await require(modulePath).default(context);
+                    }
                 }
             }
         }

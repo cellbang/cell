@@ -11,8 +11,7 @@
   "dependencies": {
     "@malagu/rpc": "next",
     "@malagu/fc-adapter": "next",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "@malagu/react": "next"
   },
   "devDependencies": {
     "@malagu/cli": "next",

@@ -71,14 +71,15 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
 
     const opt = { ...defaultAutowiredOption, ...option };
 
-    doInject( <ServiceIdentifierOrFunc>opt.id, isMlt, target, targetKey, index);
-
     if (opt.detached) {
         if (index !== undefined) {
             throw new Error(`The ${target.constructor.name} itself is not injected into the container, so the parameter injection of the constructor is not supported.`);
         }
         createAutowiredProperty(opt, isMlt, doGetValue, target, targetKey);
         return;
+    } else {
+        doInject( <ServiceIdentifierOrFunc>opt.id, isMlt, target, targetKey, index);
+
     }
 }
 
@@ -94,7 +95,7 @@ export function createAutowiredProperty(option: AutowiredOption, isMulti: boolea
             }
             const container = ContainerProvider.provide();
             const id = <interfaces.ServiceIdentifier<any>>option.id;
-            value = doGetValue(id, true, container, target, property);
+            value = doGetValue(id, isMulti, container, target, property);
 
             return value;
         }
