@@ -24,9 +24,7 @@ export class AppImpl extends React.Component<AppProps, AppState> implements App 
 
     async componentDidMount() {
         let Child: any = this.router;
-        for (const C of await this.contextProvider.provide()) {
-            Child = <C><Child/></C>;
-        }
+        (await this.contextProvider.provide()).forEach((C, index) => Child = <C key={index}><Child/></C> );
         this.setState({ child: Child });
     }
 }
