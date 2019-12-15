@@ -31,11 +31,11 @@ export class RouterImpl extends React.Component<RouterProps, RouterState> implem
 
     async componentDidMount() {
         const routeMetedatas = await this.routeMetadataProvider.provide();
-        this.setState({ child: routeMetedatas.map(metadata => {
+        this.setState({ child: routeMetedatas.map((metadata, index) => {
             if (RedirectMetadata.is(metadata)) {
-                return <Redirect {...metadata}/>;
+                return <Redirect key={index} {...metadata}/>;
             } else {
-                return <Route {...metadata}/>;
+                return <Route key={index} {...metadata}/>;
             }
         })});
     }
