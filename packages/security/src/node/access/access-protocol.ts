@@ -22,8 +22,9 @@ export enum PolicyType {
 }
 
 export interface Policy {
-    type: PolicyType
+    type: PolicyType | string
     authorizeType: AuthorizeType;
+    [key: string]: any;
 }
 
 export interface ResourcePolicyProvider {

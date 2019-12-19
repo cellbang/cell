@@ -689,7 +689,7 @@
   version "1.2.3"
   resolved "https://registry.npm.taobao.org/@types/range-parser/download/@types/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
 
-"@types/react-dom@*", "@types/react-dom@^16.8.5":
+"@types/react-dom@*":
   version "16.9.4"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz?cache=0&sync_timestamp=1573057568068&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-dom%2Fdownload%2F%40types%2Freact-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
   dependencies:
@@ -7578,7 +7578,7 @@ react-desc@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npm.taobao.org/react-desc/download/react-desc-4.1.2.tgz#83fc4ede66b2d45ae4ef63c18421474d55972966"
 
-react-dom@^16.12.0, react-dom@^16.8.6:
+react-dom@^16.12.0:
   version "16.12.0"
   resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   dependencies:
@@ -7622,7 +7622,7 @@ react-router@5.1.2, react-router@^5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@^16.12.0, react@^16.8.6:
+react@^16.12.0:
   version "16.12.0"
   resolved "https://registry.npm.taobao.org/react/download/react-16.12.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact%2Fdownload%2Freact-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   dependencies:
