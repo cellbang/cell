@@ -1,11 +1,10 @@
 import { Component, Autowired, Optional, getOwnMetadata } from '@malagu/core';
 import {
     SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
-    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, PolicyType
+    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, Policy
 } from './access-protocol';
 import { SecurityContext } from '../context';
 import { METADATA_KEY } from '../constants';
-import { AuthorizeMetadata } from '../annotation/authorize';
 import { Context } from '@malagu/web/lib/node';
 
 @Component(SecurityMetadataSource)
@@ -15,23 +14,18 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
     protected readonly securityExpressionContextHandler: SecurityExpressionContextHandler;
 
     async load(context: MethodSecurityMetadataContext): Promise<SecurityMetadata> {
-        const classMetadatas: AuthorizeMetadata[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor);
-        const methodMetadatas: AuthorizeMetadata[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor, context.method);
+        const classPolicies: Policy[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor);
+        const methodPolicies: Policy[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor, context.method);
         const ctx = {
             ...context,
             ...SecurityContext.getAuthentication()
         };
-        Context.setAttr(SECURITY_EXPRESSION_CONTEXT_KEY, ctx);
         if (this.securityExpressionContextHandler) {
             await this.securityExpressionContextHandler.handle(ctx);
         }
-        const policies = classMetadatas.concat(...methodMetadatas)
-            .filter(item => item.authorizeType === context.authorizeType)
-            .map(item => ({
-                type: PolicyType.El,
-                authorizeType: item.authorizeType,
-                el: item.el
-            }));
+        Context.setAttr(SECURITY_EXPRESSION_CONTEXT_KEY, ctx);
+        const policies = classPolicies.concat(...methodPolicies)
+            .filter(item => item.authorizeType === context.authorizeType);
 
         const resource = context.target.name;
         return {
