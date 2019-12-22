@@ -1,17 +1,17 @@
 {
   "name": "@malagu/web",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.1",
+    "@malagu/core": "^0.0.2",
     "@types/express": "^4.16.1",
     "cookies": "^0.7.3",
     "crc": "^3.8.0",
+    "express-http-context": "^1.2.3",
     "url-pattern": "^1.0.3",
-    "ws": "^7.1.1",
-    "express-http-context": "^1.2.3"
+    "ws": "^7.1.1"
   },
   "publishConfig": {
     "access": "public"
@@ -42,7 +42,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.1",
+    "@malagu/ext-scripts": "^0.0.2",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },
