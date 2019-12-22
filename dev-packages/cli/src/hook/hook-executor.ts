@@ -40,11 +40,11 @@ export class HookExecutor {
 
     protected async doExecuteHooks(modules: Map<string, string>, context: HookContext, hookName: string): Promise<void> {
 
+        const malagu = context.pkg.backendConfig['malagu'];
         for (const m of modules.entries()) {
             const [moduleName, modulePath] = m;
             const name = moduleName.split('/').pop();
             if (name) {
-                const malagu = context.pkg.backendConfig['malagu'];
                 const config = malagu[name];
                 if (!config || config[hookName] !== false) {
                     try {

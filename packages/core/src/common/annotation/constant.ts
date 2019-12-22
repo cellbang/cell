@@ -8,7 +8,7 @@ export interface ConstantOption {
 }
 
 export interface ConstantDecorator {
-    (id: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[], constantValue: any, rebind: boolean): (target: any) => any;
+    (id: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[], constantValue: any, rebind?: boolean): (target: any) => any;
 }
 
 export const Constant =

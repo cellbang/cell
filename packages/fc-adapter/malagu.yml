@@ -1,7 +1,7 @@
 malagu: 
   server: 
     endpoint: http://localhost:{port}
-  web: 
+  rpc: 
     serveHooks: false
 backend: 
   entry: 

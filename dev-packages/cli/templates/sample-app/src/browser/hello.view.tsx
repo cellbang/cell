@@ -7,7 +7,7 @@ interface Prop {}
 interface State {
     response: string
 }
-@View('/hello')
+@View()
 export class Hello extends React.Component<Prop, State> {
 
     @Autorpc(WelcomeServer)

@@ -14,6 +14,6 @@ export function Route(pathOrRouteMetadata?: string | RouteMetadata, rebind: bool
             routeMetadata.component = target;
         }
         Constant(RouteMetadata, routeMetadata, false)(target);
-        ReactComponent({ id: '@Route:' + routeMetadata.path, rebind })(target);
+        ReactComponent('@Route:' + routeMetadata.path, undefined, rebind)(target);
     };
 }
