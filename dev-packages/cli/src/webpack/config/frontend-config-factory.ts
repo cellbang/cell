@@ -44,7 +44,7 @@ export class FrontendConfigFactory {
                 crypto: 'empty'
             },
             devServer: {
-                contentBase: outputPath,
+                contentBase: false,
                 port: port || this._config.malagu && this._config.malagu.server.port,
                 open
             },
