@@ -1,25 +1,21 @@
 import * as React from 'react';
 import { Context, ReactComponent } from '@malagu/react/lib/browser';
-import { Constant } from '@malagu/core';
-import { theme } from '.';
+import { ThemeProvider as Provider, THEME_REACT_CONTEXT_PRIORITY } from './theme-protocol';
 import { ThemeProvider } from '@material-ui/core';
 import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 
-export const Theme = Symbol('Theme');
-
-@Constant(Theme, theme)
 @ReactComponent(Context)
 export class ThemeContext extends React.Component implements Context {
 
-    static priority = 900;
+    static priority = THEME_REACT_CONTEXT_PRIORITY;
 
-    @Autowired(Theme)
-    protected readonly theme: any;
+    @Autowired(Provider)
+    protected readonly provider: Provider;
 
-    render(): React.ReactElement<{}> {
+    render(): React.ReactElement {
         const { children } = this.props;
         return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={this.provider.provide()}>
             {children}
         </ThemeProvider>);
     }
