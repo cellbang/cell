@@ -12,7 +12,7 @@ export class ComponentPackageCollector {
 
     constructor(
         protected readonly pkg: ApplicationPackage,
-        protected readonly mode?: string
+        protected readonly mode: string[]
     ) {
         this.componentPackageLoader = new ComponentPackageLoader(pkg);
     }

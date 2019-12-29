@@ -1,0 +1,28 @@
+{
+  "name": "sample-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/rpc": "next",
+    "@malagu/express-adapter": "next",
+    "@malagu/zeit-adapter": "next",
+    "@malagu/react": "next"
+  },
+  "devDependencies": {
+    "@malagu/cli": "next",
+    "@types/react-dom": "^16.8.5",
+    "rimraf": "^2.6.3"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy"
+  }
+}

@@ -15,9 +15,7 @@
   },
   "devDependencies": {
     "@malagu/cli": "next",
-    "bufferutil": "^4.0.1",
-    "rimraf": "^2.6.3",
-    "utf-8-validate": "^5.0.2"
+    "rimraf": "^2.6.3"
   },
   "scripts": {
     "clean": "rimraf lib dist",

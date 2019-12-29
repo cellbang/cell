@@ -9,17 +9,18 @@ program
     .option('-o, --open [open]', 'Open browser')
     .option('-c, --copy [copy]', 'Copy local url to clipboard')
     .option('-p, --port [port]', 'Port used by the server')
-    .option('-m, --mode [mode]', 'Specify application mode')
+    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .description('serve a applicaton')
     .parse(process.argv);
 
 (async () => {
-    const cliContext = await CliContext.create(program);
+    const mode = Array.from(new Set<string>(['dev', ...(program.mode || [])]));
+    const cliContext = await CliContext.create(program, mode);
     cliContext.dev = true;
     cliContext.open = program.open;
     cliContext.copy = program.copy;
     cliContext.port = program.port;
-    cliContext.mode = program.mode;
+    cliContext.mode = mode;
     const hookContext = await HookContext.create(cliContext);
     if (hookContext.configurations.length === 0) {
         throw new Error('No malagu module found.');

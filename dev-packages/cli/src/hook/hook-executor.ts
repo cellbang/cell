@@ -10,6 +10,11 @@ export class HookExecutor {
         await this.doExecuteHooks(modules, context, 'initHooks');
     }
 
+    async executeBuildHooks(context: HookContext) {
+        const modules = context.pkg.buildHookModules;
+        await this.doExecuteHooks(modules, context, 'buildHooks');
+    }
+
     async executeDeployHooks(context: HookContext) {
         const modules = context.pkg.deployHookModules;
         if (modules.size === 0) {

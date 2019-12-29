@@ -8,7 +8,7 @@ export default (context: HookContext) => {
             c.plugins = c.plugins || [];
             c.plugins.push(new FilterWarningsPlugin({
                 exclude: [/typeorm-aurora-data-api-driver/, /mongodb/, /mssql/, /mysql/, /oracledb/, /pg/, /pg-native/, /pg-query-stream/, /sql.js/,
-                    /redis/, /sqlite3/, /eact-native-sqlite-storage/, /cli-highlight/, /Critical dependency/]
+                    /redis/, /sqlite3/, /eact-native-sqlite-storage/, /cli-highlight/, /Critical dependency/, /@sap\/hdbext/]
             }));
         }
     }

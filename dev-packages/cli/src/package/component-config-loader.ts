@@ -11,22 +11,24 @@ export class ComponentPackageLoader {
 
     }
 
-    load(nodePackage: NodePackage, mode?: string) {
+    load(nodePackage: NodePackage, mode: string[]) {
         let config: any = {};
         config = this.loadConfig(nodePackage);
+        let merged = [...mode];
 
-        if (!mode && config) {
-            mode = config.mode;
+        if (config) {
+
+            const modeForConfig = Array.isArray(config.mode) ? config.mode : config.mode ? [config.mode] : [];
+            merged = Array.from(new Set<string>([...modeForConfig, ...merged]));
         }
 
-        if (mode) {
-
-            const configForMode = this.loadConfig(nodePackage, mode);
-
+        for (const m of merged) {
+            const configForMode = this.loadConfig(nodePackage, m);
             if (configForMode) {
                 config = mergeWith(config, configForMode, customizer);
             }
         }
+
         nodePackage.malaguComponent = config;
     }
 

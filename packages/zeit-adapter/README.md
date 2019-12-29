@@ -1,0 +1,1 @@
+# Malagu - Zeit Adapter component

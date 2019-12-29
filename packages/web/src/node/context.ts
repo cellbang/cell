@@ -1,6 +1,4 @@
 import * as requestContext from 'express-http-context';
-import ws = require('ws');
-import { Dispatcher } from './dispatcher';
 import { Session } from './session/session-protocol';
 import { Cookies } from './cookies';
 import { Request, Response } from './http/http-protocol';
@@ -93,12 +91,5 @@ export class HttpContext implements Context {
     [key: string]: any;
 
     constructor(public request: Request, public response: Response) {
-    }
-}
-
-export class WebSocketContext extends HttpContext {
-
-    constructor(request: Request, response: Response, public readonly server: ws.Server, public readonly socket: ws, public readonly dispatcher: Dispatcher<WebSocketContext>) {
-        super(request, response);
     }
 }

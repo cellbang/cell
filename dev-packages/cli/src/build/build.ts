@@ -6,20 +6,22 @@ import { CliContext, HookContext } from '../context';
 import { packExternalModules } from '../extarnal';
 import { BACKEND_TARGET } from '../constants';
 const chalk = require('chalk');
+import { HookExecutor } from '../hook/hook-executor';
 
 program
     .name('malagu build')
     .usage('[options]')
     .option('-d, --dest [dir]', 'output directory', 'dist')
-    .option('-m, --mode [mode]', 'Specify application mode')
+    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .description('build a application')
     .parse(process.argv);
 
 (async () => {
-    const cliContext = await CliContext.create(program);
+    const mode = Array.from(new Set<string>(['prod', ...(program.mode || [])]));
+    const cliContext = await CliContext.create(program, mode);
     cliContext.dev = false;
     cliContext.dest = program.dir;
-    cliContext.mode = program.mode;
+    cliContext.mode = mode;
     const hookContext = await HookContext.create(cliContext);
 
     if (hookContext.configurations.length === 0) {
@@ -36,10 +38,17 @@ program
             },
             clearConsole: false
         }).apply(compiler);
-        compiler.run((err, stats) => {
+        await new Promise((resolve, reject) => compiler.run((err, stats) => {
             if (configuration.name === BACKEND_TARGET) {
                 packExternalModules(hookContext, stats);
             }
-        });
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        }));
     }
+    const hookExecutor = new HookExecutor();
+    await hookExecutor.executeBuildHooks(hookContext);
 })();

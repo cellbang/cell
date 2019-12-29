@@ -1,0 +1,45 @@
+{
+  "name": "@malagu/express-adapter",
+  "version": "0.0.4",
+  "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/web": "^0.0.4",
+    "express": "^4.17.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.0.4"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

@@ -1,9 +1,8 @@
 import { Channel } from '../../common';
-import ws = require('ws');
 
 export const ChannelStrategy = Symbol('ChannelStrategy');
 
-export const CHANNEL_MIDDLEWARE_PRIORITY = 2000;
+export const CHANNEL_MIDDLEWARE_PRIORITY = 2100;
 
 export const CURRENT_CHANNEL_STRATEGY_REQUEST_KEY = 'CurrentChannelStrategyRequest';
 
@@ -19,8 +18,4 @@ export interface ChannelStrategy {
 
     support(): Promise<boolean>;
 
-}
-
-export interface CheckAliveWS extends ws {
-    alive: boolean;
 }

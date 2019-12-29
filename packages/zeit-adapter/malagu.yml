@@ -1,0 +1,29 @@
+malagu:
+  zeit-adapter:
+    now:
+      config:
+        version: 2
+        
+frontend:
+  malagu:
+    zeit-adapter:
+      now:
+        config:
+          builds:
+            - src: '**'
+              use: '@now/static'
+          routes:
+            - src: /(.*)
+              dest: $1
+
+backend:
+  malagu:
+    zeit-adapter:
+      now:
+        config:
+          builds:
+            - src: '**'
+              use: '@now/node'
+          routes:
+            - src: /(.*)
+              dest: index.js
