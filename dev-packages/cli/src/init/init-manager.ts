@@ -60,7 +60,7 @@ export class InitManager {
 
     protected async getCliContext() {
         if (!this.cliContext) {
-            this.cliContext = await CliContext.create(this.context.program, this.outputDir);
+            this.cliContext = await CliContext.create(this.context.program, [], this.outputDir);
             this.cliContext.name = this.context.name;
             this.cliContext.outputDir = this.context.outputDir;
         }

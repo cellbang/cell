@@ -5,7 +5,7 @@ export class ApplicationPackageOptions {
     readonly projectPath: string;
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
-    readonly mode?: string;
+    readonly mode: string[];
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;
@@ -33,7 +33,7 @@ export interface Component extends Props {
 
     auto?: boolean;
 
-    mode?: string;
+    mode?: string[];
 
     /**
      * Frontend related properties.

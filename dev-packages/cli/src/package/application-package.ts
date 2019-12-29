@@ -95,6 +95,7 @@ export class ApplicationPackage {
     protected _frontendModules: Map<string, string> | undefined;
     protected _backendModules: Map<string, string> | undefined;
     protected _initHookModules: Map<string, string> | undefined;
+    protected _buildHookModules: Map<string, string> | undefined;
     protected _serveHookModules: Map<string, string> | undefined;
     protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
@@ -115,16 +116,18 @@ export class ApplicationPackage {
      */
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
+            let modeForConfig = this.rootComponentPackage().malaguComponent!.mode;
+            modeForConfig = Array.isArray(modeForConfig) ? modeForConfig : modeForConfig ? [modeForConfig] : [];
+            const modeForOption = this.options.mode;
+            const merged = Array.from(new Set<string>([...modeForConfig, ...modeForOption]));
 
-            const { mode } = this.options || this.rootComponentPackage().malaguComponent!;
-
-            if (mode) {
-                console.log(chalk`malagu {yellow mode} - ${mode}`);
+            for (const mode of merged) {
+                console.log(chalk`malagu {yellow.bold mode} - ${mode}`);
             }
 
             const collector = new ComponentPackageCollector(
                 this,
-                mode
+                merged
             );
             this._componentPackages = collector.collect(this.pkg);
             this._componentPackages.push(this.rootComponentPackage());
@@ -135,7 +138,7 @@ export class ApplicationPackage {
             for (const componentPackage of this._componentPackages) {
                 const malaguComponent = <Component>componentPackage.malaguComponent;
                 for (const modulePath of [...malaguComponent.frontend.modules || [], ...malaguComponent.backend.modules || []]) {
-                    console.log(chalk`malagu {cyan module} - ${componentPackage.name}/${ modulePath }`);
+                    console.log(chalk`malagu {cyan.bold module} - ${componentPackage.name}/${ modulePath }`);
                 }
             }
         }
@@ -177,6 +180,13 @@ export class ApplicationPackage {
             this._initHookModules = this.computeModules('initHooks');
         }
         return this._initHookModules;
+    }
+
+    get buildHookModules() {
+        if (!this._buildHookModules) {
+            this._buildHookModules = this.computeModules('buildHooks');
+        }
+        return this._buildHookModules;
     }
 
     get serveHookModules() {

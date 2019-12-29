@@ -14,12 +14,12 @@ export interface CliContext {
 }
 
 export namespace CliContext {
-    export async function create(program: CommanderStatic, projectPath: string = process.cwd()): Promise<CliContext> {
-        let pkg = new ApplicationPackage({ projectPath, mode: program.mode });
+    export async function create(program: CommanderStatic, mode: string[] = [], projectPath: string = process.cwd()): Promise<CliContext> {
+        let pkg = new ApplicationPackage({ projectPath, mode });
         if (!RawComponentPackage.is(pkg.pkg)) {
             const { malagu } = pkg.pkg;
             if (malagu && malagu.rootComponent) {
-                pkg = new ApplicationPackage({ projectPath: join(projectPath, malagu.rootComponent)});
+                pkg = new ApplicationPackage({ projectPath: join(projectPath, malagu.rootComponent), mode});
             }
         }
         return <CliContext> {

@@ -1,4 +1,4 @@
-describe('fc adapter package', () => {
+describe('express adapter package', () => {
 
     it('support code coverage statistics', () => true);
 });

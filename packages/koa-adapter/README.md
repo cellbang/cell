@@ -1,1 +1,0 @@
-# Malagu - KOA Adapter component

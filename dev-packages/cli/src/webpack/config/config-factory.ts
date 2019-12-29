@@ -18,7 +18,7 @@ export class ConfigFactory {
             if (configFactory.support(context)) {
                 const config = merge(baseConfig, configFactory.create(context));
                 configurations.push(config);
-                console.log(chalk`malagu {green target} - ${ configurations[configurations.length - 1].name }`);
+                console.log(chalk`malagu {green.bold target} - ${ configurations[configurations.length - 1].name }`);
             }
         }
         await new HookExecutor().executeWebpackHooks({

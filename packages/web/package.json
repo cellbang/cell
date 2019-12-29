@@ -10,8 +10,7 @@
     "cookies": "^0.7.3",
     "crc": "^3.8.0",
     "express-http-context": "^1.2.3",
-    "url-pattern": "^1.0.3",
-    "ws": "^7.1.1"
+    "url-pattern": "^1.0.3"
   },
   "publishConfig": {
     "access": "public"

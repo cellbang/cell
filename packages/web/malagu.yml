@@ -7,7 +7,7 @@ malagu:
   server: 
     path: /
     port: 3000
-    endpoint: ws://localhost:{port}
+    endpoint: http://localhost:{port}
 backend: 
   entry: lib/node/application/dev-application-entry
   malagu: 
