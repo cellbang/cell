@@ -19,6 +19,9 @@
     "@types/sinon": "^2.3.5",
     "@types/temp": "^0.8.29",
     "@types/webdriverio": "^4.7.0",
+    "@wdio/mocha-framework": "^5.16.15",
+    "@wdio/selenium-standalone-service": "^5.16.10",
+    "@wdio/spec-reporter": "^5.16.11",
     "chai": "^4.1.0",
     "chai-string": "^1.4.0",
     "concurrently": "^3.5.0",
@@ -38,9 +41,6 @@
     "typedoc": "^0.15.0",
     "typescript": "^3.5.3",
     "uuid": "^3.1.0",
-    "wdio-mocha-framework": "^0.6.4",
-    "wdio-selenium-standalone-service": "^0.0.12",
-    "wdio-spec-reporter": "^0.1.5",
     "webdriverio": "^5.18.0"
   },
   "scripts": {
