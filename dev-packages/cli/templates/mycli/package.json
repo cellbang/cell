@@ -1,6 +1,7 @@
 {
   "name": "mycli",
   "version": "0.0.0",
+  "license": "MIT",
   "files": [
     "lib",
     "bin",
