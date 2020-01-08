@@ -68,18 +68,20 @@ export class ApplicationPackage {
         const config = { ...this.props };
         delete config.backend;
         delete config.frontend;
-        return mergeWith(config, this.props.frontend, customizer);
+        this._frontendConfig = mergeWith(config, this.props.frontend, customizer);
+        return this._frontendConfig;
     }
 
     protected _backendConfig: Props | undefined;
     get backendConfig(): Props {
-        if (this._frontendConfig) {
-            return this._frontendConfig;
+        if (this._backendConfig) {
+            return this._backendConfig;
         }
         const config = { ...this.props };
         delete config.backend;
         delete config.frontend;
-        return mergeWith(config, this.props.backend, customizer);
+        this._backendConfig = mergeWith(config, this.props.backend, customizer);
+        return this._backendConfig;
     }
 
     protected _pkg: PublishedNodePackage | undefined;
@@ -190,10 +192,10 @@ export class ApplicationPackage {
     }
 
     get serveHookModules() {
-        if (!this._initHookModules) {
-            this._initHookModules = this.computeModules('serveHooks');
+        if (!this._serveHookModules) {
+            this._serveHookModules = this.computeModules('serveHooks');
         }
-        return this._initHookModules;
+        return this._serveHookModules;
     }
 
     get deployHookModules() {

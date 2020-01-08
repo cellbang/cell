@@ -9,7 +9,7 @@ export class RouteMetadataConverterProviderImpl implements RouteMetadataConverte
     @Autowired(RouteMetadataConverter) @Optional()
     protected readonly routeMetadataConverters: RouteMetadataConverter[] = [];
 
-    @Value('malaug.react.routes')
+    @Value('malagu.react.routes')
     protected readonly routes: any = {};
 
     async provide(): Promise<RouteMetadataConverter[]> {
