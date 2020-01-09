@@ -13,7 +13,7 @@
     "rootComponent": "app"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "next",
+    "@malagu/ext-scripts": "latest",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0",
     "@types/jsdom": "^11.0.4",

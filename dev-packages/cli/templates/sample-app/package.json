@@ -10,12 +10,12 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/rpc": "next",
-    "@malagu/fc-adapter": "next",
-    "@malagu/react": "next"
+    "@malagu/rpc": "latest",
+    "@malagu/fc-adapter": "latest",
+    "@malagu/react": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "next",
+    "@malagu/cli": "latest",
     "@types/react-dom": "^16.8.5",
     "rimraf": "^2.6.3"
   },

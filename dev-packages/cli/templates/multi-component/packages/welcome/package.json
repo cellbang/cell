@@ -5,7 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/rpc": "next"
+    "@malagu/rpc": "latest"
   },
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "next"
+    "@malagu/ext-scripts": "latest"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

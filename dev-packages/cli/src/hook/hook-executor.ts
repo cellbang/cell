@@ -1,7 +1,12 @@
 import { HookContext, ServeContext } from '../context';
 import { resolve } from 'path';
-require('ts-node').register();
+import { REGISTER_INSTANCE, register } from 'ts-node';
 const chalk = require('chalk');
+
+// Avoid duplicate registrations
+if (!process[REGISTER_INSTANCE]) {
+    register();
+}
 
 export class HookExecutor {
 
