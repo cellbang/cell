@@ -12,12 +12,12 @@
   ],
   "dependencies": {
     "@app/welcome": "^0.0.1",
-    "@malagu/fc-adapter": "next",
+    "@malagu/fc-adapter": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "@malagu/cli": "next",
+    "@malagu/cli": "latest",
     "@types/react-dom": "^16.8.5",
     "rimraf": "^2.6.3"
   },

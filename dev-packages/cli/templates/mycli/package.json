@@ -12,7 +12,7 @@
     "mycli": "./bin/mycli"
   },
   "dependencies": {
-    "@malagu/core": "next",
+    "@malagu/core": "latest",
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
     "fs-extra": "^8.1.0",

@@ -10,11 +10,11 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/mvc": "next",
-    "@malagu/fc-adapter": "next"
+    "@malagu/mvc": "latest",
+    "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "next",
+    "@malagu/cli": "latest",
     "rimraf": "^2.6.3"
   },
   "scripts": {

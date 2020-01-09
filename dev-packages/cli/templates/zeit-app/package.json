@@ -10,13 +10,13 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/rpc": "next",
-    "@malagu/express-adapter": "next",
-    "@malagu/zeit-adapter": "next",
-    "@malagu/react": "next"
+    "@malagu/rpc": "latest",
+    "@malagu/express-adapter": "latest",
+    "@malagu/zeit-adapter": "latest",
+    "@malagu/react": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "next",
+    "@malagu/cli": "latest",
     "@types/react-dom": "^16.8.5",
     "rimraf": "^2.6.3"
   },
