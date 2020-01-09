@@ -15,6 +15,9 @@ export class ChannelMiddleware implements Middleware {
                 break;
             }
         }
+
+        ctx.response.setHeader('Content-Type', 'application/json;charset=utf8');
+
         await next();
     }
 
