@@ -6,7 +6,7 @@ import { RawComponentPackage } from '../package';
 import { join } from 'path';
 import { ConfigFactory } from '../webpack';
 import { CommanderStatic } from 'commander';
-import { malaguCorePkgVersionConsistency } from '../util';
+import { checkPkgVersionConsistency } from '../util';
 
 export interface CliContext {
     program: CommanderStatic;
@@ -17,7 +17,7 @@ export interface CliContext {
 export namespace CliContext {
     export async function create(program: CommanderStatic, mode: string[] = [], projectPath: string = process.cwd()): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
-        malaguCorePkgVersionConsistency(projectPath);
+        checkPkgVersionConsistency('@malagu/core', projectPath);
 
         let pkg = new ApplicationPackage({ projectPath, mode });
         if (!RawComponentPackage.is(pkg.pkg)) {
