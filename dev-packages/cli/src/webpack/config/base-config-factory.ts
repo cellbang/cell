@@ -3,6 +3,8 @@ import * as webpack from 'webpack';
 import { CliContext } from '../../context';
 import * as path from 'path';
 const TerserPlugin = require('terser-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
@@ -27,7 +29,7 @@ export class BaseConfigFactory {
                     })
                 ]
             },
-            devtool: dev ? 'source-map' : undefined,
+            devtool: dev ? 'cheap-eval-source-map' : undefined,
             stats: 'errors-only',
             resolveLoader: {
                 modules: [
@@ -48,17 +50,38 @@ export class BaseConfigFactory {
                     {
                         test: /\.js$/,
                         enforce: 'pre',
-                        loader: 'source-map-loader',
+                        use: [{
+                            loader: 'thread-loader',
+                            options: {
+                                poolTimeout: Infinity,
+                            }
+                        }, {
+                            loader: 'source-map-loader'
+                        }],
                         exclude: /jsonc-parser/
                     },
                     {
                         test: /\.tsx?$/,
-                        use: 'ts-loader',
+                        use: [{
+                            loader: 'thread-loader',
+                            options: {
+                                poolTimeout: Infinity,
+                            }
+                        }, {
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
+                                experimentalWatchApi: true,
+                                happyPackMode: true
+                            },
+                        }],
                         exclude: /node_modules/
                     }
                 ]
             },
             plugins: [
+                new ForkTsCheckerWebpackPlugin({tslint: true}),
+                new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
         };
     }
