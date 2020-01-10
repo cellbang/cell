@@ -51,19 +51,19 @@ export class BaseConfigFactory {
                         test: /\.js$/,
                         enforce: 'pre',
                         use: [{
-                          loader: "thread-loader",
-                          options: {
-                            poolTimeout: Infinity,
-                          }
+                            loader: 'thread-loader',
+                            options: {
+                                poolTimeout: Infinity,
+                            }
                         }, {
-                          loader: 'source-map-loader'
+                            loader: 'source-map-loader'
                         }],
                         exclude: /jsonc-parser/
                     },
                     {
                         test: /\.tsx?$/,
                         use: [{
-                            loader: "thread-loader",
+                            loader: 'thread-loader',
                             options: {
                                 poolTimeout: Infinity,
                             }
