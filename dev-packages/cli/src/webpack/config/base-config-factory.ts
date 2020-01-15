@@ -11,9 +11,31 @@ const nodePathList = (process.env.NODE_PATH || '')
     .filter(p => !!p);
 
 export class BaseConfigFactory {
+    private _config: any;
+
+    private _baseWebpackConfig = {
+        devtool: 'cheap-eval-source-map',
+        stats: 'errors-only',
+        devServer: {
+          stats: 'errors-only',
+        },
+        forkTSCheckerWebpackPlugin: {
+            tslint: true,
+        }
+    };
+
+    getConfig(context: CliContext) {
+        if (this._config) {
+            return this._config;
+        }
+        const { pkg } = context;
+        this._config = { ...this._baseWebpackConfig, ...pkg.rootConfig.malagu.webpack };
+        return this._config;
+    }
     create(context: CliContext): webpack.Configuration {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
+        const config = this.getConfig(context);
         return {
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
@@ -21,6 +43,7 @@ export class BaseConfigFactory {
                 minimize: !dev,
                 minimizer: [
                     new TerserPlugin({
+                        parallel: true,
                         terserOptions: {
                             keep_classnames: true,
                             keep_fnames: true
@@ -29,8 +52,8 @@ export class BaseConfigFactory {
                     })
                 ]
             },
-            devtool: dev ? 'cheap-eval-source-map' : undefined,
-            stats: 'errors-only',
+            devtool: dev ? config.devtool : undefined,
+            stats: config.stats,
             resolveLoader: {
                 modules: [
                     path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
@@ -39,9 +62,7 @@ export class BaseConfigFactory {
                     ...nodePathList, // Support for NODE_PATH environment variable
                 ]
             },
-            devServer: {
-                stats: 'errors-only'
-            },
+            devServer: config.devServer,
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js' ]
             },
@@ -50,29 +71,16 @@ export class BaseConfigFactory {
                     {
                         test: /\.js$/,
                         enforce: 'pre',
-                        use: [{
-                            loader: 'thread-loader',
-                            options: {
-                                poolTimeout: Infinity,
-                            }
-                        }, {
-                            loader: 'source-map-loader'
-                        }],
-                        exclude: /jsonc-parser/
+                        use: [{loader: 'source-map-loader'}],
+                        exclude: /jsonc-parser|node_modules/
                     },
                     {
                         test: /\.tsx?$/,
                         use: [{
-                            loader: 'thread-loader',
-                            options: {
-                                poolTimeout: Infinity,
-                            }
-                        }, {
                             loader: 'ts-loader',
                             options: {
                                 transpileOnly: true,
-                                experimentalWatchApi: true,
-                                happyPackMode: true
+                                experimentalWatchApi: true
                             },
                         }],
                         exclude: /node_modules/
@@ -80,7 +88,7 @@ export class BaseConfigFactory {
                 ]
             },
             plugins: [
-                new ForkTsCheckerWebpackPlugin({tslint: true}),
+                new ForkTsCheckerWebpackPlugin(config.forkTSCheckerWebpackPlugin),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
         };

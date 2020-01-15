@@ -13,6 +13,8 @@ export class ConfigFactory {
         const configurations = [];
         const baseConfig = new BaseConfigFactory().create(context);
 
+        console.log(chalk`malagu {green.bold config} - you can disable lint rule check by configing malagu.webpack.forkTSCheckerWebpackPlugin, more options pls refer the README of plugin fork-ts-checker-webpack-plugin`);
+
         const configFactories = [new FrontendConfigFactory(),  new BackendConfigFactory()];
         for (const configFactory of configFactories) {
             if (configFactory.support(context)) {
