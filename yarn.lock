@@ -935,7 +935,6 @@
 "@types/yarnpkg__lockfile@^1.1.3":
   version "1.1.3"
   resolved "https://registry.npm.taobao.org/@types/yarnpkg__lockfile/download/@types/yarnpkg__lockfile-1.1.3.tgz#38fb31d82ed07dea87df6bd565721d11979fd761"
-  integrity sha1-OPsx2C7QfeqH32vVZXIdEZef12E=
 
 "@wdio/config@5.18.0":
   version "5.18.0"
@@ -1364,7 +1363,6 @@ anymatch@^2.0.0:
 anymatch@~3.1.1:
   version "3.1.1"
   resolved "https://registry.npm.taobao.org/anymatch/download/anymatch-3.1.1.tgz#c55ecf02185e2469259399310c173ce31233b142"
-  integrity sha1-xV7PAhheJGklk5kxDBc84xIzsUI=
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
@@ -1738,7 +1736,6 @@ binary-extensions@^1.0.0:
 binary-extensions@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/binary-extensions/download/binary-extensions-2.0.0.tgz#23c0df14f6a88077f5f986c0d167ec03c3d5537c"
-  integrity sha1-I8DfFPaogHf1+YbA0WfsA8PVU3w=
 
 bindings@^1.5.0:
   version "1.5.0"
@@ -2192,7 +2189,6 @@ chokidar@^2.0.2, chokidar@^2.1.8:
 chokidar@^3.3.0:
   version "3.3.1"
   resolved "https://registry.npm.taobao.org/chokidar/download/chokidar-3.3.1.tgz#c84e5b3d18d9a4d77558fef466b1bf16bbeb3450"
-  integrity sha1-yE5bPRjZpNd1WP70ZrG/FrvrNFA=
   dependencies:
     anymatch "~3.1.1"
     braces "~3.0.2"
@@ -3351,6 +3347,10 @@ dotenv@^6.2.0:
   version "6.2.0"
   resolved "https://registry.npm.taobao.org/dotenv/download/dotenv-6.2.0.tgz?cache=0&sync_timestamp=1571190782798&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdotenv%2Fdownload%2Fdotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
 
+dotenv@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+
 dotnet-deps-parser@4.9.0:
   version "4.9.0"
   resolved "https://registry.npm.taobao.org/dotnet-deps-parser/download/dotnet-deps-parser-4.9.0.tgz#d14f9f92ae9a64062cd215c8863d1e77e80236f0"
@@ -4022,14 +4022,12 @@ forever-agent@~0.6.1:
 fork-ts-checker-notifier-webpack-plugin@^1.0.3:
   version "1.0.3"
   resolved "https://registry.npm.taobao.org/fork-ts-checker-notifier-webpack-plugin/download/fork-ts-checker-notifier-webpack-plugin-1.0.3.tgz#e27976badceded4fcfc590329a28e4f733424b0b"
-  integrity sha1-4nl2utzt7U/PxZAymijk9zNCSws=
   dependencies:
     node-notifier "^6.0.0"
 
 fork-ts-checker-webpack-plugin@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npm.taobao.org/fork-ts-checker-webpack-plugin/download/fork-ts-checker-webpack-plugin-3.1.1.tgz?cache=0&sync_timestamp=1577641759189&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffork-ts-checker-webpack-plugin%2Fdownload%2Ffork-ts-checker-webpack-plugin-3.1.1.tgz#a1642c0d3e65f50c2cc1742e9c0a80f441f86b19"
-  integrity sha1-oWQsDT5l9QwswXQunAqA9EH4axk=
   dependencies:
     babel-code-frame "^6.22.0"
     chalk "^2.4.1"
@@ -4148,7 +4146,6 @@ fsevents@^1.2.7:
 fsevents@~2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/fsevents/download/fsevents-2.1.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffsevents%2Fdownload%2Ffsevents-2.1.2.tgz#4c0a1fb34bc68e543b4b82a9ec392bfbda840805"
-  integrity sha1-TAofs0vGjlQ7S4Kp7Dkr+9qECAU=
 
 ftp@~0.3.10:
   version "0.3.10"
@@ -4305,7 +4302,6 @@ glob-parent@^3.1.0:
 glob-parent@~5.1.0:
   version "5.1.0"
   resolved "https://registry.npm.taobao.org/glob-parent/download/glob-parent-5.1.0.tgz?cache=0&sync_timestamp=1569136652060&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fglob-parent%2Fdownload%2Fglob-parent-5.1.0.tgz#5f4c1d1e748d30cd73ad2944b3577a81b081e8c2"
-  integrity sha1-X0wdHnSNMM1zrSlEs1d6gbCB6MI=
   dependencies:
     is-glob "^4.0.1"
 
@@ -4453,7 +4449,6 @@ growl@1.9.2:
 growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.npm.taobao.org/growly/download/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
-  integrity sha1-8QdIy+dq+WS3yWyTxrzCivEgwIE=
 
 gud@^1.0.0:
   version "1.0.0"
@@ -5014,7 +5009,6 @@ is-binary-path@^1.0.0:
 is-binary-path@~2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/is-binary-path/download/is-binary-path-2.1.0.tgz#ea1f7f3b80f064236e83470f86c09c254fb45b09"
-  integrity sha1-6h9/O4DwZCNug0cPhsCcJU+0Wwk=
   dependencies:
     binary-extensions "^2.0.0"
 
@@ -5302,7 +5296,6 @@ is-wsl@^1.1.0:
 is-wsl@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/is-wsl/download/is-wsl-2.1.1.tgz?cache=0&sync_timestamp=1569219566107&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-wsl%2Fdownload%2Fis-wsl-2.1.1.tgz#4a1c152d429df3d441669498e2486d3596ebaf1d"
-  integrity sha1-ShwVLUKd89RBZpSY4khtNZbrrx0=
 
 isarray@0.0.1:
   version "0.0.1"
@@ -6328,7 +6321,6 @@ methods@~1.1.2:
 microevent.ts@~0.1.1:
   version "0.1.1"
   resolved "https://registry.npm.taobao.org/microevent.ts/download/microevent.ts-0.1.1.tgz#70b09b83f43df5172d0205a63025bce0f7357fa0"
-  integrity sha1-cLCbg/Q99RctAgWmMCW84Pc1f6A=
 
 micromatch@^2.3.11:
   version "2.3.11"
@@ -6778,7 +6770,6 @@ node-libs-browser@^2.2.1:
 node-notifier@^6.0.0:
   version "6.0.0"
   resolved "https://registry.npm.taobao.org/node-notifier/download/node-notifier-6.0.0.tgz#cea319e06baa16deec8ce5cd7f133c4a46b68e12"
-  integrity sha1-zqMZ4GuqFt7sjOXNfxM8Ska2jhI=
   dependencies:
     growly "^1.3.0"
     is-wsl "^2.1.1"
@@ -7390,7 +7381,6 @@ performance-now@^2.1.0:
 picomatch@^2.0.4, picomatch@^2.0.7:
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/picomatch/download/picomatch-2.2.1.tgz#21bac888b6ed8601f831ce7816e335bc779f0a4a"
-  integrity sha1-IbrIiLbthgH4Mc54FuM1vHefCko=
 
 picomatch@^2.0.5:
   version "2.1.1"
@@ -7927,7 +7917,6 @@ readdirp@^2.2.1:
 readdirp@~3.3.0:
   version "3.3.0"
   resolved "https://registry.npm.taobao.org/readdirp/download/readdirp-3.3.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freaddirp%2Fdownload%2Freaddirp-3.3.0.tgz#984458d13a1e42e2e9f5841b129e162f369aff17"
-  integrity sha1-mERY0ToeQuLp9YQbEp4WLzaa/xc=
   dependencies:
     picomatch "^2.0.7"
 
@@ -8472,7 +8461,6 @@ shelljs@^0.8.3:
 shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npm.taobao.org/shellwords/download/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
-  integrity sha1-1rkYHBpI05cyTISHHvvPxz/AZUs=
 
 shimmer@^1.2.0:
   version "1.2.1"
@@ -10295,7 +10283,6 @@ worker-loader@^2.0.0:
 worker-rpc@^0.1.0:
   version "0.1.1"
   resolved "https://registry.npm.taobao.org/worker-rpc/download/worker-rpc-0.1.1.tgz#cb565bd6d7071a8f16660686051e969ad32f54d5"
-  integrity sha1-y1Zb1tcHGo8WZgaGBR6WmtMvVNU=
   dependencies:
     microevent.ts "~0.1.1"
 

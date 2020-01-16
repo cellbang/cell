@@ -12,6 +12,7 @@
     "@malagu/cli": "^0.0.7",
     "@malagu/web": "^0.0.7",
     "ali-oss": "^6.1.1",
+    "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
     "jszip": "^3.2.2",
