@@ -1,6 +1,7 @@
 
 import * as webpack from 'webpack';
 import * as path from 'path';
+import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 
@@ -15,9 +16,8 @@ export class BackendConfigFactory {
         if (type && entry && typeof entry !== 'string') {
             entry = entry[type];
         }
-
         entry = pkg.resolveModule(entry.split(path.sep).join('/'));
-        return <webpack.Configuration>{
+        return merge(<webpack.Configuration>{
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',
@@ -53,7 +53,7 @@ export class BackendConfigFactory {
                     },
                 ]
             }
-        };
+        }, config.malagu.webpack ? config.malagu.webpack.config : {});
     }
 
     support(context: CliContext): boolean {
