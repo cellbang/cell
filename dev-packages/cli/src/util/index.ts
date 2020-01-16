@@ -37,7 +37,8 @@ export function checkPkgVersionConsistency (pkgName: string, projectPath: string
             }
         });
     } else {
-        console.log(chalk`malagu {red.bold error} - Pls generate lock file by Yarn or Npm firstly`);
-        process.exit(1);
+        // consider the monorepo project case
+        // console.log(chalk`malagu {red.bold error} - Pls generate lock file by Yarn or Npm firstly`);
+        // process.exit(1);
     }
 }
