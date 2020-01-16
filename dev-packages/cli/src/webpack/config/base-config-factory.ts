@@ -2,6 +2,7 @@
 import * as webpack from 'webpack';
 import { CliContext } from '../../context';
 import * as path from 'path';
+import * as merge from 'webpack-merge';
 const TerserPlugin = require('terser-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -14,11 +15,6 @@ export class BaseConfigFactory {
     private _config: any;
 
     private _baseWebpackConfig = {
-        devtool: 'cheap-eval-source-map',
-        stats: 'errors-only',
-        devServer: {
-          stats: 'errors-only',
-        },
         forkTSCheckerWebpackPlugin: {
             tslint: true,
         }
@@ -36,7 +32,7 @@ export class BaseConfigFactory {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
         const config = this.getConfig(context);
-        return {
+        return merge(<webpack.Configuration>{
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
             optimization: {
@@ -52,8 +48,8 @@ export class BaseConfigFactory {
                     })
                 ]
             },
-            devtool: dev ? config.devtool : undefined,
-            stats: config.stats,
+            devtool: dev ? 'cheap-eval-source-map' : undefined,
+            stats: 'errors-only',
             resolveLoader: {
                 modules: [
                     path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
@@ -62,7 +58,9 @@ export class BaseConfigFactory {
                     ...nodePathList, // Support for NODE_PATH environment variable
                 ]
             },
-            devServer: config.devServer,
+            devServer: {
+              stats: 'errors-only',
+            },
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js' ]
             },
@@ -72,7 +70,7 @@ export class BaseConfigFactory {
                         test: /\.js$/,
                         enforce: 'pre',
                         use: [{loader: 'source-map-loader'}],
-                        exclude: /jsonc-parser|node_modules/
+                        exclude: /jsonc-parser/
                     },
                     {
                         test: /\.tsx?$/,
@@ -91,6 +89,6 @@ export class BaseConfigFactory {
                 new ForkTsCheckerWebpackPlugin(config.forkTSCheckerWebpackPlugin),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
-        };
+        }, config);
     }
 }
