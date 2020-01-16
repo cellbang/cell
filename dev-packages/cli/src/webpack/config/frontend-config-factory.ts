@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { FRONTEND_TARGET } from '../../constants';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -32,7 +33,7 @@ export class FrontendConfigFactory {
         if (type && typeof entry !== 'string') {
             entry = entry[type];
         }
-        return <webpack.Configuration>{
+        return merge(<webpack.Configuration>{
             name: FRONTEND_TARGET,
             entry: entry,
             target: 'web',
@@ -117,7 +118,7 @@ export class FrontendConfigFactory {
                     'MALAGU_CONFIG': config
                 })
             ]
-        };
+        }, config.malagu.webpack ? config.malagu.webpack.config : {});
     }
 
     support(context: CliContext): boolean {
