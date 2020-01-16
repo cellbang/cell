@@ -2,7 +2,6 @@
 import * as webpack from 'webpack';
 import { CliContext } from '../../context';
 import * as path from 'path';
-import * as merge from 'webpack-merge';
 const TerserPlugin = require('terser-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -32,7 +31,7 @@ export class BaseConfigFactory {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
         const config = this.getConfig(context);
-        return merge(<webpack.Configuration>{
+        return <webpack.Configuration>{
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
             optimization: {
@@ -89,6 +88,6 @@ export class BaseConfigFactory {
                 new ForkTsCheckerWebpackPlugin(config.forkTSCheckerWebpackPlugin),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
-        }, config);
+        };
     }
 }
