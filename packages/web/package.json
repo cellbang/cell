@@ -8,6 +8,7 @@
     "@malagu/core": "^0.0.8",
     "@types/express": "^4.16.1",
     "cookies": "^0.7.3",
+    "cors": "^2.8.5",
     "crc": "^3.8.0",
     "express-http-context": "^1.2.3",
     "url-pattern": "^1.0.3"
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^0.0.8",
+    "@types/cors": "^2.8.6",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },
