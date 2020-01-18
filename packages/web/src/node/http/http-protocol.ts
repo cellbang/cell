@@ -1,7 +1,8 @@
 import * as http from 'http';
 import * as net from 'net';
+import { CORS_MIDDLEWARE_PRIORITY } from '../cors';
 
-export const HTTP_MIDDLEWARE_PRIORITY =  2000;
+export const HTTP_MIDDLEWARE_PRIORITY = CORS_MIDDLEWARE_PRIORITY - 100;
 
 export const XML_HTTP_REQUEST = 'XMLHttpRequest';
 export const X_REQUESTED_WITH = 'X-Requested-With';
