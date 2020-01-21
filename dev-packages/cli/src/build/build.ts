@@ -17,7 +17,7 @@ program
     .parse(process.argv);
 
 (async () => {
-    const mode = Array.from(new Set<string>(['prod', ...(program.mode || [])]));
+    const mode = Array.from(new Set<string>([...(program.mode || [])]));
     const cliContext = await CliContext.create(program, mode);
     cliContext.dev = false;
     cliContext.dest = program.dir;
