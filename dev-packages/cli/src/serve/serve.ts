@@ -14,7 +14,7 @@ program
     .parse(process.argv);
 
 (async () => {
-    const mode = Array.from(new Set<string>(['dev', ...(program.mode || [])]));
+    const mode = Array.from(new Set<string>([...(program.mode || ['local'])]));
     const cliContext = await CliContext.create(program, mode);
     cliContext.dev = true;
     cliContext.open = program.open;
