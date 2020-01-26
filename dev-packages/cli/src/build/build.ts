@@ -15,7 +15,6 @@ program
     .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .description('build a application')
     .parse(process.argv);
-
 (async () => {
     const mode = Array.from(new Set<string>([...(program.mode || [])]));
     const cliContext = await CliContext.create(program, mode);
@@ -51,4 +50,7 @@ program
     }
     const hookExecutor = new HookExecutor();
     await hookExecutor.executeBuildHooks(hookContext);
-})();
+})().catch(err => {
+    console.error(err);
+    process.exit(-1);
+});

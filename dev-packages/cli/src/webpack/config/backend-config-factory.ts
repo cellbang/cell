@@ -4,10 +4,11 @@ import * as path from 'path';
 import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
+const nodeExternals = require('webpack-node-externals');
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
-        const { pkg, port, open, dest } = context;
+        const { pkg, port, open, dest, dev } = context;
         const outputPath = path.resolve(pkg.projectPath, dest || 'dist', BACKEND_TARGET);
 
         const config = pkg.backendConfig;
@@ -21,6 +22,9 @@ export class BackendConfigFactory {
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',
+            externals: dev ? [nodeExternals({
+                whitelist: pkg.componentPackages.map(cp => new RegExp(cp.name))
+            })] : undefined,
             devtool: 'source-map',
             output: {
                 path: outputPath,

@@ -36,9 +36,9 @@
   "dependencies": {
     "@yarnpkg/lockfile": "^1.1.0",
     "chalk": "^2.4.2",
+    "clear-module": "^4.0.0",
     "commander": "^2.20.0",
     "css-loader": "^3.1.0",
-    "decache": "^4.5.1",
     "delay": "^4.3.0",
     "file-loader": "^4.1.0",
     "fork-ts-checker-notifier-webpack-plugin": "^1.0.3",
@@ -72,6 +72,7 @@
     "webpack": "^4.36.1",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2",
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {

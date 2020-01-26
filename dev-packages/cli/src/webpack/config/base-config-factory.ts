@@ -58,7 +58,10 @@ export class BaseConfigFactory {
                 ]
             },
             devServer: {
-              stats: 'errors-only',
+                stats: 'errors-only',
+                watchOptions: {
+                    ignored: /node_modules/
+                }
             },
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js' ]

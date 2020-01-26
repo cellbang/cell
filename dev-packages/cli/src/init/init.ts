@@ -20,4 +20,7 @@ program
     await initManager.render();
     await initManager.install();
     await initManager.executeHooks();
-})();
+})().catch(err => {
+    console.error(err);
+    process.exit(-1);
+});
