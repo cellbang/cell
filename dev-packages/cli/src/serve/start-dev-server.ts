@@ -14,7 +14,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET } from '../constants';
 import * as delay from 'delay';
-const decache = require('decache');
+const clearModule = require('clear-module');
 
 let server: any;
 
@@ -49,7 +49,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     }
     const entryContextProvider = async() => {
         const entryPath = getEntryPath(configuration);
-        decache(entryPath);
+        clearModule(entryPath);
         while (true) {
             if (fs.existsSync(entryPath)) {
                 return require(entryPath);

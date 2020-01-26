@@ -15,4 +15,7 @@ program
 
     const hookExecutor = new HookExecutor();
     await hookExecutor.executeDeployHooks(context);
-})();
+})().catch(err => {
+    console.error(err);
+    process.exit(-1);
+});
