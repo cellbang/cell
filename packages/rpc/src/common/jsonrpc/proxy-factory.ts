@@ -1,6 +1,7 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
 import { ConnectionHandler } from './handler';
 import { ApplicationError, Disposable } from '@malagu/core';
+import { PipeManager } from '@malagu/core';
 
 export type JsonRpcServer<Client> = Disposable & {
     /**
@@ -20,11 +21,12 @@ export type JsonRpcProxy<T> = T & JsonRpcConnectionEventEmitter;
 export class JsonRpcConnectionHandler<T extends object> implements ConnectionHandler {
     constructor(
         readonly path: string,
-        readonly targetFactory: (proxy: JsonRpcProxy<T>) => any
+        readonly targetFactory: (proxy: JsonRpcProxy<T>) => any,
+        readonly pipeManager: PipeManager
     ) { }
 
     onConnection(connection: MessageConnection): void {
-        const factory = new JsonRpcProxyFactory<T>(this.path);
+        const factory = new JsonRpcProxyFactory<T>(undefined, this.pipeManager);
         const proxy = factory.createProxy();
         factory.target = this.targetFactory(proxy);
         factory.listen(connection);
@@ -43,7 +45,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     protected connectionPromiseResolve: (connection: MessageConnection) => void;
     protected connectionPromise: Promise<MessageConnection>;
 
-    constructor(public target?: any) {
+    constructor(public target?: any, protected pipeMananger?: PipeManager) {
         this.waitForConnection();
     }
 
@@ -79,6 +81,9 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
 
     protected async onRequest(method: string, ...args: any[]): Promise<any> {
         try {
+            if (this.pipeMananger) {
+                await this.pipeMananger.apply({ target: this.target, method: method }, args);
+            }
             return await this.target[method](...args);
         } catch (error) {
             const e = this.serializeError(error);

@@ -5,6 +5,8 @@ import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 const nodeExternals = require('webpack-node-externals');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
@@ -12,6 +14,7 @@ export class BackendConfigFactory {
         const outputPath = path.resolve(pkg.projectPath, dest || 'dist', BACKEND_TARGET);
 
         const config = pkg.backendConfig;
+        const webpackConfig = config.webpack || {};
         let entry: any = config.entry;
         const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && entry && typeof entry !== 'string') {
@@ -41,7 +44,9 @@ export class BackendConfigFactory {
             plugins: [
                 new webpack.EnvironmentPlugin({
                     'MALAGU_CONFIG': config
-                })
+                }),
+                new ForkTsCheckerWebpackPlugin({ ...{ tslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
+                new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ],
             module: {
                 rules: [

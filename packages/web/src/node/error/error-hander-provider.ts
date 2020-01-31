@@ -1,8 +1,9 @@
 import { Context } from '../context';
-import { Component, Autowired, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Prioritizeable, ValidationErrors } from '@malagu/core';
 import { injectable } from 'inversify';
-import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY } from './error-protocol';
+import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY, VALIDATION_ERRORS_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
+import { HttpStatus } from '../http';
 
 @injectable()
 export abstract class AbstractErrorHandler implements ErrorHandler {
@@ -38,6 +39,20 @@ export class HttpErrorHandler implements ErrorHandler {
 
     async handle(ctx: Context, err: HttpError): Promise<void> {
         ctx.response.statusCode = err.statusCode;
+        ctx.response.end(err.message);
+    }
+}
+
+@Component(ErrorHandler)
+export class ValidationErrorsHandler implements ErrorHandler {
+    readonly priority: number = VALIDATION_ERRORS_ERROR_HANDlER_PRIORITY;
+
+    canHandle(ctx: Context, err: Error): Promise<boolean> {
+        return Promise.resolve(err instanceof ValidationErrors);
+    }
+
+    async handle(ctx: Context, err: HttpError): Promise<void> {
+        ctx.response.statusCode = HttpStatus.BAD_REQUEST;
         ctx.response.end(err.message);
     }
 }

@@ -4,3 +4,7 @@ export interface Newable<T> {
 export interface Abstract<T> {
     prototype: T;
 }
+
+export interface Type<T> extends Function {
+    new (...args: any[]): T;
+}
