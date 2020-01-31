@@ -3,34 +3,16 @@ import * as webpack from 'webpack';
 import { CliContext } from '../../context';
 import * as path from 'path';
 const TerserPlugin = require('terser-webpack-plugin');
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
     .filter(p => !!p);
 
 export class BaseConfigFactory {
-    private _config: any;
 
-    private _baseWebpackConfig = {
-        forkTSCheckerWebpackPlugin: {
-            tslint: true,
-        }
-    };
-
-    getConfig(context: CliContext) {
-        if (this._config) {
-            return this._config;
-        }
-        const { pkg } = context;
-        this._config = { ...this._baseWebpackConfig, ...pkg.rootConfig.malagu.webpack };
-        return this._config;
-    }
     create(context: CliContext): webpack.Configuration {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
-        const config = this.getConfig(context);
         return <webpack.Configuration>{
             entry: context.entry ? path.resolve(pkg.packagePath, context.entry) : path.resolve(pkg.packagePath, 'lib', 'app.js'),
             mode: webpackMode,
@@ -88,8 +70,6 @@ export class BaseConfigFactory {
                 ]
             },
             plugins: [
-                new ForkTsCheckerWebpackPlugin(config.forkTSCheckerWebpackPlugin),
-                new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
         };
     }

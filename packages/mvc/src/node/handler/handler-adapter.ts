@@ -4,6 +4,7 @@ import { Context, HttpError, RequestMatcher, HandlerAdapter } from '@malagu/web/
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { MVC_HANDLER_ADAPTER_PRIORITY, RouteMetadataMatcher } from './handler-protocol';
 import { MVC_PATH } from '../../common';
+import { PipeManager } from '@malagu/core';
 
 @Component(HandlerAdapter)
 export class MvcHandlerAdapter implements HandlerAdapter {
@@ -23,6 +24,9 @@ export class MvcHandlerAdapter implements HandlerAdapter {
 
     @Autowired(PathResolver)
     protected readonly pathResolver: PathResolver;
+
+    @Autowired(PipeManager)
+    protected readonly pipeManager: PipeManager;
 
     @Value(MVC_PATH)
     protected readonly mvcPath: string;
@@ -65,6 +69,7 @@ export class MvcHandlerAdapter implements HandlerAdapter {
         const target = methodMetadata.target;
         let model: any;
         try {
+            await this.pipeManager.apply({ target, method: methodMetadata.key }, args);
             model = await target[methodMetadata.key](...args);
         } catch (error) {
             if (!err) {

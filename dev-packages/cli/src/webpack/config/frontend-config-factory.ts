@@ -4,6 +4,8 @@ import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { FRONTEND_TARGET } from '../../constants';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 export class FrontendConfigFactory {
 
@@ -28,6 +30,7 @@ export class FrontendConfigFactory {
         const outputPath = path.resolve(pkg.projectPath, dest || 'dist', FRONTEND_TARGET);
 
         const config = this.getConfig(context);
+        const webpackConfig = config.webpack || {};
         let entry = pkg.resolveModule(config.entry);
         const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && typeof entry !== 'string') {
@@ -116,7 +119,9 @@ export class FrontendConfigFactory {
                 }),
                 new webpack.EnvironmentPlugin({
                     'MALAGU_CONFIG': config
-                })
+                }),
+                new ForkTsCheckerWebpackPlugin({ ...{ tslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
+                new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
         }, config.malagu.webpack ? config.malagu.webpack.config : {});
     }

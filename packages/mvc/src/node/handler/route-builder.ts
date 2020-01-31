@@ -5,6 +5,7 @@ import { getOwnMetadata, Component, Autowired, Optional, ErrorType } from '@mala
 import { PathResolver } from '@malagu/web';
 import { CatchMetadata } from '../annotation';
 import { RouteMetadata } from './handler-protocol';
+import { getTargetClass } from '@malagu/core/lib/common/utils/proxy-util';
 
 @Component()
 export class RouteBuilder {
@@ -20,7 +21,7 @@ export class RouteBuilder {
         const errorMapping: Map<ErrorType, any> = new Map<ErrorType, RouteMetadata>();
 
         for (const controller of this.controllers) {
-            const targetConstructor = controller.target ? controller.target.constructor : controller.constructor;
+            const targetConstructor = getTargetClass(controller);
 
             const controllerMetadata = <ControllerMetadata>Reflect.getOwnMetadata(METADATA_KEY.controller, targetConstructor);
             await this.doBuildRouteMap(mapping, targetConstructor, controller, controllerMetadata);
