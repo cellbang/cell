@@ -1,17 +1,18 @@
-malagu: 
-  session: 
+malagu:
+  session:
     autoCommit: true
     maxAge: 86400000
     sessionIdKey: malagu:sessionId
     sessionKey: malagu:session
-  server: 
+  server:
     path: /
     port: 3000
     endpoint: http://localhost:{port}
-backend: 
+  trace:
+    responseField: 'X-Malagu-Trace-ID'
+backend:
   entry: lib/node/application/dev-application-entry
-  malagu: 
-    cookies: 
-      keys: 
+  malagu:
+    cookies:
+      keys:
         - abcdef
-        

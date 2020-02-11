@@ -9,3 +9,4 @@ export * from './session';
 export * from './http';
 export * from './matcher';
 export * from './cors';
+export * from './trace';
