@@ -10,12 +10,14 @@ export class PipeManagerImpl implements PipeManager {
 
     async apply(metadata: MethodMetadata, args: any[]): Promise<void> {
         const paramTypes = Reflect.getMetadata('design:paramtypes', getTarget(metadata.target), metadata.method);
-        for (let index = 0; index < args.length; index++) {
-            let arg = args[index];
-            for (const pipe of this.pipeProvider.provide()) {
-                arg = await pipe.transform(arg, { argType: index < paramTypes.length ? paramTypes[index] : undefined });
+        if (paramTypes) {
+            for (let index = 0; index < args.length; index++) {
+                let arg = args[index];
+                for (const pipe of this.pipeProvider.provide()) {
+                    arg = await pipe.transform(arg, { argType: index < paramTypes.length ? paramTypes[index] : undefined });
+                }
+                args[index] = arg;
             }
-            args[index] = arg;
         }
     }
 
