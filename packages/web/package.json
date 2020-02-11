@@ -11,7 +11,8 @@
     "cors": "^2.8.5",
     "crc": "^3.8.0",
     "express-http-context": "^1.2.3",
-    "url-pattern": "^1.0.3"
+    "url-pattern": "^1.0.3",
+    "uuid": "^3.4.0"
   },
   "publishConfig": {
     "access": "public"

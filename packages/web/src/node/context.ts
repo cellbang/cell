@@ -8,6 +8,7 @@ export enum AttributeScope { App, Request, Session }
 export const CURRENT_CONTEXT_REQUEST_KEY = 'CurrentContextRequest';
 export const CURRENT_COOKIES_REQUEST_KEY = 'CurrentCookiesRequest';
 export const CURRENT_SESSION_REQUEST_KEY = 'CurrentSessionRequest';
+export const CURRENT_TRACE_ID_REQUEST_KEY = 'CurrentTraceIdRequest';
 
 const appAttrs = new Map<string, any>();
 
@@ -57,6 +58,14 @@ export namespace Context {
 
     export function setSession(session: Session): void {
         requestContext.set(CURRENT_SESSION_REQUEST_KEY, session);
+    }
+
+    export function setTraceId(traceId: string): void {
+        requestContext.set(CURRENT_TRACE_ID_REQUEST_KEY, traceId);
+    }
+
+    export function getTraceId(): string {
+        return requestContext.get(CURRENT_TRACE_ID_REQUEST_KEY);
     }
 
     export function setAttr(key: string, value: any, scope: AttributeScope = AttributeScope.Request) {
