@@ -40,10 +40,10 @@ export abstract class AbstractApplication implements Application {
     @Autowired(ApplicationLifecycle)
     protected readonly lifecycles: ApplicationLifecycle<Application>[];
 
+    abstract start(): Promise<void>;
+
     @Autowired(Logger)
     protected readonly logger: Logger;
-
-    abstract start(): Promise<void>;
 
     /**
      * Initialize and start the frontend application.
