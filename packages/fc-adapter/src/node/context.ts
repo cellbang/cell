@@ -97,6 +97,7 @@ export function ParseHttpTriggerContext(req: any, res: any, context: any) {
 
         end(chunk: any, encoding?: string, cb?: Function): void {
             this.finished = true;
+            // eslint-disable-next-line no-null/no-null
             res.send(chunk === undefined || chunk === null ? '' : chunk);
         }
     };

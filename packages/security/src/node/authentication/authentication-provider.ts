@@ -59,7 +59,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     }
 
     async support(): Promise<boolean> {
-       return !!await this.requestMatcher.match(this.options.loginUrl, this.options.loginMethod);
+        return !!await this.requestMatcher.match(this.options.loginUrl, this.options.loginMethod);
     }
 
 }

@@ -30,7 +30,7 @@ export class SessionManagerImpl implements SessionManager {
                 return session;
             }
         }
-        return await this.sessionStrategy.create();
+        return this.sessionStrategy.create();
     }
 
     async remove(): Promise<void> {

@@ -25,11 +25,11 @@ export interface ComponentDecorator {
 
 export const Component =
     <ComponentDecorator>function (idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): (target: any) => any {
-    const option = getComponentOption(idOrOption);
-    return (t: any) => {
-        applyComponentDecorator(option, t);
+        const option = getComponentOption(idOrOption);
+        return (t: any) => {
+            applyComponentDecorator(option, t);
+        };
     };
-};
 
 export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption) {
     let option: ComponentOption = {};
@@ -69,7 +69,7 @@ function doProxy (context: interfaces.Context, t: any) {
                 };
             }
             return func;
-         }
+        }
     });
     proxy.target = t;
     t.proxyTarget = proxy;

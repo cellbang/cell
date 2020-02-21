@@ -18,7 +18,7 @@ export class ChannelManager {
         for (const handler of handlers) {
             this._handlers.set(handler.path, handler);
         }
-     }
+    }
 
     async handleChannels(): Promise<void> {
         const channelStrategy: ChannelStrategy = Context.getAttr(CURRENT_CHANNEL_STRATEGY_REQUEST_KEY);

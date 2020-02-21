@@ -12,6 +12,6 @@ export class NoOpContext extends React.Component<ContextProps, ContextState> imp
     static priority = 1000;
 
     render(): React.ReactElement<{}> {
-    return <React.Fragment>{this.props.children}</React.Fragment>;
+        return <React.Fragment>{this.props.children}</React.Fragment>;
     }
 }

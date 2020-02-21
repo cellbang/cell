@@ -68,6 +68,7 @@ interface ElementScroll {
 function getMonacoEditorScroll(elem: HTMLElement): ElementScroll | undefined {
     const linesContent = elem.querySelector('.lines-content') as HTMLElement;
     const viewLines = elem.querySelector('.view-lines') as HTMLElement;
+    // eslint-disable-next-line no-null/no-null
     if (linesContent === null || viewLines === null) {
         return undefined;
     }

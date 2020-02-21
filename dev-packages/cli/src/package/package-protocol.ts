@@ -12,7 +12,7 @@ export type ApplicationModuleResolver = (modulePath: string) => string;
 
 export function customizer(objValue: any, srcValue: any) {
     if (Array.isArray(objValue)) {
-      return srcValue;
+        return srcValue;
     }
 }
 

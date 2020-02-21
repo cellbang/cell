@@ -23,9 +23,9 @@ export class TraceMiddleware implements Middleware {
         Context.setTraceId(traceId);
         ctx.response.setHeader(TRACE_ID_RESPONSE_FIELD, traceId);
         try {
-          await next();
+            await next();
         } finally {
-          this.logger.info(`ending ${method} ${path} with traceId[${traceId}], cost ${Date.now() - now}ms`);
+            this.logger.info(`ending ${method} ${path} with traceId[${traceId}], cost ${Date.now() - now}ms`);
         }
     }
 

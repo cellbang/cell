@@ -134,7 +134,7 @@ export class ApplicationPackage {
             this._componentPackages = collector.collect(this.pkg);
             this._componentPackages.push(this.rootComponentPackage());
             for (const componentPackage of this._componentPackages) {
-               this.componentPackageResolver.resolve(componentPackage);
+                this.componentPackageResolver.resolve(componentPackage);
             }
 
             for (const componentPackage of this._componentPackages) {

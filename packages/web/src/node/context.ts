@@ -3,6 +3,7 @@ import { Session } from './session/session-protocol';
 import { Cookies } from './cookies';
 import { Request, Response } from './http/http-protocol';
 
+// eslint-disable-next-line no-shadow
 export enum AttributeScope { App, Request, Session }
 
 export const CURRENT_CONTEXT_REQUEST_KEY = 'CurrentContextRequest';

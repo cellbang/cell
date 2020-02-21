@@ -59,7 +59,7 @@ export abstract class AbstractApplication implements Application {
             }
         }
 
-       // TODO
+        // TODO
 
         for (const lifecycle of this.lifecycles) {
             if (lifecycle.onStart) {

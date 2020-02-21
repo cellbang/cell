@@ -21,6 +21,7 @@ export function checkPkgVersionConsistency (pkgName: string, projectPath: string
                     if (!pkgVersion) {
                         pkgVersion = json.object[pkg].version;
                     } else {
+                        // eslint-disable-next-line max-len
                         console.log(chalk`malagu {red.bold error} - ${pkgName} package has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(json.object[pkg].version)}], thus will cause some unexpected problem, so pls check`);
                         process.exit(-1);
                     }
@@ -32,6 +33,7 @@ export function checkPkgVersionConsistency (pkgName: string, projectPath: string
 
         Object.keys(json.dependencies).forEach((dep: string) => {
             if (json.dependencies[dep].dependencies && json.dependencies[dep].dependencies[pkgName]) {
+                // eslint-disable-next-line max-len
                 console.log(chalk`malagu {red.bold error} - ${pkgName} package has existed two different versions[${chalk.yellow(dep)} has version ${chalk.yellow(json.dependencies[dep].dependencies[pkgName].version)} of ${pkgName}], thus will cause some unexpected problem, so pls check`);
                 process.exit(-1);
             }

@@ -44,7 +44,7 @@ export const Transactional = <TransactionalDecorator>function (nameOrTransaction
                 }
             };
             if (readOnly) {
-                return await callback(getConnection(name).manager);
+                return callback(getConnection(name).manager);
             } else if (isolation) {
                 return getConnection(name).manager.transaction(isolation, callback);
             } else {

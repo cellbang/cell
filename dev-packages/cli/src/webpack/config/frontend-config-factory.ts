@@ -118,7 +118,7 @@ export class FrontendConfigFactory {
                 new webpack.EnvironmentPlugin({
                     'MALAGU_CONFIG': config
                 }),
-                new ForkTsCheckerWebpackPlugin({ ...{ tslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
+                new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
             ]
         }, config.malagu.webpack ? config.malagu.webpack.config : {});
