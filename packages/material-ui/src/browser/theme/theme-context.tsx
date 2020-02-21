@@ -15,8 +15,8 @@ export class ThemeContext extends React.Component implements Context {
     render(): React.ReactElement {
         const { children } = this.props;
         return (
-        <ThemeProvider theme={this.provider.provide()}>
-            {children}
-        </ThemeProvider>);
+            <ThemeProvider theme={this.provider.provide()}>
+                {children}
+            </ThemeProvider>);
     }
 }

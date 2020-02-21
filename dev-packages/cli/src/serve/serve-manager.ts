@@ -17,15 +17,15 @@ export class ServeManager {
     start() {
         startDevServer(this.context.configurations,
             async (server: http.Server | https.Server, app: Express.Application, compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => {
-            const serveContext = <ServeContext>{
-                ...this.context,
-                server,
-                app,
-                compiler,
-                entryContextProvider
-            };
-            await new HookExecutor().executeServeHooks(serveContext);
-        });
+                const serveContext = <ServeContext>{
+                    ...this.context,
+                    server,
+                    app,
+                    compiler,
+                    entryContextProvider
+                };
+                await new HookExecutor().executeServeHooks(serveContext);
+            });
     }
 
 }

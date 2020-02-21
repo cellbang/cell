@@ -20,7 +20,7 @@ export class ProfileProvider {
 
         if (!quiet && !this.isAllRequiredExist(profile)) {
             await this.promptForProfile();
-            return await this.getProfile();
+            return this.getProfile();
         }
 
         return profile;

@@ -23,7 +23,7 @@
     "ext:build": "concurrently -n compile,lint -c blue,green \"malaguext compile\" \"malaguext lint\"",
     "ext:compile": "tsc -p compile.tsconfig.json",
     "ext:compile:clean": "rimraf lib",
-    "ext:lint": "tslint -c ../../configs/build.tslint.json --project compile.tsconfig.json",
+    "ext:lint": "eslint 'src/**/*' -c ../../configs/build.eslint.js --fix",
     "ext:watch": "tsc -w -p compile.tsconfig.json",
     "ext:docs": "typedoc --tsconfig ../../configs/typedoc-tsconfig.json --options ../../configs/typedoc.json src",
     "ext:docs:clean": "rimraf docs/api",

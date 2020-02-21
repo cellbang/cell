@@ -19,8 +19,8 @@ export class RouteProviderImpl implements RouteProvider {
         this.routeDefered.resolve(this.route);
     }
 
-    async provide(): Promise<Route> {
-        return await this.routeDefered.promise;
+    provide(): Promise<Route> {
+        return this.routeDefered.promise;
     }
 
 }

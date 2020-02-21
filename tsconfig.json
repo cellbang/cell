@@ -13,7 +13,7 @@
     },
     "plugins": [
       {
-        "name": "tslint-language-service"
+        "name": "typescript-eslint-language-service"
       }
     ]
   },

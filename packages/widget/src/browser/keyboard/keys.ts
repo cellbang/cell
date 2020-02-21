@@ -590,7 +590,7 @@ export namespace Key {
 
 }
 
-/*-------------------- Initialize the static key mappings --------------------*/
+/* -------------------- Initialize the static key mappings --------------------*/
 (() => {
     // Set the default key mappings from the constants in the Key namespace
     Object.keys(Key).map(prop => Reflect.get(Key, prop)).filter(key => Key.isKey(key)).forEach(key => {

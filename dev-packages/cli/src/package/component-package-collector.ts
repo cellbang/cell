@@ -28,7 +28,7 @@ export class ComponentPackageCollector {
         if (!pck.dependencies) {
             return;
         }
-        // tslint:disable-next-line:forin
+        // eslint-disable-next-line guard-for-in
         for (const dependency in pck.dependencies) {
             const versionRange = pck.dependencies[dependency]!;
             this.collectPackage(dependency, versionRange);

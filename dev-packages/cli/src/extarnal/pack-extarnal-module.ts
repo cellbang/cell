@@ -219,7 +219,7 @@ export async function packExternalModules(context: HookContext, stats: webpack.S
         accumulator[`script${index}`] = script;
         return accumulator;
     },
-        {}
+    {}
     );
 
     const packager = getPackager(packagerId);

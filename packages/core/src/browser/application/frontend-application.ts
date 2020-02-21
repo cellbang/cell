@@ -98,7 +98,7 @@ export class FrontendApplication extends AbstractApplication {
             }
         }
 
-       // TODO
+        // TODO
 
         for (const lifecycle of this.lifecycles) {
             if (lifecycle.onStart) {

@@ -38,7 +38,7 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
             }
         }
         if (lastError) {
-           throw lastError;
+            throw lastError;
         }
     }
 

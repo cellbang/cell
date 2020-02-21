@@ -66,9 +66,7 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
 
     const [ configuration, backendConfiguration ] = configurations;
 
-    let compiler: webpack.Compiler;
-
-    compiler = createCompiler(configuration, options, log);
+    const compiler = createCompiler(configuration, options, log);
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {
             messages: getDevSuccessInfo((configuration as any).devServer, configuration.name!),

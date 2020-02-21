@@ -46,7 +46,7 @@ export class NPM {
                         !ignoredNpmErrors.some(ignoredError => error.startsWith(error, `npm ERR! ${ignoredError.npmError}`))
                     );
                 },
-                    false
+                false
                 );
 
                 if (!failed && !err.stdout) {
@@ -98,10 +98,10 @@ export class NPM {
         return lockfile;
     }
 
-    async install(cwd: string) {
+    install(cwd: string) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['install'];
-        return await spawnProcess(command, args, { cwd, stdio: 'inherit' });
+        return spawnProcess(command, args, { cwd, stdio: 'inherit' });
     }
 
     prune(cwd: string) {
