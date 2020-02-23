@@ -16,6 +16,7 @@ export class ModuleResolver {
     resolve(componentPackage: ComponentPackage): void {
         this.resolveComponentModule(componentPackage);
         this.resolveHookModule(componentPackage);
+        this.resolveAssertModule(componentPackage);
     }
 
     protected addModuleIfExists(componentPackage: ComponentPackage, modulePaths: string[], modulePath: string): void {
@@ -74,6 +75,24 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'deploy-hook'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'hooks', 'serve'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'serve-hook'));
+
+    }
+
+    resolveAssertModule(componentPackage: ComponentPackage): void {
+        const malaguComponent = componentPackage.malaguComponent!;
+
+        malaguComponent.frontend.asserts = [ ...malaguComponent.asserts || [],  ...malaguComponent.frontend.asserts || [] ];
+        malaguComponent.backend.asserts = [ ...malaguComponent.asserts || [],  ...malaguComponent.backend.asserts || [] ];
+        const frontendAsserts = malaguComponent.frontend.asserts;
+        const backendAsserts = malaguComponent.backend.asserts;
+
+        this.addModuleIfExists(componentPackage, frontendAsserts, join('src', 'asserts'));
+        this.addModuleIfExists(componentPackage, backendAsserts, join('src', 'asserts'));
+        this.addModuleIfExists(componentPackage, frontendAsserts, 'asserts');
+        this.addModuleIfExists(componentPackage, backendAsserts, 'asserts');
+        this.addModuleIfExists(componentPackage, frontendAsserts, 'asserts');
+        this.addModuleIfExists(componentPackage, frontendAsserts, join('browser', 'asserts'));
+        this.addModuleIfExists(componentPackage, backendAsserts, join('node', 'asserts'));
 
     }
 

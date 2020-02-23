@@ -4,9 +4,11 @@ import * as path from 'path';
 import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
+import { existsSync } from 'fs-extra';
 const nodeExternals = require('webpack-node-externals');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 export class BackendConfigFactory {
     create(context: CliContext): webpack.Configuration {
@@ -21,6 +23,17 @@ export class BackendConfigFactory {
             entry = entry[type];
         }
         entry = pkg.resolveModule(entry.split(path.sep).join('/'));
+
+        const asserts = [];
+        for (const assert of pkg.backendAsserts.values()) {
+            const p = path.join(pkg.projectPath, 'node_modules', assert);
+            if (existsSync(p)) {
+                asserts.push(p);
+            } else if (existsSync(assert)) {
+                asserts.push(assert);
+            }
+        }
+
         return merge(<webpack.Configuration>{
             name: BACKEND_TARGET,
             entry: entry,
@@ -47,6 +60,10 @@ export class BackendConfigFactory {
                 }),
                 new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
+                new CopyPlugin(asserts.map(assert => ({
+                    from: assert,
+                    to: path.join(outputPath, 'asserts')
+                })))
             ],
             module: {
                 rules: [

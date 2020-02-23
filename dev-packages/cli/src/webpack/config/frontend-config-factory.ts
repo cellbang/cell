@@ -3,9 +3,11 @@ import * as webpack from 'webpack';
 import * as merge from 'webpack-merge';
 import { CliContext } from '../../context';
 import { FRONTEND_TARGET } from '../../constants';
+import { existsSync } from 'fs-extra';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 export class FrontendConfigFactory {
 
@@ -36,6 +38,17 @@ export class FrontendConfigFactory {
         if (type && typeof entry !== 'string') {
             entry = entry[type];
         }
+
+        const asserts = [];
+        for (const assert of pkg.frontendAsserts.values()) {
+            const p = path.join(pkg.projectPath, 'node_modules', assert);
+            if (existsSync(p)) {
+                asserts.push(p);
+            } else if (existsSync(assert)) {
+                asserts.push(assert);
+            }
+        }
+
         return merge(<webpack.Configuration>{
             name: FRONTEND_TARGET,
             entry: entry,
@@ -120,6 +133,10 @@ export class FrontendConfigFactory {
                 }),
                 new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
+                new CopyPlugin(asserts.map(assert => ({
+                    from: assert,
+                    to: path.join(outputPath, 'asserts')
+                })))
             ]
         }, config.malagu.webpack ? config.malagu.webpack.config : {});
     }
