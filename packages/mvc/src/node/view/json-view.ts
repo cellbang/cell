@@ -11,7 +11,7 @@ export class JsonView implements View {
 
     readonly priority = 500;
 
-    async render(model: any): Promise<void> {
+    async render(model: any, viewName: string): Promise<void> {
         const response = Context.getCurrent().response;
         response.body = JSON.stringify(model);
     }

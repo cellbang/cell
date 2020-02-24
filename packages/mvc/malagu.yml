@@ -2,4 +2,7 @@ malagu:
   mvc: 
     path: /*
     defaultViewName: json
+  mustache:
+    cache: false
+    baseViewDir: asserts/views
     
