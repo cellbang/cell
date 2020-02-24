@@ -11,7 +11,7 @@ export class TextView implements View {
 
     readonly priority = 600;
 
-    async render(model: any): Promise<void> {
+    async render(model: any, viewName: string): Promise<void> {
         const response = Context.getCurrent().response;
         response.body = model;
     }

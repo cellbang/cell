@@ -11,7 +11,6 @@ export interface Logger {
     error(message: any, context?: string): void;
     warn(message: any, context?: string): void;
     debug(message: any, context?: string): void;
-    verbose(message: any, context?: string): void;
 }
 
 @Component(Logger)
@@ -21,40 +20,27 @@ export class LoggerImpl implements Logger {
     constructor(
         @Value(LOGGER_CONFIG) protected readonly config: any
     ) {
-        this.instance.error = log.error;
-        this.instance.warn = log.warn;
-        this.instance.info = log.info;
-        this.instance.debug = log.debug;
-        this.instance.verbose = log.trace;
-
         if (config.level) {
-            log.setDefaultLevel(config.level);
+            log.setLevel(config.level);
         } else {
-            log.setDefaultLevel('error');
+            log.setLevel('error');
         }
     }
 
     error(message: any, context = '') {
-        return this.log('error', message, context);
+        return log.error(message, context);
     }
 
     info(message: any, context = '') {
-        return this.log('info', message, context);
+        return log.info(message, context);
     }
 
     warn(message: any, context = '') {
-        return this.log('warn', message, context);
+        return log.warn(message, context);
     }
 
     debug(message: any, context = '') {
-        return this.log('debug', message, context);
+        return log.debug(message, context);
     }
 
-    verbose(message: any, context = '') {
-        return this.log('verbose', message, context);
-    }
-
-    protected log(logLevel: LogLevel, message: any, context: string) {
-        this.instance[logLevel](message, context);
-    }
 }

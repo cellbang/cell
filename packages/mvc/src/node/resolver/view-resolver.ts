@@ -19,7 +19,7 @@ export class ViewResolverImpl implements ViewResolver {
         for (const view of this.viewProvider.provide()) {
             if (await view.support(viewName)) {
                 Context.getResponse().setHeader('Content-type', view.contentType);
-                await view.render(model);
+                await view.render(model, viewName);
                 return;
             }
         }
