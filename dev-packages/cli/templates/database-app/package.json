@@ -16,7 +16,8 @@
   },
   "devDependencies": {
     "@malagu/cli": "latest",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "eslint": "^6.8.0"
   },
   "scripts": {
     "clean": "rimraf lib dist",

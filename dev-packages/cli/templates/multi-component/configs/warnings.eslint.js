@@ -12,7 +12,8 @@ module.exports = {
             "vscode-languageserver-protocol",
             "vscode-languageserver-types",
             "webpack-dev-middleware",
-            "internal-ip"
+            "internal-ip",
+            "@malagu/core"
         ],
     }
 }
