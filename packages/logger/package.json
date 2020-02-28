@@ -1,0 +1,46 @@
+{
+  "name": "@malagu/logger",
+  "version": "0.0.10",
+  "description": "logger component for pino",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/web": "^0.0.10",
+    "pino": "^5.16.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.0.10",
+    "@types/pino": "^5.15.5"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}
