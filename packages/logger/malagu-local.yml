@@ -1,0 +1,6 @@
+malagu:
+  logger:
+    pinoConfig:
+      level: 'trace'
+      prettyPrint:
+        levelFirst: true
