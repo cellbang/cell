@@ -3,7 +3,7 @@ import * as program from 'commander';
 import * as webpack from 'webpack';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { CliContext, HookContext } from '../context';
-import { packExternalModules } from '../extarnal';
+import { packExternalModules } from '../external';
 import { BACKEND_TARGET } from '../constants';
 const chalk = require('chalk');
 import { HookExecutor } from '../hook/hook-executor';
