@@ -2,7 +2,7 @@ import { LogoutHandler } from './logout-protocol';
 import { Component } from '@malagu/core';
 import { SecurityContext } from '../context';
 
-@Component(LogoutHandler)
+@Component([ SecurityContextLogoutHandler, LogoutHandler ])
 export class SecurityContextLogoutHandler implements LogoutHandler {
 
     async logout(): Promise<void> {
