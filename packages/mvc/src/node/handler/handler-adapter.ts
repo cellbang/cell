@@ -1,10 +1,11 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { PathResolver } from '@malagu/web';
-import { Context, HttpError, RequestMatcher, HandlerAdapter } from '@malagu/web/lib/node';
+import { Context, RequestMatcher, HandlerAdapter } from '@malagu/web/lib/node';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { MVC_HANDLER_ADAPTER_PRIORITY, RouteMetadataMatcher } from './handler-protocol';
 import { MVC_PATH } from '../../common';
 import { PipeManager } from '@malagu/core';
+import { NotFoundAndContinueError } from '@malagu/web/lib/node';
 
 @Component(HandlerAdapter)
 export class MvcHandlerAdapter implements HandlerAdapter {
@@ -55,8 +56,7 @@ export class MvcHandlerAdapter implements HandlerAdapter {
         if (routeMetadata) {
             await this.doHandle(routeMetadata);
         } else {
-            const error = new HttpError(404, `No mapping found: ${ctx.request.method} ${path}`);
-            await this.doHandle(await this.getErrorMetadata(error), error);
+            throw new NotFoundAndContinueError(`No mapping found: ${ctx.request.method} ${path}`);
         }
     }
 

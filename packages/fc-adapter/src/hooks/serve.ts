@@ -57,7 +57,7 @@ export default (context: ServeContext) => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Credentials', 'true');
         const ctx = {
-            credentials: new ProfileProvider().provide(true)
+            credentials: await new ProfileProvider().provide(true)
         };
         await compileDeferred.promise;
         if (!initialized) {
@@ -73,7 +73,7 @@ export default (context: ServeContext) => {
             });
         }
         await initDeferred.promise;
-        doHandler(req, res, context);
+        doHandler(req, res, ctx);
 
     });
 

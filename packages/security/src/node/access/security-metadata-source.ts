@@ -27,7 +27,7 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
         const policies = classPolicies.concat(...methodPolicies)
             .filter(item => item.authorizeType === context.authorizeType);
 
-        const resource = context.target.name;
+        const resource = context.target.constructor.name;
         return {
             authorizeType: context.authorizeType,
             principal: SecurityContext.getAuthentication().principal,

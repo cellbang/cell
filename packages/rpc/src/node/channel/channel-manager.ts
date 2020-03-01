@@ -1,4 +1,4 @@
-import { Context, HttpError } from '@malagu/web/lib/node';
+import { Context, NotFoundError } from '@malagu/web/lib/node';
 import { optional } from 'inversify';
 import { ConnectionHandler, ConnnectionFactory, Channel } from '../../common';
 import { Component, Autowired, ConsoleLogger } from '@malagu/core';
@@ -32,7 +32,7 @@ export class ChannelManager {
                     return channel;
                 }
             }
-            throw new HttpError(404, `Cannot find a service for the path: ${path}`);
+            throw new NotFoundError(`Cannot find a service for the path: ${path}`);
         });
     }
 

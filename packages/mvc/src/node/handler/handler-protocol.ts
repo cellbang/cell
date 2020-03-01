@@ -3,7 +3,7 @@ import { StrOrRegex, ParamMetadata, BodyMetadata, QueryMetadata, RequestHeaderMe
     ResponseSessionMetadata, ViewMetadata, MethodMetadata, CatchMetadata, ControllerMetadata } from '../annotation';
 import { ErrorType } from '@malagu/core';
 
-export const MVC_HANDLER_ADAPTER_PRIORITY = 1900;
+export const MVC_HANDLER_ADAPTER_PRIORITY = 2000;
 
 export const RouteProvider = Symbol('RouteProvider');
 export const RouteMetadataMatcher = Symbol('RouteMetadataMatcher');

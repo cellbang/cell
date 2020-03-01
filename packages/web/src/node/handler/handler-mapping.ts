@@ -1,6 +1,7 @@
 import { Autowired, Component, Prioritizeable } from '@malagu/core';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
-import { HttpError } from '../error';
+import { NotFoundError } from '../error';
+import { NotFoundAndContinueError } from '../error';
 
 @Component(HandlerMapping)
 export class HandlerMappingImpl implements HandlerMapping {
@@ -14,13 +15,26 @@ export class HandlerMappingImpl implements HandlerMapping {
         this.prioritized = Prioritizeable.prioritizeAllSync(this.handlerAdapters).map(c => c.value);
     }
 
-    async getHandler(): Promise<HandlerAdapter> {
+    async handle(): Promise<void> {
+        let lastError;
         for (const handler of this.prioritized) {
             if (await handler.canHandle()) {
-                return handler;
+                try {
+                    await handler.handle();
+                    return;
+                } catch (error) {
+                    if (error instanceof NotFoundAndContinueError) {
+                        lastError = error;
+                    } else {
+                        throw error;
+                    }
+                }
             }
         }
-        throw new HttpError(404, 'Not found a suitable handler adapter');
+        if (lastError) {
+            throw lastError;
+        }
+        throw new NotFoundError('Not found a suitable handler adapter');
     }
 
 }

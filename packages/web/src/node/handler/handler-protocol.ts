@@ -7,7 +7,7 @@ export const HandlerAdapter = Symbol('HandlerAdapter');
 export const HandlerMapping = Symbol('HandlerMapping');
 
 export interface HandlerExecutionChain {
-    execute(handler: HandlerAdapter, middlewares: Middleware[]): Promise<void>;
+    execute(middlewares: Middleware[]): Promise<void>;
 }
 
 export interface HandlerAdapter {
@@ -17,5 +17,5 @@ export interface HandlerAdapter {
 }
 
 export interface HandlerMapping {
-    getHandler(): Promise<HandlerAdapter>;
+    handle(): Promise<void>;
 }

@@ -1,0 +1,15 @@
+backend:
+  malagu:
+    authing:
+      userPool:
+        id:
+        secret:
+      sso:
+        id:
+        secret:
+        domain:
+        redirectUri: http://localhost:3000/authing/handle
+      guardOptions:
+        isSSO: true
+    security:
+      loginUrl: /authing/handle
