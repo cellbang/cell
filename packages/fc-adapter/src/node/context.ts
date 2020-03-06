@@ -70,7 +70,7 @@ export function ParseHttpTriggerContext(req: any, res: any, context: any) {
         request.connection = {} as any;
     }
     if (req.headers['content-type'] === 'application/json') {
-        request.body = JSON.parse(request.body);
+        request.body = request.body ? JSON.parse(request.body) : {};
     }
     const response = {
         setHeader(name: string, value: number | string | string[]): void {
