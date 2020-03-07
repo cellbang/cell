@@ -16,7 +16,7 @@ export class BackendConfigFactory {
         const outputPath = path.resolve(pkg.projectPath, dest || 'dist', BACKEND_TARGET);
 
         const config = pkg.backendConfig;
-        const webpackConfig = config.webpack || {};
+        const webpackConfig = config.malagu.webpack || {};
         let entry: any = config.entry;
         const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && entry && typeof entry !== 'string') {
@@ -79,7 +79,7 @@ export class BackendConfigFactory {
                     },
                 ]
             }
-        }, config.malagu.webpack ? config.malagu.webpack.config : {});
+        }, webpackConfig ? webpackConfig.config : {});
     }
 
     support(context: CliContext): boolean {
