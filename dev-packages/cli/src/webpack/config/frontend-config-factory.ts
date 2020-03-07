@@ -39,13 +39,13 @@ export class FrontendConfigFactory {
             entry = entry[type];
         }
 
-        const asserts = [];
-        for (const assert of pkg.frontendAsserts.values()) {
+        const assets = [];
+        for (const assert of pkg.frontendAssets.values()) {
             const p = path.join(pkg.projectPath, 'node_modules', assert);
             if (existsSync(p)) {
-                asserts.push(p);
+                assets.push(p);
             } else if (existsSync(assert)) {
-                asserts.push(assert);
+                assets.push(assert);
             }
         }
 
@@ -133,9 +133,9 @@ export class FrontendConfigFactory {
                 }),
                 new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
-                new CopyPlugin(asserts.map(assert => ({
+                new CopyPlugin(assets.map(assert => ({
                     from: assert,
-                    to: path.join(outputPath, 'asserts')
+                    to: path.join(outputPath, 'assets')
                 })))
             ]
         }, webpackConfig ? webpackConfig.config : {});

@@ -4,5 +4,5 @@ malagu:
     defaultViewName: json
   mustache:
     cache: false
-    baseViewDir: asserts/views
+    baseViewDir: assets/views
     

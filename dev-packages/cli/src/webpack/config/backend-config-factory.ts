@@ -24,13 +24,13 @@ export class BackendConfigFactory {
         }
         entry = pkg.resolveModule(entry.split(path.sep).join('/'));
 
-        const asserts = [];
-        for (const assert of pkg.backendAsserts.values()) {
+        const assets = [];
+        for (const assert of pkg.backendAssets.values()) {
             const p = path.join(pkg.projectPath, 'node_modules', assert);
             if (existsSync(p)) {
-                asserts.push(p);
+                assets.push(p);
             } else if (existsSync(assert)) {
-                asserts.push(assert);
+                assets.push(assert);
             }
         }
 
@@ -38,6 +38,10 @@ export class BackendConfigFactory {
             name: BACKEND_TARGET,
             entry: entry,
             target: 'node',
+            node: {
+                __dirname: false,
+                __filename: false
+            },
             externals: dev ? [nodeExternals({
                 whitelist: pkg.componentPackages.map(cp => new RegExp(cp.name))
             })] : undefined,
@@ -60,9 +64,9 @@ export class BackendConfigFactory {
                 }),
                 new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...webpackConfig.forkTSCheckerWebpackPlugin }),
                 new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false }),
-                new CopyPlugin(asserts.map(assert => ({
+                new CopyPlugin(assets.map(assert => ({
                     from: assert,
-                    to: path.join(outputPath, 'asserts')
+                    to: path.join(outputPath, 'assets')
                 })))
             ],
             module: {

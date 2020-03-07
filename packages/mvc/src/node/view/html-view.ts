@@ -8,8 +8,6 @@ import { readFileSync } from 'fs-extra';
 @Component(View)
 export class HtmlView implements View {
 
-    static VIEW_NAME = 'json';
-
     readonly contentType = 'text/html';
 
     readonly priority = 500;

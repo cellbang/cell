@@ -96,8 +96,8 @@ export class ApplicationPackage {
 
     protected _frontendModules: Map<string, string> | undefined;
     protected _backendModules: Map<string, string> | undefined;
-    protected _frontendAsserts: Map<string, string> | undefined;
-    protected _backendAsserts: Map<string, string> | undefined;
+    protected _frontendAssets: Map<string, string> | undefined;
+    protected _backendAssets: Map<string, string> | undefined;
     protected _initHookModules: Map<string, string> | undefined;
     protected _buildHookModules: Map<string, string> | undefined;
     protected _serveHookModules: Map<string, string> | undefined;
@@ -179,18 +179,18 @@ export class ApplicationPackage {
         return this._backendModules;
     }
 
-    get frontendAsserts(): Map<string, string> {
-        if (!this._frontendAsserts) {
-            this._frontendAsserts = this.computeModules('asserts', FRONTEND_TARGET);
+    get frontendAssets(): Map<string, string> {
+        if (!this._frontendAssets) {
+            this._frontendAssets = this.computeModules('assets', FRONTEND_TARGET);
         }
-        return this._frontendAsserts;
+        return this._frontendAssets;
     }
 
-    get backendAsserts(): Map<string, string> {
-        if (!this._backendAsserts) {
-            this._backendAsserts = this.computeModules('asserts', BACKEND_TARGET);
+    get backendAssets(): Map<string, string> {
+        if (!this._backendAssets) {
+            this._backendAssets = this.computeModules('assets', BACKEND_TARGET);
         }
-        return this._backendAsserts;
+        return this._backendAssets;
     }
 
     get initHookModules() {
