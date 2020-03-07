@@ -32,7 +32,7 @@ export class FrontendConfigFactory {
         const outputPath = path.resolve(pkg.projectPath, dest || 'dist', FRONTEND_TARGET);
 
         const config = this.getConfig(context);
-        const webpackConfig = config.webpack || {};
+        const webpackConfig = config.malagu.webpack || {};
         let entry = pkg.resolveModule(config.entry);
         const type = config.deployConfig ? config.deployConfig.type : undefined;
         if (type && typeof entry !== 'string') {
@@ -138,7 +138,7 @@ export class FrontendConfigFactory {
                     to: path.join(outputPath, 'asserts')
                 })))
             ]
-        }, config.malagu.webpack ? config.malagu.webpack.config : {});
+        }, webpackConfig ? webpackConfig.config : {});
     }
 
     support(context: CliContext): boolean {
