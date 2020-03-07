@@ -81,18 +81,17 @@ export class ModuleResolver {
     resolveAssertModule(componentPackage: ComponentPackage): void {
         const malaguComponent = componentPackage.malaguComponent!;
 
-        malaguComponent.frontend.asserts = [ ...malaguComponent.asserts || [],  ...malaguComponent.frontend.asserts || [] ];
-        malaguComponent.backend.asserts = [ ...malaguComponent.asserts || [],  ...malaguComponent.backend.asserts || [] ];
-        const frontendAsserts = malaguComponent.frontend.asserts;
-        const backendAsserts = malaguComponent.backend.asserts;
+        malaguComponent.frontend.assets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
+        malaguComponent.backend.assets = [ ...malaguComponent.assets || [],  ...malaguComponent.backend.assets || [] ];
+        const frontendAssets = malaguComponent.frontend.assets;
+        const backendAssets = malaguComponent.backend.assets;
 
-        this.addModuleIfExists(componentPackage, frontendAsserts, join('src', 'asserts'));
-        this.addModuleIfExists(componentPackage, backendAsserts, join('src', 'asserts'));
-        this.addModuleIfExists(componentPackage, frontendAsserts, 'asserts');
-        this.addModuleIfExists(componentPackage, backendAsserts, 'asserts');
-        this.addModuleIfExists(componentPackage, frontendAsserts, 'asserts');
-        this.addModuleIfExists(componentPackage, frontendAsserts, join('browser', 'asserts'));
-        this.addModuleIfExists(componentPackage, backendAsserts, join('node', 'asserts'));
+        this.addModuleIfExists(componentPackage, frontendAssets, join('src', 'assets'));
+        this.addModuleIfExists(componentPackage, backendAssets, join('src', 'assets'));
+        this.addModuleIfExists(componentPackage, frontendAssets, 'assets');
+        this.addModuleIfExists(componentPackage, backendAssets, 'assets');
+        this.addModuleIfExists(componentPackage, frontendAssets, join('browser', 'assets'));
+        this.addModuleIfExists(componentPackage, backendAssets, join('node', 'assets'));
 
     }
 
