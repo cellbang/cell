@@ -1,0 +1,8 @@
+frontend:
+    malagu:
+      webpack:
+        config:
+          externals:
+            material-ui: window["material-ui"]
+        htmlWebpackTagsPlugin:
+          material-ui: https://unpkg.com/@material-ui/core@4/umd/material-ui.production.min.js

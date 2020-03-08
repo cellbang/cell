@@ -30,7 +30,7 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "malagu-cdn.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
