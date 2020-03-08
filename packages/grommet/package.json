@@ -8,9 +8,9 @@
     "@malagu/react": "^0.0.10",
     "grommet": "^2.9.0",
     "grommet-icons": "^4.4.0",
-    "styled-components": "^4.4.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "^4.4.1"
   },
   "publishConfig": {
     "access": "public"

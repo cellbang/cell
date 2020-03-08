@@ -1,3 +1,6 @@
+import { ApplicationPackage } from '../package';
+import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+
 const url = require('url');
 const ip = require('internal-ip');
 const chalk = require('chalk');
@@ -45,4 +48,31 @@ export function getDevSuccessInfo(options: any, name: string): string[] {
         );
     }
     return infos;
+}
+
+export function getWebpackConfig(pkg: ApplicationPackage, target: string) {
+    return getMalaguConfig(pkg, target).webpack || {};
+
+}
+
+export function getMalaguConfig(pkg: ApplicationPackage, target: string) {
+    return getConfig(pkg, target).malagu || {};
+}
+
+export function getConfig(pkg: ApplicationPackage, target: string) {
+    return (pkg as any)[`${target}Config`] || {};
+}
+
+export function support(pkg: ApplicationPackage, target: string) {
+    const targets = (pkg as any)[`${target}Config`].targets || [FRONTEND_TARGET, BACKEND_TARGET];
+    return (pkg as any)[`${target}Modules`].size > 0 && targets.includes(target);
+
+}
+
+export function getPort(pkg: ApplicationPackage, target: string, port?: number) {
+    if (port !== undefined) {
+        return port;
+    }
+    const server = getConfig(pkg, target).server || { port: 3000 };
+    return server.port;
 }

@@ -69,6 +69,7 @@ export class ApplicationPackage {
         delete config.backend;
         delete config.frontend;
         this._frontendConfig = mergeWith(config, this.props.frontend, customizer);
+        this._frontendConfig.mode = [...this._frontendConfig.mode || [], ...this.options.mode];
         return this._frontendConfig;
     }
 
@@ -81,6 +82,7 @@ export class ApplicationPackage {
         delete config.backend;
         delete config.frontend;
         this._backendConfig = mergeWith(config, this.props.backend, customizer);
+        this._backendConfig.mode = [...this._backendConfig.mode || [], ...this.options.mode];
         return this._backendConfig;
     }
 
