@@ -1,0 +1,10 @@
+frontend:
+    malagu:
+      webpack:
+        config:
+          externals:
+            antd: antd
+        htmlWebpackTagsPlugin:
+          antd-css: https://unpkg.com/antd@4/dist/antd.min.css
+          antd: https://unpkg.com/antd@4/dist/antd.min.js
+
