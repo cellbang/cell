@@ -1,7 +1,7 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { Context, RequestMatcher } from '@malagu/web/lib/node';
 import { UserStore, UserChecker, BadCredentialsError, AuthenticationProvider,
-    Authentication, DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY } from '@malagu/security/lib/node';
+    Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY } from '@malagu/security/lib/node';
 import axios from 'axios';
 import * as qs from 'querystring';
 import { AuthingProvider } from './authing-provider';
@@ -27,7 +27,7 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
     @Autowired(AuthingProvider)
     protected readonly authingProvider: AuthingProvider;
 
-    priority = DEFAULT_AUTHENTICATION_PROVIDER__PRIORITY + 100;
+    priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY + 100;
 
     async authenticate(): Promise<Authentication> {
         const request = Context.getRequest();
