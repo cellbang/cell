@@ -37,9 +37,6 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
             throw new BadCredentialsError('Bad credentials');
         }
 
-        Context.getResponse().statusCode = 302;
-        Context.getResponse().setHeader('Location', this.options.loginSuccessUrl);
-
         return {
             principal: user,
             credentials: '',
