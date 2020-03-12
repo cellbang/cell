@@ -27,7 +27,7 @@ export class BaseConfigFactory {
                     })
                 ]
             },
-            devtool: dev ? 'cheap-eval-source-map' : undefined,
+            devtool: dev ? 'eval-cheap-source-map' : undefined,
             stats: 'errors-only',
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js' ]
@@ -95,7 +95,10 @@ export class BaseConfigFactory {
                         {
                             test: /\.css$/,
                             exclude: /\.useable\.css$/,
-                            loader: 'style-loader!css-loader'
+                            use: [
+                                'style-loader',
+                                'css-loader'
+                            ]
                         },
                         {
                             test: /\.useable\.css$/,
@@ -117,7 +120,11 @@ export class BaseConfigFactory {
                         },
                         {
                             test: /\.woff(2)?(\\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                            loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+                            loader: 'url-loader',
+                            options: {
+                                limit: 10000,
+                                mimetype: 'application/font-woff'
+                            }
                         },
                         {
                             test: /\.wasm$/,

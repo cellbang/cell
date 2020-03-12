@@ -50,7 +50,7 @@ export class ComponentPackageLoader {
             // noop
         }
         if (fullConfigPath) {
-            return yaml.safeLoad(readFileSync(fullConfigPath, { encoding: 'utf8' }));
+            return yaml.load(readFileSync(fullConfigPath, { encoding: 'utf8' }));
         }
     }
 }

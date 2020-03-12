@@ -1,5 +1,6 @@
 import { ApplicationPackage } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import * as path from 'path';
 
 const url = require('url');
 const ip = require('internal-ip');
@@ -75,4 +76,8 @@ export function getPort(pkg: ApplicationPackage, target: string, port?: number) 
     }
     const server = getConfig(pkg, target).server || { port: 3000 };
     return server.port;
+}
+
+export function getHomePath(pkg: ApplicationPackage, target: string) {
+    return path.resolve(pkg.projectPath, '.malagu', target);
 }

@@ -1,4 +1,4 @@
-import { HookContext, customizer, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
+import { HookContext, customizer, BACKEND_TARGET, FRONTEND_TARGET, getHomePath } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
 import { resolve, join, relative } from 'path';
 import mergeWith = require('lodash.mergewith');
@@ -76,8 +76,8 @@ export default async (context: HookContext) => {
 };
 
 async function deployFrontend(context: HookContext, deployConfig: any) {
-    const { pkg, prod, dest } = context;
-    frontendCodeDir = resolve(pkg.projectPath, dest, FRONTEND_TARGET);
+    const { pkg, prod } = context;
+    frontendCodeDir = resolve(getHomePath(pkg, FRONTEND_TARGET), 'dist');
     if (!existsSync(frontendCodeDir)) {
         console.log(chalk`{yellow Please build frontend first with "malagu build"}`);
         return;
@@ -139,8 +139,8 @@ async function doUploadFrontendCode(codeDir: string, prefix: string = '') {
 }
 
 async function deployBackend(context: HookContext, deployConfig: any) {
-    const { pkg, prod, dest } = context;
-    const backendCodeDir = resolve(pkg.projectPath, dest, BACKEND_TARGET);
+    const { pkg, prod } = context;
+    const backendCodeDir = resolve(getHomePath(pkg, BACKEND_TARGET), 'dist');
     if (!existsSync(backendCodeDir)) {
         console.log(chalk`{yellow Please build backend first with "malagu build"}`);
         return;

@@ -2,9 +2,10 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import { CliContext } from '../../context';
-import { existsSync } from 'fs-extra';
-import { getWebpackConfig, getConfig } from '../utils';
-import { FRONTEND_TARGET } from '../../constants';
+import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
+import { getWebpackConfig, getConfig, getHomePath } from '../utils';
+import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
+import yaml = require('js-yaml');
 const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -43,12 +44,17 @@ export class CopyWepackPluginConfigFactory {
 export class EnvironmentPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
         const { pkg } = context;
-
+        const c = getConfig(pkg, target);
+        const homePath = getHomePath(pkg, target);
+        ensureDirSync(homePath);
+        const configPath = path.join(homePath, CONFIG_FILE);
+        yaml.dump(c);
+        writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
         return {
             plugins: [
                 new webpack.EnvironmentPlugin({
-                    'MALAGU_CONFIG': getConfig(pkg, target)
-                }),
+                    'MALAGU_CONFIG': c
+                })
             ]
         };
     }
@@ -78,10 +84,20 @@ export class ForkTsCheckerWebpackPluginConfigFactory {
 export class HardSourceWebpackPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
         const { pkg } = context;
+        const homePath = getHomePath(pkg, target);
+        const configPath = path.join(homePath, CONFIG_FILE);
+        const relativeConfigPath = path.relative(pkg.projectPath, configPath);
 
         return {
             plugins: [
                 new HardSourceWebpackPlugin({
+                    ...{
+                        environmentHash: {
+                            root: pkg.projectPath,
+                            directories: [],
+                            files: ['package-lock.json', 'yarn.lock', relativeConfigPath],
+                        }
+                    },
                     ...getWebpackConfig(pkg, target).hardSourceWebpackPlugin || {}
                 })
             ]

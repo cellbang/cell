@@ -2,11 +2,12 @@
 import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 import * as path from 'path';
+import { getHomePath } from '../utils';
 
 export class OutputConfigFactory {
     create(config: any, context: CliContext, target: string) {
-        const { pkg, dest } = context;
-        const outputPath = path.resolve(pkg.projectPath, dest || 'dist', target);
+        const { pkg } = context;
+        const outputPath = path.join(getHomePath(pkg, target), 'dist');
 
         const baseOutputConfig = {
             path: outputPath

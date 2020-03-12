@@ -52,7 +52,7 @@ export class ApplicationPackage {
             return this._rootConfig;
         }
         if (existsSync(this.path(CONFIG_FILE))) {
-            this._rootConfig = yaml.safeLoad(readFileSync(this.path(CONFIG_FILE), { encoding: 'utf8' }));
+            this._rootConfig = yaml.load(readFileSync(this.path(CONFIG_FILE), { encoding: 'utf8' }));
         }
         if (this._rootConfig && !this._rootConfig.malagu) {
             this._rootConfig.malagu = {};
@@ -69,7 +69,11 @@ export class ApplicationPackage {
         delete config.backend;
         delete config.frontend;
         this._frontendConfig = mergeWith(config, this.props.frontend, customizer);
-        this._frontendConfig.mode = [...this._frontendConfig.mode || [], ...this.options.mode];
+        let mode = this._frontendConfig.mode || [];
+        if (!Array.isArray(mode)) {
+            mode = [mode];
+        }
+        this._frontendConfig.mode = Array.from(new Set([...mode, ...this.options.mode]));
         return this._frontendConfig;
     }
 
@@ -82,6 +86,11 @@ export class ApplicationPackage {
         delete config.backend;
         delete config.frontend;
         this._backendConfig = mergeWith(config, this.props.backend, customizer);
+        let mode = this._backendConfig.mode || [];
+        if (!Array.isArray(mode)) {
+            mode = [mode];
+        }
+        this._backendConfig.mode = Array.from(new Set([...mode, ...this.options.mode]));;
         this._backendConfig.mode = [...this._backendConfig.mode || [], ...this.options.mode];
         return this._backendConfig;
     }
