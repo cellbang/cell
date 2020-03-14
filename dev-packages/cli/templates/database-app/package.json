@@ -19,7 +19,7 @@
     "rimraf": "^2.6.3"
   },
   "scripts": {
-    "clean": "rimraf lib dist",
+    "clean": "rimraf lib dist .malagu",
     "build": "malagu build",
     "start": "malagu serve",
     "deploy": "malagu deploy"

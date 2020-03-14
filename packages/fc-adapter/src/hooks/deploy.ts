@@ -38,7 +38,7 @@ export default async (context: HookContext) => {
             triggerType: 'http',
             triggerConfig: {
                 authType: 'anonymous',
-                methods: ['GET', 'POST']
+                methods: ['GET', 'POST', 'PUT', 'DELETE']
             }
         },
         apiGateway: {

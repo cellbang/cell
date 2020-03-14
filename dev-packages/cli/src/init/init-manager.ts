@@ -1,12 +1,12 @@
 import { resolve } from 'path';
 import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
-import request = require('request-promise');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
 import { CliContext, HookContext } from '../context';
 import * as ora from 'ora';
+import axios from 'axios';
 import { getPackager } from '../packager';
 const chalk = require('chalk');
 
@@ -101,8 +101,7 @@ export class InitManager {
                 if (!this.source) {
                     const spinner = ora({ text: 'loading...', discardStdin: false }).start();
                     const options = {
-                        uri: SEARCH_TEMPLATE_REPO_URI,
-                        json: true,
+                        url: SEARCH_TEMPLATE_REPO_URI,
                         timeout: 5000,
                         headers: {
                             'User-Agent': 'Malagu CLI'
@@ -110,7 +109,7 @@ export class InitManager {
                     };
                     const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
                     try {
-                        const { items } = await request(options);
+                        const { items } = await axios.request(options);
                         const thirdPartyTemplates = items.map((item: any) => this.toThirdPartyTemplate(item));
                         this.source = [...officialTemplates, ...thirdPartyTemplates];
                     } catch (error) {

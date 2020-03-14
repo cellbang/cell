@@ -91,7 +91,6 @@ export class ApplicationPackage {
             mode = [mode];
         }
         this._backendConfig.mode = Array.from(new Set([...mode, ...this.options.mode]));;
-        this._backendConfig.mode = [...this._backendConfig.mode || [], ...this.options.mode];
         return this._backendConfig;
     }
 

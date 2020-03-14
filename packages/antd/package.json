@@ -2,14 +2,12 @@
   "name": "@malagu/antd",
   "version": "0.0.10",
   "description": "",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/browser/index.js",
+  "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/react": "^0.0.10",
-    "@babel/core": "^7.8.7",
     "antd": "^4.0.2",
-    "babel-loader": "^8.0.6",
-    "less-loader": "^5.0.0",
+    "dayjs": "^1.8.22",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
