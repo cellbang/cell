@@ -82,6 +82,9 @@ export class BaseConfigFactory {
                     net: 'empty',
                     crypto: 'empty'
                 },
+                performance: {
+                    hints: false
+                },
                 stats: 'errors-only',
                 module: {
                     rules: [

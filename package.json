@@ -32,7 +32,6 @@
     "eslint-plugin-no-null": "^1.0.2",
     "ignore-styles": "^5.0.1",
     "istanbul": "^0.4.5",
-    "istanbul-instrumenter-loader": "^3.0.1",
     "jsdom": "^11.5.1",
     "lerna": "^2.2.0",
     "mocha": "^3.4.2",
@@ -62,5 +61,8 @@
   "workspaces": [
     "dev-packages/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "@wdio/cli": "^5.21.0"
+  }
 }
