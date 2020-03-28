@@ -5,8 +5,12 @@ import { getConfig } from '../utils';
 
 export class EntryConfigFactory {
     create(config: any, context: CliContext, target: string) {
-        const { pkg } = context;
-        let { entry, deployConfig } = getConfig(pkg, target);
+        const { pkg, dev } = context;
+        let { entry, deployConfig, devEntry } = getConfig(pkg, target);
+
+        if (dev) {
+            entry = devEntry || entry;
+        }
 
         const type = deployConfig ? deployConfig.type : undefined;
         if (type && entry && typeof entry !== 'string') {

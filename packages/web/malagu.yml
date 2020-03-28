@@ -11,7 +11,7 @@ malagu:
   trace:
     responseField: 'X-Malagu-Trace-ID'
 backend:
-  entry: lib/node/application/dev-application-entry
+  devEntry: lib/node/application/dev-application-entry
   malagu:
     cookies:
       keys:

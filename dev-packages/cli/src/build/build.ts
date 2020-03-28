@@ -11,7 +11,7 @@ import { HookExecutor } from '../hook/hook-executor';
 program
     .name('malagu build')
     .usage('[options]')
-    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
+    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : ['prod'])
     .description('build a application')
     .parse(process.argv);
 (async () => {
