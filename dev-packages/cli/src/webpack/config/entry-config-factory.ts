@@ -16,7 +16,7 @@ export class EntryConfigFactory {
         if (type && entry && typeof entry !== 'string') {
             entry = entry[type];
         }
-        entry = pkg.resolveModule(entry.split(path.sep).join('/'));
+        entry = pkg.resolveModule((entry as string).split(path.sep).join('/'));
 
         return {
             entry

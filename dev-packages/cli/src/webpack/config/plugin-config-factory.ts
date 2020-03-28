@@ -71,7 +71,7 @@ export class ForkTsCheckerWebpackPluginConfigFactory {
         return {
             plugins: [
                 new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...getWebpackConfig(pkg, target).forkTSCheckerWebpackPlugin || {} }),
-                new ForkTsCheckerNotifierWebpackPlugin({ title: 'TypeScript', excludeWarnings: false })
+                new ForkTsCheckerNotifierWebpackPlugin({ title: `TypeScript(${target})`, excludeWarnings: false })
             ]
         };
     }

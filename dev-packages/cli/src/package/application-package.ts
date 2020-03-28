@@ -60,38 +60,58 @@ export class ApplicationPackage {
         return this._rootConfig || { malagu: {} };
     }
 
-    protected _frontendConfig: Props | undefined;
-    get frontendConfig(): Props {
-        if (this._frontendConfig) {
-            return this._frontendConfig;
+    getConfig(target: string): Props {
+        const self: any = this;
+        const configProperty = `_${target}Config`;
+        if (self[configProperty]) {
+            return self[configProperty];
         }
-        const config = { ...this.props };
+        let config = { ...this.props };
         delete config.backend;
         delete config.frontend;
-        this._frontendConfig = mergeWith(config, this.props.frontend, customizer);
-        let mode = this._frontendConfig.mode || [];
+        config = mergeWith(config, this.props[target], customizer);
+
+        let mode = config.mode || [];
         if (!Array.isArray(mode)) {
             mode = [mode];
         }
-        this._frontendConfig.mode = Array.from(new Set([...mode, ...this.options.mode]));
-        return this._frontendConfig;
+        config.mode = Array.from(new Set([...mode, ...this.options.mode]));
+
+        if (!this._frontendConfig && !this._backendConfig) {
+            for (const m of config.mode) {
+                console.log(chalk`malagu {yellow.bold mode} - {bold ${m}}`);
+            }
+
+            for (const componentPackage of this.componentPackages) {
+                console.log(chalk`malagu {green.bold component} - ${ componentPackage.name }@${ componentPackage.version }`);
+            }
+        }
+
+        config.targets = config.targets || [FRONTEND_TARGET, BACKEND_TARGET];
+        const { targets } = config;
+        if (targets.includes(target)) {
+            console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
+            for (const componentPackage of self._componentPackages) {
+                const malaguComponent = <Component>componentPackage.malaguComponent;
+                for (const modulePath of [...malaguComponent[target].modules || []]) {
+                    console.log(chalk`malagu {cyan.bold module} - ${componentPackage.name}/${ modulePath }`);
+                }
+            }
+        }
+
+        self[configProperty] = config;
+
+        return config;
+    }
+
+    protected _frontendConfig: Props | undefined;
+    get frontendConfig(): Props {
+        return this.getConfig(FRONTEND_TARGET);
     }
 
     protected _backendConfig: Props | undefined;
     get backendConfig(): Props {
-        if (this._backendConfig) {
-            return this._backendConfig;
-        }
-        const config = { ...this.props };
-        delete config.backend;
-        delete config.frontend;
-        this._backendConfig = mergeWith(config, this.props.backend, customizer);
-        let mode = this._backendConfig.mode || [];
-        if (!Array.isArray(mode)) {
-            mode = [mode];
-        }
-        this._backendConfig.mode = Array.from(new Set([...mode, ...this.options.mode]));;
-        return this._backendConfig;
+        return this.getConfig(BACKEND_TARGET);
     }
 
     protected _pkg: PublishedNodePackage | undefined;
@@ -135,10 +155,6 @@ export class ApplicationPackage {
             const modeForOption = this.options.mode;
             const merged = Array.from(new Set<string>([...modeForConfig, ...modeForOption]));
 
-            for (const mode of merged) {
-                console.log(chalk`malagu {yellow.bold mode} - ${mode}`);
-            }
-
             const collector = new ComponentPackageCollector(
                 this,
                 merged
@@ -149,12 +165,6 @@ export class ApplicationPackage {
                 this.componentPackageResolver.resolve(componentPackage);
             }
 
-            for (const componentPackage of this._componentPackages) {
-                const malaguComponent = <Component>componentPackage.malaguComponent;
-                for (const modulePath of [...malaguComponent.frontend.modules || [], ...malaguComponent.backend.modules || []]) {
-                    console.log(chalk`malagu {cyan.bold module} - ${componentPackage.name}/${ modulePath }`);
-                }
-            }
         }
 
         return this._componentPackages;

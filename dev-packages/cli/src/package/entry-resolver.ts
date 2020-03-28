@@ -12,6 +12,8 @@ export class EntryResolver {
         if (malaguComponent) {
             malaguComponent.frontend.entry = this.doResolveEntry(componentPackage, malaguComponent.frontend.entry || malaguComponent.entry);
             malaguComponent.backend.entry = this.doResolveEntry(componentPackage, malaguComponent.backend.entry || malaguComponent.entry);
+            malaguComponent.frontend.devEntry = this.doResolveEntry(componentPackage, malaguComponent.frontend.devEntry || malaguComponent.devEntry);
+            malaguComponent.backend.devEntry = this.doResolveEntry(componentPackage, malaguComponent.backend.devEntry || malaguComponent.devEntry);
         }
     }
 
