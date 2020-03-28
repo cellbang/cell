@@ -14,7 +14,6 @@ import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigFactory } from './component-config-factory';
 import { support } from '../utils';
-const chalk = require('chalk');
 
 export class ConfigFactory {
     async create(context: CliContext): Promise<webpack.Configuration[]> {
@@ -48,7 +47,6 @@ export class ConfigFactory {
                     config = merge(config, configFactory.create(config, context, target) as any);
                 }
             }
-            console.log(chalk`malagu {green.bold target} - ${target}`);
             configurations.push(config);
         }
 

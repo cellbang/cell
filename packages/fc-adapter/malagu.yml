@@ -4,6 +4,9 @@ malagu:
   web: 
     serveHooks: false
 backend: 
+  devEntry: 
+    http: lib/node/http-application-entry
+    api-gateway: lib/node/api-gateway-application-entry
   entry: 
     http: lib/node/http-application-entry
     api-gateway: lib/node/api-gateway-application-entry

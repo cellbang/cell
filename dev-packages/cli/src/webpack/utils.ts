@@ -61,11 +61,11 @@ export function getMalaguConfig(pkg: ApplicationPackage, target: string) {
 }
 
 export function getConfig(pkg: ApplicationPackage, target: string) {
-    return (pkg as any)[`${target}Config`] || {};
+    return pkg.getConfig(target) || {};
 }
 
 export function support(pkg: ApplicationPackage, target: string) {
-    const targets = (pkg as any)[`${target}Config`].targets || [FRONTEND_TARGET, BACKEND_TARGET];
+    const targets = pkg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
     return (pkg as any)[`${target}Modules`].size > 0 && targets.includes(target);
 
 }
