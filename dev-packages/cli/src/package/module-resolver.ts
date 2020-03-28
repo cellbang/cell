@@ -16,7 +16,7 @@ export class ModuleResolver {
     resolve(componentPackage: ComponentPackage): void {
         this.resolveComponentModule(componentPackage);
         this.resolveHookModule(componentPackage);
-        this.resolveAssertModule(componentPackage);
+        this.resolveAssetModule(componentPackage);
     }
 
     protected addModuleIfExists(componentPackage: ComponentPackage, modulePaths: string[], modulePath: string): void {
@@ -78,7 +78,7 @@ export class ModuleResolver {
 
     }
 
-    resolveAssertModule(componentPackage: ComponentPackage): void {
+    resolveAssetModule(componentPackage: ComponentPackage): void {
         const malaguComponent = componentPackage.malaguComponent!;
 
         malaguComponent.frontend.assets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
