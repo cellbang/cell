@@ -80,7 +80,7 @@
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.11",
+    "@malagu/ext-scripts": "0.1.0-next.d3f71ff7",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0",
     "@types/friendly-errors-webpack-plugin": "^0.1.2",

@@ -193,6 +193,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@malagu/ext-scripts@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.npm.taobao.org/@malagu/ext-scripts/download/@malagu/ext-scripts-0.0.11.tgz#8d3bb926b0b76fe2721b0b467541ce510466fd60"
+
 "@material-ui/core@^4.6.0":
   version "4.8.0"
   resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.8.0.tgz#8fb4f4df2b35e3e781b1eec17d4aaf388edf3099"
