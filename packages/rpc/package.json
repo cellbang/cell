@@ -1,11 +1,11 @@
 {
   "name": "@malagu/rpc",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^0.0.11",
+    "@malagu/web": "^0.0.12",
     "reconnecting-websocket": "^4.1.10"
   },
   "publishConfig": {
