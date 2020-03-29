@@ -7,7 +7,6 @@ malagu:
   server:
     path: /
     port: 3000
-    endpoint: http://localhost:{port}
   trace:
     responseField: 'X-Malagu-Trace-ID'
 backend:

@@ -1,6 +1,4 @@
 malagu: 
-  server: 
-    endpoint: http://localhost:{port}
   web: 
     serveHooks: false
 backend: 
