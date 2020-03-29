@@ -37,7 +37,8 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.11"
+    "@malagu/ext-scripts": "^0.0.11",
+    "webpack-merge": "^4.2.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

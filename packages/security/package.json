@@ -2,6 +2,8 @@
   "name": "@malagu/security",
   "version": "0.0.11",
   "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/web": "^0.0.11",
     "crypto-js": "^3.1.9-1"

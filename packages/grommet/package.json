@@ -2,8 +2,8 @@
   "name": "@malagu/grommet",
   "version": "0.0.11",
   "description": "",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/browser/index.js",
+  "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/react": "^0.0.11",
     "grommet": "^2.9.0",

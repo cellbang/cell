@@ -2,8 +2,8 @@
   "name": "@malagu/react",
   "version": "0.0.11",
   "description": "",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/browser/index.js",
+  "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/core": "^0.0.11",
     "history": "^4.10.1",
