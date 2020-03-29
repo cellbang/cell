@@ -1,11 +1,11 @@
 {
   "name": "@malagu/react",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.12",
+    "@malagu/core": "^0.0.13",
     "history": "^4.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

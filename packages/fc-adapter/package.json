@@ -1,6 +1,6 @@
 {
   "name": "@malagu/fc-adapter",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
@@ -9,8 +9,8 @@
     "@alicloud/fc2": "^2.1.1",
     "@alicloud/pop-core": "^1.7.6",
     "@alicloud/ram": "^1.0.0",
-    "@malagu/cli": "^0.0.12",
-    "@malagu/web": "^0.0.12",
+    "@malagu/cli": "^0.0.13",
+    "@malagu/web": "^0.0.13",
     "ali-oss": "^6.1.1",
     "co": "^4.6.0",
     "co-defer": "^1.0.0",

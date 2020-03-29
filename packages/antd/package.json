@@ -1,11 +1,11 @@
 {
   "name": "@malagu/antd",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "^0.0.12",
+    "@malagu/react": "^0.0.13",
     "antd": "^4.0.2",
     "dayjs": "^1.8.22",
     "react": "^16.12.0",
