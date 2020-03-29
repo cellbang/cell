@@ -19,7 +19,7 @@ export class HttpProxyCreator implements ProxyCreator {
     protected pathResolver: PathResolver;
 
     @Value(ENDPOINT)
-    protected readonly endpoint: string;
+    protected endpoint: string;
 
     @Value(RPC_PATH)
     protected readonly rpcPath: string;
@@ -34,7 +34,7 @@ export class HttpProxyCreator implements ProxyCreator {
     }
 
     support(path: string): number {
-        return this.endpoint && this.endpoint.startsWith('http') ? 500 : 0;
+        return this.getEndpoint().startsWith('http') ? 500 : 0;
     }
 
     listen(handler: ConnectionHandler, options?: ConnectionOptions): void {
@@ -57,7 +57,7 @@ export class HttpProxyCreator implements ProxyCreator {
 
     protected createChannel(id: number, path: string): Channel {
         const channel = new HttpChannel(id, async content => {
-            const response = await fetch(urlJoin(this.endpoint, await this.pathResolver.resolve(this.rpcPath)), {
+            const response = await fetch(urlJoin(this.getEndpoint(), await this.pathResolver.resolve(this.rpcPath)), {
                 method: 'POST',
                 body: content,
                 headers: new Headers({
@@ -71,6 +71,13 @@ export class HttpProxyCreator implements ProxyCreator {
 
     protected createLogger(): Logger {
         return new ConsoleLogger();
+    }
+
+    protected getEndpoint() {
+        if (!this.endpoint) {
+            this.endpoint = `${location.protocol}//${location.host}`;
+        }
+        return this.endpoint;
     }
 
 }

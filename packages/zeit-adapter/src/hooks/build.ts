@@ -1,14 +1,27 @@
-import { HookContext, getHomePath, getMalaguConfig } from '@malagu/cli';
+import { HookContext, getHomePath, getMalaguConfig, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
 import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
+import * as merge from 'webpack-merge';
 
 export default async (context: HookContext) => {
     const { pkg, configurations } = context;
-
+    let nowConfig: any = {};
     for (const c of configurations) {
         const config = getMalaguConfig(pkg, c.name!)['zeit-adapter'].now.config;
-        config.name = config.name || `${pkg.pkg.name}-${c.name}`;
-        const destDir = resolve(getHomePath(pkg, c.name!), 'now.json');
-        await writeJSON(destDir, config, { spaces: 2 });
+        if (c.name === BACKEND_TARGET) {
+            nowConfig = merge(config, nowConfig);
+        } else {
+            nowConfig = merge(nowConfig, config);
+        }
     }
+
+    if (!HookContext.getConfiguration(FRONTEND_TARGET, configurations)) {
+        nowConfig.routes.push({
+            src: '/.*',
+            dest: 'backend/dist/index.js'
+        });
+    }
+
+    const destDir = resolve(getHomePath(pkg), 'now.json');
+    await writeJSON(destDir, nowConfig, { spaces: 2 });
 };

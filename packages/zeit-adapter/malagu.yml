@@ -10,11 +10,11 @@ frontend:
       now:
         config:
           builds:
-            - src: '**'
+            - src: 'frontend/dist/**'
               use: '@now/static'
           routes:
             - src: /(.*)
-              dest: $1
+              dest: frontend/dist/$1
 
 backend:
   malagu:
@@ -22,8 +22,8 @@ backend:
       now:
         config:
           builds:
-            - src: '**'
+            - src: 'backend/dist/**'
               use: '@now/node'
           routes:
-            - src: /(.*)
-              dest: index.js
+            - src: /api
+              dest: backend/dist/index.js

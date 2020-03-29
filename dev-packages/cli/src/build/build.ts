@@ -11,11 +11,11 @@ import { HookExecutor } from '../hook/hook-executor';
 program
     .name('malagu build')
     .usage('[options]')
-    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : ['prod'])
+    .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .description('build a application')
     .parse(process.argv);
 (async () => {
-    const mode = Array.from(new Set<string>([...(program.mode || [])]));
+    const mode = [...(program.mode || ['prod'])];
     const cliContext = await CliContext.create(program, mode);
     cliContext.dev = false;
     cliContext.mode = mode;
