@@ -1,11 +1,11 @@
 {
   "name": "@malagu/widget",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.12",
+    "@malagu/core": "^0.0.13",
     "@phosphor/widgets": "^1.9.3",
     "perfect-scrollbar": "^1.4.0"
   },

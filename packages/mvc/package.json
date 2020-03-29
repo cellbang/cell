@@ -1,11 +1,11 @@
 {
   "name": "@malagu/mvc",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^0.0.12",
+    "@malagu/web": "^0.0.13",
     "mustache": "^4.0.0"
   },
   "publishConfig": {
