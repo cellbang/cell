@@ -78,6 +78,6 @@ export function getPort(pkg: ApplicationPackage, target: string, port?: number) 
     return server.port;
 }
 
-export function getHomePath(pkg: ApplicationPackage, target: string) {
+export function getHomePath(pkg: ApplicationPackage, target: string = '') {
     return path.resolve(pkg.projectPath, '.malagu', target);
 }

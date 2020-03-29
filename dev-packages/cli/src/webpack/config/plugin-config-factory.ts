@@ -12,6 +12,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 export class CopyWepackPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
@@ -48,7 +50,6 @@ export class EnvironmentPluginConfigFactory {
         const homePath = getHomePath(pkg, target);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
-        yaml.dump(c);
         writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
         return {
             plugins: [
@@ -159,5 +160,19 @@ export class HtmlWebpackTagsPluginConfigFactory {
 
     support(context: CliContext, target: string): boolean {
         return FRONTEND_TARGET === target;
+    }
+}
+
+export class CleanWebpackPluginConfigFactory {
+    create(config: any, context: CliContext, target: string) {
+        return {
+            plugins: [
+                new CleanWebpackPlugin()
+            ]
+        };
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return true;
     }
 }

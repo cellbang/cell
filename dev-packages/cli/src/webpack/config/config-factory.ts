@@ -6,10 +6,10 @@ import * as merge from 'webpack-merge';
 import { HookExecutor } from '../../hook/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
-import { DevServerConfigFactory } from './der-server-config-factory';
+import { DevServerConfigFactory } from './dev-server-config-factory';
 import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory,
     ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory,
-    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory } from './plugin-config-factory';
+    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigFactory } from './component-config-factory';
@@ -34,7 +34,8 @@ export class ConfigFactory {
             new ComponentConfigFactory(),
             new MalaguYamlConfigFactory(),
             new HtmlWebpackPluginConfigFactory(),
-            new HtmlWebpackTagsPluginConfigFactory()
+            new HtmlWebpackTagsPluginConfigFactory(),
+            new CleanWebpackPluginConfigFactory()
         ];
 
         for (const target of targets) {
