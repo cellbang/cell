@@ -1,4 +1,4 @@
-# Malagu（目前请不要于生产场景）
+# Malagu（目前请不要用于生产场景）
 
 Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
 
