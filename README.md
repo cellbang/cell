@@ -1,4 +1,4 @@
-# Malagu
+# Malagu（目前请不要于生产场景）
 
 Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
 
@@ -15,6 +15,25 @@ Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应�
 1. 命令工具插件化
 
 Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意思，小石头堆砌起来可以建成高楼大厦、道路桥梁，而 Malagu 组件编排可以实现千变万化的应用。
+
+## 快速开始
+
+1. 创建应用
+
+![](https://img.alicdn.com/tfs/TB1zahNAxD1gK0jSZFsXXbldVXa-1425-748.gif)
+
+2. 本地运行应用
+
+![](https://img.alicdn.com/tfs/TB14oNOAAL0gK0jSZFAXXcA9pXa-1425-748.gif)
+
+3. 本地调试应用
+
+![](https://img.alicdn.com/tfs/TB1RjdMAEz1gK0jSZLeXXb9kVXa-1425-748.gif)
+
+4. 构建与部署应用
+
+![](https://img.alicdn.com/tfs/TB14W4NAxD1gK0jSZFsXXbldVXa-1425-748.gif)
+
 
 ## 依赖注入
 
