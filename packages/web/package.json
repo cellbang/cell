@@ -43,7 +43,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.11",
+    "@malagu/ext-scripts": "^0.0.13",
     "@types/cors": "^2.8.6",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"

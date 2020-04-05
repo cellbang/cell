@@ -11,7 +11,7 @@ export class ComponentPackageLoader {
 
     }
 
-    load(nodePackage: NodePackage, mode: string[]) {
+    load(nodePackage: NodePackage, mode: string[]): void {
         let config: any = {};
         config = this.loadConfig(nodePackage);
         let merged = [...mode];

@@ -20,7 +20,7 @@ export class ConfigFactory {
         const { pkg } = context;
         const configurations = [];
 
-        const targets = [ FRONTEND_TARGET, BACKEND_TARGET ];
+        const targets = [ BACKEND_TARGET, FRONTEND_TARGET ];
 
         const configFactories = [
             new BaseConfigFactory(),

@@ -22,7 +22,7 @@ export function autoBind(registry?: inversifyInterfaces.ContainerModuleCallBack)
     });
 }
 
-function resolve(metadata: interfaces.ProvideSyntax, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind) {
+function resolve(metadata: interfaces.ProvideSyntax, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind): void {
     const isRebind: boolean = Reflect.getOwnMetadata(METADATA_KEY.rebind, metadata.implementationType);
     const id = Reflect.getOwnMetadata(METADATA_KEY.toService, metadata.implementationType);
 
@@ -46,7 +46,7 @@ function resolve(metadata: interfaces.ProvideSyntax, bind: inversifyInterfaces.B
     }
 }
 
-function resolveConstant(metadata: ConstantOption, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind) {
+function resolveConstant(metadata: ConstantOption, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind): void {
     const ids = Array.isArray(metadata.id) ? metadata.id : [ metadata.id ];
     const id = ids.shift();
     if (metadata.rebind) {

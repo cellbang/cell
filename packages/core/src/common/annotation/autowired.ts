@@ -17,7 +17,7 @@ export interface AutowiredDecorator {
     (target: any, targetKey: string, index?: number): any;
 }
 
-export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number) {
+export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number): any {
     const option = getAutowiredOption(target, targetKey, index);
     if (targetKey === undefined && index === undefined) {
         return (t: any, tk: string, i?: number) => {
@@ -29,7 +29,7 @@ export const Autowired = <AutowiredDecorator>function (target: any, targetKey: s
     }
 };
 
-export function getAutowiredOption(target: any, targetKey: string, index?: number) {
+export function getAutowiredOption(target: any, targetKey: string, index?: number): AutowiredOption {
     let option: AutowiredOption = {};
     if (targetKey === undefined) {
         if (AutowiredOption.is(target)) {
@@ -85,11 +85,11 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
 
 export function createAutowiredProperty(option: AutowiredOption, isMulti: boolean,
     doGetValue: (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, container: Container, target: any, property: string) => any,
-    target: any, property: string) {
+    target: any, property: string): void {
     let value: any;
     Object.defineProperty(target, property, {
         enumerable: true,
-        get() {
+        get(): any {
             if (value !== undefined) {
                 return value;
             }

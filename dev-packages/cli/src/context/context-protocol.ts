@@ -47,7 +47,7 @@ export namespace HookContext {
         };
     }
 
-    export function getConfiguration(target: string, configurations: webpack.Configuration[]) {
+    export function getConfiguration(target: string, configurations: webpack.Configuration[]): undefined | webpack.Configuration {
         for (const c of configurations) {
             if (c.name === target) {
                 return c;

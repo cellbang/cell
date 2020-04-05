@@ -10,26 +10,22 @@ if (!process[REGISTER_INSTANCE]) {
 
 export class HookExecutor {
 
-    async executeInitHooks(context: HookContext) {
+    async executeInitHooks(context: HookContext): Promise<void> {
         const modules = context.pkg.initHookModules;
         await this.doExecuteHooks(modules, context, 'initHooks');
     }
 
-    async executeBuildHooks(context: HookContext) {
+    async executeBuildHooks(context: HookContext): Promise<void> {
         const modules = context.pkg.buildHookModules;
         await this.doExecuteHooks(modules, context, 'buildHooks');
     }
 
-    async executeDeployHooks(context: HookContext) {
+    async executeDeployHooks(context: HookContext): Promise<void> {
         const modules = context.pkg.deployHookModules;
-        if (modules.size === 0) {
-            console.log(chalk.yellow('Please provide the deploy hook first.'));
-            return;
-        }
         await this.doExecuteHooks(modules, context, 'deployHooks');
     }
 
-    async executeServeHooks(context: ServeContext) {
+    async executeServeHooks(context: ServeContext): Promise<void> {
         const modules = context.pkg.serveHookModules;
         if (modules.size === 0) {
             console.log(chalk.yellow('Please provide the serve hook first.'));
@@ -38,7 +34,7 @@ export class HookExecutor {
         await this.doExecuteHooks(modules, context, 'serveHooks');
     }
 
-    async executeWebpackHooks(context: HookContext) {
+    async executeWebpackHooks(context: HookContext): Promise<void> {
         const modules = context.pkg.webpackHookModules;
         await this.doExecuteHooks(modules, context, 'webpackHooks');
     }

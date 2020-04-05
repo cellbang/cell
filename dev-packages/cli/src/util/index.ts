@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as lockfile from '@yarnpkg/lockfile';
 const chalk = require('chalk');
 
-export function checkPkgVersionConsistency (pkgName: string, projectPath: string) {
+export function checkPkgVersionConsistency(pkgName: string, projectPath: string) {
     const yarnLockFile = paths.resolve(projectPath, 'yarn.lock');
     const npmLockFile = paths.resolve(projectPath, 'package-lock.json');
 

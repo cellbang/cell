@@ -6,3 +6,4 @@ export type BackendApplicationState = ApplicationState;
 export class BackendApplicationStateService extends AbstractApplicationStateService<BackendApplicationState> {
 
 }
+

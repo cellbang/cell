@@ -7,7 +7,7 @@ import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import * as webpack from 'webpack';
 
-function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string) {
+function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
         const filePath = moduleVersion.replace(/^file:/, '');
         return `${moduleVersion.startsWith('file:') ? 'file:' : ''}${pathToPackageRoot}/${filePath}`.replace(/\\/g, '/');
@@ -19,7 +19,7 @@ function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string) 
 /**
  * Add the given modules to a package json's dependencies.
  */
-function addModulesToPackageJson(externalModules: string[], packageJson: any, pathToPackageRoot: string) {
+function addModulesToPackageJson(externalModules: string[], packageJson: any, pathToPackageRoot: string): void {
     externalModules.forEach(externalModule => {
         const splitModule = externalModule.split('@');
         // If we have a scoped module we have to re-add the @
@@ -39,7 +39,7 @@ function addModulesToPackageJson(externalModules: string[], packageJson: any, pa
  * Remove a given list of excluded modules from a module list
  * @this - The active plugin instance
  */
-function removeExcludedModules(modules: string[], packageForceExcludes: string[], log: boolean) {
+function removeExcludedModules(modules: string[], packageForceExcludes: string[], log: boolean): void {
     const excludedModules = remove(modules, externalModule => {
         const splitModule = externalModule.split('@');
         // If we have a scoped module we have to re-add the @
@@ -60,7 +60,7 @@ function removeExcludedModules(modules: string[], packageForceExcludes: string[]
  * Resolve the needed versions of production dependencies for external modules.
  * @this - The active plugin instance
  */
-function getProdModules(externalModules: any[], packagePath: string, dependencyGraph: any, forceExcludes: string[]) {
+function getProdModules(externalModules: any[], packagePath: string, dependencyGraph: any, forceExcludes: string[]): any[] {
     const packageJson = readJSONSync(packagePath);
     const prodModules: string[] = [];
 
@@ -131,7 +131,7 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
     return prodModules;
 }
 
-function getExternalModuleName(module: any) {
+function getExternalModuleName(module: any): string {
     const path = /^external "(.*)"$/.exec(module.identifier())![1];
     const pathComponents = path.split('/');
     const main = pathComponents[0];
@@ -144,7 +144,7 @@ function getExternalModuleName(module: any) {
     return main;
 }
 
-function isExternalModule(module: any) {
+function isExternalModule(module: any): boolean {
     return module.identifier().startsWith('external ') && !isBuiltinModule(getExternalModuleName(module));
 }
 
@@ -160,7 +160,7 @@ function findExternalOrigin(issuer: any): any {
     return issuer;
 }
 
-function getExternalModules(stats: any) {
+function getExternalModules(stats: any): any[] {
     if (!stats.compilation.chunks) {
         return [];
     }
@@ -195,7 +195,7 @@ function getExternalModules(stats: any) {
  * This will utilize the npm cache at its best and give us the needed results
  * and performance.
  */
-export async function packExternalModules(context: HookContext, stats: webpack.Stats) {
+export async function packExternalModules(context: HookContext, stats: webpack.Stats): Promise<void> {
     const verbose = false;
     const pkg = context.pkg;
     const config = pkg.backendConfig.malagu;

@@ -13,9 +13,9 @@ export class ModuleChecker {
         } catch (error) {
             if (modulePath.indexOf(this.pkg.projectPath) === 0 && existsSync(`${modulePath}.ts`)) {
                 return true;
-            } else if(modulePath.indexOf(this.pkg.projectPath) === 0 && existsSync(modulePath)) {
+            } else if (modulePath.indexOf(this.pkg.projectPath) === 0 && existsSync(modulePath)) {
                 return true;
-            } else if(existsSync(resolve(this.pkg.projectPath, 'node_modules', modulePath))) {
+            } else if (existsSync(resolve(this.pkg.projectPath, 'node_modules', modulePath))) {
                 return true;
             } else {
                 return false;

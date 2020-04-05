@@ -7,14 +7,14 @@ program
     .name('malagu serve')
     .usage('[options]')
     .option('-o, --open [open]', 'Open browser')
-    .option('-c, --copy [copy]', 'Copy local url to clipboard')
     .option('-p, --port [port]', 'Port used by the server')
     .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .description('serve a applicaton')
     .parse(process.argv);
 
 (async () => {
-    const mode = [...(program.mode || ['local'])];
+    let mode = program.mode || [];
+    mode = ['local', ...mode.filter((m: any) => m !== 'local')];
     const cliContext = await CliContext.create(program, mode);
     cliContext.dev = true;
     cliContext.open = program.open;

@@ -14,7 +14,7 @@ export class BackendApplication extends AbstractApplication {
         this.stateService.state = 'ready';
     }
 
-    protected setupExitSignals() {
+    protected setupExitSignals(): void {
         process.removeListener('SIGINT', this.doExit);
         process.removeListener('SIGTERM', this.doExit);
 
@@ -22,7 +22,7 @@ export class BackendApplication extends AbstractApplication {
         process.on('SIGTERM', this.doExit.bind(this));
     }
 
-    protected doExit() {
+    protected doExit(): void {
         this.doStop();
         process.exit(0);
     }

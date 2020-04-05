@@ -14,7 +14,6 @@ const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-
 export class CopyWepackPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
         const { pkg } = context;
@@ -68,6 +67,10 @@ export class EnvironmentPluginConfigFactory {
 export class ForkTsCheckerWebpackPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
         const { pkg } = context;
+
+        if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
+            return {};
+        }
 
         return {
             plugins: [

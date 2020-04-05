@@ -1,3 +1,3 @@
-import './shell';
+import './hello.view';
 import { autoBind } from '@malagu/core';
 export default autoBind();
