@@ -10,7 +10,7 @@
     "**/@types/node": "8.10.20"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.13",
+    "@malagu/ext-scripts": "^0.0.14",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0",
     "@types/jsdom": "^11.0.4",
@@ -54,7 +54,10 @@
     "build": "lerna run build --scope \"@malagu/!(example-)*\"",
     "clean": "lerna run clean",
     "build:clean": "lerna run prepare",
-    "docs": "lerna run docs \"@malagu/!(example-)*\"",
+    "lint": "run lint",
+    "lint:clean": "rimraf .eslintcache",
+    "lint:oneshot": "node --max-old-space-size=4096 node_modules/eslint/bin/eslint.js --cache=true \"{dev-packages,packages,examples}/**/*.{ts,tsx}\"",
+    "docs": "rimraf gh-pages/docs/next && typedoc --tsconfig configs/typedoc-tsconfig.json --options configs/typedoc.json",
     "test": "yarn test:malagu",
     "test:malagu": "lerna run test --scope \"@malagu/!(example-)*\" --parallel",
     "watch": "lerna run watch --scope \"@malagu/!(example-)*\" --parallel",

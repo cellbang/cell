@@ -1,6 +1,6 @@
 {
   "name": "@malagu/ext-scripts",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "MIT",
   "description": "NPM scripts for malagu packages.",
   "files": [
