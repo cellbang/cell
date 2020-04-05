@@ -24,7 +24,7 @@ export class LoginPageHandlerAdapter implements HandlerAdapter {
 
     async handle(): Promise<void> {
         const response = Context.getResponse();
-        this.authingOptions.sso || {};
+        this.authingOptions.sso = this.authingOptions.sso || {};
         response.setHeader('Content-type', 'text/html');
         const guardOptions = { ...this.authingOptions.guardOptions, ...{
             appId: this.authingOptions.sso.id,
@@ -64,7 +64,7 @@ export class LogoutPageHandlerAdapter implements HandlerAdapter {
 
     async handle(): Promise<void> {
         const response = Context.getResponse();
-        this.authingOptions.sso || {};
+        this.authingOptions.sso = this.authingOptions.sso || {};
         response.setHeader('Content-type', 'text/html');
 
         response.body = render(LOGOUT_PAGE_TEMPLATE, {

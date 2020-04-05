@@ -1,4 +1,4 @@
-export function getSuperClasses(constructor: any) {
+export function getSuperClasses(constructor: any): any[] {
     const constructors = [];
     let current = constructor;
     while (Object.getPrototypeOf(current)) {

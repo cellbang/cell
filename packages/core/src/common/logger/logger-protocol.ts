@@ -27,20 +27,20 @@ export class LoggerImpl implements Logger {
         }
     }
 
-    error(message: any, context = '') {
-        return log.error(message, context);
+    error(message: any, context = ''): void {
+        log.error(message, context);
     }
 
-    info(message: any, context = '') {
-        return log.info(message, context);
+    info(message: any, context = ''): void {
+        log.info(message, context);
     }
 
-    warn(message: any, context = '') {
-        return log.warn(message, context);
+    warn(message: any, context = ''): void {
+        log.warn(message, context);
     }
 
-    debug(message: any, context = '') {
-        return log.debug(message, context);
+    debug(message: any, context = ''): void {
+        log.debug(message, context);
     }
 
 }

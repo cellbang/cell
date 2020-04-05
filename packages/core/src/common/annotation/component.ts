@@ -31,7 +31,7 @@ export const Component =
         };
     };
 
-export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption) {
+export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): ComponentOption {
     let option: ComponentOption = {};
 
     if (ComponentOption.is(idOrOption)) {
@@ -42,7 +42,7 @@ export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any
     return option;
 }
 
-function doProxy (context: interfaces.Context, t: any) {
+function doProxy(context: interfaces.Context, t: any): ProxyConstructor {
     const proxy = new Proxy(t, {
         get: (target, method, receiver) => {
             const func = target[method];

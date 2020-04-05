@@ -37,7 +37,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.11",
+    "@malagu/ext-scripts": "^0.0.13",
     "@types/url-join": "^4.0.0",
     "@types/uuid": "^3.4.5"
   },

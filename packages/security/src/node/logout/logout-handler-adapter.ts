@@ -35,7 +35,6 @@ export class LogoutHanlderAdapter implements HandlerAdapter {
         return !!await this.requestMatcher.match(this.logoutUrl, this.logoutMethod);
     }
 
-
     readonly priority: number = LOGOUT_HANDLER_ADAPTER_PRIORITY;
 
 }

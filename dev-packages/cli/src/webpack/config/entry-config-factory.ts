@@ -26,5 +26,5 @@ export class EntryConfigFactory {
     support(context: CliContext, target: string): boolean {
         return true;
     }
-}
 
+}

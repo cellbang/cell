@@ -5,7 +5,7 @@ export interface OptionalDecorator {
     (target: any, targetKey: string, index?: number): any;
 }
 
-export const Optional = <OptionalDecorator>function (target: any, targetKey: string, index?: number) {
+export const Optional = <OptionalDecorator>function (target: any, targetKey: string, index?: number): any {
     if (target === undefined) {
         return optional();
     } else {

@@ -13,7 +13,7 @@ export class ValidationPipe implements PipeTransform<any> {
 
     readonly priority = 1000;
 
-    public async transform(value: any, metadata: ArgumentMetadata) {
+    public async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
         const opts = this.options || {};
         const { argType } = metadata;
         if (!argType || !this.toValidate(metadata)) {
@@ -74,7 +74,7 @@ export class ValidationPipe implements PipeTransform<any> {
         return isNull(value) ? {} : value;
     }
 
-    private stripProtoKeys(value: Record<string, any>) {
+    private stripProtoKeys(value: Record<string, any>): void {
         delete value.__proto__;
         const keys = Object.keys(value);
         keys

@@ -12,8 +12,9 @@ import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { getDevSuccessInfo } from '../webpack/utils';
 const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
-import { BACKEND_TARGET } from '../constants';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
 import * as delay from 'delay';
+import { HookContext } from '../context';
 const clearModule = require('clear-module');
 
 let server: any;
@@ -47,7 +48,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
             }
         }).apply(compiler);
     }
-    const entryContextProvider = async() => {
+    const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);
         clearModule(entryPath);
         while (true) {
@@ -63,9 +64,13 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
-
-    const [ configuration, backendConfiguration ] = configurations;
-
+    let configuration = HookContext.getConfiguration(FRONTEND_TARGET , configurations);
+    const backendConfiguration = HookContext.getConfiguration(BACKEND_TARGET , configurations);
+    configuration = configuration || backendConfiguration;
+    if (!configuration) {
+        log.error(colors.error(options.stats.colors, 'No suitable target found.'));
+        process.exit(-1);
+    }
     const compiler = createCompiler(configuration, options, log);
     new FriendlyErrorsWebpackPlugin({
         compilationSuccessInfo: {

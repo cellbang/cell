@@ -9,7 +9,7 @@ console.log(`
   \\ \\_\\\\ \\_\\ \\__/.\\_\\/\\____\\ \\__/.\\_\\ \\____ \\ \\____/
    \\/_/ \\/_/\\/__/\\/_/\\/____/\\/__/\\/_/\\/___L\\ \\/___/
                                        /\\____/
-                 ${pkg.version.padStart(20, ' ')}  \\_/__/
+                 ${(('@malagu/cli@' + pkg.version) as any).padStart(20, ' ')}  \\_/__/
 `);
 
 program
@@ -17,6 +17,5 @@ program
     .description(`Malagu CLI ${pkg.version}`)
     .command('init [name]', 'init a application')
     .command('serve [options]', 'serve a applicaton')
-    .command('build [options]', 'build a application')
     .command('deploy [options]', 'deply a application')
     .parse(process.argv);

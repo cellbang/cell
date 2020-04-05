@@ -28,7 +28,7 @@ export interface Application {
 @Component(ApplicationLifecycle)
 export class EmptyApplicationLifecycle implements ApplicationLifecycle<Application> {
 
-    initialize() {
+    initialize(): void {
         // NOOP
     }
 

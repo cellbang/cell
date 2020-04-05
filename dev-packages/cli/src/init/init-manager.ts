@@ -58,7 +58,7 @@ export class InitManager {
         process.exit(0);
     }
 
-    protected async getCliContext() {
+    protected async getCliContext(): Promise<CliContext> {
         if (!this.cliContext) {
             this.cliContext = await CliContext.create(this.context.program, [], this.outputDir);
             this.cliContext.name = this.context.name;
@@ -71,7 +71,7 @@ export class InitManager {
         return resolve(process.cwd(), this.context.outputDir, this.context.name);
     }
 
-    protected async checkOutputDir() {
+    protected async checkOutputDir(): Promise<void> {
         if (existsSync(this.outputDir)) {
             const answers = await inquirer.prompt([{
                 name: 'overwrite',
@@ -84,11 +84,11 @@ export class InitManager {
         }
     }
 
-    protected toOfficialTemplate(name: string, location: string) {
+    protected toOfficialTemplate(name: string, location: string): any {
         return { name: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
     }
 
-    protected toThirdPartyTemplate(item: any) {
+    protected toThirdPartyTemplate(item: any): any {
         return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
     }
 
@@ -127,7 +127,7 @@ export class InitManager {
         this.location = answers.item.location;
     }
 
-    protected isLocalTemplate() {
+    protected isLocalTemplate(): boolean {
         return !this.location.startsWith('http');
     }
 
@@ -135,18 +135,18 @@ export class InitManager {
         return this.location.replace(PLACEHOLD, resolve(__dirname, '..', '..', 'templates'));
     }
 
-    protected async doOutput() {
+    protected async doOutput(): Promise<void> {
         if (this.isLocalTemplate()) {
             await this.outputLocalTemplate();
         } else {
             this.outputRemoteTempate();
         }
     }
-    protected async outputLocalTemplate() {
+    protected async outputLocalTemplate(): Promise<void> {
         await copy(this.realLocation, this.outputDir);
     }
 
-    protected outputRemoteTempate() {
+    protected outputRemoteTempate(): void {
         spawnSync('git', ['clone', '--depth=1', this.location, this.outputDir], { stdio: 'inherit' });
     }
 }

@@ -1,7 +1,17 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
-    "extends": [
-        "./configs/base.eslint.js",
-        "./configs/errors.eslint.js",
-        "./configs/warnings.eslint.js"
-    ]
+    root: true,
+    extends: [
+        './configs/base.eslintrc.json',
+        './configs/warnings.eslintrc.json',
+        './configs/errors.eslintrc.json'
+    ],
+    ignorePatterns: [
+        '**/{node_modules,lib}',
+        'plugins'
+    ],
+    parserOptions: {
+        tsconfigRootDir: __dirname,
+        project: 'tsconfig.json'
+    }
 };

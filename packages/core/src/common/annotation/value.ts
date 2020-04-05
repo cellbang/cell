@@ -18,7 +18,7 @@ export interface ValueDecorator {
     (target: any, targetKey: string, index?: number): any;
 }
 
-export const Value = <ValueDecorator>function (target: any, targetKey: string, index?: number) {
+export const Value = <ValueDecorator>function (target: any, targetKey: string, index?: number): any {
     const option = getValueOption(target, targetKey, index);
     if (targetKey === undefined && index === undefined) {
         return (t: any, tk: string, i?: number) => {
@@ -30,7 +30,7 @@ export const Value = <ValueDecorator>function (target: any, targetKey: string, i
     }
 };
 
-export function getValueOption(target: any, targetKey: string, index?: number) {
+export function getValueOption(target: any, targetKey: string, index?: number): ValueOption {
     let option: ValueOption = {};
     if (targetKey === undefined) {
         if (ValueOption.is(target)) {
@@ -61,10 +61,10 @@ export function applyValueDecorator(option: ValueOption, target: any, targetKey:
     named(el)(target, targetKey, index);
 }
 
-export function createValueProperty(option: ValueOption, target: any, property: string) {
+export function createValueProperty(option: ValueOption, target: any, property: string): void {
     Object.defineProperty(target, property, {
         enumerable: true,
-        get() {
+        get(): any {
             const container = ContainerProvider.provide();
             const el = <string>option.el;
             return container.getNamed(VALUE, el);

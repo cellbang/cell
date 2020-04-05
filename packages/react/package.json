@@ -41,7 +41,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.11",
+    "@malagu/ext-scripts": "^0.0.13",
     "@types/history": "^4.7.3",
     "@types/react-router-dom": "^5.1.3"
   },

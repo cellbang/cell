@@ -8,7 +8,7 @@ export class PinoLogger implements Logger {
 
     protected logger: pino.Logger;
 
-    constructor (
+    constructor(
         @Value(LOGGER_CONFIG)
         protected readonly config: any,
         @Autowired(PinoConfig)
@@ -31,7 +31,7 @@ export class PinoLogger implements Logger {
             const traceId = Context.getTraceId();
             const path = Context.getRequest().path;
             const method = Context.getRequest().method;
-            return  `${method.toLocaleUpperCase()} ${path}${traceId ? ` with ${traceId}` : ''}`;
+            return `${method.toLocaleUpperCase()} ${path}${traceId ? ` with ${traceId}` : ''}`;
         }
 
         return '';
