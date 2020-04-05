@@ -20,19 +20,19 @@ Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意�
 
 1. 创建应用
 
-![](https://img.alicdn.com/tfs/TB1zahNAxD1gK0jSZFsXXbldVXa-1425-748.gif)
+![](https://img.alicdn.com/tfs/TB1BjYFcIKfxu4jSZPfXXb3dXXa-1425-818.gif)
 
 2. 本地运行应用
 
-![](https://img.alicdn.com/tfs/TB14oNOAAL0gK0jSZFAXXcA9pXa-1425-748.gif)
+![](https://gw.alicdn.com/tfs/TB1Vb1rA.Y1gK0jSZFCXXcwqXXa-1425-818.gif)
 
 3. 本地调试应用
 
-![](https://img.alicdn.com/tfs/TB1RjdMAEz1gK0jSZLeXXb9kVXa-1425-748.gif)
+![](https://img.alicdn.com/tfs/TB1j5KtAYj1gK0jSZFuXXcrHpXa-1425-818.gif)
 
 4. 部署应用
 
-![](https://img.alicdn.com/tfs/TB14W4NAxD1gK0jSZFsXXbldVXa-1425-748.gif)
+![](https://img.alicdn.com/tfs/TB1SbCnA4z1gK0jSZSgXXavwpXa-1425-818.gif)
 
 
 ## 依赖注入
