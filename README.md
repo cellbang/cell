@@ -30,7 +30,7 @@ Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意�
 
 ![](https://img.alicdn.com/tfs/TB1RjdMAEz1gK0jSZLeXXb9kVXa-1425-748.gif)
 
-4. 构建与部署应用
+4. 部署应用
 
 ![](https://img.alicdn.com/tfs/TB14W4NAxD1gK0jSZFsXXbldVXa-1425-748.gif)
 
