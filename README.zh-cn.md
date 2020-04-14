@@ -1,43 +1,43 @@
-# Malagu
+# Malagu（目前请不要用于生产场景）
 
-Malagu is a serverless First, scalable and componentized application framework developed by TypeScript.
+Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
 
-*Read this in other languages: [简体中文](README.zh-cn.md)*
+*其他语言版本：[English](README.md)*
 
-**Features**
+**主要特点：**
 
-1. Based on TypeScript
-1. Zero configuration
-1. Spring Boot-like development experience
+1. 基于 TypeScript
+1. 零配置
+1. NodeJs 版 Spring Boot
 1. Serverless First
-1. componentization
-1. Front-end and back-end integration
-1. Aspect-oriented programming (AOP)
-1. Integrated ORM framework
-1. The command tool is extensible
+1. 组件化
+1. 前后端一体化
+1. 面向切面编程（AOP）
+1. 集成了 ORM 框架
+1. 命令工具插件化
 
-The origin of the name Malagu: In my hometown, the homonym "Mulagu" means small stones. Stacked small stones can be used to build high-rise buildings, roads and bridges, and Malagu component arrangement can realize a variety of applications.
+Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意思，小石头堆砌起来可以建成高楼大厦、道路桥梁，而 Malagu 组件编排可以实现千变万化的应用。
 
-## Quick Start
+## 快速开始
 
-1. Create an application
+1. 创建应用
 
 ![](https://img.alicdn.com/tfs/TB1BjYFcIKfxu4jSZPfXXb3dXXa-1425-818.gif)
 
-2. Run locally
+2. 本地运行应用
 
 ![](https://gw.alicdn.com/tfs/TB1Vb1rA.Y1gK0jSZFCXXcwqXXa-1425-818.gif)
 
-3. Debug locally
+3. 本地调试应用
 
 ![](https://img.alicdn.com/tfs/TB1j5KtAYj1gK0jSZFuXXcrHpXa-1425-818.gif)
 
-4. Deploy the application
+4. 部署应用
 
 ![](https://img.alicdn.com/tfs/TB1SbCnA4z1gK0jSZSgXXavwpXa-1425-818.gif)
 
 
-## Dependency injection
+## 依赖注入
 
 ```typescript
 @Component()
@@ -52,12 +52,12 @@ export class B {
 }
 ```
 
-## Field injection
+## 属性注入
 
 ```typescript
 @Component()
 export class A {
-    @Value('foo') // Support EL expression syntax, such as @Value ('obj.xxx'), @Value ('arr [1]'), etc.
+    @Value('foo') // 支持 EL 表达式语法，如 @Value('obj.xxx')、@Value('arr[1]') 等等
     protected foo: string;
 }
 ```
@@ -96,7 +96,7 @@ export class UserController {
 }
 ```
 
-## Database operations
+## 数据库操作
 
 ```typescript
 import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/mvc/lib/node';
