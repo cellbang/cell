@@ -16,7 +16,7 @@ Malagu is a serverless First, scalable and componentized application framework d
 1. Integrated ORM framework
 1. The command tool is extensible
 
-The origin of the name Malagu: In my hometown, the homonym "Mulagu" means small stones. Stacked small stones can be used to build high-rise buildings, roads and bridges, and Malagu component arrangement can realize a variety of applications.
+The origin of the name Malagu: In my hometown, the homonym "Malagu" means small stones. Stacked small stones can be used to build high-rise buildings, roads and bridges, and Malagu component arrangement can realize a variety of applications.
 
 ## Quick Start
 
