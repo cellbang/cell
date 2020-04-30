@@ -6116,8 +6116,8 @@ jexl@^2.1.1:
   resolved "https://registry.npm.taobao.org/jexl/download/jexl-2.2.2.tgz#eb06cd84684a52b6408be94604c5529f416ccd2f"
 
 jquery@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
