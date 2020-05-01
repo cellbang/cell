@@ -2,7 +2,7 @@
 export const LogoutHandler = Symbol('LogoutHandler');
 export const LogoutSuccessHandler = Symbol('LogoutSuccessHandler');
 
-export const LOGOUT_HANDLER_ADAPTER_PRIORITY =  500;
+export const LOGOUT_HANDLER_ADAPTER_PRIORITY =  3000;
 
 export const LOGOUT_SUCCESS_HANDLER_PRIORITY =  2000;
 
