@@ -18,6 +18,10 @@ Malagu is a serverless First, scalable and componentized application framework d
 
 The origin of the name Malagu: In my hometown, the homonym "Malagu" means small stones. Stacked small stones can be used to build high-rise buildings, roads and bridges, and Malagu component arrangement can realize a variety of applications.
 
+## Document
+
+To check out the [document](https://www.yuque.com/cellbang/malagu).
+
 ## Quick Start
 
 1. Create an application
@@ -52,7 +56,7 @@ export class B {
 }
 ```
 
-## Field injection
+## Property injection
 
 ```typescript
 @Component()
@@ -79,7 +83,7 @@ export class UserController {
     }
 
     @Delete(':id')
-    async reomve(@Param('id') id: number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         ...
     }
 
@@ -119,7 +123,7 @@ export class UserController {
     }
     @Delete(':id')
     @Transactional()
-    async reomve(@Param('id') id: number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         const repo = OrmContext.getRepository(User);
         await repo.delete(id);
     }

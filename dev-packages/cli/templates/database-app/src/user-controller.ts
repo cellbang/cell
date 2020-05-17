@@ -21,7 +21,7 @@ export class UserController {
 
     @Delete(':id')
     @Transactional()
-    async reomve(@Param('id') id: number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         const repo = OrmContext.getRepository(User);
         await repo.delete(id);
     }
