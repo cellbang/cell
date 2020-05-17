@@ -1,5 +1,4 @@
-# Malagu（目前请不要用于生产场景）
-
+# Malagu
 Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
 
 *其他语言版本：[English](README.md)*
@@ -17,6 +16,10 @@ Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应�
 1. 命令工具插件化
 
 Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意思，小石头堆砌起来可以建成高楼大厦、道路桥梁，而 Malagu 组件编排可以实现千变万化的应用。
+
+## 文档
+
+查看[文档](https://www.yuque.com/cellbang/malagu)。
 
 ## 快速开始
 
@@ -79,7 +82,7 @@ export class UserController {
     }
 
     @Delete(':id')
-    async reomve(@Param('id') id: number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         ...
     }
 
@@ -119,7 +122,7 @@ export class UserController {
     }
     @Delete(':id')
     @Transactional()
-    async reomve(@Param('id') id: number): Promise<void> {
+    async remove(@Param('id') id: number): Promise<void> {
         const repo = OrmContext.getRepository(User);
         await repo.delete(id);
     }

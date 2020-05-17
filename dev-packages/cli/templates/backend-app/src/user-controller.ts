@@ -25,7 +25,7 @@ export class UserController {
     }
 
     @Delete(':name')
-    reomve(@Param('name') name: string): void {
+    remove(@Param('name') name: string): void {
         const index = users.findIndex(user => user.name === name);
         if (index !== -1) {
             users.splice(index, 1);
