@@ -29,16 +29,18 @@ export default async (context: HookContext) => {
         funciton: {
             name: pkg.pkg.name,
             handler: 'index.handler',
-            memorySize: 128,
+            memorySize: 256,
             runtime: 'nodejs10',
             initializer: 'index.init',
+            timeout: 15,
+            instanceConcurrency: 10
         },
         trigger: {
             name: pkg.pkg.name,
             triggerType: 'http',
             triggerConfig: {
                 authType: 'anonymous',
-                methods: ['GET', 'POST', 'PUT', 'DELETE']
+                methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH']
             }
         },
         apiGateway: {
@@ -48,7 +50,8 @@ export default async (context: HookContext) => {
             },
             api: {
                 name: 'malagu',
-                path: '/api'
+                path: '/*',
+                method: 'ANY'
             }
         },
         devAlias: 'dev',

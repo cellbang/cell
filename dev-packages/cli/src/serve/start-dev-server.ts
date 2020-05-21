@@ -64,9 +64,9 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
-    let configuration = HookContext.getConfiguration(FRONTEND_TARGET , configurations);
+    const frontendConfiguration = HookContext.getConfiguration(FRONTEND_TARGET , configurations);
     const backendConfiguration = HookContext.getConfiguration(BACKEND_TARGET , configurations);
-    configuration = configuration || backendConfiguration;
+    const configuration = frontendConfiguration || backendConfiguration;
     if (!configuration) {
         log.error(colors.error(options.stats.colors, 'No suitable target found.'));
         process.exit(-1);
@@ -82,7 +82,7 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     try {
         server = new Server(compiler, options, log);
         setupExitSignals(server);
-        if (backendConfiguration) {
+        if (frontendConfiguration && backendConfiguration) {
             attachBackendServer(executeServeHooks, backendConfiguration, options, log);
         } else if (configuration.name === BACKEND_TARGET) {
             attachBackendServer(executeServeHooks, configuration, options, log, compiler);

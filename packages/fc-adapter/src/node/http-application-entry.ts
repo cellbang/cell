@@ -4,11 +4,18 @@ import { Dispatcher, Context, HttpContext } from '@malagu/web/lib/node';
 import { ParseHttpTriggerContext } from './context';
 import * as getRawBody from 'raw-body';
 
+let startPromise: Promise<void>;
+
+async function start() {
+    const c = await container;
+    ContainerProvider.set(c);
+    return c.get<Application>(Application).start();
+}
+
 export async function init(context: any, callback: any) {
     try {
-        const c = await container;
-        ContainerProvider.set(c);
-        await c.get<Application>(Application).start();
+        startPromise = start();
+        await startPromise;
         callback(undefined, '');
     } catch (err) {
         callback(err);
@@ -17,6 +24,11 @@ export async function init(context: any, callback: any) {
 
 export async function handler(request: any, response: any, context: any) {
     try {
+        if (startPromise) {
+            await startPromise;
+        } else {
+            await start();
+        }
         request.body = await getRawBody(request).then(body => body.toString());
         const httpContext = ParseHttpTriggerContext(request, response, context);
         const c = await container;

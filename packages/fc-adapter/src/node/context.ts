@@ -6,7 +6,7 @@ export type Callback = (err: Error | undefined, data: any) => void;
 export function parseApiGatewayContext(event: string, context: any, callback: Callback) {
     const e = JSON.parse(event);
     const request = {
-        method: e.method,
+        method: e.httpMethod || e.method,
         path: e.path,
         url: e.path,
         connection: {} as any,
