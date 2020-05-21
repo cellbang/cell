@@ -768,6 +768,10 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@types/mustache/-/mustache-4.0.0.tgz#8db01fdff5210646a9d8819ad2aca0ccb5fef12a"
 
+"@types/mustache@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.npmjs.org/@types/mustache/-/mustache-4.0.1.tgz#e4d421ed2d06d463b120621774185a5cd1b92d77"
+
 "@types/node@*", "@types/node@^12.0.2":
   version "12.12.21"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.12.21.tgz#aa44a6363291c7037111c47e4661ad210aded23f"
@@ -7382,6 +7386,10 @@ multipipe@^0.1.2:
 mustache@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/mustache/-/mustache-4.0.0.tgz#7f02465dbb5b435859d154831c032acdfbbefb31"
+
+mustache@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/mustache/download/mustache-4.0.1.tgz#d99beb031701ad433338e7ea65e0489416c854a2"
 
 mute-stream@0.0.7:
   version "0.0.7"

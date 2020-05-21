@@ -48,7 +48,9 @@ export default (context: ServeContext) => {
         } else {
             handler(JSON.stringify({
                 headers: req.headers,
-                body: req.rawBody
+                body: req.rawBody,
+                method: req.method,
+                path: req.path
             }), ctx, getCallback(res, type));
         }
     };

@@ -17,5 +17,6 @@ program
     .description(`Malagu CLI ${pkg.version}`)
     .command('init [name]', 'init a application')
     .command('serve [options]', 'serve a applicaton')
-    .command('deploy [options]', 'deply a application')
+    .command('build [options]', 'build a applicaton')
+    .command('deploy [options]', 'build and deply a application')
     .parse(process.argv);
