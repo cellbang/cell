@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -53,7 +53,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.14"
+    "@malagu/ext-scripts": "^0.0.15"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
