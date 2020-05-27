@@ -23,6 +23,7 @@ export function parseApiGatewayContext(event: string, context: any, callback: Ca
     };
     const res: { [key: string]: any } = {
         headers: {},
+        statusCode: 200,
         isBase64Encoded: false
     };
     const response = {
