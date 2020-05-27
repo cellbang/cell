@@ -17,6 +17,7 @@ export function parseApiGatewayContext(event: string, context: any, callback: Ca
             if (e.headers['content-type'] === 'application/json') {
                 return JSON.parse(body);
             }
+            return body;
         }
 
     };
@@ -38,7 +39,7 @@ export function parseApiGatewayContext(event: string, context: any, callback: Ca
         },
 
         get statusCode(): number {
-            return res.statusCode;
+            return res.statusCode || 200;
         },
 
         finished: false,
