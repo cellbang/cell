@@ -17,9 +17,9 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "loglevel": "^1.6.3",
-    "mustache": "^4.0.1",
     "reflect-metadata": "^0.1.10",
     "source-map-support": "^0.5.13",
+    "traverse": "^0.6.6",
     "ts-custom-error": "^3.1.1",
     "url-join": "^4.0.1",
     "vscode-ws-jsonrpc": "^0.1.1"
@@ -53,7 +53,8 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.16"
+    "@malagu/ext-scripts": "^0.0.16",
+    "@types/traverse": "^0.6.32"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
