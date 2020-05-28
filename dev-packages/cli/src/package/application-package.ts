@@ -10,6 +10,7 @@ import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync, readFileSync } from 'fs-extra';
 const chalk = require('chalk');
 import yaml = require('js-yaml');
+import { ExpressionHandler } from '../el';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -100,6 +101,9 @@ export class ApplicationPackage {
         }
 
         self[configProperty] = config;
+        config.env = process.env;
+        new ExpressionHandler(config).handle();
+        delete config.env;
 
         return config;
     }

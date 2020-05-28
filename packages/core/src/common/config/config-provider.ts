@@ -1,20 +1,16 @@
 import { ConfigProvider } from './config-protocol';
-import { Component } from '../annotation';
-import { render, parse } from 'mustache';
-
-const jexl = require('jexl');
+import { Component, Autowired } from '../annotation';
+import { ExpressionHandler } from '../el';
 
 @Component(ConfigProvider)
 export class ConfigProviderImpl implements ConfigProvider {
+
+    @Autowired(ExpressionHandler)
+    protected readonly expressionHandler: ExpressionHandler;
+
     get<T>(key: string, defaultValue?: T): T {
-        const config: any = process.env.MALAGU_CONFIG;
-        const value = jexl.evalSync(key, config) || defaultValue;
-        if (typeof value === 'string') {
-            config.env = process.env;
-            parse(value);
-            return render(value, config) as any;
-        }
-        return value;
+
+        return this.expressionHandler.handle(`\${${key}}`) || defaultValue;
     }
 
 }
