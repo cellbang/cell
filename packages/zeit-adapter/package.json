@@ -1,11 +1,11 @@
 {
   "name": "@malagu/zeit-adapter",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^0.0.16",
+    "@malagu/web": "^0.0.17",
     "express": "^4.17.1"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.16",
+    "@malagu/ext-scripts": "^0.0.17",
     "webpack-merge": "^4.2.1"
   },
   "nyc": {
