@@ -24,12 +24,12 @@ export async function init(context: any, callback: any) {
 
 export async function handler(request: any, response: any, context: any) {
     try {
+        request.body = await getRawBody(request).then(body => body.toString());
         if (startPromise) {
             await startPromise;
         } else {
             await start();
         }
-        request.body = await getRawBody(request).then(body => body.toString());
         const httpContext = ParseHttpTriggerContext(request, response, context);
         const c = await container;
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
