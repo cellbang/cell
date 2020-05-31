@@ -1,10 +1,8 @@
-import { HookContext, customizer, BACKEND_TARGET, FRONTEND_TARGET, getHomePath } from '@malagu/cli';
+import { DeployContext, BACKEND_TARGET, getHomePath, getConfig } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
-import { resolve, join, relative } from 'path';
-import mergeWith = require('lodash.mergewith');
-import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
+import { join } from 'path';
+import { readdirSync, statSync, readFileSync, existsSync, readFile } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
-const OSSClient = require('ali-oss');
 import  * as JSZip from 'jszip';
 import * as ora from 'ora';
 const CloudAPI = require('@alicloud/cloudapi');
@@ -12,140 +10,34 @@ const Ram = require('@alicloud/ram');
 const chalk = require('chalk');
 
 let client: any;
-let ossClient: any;
 let profile: Profile;
-let frontendCodeDir: string;
 let devAlias: string;
 let prodAlias: string;
 
-export default async (context: HookContext) => {
-    const { pkg, configurations } = context;
-    const defaultDeployConfig = {
-        type: 'http',
-        bucket: `malagu-${pkg.pkg.name}`,
-        service: {
-            name: 'malagu'
-        },
-        funciton: {
-            name: pkg.pkg.name,
-            handler: 'index.handler',
-            memorySize: 256,
-            runtime: 'nodejs10',
-            initializer: 'index.init',
-            timeout: 15,
-            instanceConcurrency: 10
-        },
-        trigger: {
-            name: pkg.pkg.name,
-            triggerType: 'http',
-            triggerConfig: {
-                authType: 'anonymous',
-                methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH']
-            }
-        },
-        apiGateway: {
-            stage: 'RELEASE',
-            group: {
-                name: 'malagu'
-            },
-            api: {
-                name: 'malagu',
-                path: '/*',
-                method: 'ANY'
-            }
-        },
-        devAlias: 'dev',
-        prodAlias: 'prod'
+export default async (context: DeployContext) => {
+    const { pkg } = context;
 
-    };
-
-    const appBackendConfig = pkg.backendConfig;
-    const deployConfig = mergeWith(defaultDeployConfig, appBackendConfig.deployConfig, customizer);
+    const deployConfig = getConfig(pkg, BACKEND_TARGET).deployConfig;
 
     const profileProvider = new ProfileProvider();
-    profile = deployConfig.profile ? <Profile>deployConfig.profile : await profileProvider.provide();
+    profile = {
+        ...await profileProvider.provide(),
+        ...deployConfig.profile
+
+    };
 
     devAlias = deployConfig.devAlias;
     prodAlias = deployConfig.prodAlias;
 
-    for (const c of configurations) {
-        if (c.name === FRONTEND_TARGET) {
-            await deployFrontend(context, deployConfig);
-        } else {
-            await deployBackend(context, deployConfig);
-        }
-    }
+    doDeploy(context, deployConfig);
 
 };
 
-async function deployFrontend(context: HookContext, deployConfig: any) {
+async function doDeploy(context: DeployContext, deployConfig: any) {
     const { pkg, prod } = context;
-    frontendCodeDir = resolve(getHomePath(pkg, FRONTEND_TARGET), 'dist');
-    if (!existsSync(frontendCodeDir)) {
-        console.log(chalk`{yellow Please build frontend first with "malagu build"}`);
-        return;
-    }
-    console.log(`Deploying ${chalk.yellow('frontend')} to Object Storage Service...`);
-    const { bucket } = deployConfig;
-    ossClient = new OSSClient({
-        region: `oss-${profile.defaultRegion}`,
-        accessKeyId: profile.accessKeyId,
-        accessKeySecret: profile.accessKeySecret
-    });
-    await uploadFrontendCode(frontendCodeDir, bucket, new Date().toISOString());
-    await uploadFrontendCode(frontendCodeDir, `${bucket}-${devAlias}`);
-    if (prod) {
-        await uploadFrontendCode(frontendCodeDir, `${bucket}-${prodAlias}`);
-    }
-    console.log('Deploy finished');
-}
-
-async function uploadFrontendCode(codeDir: string, bucket: string, prefix?: string) {
-    try {
-        await ossClient.getBucketInfo(bucket);
-    } catch (error) {
-        await spinner(`Create ${bucket} bucket`, async () => {
-            await ossClient.putBucket(bucket);
-            await ossClient.putBucketACL(bucket, 'public-read');
-        });
-    }
-
-    ossClient.useBucket(bucket);
-    await spinner(`Upload to ${bucket} bucket`, async () => {
-        await doUploadFrontendCode(codeDir, prefix);
-    });
-
-    if (!prefix) {
-        try {
-            await ossClient.getBucketWebsite(bucket);
-        } catch (error) {
-            await ossClient.putBucketWebsite(bucket, {
-                index: 'index.html'
-            });
-        }
-        console.log(`    - Url: ${chalk.green.bold(`http://${bucket}.oss-${profile.defaultRegion}.aliyuncs.com`)}`);
-    }
-
-}
-
-async function doUploadFrontendCode(codeDir: string, prefix: string = '') {
-    const files = readdirSync(codeDir);
-    await Promise.all(files.map(async fileName => {
-        const fullPath = join(codeDir, fileName);
-        const file = statSync(fullPath);
-        if (file.isDirectory()) {
-            await doUploadFrontendCode(fullPath, prefix);
-        } else {
-            await ossClient.put(join(prefix, relative(frontendCodeDir, fullPath)), fullPath);
-        }
-    }));
-}
-
-async function deployBackend(context: HookContext, deployConfig: any) {
-    const { pkg, prod } = context;
-    const backendCodeDir = resolve(getHomePath(pkg, BACKEND_TARGET), 'dist');
-    if (!existsSync(backendCodeDir)) {
-        console.log(chalk`{yellow Please build backend first with "malagu build"}`);
+    const codeDir = getHomePath(pkg);
+    if (!existsSync(codeDir)) {
+        console.log(chalk`{yellow Please build app first with "malagu build"}`);
         return;
     }
     client = new FCClient(profile.accountId, {
@@ -155,18 +47,19 @@ async function deployBackend(context: HookContext, deployConfig: any) {
         timeout: 600000
     });
 
-    const { service, funciton, trigger, apiGateway, type } = deployConfig;
+    const { service, trigger, apiGateway, customDomain, type } = deployConfig;
+    const fundtionMeta = deployConfig.function;
     const serviceName = service.name;
-    const functionName = funciton.name;
+    const functionName = fundtionMeta.name;
 
-    console.log(`Deploying ${chalk.yellow('backend')} to Function Compute...`);
+    console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Function Compute...`);
 
     await createOrUpdateService(serviceName, service);
 
     const zip = new JSZip();
-    await loadCode(backendCodeDir, zip);
+    await loadCode(codeDir, zip);
 
-    await createOrUpdateFunction(serviceName, functionName, funciton, zip);
+    await createOrUpdateFunction(serviceName, functionName, fundtionMeta, zip);
 
     const { data: { versionId } } = await client.publishVersion(serviceName);
 
@@ -176,10 +69,36 @@ async function deployBackend(context: HookContext, deployConfig: any) {
         await createOrUpdateAlias(serviceName, prodAlias, versionId);
     }
 
-    if (type === 'http') {
+    if (type === 'http' || type === 'custom') {
         await createOrUpdateHttpTrigger(serviceName, functionName, trigger, devAlias);
         if (prod) {
             await createOrUpdateHttpTrigger(serviceName, functionName, trigger, prodAlias);
+        }
+        if (customDomain && customDomain.name) {
+            const { protocol, certConfig, routeConfig } = customDomain;
+            const options: any = {
+                protocol,
+
+            };
+
+            if (certConfig) {
+                options.certConfig = {};
+                const privateKey = certConfig.PrivateKey;
+                const certificate = certConfig.Certificate;
+
+                if (privateKey && privateKey.endsWith('.pem')) {
+                    options.certConfig.PrivateKey = await readFile(privateKey, 'utf-8');
+                }
+                if (certificate && certificate.endsWith('.pem')) {
+                    options.certConfig.Certificate = await readFile(certificate, 'utf-8');
+                }
+            }
+
+            if (routeConfig) {
+                options.routeConfig = routeConfig;
+            }
+
+            await createOrUpdateCustomDomain(customDomain.name, options);
         }
     }
 
@@ -320,6 +239,32 @@ async function createOrUpdateFunction(serviceName: string, functionName: string,
     }
 }
 
+async function createOrUpdateCustomDomain(domainName: string, option: any) {
+    try {
+        await client.getCustomDomain(domainName);
+        await spinner(`Update ${domainName} custom domain`, async () => {
+            await client.updateCustomDomain(domainName, {
+                ...option
+            });
+        });
+
+    } catch (ex) {
+        if (ex.code === 'DomainNameNotFound') {
+            delete option.name;
+            option.domainName = domainName;
+            await spinner(`Create ${domainName} custom domain`, async () => {
+                await client.createCustomDomain(domainName, {
+                    ...option
+                });
+            });
+        } else {
+            throw ex;
+        }
+    }
+    console.log(chalk`    - Url: ${chalk.green.bold(
+        `${option.protocol.includes('HTTPS') ? 'https' : 'http'}://${domainName}`)}`);
+}
+
 async function createOrUpdateAlias(serviceName: string, aliasName: string, versionId: string) {
     try {
         await client.getAlias(serviceName, aliasName);
@@ -346,7 +291,9 @@ async function loadCode(codeDir: string, zip: JSZip) {
             const dir = zip.folder(fileName);
             await loadCode(fullPath, dir);
         } else {
-            zip.file(fileName, readFileSync(fullPath));
+            zip.file(fileName, readFileSync(fullPath), {
+                unixPermissions: file.mode
+            });
         }
     }));
 }

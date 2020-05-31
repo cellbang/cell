@@ -14,7 +14,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
 import * as delay from 'delay';
-import { HookContext } from '../context';
+import { ConfigurationContext } from '../context';
 const clearModule = require('clear-module');
 
 let server: any;
@@ -64,8 +64,8 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
-    const frontendConfiguration = HookContext.getConfiguration(FRONTEND_TARGET , configurations);
-    const backendConfiguration = HookContext.getConfiguration(BACKEND_TARGET , configurations);
+    const frontendConfiguration = ConfigurationContext.getConfiguration(FRONTEND_TARGET , configurations);
+    const backendConfiguration = ConfigurationContext.getConfiguration(BACKEND_TARGET , configurations);
     const configuration = frontendConfiguration || backendConfiguration;
     if (!configuration) {
         log.error(colors.error(options.stats.colors, 'No suitable target found.'));

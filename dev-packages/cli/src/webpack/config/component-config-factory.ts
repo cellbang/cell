@@ -1,5 +1,5 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import * as path from 'path';
 
 const nodePathList = (process.env.NODE_PATH || '')
@@ -7,7 +7,7 @@ const nodePathList = (process.env.NODE_PATH || '')
     .filter(p => !!p);
 
 export class ComponentConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         return {
             resolveLoader: {
@@ -35,7 +35,7 @@ export class ComponentConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

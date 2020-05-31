@@ -53,12 +53,14 @@ export class ModuleResolver {
 
         malaguComponent.webpackHooks = malaguComponent.webpackHooks || [];
         malaguComponent.initHooks = malaguComponent.initHooks || [];
+        malaguComponent.configHooks = malaguComponent.configHooks || [];
         malaguComponent.buildHooks = malaguComponent.buildHooks || [];
         malaguComponent.deployHooks = malaguComponent.deployHooks || [];
         malaguComponent.serveHooks = malaguComponent.serveHooks || [];
         malaguComponent.webpackHooks = malaguComponent.webpackHooks || [];
         const webpackHooks = malaguComponent.webpackHooks;
         const initHooks = malaguComponent.initHooks;
+        const configHooks = malaguComponent.configHooks;
         const buildHooks = malaguComponent.buildHooks;
         const deployHooks = malaguComponent.deployHooks;
         const serveHooks = malaguComponent.serveHooks;
@@ -69,6 +71,8 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, webpackHooks, join(libOrSrc, 'webpack-hook'));
         this.addModuleIfExists(componentPackage, initHooks, join(libOrSrc, 'hooks', 'init'));
         this.addModuleIfExists(componentPackage, initHooks, join(libOrSrc, 'init-hook'));
+        this.addModuleIfExists(componentPackage, configHooks, join(libOrSrc, 'hooks', 'config'));
+        this.addModuleIfExists(componentPackage, configHooks, join(libOrSrc, 'config-hook'));
         this.addModuleIfExists(componentPackage, buildHooks, join(libOrSrc, 'hooks', 'build'));
         this.addModuleIfExists(componentPackage, buildHooks, join(libOrSrc, 'build-hook'));
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'hooks', 'deploy'));

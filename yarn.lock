@@ -17,7 +17,7 @@
     httpx "^2.1.1"
     kitx "^1.2.0"
 
-"@alicloud/pop-core@^1.3.3", "@alicloud/pop-core@^1.4.0", "@alicloud/pop-core@^1.7.6":
+"@alicloud/pop-core@^1.3.3", "@alicloud/pop-core@^1.4.0":
   version "1.7.9"
   resolved "https://registry.npm.taobao.org/@alicloud/pop-core/download/@alicloud/pop-core-1.7.9.tgz#97c0c5bb591894feda87e8a82d45c117bebbde13"
   dependencies:
@@ -9645,9 +9645,9 @@ serve-index@^1.9.1:
     mime-types "~2.1.17"
     parseurl "~1.3.2"
 
-serve-static@1.14.1:
+serve-static@1.14.1, serve-static@^1.14.1:
   version "1.14.1"
-  resolved "https://registry.npm.taobao.org/serve-static/download/serve-static-1.14.1.tgz#666e636dc4f010f7ef29970a88a674320898b2f9"
+  resolved "https://registry.npmjs.org/serve-static/-/serve-static-1.14.1.tgz#666e636dc4f010f7ef29970a88a674320898b2f9"
   dependencies:
     encodeurl "~1.0.2"
     escape-html "~1.0.3"

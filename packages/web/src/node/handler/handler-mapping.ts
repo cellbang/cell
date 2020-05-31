@@ -2,6 +2,7 @@ import { Autowired, Component, Prioritizeable } from '@malagu/core';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
 import { NotFoundError } from '../error';
 import { NotFoundAndContinueError } from '../error';
+import { Context } from '../context';
 
 @Component(HandlerMapping)
 export class HandlerMappingImpl implements HandlerMapping {
@@ -34,7 +35,7 @@ export class HandlerMappingImpl implements HandlerMapping {
         if (lastError) {
             throw lastError;
         }
-        throw new NotFoundError('Not found a suitable handler adapter');
+        throw new NotFoundError(`Not found a suitable handler adapter: ${ Context.getRequest().path }`);
     }
 
 }

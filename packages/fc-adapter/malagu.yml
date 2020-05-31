@@ -1,12 +1,46 @@
 malagu: 
   web: 
-    serveHooks: false
+    serveHooks: "${deployConfig.type == 'custom' ? true : false}"
+  fc-adapter: 
+    serveHooks: "${deployConfig.type == 'custom' ? false : true}"
 backend: 
-  devEntry: 
-    http: lib/node/http-application-entry
-    api-gateway: lib/node/api-gateway-application-entry
-  entry: 
-    http: lib/node/http-application-entry
-    api-gateway: lib/node/api-gateway-application-entry
+  devEntry: "@malagu/${deployConfig.type == 'custom' ? 'web/lib/node/application/dev-application-entry' : 'fc-adapter/lib/node/${deployConfig.type}-application-entry'}"
+  entry: lib/node/${deployConfig.type}-application-entry
 deployConfig: 
-      type: http
+  type: custom
+  bucket: malagu-${pkg.name}
+  service:
+    name: malagu
+  function:
+    name: ${pkg.name}
+    handler: dist/index.handler
+    memorySize: 256
+    runtime: "${deployConfig.type == 'custom' ? 'custom' : 'nodejs12'}"
+    initializer: "${deployConfig.type == 'custom' ? undefined : 'dist/index.init'}"
+    timeout: 15
+    instanceConcurrency: 10
+  trigger:
+    name: ${pkg.name}
+    triggerType: http
+    triggerConfig:
+      authType: anonymous
+      methods: [GET, POST, PUT, DELETE, HEAD, PATCH]
+  customDomain:
+    protocol: HTTP
+    routeConfig:
+      routes:
+        - path: '/*'
+          serviceName: ${deployConfig.service.name}
+          qualifier: "${cliContext.prod ? deployConfig.prodAlias : deployConfig.devAlias}"
+          functionName: ${deployConfig.function.name}
+  apiGateway:
+      stage: RELEASE
+      group:
+          name: malagu
+      api:
+          name: malagu
+          path: '/*'
+          method: ANY
+  devAlias: dev
+  prodAlias: prod
+  bootstrap: 'node backend/dist/index.js'

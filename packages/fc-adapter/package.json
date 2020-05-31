@@ -7,10 +7,10 @@
   "dependencies": {
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.1.1",
-    "@alicloud/pop-core": "^1.7.6",
     "@alicloud/ram": "^1.0.0",
     "@malagu/cli": "^0.0.18",
     "@malagu/web": "^0.0.18",
+    "express": "^4.17.1",
     "ali-oss": "^6.1.1",
     "co": "^4.6.0",
     "co-defer": "^1.0.0",
@@ -38,7 +38,9 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "malagu.yml",
+    "malagu-remote.yml"
+
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",

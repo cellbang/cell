@@ -1,7 +1,7 @@
 
 import * as webpack from 'webpack';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import { HookContext } from '../context';
+import { BuildContext } from '../context';
 import { BACKEND_TARGET } from '../constants';
 import { packExternalModules } from '../external';
 import { HookExecutor } from '../hook';
@@ -9,28 +9,28 @@ const chalk = require('chalk');
 
 export class BuildManager {
 
-    constructor(protected readonly hookContext: HookContext) {
+    constructor(protected readonly ctx: BuildContext) {
 
     }
 
     async build(): Promise<void> {
-        if (this.hookContext.configurations.length === 0) {
+        if (this.ctx.configurations.length === 0) {
             throw new Error('No malagu module found.');
         }
 
         console.log('compiling...');
-        for (const configuration of this.hookContext.configurations) {
+        for (const configuration of this.ctx.configurations) {
             const compiler = webpack(configuration);
             new FriendlyErrorsWebpackPlugin({
                 compilationSuccessInfo: {
-                    messages: [ `The ${configuration.name} code output to ${chalk.green(configuration.output && configuration.output.path)}` ],
+                    messages: [ `The ${configuration.name} code output to ${chalk.bold.blue(configuration.output && configuration.output.path)}` ],
                     notes: []
                 },
                 clearConsole: false
             }).apply(compiler);
             await new Promise((resolve, reject) => compiler.run((err, stats) => {
                 if (configuration.name === BACKEND_TARGET) {
-                    packExternalModules(this.hookContext, stats);
+                    packExternalModules(this.ctx, stats);
                 }
                 if (err) {
                     reject(err);
@@ -40,7 +40,7 @@ export class BuildManager {
             }));
         }
         const hookExecutor = new HookExecutor();
-        await hookExecutor.executeBuildHooks(this.hookContext);
+        await hookExecutor.executeBuildHooks(this.ctx);
     }
 
 }

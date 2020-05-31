@@ -1,9 +1,9 @@
-import { HookContext, getHomePath } from '@malagu/cli';
+import { DeployContext, getHomePath } from '@malagu/cli';
 import { join } from 'path';
 const chalk = require('chalk');
 import { spawnSync } from 'child_process';
 
-export default (context: HookContext) => {
+export default (context: DeployContext) => {
     const { pkg, prod } = context;
     const cwd = getHomePath(pkg);
     console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Zeit...`);

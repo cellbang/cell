@@ -1,16 +1,12 @@
 {
-  "name": "@malagu/react",
+  "name": "@malagu/serve-static",
   "version": "0.0.18",
   "description": "",
-  "main": "lib/browser/index.js",
-  "typings": "lib/browser/index.d.ts",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.18",
-    "history": "^4.10.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2"
+    "@malagu/web": "^0.0.18",
+    "serve-static": "^1.14.1"
   },
   "publishConfig": {
     "access": "public"
@@ -31,7 +27,7 @@
     "lib",
     "src",
     "malagu.yml",
-    "malagu-cdn.yml"
+    "malagu-remote.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
@@ -43,8 +39,12 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^0.0.18",
-    "@types/history": "^4.7.3",
-    "@types/react-router-dom": "^5.1.3"
+    "@types/koa-session": "^5.10.1",
+    "@types/mustache": "^4.0.1",
+    "@types/url-join": "^4.0.0",
+    "@types/uuid": "^3.4.5",
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -9,6 +9,9 @@ malagu:
     port: 3000
   trace:
     responseField: 'X-Malagu-Trace-ID'
+  web:
+    route:
+      cacheSize: 500
 backend:
   devEntry: lib/node/application/dev-application-entry
   malagu:

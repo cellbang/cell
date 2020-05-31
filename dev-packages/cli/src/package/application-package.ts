@@ -10,7 +10,7 @@ import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync, readFileSync } from 'fs-extra';
 const chalk = require('chalk');
 import yaml = require('js-yaml');
-import { ExpressionHandler } from '../el';
+import { ModulePathBuilder } from './module-path-builder';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -80,7 +80,7 @@ export class ApplicationPackage {
 
         if (!this._frontendConfig && !this._backendConfig) {
             for (const m of config.mode) {
-                console.log(chalk`malagu {yellow.bold mode} - {bold ${m}}`);
+                console.log(chalk`malagu {bold.blue mode} - {bold ${m}}`);
             }
 
             for (const componentPackage of this.componentPackages) {
@@ -99,12 +99,7 @@ export class ApplicationPackage {
                 }
             }
         }
-
         self[configProperty] = config;
-        config.env = process.env;
-        new ExpressionHandler(config).handle();
-        delete config.env;
-
         return config;
     }
 
@@ -138,6 +133,7 @@ export class ApplicationPackage {
     protected _deployHookModules: Map<string, string> | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Map<string, string> | undefined;
+    protected _configHookModules: Map<string, string> | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
     protected rootComponentPackage() {
@@ -224,6 +220,13 @@ export class ApplicationPackage {
         return this._initHookModules;
     }
 
+    get configHookModules() {
+        if (!this._configHookModules) {
+            this._configHookModules = this.computeModules('configHooks');
+        }
+        return this._configHookModules;
+    }
+
     get buildHookModules() {
         if (!this._buildHookModules) {
             this._buildHookModules = this.computeModules('buildHooks');
@@ -266,15 +269,10 @@ export class ApplicationPackage {
             const component = componentPackage.malaguComponent;
             if (component) {
                 const modulePaths = (target ? component[target][type] : component[type]) || [];
+                const modulePathBuilder = new ModulePathBuilder(this);
                 for (const modulePath of modulePaths) {
                     if (typeof modulePath === 'string') {
-                        let componentPath: string;
-                        if (componentPackage.name === this.pkg.name) {
-                            componentPath = paths.join(paths.resolve(this.projectPath), modulePath).split(paths.sep).join('/');
-                        } else {
-                            componentPath = paths.join(componentPackage.name, modulePath).split(paths.sep).join('/');
-                        }
-                        result.set(componentPackage.name, componentPath);
+                        result.set(componentPackage.name, modulePathBuilder.build(componentPackage, modulePath));
                         moduleIndex = moduleIndex + 1;
                     }
                 }

@@ -1,0 +1,1 @@
+# Malagu - Serve Static extension

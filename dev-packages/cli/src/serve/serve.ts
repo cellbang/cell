@@ -1,7 +1,7 @@
 
 import * as program from 'commander';
 import { ServeManager } from './serve-manager';
-import { CliContext, HookContext } from '../context';
+import { ContextUtils } from '../context';
 
 program
     .name('malagu serve')
@@ -15,17 +15,16 @@ program
 (async () => {
     let mode = program.mode || [];
     mode = ['local', ...mode.filter((m: any) => m !== 'local')];
-    const cliContext = await CliContext.create(program, mode);
-    cliContext.dev = true;
-    cliContext.open = program.open;
-    cliContext.copy = program.copy;
-    cliContext.port = program.port;
-    cliContext.mode = mode;
-    const hookContext = await HookContext.create(cliContext);
-    if (hookContext.configurations.length === 0) {
+    const ctx = await ContextUtils.createConfigurationContext(program, {
+        mode,
+        dev: true,
+        open: program.open,
+        port: program.port
+    });
+    if (ctx.configurations.length === 0) {
         throw new Error('No malagu module found.');
     }
-    new ServeManager(hookContext).start();
+    new ServeManager(ctx).start();
 
 })().catch(err => {
     console.error(err);

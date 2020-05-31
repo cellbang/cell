@@ -1,11 +1,14 @@
 import { RequestMatcher } from './matcher-protocol';
 import { Context } from '../context';
-import { Component } from '@malagu/core';
+import { Component, Value } from '@malagu/core';
 import * as UrlPattern from 'url-pattern';
 
 @Component(RequestMatcher)
 export class RequestMatcherImpl implements RequestMatcher {
     protected caches: Map<string, UrlPattern> = new Map<string, UrlPattern>();
+
+    @Value('malagu.web.route.cacheSize')
+    protected readonly cacheSize: number;
 
     async match(pattern: any, method?: string): Promise<any> {
         const request = Context.getRequest();
@@ -19,7 +22,9 @@ export class RequestMatcherImpl implements RequestMatcher {
             urlPathern = this.caches.get(pattern);
             if (!urlPathern) {
                 urlPathern = new UrlPattern(pattern);
-                this.caches.set(pattern, urlPathern);
+                if (this.caches.size < this.cacheSize) {
+                    this.caches.set(pattern, urlPathern);
+                }
             }
         } else {
             urlPathern = new UrlPattern(pattern);

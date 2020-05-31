@@ -1,14 +1,11 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { Dispatcher, Context, HttpContext } from '@malagu/web/lib/node';
 import * as express from 'express';
-import { DEFAULT_SERVER_OPTIONS } from './context';
-import { ContainerProvider, Application, ConfigProvider } from '@malagu/core';
+import { ContainerProvider, Application } from '@malagu/core';
 
 container.then(async c => {
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
-    const configProvider = c.get<ConfigProvider>(ConfigProvider);
-    const { port } = configProvider.get<any>('malagu.server', DEFAULT_SERVER_OPTIONS);
 
     const app = express();
     app.use(express.json());
@@ -19,6 +16,8 @@ container.then(async c => {
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
-    app.listen(port);
-    console.log(`serve ${port}`);
+    const server = app.listen(9000);
+    server.timeout = 0;
+    server.keepAliveTimeout = 0;
+    console.log('serve 9000');
 });

@@ -1,11 +1,11 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 import { getPort, getMalaguConfig } from '../utils';
 
 export class DevServerConfigFactory {
 
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg, port, open } = context;
         const realPort = getPort(pkg, target, port);
         const baseDevServerConfig = {
@@ -38,7 +38,7 @@ export class DevServerConfigFactory {
         }
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

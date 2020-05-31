@@ -1,4 +1,5 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
+import { CommanderStatic } from 'commander';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 export class ApplicationPackageOptions {
@@ -6,6 +7,7 @@ export class ApplicationPackageOptions {
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
     readonly mode: string[];
+    readonly program: CommanderStatic;
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;
