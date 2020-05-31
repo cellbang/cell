@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
-import { CliContext, HookContext } from '../context';
+import { ContextUtils, HookContext } from '../context';
 import * as ora from 'ora';
 import axios from 'axios';
 import { getPackager } from '../packager';
@@ -26,7 +26,7 @@ export class InitManager {
     protected source: any[];
     protected name: string;
     protected location: string;
-    protected cliContext: CliContext;
+    protected hookContext: HookContext;
     constructor(protected readonly context: any) {
 
     }
@@ -45,26 +45,25 @@ export class InitManager {
     }
 
     async install(): Promise<void> {
-        const ctx = await this.getCliContext();
+        const ctx = await HookContext.create(this.context.program, {}, this.outputDir, true);
         const packagerId = ctx.pkg.rootConfig.malagu.packager;
         await getPackager(packagerId).install(this.outputDir, {});
     }
 
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
-        process.chdir(outputDir);
-        await new HookExecutor().executeInitHooks(await HookContext.create(await this.getCliContext()));
+        await new HookExecutor().executeInitHooks(await ContextUtils.createInitContext(await this.getHookContext()));
         console.log(chalk`{bold.green Success!} Initialized "${ this.name }" example in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }
 
-    protected async getCliContext(): Promise<CliContext> {
-        if (!this.cliContext) {
-            this.cliContext = await CliContext.create(this.context.program, [], this.outputDir);
-            this.cliContext.name = this.context.name;
-            this.cliContext.outputDir = this.context.outputDir;
+    protected async getHookContext(): Promise<HookContext> {
+        if (!this.hookContext) {
+            this.hookContext = await HookContext.create(this.context.program, {}, this.outputDir);
+            this.hookContext.name = this.context.name;
+            this.hookContext.outputDir = this.context.outputDir;
         }
-        return this.cliContext;
+        return this.hookContext;
     }
 
     protected get outputDir(): string {

@@ -1,7 +1,7 @@
 
 import * as webpack from 'webpack';
 import { BaseConfigFactory } from './base-config-factory';
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import * as merge from 'webpack-merge';
 import { HookExecutor } from '../../hook/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
@@ -16,7 +16,7 @@ import { ComponentConfigFactory } from './component-config-factory';
 import { support } from '../utils';
 
 export class ConfigFactory {
-    async create(context: CliContext): Promise<webpack.Configuration[]> {
+    async create(context: HookContext): Promise<webpack.Configuration[]> {
         const { pkg } = context;
         const configurations = [];
 

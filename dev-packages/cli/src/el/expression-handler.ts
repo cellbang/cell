@@ -27,14 +27,22 @@ export class ExpressionHandler {
         if (sections.length > 0) {
             if (this.hasExpression(sections)) {
                 if (sections.length === 1) {
-                    return sections[0].evalSync(ctx);
+                    let value = sections[0].evalSync(ctx);
+                    if (typeof value === 'string') {
+                        value = this.evalSync(value, ctx);
+                    }
+                    return value;
                 }
                 const result: string[] = [];
                 for (const section of sections) {
                     if (typeof section === 'string') {
                         result.push(section);
                     } else {
-                        result.push(section.evalSync(ctx));
+                        let value = section.evalSync(ctx);
+                        if (typeof value === 'string') {
+                            value = this.evalSync(value, ctx);
+                        }
+                        result.push(value);
                     }
                 }
                 return result.join('');

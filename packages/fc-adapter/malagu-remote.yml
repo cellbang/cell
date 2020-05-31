@@ -1,0 +1,5 @@
+malagu:
+  server:
+    path: "${deployConfig.customDomain.name ? '/' : '/2016-08-15/proxy/${deployConfig.service.name}.${cliContext.prod ? deployConfig.prodAlias : deployConfig.devAlias}/${deployConfig.function.name}'}/"
+    _domain: "${ 'HTTPS' in deployConfig.customDomain.protocol ? 'https' : 'http' }://${deployConfig.customDomain.name}"
+    endpoint: "${deployConfig.customDomain.name ? malagu.server._domain : 'https://${deployConfig.profile.accountId}.${deployConfig.profile.defaultRegion}.fc.aliyuncs.com'}"

@@ -15,12 +15,10 @@ container.then(async c => {
     app.use(express.raw());
     app.use(express.text());
     app.all('*', async (req: any, res: any) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Credentials', 'true');
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
     app.listen(port);
-    console.log('serve 3000');
+    console.log(`serve ${port}`);
 });

@@ -1,11 +1,11 @@
 frontend:
-    malagu:
-      webpack:
-        config:
-          externals:
-            react: React
-            react-dom: ReactDOM
-        htmlWebpackTagsPlugin:
-          react: https://unpkg.com/react@16/umd/react.production.min.js
-          react-dom: https://unpkg.com/react-dom@16/umd/react-dom.production.min.js
+  malagu:
+    webpack:
+      config:
+        externals:
+          react: React
+          react-dom: ReactDOM
+      htmlWebpackTagsPlugin:
+        react: https://unpkg.com/react@16/umd/react.production.min.js
+        react-dom: https://unpkg.com/react-dom@16/umd/react-dom.production.min.js
   

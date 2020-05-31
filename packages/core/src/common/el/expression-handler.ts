@@ -43,14 +43,22 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
             if (this.hasExpression(sections)) {
                 const c = this.getContext(ctx);
                 if (sections.length === 1) {
-                    return sections[0].evalSync(this.expressionContextProvider.provide());
+                    let value = sections[0].evalSync(c);
+                    if (typeof value === 'string') {
+                        value = this.handle(value, c);
+                    }
+                    return value;
                 }
                 const result: string[] = [];
                 for (const section of sections) {
                     if (typeof section === 'string') {
                         result.push(section);
                     } else {
-                        result.push(section.evalSync(c));
+                        let value = section.evalSync(c);
+                        if (typeof value === 'string') {
+                            value = this.handle(value, c);
+                        }
+                        result.push(value);
                     }
                 }
                 return result.join('');

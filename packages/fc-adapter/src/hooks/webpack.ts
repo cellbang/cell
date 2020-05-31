@@ -7,8 +7,7 @@ export default (context: WebpackContext) => {
         if (c.name === BACKEND_TARGET) {
             c.plugins = c.plugins || [];
             c.plugins.push(new FilterWarningsPlugin({
-                exclude: [/typeorm-aurora-data-api-driver/, /mongodb/, /mssql/, /mysql/, /oracledb/, /pg/, /pg-native/, /pg-query-stream/, /sql.js/,
-                    /redis/, /sqlite3/, /eact-native-sqlite-storage/, /cli-highlight/, /Critical dependency/, /@sap\/hdbext/]
+                exclude: [/Critical dependency: the request of a dependency is an expression/]
             }));
         }
     }

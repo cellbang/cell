@@ -1,11 +1,11 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 import * as path from 'path';
 import { getHomePath } from '../utils';
 
 export class OutputConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const outputPath = path.join(getHomePath(pkg, target), 'dist');
 
@@ -32,7 +32,7 @@ export class OutputConfigFactory {
         }
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

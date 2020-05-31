@@ -1,10 +1,10 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import * as path from 'path';
 import { getConfig } from '../utils';
 
 export class EntryConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg, dev } = context;
         let { entry, deployConfig, devEntry } = getConfig(pkg, target);
 
@@ -23,7 +23,7 @@ export class EntryConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 

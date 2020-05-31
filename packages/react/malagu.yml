@@ -1,0 +1,7 @@
+frontend:
+  malagu:
+    react:
+      history:
+        type: browser
+      
+  

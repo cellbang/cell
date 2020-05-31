@@ -1,0 +1,4 @@
+malagu: 
+  serve-static: 
+    spa: true
+    root: .malagu/frontend/dist

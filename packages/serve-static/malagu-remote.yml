@@ -1,0 +1,3 @@
+malagu: 
+  serve-static: 
+    root: /code/frontend/dist

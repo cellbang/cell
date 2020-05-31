@@ -1,5 +1,5 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
@@ -8,7 +8,7 @@ import * as path from 'path';
 
 export class BaseConfigFactory {
 
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { dev, pkg } = context;
         const webpackMode = dev ? 'development' : 'production';
         const baseConfig = {
@@ -144,7 +144,7 @@ export class BaseConfigFactory {
         }
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

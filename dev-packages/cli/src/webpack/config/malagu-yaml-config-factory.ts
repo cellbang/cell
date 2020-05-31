@@ -1,14 +1,14 @@
 
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import { getWebpackConfig } from '../utils';
 
 export class MalaguYamlConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         return getWebpackConfig(pkg, target).config || {};
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

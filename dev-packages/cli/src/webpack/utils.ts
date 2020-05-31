@@ -32,7 +32,7 @@ export function getDevSuccessInfo(options: any, name: string): string[] {
     if (options.socket) {
         infos.push(`Listening to socket at ${chalk.green(options.socket)}`);
     } else {
-        infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.green(uri)}`);
+        infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.bold.green(uri)}`);
     }
 
     if (options.historyApiFallback) {

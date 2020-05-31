@@ -1,9 +1,9 @@
-import { HookContext, getHomePath, getMalaguConfig, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
+import { BuildContext, ConfigurationContext, getHomePath, getMalaguConfig, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
 import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
 import * as merge from 'webpack-merge';
 
-export default async (context: HookContext) => {
+export default async (context: BuildContext) => {
     const { pkg, configurations } = context;
     let nowConfig: any = {};
     for (const c of configurations) {
@@ -15,7 +15,7 @@ export default async (context: HookContext) => {
         }
     }
 
-    if (!HookContext.getConfiguration(FRONTEND_TARGET, configurations)) {
+    if (!ConfigurationContext.getConfiguration(FRONTEND_TARGET, configurations)) {
         nowConfig.routes.push({
             src: '/.*',
             dest: 'backend/dist/index.js'

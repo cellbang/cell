@@ -1,7 +1,7 @@
 
 import * as webpack from 'webpack';
 import * as path from 'path';
-import { CliContext } from '../../context';
+import { HookContext } from '../../context';
 import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
 import { getWebpackConfig, getConfig, getHomePath } from '../utils';
 import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
@@ -15,7 +15,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 export class CopyWepackPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const assets = [];
         for (const assert of (pkg as any)[`${target}Assets`].values()) {
@@ -37,13 +37,13 @@ export class CopyWepackPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }
 
 export class EnvironmentPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const c = getConfig(pkg, target);
         const homePath = getHomePath(pkg, target);
@@ -59,13 +59,13 @@ export class EnvironmentPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }
 
 export class ForkTsCheckerWebpackPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
 
         if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
@@ -80,13 +80,13 @@ export class ForkTsCheckerWebpackPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }
 
 export class HardSourceWebpackPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const homePath = getHomePath(pkg, target);
         const configPath = path.join(homePath, CONFIG_FILE);
@@ -108,13 +108,13 @@ export class HardSourceWebpackPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }
 
 export class HtmlWebpackPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         return {
             plugins: [
@@ -123,13 +123,13 @@ export class HtmlWebpackPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return FRONTEND_TARGET === target;
     }
 }
 
 export class HtmlWebpackTagsPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
         const before = [];
@@ -161,13 +161,13 @@ export class HtmlWebpackTagsPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return FRONTEND_TARGET === target;
     }
 }
 
 export class CleanWebpackPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
+    create(config: any, context: HookContext, target: string) {
         return {
             plugins: [
                 new CleanWebpackPlugin()
@@ -175,7 +175,7 @@ export class CleanWebpackPluginConfigFactory {
         };
     }
 
-    support(context: CliContext, target: string): boolean {
+    support(context: HookContext, target: string): boolean {
         return true;
     }
 }

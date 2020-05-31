@@ -1,6 +1,6 @@
 import { remove, isEmpty, get, isNil, pick, uniq, defaults, now } from 'lodash';
 import { join, dirname, relative } from 'path';
-import { HookContext } from '../context';
+import { ConfigurationContext } from '../context';
 import { getPackager } from '../packager';
 import { BACKEND_TARGET } from '../constants';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
@@ -195,11 +195,11 @@ function getExternalModules(stats: any): any[] {
  * This will utilize the npm cache at its best and give us the needed results
  * and performance.
  */
-export async function packExternalModules(context: HookContext, stats: webpack.Stats): Promise<void> {
+export async function packExternalModules(context: ConfigurationContext, stats: webpack.Stats): Promise<void> {
     const verbose = false;
     const pkg = context.pkg;
     const config = pkg.backendConfig.malagu;
-    const configuration = HookContext.getConfiguration(BACKEND_TARGET, context.configurations);
+    const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const packagerId = config.packager;
     const includes = config.includeModules;
     const packagerOptions = config.packagerOptions || {};
