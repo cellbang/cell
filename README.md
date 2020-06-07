@@ -1,6 +1,6 @@
 # Malagu
 
-Malagu is a serverless First, scalable and componentized application framework developed by TypeScript.
+Malagu is a serverless first, scalable and componentized application framework developed by TypeScript.
 
 *Read this in other languages: [简体中文](README.zh-cn.md)*
 
