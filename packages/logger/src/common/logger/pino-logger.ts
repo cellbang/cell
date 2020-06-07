@@ -1,7 +1,7 @@
 import { Logger, LOGGER_CONFIG, Value, Component, Autowired, Optional } from '@malagu/core';
 import { Context } from '@malagu/web/lib/node';
 import * as pino from 'pino';
-import { PinoConfig, PinoDestinationConfig } from './pino-logger-protocol';
+import { PinoConfig } from './pino-logger-protocol';
 
 @Component({ id: Logger, rebind: true})
 export class PinoLogger implements Logger {
@@ -13,13 +13,10 @@ export class PinoLogger implements Logger {
         protected readonly config: any,
         @Autowired(PinoConfig)
         @Optional()
-        protected readonly pinoConfig1: PinoConfig,
-        @Autowired(PinoDestinationConfig)
-        @Optional()
-        protected readonly destinationConfig: PinoDestinationConfig
+        protected readonly pinoConfig1: PinoConfig
     ) {
         const { pinoConfig } = this.config;
-        this.logger = pino({ ...pinoConfig, ...pinoConfig1 }, destinationConfig);
+        this.logger = pino({ ...pinoConfig, ...pinoConfig1 });
     }
 
     public getLogger() {

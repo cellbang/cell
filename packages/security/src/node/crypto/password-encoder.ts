@@ -11,7 +11,7 @@ export class Pbkdf2PasswordEncoder implements PasswordEncoder {
     async encode(rawPassword: string): Promise<string> {
         const { encodeHashAsBase64 } = this.options;
         const salt = lib.WordArray.random(8);
-        const encoded = this.doEncode(rawPassword, salt);
+        const encoded = this.doEncode(rawPassword, salt.toString());
         if (encodeHashAsBase64) {
             return enc.Base64.stringify(enc.Utf8.parse(encoded));
         }
