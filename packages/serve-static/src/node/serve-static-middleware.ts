@@ -21,7 +21,7 @@ export class ServeStaticMiddleware implements Middleware {
         }
 
         const executor = (resolve: any, reject: any) => {
-            serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, err => {
+            serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, (err: any) => {
                 const url = ctx.request.url;
                 if ((ctx.request.method === 'GET' || ctx.request.method === 'HEAD') && url !== 'index.html') {
                     ctx.request.url = '/index.html';
