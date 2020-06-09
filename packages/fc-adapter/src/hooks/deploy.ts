@@ -28,12 +28,15 @@ export default async (context: DeployContext) => {
 
     devAlias = deployConfig.devAlias;
     prodAlias = deployConfig.prodAlias;
-
-    doDeploy(context, deployConfig);
+    const regions = deployConfig.regions || [profile.defaultRegion];
+    for (const region of regions) {
+        await doDeploy(context, deployConfig, region);
+        console.log();
+    }
 
 };
 
-async function doDeploy(context: DeployContext, deployConfig: any) {
+async function doDeploy(context: DeployContext, deployConfig: any, region: string) {
     const { pkg, prod } = context;
     const codeDir = getHomePath(pkg);
     if (!existsSync(codeDir)) {
@@ -43,8 +46,10 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     client = new FCClient(profile.accountId, {
         accessKeyID: profile.accessKeyId,
         accessKeySecret: profile.accessKeySecret,
-        region: profile.defaultRegion,
-        timeout: 600000
+        region,
+        timeout: deployConfig.timeout,
+        secure: deployConfig.secure,
+        internal: deployConfig.internal
     });
 
     const { service, trigger, apiGateway, customDomain, type } = deployConfig;
@@ -52,7 +57,7 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     const serviceName = service.name;
     const functionName = fundtionMeta.name;
 
-    console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Function Compute...`);
+    console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of Function Compute...`);
 
     await createOrUpdateService(serviceName, service);
 
@@ -70,9 +75,9 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     }
 
     if (type === 'http' || type === 'custom') {
-        await createOrUpdateHttpTrigger(serviceName, functionName, trigger, devAlias);
+        await createOrUpdateHttpTrigger(region, serviceName, functionName, trigger, devAlias);
         if (prod) {
-            await createOrUpdateHttpTrigger(serviceName, functionName, trigger, prodAlias);
+            await createOrUpdateHttpTrigger(region, serviceName, functionName, trigger, prodAlias);
         }
         if (customDomain && customDomain.name) {
             const { protocol, certConfig, routeConfig } = customDomain;
@@ -104,31 +109,31 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
 
     if (type === 'api-gateway') {
         console.log('- API Gateway:');
-        const apiGroup = await createGroupIfNeed(apiGateway.group);
-        await deployApi(serviceName, functionName, apiGateway, apiGroup, devAlias);
+        const apiGroup = await createGroupIfNeed(region, apiGateway.group);
+        await deployApi(region, serviceName, functionName, apiGateway, apiGroup, devAlias);
         if (prod) {
-            await deployApi(`${serviceName}.${prodAlias}`, functionName, apiGateway, apiGroup, prodAlias);
+            await deployApi(region, `${serviceName}.${prodAlias}`, functionName, apiGateway, apiGroup, prodAlias);
         }
     }
     console.log('Deploy finished');
 
 }
 
-function createCloudAPI() {
+function createCloudAPI(region: string) {
     return new CloudAPI({
         accessKeyId: profile.accessKeyId,
         accessKeySecret: profile.accessKeySecret,
-        endpoint: `http://apigateway.${profile.defaultRegion}.aliyuncs.com`,
+        endpoint: `http://apigateway.${region}.aliyuncs.com`,
     });
 
 }
 
-async function deployApi(serviceName: string, functionName: string, option: any, apiGroup: any, alias: string) {
+async function deployApi(region: string, serviceName: string, functionName: string, option: any, apiGroup: any, alias: string) {
     const { api, stage } = option;
     const opt = { ...api };
     opt.name = `${opt.name}_${alias}`;
-    opt['function'] = `${profile.defaultRegion}/${serviceName}.${alias}/${functionName}`;
-    const ag = createCloudAPI();
+    opt['function'] = `${region}/${serviceName}.${alias}/${functionName}`;
+    const ag = createCloudAPI(region);
 
     const ram = new Ram({
         accessKeyId: profile.accessKeyId,
@@ -165,7 +170,7 @@ async function deployApi(serviceName: string, functionName: string, option: any,
     });
 }
 
-async function createOrUpdateHttpTrigger(serviceName: string, functionName: string, option: any, alias: string) {
+async function createOrUpdateHttpTrigger(region: string, serviceName: string, functionName: string, option: any, alias: string) {
     const opt = { ...option };
     opt.triggerName = `${opt.name}-${alias}`;
     delete opt.name;
@@ -188,20 +193,21 @@ async function createOrUpdateHttpTrigger(serviceName: string, functionName: stri
     }
     console.log(`    - Methods: ${opt.triggerConfig.methods}`);
     console.log(chalk`    - Url: ${chalk.green.bold(
-        `https://${profile.accountId}.${profile.defaultRegion}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${alias}/${functionName}/`)}`);
+        `https://${profile.accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${alias}/${functionName}/`)}`);
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {
+    const opt = { ...option };
+    delete opt.name;
     try {
-        delete option.name;
         await client.getService(serviceName);
         await spinner(`Update ${serviceName} service`, async () => {
-            await client.updateService(serviceName, option);
+            await client.updateService(serviceName, opt);
         });
     } catch (ex) {
         if (ex.code === 'ServiceNotFound') {
             await spinner(`Create a ${serviceName} service`, async () => {
-                await client.createService(serviceName, option);
+                await client.createService(serviceName, opt);
             });
         } else {
             throw ex;
@@ -223,11 +229,14 @@ async function createOrUpdateFunction(serviceName: string, functionName: string,
 
     } catch (ex) {
         if (ex.code === 'FunctionNotFound') {
-            delete option.name;
-            option.functionName = functionName;
+            const opt = { ...option };
+            opt.EnvironmentVariables = opt.env;
+            delete opt.name;
+            delete opt.env;
+            opt.functionName = functionName;
             await spinner(`Create ${functionName} function`, async () => {
                 await client.createFunction(serviceName, {
-                    ...option,
+                    ...opt,
                     code: {
                         zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
                     },
@@ -250,11 +259,12 @@ async function createOrUpdateCustomDomain(domainName: string, option: any) {
 
     } catch (ex) {
         if (ex.code === 'DomainNameNotFound') {
-            delete option.name;
-            option.domainName = domainName;
+            const opt = { ...option };
+            delete opt.name;
+            opt.domainName = domainName;
             await spinner(`Create ${domainName} custom domain`, async () => {
                 await client.createCustomDomain(domainName, {
-                    ...option
+                    ...opt
                 });
             });
         } else {
@@ -298,8 +308,8 @@ async function loadCode(codeDir: string, zip: JSZip) {
     }));
 }
 
-async function createGroupIfNeed(group: any) {
-    const ag = createCloudAPI();
+async function createGroupIfNeed(region: string, group: any) {
+    const ag = createCloudAPI(region);
     const groupName = group.name;
     const groupDescription = group.description;
 

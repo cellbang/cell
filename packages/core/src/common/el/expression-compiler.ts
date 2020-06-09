@@ -40,7 +40,9 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 
 	protected middleCompile(text: string): MiddleExpression | undefined {
 		let me: MiddleExpression | undefined;
-		if (text.startsWith('${')) {
+		if (text.startsWith('${{')) {
+			me = this.nextMiddleExpression(text.substring(3), 2);
+		} else if (text.startsWith('${')) {
 			me = this.nextMiddleExpression(text.substring(2));
 		} else {
 			me = this.nextString(text);
@@ -48,7 +50,7 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 		return me;
 	}
 
-	protected nextMiddleExpression(text: string): MiddleExpression | undefined {
+	protected nextMiddleExpression(text: string, bracketBeginCharNum = 1): MiddleExpression | undefined {
 		let stringed = false;
 		let escaped = false;
 		let bracketBeginCharFound = 0;
@@ -83,7 +85,7 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 				bracketBeginCharFound++;
 				section.push(c);
 			} else if (this.BRACKET_END === c) {
-				if (bracketBeginCharFound === 0) {
+				if (bracketBeginCharFound === 0 && bracketBeginCharNum === 1) {
 					const jexlEngine = this.jexlEngineProvider.provide();
 					const expression = jexlEngine.createExpression(section.join(''));
 					let nextText;
@@ -91,9 +93,11 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 						nextText = text.substring(i + 1);
 					}
 					return { expression, nextText };
-				} else {
+				} else if (bracketBeginCharFound > 0) {
 					bracketBeginCharFound--;
 					section.push(c);
+				} else {
+					bracketBeginCharNum--;
 				}
 			} else {
 				section.push(c);

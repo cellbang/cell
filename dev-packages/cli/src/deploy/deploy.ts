@@ -9,7 +9,7 @@ program
     .usage('[options]')
     .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
     .option('-p, --prod [prod]', 'Create a production deployment')
-    .option('-s, --skipBuild [skipBuild]', 'Skip the build process')
+    .option('-s, --skip-build [skipBuild]', 'Skip the build process')
     .description('deploy a applicaton')
     .parse(process.argv);
 (async () => {
