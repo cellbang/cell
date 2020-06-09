@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.0.20
+
+- Modify build command options --skipBuild to --skip-build
+- The configuration file supports runtime expression definition: ${{xxx}}
+- Resources support multi-regional deployment
+
 ## v0.0.19
 
 - feat(fc-adapter) support custom runtime
