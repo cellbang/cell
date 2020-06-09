@@ -1,10 +1,10 @@
 # Change Log
 
-## v0.0.20
+## v0.0.21
 
 - fix(fc-adapter) Fix malagu.server.path default value
 - fix(fc-adapter) Delete function initialization function entry
-- Fix function handler path
+- fix(fc-adapter) Fix function handler path
 
 ## v0.0.20
 
