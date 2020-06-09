@@ -15,10 +15,9 @@ deployConfig:
     name: malagu
   function:
     name: ${pkg.name}
-    handler: dist/index.handler
+    handler: backend/dist/index.handler
     memorySize: 256
     runtime: "${deployConfig.type == 'custom' ? 'custom' : 'nodejs12'}"
-    initializer: "${deployConfig.type == 'custom' ? undefined : 'dist/index.init'}"
     timeout: 15
     instanceConcurrency: 10
     bootstrap: 'node backend/dist/index.js'
