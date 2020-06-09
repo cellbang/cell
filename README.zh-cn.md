@@ -21,6 +21,10 @@ Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意�
 
 查看[文档](https://www.yuque.com/cellbang/malagu)。
 
+## 更新日志
+
+每个发行版的详细更改记录在[发行日志](https://github.com/cellbang/malagu/releases).
+
 ## 快速开始
 
 1. 创建应用
