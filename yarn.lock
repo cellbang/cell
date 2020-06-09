@@ -229,11 +229,6 @@
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/@improved/node/download/@improved/node-1.1.1.tgz#7be3d401b7cd2f848d5bb8713d2826b84fc51817"
 
-"@malagu/ext-scripts@^0.0.18":
-  version "0.0.18"
-  resolved "https://registry.npm.taobao.org/@malagu/ext-scripts/download/@malagu/ext-scripts-0.0.18.tgz#f3858869acebc11f5a29c91b3bd85b3b680df79c"
-  integrity sha1-84WIaazrwR9aKckbO9hbO2gN95w=
-
 "@material-ui/core@^4.6.0":
   version "4.10.1"
   resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.10.1.tgz#e3db4ca55d2af6cc23a1159ef5c32ad97c43c39c"
