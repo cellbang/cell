@@ -8,7 +8,9 @@ backend:
   entry: lib/node/${deployConfig.type}-application-entry
 deployConfig: 
   type: custom
-  bucket: malagu-${pkg.name}
+  secure: true
+  internal: false
+  timeout: 600000
   service:
     name: malagu
   function:
@@ -19,6 +21,7 @@ deployConfig:
     initializer: "${deployConfig.type == 'custom' ? undefined : 'dist/index.init'}"
     timeout: 15
     instanceConcurrency: 10
+    bootstrap: 'node backend/dist/index.js'
   trigger:
     name: ${pkg.name}
     triggerType: http
@@ -43,4 +46,3 @@ deployConfig:
           method: ANY
   devAlias: dev
   prodAlias: prod
-  bootstrap: 'node backend/dist/index.js'

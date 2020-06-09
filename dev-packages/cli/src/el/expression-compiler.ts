@@ -37,7 +37,9 @@ export class ExpressionCompiler {
 
 	protected middleCompile(text: string): MiddleExpression | undefined {
 		let me: MiddleExpression | undefined;
-		if (text.startsWith('${')) {
+		if (text.startsWith('${{')) {
+			me = this.nextString(text); // runtime expression
+		} else if (text.startsWith('${')) {
 			me = this.nextMiddleExpression(text.substring(2));
 		} else {
 			me = this.nextString(text);
@@ -136,7 +138,8 @@ export class ExpressionCompiler {
 						section.push(c);
 					}
 				} else {
-					if (this.SPECIAL_CHAR === c) {
+					if (this.SPECIAL_CHAR === c && text.length > i + 2
+						&& text[i + 1] === this.BRACKET_BEGIN && text[i + 2] !== this.BRACKET_BEGIN) {
 						specialCharFound = true;
 					} else {
 						section.push(c);
