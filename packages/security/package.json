@@ -1,11 +1,11 @@
 {
   "name": "@malagu/security",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^0.0.20",
+    "@malagu/web": "^0.0.21",
     "crypto-js": "^4.0.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.20",
+    "@malagu/ext-scripts": "^0.0.21",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },

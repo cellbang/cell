@@ -2,6 +2,12 @@
 
 ## v0.0.20
 
+- fix(fc-adapter) Fix malagu.server.path default value
+- fix(fc-adapter) Delete function initialization function entry
+- Fix function handler path
+
+## v0.0.20
+
 - Modify build command options --skipBuild to --skip-build
 - The configuration file supports runtime expression definition: ${{xxx}}
 - Resources support multi-regional deployment
