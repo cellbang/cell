@@ -22,6 +22,10 @@ The origin of the name Malagu: In my hometown, the homonym "Malagu" means small 
 
 To check out the [document](https://www.yuque.com/cellbang/malagu).
 
+## Changelog
+
+Detailed changes for each release are documented in the [release notes](https://github.com/cellbang/malagu/releases).
+
 ## Quick Start
 
 1. Create an application
