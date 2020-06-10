@@ -1,7 +1,7 @@
 
 import { HookContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
-import { getPort, getMalaguConfig } from '../utils';
+import { getPort } from '../utils';
 
 export class DevServerConfigFactory {
 
@@ -26,10 +26,6 @@ export class DevServerConfigFactory {
                 }
             };
         } else {
-            const server = getMalaguConfig(pkg, target).server || {};
-            if (server.endpoint) {
-                server.endpoint = server.endpoint.replace('{port}', realPort);
-            }
             return {
                 devServer: {
                     ...baseDevServerConfig,

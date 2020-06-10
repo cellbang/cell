@@ -12,7 +12,8 @@
   "dependencies": {
     "@malagu/rpc": "latest",
     "@malagu/fc-adapter": "latest",
-    "@malagu/react": "latest"
+    "@malagu/react": "latest",
+    "@malagu/serve-static": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest",
