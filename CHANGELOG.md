@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.0.22
+
+- feat(fc-adpater) Optimized the default value of malagu.server.endpoint
+- feat(cli) The sample-app template adds serve-static dependencies
+- feat(fc-adpater) Optimized configHooks logic
+
 ## v0.0.21
 
 - fix(fc-adapter) Fix malagu.server.path default value
