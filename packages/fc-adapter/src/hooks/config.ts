@@ -6,7 +6,7 @@ export default async (context: ConfigContext) => {
     if (config.mode && config.mode.includes('remote')) {
         const profileProvider = new ProfileProvider();
         if (!config.deployConfig.profile) {
-            const profile = await profileProvider.provide();
+            const profile = await profileProvider.provide(true);
             config.deployConfig.profile = {
                 accountId: profile.accountId,
                 defaultRegion: profile.defaultRegion

@@ -13,7 +13,8 @@
   "dependencies": {
     "@app/welcome": "^0.0.1",
     "@malagu/fc-adapter": "latest",
-    "@malagu/react": "latest"
+    "@malagu/react": "latest",
+    "@malagu/serve-static": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest",
