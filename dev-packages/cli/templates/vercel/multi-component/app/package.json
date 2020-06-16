@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.1",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@app/welcome": "^0.0.1",
+    "@malagu/express-adapter": "latest",
+    "@malagu/vercel-adapter": "latest",
+    "@malagu/react": "latest",
+    "@malagu/serve-static": "latest"
+  },
+  "devDependencies": {
+    "@malagu/cli": "latest",
+    "@types/react-dom": "^16.8.5",
+    "rimraf": "^2.6.3"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m test",
+    "deploy:test": "malagu deploy -m test",
+    "deploy:release": "malagu deploy -m release -p"
+  }
+}

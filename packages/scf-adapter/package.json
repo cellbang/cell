@@ -1,0 +1,55 @@
+{
+  "name": "@malagu/scf-adapter",
+  "version": "0.0.22",
+  "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/cli": "^0.0.22",
+    "@malagu/web": "^0.0.22",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.1",
+    "jszip": "^3.2.2",
+    "tencent-serverless-http": "^1.2.0",
+    "tencentcloud-sdk-nodejs": "^3.0.186"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/muxiangqiu/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muxiangqiu/malagu/issues"
+  },
+  "homepage": "https://github.com/muxiangqiu/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-remote.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^0.0.22",
+    "@types/inquirer": "^6.5.0",
+    "@types/jszip": "^3.1.6"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

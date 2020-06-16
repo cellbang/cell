@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "malagu serve",
+            "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu-serve",
+            "cwd": "${workspaceFolder}/app",
+            "sourceMaps": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outputCapture": "std"
+        }
+    ]
+}
