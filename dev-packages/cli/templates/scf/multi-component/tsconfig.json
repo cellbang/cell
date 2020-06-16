@@ -1,0 +1,25 @@
+{
+  "extends": "./configs/base.tsconfig",
+  "compilerOptions": {
+    "skipLibCheck": false,
+    "baseUrl": ".",
+    "paths": {
+      "@app/welcome": [
+        "packages/welcome/src/common"
+      ],
+      "@app/welcome/lib/*": [
+        "packages/welcome/src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ]
+  },
+  "include": [
+    "dev-packages/*/src",
+    "packages/*/src",
+    "examples/*/test"
+  ]
+}

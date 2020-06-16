@@ -1,0 +1,2 @@
+deployConfig:
+  name: pre ## 预发环境

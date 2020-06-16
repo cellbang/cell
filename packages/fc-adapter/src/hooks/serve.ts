@@ -21,7 +21,9 @@ export default (context: ServeContext) => {
     const type = pkg.backendConfig.deployConfig.type;
     context.compiler.hooks.done.tap('FCAdapterServe', () => {
         entryContextProvider().then(obj => {
-            init = obj.init;
+            init = obj.init || ((c: any, callback: any) => {
+                callback();
+            });
             handler = obj.handler;
             initialized = false;
             compileDeferred.resolve();

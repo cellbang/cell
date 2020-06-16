@@ -1,0 +1,30 @@
+{
+  "name": "backend-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/mvc": "latest",
+    "@malagu/fc-adapter": "latest",
+    "@malagu/typeorm": "latest"
+  },
+  "devDependencies": {
+    "@malagu/cli": "latest",
+    "rimraf": "^2.6.3"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m test",
+    "deploy:test": "malagu deploy -m test",
+    "deploy:pre": "malagu deploy -m pre",
+    "deploy:release": "malagu deploy -m release"
+  }
+}
