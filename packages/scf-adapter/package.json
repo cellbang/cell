@@ -1,12 +1,12 @@
 {
   "name": "@malagu/scf-adapter",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cli": "^0.0.22",
-    "@malagu/web": "^0.0.22",
+    "@malagu/cli": "^0.0.23",
+    "@malagu/web": "^0.0.23",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
@@ -45,7 +45,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.22",
+    "@malagu/ext-scripts": "^0.0.23",
     "@types/inquirer": "^6.5.0",
     "@types/jszip": "^3.1.6"
   },

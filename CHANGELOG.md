@@ -1,5 +1,13 @@
 # Change Log
 
+## v0.0.23
+
+- feat(scf-adapter) Add scf-adapter component
+- feat(cli) Optimize multi-environment design
+- feat(fc-adapter) The non-custom function of fc-adapter uses fc-express proxy forwarding
+- feat(cli) Add scf related templates
+- feat(vercel-adapter) Alter zeit-adapter to vercel-adapter
+
 ## v0.0.22
 
 - feat(fc-adpater) Optimized the default value of malagu.server.endpoint
