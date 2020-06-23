@@ -5,3 +5,4 @@ export * from './connection-factory';
 export * from './reader';
 export * from './writer';
 export * from './channel-protocol';
+export * from './rpc-util';

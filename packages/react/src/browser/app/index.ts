@@ -6,3 +6,4 @@ export * from './context-provider';
 export * from './history-provider';
 export * from './context';
 export * from './route-metadata-converter-provider';
+export * from './layout';

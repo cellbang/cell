@@ -2,3 +2,7 @@ malagu:
   serve-static: 
     spa: true
     root: .malagu/frontend/dist
+    options:
+      maxAge: 31536000000
+      htmlMaxAge: 5000 # 5s
+      immutable: true

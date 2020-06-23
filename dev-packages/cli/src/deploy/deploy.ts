@@ -20,7 +20,7 @@ program
         dev: false,
         prod: program.prod
     });
-    if (!program.skipBuild || mode.length > 1) {
+    if (!program.skipBuild) {
         await new BuildManager(ctx).build();
     }
     const hookExecutor = new HookExecutor();

@@ -92,13 +92,14 @@ export class InitManager {
     }
 
     protected async selectTemplate(): Promise<void> {
+        const spinner = ora({ text: 'loading...', discardStdin: false }).start();
         const answers = await inquirer.prompt([{
             name: 'item',
             type: 'autocomplete',
+            pageSize: 12,
             message: 'Select a template to init',
             source: async (answersSoFar: any, input: string) => {
                 if (!this.source) {
-                    const spinner = ora({ text: 'loading...', discardStdin: false }).start();
                     const options = {
                         url: SEARCH_TEMPLATE_REPO_URI,
                         timeout: 5000,

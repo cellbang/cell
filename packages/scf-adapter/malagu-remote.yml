@@ -1,3 +1,8 @@
-malagu:
-  server:
-    path: /${deployConfig.function.name}/
+backend:
+  malagu:
+    server:
+      path: /${deployConfig.function.name}/
+frontend:
+  malagu:
+    server:
+      path: "/${deployConfig.name == 'release' ? '' : '${deployConfig.apiGateway.release.environmentName}/'}${deployConfig.function.name}/"

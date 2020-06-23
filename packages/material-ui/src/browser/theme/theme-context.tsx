@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Context, ReactComponent } from '@malagu/react/lib/browser';
+import { Context } from '@malagu/react';
 import { ThemeProvider as Provider, THEME_REACT_CONTEXT_PRIORITY } from './theme-protocol';
 import { ThemeProvider } from '@material-ui/core';
 import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 
-@ReactComponent(Context)
-export class ThemeContext extends React.Component implements Context {
+@Context(Context)
+export class ThemeContext extends React.Component {
 
     static priority = THEME_REACT_CONTEXT_PRIORITY;
 

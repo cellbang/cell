@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { ReactComponent } from '../annotation';
-import { Context } from './app-protocol';
+import { Context } from '../annotation';
 
 export interface ContextProps {}
 
 export interface ContextState {}
 
-@ReactComponent(Context)
-export class NoOpContext extends React.Component<ContextProps, ContextState> implements Context {
+@Context()
+export class NoOpContext extends React.Component<ContextProps, ContextState> {
 
     static priority = 1000;
 

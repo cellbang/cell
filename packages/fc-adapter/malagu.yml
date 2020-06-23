@@ -38,7 +38,7 @@ deployConfig:
       routes:
         - path: '/*'
           serviceName: ${deployConfig.service.name}
-          qualifier: "${cliContext.prod ? deployConfig.prodAlias : deployConfig.devAlias}"
+          qualifier: ${deployConfig.alias.name}
           functionName: ${deployConfig.function.name}
   apiGateway:
     stage:

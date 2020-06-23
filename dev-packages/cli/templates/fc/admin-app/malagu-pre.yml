@@ -1,0 +1,4 @@
+deployConfig:
+  name: pre # 预发环境
+  # customDomain:
+  #   name: pre.xxx.com # 需要绑定自定义域名才能正常访问

@@ -1,5 +1,5 @@
 import { inject, named } from 'inversify';
-import { ContainerProvider } from '../container';
+import { ConfigUtil } from '../config/config-util';
 
 export const VALUE = Symbol('Value');
 
@@ -65,9 +65,8 @@ export function createValueProperty(option: ValueOption, target: any, property: 
     Object.defineProperty(target, property, {
         enumerable: true,
         get(): any {
-            const container = ContainerProvider.provide();
             const el = <string>option.el;
-            return container.getNamed(VALUE, el);
+            return ConfigUtil.get(el);
         }
     });
 }

@@ -1,6 +1,6 @@
-import { inject, interfaces, multiInject, Container } from 'inversify';
+import { inject, interfaces, multiInject } from 'inversify';
 import { ServiceIdentifierOrFunc } from 'inversify/dts/annotation/inject';
-import { ContainerProvider } from '../container';
+import { ContainerUtil } from '../container';
 
 export interface AutowiredOption {
     id?: ServiceIdentifierOrFunc,
@@ -49,11 +49,11 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
             inject(id)(target, targetKey, index);
         }
     },
-    doGetValue = (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, container: Container, t: any, property: string) => {
+    doGetValue = (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, t: any, property: string) => {
         if (isMulti) {
-            return container.getAll(id);
+            return ContainerUtil.getAll(id);
         } else {
-            return container.get(id);
+            return ContainerUtil.get(id);
         }
     }): void {
     let type: any;
@@ -84,7 +84,7 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
 }
 
 export function createAutowiredProperty(option: AutowiredOption, isMulti: boolean,
-    doGetValue: (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, container: Container, target: any, property: string) => any,
+    doGetValue: (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, target: any, property: string) => any,
     target: any, property: string): void {
     let value: any;
     Object.defineProperty(target, property, {
@@ -93,9 +93,8 @@ export function createAutowiredProperty(option: AutowiredOption, isMulti: boolea
             if (value !== undefined) {
                 return value;
             }
-            const container = ContainerProvider.provide();
             const id = <interfaces.ServiceIdentifier<any>>option.id;
-            value = doGetValue(id, isMulti, container, target, property);
+            value = doGetValue(id, isMulti, target, property);
 
             return value;
         }

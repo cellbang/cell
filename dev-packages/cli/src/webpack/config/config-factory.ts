@@ -7,8 +7,8 @@ import { HookExecutor } from '../../hook/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
-import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory,
-    ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory,
+import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, WorkboxWebpackPluginConfigFactory,
+    ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory, AssetsWebpackPluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
@@ -35,6 +35,8 @@ export class ConfigFactory {
             new MalaguYamlConfigFactory(),
             new HtmlWebpackPluginConfigFactory(),
             new HtmlWebpackTagsPluginConfigFactory(),
+            new WorkboxWebpackPluginConfigFactory(),
+            new AssetsWebpackPluginConfigFactory(),
             new CleanWebpackPluginConfigFactory()
         ];
 

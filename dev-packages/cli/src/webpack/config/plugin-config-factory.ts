@@ -13,6 +13,8 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AssetsWebpackPlugin = require('assets-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 export class CopyWepackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
@@ -116,9 +118,65 @@ export class HardSourceWebpackPluginConfigFactory {
 export class HtmlWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
+        const faviconPath = path.join(pkg.projectPath, 'favicon.ico');
+        const exists = existsSync(faviconPath);
         return {
             plugins: [
-                new HtmlWebpackPlugin({ ...{ title: 'Malagu App' }, ...getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackPlugin || {} }),
+                new HtmlWebpackPlugin({
+                    title: 'Malagu App',
+                    favicon: exists ? faviconPath : undefined,
+                    ...getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackPlugin || {}
+                }),
+            ]
+        };
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return FRONTEND_TARGET === target;
+    }
+}
+
+export class WorkboxWebpackPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        const { pkg } = context;
+        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {};
+        return {
+            plugins: [
+                new WorkboxWebpackPlugin.GenerateSW({
+                    clientsClaim: true,
+                    skipWaiting: true,
+                    ...pluginConfig
+                })
+            ]
+        };
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return FRONTEND_TARGET === target;
+    }
+}
+
+export class AssetsWebpackPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        const { pkg } = context;
+        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).assetsWebpackPlugin || {};
+        const outputPath = path.join(getHomePath(pkg, FRONTEND_TARGET), 'dist');
+        const metadata = {
+            version: pkg.pkg.version,
+            name: pkg.pkg.name,
+            description: pkg.pkg.description,
+            auther: pkg.pkg.author,
+            icons: pkg.pkg.icons
+        };
+        return {
+            plugins: [
+                new AssetsWebpackPlugin({
+                    filename: 'manifest.json',
+                    metadata,
+                    path: outputPath,
+                    prettyPrint: true,
+                    ...pluginConfig
+                })
             ]
         };
     }
