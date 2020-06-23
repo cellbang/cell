@@ -1,17 +1,17 @@
 import { Component, Autowired, Prioritizeable } from '@malagu/core';
-import { ContextProvider, Context } from './app-protocol';
+import { ContextProvider, CONTEXT } from './app-protocol';
 
 @Component(ContextProvider)
 export class ContextProviderImpl implements ContextProvider {
 
-    protected prioritized: (new() => Context)[];
+    protected prioritized: React.ComponentType<any>[];
 
     constructor(
-        @Autowired(Context)
-        protected readonly contexts: (new() => Context)[]
+        @Autowired(CONTEXT)
+        protected readonly contexts: React.ComponentType<any>[]
     ) { }
 
-    async provide(): Promise<(new() => Context)[]> {
+    provide(): React.ComponentType<any>[] {
         if (!this.prioritized) {
             this.prioritized = Prioritizeable.prioritizeAllSync(this.contexts).map(c => c.value);
         }

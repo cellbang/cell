@@ -34,7 +34,18 @@ module.exports.container = Promise.resolve()
     if (reason) {
       console.error(reason);
     }
-  });`;
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      const baseURI = document.getElementsByTagName('script')[0].baseURI;
+      navigator.serviceWorker.register(baseURI + 'service-worker.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }`;
 }
 
 function generateBackendComponents(modules: string[]) {

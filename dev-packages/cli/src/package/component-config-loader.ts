@@ -25,7 +25,7 @@ export class ComponentPackageLoader {
         for (let i = 0; i < mode.length; i++) {
             const m = mode[i];
             const configForMode = this.loadConfig(nodePackage, m);
-            configMap.set(m, configForMode);
+            configMap.set(m, configForMode || {});
             if (configForMode) {
                 config = mergeWith(config, configForMode, customizer);
                 const modeForConfig = this.getMode(configForMode);
@@ -33,6 +33,8 @@ export class ComponentPackageLoader {
                 if (diffMode.length > 0) {
                     if (i < mode.length - 1) {
                         mode.splice(0, i + 1);
+                    } else {
+                        mode = [];
                     }
                     return this.doLoad(nodePackage, this.mergeMode(diffMode, mode), configMap, config);
                 }

@@ -1,9 +1,11 @@
 export const templates: any = {
     'scf-sample-app': '{{ templatePath }}/scf/sample-app',
+    'scf-admin-app': '{{ templatePath }}/scf/admin-app',
     'scf-backend-app': '{{ templatePath }}/scf/backend-app',
     'scf-database-app': '{{ templatePath }}/scf/database-app',
     'scf-multi-component': '{{ templatePath }}/scf/multi-component',
     'fc-sample-app': '{{ templatePath }}/fc/sample-app',
+    'fc-admin-app': '{{ templatePath }}/fc/admin-app',
     'fc-backend-app': '{{ templatePath }}/fc/backend-app',
     'fc-database-app': '{{ templatePath }}/fc/database-app',
     'fc-multi-component': '{{ templatePath }}/fc/multi-component',

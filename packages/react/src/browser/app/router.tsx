@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ReactComponent } from '../annotation';
-import { Router, HistoryProvider, RouteMetadataProvider, RedirectMetadata } from './app-protocol';
-import { Autowired } from '@malagu/core/lib/common/annotation/detached';
-import { Router as ReactRouter, Switch, Redirect, Route } from 'react-router-dom';
+import { HistoryProvider, RouteMetadataProvider, RedirectMetadata, RouteMetadata } from './app-protocol';
+import { Autowired, Value } from '@malagu/core/lib/common/annotation/detached';
+import { Router as ReactRouter, Redirect, Route, Switch, RedirectProps } from 'react-router-dom';
+import { Router } from '../annotation';
 
 export interface RouterProps { }
 
@@ -10,8 +10,8 @@ export interface RouterState {
     child: React.ReactElement[];
 }
 
-@ReactComponent(Router)
-export class RouterImpl extends React.Component<RouterProps, RouterState> implements Router {
+@Router(RouterImpl, false)
+export class RouterImpl extends React.Component<RouterProps, RouterState> {
 
     @Autowired(RouteMetadataProvider)
     protected readonly routeMetadataProvider: RouteMetadataProvider;
@@ -19,24 +19,29 @@ export class RouterImpl extends React.Component<RouterProps, RouterState> implem
     @Autowired(HistoryProvider)
     protected readonly historyProvider: HistoryProvider;
 
+    @Value('malagu.react.path')
+    protected readonly path: string | string[];
+
     render(): React.ReactElement<{}> {
         return (
             <ReactRouter history={this.historyProvider.provide()}>
                 <Switch>
-                    { this.state && this.state.child || '' }
+                    { this.buildRoutes(this.routeMetadataProvider.provide()) }
                 </Switch>
             </ReactRouter>
         );
     }
 
-    async componentDidMount() {
-        const routeMetedatas = await this.routeMetadataProvider.provide();
-        this.setState({ child: routeMetedatas.map((metadata, index) => {
+    protected buildRoutes(list: (RouteMetadata | RedirectMetadata)[]) {
+        return list.map((metadata, index) => {
+            const props = { ...metadata };
+            delete props.isDefaultLayout;
+            delete props.priority;
             if (RedirectMetadata.is(metadata)) {
-                return <Redirect key={index} {...metadata}/>;
+                return <Redirect key={index} {...(props as RedirectProps)}/>;
             } else {
-                return <Route key={index} {...metadata}/>;
+                return <Route key={index} {...props}/>;
             }
-        })});
+        });
     }
 }

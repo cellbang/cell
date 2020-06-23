@@ -6,7 +6,7 @@ import { getHomePath } from '../utils';
 
 export class OutputConfigFactory {
     create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
+        const { pkg, dev } = context;
         const outputPath = path.join(getHomePath(pkg, target), 'dist');
 
         const baseOutputConfig = {
@@ -19,7 +19,7 @@ export class OutputConfigFactory {
                     ...baseOutputConfig,
                     filename: 'index.js',
                     libraryTarget: 'umd',
-                    devtoolModuleFilenameTemplate: '[absolute-resource-path]'
+                    devtoolModuleFilenameTemplate: dev ? '[absolute-resource-path]' : undefined
                 }
             };
         } else {

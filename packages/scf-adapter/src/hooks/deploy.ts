@@ -608,7 +608,16 @@ async function createOrUpdateApi(serviceId: string, subDomain: string, servicePr
             const modifyApiRequest = new apiModels.ModifyApiRequest();
             apiId = apiIdStatusSet[0].ApiId;
             parseApiMeta(modifyApiRequest, api, serviceId, apiId);
-            await promisify(apiClient.ModifyApi.bind(apiClient))(modifyApiRequest);
+            try {
+                await promisify(apiClient.ModifyApi.bind(apiClient))(modifyApiRequest);
+            } catch (err) {
+                if (err.code === 'InternalError') {
+                    await delay(1000);
+                    await promisify(apiClient.ModifyApi.bind(apiClient))(modifyApiRequest);
+                } else {
+                    throw err;
+                }
+            }
         });
     } else {
         await spinner(`Create ${apiName} api`, async () => {
@@ -619,8 +628,10 @@ async function createOrUpdateApi(serviceId: string, subDomain: string, servicePr
         });
     }
 
-    const path = api.requestConfig.path;
-    console.log(chalk`    - Url: {green.bold ${serviceProtocol.includes('https') ? 'https' : 'http'}://${subDomain!}/${environmentName}${path.split('*')[0]}}`);
+    const path = api.requestConfig.path.split('*')[0];
+    const protocol = serviceProtocol.includes('https') ? 'https' : 'http';
+    console.log(
+        chalk`    - Url: {green.bold ${protocol}://${subDomain!}${environmentName === 'release' ? '' : `/${environmentName}`}${path}}`);
 
     return apiId!;
 }

@@ -1,27 +1,32 @@
 import { History } from 'history';
 import { RouteProps, RedirectProps } from 'react-router';
 
-export const App = Symbol('App');
-export const Router = Symbol('Router');
-export const RouteMetadata = Symbol('RouteMetadata');
+export const APP = Symbol('APP');
+export const CONTEXT = Symbol('CONTEXT');
+export const DEFAULT_LAYOUT = Symbol('DEFAULT_LAYOUT');
+export const ROUTER = Symbol('Router');
+export const ROUTE_METADATA = Symbol('ROUTE_METADATA');
+
 export const RouteMetadataProvider = Symbol('RouteMetadataProvider');
-export const Context = Symbol('Context');
 export const ContextProvider = Symbol('ContextProvider');
 export const HistoryProvider = Symbol('HistoryProvider');
 export const RouteMetadataConverter = Symbol('RouteMetadataConverter');
 export const RouteMetadataConverterProvider = Symbol('RouteMetadataConverterProvider');
 
-export interface Element extends React.Component<any, any> {}
-
-export interface App extends Element {}
-
-export interface Router extends Element {}
-
 export interface RouteMetadata extends RouteProps {
+    isDefaultLayout?: boolean;
+    layout?: React.ComponentType<any>;
     priority?: number;
 }
 
+export namespace RouteMetadata {
+    export function is(metadata: any): metadata is RouteMetadata {
+        return !!!metadata.to;
+    }
+}
+
 export interface RedirectMetadata extends RedirectProps {
+    isDefaultLayout?: boolean;
     priority?: number;
 }
 
@@ -32,14 +37,11 @@ export namespace RedirectMetadata {
 }
 
 export interface RouteMetadataProvider {
-    provide(): Promise<(RouteMetadata | RedirectMetadata)[]>;
-}
-
-export interface Context extends Element {
+    provide(): (RouteMetadata | RedirectMetadata)[];
 }
 
 export interface ContextProvider {
-    provide(): Promise<(new() => Context)[]>;
+    provide(): React.ComponentType<any>[];
 }
 
 export interface HistoryProvider  {
@@ -48,9 +50,9 @@ export interface HistoryProvider  {
 
 export interface RouteMetadataConverter {
     readonly priority: number;
-    convert(metadata: RouteMetadata | RedirectMetadata): Promise<RouteMetadata | RedirectMetadata>;
+    convert(metadata: RouteMetadata | RedirectMetadata): RouteMetadata | RedirectMetadata;
 }
 
 export interface RouteMetadataConverterProvider {
-    provide(): Promise<RouteMetadataConverter[]>;
+    provide(): RouteMetadataConverter[];
 }

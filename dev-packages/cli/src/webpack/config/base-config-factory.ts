@@ -27,7 +27,7 @@ export class BaseConfigFactory {
                     })
                 ]
             },
-            devtool: dev ? 'eval-cheap-source-map' : undefined,
+            devtool: dev ? 'source-map' : undefined,
             stats: 'errors-only',
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js' ]
