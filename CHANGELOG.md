@@ -7,7 +7,7 @@
 - feat(serve-static) defines two component attributes: path and apiPath, path matches the front-end route, and apiPath matches the back-end route
 - feat(cli) adds the base tag to the default html template to allow the resources in html to be loaded by absolute routing
 - feat(cli) serve, build and deploy add parameter entry and options -t, --targets uniformly, support non-malagu framework operation, build and deployment
-- The feat(cli) build command adds options -o, --output, custom code output location
+- feat(cli) build command adds options -o, --output, custom code output location
 
 - feat(cli) 通过按需加载模块优化命令行执行速度
 - feat(core) 前端应用不再直接 body 里面，提供了一个 id 为 malagu.hostDomId 的 div 容器
