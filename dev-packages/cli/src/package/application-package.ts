@@ -36,7 +36,7 @@ export class ApplicationPackage {
         if (this._props) {
             return this._props;
         }
-        let props = <Component>{};
+        let props = <Component>{ malagu: {} };
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
@@ -72,23 +72,8 @@ export class ApplicationPackage {
         delete config.frontend;
         config = mergeWith(config, this.props[target], customizer);
 
-        let mode = config.mode || [];
-        if (!Array.isArray(mode)) {
-            mode = [mode];
-        }
-        config.mode = Array.from(new Set([...mode, ...this.options.mode]));
-
-        if (!this._frontendConfig && !this._backendConfig) {
-            for (const m of config.mode) {
-                console.log(chalk`malagu {bold.blue mode} - {bold ${m}}`);
-            }
-
-            for (const componentPackage of this.componentPackages) {
-                console.log(chalk`malagu {green.bold component} - ${ componentPackage.name }@${ componentPackage.version }`);
-            }
-        }
-
-        config.targets = config.targets || [FRONTEND_TARGET, BACKEND_TARGET];
+        config.targets = this.options.targets.length ? this.options.targets : (config.targets || [ FRONTEND_TARGET, BACKEND_TARGET ]);
+        config.targets = Array.from(new Set(config.targets));
         const { targets } = config;
         if (targets.includes(target)) {
             console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
@@ -116,9 +101,13 @@ export class ApplicationPackage {
     protected _pkg: PublishedNodePackage | undefined;
     get pkg(): PublishedNodePackage {
         if (!this._pkg) {
-            this._pkg = readJsonFile(this.packagePath);
+            if (existsSync(this.packagePath)) {
+                this._pkg = readJsonFile(this.packagePath);
+            } else {
+                this._pkg = {} as PublishedNodePackage;
+            }
             this._pkg!.name = this._pkg!.name || paths.basename(this.projectPath);
-            this._pkg!.name = this._pkg!.name || 'latest';
+            this._pkg!.version = this._pkg!.version || 'latest';
         }
         return this._pkg!;
     }
@@ -141,6 +130,10 @@ export class ApplicationPackage {
             this.pkg.malaguComponent = {};
             this.componentPackageLoader.load(this.pkg, this.options.mode);
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
+            const mode = this._rootComponentPackage.malaguComponent!.mode!;
+            for (const m of mode) {
+                console.log(chalk`malagu {bold.blue mode} - {bold ${m}}`);
+            }
         }
         return this._rootComponentPackage;
     }
@@ -150,20 +143,19 @@ export class ApplicationPackage {
      */
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
-            let modeForConfig = this.rootComponentPackage().malaguComponent!.mode;
-            modeForConfig = Array.isArray(modeForConfig) ? modeForConfig : modeForConfig ? [modeForConfig] : [];
-            const modeForOption = this.options.mode;
-            const merged = Array.from(new Set<string>([...modeForConfig, ...modeForOption]));
+            const mode = this.rootComponentPackage().malaguComponent!.mode!;
 
             const collector = new ComponentPackageCollector(
                 this,
-                merged
+                mode
             );
             this._componentPackages = collector.collect(this.pkg);
             this._componentPackages.push(this.rootComponentPackage());
             for (const componentPackage of this._componentPackages) {
                 this.componentPackageResolver.resolve(componentPackage);
             }
+
+            console.log(chalk`malagu {green.bold component} - ${ this.rootComponentPackage().name }@${ this.rootComponentPackage().version }`);
 
         }
 

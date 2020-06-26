@@ -5,7 +5,6 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cli": "^0.0.24",
     "@malagu/web": "^0.0.24",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -45,6 +44,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
+    "@malagu/cli": "^0.0.24",
     "@malagu/ext-scripts": "^0.0.24",
     "@types/inquirer": "^6.5.0",
     "@types/jszip": "^3.1.6"

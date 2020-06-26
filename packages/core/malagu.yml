@@ -1,5 +1,7 @@
 auto: false
 malagu:
+  name: 'Malagu Framework'
+  hostDomId: malagu-root
   logger:
     level: 'info'
 frontend:

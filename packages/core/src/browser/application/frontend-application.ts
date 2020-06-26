@@ -2,7 +2,7 @@ import { ApplicationShell } from '../shell';
 import { FrontendApplicationStateService } from './frontend-application-state';
 import { parseCssTime } from '../browser';
 import { Component, Autowired, MaybePromise,
-    ApplicationStateService, AbstractApplication, Application } from '../../common';
+    ApplicationStateService, AbstractApplication, Application, Value } from '../../common';
 
 @Component(Application)
 export class FrontendApplication extends AbstractApplication {
@@ -12,6 +12,9 @@ export class FrontendApplication extends AbstractApplication {
 
     @Autowired(ApplicationStateService)
     protected readonly stateService: FrontendApplicationStateService;
+
+    @Value('malagu.hostDomId')
+    protected readonly hostDomId: string;
 
     get shell(): ApplicationShell {
         return this._shell;
@@ -36,10 +39,10 @@ export class FrontendApplication extends AbstractApplication {
      */
     protected getHost(): Promise<HTMLElement> {
         if (document.body) {
-            return Promise.resolve(document.body);
+            return Promise.resolve(document.getElementById(this.hostDomId) || document.body);
         }
         return new Promise<HTMLElement>(resolve =>
-            window.addEventListener('load', () => resolve(document.body), { once: true })
+            window.addEventListener('load', () => resolve(document.getElementById(this.hostDomId) || document.body), { once: true })
         );
     }
 

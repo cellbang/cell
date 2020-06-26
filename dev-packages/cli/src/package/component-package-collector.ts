@@ -3,6 +3,7 @@ import { NodePackage } from './npm-registry';
 import { ComponentPackage, RawComponentPackage } from './package-protocol';
 import { ApplicationPackage } from './application-package';
 import { ComponentPackageLoader } from './component-config-loader';
+const chalk = require('chalk');
 
 export class ComponentPackageCollector {
 
@@ -67,6 +68,7 @@ export class ComponentPackageCollector {
             this.collectPackagesWithParent(pck, componentPackage);
             delete componentPackage.malaguComponent?.mode;
             this.sorted.push(componentPackage);
+            console.log(chalk`malagu {green.bold component} - ${ componentPackage.name }@${ componentPackage.version }`);
         }
     }
 

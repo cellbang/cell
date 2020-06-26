@@ -2,7 +2,9 @@
   "extends": "../../configs/base.tsconfig",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "lib"
+    "outDir": "lib",
+    "target": "ES2018",
+    "lib": ["ES2018"]
   },
   "include": [
     "src"
