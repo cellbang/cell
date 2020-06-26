@@ -30,7 +30,7 @@ export class BaseConfigFactory {
             devtool: dev ? 'source-map' : undefined,
             stats: 'errors-only',
             resolve: {
-                extensions: [ '.tsx', '.ts', '.js' ]
+                extensions: [ '.tsx', '.ts', '.js', '.wasm', '.mjs', '.json' ]
             },
             module: {
                 rules: [

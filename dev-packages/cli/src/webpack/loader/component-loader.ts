@@ -38,8 +38,8 @@ module.exports.container = Promise.resolve()
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      const baseURI = document.getElementsByTagName('script')[0].baseURI;
-      navigator.serviceWorker.register(baseURI + 'service-worker.js').then(registration => {
+      const href = document.getElementsByTagName('base')[0].href;
+      navigator.serviceWorker.register(href + 'service-worker.js' + '?${new Date().getTime()}').then(registration => {
         console.log('SW registered: ', registration);
       }).catch(registrationError => {
         console.log('SW registration failed: ', registrationError);

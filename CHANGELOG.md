@@ -1,5 +1,23 @@
 # Change Log
 
+## v0.0.25
+- feat(cli) optimizes command line execution speed by loading modules on demand
+- feat(core) front-end application is no longer directly in the body, and provides a div container with an id of malagu.hostDomId
+- feat(cli) provides a default html template, if the index.html file exists in the project root directory, it will overwrite the default provided template
+- feat(serve-static) defines two component attributes: path and apiPath, path matches the front-end route, and apiPath matches the back-end route
+- feat(cli) adds the base tag to the default html template to allow the resources in html to be loaded by absolute routing
+- feat(cli) serve, build and deploy add parameter entry and options -t, --targets uniformly, support non-malagu framework operation, build and deployment
+- The feat(cli) build command adds options -o, --output, custom code output location
+
+- feat(cli) 通过按需加载模块优化命令行执行速度
+- feat(core) 前端应用不再直接 body 里面，提供了一个 id 为 malagu.hostDomId 的 div 容器
+- feat(cli) 提供一个默认的 html 模板，如果项目根目录存在 index.html 文件，会覆盖默认提供的模板
+- feat(serve-static) 定义了两个组件属性：path 和 apiPath，path 匹配的前端路由，而 apiPath 匹配的是后端路由
+- feat(cli) 默认 html 模板中添加 base 标签，让 html 中的资源以绝对路由的方式加载
+- feat(cli) serve、build 和 deploy 统一添加参数 entry 和选项 -t, --targets，支持非 malagu 框架运行、构建和部署
+- feat(cli) build 命令添加选项 -o, --output，自定义代码输出位置
+
+
 ## v0.0.24
 
 - feat(cli) add admin-app application template

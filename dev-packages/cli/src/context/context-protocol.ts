@@ -4,7 +4,6 @@ import * as https from 'https';
 import * as http from 'http';
 import { RawComponentPackage } from '../package';
 import { join } from 'path';
-import { ConfigFactory } from '../webpack';
 import { CommanderStatic } from 'commander';
 import { checkPkgVersionConsistency } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
@@ -25,11 +24,12 @@ export namespace HookContext {
         }
 
         const mode = options.mode || [];
-        let pkg = new ApplicationPackage({ projectPath, mode, program });
+        const targets = options.targets;
+        let pkg = new ApplicationPackage({ projectPath, mode, targets, program });
         if (!RawComponentPackage.is(pkg.pkg)) {
             const { malagu } = pkg.pkg;
             if (malagu && malagu.rootComponent) {
-                pkg = new ApplicationPackage({ projectPath: join(projectPath, malagu.rootComponent), mode, program});
+                pkg = new ApplicationPackage({ projectPath: join(projectPath, malagu.rootComponent), mode, targets, program});
             }
         }
 
@@ -69,6 +69,7 @@ export interface ConfigurationContext extends HookContext {
 
 export namespace ConfigurationContext {
     export async function create(hookContext: HookContext): Promise<ConfigurationContext> {
+        const { ConfigFactory } = require('../webpack');
         const configFactory = new ConfigFactory();
         const configurations = await configFactory.create(hookContext);
         return {

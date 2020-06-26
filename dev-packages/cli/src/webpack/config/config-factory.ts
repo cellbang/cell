@@ -9,7 +9,7 @@ import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, WorkboxWebpackPluginConfigFactory,
     ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory, AssetsWebpackPluginConfigFactory,
-    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory } from './plugin-config-factory';
+    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, WebpackPwaManifestPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigFactory } from './component-config-factory';
@@ -36,6 +36,7 @@ export class ConfigFactory {
             new HtmlWebpackPluginConfigFactory(),
             new HtmlWebpackTagsPluginConfigFactory(),
             new WorkboxWebpackPluginConfigFactory(),
+            new WebpackPwaManifestPluginConfigFactory(),
             new AssetsWebpackPluginConfigFactory(),
             new CleanWebpackPluginConfigFactory()
         ];

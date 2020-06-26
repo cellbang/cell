@@ -1,20 +1,10 @@
-
 import * as webpack from 'webpack';
 import * as path from 'path';
 import { HookContext } from '../../context';
 import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
-import { getWebpackConfig, getConfig, getHomePath } from '../utils';
+import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig } from '../utils';
 import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
 import yaml = require('js-yaml');
-const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AssetsWebpackPlugin = require('assets-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 export class CopyWepackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
@@ -28,6 +18,11 @@ export class CopyWepackPluginConfigFactory {
                 assets.push(assert);
             }
         }
+
+        if (assets.length === 0) {
+            return {};
+        }
+        const CopyPlugin = require('copy-webpack-plugin');
 
         return {
             plugins: [
@@ -73,6 +68,8 @@ export class ForkTsCheckerWebpackPluginConfigFactory {
         if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
             return {};
         }
+        const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
+        const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
         return {
             plugins: [
@@ -93,7 +90,7 @@ export class HardSourceWebpackPluginConfigFactory {
         const homePath = getHomePath(pkg, target);
         const configPath = path.join(homePath, CONFIG_FILE);
         const relativeConfigPath = path.relative(pkg.projectPath, configPath);
-
+        const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
         return {
             plugins: [
                 new HardSourceWebpackPlugin({
@@ -119,14 +116,24 @@ export class HtmlWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const faviconPath = path.join(pkg.projectPath, 'favicon.ico');
-        const exists = existsSync(faviconPath);
+        const faviconExists = existsSync(faviconPath);
+        const templatePath = path.join(pkg.projectPath, 'index.html');
+        const templateExists = existsSync(templatePath);
+        const HtmlWebpackPlugin = require('html-webpack-plugin');
+        const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+
+        const c = getMalaguConfig(pkg, FRONTEND_TARGET);
+        const baseHref = c.server.path;
         return {
             plugins: [
                 new HtmlWebpackPlugin({
                     title: 'Malagu App',
-                    favicon: exists ? faviconPath : undefined,
+                    template: templateExists ? templatePath : path.join(__dirname, '..', '..', '..', 'templates', 'index.html'),
+                    templateParameters: getConfig(pkg, FRONTEND_TARGET),
+                    favicon: faviconExists ? faviconPath : undefined,
                     ...getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackPlugin || {}
                 }),
+                new BaseHrefWebpackPlugin({ baseHref })
             ]
         };
     }
@@ -140,6 +147,7 @@ export class WorkboxWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
         const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {};
+        const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
         return {
             plugins: [
                 new WorkboxWebpackPlugin.GenerateSW({
@@ -156,8 +164,38 @@ export class WorkboxWebpackPluginConfigFactory {
     }
 }
 
+export class WebpackPwaManifestPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        const { pkg } = context;
+        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).webpackPwaManifestPlugin || {};
+        const WebpackPwaManifest = require('webpack-pwa-manifest');
+        return {
+            plugins: [
+                new WebpackPwaManifest({
+                    version: pkg.pkg.version,
+                    name: pkg.pkg.name,
+                    short_name: pkg.pkg.short_name,
+                    display: pkg.pkg.display,
+                    description: pkg.pkg.description,
+                    background_color: pkg.pkg.background_color,
+                    crossorigin: pkg.pkg.crossorigin || 'anonymous',
+                    theme_color: pkg.pkg.theme_color,
+                    icons: pkg.pkg.icons,
+                    inject: true,
+                    ...pluginConfig
+                })
+            ]
+        };
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return FRONTEND_TARGET === target;
+    }
+}
+
 export class AssetsWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
+        const AssetsWebpackPlugin = require('assets-webpack-plugin');
         const { pkg } = context;
         const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).assetsWebpackPlugin || {};
         const outputPath = path.join(getHomePath(pkg, FRONTEND_TARGET), 'dist');
@@ -171,7 +209,9 @@ export class AssetsWebpackPluginConfigFactory {
         return {
             plugins: [
                 new AssetsWebpackPlugin({
-                    filename: 'manifest.json',
+                    filename: 'assets-manifest.json',
+                    manifestFirst: true,
+                    update: true,
                     metadata,
                     path: outputPath,
                     prettyPrint: true,
@@ -212,6 +252,12 @@ export class HtmlWebpackTagsPluginConfigFactory {
             }
         }
 
+        if (after.length === 0 && before.length === 0) {
+            return {};
+        }
+
+        const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+
         return {
             plugins: [
                 ...[...after, ...before.reverse()].map(c => new HtmlWebpackTagsPlugin(c))
@@ -226,6 +272,7 @@ export class HtmlWebpackTagsPluginConfigFactory {
 
 export class CleanWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
+        const { CleanWebpackPlugin } = require('clean-webpack-plugin');
         return {
             plugins: [
                 new CleanWebpackPlugin()

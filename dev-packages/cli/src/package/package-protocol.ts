@@ -7,6 +7,7 @@ export class ApplicationPackageOptions {
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
     readonly mode: string[];
+    readonly targets: string[];
     readonly program: CommanderStatic;
 }
 

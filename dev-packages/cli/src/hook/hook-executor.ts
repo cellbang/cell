@@ -1,14 +1,8 @@
 import { ServeContext, InitContext, BuildContext, DeployContext, WebpackContext, HookContext, ConfigContext } from '../context';
 import { resolve } from 'path';
-import { REGISTER_INSTANCE, register } from 'ts-node';
 import { getConfig } from '../webpack/utils';
 import { BACKEND_TARGET } from '../constants';
 const chalk = require('chalk');
-
-// Avoid duplicate registrations
-if (!process[REGISTER_INSTANCE]) {
-    register();
-}
 
 export class HookExecutor {
 
@@ -65,6 +59,11 @@ export class HookExecutor {
     }
 
     protected async doExecuteHooks(modules: Map<string, string>, context: HookContext, hookName: string): Promise<void> {
+        const { REGISTER_INSTANCE, register } = require('ts-node');
+        // Avoid duplicate registrations
+        if (!(process as any)[REGISTER_INSTANCE]) {
+            register();
+        }
 
         for (const m of modules.entries()) {
             const properties: string[] = [];

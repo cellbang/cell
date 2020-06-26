@@ -6,8 +6,8 @@ import { getHomePath } from '../utils';
 
 export class OutputConfigFactory {
     create(config: any, context: HookContext, target: string) {
-        const { pkg, dev } = context;
-        const outputPath = path.join(getHomePath(pkg, target), 'dist');
+        const { pkg, dev, output } = context;
+        const outputPath = output ? path.resolve(pkg.projectPath, output) : path.join(getHomePath(pkg, target), 'dist');
 
         const baseOutputConfig = {
             path: outputPath
