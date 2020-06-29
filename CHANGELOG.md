@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.0.26
+
+- fix(react+material-ul) remove @Context id
+
 ## v0.0.25
 - feat(cli) optimizes command line execution speed by loading modules on demand
 - feat(core) front-end application is no longer directly in the body, and provides a div container with an id of malagu.hostDomId
