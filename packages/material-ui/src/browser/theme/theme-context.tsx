@@ -4,7 +4,7 @@ import { ThemeProvider as Provider, THEME_REACT_CONTEXT_PRIORITY } from './theme
 import { ThemeProvider } from '@material-ui/core';
 import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 
-@Context(Context)
+@Context()
 export class ThemeContext extends React.Component {
 
     static priority = THEME_REACT_CONTEXT_PRIORITY;
