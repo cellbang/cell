@@ -1830,14 +1830,14 @@
   resolved "https://registry.npm.taobao.org/@types/range-parser/download/@types/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha1-fuMwunyq+5gJC+zoal7kQRWQTCw=
 
-"@types/react-dom@^16.8.5", "@types/react-dom@^16.9.8":
+"@types/react-dom@^16.9.8":
   version "16.9.8"
   resolved "https://registry.npm.taobao.org/@types/react-dom/download/@types/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
   integrity sha1-/kweEd/GcVVzPfpqplEItJcctCM=
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.1.3", "@types/react-router-dom@^5.1.5":
+"@types/react-router-dom@^5.1.3":
   version "5.1.5"
   resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router-dom%2Fdownload%2F%40types%2Freact-router-dom-5.1.5.tgz#7c334a2ea785dbad2b2dcdd83d2cf3d9973da090"
   integrity sha1-fDNKLqeF260rLc3YPSzz2Zc9oJA=
@@ -1854,14 +1854,6 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-router@^5.1.7":
-  version "5.1.8"
-  resolved "https://registry.npm.taobao.org/@types/react-router/download/@types/react-router-5.1.8.tgz?cache=0&sync_timestamp=1592806293110&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-router%2Fdownload%2F%40types%2Freact-router-5.1.8.tgz#4614e5ba7559657438e17766bb95ef6ed6acc3fa"
-  integrity sha1-RhTlunVZZXQ44Xdmu5Xvbtasw/o=
-  dependencies:
-    "@types/history" "*"
-    "@types/react" "*"
-
 "@types/react-transition-group@^4.2.0":
   version "4.4.0"
   resolved "https://registry.npm.taobao.org/@types/react-transition-group/download/@types/react-transition-group-4.4.0.tgz?cache=0&sync_timestamp=1590088384339&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact-transition-group%2Fdownload%2F%40types%2Freact-transition-group-4.4.0.tgz#882839db465df1320e4753e6e9f70ca7e9b4d46d"
@@ -1873,14 +1865,6 @@
   version "16.9.35"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.35.tgz?cache=0&sync_timestamp=1589160578767&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
   integrity sha1-oIMNFy6Krdm9QXCboigaMSS702g=
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@^16.9.38":
-  version "16.9.41"
-  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.41.tgz#925137ee4d2ff406a0ecf29e8e9237390844002e"
-  integrity sha1-klE37k0v9Aag7PKejpI3OQhEAC4=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
