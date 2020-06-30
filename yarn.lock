@@ -1259,11 +1259,6 @@
   dependencies:
     core-js "^2.5.7"
 
-"@malagu/ext-scripts@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.npm.taobao.org/@malagu/ext-scripts/download/@malagu/ext-scripts-0.0.25.tgz#32cded2789f0eeaf0f7f3dd3612e8e8c44494cb8"
-  integrity sha1-Ms3tJ4nw7q8Pfz3TYS6OjERJTLg=
-
 "@material-ui/core@^4.6.0":
   version "4.10.1"
   resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.10.1.tgz#e3db4ca55d2af6cc23a1159ef5c32ad97c43c39c"
