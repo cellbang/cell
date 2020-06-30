@@ -2,6 +2,11 @@
 
 ## v0.0.26
 
+- fix(cli) Fix malagu init command execution failure
+- fix(cli) 修复 malagu init 命令执行失败
+
+## v0.0.26
+
 - fix(react+material-ul) remove @Context id
 
 ## v0.0.25
