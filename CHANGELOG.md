@@ -1,6 +1,11 @@
 # Change Log
 
-## v0.0.26
+## v0.0.28
+
+- feat(cli) Change the compilation target to es6
+- feat(cli) 变更编译目标到 es6
+
+## v0.0.27
 
 - fix(cli) Fix malagu init command execution failure
 - fix(cli) 修复 malagu init 命令执行失败
