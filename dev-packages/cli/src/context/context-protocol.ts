@@ -24,7 +24,7 @@ export namespace HookContext {
         }
 
         const mode = options.mode || [];
-        const targets = options.targets;
+        const targets = options.targets || [];
         let pkg = new ApplicationPackage({ projectPath, mode, targets, program });
         if (!RawComponentPackage.is(pkg.pkg)) {
             const { malagu } = pkg.pkg;
