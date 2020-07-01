@@ -5,7 +5,7 @@ import { ContextInitializer, ExpressionContext } from './expression-protocol';
 export class CoreContextInitializer implements ContextInitializer {
 
     initialize(ctx: ExpressionContext): void {
-        ctx.env = process.env;
+        ctx.env = { ...process.env, _ignoreEl: true };
     }
 
     priority = 500;

@@ -18,6 +18,8 @@ export class ExpressionHandler {
         traverse(this.ctx).forEach(function (value: any) {
             if (typeof value === 'string') {
                 this.update(self.evalSync(value, self.ctx));
+            } else if (value && value._ignoreEl === true) {
+                this.update(value, true);
             }
         });
     }
