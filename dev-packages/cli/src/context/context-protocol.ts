@@ -43,10 +43,10 @@ export namespace HookContext {
                     config: config
                 });
 
-                config.env = process.env;
+                config.env = { ...process.env, _ignoreEl: true };
 
-                config.pkg = pkg.pkg;
-                config.cliContext = program;
+                config.pkg = { ...pkg.pkg, _ignoreEl: true};
+                config.cliContext = { ...program, _ignoreEl: true};
                 new ExpressionHandler(config).handle();
                 delete config.env;
                 delete config.pkg;

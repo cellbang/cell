@@ -30,7 +30,11 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
             const self = this;
             traverse(c).forEach(function (value: any) {
                 if (typeof value === 'string') {
-                    this.update(self.handle(value, c));
+                    if (typeof value === 'string') {
+                        this.update(self.handle(value, c));
+                    } else if (value && (value as any)._ignoreEl === true) {
+                        this.update(value, true);
+                    }
                 }
             });
         }

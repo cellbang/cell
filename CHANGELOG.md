@@ -1,5 +1,13 @@
 # Change Log
 
+## v0.0.29
+
+- feat(cli+core) In the configuration of a node in the component configuration, if the _ignoreEl attribute is true, the expression calculation of the configuration node and child nodes is ignored
+- feat(cli+core) ignores the expression calculation under the configuration node such as env by default
+
+- feat(cli+core) 组件配置中某个节点配置如果存在 _ignoreEl 属性为 true，则忽略该配置节点以及子节点的表达式计算
+- feat(cli+core) 默认忽略 env 等配置节点下面的表达式计算
+
 ## v0.0.28
 
 - feat(cli) Change the compilation target to es6
