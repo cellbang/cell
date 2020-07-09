@@ -34,6 +34,10 @@ deployConfig:
     serviceName: ${deployConfig.service.name}
   customDomain:
     protocol: HTTP
+    certConfig:
+      # certName: xxx
+      privateKey: ssl/domain.key
+      certificate: ssl/domain.pem
     routeConfig:
       routes:
         - path: '/*'

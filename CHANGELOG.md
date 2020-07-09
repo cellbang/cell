@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.0.30
+
+- fix(fc-adapter) Fix and optimize HTTS certificate configuration
+- fix(fc-adapter) 修复并优化 HTTS 证书配置
+
 ## v0.0.29
 
 - feat(cli+core) In the configuration of a node in the component configuration, if the _ignoreEl attribute is true, the expression calculation of the configuration node and child nodes is ignored
