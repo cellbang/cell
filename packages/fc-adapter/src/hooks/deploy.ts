@@ -340,16 +340,16 @@ async function createOrUpdateCustomDomain(customDomain: any) {
         protocol
     };
 
-    if (certConfig) {
-        opts.certConfig = {};
-        const privateKey = certConfig.PrivateKey;
-        const certificate = certConfig.Certificate;
+    if (certConfig?.certName) {
+        opts.certConfig = { ...certConfig };
+        const privateKey = certConfig.privateKey;
+        const certificate = certConfig.certificate;
 
-        if (privateKey && privateKey.endsWith('.pem')) {
-            opts.certConfig.PrivateKey = await readFile(privateKey, 'utf-8');
+        if (privateKey?.endsWith('.key')) {
+            opts.certConfig.privateKey = await readFile(privateKey, 'utf-8');
         }
-        if (certificate && certificate.endsWith('.pem')) {
-            opts.certConfig.Certificate = await readFile(certificate, 'utf-8');
+        if (certificate?.endsWith('.pem')) {
+            opts.certConfig.certificate = await readFile(certificate, 'utf-8');
         }
     }
 
