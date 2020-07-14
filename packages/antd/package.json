@@ -1,11 +1,11 @@
 {
   "name": "@malagu/antd",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "^0.0.30",
+    "@malagu/react": "^0.0.31",
     "antd": "^4.0.2",
     "dayjs": "^1.8.22",
     "react": "^16.12.0",
@@ -41,7 +41,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.30",
+    "@malagu/ext-scripts": "^0.0.31",
     "@types/history": "^4.7.3",
     "@types/react-router-dom": "^5.1.3"
   },
