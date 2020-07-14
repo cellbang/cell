@@ -1,11 +1,11 @@
 {
   "name": "@malagu/widget",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.30",
+    "@malagu/core": "^0.0.31",
     "@phosphor/widgets": "^1.9.3",
     "perfect-scrollbar": "^1.4.0"
   },
@@ -38,7 +38,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.30"
+    "@malagu/ext-scripts": "^0.0.31"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

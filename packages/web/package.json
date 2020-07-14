@@ -1,11 +1,11 @@
 {
   "name": "@malagu/web",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.30",
+    "@malagu/core": "^0.0.31",
     "@types/express": "^4.16.1",
     "cookies": "^0.7.3",
     "cors": "^2.8.5",
@@ -43,7 +43,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.30",
+    "@malagu/ext-scripts": "^0.0.31",
     "@types/cors": "^2.8.6",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
