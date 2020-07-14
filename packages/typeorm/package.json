@@ -1,11 +1,11 @@
 {
   "name": "@malagu/typeorm",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^0.0.30",
+    "@malagu/web": "^0.0.31",
     "mysql": "^2.17.1",
     "typeorm": "^0.2.19"
   },
@@ -38,8 +38,8 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/cli": "^0.0.30",
-    "@malagu/ext-scripts": "^0.0.30",
+    "@malagu/cli": "^0.0.31",
+    "@malagu/ext-scripts": "^0.0.31",
     "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "nyc": {

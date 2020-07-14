@@ -1,6 +1,6 @@
 {
   "name": "@malagu/fc-adapter",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
@@ -8,7 +8,7 @@
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.1.1",
     "@alicloud/ram": "^1.0.0",
-    "@malagu/web": "^0.0.30",
+    "@malagu/web": "^0.0.31",
     "@webserverless/fc-express": "^0.1.4",
     "ali-oss": "^6.1.1",
     "co": "^4.6.0",
@@ -50,8 +50,8 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/cli": "^0.0.30",
-    "@malagu/ext-scripts": "^0.0.30",
+    "@malagu/cli": "^0.0.31",
+    "@malagu/ext-scripts": "^0.0.31",
     "@types/inquirer": "^6.5.0",
     "@types/jszip": "^3.1.6"
   },
