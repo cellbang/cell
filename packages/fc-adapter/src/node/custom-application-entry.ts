@@ -11,6 +11,8 @@ container.then(async c => {
     app.use(express.json());
     app.use(express.raw());
     app.use(express.text());
+    app.use(express.urlencoded({ extended: true }));
+
     app.all('*', async (req: any, res: any) => {
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
