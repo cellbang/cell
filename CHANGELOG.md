@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.0.31
+
+- feat(fc-adapter + scf-adapter + express-adapter) supports urlencoded request content type
+- feat(fc-adapter + scf-adapter + express-adapter) 支持urlencoded 请求内容类型
+
 ## v0.0.30
 
 - fix(fc-adapter) Fix and optimize HTTS certificate configuration

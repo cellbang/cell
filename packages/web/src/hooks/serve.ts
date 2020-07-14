@@ -13,6 +13,7 @@ export default async (context: any) => {
     app.use(express.json());
     app.use(express.raw());
     app.use(express.text());
+    app.use(express.urlencoded({ extended: true }));
     let doDispatch: (req: any, res: any) => void;
     const compileDeferred = new Deferred<void>();
 
