@@ -1,0 +1,12 @@
+frontend:
+  malagu:
+    widget:
+      locales:
+        zh-CN:
+          messages:
+            malagu.shell.login.label: 登录
+            malagu.shell.logo.label: 细胞矩阵
+        en-US:
+          messages:
+            malagu.shell.login.label: Login
+            malagu.shell.logo.label: Cellbang

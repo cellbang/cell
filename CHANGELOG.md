@@ -1,5 +1,26 @@
 # Change Log
 
+## v0.0.32
+- The feat(cli) compilation process supports progress display
+- The local operation of feat(cli) disables the PWA function by default, which can be manually turned on through malagu.webpack.workboxWebpackPlugin.generateInDevMode configuration, and the PWA function will be automatically turned on when publishing
+- feat(cli) admin-app template update
+- feat(core) optimize online and local log levels
+- feat(widget) completes the design and implementation of the first version of the widget. The widget provides the ability to dynamically assemble, configure and expand the front-end page, and it is also the basic ability of the future micro-front-end and visualization
+- feat(shell) adds a shell component and provides a highly extensible layout component by default
+- feat(react) completed the first version of Slot design and implementation, so that front-end components can be injected into a slot, and dynamically manage front-end components, namely widgets
+- feat(widget+react+grommet) internationalization, multi-theme, communication between front-end components (rxjs) design and implementation
+- feat (cli) template supports github actions configuration
+
+- feat(cli) 编译构建过程支持进度显示
+- feat(cli) 本地运行默认关闭 PWA 功能，可以通过 malagu.webpack.workboxWebpackPlugin.generateInDevMode 配置手动开启，发布的时候会自动开启 PWA 功能
+- feat(cli) admin-app 模板更新
+- feat(core) 优化线上和本地日志级别
+- feat(widget) 完成 widget 第一版设计与实现，通过 widget 提供前端页面的动态组装、配置和扩展的能力，同时也是未来微前端和可视化的基础能力
+- feat(shell) 添加 shell 组件，默认提供了一个高度可扩展的布局组件
+- feat(react) 完成第一版 Slot 设计与实现，让前端组件可以被注入到某个 Slot，动态管理前端组件，即 widget
+- feat(widget+react+grommet) 国际化、多主题、前端组件之间通信（rxjs）设计与实现
+- feat（cli）模板支持github actions 配置
+
 ## v0.0.31
 
 - feat(fc-adapter + scf-adapter + express-adapter) supports urlencoded request content type

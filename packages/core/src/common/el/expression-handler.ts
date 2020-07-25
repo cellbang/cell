@@ -27,21 +27,30 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
 
         if (!ctx && c !== this._ctx) {
             this._ctx = c;
+            this.handle(c, c);
+        }
+        return c;
+    }
+
+    handle(textOrObj: string | Object, ctx?: ExpressionContext): any {
+        if (typeof textOrObj === 'string') {
+            return this.doHandle(textOrObj, ctx);
+        } else {
             const self = this;
-            traverse(c).forEach(function (value: any) {
+            traverse(textOrObj).forEach(function (value: any) {
                 if (typeof value === 'string') {
                     if (typeof value === 'string') {
-                        this.update(self.handle(value, c));
+                        this.update(self.handle(value, ctx));
                     } else if (value && (value as any)._ignoreEl === true) {
                         this.update(value, true);
                     }
                 }
             });
+            return textOrObj;
         }
-        return c;
     }
 
-    handle(text: string, ctx?: ExpressionContext): any {
+    protected doHandle(text: string, ctx?: ExpressionContext): any {
         const sections = this.expressionCompiler.compileSections(text);
         if (sections.length > 0) {
             if (this.hasExpression(sections)) {

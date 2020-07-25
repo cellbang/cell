@@ -1,5 +1,5 @@
 import { Constant } from '@malagu/core';
-import { ROUTE_METADATA, RedirectMetadata } from '../app/app-protocol';
+import { ROUTE_METADATA, RedirectMetadata } from '../router/router-protocol';
 
 export function Redirect(toOrRedirectMetadata?: string | RedirectMetadata, rebind: boolean = false) {
     return function (target: any) {

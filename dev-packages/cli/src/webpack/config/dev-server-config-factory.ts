@@ -9,7 +9,6 @@ export class DevServerConfigFactory {
         const { pkg, port, open } = context;
         const realPort = getPort(pkg, target, port);
         const baseDevServerConfig = {
-            stats: 'errors-only',
             watchOptions: {
                 ignored: /node_modules/
             },
@@ -35,7 +34,7 @@ export class DevServerConfigFactory {
     }
 
     support(context: HookContext, target: string): boolean {
-        return true;
+        return context.dev;
     }
 }
 

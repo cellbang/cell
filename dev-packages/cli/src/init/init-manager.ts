@@ -6,13 +6,10 @@ import { spawnSync } from 'child_process';
 import { HookExecutor } from '../hook/hook-executor';
 import { ContextUtils, HookContext } from '../context';
 import * as ora from 'ora';
-import axios from 'axios';
 import { getPackager } from '../packager';
 const chalk = require('chalk');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
-
-const SEARCH_TEMPLATE_REPO_URI = 'https://api.github.com/search/repositories?q=topic:malagu-template&sort=stars&order=desc';
 
 const PLACEHOLD = '{{ templatePath }}';
 
@@ -100,24 +97,9 @@ export class InitManager {
             message: 'Select a template to init',
             source: async (answersSoFar: any, input: string) => {
                 if (!this.source) {
-                    const options = {
-                        url: SEARCH_TEMPLATE_REPO_URI,
-                        timeout: 5000,
-                        headers: {
-                            'User-Agent': 'Malagu CLI'
-                        }
-                    };
                     const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
-                    try {
-                        const { items } = await axios.request(options);
-                        const thirdPartyTemplates = items.map((item: any) => this.toThirdPartyTemplate(item));
-                        this.source = [...officialTemplates, ...thirdPartyTemplates];
-                    } catch (error) {
-                        this.source = officialTemplates;
-                        return this.source;
-                    } finally {
-                        spinner.stop();
-                    }
+                    this.source = officialTemplates;
+                    spinner.stop();
                 }
                 return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
             }

@@ -8,8 +8,6 @@ const colors = require('webpack-dev-server/lib/utils/colors');
 const processOptions = require('webpack-dev-server/lib/utils/processOptions');
 const createLogger = require('webpack-dev-server/lib/utils/createLogger');
 const findPort = require('webpack-dev-server/lib/utils/findPort');
-import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import { getDevSuccessInfo } from '../webpack/utils';
 const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
@@ -41,12 +39,6 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
         server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem, logLevel: 'error' }));
-        new FriendlyErrorsWebpackPlugin({
-            compilationSuccessInfo: {
-                messages: getDevSuccessInfo((configuration as any).devServer, configuration.name!),
-                notes: []
-            }
-        }).apply(compiler);
     }
     const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);
@@ -72,12 +64,6 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
         process.exit(-1);
     }
     const compiler = createCompiler(configuration, options, log);
-    new FriendlyErrorsWebpackPlugin({
-        compilationSuccessInfo: {
-            messages: getDevSuccessInfo((configuration as any).devServer, configuration.name!),
-            notes: []
-        }
-    }).apply(compiler);
 
     try {
         server = new Server(compiler, options, log);

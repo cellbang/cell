@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { ContextProvider, ROUTER } from './app-protocol';
+import { ROUTER } from '../router';
 import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 import { App } from '../annotation';
+import { ContextProvider } from '../context';
 
 export interface AppProps { }
 

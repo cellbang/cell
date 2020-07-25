@@ -5,12 +5,13 @@
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^0.0.31",
+    "@malagu/widget": "^0.0.31",
     "history": "^4.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-router": "^5.1.2",
-    "react-router-dom": "^5.1.2"
+    "react-intl": "^5.4.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0"
   },
   "publishConfig": {
     "access": "public"
@@ -21,12 +22,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/muxiangqiu/malagu.git"
+    "url": "https://github.com/cellbang/malagu.git"
   },
   "bugs": {
-    "url": "https://github.com/muxiangqiu/malagu/issues"
+    "url": "https://github.com/cellbang/malagu/issues"
   },
-  "homepage": "https://github.com/muxiangqiu/malagu",
+  "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
     "src",

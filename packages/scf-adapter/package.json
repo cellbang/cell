@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/muxiangqiu/malagu.git"
+    "url": "https://github.com/cellbang/malagu.git"
   },
   "bugs": {
-    "url": "https://github.com/muxiangqiu/malagu/issues"
+    "url": "https://github.com/cellbang/malagu/issues"
   },
-  "homepage": "https://github.com/muxiangqiu/malagu",
+  "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
     "src",

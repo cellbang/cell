@@ -1,5 +1,3 @@
-import './page.view';
-import './page2.view';
-import './layout';
+import './user.view';
 import { autoBind } from '@malagu/core';
 export default autoBind();

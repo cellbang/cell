@@ -2,8 +2,8 @@
   "name": "@malagu/widget",
   "version": "0.0.31",
   "description": "",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/browser/index.js",
+  "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/core": "^0.0.31",
     "@phosphor/widgets": "^1.9.3",
@@ -18,12 +18,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/muxiangqiu/malagu.git"
+    "url": "https://github.com/cellbang/malagu.git"
   },
   "bugs": {
-    "url": "https://github.com/muxiangqiu/malagu/issues"
+    "url": "https://github.com/cellbang/malagu/issues"
   },
-  "homepage": "https://github.com/muxiangqiu/malagu",
+  "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
     "src",

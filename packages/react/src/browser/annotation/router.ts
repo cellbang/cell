@@ -1,8 +1,9 @@
 import { ReactComponent } from './react-component';
-import { ROUTER } from '../app/app-protocol';
+import { ROUTER } from '../router/router-protocol';
+import * as React from 'react';
 
 export const Router =
-    function (component?: any, rebind: boolean = true): (target: any) => any {
+    function (component?: React.ComponentType<any>, rebind: boolean = true): (target: any) => any {
         return (t: any) => {
             ReactComponent(ROUTER, component || t, rebind)(t);
         };

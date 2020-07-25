@@ -1,6 +1,13 @@
 import { loader } from 'webpack';
 import { FRONTEND_TARGET } from '../../constants';
 
+interface Context {
+  target: string;
+  registed: boolean;
+  modules: string[];
+
+}
+
 function generateImports(modules: string[], fn: 'import' | 'require'): string {
     let targetModules: string[] = [];
     targetModules = modules.map((m: string) => {
@@ -12,7 +19,8 @@ function generateImports(modules: string[], fn: 'import' | 'require'): string {
     return targetModules.map(m => `then(function () { return ${m}.then(load) })`).join('.\n');
 }
 
-function generateFrontendComponents(modules: string[]) {
+function generateFrontendComponents(context: Context) {
+    const { modules, registed } = context;
     return `
 require('es6-promise/auto');
 require('reflect-metadata');
@@ -34,9 +42,8 @@ module.exports.container = Promise.resolve()
     if (reason) {
       console.error(reason);
     }
-  });
-
-  if ('serviceWorker' in navigator) {
+  });` + (registed ?
+  `if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       const href = document.getElementsByTagName('base')[0].href;
       navigator.serviceWorker.register(href + 'service-worker.js' + '?${new Date().getTime()}').then(registration => {
@@ -45,10 +52,11 @@ module.exports.container = Promise.resolve()
         console.log('SW registration failed: ', registrationError);
       });
     });
-  }`;
+  }` : '');
 }
 
-function generateBackendComponents(modules: string[]) {
+function generateBackendComponents(context: Context) {
+    const { modules } = context;
     return `
 require('reflect-metadata');
 const { Container } = require('inversify');
@@ -73,17 +81,17 @@ module.exports.container = Promise.resolve()
 }
 
 const componentLoader: loader.Loader = function (source, sourceMap) {
-    const { target, modules } = this.query;
+    const { target } = this.query;
     if (target === FRONTEND_TARGET) {
         this.callback(undefined, `
         ${source}
-        ${generateFrontendComponents(modules)}
+        ${generateFrontendComponents(this.query)}
         `, sourceMap);
 
     } else {
         this.callback(undefined, `
         ${source}
-        ${generateBackendComponents(modules)}
+        ${generateBackendComponents(this.query)}
         `, sourceMap);
     }
 };

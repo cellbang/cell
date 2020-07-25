@@ -6,6 +6,6 @@ frontend:
           react: React
           react-dom: ReactDOM
       htmlWebpackTagsPlugin:
-        react: https://unpkg.com/react@16/umd/react.production.min.js
-        react-dom: https://unpkg.com/react-dom@16/umd/react-dom.production.min.js
+        react: "https://cdn.jsdelivr.net/npm/react@^16.12.0/umd/react.${cliContext.dev ? 'development' : 'production.min'}.js"
+        react-dom: "https://cdn.jsdelivr.net/npm/react-dom@^16.12.0/umd/react-dom.${cliContext.dev ? 'development' : 'production.min'}.js"
   

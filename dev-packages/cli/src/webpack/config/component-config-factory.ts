@@ -1,6 +1,7 @@
 
 import { HookContext } from '../../context';
 import * as path from 'path';
+import { getWebpackConfig } from '../utils';
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
@@ -8,7 +9,9 @@ const nodePathList = (process.env.NODE_PATH || '')
 
 export class ComponentConfigFactory {
     create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
+        const { pkg, dev } = context;
+        const pluginConfig = getWebpackConfig(pkg, target).workboxWebpackPlugin || {};
+        const registed = !dev || !!pluginConfig.generateInDevMode;
         return {
             resolveLoader: {
                 modules: [
@@ -26,7 +29,8 @@ export class ComponentConfigFactory {
                             loader: 'component-loader',
                             options: {
                                 target: target,
-                                modules: Array.from((pkg as any)[`${target}Modules`].values())
+                                registed,
+                                modules: [...(pkg as any)[`${target}Modules`].values()]
                             }
                         }
                     },

@@ -3,7 +3,7 @@ malagu:
   name: 'Malagu Framework'
   hostDomId: malagu-root
   logger:
-    level: 'info'
+    level: info
 frontend:
   entry: lib/common/application/application-entry
 backend:
