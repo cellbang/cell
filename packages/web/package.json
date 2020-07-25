@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/core": "^0.0.31",
     "@types/express": "^4.16.1",
-    "cookies": "^0.7.3",
+    "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "crc": "^3.8.0",
     "express-http-context": "^1.2.3",
@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/muxiangqiu/malagu.git"
+    "url": "https://github.com/cellbang/malagu.git"
   },
   "bugs": {
-    "url": "https://github.com/muxiangqiu/malagu/issues"
+    "url": "https://github.com/cellbang/malagu/issues"
   },
-  "homepage": "https://github.com/muxiangqiu/malagu",
+  "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
     "src",

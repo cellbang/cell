@@ -28,7 +28,7 @@ export class BaseConfigFactory {
                 ]
             },
             devtool: dev ? 'source-map' : undefined,
-            stats: 'errors-only',
+            stats: 'minimal',
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js', '.wasm', '.mjs', '.json' ]
             },
@@ -85,7 +85,6 @@ export class BaseConfigFactory {
                 performance: {
                     hints: false
                 },
-                stats: 'errors-only',
                 module: {
                     rules: [
                         {

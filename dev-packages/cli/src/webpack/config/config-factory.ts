@@ -7,13 +7,14 @@ import { HookExecutor } from '../../hook/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
-import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, WorkboxWebpackPluginConfigFactory,
-    ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory, AssetsWebpackPluginConfigFactory,
-    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, WebpackPwaManifestPluginConfigFactory } from './plugin-config-factory';
+import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, WorkboxWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory,
+    ForkTsCheckerWebpackPluginConfigFactory, HardSourceWebpackPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
+    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, ProgressPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigFactory } from './component-config-factory';
 import { support } from '../utils';
+const chalk = require('chalk');
 
 export class ConfigFactory {
     async create(context: HookContext): Promise<webpack.Configuration[]> {
@@ -24,6 +25,7 @@ export class ConfigFactory {
 
         const configFactories = [
             new BaseConfigFactory(),
+            new FilterWarningsPluginConfigFactory(),
             new EntryConfigFactory(),
             new OutputConfigFactory(),
             new DevServerConfigFactory(),
@@ -36,18 +38,20 @@ export class ConfigFactory {
             new HtmlWebpackPluginConfigFactory(),
             new HtmlWebpackTagsPluginConfigFactory(),
             new WorkboxWebpackPluginConfigFactory(),
-            new WebpackPwaManifestPluginConfigFactory(),
-            new AssetsWebpackPluginConfigFactory(),
-            new CleanWebpackPluginConfigFactory()
+            new CleanWebpackPluginConfigFactory(),
+            new FriendlyErrorsWebpackPluginConfigFactory(),
+            new ProgressPluginConfigFactory()
         ];
 
         for (const target of targets) {
             if (!support(pkg, target)) {
                 continue;
             }
+            console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
             let config = {};
             for (const configFactory of configFactories) {
                 if (configFactory.support(context, target)) {
+                    console.log(chalk`malagu {blue.bold webpack} - ${configFactory.constructor.name}`);
                     config = merge(config, configFactory.create(config, context, target) as any);
                 }
             }

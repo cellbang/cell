@@ -46,7 +46,7 @@ export namespace HookContext {
                 config.env = { ...process.env, _ignoreEl: true };
 
                 config.pkg = { ...pkg.pkg, _ignoreEl: true};
-                config.cliContext = { ...program, _ignoreEl: true};
+                config.cliContext = { ...options, ...program, _ignoreEl: true};
                 new ExpressionHandler(config).handle();
                 delete config.env;
                 delete config.pkg;
@@ -110,7 +110,7 @@ export namespace ContextUtils {
     }
 
     export function createInitContext(hookContext: HookContext): Promise<InitContext> {
-        return ConfigurationContext.create(hookContext);
+        return Promise.resolve(hookContext);
     }
 
     export async function createServeContext(context: ConfigurationContext, server: http.Server | https.Server, app: any, compiler: webpack.Compiler,
@@ -134,7 +134,7 @@ export interface BuildContext extends ConfigurationContext {
 
 }
 
-export interface InitContext extends ConfigurationContext {
+export interface InitContext extends HookContext {
 
 }
 

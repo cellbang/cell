@@ -10,7 +10,7 @@ export interface ExpressionCompiler {
 
 export interface ExpressionHandler {
 
-    handle(text: string): any;
+    handle(text: string | Object): any;
 
 }
 

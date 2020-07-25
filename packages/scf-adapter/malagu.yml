@@ -2,6 +2,8 @@ backend:
   entry: lib/node/api-gateway-application-entry
 deployConfig: 
   name: "${cliContext.prod ? 'release' : 'test'}" # test, prepub, release
+  profile:
+    regions: [ ap-guangzhou ]
   type: api-gateway
   namespace:
     name: default

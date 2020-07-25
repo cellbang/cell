@@ -5,6 +5,6 @@ frontend:
           externals:
             antd: antd
         htmlWebpackTagsPlugin:
-          antd-css: https://unpkg.com/antd@4/dist/antd.min.css
-          antd: https://unpkg.com/antd@4/dist/antd.min.js
+          antd-css: "https://cdn.jsdelivr.net/npm/antd@^4.0.2/dist/antd.${cliContext.dev ? '' : 'min.'}css"
+          antd: "https://cdn.jsdelivr.net/npm/antd@^4.0.2/dist/antd.${cliContext.dev ? '' : 'min.'}js"
 

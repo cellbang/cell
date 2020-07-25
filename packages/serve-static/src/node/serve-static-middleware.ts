@@ -21,7 +21,7 @@ export class ServeStaticMiddleware implements Middleware {
     handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         const oldUrl = ctx.request.url;
         if (this.path && this.path !== ctx.request.url) {
-            ctx.request.url = relative(this.path, ctx.request.url);
+            ctx.request.url = `/${relative(this.path, ctx.request.url)}`;
         }
 
         const executor = (resolve: any, reject: any) => {

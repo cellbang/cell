@@ -1,5 +1,5 @@
 {
-  "name": "app3",
+  "name": "admin-app",
   "keywords": [
     "malagu-component"
   ],
@@ -11,8 +11,7 @@
   ],
   "dependencies": {
     "@malagu/rpc": "latest",
-    "@malagu/react": "latest",
-    "@malagu/material-ui": "latest",
+    "@malagu/shell": "latest",
     "@malagu/serve-static": "latest",
     "@malagu/fc-adapter": "latest"
   },

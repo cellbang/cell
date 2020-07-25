@@ -6,10 +6,11 @@
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/react": "^0.0.31",
-    "grommet": "^2.13.0",
+    "grommet": "^2.14.0",
     "grommet-icons": "^4.4.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-is": "^16.13.1",
     "styled-components": "^5.1.1"
   },
   "publishConfig": {
@@ -21,12 +22,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/muxiangqiu/malagu.git"
+    "url": "https://github.com/cellbang/malagu.git"
   },
   "bugs": {
-    "url": "https://github.com/muxiangqiu/malagu/issues"
+    "url": "https://github.com/cellbang/malagu/issues"
   },
-  "homepage": "https://github.com/muxiangqiu/malagu",
+  "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
     "src",

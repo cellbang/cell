@@ -4,7 +4,7 @@ import { METADATA_KEY } from '../constants';
 export interface ConstantOption {
     id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
     rebind?: boolean;
-    constantValue?: boolean;
+    constantValue?: any;
 }
 
 export interface ConstantDecorator {

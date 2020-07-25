@@ -5,6 +5,8 @@ backend:
   entry: lib/node/${deployConfig.type}-application-entry
 deployConfig: 
   name: "${cliContext.prod ? 'release' : 'test'}" # test, pre, release
+  profile:
+    regions: [ cn-hangzhou ]
   type: custom
   secure: true
   internal: false
@@ -36,8 +38,8 @@ deployConfig:
     protocol: HTTP
     certConfig:
       # certName: xxx
-      privateKey: ssl/domain.key
-      certificate: ssl/domain.pem
+      privateKey: "${ env.SSL_KEY ?: 'ssl/domain.key'}"
+      certificate: "${ env.SSL_PEM ?: 'ssl/domain.pem'}"
     routeConfig:
       routes:
         - path: '/*'

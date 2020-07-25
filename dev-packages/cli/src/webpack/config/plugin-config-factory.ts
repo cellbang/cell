@@ -2,9 +2,45 @@ import * as webpack from 'webpack';
 import * as path from 'path';
 import { HookContext } from '../../context';
 import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
-import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig } from '../utils';
-import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
+import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig, getDevSuccessInfo } from '../utils';
+import { FRONTEND_TARGET, CONFIG_FILE, BACKEND_TARGET } from '../../constants';
 import yaml = require('js-yaml');
+const chalk = require('chalk');
+
+export class FilterWarningsPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        const { pkg } = context;
+        const pluginConfig = getWebpackConfig(pkg, target).filterWarningsPlugin || {};
+        const excludeSet = new Set();
+        for (const key in pluginConfig) {
+            if (pluginConfig.hasOwnProperty(key)) {
+                const exclude = pluginConfig[key];
+                if (Array.isArray(exclude)) {
+                    for (const item of exclude) {
+                        excludeSet.add(item);
+                    }
+                }
+            }
+        }
+
+        const defaultExclude = target === BACKEND_TARGET ? [/Critical dependency: the request of a dependency is an expression/ ] : [];
+        if (defaultExclude.length || excludeSet.size) {
+            const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+            return {
+                plugins: [
+                    new FilterWarningsPlugin({
+                        exclude: [ ...defaultExclude, ...excludeSet]
+                    })
+                ]
+            };
+        }
+        return {};
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return true;
+    }
+}
 
 export class CopyWepackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
@@ -64,10 +100,6 @@ export class EnvironmentPluginConfigFactory {
 export class ForkTsCheckerWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
         const { pkg } = context;
-
-        if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
-            return {};
-        }
         const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
         const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
@@ -80,6 +112,10 @@ export class ForkTsCheckerWebpackPluginConfigFactory {
     }
 
     support(context: HookContext, target: string): boolean {
+        const { pkg } = context;
+        if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
+            return false;
+        }
         return true;
     }
 }
@@ -145,14 +181,16 @@ export class HtmlWebpackPluginConfigFactory {
 
 export class WorkboxWebpackPluginConfigFactory {
     create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {};
+        const { dev, pkg } = context;
+        const pluginConfig = { ...getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {} };
         const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+        delete pluginConfig.generateInDevMode;
         return {
             plugins: [
                 new WorkboxWebpackPlugin.GenerateSW({
                     clientsClaim: true,
                     skipWaiting: true,
+                    maximumFileSizeToCacheInBytes: dev ? 10 * 1024 * 1024 : undefined,
                     ...pluginConfig
                 })
             ]
@@ -160,69 +198,9 @@ export class WorkboxWebpackPluginConfigFactory {
     }
 
     support(context: HookContext, target: string): boolean {
-        return FRONTEND_TARGET === target;
-    }
-}
-
-export class WebpackPwaManifestPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).webpackPwaManifestPlugin || {};
-        const WebpackPwaManifest = require('webpack-pwa-manifest');
-        return {
-            plugins: [
-                new WebpackPwaManifest({
-                    version: pkg.pkg.version,
-                    name: pkg.pkg.name,
-                    short_name: pkg.pkg.short_name,
-                    display: pkg.pkg.display,
-                    description: pkg.pkg.description,
-                    background_color: pkg.pkg.background_color,
-                    crossorigin: pkg.pkg.crossorigin || 'anonymous',
-                    theme_color: pkg.pkg.theme_color,
-                    icons: pkg.pkg.icons,
-                    inject: true,
-                    ...pluginConfig
-                })
-            ]
-        };
-    }
-
-    support(context: HookContext, target: string): boolean {
-        return FRONTEND_TARGET === target;
-    }
-}
-
-export class AssetsWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const AssetsWebpackPlugin = require('assets-webpack-plugin');
-        const { pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).assetsWebpackPlugin || {};
-        const outputPath = path.join(getHomePath(pkg, FRONTEND_TARGET), 'dist');
-        const metadata = {
-            version: pkg.pkg.version,
-            name: pkg.pkg.name,
-            description: pkg.pkg.description,
-            auther: pkg.pkg.author,
-            icons: pkg.pkg.icons
-        };
-        return {
-            plugins: [
-                new AssetsWebpackPlugin({
-                    filename: 'assets-manifest.json',
-                    manifestFirst: true,
-                    update: true,
-                    metadata,
-                    path: outputPath,
-                    prettyPrint: true,
-                    ...pluginConfig
-                })
-            ]
-        };
-    }
-
-    support(context: HookContext, target: string): boolean {
-        return FRONTEND_TARGET === target;
+        const { dev, pkg } = context;
+        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {};
+        return FRONTEND_TARGET === target && (!dev || pluginConfig.generateInDevMode);
     }
 }
 
@@ -282,5 +260,41 @@ export class CleanWebpackPluginConfigFactory {
 
     support(context: HookContext, target: string): boolean {
         return true;
+    }
+}
+
+export class FriendlyErrorsWebpackPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        const { dev } = context;
+        const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+        return {
+            plugins: [
+                new FriendlyErrorsWebpackPlugin({
+                    compilationSuccessInfo: {
+                        messages: dev ? getDevSuccessInfo(config.devServer, target) : [ `The ${target} code output to ${chalk.bold.blue(config.output?.path)}` ],
+                        notes: []
+                    },
+                    clearConsole: dev
+                })
+            ]
+        };
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return true;
+    }
+}
+
+export class ProgressPluginConfigFactory {
+    create(config: any, context: HookContext, target: string) {
+        return {
+            plugins: [
+                new webpack.ProgressPlugin()
+            ]
+        };
+    }
+
+    support(context: HookContext, target: string): boolean {
+        return process.env.CI !== 'true';
     }
 }
