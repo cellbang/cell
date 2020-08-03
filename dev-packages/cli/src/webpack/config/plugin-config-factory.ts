@@ -17,7 +17,7 @@ export class FilterWarningsPluginConfigFactory {
                 const exclude = pluginConfig[key];
                 if (Array.isArray(exclude)) {
                     for (const item of exclude) {
-                        excludeSet.add(item);
+                        excludeSet.add(new RegExp(item));
                     }
                 }
             }

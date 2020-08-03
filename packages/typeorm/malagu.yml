@@ -2,8 +2,6 @@ backend:
   malagu:
     typeorm:
       ormConfig:
-      privateKey: "${ env.SSL_KEY ?: 'ssl/domain.key'}"
-      certificate: "${ env.SSL_PEM ?: 'ssl/domain.pem'}"
         - type: "${ env.DE_TYPE ?: 'mysql'}"
           host: "${ env.DB_HOST ?: 'localhost'}"
           port: "${ env.DB_PORT ?: 3306}"
@@ -17,6 +15,8 @@ backend:
           - typeorm-aurora-data-api-driver
           - mongodb
           - mssql
+          - mysql
+          - mysql2
           - oracledb
           - pg
           - pg-native
