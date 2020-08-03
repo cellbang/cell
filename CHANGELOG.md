@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.0.33
+
+
+- fix(cli) fix FilterWarningsPlugin configuration
+- fix(typeorm) fix typeorm component configuration
+
+- fix(cli) 修复 FilterWarningsPlugin 配置
+- fix(typeorm) 修复 typeorm 组件配置
+
+
 ## v0.0.32
 - The feat(cli) compilation process supports progress display
 - The local operation of feat(cli) disables the PWA function by default, which can be manually turned on through malagu.webpack.workboxWebpackPlugin.generateInDevMode configuration, and the PWA function will be automatically turned on when publishing
