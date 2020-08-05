@@ -25,7 +25,7 @@ export function InnerNavItem(props: NavItemProps) {
         <ThemeContext.Extend value={{ box: { extend: { outline: 'none' } } }}>
             <Box direction="row" alignContent="start"
                 responsive={false}
-                gap={icon || label ? 'small' : 'none'} pad="small" hoverIndicator={hoverIndicator} focusIndicator={false}
+                gap={icon && label ? 'small' : 'none'} pad="small" hoverIndicator={hoverIndicator} focusIndicator={false}
                 background={ className && activatable ? 'rgba(221,221,221,0.4)' : undefined }
                 onClick={() => {
                     if (origin && window.location.origin !== origin) {
