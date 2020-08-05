@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.0.34
+
+- feat(grommet) optimize the style of NavItem component
+
+- feat(grommet) 优化NavItem组件样式
+
+
 ## v0.0.33
 
 
