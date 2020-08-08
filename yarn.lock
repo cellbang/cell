@@ -1766,10 +1766,10 @@
   resolved "https://registry.npm.taobao.org/@types/uuid/download/@types/uuid-3.4.9.tgz?cache=0&sync_timestamp=1589912819866&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fuuid%2Fdownload%2F%40types%2Fuuid-3.4.9.tgz#fcf01997bbc9f7c09ae5f91383af076d466594e1"
   integrity sha1-/PAZl7vJ98Ca5fkTg68HbUZllOE=
 
-"@types/validator@10.11.3":
-  version "10.11.3"
-  resolved "https://registry.npm.taobao.org/@types/validator/download/@types/validator-10.11.3.tgz#945799bef24a953c5bc02011ca8ad79331a3ef25"
-  integrity sha1-lFeZvvJKlTxbwCARyorXkzGj7yU=
+"@types/validator@13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.0.0.tgz#365f1bf936aeaddd0856fc41aa1d6f82d88ee5b3"
+  integrity sha512-WAy5txG7aFX8Vw3sloEKp5p/t/Xt8jD3GRD9DacnFv6Vo8ubudAsRTXgxpQwU0mpzY/H8U4db3roDuCMjShBmw==
 
 "@types/webdriverio@^4.7.0":
   version "4.13.3"
@@ -3475,10 +3475,10 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-class-transformer@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.npm.taobao.org/class-transformer/download/class-transformer-0.2.3.tgz#598c92ca71dcca73f91ccb875d74a3847ccfa32d"
-  integrity sha1-WYySynHcynP5HMuHXXSjhHzPoy0=
+class-transformer@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.3.1.tgz#ee681a5439ff2230fc57f5056412d3befa70d597"
+  integrity sha512-cKFwohpJbuMovS8xVLmn8N2AUbAuc8pVo4zEfsUVo8qgECOogns1WVk/FkOZoxhOPTyTYFckuoH+13FO+MQ8GA==
 
 class-utils@^0.3.5:
   version "0.3.6"
@@ -3489,14 +3489,15 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class-validator@^0.11.0:
-  version "0.11.1"
-  resolved "https://registry.npm.taobao.org/class-validator/download/class-validator-0.11.1.tgz#9033b9ebdc3883e826dfc0c545a45935e3298553"
-  integrity sha1-kDO569w4g+gm38DFRaRZNeMphVM=
+class-validator@^0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.12.2.tgz#2ceb72f88873e9c714cf5f9c278cbc71f6f6c8ef"
+  integrity sha512-TDzPzp8BmpsbPhQpccB3jMUE/3pK0TyqamrK0kcx+ZeFytMA+O6q87JZZGObHHnoo9GM8vl/JppIyKWeEA/EVw==
   dependencies:
-    "@types/validator" "10.11.3"
-    google-libphonenumber "^3.1.6"
-    validator "12.0.0"
+    "@types/validator" "13.0.0"
+    google-libphonenumber "^3.2.8"
+    tslib ">=1.9.0"
+    validator "13.0.0"
 
 classnames@2.x, classnames@^2.2.0, classnames@^2.2.1, classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
@@ -5997,10 +5998,10 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-google-libphonenumber@^3.1.6:
+google-libphonenumber@^3.2.8:
   version "3.2.10"
-  resolved "https://registry.npm.taobao.org/google-libphonenumber/download/google-libphonenumber-3.2.10.tgz#021a314652747d736a39e2e60dc670f0431425ad"
-  integrity sha1-AhoxRlJ0fXNqOeLmDcZw8EMUJa0=
+  resolved "https://registry.yarnpkg.com/google-libphonenumber/-/google-libphonenumber-3.2.10.tgz#021a314652747d736a39e2e60dc670f0431425ad"
+  integrity sha512-TsckE9O8QgqaIeaOXPjcJa4/kX3BzFdO1oCbMfmUpRZckml4xJhjJVxaT9Mdt/VrZZkT9lX44eHAEWfJK1tHtw==
 
 got@^6.7.1:
   version "6.7.1"
@@ -11919,6 +11920,11 @@ ts-node@^8.4.1:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
+tslib@>=1.9.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
+
 tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
@@ -12352,10 +12358,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@12.0.0:
-  version "12.0.0"
-  resolved "https://registry.npm.taobao.org/validator/download/validator-12.0.0.tgz#fb33221f5320abe2422cda2f517dc3838064e813"
-  integrity sha1-+zMiH1Mgq+JCLNovUX3Dg4Bk6BM=
+validator@13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.0.0.tgz#0fb6c6bb5218ea23d368a8347e6d0f5a70e3bcab"
+  integrity sha512-anYx5fURbgF04lQV18nEQWZ/3wHGnxiKdG4aL8J+jEDsm98n/sU/bey+tYk6tnGJzm7ioh5FoqrAiQ6m03IgaA==
 
 value-equal@^1.0.1:
   version "1.0.1"
