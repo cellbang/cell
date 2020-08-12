@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.0.35
+
+- fix(cli) fix class-transformer compilation warning
+- fix(cli) 修复 class-transformer 编译警告
+
 ## v0.0.34
 
 - fix(cli) fix the compatibility problem of cli tool in windows environment
