@@ -38,7 +38,7 @@ export class BaseConfigFactory {
                         test: /\.js$/,
                         enforce: 'pre',
                         use: [{loader: 'source-map-loader'}],
-                        exclude: /jsonc-parser/
+                        exclude: /jsonc-parser|class-transformer/
                     },
                     {
                         test: /\.tsx?$/,
