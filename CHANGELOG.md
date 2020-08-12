@@ -1,18 +1,14 @@
 # Change Log
 
-## v0.0.35
-
--fix(cli) fix the compatibility problem of cli tool in windows environment
--feat(core) upgrade class-transformer
-
--fix(cli) 修复 cli 工具在 windows 环境下存在的兼容性问题
--feat(core) 升级 class-transformer
-
 ## v0.0.34
 
+- fix(cli) fix the compatibility problem of cli tool in windows environment
+- feat(core) upgrade class-transformer
 - feat(grommet) optimize the style of NavItem component
 
 - feat(grommet) 优化 NavItem 组件样式
+- fix(cli) 修复 cli 工具在 windows 环境下存在的兼容性问题
+- feat(core) 升级 class-transformer
 
 
 ## v0.0.33
