@@ -1,6 +1,6 @@
 import { ApplicationPackage } from './application-package';
 import { existsSync } from 'fs';
-import { resolve } from 'path';
+import { resolve, sep } from 'path';
 
 export class ModuleChecker {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -11,9 +11,10 @@ export class ModuleChecker {
             this.pkg.resolveModule(modulePath);
             return true;
         } catch (error) {
-            if (modulePath.indexOf(this.pkg.projectPath) === 0 && existsSync(`${modulePath}.ts`)) {
+            const projectPath = this.pkg.projectPath.split(sep).join('/');
+            if (modulePath.indexOf(projectPath) === 0 && existsSync(resolve(`${modulePath}.ts`))) {
                 return true;
-            } else if (modulePath.indexOf(this.pkg.projectPath) === 0 && existsSync(modulePath)) {
+            } else if (modulePath.indexOf(projectPath) === 0 && existsSync(resolve(modulePath))) {
                 return true;
             } else if (existsSync(resolve(this.pkg.projectPath, 'node_modules', modulePath))) {
                 return true;

@@ -50,8 +50,8 @@ export class CopyWepackPluginConfigFactory {
             const p = path.join(pkg.projectPath, 'node_modules', assert);
             if (existsSync(p)) {
                 assets.push(p);
-            } else if (existsSync(assert)) {
-                assets.push(assert);
+            } else if (existsSync(path.resolve(assert))) {
+                assets.push(path.resolve(assert));
             }
         }
 
