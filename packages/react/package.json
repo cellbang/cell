@@ -1,11 +1,11 @@
 {
   "name": "@malagu/react",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/widget": "^0.0.34",
+    "@malagu/widget": "^0.0.35",
     "history": "^4.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -43,7 +43,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.34",
+    "@malagu/ext-scripts": "^0.0.35",
     "@types/history": "^4.7.3",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.3"
