@@ -12,7 +12,13 @@ export class CorsMiddleware implements Middleware {
     protected readonly options: any;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        return new Promise((resolve, reject) => cors(this.options)(ctx.request as any, ctx.response as any, () => next().then(resolve).catch(reject)));
+        return new Promise((resolve, reject) => cors(this.options)(ctx.request as any, ctx.response as any, (err: any) => {
+            if (err) {
+                reject(err);
+            } else {
+                next().then(resolve).catch(reject);
+            }
+        }));
     }
 
     readonly priority = CORS_MIDDLEWARE_PRIORITY;

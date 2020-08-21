@@ -1,9 +1,10 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { ContainerProvider, Application } from '@malagu/core';
+import { ContainerProvider, Application, ConfigUtil } from '@malagu/core';
 import { Dispatcher, Context } from '@malagu/web/lib/node';
 import { HttpContext } from '@malagu/web/lib/node';
 import * as express from 'express';
 import * as proxy from '@webserverless/fc-express';
+import { ENDPOINT } from '@malagu/web';
 const getRawBody = require('raw-body');
 
 const app = express();
@@ -18,6 +19,10 @@ async function start() {
     const c = await container;
     ContainerProvider.set(c);
     app.all('*', async (req: any, res: any) => {
+        const endpoint = ConfigUtil.get<string | undefined>(ENDPOINT);
+        if (endpoint) {
+            res.header('Access-Control-Allow-Origin', endpoint);
+        }
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));

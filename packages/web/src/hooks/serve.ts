@@ -33,8 +33,6 @@ export default async (context: any) => {
     });
 
     app.all('*', async (req: any, res: any) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Credentials', 'true');
         await compileDeferred.promise;
         doDispatch(req, res);
     });

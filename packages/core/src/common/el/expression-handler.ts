@@ -7,7 +7,7 @@ import { postConstruct } from 'inversify';
 export class ExpressionHandlerImpl implements ExpressionHandler {
 
     @Autowired(JexlEngineProvider)
-    protected readonly jexlEngineProvider: JexlEngineProvider;
+    protected readonly jexlEngineProvider: JexlEngineProvider<any>;
 
     @Autowired(ExpressionContextProvider)
     protected readonly expressionContextProvider: ExpressionContextProvider;

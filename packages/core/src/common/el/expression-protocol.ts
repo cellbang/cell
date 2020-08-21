@@ -29,8 +29,8 @@ export interface ExpressionContextProvider {
     provide(): ExpressionContext;
 }
 
-export interface JexlEngineProvider {
+export interface JexlEngineProvider<T> {
 
-    provide(): any
+    provide(): T
 }
 
