@@ -15,7 +15,7 @@ export interface RouteMetadata extends RouteProps {
 
 export namespace RouteMetadata {
     export function is(metadata: any): metadata is RouteMetadata {
-        return !!!metadata.to;
+        return !metadata.to;
     }
 }
 

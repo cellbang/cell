@@ -5,7 +5,7 @@ import { ContextInitializer, ExpressionContext, JexlEngineProvider } from './exp
 export class CoreContextInitializer implements ContextInitializer {
 
     @Autowired(JexlEngineProvider)
-	protected readonly jexlEngineProvider: JexlEngineProvider<any>;
+    protected readonly jexlEngineProvider: JexlEngineProvider<any>;
 
     initialize(ctx: ExpressionContext): void {
         ctx.env = { ...process.env, _ignoreEl: true };

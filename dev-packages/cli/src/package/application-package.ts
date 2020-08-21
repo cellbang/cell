@@ -264,7 +264,7 @@ export class ApplicationPackage {
                 const modulePathBuilder = new ModulePathBuilder(this);
                 for (const modulePath of modulePaths) {
                     if (typeof modulePath === 'string') {
-                        result.set(componentPackage.name, modulePathBuilder.build(componentPackage, modulePath));
+                        result.set(`${componentPackage.name}@${moduleIndex}`, modulePathBuilder.build(componentPackage, modulePath));
                         moduleIndex = moduleIndex + 1;
                     }
                 }

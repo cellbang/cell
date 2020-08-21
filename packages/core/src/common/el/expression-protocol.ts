@@ -5,7 +5,7 @@ export const ExpressionContextProvider = Symbol('ExpressionContextProvider');
 export const JexlEngineProvider = Symbol('JexlEngineProvider');
 
 export interface ExpressionCompiler {
-	compileSections(text: string): any[]
+    compileSections(text: string): any[]
 }
 
 export interface ExpressionHandler {

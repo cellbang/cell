@@ -1057,6 +1057,11 @@
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/@improved/node/download/@improved/node-1.1.1.tgz#7be3d401b7cd2f848d5bb8713d2826b84fc51817"
 
+"@malagu/ext-scripts@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@malagu/ext-scripts/-/ext-scripts-0.0.35.tgz#2d24d6441e3e01543d0412348788019ac449b72d"
+  integrity sha512-h7V7OQ33aAcIoyX+ibYvkc4vUV7n+LuEn97ueJFnFx/i8+xbO3rMs21wS3GDNZH0wHxNZ2+EuxMnWuMBpdgRHA==
+
 "@material-ui/core@^4.6.0":
   version "4.10.1"
   resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.10.1.tgz#e3db4ca55d2af6cc23a1159ef5c32ad97c43c39c"
@@ -1127,6 +1132,11 @@
     "@babel/runtime" "^7.4.4"
     prop-types "^15.7.2"
     react-is "^16.8.0"
+
+"@panva/asn1.js@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
+  integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
 "@phosphor/algorithm@^1.2.0":
   version "1.2.0"
@@ -2723,8 +2733,8 @@ aws4@^1.8.0:
 
 axios@^0.19.0, axios@^0.19.2:
   version "0.19.2"
-  resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
-  integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
 
@@ -7156,6 +7166,13 @@ jexl@^2.1.1, jexl@^2.2.2:
   resolved "https://registry.npm.taobao.org/jexl/download/jexl-2.2.2.tgz#eb06cd84684a52b6408be94604c5529f416ccd2f"
   integrity sha1-6wbNhGhKUrZAi+lGBMVSn0FszS8=
 
+jose@^1.28.0:
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-1.28.0.tgz#0803f8c71f43cd293a9d931c555c30531f5ca5dc"
+  integrity sha512-JmfDRzt/HSj8ipd9TsDtEHoLUnLYavG+7e8F6s1mx2jfVSfXOTaFQsJUydbjJpTnTDHP1+yKL9Ke7ktS/a0Eiw==
+  dependencies:
+    "@panva/asn1.js" "^1.0.0"
+
 jquery@^3.4.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
@@ -9564,10 +9581,10 @@ qs@6.7.0:
   resolved "https://registry.npm.taobao.org/qs/download/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
 
-qs@^6.4.0:
+qs@^6.4.0, qs@^6.9.4:
   version "6.9.4"
-  resolved "https://registry.npm.taobao.org/qs/download/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
-  integrity sha1-kJCykNH5FyjTwi5UhDykSupatoc=
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.4.tgz#9090b290d1f91728d3c22e54843ca44aea5ab687"
+  integrity sha512-A1kFqHekCTM7cz0udomYUoYNWjBebHm/5wzU/XqrBRBNWectVH0QIiN+NEcZ0Dte5hvzHwbr8+XQmguPhJ6WdQ==
 
 qs@~6.5.2:
   version "6.5.2"

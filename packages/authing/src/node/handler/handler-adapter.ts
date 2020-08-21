@@ -1,7 +1,7 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { LOGIN_PAGE_HANDLER_ADAPTER_PRIORITY, LOGIN_PAGE_TEMPLATE, LOGOUT_PAGE_HANDLER_ADAPTER_PRIORITY, LOGOUT_PAGE_TEMPLATE } from './handler-protocol';
 import { RequestMatcher, HandlerAdapter, Context } from '@malagu/web/lib/node';
-import { PathResolver } from '@malagu/web';
+import { PathResolver, HttpMethod, HttpHeaders, MediaType } from '@malagu/web';
 import { render } from 'mustache';
 import { SecurityContext } from '@malagu/security/lib/node';
 
@@ -25,7 +25,7 @@ export class LoginPageHandlerAdapter implements HandlerAdapter {
     async handle(): Promise<void> {
         const response = Context.getResponse();
         this.authingOptions.sso = this.authingOptions.sso || {};
-        response.setHeader('Content-type', 'text/html');
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
         const guardOptions = { ...this.authingOptions.guardOptions, ...{
             appId: this.authingOptions.sso.id,
             domain: this.authingOptions.sso.domain
@@ -40,7 +40,7 @@ export class LoginPageHandlerAdapter implements HandlerAdapter {
     }
 
     async canHandle(): Promise<boolean> {
-        return this.requestMatcher.match(await this.pathResolver.resolve(this.securityOptions.loginPage), 'GET');
+        return this.requestMatcher.match(await this.pathResolver.resolve(this.securityOptions.loginPage), HttpMethod.GET);
     }
 
 }
@@ -65,7 +65,7 @@ export class LogoutPageHandlerAdapter implements HandlerAdapter {
     async handle(): Promise<void> {
         const response = Context.getResponse();
         this.authingOptions.sso = this.authingOptions.sso || {};
-        response.setHeader('Content-type', 'text/html');
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML);
 
         response.body = render(LOGOUT_PAGE_TEMPLATE, {
             userPoolId: this.authingOptions.userPool.id,

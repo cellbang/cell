@@ -1,6 +1,7 @@
 import { Middleware, Context } from '@malagu/web/lib/node';
 import { Component, Autowired } from '@malagu/core';
 import { ChannelStrategy, CHANNEL_MIDDLEWARE_PRIORITY, CURRENT_CHANNEL_STRATEGY_REQUEST_KEY } from './channel-protocol';
+import { HttpHeaders, MediaType } from '@malagu/web';
 
 @Component(Middleware)
 export class ChannelMiddleware implements Middleware {
@@ -16,7 +17,7 @@ export class ChannelMiddleware implements Middleware {
             }
         }
 
-        ctx.response.setHeader('Content-Type', 'application/json;charset=utf8');
+        ctx.response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8);
 
         await next();
     }

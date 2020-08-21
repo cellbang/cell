@@ -1,3 +1,4 @@
+modules: [ lib/common/module ]
 malagu:
   session:
     autoCommit: true
@@ -7,6 +8,7 @@ malagu:
   server:
     path: /
     port: 3000
+    endpoint: http://localhost:${malagu.server.port}
   trace:
     responseField: 'X-Malagu-Trace-ID'
   web:

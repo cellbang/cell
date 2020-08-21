@@ -73,7 +73,7 @@ function load(raw) {
 module.exports.container = Promise.resolve()
   .${generateImports(modules, 'require')}
   .then(() => container).catch(reason => {
-	  console.error('Failed to start the backend application.');
+    console.error('Failed to start the backend application.');
     if (reason) {
       console.error(reason);
     }
