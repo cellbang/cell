@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.0.36
+
+- feat(cli + core) property file supports regular expression properties: ${{'.*\.google\.com$'|regexp}}
+- fix(web) run locally to remove the hard-coded configuration of cors
+
+- feat(cli + core) 属性文件支持正则表达式属性：${{'.*\.google\.com$'|regexp}}
+- fix(web) 本地运行去掉 cors 硬编码配置
+
+
 ## v0.0.35
 
 - fix(cli) fix class-transformer compilation warning

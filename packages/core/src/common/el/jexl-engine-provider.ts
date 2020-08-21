@@ -3,7 +3,7 @@ import { JexlEngineProvider } from './expression-protocol';
 import { Jexl } from 'jexl';
 
 @Component(JexlEngineProvider)
-export class JexlEngineProviderImpl implements JexlEngineProvider {
+export class JexlEngineProviderImpl implements JexlEngineProvider<any> {
 
     protected jexlEngine: any;
 

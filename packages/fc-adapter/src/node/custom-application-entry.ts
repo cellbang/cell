@@ -1,7 +1,8 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { Dispatcher, Context, HttpContext } from '@malagu/web/lib/node';
 import * as express from 'express';
-import { ContainerProvider, Application } from '@malagu/core';
+import { ContainerProvider, Application, ConfigUtil } from '@malagu/core';
+import { ENDPOINT } from '@malagu/web';
 
 container.then(async c => {
     ContainerProvider.set(c);
@@ -14,6 +15,10 @@ container.then(async c => {
     app.use(express.urlencoded({ extended: true }));
 
     app.all('*', async (req: any, res: any) => {
+        const endpoint = ConfigUtil.get<string | undefined>(ENDPOINT);
+        if (endpoint) {
+            res.header('Access-Control-Allow-Origin', endpoint);
+        }
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));

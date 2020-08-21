@@ -15,7 +15,7 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 	private BRACKET_END = '}';
 
 	@Autowired(JexlEngineProvider)
-	protected readonly jexlEngineProvider: JexlEngineProvider;
+	protected readonly jexlEngineProvider: JexlEngineProvider<any>;
 
 	compileSections(text: string): any[] {
 		if (!text || text.indexOf(this.SPECIAL_CHAR) < 0) {
