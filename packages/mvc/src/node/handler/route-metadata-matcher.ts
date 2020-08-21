@@ -28,7 +28,7 @@ export class RouteMetadataMatcherImpl implements RouteMetadataMatcher {
             }
         } else {
             const request = Context.getRequest();
-            const pathMap = route.mapping.get(request.method!.toLowerCase());
+            const pathMap = route.mapping.get(request.method!.toUpperCase());
             if (pathMap) {
                 for (const entry of pathMap) {
                     const [ p, metadata ] = entry;

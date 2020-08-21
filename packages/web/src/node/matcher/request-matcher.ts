@@ -13,7 +13,7 @@ export class RequestMatcherImpl implements RequestMatcher {
     async match(pattern: any, method?: string): Promise<any> {
         const request = Context.getRequest();
         const path = request.path;
-        if (method && request.method && method.toLowerCase() !== request.method.toLowerCase()) {
+        if (method && request.method && method.toUpperCase() !== request.method.toUpperCase()) {
             return false;
         }
         pattern = pattern || '/';

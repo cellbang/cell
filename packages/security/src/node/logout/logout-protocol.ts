@@ -1,8 +1,9 @@
+import { SECURITY_CONTEXT_MIDDLEWARE_PRIORITY } from '../context';
 
 export const LogoutHandler = Symbol('LogoutHandler');
 export const LogoutSuccessHandler = Symbol('LogoutSuccessHandler');
 
-export const LOGOUT_HANDLER_ADAPTER_PRIORITY =  3000;
+export const LOGOUT_MIDDLEWARE_PRIORITY = SECURITY_CONTEXT_MIDDLEWARE_PRIORITY - 100;
 
 export const LOGOUT_SUCCESS_HANDLER_PRIORITY =  2000;
 

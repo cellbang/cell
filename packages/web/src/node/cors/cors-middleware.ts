@@ -2,7 +2,7 @@ import { Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Value } from '@malagu/core';
 import * as cors from 'cors';
-import { CORS, ENDPOINT } from '../../common';
+import { CORS, ENDPOINT, HttpHeaders } from '../../common';
 import { CORS_MIDDLEWARE_PRIORITY } from './cors-protocol';
 
 @Component([CorsMiddleware, Middleware])
@@ -19,8 +19,8 @@ export class CorsMiddleware implements Middleware {
             if (err) {
                 reject(err);
             } else {
-                if (this.endpoint && !ctx.response.getHeader('Access-Control-Allow-Origin')) {
-                    ctx.response.setHeader('Access-Control-Allow-Origin', this.endpoint);
+                if (this.endpoint && !ctx.response.getHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN)) {
+                    ctx.response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, this.endpoint);
                 }
                 next().then(resolve).catch(reject);
             }

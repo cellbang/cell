@@ -2,7 +2,7 @@ import { Middleware, Context, RequestMatcher } from '@malagu/web/lib/node';
 import * as serveStatic from 'serve-static';
 import { Value, Component, Autowired } from '@malagu/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
-import { SERVER_PATH } from '@malagu/web';
+import { SERVER_PATH, HttpMethod, MediaType, HttpHeaders } from '@malagu/web';
 import { relative } from 'path';
 import { OutgoingMessage } from 'http';
 
@@ -18,7 +18,11 @@ export class ServeStaticMiddleware implements Middleware {
     @Autowired(RequestMatcher)
     protected readonly requestMatcher: RequestMatcher;
 
-    handle(ctx: Context, next: () => Promise<void>): Promise<void> {
+    async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
+        if (ctx.request.query['static'] === 'skip') {
+            await next();
+            return;
+        }
         const oldUrl = ctx.request.url;
         if (this.path && this.path !== ctx.request.url) {
             ctx.request.url = `/${relative(this.path, ctx.request.url)}`;
@@ -28,22 +32,29 @@ export class ServeStaticMiddleware implements Middleware {
             const opts = this.config.options;
             if (!opts.setHeaders) {
                 opts.setHeaders = (res: OutgoingMessage, path: string) => {
-                    if ((serveStatic.mime as any).lookup!(path) === 'text/html') {
+                    if ((serveStatic.mime as any).lookup!(path) === MediaType.TEXT_HTML) {
                         // Custom Cache-Control for HTML files
-                        res.setHeader('Cache-Control', `public, max-age=${opts.htmlMaxAge / 1000}`);
+                        res.setHeader(HttpHeaders.CACHE_CONTROL, `public, max-age=${opts.htmlMaxAge / 1000}`);
                     }
                 };
             }
             serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, (err: any) => {
                 const url = ctx.request.url;
-                if ((ctx.request.method === 'GET' || ctx.request.method === 'HEAD') && url !== 'index.html') {
+                if ((ctx.request.method === HttpMethod.GET || ctx.request.method === HttpMethod.HEAD) && url !== 'index.html') {
                     if (this.config.path && !this.requestMatcher.match(this.config.path)) {
                         ctx.request.url = oldUrl;
                         next().then(resolve).catch(reject);
                     }
-                    if (this.config.apiPath && this.requestMatcher.match(this.config.apiPath)) {
-                        ctx.request.url = oldUrl;
-                        next().then(resolve).catch(reject);
+                    if (this.config.apiPath) {
+                        this.requestMatcher.match(this.config.apiPath).then(r => {
+                            if (r) {
+                                ctx.request.url = oldUrl;
+                                next().then(resolve).catch(reject);
+                            } else {
+                                ctx.request.url = '/index.html';
+                                executor(resolve, reject);
+                            }
+                        }).catch(reject);
                     } else {
                         ctx.request.url = '/index.html';
                         executor(resolve, reject);

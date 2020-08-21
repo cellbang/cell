@@ -1,9 +1,9 @@
 import { Value, Component } from '@malagu/core';
 import axios from 'axios';
-import { UserStore, User, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
+import { UserService, User, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
 
-@Component({ id: UserStore, rebind: true })
-export class UserStoreImpl implements UserStore {
+@Component({ id: UserService, rebind: true })
+export class UserServiceImpl implements UserService<string, User> {
 
     @Value('malagu.security')
     protected readonly options: any;

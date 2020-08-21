@@ -1,9 +1,10 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { AuthenticationProvider, Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY } from './authentication-protocol';
-import { Context, RequestMatcher } from '@malagu/web/lib/node';
+import { Context, RequestMatcher, RedirectStrategy } from '@malagu/web/lib/node';
 import { PasswordEncoder } from '../crypto';
-import { UserStore, UserChecker } from '../user';
+import { UserService, UserChecker, User } from '../user';
 import { BadCredentialsError } from '../error';
+import { PathResolver } from '@malagu/web';
 
 @Component(AuthenticationProvider)
 export class AuthenticationProviderImpl implements AuthenticationProvider {
@@ -14,8 +15,8 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     @Autowired(PasswordEncoder)
     protected readonly passwordEncoder: PasswordEncoder;
 
-    @Autowired(UserStore)
-    protected readonly userStore: UserStore;
+    @Autowired(UserService)
+    protected readonly userService: UserService<string, User>;
 
     @Autowired(UserChecker)
     protected readonly userChecker: UserChecker;
@@ -23,21 +24,28 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     @Autowired(RequestMatcher)
     protected readonly requestMatcher: RequestMatcher;
 
+    @Autowired(PathResolver)
+    protected readonly pathResolver: PathResolver;
+
+    @Autowired(RedirectStrategy)
+    protected readonly redirectStrategy: RedirectStrategy;
+
     priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY;
 
-    async authenticate(): Promise<Authentication> {
+    async authenticate(): Promise<Authentication | undefined> {
         const username = this.doGetValue(this.options.usernameKey);
         const password = this.doGetValue(this.options.passwordKey);
         if (!password || !username) {
             throw new BadCredentialsError('Bad credentials');
         }
-        const user = await this.userStore.load(username);
+        const user = await this.userService.load(username);
         await this.userChecker.check(user);
         if (!await this.passwordEncoder.matches(password, user.password)) {
             throw new BadCredentialsError('Bad credentials');
         }
 
         return {
+            name: user.username,
             principal: user,
             credentials: '',
             policies: user.policies,
@@ -56,7 +64,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     }
 
     async support(): Promise<boolean> {
-        return !!await this.requestMatcher.match(this.options.loginUrl, this.options.loginMethod);
+        return !!await this.requestMatcher.match(await this.pathResolver.resolve(this.options.loginUrl), this.options.loginMethod);
     }
 
 }

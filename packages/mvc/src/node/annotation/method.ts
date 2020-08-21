@@ -1,4 +1,5 @@
 import { METADATA_KEY } from '../constants';
+import { HttpMethod } from '@malagu/web';
 
 export type StrOrRegex = string | RegExp;
 export type RouteOptions = StrOrRegex | { path: StrOrRegex } | { options: Object, path: StrOrRegex } & Object;
@@ -23,31 +24,31 @@ export interface HandlerDecorator {
 }
 
 export function Get(options?: RouteOptions): HandlerDecorator {
-    return Method('get', options);
+    return Method(HttpMethod.GET, options);
 }
 
 export function Post(options?: RouteOptions): HandlerDecorator {
-    return Method('post', options);
+    return Method(HttpMethod.POST, options);
 }
 
 export function Put(options?: RouteOptions): HandlerDecorator {
-    return Method('put', options);
+    return Method(HttpMethod.PUT, options);
 }
 
 export function Patch(options?: RouteOptions): HandlerDecorator {
-    return Method('patch', options);
+    return Method(HttpMethod.PATCH, options);
 }
 
 export function Head(options?: RouteOptions): HandlerDecorator {
-    return Method('head', options);
+    return Method(HttpMethod.HEAD, options);
 }
 
 export function Delete(options?: RouteOptions): HandlerDecorator {
-    return Method('delete', options);
+    return Method(HttpMethod.DELETE, options);
 }
 
 export function Options(options?: RouteOptions): HandlerDecorator {
-    return Method('options', options);
+    return Method(HttpMethod.OPTIONS, options);
 }
 
 export const Method = <MethodDecorator>function (

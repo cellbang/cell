@@ -3,7 +3,7 @@ import { Component, Autowired, Prioritizeable, ValidationErrors } from '@malagu/
 import { injectable } from 'inversify';
 import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY, VALIDATION_ERRORS_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
-import { HttpStatus } from '../http';
+import { HttpStatus } from '../../common/http';
 
 @injectable()
 export abstract class AbstractErrorHandler implements ErrorHandler {
@@ -15,7 +15,7 @@ export abstract class AbstractErrorHandler implements ErrorHandler {
 
     async handle(ctx: Context, err: Error): Promise<void> {
         console.error(err);
-        ctx.response.statusCode = 500;
+        ctx.response.statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
         ctx.response.end(err.message);
         await this.doHandle(ctx, err);
     }
