@@ -4,7 +4,7 @@
 
 - fix(web+fc-adapter) fix cors function release to function calculation does not take effect
 - fix(typeorm) fix the local running modification code hot loading causes the database link to have an error
-- fix(core) Fix the "EventEmitter memory leak detected" warning caused by hot loading of local running modified code
+- fix(core) fix the "EventEmitter memory leak detected" warning caused by hot loading of local running modified code
 
 - fix(web+fc-adapter) 修复 cors 功能发布到函数计算不生效
 - fix(typeorm) 修复本地运行修改代码热加载导致数据库链接已经存在错误
