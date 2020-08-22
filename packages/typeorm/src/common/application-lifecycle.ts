@@ -1,5 +1,5 @@
 import { Component, ApplicationLifecycle, Application, Value } from '@malagu/core';
-import { createConnections, Connection } from 'typeorm';
+import { createConnections, getConnectionManager } from 'typeorm';
 import { DEFAULT_CONNECTION_NAME } from './constants';
 import { EntityProvider } from './entity-provider';
 
@@ -9,9 +9,13 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
     @Value('malagu.typeorm')
     protected readonly options: any;
 
-    protected connections: Connection[];
-
     async onStart(app: Application): Promise<void> {
+        const connections = getConnectionManager().connections;
+        for (const c of connections) {
+            if (c.isConnected) {
+                await c.close();
+            }
+        }
         const { ormConfig } = this.options;
         let configs: any[];
         if (Array.isArray(ormConfig)) {
@@ -25,13 +29,14 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
             config.entities = EntityProvider.getEntities(config.name) || [];
         }
 
-        this.connections = await createConnections(configs);
+        await createConnections(configs);
     }
 
     onStop(app: Application): void {
-        if (this.connections) {
-            for (const connection of this.connections) {
-                connection.close();
+        const connections = getConnectionManager().connections;
+        for (const c of connections) {
+            if (c.isConnected) {
+                c.close();
             }
         }
     }
