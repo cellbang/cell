@@ -14,12 +14,21 @@ export class BackendApplication extends AbstractApplication {
         this.stateService.state = 'ready';
     }
 
-    protected setupExitSignals(): void {
-        process.removeListener('SIGINT', this.doExit);
-        process.removeListener('SIGTERM', this.doExit);
+    protected removeLisners(event: NodeJS.Signals) {
+        for (const l of process.listeners(event)) {
+            if ((l as any)._tag === BackendApplication.name) {
+                process.removeListener(event, l);
+            }
+        }
+    }
 
-        process.on('SIGINT', this.doExit.bind(this));
-        process.on('SIGTERM', this.doExit.bind(this));
+    protected setupExitSignals(): void {
+        this.removeLisners('SIGINT');
+        this.removeLisners('SIGTERM');
+        const l = this.doExit.bind(this);
+        l._tag = BackendApplication.name;
+        process.once('SIGINT', l);
+        process.once('SIGTERM', l);
     }
 
     protected doExit(): void {
