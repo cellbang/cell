@@ -403,7 +403,7 @@ async function loadCode(codeDir: string, zip: JSZip) {
             await loadCode(fullPath, dir);
         } else {
             zip.file(fileName, readFileSync(fullPath), {
-                unixPermissions: file.mode
+                unixPermissions: '755'
             });
         }
     }));
