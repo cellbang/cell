@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.0.38
+
+- fix(fc-adaper+scf-adaper) Fix the code file permission problem under Windows system
+- fix(fc-adaper+scf-adaper) 修复 Windows 系统下代码文件权限问题
+
 ## v0.0.37
 
 - fix(web+fc-adapter) fix cors function release to function calculation does not take effect
