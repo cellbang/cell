@@ -19,11 +19,12 @@ export class BuildManager {
         for (const configuration of this.ctx.configurations) {
             const compiler = webpack(configuration);
             await new Promise((resolve, reject) => compiler.run((err, stats) => {
-                if (configuration.name === BACKEND_TARGET) {
-                    packExternalModules(this.ctx, stats);
-                }
                 if (err) {
                     reject(err);
+                    return;
+                }
+                if (configuration.name === BACKEND_TARGET) {
+                    packExternalModules(this.ctx, stats).then(resolve).catch(reject);
                 } else {
                     resolve();
                 }
