@@ -1,11 +1,11 @@
 {
   "name": "@malagu/shell",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/grommet": "^0.0.38"
+    "@malagu/grommet": "^0.0.39"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^0.0.38",
+    "@malagu/ext-scripts": "^0.0.39",
     "@types/styled-components": "^5.1.1"
   },
   "nyc": {
