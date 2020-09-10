@@ -1,9 +1,14 @@
 # Change Log
 
+## v0.0.40
+
+- feat(oauth2): add oauth2-core, oauth2-jose, oauth2-client components
+
 ## v0.0.39
 
 - fix(cli) When the backend uses webpack to exclude a certain package and installs the package to the build directory when building, after publishing it online, the excluded package is not packaged and uploaded correctly
 - fix(cli) 当后端使用 webpack 排除某一个包，并构建的时候安装该包到构建目录时，发布到线上后，排除的包没有被正确打包上传
+
 ## v0.0.38
 
 - fix(fc-adaper+scf-adaper) Fix the code file permission problem under Windows system

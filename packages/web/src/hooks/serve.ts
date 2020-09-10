@@ -23,8 +23,8 @@ export default async (context: any) => {
             const c = await container;
             ContainerProvider.set(c);
             await c.get(Application).start();
+            const dispatcher = c.get(Dispatcher);
             doDispatch = (req: any, res: any) => {
-                const dispatcher = c.get(Dispatcher);
                 const httpContext = new HttpContext(req, res);
                 Context.run(() => dispatcher.dispatch(httpContext));
             };

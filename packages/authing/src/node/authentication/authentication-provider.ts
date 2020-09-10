@@ -1,10 +1,11 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { Context, RequestMatcher } from '@malagu/web/lib/node';
-import { UserStore, UserChecker, BadCredentialsError, AuthenticationProvider,
-    Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY } from '@malagu/security/lib/node';
+import { UserService, UserChecker, BadCredentialsError, AuthenticationProvider,
+    Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY, User } from '@malagu/security/lib/node';
 import axios from 'axios';
 import * as qs from 'querystring';
 import { AuthingProvider } from './authing-provider';
+import { HttpMethod } from '@malagu/web';
 
 @Component(AuthenticationProvider)
 export class AuthingSSOAuthenticationProvider implements AuthenticationProvider {
@@ -15,8 +16,8 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
     @Value('malagu.authing.sso')
     protected readonly ssoOptions: any;
 
-    @Autowired(UserStore)
-    protected readonly userStore: UserStore;
+    @Autowired(UserService)
+    protected readonly userService: UserService<string, User>;
 
     @Autowired(UserChecker)
     protected readonly userChecker: UserChecker;
@@ -29,10 +30,10 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
 
     priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY + 100;
 
-    async authenticate(): Promise<Authentication> {
+    async authenticate(): Promise<Authentication | undefined> {
         const request = Context.getRequest();
         let user;
-        if (request.method.toUpperCase() === 'POST') {
+        if (request.method.toUpperCase() === HttpMethod.POST) {
             const rawUser = request.body;
             if (!rawUser || !rawUser._id) {
                 throw new BadCredentialsError('Bad credentials');
@@ -42,7 +43,7 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
             if (!result.status) {
                 throw new BadCredentialsError(result.message);
             };
-            user = await this.userStore.load(rawUser);
+            user = await this.userService.load(rawUser);
         } else {
             const code = request.query.code;
             let accessToken = request.query.access_token;
@@ -52,13 +53,12 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
             if (!accessToken) {
                 accessToken = await this.getAccessTokenByCode(code);
             }
-            user = await this.userStore.load(accessToken);
-            Context.getResponse().statusCode = 302;
-            Context.getResponse().setHeader('Location', this.securityOptions.loginSuccessUrl);
+            user = await this.userService.load(accessToken);
         }
         await this.userChecker.check(user);
 
         return {
+            name: user.username,
             principal: user,
             credentials: '',
             policies: user.policies,

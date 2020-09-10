@@ -1,9 +1,10 @@
 import { AUTHENTICATION_ERROR_HANDlER_PRIORITY, ACCESS_DENIED_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { AuthenticationError, AccessDeniedError } from './error';
-import { ErrorHandler, Context } from '@malagu/web/lib/node';
+import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
-import { SecurityContext } from '../context';
 import { X_REQUESTED_WITH, XML_HTTP_REQUEST } from '@malagu/web/lib/node';
+import { HttpStatus, HttpHeaders } from '@malagu/web';
+import { RequestCache } from '../cache';
 
 @Component([AuthenticationErrorHandler, ErrorHandler])
 export class AuthenticationErrorHandler implements ErrorHandler {
@@ -15,20 +16,25 @@ export class AuthenticationErrorHandler implements ErrorHandler {
     @Value('malagu.security.loginPage')
     protected loginPage: string;
 
+    @Autowired(RedirectStrategy)
+    protected readonly redirectStrategy: RedirectStrategy;
+
+    @Autowired(RequestCache)
+    protected readonly requestCache: RequestCache;
+
     canHandle(ctx: Context, err: Error): Promise<boolean> {
         return Promise.resolve(err instanceof AuthenticationError);
     }
 
     async handle(ctx: Context, err: AuthenticationError): Promise<void> {
         if (ctx.request.headers[X_REQUESTED_WITH] === XML_HTTP_REQUEST) {
-            ctx.response.statusCode = 401;
-            ctx.response.setHeader('WWW-Authenticate', `Basic realm="${this.realm}"`);
-            ctx.response.end(err.message);
+            ctx.response.statusCode = HttpStatus.UNAUTHORIZED;
+            ctx.response.setHeader(HttpHeaders.WWW_AUTHENTICATE, `Basic realm="${this.realm}"`);
         } else {
-            ctx.response.statusCode = 302;
-            ctx.response.setHeader('Location', this.loginPage);
-            ctx.response.end(err.message);
+            await this.requestCache.save();
+            await this.redirectStrategy.send(this.loginPage);
         }
+        ctx.response.end(err.message);
     }
 }
 
@@ -36,19 +42,12 @@ export class AuthenticationErrorHandler implements ErrorHandler {
 export class AccessDeniedErrorHandler implements ErrorHandler {
     readonly priority: number = ACCESS_DENIED_ERROR_HANDlER_PRIORITY;
 
-    @Autowired(AuthenticationErrorHandler)
-    protected readonly authenticationErrorHandler: AuthenticationErrorHandler;
-
     canHandle(ctx: Context, err: Error): Promise<boolean> {
         return Promise.resolve(err instanceof AccessDeniedError);
     }
 
     async handle(ctx: Context, err: AccessDeniedError): Promise<void> {
-        if (SecurityContext.getAuthentication().authenticated) {
-            ctx.response.statusCode = 403;
-            ctx.response.end(err.message);
-        } else {
-            await this.authenticationErrorHandler.handle(ctx, new AuthenticationError());
-        }
+        ctx.response.statusCode = HttpStatus.FORBIDDEN;
+        ctx.response.end(err.message);
     }
 }

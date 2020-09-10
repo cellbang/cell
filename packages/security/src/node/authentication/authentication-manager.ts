@@ -1,5 +1,5 @@
 import { Component, Autowired, Prioritizeable } from '@malagu/core';
-import { AuthenticationProvider, AuthenticationManager, Authentication } from './authentication-protocol';
+import { AuthenticationProvider, AuthenticationManager, Authentication, AuthenticationSuccessHandler } from './authentication-protocol';
 import { AccountStatusError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';
 import { postConstruct } from 'inversify';
@@ -11,6 +11,9 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
 
     @Autowired(AuthenticationProvider)
     protected readonly authenticationProviders: AuthenticationProvider[];
+
+    @Autowired(AuthenticationSuccessHandler)
+    protected readonly authenticationSuccessHandler: AuthenticationSuccessHandler;
 
     @postConstruct()
     async init() {
@@ -25,6 +28,7 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
                 if (await authenticationProvider.support()) {
                     result = await authenticationProvider.authenticate();
                     if (result) {
+                        await this.authenticationSuccessHandler.onAuthenticationSuccess(result);
                         SecurityContext.setAuthentication(result);
                         return;
                     }

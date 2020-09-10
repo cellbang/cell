@@ -7,3 +7,4 @@ export * from './access';
 export * from './annotation';
 export * from './constants';
 export * from './logout';
+export * from './cache';

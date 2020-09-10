@@ -1,6 +1,7 @@
 import { AccessDecisionManager, SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED } from './access-protocol';
 import { Component, Prioritizeable, Autowired } from '@malagu/core';
-import { AccessDeniedError } from '../error';
+import { AccessDeniedError, AuthenticationError } from '../error';
+import { SecurityContext } from '../context';
 
 @Component(AccessDecisionManager)
 export class AccessDecisionManagerImpl implements AccessDecisionManager {
@@ -20,6 +21,7 @@ export class AccessDecisionManagerImpl implements AccessDecisionManager {
             if (await voter.support(securityMetadata)) {
                 const result = await voter.vote(securityMetadata);
                 if (result === ACCESS_DENIED) {
+                    this.handleError();
                     throw new AccessDeniedError('Access is denied');
                 } else if (result === ACCESS_GRANTED) {
                     grant++;
@@ -27,8 +29,15 @@ export class AccessDecisionManagerImpl implements AccessDecisionManager {
             }
         }
         if (grant <= 0) {
+            this.handleError();
+        }
+    }
+
+    protected handleError() {
+        if (SecurityContext.getAuthentication().authenticated) {
             throw new AccessDeniedError('Access is denied');
         }
+        throw new AuthenticationError('Need authentication');
     }
 
 }

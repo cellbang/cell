@@ -1,4 +1,4 @@
-import { PasswordEncoder } from './crypto-protocol';
+import { PasswordEncoder } from './password-protocol';
 import { PBKDF2, lib, enc} from 'crypto-js';
 import { Value, Component } from '@malagu/core';
 

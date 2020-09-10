@@ -1,5 +1,5 @@
 import { HttpError } from './http-error';
-import { HttpStatus } from '../http';
+import { HttpStatus } from '../../common/http';
 
 export class NotFoundError extends HttpError {
 
