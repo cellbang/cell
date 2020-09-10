@@ -1,9 +1,12 @@
 import { Policy } from '../access';
+import { SECURITY_CONTEXT_MIDDLEWARE_PRIORITY } from '../context';
 
 export const AuthenticationProvider = Symbol('AuthenticationProvider');
 export const AuthenticationManager = Symbol('AuthenticationManager');
+export const AuthenticationSuccessHandler = Symbol('AuthenticationSuccessHandler');
 
-export const AUTHENTICATION_HANDLER_ADAPTER_PRIORITY = 3000;
+export const AUTHENTICATION_MIDDLE_PRIORITY = SECURITY_CONTEXT_MIDDLEWARE_PRIORITY - 100;
+
 export const DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY =  2000;
 
 export interface AuthenticationManager {
@@ -13,14 +16,19 @@ export interface AuthenticationManager {
 
 export interface AuthenticationProvider {
     readonly priority: number;
-    authenticate(): Promise<Authentication>;
+    authenticate(): Promise<Authentication | undefined>;
     support(): Promise<boolean>;
 }
 
 export interface Authentication {
+    name: string;
     policies: Policy[];
     credentials: any;
     details?: any;
     principal: any;
     authenticated: boolean;
+}
+
+export interface AuthenticationSuccessHandler {
+    onAuthenticationSuccess(authentication: Authentication): Promise<void>;
 }

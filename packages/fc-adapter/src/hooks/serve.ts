@@ -58,8 +58,6 @@ export default (context: ServeContext) => {
     };
 
     app.all('*', async (req: any, res: any) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Credentials', 'true');
         const ctx = {
             credentials: await new ProfileProvider().provide(true)
         };

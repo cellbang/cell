@@ -2,7 +2,7 @@ import { Context } from '../context';
 import { MiddlewareProvider } from '../middleware';
 import { ErrorHandlerProvider } from '../error/error-hander-provider';
 import { Dispatcher } from './dispatcher-protocol';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired, Logger } from '@malagu/core';
 import { HandlerExecutionChain } from '../handler/handler-protocol';
 
 @Component(Dispatcher)
@@ -17,12 +17,16 @@ export class DispatcherImpl implements Dispatcher<Context> {
     @Autowired
     protected errorHandlerProvider: ErrorHandlerProvider;
 
+    @Autowired(Logger)
+    protected readonly logger: Logger;
+
     async dispatch(ctx: Context): Promise<void> {
         try {
             Context.setCurrent(ctx);
             const middlewares = this.middlewareProvider.provide();
             await this.handlerExecutionChain.execute(middlewares);
         } catch (err) {
+            this.logger.error(err);
             await this.handleError(ctx, err);
         }
     }
@@ -34,6 +38,7 @@ export class DispatcherImpl implements Dispatcher<Context> {
                 try {
                     await handler.handle(ctx, err);
                 } catch (error) {
+                    this.logger.error(error);
                     continue;
                 }
                 return;

@@ -1,7 +1,7 @@
 import { ConsoleLogger, Component, Autowired, Value } from '@malagu/core';
 import { Channel, HttpChannel, JsonRpcProxy, JsonRpcProxyFactory,
     ConnectionHandler, ConnnectionFactory, RPC_PATH } from '../../common';
-import { ENDPOINT, PathResolver } from '@malagu/web';
+import { ENDPOINT, PathResolver, HttpMethod, HttpHeaders, MediaType } from '@malagu/web';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
 const urlJoin = require('url-join');
@@ -58,10 +58,10 @@ export class HttpProxyCreator implements ProxyCreator {
     protected createChannel(id: number, path: string): Channel {
         const channel = new HttpChannel(id, async content => {
             const response = await fetch(urlJoin(this.getEndpoint(), await this.pathResolver.resolve(this.rpcPath)), {
-                method: 'POST',
+                method: HttpMethod.POST,
                 body: content,
                 headers: new Headers({
-                    'Content-Type': 'application/json'
+                    [HttpHeaders.CONTENT_TYPE]: MediaType.APPLICATION_JSON_UTF8
                 })
             });
             channel.handleMessage(await response.json());

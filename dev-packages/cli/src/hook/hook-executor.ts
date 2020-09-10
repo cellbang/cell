@@ -72,10 +72,10 @@ export class HookExecutor {
                 const [p1, p2] = moduleName.split('/');
                 properties.push(p1.substring(1));
                 if (p2) {
-                    properties.push(p2);
+                    properties.push(p2.substring(0, p2.lastIndexOf('@')));
                 }
             } else {
-                properties.push(moduleName);
+                properties.push(moduleName.substring(0, moduleName.lastIndexOf('@')));
             }
             if (properties.length > 0) {
                 properties.push(hookName);

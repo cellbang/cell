@@ -1,11 +1,11 @@
-import { UserStore, User } from './user-protocol';
+import { User, UserService } from './user-protocol';
 import { Value, Component } from '@malagu/core';
 import { UsernameNotFoundError } from '../error';
 import { ElPolicy, PolicyType } from '../access';
 import { AuthorizeType } from '../annotation';
 
-@Component(UserStore)
-export class UserStoreImpl implements UserStore {
+@Component(UserService)
+export class UserServiceImpl implements UserService<string, User> {
 
     @Value('malagu.security')
     protected readonly options: any;

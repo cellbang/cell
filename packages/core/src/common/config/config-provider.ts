@@ -9,7 +9,6 @@ export class ConfigProviderImpl implements ConfigProvider {
     protected readonly expressionHandler: ExpressionHandler;
 
     get<T>(key: string, defaultValue?: T): T {
-
         return this.expressionHandler.handle(`\${${key}}`) || defaultValue;
     }
 

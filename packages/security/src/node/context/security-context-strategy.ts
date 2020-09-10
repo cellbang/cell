@@ -12,6 +12,7 @@ export class SessionSecurityContextStrategy implements SecurityContextStrategy {
     create(): Promise<SecurityContext> {
         const securityContext = new SecurityContextImpl();
         securityContext.authentication = {
+            name: 'anonymousUser',
             principal: 'anonymousUser',
             policies: [],
             credentials: '',

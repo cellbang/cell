@@ -1,0 +1,57 @@
+backend:
+  malagu:
+    oauth2:
+      client:
+        clockSkew: 60000 # 60s
+        redirectLoginPath: /login/oauth2/code/*
+        authorizationRequestBaseUri: /oauth2/authorization
+        defaultRedirectUri: ${malagu.server.endpoint}${malagu.server.path}{action}/oauth2/code/{registrationId}
+        registrationTemplates:
+          google:
+            scopes: [ openid, profile, email ]
+            redirectUri: ${malagu.oauth2.client.defaultRedirectUri}
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: basic
+            clientName: Google
+          github:
+            scopes: [ read:user ]
+            redirectUri: ${malagu.oauth2.client.defaultRedirectUri}
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: basic
+            clientName: GitHub
+          facebook:
+            scopes: [ public_profile, email ]
+            redirectUri: ${malagu.oauth2.client.defaultRedirectUri}
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: post
+            clientName: Facebook
+          okta:
+            scopes: [ openid, profile, email ]
+            redirectUri: ${malagu.oauth2.client.defaultRedirectUri}
+            authorizationGrantType: authorization_code
+            clientAuthenticationMethod: basic
+            clientName: Facebook
+        providerTemplates:
+          google:
+            authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+            tokenUri: https://www.googleapis.com/oauth2/v4/token
+            userInfoEndpoint: 
+              uri: https://www.googleapis.com/oauth2/v3/userinfo
+              userNameAttributeName: sub
+            jwkSetUri: https://www.googleapis.com/oauth2/v3/certs
+            issuerUri: https://accounts.google.com
+          github:
+            authorizationUri: https://github.com/login/oauth/authorize
+            tokenUri: https://github.com/login/oauth/access_token
+            userInfoEndpoint: 
+              uri: https://api.github.com/user
+              userNameAttributeName: id
+          facebook:
+            authorizationUri: https://www.facebook.com/v2.8/dialog/oauth
+            tokenUri: https://graph.facebook.com/v2.8/oauth/access_token
+            userInfoEndpoint: 
+              uri: https://graph.facebook.com/me?fields=id,name,email
+              userNameAttributeName: id
+          okta:
+            userInfoEndpoint: 
+              userNameAttributeName: sub
