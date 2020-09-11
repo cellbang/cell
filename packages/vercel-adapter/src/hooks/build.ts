@@ -1,4 +1,4 @@
-import { BuildContext, ConfigurationContext, getHomePath, getConfig, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
+import { BuildContext, ConfigurationContext, getHomePath, getMalaguConfig, BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli';
 import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
 import * as merge from 'webpack-merge';
@@ -7,7 +7,7 @@ export default async (context: BuildContext) => {
     const { pkg, configurations } = context;
     let vercelConfig: any = {};
     for (const c of configurations) {
-        const config = getConfig(pkg, c.name!).deployConfig.vercel.config;
+        const config = getMalaguConfig(pkg, c.name!).vercel.config;
         if (c.name === BACKEND_TARGET) {
             vercelConfig = merge(config, vercelConfig);
         } else {

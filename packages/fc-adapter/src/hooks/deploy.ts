@@ -1,4 +1,4 @@
-import { DeployContext, BACKEND_TARGET, getHomePath, getConfig } from '@malagu/cli';
+import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
 import { join } from 'path';
 import { readdirSync, statSync, readFileSync, existsSync, readFile } from 'fs-extra';
@@ -17,7 +17,7 @@ let region: string;
 export default async (context: DeployContext) => {
     const { pkg } = context;
 
-    const deployConfig = getConfig(pkg, BACKEND_TARGET).deployConfig;
+    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['fc-adapter'];
 
     const profileProvider = new ProfileProvider();
     profile = {
@@ -78,6 +78,11 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     if (type === 'http' || type === 'custom') {
         await createOrUpdateHttpTrigger(trigger);
         if (customDomain && customDomain.name) {
+            for (const route of customDomain.routeConfig.routes) {
+                route.serviceName = route.serviceName || serviceName;
+                route.functionName = route.functionName || functionName;
+                route.qualifier = route.qualifier || alias.name;
+            }
             await createOrUpdateCustomDomain(customDomain);
         }
     }
@@ -357,7 +362,20 @@ async function createOrUpdateCustomDomain(customDomain: any) {
         opts.routeConfig = routeConfig;
     }
     try {
-        await fcClient.getCustomDomain(name);
+        const { data } = await fcClient.getCustomDomain(name);
+        const routes: any[] = [];
+        if (data?.routeConfig?.routes) {
+            for (const route of data.routeConfig.routes) {
+                const target = opts.routeConfig.routes.find((r: any) => r.path === route.path);
+                if (target) {
+                    routes.push({ ...route, ...target });
+                    opts.routeConfig.routes.splice(opts.routeConfig.routes.findIndex((r: any) => r.path === target.path), 1);
+                } else {
+                    routes.push(route);
+                }
+            }
+            opts.routeConfig.routes = [ ...opts.routeConfig.routes, ...routes ];
+        }
         await spinner(`Update ${name} custom domain`, async () => {
             await fcClient.updateCustomDomain(name, opts);
         });
@@ -379,7 +397,7 @@ async function createOrUpdateCustomDomain(customDomain: any) {
 async function createOrUpdateAlias(alias: any, versionId: string) {
     try {
         await fcClient.getAlias(alias.serviceName, alias.name);
-        await spinner(`Update ${alias.Name} alias to version ${versionId}`, async () => {
+        await spinner(`Update ${alias.name} alias to version ${versionId}`, async () => {
             await fcClient.updateAlias(alias.serviceName, alias.name, versionId);
         });
     } catch (ex) {

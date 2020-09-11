@@ -1,2 +1,5 @@
-deployConfig:
-  name: release ## 线上环境
+stage: release # 线上环境
+
+# fc-adapter:
+  # customDomain:
+  #   name: xxx.com # 需要绑定自定义域名才能正常访问

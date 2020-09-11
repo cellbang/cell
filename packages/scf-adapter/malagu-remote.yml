@@ -1,8 +1,61 @@
-backend:
+backend: 
+  entry: lib/node/api-gateway-application-entry
   malagu:
     server:
-      path: /${deployConfig.function.name}/
+      path: /${malagu['scf-adapter'].function.name}/
+stage: "${cliContext.prod ? 'release' : 'test'}" # test, prepub, release
+malagu:
+  scf-adapter:
+    profile:
+      regions: [ ap-guangzhou ]
+    type: api-gateway
+    namespace:
+      name: default
+    function:
+      name: ${pkg.name}
+      namespace: ${malagu['scf-adapter'].namespace.name}
+      handler: index.handler
+      memorySize: 256
+      runtime: Nodejs12.16
+      timeout: 15
+    alias:
+      name: ${stage}
+      functionName: ${malagu['scf-adapter'].function.name}
+      namespace: ${malagu['scf-adapter'].namespace.name}
+    customDomain:
+      # name: abc.com
+      # certificateId: xxxx
+      protocol: http
+      netType: OUTER
+    apiGateway:
+      release:
+        environmentName: ${stage}
+        desc: 'Released By Malagu'
+      service:
+        name: malagu
+        protocol: http&https
+      api:
+        name: ${malagu['scf-adapter'].function.name}
+        serviceTimeout: 20 # 20s
+        protocol: HTTP
+        serviceScfIsIntegratedResponse: true
+        serviceScfFunctionName: ${malagu['scf-adapter'].function.name}
+        serviceScfFunctionNamespace: ${malagu['scf-adapter'].namespace.name}
+        serviceScfFunctionQualifier: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+        serviceWebsocketTransportFunctionName: ${malagu['scf-adapter'].function.name}
+        serviceWebsocketTransportFunctionNamespace: ${malagu['scf-adapter'].namespace.name}
+        serviceWebsocketTransportFunctionQualifier: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+        requestConfig:
+          path: '${malagu.server.path}*'
+          method: ANY
+      usagePlan:
+        name: ${malagu['scf-adapter'].function.name}
+        environment: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+      strategy:
+        # strategy: 5000
+        environmentName: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+
 frontend:
   malagu:
     server:
-      path: "/${deployConfig.name == 'release' ? '' : '${deployConfig.apiGateway.release.environmentName}/'}${deployConfig.function.name}/"
+      path: "/${stage == 'release' ? '' : (malagu['scf-adapter'].apiGateway.release.environmentName + '/')}${malagu['scf-adapter'].function.name}/"

@@ -1,2 +1,1 @@
-deployConfig:
-  name: release ## 线上环境
+stage: release # 线上环境

@@ -27,7 +27,8 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "malagu.yml",
+    "malagu-remote.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",

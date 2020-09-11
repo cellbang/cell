@@ -1,4 +1,4 @@
-import { DeployContext, BACKEND_TARGET, getHomePath, getConfig } from '@malagu/cli';
+import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
 import { join } from 'path';
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
@@ -134,7 +134,7 @@ class ScfClientExt extends ScfClient {
 export default async (context: DeployContext) => {
     const { pkg } = context;
 
-    const deployConfig = getConfig(pkg, BACKEND_TARGET).deployConfig;
+    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['scf-adapter'];
 
     const profileProvider = new ProfileProvider();
     profile = {

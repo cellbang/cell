@@ -1,2 +1,1 @@
-deployConfig:
-  name: test ## 测试环境
+stage: test # 测试环境
