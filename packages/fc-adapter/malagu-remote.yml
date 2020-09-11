@@ -1,5 +1,77 @@
+backend: 
+  entry: lib/node/${malagu['fc-adapter'].type}-application-entry
+stage: "${cliContext.prod ? 'release' : 'test'}" # test, pre, release
 malagu:
   server:
-    path: "${(deployConfig.customDomain.name || deployConfig.type != 'custom') ? (deployConfig.type == 'api-gateway' ? '/${deployConfig.function.name}/' : '/') : '/2016-08-15/proxy/${deployConfig.service.name}.${deployConfig.alias.name}/${deployConfig.function.name}/'}"
-    _domain: "${ 'HTTPS' in deployConfig.customDomain.protocol ? 'https' : 'http' }://${deployConfig.customDomain.name}"
-    endpoint: "${deployConfig.customDomain.name || !deployConfig.profile.accountId ? deployConfig.customDomain.name? malagu.server._domain : undefined : 'https://${deployConfig.profile.accountId}.${deployConfig.profile.defaultRegion}.fc.aliyuncs.com'}"
+    path: "${(malagu['fc-adapter'].customDomain.name || malagu['fc-adapter'].type != 'custom') ? (malagu['fc-adapter'].type == 'api-gateway' ? ('/' + malagu['fc-adapter'].function.name + '/') : '/') : ('/2016-08-15/proxy/' + malagu['fc-adapter'].service.name + '.' + malagu['fc-adapter'].alias.name + '/' + malagu['fc-adapter'].function.name + '/')}"
+    _domain: "${ 'HTTPS' in malagu['fc-adapter'].customDomain.protocol ? 'https' : 'http' }://${malagu['fc-adapter'].customDomain.name}"
+    endpoint: "${malagu['fc-adapter'].customDomain.name || !malagu['fc-adapter'].profile.accountId ? malagu['fc-adapter'].customDomain.name ? malagu.server._domain : undefined : ('https://' + malagu['fc-adapter'].profile.accountId + '.' + malagu['fc-adapter'].profile.defaultRegion + '.fc.aliyuncs.com')}"
+  fc-adapter:
+    profile:
+      regions: [ cn-hangzhou ]
+    type: custom
+    secure: true
+    internal: false
+    timeout: 600000
+    service:
+      name: malagu
+    function:
+      name: ${pkg.name}
+      serviceName: ${malagu['fc-adapter'].service.name}
+      handler: backend/dist/index.handler
+      memorySize: 256
+      runtime: "${malagu['fc-adapter'].type == 'custom' ? 'custom' : 'nodejs12'}"
+      timeout: 15 # 15s
+      instanceConcurrency: 10
+      bootstrap: 'node backend/dist/index.js'
+    trigger:
+      name: ${pkg.name}-${malagu['fc-adapter'].alias.name}
+      qualifier: ${malagu['fc-adapter'].alias.name}
+      functionName: ${malagu['fc-adapter'].function.name}
+      serviceName: ${malagu['fc-adapter'].service.name}
+      triggerType: http
+      triggerConfig:
+        authType: anonymous
+        methods: [GET, POST, PUT, DELETE, HEAD, PATCH]
+    alias:
+      name: ${stage}
+      serviceName: ${malagu['fc-adapter'].service.name}
+    customDomain:
+      protocol: HTTP
+      certConfig:
+        # certName: xxx
+        privateKey: "${ env.SSL_KEY ?: 'ssl/domain.key'}"
+        certificate: "${ env.SSL_PEM ?: 'ssl/domain.pem'}"
+      routeConfig:
+        routes:
+          - path: '/*'
+            serviceName: ${malagu['fc-adapter'].service.name}
+            qualifier: ${malagu['fc-adapter'].alias.name}
+            functionName: ${malagu['fc-adapter'].function.name}
+    apiGateway:
+      stage:
+        name: ${stage}
+        desc: 'Released By Malagu'
+      group:
+        name: malagu
+        description: 'Created By Malagu'
+      api:
+        name: ${malagu['fc-adapter'].function.name|replace('-', '_')}
+        visibility: PUBLIC
+        description: 'Created By Malagu'
+        authType: ANONYMOUS
+        requestConfig:
+          method: ANY
+          protocol: HTTP,HTTPS
+          postBodyDescription: ''
+          mode: PASSTHROUGH
+          path: '${malagu.server.path}*'
+        serviceConfig:
+          serviceProtocol: FunctionCompute
+          serviceTimeout: 20 # 20s
+          contentTypeValue: 'application/json; charset=UTF-8'
+          functionComputeConfig:
+            serviceName: ${malagu['fc-adapter'].service.name}
+            functionName: ${malagu['fc-adapter'].function.name}
+            qualifier: ${malagu['fc-adapter'].alias.name}
+        resultType: PASSTHROUGH

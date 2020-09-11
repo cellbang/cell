@@ -1,4 +1,5 @@
-deployConfig:
-  name: test # 测试环境
+stage: test # 测试环境
+
+# fc-adapter:
   # customDomain:
   #   name: test.xxx.com # 需要绑定自定义域名才能正常访问

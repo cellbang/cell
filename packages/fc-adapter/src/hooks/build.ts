@@ -1,10 +1,10 @@
-import { BuildContext, BACKEND_TARGET, getConfig, getHomePath } from '@malagu/cli';
+import { BuildContext, BACKEND_TARGET, getMalaguConfig, getHomePath } from '@malagu/cli';
 import { join } from 'path';
 import { writeFile } from 'fs-extra';
 
 export default async (context: BuildContext) => {
     const { pkg } = context;
-    const deployConfig = getConfig(pkg, BACKEND_TARGET).deployConfig;
+    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['fc-adapter'];
     if (deployConfig.type === 'custom') {
         const destDir = join(getHomePath(pkg), 'bootstrap');
         const bootstrap = deployConfig.function.bootstrap;
