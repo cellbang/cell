@@ -13,6 +13,7 @@
     "@malagu/rpc": "latest",
     "@malagu/shell": "latest",
     "@malagu/serve-static": "latest",
+    "@malagu/typeorm": "latest",
     "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {

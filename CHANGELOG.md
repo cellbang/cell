@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.0.42
+
+- fix(cli) Fix the problem of fc-admin-app template package shortage
+- fix(cli) Fix template configuration file error
+- fix(cli) 修复fc-admin-app 模板少包问题
+- fix(cli) 修复模板配置文件错误问题
+
 ## v0.0.41
 
 - feat(fc-adapter + scf-adapter + vercel + cli) Remove the configuration attribute deployConfig, and put the configuration attributes under deployConfig to the child of the specific adaptation component
