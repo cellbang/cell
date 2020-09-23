@@ -8,10 +8,13 @@ import { ContextUtils, HookContext } from '../context';
 import * as ora from 'ora';
 import { getPackager } from '../packager';
 const chalk = require('chalk');
+import { ok } from 'assert';
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const PLACEHOLD = '{{ templatePath }}';
+
+const remoteTemplateRegex = /^(https?:|git@)/i;
 
 export interface Template {
     name: string;
@@ -21,7 +24,7 @@ export interface Template {
 export class InitManager {
 
     protected source: any[];
-    protected name: string;
+    protected templateName: string;
     protected location: string;
     protected hookContext: HookContext;
     constructor(protected readonly context: any) {
@@ -50,7 +53,7 @@ export class InitManager {
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
         await new HookExecutor().executeInitHooks(await ContextUtils.createInitContext(await this.getHookContext()));
-        console.log(chalk`{bold.green Success!} Initialized "${ this.name }" example in {bold.blue ${outputDir}}.`);
+        console.log(chalk`{bold.green Success!} Initialized "${ this.templateName }" example in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }
 
@@ -89,6 +92,21 @@ export class InitManager {
     }
 
     protected async selectTemplate(): Promise<void> {
+        const { name, template } = this.context;
+        if (template) {
+            this.templateName = template;
+            if (remoteTemplateRegex.test(template)) {
+                this.location = template;
+            } else {
+                Object.keys(templates).forEach(key => {
+                    if (key === name) {
+                        this.location = templates[key];
+                    }
+                });
+                ok(this.location, `"${template}" template not found`);
+            }
+            return;
+        }
         const spinner = ora({ text: 'loading...', discardStdin: false }).start();
         const answers = await inquirer.prompt([{
             name: 'item',
@@ -104,13 +122,9 @@ export class InitManager {
                 return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
             }
         }]);
-        this.name = answers.item.name;
+        this.templateName = answers.item.name;
         this.context.name = this.context.name || answers.item.name;
         this.location = answers.item.location;
-    }
-
-    protected isLocalTemplate(): boolean {
-        return !this.location.startsWith('http');
     }
 
     protected get realLocation() {
@@ -118,10 +132,10 @@ export class InitManager {
     }
 
     protected async doOutput(): Promise<void> {
-        if (this.isLocalTemplate()) {
-            await this.outputLocalTemplate();
-        } else {
+        if (remoteTemplateRegex.test(this.location)) {
             this.outputRemoteTempate();
+        } else {
+            await this.outputLocalTemplate();
         }
     }
     protected async outputLocalTemplate(): Promise<void> {

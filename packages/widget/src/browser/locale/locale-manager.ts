@@ -8,7 +8,7 @@ export class LocaleManagerImpl implements LocaleManager {
 
     protected readonly langStorageKey = 'malagu:lang';
 
-    @Value('malagu.widget.locales')
+    @Value('malagu.locales')
     protected readonly localesForConfig: { [lang: string]: Locale };
 
     @Autowired(Locale) @Optional()

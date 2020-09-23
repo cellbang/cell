@@ -94,8 +94,8 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, backendAssets, join('src', 'assets'));
         this.addModuleIfExists(componentPackage, frontendAssets, 'assets');
         this.addModuleIfExists(componentPackage, backendAssets, 'assets');
-        this.addModuleIfExists(componentPackage, frontendAssets, join('browser', 'assets'));
-        this.addModuleIfExists(componentPackage, backendAssets, join('node', 'assets'));
+        this.addModuleIfExists(componentPackage, frontendAssets, join('src', 'browser', 'assets'));
+        this.addModuleIfExists(componentPackage, backendAssets, join('src', 'node', 'assets'));
 
     }
 

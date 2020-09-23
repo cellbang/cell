@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.0.43
+
+- feat(cli) `malagu init` command supports specifying template options, you can specify the built-in template name and remote GitHub address, such as: `malagu init demo fc-backend-app` or `malagu init demo git@github.com:cellbang/cellbang-site.git`
+- feat(widget+shell) component property change: `malagu.widget.locales` changed to `malagu.locales`
+- feat(widget) component property change: `malagu.widget.themes` changed to `malagu.themes`
+
+- feat(cli) `malagu init` 命令支持指定模板选项，可以指定内置模板名称和远端 GitHub 地址，如：`malagu init demo fc-backend-app` 或者 `malagu init demo git@github.com:cellbang/cellbang-site.git`
+- feat(widget+shell) 组件属性变更：`malagu.widget.locales` 变更为 `malagu.locales`
+- feat(widget) 组件属性变更：`malagu.widget.themes` 变更为 `malagu.themes` 
+
 ## v0.0.42
 
 - fix(cli) Fix the problem of fc-admin-app template package shortage

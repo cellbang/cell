@@ -2,6 +2,7 @@ import { fluentProvide } from 'inversify-binding-decorators';
 import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
 import { MethodBeforeAdvice, AfterReturningAdvice, AfterThrowsAdvice } from '../aop/aop-protocol';
+import { isResolveMode } from '../utils';
 
 export enum Scope {
     Request, Singleton, Transient
@@ -45,6 +46,9 @@ export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any
 function doProxy(context: interfaces.Context, t: any): ProxyConstructor {
     const proxy = new Proxy(t, {
         get: (target, method, receiver) => {
+            if (isResolveMode()) {
+                return t;
+            }
             const func = target[method];
             if (typeof func === 'function') {
                 return async (...args: any[]) => {
@@ -71,8 +75,6 @@ function doProxy(context: interfaces.Context, t: any): ProxyConstructor {
             return func;
         }
     });
-    proxy.target = t;
-    t.proxyTarget = proxy;
     return proxy;
 }
 

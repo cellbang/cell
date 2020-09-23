@@ -8,7 +8,7 @@ export class ThemeManagerImpl<T> implements ThemeManager<T> {
 
     protected readonly themeStorageKey = 'malagu:theme';
 
-    @Value('malagu.widget.themes')
+    @Value('malagu.themes')
     protected readonly themesForConfig: { [id: string]: Theme<T> };
 
     @Autowired(Theme) @Optional()
