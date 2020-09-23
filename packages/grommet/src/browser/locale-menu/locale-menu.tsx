@@ -6,7 +6,7 @@ import { useIntl, IntlShape } from 'react-intl';
 import { Down } from 'grommet-icons';
 
 function parseLabel(locale: Locale, intl: IntlShape) {
-    return locale.label && intl.formatMessage({ id: locale.label }) || intl.formatDisplayName(locale.lang);
+    return locale.label ? intl.formatMessage({ id: locale.label }) : intl.formatDisplayName(locale.lang, { type: 'language' } );
 }
 
 export function LocaleMenu(props: MenuProps & Omit<ButtonType, 'icon'>) {

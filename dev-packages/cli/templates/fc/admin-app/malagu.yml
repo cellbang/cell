@@ -57,35 +57,35 @@ malagu:
           path: /menus
           icon: List
           label: 菜单管理
-    themes:
-      default:
-        label: 黑色
-        props:
-          global:
+  themes:
+    default:
+      label: 黑色
+      props:
+        global:
+          colors:
+            brand: '#000000'
+    blue:
+      label: 蓝色
+      props:
+        global:
             colors:
-              brand: '#000000'
-      blue:
-        label: 蓝色
-        props:
-          global:
-              colors:
-                brand: '#7D4CDB'
-      green:
-        label: 绿色
-        props:
-          global:
-            colors:
-              brand: '#00C781'
-      yellow:
-        label: 黄色
-        props:
-          global:
-            colors:
-              brand: '#FFCA58'
-      red:
-        label: 黄色
-        props:
-          global:
-            colors:
-              brand: '#FF4040'
+              brand: '#7D4CDB'
+    green:
+      label: 绿色
+      props:
+        global:
+          colors:
+            brand: '#00C781'
+    yellow:
+      label: 黄色
+      props:
+        global:
+          colors:
+            brand: '#FFCA58'
+    red:
+      label: 黄色
+      props:
+        global:
+          colors:
+            brand: '#FF4040'
 

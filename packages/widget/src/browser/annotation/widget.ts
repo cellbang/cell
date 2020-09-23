@@ -21,8 +21,8 @@ export const Widget =
             }
             const id = widgetOption.id || [];
             const component = widgetOption.component || t;
-            Constant([...id, WidgetModel], {
-                id: component.name,
+            Constant([...id, component, WidgetModel], {
+                id: widgetOption.id ? widgetOption.id.toString() : component.name,
                 visible: true,
                 type: WidgetType.Decorator,
                 priority: widgetOption.priority || 500,
