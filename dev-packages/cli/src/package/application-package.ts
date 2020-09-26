@@ -1,15 +1,12 @@
 import * as paths from 'path';
 import { readJsonFile } from './json-file';
 import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
-import { Component, ComponentPackage, Props, ApplicationLog, ApplicationPackageOptions, customizer, ApplicationModuleResolver } from './package-protocol';
+import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
-import mergeWith = require('lodash.mergewith');
-import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
+import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ComponentPackageLoader } from './component-config-loader';
 import { ComponentPackageResolver } from './component-package-resolver';
-import { existsSync, readFileSync } from 'fs-extra';
-const chalk = require('chalk');
-import yaml = require('js-yaml');
+import { existsSync } from 'fs-extra';
 import { ModulePathBuilder } from './module-path-builder';
 
 // tslint:disable:no-implicit-dependencies
@@ -31,71 +28,15 @@ export class ApplicationPackage {
         this.error = options.error || console.error.bind(console);
     }
 
-    protected _props: Component | undefined;
-    get props(): Component {
-        if (this._props) {
-            return this._props;
-        }
-        let props = <Component>{ malagu: {} };
-        for (const componentPackage of this.componentPackages) {
-            const component = componentPackage.malaguComponent;
-            if (component) {
-                props = mergeWith(props, component, customizer);
+    static create(options: ApplicationPackageOptions) {
+        let pkg = new ApplicationPackage(options);
+        if (!RawComponentPackage.is(pkg.pkg)) {
+            const { malagu } = pkg.pkg;
+            if (malagu && malagu.rootComponent) {
+                pkg = new ApplicationPackage({ ...options, projectPath: paths.join(options.projectPath, malagu.rootComponent) });
             }
         }
-
-        return props;
-    }
-
-    protected _rootConfig: Props | undefined;
-    get rootConfig(): Props {
-        if (this._rootConfig) {
-            return this._rootConfig;
-        }
-        if (existsSync(this.path(CONFIG_FILE))) {
-            this._rootConfig = yaml.load(readFileSync(this.path(CONFIG_FILE), { encoding: 'utf8' }));
-        }
-        if (this._rootConfig && !this._rootConfig.malagu) {
-            this._rootConfig.malagu = {};
-        }
-        return this._rootConfig || { malagu: {} };
-    }
-
-    getConfig(target: string): Props {
-        const self: any = this;
-        const configProperty = `_${target}Config`;
-        if (self[configProperty]) {
-            return self[configProperty];
-        }
-        let config = { ...this.props };
-        delete config.backend;
-        delete config.frontend;
-        config = mergeWith(config, this.props[target], customizer);
-
-        config.targets = this.options.targets.length ? this.options.targets : (config.targets || [ FRONTEND_TARGET, BACKEND_TARGET ]);
-        config.targets = Array.from(new Set(config.targets));
-        const { targets } = config;
-        if (targets.includes(target)) {
-            console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
-            for (const componentPackage of self._componentPackages) {
-                const malaguComponent = <Component>componentPackage.malaguComponent;
-                for (const modulePath of [...malaguComponent[target].modules || []]) {
-                    console.log(chalk`malagu {cyan.bold module} - ${componentPackage.name}/${ modulePath }`);
-                }
-            }
-        }
-        self[configProperty] = config;
-        return config;
-    }
-
-    protected _frontendConfig: Props | undefined;
-    get frontendConfig(): Props {
-        return this.getConfig(FRONTEND_TARGET);
-    }
-
-    protected _backendConfig: Props | undefined;
-    get backendConfig(): Props {
-        return this.getConfig(BACKEND_TARGET);
+        return pkg;
     }
 
     protected _pkg: PublishedNodePackage | undefined;
@@ -123,17 +64,14 @@ export class ApplicationPackage {
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Map<string, string> | undefined;
     protected _configHookModules: Map<string, string> | undefined;
+    protected _cliHookModules: Map<string, string> | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
-    protected rootComponentPackage() {
+    get rootComponentPackage() {
         if (!this._rootComponentPackage) {
             this.pkg.malaguComponent = {};
             this.componentPackageLoader.load(this.pkg, this.options.mode);
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
-            const mode = this._rootComponentPackage.malaguComponent!.mode!;
-            for (const m of mode) {
-                console.log(chalk`malagu {bold.blue mode} - {bold ${m}}`);
-            }
         }
         return this._rootComponentPackage;
     }
@@ -143,19 +81,17 @@ export class ApplicationPackage {
      */
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
-            const mode = this.rootComponentPackage().malaguComponent!.mode!;
+            const mode = this.rootComponentPackage.malaguComponent!.mode!;
 
             const collector = new ComponentPackageCollector(
                 this,
                 mode
             );
             this._componentPackages = collector.collect(this.pkg);
-            this._componentPackages.push(this.rootComponentPackage());
+            this._componentPackages.push(this.rootComponentPackage);
             for (const componentPackage of this._componentPackages) {
                 this.componentPackageResolver.resolve(componentPackage);
             }
-
-            console.log(chalk`malagu {green.bold component} - ${ this.rootComponentPackage().name }@${ this.rootComponentPackage().version }`);
 
         }
 
@@ -203,6 +139,13 @@ export class ApplicationPackage {
             this._backendAssets = this.computeModules('assets', BACKEND_TARGET);
         }
         return this._backendAssets;
+    }
+
+    get cliHookModules() {
+        if (!this._cliHookModules) {
+            this._cliHookModules = this.computeModules('cliHooks');
+        }
+        return this._cliHookModules;
     }
 
     get initHookModules() {

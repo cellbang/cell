@@ -1,6 +1,7 @@
 import { ApplicationPackage } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
+import { ApplicationConfig } from '../package/application-config';
 
 const url = require('url');
 const ip = require('internal-ip');
@@ -51,30 +52,34 @@ export function getDevSuccessInfo(options: any, name: string): string[] {
     return infos;
 }
 
-export function getWebpackConfig(pkg: ApplicationPackage, target: string) {
-    return getMalaguConfig(pkg, target).webpack || {};
+export function getWebpackConfig(cfg: ApplicationConfig, target: string) {
+    return getMalaguConfig(cfg, target).webpack || {};
 
 }
 
-export function getMalaguConfig(pkg: ApplicationPackage, target: string) {
-    return getConfig(pkg, target).malagu || {};
+export function getMalaguConfig(cfg: ApplicationConfig, target: string) {
+    return getConfig(cfg, target).malagu || {};
 }
 
-export function getConfig(pkg: ApplicationPackage, target: string) {
-    return pkg.getConfig(target) || {};
+export function getConfig(cfg: ApplicationConfig, target: string) {
+    return cfg.getConfig(target) || {};
 }
 
-export function support(pkg: ApplicationPackage, target: string) {
-    const targets = pkg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
-    return (pkg as any)[`${target}Modules`].size > 0 && targets.includes(target);
+export function getModules(pkg: ApplicationPackage, target: string): Map<string, string> {
+    return (pkg as any)[`${target}Modules`];
+}
+
+export function support(cfg: ApplicationConfig, target: string) {
+    const targets = cfg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
+    return (cfg.pkg as any)[`${target}Modules`].size > 0 && targets.includes(target);
 
 }
 
-export function getPort(pkg: ApplicationPackage, target: string, port?: number) {
+export function getPort(cfg: ApplicationConfig, target: string, port?: number) {
     if (port !== undefined) {
         return port;
     }
-    const server = getConfig(pkg, target).server || { port: 3000 };
+    const server = getConfig(cfg, target).server || { port: 3000 };
     return server.port;
 }
 

@@ -3,7 +3,7 @@ backend:
   malagu:
     server:
       path: /${malagu['scf-adapter'].function.name}/
-stage: "${cliContext.prod ? 'release' : 'test'}" # test, prepub, release
+stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'prod' : cliContext.prod ? 'prod' : 'test'}" # test, pre, prod
 malagu:
   scf-adapter:
     profile:
@@ -29,7 +29,7 @@ malagu:
       netType: OUTER
     apiGateway:
       release:
-        environmentName: ${stage}
+        environmentName: "${stage == 'pre' ? 'prepub' : stage == 'prod' ? 'release' : stage}"
         desc: 'Released By Malagu'
       service:
         name: malagu
@@ -58,4 +58,4 @@ malagu:
 frontend:
   malagu:
     server:
-      path: "/${stage == 'release' ? '' : (malagu['scf-adapter'].apiGateway.release.environmentName + '/')}${malagu['scf-adapter'].function.name}/"
+      path: "/${stage == 'prod' ? '' : (malagu['scf-adapter'].apiGateway.release.environmentName + '/')}${malagu['scf-adapter'].function.name}/"

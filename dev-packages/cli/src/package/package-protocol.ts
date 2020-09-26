@@ -2,13 +2,17 @@ import { PublishedNodePackage, NodePackage } from './npm-registry';
 import { CommanderStatic } from 'commander';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
+
+export class ApplicationConfigOptions {
+    readonly targets: string[];
+    readonly program: CommanderStatic;
+}
+
 export class ApplicationPackageOptions {
+    readonly mode: string[];
     readonly projectPath: string;
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
-    readonly mode: string[];
-    readonly targets: string[];
-    readonly program: CommanderStatic;
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;

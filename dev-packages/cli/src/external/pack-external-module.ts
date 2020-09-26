@@ -6,6 +6,7 @@ import { BACKEND_TARGET } from '../constants';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import * as webpack from 'webpack';
+import { getMalaguConfig } from '../webpack';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -197,8 +198,8 @@ function getExternalModules(stats: any): any[] {
  */
 export async function packExternalModules(context: ConfigurationContext, stats: webpack.Stats): Promise<void> {
     const verbose = false;
-    const pkg = context.pkg;
-    const config = pkg.backendConfig.malagu;
+    const { cfg, pkg } = context;
+    const config = getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const packagerId = config.packager;
     const includes = config.includeModules;

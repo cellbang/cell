@@ -24,7 +24,7 @@ export class ThemeManagerImpl<T> implements ThemeManager<T> {
         if (themeStr) {
             this.currentSubject.next(JSON.parse(themeStr));
         } else {
-            if (!this.themesForConfig) {
+            if (this.themesForConfig) {
                 this.currentSubject.next(this.themesForConfig[DEFAULT_THEME]);
             }
         }

@@ -132,9 +132,9 @@ class ScfClientExt extends ScfClient {
 }
 
 export default async (context: DeployContext) => {
-    const { pkg } = context;
+    const { cfg } = context;
 
-    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['scf-adapter'];
+    const deployConfig = getMalaguConfig(cfg, BACKEND_TARGET)['scf-adapter'];
 
     const profileProvider = new ProfileProvider();
     profile = {

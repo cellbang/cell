@@ -3,7 +3,6 @@ import { NodePackage } from './npm-registry';
 import { ComponentPackage, RawComponentPackage } from './package-protocol';
 import { ApplicationPackage } from './application-package';
 import { ComponentPackageLoader } from './component-config-loader';
-const chalk = require('chalk');
 
 export class ComponentPackageCollector {
 
@@ -29,6 +28,15 @@ export class ComponentPackageCollector {
         if (!pck.dependencies) {
             return;
         }
+
+        if (this.pkg.pkg.name === pck.name) {
+            // eslint-disable-next-line guard-for-in
+            for (const dependency in pck.devDependencies) {
+                const versionRange = pck.devDependencies[dependency]!;
+                this.collectPackage(dependency, versionRange, mode);
+            }
+        }
+
         // eslint-disable-next-line guard-for-in
         for (const dependency in pck.dependencies) {
             const versionRange = pck.dependencies[dependency]!;
@@ -68,7 +76,6 @@ export class ComponentPackageCollector {
             this.collectPackagesWithParent(pck, componentPackage);
             delete componentPackage.malaguComponent?.mode;
             this.sorted.push(componentPackage);
-            console.log(chalk`malagu {green.bold component} - ${ componentPackage.name }@${ componentPackage.version }`);
         }
     }
 

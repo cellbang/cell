@@ -1,6 +1,6 @@
 backend: 
   entry: lib/node/${malagu['fc-adapter'].type}-application-entry
-stage: "${cliContext.prod ? 'release' : 'test'}" # test, pre, release
+stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'prod' : cliContext.prod ? 'prod' : 'test'}" # test, pre, prod
 malagu:
   server:
     path: "${(malagu['fc-adapter'].customDomain.name || malagu['fc-adapter'].type != 'custom') ? (malagu['fc-adapter'].type == 'api-gateway' ? ('/' + malagu['fc-adapter'].function.name + '/') : '/') : ('/2016-08-15/proxy/' + malagu['fc-adapter'].service.name + '.' + malagu['fc-adapter'].alias.name + '/' + malagu['fc-adapter'].function.name + '/')}"
@@ -50,7 +50,7 @@ malagu:
             functionName: ${malagu['fc-adapter'].function.name}
     apiGateway:
       stage:
-        name: ${stage}
+        name: "${stage != 'prod' ? 'realse' : stage}"
         desc: 'Released By Malagu'
       group:
         name: malagu

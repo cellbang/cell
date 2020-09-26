@@ -1,13 +1,13 @@
 
-import { HookContext } from '../../context';
+import { CliContext } from '../../context';
 import { BACKEND_TARGET } from '../../constants';
 import { getPort } from '../utils';
 
 export class DevServerConfigFactory {
 
-    create(config: any, context: HookContext, target: string) {
-        const { pkg, port, open } = context;
-        const realPort = getPort(pkg, target, port);
+    create(config: any, context: CliContext, target: string) {
+        const { cfg, port, open } = context;
+        const realPort = getPort(cfg, target, port);
         const baseDevServerConfig = {
             watchOptions: {
                 ignored: /node_modules/
@@ -33,7 +33,7 @@ export class DevServerConfigFactory {
         }
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return context.dev;
     }
 }

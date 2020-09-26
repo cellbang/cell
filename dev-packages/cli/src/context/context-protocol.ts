@@ -2,22 +2,22 @@ import { ApplicationPackage } from '../package';
 import webpack = require('webpack');
 import * as https from 'https';
 import * as http from 'http';
-import { RawComponentPackage } from '../package';
-import { join } from 'path';
 import { CommanderStatic } from 'commander';
 import { checkPkgVersionConsistency } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { HookExecutor } from '../hook';
 import { ExpressionHandler } from '../el';
+import { ApplicationConfig } from '../package/application-config';
 
-export interface HookContext {
+export interface CliContext {
     program: CommanderStatic;
     pkg: ApplicationPackage;
+    cfg: ApplicationConfig;
     [key: string]: any;
 }
 
-export namespace HookContext {
-    export async function create(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd(), skipComponent = false): Promise<HookContext> {
+export namespace CliContext {
+    export async function create(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
             checkPkgVersionConsistency('@malagu/core', projectPath);
@@ -25,20 +25,16 @@ export namespace HookContext {
 
         const mode = options.mode || [];
         const targets = options.targets || [];
-        let pkg = new ApplicationPackage({ projectPath, mode, targets, program });
-        if (!RawComponentPackage.is(pkg.pkg)) {
-            const { malagu } = pkg.pkg;
-            if (malagu && malagu.rootComponent) {
-                pkg = new ApplicationPackage({ projectPath: join(projectPath, malagu.rootComponent), mode, targets, program});
-            }
-        }
+        const pkg = ApplicationPackage.create({ projectPath, mode });
+        const cfg = new ApplicationConfig({ targets, program }, pkg);
 
         if (!skipComponent) {
             for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
-                const config = pkg.getConfig(target);
+                const config = cfg.getConfig(target);
                 const hookExecutor = new HookExecutor();
                 await hookExecutor.executeConfigHooks({
                     pkg,
+                    cfg,
                     program,
                     config: config
                 });
@@ -55,25 +51,27 @@ export namespace HookContext {
 
         }
 
-        return <HookContext> {
+        return <CliContext> {
             ...options,
             pkg,
+            cfg,
             dest: 'dist',
             program
         };
     }
 }
-export interface ConfigurationContext extends HookContext {
+export interface ConfigurationContext extends CliContext {
     configurations: webpack.Configuration[];
 }
 
 export namespace ConfigurationContext {
-    export async function create(hookContext: HookContext): Promise<ConfigurationContext> {
+    export async function create(cliContext: CliContext, options: { [key: string]: any } = {} ): Promise<ConfigurationContext> {
         const { ConfigFactory } = require('../webpack');
         const configFactory = new ConfigFactory();
-        const configurations = await configFactory.create(hookContext);
+        const configurations = await configFactory.create({ ...cliContext, ...options });
         return {
-            ...hookContext,
+            ...options,
+            ...cliContext,
             configurations: configurations
         };
     }
@@ -87,30 +85,40 @@ export namespace ConfigurationContext {
     }
 }
 
+let _current: CliContext;
+
 export namespace ContextUtils {
 
-    export function createHooKContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<HookContext> {
-        return HookContext.create(program, options, projectPath);
+    export function getCurrent() {
+        return _current;
     }
 
-    export async function createConfigurationContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<BuildContext> {
-        return ConfigurationContext.create(await createHooKContext(program, options, projectPath));
+    export function setCurrent(current: CliContext) {
+        _current = current;
     }
 
-    export function createBuildContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<BuildContext> {
-        return createConfigurationContext(program, options, projectPath);
+    export function createCliContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<CliContext> {
+        return CliContext.create(program, options, projectPath);
     }
 
-    export function createDeployContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<DeployContext> {
-        return createConfigurationContext(program, options, projectPath);
+    export async function createConfigurationContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<BuildContext> {
+        return ConfigurationContext.create(cliContext, options);
     }
 
-    export function createWebpackContext(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<WebpackContext> {
-        return createConfigurationContext(program, options, projectPath);
+    export function createBuildContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<BuildContext> {
+        return createConfigurationContext(cliContext, options);
     }
 
-    export function createInitContext(hookContext: HookContext): Promise<InitContext> {
-        return Promise.resolve(hookContext);
+    export function createDeployContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<DeployContext> {
+        return createConfigurationContext(cliContext, options);
+    }
+
+    export function createWebpackContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<WebpackContext> {
+        return createConfigurationContext(cliContext, options);
+    }
+
+    export function createInitContext(cliContext: CliContext): Promise<InitContext> {
+        return Promise.resolve(cliContext);
     }
 
     export async function createServeContext(context: ConfigurationContext, server: http.Server | https.Server, app: any, compiler: webpack.Compiler,
@@ -124,8 +132,8 @@ export namespace ContextUtils {
         };
     }
 
-    export async function createConfigContext(hookContext: HookContext, config: { [key: string]: any }): Promise<ConfigContext> {
-        return { ...hookContext, config };
+    export async function createConfigContext(cliContext: CliContext, config: { [key: string]: any }): Promise<ConfigContext> {
+        return { ...cliContext, config };
     }
 
 }
@@ -134,7 +142,7 @@ export interface BuildContext extends ConfigurationContext {
 
 }
 
-export interface InitContext extends HookContext {
+export interface InitContext extends CliContext {
 
 }
 
@@ -146,7 +154,7 @@ export interface WebpackContext extends ConfigurationContext {
 
 }
 
-export interface ConfigContext extends HookContext {
+export interface ConfigContext extends CliContext {
     config: { [key: string]: any };
 
 }

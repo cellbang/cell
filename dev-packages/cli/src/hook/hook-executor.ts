@@ -1,10 +1,15 @@
-import { ServeContext, InitContext, BuildContext, DeployContext, WebpackContext, HookContext, ConfigContext } from '../context';
+import { ServeContext, InitContext, BuildContext, DeployContext, WebpackContext, CliContext, ConfigContext } from '../context';
 import { resolve } from 'path';
 import { getConfig } from '../webpack/utils';
 import { BACKEND_TARGET } from '../constants';
 const chalk = require('chalk');
 
 export class HookExecutor {
+
+    async executeCliHooks(context: CliContext): Promise<void> {
+        const modules = context.pkg.cliHookModules;
+        await this.doExecuteHooks(modules, context, 'cliHooks');
+    }
 
     async executeInitHooks(context: InitContext): Promise<void> {
         const modules = context.pkg.initHookModules;
@@ -40,13 +45,13 @@ export class HookExecutor {
         await this.doExecuteHooks(modules, context, 'webpackHooks');
     }
 
-    async executeHooks(context: HookContext, hookName: string): Promise<void> {
+    async executeHooks(context: CliContext, hookName: string): Promise<void> {
         const modules = context.pkg.computeModules(hookName);
         await this.doExecuteHooks(modules, context, hookName);
     }
 
-    protected checkHooks(context: HookContext, properties: string[]): boolean {
-        const config = getConfig(context.pkg, BACKEND_TARGET);
+    protected checkHooks(context: CliContext, properties: string[]): boolean {
+        const config = getConfig(context.cfg, BACKEND_TARGET);
         let current: any = config;
         for (const p of properties) {
             current = current[p];
@@ -58,7 +63,7 @@ export class HookExecutor {
         return current !== false ? true : false;
     }
 
-    protected async doExecuteHooks(modules: Map<string, string>, context: HookContext, hookName: string): Promise<void> {
+    protected async doExecuteHooks(modules: Map<string, string>, context: CliContext, hookName: string): Promise<void> {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
         if (!(process as any)[REGISTER_INSTANCE]) {

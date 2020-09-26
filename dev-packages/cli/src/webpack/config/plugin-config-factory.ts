@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
-import { HookContext } from '../../context';
+import { CliContext } from '../../context';
 import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
 import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig, getDevSuccessInfo } from '../utils';
 import { FRONTEND_TARGET, CONFIG_FILE, BACKEND_TARGET } from '../../constants';
@@ -8,9 +8,9 @@ import yaml = require('js-yaml');
 const chalk = require('chalk');
 
 export class FilterWarningsPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, target).filterWarningsPlugin || {};
+    create(config: any, context: CliContext, target: string) {
+        const { cfg } = context;
+        const pluginConfig = getWebpackConfig(cfg, target).filterWarningsPlugin || {};
         const excludeSet = new Set();
         for (const key in pluginConfig) {
             if (pluginConfig.hasOwnProperty(key)) {
@@ -37,13 +37,13 @@ export class FilterWarningsPluginConfigFactory {
         return {};
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class CopyWepackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
+    create(config: any, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
         for (const assert of (pkg as any)[`${target}Assets`].values()) {
@@ -70,15 +70,15 @@ export class CopyWepackPluginConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class EnvironmentPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const c = getConfig(pkg, target);
+    create(config: any, context: CliContext, target: string) {
+        const { cfg, pkg } = context;
+        const c = getConfig(cfg, target);
         const homePath = getHomePath(pkg, target);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
@@ -92,37 +92,14 @@ export class EnvironmentPluginConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
-        return true;
-    }
-}
-
-export class ForkTsCheckerWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
-        const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-
-        return {
-            plugins: [
-                new ForkTsCheckerWebpackPlugin({ ...{ eslint: true }, ...getWebpackConfig(pkg, target).forkTSCheckerWebpackPlugin || {} }),
-                new ForkTsCheckerNotifierWebpackPlugin({ title: `TypeScript(${target})`, excludeWarnings: false })
-            ]
-        };
-    }
-
-    support(context: HookContext, target: string): boolean {
-        const { pkg } = context;
-        if (!existsSync(path.join(pkg.projectPath, '.eslintrc.js'))) {
-            return false;
-        }
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class HardSourceWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
+    create(config: any, context: CliContext, target: string) {
+        const { pkg, cfg } = context;
         const homePath = getHomePath(pkg, target);
         const configPath = path.join(homePath, CONFIG_FILE);
         const relativeConfigPath = path.relative(pkg.projectPath, configPath);
@@ -137,20 +114,20 @@ export class HardSourceWebpackPluginConfigFactory {
                             files: ['package-lock.json', 'yarn.lock', relativeConfigPath],
                         }
                     },
-                    ...getWebpackConfig(pkg, target).hardSourceWebpackPlugin || {}
+                    ...getWebpackConfig(cfg, target).hardSourceWebpackPlugin || {}
                 })
             ]
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class HtmlWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
+    create(config: any, context: CliContext, target: string) {
+        const { pkg, cfg } = context;
         const faviconPath = path.join(pkg.projectPath, 'favicon.ico');
         const faviconExists = existsSync(faviconPath);
         const templatePath = path.join(pkg.projectPath, 'index.html');
@@ -158,56 +135,31 @@ export class HtmlWebpackPluginConfigFactory {
         const HtmlWebpackPlugin = require('html-webpack-plugin');
         const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 
-        const c = getMalaguConfig(pkg, FRONTEND_TARGET);
+        const c = getMalaguConfig(cfg, FRONTEND_TARGET);
         const baseHref = c.server.path;
         return {
             plugins: [
                 new HtmlWebpackPlugin({
                     title: 'Malagu App',
                     template: templateExists ? templatePath : path.join(__dirname, '..', '..', '..', 'templates', 'index.html'),
-                    templateParameters: getConfig(pkg, FRONTEND_TARGET),
+                    templateParameters: getConfig(cfg, FRONTEND_TARGET),
                     favicon: faviconExists ? faviconPath : undefined,
-                    ...getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackPlugin || {}
+                    ...getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {}
                 }),
                 new BaseHrefWebpackPlugin({ baseHref })
             ]
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return FRONTEND_TARGET === target;
     }
 }
 
-export class WorkboxWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { dev, pkg } = context;
-        const pluginConfig = { ...getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {} };
-        const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-        delete pluginConfig.generateInDevMode;
-        return {
-            plugins: [
-                new WorkboxWebpackPlugin.GenerateSW({
-                    clientsClaim: true,
-                    skipWaiting: true,
-                    maximumFileSizeToCacheInBytes: dev ? 10 * 1024 * 1024 : undefined,
-                    ...pluginConfig
-                })
-            ]
-        };
-    }
-
-    support(context: HookContext, target: string): boolean {
-        const { dev, pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).workboxWebpackPlugin || {};
-        return FRONTEND_TARGET === target && (!dev || pluginConfig.generateInDevMode);
-    }
-}
-
 export class HtmlWebpackTagsPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg } = context;
-        const pluginConfig = getWebpackConfig(pkg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
+    create(config: any, context: CliContext, target: string) {
+        const { cfg } = context;
+        const pluginConfig = getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
         const before = [];
         const after = [];
         for (const key in pluginConfig) {
@@ -243,13 +195,13 @@ export class HtmlWebpackTagsPluginConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return FRONTEND_TARGET === target;
     }
 }
 
 export class CleanWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
+    create(config: any, context: CliContext, target: string) {
         const { CleanWebpackPlugin } = require('clean-webpack-plugin');
         return {
             plugins: [
@@ -258,13 +210,13 @@ export class CleanWebpackPluginConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class FriendlyErrorsWebpackPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
+    create(config: any, context: CliContext, target: string) {
         const { dev } = context;
         const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
         return {
@@ -280,21 +232,25 @@ export class FriendlyErrorsWebpackPluginConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }
 
 export class ProgressPluginConfigFactory {
-    create(config: any, context: HookContext, target: string) {
+    create(config: any, context: CliContext, target: string) {
+        const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
         return {
             plugins: [
-                new webpack.ProgressPlugin()
+                new ProgressBarPlugin({
+                    format: `${target} build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`
+                })
             ]
         };
     }
 
-    support(context: HookContext, target: string): boolean {
-        return process.env.CI !== 'true';
+    support(context: CliContext, target: string): boolean {
+        return process.env.CI !== 'true' && !process.env.VSCODE_PID;
     }
 }
