@@ -58,12 +58,15 @@ export class ModuleResolver {
         malaguComponent.deployHooks = malaguComponent.deployHooks || [];
         malaguComponent.serveHooks = malaguComponent.serveHooks || [];
         malaguComponent.webpackHooks = malaguComponent.webpackHooks || [];
+        malaguComponent.cliHooks = malaguComponent.cliHooks || [];
+
         const webpackHooks = malaguComponent.webpackHooks;
         const initHooks = malaguComponent.initHooks;
         const configHooks = malaguComponent.configHooks;
         const buildHooks = malaguComponent.buildHooks;
         const deployHooks = malaguComponent.deployHooks;
         const serveHooks = malaguComponent.serveHooks;
+        const cliHooks = malaguComponent.cliHooks;
 
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
 
@@ -79,6 +82,8 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'deploy-hook'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'hooks', 'serve'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'serve-hook'));
+        this.addModuleIfExists(componentPackage, cliHooks, join(libOrSrc, 'hooks', 'cli'));
+        this.addModuleIfExists(componentPackage, cliHooks, join(libOrSrc, 'cli-hook'));
 
     }
 

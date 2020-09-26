@@ -3,8 +3,8 @@ import { join } from 'path';
 import { writeFile } from 'fs-extra';
 
 export default async (context: BuildContext) => {
-    const { pkg } = context;
-    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['fc-adapter'];
+    const { pkg, cfg } = context;
+    const deployConfig = getMalaguConfig(cfg, BACKEND_TARGET)['fc-adapter'];
     if (deployConfig.type === 'custom') {
         const destDir = join(getHomePath(pkg), 'bootstrap');
         const bootstrap = deployConfig.function.bootstrap;

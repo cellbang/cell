@@ -15,9 +15,9 @@ let profile: Profile;
 let region: string;
 
 export default async (context: DeployContext) => {
-    const { pkg } = context;
+    const { cfg } = context;
 
-    const deployConfig = getMalaguConfig(pkg, BACKEND_TARGET)['fc-adapter'];
+    const deployConfig = getMalaguConfig(cfg, BACKEND_TARGET)['fc-adapter'];
 
     const profileProvider = new ProfileProvider();
     profile = {

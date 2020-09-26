@@ -4,10 +4,10 @@ import { writeJSON } from 'fs-extra';
 import * as merge from 'webpack-merge';
 
 export default async (context: BuildContext) => {
-    const { pkg, configurations } = context;
+    const { pkg, cfg, configurations } = context;
     let vercelConfig: any = {};
     for (const c of configurations) {
-        const config = getMalaguConfig(pkg, c.name!).vercel.config;
+        const config = getMalaguConfig(cfg, c.name!).vercel.config;
         if (c.name === BACKEND_TARGET) {
             vercelConfig = merge(config, vercelConfig);
         } else {

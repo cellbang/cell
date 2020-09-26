@@ -1,5 +1,27 @@
 # Change Log
 
+## v0.0.44
+
+- feat(pwa) Add pwa component
+- feat(pwa) Add eslint component
+- feat(cli) Remove pwa function
+- feat(cli) Remove eslint function
+- feat(cli) Simplified application template configuration
+- feat(fc-adapter + scf-adapter) Simplifies the stage configuration and automatically judges the stage according to the operating mode. When test mode is included, stage is test, when pre mode is included, stage is pre, and when prod mode is included, stage is prod
+- feat(cli) Add cli hook, through this plug-in you can add new commands and extend old commands
+- feat(cli) Beautify the command line output log
+- feat(cli) Add command smart suggestions
+- feat(pwa) 添加 pwa 组件
+- feat(pwa) 添加 eslint 组件
+- feat(cli) 移除 pwa 功能
+- feat(cli) 移除 eslint 功能
+- feat(cli) 简化应用模板配置
+- feat(fc-adapter + scf-adapter) 简化 stage 配置，根据运行模式自动判断 stage。当包含 test 模式，则 stage 为 test，当包含 pre 模式，则 stage 为 pre，当包含 prod 模式，则 stage 为 prod
+- feat(cli) 添加 cli hook，通过该插件可以添加新的命令和扩展老的命令
+- feat(cli) 美化命令行输出日志
+- feat(cli) 添加命令智能建议
+
+
 ## v0.0.43
 
 - feat(cli) `malagu init` command supports specifying template options, you can specify the built-in template name and remote GitHub address, such as: `malagu init demo fc-backend-app` or `malagu init demo git@github.com:cellbang/cellbang-site.git`

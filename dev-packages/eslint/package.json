@@ -1,0 +1,47 @@
+{
+  "name": "@malagu/eslint",
+  "version": "0.0.43",
+  "description": "eslint component",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "eslint": "^6.8.0",
+    "file-loader": "^4.1.0",
+    "fork-ts-checker-notifier-webpack-plugin": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/cli": "^0.0.43",
+    "@malagu/ext-scripts": "^0.0.43"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

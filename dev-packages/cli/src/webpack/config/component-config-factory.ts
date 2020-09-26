@@ -1,5 +1,5 @@
 
-import { HookContext } from '../../context';
+import { CliContext } from '../../context';
 import * as path from 'path';
 import { getWebpackConfig } from '../utils';
 
@@ -8,9 +8,9 @@ const nodePathList = (process.env.NODE_PATH || '')
     .filter(p => !!p);
 
 export class ComponentConfigFactory {
-    create(config: any, context: HookContext, target: string) {
-        const { pkg, dev } = context;
-        const pluginConfig = getWebpackConfig(pkg, target).workboxWebpackPlugin || {};
+    create(config: any, context: CliContext, target: string) {
+        const { cfg, pkg, dev } = context;
+        const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin || {};
         const registed = !dev || !!pluginConfig.generateInDevMode;
         return {
             resolveLoader: {
@@ -39,7 +39,7 @@ export class ComponentConfigFactory {
         };
     }
 
-    support(context: HookContext, target: string): boolean {
+    support(context: CliContext, target: string): boolean {
         return true;
     }
 }

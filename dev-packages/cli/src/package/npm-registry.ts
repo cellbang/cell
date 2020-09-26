@@ -23,6 +23,7 @@ export interface NodePackage {
     maintainers?: Maintainer[];
     keywords?: string[];
     dependencies?: Dependencies;
+    devDependencies?: Dependencies;
     [property: string]: any;
 }
 
