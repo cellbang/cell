@@ -1138,105 +1138,6 @@
   resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
   integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
 
-"@phosphor/algorithm@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/@phosphor/algorithm/download/@phosphor/algorithm-1.2.0.tgz#4a19aa59261b7270be696672dc3f0663f7bef152"
-  integrity sha1-ShmqWSYbcnC+aWZy3D8GY/e+8VI=
-
-"@phosphor/collections@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/@phosphor/collections/download/@phosphor/collections-1.2.0.tgz#a8cdd0edc0257de7c33306a91caf47910036307f"
-  integrity sha1-qM3Q7cAlfefDMwapHK9HkQA2MH8=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-
-"@phosphor/commands@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.npm.taobao.org/@phosphor/commands/download/@phosphor/commands-1.7.2.tgz#df724f2896ae43c4a3a9e2b5a6445a15e0d60487"
-  integrity sha1-33JPKJauQ8SjqeK1pkRaFeDWBIc=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-    "@phosphor/coreutils" "^1.3.1"
-    "@phosphor/disposable" "^1.3.1"
-    "@phosphor/domutils" "^1.1.4"
-    "@phosphor/keyboard" "^1.1.3"
-    "@phosphor/signaling" "^1.3.1"
-
-"@phosphor/coreutils@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/@phosphor/coreutils/download/@phosphor/coreutils-1.3.1.tgz#441e34f42340f7faa742a88b2a181947a88d7226"
-  integrity sha1-RB409CNA9/qnQqiLKhgZR6iNciY=
-
-"@phosphor/disposable@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/@phosphor/disposable/download/@phosphor/disposable-1.3.1.tgz#be98fe12bd8c9a4600741cb83b0a305df28628f3"
-  integrity sha1-vpj+Er2MmkYAdBy4OwowXfKGKPM=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-    "@phosphor/signaling" "^1.3.1"
-
-"@phosphor/domutils@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npm.taobao.org/@phosphor/domutils/download/@phosphor/domutils-1.1.4.tgz#4c6aecf7902d3793b45db325319340e0a0b5543b"
-  integrity sha1-TGrs95AtN5O0XbMlMZNA4KC1VDs=
-
-"@phosphor/dragdrop@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.npm.taobao.org/@phosphor/dragdrop/download/@phosphor/dragdrop-1.4.1.tgz#45887dfe8f5849db2b4d1c0329a377f0f0854464"
-  integrity sha1-RYh9/o9YSdsrTRwDKaN38PCFRGQ=
-  dependencies:
-    "@phosphor/coreutils" "^1.3.1"
-    "@phosphor/disposable" "^1.3.1"
-
-"@phosphor/keyboard@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.npm.taobao.org/@phosphor/keyboard/download/@phosphor/keyboard-1.1.3.tgz#e5fd13af0479034ef0b5fffcf43ef2d4a266b5b6"
-  integrity sha1-5f0TrwR5A07wtf/89D7y1KJmtbY=
-
-"@phosphor/messaging@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.npm.taobao.org/@phosphor/messaging/download/@phosphor/messaging-1.3.0.tgz#a140e6dd28a496260779acf74860f738c654c65e"
-  integrity sha1-oUDm3SikliYHeaz3SGD3OMZUxl4=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-    "@phosphor/collections" "^1.2.0"
-
-"@phosphor/properties@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.npm.taobao.org/@phosphor/properties/download/@phosphor/properties-1.1.3.tgz#63e4355be5e22a411c566fd1860207038f171598"
-  integrity sha1-Y+Q1W+XiKkEcVm/RhgIHA48XFZg=
-
-"@phosphor/signaling@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/@phosphor/signaling/download/@phosphor/signaling-1.3.1.tgz#1cd10b069bdb2c9adb3ba74245b30141e5afc2d7"
-  integrity sha1-HNELBpvbLJrbO6dCRbMBQeWvwtc=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-
-"@phosphor/virtualdom@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npm.taobao.org/@phosphor/virtualdom/download/@phosphor/virtualdom-1.2.0.tgz#6a233312f817eb02555a0359c4ae3e501fa62bca"
-  integrity sha1-aiMzEvgX6wJVWgNZxK4+UB+mK8o=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-
-"@phosphor/widgets@^1.9.3":
-  version "1.9.3"
-  resolved "https://registry.npm.taobao.org/@phosphor/widgets/download/@phosphor/widgets-1.9.3.tgz#b8b7ad69fd7cc7af8e8c312ebead0e0965a4cefd"
-  integrity sha1-uLetaf18x6+OjDEuvq0OCWWkzv0=
-  dependencies:
-    "@phosphor/algorithm" "^1.2.0"
-    "@phosphor/commands" "^1.7.2"
-    "@phosphor/coreutils" "^1.3.1"
-    "@phosphor/disposable" "^1.3.1"
-    "@phosphor/domutils" "^1.1.4"
-    "@phosphor/dragdrop" "^1.4.1"
-    "@phosphor/keyboard" "^1.1.3"
-    "@phosphor/messaging" "^1.3.0"
-    "@phosphor/properties" "^1.1.3"
-    "@phosphor/signaling" "^1.3.1"
-    "@phosphor/virtualdom" "^1.2.0"
-
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
   resolved "https://registry.npm.taobao.org/@rollup/plugin-node-resolve/download/@rollup/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
@@ -9233,11 +9134,6 @@ pbkdf2@^3.0.3:
 pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/pend/download/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
-
-perfect-scrollbar@^1.4.0:
-  version "1.5.0"
-  resolved "https://registry.npm.taobao.org/perfect-scrollbar/download/perfect-scrollbar-1.5.0.tgz#821d224ed8ff61990c23f26db63048cdc75b6b83"
-  integrity sha1-gh0iTtj/YZkMI/JttjBIzcdba4M=
 
 performance-now@^2.1.0:
   version "2.1.0"
