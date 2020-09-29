@@ -3,7 +3,7 @@
 ## v0.0.44
 
 - feat(pwa) Add pwa component
-- feat(pwa) Add eslint component
+- feat(eslint) Add eslint component
 - feat(cli) Remove pwa function
 - feat(cli) Remove eslint function
 - feat(cli) Simplified application template configuration
@@ -12,7 +12,7 @@
 - feat(cli) Beautify the command line output log
 - feat(cli) Add command smart suggestions
 - feat(pwa) 添加 pwa 组件
-- feat(pwa) 添加 eslint 组件
+- feat(eslint) 添加 eslint 组件
 - feat(cli) 移除 pwa 功能
 - feat(cli) 移除 eslint 功能
 - feat(cli) 简化应用模板配置
