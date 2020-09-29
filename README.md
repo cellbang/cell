@@ -1,53 +1,68 @@
-# Malagu
+English | [简体中文](./README.zh-cn.md)
 
-Malagu is a serverless First, scalable and componentized application framework developed by TypeScript.
+# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
+[![npm downloads](https://img.shields.io/npm/dm/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
+[![TravisCI](https://www.travis-ci.org/cellbang/malagu.svg?branch=master)](https://www.travis-ci.org/cellbang/malagu) 
 
-*Read this in other languages: [简体中文](README.zh-cn.md)*
+Malagu is a Serverless First, component-based, platform-independent, progressive application framework based on TypeScript.
 
-**Features**
 
-1. Based on TypeScript
-1. Zero configuration
-1. Spring Boot-like development experience
-1. Serverless First
-1. componentization
-1. Front-end and back-end integration
-1. Aspect-oriented programming (AOP)
-1. Integrated ORM framework
-1. The command tool is extensible
+## Features
 
-The origin of the name Malagu: In my hometown, the homonym "Malagu" means small stones. Stacked small stones can be used to build high-rise buildings, roads and bridges, and Malagu component arrangement can realize a variety of applications.
+- Convention over configuration, zero configuration, out of the box
+- Spring Boot for TypeScript
+- Serverless First
+- The platform is not locked.
+- Support for front-end integration, front-end framework is not locked
+- Componentized, Progressive
+- Plug-in command line tools
+- Dependency injection
+- Facet-oriented programming (AOP)
+- Integrates with the popular ORM framework for declarative transaction management using decorators.
+- Support for OIDC accreditation
+- OAuth2 authorization support
+- Managing Status with rxjs
+- Both REST and RPC interface styles available
 
-## Document
+The Malagu name comes from the fact that where I come from, the word "malagu" means small stone, and while small stones can be built into tall buildings, roads, and bridges, the Malagu component layout can be used in a myriad of ways.
 
-To check out the [document](https://www.yuque.com/cellbang/malagu).
+## Quick start
 
-## Changelog
+```bash
+# Install command-line tools
+npm install -g yarn
+npm install -g @malagu/cli
 
-Detailed changes for each release are documented in the [release notes](https://github.com/cellbang/malagu/releases).
+# Initialization
+malagu init project-name
+cd project-name # Enter the project root directory
 
-## Quick Start
+# Running
+malagu serve
 
-1. Create an application
+# Deployment
+malagu deploy
+```
 
-![](https://img.alicdn.com/tfs/TB1BjYFcIKfxu4jSZPfXXb3dXXa-1425-818.gif)
+## Documentation
 
-2. Run locally
-
-![](https://gw.alicdn.com/tfs/TB1Vb1rA.Y1gK0jSZFCXXcwqXXa-1425-818.gif)
-
-3. Debug locally
-
-![](https://img.alicdn.com/tfs/TB1j5KtAYj1gK0jSZFuXXcrHpXa-1425-818.gif)
-
-4. Deploy the application
-
-![](https://img.alicdn.com/tfs/TB1SbCnA4z1gK0jSZSgXXavwpXa-1425-818.gif)
+- [Introduction](https://www.yuque.com/cellbang/malagu/puw7p0)
+- [Quick Start](https://www.yuque.com/cellbang/malagu/qmq79k)
+- [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
+- [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
+- [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
+- [Component design](https://www.yuque.com/cellbang/malagu/qaqomw)
+- [Front-end architecture](https://www.yuque.com/cellbang/malagu/vl9wbw)
+- [React development](https://www.yuque.com/cellbang/malagu/fum7u8)
+- [Front and back-end integrated development](https://www.yuque.com/cellbang/malagu/fi6lxi)
 
 
 ## Dependency injection
 
 ```typescript
+// Class object injection
 @Component()
 export class A {
 
@@ -58,49 +73,12 @@ export class B {
     @Autowired()
     protected a: A;
 }
-```
 
-## Property injection
-
-```typescript
+// Configuration property injection
 @Component()
-export class A {
-    @Value('foo') // Support EL expression syntax, such as @Value ('obj.xxx'), @Value ('arr [1]'), etc.
+export class C {
+    @Value('foo') // Support EL expression syntax, such as @Value('obj.xxx'), @Value('arr[1]') etc.
     protected foo: string;
-}
-```
-
-## MVC
-
-```typescript
-@Controller('users')
-export class UserController {
-    
-    @Get()
-    list(): Promise<User[]> {
-        ...
-    }
-
-    @Get(':id')
-    get(@Param('id') id: number): Promise<User | undefined> {
-        ...
-    }
-
-    @Delete(':id')
-    async remove(@Param('id') id: number): Promise<void> {
-        ...
-    }
-
-    @Put()
-    async modify(@Body() user: User): Promise<void> {
-        ...
-    }
-
-    @Post()
-    create(@Body() user: User): Promise<User> {
-        ...
-    }
-
 }
 ```
 
@@ -145,3 +123,7 @@ export class UserController {
     }
 }
 ```
+
+## Discuss group
+
+<img src="https://i.loli.net/2020/09/29/omaq25b9VtSLI6X.jpg" width="260px"/><img src="https://i.loli.net/2020/09/29/3gDijlqfF8UP79b.jpg" width="260px" height="343px">

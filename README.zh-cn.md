@@ -1,52 +1,68 @@
-# Malagu
-Malagu 是基于 TypeScript 的 Serverless First、可扩展和组件化的应用框架。
+[English](./README.md) | 简体中文
 
-*其他语言版本：[English](README.md)*
+# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
+[![npm downloads](https://img.shields.io/npm/dm/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
+[![TravisCI](https://www.travis-ci.org/cellbang/malagu.svg?branch=master)](https://www.travis-ci.org/cellbang/malagu) 
 
-**主要特点：**
+Malagu 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐进式应用框架。
 
-1. 基于 TypeScript
-1. 零配置
-1. NodeJs 版 Spring Boot
-1. Serverless First
-1. 组件化
-1. 前后端一体化
-1. 面向切面编程（AOP）
-1. 集成了 ORM 框架
-1. 命令工具插件化
+
+## 特征
+
+- 约定大于配置，零配置，开箱即用
+- TypeScript 版 Spring Boot
+- Serverless First
+- 平台不锁定
+- 支持前后端一体化，前端框架不锁定
+- 组件化，渐进式
+- 命令行工具插件化
+- 依赖注入
+- 面向切面编程（AOP）
+- 集成了流行的 ORM 框架，使用装饰器声明式事务管理
+- 支持 OIDC 认征
+- 支持 OAuth2 授权
+- 使用 rxjs 管理状态
+- 提供 REST 和 RPC 两种接口风格
 
 Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意思，小石头堆砌起来可以建成高楼大厦、道路桥梁，而 Malagu 组件编排可以实现千变万化的应用。
 
-## 文档
-
-查看[文档](https://www.yuque.com/cellbang/malagu)。
-
-## 更新日志
-
-每个发行版的详细更改记录在[发行日志](https://github.com/cellbang/malagu/releases).
-
 ## 快速开始
 
-1. 创建应用
+```bash
+# 安装命令行工具
+npm install -g yarn
+npm install -g @malagu/cli
 
-![](https://img.alicdn.com/tfs/TB1BjYFcIKfxu4jSZPfXXb3dXXa-1425-818.gif)
+# 初始化
+malagu init project-name
+cd project-name            # 进入项目根目录
 
-2. 本地运行应用
+# 运行
+malagu serve
 
-![](https://gw.alicdn.com/tfs/TB1Vb1rA.Y1gK0jSZFCXXcwqXXa-1425-818.gif)
+# 部署
+malagu deploy
+```
 
-3. 本地调试应用
+## 文档
 
-![](https://img.alicdn.com/tfs/TB1j5KtAYj1gK0jSZFuXXcrHpXa-1425-818.gif)
-
-4. 部署应用
-
-![](https://img.alicdn.com/tfs/TB1SbCnA4z1gK0jSZSgXXavwpXa-1425-818.gif)
+- [介绍](https://www.yuque.com/cellbang/malagu/puw7p0)
+- [快速开始](https://www.yuque.com/cellbang/malagu/qmq79k)
+- [命令行工具](https://www.yuque.com/cellbang/malagu/xbfpir)
+- [控制器](https://www.yuque.com/cellbang/malagu/cbgl7g)
+- [依赖注入](https://www.yuque.com/cellbang/malagu/fw025h)
+- [组件设计](https://www.yuque.com/cellbang/malagu/qaqomw)
+- [前端架构](https://www.yuque.com/cellbang/malagu/vl9wbw)
+- [React 开发](https://www.yuque.com/cellbang/malagu/fum7u8)
+- [前后端一体化开发](https://www.yuque.com/cellbang/malagu/fi6lxi)
 
 
 ## 依赖注入
 
 ```typescript
+// 类对象注入
 @Component()
 export class A {
 
@@ -57,49 +73,12 @@ export class B {
     @Autowired()
     protected a: A;
 }
-```
 
-## 属性注入
-
-```typescript
+// 配置属性注入
 @Component()
-export class A {
+export class C {
     @Value('foo') // 支持 EL 表达式语法，如 @Value('obj.xxx')、@Value('arr[1]') 等等
     protected foo: string;
-}
-```
-
-## MVC
-
-```typescript
-@Controller('users')
-export class UserController {
-    
-    @Get()
-    list(): Promise<User[]> {
-        ...
-    }
-
-    @Get(':id')
-    get(@Param('id') id: number): Promise<User | undefined> {
-        ...
-    }
-
-    @Delete(':id')
-    async remove(@Param('id') id: number): Promise<void> {
-        ...
-    }
-
-    @Put()
-    async modify(@Body() user: User): Promise<void> {
-        ...
-    }
-
-    @Post()
-    create(@Body() user: User): Promise<User> {
-        ...
-    }
-
 }
 ```
 
@@ -144,3 +123,25 @@ export class UserController {
     }
 }
 ```
+
+## 交流群
+
+<img src="https://i.loli.net/2020/09/29/omaq25b9VtSLI6X.jpg" width="260px"/><img src="https://i.loli.net/2020/09/29/3gDijlqfF8UP79b.jpg" width="260px" height="343px">
+
+<!-- ## 示例
+
+1. 创建应用
+
+![](https://img.alicdn.com/tfs/TB1BjYFcIKfxu4jSZPfXXb3dXXa-1425-818.gif)
+
+2. 本地运行应用
+
+![](https://gw.alicdn.com/tfs/TB1Vb1rA.Y1gK0jSZFCXXcwqXXa-1425-818.gif)
+
+3. 本地调试应用
+
+![](https://img.alicdn.com/tfs/TB1j5KtAYj1gK0jSZFuXXcrHpXa-1425-818.gif)
+
+4. 部署应用
+
+![](https://img.alicdn.com/tfs/TB1SbCnA4z1gK0jSZSgXXavwpXa-1425-818.gif) -->
