@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.0.1
+
+- feat(cli) Update template favicon
+
+
+## v1.0.0
+
+- feat(cli) Update readme file
+
+
 ## v0.0.44
 
 - feat(pwa) Add pwa component
