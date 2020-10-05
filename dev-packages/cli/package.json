@@ -56,6 +56,7 @@
     "is-builtin-module": "^3.0.0",
     "jexl": "^2.2.2",
     "js-yaml": "^3.13.1",
+    "leven": "^3.1.0",
     "lodash": "^4.17.19",
     "lodash.mergewith": "^4.6.2",
     "memory-fs": "^0.4.1",
