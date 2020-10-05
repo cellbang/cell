@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.2
+
+- fix(cli) Add missing leven module
+- fix(cli) 添加缺少的 leven 模块
+
 ## v1.0.1
 
 - feat(cli) Update template favicon
