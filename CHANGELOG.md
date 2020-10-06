@@ -2,15 +2,15 @@
 
 ## v1.0.5
 
-fix(rpc) When the target of class compilation output is esnext, the class method cannot be enumerated, which causes the method members not to be traversed by `for in`
-fix(rpc) 修复类编译输出目标为 esnext 时，类方法不可枚举，导致 `for in` 遍历不出来方法成员
+- fix(rpc) When the target of class compilation output is esnext, the class method cannot be enumerated, which causes the method members not to be traversed by `for in`
+- fix(rpc) 修复类编译输出目标为 esnext 时，类方法不可枚举，导致 `for in` 遍历不出来方法成员
 
 ## v1.0.3
 
-fix(cli) Fix the single-step debugging cannot find the module error
-fix(cli) Fix the warning that the sourcemap file cannot be found in single-step debugging
-fix(cli) 修复单步调试找不到模块错误
-fix(cli) 修复单步调试找不到 sourcemap 文件警告
+- fix(cli) Fix the single-step debugging cannot find the module error
+- fix(cli) Fix the warning that the sourcemap file cannot be found in single-step debugging
+- fix(cli) 修复单步调试找不到模块错误
+- fix(cli) 修复单步调试找不到 sourcemap 文件警告
 
 ## v1.0.2
 
