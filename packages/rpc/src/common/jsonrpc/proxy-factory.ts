@@ -1,6 +1,6 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
 import { ConnectionHandler } from './handler';
-import { ApplicationError, Disposable } from '@malagu/core';
+import { ApplicationError, Disposable, getPropertyNames } from '@malagu/core';
 import { PipeManager } from '@malagu/core';
 
 export type JsonRpcServer<Client> = Disposable & {
@@ -61,12 +61,20 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
         });
     }
 
+    protected getRequestHander(prop: string) {
+        return (...args: any[]) => this.onRequest(prop, ...args);
+    }
+
+    protected getNotificationHander(prop: string) {
+        return (...args: any[]) => this.onNotification(prop, ...args);
+    }
+
     protected registerMethods(connection: MessageConnection) {
         if (this.target) {
-            for (const prop in this.target) {
+            for (const prop of getPropertyNames(this.target)) {
                 if (typeof this.target[prop] === 'function') {
-                    connection.onRequest(prop, (...args) => this.onRequest(prop, ...args));
-                    connection.onNotification(prop, (...args) => this.onNotification(prop, ...args));
+                    connection.onRequest(prop, this.getRequestHander(prop));
+                    connection.onNotification(prop, this.getNotificationHander(prop));
                 }
             }
         }
