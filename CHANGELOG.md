@@ -2,6 +2,14 @@
 
 ## v1.0.2
 
+fix(cli) Fix the single-step debugging cannot find the module error
+fix(cli) Fix the warning that the sourcemap file cannot be found in single-step debugging
+fix(cli) 修复单步调试找不到模块错误
+fix(cli) 修复单步调试找不到 sourcemap 文件警告
+
+
+## v1.0.2
+
 - fix(cli) Add missing leven module
 - fix(cli) 添加缺少的 leven 模块
 

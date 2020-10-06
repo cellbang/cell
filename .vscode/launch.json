@@ -5,13 +5,16 @@
             "type": "node",
             "request": "launch",
             "name": "malagu serve",
-            "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu-serve",
-            // "args": ["-m", "release"],
+            "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu",
+            "args": [ "serve" ],
+            "cwd": "${workspaceFolder}/app",
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceRoot}/app/.malagu/**/*.js"
+            ],
             "env": {
                 "NODE_ENV": "development"
             },
-            "cwd": "${workspaceFolder}/app",
-            "sourceMaps": true,
             "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
             "outputCapture": "std"
