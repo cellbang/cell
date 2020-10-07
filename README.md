@@ -54,6 +54,8 @@ malagu deploy
 - [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
+- [Authentication and authorization](https://www.yuque.com/cellbang/malagu/qhl0km)
+- [Cloud Platform Adaptation](https://www.yuque.com/cellbang/malagu/hh1mng)
 - [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
 - [Component design](https://www.yuque.com/cellbang/malagu/qaqomw)
 - [Front-end architecture](https://www.yuque.com/cellbang/malagu/vl9wbw)
