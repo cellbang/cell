@@ -50,7 +50,7 @@ malagu:
             functionName: ${malagu['fc-adapter'].function.name}
     apiGateway:
       stage:
-        name: "${stage != 'prod' ? 'realse' : stage}"
+        name: "${stage != 'prod' ? 'release' : stage}"
         desc: 'Released By Malagu'
       group:
         name: malagu

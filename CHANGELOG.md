@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.6
+
+- fix(fc-adapter) Fix spelling errors 
+- fix(fc-adapter) 修复拼写错误 
+
 ## v1.0.5
 
 - fix(rpc) When the target of class compilation output is esnext, the class method cannot be enumerated, which causes the method members not to be traversed by `for in`

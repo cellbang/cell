@@ -22,7 +22,6 @@ export class AccessDecisionManagerImpl implements AccessDecisionManager {
                 const result = await voter.vote(securityMetadata);
                 if (result === ACCESS_DENIED) {
                     this.handleError();
-                    throw new AccessDeniedError('Access is denied');
                 } else if (result === ACCESS_GRANTED) {
                     grant++;
                 }
