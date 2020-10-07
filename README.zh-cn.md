@@ -53,6 +53,7 @@ malagu deploy
 - [快速开始](https://www.yuque.com/cellbang/malagu/qmq79k)
 - [命令行工具](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [控制器](https://www.yuque.com/cellbang/malagu/cbgl7g)
+- [数据库操作](https://www.yuque.com/cellbang/malagu/ztbcwq)
 - [依赖注入](https://www.yuque.com/cellbang/malagu/fw025h)
 - [组件设计](https://www.yuque.com/cellbang/malagu/qaqomw)
 - [前端架构](https://www.yuque.com/cellbang/malagu/vl9wbw)
