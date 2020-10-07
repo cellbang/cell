@@ -53,6 +53,7 @@ malagu deploy
 - [Quick Start](https://www.yuque.com/cellbang/malagu/qmq79k)
 - [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
+- [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
 - [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
 - [Component design](https://www.yuque.com/cellbang/malagu/qaqomw)
 - [Front-end architecture](https://www.yuque.com/cellbang/malagu/vl9wbw)
