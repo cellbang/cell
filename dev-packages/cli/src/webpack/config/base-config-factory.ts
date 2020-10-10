@@ -94,21 +94,21 @@ export class BaseConfigFactory {
                                 name: 'worker-ext.[hash].js'
                             }
                         },
-                        {
-                            test: /\.css$/,
-                            exclude: /\.useable\.css$/,
-                            use: [
-                                'style-loader',
-                                'css-loader'
-                            ]
-                        },
-                        {
-                            test: /\.useable\.css$/,
-                            use: [
-                                'style-loader/useable',
-                                'css-loader'
-                            ]
-                        },
+                        // {
+                        //     test: /\.css$/,
+                        //     exclude: /\.useable\.css$/,
+                        //     use: [
+                        //         'style-loader',
+                        //         'css-loader'
+                        //     ]
+                        // },
+                        // {
+                        //     test: /\.useable\.css$/,
+                        //     use: [
+                        //         'style-loader/useable',
+                        //         'css-loader'
+                        //     ]
+                        // },
                         {
                             test: /\.(jpg|png|gif)$/,
                             loader: 'file-loader',
@@ -119,6 +119,10 @@ export class BaseConfigFactory {
                         {
                             test: /source-map-support/,
                             loader: 'ignore-loader'
+                        },
+                        {
+                            test: /\.(ttf|eot|svg)(\\?v=\\d+\\.\\d+\\.\\d+)?$/,
+                            loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
                         },
                         {
                             test: /\.woff(2)?(\\?v=[0-9]\.[0-9]\.[0-9])?$/,

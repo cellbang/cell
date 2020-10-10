@@ -89,7 +89,15 @@ export class HookExecutor {
                         await require(resolve(context.pkg.projectPath, 'node_modules', modulePath)).default(context);
                     } catch (error) {
                         if (error && error.code === 'MODULE_NOT_FOUND') {
-                            await require(modulePath).default(context);
+                            try {
+                                await require(resolve(context.pkg.projectPath, '..', 'node_modules', modulePath)).default(context);
+                            } catch (error2) {
+                                if (error2 && error2.code === 'MODULE_NOT_FOUND') {
+                                    await require(modulePath).default(context);
+                                } else {
+                                    throw error2;
+                                }
+                            }
                         } else {
                             throw error;
                         }
