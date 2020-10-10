@@ -1,11 +1,11 @@
 {
   "name": "@malagu/grommet",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "^1.0.6",
+    "@malagu/react": "^1.0.7",
     "grommet": "^2.14.0",
     "grommet-icons": "^4.4.0",
     "react": "^16.12.0",
@@ -42,7 +42,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.0.6",
+    "@malagu/ext-scripts": "^1.0.7",
     "@types/history": "^4.7.3",
     "@types/react-router-dom": "^5.1.3"
   },

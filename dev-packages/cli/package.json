@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
@@ -82,7 +82,7 @@
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.0.6",
+    "@malagu/ext-scripts": "^1.0.7",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0",
     "@types/friendly-errors-webpack-plugin": "^0.1.2",

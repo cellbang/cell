@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-cn.md)
 
-# [<img src="https://i.loli.net/2020/09/30/4OLzUhDbIApdQq5.png" height="38px"/>](https://www.yuque.com/cellbang/malagu/puw7p0)
+# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
