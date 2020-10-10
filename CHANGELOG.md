@@ -1,5 +1,13 @@
 # Change Log
 
+## v1.0.7
+- fix(cli) Fix command line plugin not found in monorepo style projects
+- feat(cli) adjust the loading priority of index.html and favicon.ico under the project root, which is greater than the attribute configuration
+- feat(core) adds a getAll method to the tool class ConfigUtil to facilitate obtaining the application configuration before the IoC container is built
+- fix(cli) 修复 monorepo 风格的项目中找不到命令行插件
+- feat(cli) 调整项目根下面的 index.html 和 favicon.ico 加载优先级，大于属性配置
+- feat(core) 为工具类 ConfigUtil 添加 getAll 方法，方便在 IoC 容器构建之前获取应用配置 
+
 ## v1.0.6
 
 - fix(fc-adapter) Fix spelling errors 

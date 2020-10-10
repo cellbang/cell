@@ -136,15 +136,16 @@ export class HtmlWebpackPluginConfigFactory {
         const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 
         const c = getMalaguConfig(cfg, FRONTEND_TARGET);
-        const baseHref = c.server.path;
+        const baseHref = c.server?.path;
         return {
             plugins: [
                 new HtmlWebpackPlugin({
                     title: 'Malagu App',
-                    template: templateExists ? templatePath : path.join(__dirname, '..', '..', '..', 'templates', 'index.html'),
+                    template: templateExists ? undefined : path.join(__dirname, '..', '..', '..', 'templates', 'index.html'),
                     templateParameters: getConfig(cfg, FRONTEND_TARGET),
-                    favicon: faviconExists ? faviconPath : undefined,
-                    ...getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {}
+                    ...getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
+                    ...(templateExists ? { template: templatePath } : {}),
+                    ...(faviconExists ? { favicon: faviconPath } : {})
                 }),
                 new BaseHrefWebpackPlugin({ baseHref })
             ]

@@ -1,6 +1,7 @@
 import { Component, Autowired, Optional } from '../annotation';
 import { ExpressionContextProvider, ContextInitializer, ExpressionContext } from './expression-protocol';
 import { Prioritizeable } from '../utils';
+import { ConfigUtil } from '../config';
 
 @Component(ExpressionContextProvider)
 export class ExpressionContextProviderImpl implements ExpressionContextProvider {
@@ -14,7 +15,7 @@ export class ExpressionContextProviderImpl implements ExpressionContextProvider 
         protected readonly contextInitializers: ContextInitializer[]
 
     ) {
-        this.ctx = process.env.MALAGU_CONFIG as any;
+        this.ctx = ConfigUtil.getAll();
     }
 
     provide(): ExpressionContext {
