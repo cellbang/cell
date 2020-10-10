@@ -1,11 +1,11 @@
 {
   "name": "@malagu/widget",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^1.0.6"
+    "@malagu/core": "^1.0.7"
   },
   "publishConfig": {
     "access": "public"
@@ -36,7 +36,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.0.6"
+    "@malagu/ext-scripts": "^1.0.7"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

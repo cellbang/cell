@@ -1,11 +1,11 @@
 {
   "name": "@malagu/rpc",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.0.6",
+    "@malagu/web": "^1.0.7",
     "reconnecting-websocket": "^4.1.10"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.0.6",
+    "@malagu/ext-scripts": "^1.0.7",
     "@types/url-join": "^4.0.0",
     "@types/uuid": "^3.4.5"
   },
