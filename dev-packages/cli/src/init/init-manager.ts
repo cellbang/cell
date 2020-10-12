@@ -99,7 +99,7 @@ export class InitManager {
                 this.location = template;
             } else {
                 Object.keys(templates).forEach(key => {
-                    if (key === name) {
+                    if (key === template) {
                         this.location = templates[key];
                     }
                 });
