@@ -37,7 +37,7 @@ export class BaseConfigFactory {
                     {
                         test: /\.js$/,
                         enforce: 'pre',
-                        use: [{loader: 'source-map-loader'}],
+                        use: 'source-map-loader',
                         exclude: /jsonc-parser|class-transformer/
                     },
                     {
@@ -94,21 +94,6 @@ export class BaseConfigFactory {
                                 name: 'worker-ext.[hash].js'
                             }
                         },
-                        // {
-                        //     test: /\.css$/,
-                        //     exclude: /\.useable\.css$/,
-                        //     use: [
-                        //         'style-loader',
-                        //         'css-loader'
-                        //     ]
-                        // },
-                        // {
-                        //     test: /\.useable\.css$/,
-                        //     use: [
-                        //         'style-loader/useable',
-                        //         'css-loader'
-                        //     ]
-                        // },
                         {
                             test: /\.(jpg|png|gif)$/,
                             loader: 'file-loader',

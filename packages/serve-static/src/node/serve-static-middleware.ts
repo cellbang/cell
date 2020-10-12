@@ -32,6 +32,9 @@ export class ServeStaticMiddleware implements Middleware {
             const opts = this.config.options;
             if (!opts.setHeaders) {
                 opts.setHeaders = (res: OutgoingMessage, path: string) => {
+                    if (opts.headers) {
+                        Object.keys(opts.headers).forEach(key => res.setHeader(key, opts.headers[key]));
+                    }
                     if ((serveStatic.mime as any).lookup!(path) === MediaType.TEXT_HTML) {
                         // Custom Cache-Control for HTML files
                         res.setHeader(HttpHeaders.CACHE_CONTROL, `public, max-age=${opts.htmlMaxAge / 1000}`);
@@ -44,6 +47,7 @@ export class ServeStaticMiddleware implements Middleware {
                     if (this.config.path && !this.requestMatcher.match(this.config.path) || !this.config.spa) {
                         ctx.request.url = oldUrl;
                         next().then(resolve).catch(reject);
+                        return;
                     }
                     if (this.config.apiPath) {
                         this.requestMatcher.match(this.config.apiPath).then(r => {

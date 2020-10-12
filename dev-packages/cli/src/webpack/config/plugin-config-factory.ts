@@ -3,7 +3,7 @@ import * as path from 'path';
 import { CliContext } from '../../context';
 import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
 import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig, getDevSuccessInfo } from '../utils';
-import { FRONTEND_TARGET, CONFIG_FILE, BACKEND_TARGET } from '../../constants';
+import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
 import yaml = require('js-yaml');
 const chalk = require('chalk');
 
@@ -23,7 +23,7 @@ export class FilterWarningsPluginConfigFactory {
             }
         }
 
-        const defaultExclude = target === BACKEND_TARGET ? [/Critical dependency: the request of a dependency is an expression/ ] : [];
+        const defaultExclude =  [/Critical dependency: / ];
         if (defaultExclude.length || excludeSet.size) {
             const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
             return {

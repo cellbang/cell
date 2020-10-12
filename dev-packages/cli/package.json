@@ -29,7 +29,6 @@
     "prepare": "yarn run clean && yarn run build",
     "clean": "malaguext clean",
     "build": "malaguext build",
-    "build2": "cd lib && node --expose-gc --max_old_space_size=3072 ../bin/malagu-build init/init.js -t backend",
     "watch": "malaguext watch",
     "test": "malaguext test",
     "docs": "malaguext docs"

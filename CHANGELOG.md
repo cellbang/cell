@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.0.8
+- feat(cli) Modify the use of template variables
+- fix(cli) Trying to solve the .gitignore renaming problem
+- feat(serve-static) supports configuring response headers through configuration properties
+- feat(cli) supports module deduplication
+- feat(cli) 修改模板变量的使用
+- fix(cli) 尝试解决 `.gitignore` 重命名问题
+- feat(serve-static) 支持通过配置属性配置响应头
+- feat(cli) 支持模块去重
+
 ## v1.0.7
 - fix(cli) Fix command line plugin not found in monorepo style projects
 - feat(cli) adjust the loading priority of index.html and favicon.ico under the project root, which is greater than the attribute configuration
