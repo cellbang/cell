@@ -9,9 +9,6 @@
             "args": [ "serve" ],
             "cwd": "${workspaceFolder}/app",
             "sourceMaps": true,
-            "outFiles": [
-                "${workspaceRoot}/app/.malagu/**/*.js"
-            ],
             "env": {
                 "NODE_ENV": "development"
             },

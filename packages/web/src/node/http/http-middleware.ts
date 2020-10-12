@@ -9,7 +9,7 @@ export class HttpMiddleware implements Middleware {
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         await next();
         const response = ctx.response;
-        if (!response.finished) {
+        if (!Context.isSkipAutoEnd() && !response.finished) {
             const body = response.body;
             if (body instanceof Deferred) {
                 response.end(await body.promise);

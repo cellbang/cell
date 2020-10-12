@@ -200,14 +200,20 @@ export class ApplicationPackage {
     computeModules(type: string, target?: string): Map<string, string> {
         const result = new Map<string, string>();
         let moduleIndex = 1;
+        const modulePathBuilder = new ModulePathBuilder(this);
+        const moduleMap = new Map<string, boolean>();
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
                 const modulePaths = (target ? component[target][type] : component[type]) || [];
-                const modulePathBuilder = new ModulePathBuilder(this);
                 for (const modulePath of modulePaths) {
                     if (typeof modulePath === 'string') {
-                        result.set(`${componentPackage.name}@${moduleIndex}`, modulePathBuilder.build(componentPackage, modulePath));
+                        const realModulePath = modulePathBuilder.build(componentPackage, modulePath);
+                        if (moduleMap.get(realModulePath)) {
+                            continue;
+                        }
+                        moduleMap.set(realModulePath, true);
+                        result.set(`${componentPackage.name}@${moduleIndex}`, realModulePath);
                         moduleIndex = moduleIndex + 1;
                     }
                 }

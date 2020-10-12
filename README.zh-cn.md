@@ -22,7 +22,7 @@ Malagu 是基于 TypeScript 的 Serverless First、组件化、平台无关的�
 - 依赖注入
 - 面向切面编程（AOP）
 - 集成了流行的 ORM 框架，使用装饰器声明式事务管理
-- 支持 OIDC 认征
+- 支持 OIDC 认证
 - 支持 OAuth2 授权
 - 使用 rxjs 管理状态
 - 提供 REST 和 RPC 两种接口风格

@@ -10,6 +10,7 @@ export const CURRENT_CONTEXT_REQUEST_KEY = 'CurrentContextRequest';
 export const CURRENT_COOKIES_REQUEST_KEY = 'CurrentCookiesRequest';
 export const CURRENT_SESSION_REQUEST_KEY = 'CurrentSessionRequest';
 export const CURRENT_TRACE_ID_REQUEST_KEY = 'CurrentTraceIdRequest';
+export const CURRENT_SKIP_AUTO_END_REQUEST_KEY = 'CurrentSkipAutoEndRequest';
 
 const appAttrs = new Map<string, any>();
 
@@ -67,6 +68,14 @@ export namespace Context {
 
     export function getTraceId(): string {
         return requestContext.get(CURRENT_TRACE_ID_REQUEST_KEY);
+    }
+
+    export function setSkipAutoEnd(skipAutoEnd: boolean): void {
+        requestContext.set(CURRENT_SKIP_AUTO_END_REQUEST_KEY, skipAutoEnd);
+    }
+
+    export function isSkipAutoEnd(): boolean {
+        return !!requestContext.get(CURRENT_SKIP_AUTO_END_REQUEST_KEY);
     }
 
     export function setAttr(key: string, value: any, scope: AttributeScope = AttributeScope.Request) {

@@ -123,7 +123,7 @@ export class InitManager {
             }
         }]);
         this.templateName = answers.item.name;
-        this.context.name = this.context.name || answers.item.name;
+        this.context.name = name || answers.item.name;
         this.location = answers.item.location;
     }
 
