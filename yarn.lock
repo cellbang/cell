@@ -10134,11 +10134,6 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-reconnecting-websocket@^4.1.10:
-  version "4.4.0"
-  resolved "https://registry.npm.taobao.org/reconnecting-websocket/download/reconnecting-websocket-4.4.0.tgz?cache=0&sync_timestamp=1581058644735&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freconnecting-websocket%2Fdownload%2Freconnecting-websocket-4.4.0.tgz#3b0e5b96ef119e78a03135865b8bb0af1b948783"
-  integrity sha1-Ow5blu8RnnigMTWGW4uwrxuUh4M=
-
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/redent/download/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -12315,17 +12310,17 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz?cache=0&sync_timestamp=1572870776965&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvm-browserify%2Fdownload%2Fvm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
-vscode-jsonrpc@^4.1.0-next:
-  version "4.1.0-next.3"
-  resolved "https://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-4.1.0-next.3.tgz#05fe742959a2726020d4d0bfbc3d3c97873c7fde"
-  integrity sha1-Bf50KVmicmAg1NC/vD08l4c8f94=
+vscode-jsonrpc@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-5.0.1.tgz#9bab9c330d89f43fc8c1e8702b5c36e058a01794"
+  integrity sha512-JvONPptw3GAQGXlVV2utDcHx0BiY34FupW/kI6mZ5x06ER5DdPG/tXWMVHjTNULF5uKPOUUD0SaXg5QaubJL0A==
 
-vscode-ws-jsonrpc@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npm.taobao.org/vscode-ws-jsonrpc/download/vscode-ws-jsonrpc-0.1.1.tgz#163ff05662635b4fd161ed132e112cec4d83f126"
-  integrity sha1-Fj/wVmJjW0/RYe0TLhEs7E2D8SY=
+vscode-ws-jsonrpc@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/vscode-ws-jsonrpc/-/vscode-ws-jsonrpc-0.2.0.tgz#5e9c26e10da54a1a235da7d59e74508bbcb8edd9"
+  integrity sha512-NE9HNRgPjCaPyTJvIudcpyIWPImxwRDtuTX16yks7SAiZgSXigxAiZOvSvVBGmD1G/OMfrFo6BblOtjVR9DdVA==
   dependencies:
-    vscode-jsonrpc "^4.1.0-next"
+    vscode-jsonrpc "^5.0.0"
 
 w3c-hr-time@^1.0.2:
   version "1.0.2"

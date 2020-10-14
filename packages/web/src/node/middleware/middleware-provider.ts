@@ -16,7 +16,7 @@ export class MiddlewareProvider {
     protected prioritized: Middleware[];
 
     constructor(
-        @Autowired(Middleware) @Optional
+        @Autowired(Middleware) @Optional()
         protected readonly middlewares: Middleware[]
     ) { }
 

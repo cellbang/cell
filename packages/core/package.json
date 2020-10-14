@@ -23,7 +23,7 @@
     "traverse": "^0.6.6",
     "ts-custom-error": "^3.1.1",
     "url-join": "^4.0.1",
-    "vscode-ws-jsonrpc": "^0.1.1"
+    "vscode-ws-jsonrpc": "^0.2.0"
   },
   "publishConfig": {
     "access": "public"

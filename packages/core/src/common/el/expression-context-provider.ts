@@ -11,7 +11,7 @@ export class ExpressionContextProviderImpl implements ExpressionContextProvider 
     protected initialized = false;
 
     constructor(
-        @Autowired(ContextInitializer) @Optional
+        @Autowired(ContextInitializer) @Optional()
         protected readonly contextInitializers: ContextInitializer[]
 
     ) {

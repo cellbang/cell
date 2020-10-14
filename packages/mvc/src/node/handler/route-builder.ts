@@ -10,7 +10,7 @@ import { getTargetClass } from '@malagu/core/lib/common/utils/proxy-util';
 @Component()
 export class RouteBuilder {
 
-    @Autowired(CONTROLLER) @Optional
+    @Autowired(CONTROLLER) @Optional()
     protected readonly controllers: any[] = [];
 
     @Autowired(PathResolver)

@@ -10,13 +10,16 @@ export enum Scope {
 export interface ComponentOption {
     id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
     scope?: Scope;
+    name?: string | number | symbol;
+    tag?: { tag: string | number | symbol, value: any },
+    default?: boolean;
+    when?: (request: interfaces.Request) => boolean
     rebind?: boolean;
     proxy?: boolean;
 }
 export namespace ComponentOption {
     export function is(options: any): options is ComponentOption {
-        return options && (options.id !== undefined || options.scope !== undefined ||
-            options.rebind !== undefined || options.proxy !== undefined);
+        return typeof options === 'object' && !Array.isArray(options);
     }
 }
 
@@ -94,6 +97,23 @@ export function applyComponentDecorator(option: ComponentOption, target: any): v
         whenOn = p.inSingletonScope();
     } else if (opt.scope === Scope.Transient) {
         whenOn = p.inTransientScope();
+    }
+    if (opt.name) {
+        whenOn = whenOn.whenTargetNamed(opt.name);
+    } else if (opt.tag) {
+        const { tag, value } = opt.tag;
+        whenOn = whenOn.whenTargetTagged(tag, value);
+    } else if (opt.default) {
+        whenOn = whenOn.when((request: interfaces.Request) => {
+
+            const targetIsDefault = (request.target) &&
+                (!request.target.isNamed()) &&
+                (!request.target.isTagged());
+
+            return targetIsDefault;
+        });
+    } else if (opt.when) {
+        whenOn = whenOn.when(opt.when);
     }
     if (opt.proxy) {
         whenOn.onActivation(doProxy).done(true)(target);

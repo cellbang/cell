@@ -10,7 +10,7 @@ import { Context } from '@malagu/web/lib/node';
 @Component(SecurityMetadataSource)
 export class MethodSecurityMetadataSource implements SecurityMetadataSource {
 
-    @Autowired(SecurityExpressionContextHandler) @Optional
+    @Autowired(SecurityExpressionContextHandler) @Optional()
     protected readonly securityExpressionContextHandler: SecurityExpressionContextHandler;
 
     async load(context: MethodSecurityMetadataContext): Promise<SecurityMetadata> {

@@ -5,8 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.0.8",
-    "reconnecting-websocket": "^4.1.10"
+    "@malagu/web": "^1.0.8"
   },
   "publishConfig": {
     "access": "public"
