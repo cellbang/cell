@@ -1,5 +1,24 @@
 # Change Log
 
+## v1.1.0
+- feat(core) Upgrade vscode-ws-jsonrpc version
+- feat(core) Decorator `@Component()` supports name, tag, default, when attributes
+- feat(core) Add new decorators `@Named()`, `@Tagged()`, `@TargetName()`, `@PostConstruct()`
+- feat(rpc) Supports error converter ʻErrorConverter`
+- feat(cli) `.malagu/backend/malagu.yml` and `.malagu/backend/malagu.yml` obtained by merging all components will only be generated during the local development process
+
+- feat(core) 升级 vscode-ws-jsonrpc 版本
+- feat(core) 装饰器 `@Component()` 支持 name、tag、default、when 属性
+- feat(core) 添加新的装饰器 `@Named()`、`@Tagged()`、`@TargetName()`、`@PostConstruct()`
+- feat(rpc) 支持错误转换器 `ErrorConverter`
+- feat(cli) 合并所有组件得到的 `.malagu/backend/malagu.yml` 和 `.malagu/backend/malagu.yml` 只会在本地开发过程才会生成
+
+**Breaking Changes:**
+- feat(core) 装饰器 `@Optional()` 必须得带小括号
+- feat(core) Decorator `@Optional()` must have parentheses
+
+
+
 ## v1.0.8
 - feat(cli) Modify the use of template variables
 - feat(serve-static) supports configuring response headers through configuration properties

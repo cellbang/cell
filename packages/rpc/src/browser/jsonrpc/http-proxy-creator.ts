@@ -1,6 +1,6 @@
 import { ConsoleLogger, Component, Autowired, Value } from '@malagu/core';
 import { Channel, HttpChannel, JsonRpcProxy, JsonRpcProxyFactory,
-    ConnectionHandler, ConnnectionFactory, RPC_PATH } from '../../common';
+    ConnectionHandler, ConnnectionFactory, RPC_PATH, ErrorConverter } from '../../common';
 import { ENDPOINT, PathResolver, HttpMethod, HttpHeaders, MediaType } from '@malagu/web';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
@@ -24,8 +24,8 @@ export class HttpProxyCreator implements ProxyCreator {
     @Value(RPC_PATH)
     protected readonly rpcPath: string;
 
-    create<T extends object>(path: string, target?: object | undefined): JsonRpcProxy<T> {
-        const factory = new JsonRpcProxyFactory<T>(target);
+    create<T extends object>(path: string, errorConverters?: ErrorConverter[], target?: object | undefined): JsonRpcProxy<T> {
+        const factory = new JsonRpcProxyFactory<T>(target, errorConverters);
         this.listen({
             path,
             onConnection: c => factory.listen(c)

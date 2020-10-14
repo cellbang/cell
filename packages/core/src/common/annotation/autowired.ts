@@ -1,19 +1,18 @@
 import { inject, interfaces, multiInject } from 'inversify';
-import { ServiceIdentifierOrFunc } from 'inversify/dts/annotation/inject';
 import { ContainerUtil } from '../container';
 
 export interface AutowiredOption {
-    id?: ServiceIdentifierOrFunc,
+    id?: interfaces.ServiceIdentifier<any>,
     detached?: boolean
 }
 export namespace AutowiredOption {
     export function is(options: any): options is AutowiredOption {
-        return options && (options.id !== undefined || options.detached !== undefined);
+        return typeof options === 'object';
     }
 }
 
 export interface AutowiredDecorator {
-    (option?: ServiceIdentifierOrFunc | AutowiredOption): (target: any, targetKey: string, index?: number) => any;
+    (option?: interfaces.ServiceIdentifier<any> | AutowiredOption): (target: any, targetKey: string, index?: number) => any;
     (target: any, targetKey: string, index?: number): any;
 }
 
@@ -42,9 +41,9 @@ export function getAutowiredOption(target: any, targetKey: string, index?: numbe
 }
 
 export function applyAutowiredDecorator(option: AutowiredOption, target: any, targetKey: string, index?: number,
-    doInject = (id: ServiceIdentifierOrFunc, isMulti: boolean, t: any, k: string, i?: number) => {
+    doInject = (id: interfaces.ServiceIdentifier<any>, isMulti: boolean, t: any, k: string, i?: number) => {
         if (isMulti) {
-            multiInject(<interfaces.ServiceIdentifier<any>>id)(t, k, i);
+            multiInject(id)(t, k, i);
         } else {
             inject(id)(target, targetKey, index);
         }
@@ -78,7 +77,7 @@ export function applyAutowiredDecorator(option: AutowiredOption, target: any, ta
         createAutowiredProperty(opt, isMlt, doGetValue, target, targetKey);
         return;
     } else {
-        doInject( <ServiceIdentifierOrFunc>opt.id, isMlt, target, targetKey, index);
+        doInject(opt.id!, isMlt, target, targetKey, index);
 
     }
 }

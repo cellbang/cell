@@ -2,6 +2,7 @@ import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc
 import { ConnectionHandler } from './handler';
 import { ApplicationError, Disposable, getPropertyNames } from '@malagu/core';
 import { PipeManager } from '@malagu/core';
+import { ErrorConverter } from '../converter';
 
 export type JsonRpcServer<Client> = Disposable & {
     /**
@@ -22,11 +23,12 @@ export class JsonRpcConnectionHandler<T extends object> implements ConnectionHan
     constructor(
         readonly path: string,
         readonly targetFactory: (proxy: JsonRpcProxy<T>) => any,
+        readonly errorConverters: ErrorConverter[],
         readonly pipeManager: PipeManager
     ) { }
 
     onConnection(connection: MessageConnection): void {
-        const factory = new JsonRpcProxyFactory<T>(undefined, this.pipeManager);
+        const factory = new JsonRpcProxyFactory<T>(undefined, this.errorConverters, this.pipeManager);
         const proxy = factory.createProxy();
         factory.target = this.targetFactory(proxy);
         factory.listen(connection);
@@ -45,7 +47,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     protected connectionPromiseResolve: (connection: MessageConnection) => void;
     protected connectionPromise: Promise<MessageConnection>;
 
-    constructor(public target?: any, protected pipeMananger?: PipeManager) {
+    constructor(public target?: any, protected errorConverters?: ErrorConverter[], protected pipeMananger?: PipeManager) {
         this.waitForConnection();
     }
 
@@ -156,6 +158,15 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     }
 
     protected serializeError(e: any): any {
+        if (this.errorConverters) {
+            for (const converter of this.errorConverters) {
+                const serialized = converter.serialize(e);
+                if (serialized) {
+                    e = serialized;
+                    break;
+                }
+            }
+        }
         if (ApplicationError.is(e)) {
             return new ResponseError(e.code, '',
                 Object.assign({ kind: 'application' }, e.toJson())
@@ -168,13 +179,22 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
             const capturedStack = capturedError.stack || '';
             if (e.data && e.data.kind === 'application') {
                 const { stack, data, message } = e.data;
-                return ApplicationError.fromJson(e.code, {
+                e = ApplicationError.fromJson(e.code, {
                     message: message || capturedError.message,
                     data,
                     stack: `${capturedStack}\nCaused by: ${stack}`
                 });
+            } else {
+                e.stack = capturedStack;
             }
-            e.stack = capturedStack;
+        }
+        if (this.errorConverters) {
+            for (const converter of this.errorConverters) {
+                const deserialized = converter.deserialize(e);
+                if (deserialized) {
+                    return deserialized;
+                }
+            }
         }
         return e;
     }
