@@ -18,7 +18,6 @@
 - feat(core) Decorator `@Optional()` must have parentheses
 
 
-
 ## v1.0.8
 - feat(cli) Modify the use of template variables
 - feat(serve-static) supports configuring response headers through configuration properties
