@@ -25,7 +25,7 @@ malagu:
       instanceConcurrency: 10
       bootstrap: 'node backend/dist/index.js'
     trigger:
-      name: ${pkg.name}-${malagu['fc-adapter'].alias.name}
+      name: ${malagu['fc-adapter'].function.name}-${malagu['fc-adapter'].alias.name}
       qualifier: ${malagu['fc-adapter'].alias.name}
       functionName: ${malagu['fc-adapter'].function.name}
       serviceName: ${malagu['fc-adapter'].service.name}
