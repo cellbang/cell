@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "pwa-node",
             "request": "launch",
             "name": "malagu serve",
             "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu",
@@ -13,9 +13,6 @@
                 "NODE_ENV": "development"
             },
             "smartStep": true,
-            "outFiles": [
-                "${workspaceRoot}/.malagu/**/*.js"
-            ],
             "internalConsoleOptions": "openOnSessionStart",
             "outputCapture": "std"
         }
