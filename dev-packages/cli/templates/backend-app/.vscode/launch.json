@@ -13,9 +13,6 @@
                 "NODE_ENV": "development"
             },
             "smartStep": true,
-            "outFiles": [
-                "${workspaceRoot}/.malagu/**/*.js"
-            ],
             "internalConsoleOptions": "openOnSessionStart",
             "outputCapture": "std"
         }
