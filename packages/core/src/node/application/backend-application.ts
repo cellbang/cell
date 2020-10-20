@@ -14,7 +14,7 @@ export class BackendApplication extends AbstractApplication {
         this.stateService.state = 'ready';
     }
 
-    protected removeLisners(event: NodeJS.Signals) {
+    protected removeListeners(event: NodeJS.Signals) {
         for (const l of process.listeners(event)) {
             if ((l as any)._tag === BackendApplication.name) {
                 process.removeListener(event, l);
@@ -23,8 +23,8 @@ export class BackendApplication extends AbstractApplication {
     }
 
     protected setupExitSignals(): void {
-        this.removeLisners('SIGINT');
-        this.removeLisners('SIGTERM');
+        this.removeListeners('SIGINT');
+        this.removeListeners('SIGTERM');
         const l = this.doExit.bind(this);
         l._tag = BackendApplication.name;
         process.once('SIGINT', l);
