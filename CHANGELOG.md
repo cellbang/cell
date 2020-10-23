@@ -1,5 +1,20 @@
 # Change Log
 
+## v1.2.0
+- fix(node-debug): Replacing node with pwa-node
+- fix(launch.json): Delete outFiles
+- fix(core): removeLisners -> removeListeners
+- feat(oidc-provider) Add component oidc-provider
+- feat(fc-adapter) The HTTP trigger name is generated based on the function name
+- feat(cli) Optimize command line plugin loading mechanism
+
+- fix(node-debug) 用 pwa-node 替换 node
+- fix(launch.json) 删除 outFiles
+- fix(core): removeLisners -> removeListeners
+- feat(oidc-provider) 添加组件 oidc-provider
+- feat(fc-adapter) HTTP 触发器的名称是基于函数名生成的
+- feat(cli) 优化命令行插件加载机制
+
 ## v1.1.0
 - feat(core) Upgrade vscode-ws-jsonrpc version
 - feat(core) Decorator `@Component()` supports name, tag, default, when attributes
