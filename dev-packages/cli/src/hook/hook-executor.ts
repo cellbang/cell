@@ -76,7 +76,7 @@ export class HookExecutor {
                 }
             }
         }
-        
+
     }
 
     protected async doExecuteHooks(modules: Map<string, string>, context: CliContext, hookName: string): Promise<void> {
