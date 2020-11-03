@@ -1,1 +1,1 @@
-# Malagu - MVCcomponent
+# Malagu - MVC Component

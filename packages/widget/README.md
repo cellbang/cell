@@ -1,1 +1,1 @@
-# Malagu - Widgetcomponent
+# Malagu - Widget Component

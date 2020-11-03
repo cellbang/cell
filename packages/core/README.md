@@ -1,1 +1,1 @@
-# Malagu - Corecomponent
+# Malagu - Core Component

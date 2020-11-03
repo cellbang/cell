@@ -1,1 +1,1 @@
-# Malagu - Shellcomponent
+# Malagu - Shell Component
