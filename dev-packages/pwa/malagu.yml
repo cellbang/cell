@@ -1,0 +1,4 @@
+malagu:
+  webpack:
+    workboxWebpackPlugin:
+      generateInDevMode: false

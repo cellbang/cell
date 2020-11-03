@@ -1,0 +1,1 @@
+# Malagu - Compression Component

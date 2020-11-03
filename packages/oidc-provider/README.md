@@ -1,1 +1,1 @@
-# Malagu - Oidc Provider component
+# Malagu - Oidc Provider Component

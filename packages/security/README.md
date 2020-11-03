@@ -1,1 +1,1 @@
-# Malagu - Security component
+# Malagu - Security Component
