@@ -1,1 +1,1 @@
-# Malagu - Serve Staticcomponent
+# Malagu - Serve Static Component

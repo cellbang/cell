@@ -1,1 +1,1 @@
-# Malagu - Authingcomponent
+# Malagu - Authing Component

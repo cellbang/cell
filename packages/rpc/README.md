@@ -1,1 +1,1 @@
-# Malagu - Rpccomponent
+# Malagu - Rpc Component
