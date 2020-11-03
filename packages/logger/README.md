@@ -1,1 +1,1 @@
-# Malagu - Logger component with pino
+# Malagu - Logger Component with pino

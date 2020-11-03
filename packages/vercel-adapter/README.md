@@ -1,1 +1,1 @@
-# Malagu - Vercel Adapter component
+# Malagu - Vercel Adapter Component

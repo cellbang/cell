@@ -1,7 +1,7 @@
 import { ConsoleLogger, Component, Autowired, Value } from '@malagu/core';
 import { Channel, HttpChannel, JsonRpcProxy, JsonRpcProxyFactory,
     ConnectionHandler, ConnnectionFactory, RPC_PATH, ErrorConverter } from '../../common';
-import { ENDPOINT, PathResolver, HttpMethod, HttpHeaders, MediaType } from '@malagu/web';
+import { ENDPOINT, PathResolver, HttpHeaders, MediaType, RestOperations } from '@malagu/web';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions } from './proxy-protocol';
 const urlJoin = require('url-join');
@@ -10,13 +10,15 @@ const urlJoin = require('url-join');
 export class HttpProxyCreator implements ProxyCreator {
 
     protected channelIdSeq = 0;
-    protected readonly channels = new Map<number, Channel>();
 
     @Autowired(ConnnectionFactory)
     protected connnectionFactory: ConnnectionFactory<Channel>;
 
     @Autowired(PathResolver)
     protected pathResolver: PathResolver;
+
+    @Autowired(RestOperations)
+    protected restOperations: RestOperations;
 
     @Value(ENDPOINT)
     protected endpoint: string;
@@ -51,20 +53,18 @@ export class HttpProxyCreator implements ProxyCreator {
     protected doOpenChannel(path: string, handler: (channel: Channel) => void, options?: ConnectionOptions): void {
         const id = this.channelIdSeq++;
         const channel = this.createChannel(id, path);
-        this.channels.set(id, channel);
         handler(channel);
     }
 
     protected createChannel(id: number, path: string): Channel {
         const channel = new HttpChannel(id, async content => {
-            const response = await fetch(urlJoin(this.getEndpoint(), await this.pathResolver.resolve(this.rpcPath)), {
-                method: HttpMethod.POST,
-                body: content,
-                headers: new Headers({
+            const response = await this.restOperations.post(urlJoin(this.getEndpoint(), await this.pathResolver.resolve(this.rpcPath)), content,
+            {
+                headers: {
                     [HttpHeaders.CONTENT_TYPE]: MediaType.APPLICATION_JSON_UTF8
-                })
+                }
             });
-            channel.handleMessage(await response.json());
+            channel.handleMessage(response.data);
         }, path);
         return channel;
     }

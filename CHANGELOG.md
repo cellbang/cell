@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.3.0
+- feat(compression) 添加 compression 组件，提供前端静态文件 gzip 压缩能力，开箱即用
+- feat(compression) Adds compression components to provide front-end static file gzip compression capabilities out of the box
+
 ## v1.2.0
 - fix(node-debug): Replacing node with pwa-node
 - fix(launch.json): Delete outFiles

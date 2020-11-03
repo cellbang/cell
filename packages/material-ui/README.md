@@ -1,1 +1,1 @@
-# Malagu - Material UI extension
+# Malagu - Material UIcomponent

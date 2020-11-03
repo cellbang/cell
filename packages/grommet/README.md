@@ -1,1 +1,1 @@
-# Malagu - Grommet extension
+# Malagu - Grommetcomponent
