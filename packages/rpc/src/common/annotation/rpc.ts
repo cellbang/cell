@@ -1,9 +1,11 @@
 import { interfaces } from 'inversify';
 import { fluentProvide } from 'inversify-binding-decorators';
-import { ConnectionHandler, NoOpConnectionHandler, JsonRpcConnectionHandler } from '../jsonrpc';
 import {applyComponentDecorator } from '@malagu/core';
 import { PipeManager } from '@malagu/core';
 import { ErrorConverter } from '../converter';
+import { ConnectionHandler, NoOpConnectionHandler } from '../handler';
+import { JsonRpcConnectionHandler } from '../factory';
+import { RpcUtil } from '../utils';
 
 export interface RpcOption {
     id: interfaces.ServiceIdentifier<any>
@@ -22,14 +24,14 @@ export const Rpc = (idOrOption: interfaces.ServiceIdentifier<any> | RpcOption) =
         const pipeManager = context.container.get<PipeManager>(PipeManager);
         const errorConverters = [];
         try {
-            const name = typeof id !== 'function' ? <symbol | string>id : id.name || id.toString();
+            const name = RpcUtil.toName(id);
             errorConverters.push(context.container.getNamed<ErrorConverter>(ErrorConverter, name));
         } catch (error) {
             if (!error?.message.startsWith('No matching bindings found for serviceIdentifier: Symbol(ErrorConverter)')) {
                 throw error;
             }
         }
-        return new JsonRpcConnectionHandler(id.toString(), () => t, errorConverters, pipeManager);
+        return new JsonRpcConnectionHandler(RpcUtil.toPath(id), () => t, errorConverters, pipeManager);
     }).done(true)(NoOpConnectionHandler);
 };
 

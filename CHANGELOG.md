@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.4.0
+- feat(rpc) Supports the microservices of JSON RPC communication protocol, so that the front-end and BFF, BFF and microservices, microservices communicate in a unified style
+- feat(cli) Loads the `lib/common/module.j|ts` file of the component by default as the front and back public module
+- feat(rpc) 支持 JSON RPC 通信协议的微服务，让前端与 BFF、BFF 与微服务、微服务的通信方式统一风格
+- feat(cli) 默认加载组件的 `lib/common/module.j|ts` 文件作为前后端公共模块 
+
 ## v1.3.0
 - feat(compression) 添加 compression 组件，提供前端静态文件 gzip 压缩能力，开箱即用
 - feat(compression) Adds compression components to provide front-end static file gzip compression capabilities out of the box

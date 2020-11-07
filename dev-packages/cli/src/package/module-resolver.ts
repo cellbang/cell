@@ -38,6 +38,8 @@ export class ModuleResolver {
         const backendModules = malaguComponent.backend.modules;
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
 
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'common', 'module'));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'common', 'module'));
         this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', `${FRONTEND_TARGET}-module`));
         this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'node', `${BACKEND_TARGET}-module`));
         this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', 'module'));

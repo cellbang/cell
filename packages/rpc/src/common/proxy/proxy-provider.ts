@@ -1,6 +1,7 @@
 import { Prioritizeable, Component, Autowired } from '@malagu/core';
+import { ErrorConverter } from '../converter';
+import { JsonRpcProxy } from '../factory';
 import { ProxyProvider, ProxyCreator } from './proxy-protocol';
-import { ErrorConverter, JsonRpcProxy } from '../../common';
 
 @Component(ProxyProvider)
 export class ProxyProviderImpl implements ProxyProvider {
