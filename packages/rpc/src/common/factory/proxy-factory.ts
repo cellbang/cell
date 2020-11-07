@@ -1,8 +1,8 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
-import { ConnectionHandler } from './handler';
 import { ApplicationError, Disposable, getPropertyNames } from '@malagu/core';
 import { PipeManager } from '@malagu/core';
 import { ErrorConverter } from '../converter';
+import { ConnectionHandler } from '../handler';
 
 export type JsonRpcServer<Client> = Disposable & {
     /**

@@ -1,4 +1,5 @@
-import { ErrorConverter, JsonRpcProxy } from '../../common';
+import { ErrorConverter } from '../converter';
+import { JsonRpcProxy } from '../factory';
 
 export const ProxyProvider = Symbol('ProxyProvider');
 

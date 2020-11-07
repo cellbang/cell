@@ -1,7 +1,7 @@
 import { Message } from 'vscode-jsonrpc/lib/messages';
 import { } from 'vscode-jsonrpc/lib/messageWriter';
-import { Channel } from './channel-protocol';
 import { Emitter, Event } from 'vscode-jsonrpc/lib/events';
+import { Channel } from '../channal';
 
 export abstract class AbstractMessageWriter {
 

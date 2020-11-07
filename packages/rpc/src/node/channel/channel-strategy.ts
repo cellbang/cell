@@ -1,4 +1,4 @@
-import { Channel, HttpChannel } from '../../common/jsonrpc';
+import { Channel, HttpChannel } from '../../common/channal';
 import { ChannelStrategy } from './channel-protocol';
 import { Component, Deferred } from '@malagu/core';
 import { Context, HttpContext } from '@malagu/web/lib/node';

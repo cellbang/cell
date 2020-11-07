@@ -1,5 +1,5 @@
 import { DataCallback, PartialMessageInfo } from 'vscode-jsonrpc/lib/messageReader';
-import { Channel } from './channel-protocol';
+import { Channel } from '../channal/channel-protocol';
 import { Emitter, Event } from 'vscode-jsonrpc/lib/events';
 
 export abstract class AbstractMessageReader {

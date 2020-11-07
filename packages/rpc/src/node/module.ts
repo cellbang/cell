@@ -1,4 +1,3 @@
-import '../common';
 import { autoBind } from '@malagu/core';
 import '.';
 

@@ -1,5 +1,5 @@
 import { MessageConnection, createMessageConnection, Logger } from 'vscode-jsonrpc';
-import { Channel } from './channel-protocol';
+import { Channel } from '../channal/channel-protocol';
 import { ChannelMessageReader } from './reader';
 import { ChannelMessageWriter } from './writer';
 import { Component } from '@malagu/core';
