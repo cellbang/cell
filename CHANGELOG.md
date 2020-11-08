@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.4.1
+- feat(cli) Support microservice templates
+- feat(cli) 支持微服务模板
+
 ## v1.4.0
 - feat(rpc) Supports JSON RPC communication protocol microservices, so that the front-end and BFF, BFF and microservices, and microservices and microservices communicate in a unified style
 - feat(cli) Loads the `lib/common/module.j|ts` file of the component by default as the front and back public module

@@ -17,6 +17,7 @@ Malagu is a Serverless First, Component-based, platform-independent, progressive
 - Serverless First
 - The platform is not locked.
 - Support for front-end integration, front-end framework is not locked
+- Support microservices
 - Componentized, Progressive
 - Plug-in command line tools
 - Dependency injection
@@ -54,6 +55,7 @@ malagu deploy
 - [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
+- [Microservice](https://www.yuque.com/cellbang/malagu/wtiy6s)
 - [Authentication and authorization](https://www.yuque.com/cellbang/malagu/qhl0km)
 - [Cloud Platform Adaptation](https://www.yuque.com/cellbang/malagu/hh1mng)
 - [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
