@@ -17,6 +17,7 @@ Malagu 是基于 TypeScript 的 Serverless First、组件化、平台无关的�
 - Serverless First
 - 平台不锁定
 - 支持前后端一体化，前端框架不锁定
+- 支持微服务
 - 组件化，渐进式
 - 命令行工具插件化
 - 依赖注入
@@ -54,6 +55,7 @@ malagu deploy
 - [命令行工具](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [控制器](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [数据库操作](https://www.yuque.com/cellbang/malagu/ztbcwq)
+- [微服务](https://www.yuque.com/cellbang/malagu/wtiy6s)
 - [认证与授权](https://www.yuque.com/cellbang/malagu/qhl0km)
 - [云平台适配](https://www.yuque.com/cellbang/malagu/hh1mng)
 - [依赖注入](https://www.yuque.com/cellbang/malagu/fw025h)

@@ -3,6 +3,7 @@ export const templates: any = {
     'sample-app': '{{ templatePath }}/sample-app',
     'database-app': '{{ templatePath }}/database-app',
     'admin-app': '{{ templatePath }}/admin-app',
+    'microservice': '{{ templatePath }}/microservice',
     'multi-component': '{{ templatePath }}/multi-component',
     'mycli': '{{ templatePath }}/mycli',
     'site': 'https://github.com/cellbang/cellbang-site.git'
