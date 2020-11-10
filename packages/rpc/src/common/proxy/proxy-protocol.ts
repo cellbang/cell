@@ -17,3 +17,10 @@ export interface ProxyCreator {
 export interface ConnectionOptions {
     reconnecting?: boolean;
 }
+
+export interface RequestTaskMeta {
+    id: number;
+    contentLength: number;
+    contents: string[];
+    task: () => Promise<void>;
+}
