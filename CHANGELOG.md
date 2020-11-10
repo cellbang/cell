@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.5.0
+- feat(rpc) Rpc style interface supports multi-request merging, which greatly reduces the cold start probability in Serverless scenarios; under high concurrency, it greatly reduces the number of requests, thereby reducing the impact of distributed network delays. Zero code transformation and zero configuration
+- feat(rpc) Rpc 风格接口支持多请求合并，极大减少 Serverless 场景下冷启动概率；高并发情况下，极大减少请求次数，从而减弱分布式网络延迟的影响。零代码改造和零配置
+
 ## v1.4.1
 - feat(cli) Support microservice templates
 - feat(cli) 支持微服务模板
