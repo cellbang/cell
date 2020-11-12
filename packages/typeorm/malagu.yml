@@ -28,3 +28,6 @@ backend:
           - cli-highlight
           - Critical dependency
           - '@sap/hdbext'
+          - hdb-pool
+          - ioredis
+          - better-sqlite3

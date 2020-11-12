@@ -55,6 +55,8 @@ export class ApplicationPackage {
 
     protected _frontendModules: Map<string, string> | undefined;
     protected _backendModules: Map<string, string> | undefined;
+    protected _frontendStaticModules: Map<string, string> | undefined;
+    protected _backendStaticModules: Map<string, string> | undefined;
     protected _frontendAssets: Map<string, string> | undefined;
     protected _backendAssets: Map<string, string> | undefined;
     protected _initHookModules: Map<string, string> | undefined;
@@ -125,6 +127,20 @@ export class ApplicationPackage {
             this._backendModules = this.computeModules('modules', BACKEND_TARGET);
         }
         return this._backendModules;
+    }
+
+    get frontendStaticModules(): Map<string, string> {
+        if (!this._frontendStaticModules) {
+            this._frontendStaticModules = this.computeModules('staticModules', FRONTEND_TARGET);
+        }
+        return this._frontendStaticModules;
+    }
+
+    get backendStaticModules(): Map<string, string> {
+        if (!this._backendStaticModules) {
+            this._backendStaticModules = this.computeModules('staticModules', BACKEND_TARGET);
+        }
+        return this._backendStaticModules;
     }
 
     get frontendAssets(): Map<string, string> {

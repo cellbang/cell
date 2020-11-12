@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.5.1
+- feat (cli) supports static module configuration `staticModules` to avoid repeated packaging of public modules for dynamic modules
+- feat (cli) built-in es6 to es5 capability, specify the module to be converted through attribute configuration
+- feat(cli) 支持静态模块配置 `staticModules`，避免动态模块重复打包公共模块
+- feat(cli) 内置 es6 转 es5 能力，通过属性配置方式指定需要转换的模块
+
 ## v1.5.0
 - feat(rpc) Rpc style interface supports multi-request merging, which greatly reduces the cold start probability in Serverless scenarios; under high concurrency, it greatly reduces the number of requests, thereby reducing the impact of distributed network delays. Zero code transformation and zero configuration
 - feat(rpc) Rpc 风格接口支持多请求合并，极大减少 Serverless 场景下冷启动概率；高并发情况下，极大减少请求次数，从而减弱分布式网络延迟的影响。零代码改造和零配置

@@ -8,7 +8,7 @@ import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, FilterWarningsPluginConfigFactory,
-    HardSourceWebpackPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
+    HardSourceWebpackPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory, ToES5PluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, ProgressPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
@@ -34,6 +34,7 @@ export class ConfigFactory {
 
         const configFactories = [
             new BaseConfigFactory(),
+            new ToES5PluginConfigFactory(),
             new FilterWarningsPluginConfigFactory(),
             new EntryConfigFactory(),
             new OutputConfigFactory(),
