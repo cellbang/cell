@@ -14,7 +14,8 @@ export class ModuleResolver {
     }
 
     resolve(componentPackage: ComponentPackage): void {
-        this.resolveComponentModule(componentPackage);
+        this.resolveComponentStaticModule(componentPackage);
+        this.resolveComponentDynamicModule(componentPackage);
         this.resolveHookModule(componentPackage);
         this.resolveAssetModule(componentPackage);
     }
@@ -27,27 +28,37 @@ export class ModuleResolver {
         }
     }
 
-    resolveComponentModule(componentPackage: ComponentPackage): void {
+    resolveComponentModule(componentPackage: ComponentPackage, target: string, suffix?: string): void {
+        const prop = `${target}s`;
+        suffix = suffix || target;
         const malaguComponent = componentPackage.malaguComponent!;
         malaguComponent.frontend = malaguComponent.frontend || [];
         malaguComponent.backend = malaguComponent.backend || [];
 
-        malaguComponent.frontend.modules = [ ...malaguComponent.modules || [],  ...malaguComponent.frontend.modules || [] ];
-        malaguComponent.backend.modules = [ ...malaguComponent.modules || [],  ...malaguComponent.backend.modules || [] ];
-        const frontendModules = malaguComponent.frontend.modules;
-        const backendModules = malaguComponent.backend.modules;
+        malaguComponent.frontend[prop] = [ ...malaguComponent[prop] || [],  ...malaguComponent.frontend[prop] || [] ];
+        malaguComponent.backend[prop] = [ ...malaguComponent[prop] || [],  ...malaguComponent.backend[prop] || [] ];
+        const frontendModules = malaguComponent.frontend[prop];
+        const backendModules = malaguComponent.backend[prop];
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
 
-        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'common', 'module'));
-        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'common', 'module'));
-        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', `${FRONTEND_TARGET}-module`));
-        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'node', `${BACKEND_TARGET}-module`));
-        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', 'module'));
-        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'node', 'module'));
-        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'module'));
-        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'module'));
-        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, `${FRONTEND_TARGET}-module`));
-        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, `${BACKEND_TARGET}-module`));
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'common', suffix));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'common', suffix));
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', `${FRONTEND_TARGET}-${suffix}`));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'node', `${BACKEND_TARGET}-${suffix}`));
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'browser', suffix));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'node', suffix));
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, suffix));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, suffix));
+        this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, `${FRONTEND_TARGET}-${suffix}`));
+        this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, `${BACKEND_TARGET}-${suffix}`));
+    }
+
+    resolveComponentStaticModule(componentPackage: ComponentPackage): void {
+        this.resolveComponentModule(componentPackage, 'staticModule', 'static-module');
+    }
+
+    resolveComponentDynamicModule(componentPackage: ComponentPackage): void {
+        this.resolveComponentModule(componentPackage, 'module');
     }
 
     resolveHookModule(componentPackage: ComponentPackage): void {

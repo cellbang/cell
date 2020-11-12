@@ -30,7 +30,8 @@ export class ComponentConfigFactory {
                             options: {
                                 target: target,
                                 registed,
-                                modules: [...(pkg as any)[`${target}Modules`].values()]
+                                modules: [...(pkg as any)[`${target}Modules`].values()],
+                                staticModules: [...(pkg as any)[`${target}StaticModules`].values()]
                             }
                         }
                     },

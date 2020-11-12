@@ -78,7 +78,12 @@
     "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-merge": "^4.2.1",
     "webpack-node-externals": "^1.7.2",
-    "worker-loader": "^2.0.0"
+    "worker-loader": "^2.0.0",
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-transform-classes": "^7.10.0",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "babel-loader": "^8.0.6"
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^1.5.0",
