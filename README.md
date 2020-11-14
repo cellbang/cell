@@ -48,6 +48,10 @@ malagu serve
 malagu deploy
 ```
 
+## Example
+
+[View Online Sample Template](https://template.cellbang.com/#/code/template.theia-workspace)
+
 ## Documentation
 
 - [Introduction](https://www.yuque.com/cellbang/malagu/puw7p0)
