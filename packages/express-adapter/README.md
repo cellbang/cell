@@ -1,1 +1,1 @@
-# Malagu - Express Adapter component
+# Malagu - Express Adapter Component

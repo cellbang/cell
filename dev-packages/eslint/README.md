@@ -1,1 +1,1 @@
-# Malagu - ESLint component
+# Malagu - ESLint Component

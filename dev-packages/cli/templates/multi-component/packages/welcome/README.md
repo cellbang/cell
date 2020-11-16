@@ -1,1 +1,1 @@
-# Malagu - Welcome component
+# Malagu - Welcome Component

@@ -1,1 +1,1 @@
-# Malagu - Shell extension
+# Malagu - Shell Component

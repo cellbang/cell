@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "pwa-node",
             "request": "launch",
             "name": "mycli init",
             "program": "${workspaceRoot}/bin/mycli-init",
@@ -16,7 +16,7 @@
             "outputCapture": "std"
         },
         {
-            "type": "node",
+            "type": "pwa-node",
             "request": "launch",
             "name": "mycli deploy",
             "program": "${workspaceRoot}/bin/mycli-deploy",

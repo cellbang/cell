@@ -1,1 +1,1 @@
-# Malagu - PWA component
+# Malagu - PWA Component

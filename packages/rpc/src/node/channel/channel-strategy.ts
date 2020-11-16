@@ -1,12 +1,23 @@
-import { Channel, HttpChannel } from '../../common/jsonrpc';
-import { ChannelStrategy } from './channel-protocol';
-import { Component, Deferred } from '@malagu/core';
+import { Channel, HttpChannel } from '../../common/channal';
+import { ChannelStrategy, CURRENT_MESSAGE_COUNT_REQUEST_KEY, CURRENT_RESPONSE_MESSAGE_REQUEST_KEY } from './channel-protocol';
+import { Component } from '@malagu/core';
 import { Context, HttpContext } from '@malagu/web/lib/node';
 
 @Component(ChannelStrategy)
 export class HttpChannelStrategy implements ChannelStrategy {
-    getMessage(): Promise<Channel.Message> {
-        return Context.getRequest().body;
+    async getMessages(): Promise<Channel.Message[]> {
+        let message = await Context.getRequest().body;
+        if (!Array.isArray(message)) {
+            message = [ message ];
+        } else {
+            const parsed: Channel.Message[] = [];
+            for (const m of message) {
+                parsed.push(JSON.parse(m));
+            }
+            message = parsed;
+        }
+        Context.setAttr(CURRENT_MESSAGE_COUNT_REQUEST_KEY, message.length);
+        return message;
     }
 
     async createChannel(id: number): Promise<Channel> {
@@ -15,15 +26,27 @@ export class HttpChannelStrategy implements ChannelStrategy {
         });
     }
 
-    async handleChannels(channelFactory: () => Promise<Channel>): Promise<void> {
-        const channel = await channelFactory();
-        channel.handleMessage(await this.getMessage());
-        Context.getResponse().body = new Deferred<any>();
+    async handleMessage(message: string): Promise<void> {
+        if (!this.consumeMessage(message)) {
+            const deferred = Context.getResponse().body;
+            const messages = Context.getAttr<string[]>(CURRENT_RESPONSE_MESSAGE_REQUEST_KEY);
+            deferred.resolve(messages.length > 1 ? JSON.stringify(messages) : message);
+        }
     }
 
-    async handleMessage(message: string): Promise<void> {
-        const deferred = Context.getResponse().body;
-        deferred.resolve(message);
+    protected consumeMessage(message: string) {
+        const messageCount = Context.getAttr<number>(CURRENT_MESSAGE_COUNT_REQUEST_KEY);
+        Context.setAttr(CURRENT_MESSAGE_COUNT_REQUEST_KEY, messageCount - 1);
+        let messages = Context.getAttr<string[]>(CURRENT_RESPONSE_MESSAGE_REQUEST_KEY);
+        if (!messages) {
+            messages = [];
+            Context.setAttr(CURRENT_RESPONSE_MESSAGE_REQUEST_KEY, messages);
+        }
+        messages.push(message);
+        if (messageCount - 1 <= 0) {
+            return false;
+        }
+        return true;
     }
 
     async support(): Promise<boolean> {

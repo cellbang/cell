@@ -10,8 +10,8 @@ const nodePathList = (process.env.NODE_PATH || '')
 export class ComponentConfigFactory {
     create(config: any, context: CliContext, target: string) {
         const { cfg, pkg, dev } = context;
-        const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin || {};
-        const registed = !dev || !!pluginConfig.generateInDevMode;
+        const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin;
+        const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
         return {
             resolveLoader: {
                 modules: [
@@ -30,7 +30,8 @@ export class ComponentConfigFactory {
                             options: {
                                 target: target,
                                 registed,
-                                modules: [...(pkg as any)[`${target}Modules`].values()]
+                                modules: [...(pkg as any)[`${target}Modules`].values()],
+                                staticModules: [...(pkg as any)[`${target}StaticModules`].values()]
                             }
                         }
                     },

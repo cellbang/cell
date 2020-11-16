@@ -15,19 +15,9 @@ export class BaseConfigFactory {
             name: target,
             mode: webpackMode,
             optimization: {
-                minimize: !dev,
-                minimizer: [
-                    new TerserPlugin({
-                        parallel: true,
-                        terserOptions: {
-                            keep_classnames: true,
-                            keep_fnames: true
-                        },
-                        extractComments: false
-                    })
-                ]
+                minimize: !dev
             },
-            devtool: dev ? 'source-map' : undefined,
+            devtool: dev ? 'source-map' : false,
             stats: 'minimal',
             resolve: {
                 extensions: [ '.tsx', '.ts', '.js', '.wasm', '.mjs', '.json' ]
@@ -71,6 +61,20 @@ export class BaseConfigFactory {
                     __dirname: false,
                     __filename: false
                 },
+                optimization: {
+                    minimizer: [
+                        new TerserPlugin({
+                            terserOptions: {
+                                output: {
+                                    comments: false,
+                                },
+                                keep_classnames: true,
+                                keep_fnames: true
+                            },
+                            extractComments: false
+                        })
+                    ]
+                },
                 devtool: 'source-map',
             });
         } else {
@@ -84,6 +88,18 @@ export class BaseConfigFactory {
                 },
                 performance: {
                     hints: false
+                },
+                optimization: {
+                    minimizer: [
+                        new TerserPlugin({
+                            terserOptions: {
+                                output: {
+                                    comments: false,
+                                }
+                            },
+                            extractComments: false
+                        })
+                    ]
                 },
                 module: {
                     rules: [

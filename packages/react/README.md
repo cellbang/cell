@@ -1,1 +1,1 @@
-# Malagu - React extension
+# Malagu - React Component

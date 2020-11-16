@@ -7,7 +7,7 @@ English | [简体中文](./README.zh-cn.md)
 [![npm downloads](https://img.shields.io/npm/dm/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
 [![TravisCI](https://www.travis-ci.org/cellbang/malagu.svg?branch=master)](https://www.travis-ci.org/cellbang/malagu) 
 
-Malagu is a Serverless First, component-based, platform-independent, progressive application framework based on TypeScript.
+Malagu is a Serverless First, Component-based, platform-independent, progressive application framework based on TypeScript.
 
 
 ## Features
@@ -17,6 +17,7 @@ Malagu is a Serverless First, component-based, platform-independent, progressive
 - Serverless First
 - The platform is not locked.
 - Support for front-end integration, front-end framework is not locked
+- Support microservices
 - Componentized, Progressive
 - Plug-in command line tools
 - Dependency injection
@@ -27,7 +28,7 @@ Malagu is a Serverless First, component-based, platform-independent, progressive
 - Managing Status with rxjs
 - Both REST and RPC interface styles available
 
-The Malagu name comes from the fact that where I come from, the word "malagu" means small stone, and while small stones can be built into tall buildings, roads, and bridges, the Malagu component layout can be used in a myriad of ways.
+The Malagu name comes from the fact that where I come from, the word "malagu" means small stone, and while small stones can be built into tall buildings, roads, and bridges, the Malagu Component layout can be used in a myriad of ways.
 
 ## Quick start
 
@@ -47,6 +48,10 @@ malagu serve
 malagu deploy
 ```
 
+## Example
+
+[View Online Sample Template](https://template.cellbang.com/#/code/template.theia-workspace)
+
 ## Documentation
 
 - [Introduction](https://www.yuque.com/cellbang/malagu/puw7p0)
@@ -54,6 +59,7 @@ malagu deploy
 - [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
+- [Microservice](https://www.yuque.com/cellbang/malagu/wtiy6s)
 - [Authentication and authorization](https://www.yuque.com/cellbang/malagu/qhl0km)
 - [Cloud Platform Adaptation](https://www.yuque.com/cellbang/malagu/hh1mng)
 - [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
