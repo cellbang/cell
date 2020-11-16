@@ -1,1 +1,1 @@
-# Malagu - Web extension
+# Malagu - Web Component

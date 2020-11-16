@@ -1,5 +1,44 @@
 # Change Log
 
+## v1.5.1
+- feat (cli) supports static module configuration `staticModules` to avoid repeated packaging of public modules for dynamic modules
+- feat (cli) built-in es6 to es5 capability, specify the module to be converted through attribute configuration
+- feat(cli) 支持静态模块配置 `staticModules`，避免动态模块重复打包公共模块
+- feat(cli) 内置 es6 转 es5 能力，通过属性配置方式指定需要转换的模块
+
+## v1.5.0
+- feat(rpc) Rpc style interface supports multi-request merging, which greatly reduces the cold start probability in Serverless scenarios; under high concurrency, it greatly reduces the number of requests, thereby reducing the impact of distributed network delays. Zero code transformation and zero configuration
+- feat(rpc) Rpc 风格接口支持多请求合并，极大减少 Serverless 场景下冷启动概率；高并发情况下，极大减少请求次数，从而减弱分布式网络延迟的影响。零代码改造和零配置
+
+## v1.4.1
+- feat(cli) Support microservice templates
+- feat(cli) 支持微服务模板
+
+## v1.4.0
+- feat(rpc) Supports JSON RPC communication protocol microservices, so that the front-end and BFF, BFF and microservices, and microservices and microservices communicate in a unified style
+- feat(cli) Loads the `lib/common/module.j|ts` file of the component by default as the front and back public module
+- feat(rpc) 支持 JSON RPC 通信协议的微服务，让前端与 BFF、BFF 与微服务、微服务与微服务的通信方式统一风格
+- feat(cli) 默认加载组件的 `lib/common/module.j|ts` 文件作为前后端公共模块
+
+## v1.3.0
+- feat(compression) 添加 compression 组件，提供前端静态文件 gzip 压缩能力，开箱即用
+- feat(compression) Adds compression components to provide front-end static file gzip compression capabilities out of the box
+
+## v1.2.0
+- fix(node-debug): Replacing node with pwa-node
+- fix(launch.json): Delete outFiles
+- fix(core): removeLisners -> removeListeners
+- feat(oidc-provider) Add component oidc-provider
+- feat(fc-adapter) The HTTP trigger name is generated based on the function name
+- feat(cli) Optimize command line plugin loading mechanism
+
+- fix(node-debug) 用 pwa-node 替换 node
+- fix(launch.json) 删除 outFiles
+- fix(core): removeLisners -> removeListeners
+- feat(oidc-provider) 添加组件 oidc-provider
+- feat(fc-adapter) HTTP 触发器的名称是基于函数名生成的
+- feat(cli) 优化命令行插件加载机制
+
 ## v1.1.0
 - feat(core) Upgrade vscode-ws-jsonrpc version
 - feat(core) Decorator `@Component()` supports name, tag, default, when attributes

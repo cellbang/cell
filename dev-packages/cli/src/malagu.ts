@@ -42,6 +42,11 @@ function getMode(options: any) {
     return [...fixedMode, ...mode.filter((m: any) => fixedMode.indexOf(m) === -1)];
 }
 
+function isDev(options: any) {
+
+    return options._.includes('serve');
+}
+
 function getTargets(options: any) {
     return getArrayOptions(options, 'targets', 't');
 }
@@ -98,7 +103,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
     const mode = getMode(options);
     const targets = getTargets(options);
     const prod = options.p || options.prod;
-    const context = await CliContext.create(program, { targets, mode, prod });
+    const context = await CliContext.create(program, { targets, mode, prod, dev: isDev(options) });
     ContextUtils.setCurrent(context);
     await new HookExecutor().executeCliHooks(context);
     spinner.stop();

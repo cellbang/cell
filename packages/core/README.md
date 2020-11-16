@@ -1,1 +1,1 @@
-# Malagu - Core extension
+# Malagu - Core Component

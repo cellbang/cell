@@ -63,6 +63,22 @@ export class HookExecutor {
         return current !== false ? true : false;
     }
 
+    protected async doRequire(context: CliContext, ...paths: string[]) {
+        for (const path of paths) {
+            try {
+                await require(path).default(context);
+                return;
+            } catch (error) {
+                if (error && error.code === 'MODULE_NOT_FOUND') {
+                    continue;
+                } else {
+                    throw error;
+                }
+            }
+        }
+
+    }
+
     protected async doExecuteHooks(modules: Map<string, string>, context: CliContext, hookName: string): Promise<void> {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
@@ -85,23 +101,13 @@ export class HookExecutor {
             if (properties.length > 0) {
                 properties.push(hookName);
                 if (this.checkHooks(context, properties)) {
-                    try {
-                        await require(resolve(context.pkg.projectPath, 'node_modules', modulePath)).default(context);
-                    } catch (error) {
-                        if (error && error.code === 'MODULE_NOT_FOUND') {
-                            try {
-                                await require(resolve(context.pkg.projectPath, '..', 'node_modules', modulePath)).default(context);
-                            } catch (error2) {
-                                if (error2 && error2.code === 'MODULE_NOT_FOUND') {
-                                    await require(modulePath).default(context);
-                                } else {
-                                    throw error2;
-                                }
-                            }
-                        } else {
-                            throw error;
-                        }
-                    }
+                    await this.doRequire(
+                        context,
+                        resolve(context.pkg.projectPath, 'node_modules', modulePath),
+                        resolve(context.pkg.projectPath, '..', 'node_modules', modulePath),
+                        resolve(context.pkg.projectPath, '..', '..', 'node_modules', modulePath),
+                        modulePath
+                    );
                 }
             }
         }

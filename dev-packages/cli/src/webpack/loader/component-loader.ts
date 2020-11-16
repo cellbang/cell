@@ -5,6 +5,7 @@ interface Context {
   target: string;
   registed: boolean;
   modules: string[];
+  staticModules: string[];
 
 }
 
@@ -19,8 +20,12 @@ function generateImports(modules: string[], fn: 'import' | 'require'): string {
     return targetModules.map(m => `then(function () { return ${m}.then(load) })`).join('.\n');
 }
 
+function loadStaticModuls(modules: string[]): string {
+  return modules.map(m => `container.load(require('${m}').default);`).join('\n');
+}
+
 function generateFrontendComponents(context: Context) {
-    const { modules, registed } = context;
+    const { modules, staticModules, registed } = context;
     return `
 require('es6-promise/auto');
 require('reflect-metadata');
@@ -30,6 +35,8 @@ const { CoreFrontendModule } = require('@malagu/core/lib/browser/module');
 
 const container = new Container();
 container.load(CoreFrontendModule);
+
+${loadStaticModuls(staticModules)}
 
 function load(raw) {
   return Promise.resolve(raw.default).then(module => container.load(module));
@@ -56,7 +63,7 @@ module.exports.container = Promise.resolve()
 }
 
 function generateBackendComponents(context: Context) {
-    const { modules } = context;
+    const { modules, staticModules } = context;
     return `
 require('reflect-metadata');
 const { Container } = require('inversify');
@@ -65,6 +72,8 @@ require('source-map-support').install();
 
 const container = new Container();
 container.load(CoreBackendModule);
+
+${loadStaticModuls(staticModules)}
 
 function load(raw) {
   return Promise.resolve(raw.default).then(module => container.load(module));

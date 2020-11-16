@@ -4,6 +4,11 @@ malagu:
   hostDomId: malagu-root
   logger:
     level: info
+  webpack:
+    toES5Plugin:
+      include:
+        class-transformer: class-transformer
+        vscode-jsonrpc: vscode-jsonrpc
 frontend:
   entry: lib/common/application/application-entry
 backend:

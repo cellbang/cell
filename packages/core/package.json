@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "1.1.0",
+  "version": "1.5.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -23,7 +23,7 @@
     "traverse": "^0.6.6",
     "ts-custom-error": "^3.1.1",
     "url-join": "^4.0.1",
-    "vscode-ws-jsonrpc": "^0.2.0"
+    "vscode-jsonrpc": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -55,7 +55,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.1.0",
+    "@malagu/ext-scripts": "^1.5.1",
     "@types/traverse": "^0.6.32"
   },
   "nyc": {

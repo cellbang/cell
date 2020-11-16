@@ -1,1 +1,1 @@
-# Malagu - Rpc extension
+# Malagu - Rpc Component
