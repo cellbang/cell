@@ -13,7 +13,7 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
     @Value('malagu.security.loginSuccessUrl')
     protected readonly loginSuccessUrl: string;
 
-    @Value('malagu.security.loginSuccessUrl')
+    @Value('malagu.security.alwaysUseLoginSuccessUrl')
     protected readonly alwaysUseLoginSuccessUrl: boolean;
 
     @Value('malagu.security.useReferer')

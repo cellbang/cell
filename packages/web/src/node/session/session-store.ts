@@ -1,6 +1,7 @@
 import { Session, SessionStrategy, SessionStore, COOKIE_EXP_DATE } from './session-protocol';
-import { Autowired, Value, Component } from '@malagu/core';
+import { Autowired, Value, Component, Logger } from '@malagu/core';
 import { Context } from '../context';
+const { gzip, ungzip } = require('node-gzip');
 
 @Component(SessionStore)
 export class CookieSessionStore implements SessionStore {
@@ -13,15 +14,25 @@ export class CookieSessionStore implements SessionStore {
     @Autowired(SessionStrategy)
     protected readonly sessionStrategy: SessionStrategy;
 
+    @Autowired(Logger)
+    protected readonly logger: Logger;
+
     async get(id: string): Promise<Session | undefined> {
         const value = Context.getCookies().get(this.sessionOptions.sessionKey, this.sessionOptions);
         if (value) {
-            return this.sessionStrategy.create(JSON.parse(Buffer.from(value, 'base64').toString('utf8')));
+            try {
+                const decompressed = await ungzip(Buffer.from(value, 'base64'));
+                return this.sessionStrategy.create(JSON.parse(decompressed.toString()));
+            } catch (error) {
+                this.logger.error(error);
+            }
+
         }
     }
 
     async set(session: Session): Promise<void> {
-        Context.getCookies().set(this.sessionOptions.sessionKey, Buffer.from(JSON.stringify(session.toJSON())).toString('base64'), this.sessionOptions);
+        const compressed = await gzip(JSON.stringify(session.toJSON()));
+        Context.getCookies().set(this.sessionOptions.sessionKey, compressed.toString('base64'), this.sessionOptions);
     }
 
     async remove(id: string): Promise<void> {

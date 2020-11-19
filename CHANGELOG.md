@@ -1,5 +1,21 @@
 # Change Log
 
+## v1.6.0
+
+- feat(web) adds gzip compression optimization to the cookie-based session storage scheme, greatly alleviating the 4KB request header limitation in Serverless scenarios, while also reducing the request header transfer burden
+- feat(grommet) Optimize the LocaleMenu component
+- feat(grommet) update Cellbang icon
+- feat(fact) adds `@Icon()` decorator for injecting custom icon components
+- feat(cli) provides the default site icon, the template no longer provides favicon.ico files, developers can override the default by placing a custom favicon.ico file at the root of the project
+- feat(security + oauth2-client) provides authentication success custom redirect URL capability for OIDC authentication
+- feat(web) 基于 Cookie 的 Session 存储方案添加 gzip 压缩优化，极大缓解在 Serverless 场景下的请求头 4KB 限制，同时也减轻请求头传输负担
+- feat(grommet) 优化 LocaleMenu 组件
+- feat(grommet) 更新 Cellbang 图标
+- feat(react) 添加 `@Icon()` 装饰器，用于注入自定义的图标组件
+- feat(cli) 提供默认网站图标，模板中不再提供 favicon.ico 文件，开发者可以通过在项目根下放置自定义的 favicon.ico 文件覆盖默认
+- feat(security + oauth2-client) 为 OIDC 认证提供认证成功自定义重定向 URL 能力
+
+
 ## v1.5.1
 - feat (cli) supports static module configuration `staticModules` to avoid repeated packaging of public modules for dynamic modules
 - feat (cli) built-in es6 to es5 capability, specify the module to be converted through attribute configuration

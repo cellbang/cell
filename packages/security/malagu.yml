@@ -12,6 +12,7 @@ malagu:
     logoutSuccessUrl: /login
     alwaysUseDefaultTargetUrl: false
     useReferer: false
+    targetUrlParameter: redirect
 backend:
   malagu:
     security:

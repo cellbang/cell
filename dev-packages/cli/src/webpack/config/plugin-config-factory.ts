@@ -138,6 +138,7 @@ export class HtmlWebpackPluginConfigFactory {
         const templateExists = existsSync(templatePath);
         const HtmlWebpackPlugin = require('html-webpack-plugin');
         const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+        const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
 
         const c = getMalaguConfig(cfg, FRONTEND_TARGET);
         const baseHref = c.server?.path;
@@ -145,7 +146,8 @@ export class HtmlWebpackPluginConfigFactory {
             plugins: [
                 new HtmlWebpackPlugin({
                     title: 'Malagu App',
-                    template: templateExists ? undefined : path.join(__dirname, '..', '..', '..', 'templates', 'index.html'),
+                    template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
+                    favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
                     templateParameters: getConfig(cfg, FRONTEND_TARGET),
                     ...getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
                     ...(templateExists ? { template: templatePath } : {}),
