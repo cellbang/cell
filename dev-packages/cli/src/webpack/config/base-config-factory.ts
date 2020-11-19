@@ -15,7 +15,19 @@ export class BaseConfigFactory {
             name: target,
             mode: webpackMode,
             optimization: {
-                minimize: !dev
+                minimize: !dev,
+                minimizer: [
+                    new TerserPlugin({
+                        terserOptions: {
+                            output: {
+                                comments: false,
+                            },
+                            keep_classnames: true,
+                            keep_fnames: true
+                        },
+                        extractComments: false
+                    })
+                ]
             },
             devtool: dev ? 'source-map' : false,
             stats: 'minimal',
@@ -61,20 +73,6 @@ export class BaseConfigFactory {
                     __dirname: false,
                     __filename: false
                 },
-                optimization: {
-                    minimizer: [
-                        new TerserPlugin({
-                            terserOptions: {
-                                output: {
-                                    comments: false,
-                                },
-                                keep_classnames: true,
-                                keep_fnames: true
-                            },
-                            extractComments: false
-                        })
-                    ]
-                },
                 devtool: 'source-map',
             });
         } else {
@@ -88,18 +86,6 @@ export class BaseConfigFactory {
                 },
                 performance: {
                     hints: false
-                },
-                optimization: {
-                    minimizer: [
-                        new TerserPlugin({
-                            terserOptions: {
-                                output: {
-                                    comments: false,
-                                }
-                            },
-                            extractComments: false
-                        })
-                    ]
                 },
                 module: {
                     rules: [

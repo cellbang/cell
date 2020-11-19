@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { Menu, MenuProps, ButtonType } from 'grommet';
+import { Menu, MenuProps, ButtonType, Text } from 'grommet';
 import { ContainerUtil } from '@malagu/core';
 import { LocaleManager, Locale } from '@malagu/widget';
 import { useIntl, IntlShape } from 'react-intl';
 import { Down } from 'grommet-icons';
 
-function parseLabel(locale: Locale, intl: IntlShape) {
-    return locale.label ? intl.formatMessage({ id: locale.label }) : intl.formatDisplayName(locale.lang, { type: 'language' } );
+function parseLabel(intl: IntlShape, locale?: Locale) {
+    if (locale) {
+        return locale.label ? intl.formatMessage({ id: locale.label }) : intl.formatDisplayName(locale.lang, { type: 'language' } );
+    }
 }
 
 export function LocaleMenu(props: MenuProps & Omit<ButtonType, 'icon'>) {
@@ -20,8 +22,8 @@ export function LocaleMenu(props: MenuProps & Omit<ButtonType, 'icon'>) {
         return () => subscription.unsubscribe();
     }, []);
     return (
-        <Menu size="medium" hoverIndicator icon={<Down/>} {...props} label={parseLabel(current!, intl)}
-            items={locales.map(l => ({ label: parseLabel(l, intl), onClick: () => localeManager.currentSubject.next(l) }))}
+        <Menu size="medium" hoverIndicator icon={<Down size={props.size}/>} {...props} label={parseLabel(intl, current)}
+            items={locales.map(l => ({ label: <Text size={props.size}>{parseLabel(intl, l)}</Text>, onClick: () => localeManager.currentSubject.next(l) }))}
         />
     );
 }

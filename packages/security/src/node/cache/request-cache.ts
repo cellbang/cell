@@ -13,10 +13,10 @@ export class HttpSessionRequestCache implements RequestCache {
     @Autowired(PathResolver)
     protected readonly pathResolver: PathResolver;
 
-    async save(): Promise<void> {
+    async save(savedRequest?: SavedRequest): Promise<void> {
         if (Context.getSession()) {
             const request = Context.getRequest();
-            Context.setAttr(SAVED_REQUEST, {
+            Context.setAttr(SAVED_REQUEST, savedRequest || {
                 redirectUrl: await this.pathResolver.resolve(this.endpoint, request.path, qs.stringify(request.query)),
                 method: request.method.toUpperCase(),
                 query: { ...request.query }
