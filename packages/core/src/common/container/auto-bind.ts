@@ -1,17 +1,19 @@
-import { interfaces as inversifyInterfaces, ContainerModule } from 'inversify';
-import interfaces from 'inversify-binding-decorators/dts/interfaces/interfaces';
+import { interfaces, ContainerModule } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { CustomError } from 'ts-custom-error';
 import { ConstantOption } from '../annotation/constant';
+import { ComponentMetadata, Scope } from '../annotation';
+import { ConfigUtil } from '../config/config-util';
+import { AopProxyFactory, ClassFilter } from '../aop/aop-protocol';
+import { ContainerUtil } from './container-util';
 
-class NoOpError extends CustomError {
-}
-
-export function autoBind(registry?: inversifyInterfaces.ContainerModuleCallBack): inversifyInterfaces.ContainerModule {
+export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
     return new ContainerModule((bind, unbind, isBound, rebind) => {
-        const provideMetadata: interfaces.ProvideSyntax[] = Reflect.getMetadata(METADATA_KEY.provide, Reflect) || [];
-        provideMetadata.map(metadata => resolve(metadata, bind, rebind));
-        Reflect.defineMetadata(METADATA_KEY.provide, [], Reflect);
+        const metadatas: ComponentMetadata[] = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
+        for (let index = metadatas.length - 1; index >= 0; index--) {
+            const metadata = metadatas[index];
+            resolve(metadata, bind, rebind);
+        }
+        Reflect.defineMetadata(METADATA_KEY.component, [], Reflect);
         const constantMetadata: ConstantOption[] = Reflect.getMetadata(METADATA_KEY.constantValue, Reflect) || [];
         constantMetadata.map(metadata => resolveConstant(metadata, bind, rebind));
         Reflect.defineMetadata(METADATA_KEY.constantValue, [], Reflect);
@@ -22,31 +24,56 @@ export function autoBind(registry?: inversifyInterfaces.ContainerModuleCallBack)
     });
 }
 
-function resolve(metadata: interfaces.ProvideSyntax, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind): void {
-    const isRebind: boolean = Reflect.getOwnMetadata(METADATA_KEY.rebind, metadata.implementationType);
-    const id = Reflect.getOwnMetadata(METADATA_KEY.toService, metadata.implementationType);
+function doProxyIfNeed(metadata: ComponentMetadata, target: any) {
+    const enabled = ConfigUtil.getRaw().malagu?.aop?.enabled;
+    if (enabled) {
+        const classFilter = ContainerUtil.get<ClassFilter>(ClassFilter);
+        if (target.constructor && classFilter.matches(target.constructor, metadata)) {
+            const aopProxyFactory = ContainerUtil.get<AopProxyFactory>(AopProxyFactory);
+            return aopProxyFactory.create({
+                target,
+                metadata
+            }).getPorxy();
+        }
+    }
 
-    const bindWrapper = (serviceIdentifier: inversifyInterfaces.ServiceIdentifier<any>) => {
-        if (id && id !== serviceIdentifier) {
-            bind(serviceIdentifier).toService(id);
-            throw new NoOpError();
-        }
-        if (isRebind) {
-            return rebind(serviceIdentifier);
-        }
-        return bind(serviceIdentifier);
-    };
-    try {
-        metadata.constraint(bindWrapper, metadata.implementationType);
-    } catch (error) {
-        if (error instanceof NoOpError) {
-            return;
-        }
-        throw error;
+    return target;
+}
+
+function resolve(metadata: ComponentMetadata, bind: interfaces.Bind, rebind: interfaces.Rebind): void {
+    let mid: any;
+    const { ids, scope, name, tag, when, proxy, onActivation, target } = metadata;
+    const id = ids.shift()!;
+    mid = metadata.rebind ? rebind(id).to(target) : bind(id).to(target);
+
+    if (scope === Scope.Singleton) {
+        mid = mid.inSingletonScope();
+    } else if (scope === Scope.Transient) {
+        mid = mid.inTransientScope();
+    }
+
+    if (name) {
+        mid = mid.whenTargetNamed(name);
+    } else if (tag) {
+        mid = mid.whenTargetTagged(tag.tag, tag.value);
+    } else if (metadata.default) {
+        mid = mid.whenTargetIsDefault();
+    } else if (when) {
+        mid = mid.when(when);
+    }
+
+    if (onActivation) {
+        mid.onActivation(onActivation);
+    } else if (proxy) {
+        mid.onActivation((context: interfaces.Context, t: any) => doProxyIfNeed(metadata, t));
+    }
+
+    for (const item of ids) {
+        bind(item).toService(id);
     }
 }
 
-function resolveConstant(metadata: ConstantOption, bind: inversifyInterfaces.Bind, rebind: inversifyInterfaces.Rebind): void {
+function resolveConstant(metadata: ConstantOption, bind: interfaces.Bind, rebind: interfaces.Rebind): void {
     const ids = Array.isArray(metadata.id) ? metadata.id : [ metadata.id ];
     const id = ids.shift();
     if (metadata.rebind) {

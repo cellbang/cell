@@ -1,7 +1,8 @@
 import { Component, Autowired, Value } from '@malagu/core';
 import { Context, RequestMatcher } from '@malagu/web/lib/node';
 import { UserService, UserChecker, BadCredentialsError, AuthenticationProvider,
-    Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY, User } from '@malagu/security/lib/node';
+    Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY } from '@malagu/security/lib/node';
+import { User } from '@malagu/security';
 import axios from 'axios';
 import * as qs from 'querystring';
 import { AuthingProvider } from './authing-provider';
@@ -28,7 +29,7 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
     @Autowired(AuthingProvider)
     protected readonly authingProvider: AuthingProvider;
 
-    priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY + 100;
+    priority = USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY + 100;
 
     async authenticate(): Promise<Authentication | undefined> {
         const request = Context.getRequest();
@@ -45,8 +46,8 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
             };
             user = await this.userService.load(rawUser);
         } else {
-            const code = request.query.code;
-            let accessToken = request.query.access_token;
+            const code = <string>request.query.code;
+            let accessToken = <string>request.query.access_token;
             if (!code || accessToken) {
                 throw new BadCredentialsError('Bad credentials');
             }

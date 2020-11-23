@@ -1,6 +1,6 @@
 import { AuthorizationRequest, AccessToken, RefreshToken, OAuth2AuthorizationError } from '@malagu/oauth2-core';
 import { ClientRegistration } from '../registration';
-import { Authentication, AUTHENTICATION_MIDDLE_PRIORITY } from '@malagu/security';
+import { Authentication, AUTHENTICATION_MIDDLE_PRIORITY } from '@malagu/security/lib/node';
 
 export const AuthorizationRequestResolver = Symbol('AuthorizationRequestResolver');
 export const AuthorizedClientManager = Symbol('AuthorizedClientManager');

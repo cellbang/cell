@@ -6,7 +6,7 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/core": "^1.6.0",
-    "@types/express": "^4.16.1",
+    "@types/express": "^4.17.9",
     "axios": "^0.19.2",
     "cookies": "^0.8.0",
     "cors": "^2.8.5",

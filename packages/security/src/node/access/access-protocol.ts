@@ -1,4 +1,4 @@
-import { AuthorizeType } from '../annotation/authorize';
+import { AuthorizeType, Policy } from '../../common';
 
 export const AccessDecisionManager = Symbol('AccessDecisionManager');
 export const AccessDecisionVoter = Symbol('AccessDecisionVoter');
@@ -8,6 +8,7 @@ export const SecurityExpressionContextHandler = Symbol('SecurityExpressionContex
 export const ResourcePolicyProvider = Symbol('ResourcePolicyProvider');
 export const PrincipalPolicyProvider = Symbol('PrincipalPolicyProvider');
 export const PolicyFactory = Symbol('PolicyFactory');
+export const ResourceNameResolver = Symbol('ResourceNameResolver');
 
 export const SECURITY_EXPRESSION_CONTEXT_KEY = 'SecurityExpressionContext';
 
@@ -16,16 +17,6 @@ export const ACCESS_ABSTAIN = 0;
 export const ACCESS_DENIED = -1;
 
 export const POLICY_BASED_VOTER_PRIORITY = 2000;
-
-export enum PolicyType {
-    El= 'el'
-}
-
-export interface Policy {
-    type: PolicyType | string
-    authorizeType: AuthorizeType;
-    [key: string]: any;
-}
 
 export interface ResourcePolicyProvider {
     provide(resource: string, type: AuthorizeType): Promise<Policy[]>;
@@ -45,11 +36,6 @@ export interface PolicyResolver<> {
     support(policy: Policy): Promise<boolean>;
 }
 
-export interface ElPolicy extends Policy {
-    context: any;
-    el: string;
-}
-
 export interface SecurityExpressionContextHandler {
     handle(context: any): Promise<void>
 }
@@ -60,12 +46,14 @@ export interface SecurityMetadata {
     resource: string;
     principal: any;
     policies: Policy[];
+    grant: number;
 }
 
 export interface SecurityMetadataContext {
 }
 
 export interface MethodSecurityMetadataContext extends SecurityMetadataContext {
+    grant: number;
     authorizeType: AuthorizeType
     method: string;
     args: any[];
@@ -86,4 +74,8 @@ export interface AccessDecisionVoter {
     vote(securityMetadata: SecurityMetadata): Promise<number>;
     support(securityMetadata: SecurityMetadata): Promise<boolean>;
     readonly priority: number;
+}
+
+export interface ResourceNameResolver {
+    resolve(ctx: MethodSecurityMetadataContext): Promise<string>;
 }

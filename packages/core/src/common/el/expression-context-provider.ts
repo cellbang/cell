@@ -15,7 +15,7 @@ export class ExpressionContextProviderImpl implements ExpressionContextProvider 
         protected readonly contextInitializers: ContextInitializer[]
 
     ) {
-        this.ctx = ConfigUtil.getAll();
+        this.ctx = ConfigUtil.getRaw();
     }
 
     provide(): ExpressionContext {

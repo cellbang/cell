@@ -1,5 +1,5 @@
 import { ConsoleLogger, Component, Autowired, Value } from '@malagu/core';
-import { HttpHeaders, HttpMethod, MediaType, RestOperations } from '@malagu/web';
+import { HttpHeaders, HttpMethod, MediaType, RestOperations, XML_HTTP_REQUEST } from '@malagu/web';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions, RequestTaskMeta } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';
@@ -8,7 +8,6 @@ import { Channel, HttpChannel } from '../channal';
 import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 import { AxiosRequestConfig } from 'axios';
-import { XML_HTTP_REQUEST, X_REQUESTED_WITH } from '@malagu/web/lib/node';
 import { ClientConfigProcessor } from '../processor';
 
 @Component(ProxyCreator)
@@ -148,7 +147,7 @@ export class HttpProxyCreator implements ProxyCreator {
                 data: contents.length > 1 ? JSON.stringify(contents) : contents[0],
                 headers: {
                     [HttpHeaders.CONTENT_TYPE]: MediaType.APPLICATION_JSON_UTF8,
-                    [X_REQUESTED_WITH]: XML_HTTP_REQUEST
+                    [HttpHeaders.X_REQUESTED_WITH]: XML_HTTP_REQUEST
                 },
                 ...this.clientConfig
             };

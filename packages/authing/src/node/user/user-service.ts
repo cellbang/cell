@@ -1,6 +1,7 @@
 import { Value, Component } from '@malagu/core';
 import axios from 'axios';
-import { UserService, User, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security/lib/node';
+import { UserService } from '@malagu/security/lib/node';
+import { User } from '@malagu/security';
 
 @Component({ id: UserService, rebind: true })
 export class UserServiceImpl implements UserService<string, User> {
@@ -29,11 +30,7 @@ export class UserServiceImpl implements UserService<string, User> {
             accountNonLocked: true,
             credentialsNonExpired: true,
             enabled: true,
-            policies: [ <ElPolicy>{
-                type: PolicyType.El,
-                authorizeType: AuthorizeType.Pre,
-                el: 'true'
-            } ],
+            policies: [],
             rawUserInfo: data
         } as any;
     }

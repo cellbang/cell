@@ -11,10 +11,10 @@ export class DispatcherImpl implements Dispatcher<Context> {
     @Autowired(HandlerExecutionChain)
     protected handlerExecutionChain: HandlerExecutionChain;
 
-    @Autowired
+    @Autowired(MiddlewareProvider)
     protected middlewareProvider: MiddlewareProvider;
 
-    @Autowired
+    @Autowired(ErrorHandlerProvider)
     protected errorHandlerProvider: ErrorHandlerProvider;
 
     @Autowired(Logger)

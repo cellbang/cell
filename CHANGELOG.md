@@ -1,5 +1,32 @@
 # Change Log
 
+## v1.7.0
+
+- feat(core) optimizes the AOP user interface and provides the decorator `@Aspect()`
+- feat(core) `@Component()` Add `sysTags` for classifying object labels injected into the container to facilitate AOP control of the intercept scope based on `sysTags`
+- feat(core) `@Component() ` Add default values for configuration properties: `malagu.annotation.
+- feat(core) Adds AOP global switch control: `malagu.aop.enabled`, enabled by default
+- feat(security) Adds secure intercept access control: `malagu.security.aop.pointcut`, which defaults to `Endpoint`, which means intercept all external endpoint processors
+- feat(security) adds front-end abstraction for easy integration with SPA.
+- feat(security) Adds a user info fetch endpoint, defaults to `/userinfo`.
+- fix(oauth2-client) Fix the problem of not being able to get user information based on OAuth2.0 authentication.
+- fix(security) optimizes the permission decision algorithm and adds a resource pattern to match the permission configuration
+- fix (security) supports Base certification
+- fix(core) optimizes a large amount of code
+
+- feat(core) 优化 AOP 用户接口，提供装饰器`@Aspect()`
+- feat(core) `@Component()` 添加 `sysTags`，用于给注入到容器的对象标签分类，方便 AOP 基于 `sysTags` 控制拦截范围
+- feat(core) `@Component()` 添加默认值配置属性：`malagu.annotation.Component`
+- feat(core) 添加 AOP 全局开关控制：`malagu.aop.enabled`，默认开启
+- feat(security) 添加安全拦截访问控制：`malagu.security.aop.pointcut`，默认值为 `Endpoint`，表示拦截所有的对外端点处理器 
+- feat(security) 添加前端抽象，方便与 SPA 集成使用
+- feat(security) 添加获取用户信息端点，默认为 `/userinfo`
+- fix(oauth2-client) 修复基于 OAuth2.0 认证无法获取用户信息问题
+- fix(security) 优化权限决策算法，添加资源模式匹配权限配置
+- fix(security) 支持 Base 认证
+- fix(core) 优化大量代码
+
+
 ## v1.6.0
 
 - feat(web) adds gzip compression optimization to the cookie-based session storage scheme, greatly alleviating the 4KB request header limitation in Serverless scenarios, while also reducing the request header transfer burden

@@ -4,21 +4,17 @@ import { ErrorType } from '@malagu/core';
 export interface CatchMetadata {
     errorTypes: ErrorType[];
     target: any;
-    key: string;
-    descriptor: TypedPropertyDescriptor<Function>;
+    key: string | symbol;
+    descriptor: TypedPropertyDescriptor<any>;
 }
 
-export interface CatchDecorator {
-    (errorTypes: ErrorType | ErrorType[]): MethodDecorator;
-}
-
-export const Catch = <CatchDecorator>function (errorTypes: ErrorType | ErrorType[]) {
-    return (t: any, k: string, d: TypedPropertyDescriptor<Function>) => {
+export function Catch(errorTypes: ErrorType | ErrorType[]): MethodDecorator {
+    return (t, k, d) => {
         applyCatchDecorator(t, k, d, Array.isArray(errorTypes) ? errorTypes : [ errorTypes ]);
     };
 };
 
-export function applyCatchDecorator(target: any, key: string, descriptor: TypedPropertyDescriptor<Function>, errorTypes: ErrorType[]): void {
+export function applyCatchDecorator(target: any, key: string | symbol, descriptor: TypedPropertyDescriptor<any>, errorTypes: ErrorType[]): void {
     const metadata: CatchMetadata = { errorTypes, target, key, descriptor };
     let metadataList: CatchMetadata[] = [];
 

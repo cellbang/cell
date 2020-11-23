@@ -6,3 +6,4 @@ export * from './metadata-util';
 export * from './disposable';
 export * from './os';
 export * from './proxy-util';
+export * from './annotation-util';

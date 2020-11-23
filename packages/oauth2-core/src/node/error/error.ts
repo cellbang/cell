@@ -1,6 +1,6 @@
 import { CustomError } from '@malagu/core';
 import { OAuth2Error } from '../endpoint';
-import { AuthenticationError } from '@malagu/security';
+import { AuthenticationError } from '@malagu/security/lib/node';
 
 export class OAuth2AuthorizationError extends CustomError {
 

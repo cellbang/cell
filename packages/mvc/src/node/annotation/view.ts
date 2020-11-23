@@ -4,16 +4,12 @@ export interface ViewMetadata {
     viewName: string;
 }
 
-export interface ViewDecorator {
-    (viewName: string): (target: any, key: string, descriptor: TypedPropertyDescriptor<Function>) => void;
-}
-
-export const View = <ViewDecorator>function (viewName: string) {
-    return (t: any, k: string, d: TypedPropertyDescriptor<Function>) => {
+export function View(viewName: string): MethodDecorator {
+    return (t, k, d) => {
         applyViewDecorator(t, k, d, viewName);
     };
 };
 
-export function applyViewDecorator(target: any, targetKey: string, descriptor: TypedPropertyDescriptor<Function>, viewName: string): void {
+export function applyViewDecorator(target: any, targetKey: string | symbol, descriptor: TypedPropertyDescriptor<any>, viewName: string): void {
     Reflect.defineMetadata(METADATA_KEY.controllerView, { viewName }, target.constructor, targetKey);
 }

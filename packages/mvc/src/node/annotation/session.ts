@@ -11,22 +11,19 @@ export interface ResponseSessionMetadata {
 }
 
 export interface SessionDecorator {
-    (name?: string): (target: any, targetKey: string, parameterIndex: number) => any;
-    (target: any, targetKey: string, parameterIndex: number): any;
-    (name: string, value: string): (target: any, targetKey: string, descriptor: PropertyDescriptor) => any;
+    (name?: string): ParameterDecorator;
+    (name: string, value: string): MethodDecorator;
 
 }
 
-export const Session = <SessionDecorator>function (target: any, targetKey: string, parameterIndex: number) {
-    if (parameterIndex !== undefined) {
-        applyRequestSessionDecorator(target, targetKey, parameterIndex);
-    } else if (target && targetKey) {
-        return (t: any, tk: string, d: PropertyDescriptor) => {
-            applyResponseSessionDecorator(t, tk, d, target, targetKey);
+export const Session = <SessionDecorator>function (name?: string, value?: string) {
+    if (name && value) {
+        return (t: any, tk: string | symbol, d: PropertyDescriptor) => {
+            applyResponseSessionDecorator(t, tk, d, name, value);
         };
     } else {
-        return (t: any, tk: string, i: number) => {
-            applyRequestSessionDecorator(t, tk, i, target);
+        return (t: any, tk: string | symbol, i: number) => {
+            applyRequestSessionDecorator(t, tk, i, name);
         };
     }
 };

@@ -1,5 +1,5 @@
 import { AuthorizationSuccessHandler, AuthorizedClient, AuthorizedClientManager } from './authorization-protocol';
-import { Authentication } from '@malagu/security';
+import { Authentication } from '@malagu/security/lib/node';
 import { Component, Autowired } from '@malagu/core';
 
 @Component(AuthorizationSuccessHandler)

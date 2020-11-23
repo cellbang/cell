@@ -1,9 +1,5 @@
 import { METADATA_KEY } from '../constants';
-import { Policy, PolicyType } from '../access';
-
-export enum AuthorizeType {
-    Pre= 'Pre', Post= 'Post'
-}
+import { AuthorizeType, Policy, PolicyType } from '../../common';
 
 export interface ElOption {
     el: string;
@@ -18,7 +14,7 @@ export namespace ElOption {
 
 export const Authorize = function (elOrElOptionOrPolicy: string | ElOption | Policy) {
     const policy = getPolicy(elOrElOptionOrPolicy);
-    return (target: any, targetKey?: string, descriptor?: TypedPropertyDescriptor<Function>) => {
+    return (target: any, targetKey?: string | symbol, descriptor?: any) => {
         if (targetKey) {
             const policies: Policy[] = Reflect.getOwnMetadata(METADATA_KEY.authorize, target.constructor, targetKey) || [];
             policies.push(policy);
@@ -33,11 +29,11 @@ export const Authorize = function (elOrElOptionOrPolicy: string | ElOption | Pol
 };
 
 export function getPolicy(elOrElOptionOrPolicy: string | ElOption | Policy) {
-    let policy: Policy;
+    let policy = <Policy>elOrElOptionOrPolicy;
     if (typeof elOrElOptionOrPolicy === 'string') {
         policy = { authorizeType: AuthorizeType.Pre, el: elOrElOptionOrPolicy, type: PolicyType.El };
-    } else {
-        policy = { authorizeType: AuthorizeType.Pre, type: PolicyType.El, ...elOrElOptionOrPolicy};
+    } else if (elOrElOptionOrPolicy.el) {
+        policy = { type: PolicyType.El, ...elOrElOptionOrPolicy};
     }
     return policy;
 }

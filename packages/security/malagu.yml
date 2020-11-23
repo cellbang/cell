@@ -1,6 +1,8 @@
 malagu:
   security:
     enabled: true
+    loginRequired: true
+    openNewWindow: false
     usernameKey: username
     passwordKey: password
     loginPage: /login
@@ -9,10 +11,21 @@ malagu:
     loginSuccessUrl: /
     logoutUrl: /logout
     logoutMethod: POST
-    logoutSuccessUrl: /login
+    logoutSuccessUrl: ${malagu.security.loginPage}
     alwaysUseDefaultTargetUrl: false
     useReferer: false
     targetUrlParameter: redirect
+    userInfoEndpoint:
+      url: /userinfo
+      method: POST
+    userMapperRule:
+      github:
+        avatar: avatar_url
+        nickname: login
+frontend:
+  malagu:
+    security:
+      loginPage: /login?${malagu.security.targetUrlParameter}={redirect}
 backend:
   malagu:
     security:
@@ -24,5 +37,11 @@ backend:
         secret: 123456
         encodeHashAsBase64: true
       basic:
+        enabled: false
         realm: realm
+      policy:
+        '*': 
+          type: el
+          el: authenticated
+
 

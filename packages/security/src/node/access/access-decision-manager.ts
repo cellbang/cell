@@ -2,6 +2,7 @@ import { AccessDecisionManager, SecurityMetadata, AccessDecisionVoter, ACCESS_DE
 import { Component, Prioritizeable, Autowired } from '@malagu/core';
 import { AccessDeniedError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';
+import { HttpStatus } from '@malagu/web';
 
 @Component(AccessDecisionManager)
 export class AccessDecisionManagerImpl implements AccessDecisionManager {
@@ -34,9 +35,9 @@ export class AccessDecisionManagerImpl implements AccessDecisionManager {
 
     protected handleError() {
         if (SecurityContext.getAuthentication().authenticated) {
-            throw new AccessDeniedError('Access is denied');
+            throw new AccessDeniedError(HttpStatus.FORBIDDEN_REASON_PHRASE);
         }
-        throw new AuthenticationError('Need authentication');
+        throw new AuthenticationError(HttpStatus.UNAUTHORIZED_REASON_PHRASE);
     }
 
 }

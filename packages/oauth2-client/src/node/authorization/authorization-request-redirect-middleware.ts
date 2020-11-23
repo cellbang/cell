@@ -6,7 +6,7 @@ import { AuthorizationGrantType, AuthorizationRequest } from '@malagu/oauth2-cor
 import { RedirectStrategy } from '@malagu/web/lib/node';
 import { HttpMethod, HttpStatus } from '@malagu/web';
 import { ClientAuthorizationError } from '../error';
-import { RequestCache } from '@malagu/security';
+import { RequestCache } from '@malagu/security/lib/node';
 
 @Component(Middleware)
 export class AuthorizationRequestRedirectMiddleware implements Middleware {
@@ -75,7 +75,7 @@ export class AuthorizationRequestRedirectMiddleware implements Middleware {
             await this.authorizationRequestManager.save(authorizationRequest);
         }
         if (this.targetUrlParameter) {
-            const redirectUrl = Context.getRequest().query[this.targetUrlParameter];
+            const redirectUrl = <string>Context.getRequest().query[this.targetUrlParameter];
             if (redirectUrl) {
                 await this.requestCache.save({
                     redirectUrl,
