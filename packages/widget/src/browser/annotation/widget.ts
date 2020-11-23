@@ -1,9 +1,8 @@
-import { Constant } from '@malagu/core';
-import { interfaces } from 'inversify';
+import { ComponentId, Constant } from '@malagu/core';
 import { WidgetModel, WidgetType } from '../widget';
 
 export interface WidgetOption {
-    id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
+    id?: ComponentId | ComponentId[];
     rebind?: boolean;
     area: string;
     priority?: number;
@@ -11,8 +10,8 @@ export interface WidgetOption {
 }
 
 export const Widget =
-    function (areaOrWidgetOption: string | WidgetOption): (target: any) => any {
-        return (t: any) => {
+    function (areaOrWidgetOption: string | WidgetOption): ClassDecorator {
+        return t => {
             let widgetOption: WidgetOption;
             if (typeof areaOrWidgetOption === 'string') {
                 widgetOption = { area: areaOrWidgetOption };

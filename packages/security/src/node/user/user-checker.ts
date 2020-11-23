@@ -1,6 +1,7 @@
-import { User, UserChecker } from './user-protocol';
+import { UserChecker } from './user-protocol';
 import { Component, Autowired, Logger } from '@malagu/core';
 import { LockedError, AccountExpiredError, DisabledError, CredentialsExpiredError } from '../error';
+import { User } from '../../common';
 
 @Component(UserChecker)
 export class UserCheckerImpl implements UserChecker {

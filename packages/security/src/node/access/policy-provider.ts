@@ -1,7 +1,7 @@
-import { Policy, PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
-import { Component, Value } from '@malagu/core';
-import { postConstruct } from 'inversify';
-import { AuthorizeType } from '../annotation';
+import { PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
+import { Component, Value, PostConstruct } from '@malagu/core';
+import { AuthorizeType, Policy } from '../../common';
+import * as UrlPattern from 'url-pattern';
 
 @Component(PrincipalPolicyProvider)
 export class PrincipalPolicyProviderImpl implements PrincipalPolicyProvider {
@@ -15,40 +15,49 @@ export class PrincipalPolicyProviderImpl implements PrincipalPolicyProvider {
 @Component(ResourcePolicyProvider)
 export class ResourcePolicyProviderImpl implements ResourcePolicyProvider {
 
-    @Value('malagu.security.policies')
-    protected readonly policies?: any;
+    @Value('malagu.security.policy')
+    protected readonly policyMap?: { [resource: string]: (Policy[] | Policy) };
 
-    protected readonly policyMap: Map<string, Map<string, Policy[]>> = new Map<string, Map<string, Policy[]>>();
+    protected readonly metadata = {
+        [AuthorizeType.Pre]: new Map<string, Policy[]>(),
+        [AuthorizeType.Post]: new Map<string, Policy[]>()
+    };
 
-    @postConstruct()
+    @PostConstruct()
     protected async init(): Promise<void> {
-        if (this.policies) {
-            for (const resource of Object.keys(this.policies)) {
-                for (const options of this.policies[resource]) {
-                    let opts = options;
-                    if (!Array.isArray(options)) {
-                        opts = [ options ];
+        if (this.policyMap) {
+            for (const pattarn of Object.keys(this.policyMap)) {
+                const temp = this.policyMap[pattarn];
+                if (!temp) {
+                    continue;
+                }
+                const policies = Array.isArray(temp) ? temp : [ temp ];
+
+                for (const policy of policies) {
+                    if (policy.authorizeType !== AuthorizeType.Post) {
+                        policy.authorizeType = AuthorizeType.Pre;
                     }
-                    const preResult: Policy[] = [];
-                    const postResult: Policy[] = [];
-                    const result = new Map<string, Policy[]>();
-                    for (const opt of opts) {
-                        if (!opt.type || opt.type === AuthorizeType.Pre) {
-                            preResult.push(opt);
-                        } else if (opt.type === AuthorizeType.Post) {
-                            postResult.push(opt);
-                        }
-                        result.set(AuthorizeType.Pre, preResult);
-                        result.set(AuthorizeType.Post, postResult);
+                    const map = this.metadata[policy.authorizeType];
+                    let ps = map.get(pattarn);
+                    if (!ps) {
+                        ps = [];
+                        map.set(pattarn, ps);
                     }
-                    this.policyMap.set(resource, result);
+                    ps.push(policy);
                 }
             }
         }
     }
 
     async provide(resource: string, type: AuthorizeType): Promise<Policy[]> {
-        const result = this.policyMap.get(resource);
-        return result && result.get(type) || [];
+        const map = this.metadata[type];
+        const policies: Policy[] = [];
+        for (const pattarn of map.keys()) {
+            const result = new UrlPattern(pattarn).match(resource);
+            if (result) {
+                policies.push(...map.get(pattarn));
+            }
+        }
+        return policies;
     }
 }

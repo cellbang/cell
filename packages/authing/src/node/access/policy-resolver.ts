@@ -1,6 +1,7 @@
 import { Component } from '@malagu/core';
 import { AUTHING_POLICY_TYPE } from './policy-provider';
-import { PolicyResolver, Policy, SecurityMetadata } from '@malagu/security/lib/node';
+import { PolicyResolver, SecurityMetadata } from '@malagu/security/lib/node';
+import { Policy } from '@malagu/security';
 import * as UrlPattern from 'url-pattern';
 
 @Component(PolicyResolver)
@@ -10,9 +11,7 @@ export class AuthingPolicyResolver implements PolicyResolver {
         for (const p of policy.permissionList) {
             const pattern = new UrlPattern(p);
             const result = pattern.match(`${securityMetadata.resource}.${securityMetadata.action}`);
-            if (!!result) {
-                return true;
-            }
+            return !!result;
         }
         return false;
     }

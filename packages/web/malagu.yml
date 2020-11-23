@@ -17,6 +17,8 @@ malagu:
   client:
     config:
       withCredentials: true
+      headers:
+        X-Requested-With: XMLHttpRequest
 backend:
   devEntry: lib/node/application/dev-application-entry
   malagu:

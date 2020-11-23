@@ -12,7 +12,6 @@
     "class-validator": "^0.12.2",
     "es6-promise": "^4.2.4",
     "inversify": "^5.0.1",
-    "inversify-binding-decorators": "^4.0.0",
     "jexl": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",

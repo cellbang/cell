@@ -1,15 +1,13 @@
 import { Value, Component, Autowired } from '@malagu/core';
-import { UserService, User, ElPolicy, PolicyType, AuthorizeType } from '@malagu/security';
-import { Oidc2UserRequest } from './user-protocol';
+import { UserService } from '@malagu/security/lib/node';
+import { User } from '@malagu/security';
+import { OidcUserRequest } from './user-protocol';
 import { OAuth2UserRequest, UserResponseClient, INVALID_USER_INFO_RESPONSE_ERROR_CODE } from '../endpoint';
 import { ProviderDetailsManager } from '../provider';
 import { AuthorizationGrantType, StandardClaimNames, OAuth2AuthenticationError, IdTokenClaimNames } from '@malagu/oauth2-core';
 
 @Component()
-export class OidcUserService implements UserService<Oidc2UserRequest, User> {
-
-    @Value('malagu.security')
-    protected readonly options: any;
+export class OidcUserService implements UserService<OidcUserRequest, User> {
 
     @Value('malagu.oauth2.client.accessibleScopes')
     protected readonly accessibleScopes: string[];
@@ -20,7 +18,7 @@ export class OidcUserService implements UserService<Oidc2UserRequest, User> {
     @Autowired(UserResponseClient)
     protected readonly userResponseClient: UserResponseClient<OAuth2UserRequest>;
 
-    async load(userRequest: Oidc2UserRequest): Promise<User> {
+    async load(userRequest: OidcUserRequest): Promise<User> {
         const { idToken, clientRegistration } = userRequest;
         let claims: { [key: string]: any } = {};
         if (await this.shuldRetrieveuserInfo(userRequest)) {
@@ -56,23 +54,20 @@ export class OidcUserService implements UserService<Oidc2UserRequest, User> {
         const userNameAttributeName = providerDetails?.userInfoEndpoint?.userNameAttributeName || IdTokenClaimNames.SUB;
 
         return {
+            type: clientRegistration.registrationId,
             username: claims[userNameAttributeName],
             password: '',
             accountNonExpired: true,
             accountNonLocked: true,
             credentialsNonExpired: true,
             enabled: true,
-            policies: [ <ElPolicy>{
-                type: PolicyType.El,
-                authorizeType: AuthorizeType.Pre,
-                el: 'true'
-            } ],
+            policies: [],
             claims,
             idToken
         };
     }
 
-    protected async shuldRetrieveuserInfo(userRequest: Oidc2UserRequest) {
+    protected async shuldRetrieveuserInfo(userRequest: OidcUserRequest) {
         const { clientRegistration, accessToken } = userRequest;
         const providerDetails = await this.providerDetailsManager.get(clientRegistration.provider);
 

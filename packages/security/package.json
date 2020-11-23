@@ -2,8 +2,8 @@
   "name": "@malagu/security",
   "version": "1.6.0",
   "description": "",
-  "main": "lib/node/index.js",
-  "typings": "lib/node/index.d.ts",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/web": "^1.6.0",
     "crypto-js": "^4.0.0"

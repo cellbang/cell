@@ -33,7 +33,7 @@ const { Container } = require('inversify');
 const { FrontendApplication } = require('@malagu/core/lib/browser');
 const { CoreFrontendModule } = require('@malagu/core/lib/browser/module');
 
-const container = new Container();
+const container = new Container({ skipBaseClassChecks: true });
 container.load(CoreFrontendModule);
 
 ${loadStaticModuls(staticModules)}
@@ -70,7 +70,7 @@ const { Container } = require('inversify');
 const { CoreBackendModule } = require('@malagu/core/lib/node/module');
 require('source-map-support').install();
 
-const container = new Container();
+const container = new Container({ skipBaseClassChecks: true });
 container.load(CoreBackendModule);
 
 ${loadStaticModuls(staticModules)}

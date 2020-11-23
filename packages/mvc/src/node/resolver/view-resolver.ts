@@ -11,7 +11,7 @@ export class ViewResolverImpl implements ViewResolver {
     @Value('malagu.mvc.defaultViewName')
     protected readonly defaultViewName: string;
 
-    @Autowired
+    @Autowired(ViewProvider)
     protected readonly viewProvider: ViewProvider;
 
     async resolve(metadata: any, model: any): Promise<void> {

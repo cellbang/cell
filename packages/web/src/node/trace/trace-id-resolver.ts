@@ -10,7 +10,7 @@ export class TraceIdResolverImpl implements TraceIdResolver {
 
     resolve(): Promise<string> {
         if (Context.getRequest() && this.traceField ) {
-            const traceId = Context.getRequest().headers[this.traceField] as string | undefined;
+            const traceId = Context.getRequest().get(this.traceField);
             if (traceId) {
                 return Promise.resolve(traceId);
             }

@@ -1,10 +1,10 @@
 import { interfaces } from 'inversify';
 import { ContainerUtil } from '@malagu/core';
-import { RPC } from '../annotation';
+import { ID_KEY, RPC } from '../annotation';
 
 export namespace RpcUtil {
     export function get<T>(rpcServiceIdentifier: interfaces.ServiceIdentifier<T>): T {
-        return ContainerUtil.getNamed(RPC, rpcServiceIdentifier.toString());
+        return ContainerUtil.getTagged(RPC, ID_KEY, rpcServiceIdentifier);
     }
 
     export function toPath(serviceIdentifier: any) {

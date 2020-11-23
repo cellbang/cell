@@ -5,7 +5,7 @@ import { Component, Autowired, Value, IllegalArgumentError } from '@malagu/core'
 import { ClientRegistrationManager, ClientRegistration } from '../registration';
 import { RequestMatcher, Context } from '@malagu/web/lib/node';
 import { AUTHORIZATION_REQUEST_BASE_URI, DEFAULT_REDIRECT_URI } from '../constants';
-import { Base64StringKeyGenerator } from '@malagu/security';
+import { Base64StringKeyGenerator } from '@malagu/security/lib/node';
 import { SHA256, enc } from 'crypto-js';
 import { ProviderDetailsManager } from '../provider';
 import * as qs from 'qs';
@@ -143,7 +143,7 @@ export class DefaultAuthorizationRequestResolver implements AuthorizationRequest
     }
 
     protected getAction(defaultAction = 'login') {
-        return Context.getRequest().query['action'] || defaultAction;
+        return <string>Context.getRequest().query['action'] || defaultAction;
     }
 
 }

@@ -1,13 +1,15 @@
 import { Component, Autowired, Value } from '@malagu/core';
-import { AuthenticationProvider, Authentication, DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY } from './authentication-protocol';
+import { AuthenticationProvider, Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY,
+    BASE_AUTHENTICATION_PROVIDER_PRIORITY, AUTHENTICATION_SCHEME_BASIC } from './authentication-protocol';
 import { Context, RequestMatcher, RedirectStrategy } from '@malagu/web/lib/node';
 import { PasswordEncoder } from '../crypto';
-import { UserService, UserChecker, User } from '../user';
+import { UserService, UserChecker, UserMapper } from '../user';
 import { BadCredentialsError } from '../error';
-import { PathResolver } from '@malagu/web';
+import { HttpHeaders, PathResolver } from '@malagu/web';
+import { User } from '../../common';
 
 @Component(AuthenticationProvider)
-export class AuthenticationProviderImpl implements AuthenticationProvider {
+export class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     @Value('malagu.security')
     protected readonly options: any;
@@ -21,6 +23,9 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     @Autowired(UserChecker)
     protected readonly userChecker: UserChecker;
 
+    @Autowired(UserMapper)
+    protected readonly userMapper: UserMapper;
+
     @Autowired(RequestMatcher)
     protected readonly requestMatcher: RequestMatcher;
 
@@ -30,7 +35,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     @Autowired(RedirectStrategy)
     protected readonly redirectStrategy: RedirectStrategy;
 
-    priority = DEFAULT_AUTHENTICATION_PROVIDER_PRIORITY;
+    priority = USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY;
 
     async authenticate(): Promise<Authentication | undefined> {
         const username = this.doGetValue(this.options.usernameKey);
@@ -46,7 +51,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
 
         return {
             name: user.username,
-            principal: user,
+            principal: this.userMapper.map(user),
             credentials: '',
             policies: user.policies,
             authenticated: true
@@ -59,7 +64,7 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
         if (request.body) {
             return request.body[key];
         } else {
-            return request.query[key];
+            return <string>request.query[key];
         }
     }
 
@@ -68,3 +73,79 @@ export class AuthenticationProviderImpl implements AuthenticationProvider {
     }
 
 }
+
+@Component(AuthenticationProvider)
+export class BaseAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired(PasswordEncoder)
+    protected readonly passwordEncoder: PasswordEncoder;
+
+    @Autowired(UserService)
+    protected readonly userService: UserService<string, User>;
+
+    @Autowired(UserChecker)
+    protected readonly userChecker: UserChecker;
+
+    @Autowired(UserMapper)
+    protected readonly userMapper: UserMapper;
+
+    @Autowired(RequestMatcher)
+    protected readonly requestMatcher: RequestMatcher;
+
+    @Autowired(PathResolver)
+    protected readonly pathResolver: PathResolver;
+
+    @Autowired(RedirectStrategy)
+    protected readonly redirectStrategy: RedirectStrategy;
+
+    priority = BASE_AUTHENTICATION_PROVIDER_PRIORITY;
+
+    async authenticate(): Promise<Authentication | undefined> {
+        const request = Context.getRequest();
+        const header = request.get(HttpHeaders.AUTHORIZATION)!.trim();
+
+        if (header.toLowerCase() === (AUTHENTICATION_SCHEME_BASIC.toLowerCase())) {
+            throw new BadCredentialsError('Empty basic authentication token');
+        }
+        const token = Buffer.from(header.substring(6), 'base64').toString('utf8');
+        const delim = token.indexOf(':');
+        if (delim === -1) {
+            throw new BadCredentialsError('Invalid basic authentication token');
+        }
+        const username = token.substring(0, delim);
+        const password = token.substring(delim);
+        if (!password || !username) {
+            throw new BadCredentialsError('Bad credentials');
+        }
+        const user = await this.userService.load(username);
+        await this.userChecker.check(user);
+        if (!await this.passwordEncoder.matches(password, user.password)) {
+            throw new BadCredentialsError('Bad credentials');
+        }
+
+        return {
+            name: user.username,
+            principal: this.userMapper.map(user),
+            credentials: '',
+            policies: user.policies,
+            authenticated: true,
+            next: true
+        };
+
+    }
+
+    async support(): Promise<boolean> {
+        const request = Context.getRequest();
+        let header = request.get(HttpHeaders.AUTHORIZATION);
+        if (!header) {
+            return false;
+        }
+        header = header.trim();
+        if (header.toLowerCase().startsWith(AUTHENTICATION_SCHEME_BASIC.toLowerCase())) {
+            return false;
+        }
+        return true;
+    }
+
+}
+

@@ -1,5 +1,5 @@
 import { AuthorizationSuccessHandler, AuthorizedClient, AuthorizedClientManager, AuthorizationFailureHandler } from './authorization-protocol';
-import { Authentication } from '@malagu/security';
+import { Authentication } from '@malagu/security/lib/node';
 import { Component, Autowired } from '@malagu/core';
 import { OAuth2AuthorizationError, OAuth2ErrorCodes } from '@malagu/oauth2-core';
 import { ClientAuthorizationError } from '../error';
