@@ -1,6 +1,6 @@
 import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { readdirSync, statSync, readFileSync, existsSync, readFile } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
 import  * as JSZip from 'jszip';
@@ -13,6 +13,12 @@ let fcClient: any;
 let apiClient: any;
 let profile: Profile;
 let region: string;
+
+export interface CodeUri {
+    value?: string;
+    exclude?: string | RegExp;
+    include?: string | RegExp
+}
 
 export default async (context: DeployContext) => {
     const { cfg } = context;
@@ -36,7 +42,7 @@ export default async (context: DeployContext) => {
 
 async function doDeploy(context: DeployContext, deployConfig: any) {
     const { pkg } = context;
-    const codeDir = getHomePath(pkg);
+    let codeDir = getHomePath(pkg);
     if (!existsSync(codeDir)) {
         console.log(chalk`{yellow Please build app first with "malagu build"}`);
         return;
@@ -57,9 +63,11 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     });
 
     const { service, trigger, apiGateway, customDomain, alias, type } = deployConfig;
-    const fundtionMeta = deployConfig.function;
+    const functionMeta = deployConfig.function;
     const serviceName = service.name;
-    const functionName = fundtionMeta.name;
+    const functionName = functionMeta.name;
+    let codeUri = functionMeta.codeUri;
+    delete functionMeta.codeUri;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of Function Compute...`);
     console.log(chalk`{bold.cyan - FC:}`);
@@ -67,9 +75,15 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
     await createOrUpdateService(serviceName, service);
 
     const zip = new JSZip();
-    await loadCode(codeDir, zip);
+    if (typeof codeUri === 'string') {
+        codeUri = { value: codeUri };
+    }
+    if (codeUri?.value) {
+        codeDir = resolve(codeDir, codeUri.value);
+    }
+    await loadCode(codeDir, zip, codeUri);
 
-    await createOrUpdateFunction(functionName, fundtionMeta, zip);
+    await createOrUpdateFunction(functionName, functionMeta, zip);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);
 
@@ -411,14 +425,26 @@ async function createOrUpdateAlias(alias: any, versionId: string) {
     }
 }
 
-async function loadCode(codeDir: string, zip: JSZip) {
+async function loadCode(codeDir: string, zip: JSZip, codeUri?: CodeUri) {
     const files = readdirSync(codeDir);
     await Promise.all(files.map(async fileName => {
         const fullPath = join(codeDir, fileName);
+        if (codeUri?.include) {
+            const includes = typeof codeUri.include === 'string' ? new RegExp(codeUri.include) : codeUri.include;
+            if (!includes.test(fullPath)) {
+                return;
+            }
+        }
+        if (codeUri?.exclude) {
+            const exclude = typeof codeUri.exclude === 'string' ? new RegExp(codeUri.exclude) : codeUri.exclude;
+            if (exclude.test(fullPath)) {
+                return;
+            }
+        }
         const file = statSync(fullPath);
         if (file.isDirectory()) {
             const dir = zip.folder(fileName);
-            await loadCode(fullPath, dir);
+            await loadCode(fullPath, dir, codeUri);
         } else {
             zip.file(fileName, readFileSync(fullPath), {
                 unixPermissions: '755'

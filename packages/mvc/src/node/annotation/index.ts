@@ -8,3 +8,8 @@ export * from './view';
 export * from './cookie';
 export * from './session';
 export * from './catch';
+export * from './file';
+export * from './text';
+export * from './json';
+export * from './html';
+

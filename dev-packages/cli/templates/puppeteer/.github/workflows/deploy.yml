@@ -1,0 +1,25 @@
+name: Malagu Deploy
+
+on: push
+
+jobs:
+  malagu-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - uses: bahmutov/npm-install@v1
+      - run: npm run lint --if-present
+      - run: npm test
+      - if: ${{ github.ref == 'refs/heads/master' }}
+        env: ${{ secrets }}
+        run: npx malagu deploy -m prod
+      - if: ${{ github.ref == 'refs/heads/pre' }}
+        env: ${{ secrets }}
+        run: npx malagu deploy -m pre
+      - if: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/pre' }}
+        env: ${{ secrets }}
+        run: npx malagu deploy -m test
