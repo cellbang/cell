@@ -5,11 +5,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as merge from 'webpack-merge';
 import * as path from 'path';
+import { getWebpackConfig } from '../utils';
 
 export class BaseConfigFactory {
 
     create(config: any, context: CliContext, target: string) {
-        const { dev, pkg } = context;
+        const { dev, pkg, cfg } = context;
+        let sourceMaploaderExclude = getWebpackConfig(cfg, target).sourceMaploaderExclude || {};
+        sourceMaploaderExclude = Object.keys(sourceMaploaderExclude).map(key => sourceMaploaderExclude[key]);
+        sourceMaploaderExclude = new RegExp(['jsonc-parser|class-transformer|smart-buffer|socks|agent-base', ...sourceMaploaderExclude].join('|'));
         const webpackMode = dev ? 'development' : 'production';
         const baseConfig = {
             name: target,
@@ -40,7 +44,7 @@ export class BaseConfigFactory {
                         test: /\.js$/,
                         enforce: 'pre',
                         use: 'source-map-loader',
-                        exclude: /jsonc-parser|class-transformer/
+                        exclude: sourceMaploaderExclude
                     },
                     {
                         test: /\.tsx?$/,

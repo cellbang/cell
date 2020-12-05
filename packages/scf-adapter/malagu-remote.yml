@@ -15,7 +15,9 @@ malagu:
       name: ${pkg.name}
       namespace: ${malagu['scf-adapter'].namespace.name}
       handler: index.handler
-      memorySize: 256
+      codeUri:
+        exclude: malagu.yml
+      memorySize: 512
       runtime: Nodejs12.16
       timeout: 15
     alias:

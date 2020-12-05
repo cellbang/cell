@@ -1,7 +1,7 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
 import { CliContext } from '../../context';
-import { existsSync, ensureDirSync, writeFileSync, removeSync } from 'fs-extra';
+import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
 import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig, getDevSuccessInfo } from '../utils';
 import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
 import yaml = require('js-yaml');
@@ -77,16 +77,12 @@ export class CopyWepackPluginConfigFactory {
 
 export class EnvironmentPluginConfigFactory {
     create(config: any, context: CliContext, target: string) {
-        const { cfg, pkg, dev } = context;
+        const { cfg, pkg } = context;
         const c = getConfig(cfg, target);
         const homePath = getHomePath(pkg, target);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
-        if (dev) {
-            writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
-        } else {
-            removeSync(configPath);
-        }
+        writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
         return {
             plugins: [
                 new webpack.EnvironmentPlugin({

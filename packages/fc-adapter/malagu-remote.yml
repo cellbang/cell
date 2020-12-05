@@ -19,10 +19,12 @@ malagu:
       name: ${pkg.name}
       serviceName: ${malagu['fc-adapter'].service.name}
       handler: backend/dist/index.handler
-      memorySize: 256
+      memorySize: 512
       runtime: "${malagu['fc-adapter'].type == 'custom' ? 'custom' : 'nodejs12'}"
       timeout: 15 # 15s
       instanceConcurrency: 10
+      codeUri:
+        exclude: malagu.yml
       bootstrap: 'node backend/dist/index.js'
     trigger:
       name: ${malagu['fc-adapter'].function.name}-${malagu['fc-adapter'].alias.name}

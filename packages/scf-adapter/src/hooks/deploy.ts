@@ -1,6 +1,6 @@
 import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
 import { ProfileProvider, Profile } from './profile-provider';
-import { join } from 'path';
+import { join, resolve as pathResolve } from 'path';
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 import * as JSZip from 'jszip';
 import * as ora from 'ora';
@@ -24,6 +24,12 @@ let scfClientExt: any;
 let scfClient: any;
 let apiClient: any;
 let profile: Profile;
+
+export interface CodeUri {
+    value?: string;
+    exclude?: string | RegExp;
+    include?: string | RegExp
+}
 
 class HttpConnection {
     static doRequest(method: string, url: string, data: any, callback: any, opt = {}) {
@@ -153,7 +159,7 @@ export default async (context: DeployContext) => {
 
 async function doDeploy(context: DeployContext, deployConfig: any, region: string) {
     const { pkg } = context;
-    const codeDir = getHomePath(pkg);
+    let codeDir = getHomePath(pkg);
     if (!existsSync(codeDir)) {
         console.log(chalk`{yellow Please build app first with "malagu build"}`);
         return;
@@ -165,8 +171,10 @@ async function doDeploy(context: DeployContext, deployConfig: any, region: strin
     apiClient = new ApiClient(credential, region);
 
     const { namespace, apiGateway, customDomain, alias, type } = deployConfig;
-    const fundtionMeta = deployConfig.function;
-    const functionName = fundtionMeta.name;
+    const functionMeta = deployConfig.function;
+    const functionName = functionMeta.name;
+    let codeUri = functionMeta.codeUri;
+    delete functionMeta.codeUri;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of SCF...`);
     console.log(chalk`{bold.cyan - SCF:}`);
@@ -174,9 +182,14 @@ async function doDeploy(context: DeployContext, deployConfig: any, region: strin
     await createOrUpdateNamespace(namespace);
 
     const zip = new JSZip();
-    await loadCode(codeDir, zip);
-
-    await createOrUpdateFunction(fundtionMeta, zip);
+    if (typeof codeUri === 'string') {
+        codeUri = { value: codeUri };
+    }
+    if (codeUri?.value) {
+        codeDir = pathResolve(codeDir, codeUri.value);
+    }
+    await loadCode(codeDir, zip, codeUri);
+    await createOrUpdateFunction(functionMeta, zip);
 
     const functionVersion = await publishVersion(namespace.name, functionName);
 
@@ -427,14 +440,26 @@ async function createOrUpdateAlias(alias: any, functionVersion: string) {
     }
 }
 
-async function loadCode(codeDir: string, zip: JSZip) {
+async function loadCode(codeDir: string, zip: JSZip, codeUri?: CodeUri) {
     const files = readdirSync(codeDir);
     await Promise.all(files.map(async fileName => {
         const fullPath = join(codeDir, fileName);
+        if (codeUri?.include) {
+            const includes = typeof codeUri.include === 'string' ? new RegExp(codeUri.include) : codeUri.include;
+            if (!includes.test(fullPath)) {
+                return;
+            }
+        }
+        if (codeUri?.exclude) {
+            const exclude = typeof codeUri.exclude === 'string' ? new RegExp(codeUri.exclude) : codeUri.exclude;
+            if (exclude.test(fullPath)) {
+                return;
+            }
+        }
         const file = statSync(fullPath);
         if (file.isDirectory()) {
             const dir = zip.folder(fileName);
-            await loadCode(fullPath, dir);
+            await loadCode(fullPath, dir, codeUri);
         } else {
             zip.file(fileName, readFileSync(fullPath), {
                 unixPermissions: '755'
