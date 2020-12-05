@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.8.1
+
+- feat(cli) supports version update notification
+- feat(cli) 支持版本更新通知
+
 ## v1.8.0
 
 - feat(cli) add the `malagu.webpack.sourceMaploaderExclude` property to ignore the warning message that the source map cannot be loaded
