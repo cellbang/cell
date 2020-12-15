@@ -1,9 +1,11 @@
 targets:
   - backend
 malagu:
+  cloud:
+    region: cn-hangzhou                            # 指定存放 headless 相关二进制的 oss 的地域，建议与应用部署的地域一致
+    credentials:
+      accessKeyId: xxxxxxxxxxxxxxxxxxxxxxxx         # 指定能够访问存放 headless 相关二进制 accessKeyId，至少具有读该 Object 的权限
+      accessKeySecret: xxxxxxxxxxxxxxxxxxxxxx
   puppeteer:
     bucket: headless-lib                            # 指定存放 headless 相关二进制的 oss 的 Bucket 名称 headless-lib
     object: headless-lib.tar.gz                     # 指定存放 headless 相关二进制的 oss 的 objeck 名称，默认 headless-lib.tar.gz
-    accessKeyId: xxxxxxxxxxxxxxxxxxxxxxxx           # 指定能够访问存放 headless 相关二进制 accessKeyId，至少具有读该 Object 的权限
-    accessKeySecret: xxxxxxxxxxxxxxxxxxxxxx
-    region: oss-cn-hangzhou                         # 指定存放 headless 相关二进制的 oss 的地域，建议与应用部署的地域一致

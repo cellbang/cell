@@ -6,7 +6,7 @@ export const BrowserInstaller = Symbol('BrowserInstaller');
 export interface PuppeteerConfig {
     launchOptions: LaunchOptions;
     bucket: string;
-    object: string;
+    key: string;
     internal: boolean;
     accessKeyId: string;
     accessKeySecret: string;
