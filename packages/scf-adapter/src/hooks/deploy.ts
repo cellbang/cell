@@ -1,18 +1,15 @@
-import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
-import { ProfileProvider, Profile } from './profile-provider';
-import { join, resolve as pathResolve } from 'path';
-import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
+import { DeployContext } from '@malagu/cli';
 import * as JSZip from 'jszip';
 import * as ora from 'ora';
 import { promisify } from 'util';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
+import { Credentials } from '@malagu/cloud';
+import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';
+import { ScfClientExt } from './scf-client';
 
 const { scf, common, apigateway } = require('tencentcloud-sdk-nodejs');
-
 const chalk = require('chalk');
-const crypto = require('crypto');
-const request = require('request');
 
 const ScfClient = scf.v20180416.Client;
 const scfModels = scf.v20180416.Models;
@@ -23,172 +20,26 @@ const apiModels = apigateway.v20180808.Models;
 let scfClientExt: any;
 let scfClient: any;
 let apiClient: any;
-let profile: Profile;
-
-export interface CodeUri {
-    value?: string;
-    exclude?: string | RegExp;
-    include?: string | RegExp
-}
-
-class HttpConnection {
-    static doRequest(method: string, url: string, data: any, callback: any, opt = {}) {
-        const req: any = {
-            method: method,
-            url: url
-        };
-        Object.assign(req, opt);
-        request(req, function (error: Error, response: any, body: any) {
-            callback(error, response, body);
-        });
-    }
-}
-
-class ScfClientExt extends ScfClient {
-
-    constructor(credential: any, region: string) {
-        super(credential, region);
-    }
-
-    doRequest(action: string, req: any) {
-        let params = req; // this.mergeData(req);
-        const optional = {
-            timeout: this.profile.httpProfile.reqTimeout * 1000
-        };
-        params = this.formatRequestData(action, params, optional);
-        return new Promise(
-            (resolve, reject) => {
-                HttpConnection.doRequest(this.profile.httpProfile.reqMethod,
-                    this.profile.httpProfile.protocol + this.getEndpoint() + this.path,
-                    params, (error: Error, response: any, data: any) => {
-                        if (error) {
-                            reject(error);
-                        } else if (response.statusCode !== 200) {
-                            reject(new Error(response.statusMessage));
-                        } else {
-                            data = JSON.parse(data);
-                            if (data.Response.Error) {
-                                reject(new Error(data.Response.Error.Message));
-                            } else {
-                                resolve(data.Response);
-                            }
-                        }
-                    },  // callback
-                    optional) // doRequest
-                    ;
-            });
-    }
-
-    formatRequestData(action: string, params: any, optional: any) {
-        const contentType = 'application/json';
-        const service = 'scf';
-        const newDate = new Date();
-        const timestamp = Math.ceil(newDate.getTime() / 1000);
-        const date = newDate.toISOString().replace(/\T.+/, '');
-        optional.headers = {
-            'Content-Type': contentType,
-            'Host': this.endpoint,
-            'X-TC-Action': action,
-            'X-TC-RequestClient': this.sdkVersion,
-            'X-TC-Timestamp': timestamp,
-            'X-TC-Version': this.apiVersion,
-            'X-TC-Region': this.region,
-            'X-TC-Language': this.profile.language
-        };
-
-        const signature = this.getSignature(params, optional, date, service);
-
-        const auth = `TC3-HMAC-SHA256 Credential=${this.credential.secretId}/${date}/${service}/tc3_request, SignedHeaders=content-type;host, Signature=${signature}`;
-
-        optional.headers['Authorization'] = auth;
-
-        return params;
-    }
-
-    getSignature(params: any, optional: any, date: string, service: string) {
-        // eslint-disable-next-line no-null/no-null
-        optional.body = JSON.stringify(params, (k, v) => v === null ? undefined : v);
-        const canonical_uri = '/';
-        const canonical_querystring = '';
-        const payload = optional.body;
-        const payloadHash = crypto.createHash('sha256').update(payload, 'utf8').digest();
-        const canonical_headers = `content-type:${optional.headers['Content-Type']}\nhost:${optional.headers['Host']}\n`;
-        const signedHeaders = 'content-type;host';
-        const canonicalRequest = `POST\n${canonical_uri}\n${canonical_querystring}\n${canonical_headers}\n${signedHeaders}\n${payloadHash.toString('hex')}`;
-        const algorithm = 'TC3-HMAC-SHA256';
-        const credentialScope = `${date}/${service}/tc3_request`;
-        const canonicalRequestHash = crypto.createHash('sha256').update(canonicalRequest, 'utf8').digest();
-        const stringToSign = `${algorithm}\n${optional.headers['X-TC-Timestamp']}\n${credentialScope}\n${canonicalRequestHash.toString('hex')}`;
-        const secretDate = this.sign(`TC3${this.credential.secretKey}`, date, false);
-        const secretService = this.sign(Buffer.from(secretDate.digest('hex'), 'hex'), service, false);
-        const secretSigning = this.sign(Buffer.from(secretService.digest('hex'), 'hex'), 'tc3_request', false);
-        const signature = this.sign(Buffer.from(secretSigning.digest('hex'), 'hex'), stringToSign, true);
-        return signature;
-    }
-
-    sign(key: string | Buffer, msg: string, hex: boolean) {
-        if (hex) {
-            return crypto
-                .createHmac('sha256', key)
-                .update(msg, 'utf8')
-                .digest('hex');
-        }
-        return crypto.createHmac('sha256', key).update(msg, 'utf8');
-    }
-}
 
 export default async (context: DeployContext) => {
-    const { cfg } = context;
+    const { cfg, pkg } = context;
 
-    const deployConfig = getMalaguConfig(cfg, BACKEND_TARGET)['scf-adapter'];
+    const adapterConfig = FaaSAdapterUtils.getConfiguration<any>(cfg);
 
-    const profileProvider = new ProfileProvider();
-    profile = {
-        ...await profileProvider.provide(),
-        ...deployConfig.profile
-
-    };
-
-    const regions = deployConfig.regions || [profile.defaultRegion];
-    for (const region of regions) {
-        await doDeploy(context, deployConfig, region);
-        console.log();
-    }
-
-};
-
-async function doDeploy(context: DeployContext, deployConfig: any, region: string) {
-    const { pkg } = context;
-    let codeDir = getHomePath(pkg);
-    if (!existsSync(codeDir)) {
-        console.log(chalk`{yellow Please build app first with "malagu build"}`);
-        return;
-    }
-    const credential = new common.Credential(profile.secretId, profile.secretKey);
-
-    scfClient = new ScfClient(credential, region);
-    scfClientExt = new ScfClientExt(credential, region);
-    apiClient = new ApiClient(credential, region);
-
-    const { namespace, apiGateway, customDomain, alias, type } = deployConfig;
-    const functionMeta = deployConfig.function;
+    const profileProvider = new DefaultProfileProvider();
+    const { region, credentials } = await profileProvider.provide(adapterConfig);
+    await createClients(region, credentials);
+    const { namespace, apiGateway, customDomain, alias, type } = adapterConfig;
+    const functionMeta = adapterConfig.function;
     const functionName = functionMeta.name;
-    let codeUri = functionMeta.codeUri;
-    delete functionMeta.codeUri;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of SCF...`);
     console.log(chalk`{bold.cyan - SCF:}`);
 
     await createOrUpdateNamespace(namespace);
 
-    const zip = new JSZip();
-    if (typeof codeUri === 'string') {
-        codeUri = { value: codeUri };
-    }
-    if (codeUri?.value) {
-        codeDir = pathResolve(codeDir, codeUri.value);
-    }
-    await loadCode(codeDir, zip, codeUri);
+    const codeLoader = new DefaultCodeLoader();
+    const zip = await codeLoader.load(context, adapterConfig);
     await createOrUpdateFunction(functionMeta, zip);
 
     const functionVersion = await publishVersion(namespace.name, functionName);
@@ -216,7 +67,15 @@ async function doDeploy(context: DeployContext, deployConfig: any, region: strin
 
     }
     console.log('Deploy finished');
+    console.log();
+};
 
+async function createClients(region: string, credentials: Credentials) {
+    const credential = new common.Credential(credentials.accessKeyId, credentials.accessKeySecret);
+
+    scfClient = new ScfClient(credential, region);
+    scfClientExt = new ScfClientExt(credential, region);
+    apiClient = new ApiClient(credential, region);
 }
 
 function cleanObj(obj: any) {
@@ -438,34 +297,6 @@ async function createOrUpdateAlias(alias: any, functionVersion: string) {
             throw error;
         }
     }
-}
-
-async function loadCode(codeDir: string, zip: JSZip, codeUri?: CodeUri) {
-    const files = readdirSync(codeDir);
-    await Promise.all(files.map(async fileName => {
-        const fullPath = join(codeDir, fileName);
-        if (codeUri?.include) {
-            const includes = typeof codeUri.include === 'string' ? new RegExp(codeUri.include) : codeUri.include;
-            if (!includes.test(fullPath)) {
-                return;
-            }
-        }
-        if (codeUri?.exclude) {
-            const exclude = typeof codeUri.exclude === 'string' ? new RegExp(codeUri.exclude) : codeUri.exclude;
-            if (exclude.test(fullPath)) {
-                return;
-            }
-        }
-        const file = statSync(fullPath);
-        if (file.isDirectory()) {
-            const dir = zip.folder(fileName);
-            await loadCode(fullPath, dir, codeUri);
-        } else {
-            zip.file(fileName, readFileSync(fullPath), {
-                unixPermissions: '755'
-            });
-        }
-    }));
 }
 
 function parseServiceMeta(req: any, serviceMeta: any) {

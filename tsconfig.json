@@ -27,6 +27,12 @@
       ],
       "@malagu/react": [
         "packages/react/src/browser"
+      ],
+      "@malagu/cloud": [
+        "packages/cloud/src/common"
+      ],
+      "@malagu/faas-adapter/lib/hooks": [
+        "packages/faas-adapter/src/hooks"
       ]
     },
     "plugins": [

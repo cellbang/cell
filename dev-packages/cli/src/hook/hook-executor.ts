@@ -55,7 +55,7 @@ export class HookExecutor {
         let current: any = config;
         for (const p of properties) {
             current = current[p];
-            if (current === undefined) {
+            if (!current) {
                 break;
             }
         }

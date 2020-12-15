@@ -4,8 +4,7 @@ malagu:
     launchOptions:
       headless: true
       executablePath: ${malagu.puppeteer.setupPath}/headless-chromium
-    internal: true
     bucket: headless-lib
-    object: headless-lib.tar.gz
+    key: headless-lib.tar.gz
     setupPath: /tmp
     libPath: ${malagu.puppeteer.setupPath}/lib/usr/lib/x86_64-linux-gnu/

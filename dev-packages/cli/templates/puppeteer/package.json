@@ -12,6 +12,7 @@
   "dependencies": {
     "@malagu/mvc": "latest",
     "@malagu/puppeteer": "latest",
+    "@malagu/oss": "latest",
     "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {
