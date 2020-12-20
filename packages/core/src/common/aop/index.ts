@@ -1,2 +1,3 @@
 export * from './aop-protocol';
-export * from './method-advice';
+export * from './class-filter';
+export * from './aop-proxy-factory';

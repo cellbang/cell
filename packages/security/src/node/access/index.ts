@@ -5,3 +5,4 @@ export * from './method-advice';
 export * from './policy-provider';
 export * from './policy-resolver';
 export * from './security-metadata-source';
+export * from './resource-name-resolver';

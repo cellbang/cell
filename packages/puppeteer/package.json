@@ -1,0 +1,50 @@
+{
+  "name": "@malagu/puppeteer",
+  "version": "1.9.0",
+  "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/cloud": "^1.9.0",
+    "puppeteer-core": "^5.5.0",
+    "tar": "^4.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-remote.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^1.9.0",
+    "@types/puppeteer-core": "^2.0.0",
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

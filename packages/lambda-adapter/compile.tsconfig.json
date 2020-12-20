@@ -1,0 +1,12 @@
+{
+  "extends": "../../configs/base.tsconfig",
+  "compilerOptions": {
+    "target": "es6",
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": "."
+  },
+  "include": [
+    "src"
+  ]
+}

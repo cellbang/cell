@@ -1,14 +1,21 @@
 import * as React from 'react';
-import { Component } from '@malagu/core';
+import { Component, Autowired, PostConstruct } from '@malagu/core';
 import * as icons from 'grommet-icons';
 import { IconProps } from './icon-protocol';
-import { IconResolver } from '@malagu/react';
-import { Cellbang } from './icon';
-
-(icons as any).Cellbang = Cellbang;
+import { ICON, IconResolver } from '@malagu/react';
 
 @Component(IconResolver)
 export class IconResolverImpl implements IconResolver<IconProps> {
+
+    @Autowired(ICON)
+    protected readonly extendedIcons: React.ComponentType<any>[];
+
+    @PostConstruct()
+    protected init() {
+        for (const icon of this.extendedIcons) {
+            (icons as any)[icon.name] = icon;
+        }
+    }
 
     async resolve({ icon, ...rest }: IconProps): Promise<React.ReactNode> {
         if (!icon) {

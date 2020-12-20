@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "1.5.1",
+  "version": "1.9.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -12,7 +12,6 @@
     "class-validator": "^0.12.2",
     "es6-promise": "^4.2.4",
     "inversify": "^5.0.1",
-    "inversify-binding-decorators": "^4.0.0",
     "jexl": "^2.1.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
@@ -55,7 +54,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.5.1",
+    "@malagu/ext-scripts": "^1.9.0",
     "@types/traverse": "^0.6.32"
   },
   "nyc": {

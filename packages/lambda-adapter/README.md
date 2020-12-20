@@ -1,0 +1,1 @@
+# Malagu - Lambda Adapter Component

@@ -1,14 +1,18 @@
-import { fluentProvide } from 'inversify-binding-decorators';
-import { interfaces } from 'inversify';
+import { decorate, injectable, interfaces, METADATA_KEY as inversify_METADATA_KEY } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { MethodBeforeAdvice, AfterReturningAdvice, AfterThrowsAdvice } from '../aop/aop-protocol';
-import { isResolveMode } from '../utils';
+import { ConfigUtil } from '../config/config-util';
+import { AnnotationUtil } from '../utils';
+
+export type ComponentId = interfaces.ServiceIdentifier<any>;
+
+export const COMPONENT_TAG = 'Component';
 
 export enum Scope {
     Request, Singleton, Transient
 }
+
 export interface ComponentOption {
-    id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
+    id?: ComponentId | ComponentId[];
     scope?: Scope;
     name?: string | number | symbol;
     tag?: { tag: string | number | symbol, value: any },
@@ -16,127 +20,104 @@ export interface ComponentOption {
     when?: (request: interfaces.Request) => boolean
     rebind?: boolean;
     proxy?: boolean;
+    sysTags?: string[],
+    onActivation?: (context: interfaces.Context, t: any) => any;
 }
-export namespace ComponentOption {
-    export function is(options: any): options is ComponentOption {
-        return typeof options === 'object' && !Array.isArray(options);
-    }
+
+export interface ComponentMetadata {
+    ids:  ComponentId[];
+    scope: Scope;
+    name?: string | number | symbol;
+    tag?: { tag: string | number | symbol, value: any },
+    default?: boolean;
+    when?: (request: interfaces.Request) => boolean
+    rebind: boolean;
+    proxy: boolean;
+    sysTags: string[]
+    onActivation?: (context: interfaces.Context, t: any) => any;
+    target: any;
 }
+
+export type IdOrComponentOption = ComponentId | ComponentId[] | ComponentOption;
 
 export interface ComponentDecorator {
-    (option?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): (target: any) => any;
+    (idOrOption?: IdOrComponentOption): ClassDecorator;
+    (...ids: ComponentId[]): ClassDecorator;
 }
 
-export const Component =
-    <ComponentDecorator>function (idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): (target: any) => any {
-        const option = getComponentOption(idOrOption);
-        return (t: any) => {
-            applyComponentDecorator(option, t);
-        };
+export const Component = <ComponentDecorator>function (...idOrOption: any): ClassDecorator {
+    return (t: any) => {
+        const option = parseComponentOption(t, idOrOption);
+        applyComponentDecorator(option, t);
     };
+};
 
-export function getComponentOption(idOrOption?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[] | ComponentOption): ComponentOption {
-    let option: ComponentOption = {};
+const defaultComponentOption: ComponentOption = {
+    scope: Scope.Singleton,
+    rebind: false,
+    proxy: false,
+    ...ConfigUtil.getRaw().malagu?.annotation?.Component
+};
 
-    if (ComponentOption.is(idOrOption)) {
-        option = { ...idOrOption };
-    } else if (idOrOption) {
-        option = { id: idOrOption };
-    }
-    return option;
-}
-
-function doProxy(context: interfaces.Context, t: any): ProxyConstructor {
-    const proxy = new Proxy(t, {
-        get: (target, method, receiver) => {
-            if (isResolveMode()) {
-                return t;
-            }
-            const func = target[method];
-            if (typeof func === 'function') {
-                return async (...args: any[]) => {
-                    try {
-                        const beforeAdvices = context.container.getAll<MethodBeforeAdvice>(MethodBeforeAdvice) || [];
-                        for (const advice of beforeAdvices) {
-                            await advice.before(method, args, t);
-                        }
-                        const returnValue = await func.apply(target, args);
-                        const afterReturningAdvices = context.container.getAll<AfterReturningAdvice>(AfterReturningAdvice) || [];
-                        for (const advice of afterReturningAdvices) {
-                            await advice.afterReturning(returnValue, method, args, t);
-                        }
-                        return returnValue;
-                    } catch (error) {
-                        const afterThrowsAdvices = context.container.getAll<AfterThrowsAdvice>(AfterThrowsAdvice) || [];
-                        for (const advice of afterThrowsAdvices) {
-                            await advice.afterThrows(error, method, args, t);
-                        }
-                        throw error;
-                    }
-                };
-            }
-            return func;
+export function parseComponentOption(target: any, idOrOption: any) {
+    if (Array.isArray(idOrOption)) {
+        if (idOrOption.length === 1) {
+            idOrOption = idOrOption[0];
+        } else if (idOrOption.length === 0) {
+            idOrOption = undefined;
         }
-    });
-    return proxy;
+    }
+    const option = AnnotationUtil.getValueOrOption<ComponentOption>(idOrOption);
+
+    const parsed = { ...defaultComponentOption, ...option };
+    let ids: ComponentId[];
+    if (Array.isArray(parsed.id)) {
+        ids = parsed.id;
+    } else if (parsed.id && parsed.id !== target) {
+        ids = [ parsed.id, target ];
+    } else {
+        ids = [ target ];
+    }
+    parsed.id = ids;
+    parsed.sysTags = [ ...new Set<string>([ COMPONENT_TAG, ...parsed.sysTags || []]) ];
+    return parsed;
 }
 
-export function applyComponentDecorator(option: ComponentOption, target: any): void {
-    const defaultComponentOption: ComponentOption = {
-        id: target,
-        scope: Scope.Singleton,
-        rebind: false,
-        proxy: false
+export function applyComponentDecorator(option: ComponentOption, target: any) {
+
+    const isAlreadyDecorated = Reflect.hasOwnMetadata(inversify_METADATA_KEY.PARAM_TYPES, target);
+
+    if (!isAlreadyDecorated) {
+        decorate(injectable(), target);
+    }
+
+    const metadata: ComponentMetadata = {
+        target,
+        ids: Array.isArray(option.id) ? option.id : [ option.id || target ],
+        sysTags: option.sysTags!,
+        rebind: option.rebind!,
+        proxy: option.proxy!,
+        scope: option.scope!,
+        name: option.name,
+        tag: option.tag,
+        default: option.default,
+        when: option.when,
+        onActivation: option.onActivation
     };
-    const opt = { ...defaultComponentOption, ...option };
-    const ids = Array.isArray(opt.id) ? opt.id : opt.id !== target ? [ opt.id, target ] : [ opt.id ] ;
-    const id = <interfaces.ServiceIdentifier<any>>ids[0];
-    const p = fluentProvide(id);
-    let whenOn: any;
-    if (opt.scope === Scope.Singleton) {
-        whenOn = p.inSingletonScope();
-    } else if (opt.scope === Scope.Transient) {
-        whenOn = p.inTransientScope();
-    }
-    if (opt.name) {
-        whenOn = whenOn.whenTargetNamed(opt.name);
-    } else if (opt.tag) {
-        const { tag, value } = opt.tag;
-        whenOn = whenOn.whenTargetTagged(tag, value);
-    } else if (opt.default) {
-        whenOn = whenOn.when((request: interfaces.Request) => {
 
-            const targetIsDefault = (request.target) &&
-                (!request.target.isNamed()) &&
-                (!request.target.isTagged());
+    let metadatas: ComponentMetadata[] = Reflect.getMetadata(
+        METADATA_KEY.component,
+        Reflect
+    );
 
-            return targetIsDefault;
-        });
-    } else if (opt.when) {
-        whenOn = whenOn.when(opt.when);
-    }
-    if (opt.proxy) {
-        whenOn.onActivation(doProxy).done(true)(target);
-    } else {
-        whenOn.done(true)(target);
-    }
-    ids.shift();
-    if (ids.length > 0) {
-        (Reflect as any).defineMetadata(
-            METADATA_KEY.toService,
-            id,
-            target
-        );
-    }
-    for (const sevice of ids) {
-        fluentProvide(<interfaces.ServiceIdentifier<any>>sevice).done(true)(target);
-    }
-    if (opt.rebind) {
-        const metadata = true;
+    if (!metadatas) {
+        metadatas = [];
         Reflect.defineMetadata(
-            METADATA_KEY.rebind,
-            metadata,
-            target
+            METADATA_KEY.component,
+            metadatas,
+            Reflect
         );
     }
+    metadatas.push(metadata);
+    return metadata;
 }

@@ -1,5 +1,6 @@
 import { inject, named } from 'inversify';
 import { ConfigUtil } from '../config/config-util';
+import { AnnotationUtil } from '../utils';
 
 export const VALUE = Symbol('Value');
 
@@ -7,65 +8,46 @@ export interface ValueOption {
     el?: string,
     detached?: boolean
 }
-export namespace ValueOption {
-    export function is(option: any): option is ValueOption {
-        return option && (option.el !== undefined || option.detached !== undefined);
-    }
-}
 
-export interface ValueDecorator {
-    (elOrValueOption?: string | ValueOption): (target: any, targetKey: string, index?: number) => any;
-    (target: any, targetKey: string, index?: number): any;
-}
+export type ElOrValueOption = string | ValueOption;
 
-export const Value = <ValueDecorator>function (target: any, targetKey: string, index?: number): any {
-    const option = getValueOption(target, targetKey, index);
-    if (targetKey === undefined && index === undefined) {
-        return (t: any, tk: string, i?: number) => {
-            applyValueDecorator(option, t, tk, i);
-        };
-
-    } else {
+export const Value = function (elOrOption?: ElOrValueOption): PropertyDecorator & ParameterDecorator {
+    return (target: any, targetKey: string, index?: number) => {
+        const option = parseValueOption(target, targetKey, index, elOrOption);
         applyValueDecorator(option, target, targetKey, index);
-    }
+    };
 };
 
-export function getValueOption(target: any, targetKey: string, index?: number): ValueOption {
-    let option: ValueOption = {};
-    if (targetKey === undefined) {
-        if (ValueOption.is(target)) {
-            option = { ...target };
-        } else if (target) {
-            option = { el: target };
-        }
-    }
-    return option;
+const defaultValueOption: ValueOption = {
+    detached: false
+};
+
+export function parseValueOption(target: any, targetKey: string, index?: number, elOrOption?: ElOrValueOption) {
+    const option = AnnotationUtil.getValueOrOption<ValueOption>(elOrOption, 'el');
+    option.el = option.el || targetKey;
+    return { ...defaultValueOption, ...option };
 }
 
-export function applyValueDecorator(option: ValueOption, target: any, targetKey: string, index?: number): void {
-    const defaultAutowiredOption: ValueOption = {
-        el: targetKey,
-        detached: false
-    };
-    const opt = { ...defaultAutowiredOption, ...option };
-    if (opt.detached) {
+export function applyValueDecorator(option: ValueOption, target: any, targetKey: string, index?: number) {
+    if (option.detached) {
         if (index !== undefined) {
             throw new Error(`The ${target.constructor.name} itself is not injected into the container, so the parameter injection of the constructor is not supported.`);
         }
-        createValueProperty(opt, target, targetKey);
+        createValueProperty(option, target, targetKey);
         return;
     }
 
-    const el = <string>opt.el;
+    const el = option.el!;
     inject(VALUE)(target, targetKey, index);
     named(el)(target, targetKey, index);
+    return option;
 }
 
 export function createValueProperty(option: ValueOption, target: any, property: string): void {
     Object.defineProperty(target, property, {
         enumerable: true,
         get(): any {
-            const el = <string>option.el;
+            const el = option.el!;
             return ConfigUtil.get(el);
         }
     });

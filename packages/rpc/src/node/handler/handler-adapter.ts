@@ -11,7 +11,7 @@ export const PATH_PARMAS_ATTR = 'pathParams';
 export class RpcHandlerAdapter implements HandlerAdapter {
     readonly priority = RPC_HANDLER_ADAPTER_PRIORITY;
 
-    @Autowired
+    @Autowired(ChannelManager)
     protected readonly channelManager: ChannelManager;
 
     @Autowired(RequestMatcher)

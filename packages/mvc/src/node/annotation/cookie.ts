@@ -11,22 +11,19 @@ export interface ResponseCookieMetadata {
 }
 
 export interface CookieDecorator {
-    (name?: string): (target: any, targetKey: string, parameterIndex: number) => any;
-    (target: any, targetKey: string, parameterIndex: number): any;
-    (name: string, value: string): (target: any, targetKey: string, descriptor: PropertyDescriptor) => any;
+    (name?: string): ParameterDecorator;
+    (name: string, value: string): MethodDecorator;
 
 }
 
-export const Cookie = <CookieDecorator>function (target: any, targetKey: string, parameterIndex: number) {
-    if (parameterIndex !== undefined) {
-        applyRequestCookieDecorator(target, targetKey, parameterIndex);
-    } else if (target && targetKey) {
-        return (t: any, tk: string, d: PropertyDescriptor) => {
-            applyResponseCookieDecorator(t, tk, d, target, targetKey);
+export const Cookie = <CookieDecorator>function (name?: string, value?: string): ParameterDecorator | MethodDecorator {
+    if (name && value) {
+        return (t: any, tk: string | symbol, d: PropertyDescriptor) => {
+            applyResponseCookieDecorator(t, tk, d, name, value);
         };
     } else {
         return (t: any, tk: string, i: number) => {
-            applyRequestCookieDecorator(t, tk, i, target);
+            applyRequestCookieDecorator(t, tk, i, name);
         };
     }
 };

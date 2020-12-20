@@ -299,4 +299,6 @@ export class HttpHeaders {
      * @see <a href="https://tools.ietf.org/html/rfc7235#section-4.1">Section 4.1 of RFC 7235</a>
      */
     public static WWW_AUTHENTICATE = 'WWW-Authenticate';
+
+    public static X_REQUESTED_WITH = 'X-Requested-With';
 }

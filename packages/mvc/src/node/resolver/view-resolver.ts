@@ -11,16 +11,16 @@ export class ViewResolverImpl implements ViewResolver {
     @Value('malagu.mvc.defaultViewName')
     protected readonly defaultViewName: string;
 
-    @Autowired
+    @Autowired(ViewProvider)
     protected readonly viewProvider: ViewProvider;
 
     async resolve(metadata: any, model: any): Promise<void> {
         const viewMetadata = <ViewMetadata>metadata.viewMetadata;
-        const viewName = viewMetadata.viewName || this.defaultViewName;
+        viewMetadata.viewName = viewMetadata.viewName || this.defaultViewName;
         for (const view of this.viewProvider.provide()) {
-            if (await view.support(viewName)) {
+            if (await view.support(viewMetadata)) {
                 Context.getResponse().setHeader(HttpHeaders.CONTENT_TYPE, view.contentType);
-                await view.render(model, viewName);
+                await view.render(model, viewMetadata);
                 return;
             }
         }

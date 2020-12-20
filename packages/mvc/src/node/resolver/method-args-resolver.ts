@@ -22,11 +22,11 @@ export class BodyMethodArgsResolver implements MethodArgsResolver {
 export class HeaderMethodArgsResolver implements MethodArgsResolver {
     readonly priority = 200;
     async resolve(metadata: any, args: any[]): Promise<void> {
-        const headers: any = Context.getCurrent().request.headers;
+        const request = Context.getCurrent().request;
         const headerMetadatas = <RequestHeaderMetadata[]>metadata.requestHeaderMetadata;
-        if (headerMetadatas && headers !== undefined) {
+        if (headerMetadatas) {
             for (const m of headerMetadatas) {
-                args[m.parameterIndex] = m.name ? headers[m.name] : headers;
+                args[m.parameterIndex] = m.name ? request.get(m.name) : request.headers;
             }
         }
     }

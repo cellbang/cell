@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-node",
+            "type": "node",
             "request": "launch",
             "name": "malagu serve",
             "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu",

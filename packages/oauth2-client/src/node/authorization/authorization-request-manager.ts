@@ -43,7 +43,7 @@ export class HttpSessionAuthorizationRequestManager implements AuthorizationRequ
     }
 
     protected getStateParameter(): string | undefined {
-        return Context.getRequest().query[OAuth2ParameterNames.STATE];
+        return <string>Context.getRequest().query[OAuth2ParameterNames.STATE];
     }
 
     protected getAuthorizationRequests(): { [state: string]: AuthorizationRequest } {

@@ -203,7 +203,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const packagerId = config.packager;
     const includes = config.includeModules;
-    const packagerOptions = config.packagerOptions || {};
+    const packagerOptions = { frozenLockfile: true, nonInteractive: true, ...config.packagerOptions };
     const scripts: any[] = packagerOptions.scripts || [];
 
     if (!includes || !configuration) {

@@ -1,7 +1,8 @@
-import { Policy, ElPolicy, PolicyResolver, SecurityMetadata, PolicyType, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
+import { PolicyResolver, SecurityMetadata, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
 import { eval } from 'jexl';
 import { Component } from '@malagu/core';
 import { Context } from '@malagu/web/lib/node';
+import { ElPolicy, Policy, PolicyType } from '../../common';
 
 @Component(PolicyResolver)
 export class ElPolicyResolver implements PolicyResolver {

@@ -1,7 +1,7 @@
 import { Constant } from '@malagu/core';
 import { ROUTE_METADATA, RedirectMetadata } from '../router/router-protocol';
 
-export function Redirect(toOrRedirectMetadata?: string | RedirectMetadata, rebind: boolean = false) {
+export function Redirect(toOrRedirectMetadata?: string | RedirectMetadata, rebind: boolean = false): ClassDecorator {
     return function (target: any) {
         let redirectMetadata: RedirectMetadata;
         if (typeof toOrRedirectMetadata === 'string') {

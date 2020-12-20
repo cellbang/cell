@@ -8,54 +8,40 @@ export interface MethodMetadata {
     options: RouteOptions;
     target: any;
     method: string;
-    key: string;
-    descriptor: TypedPropertyDescriptor<Function>;
+    key: string | symbol;
+    descriptor: TypedPropertyDescriptor<any>;
 }
 
-export interface MethodDecorator {
-    (
-        method: string,
-        options?: RouteOptions,
-    ): (target: any, key: string, descriptor: TypedPropertyDescriptor<Function>) => void;
-}
-
-export interface HandlerDecorator {
-    (target: any, key: string, descriptor: TypedPropertyDescriptor<Function>): void;
-}
-
-export function Get(options?: RouteOptions): HandlerDecorator {
+export function Get(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.GET, options);
 }
 
-export function Post(options?: RouteOptions): HandlerDecorator {
+export function Post(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.POST, options);
 }
 
-export function Put(options?: RouteOptions): HandlerDecorator {
+export function Put(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.PUT, options);
 }
 
-export function Patch(options?: RouteOptions): HandlerDecorator {
+export function Patch(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.PATCH, options);
 }
 
-export function Head(options?: RouteOptions): HandlerDecorator {
+export function Head(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.HEAD, options);
 }
 
-export function Delete(options?: RouteOptions): HandlerDecorator {
+export function Delete(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.DELETE, options);
 }
 
-export function Options(options?: RouteOptions): HandlerDecorator {
+export function Options(options?: RouteOptions): MethodDecorator {
     return Method(HttpMethod.OPTIONS, options);
 }
 
-export const Method = <MethodDecorator>function (
-    method: string,
-    options: RouteOptions = '',
-): HandlerDecorator {
-    return function (target: any, key: string, descriptor: TypedPropertyDescriptor<Function>) {
+export const Method = function (method: string, options: RouteOptions = ''): MethodDecorator {
+    return function (target, key, descriptor) {
         const metadata: MethodMetadata = { options, method, target, key, descriptor };
         let metadataList: MethodMetadata[] = [];
 

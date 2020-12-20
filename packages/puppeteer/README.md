@@ -1,0 +1,1 @@
+# Malagu - Puppeteer Component

@@ -29,6 +29,12 @@ async function start() {
 const startPromise = start();
 
 export async function handler(req: any, res: any, context: any) {
+    process.env.ALIBABA_ACCOUNT_ID = context.accountId;
+    process.env.ALIBABA_ACCESS_KEY_ID = context.credentials?.accessKeyId;
+    process.env.ALIBABA_ACCESS_KEY_SECRET = context.credentials?.accessKeySecret;
+    process.env.ALIBABA_SECURITY_TOKEN = context.credentials?.securityToken;
+    process.env.ALIBABA_REQUEST_ID = context.requestId;
+    process.env.ALIBABA_REGION = context.region;
     req.body = await getRawBody(req);
     await startPromise;
     server.httpProxy(req, res, context);

@@ -9,6 +9,30 @@
       ],
       "@malagu/core/lib/*": [
         "packages/core/src/*"
+      ],
+      "@malagu/web": [
+        "packages/web/src/common"
+      ],
+      "@malagu/web/lib/*": [
+        "packages/web/src/*"
+      ],
+      "@malagu/securtiy": [
+        "packages/securtiy/src/common"
+      ],
+      "@malagu/securtiy/lib/*": [
+        "packages/securtiy/src/*"
+      ],
+      "@malagu/widget": [
+        "packages/widget/src/browser"
+      ],
+      "@malagu/react": [
+        "packages/react/src/browser"
+      ],
+      "@malagu/cloud": [
+        "packages/cloud/src/common"
+      ],
+      "@malagu/faas-adapter/lib/hooks": [
+        "packages/faas-adapter/src/hooks"
       ]
     },
     "plugins": [

@@ -165,3 +165,5 @@ export enum HttpMethod {
     OPTIONS = 'OPTIONS',
     TRACE = 'TRACE'
 }
+
+export const XML_HTTP_REQUEST = 'XMLHttpRequest';

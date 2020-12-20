@@ -5,20 +5,10 @@ export interface ParamMetadata {
     parameterIndex: number;
 }
 
-export interface ParamDecorator {
-    (name?: string): (target: any, targetKey: string, parameterIndex: number) => any;
-    (target: any, targetKey: string, parameterIndex: number): any;
-}
-
-export const Param = <ParamDecorator>function (target: any, targetKey: string | symbol, parameterIndex: number) {
-    if (targetKey === undefined) {
-        return (t: any, tk: string, i: number) => {
-            applyParamDecorator(t, tk, i, target);
-        };
-
-    } else {
-        applyParamDecorator(target, targetKey, parameterIndex);
-    }
+export function Param(name?: string): ParameterDecorator {
+    return (t, tk, i) => {
+        applyParamDecorator(t, tk, i, name);
+    };
 };
 
 export function applyParamDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {

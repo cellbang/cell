@@ -1,18 +1,13 @@
-import { interfaces } from 'inversify';
 import { METADATA_KEY } from '../constants';
+import { ComponentId } from './component';
 
 export interface ConstantOption {
-    id?: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[];
+    id: ComponentId | ComponentId[];
     rebind?: boolean;
     constantValue?: any;
 }
 
-export interface ConstantDecorator {
-    (id: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[], constantValue: any, rebind?: boolean): (target: any) => any;
-}
-
-export const Constant =
-    <ConstantDecorator>function (id: interfaces.ServiceIdentifier<any> | interfaces.ServiceIdentifier<any>[], constantValue: any, rebind: boolean = false): (target: any) => any {
+export const Constant = function (id: ComponentId | ComponentId[], constantValue: any, rebind = false): ClassDecorator {
         return (t: any) => {
             applyConstantDecorator({ id, constantValue, rebind }, t);
         };

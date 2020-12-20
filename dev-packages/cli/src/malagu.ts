@@ -4,9 +4,12 @@ import { HookExecutor } from './hook';
 const leven = require('leven');
 import * as ora from 'ora';
 const chalk = require('chalk');
+const updateNotifier = require('update-notifier');
 
 const minimist = require('minimist');
-const { version } = require('../package.json');
+const pkg = require('../package.json');
+const version = pkg.version;
+updateNotifier({ pkg }).notify();
 
 console.log(`
                    ___
