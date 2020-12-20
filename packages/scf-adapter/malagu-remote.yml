@@ -2,26 +2,18 @@ backend:
   entry: lib/node/api-gateway-application-entry
   malagu:
     server:
-      path: /${malagu['scf-adapter'].function.name}/
-stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'prod' : cliContext.prod ? 'prod' : 'test'}" # test, pre, prod
+      path: /${malagu['faas-adapter'].function.name}/
 malagu:
-  scf-adapter:
-    profile:
-      regions: [ ap-guangzhou ]
-    type: api-gateway
+  faas-adapter:
     namespace:
       name: default
     function:
-      name: ${pkg.name}
-      namespace: ${malagu['scf-adapter'].namespace.name}
       handler: index.handler
-      memorySize: 256
+      namespace: ${malagu['faas-adapter'].namespace.name}
       runtime: Nodejs12.16
-      timeout: 15
     alias:
-      name: ${stage}
-      functionName: ${malagu['scf-adapter'].function.name}
-      namespace: ${malagu['scf-adapter'].namespace.name}
+      functionName: ${malagu['faas-adapter'].function.name}
+      namespace: ${malagu['faas-adapter'].namespace.name}
     customDomain:
       # name: abc.com
       # certificateId: xxxx
@@ -35,27 +27,27 @@ malagu:
         name: malagu
         protocol: http&https
       api:
-        name: ${malagu['scf-adapter'].function.name}
+        name: ${malagu['faas-adapter'].function.name}
         serviceTimeout: 20 # 20s
         protocol: HTTP
         serviceScfIsIntegratedResponse: true
-        serviceScfFunctionName: ${malagu['scf-adapter'].function.name}
-        serviceScfFunctionNamespace: ${malagu['scf-adapter'].namespace.name}
-        serviceScfFunctionQualifier: ${malagu['scf-adapter'].apiGateway.release.environmentName}
-        serviceWebsocketTransportFunctionName: ${malagu['scf-adapter'].function.name}
-        serviceWebsocketTransportFunctionNamespace: ${malagu['scf-adapter'].namespace.name}
-        serviceWebsocketTransportFunctionQualifier: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+        serviceScfFunctionName: ${malagu['faas-adapter'].function.name}
+        serviceScfFunctionNamespace: ${malagu['faas-adapter'].namespace.name}
+        serviceScfFunctionQualifier: ${malagu['faas-adapter'].apiGateway.release.environmentName}
+        serviceWebsocketTransportFunctionName: ${malagu['faas-adapter'].function.name}
+        serviceWebsocketTransportFunctionNamespace: ${malagu['faas-adapter'].namespace.name}
+        serviceWebsocketTransportFunctionQualifier: ${malagu['faas-adapter'].apiGateway.release.environmentName}
         requestConfig:
           path: '${malagu.server.path}*'
           method: ANY
       usagePlan:
-        name: ${malagu['scf-adapter'].function.name}
-        environment: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+        name: ${malagu['faas-adapter'].function.name}
+        environment: ${malagu['faas-adapter'].apiGateway.release.environmentName}
       strategy:
         # strategy: 5000
-        environmentName: ${malagu['scf-adapter'].apiGateway.release.environmentName}
+        environmentName: ${malagu['faas-adapter'].apiGateway.release.environmentName}
 
 frontend:
   malagu:
     server:
-      path: "/${stage == 'prod' ? '' : (malagu['scf-adapter'].apiGateway.release.environmentName + '/')}${malagu['scf-adapter'].function.name}/"
+      path: "/${stage == 'prod' ? '' : (malagu['faas-adapter'].apiGateway.release.environmentName + '/')}${malagu['faas-adapter'].function.name}/"

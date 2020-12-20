@@ -1,14 +1,9 @@
-import { AutowiredDecorator, applyAutowiredDecorator, getAutowiredOption } from '../autowired';
+import { applyAutowiredDecorator, parseAutowiredOption, IdOrAutowiredOption } from '../autowired';
 
-export const Autowired = <AutowiredDecorator>function (target: any, targetKey: string, index?: number): any {
-    const option = getAutowiredOption(target, targetKey, index);
-    option.detached = true;
-    if (targetKey === undefined) {
-        return (t: any, tk: string, i?: number) => {
-            applyAutowiredDecorator(option, t, tk, i);
-        };
-
-    } else {
+export const Autowired = function (idOrOption?: IdOrAutowiredOption): PropertyDecorator & ParameterDecorator {
+    return (target: any, targetKey: string, index?: number) => {
+        const option = parseAutowiredOption(target, targetKey, index, idOrOption);
+        option.detached = true;
         applyAutowiredDecorator(option, target, targetKey, index);
-    }
+    };
 };

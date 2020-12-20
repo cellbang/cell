@@ -1,14 +1,9 @@
-import { ValueDecorator, getValueOption, applyValueDecorator } from '../value';
+import { applyValueDecorator, ElOrValueOption, parseValueOption } from '../value';
 
-export const Value = <ValueDecorator>function (target: any, targetKey: string, index?: number): any {
-    const option = getValueOption(target, targetKey, index);
-    option.detached = true;
-    if (targetKey === undefined) {
-        return (t: any, tk: string, i?: number) => {
-            applyValueDecorator(option, t, tk, i);
-        };
-
-    } else {
+export const Value = function (elOrOption?: ElOrValueOption): PropertyDecorator & ParameterDecorator {
+    return (target: any, targetKey: string, index?: number) => {
+        const option = parseValueOption(target, targetKey, index, elOrOption);
+        option.detached = true;
         applyValueDecorator(option, target, targetKey, index);
-    }
+    };
 };

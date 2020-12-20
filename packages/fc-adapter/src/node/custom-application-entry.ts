@@ -14,6 +14,12 @@ container.then(async c => {
     app.use(express.urlencoded({ extended: true }));
 
     app.all('*', async (req: any, res: any) => {
+        process.env.ALIBABA_ACCOUNT_ID = req.get('x-fc-account-id');
+        process.env.ALIBABA_ACCESS_KEY_ID = req.get('x-fc-access-key-id');
+        process.env.ALIBABA_ACCESS_KEY_SECRET = req.get('x-fc-access-key-secret');
+        process.env.ALIBABA_SECURITY_TOKEN = req.get('x-fc-security-token');
+        process.env.ALIBABA_REQUEST_ID = req.get('x-fc-request-id');
+        process.env.ALIBABA_REGION = req.get('x-fc-region');
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));

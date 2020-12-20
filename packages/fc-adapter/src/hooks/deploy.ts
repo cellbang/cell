@@ -1,7 +1,7 @@
-import { DeployContext, BACKEND_TARGET, getHomePath, getMalaguConfig } from '@malagu/cli';
-import { ProfileProvider, Profile } from './profile-provider';
-import { join } from 'path';
-import { readdirSync, statSync, readFileSync, existsSync, readFile } from 'fs-extra';
+import { DeployContext } from '@malagu/cli';
+import { readFile } from 'fs-extra';
+import { Credentials, Account } from '@malagu/cloud';
+import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';
 const FCClient = require('@alicloud/fc2');
 import  * as JSZip from 'jszip';
 import * as ora from 'ora';
@@ -11,72 +11,39 @@ const chalk = require('chalk');
 
 let fcClient: any;
 let apiClient: any;
-let profile: Profile;
-let region: string;
+let ram: any;
 
 export default async (context: DeployContext) => {
-    const { cfg } = context;
 
-    const deployConfig = getMalaguConfig(cfg, BACKEND_TARGET)['fc-adapter'];
+    const { cfg, pkg } = context;
 
-    const profileProvider = new ProfileProvider();
-    profile = {
-        ...await profileProvider.provide(),
-        ...deployConfig.profile
+    const adapterConfig = FaaSAdapterUtils.getConfiguration<any>(cfg);
 
-    };
+    const profileProvider = new DefaultProfileProvider();
+    const { region, account, credentials } = await profileProvider.provide(adapterConfig);
+    await createClients(adapterConfig, region, credentials, account);
 
-    const regions = deployConfig.regions || [profile.defaultRegion];
-    for (region of regions) {
-        await doDeploy(context, deployConfig);
-        console.log();
-    }
-
-};
-
-async function doDeploy(context: DeployContext, deployConfig: any) {
-    const { pkg } = context;
-    const codeDir = getHomePath(pkg);
-    if (!existsSync(codeDir)) {
-        console.log(chalk`{yellow Please build app first with "malagu build"}`);
-        return;
-    }
-    fcClient = new FCClient(profile.accountId, {
-        accessKeyID: profile.accessKeyId,
-        accessKeySecret: profile.accessKeySecret,
-        region,
-        timeout: deployConfig.timeout,
-        secure: deployConfig.secure,
-        internal: deployConfig.internal
-    });
-
-    apiClient = new CloudAPI({
-        accessKeyId: profile.accessKeyId,
-        accessKeySecret: profile.accessKeySecret,
-        endpoint: `http://apigateway.${region}.aliyuncs.com`,
-    });
-
-    const { service, trigger, apiGateway, customDomain, alias, type } = deployConfig;
-    const fundtionMeta = deployConfig.function;
+    const { service, trigger, apiGateway, customDomain, alias, type } = adapterConfig;
+    const functionMeta = adapterConfig.function;
     const serviceName = service.name;
-    const functionName = fundtionMeta.name;
+    const functionName = functionMeta.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of Function Compute...`);
     console.log(chalk`{bold.cyan - FC:}`);
 
     await createOrUpdateService(serviceName, service);
 
-    const zip = new JSZip();
-    await loadCode(codeDir, zip);
-
-    await createOrUpdateFunction(functionName, fundtionMeta, zip);
+    const codeLoader = new DefaultCodeLoader();
+    const zip = await codeLoader.load(context, adapterConfig);
+    delete functionMeta.codeUri;
+    await createOrUpdateFunction(functionName, functionMeta, zip);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);
 
     await createOrUpdateAlias(alias, versionId);
 
     if (type === 'http' || type === 'custom') {
-        await createOrUpdateHttpTrigger(trigger);
+        await createOrUpdateHttpTrigger(trigger, region, account.id);
         if (customDomain && customDomain.name) {
             for (const route of customDomain.routeConfig.routes) {
                 route.serviceName = route.serviceName || serviceName;
@@ -92,11 +59,36 @@ async function doDeploy(context: DeployContext, deployConfig: any) {
         const { group, api, stage } = apiGateway;
         const role = await createRoleIfNeed();
         const { groupId, subDomain } = await createOrUpdateGroup(group);
-        const apiId = await createOrUpdateApi(groupId, subDomain, stage.name, api, role);
+        const apiId = await createOrUpdateApi(region, groupId, subDomain, stage.name, api, role);
         await deployApi(groupId, apiId, stage);
     }
     console.log('Deploy finished');
+    console.log();
 
+};
+
+async function createClients(adapterConfig: any, region: string, credentials: Credentials, account: Account) {
+    fcClient = new FCClient(account.id, {
+        accessKeyID: credentials.accessKeyId,
+        accessKeySecret: credentials.accessKeySecret,
+        securityToken: credentials.token,
+        region,
+        timeout: adapterConfig.timeout,
+        secure: adapterConfig.secure,
+        internal: adapterConfig.internal
+    });
+
+    apiClient = new CloudAPI({
+        accessKeyId: credentials.accessKeyId,
+        accessKeySecret: credentials.accessKeySecret,
+        endpoint: `http://apigateway.${region}.aliyuncs.com`,
+    });
+
+    ram = new Ram({
+        accessKeyId: credentials.accessKeyId,
+        accessKeySecret: credentials.accessKeySecret,
+        endpoint: 'https://ram.aliyuncs.com'
+    });
 }
 
 async function deployApi(groupId: string, apiId: string, stage: any) {
@@ -110,7 +102,7 @@ async function deployApi(groupId: string, apiId: string, stage: any) {
     });
 }
 
-function parseApiMeta(apiMeta: any, groupId: string, role: any, apiId?: string) {
+function parseApiMeta(apiMeta: any, region: string, groupId: string, role: any, apiId?: string) {
     const req: any = {};
     req.GroupId = groupId;
     req.Visibility = apiMeta.visibility;
@@ -224,7 +216,7 @@ function parseApiMeta(apiMeta: any, groupId: string, role: any, apiId?: string) 
     return req;
 }
 
-async function createOrUpdateApi(groupId: string, subDomain: string, stage: string, api: any, role: any) {
+async function createOrUpdateApi(region: string, groupId: string, subDomain: string, stage: string, api: any, role: any) {
     const apiName = api.name;
     let apiId: string;
     const result = await apiClient.describeApis({
@@ -242,7 +234,7 @@ async function createOrUpdateApi(groupId: string, subDomain: string, stage: stri
         });
     } else {
         await spinner(`Create ${apiName} api`, async () => {
-            const { ApiId } = await apiClient.createApi(parseApiMeta(api, groupId, role));
+            const { ApiId } = await apiClient.createApi(parseApiMeta(api, region, groupId, role));
             apiId = ApiId;
         });
     }
@@ -256,7 +248,7 @@ async function createOrUpdateApi(groupId: string, subDomain: string, stage: stri
     return apiId!;
 }
 
-async function createOrUpdateHttpTrigger(trigger: any) {
+async function createOrUpdateHttpTrigger(trigger: any, region: string, accountId: string) {
     const opts = { ...trigger };
     opts.triggerName = opts.name;
     delete opts.functionName;
@@ -282,7 +274,7 @@ async function createOrUpdateHttpTrigger(trigger: any) {
     }
     console.log(`    - Methods: ${triggerConfig.methods}`);
     console.log(chalk`    - Url: ${chalk.green.bold(
-        `https://${profile.accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
+        `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {
@@ -411,22 +403,6 @@ async function createOrUpdateAlias(alias: any, versionId: string) {
     }
 }
 
-async function loadCode(codeDir: string, zip: JSZip) {
-    const files = readdirSync(codeDir);
-    await Promise.all(files.map(async fileName => {
-        const fullPath = join(codeDir, fileName);
-        const file = statSync(fullPath);
-        if (file.isDirectory()) {
-            const dir = zip.folder(fileName);
-            await loadCode(fullPath, dir);
-        } else {
-            zip.file(fileName, readFileSync(fullPath), {
-                unixPermissions: '755'
-            });
-        }
-    }));
-}
-
 function parseGroupMeta(groupMeta: any, groupId?: string) {
     return {
         GroupName: groupMeta.name,
@@ -486,11 +462,6 @@ function parseRoleMeta(roleName: string) {
 }
 
 async function createRoleIfNeed() {
-    const ram = new Ram({
-        accessKeyId: profile.accessKeyId,
-        accessKeySecret: profile.accessKeySecret,
-        endpoint: 'https://ram.aliyuncs.com'
-    });
     const roleName = 'apigatewayAccessFC';
     let role;
     try {

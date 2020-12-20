@@ -20,7 +20,7 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
         this.prioritized = Prioritizeable.prioritizeAllSync(this.authenticationProviders).map(c => c.value);
     }
 
-    async authenticate(): Promise<void> {
+    async authenticate(next: () => Promise<void>): Promise<void> {
         let result: Authentication | undefined;
         let lastError: any;
         for (const authenticationProvider of this.prioritized) {
@@ -30,6 +30,9 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
                     if (result) {
                         await this.authenticationSuccessHandler.onAuthenticationSuccess(result);
                         SecurityContext.setAuthentication(result);
+                        if (result.next) {
+                            await next();
+                        }
                         return;
                     }
                 }

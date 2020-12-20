@@ -1,5 +1,87 @@
 # Change Log
 
+## v1.9.0
+
+- feat(cloud) abstracts a basic cloud computing component `@malagu/cloud`, abstracts unified interfaces and configurations for cloud products of different cloud vendors, developers can use unified interfaces to operate cloud service resources that do not require cloud vendors
+- feat(oss + cos + s3) adds three new components: `@malagu/oss`, `@malagu/cos`, `@malagu/s3`, respectively for the object storage resources of Alibaba Cloud, Tencent Cloud and Amazon Cloud Implementation of the operation interface
+- feat(faas-adapter) adds a new component: `@malagu/faas-adapter`, this component is an adapter summary for FaaS scenarios, and does not need to be implemented by cloud vendors’ Faa adapter extension `@malagu/faas-adapter`
+- feat(faas-adapter) extends the new command: `malagu config`, through which the account is manually configured, and AKSK related information
+- feat(lambda-adapter) add a new component: `@malagu/lambda-adapter`, use Amazon cloud Apigateway + lambda to implement application deployment
+- feat(faas-adapter) deployment related configuration is unified to the configuration of `malagu.faas-adapter` property
+
+- feat(cloud) 抽象了一个云计算基础组件 `@malagu/cloud`，对不同的云厂商的云产品抽象统一的接口和配置，开发者可以使用统一的接口操作不用云厂商的云服务资源
+- feat(oss + cos + s3) 添加三个新组件：`@malagu/oss`、`@malagu/cos`、`@malagu/s3`，分别对阿里云、腾讯云和亚马逊云的对象存储资源操作接口的实现
+- feat(faas-adapter) 添加新组件：`@malagu/faas-adapter`，该组件是对 FaaS 场景的适配器抽象，不用云厂商的 FaaS 适配器扩展 `@malagu/faas-adapter` 组件实现
+- feat(faas-adapter) 扩展新的命令：`malagu config`，通过该命令手动配置账号、AKSK 相关的信息
+- feat(lambda-adapter) 添加新组件：`@malagu/lambda-adapter`，使用亚马逊云的 Apigateway + lambda 实现应用部署
+- feat(faas-adapter) 部署相关的配置全部统一到 `malagu.faas-adapter` 属性上配置
+
+## v1.8.1
+
+- feat(cli) supports version update notification
+- feat(cli) 支持版本更新通知
+
+## v1.8.0
+
+- feat(cli) add the `malagu.webpack.sourceMaploaderExclude` property to ignore the warning message that the source map cannot be loaded
+- feat(cli) build and release code also generates the `malagu.yml` file to the `.malagu` directory, which can be ignored by the `codeUri` property of the function. The default is to ignore the upload of the `malagu.yml` file to prevent some private information Give way
+- feat(fc-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `malagu.yml` file
+- feat(scf-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `malagu.yml` file
+- feat(puppeteer) add @malagu/puppeteer component
+- feat(cli) add `puppeteer` application template
+- feat(mvc) adds the file view `FileView` to facilitate the implementation of file download related APIs. It also provides a simplified decorator `@File()`, and also provides `@Text()`, `@Json()` , `@Html()` decorator simplifies the ability to use different types of views
+
+- feat(cli) 添加 `malagu.webpack.sourceMaploaderExclude` 属性，用于忽略 source map 加载不到警告信息
+- feat(cli) 构建发布代码也生成 `malagu.yml` 文件到 `.malagu` 目录，可以通过函数的 `codeUri` 属性进行忽略，默认是忽略 `malagu.yml` 文件上传的，防止一些私密信息泄露
+- feat(fc-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `malagu.yml` 文件的上传
+- feat(scf-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `malagu.yml` 文件的上传
+- feat(puppeteer) 添加 @malagu/puppeteer 组件
+- feat(cli) 添加 `puppeteer` 应用模板
+- feat(mvc) 添加文件视图 `FileView`，方便实现文件下载相关 API，同时也提供简化的装饰器 `@File()`，另外也提供了 `@Text()`、`@Json()`、`@Html()` 装饰器简化使用不同类型视图能力
+
+## v1.7.0
+
+- feat(core) optimizes the AOP user interface and provides the decorator `@Aspect()`
+- feat(core) `@Component()` Add `sysTags` for classifying object labels injected into the container to facilitate AOP control of the intercept scope based on `sysTags`
+- feat(core) `@Component() ` Add default values for configuration properties: `malagu.annotation.
+- feat(core) Adds AOP global switch control: `malagu.aop.enabled`, enabled by default
+- feat(security) Adds secure intercept access control: `malagu.security.aop.pointcut`, which defaults to `Endpoint`, which means intercept all external endpoint processors
+- feat(security) adds front-end abstraction for easy integration with SPA.
+- feat(security) Adds a user info fetch endpoint, defaults to `/userinfo`.
+- fix(oauth2-client) Fix the problem of not being able to get user information based on OAuth2.0 authentication.
+- fix(security) optimizes the permission decision algorithm and adds a resource pattern to match the permission configuration
+- fix (security) supports Base certification
+- fix(core) optimizes a large amount of code
+
+- feat(core) 优化 AOP 用户接口，提供装饰器`@Aspect()`
+- feat(core) `@Component()` 添加 `sysTags`，用于给注入到容器的对象标签分类，方便 AOP 基于 `sysTags` 控制拦截范围
+- feat(core) `@Component()` 添加默认值配置属性：`malagu.annotation.Component`
+- feat(core) 添加 AOP 全局开关控制：`malagu.aop.enabled`，默认开启
+- feat(security) 添加安全拦截访问控制：`malagu.security.aop.pointcut`，默认值为 `Endpoint`，表示拦截所有的对外端点处理器 
+- feat(security) 添加前端抽象，方便与 SPA 集成使用
+- feat(security) 添加获取用户信息端点，默认为 `/userinfo`
+- fix(oauth2-client) 修复基于 OAuth2.0 认证无法获取用户信息问题
+- fix(security) 优化权限决策算法，添加资源模式匹配权限配置
+- fix(security) 支持 Base 认证
+- fix(core) 优化大量代码
+
+
+## v1.6.0
+
+- feat(web) adds gzip compression optimization to the cookie-based session storage scheme, greatly alleviating the 4KB request header limitation in Serverless scenarios, while also reducing the request header transfer burden
+- feat(grommet) Optimize the LocaleMenu component
+- feat(grommet) update Cellbang icon
+- feat(fact) adds `@Icon()` decorator for injecting custom icon components
+- feat(cli) provides the default site icon, the template no longer provides favicon.ico files, developers can override the default by placing a custom favicon.ico file at the root of the project
+- feat(security + oauth2-client) provides authentication success custom redirect URL capability for OIDC authentication
+- feat(web) 基于 Cookie 的 Session 存储方案添加 gzip 压缩优化，极大缓解在 Serverless 场景下的请求头 4KB 限制，同时也减轻请求头传输负担
+- feat(grommet) 优化 LocaleMenu 组件
+- feat(grommet) 更新 Cellbang 图标
+- feat(react) 添加 `@Icon()` 装饰器，用于注入自定义的图标组件
+- feat(cli) 提供默认网站图标，模板中不再提供 favicon.ico 文件，开发者可以通过在项目根下放置自定义的 favicon.ico 文件覆盖默认
+- feat(security + oauth2-client) 为 OIDC 认证提供认证成功自定义重定向 URL 能力
+
+
 ## v1.5.1
 - feat (cli) supports static module configuration `staticModules` to avoid repeated packaging of public modules for dynamic modules
 - feat (cli) built-in es6 to es5 capability, specify the module to be converted through attribute configuration

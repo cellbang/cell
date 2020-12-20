@@ -13,7 +13,7 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
     @Value('malagu.security.loginSuccessUrl')
     protected readonly loginSuccessUrl: string;
 
-    @Value('malagu.security.loginSuccessUrl')
+    @Value('malagu.security.alwaysUseLoginSuccessUrl')
     protected readonly alwaysUseLoginSuccessUrl: boolean;
 
     @Value('malagu.security.useReferer')
@@ -46,7 +46,7 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
         let targetUrl: string | undefined;
         const request = Context.getRequest();
         if (this.targetUrlParameter) {
-            targetUrl = request.query[this.targetUrlParameter];
+            targetUrl = <string | undefined>request.query[this.targetUrlParameter];
             if (targetUrl) {
                 this.logger.debug(`Found targetUrlParameter in request: ${targetUrl}`);
                 return targetUrl;
@@ -54,8 +54,8 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
         }
 
         if (this.useReferer) {
-            const referer = request.headers[HttpHeaders.REFERER];
-            targetUrl = Array.isArray(referer) && referer.length ? referer[0] : <string>referer;
+            const referer = request.get(HttpHeaders.REFERER);
+            targetUrl = referer?.length ? referer[0] : '';
             this.logger.debug(`Using Referer header: ${targetUrl}`);
         }
 

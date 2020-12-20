@@ -1,0 +1,51 @@
+{
+  "name": "@malagu/lambda-adapter",
+  "version": "1.9.0",
+  "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/faas-adapter": "^1.9.0",
+    "@malagu/web": "^1.9.0",
+    "@vendia/serverless-express": "^3.4.0",
+    "aws-sdk": "^2.807.0",
+    "express": "^4.17.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-remote.yml"
+  ],
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "malaguext clean",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "test": "malaguext test",
+    "docs": "malaguext docs"
+  },
+  "devDependencies": {
+    "@malagu/cli": "^1.9.0",
+    "@malagu/ext-scripts": "^1.9.0",
+    "@types/jszip": "^3.1.6"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

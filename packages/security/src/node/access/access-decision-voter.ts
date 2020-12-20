@@ -1,7 +1,6 @@
 import { SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED,
     POLICY_BASED_VOTER_PRIORITY, PolicyResolver, PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
 import { Component, Autowired } from '@malagu/core';
-import { AuthorizeType } from '../annotation';
 
 @Component(AccessDecisionVoter)
 export class PolicyBasedVoter implements AccessDecisionVoter {
@@ -22,19 +21,18 @@ export class PolicyBasedVoter implements AccessDecisionVoter {
         const principalPolicies = await this.principalPolicyProvider.provide(securityMetadata.principal, securityMetadata.authorizeType);
         const resourcePolicies = await this.resourcePolicyProvider.provide(securityMetadata.resource, securityMetadata.authorizeType);
         const policies = [ ...principalPolicies, ...resourcePolicies, ...securityMetadata.policies ];
-        let grant = 0;
         for (const policy of policies) {
             for (const policyResolver of this.policyResolvers) {
                 if (await policyResolver.support(policy)) {
                     if (await policyResolver.resolve(policy, securityMetadata)) {
-                        grant++;
+                        securityMetadata.grant++;
                     } else {
                         return ACCESS_DENIED;
                     }
                 }
             }
         }
-        if (securityMetadata.authorizeType === AuthorizeType.Post || grant > 0) {
+        if (securityMetadata.grant > 0) {
             return ACCESS_GRANTED;
         }
         return ACCESS_DENIED;

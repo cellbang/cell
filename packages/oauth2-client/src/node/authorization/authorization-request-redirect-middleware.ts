@@ -4,9 +4,9 @@ import { AUTHORIZATION_REQUEST_BASE_URI } from '../constants';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_REQUEST_REDIRECT_MIDDLEWARE_PRIORITY } from './authorization-protocol';
 import { AuthorizationGrantType, AuthorizationRequest } from '@malagu/oauth2-core';
 import { RedirectStrategy } from '@malagu/web/lib/node';
-import { HttpStatus } from '@malagu/web';
+import { HttpMethod, HttpStatus } from '@malagu/web';
 import { ClientAuthorizationError } from '../error';
-import { RequestCache } from '@malagu/security';
+import { RequestCache } from '@malagu/security/lib/node';
 
 @Component(Middleware)
 export class AuthorizationRequestRedirectMiddleware implements Middleware {
@@ -28,6 +28,9 @@ export class AuthorizationRequestRedirectMiddleware implements Middleware {
 
     @Autowired(RequestCache)
     protected readonly requestCache: RequestCache;
+
+    @Value('malagu.security.targetUrlParameter')
+    protected readonly targetUrlParameter: string;
 
     @Autowired(Logger)
     protected readonly logger: Logger;
@@ -70,6 +73,16 @@ export class AuthorizationRequestRedirectMiddleware implements Middleware {
     protected async sendRedirectForAuthorization(authorizationRequest: AuthorizationRequest) {
         if (AuthorizationGrantType.AuthorizationCode === authorizationRequest.authorizationGrantType) {
             await this.authorizationRequestManager.save(authorizationRequest);
+        }
+        if (this.targetUrlParameter) {
+            const redirectUrl = <string>Context.getRequest().query[this.targetUrlParameter];
+            if (redirectUrl) {
+                await this.requestCache.save({
+                    redirectUrl,
+                    method: HttpMethod.GET,
+                    query: {}
+                });
+            }
         }
         await this.redirectStrategy.send(authorizationRequest.authorizationRequestUri);
     }

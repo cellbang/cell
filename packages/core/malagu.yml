@@ -2,6 +2,11 @@ auto: false
 malagu:
   name: 'Malagu Framework'
   hostDomId: malagu-root
+  annotation:
+    Component:
+      proxy: false
+  aop:
+    enabled: true
   logger:
     level: info
   webpack:

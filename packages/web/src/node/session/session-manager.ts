@@ -8,6 +8,9 @@ export class SessionManagerImpl implements SessionManager {
     @Value('malagu.session.sessionIdKey')
     protected readonly sessionIdKey: string;
 
+    @Value('malagu.session')
+    protected readonly sessionOptions: any;
+
     @Autowired(SessionStrategy)
     protected readonly sessionStrategy: SessionStrategy;
 
@@ -50,7 +53,7 @@ export class SessionManagerImpl implements SessionManager {
         }
         if (await this.sessionStrategy.shouldSaveSession(session)) {
             await this.sessionStore.set(session);
-            Context.getCookies().set(this.sessionIdKey, session.id);
+            Context.getCookies().set(this.sessionIdKey, session.id, this.sessionOptions);
         }
     }
 

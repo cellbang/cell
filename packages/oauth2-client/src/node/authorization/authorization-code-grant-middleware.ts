@@ -1,13 +1,12 @@
-import { Middleware, Context } from '@malagu/web/lib/node';
+import { Middleware, Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_CODE_GRANT_MIDDLEWARE_PRIORITY,
     AuthorizedClientManager, AuthorizedClient, INVALID_STATE_PARAMETER_ERROR_CODE } from './authorization-protocol';
 import { AuthorizationRequest, OAuth2ParameterNames, OAuth2AuthorizationError, OAuth2Error } from '@malagu/oauth2-core';
-import { RedirectStrategy } from '@malagu/web/lib/node';
 import { AuthorizationResponseUtil } from '../utils';
 import { ClientRegistrationManager, ClientRegistration } from '../registration';
 import { ENDPOINT, PathResolver } from '@malagu/web';
-import { SecurityContext, RequestCache } from '@malagu/security';
+import { SecurityContext, RequestCache } from '@malagu/security/lib/node';
 import { AuthorizationCodeTokenResponseClient } from '../endpoint';
 
 @Component(Middleware)

@@ -96,11 +96,17 @@ export class Yarn {
 
     install(cwd: string, packagerOptions: any) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
-        const args = ['install', '--frozen-lockfile', '--non-interactive'];
+        const args = ['install'];
 
         // Convert supported packagerOptions
         if (packagerOptions.ignoreScripts) {
             args.push('--ignore-scripts');
+        }
+        if (packagerOptions.frozenLockfile) {
+            args.push('--frozen-lockfile');
+        }
+        if (packagerOptions.nonInteractive) {
+            args.push('--non-interactive');
         }
         return spawnProcess(command, args, { cwd, stdio: 'inherit' });
     }

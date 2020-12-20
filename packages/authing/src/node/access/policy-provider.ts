@@ -1,5 +1,6 @@
 import { Component, Autowired } from '@malagu/core';
-import { PrincipalPolicyProvider, AuthorizeType, Policy } from '@malagu/security/lib/node';
+import { PrincipalPolicyProvider } from '@malagu/security/lib/node';
+import { AuthorizeType, Policy } from '@malagu/security';
 import { AuthingProvider } from '../authentication';
 
 export const AUTHING_POLICY_TYPE = 'authing';

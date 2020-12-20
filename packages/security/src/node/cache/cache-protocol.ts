@@ -10,7 +10,7 @@ export interface SavedRequest {
 }
 
 export interface RequestCache {
-    save(): Promise<void>;
+    save(savedRequest?: SavedRequest): Promise<void>;
     get(): Promise<SavedRequest | undefined>;
     remove(): Promise<void>;
 

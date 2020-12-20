@@ -11,22 +11,19 @@ export interface ResponseHeaderMetadata {
 }
 
 export interface HeaderDecorator {
-    (name?: string): (target: any, targetKey: string, parameterIndex: number) => any;
-    (target: any, targetKey: string, parameterIndex: number): any;
-    (name: string, value: string): (target: any, targetKey: string, descriptor: PropertyDescriptor) => any;
+    (name?: string): ParameterDecorator;
+    (name: string, value: string): MethodDecorator;
 
 }
 
-export const Header = <HeaderDecorator>function (target: any, targetKey: string, parameterIndex: number) {
-    if (parameterIndex !== undefined) {
-        applyRequestHeaderDecorator(target, targetKey, parameterIndex);
-    } else if (target && targetKey) {
-        return (t: any, tk: string, d: PropertyDescriptor) => {
-            applyResponseHeaderDecorator(t, tk, d, target, targetKey);
+export const Header = <HeaderDecorator>function (name?: string, value?: string) {
+    if (name && value) {
+        return (t: any, tk: string | symbol, d: PropertyDescriptor) => {
+            applyResponseHeaderDecorator(t, tk, d, name, value);
         };
     } else {
-        return (t: any, tk: string, i: number) => {
-            applyRequestHeaderDecorator(t, tk, i, target);
+        return (t: any, tk: string | symbol, i: number) => {
+            applyRequestHeaderDecorator(t, tk, i, name);
         };
     }
 };

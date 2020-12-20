@@ -1,25 +1,33 @@
-import { interfaces } from 'inversify';
-import { fluentProvide } from 'inversify-binding-decorators';
-import {applyComponentDecorator } from '@malagu/core';
-import { PipeManager } from '@malagu/core';
+import { ComponentDecorator, applyComponentDecorator, ComponentOption, PipeManager, parseComponentOption } from '@malagu/core';
+import { AOP_POINTCUT } from '@malagu/web';
 import { ErrorConverter } from '../converter';
-import { ConnectionHandler, NoOpConnectionHandler } from '../handler';
+import { ConnectionHandler } from '../handler';
 import { JsonRpcConnectionHandler } from '../factory';
 import { RpcUtil } from '../utils';
 
-export interface RpcOption {
-    id: interfaces.ServiceIdentifier<any>
-}
-export namespace RpcOption {
-    export function is(options: any): options is RpcOption {
-        return options && (options.id !== undefined);
+export const RPC_TAG = 'Rpc';
+
+export const Rpc = <ComponentDecorator>function (...idOrOption: any): ClassDecorator {
+    return target => {
+        const option = parseRpcOption(target, idOrOption);
+        applyRpcDecorator(option, target);
+    };
+};
+
+export function parseRpcOption(target: any, idOrOption?: any) {
+    const parsed = parseComponentOption(target, idOrOption);
+
+    if (idOrOption?.proxy === undefined) {
+        parsed.proxy = true;
     }
+    parsed.sysTags!.push(AOP_POINTCUT, RPC_TAG);
+    return parsed;
 }
 
-export const Rpc = (idOrOption: interfaces.ServiceIdentifier<any> | RpcOption) => (target: any) => {
-    const { id } = getRpcOption(idOrOption);
-    applyComponentDecorator({ id, proxy: true }, target);
-    fluentProvide(ConnectionHandler).inSingletonScope().onActivation(context => {
+export function applyRpcDecorator(option: ComponentOption, target: any) {
+    const { ids } = applyComponentDecorator(option, target);
+    const id = ids[0];
+    return applyComponentDecorator({ id: ConnectionHandler, onActivation: context => {
         const t = context.container.get(id);
         const pipeManager = context.container.get<PipeManager>(PipeManager);
         const errorConverters = [];
@@ -32,13 +40,5 @@ export const Rpc = (idOrOption: interfaces.ServiceIdentifier<any> | RpcOption) =
             }
         }
         return new JsonRpcConnectionHandler(RpcUtil.toPath(id), () => t, errorConverters, pipeManager);
-    }).done(true)(NoOpConnectionHandler);
-};
-
-export function getRpcOption(idOrOption: interfaces.ServiceIdentifier<any> | RpcOption): RpcOption {
-
-    if (RpcOption.is(idOrOption)) {
-        return { ...idOrOption };
-    }
-    return { id: idOrOption };
+    }}, target);
 }

@@ -61,7 +61,7 @@ export class RouteBuilder {
             pathMap.set(path, {
                 controllerMetadata,
                 methodMetadata: m,
-                ...this.doRouteMetadata(targetConstructor, m.key)
+                ...this.doRouteMetadata(targetConstructor, m.key.toString())
             });
         }
     }
@@ -78,7 +78,7 @@ export class RouteBuilder {
                 errorMapping.set(errorType, {
                     controllerMetadata,
                     methodMetadata: m,
-                    ...this.doRouteMetadata(targetConstructor, m.key)
+                    ...this.doRouteMetadata(targetConstructor, m.key.toString())
                 });
             }
         }

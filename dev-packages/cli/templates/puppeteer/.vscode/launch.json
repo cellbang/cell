@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "malagu serve",
+            "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu",
+            "args": [ "serve" ],
+            "cwd": "${workspaceFolder}",
+            "sourceMaps": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "smartStep": true,
+            "internalConsoleOptions": "openOnSessionStart",
+            "outputCapture": "std"
+        }
+    ]
+}

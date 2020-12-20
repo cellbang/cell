@@ -1,10 +1,10 @@
-import { Controller, Get, View, TextView } from '@malagu/mvc/lib/node';
+import { Controller, Get, Text } from '@malagu/mvc/lib/node';
 
 @Controller('/')
 export class HomeController {
     
     @Get()
-    @View(TextView.VIEW_NAME)
+    @Text()
     home(): string {
         return 'Welcome to Malagu';
     }
