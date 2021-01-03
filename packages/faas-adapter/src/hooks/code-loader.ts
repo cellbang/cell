@@ -30,18 +30,12 @@ export class DefaultCodeLoader implements CodeLoader {
         const files = readdirSync(codeDir);
         for (const fileName of files) {
             const fullPath = join(codeDir, fileName);
-            if (codeUri?.include) {
-                const includes = typeof codeUri.include === 'string' ? new RegExp(codeUri.include) : codeUri.include;
-                if (!includes.test(fullPath)) {
+            if (!codeUri?.include || !this.match(codeUri.include, fullPath)) {
+                if (codeUri?.exclude && this.match(codeUri.exclude, fullPath)) {
                     return;
                 }
             }
-            if (codeUri?.exclude) {
-                const exclude = typeof codeUri.exclude === 'string' ? new RegExp(codeUri.exclude) : codeUri.exclude;
-                if (exclude.test(fullPath)) {
-                    return;
-                }
-            }
+
             const file = statSync(fullPath);
             if (file.isDirectory()) {
                 const dir = zip.folder(fileName);
@@ -52,6 +46,11 @@ export class DefaultCodeLoader implements CodeLoader {
                 });
             }
         }
+    }
+
+    protected match(pattern: string | RegExp, fullPath: string) {
+        const regx = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
+        return regx.test(fullPath);
     }
 
 }

@@ -63,6 +63,17 @@ export class ApplicationConfig {
         delete config.frontend;
         config = mergeWith(config, this.props[target], customizer);
 
+        delete config.webpackHooks;
+        delete config.initHooks;
+        delete config.configHooks;
+        delete config.buildHooks;
+        delete config.deployHooks;
+        delete config.serveHooks;
+        delete config.cliHooks;
+        delete config.modules;
+        delete config.staticModules;
+        delete config.assets;
+
         config.targets = this.options.targets.length ? this.options.targets : (config.targets || [ FRONTEND_TARGET, BACKEND_TARGET ]);
         config.targets = Array.from(new Set(config.targets));
         self[configProperty] = config;
