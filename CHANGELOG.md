@@ -1,5 +1,17 @@
 # Change Log
 
+## v1.9.1
+
+- fix(cloud) misspelling
+- fix(faas-adapter) fix the problem that the `include` behavior of the function code configuration `codeUri` does not meet expectations
+- feat(cli) add templates related to file operations based on object storage
+- feat(cli) delete unwanted attributes in the `malagu.yml` file output by the component merge
+
+- fix(cloud) 拼写错误
+- fix(faas-adapter) 修复函数代码配置 `codeUri` 的 `include` 行为不符合预期问题
+- feat(cli) 添加基于对象存储实现的文件操作相关的模板
+- feat(cli) 删除组件合并输出的 `malagu.yml` 文件中不需要的属性
+
 ## v1.9.0
 
 - feat(cloud) abstracts a basic cloud computing component `@malagu/cloud`, abstracts unified interfaces and configurations for cloud products of different cloud vendors, developers can use unified interfaces to operate cloud service resources that do not require cloud vendors

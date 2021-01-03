@@ -43,7 +43,7 @@ export abstract class AbstractCloudService<T> implements CloudService<T> {
             const clientOptions = ConfigUtil.get<ClientOptions>(clientProp) || await this.clientOptionsProvider.provide() || { internal: true };
             const region = ConfigUtil.get<string>(regionProp) || await this.regionProvider.provide();
             if (!region) {
-                throw Error(`Please configure region through the properties "malagu.cloud.credentials" or "${regionProp}"`);
+                throw Error(`Please configure region through the properties "malagu.cloud.region" or "${regionProp}"`);
             }
             const credentials = ConfigUtil.get<Credentials>(credentialsProp) || await this.credentialsProvider.provide();
             if (!credentials) {
