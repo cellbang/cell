@@ -31,7 +31,7 @@ export class AuthorizationCodeTokenResponseClient implements AccessTokenResponse
         } catch (error) {
             const oauth2Error = <OAuth2Error>{
                 errorCode: INVALID_TOKEN_RESPONSE_ERROR_CODE,
-                description: `An error occurred while attempting to retrieve the OAuth 2.0 Access Token Response: ${error.getMessage()}`
+                description: `An error occurred while attempting to retrieve the OAuth 2.0 Access Token Response: ${error?.message || error}`
             };
             throw new OAuth2AuthorizationError(oauth2Error, error);
         }

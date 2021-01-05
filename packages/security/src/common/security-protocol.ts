@@ -17,6 +17,10 @@ export interface ElPolicy extends Policy {
     el: string;
 }
 
+export enum UserType {
+    Memery = 'memory', Database = 'database'
+}
+
 export interface User {
     type: string;
     username: string;
@@ -28,6 +32,14 @@ export interface User {
     enabled: boolean;
     claims?: { [key: string]: any};
     [key: string]: any;
+}
+
+export namespace User {
+    export function is(user: Object | undefined): user is User {
+        return !!user && 'type' in user && 'username' in user && 'password' in user &&
+            'policies' in user && 'accountNonExpired' in user && 'accountNonLocked' in user &&
+            'credentialsNonExpired' in user && 'enabled' in user;
+    }
 }
 
 export interface UserMapperRule {

@@ -21,6 +21,8 @@ malagu:
     userMapperRule:
       github:
         avatar: avatar_url
+        email: email
+        login: login
         nickname: login
 frontend:
   malagu:
