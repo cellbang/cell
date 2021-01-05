@@ -57,7 +57,7 @@ export class DefaultUserResponseClient implements UserResponseClient<OAuth2UserR
         } catch (error) {
             const oauth2Error = <OAuth2Error>{
                 errorCode: INVALID_USER_INFO_RESPONSE_ERROR_CODE,
-                description: `An error occurred while attempting to retrieve the UserInfo Resource: ${error.getMessage()}`
+                description: `An error occurred while attempting to retrieve the UserInfo Resource: ${error?.message || error}`
             };
             throw new OAuth2AuthorizationError(oauth2Error, error);
         }

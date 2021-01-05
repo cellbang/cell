@@ -15,12 +15,12 @@ export interface ComponentOption {
     id?: ComponentId | ComponentId[];
     scope?: Scope;
     name?: string | number | symbol;
-    tag?: { tag: string | number | symbol, value: any },
+    tag?: { tag: string | number | symbol, value: any };
     default?: boolean;
-    when?: (request: interfaces.Request) => boolean
+    when?: (request: interfaces.Request) => boolean;
     rebind?: boolean;
     proxy?: boolean;
-    sysTags?: string[],
+    sysTags?: string[];
     onActivation?: (context: interfaces.Context, t: any) => any;
 }
 

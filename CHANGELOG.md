@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.9.2
+
+- feat(security) adds the enumeration type `UserType` and a method to determine whether it is a `User` object
+- fix(security) fix the problem that non-authentication exceptions are not thrown correctly
+- feat(security) Improve Github third-party authentication user information mapping rules
+
+- feat(security) 添加枚举类型 `UserType` 和判断是否是 `User` 对象的方法
+- fix(security) 修复非认证异常没有正确抛出问题
+- feat(security) 完善 Github 第三方认证用户信息映射规则
+
 ## v1.9.1
 
 - fix(cloud) misspelling

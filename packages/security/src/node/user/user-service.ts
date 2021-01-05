@@ -1,7 +1,7 @@
 import { UserService } from './user-protocol';
 import { Value, Component } from '@malagu/core';
 import { UsernameNotFoundError } from '../error';
-import { User } from '../../common';
+import { User, UserType } from '../../common';
 
 @Component(UserService)
 export class UserServiceImpl implements UserService<string, User> {
@@ -12,7 +12,7 @@ export class UserServiceImpl implements UserService<string, User> {
     async load(username: string): Promise<User> {
         if (this.options.username === username) {
             return {
-                type: 'memory',
+                type: UserType.Memery,
                 username,
                 password: this.options.password,
                 accountNonExpired: true,
