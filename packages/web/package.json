@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/core": "^1.9.2",
     "@types/express": "^4.17.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "crc": "^3.8.0",
