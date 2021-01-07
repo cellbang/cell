@@ -6,7 +6,6 @@ import * as traverse from 'traverse';
 import * as delay from 'delay';
 import { Credentials } from '@malagu/cloud';
 import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';
-import { ScfClientExt } from './scf-client';
 
 const { scf, common, apigateway } = require('tencentcloud-sdk-nodejs');
 const chalk = require('chalk');
@@ -74,7 +73,7 @@ async function createClients(region: string, credentials: Credentials) {
     const credential = new common.Credential(credentials.accessKeyId, credentials.accessKeySecret);
 
     scfClient = new ScfClient(credential, region);
-    scfClientExt = new ScfClientExt(credential, region);
+    scfClientExt = new ScfClient(credential, region, new common.ClientProfile('TC3-HMAC-SHA256'));
     apiClient = new ApiClient(credential, region);
 }
 
