@@ -42,7 +42,7 @@ malagu:
             functionName: ${malagu['faas-adapter'].function.name}
     apiGateway:
       stage:
-        name: "${stage != 'prod' ? 'release' : stage}"
+        name: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'release' : cliContext.prod ? 'release' : 'test'}"
         desc: 'Released By Malagu'
       group:
         name: malagu

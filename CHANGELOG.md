@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.9.3
+## v1.9.4
 
 - fix(scf-adapter) Fix the incorrect geographic list of Tencent Cloud SCF
 - fix(cli) Exception message is not thrown as expected when executing cli hook
