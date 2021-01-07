@@ -64,17 +64,23 @@ export class HookExecutor {
     }
 
     protected async doRequire(context: CliContext, ...paths: string[]) {
+        let lastError: Error | undefined;
         for (const path of paths) {
             try {
                 await require(path).default(context);
                 return;
             } catch (error) {
+                lastError = error;
                 if (error && error.code === 'MODULE_NOT_FOUND') {
                     continue;
                 } else {
                     throw error;
                 }
             }
+        }
+
+        if (lastError) {
+            throw lastError;
         }
 
     }

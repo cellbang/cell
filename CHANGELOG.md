@@ -1,5 +1,17 @@
 # Change Log
 
+## v1.9.3
+
+- fix(scf-adapter) Fix the incorrect geographic list of Tencent Cloud SCF
+- fix(cli) Exception message is not thrown as expected when executing cli hook
+- feat(scf-adapter) scf sdk already supports the `TC3-HMAC-SHA256` signature algorithm, remove the workround implementation
+- feat(grommet) Optimize localized component `LocalMenu`, add new component property `fontSize`
+
+- fix(scf-adapter) 修复腾讯云函数的地域列表不正确问题
+- fix(cli) 执行 cli hook 的时候异常信息没有按预期抛出来
+- feat(scf-adapter) scf sdk 已经支持 `TC3-HMAC-SHA256` 签名算法，移除 workround 实现
+- feat(grommet) 优化本地化组件 `LocalMenu`，添加新组件属性 `fontSize`
+
 ## v1.9.2
 
 - feat(security) adds the enumeration type `UserType` and a method to determine whether it is a `User` object

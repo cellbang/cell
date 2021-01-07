@@ -11,7 +11,7 @@ function parseLabel(intl: IntlShape, locale?: Locale) {
     }
 }
 
-export function LocaleMenu(props: MenuProps & Omit<ButtonType, 'icon'>) {
+export function LocaleMenu(props: Omit<MenuProps, 'items'> & Omit<ButtonType, 'icon'> & { fontSize?: 'small' | 'medium' | 'large' | 'xlarge' | string; }) {
     const intl = useIntl();
     const localeManager = ContainerUtil.get<LocaleManager>(LocaleManager);
     const [locales, setLocales] = React.useState<Locale[]>([]);
@@ -22,8 +22,8 @@ export function LocaleMenu(props: MenuProps & Omit<ButtonType, 'icon'>) {
         return () => subscription.unsubscribe();
     }, []);
     return (
-        <Menu size="medium" hoverIndicator icon={<Down size={props.size}/>} {...props} label={parseLabel(intl, current)}
-            items={locales.map(l => ({ label: <Text size={props.size}>{parseLabel(intl, l)}</Text>, onClick: () => localeManager.currentSubject.next(l) }))}
+        <Menu size="medium" hoverIndicator icon={<Down size={props.fontSize}/>} {...props} label={<Text size={props.fontSize}>{parseLabel(intl, current)}</Text>}
+            items={locales.map(l => ({ label: <Text size={props.fontSize}>{parseLabel(intl, l)}</Text>, onClick: () => localeManager.currentSubject.next(l) }))}
         />
     );
 }

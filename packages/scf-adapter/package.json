@@ -10,7 +10,7 @@
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
     "tencent-serverless-http": "^1.2.0",
-    "tencentcloud-sdk-nodejs": "^3.0.186"
+    "tencentcloud-sdk-nodejs": "^3.0.268"
   },
   "publishConfig": {
     "access": "public"
