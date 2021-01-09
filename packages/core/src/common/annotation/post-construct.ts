@@ -1,2 +1,1 @@
-import { postConstruct } from 'inversify';
-export const PostConstruct = postConstruct;
+export { postConstruct as PostConstruct } from 'inversify';

@@ -1,5 +1,5 @@
 import { Component } from '@malagu/core';
-import { ClientOptions, Credentials, Body, CreateBucketResult, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest,
+import { ClientOptions, Credentials, Body, CreateBucketResult, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest, CopyObjectRequest,
     HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService, PutObjectRequest, AbstractObjectStorageService } from '@malagu/cloud';
 import { S3 } from 'aws-sdk';
 import { Readable } from 'stream';
@@ -77,21 +77,28 @@ export class ObjectStorageServiceImpl extends AbstractObjectStorageService<S3> {
 
     async getObject(request: GetObjectRequest): Promise<Body> {
         const service = await this.getRawCloudService();
-        const { bucket, key } = request;
-        const result = await service.getObject({ Bucket: bucket, Key: key}).promise();
+        const { bucket, key, range } = request;
+        const result = await service.getObject({ Bucket: bucket, Key: key, Range: range}).promise();
         return <Body>result.Body;
     }
 
     async getStream(request: GetObjectRequest): Promise<Readable> {
         const service = await this.getRawCloudService();
-        const { bucket, key } = request;
-        return service.getObject({ Bucket: bucket, Key: key }).createReadStream();
+        const { bucket, key, range } = request;
+        return service.getObject({ Bucket: bucket, Key: key, Range: range }).createReadStream();
     }
 
     async putObject(request: PutObjectRequest): Promise<void> {
         const service = await this.getRawCloudService();
-        const { bucket, key, body } = request;
-        await service.putObject({ Bucket: bucket, Key: key, Body: body }).promise();
+        const { bucket, key, body, cacheControl, contentDisposition, contentLength, contentType, expires, contentEncoding } = request;
+        await service.putObject({ Bucket: bucket, Key: key, Body: body, CacheControl: cacheControl, ContentDisposition: contentDisposition,
+            ContentEncoding: contentEncoding, ContentLength: contentLength, ContentType: contentType, Expires: expires }).promise();
+    }
+
+    async copyObject(request: CopyObjectRequest): Promise<void> {
+        const service = await this.getRawCloudService();
+        const { bucket, key, copySource } = request;
+        await service.copyObject({ Bucket: bucket, Key: key, CopySource: copySource }).promise();
     }
 
     async deleteObject(request: DeleteObjectRequest): Promise<void> {
@@ -103,7 +110,14 @@ export class ObjectStorageServiceImpl extends AbstractObjectStorageService<S3> {
     async headObject(request: GetObjectRequest): Promise<HeadObjectResult> {
         const service = await this.getRawCloudService();
         const { bucket, key } = request;
-        await service.headObject({ Bucket: bucket, Key: key }).promise();
-        return {};
+        const { CacheControl, ContentDisposition, ContentEncoding, ContentLength, ContentType, Expires } = await service.headObject({ Bucket: bucket, Key: key }).promise();
+        return {
+            cacheControl: CacheControl,
+            contentDisposition: ContentDisposition,
+            contentEncoding: ContentEncoding,
+            contentLength: ContentLength,
+            contentType: ContentType,
+            expires: Expires
+        };
     }
 }

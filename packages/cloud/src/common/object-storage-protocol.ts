@@ -62,6 +62,7 @@ export interface ListObjectsResult {
 export interface GetObjectRequest {
     bucket: string;
     key: string;
+    range?: string;
 }
 
 export interface CreateBucketRequest {
@@ -76,6 +77,18 @@ export interface PutObjectRequest {
     bucket: string;
     key: string;
     body: Body;
+    cacheControl?: string;
+    contentDisposition?: string;
+    contentEncoding?: string;
+    contentLength?: number;
+    contentType?: string;
+    expires?: Date;
+}
+
+export interface CopyObjectRequest {
+    bucket: string;
+    key: string;
+    copySource: string;
 }
 
 export interface DeleteObjectRequest {
@@ -93,7 +106,12 @@ export interface DeleteBucketRequest {
 }
 
 export interface HeadObjectResult {
-
+    cacheControl?: string;
+    contentDisposition?: string;
+    contentEncoding?: string;
+    contentLength?: number;
+    contentType?: string;
+    expires?: Date;
 }
 
 export interface ObjectStorageService<T> extends CloudService<T> {
@@ -104,6 +122,7 @@ export interface ObjectStorageService<T> extends CloudService<T> {
     getObject(request: GetObjectRequest): Promise<Body>;
     getStream(request: GetObjectRequest): Promise<Readable>;
     putObject(request: PutObjectRequest): Promise<void>;
+    copyObject(request: CopyObjectRequest): Promise<void>;
     deleteObject(request: DeleteObjectRequest): Promise<void>;
     headObject(request: GetObjectRequest): Promise<HeadObjectResult>;
 }
@@ -117,6 +136,7 @@ export abstract class AbstractObjectStorageService<T> extends AbstractCloudServi
     abstract getObject(request: GetObjectRequest): Promise<Body>;
     abstract getStream(request: GetObjectRequest): Promise<Readable>;
     abstract putObject(request: PutObjectRequest): Promise<void>;
+    abstract copyObject(request: CopyObjectRequest): Promise<void>;
     abstract deleteObject(request: DeleteObjectRequest): Promise<void>;
     abstract headObject(request: GetObjectRequest): Promise<HeadObjectResult>;
 }

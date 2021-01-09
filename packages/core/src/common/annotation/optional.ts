@@ -1,3 +1,1 @@
-import { optional } from 'inversify';
-
-export const Optional = optional;
+export { optional as Optional } from 'inversify';

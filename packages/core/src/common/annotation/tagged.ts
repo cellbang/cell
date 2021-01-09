@@ -1,2 +1,1 @@
-import { tagged } from 'inversify';
-export const Tagged = tagged;
+export { tagged as Tagged } from 'inversify';

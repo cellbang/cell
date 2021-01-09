@@ -1,5 +1,5 @@
 import { Component } from '@malagu/core';
-import { ClientOptions, Credentials, CreateBucketResult, Body, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest,
+import { ClientOptions, Credentials, CreateBucketResult, Body, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest, CopyObjectRequest,
     HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService, PutObjectRequest, AbstractObjectStorageService } from '@malagu/cloud';
 import { Readable } from 'stream';
 import { promisify } from 'util';
@@ -94,8 +94,15 @@ export class ObjectStorageServiceImpl extends AbstractObjectStorageService<any> 
 
     async putObject(request: PutObjectRequest): Promise<void> {
         const service = await this.getRawCloudService();
-        const { bucket, key, body } = request;
-        await promisify(service.putObject.bind(service))({ Bucket: bucket, Key: key, Body: body, Region: this.region });
+        const { bucket, key, body, cacheControl, contentDisposition, contentLength, contentType, expires, contentEncoding } = request;
+        await promisify(service.putObject.bind(service))({ Bucket: bucket, Key: key, Body: body, CacheControl: cacheControl, ContentDisposition: contentDisposition,
+            ContentEncoding: contentEncoding, ContentLength: contentLength, ContentType: contentType, Expires: expires, Region: this.region });
+    }
+
+    async copyObject(request: CopyObjectRequest): Promise<void> {
+        const service = await this.getRawCloudService();
+        const { bucket, key, copySource } = request;
+        await promisify(service.putObjectCopy.bind(service))({ Bucket: bucket, Key: key, CopySource: copySource, Region: this.region });
     }
 
     async deleteObject(request: DeleteObjectRequest): Promise<void> {
@@ -107,7 +114,14 @@ export class ObjectStorageServiceImpl extends AbstractObjectStorageService<any> 
     async headObject(request: GetObjectRequest): Promise<HeadObjectResult> {
         const service = await this.getRawCloudService();
         const { bucket, key } = request;
-        await promisify(service.headObject.bind(service))({ Bucket: bucket, Key: key, Region: this.region });
-        return {};
+        const { headers } = await promisify(service.headObject.bind(service))({ Bucket: bucket, Key: key, Region: this.region });
+        return {
+            contentLength: parseInt(headers['content-length']),
+            contentType: headers['content-type'],
+            contentDisposition: headers['content-disposition'],
+            cacheControl: headers['cache-control'],
+            expires: headers['expires'],
+            contentEncoding: headers['content-encoding'],
+        };
     }
 }
