@@ -1,2 +1,1 @@
-import { targetName } from 'inversify';
-export const TargetName = targetName;
+export { targetName as TargetName } from 'inversify';

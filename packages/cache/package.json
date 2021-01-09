@@ -1,12 +1,12 @@
 {
-  "name": "@malagu/logger",
+  "name": "@malagu/cache",
   "version": "1.9.4",
-  "description": "logger component for pino",
+  "description": "cache component for cache-manager",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.9.4",
-    "pino": "^5.16.0"
+    "@malagu/core": "^1.9.4",
+    "cache-manager": "^3.4.0"
   },
   "publishConfig": {
     "access": "public"
@@ -26,8 +26,7 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml",
-    "malagu-local.yml"
+    "malagu.yml"
   ],
   "scripts": {
     "prepare": "yarn run clean && yarn run build",
@@ -39,7 +38,7 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^1.9.4",
-    "@types/pino": "^5.15.5"
+    "@types/cache-manager": "^2.10.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -1,5 +1,19 @@
 # Change Log
 
+## v1.10.0
+
+- feat(core) adds support for multi-tenant, provides `TenantProvider` interface
+- feat(security) provides an implementation of the `TenantProvider` interface
+- feat(cloud) object storage service supports the `copyObject` method
+- feat(cache) adds the `@malagu/cache` component, which integrates `cache-manager`, and provides memory-based storage strategies by default
+- fix(oss) Fix the problem of incorrect transfer of token when using temporary AKSK
+
+- feat(core) 添加对多住户的支持，提供了 `TenantProvider` 接口
+- feat(security) 提供了 `TenantProvider` 接口的实现
+- feat(cloud) 对象存储服务支持 `copyObject` 方法
+- feat(cache) 添加 `@malagu/cache` 组件，该组件集成了 `cache-manager`，默认提供基于内存的存储策略
+- fix(oss) 修复使用临时 AKSK 时，没有正确传递 Token 问题
+
 ## v1.9.4
 
 - fix(scf-adapter) Fix the incorrect geographic list of Tencent Cloud SCF

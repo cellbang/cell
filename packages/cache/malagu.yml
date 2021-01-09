@@ -1,0 +1,7 @@
+malagu:
+  cache:
+    config:
+      default:
+        store: memory
+        max: 100
+        ttl: 3600 # seconds
