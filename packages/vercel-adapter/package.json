@@ -1,11 +1,11 @@
 {
   "name": "@malagu/vercel-adapter",
-  "version": "1.9.4",
+  "version": "1.10.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.9.4",
+    "@malagu/web": "^1.10.0",
     "command-exists": "^1.2.9",
     "express": "^4.17.1"
   },
@@ -39,7 +39,7 @@
     "docs": "malaguext docs"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.9.4",
+    "@malagu/ext-scripts": "^1.10.0",
     "webpack-merge": "^4.2.1"
   },
   "nyc": {
