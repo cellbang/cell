@@ -8,7 +8,7 @@
 - feat(cache) adds the `@malagu/cache` component, which integrates `cache-manager`, and provides memory-based storage strategies by default
 - fix(oss) Fix the problem of incorrect transfer of token when using temporary AKSK
 
-- feat(core) 添加对多住户的支持，提供了 `TenantProvider` 接口
+- feat(core) 添加对多租户的支持，提供了 `TenantProvider` 接口
 - feat(security) 提供了 `TenantProvider` 接口的实现
 - feat(cloud) 对象存储服务支持 `copyObject` 方法
 - feat(cache) 添加 `@malagu/cache` 组件，该组件集成了 `cache-manager`，默认提供基于内存的存储策略
