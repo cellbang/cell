@@ -10,7 +10,7 @@ export class DevServerConfigFactory {
         const realPort = getPort(cfg, target, port);
         const baseDevServerConfig = {
             watchOptions: {
-                ignored: /node_modules/
+                ignored: [ /node_modules/ ]
             },
             port: realPort,
             open,
@@ -27,7 +27,7 @@ export class DevServerConfigFactory {
         } else {
             return {
                 devServer: {
-                    ...baseDevServerConfig,
+                    ...baseDevServerConfig
                 }
             };
         }

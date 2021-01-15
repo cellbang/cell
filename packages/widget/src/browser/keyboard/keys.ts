@@ -161,7 +161,7 @@ export class KeyCode {
     /**
      * Create a KeyCode from one of several input types.
      */
-    public static createKeyCode(input: KeyboardEvent | Keystroke | KeyCodeSchema | string): KeyCode {
+    public static createKeyCode(input: KeyboardEvent | Keystroke | KeyCodeSchema | string, eventDispatch: 'code' | 'keyCode' = 'code'): KeyCode {
         if (typeof input === 'string') {
             const parts = input.split('+');
             if (!KeyCode.isModifierString(parts[0])) {
@@ -172,7 +172,7 @@ export class KeyCode {
             }
             return KeyCode.createKeyCode({ modifiers: parts as KeyModifier[] });
         } else if (KeyCode.isKeyboardEvent(input)) {
-            const key = KeyCode.toKey(input);
+            const key = KeyCode.toKey(input, eventDispatch);
             return new KeyCode({
                 key: Key.isModifier(key.code) ? undefined : key,
                 meta: isOSX && input.metaKey,
@@ -220,7 +220,19 @@ export class KeyCode {
         }
 
         const schema: KeyCodeSchema = {};
-        const keys = keybinding.trim().toLowerCase().split('+');
+        const keys = [];
+        let currentKey = '';
+        for (const character of keybinding.trim().toLowerCase()) {
+            if (currentKey && (character === '-' || character === '+')) {
+                keys.push(currentKey);
+                currentKey = '';
+            } else if (character !== '+') {
+                currentKey += character;
+            }
+        }
+        if (currentKey) {
+            keys.push(currentKey);
+        }
         /* If duplicates i.e ctrl+ctrl+a or alt+alt+b or b+alt+b it is invalid */
         if (keys.length !== new Set(keys).size) {
             throw new Error(`Can't parse keybinding ${keybinding} Duplicate modifiers`);
@@ -316,9 +328,9 @@ export namespace KeyCode {
      * `keyIdentifier` is used to access this deprecated field:
      * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyIdentifier
      */
-    export function toKey(event: KeyboardEvent): Key {
+    export function toKey(event: KeyboardEvent, dispatch: 'code' | 'keyCode' = 'code'): Key {
         const code = event.code;
-        if (code) {
+        if (code && dispatch === 'code') {
             if (isOSX) {
                 // https://github.com/eclipse-theia/theia/issues/4986
                 const char = event.key;
@@ -328,13 +340,22 @@ export namespace KeyCode {
                     return Key.INTL_BACKSLASH;
                 }
             }
+
+            // https://github.com/eclipse-theia/theia/issues/7315
+            if (code.startsWith('Numpad') && event.key && event.key.length > 1) {
+                const k = Key.getKey(event.key);
+                if (k) {
+                    return k;
+                }
+            }
+
             const key = Key.getKey(code);
             if (key) {
                 return key;
             }
         }
 
-        // tslint:disable-next-line: deprecation
+        // eslint-disable-next-line deprecation/deprecation
         const keyCode = event.keyCode;
         if (keyCode) {
             const key = Key.getKey(keyCode);
@@ -364,6 +385,7 @@ export namespace KeyCode {
         if (key && Array.from(key).length === 1) {
             return key;
         }
+        // eslint-disable-next-line deprecation/deprecation
         const charCode = event.charCode;
         // Use the charCode property if it does not correspond to a unicode control character
         if (charCode && charCode > 0x1f && !(charCode >= 0x80 && charCode <= 0x9f)) {
@@ -451,7 +473,7 @@ export namespace SpecialCases {
 
 export namespace Key {
 
-    // tslint:disable-next-line:no-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export function isKey(arg: any): arg is Key {
         return typeof arg === 'object' && ('code' in arg) && ('keyCode' in arg);
     }
@@ -590,7 +612,7 @@ export namespace Key {
 
 }
 
-/* -------------------- Initialize the static key mappings --------------------*/
+/* -------------------- Initialize the static key mappings -------------------- */
 (() => {
     // Set the default key mappings from the constants in the Key namespace
     Object.keys(Key).map(prop => Reflect.get(Key, prop)).filter(key => Key.isKey(key)).forEach(key => {

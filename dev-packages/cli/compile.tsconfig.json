@@ -1,11 +1,12 @@
 {
   "extends": "../../configs/base.tsconfig",
   "compilerOptions": {
+    "composite": true,
     "rootDir": "src",
-    "outDir": "lib",
-    "target": "es6"
+    "outDir": "lib"
   },
   "include": [
     "src"
-  ]
+  ],
+  "references": []
 }

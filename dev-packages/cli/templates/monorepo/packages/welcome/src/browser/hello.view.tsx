@@ -5,13 +5,13 @@ import { View } from '@malagu/react';
 
 interface Prop {}
 interface State {
-    response: string
+    response: string;
 }
 @View()
 export class Hello extends React.Component<Prop, State> {
 
     @Autorpc(WelcomeServer)
-    protected welcomeServer!: WelcomeServer;
+    protected welcomeServer: WelcomeServer;
 
     constructor(prop: Prop) {
         super(prop);
@@ -26,6 +26,6 @@ export class Hello extends React.Component<Prop, State> {
     }
 
     render() {
-        return <div>{this.state.response}</div>
+        return <div>{this.state.response}</div>;
     }
 }

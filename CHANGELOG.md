@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.11.0
+
+- feat(all) Use project references to enable incremental compilation to speed up compilation
+- feat(cli) multi-component template was renamed monorepo, and the content of the upgraded template was optimized
+- feat(cli) optimize the hot replacement behavior of back-end type projects in monorepo projects
+
+- feat(all) 使用项目引用，开启增量编译，加快编译速度
+- feat(cli) multi-component 模板改名为 monorepo，并优化升级模板内容
+- feat(cli) 优化后端类型项目在 monorepo 项目中热替换行为
+
 ## v1.10.0
 
 - feat(core) adds support for multi-tenant, provides `TenantProvider` interface
