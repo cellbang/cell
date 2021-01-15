@@ -1,7 +1,6 @@
 import { Component, Value } from '../annotation';
 import { PipeTransform, ArgumentMetadata } from './pipe-protocol';
 import { ValidationErrors } from '../error';
-import { isNull } from 'util';
 import { validate } from 'class-validator';
 import { classToPlain, plainToClass } from 'class-transformer';
 
@@ -67,11 +66,13 @@ export class ValidationPipe implements PipeTransform<any> {
     private toValidate(metadata: ArgumentMetadata): boolean {
         const { argType } = metadata;
         const types = [String, Boolean, Number, Array, Object];
-        return !types.some(t => argType === t) && !isNull(argType);
+        // eslint-disable-next-line no-null/no-null
+        return !types.some(t => argType === t) && argType !== null;
     }
 
     private toEmptyIfNil<T = any, R = any>(value: T): R | {} {
-        return isNull(value) ? {} : value;
+        // eslint-disable-next-line no-null/no-null
+        return value === null ? {} : value;
     }
 
     private stripProtoKeys(value: Record<string, any>): void {

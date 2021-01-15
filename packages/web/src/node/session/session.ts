@@ -1,9 +1,9 @@
 import { Session } from './session-protocol';
-import * as uuid from 'uuid/v4';
+import { v4 } from 'uuid';
 const crc = require('crc').crc32;
 
 export class SessionImpl implements Session {
-    readonly id = uuid();
+    readonly id = v4();
     isNew: boolean = true;
     expire: number;
     maxAge: number;

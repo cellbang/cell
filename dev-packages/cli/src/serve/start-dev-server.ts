@@ -8,7 +8,6 @@ const colors = require('webpack-dev-server/lib/utils/colors');
 const processOptions = require('webpack-dev-server/lib/utils/processOptions');
 const createLogger = require('webpack-dev-server/lib/utils/createLogger');
 const findPort = require('webpack-dev-server/lib/utils/findPort');
-const webpackDevMiddleware = require('webpack-dev-middleware');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
 import * as delay from 'delay';
@@ -38,7 +37,11 @@ function getEntryPath(configuration: webpack.Configuration) {
 function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
-        server.app.use(webpackDevMiddleware(compiler, { fs: compiler.outputFileSystem, logLevel: 'error' }));
+        compiler.watch(options.watchOptions, (err) => {
+            if (err) {
+                log.error(err.stack || err);
+            }
+        });
     }
     const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);

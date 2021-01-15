@@ -6,7 +6,7 @@ export const templates: any = {
     'microservice': '{{ templatePath }}/microservice',
     'file-service': '{{ templatePath }}/file-service',
     'puppeteer': '{{ templatePath }}/puppeteer',
-    'multi-component': '{{ templatePath }}/multi-component',
+    'monorepo': '{{ templatePath }}/monorepo',
     'mycli': '{{ templatePath }}/mycli',
     'site': 'https://github.com/cellbang/cellbang-site.git'
 };

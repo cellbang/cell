@@ -8,6 +8,7 @@ import { ElPolicy, Policy, PolicyType } from '../../common';
 export class ElPolicyResolver implements PolicyResolver {
 
     resolve(policy: ElPolicy, securityMetadata: SecurityMetadata): Promise<boolean> {
+        // eslint-disable-next-line no-eval
         return eval(policy.el, policy.context || Context.getAttr(SECURITY_EXPRESSION_CONTEXT_KEY));
     }
 

@@ -92,7 +92,7 @@ export class DefaultAuthorizationRequestResolver implements AuthorizationRequest
     protected getParameters(authorizationRequest: AuthorizationRequest) {
         const parameters: { [key: string]: string } = {};
         parameters[OAuth2ParameterNames.RESPONSE_TYPE] = authorizationRequest.responseType;
-		parameters[OAuth2ParameterNames.CLIENT_ID] = authorizationRequest.clientId;
+        parameters[OAuth2ParameterNames.CLIENT_ID] = authorizationRequest.clientId;
         if (authorizationRequest.scopes) {
             parameters[OAuth2ParameterNames.SCOPE] = authorizationRequest.scopes.join(' ');
         }
@@ -107,7 +107,7 @@ export class DefaultAuthorizationRequestResolver implements AuthorizationRequest
                 parameters[key] = authorizationRequest.additionalParameters[key];
             }
         }
-	    return parameters;
+        return parameters;
     }
 
     protected expandRedirectUri(clientRegistration: ClientRegistration, action: string) {

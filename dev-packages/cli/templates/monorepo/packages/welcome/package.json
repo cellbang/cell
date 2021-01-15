@@ -5,7 +5,9 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/rpc": "latest"
+    "@malagu/rpc": "latest",
+    "@malagu/react": "latest",
+    "@malagu/serve-static": "latest"
   },
   "publishConfig": {
     "access": "public"
@@ -20,12 +22,11 @@
     "malagu.yml"
   ],
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
-    "clean": "malaguext clean",
+    "lint": "malaguext lint",
     "build": "malaguext build",
     "watch": "malaguext watch",
-    "test": "malaguext test",
-    "docs": "malaguext docs"
+    "clean": "malaguext clean",
+    "test": "malaguext test"
   },
   "devDependencies": {
     "@malagu/ext-scripts": "latest"

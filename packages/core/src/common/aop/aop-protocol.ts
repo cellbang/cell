@@ -52,6 +52,6 @@ export interface ClassFilter {
 }
 
 export interface MethodMatcher {
-	matches(method: string | number | symbol, clazz: Newable<any>, args: any[]): boolean;
+    matches(method: string | number | symbol, clazz: Newable<any>, args: any[]): boolean;
 }
 
