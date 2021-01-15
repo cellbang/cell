@@ -37,7 +37,7 @@ function getEntryPath(configuration: webpack.Configuration) {
 function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
-        compiler.watch(options.watchOptions, (err) => {
+        compiler.watch(options.watchOptions, err => {
             if (err) {
                 log.error(err.stack || err);
             }
