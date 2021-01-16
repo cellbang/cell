@@ -19,7 +19,7 @@ export interface ConnectionOptions {
 }
 
 export interface RequestTaskMeta {
-    id: number;
+    id: number | NodeJS.Timeout;
     contentLength: number;
     contents: string[];
     task: () => Promise<void>;
