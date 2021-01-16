@@ -41,7 +41,7 @@ export class ServeStaticMiddleware implements Middleware {
                     }
                 };
             }
-            serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, (err: any) => {
+            serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, ((err: any) => {
                 const url = ctx.request.url;
                 if ((ctx.request.method === HttpMethod.GET || ctx.request.method === HttpMethod.HEAD) && url !== 'index.html') {
                     if (this.config.path && !this.requestMatcher.match(this.config.path) || !this.config.spa) {
@@ -70,7 +70,7 @@ export class ServeStaticMiddleware implements Middleware {
                     ctx.request.url = oldUrl;
                     next().then(resolve).catch(reject);
                 }
-            });
+             }) as any);
         };
 
         return new Promise(executor);

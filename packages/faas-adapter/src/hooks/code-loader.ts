@@ -39,7 +39,9 @@ export class DefaultCodeLoader implements CodeLoader {
             const file = statSync(fullPath);
             if (file.isDirectory()) {
                 const dir = zip.folder(fileName);
-                await this.doLoad(fullPath, dir, codeUri);
+                if (dir) {
+                    await this.doLoad(fullPath, dir, codeUri);
+                }
             } else {
                 zip.file(fileName, readFileSync(fullPath), {
                     unixPermissions: '755'

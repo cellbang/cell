@@ -138,7 +138,7 @@ export class HttpProxyCreator implements ProxyCreator {
             if (!meta) {
                 return;
             }
-            clearTimeout(meta.id);
+            clearTimeout(meta.id as any);
             const contents = meta.contents;
             this.requestMap.delete(endpoint);
             const config: AxiosRequestConfig = {
