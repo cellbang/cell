@@ -1,7 +1,7 @@
 import { Component, Autowired, Optional, getOwnMetadata } from '@malagu/core';
 import {
     SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
-    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, ResourceNameResolver } from './access-protocol';
+    SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, ActionNameResolver } from './access-protocol';
 import { SecurityContext } from '../context';
 import { METADATA_KEY } from '../constants';
 import { Context } from '@malagu/web/lib/node';
@@ -13,8 +13,8 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
     @Autowired(SecurityExpressionContextHandler) @Optional()
     protected readonly securityExpressionContextHandler: SecurityExpressionContextHandler;
 
-    @Autowired(ResourceNameResolver)
-    protected readonly resourceNameResolver: ResourceNameResolver;
+    @Autowired(ActionNameResolver)
+    protected readonly actionNameResolver: ActionNameResolver;
 
     async load(context: MethodSecurityMetadataContext): Promise<SecurityMetadata> {
         const classPolicies: Policy[] = getOwnMetadata(METADATA_KEY.authorize, context.target.constructor);
@@ -29,13 +29,12 @@ export class MethodSecurityMetadataSource implements SecurityMetadataSource {
         Context.setAttr(SECURITY_EXPRESSION_CONTEXT_KEY, ctx);
         const policies = classPolicies.concat(...methodPolicies)
             .filter(item => item.authorizeType === context.authorizeType);
-
-        const resource = await this.resourceNameResolver.resolve(context);
+        const action = await this.actionNameResolver.resolve(context);
         return {
             authorizeType: context.authorizeType,
             principal: SecurityContext.getAuthentication().principal,
-            action: context.method,
-            resource,
+            action,
+            resource: '',
             policies: policies,
             get grant() {
                 return ctx.grant;

@@ -1,6 +1,6 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
-import { ApplicationError, Disposable, getPropertyNames } from '@malagu/core';
-import { PipeManager } from '@malagu/core';
+import { ApplicationError, Disposable, getPropertyNames, Logger, PipeManager, getTargetClass } from '@malagu/core';
+import { Context } from '@malagu/web/lib/node';
 import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 
@@ -24,11 +24,12 @@ export class JsonRpcConnectionHandler<T extends object> implements ConnectionHan
         readonly path: string,
         readonly targetFactory: (proxy: JsonRpcProxy<T>) => any,
         readonly errorConverters: ErrorConverter[],
-        readonly pipeManager: PipeManager
+        readonly pipeManager: PipeManager,
+        readonly logger: Logger
     ) { }
 
     onConnection(connection: MessageConnection): void {
-        const factory = new JsonRpcProxyFactory<T>(undefined, this.errorConverters, this.pipeManager);
+        const factory = new JsonRpcProxyFactory<T>(undefined, this.errorConverters, this.pipeManager, this.logger);
         const proxy = factory.createProxy();
         factory.target = this.targetFactory(proxy);
         factory.listen(connection);
@@ -47,7 +48,11 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     protected connectionPromiseResolve: (connection: MessageConnection) => void;
     protected connectionPromise: Promise<MessageConnection>;
 
-    constructor(public target?: any, protected errorConverters?: ErrorConverter[], protected pipeMananger?: PipeManager) {
+    constructor(
+        public target?: any,
+        protected errorConverters?: ErrorConverter[],
+        protected pipeMananger?: PipeManager,
+        protected logger?: Logger) {
         this.waitForConnection();
     }
 
@@ -90,10 +95,14 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     }
 
     protected async onRequest(method: string, ...args: any[]): Promise<any> {
+        const now = Date.now();
+        const message = `${getTargetClass(this.target).name}.${method} with traceId[${Context.getTraceId() || 'none'}]`;
+        // eslint-disable-next-line no-unused-expressions
+        this.logger?.info(`starting ${message}`);
         try {
-            if (this.pipeMananger) {
-                await this.pipeMananger.apply({ target: this.target, method: method }, args);
-            }
+            // eslint-disable-next-line no-unused-expressions
+            await this.pipeMananger?.apply({ target: this.target, method: method }, args);
+
             return await this.target[method](...args);
         } catch (error) {
             const e = this.serializeError(error);
@@ -102,8 +111,13 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
             }
             const reason = e.message || '';
             const stack = e.stack || '';
-            console.error(`Request ${method} failed with error: ${reason}`, stack);
+            // eslint-disable-next-line no-unused-expressions
+            this.logger?.error(`Request ${method} failed with error: ${reason} with traceId[${Context.getTraceId() || 'none'}]`, stack);
             throw e;
+        } finally {
+            // eslint-disable-next-line no-unused-expressions
+            this.logger?.info(`ending ${message}, cost ${Date.now() - now}ms`);
+
         }
     }
 

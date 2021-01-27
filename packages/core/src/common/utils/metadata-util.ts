@@ -16,7 +16,7 @@ export function getOwnMetadata(metadataKey: string, constructor: Object, propert
             if (Array.isArray(metadata)) {
                 result = [ ...result, ...metadata ];
             } else {
-                return metadata;
+                return [ metadata ];
             }
         }
     }

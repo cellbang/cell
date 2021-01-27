@@ -1,6 +1,6 @@
 import { UserManager } from './user-protocol';
 import { Autowired, Component, Value, PostConstruct } from '@malagu/core';
-import { RestOperations, HttpMethod, PathResolver, HttpStatus } from '@malagu/web';
+import { RestOperations, HttpMethod, PathResolver, HttpStatus, HttpHeaders } from '@malagu/web';
 import { Method } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../common';
@@ -44,7 +44,7 @@ export class UserManagerImpl implements UserManager {
 
         this.restOperations.interceptors.response.use(response => response, error => {
             if (error.response) {
-                if (error.response.status === HttpStatus.UNAUTHORIZED) {
+                if (error.response.status === HttpStatus.UNAUTHORIZED && !error.response.headers[HttpHeaders.WWW_AUTHENTICATE.toLowerCase()]) {
                     this.openLoginPage();
                     return;
                 }

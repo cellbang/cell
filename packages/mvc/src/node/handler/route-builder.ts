@@ -85,6 +85,7 @@ export class RouteBuilder {
     }
 
     protected doRouteMetadata(targetConstructor: any, method: string) {
+        const viewMetadata = getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method)
         return {
             paramMetadata: getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
             bodyMetadata: getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
@@ -95,7 +96,7 @@ export class RouteBuilder {
             responseCookieMetadata: getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
             requestSessionMetadata: getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
             responseSessionMetadata: getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
-            viewMetadata: getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method) || { }
+            viewMetadata:  viewMetadata.lenght ? viewMetadata[0] : {}
         };
     }
 }

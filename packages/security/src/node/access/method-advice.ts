@@ -1,5 +1,5 @@
 import { MethodBeforeAdvice, Autowired, Aspect, AfterReturningAdvice, Value, ConfigUtil, Injectable } from '@malagu/core';
-import { AccessDecisionManager, MethodSecurityMetadataContext, SecurityMetadataSource, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
+import { AccessDecisionManager, MethodSecurityMetadataContext, ResourceNameResolver, SecurityMetadataSource, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
 import { AOP_POINTCUT } from '@malagu/web';
 import { SecurityContext } from '../context';
 import { AuthorizeType } from '../../common';
@@ -16,6 +16,9 @@ export abstract class AbstractSecurityMethodAdivice {
     @Autowired(SecurityMetadataSource)
     protected readonly securityMetadataSource: SecurityMetadataSource;
 
+    @Autowired(ResourceNameResolver)
+    protected readonly resourceNameResolver: ResourceNameResolver;
+
     @Value('malagu.security.enabled')
     protected readonly enabled: boolean;
 
@@ -29,9 +32,13 @@ export class SecurityMethodBeforeAdivice extends AbstractSecurityMethodAdivice i
 
     async before(method: string | number | symbol, args: any[], target: any): Promise<void> {
         if (this.needAccessDecision(method)) {
-            const ctx = { method, args, target, authorizeType: AuthorizeType.Pre, grant: 0 };
+            const ctx: MethodSecurityMetadataContext = { method: method as string, args, target, authorizeType: AuthorizeType.Pre, grant: 0 };
             const securityMetadata = await this.securityMetadataSource.load(ctx);
-            await this.accessDecisionManager.decide(securityMetadata);
+            const resouces = await this.resourceNameResolver.resolve(ctx);
+            for (const resource of resouces) {
+                securityMetadata.resource = resource;
+                await this.accessDecisionManager.decide(securityMetadata);
+            }
         }
     }
 
@@ -43,8 +50,13 @@ export class SecurityAfterReturningAdvice extends AbstractSecurityMethodAdivice 
     async afterReturning(returnValue: any, method: string | number | symbol, args: any[], target: any): Promise<void> {
         if (this.needAccessDecision(method)) {
             const oldCtx = Context.getAttr<MethodSecurityMetadataContext>(SECURITY_EXPRESSION_CONTEXT_KEY);
-            const securityMetadata = await this.securityMetadataSource.load({ method, args, target, returnValue, authorizeType: AuthorizeType.Post, grant: oldCtx.grant });
-            await this.accessDecisionManager.decide(securityMetadata);
+            const newCtx = { method: method as string, args, target, returnValue, authorizeType: AuthorizeType.Post, grant: oldCtx.grant };
+            const securityMetadata = await this.securityMetadataSource.load(newCtx);
+            const resouces = await this.resourceNameResolver.resolve(newCtx);
+            for (const resource of resouces) {
+                securityMetadata.resource = resource;
+                await this.accessDecisionManager.decide(securityMetadata);
+            }
         }
     }
 

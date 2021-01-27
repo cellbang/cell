@@ -1,6 +1,6 @@
-import { ComponentDecorator, applyComponentDecorator, ComponentOption, PipeManager, parseComponentOption } from '@malagu/core';
+import { ComponentDecorator, applyComponentDecorator, ComponentOption, PipeManager, parseComponentOption, Logger } from '@malagu/core';
 import { AOP_POINTCUT } from '@malagu/web';
-import { ErrorConverter } from '../converter';
+import { ErrorConverter, GlobalConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 import { JsonRpcConnectionHandler } from '../factory';
 import { RpcUtil } from '../utils';
@@ -14,10 +14,10 @@ export const Rpc = <ComponentDecorator>function (...idOrOption: any): ClassDecor
     };
 };
 
-export function parseRpcOption(target: any, idOrOption?: any) {
+export function parseRpcOption(target: any, idOrOption: any) {
     const parsed = parseComponentOption(target, idOrOption);
 
-    if (idOrOption?.proxy === undefined) {
+    if (idOrOption[0].proxy === undefined) {
         parsed.proxy = true;
     }
     parsed.sysTags!.push(AOP_POINTCUT, RPC_TAG);
@@ -30,7 +30,8 @@ export function applyRpcDecorator(option: ComponentOption, target: any) {
     return applyComponentDecorator({ id: ConnectionHandler, onActivation: context => {
         const t = context.container.get(id);
         const pipeManager = context.container.get<PipeManager>(PipeManager);
-        const errorConverters = [];
+        const logger = context.container.get<Logger>(Logger);
+        const errorConverters = context.container.getAllNamed<ErrorConverter>(ErrorConverter, GlobalConverter);
         try {
             const name = RpcUtil.toName(id);
             errorConverters.push(context.container.getNamed<ErrorConverter>(ErrorConverter, name));
@@ -39,6 +40,6 @@ export function applyRpcDecorator(option: ComponentOption, target: any) {
                 throw error;
             }
         }
-        return new JsonRpcConnectionHandler(RpcUtil.toPath(id), () => t, errorConverters, pipeManager);
+        return new JsonRpcConnectionHandler(RpcUtil.toPath(id), () => t, errorConverters, pipeManager, logger);
     }}, target);
 }

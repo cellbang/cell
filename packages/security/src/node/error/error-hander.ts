@@ -37,7 +37,7 @@ export class AuthenticationErrorHandler implements ErrorHandler {
                 ctx.response.setHeader(HttpHeaders.WWW_AUTHENTICATE, `Basic realm="${this.realm}"`);
             }
             ctx.response.statusCode = HttpStatus.UNAUTHORIZED;
-            ctx.response.end(HttpStatus.UNAUTHORIZED_REASON_PHRASE);
+            ctx.response.end(err.message);
         }
     }
 }
@@ -52,6 +52,6 @@ export class AccessDeniedErrorHandler implements ErrorHandler {
 
     async handle(ctx: Context, err: AccessDeniedError): Promise<void> {
         ctx.response.statusCode = HttpStatus.FORBIDDEN;
-        ctx.response.end(HttpStatus.FORBIDDEN_REASON_PHRASE);
+        ctx.response.end(err.message);
     }
 }

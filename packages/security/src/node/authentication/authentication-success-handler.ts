@@ -31,7 +31,7 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
     async onAuthenticationSuccess(authentication: Authentication): Promise<void> {
         const response = Context.getResponse();
         const targetUrl = await this.determineTargetUrl(authentication);
-        if (response.finished) {
+        if (response.writableEnded) {
             this.logger.debug(`Response has already been committed. Unable to redirect to ${targetUrl}`);
             return;
         }
