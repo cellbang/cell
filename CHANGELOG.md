@@ -1,5 +1,21 @@
 # Change Log
 
+## v1.12.0
+
+- feat(security) supports similar cloud vendor authorization policy mechanism `AclPolicy`
+- feat(security) `PolicyResolver` no longer returns `true|false`, and returns three results: agree, deny and abstain
+- feat(security) Add a new decorator `@Resource`, used to customize resource names, which can be added to classes and methods, and support EL expressions when added to methods. By default, the class name is used as the resource name, and the resource name will be used when determining permissions
+- feat(security) adds a new decorator `@Action`, which is used to customize the action name and can only be loaded on the method. By default, the class name + method name is used as the action name, and the action name will be used when determining permissions
+- feat(security) adds a new interface `ActionNameResolver` for resolving action names
+- feat(security) unifies multiple interfaces of policy providers into one interface `PolicyProvider`
+
+- feat(security) 支持类似云厂商授权策略机制 `AclPolicy`
+- feat(security) `PolicyResolver` 不再返回 `true|false`，返回三种结果：同意、拒绝和弃权
+- feat(security) 添加新装饰器 `@Resource`，用于自定义资源名称，可以加在类和方法上，加在方法上支持 EL 表达式。默认使用类名称作为资源名称，资源名称在权限判断的时候会使用到
+- feat(security) 添加新装饰器 `@Action`，用于自定义动作名称，只能加载方法上。默认使用类名 + 方法名称作为动作名称，动作名称在权限判断的时候会使用到
+- feat(security) 添加新接口 `ActionNameResolver`，用于解析动作名称
+- feat(security) 将策略提供者多种接口统一成一个接口 `PolicyProvider`
+
 ## v1.11.0
 
 - feat(all) Use project references to enable incremental compilation to speed up compilation

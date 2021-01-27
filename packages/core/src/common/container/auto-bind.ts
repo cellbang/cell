@@ -26,7 +26,7 @@ export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfa
 
 function doProxyIfNeed(metadata: ComponentMetadata, target: any) {
     const enabled = ConfigUtil.getRaw().malagu?.aop?.enabled;
-    if (enabled) {
+    if (enabled && metadata.proxy) {
         const classFilter = ContainerUtil.get<ClassFilter>(ClassFilter);
         if (target.constructor && classFilter.matches(target.constructor, metadata)) {
             const aopProxyFactory = ContainerUtil.get<AopProxyFactory>(AopProxyFactory);

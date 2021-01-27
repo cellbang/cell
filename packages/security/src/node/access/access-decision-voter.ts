@@ -1,6 +1,7 @@
-import { SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED,
-    POLICY_BASED_VOTER_PRIORITY, PolicyResolver, PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
-import { Component, Autowired } from '@malagu/core';
+import { SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED, ACCESS_ABSTAIN,
+    POLICY_BASED_VOTER_PRIORITY, PolicyResolver, PolicyProvider, TENANT_VOTER_PRIORITY } from './access-protocol';
+import { Component, Autowired, TenantProvider } from '@malagu/core';
+import { SecurityContext } from '../context';
 
 @Component(AccessDecisionVoter)
 export class PolicyBasedVoter implements AccessDecisionVoter {
@@ -10,23 +11,28 @@ export class PolicyBasedVoter implements AccessDecisionVoter {
     @Autowired(PolicyResolver)
     protected readonly policyResolvers: PolicyResolver[];
 
-    @Autowired(ResourcePolicyProvider)
-    protected readonly resourcePolicyProvider: ResourcePolicyProvider;
-
-    @Autowired(PrincipalPolicyProvider)
-    protected readonly principalPolicyProvider: PrincipalPolicyProvider;
+    @Autowired(PolicyProvider)
+    protected readonly policyProviders: PolicyProvider[];
 
     async vote(securityMetadata: SecurityMetadata): Promise<number> {
+        const policies = [ ...securityMetadata.policies ];
+        const ctx = {
+            resource: securityMetadata.resource,
+            principal: securityMetadata.principal,
+            type: securityMetadata.authorizeType
+        };
 
-        const principalPolicies = await this.principalPolicyProvider.provide(securityMetadata.principal, securityMetadata.authorizeType);
-        const resourcePolicies = await this.resourcePolicyProvider.provide(securityMetadata.resource, securityMetadata.authorizeType);
-        const policies = [ ...principalPolicies, ...resourcePolicies, ...securityMetadata.policies ];
+        for (const policyProvider of this.policyProviders) {
+            policies.push(...await policyProvider.provide(ctx));
+        }
+
         for (const policy of policies) {
             for (const policyResolver of this.policyResolvers) {
-                if (await policyResolver.support(policy)) {
-                    if (await policyResolver.resolve(policy, securityMetadata)) {
+                if (await policyResolver.support(policy, securityMetadata)) {
+                    const result = await policyResolver.resolve(policy, securityMetadata);
+                    if (result === ACCESS_GRANTED) {
                         securityMetadata.grant++;
-                    } else {
+                    } else if (result === ACCESS_DENIED) {
                         return ACCESS_DENIED;
                     }
                 }
@@ -35,7 +41,31 @@ export class PolicyBasedVoter implements AccessDecisionVoter {
         if (securityMetadata.grant > 0) {
             return ACCESS_GRANTED;
         }
+        if (securityMetadata.grant === 0) {
+            return ACCESS_ABSTAIN;
+        }
         return ACCESS_DENIED;
+    }
+
+    async support(securityMetadata: SecurityMetadata): Promise<boolean> {
+        return true;
+    }
+
+}
+
+@Component(AccessDecisionVoter)
+export class TenantVoter implements AccessDecisionVoter {
+
+    readonly priority = TENANT_VOTER_PRIORITY;
+
+    @Autowired(TenantProvider)
+    protected readonly tenantProvider: TenantProvider;
+
+    async vote(securityMetadata: SecurityMetadata): Promise<number> {
+        if (await this.tenantProvider.provide() === SecurityContext.getAuthentication().name) {
+            return ACCESS_GRANTED;
+        }
+        return ACCESS_ABSTAIN;
     }
 
     async support(securityMetadata: SecurityMetadata): Promise<boolean> {

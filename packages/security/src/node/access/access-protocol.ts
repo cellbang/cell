@@ -5,10 +5,10 @@ export const AccessDecisionVoter = Symbol('AccessDecisionVoter');
 export const SecurityMetadataSource = Symbol('SecurityMetadataSource');
 export const PolicyResolver = Symbol('PolicyResolver');
 export const SecurityExpressionContextHandler = Symbol('SecurityExpressionContextHandler');
-export const ResourcePolicyProvider = Symbol('ResourcePolicyProvider');
-export const PrincipalPolicyProvider = Symbol('PrincipalPolicyProvider');
+export const PolicyProvider = Symbol('PolicyProvider');
 export const PolicyFactory = Symbol('PolicyFactory');
 export const ResourceNameResolver = Symbol('ResourceNameResolver');
+export const ActionNameResolver = Symbol('ActionNameResolver');
 
 export const SECURITY_EXPRESSION_CONTEXT_KEY = 'SecurityExpressionContext';
 
@@ -16,14 +16,17 @@ export const ACCESS_GRANTED = 1;
 export const ACCESS_ABSTAIN = 0;
 export const ACCESS_DENIED = -1;
 
-export const POLICY_BASED_VOTER_PRIORITY = 2000;
+export const TENANT_VOTER_PRIORITY = 2000;
+export const POLICY_BASED_VOTER_PRIORITY = TENANT_VOTER_PRIORITY - 100;
 
-export interface ResourcePolicyProvider {
-    provide(resource: string, type: AuthorizeType): Promise<Policy[]>;
+export interface PolicyContext {
+    principal: any;
+    type: AuthorizeType;
+    resource: string;
 }
 
-export interface PrincipalPolicyProvider {
-    provide(principal: any, type: AuthorizeType): Promise<Policy[]>;
+export interface PolicyProvider {
+    provide(ctx: PolicyContext): Promise<Policy[]>;
 }
 
 export interface PolicyFactory {
@@ -31,9 +34,9 @@ export interface PolicyFactory {
     support(options: any): Promise<boolean>;
 }
 
-export interface PolicyResolver<> {
-    resolve(policy: Policy, securityMetadata: SecurityMetadata): Promise<boolean>;
-    support(policy: Policy): Promise<boolean>;
+export interface PolicyResolver {
+    resolve(policy: Policy, securityMetadata: SecurityMetadata): Promise<number>;
+    support(policy: Policy, securityMetadata: SecurityMetadata): Promise<boolean>;
 }
 
 export interface SecurityExpressionContextHandler {
@@ -77,5 +80,9 @@ export interface AccessDecisionVoter {
 }
 
 export interface ResourceNameResolver {
+    resolve(ctx: MethodSecurityMetadataContext): Promise<string[]>;
+}
+
+export interface ActionNameResolver {
     resolve(ctx: MethodSecurityMetadataContext): Promise<string>;
 }

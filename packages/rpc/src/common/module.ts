@@ -1,6 +1,6 @@
 import { autoBind } from '@malagu/core';
 import { ProxyProvider } from './proxy';
-import { ErrorConverter } from './converter';
+import { ErrorConverter, GlobalConverter } from './converter';
 import { ID_KEY, RPC } from './annotation';
 import { RpcUtil } from './utils';
 export * from '.';
@@ -11,7 +11,7 @@ export default autoBind(bind => {
         const id = ctx.currentRequest.target.getCustomTags()?.find(m => m.key === ID_KEY)!.value;
         const path = RpcUtil.toPath(id);
         const proxyProvider = ctx.container.get<ProxyProvider>(ProxyProvider);
-        const errorConverters = [];
+        const errorConverters = ctx.container.getAllNamed<ErrorConverter>(ErrorConverter, GlobalConverter);
         try {
             const name = RpcUtil.toName(id);
             errorConverters.push(ctx.container.getNamed<ErrorConverter>(ErrorConverter, name));

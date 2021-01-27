@@ -3,7 +3,7 @@ export enum AuthorizeType {
 }
 
 export enum PolicyType {
-    El= 'el'
+    el= 'el', acl= 'Acl'
 }
 
 export interface Policy {
@@ -15,6 +15,22 @@ export interface Policy {
 export interface ElPolicy extends Policy {
     context: any;
     el: string;
+}
+
+export enum Effect {
+    Allow= 'Allow', Deny= 'Deny'
+}
+
+export interface Statement {
+    effect: Effect;
+    action: string | string[];
+    resource: string | string[];
+    condition: { [key: string]: any };
+}
+
+export interface AclPolicy extends Policy {
+    version?: string;
+    statement: Statement[];
 }
 
 export enum UserType {

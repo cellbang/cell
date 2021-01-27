@@ -31,9 +31,9 @@ export const Authorize = function (elOrElOptionOrPolicy: string | ElOption | Pol
 export function getPolicy(elOrElOptionOrPolicy: string | ElOption | Policy) {
     let policy = <Policy>elOrElOptionOrPolicy;
     if (typeof elOrElOptionOrPolicy === 'string') {
-        policy = { authorizeType: AuthorizeType.Pre, el: elOrElOptionOrPolicy, type: PolicyType.El };
+        policy = { authorizeType: AuthorizeType.Pre, el: elOrElOptionOrPolicy, type: PolicyType.el };
     } else if (elOrElOptionOrPolicy.el) {
-        policy = { type: PolicyType.El, ...elOrElOptionOrPolicy};
+        policy = { type: PolicyType.el, ...elOrElOptionOrPolicy};
     }
     return policy;
 }

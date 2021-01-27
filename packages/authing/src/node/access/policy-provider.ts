@@ -1,19 +1,19 @@
 import { Component, Autowired } from '@malagu/core';
-import { PrincipalPolicyProvider } from '@malagu/security/lib/node';
+import { PolicyProvider, PolicyContext } from '@malagu/security/lib/node';
 import { AuthorizeType, Policy } from '@malagu/security';
 import { AuthingProvider } from '../authentication';
 
 export const AUTHING_POLICY_TYPE = 'authing';
 
-@Component({ id: PrincipalPolicyProvider, rebind: true })
-export class PrincipalPolicyProviderImpl implements PrincipalPolicyProvider {
+@Component(PolicyProvider)
+export class PrincipalPolicyProvider implements PolicyProvider {
 
     @Autowired(AuthingProvider)
     protected readonly authingProvider: AuthingProvider;
 
-    async provide(principal: any, type: AuthorizeType): Promise<Policy[]> {
-        const policies: Policy[] = (principal.policies || []).filter((p: any) => p.authorizeType === type);
-
+    async provide(ctx: PolicyContext): Promise<Policy[]> {
+        const { principal, type } = ctx;
+        const policies: Policy[] = [];
         if (type === AuthorizeType.Pre && principal.username) {
             const auth = this.authingProvider.provide();
             const { rawList } = await auth.userPermissionList(principal.username);

@@ -9,6 +9,8 @@ malagu:
     enabled: true
   logger:
     level: info
+  tenant:
+    enabled: false
   webpack:
     toES5Plugin:
       include:

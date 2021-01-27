@@ -1,19 +1,20 @@
-import { PrincipalPolicyProvider, ResourcePolicyProvider } from './access-protocol';
+import { PolicyContext, PolicyProvider } from './access-protocol';
 import { Component, Value, PostConstruct } from '@malagu/core';
 import { AuthorizeType, Policy } from '../../common';
-import * as UrlPattern from 'url-pattern';
+import { contains } from 'micromatch';
 
-@Component(PrincipalPolicyProvider)
-export class PrincipalPolicyProviderImpl implements PrincipalPolicyProvider {
+@Component(PolicyProvider)
+export class PrincipalPolicyProvider implements PolicyProvider {
 
-    async provide(principal: any, type: AuthorizeType): Promise<Policy[]> {
+    async provide(ctx: PolicyContext): Promise<Policy[]> {
+        const { principal, type } = ctx;
         const policies: Policy[] = principal && principal.policies || [];
         return policies.filter(p => p.authorizeType === type);
     }
 }
 
-@Component(ResourcePolicyProvider)
-export class ResourcePolicyProviderImpl implements ResourcePolicyProvider {
+@Component(PolicyProvider)
+export class ResourcePolicyProvider implements PolicyProvider {
 
     @Value('malagu.security.policy')
     protected readonly policyMap?: { [resource: string]: (Policy[] | Policy) };
@@ -49,13 +50,13 @@ export class ResourcePolicyProviderImpl implements ResourcePolicyProvider {
         }
     }
 
-    async provide(resource: string, type: AuthorizeType): Promise<Policy[]> {
+    async provide(ctx: PolicyContext): Promise<Policy[]> {
+        const { resource, type } = ctx;
         const map = this.metadata[type];
         const policies: Policy[] = [];
         for (const pattarn of map.keys()) {
-            const result = new UrlPattern(pattarn).match(resource);
-            if (result) {
-                policies.push(...map.get(pattarn));
+            if (contains(resource, pattarn)) {
+                policies.push(...map.get(pattarn)!);
             }
         }
         return policies;
