@@ -85,7 +85,7 @@ export class RouteBuilder {
     }
 
     protected doRouteMetadata(targetConstructor: any, method: string) {
-        const viewMetadata = getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method)
+        const viewMetadata = getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method);
         return {
             paramMetadata: getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
             bodyMetadata: getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
