@@ -1,3 +1,7 @@
+import { ConfigUtil, ContainerUtil } from '@malagu/core';
+import { ENDPOINT } from '../constants';
+import { PathResolver } from '../resolver';
+
 export namespace UrlUtil {
 
     export function isValidRedirectUrl(url?: string) {
@@ -14,4 +18,16 @@ export namespace UrlUtil {
         }
         return /^[a-z0-9.+-]+:\/\/.*/i.test(url);
     }
+
+    export async function getUrl(...paths: string[]) {
+        const endpoint = ConfigUtil.get<string>(ENDPOINT);
+        const pathResolver = ContainerUtil.get<PathResolver>(PathResolver);
+        return pathResolver.resolve(endpoint, await pathResolver.resolve(...paths));
+    }
+
+    export async function getPath(...paths: string[]) {
+        const pathResolver = ContainerUtil.get<PathResolver>(PathResolver);
+        return pathResolver.resolve(...paths);
+    }
+
 }

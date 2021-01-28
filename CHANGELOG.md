@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.12.2
+
+- feat (web) code optimization, the convenience methods of `getUrl` and `getPath` added to the `UrlUtil` tool class
+- feat(web) 代码优化，`UrlUtil` 工具类添加 `getUrl` 和 `getPath` 便捷方法
+
 ## v1.12.1
 
 - fix(rpc) fix the GlobalConverter not found error and optimize the code
