@@ -1,11 +1,11 @@
 {
   "name": "@malagu/logger",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "description": "logger component for pino",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.12.0",
+    "@malagu/web": "^1.12.1",
     "pino": "^5.16.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.12.0",
+    "@malagu/ext-scripts": "^1.12.1",
     "@types/pino": "^5.15.5"
   },
   "nyc": {
