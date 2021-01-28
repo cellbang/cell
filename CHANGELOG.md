@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.12.1
+
+- fix(rpc) fix the GlobalConverter not found error and optimize the code
+- fix(rpc) 修复做不到 GlobalConverter 错误，并优化代码
+
 ## v1.12.0
 
 - feat(security) supports similar cloud vendor authorization policy mechanism `AclPolicy`
