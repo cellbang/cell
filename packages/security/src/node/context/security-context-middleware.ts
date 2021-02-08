@@ -16,6 +16,7 @@ export class SecurityContextMiddleWare implements Middleware {
         const context = await this.securityContextStore.load();
         try {
             SecurityContext.setCurrent(context);
+            Context.setTenant(context.authentication.name);
             await next();
         } finally {
             await this.securityContextStore.save(SecurityContext.getCurrent());

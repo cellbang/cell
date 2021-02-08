@@ -1,16 +1,14 @@
 import { MethodSecurityMetadataContext, ResourceNameResolver } from './access-protocol';
-import { Component, Value, Autowired, TenantProvider, TENANT_ENABLED, getOwnMetadata } from '@malagu/core';
+import { Component, Value, TENANT_ENABLED, getOwnMetadata } from '@malagu/core';
 import { METADATA_KEY } from '../constants';
 import { evalSync } from 'jexl';
+import { Context } from '@malagu/web/lib/node';
 
 @Component(ResourceNameResolver)
 export class DefaultResourceNameResolver implements ResourceNameResolver {
 
     @Value(TENANT_ENABLED)
     protected tenantEnabled: boolean;
-
-    @Autowired(TenantProvider)
-    protected tenantProvider: TenantProvider;
 
     async resolve(ctx: MethodSecurityMetadataContext): Promise<string[]> {
         const classResources: string[] = getOwnMetadata(METADATA_KEY.resource, ctx.target.constructor);
@@ -35,7 +33,7 @@ export class DefaultResourceNameResolver implements ResourceNameResolver {
 
     protected async appendTenantIfNeed(resources: string[]) {
         if (this.tenantEnabled) {
-            const tenant = await this.tenantProvider.provide();
+            const tenant = Context.getTenant();
             return resources.map(r => `${tenant}:${r}`);
         }
         return resources;
