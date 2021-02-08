@@ -1,5 +1,4 @@
 export * from './middleware';
-export * from './middleware';
 export * from './dispatcher';
 export * from './context';
 export * from './error';

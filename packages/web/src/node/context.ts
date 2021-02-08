@@ -11,6 +11,7 @@ export const CURRENT_COOKIES_REQUEST_KEY = 'CurrentCookiesRequest';
 export const CURRENT_SESSION_REQUEST_KEY = 'CurrentSessionRequest';
 export const CURRENT_TRACE_ID_REQUEST_KEY = 'CurrentTraceIdRequest';
 export const CURRENT_SKIP_AUTO_END_REQUEST_KEY = 'CurrentSkipAutoEndRequest';
+export const CURRENT_TENANT_REQUEST_KEY = 'CurrentTenantRequest';
 
 const appAttrs = new Map<string, any>();
 
@@ -68,6 +69,14 @@ export namespace Context {
 
     export function getTraceId(): string {
         return requestContext.get(CURRENT_TRACE_ID_REQUEST_KEY);
+    }
+
+    export function setTenant(tenant: string): void {
+        requestContext.set(CURRENT_TENANT_REQUEST_KEY, tenant);
+    }
+
+    export function getTenant(): string {
+        return requestContext.get(CURRENT_TENANT_REQUEST_KEY);
     }
 
     export function setSkipAutoEnd(skipAutoEnd: boolean): void {

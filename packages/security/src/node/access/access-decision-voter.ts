@@ -1,6 +1,7 @@
 import { SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED, ACCESS_ABSTAIN,
     POLICY_BASED_VOTER_PRIORITY, PolicyResolver, PolicyProvider, TENANT_VOTER_PRIORITY } from './access-protocol';
-import { Component, Autowired, TenantProvider } from '@malagu/core';
+import { Component, Autowired } from '@malagu/core';
+import { Context } from '@malagu/web/lib/node';
 import { SecurityContext } from '../context';
 
 @Component(AccessDecisionVoter)
@@ -58,11 +59,8 @@ export class TenantVoter implements AccessDecisionVoter {
 
     readonly priority = TENANT_VOTER_PRIORITY;
 
-    @Autowired(TenantProvider)
-    protected readonly tenantProvider: TenantProvider;
-
     async vote(securityMetadata: SecurityMetadata): Promise<number> {
-        if (await this.tenantProvider.provide() === SecurityContext.getAuthentication().name) {
+        if (Context.getTenant() === SecurityContext.getAuthentication().name) {
             return ACCESS_GRANTED;
         }
         return ACCESS_ABSTAIN;

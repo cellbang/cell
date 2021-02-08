@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.13.0
+
+- feat (core) remove the `TenantProvider` interface
+- feat(web) `Context` adds get or set `Tenant` method
+- feat(security) remove the implementation of the `TenantProvider` interface and set the `Tenant` in the security context middleware
+
+- feat (core) 移除 `TenantProvider` 接口
+- feat(web) `Context` 添加获取或设置 `Tenant` 方法
+- feat(security) 移除 `TenantProvider` 接口实现，并在安全上下文中间件中设置 `Tenant`
+
 ## v1.12.2
 
 - feat (web) code optimization, the convenience methods of `getUrl` and `getPath` added to the `UrlUtil` tool class
