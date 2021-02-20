@@ -1,11 +1,11 @@
 {
   "name": "@malagu/faas-adapter",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "^1.12.2",
+    "@malagu/cloud": "^1.13.0",
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
@@ -40,8 +40,8 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli": "^1.12.2",
-    "@malagu/ext-scripts": "^1.12.2",
+    "@malagu/cli": "^1.13.0",
+    "@malagu/ext-scripts": "^1.13.0",
     "@types/inquirer": "^6.5.0",
     "@types/jszip": "^3.1.6"
   },
