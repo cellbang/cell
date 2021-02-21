@@ -1,12 +1,16 @@
 # Change Log
 
+## v1.13.1
+- feat(security) Add tool class `AccessDecisionUtils` to facilitate manual verification of permissions
+- feat(security) 添加工具类 `AccessDecisionUtils`，方便手动验证权限
+
 ## v1.13.0
 
-- feat (core) remove the `TenantProvider` interface
+- feat(core) remove the `TenantProvider` interface
 - feat(web) `Context` adds get or set `Tenant` method
 - feat(security) remove the implementation of the `TenantProvider` interface and set the `Tenant` in the security context middleware
 
-- feat (core) 移除 `TenantProvider` 接口
+- feat(core) 移除 `TenantProvider` 接口
 - feat(web) `Context` 添加获取或设置 `Tenant` 方法
 - feat(security) 移除 `TenantProvider` 接口实现，并在安全上下文中间件中设置 `Tenant`
 
