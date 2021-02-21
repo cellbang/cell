@@ -7,3 +7,4 @@ export * from './policy-resolver';
 export * from './security-metadata-source';
 export * from './resource-name-resolver';
 export * from './action-name-resolver';
+export * from './access-decision-utils';
