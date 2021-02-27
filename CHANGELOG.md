@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.14.0
+- feat(shell) Optimize the display of login status
+- feat(shell) 优化登录状态的显示
+
+
 ## v1.13.1
 - feat(security) Add tool class `AccessDecisionUtils` to facilitate manual verification of permissions
 - feat(security) 添加工具类 `AccessDecisionUtils`，方便手动验证权限

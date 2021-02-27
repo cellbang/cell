@@ -5,7 +5,8 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/grommet": "^1.13.1"
+    "@malagu/grommet": "^1.13.1",
+    "@malagu/security": "^1.13.1"
   },
   "publishConfig": {
     "access": "public"
