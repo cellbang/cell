@@ -50,7 +50,7 @@ malagu deploy
 
 ## Example
 
-[View Online Sample Template](https://template.cellbang.com/#/code/template.theia-workspace)
+[View Online Sample Template](https://cloud.cellbang.com/?share=c3aa122a-abcd-4ac6-ac03-9b5cb5d5de62#/.theia/template.theia-workspace)
 
 ## Documentation
 
