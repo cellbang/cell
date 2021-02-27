@@ -50,7 +50,7 @@ malagu deploy
 
 ## 示例
 
-[在线示例模板查看](https://template.cellbang.com/#/code/template.theia-workspace)
+[在线示例模板查看](https://cloud.cellbang.com/?share=c3aa122a-abcd-4ac6-ac03-9b5cb5d5de62#/.theia/template.theia-workspace)
 
 ## 文档
 
