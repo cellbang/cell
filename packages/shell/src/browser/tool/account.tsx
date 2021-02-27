@@ -5,7 +5,8 @@ import { Widget } from '@malagu/widget';
 import { AreaType } from '../area';
 import styled from 'styled-components';
 import { Slot } from '@malagu/react';
-import { LoginUserManager, User } from '../user';
+import { UserManager } from '@malagu/security/lib/browser';
+import { User } from '@malagu/security';
 import { NavItem, Icon } from '@malagu/grommet';
 
 const StyledAccount = styled.div`
@@ -19,11 +20,11 @@ const StyledAccount = styled.div`
 export function Account(props: AvatarProps) {
     // eslint-disable-next-line no-null/no-null
     const targetRef = React.useRef(null);
-    const loginUserManager = ContainerUtil.get<LoginUserManager>(LoginUserManager);
+    const loginUserManager = ContainerUtil.get<UserManager>(UserManager);
     const [show, setShow] = React.useState(false);
-    const [user, setUser] = React.useState<User | undefined>(loginUserManager.userSubject.value);
+    const [user, setUser] = React.useState<User | undefined>(loginUserManager.userInfoSubject.value);
     React.useEffect(() => {
-        const subscription = loginUserManager.userSubject.subscribe(u => setUser(u));
+        const subscription = loginUserManager.userInfoSubject.subscribe(u => setUser(u));
         return () => subscription.unsubscribe();
     }, []);
     const { icon, login, ...rest } = ConfigUtil.get('malagu.shell.account');
@@ -34,7 +35,10 @@ export function Account(props: AvatarProps) {
     }
     return (
         <Box ref={targetRef}>
-            <Avatar hoverIndicator title={user.name} style={{ marginLeft: '4px' }} onClick={() => setShow(true)} {...props}>{<Icon icon={user.avatar || icon}/>}</Avatar>
+            <Avatar
+                hoverIndicator title={user.nickname} style={{ margin: '12px' }} size='small' onClick={() => setShow(true)} {...props} src={user.avatar || props.src}>
+                    {<Icon icon={user.avatar || icon}/>}
+            </Avatar>
             {targetRef.current && show && (
                 <Drop
                     target={targetRef.current!}

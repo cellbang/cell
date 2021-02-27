@@ -1,9 +1,11 @@
 import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
-import { Rpc } from '@malagu/rpc'
+import { Rpc } from '@malagu/rpc';
+import { Anonymous } from '@malagu/security/lib/node'
 import { User } from './entity';
 import { UserService } from '../common';
 
 @Rpc(UserService)
+@Anonymous()
 export class UserServiceImpl implements UserService {
     
     @Transactional({ readOnly: true })

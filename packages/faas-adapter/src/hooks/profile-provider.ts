@@ -59,7 +59,7 @@ export class DefaultProfileProvider implements ProfileProvider {
             region: process.env.MALAGU_REGION,
             credentials: {
                 accessKeyId: process.env.MALAGU_ACCESS_KEY_ID,
-                accessKeySecret: process.env.AWS_ACCESS_KEY_SECRET
+                accessKeySecret: process.env.MALAGU_ACCESS_KEY_SECRET
             },
             account: {
                 id: process.env.MALAGU_ACCOUNT_ID

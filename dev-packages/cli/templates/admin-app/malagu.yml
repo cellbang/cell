@@ -2,6 +2,8 @@
 # mode: cdn
 mode: [ database ]
 malagu:
+  security:
+    loginRequired: false
   shell:
     categories:
       appCenter:
@@ -83,7 +85,7 @@ malagu:
           colors:
             brand: '#FFCA58'
     red:
-      label: 黄色
+      label: 红色
       props:
         global:
           colors:
