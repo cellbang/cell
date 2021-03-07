@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.15.1
+- feat(vue) Update vue configuration file
+- feat(vue) 更新 vue 配置文件
+
 ## v1.15.0
 - feat(cli) add vue related application templates
 - feat(vue) Added `@malagu/vue` component, integrated vue capability
