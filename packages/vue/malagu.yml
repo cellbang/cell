@@ -1,8 +1,6 @@
 frontend:
   malagu:
-    react:
+    vue:
       path: ${malagu.server.path}
-      history:
-        type: browser
       
   
