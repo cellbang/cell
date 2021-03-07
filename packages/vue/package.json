@@ -1,0 +1,50 @@
+{
+  "name": "@malagu/vue",
+  "version": "1.14.0",
+  "description": "",
+  "main": "lib/browser/index.js",
+  "typings": "lib/browser/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "^1.14.0",
+    "@vue/compiler-sfc": "^3.0.7",
+    "vue": "3.0.7",
+    "vue-loader": "^16.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-cdn.yml"
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^1.14.0",
+    "@types/history": "^4.7.3",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.3"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

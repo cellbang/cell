@@ -1,0 +1,8 @@
+frontend:
+  malagu:
+    react:
+      path: ${malagu.server.path}
+      history:
+        type: browser
+      
+  

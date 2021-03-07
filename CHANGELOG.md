@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.15.0
+- feat(cli) add vue related application templates
+- feat(vue) Added `@malagu/vue` component, integrated vue capability
+
+- feat(cli) 添加 vue 相关应用模板
+- feat(vue) 添加 `@malagu/vue` 组件，集成 vue 能力
+
 ## v1.14.0
 - feat(shell) Optimize the display of login status
 - feat(shell) 优化登录状态的显示
