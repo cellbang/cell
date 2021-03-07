@@ -111,6 +111,9 @@
     },
     {
       "path": "../packages/widget/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/vue/compile.tsconfig.json"
     }
   ]
 }
