@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.15.3
+
+- fix(vue) 加载 vue 的样式部分文报错
+
 ## v1.15.2
 
 - fix(cli) to fix the error when using hook in `vue-app` template
