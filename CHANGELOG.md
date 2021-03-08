@@ -1,5 +1,13 @@
 # Change Log
 
+## v1.15.2
+
+- fix(cli) to fix the error when using hook in `vue-app` template
+- feat(vue) supports Vue CSS file parsing
+
+- fix(cli) 修复 `vue-app` 模板在使用 Hook 时候报错
+- feat(vue) 支持 vue css 文件解析
+
 ## v1.15.1
 - feat(vue) Update vue configuration file
 - feat(vue) 更新 vue 配置文件

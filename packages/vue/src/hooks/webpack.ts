@@ -10,6 +10,13 @@ export default async (context: WebpackContext) => {
             test: /\.vue$/,
             loader: 'vue-loader'
         });
+        // config.module!.rules.push({
+        //     test: /\.css$/,
+        //     use: [
+        //       'vue-style-loader',
+        //       'css-loader'
+        //     ]
+        // });
         config.plugins!.push(new VueLoaderPlugin());
     }
 };
