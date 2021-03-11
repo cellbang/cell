@@ -230,7 +230,7 @@ async function createOrUpdateApi(region: string, groupId: string, subDomain: str
     } else if (apis.length === 1) {
         await spinner(`Update ${apiName} api`, async () => {
             apiId = apis[0].ApiId;
-            apiClient.modifyApi(parseApiMeta(api, groupId, role, apiId));
+            apiClient.modifyApi(parseApiMeta(api, region, groupId, role, apiId));
         });
     } else {
         await spinner(`Create ${apiName} api`, async () => {
@@ -287,7 +287,7 @@ async function createOrUpdateService(serviceName: string, option: any) {
         });
     } catch (ex) {
         if (ex.code === 'ServiceNotFound') {
-            await spinner(`Create a ${serviceName} service`, async () => {
+            await spinner(`Create ${serviceName} service`, async () => {
                 await fcClient.createService(serviceName, opt);
             });
         } else {

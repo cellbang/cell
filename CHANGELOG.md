@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.16.0
+
+- fix(fc-adapter) fixes the second deployment error of a function of the api-gateway type
+- feat (fc-adapter) the default service name is the name property of package.json
+- fix(fc-adapter) 修复 api-gateway 类型的函数第二次部署报错
+- feat(fc-adapter) 默认服务名称为 package.json 的 name 属性
+
 ## v1.15.3
 
 - fix(vue) 加载 vue 的样式部分文报错

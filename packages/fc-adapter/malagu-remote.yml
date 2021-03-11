@@ -11,7 +11,7 @@ malagu:
     internal: false
     timeout: 600000
     service:
-      name: malagu
+      name: ${pkg.name}
     function:
       serviceName: ${malagu['faas-adapter'].service.name}
       runtime: "${malagu['faas-adapter'].type == 'custom' ? 'custom' : 'nodejs12'}"
