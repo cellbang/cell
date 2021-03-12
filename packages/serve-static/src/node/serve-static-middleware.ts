@@ -3,7 +3,7 @@ import * as serveStatic from 'serve-static';
 import { Value, Component, Autowired } from '@malagu/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
 import { SERVER_PATH, HttpMethod, MediaType, HttpHeaders } from '@malagu/web';
-import { relative } from 'path';
+import { posix } from 'path';
 import { OutgoingMessage } from 'http';
 
 @Component(Middleware)
@@ -25,7 +25,7 @@ export class ServeStaticMiddleware implements Middleware {
         }
         const oldUrl = ctx.request.url;
         if (this.path && this.path !== ctx.request.url) {
-            ctx.request.url = `/${relative(this.path, ctx.request.url)}`;
+            ctx.request.url = `/${posix.relative(this.path, ctx.request.url)}`;
         }
 
         const executor = (resolve: any, reject: any) => {
