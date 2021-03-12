@@ -12,9 +12,6 @@ export class DefaultProfileProvider implements ProfileProvider {
         let profile: Profile | undefined = {
             account, credentials, region
         };
-        if (!this.isAllRequiredExist(profile)) {
-            profile = await FaaSAdapterUtils.getProfileFromFile(profilePath);
-        }
 
         if (!profile || !this.isAllRequiredExist(profile)) {
             profile = await this.getProfileFromEnv();
@@ -24,7 +21,11 @@ export class DefaultProfileProvider implements ProfileProvider {
             profile = await this.getProfileFromDotEnv();
         }
 
-        if (!quiet && !this.isAllRequiredExist(profile)) {
+        if (!this.isAllRequiredExist(profile)) {
+            profile = await FaaSAdapterUtils.getProfileFromFile(profilePath);
+        }
+
+        if (!profile || !quiet && !this.isAllRequiredExist(profile)) {
             return FaaSAdapterUtils.promptForProfile(profilePath, regions);
         }
 
