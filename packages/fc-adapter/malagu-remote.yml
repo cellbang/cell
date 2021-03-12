@@ -45,7 +45,7 @@ malagu:
         name: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'release' : cliContext.prod ? 'release' : 'test'}"
         desc: 'Released By Malagu'
       group:
-        name: malagu
+        name: ${pkg.name}
         description: 'Created By Malagu'
       api:
         name: ${malagu['faas-adapter'].function.name|replace('-', '_')}

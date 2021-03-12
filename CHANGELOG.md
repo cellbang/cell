@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.16.1
+
+- fix(faas-adapter) fix profile loading priority
+- feat(fc-adapter) The name of the API gateway group defaults to the name property of package.json
+- fix(faas-adapter) 修复 profile 加载优先级
+- feat(fc-adapter) API 网关组的名称默认为 package.json 的 name 属性
+
 ## v1.16.0
 
 - fix(fc-adapter) fixes the second deployment error of a function of the api-gateway type
