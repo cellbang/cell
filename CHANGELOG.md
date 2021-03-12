@@ -1,5 +1,13 @@
 # Change Log
 
+## v1.16.2
+
+- fix(serve-static) has an infinite loop without index.html
+- feat(fc-adapter) optimize cdn loading logic
+- fix(serve-static) 在没有 index.html 的情况下存在死循环
+- feat(fc-adapter) 优化 cdn 加载逻辑
+
+
 ## v1.16.1
 
 - fix(faas-adapter) fix profile loading priority
