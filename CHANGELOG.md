@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.16.3
+
+- feat(serve-static) does not cache html files by default
+- fix(rpc) fixes the problem that the session setting in the rpc method does not take effect
+- feat(typeorm) shields unnecessary warning messages
+
+- feat(serve-static) 默认不缓存 html 文件
+- fix(rpc) 修复在 rpc 方法中设置 session 不生效问题
+- feat(typeorm) 屏蔽掉不必要的警告信息
+
 ## v1.16.2
 
 - fix(serve-static) has an infinite loop without index.html

@@ -1,7 +1,7 @@
-import { Component, Autowired, Value } from '@malagu/core';
+import { Component, Autowired, Value, Deferred } from '@malagu/core';
 import { ChannelManager } from '../channel';
 import { RPC_HANDLER_ADAPTER_PRIORITY } from './handler-protocol';
-import { RequestMatcher, HandlerAdapter } from '@malagu/web/lib/node';
+import { RequestMatcher, HandlerAdapter, Context } from '@malagu/web/lib/node';
 import { PathResolver } from '@malagu/web';
 import { RPC_PATH } from '../../common';
 
@@ -23,8 +23,12 @@ export class RpcHandlerAdapter implements HandlerAdapter {
     @Value(RPC_PATH)
     protected readonly rpcPath: string;
 
-    handle(): Promise<void> {
-        return this.channelManager.handleChannels();
+    async handle(): Promise<void> {
+        await this.channelManager.handleChannels();
+        const response = Context.getResponse();
+        if (response.body instanceof Deferred) {
+            response.body = await response.body.promise;
+        }
     }
 
     async canHandle(): Promise<boolean> {
