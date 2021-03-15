@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cloud",
-  "version": "1.16.3",
+  "version": "1.16.4",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^1.16.3"
+    "@malagu/core": "^1.16.4"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.16.3",
+    "@malagu/ext-scripts": "^1.16.4",
     "@types/puppeteer-core": "^2.0.0",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
