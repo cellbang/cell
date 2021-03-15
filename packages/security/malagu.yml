@@ -41,9 +41,4 @@ backend:
       basic:
         enabled: false
         realm: realm
-      policy:
-        '*': 
-          type: el
-          el: authenticated
-
 

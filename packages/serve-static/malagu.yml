@@ -4,5 +4,5 @@ malagu:
     root: .malagu/frontend/dist
     options:
       maxAge: 31536000000
-      htmlMaxAge: 31536000000
+      # htmlMaxAge: 31536000000
       immutable: true

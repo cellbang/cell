@@ -1,3 +1,27 @@
+malagu:
+  webpack:
+    filterWarningsPlugin:
+      typeorm:
+        - typeorm-aurora-data-api-driver
+        - mongodb
+        - mssql
+        - mysql
+        - mysql2
+        - oracledb
+        - pg
+        - pg-native
+        - pg-query-stream
+        - sql.js
+        - redis
+        - sqlite3
+        - react-native-sqlite-storage
+        - cli-highlight
+        - Critical dependency
+        - '@sap/hdbext'
+        - '@sap/hana-client'
+        - hdb-pool
+        - ioredis
+        - better-sqlite3
 backend: 
   malagu:
     typeorm:
@@ -9,26 +33,3 @@ backend:
           username: "${ env.DB_USERNAME ?: 'root'}"
           password: "${ env.DB_PASSWORD ?: 'root'}"
           database: "${ env.DB_DATABASE ?: 'test'}"
-    webpack:
-      filterWarningsPlugin:
-        typeorm:
-          - typeorm-aurora-data-api-driver
-          - mongodb
-          - mssql
-          - mysql
-          - mysql2
-          - oracledb
-          - pg
-          - pg-native
-          - pg-query-stream
-          - sql.js
-          - redis
-          - sqlite3
-          - react-native-sqlite-storage
-          - cli-highlight
-          - Critical dependency
-          - '@sap/hdbext'
-          - '@sap/hana-client'
-          - hdb-pool
-          - ioredis
-          - better-sqlite3
