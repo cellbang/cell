@@ -110,6 +110,7 @@ function parseApiMeta(apiMeta: any, region: string, groupId: string, role: any, 
     req.ApiName = apiMeta.name;
     req.Description = apiMeta.description;
     req.AuthType = apiMeta.authType;
+    req.ForceNonceCheck = apiMeta.forceNonceCheck;
     req.ResultType = apiMeta.resultType;
     req.ResultSample = apiMeta.resultSample;
     req.FailResultSample = apiMeta.failResultSample;
