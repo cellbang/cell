@@ -14,7 +14,7 @@ jobs:
       - uses: bahmutov/npm-install@v1
       - run: npm run lint --if-present
       - run: npm test
-      - if: ${{ github.ref == 'refs/heads/master' }}
+      - if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
         env: ${{ secrets }}
         working-directory: app
         run: npx malagu deploy -m prod
@@ -22,7 +22,7 @@ jobs:
         env: ${{ secrets }}
         working-directory: app
         run: npx malagu deploy -m pre
-      - if: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/pre' }}
+      - if: ${{ github.ref != 'refs/heads/master' && github.ref == 'refs/heads/main' && github.ref != 'refs/heads/pre' }}
         env: ${{ secrets }}
         working-directory: app
         run: npx malagu deploy -m test

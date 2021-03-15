@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.16.4
+
+- feat(cli) CICD supports main branch main
+- feat(cli) CICD 支持主分支 main
+
 ## v1.16.3
 
 - feat(serve-static) does not cache html files by default
