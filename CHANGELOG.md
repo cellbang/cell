@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.16.5
+
+- feat(fc-adapter) api gateway supports forceNonceCheck attribute configuration
+- feat(fc-adapter) api gateway 支持 forceNonceCheck 属性配置
+
 ## v1.16.4
 
 - feat(cli) CICD supports main branch main
