@@ -4,9 +4,10 @@ import { DefaultProfileProvider, FaaSAdapterUtils, FaaSAdapterConfiguration } fr
 export default async (context: ConfigContext) => {
     const { config, cfg } = context;
     if (config.mode && config.mode.includes('remote')) {
+        context.spinner?.stop();
         const adapterConfig = FaaSAdapterUtils.getConfiguration<FaaSAdapterConfiguration>(cfg);
         const profileProvider = new DefaultProfileProvider();
-        const profile = await profileProvider.provide(adapterConfig, true);
+        const profile = await profileProvider.provide(adapterConfig);
         const faasAdapter = config.malagu['faas-adapter'];
         if (!faasAdapter.account?.id) {
             faasAdapter.account = profile.account;

@@ -101,12 +101,11 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .action((entry, cmd) => {
             require('./deploy/deploy').default({ entry, ...parseOptions(cmd) });
         });
-
     const options = minimist(process.argv.slice(2));
     const mode = getMode(options);
     const targets = getTargets(options);
     const prod = options.p || options.prod;
-    const context = await CliContext.create(program, { targets, mode, prod, dev: isDev(options) });
+    const context = await CliContext.create(program, { targets, mode, prod, dev: isDev(options), spinner });
     ContextUtils.setCurrent(context);
     await new HookExecutor().executeCliHooks(context);
     spinner.stop();

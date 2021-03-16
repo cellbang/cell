@@ -9,7 +9,7 @@ export class DefaultProfileProvider implements ProfileProvider {
     async provide(config: FaaSAdapterConfiguration, quiet: boolean = false): Promise<Profile> {
         this.config = config;
         const { region, account, credentials, regions, profilePath } = this.config;
-        let profile: Profile | undefined = {
+        let profile: Profile = {
             account, credentials, region
         };
 
@@ -22,10 +22,10 @@ export class DefaultProfileProvider implements ProfileProvider {
         }
 
         if (!this.isAllRequiredExist(profile)) {
-            profile = await FaaSAdapterUtils.getProfileFromFile(profilePath);
+            profile = <Profile>await FaaSAdapterUtils.getProfileFromFile(profilePath);
         }
 
-        if (!profile || !quiet && !this.isAllRequiredExist(profile)) {
+        if (!quiet && (!profile || !this.isAllRequiredExist(profile))) {
             return FaaSAdapterUtils.promptForProfile(profilePath, regions);
         }
 
