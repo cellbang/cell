@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.16.6
+
+- feat(cli) prompts for the AKSK information to be overwritten by other information during the first deployment
+- feat(cli) 第一次部署提示输入 AKSK 信息被其他信息覆盖
+
 ## v1.16.5
 
 - feat(fc-adapter) api gateway supports forceNonceCheck attribute configuration

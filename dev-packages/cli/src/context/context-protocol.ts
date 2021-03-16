@@ -36,7 +36,8 @@ export namespace CliContext {
                     pkg,
                     cfg,
                     program,
-                    config: config
+                    config: config,
+                    ...options
                 });
 
                 config.env = { ...process.env, _ignoreEl: true };
