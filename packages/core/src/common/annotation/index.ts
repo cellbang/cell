@@ -9,3 +9,4 @@ export * from './post-construct';
 export * from './target-name';
 export * from './injectable';
 export * from './aspect';
+export * from './service';
