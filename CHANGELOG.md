@@ -1,6 +1,12 @@
 # Change Log
 
+## v1.16.8
+
+- fix(scf-adapter) set context.callbackWaitsForEmptyEventLoop to false to fix the asynchronous task timeout problem
+- fix(scf-adapter) 设置 context.callbackWaitsForEmptyEventLoop 为 false，修复异步任务超时问题
+
 ## v1.16.7
+
 - feat(core) adds `@Service()` decoration, currently `@Service()` and `@Component()` have the same effect. When adding a decorator to a service class, using `@Service()` will be better and more readable; when AOP interception is needed on the service class, separate the service class from other classes, which is more convenient for AOP Intercept.
 - feat(core) 添加 `@Service()` 装饰，目前 `@Service()` 与 `@Component()` 效果是一样的。当给服务类添加装饰器的时候，使用 `@Service()` 会更好，可读性更强；当要对服务类进行 AOP 拦截的时候，将服务类与其他类进行分开，更方便 AOP 拦截。
 
