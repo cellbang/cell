@@ -26,7 +26,7 @@ export class FrontendApplication extends AbstractApplication {
 
         const host = await this.getHost();
         this._shell.attach(host);
-        await new Promise(resolve => requestAnimationFrame(() => resolve()));
+        await new Promise<void>(resolve => requestAnimationFrame(() => resolve()));
         this.stateService.state = 'attached_shell';
 
         await this.revealShell(host);

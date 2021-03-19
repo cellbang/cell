@@ -30,5 +30,6 @@ const startPromise = start();
 export async function handler(event: string, context: any) {
     await startPromise;
     const result = await proxy(server, event, context, 'PROMISE');
+    context.callbackWaitsForEmptyEventLoop = false;
     return result.promise;
 }
