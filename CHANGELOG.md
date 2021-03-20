@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.16.9
+
+- fix(scf-adapter) Fix the function status error when deployed to Tencent Cloud Cloud function
+- fix(scf-adapter) 修复部署到腾讯云云函数可能报函数状态错误
+
 ## v1.16.8
 
 - fix(scf-adapter) set context.callbackWaitsForEmptyEventLoop to false to fix the asynchronous task timeout problem

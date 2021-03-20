@@ -277,6 +277,7 @@ async function createOrUpdateAlias(alias: any, functionVersion: string) {
     getAliasRequest.FunctionName = alias.functionName;
     getAliasRequest.Namespace = alias.namespace;
     try {
+        await checkStatus(alias.namespace, alias.functionName);
         await promisify(scfClient.GetAlias.bind(scfClient))(getAliasRequest);
         await spinner(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
             await checkStatus(alias.namespace, alias.functionName);
