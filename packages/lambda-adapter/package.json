@@ -1,12 +1,12 @@
 {
   "name": "@malagu/lambda-adapter",
-  "version": "1.16.8",
+  "version": "1.16.9",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/faas-adapter": "^1.16.8",
-    "@malagu/web": "^1.16.8",
+    "@malagu/faas-adapter": "^1.16.9",
+    "@malagu/web": "^1.16.9",
     "@vendia/serverless-express": "^3.4.0",
     "aws-sdk": "^2.807.0",
     "express": "^4.17.1"
@@ -40,8 +40,8 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli": "^1.16.8",
-    "@malagu/ext-scripts": "^1.16.8",
+    "@malagu/cli": "^1.16.9",
+    "@malagu/ext-scripts": "^1.16.9",
     "@types/jszip": "^3.1.6"
   },
   "nyc": {
