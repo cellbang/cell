@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.16.10
+
+- fix(serve-static) Optimized code
+
 ## v1.16.9
 
 - fix(scf-adapter) Fix the function status error when deployed to Tencent Cloud Cloud function

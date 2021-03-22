@@ -3,7 +3,6 @@ import * as serveStatic from 'serve-static';
 import { Value, Component, Autowired } from '@malagu/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
 import { SERVER_PATH, HttpMethod, MediaType, HttpHeaders } from '@malagu/web';
-import { posix } from 'path';
 import { OutgoingMessage } from 'http';
 
 @Component(Middleware)
@@ -19,13 +18,20 @@ export class ServeStaticMiddleware implements Middleware {
     protected readonly requestMatcher: RequestMatcher;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        if (ctx.request.query['static'] === 'skip') {
+        const method = ctx.request.method;
+        if (!(method === HttpMethod.GET || method === HttpMethod.HEAD) || ctx.request.query['static'] === 'skip') {
             await next();
             return;
         }
-        const oldUrl = ctx.request.url;
-        if (this.path && this.path !== ctx.request.url) {
-            ctx.request.url = `/${posix.relative(this.path, ctx.request.url)}`;
+
+        if (this.config.apiPath && await this.requestMatcher.match(this.config.apiPath)) {
+            await next();
+            return;
+        }
+
+        if (this.config.path && !await this.requestMatcher.match(this.config.path)) {
+            await next();
+            return;
         }
 
         const executor = (resolve: any, reject: any) => {
@@ -43,31 +49,16 @@ export class ServeStaticMiddleware implements Middleware {
             }
             serveStatic(this.config.root, this.config.options)(ctx.request as any, ctx.response as any, ((err: any) => {
                 const url = ctx.request.url;
-                if ((ctx.request.method === HttpMethod.GET || ctx.request.method === HttpMethod.HEAD) && url !== '/index.html') {
-                    if (this.config.path && !this.requestMatcher.match(this.config.path) || !this.config.spa) {
-                        ctx.request.url = oldUrl;
+                if (url !== '/index.html') {
+                    if (!this.config.spa) {
                         next().then(resolve).catch(reject);
                         return;
                     }
-                    if (this.config.apiPath) {
-                        this.requestMatcher.match(this.config.apiPath).then(r => {
-                            if (r) {
-                                ctx.request.url = oldUrl;
-                                next().then(resolve).catch(reject);
-                            } else {
-                                ctx.request.url = '/index.html';
-                                executor(resolve, reject);
-                            }
-                        }).catch(reject);
-                    } else {
-                        ctx.request.url = '/index.html';
-                        executor(resolve, reject);
-                    }
+                    ctx.request.url = '/index.html';
+                    executor(resolve, reject);
                 } else if (err) {
-                    ctx.request.url = oldUrl;
                     reject(err);
                 } else {
-                    ctx.request.url = oldUrl;
                     next().then(resolve).catch(reject);
                 }
              }) as any);
