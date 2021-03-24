@@ -32,6 +32,7 @@ export class AuthenticationErrorHandler implements ErrorHandler {
         if (ctx.request.get(HttpHeaders.X_REQUESTED_WITH) !== XML_HTTP_REQUEST && !this.baseEnabled) {
             await this.requestCache.save();
             await this.redirectStrategy.send(this.loginPage);
+            ctx.response.end(err.message);
         } else {
             if (this.baseEnabled) {
                 ctx.response.setHeader(HttpHeaders.WWW_AUTHENTICATE, `Basic realm="${this.realm}"`);

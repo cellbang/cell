@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.16.11
+
+- fix(security+oauth2-client) End of missing response
+
 ## v1.16.10
 
 - fix(serve-static) Optimized code
