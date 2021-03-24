@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "1.16.10",
+  "version": "1.16.11",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -53,7 +53,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.16.10",
+    "@malagu/ext-scripts": "^1.16.11",
     "@types/traverse": "^0.6.32"
   },
   "nyc": {
