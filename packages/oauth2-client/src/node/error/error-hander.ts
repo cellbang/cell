@@ -34,5 +34,6 @@ export class OAuth2AuthorizationErrorHandler implements ErrorHandler {
         }
 
         await this.redirectStrategy.send(redirectUri);
+        ctx.response.end(err.message);
     }
 }

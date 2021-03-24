@@ -7,28 +7,27 @@ English | [简体中文](./README.zh-cn.md)
 [![npm downloads](https://img.shields.io/npm/dm/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
 [![TravisCI](https://www.travis-ci.org/cellbang/malagu.svg?branch=master)](https://www.travis-ci.org/cellbang/malagu) 
 
-Malagu is a Serverless First, Component-based, platform-independent, progressive application framework based on TypeScript.
-
+Malagu is a Serverless First, componentized, platform-independent progressive application framework based on TypeScript.
 
 ## Features
 
-- Convention over configuration, zero configuration, out of the box
+- Convention is greater than configuration, zero configuration, ready to use out of the box
 - Spring Boot for TypeScript
 - Serverless First
-- The platform is not locked.
-- Support for front-end integration, front-end framework is not locked
+- The platform is not locked
+- Support front-end and back-end integration, and the front-end frame is not locked
 - Support microservices
-- Componentized, Progressive
-- Plug-in command line tools
+- Componentization, progressive
+- Pluginization of command line tools
 - Dependency injection
-- Facet-oriented programming (AOP)
-- Integrates with the popular ORM framework for declarative transaction management using decorators.
-- Support for OIDC accreditation
-- OAuth2 authorization support
-- Managing Status with rxjs
-- Both REST and RPC interface styles available
+- Aspect Oriented Programming (AOP)
+- Integrate with popular ORM framework and use decorator declarative transaction management
+- Support OIDC certification
+- Support OAuth2 authorization
+- Use rxjs to manage status
+- Provides two interface styles, REST and RPC
 
-The Malagu name comes from the fact that where I come from, the word "malagu" means small stone, and while small stones can be built into tall buildings, roads, and bridges, the Malagu Component layout can be used in a myriad of ways.
+The origin of Malagu's name: In my hometown, the homophonic "Ma Lagu" means small stones. The small stones can be piled up to build high-rise buildings, roads and bridges, and the arrangement of Malagu components can realize ever-changing applications.
 
 ## Quick start
 
