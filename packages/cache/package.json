@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cache",
-  "version": "1.16.11",
+  "version": "1.16.12",
   "description": "cache component for cache-manager",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^1.16.11",
+    "@malagu/core": "^1.16.12",
     "cache-manager": "^3.4.0"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.16.11",
+    "@malagu/ext-scripts": "^1.16.12",
     "@types/cache-manager": "^2.10.3"
   },
   "nyc": {
