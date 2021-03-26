@@ -45,10 +45,11 @@ malagu:
         name: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'release' : cliContext.prod ? 'release' : 'test'}"
         desc: 'Released By Malagu'
       group:
-        name: ${pkg.name}
+        name: ${pkg.name|replace('-', '_')}
         description: 'Created By Malagu'
       api:
         name: ${malagu['faas-adapter'].function.name|replace('-', '_')}
+        forceNonceCheck: false
         visibility: PUBLIC
         description: 'Created By Malagu'
         authType: ANONYMOUS

@@ -34,6 +34,9 @@ export async function handler(event: string, context: any, callback: any) {
     process.env.ALIBABA_SECURITY_TOKEN = context.credentials?.securityToken;
     process.env.ALIBABA_REQUEST_ID = context.requestId;
     process.env.ALIBABA_REGION = context.region;
+    process.env.ALIBABA_REGION = context.region;
+    process.env.IGNORE_EVENT_HEADER = 'true';
+    process.env.IGNORE_CONTEXT_HEADER = 'true';
     await startPromise;
     server.proxy(event, context, callback);
 }

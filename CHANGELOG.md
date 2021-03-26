@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.16.12
+
+- feat(fc-adapter) Ignore the header of function context and event
+
 ## v1.16.11
 
 - fix(security+oauth2-client) End of missing response
