@@ -2199,10 +2199,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@webserverless/fc-express@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@webserverless/fc-express/-/fc-express-0.1.4.tgz#9da4da0570e1c1ea7f666258b46228588e9a8bf1"
-  integrity sha512-xShdQ0642HHLqCD5UFx60H+IG0z4MwGfY4Sksh+iJrSi3HkxcEmuih20ks2kPFI/godjz8Zw02D3Xsi0gejIdA==
+"@webserverless/fc-express@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@webserverless/fc-express/-/fc-express-1.0.0.tgz#5cb9dc29eba3395cb6c226f21d1bc3003fde98ef"
+  integrity sha512-K5FqKCaGkPj/4Xkqcks4hubKlTdMVDCGRm9vdUukAYjcujihcdiL0/lPDyFmlcUUy1LPyENBgcICwgcn5PBReQ==
   dependencies:
     binary-case "^1.1.4"
     type-is "^1.6.18"

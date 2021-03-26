@@ -10,7 +10,7 @@
     "@alicloud/ram": "^1.0.0",
     "@malagu/faas-adapter": "^1.16.11",
     "@malagu/web": "^1.16.11",
-    "@webserverless/fc-express": "^0.1.4",
+    "@webserverless/fc-express": "^1.0.0",
     "ali-oss": "^6.1.1",
     "co": "^4.6.0",
     "co-defer": "^1.0.0",
