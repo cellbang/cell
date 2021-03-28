@@ -1,8 +1,7 @@
 import { ConfigProvider } from './config-protocol';
 import { ContainerUtil } from '../container';
+import { config } from './dynamic-config';
 import * as traverse from 'traverse';
-
-const config: { [key: string]: any } = process.env.MALAGU_CONFIG as any || {};
 
 const traverseConfig = traverse(config);
 

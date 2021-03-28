@@ -9,9 +9,6 @@ export class DevServerConfigFactory {
         const { cfg, port, open } = context;
         const realPort = getPort(cfg, target, port);
         const baseDevServerConfig = {
-            watchOptions: {
-                ignored: [ /node_modules/ ]
-            },
             port: realPort,
             open,
             contentBase: false

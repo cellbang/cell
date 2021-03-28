@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.17.0
+
+- feat(core+cli) The compilation period dynamic property configuration injection is consistent with the dynamic container assembly design
+- feat(core+cli) 编译期动态属性配置注入与动态容器组装设计保持一致
+
 ## v1.16.12
 
 - feat(fc-adapter) Ignore the header of function context and event
