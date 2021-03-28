@@ -46,6 +46,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);
         clearModule(entryPath);
+        clearModule.match(/node_modules/);
         while (true) {
             if (fs.existsSync(entryPath)) {
                 return require(entryPath);
