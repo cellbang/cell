@@ -3,7 +3,9 @@
 ## v1.17.0
 
 - feat(core+cli) The compilation period dynamic property configuration injection is consistent with the dynamic container assembly design
+- fix(cli) Backend hot replacement adds cache cleanup node_modules the database, fixing the unpredictable behavior of typeorm database operations
 - feat(core+cli) 编译期动态属性配置注入与动态容器组装设计保持一致
+- fix(cli) 后端热替换添加对 node_modules 的缓存清理，修复 typeorm 数据库操作不可预期行为
 
 ## v1.16.12
 
