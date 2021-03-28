@@ -7,12 +7,13 @@ import { HookExecutor } from '../../hook/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
-import { CopyWepackPluginConfigFactory, EnvironmentPluginConfigFactory, FilterWarningsPluginConfigFactory,
+import { CopyWepackPluginConfigFactory, FilterWarningsPluginConfigFactory,
     HardSourceWebpackPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory, ToES5PluginConfigFactory,
-    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, ProgressPluginConfigFactory } from './plugin-config-factory';
+    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
+    ProgressPluginConfigFactory } from './plugin-config-factory';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../../constants';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
-import { ComponentConfigFactory } from './component-config-factory';
+import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
 import { getModules, support } from '../utils';
 const chalk = require('chalk');
 
@@ -42,8 +43,8 @@ export class ConfigFactory {
             new FriendlyErrorsWebpackPluginConfigFactory(),
             new CopyWepackPluginConfigFactory(),
             new HardSourceWebpackPluginConfigFactory(),
-            new EnvironmentPluginConfigFactory(),
             new ComponentConfigFactory(),
+            new ComponentConfigConfigFactory(),
             new MalaguYamlConfigFactory(),
             new HtmlWebpackPluginConfigFactory(),
             new HtmlWebpackTagsPluginConfigFactory(),

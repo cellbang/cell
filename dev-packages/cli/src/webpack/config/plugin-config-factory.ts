@@ -1,10 +1,8 @@
-import * as webpack from 'webpack';
 import * as path from 'path';
 import { CliContext } from '../../context';
-import { existsSync, ensureDirSync, writeFileSync } from 'fs-extra';
+import { existsSync } from 'fs-extra';
 import { getWebpackConfig, getConfig, getHomePath, getMalaguConfig, getDevSuccessInfo } from '../utils';
 import { FRONTEND_TARGET, CONFIG_FILE } from '../../constants';
-import yaml = require('js-yaml');
 const chalk = require('chalk');
 
 export class FilterWarningsPluginConfigFactory {
@@ -66,28 +64,6 @@ export class CopyWepackPluginConfigFactory {
                     from: assert,
                     to: path.join(config.output.path, 'assets')
                 }))),
-            ]
-        };
-    }
-
-    support(context: CliContext, target: string): boolean {
-        return true;
-    }
-}
-
-export class EnvironmentPluginConfigFactory {
-    create(config: any, context: CliContext, target: string) {
-        const { cfg, pkg } = context;
-        const c = getConfig(cfg, target);
-        const homePath = getHomePath(pkg, target);
-        ensureDirSync(homePath);
-        const configPath = path.join(homePath, CONFIG_FILE);
-        writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
-        return {
-            plugins: [
-                new webpack.EnvironmentPlugin({
-                    'MALAGU_CONFIG': c
-                })
             ]
         };
     }

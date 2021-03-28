@@ -1,7 +1,10 @@
 
 import { CliContext } from '../../context';
 import * as path from 'path';
-import { getWebpackConfig } from '../utils';
+import { getConfig, getHomePath, getWebpackConfig } from '../utils';
+import { CONFIG_FILE, FRONTEND_TARGET } from '../../constants';
+import { ensureDirSync, writeFileSync } from 'fs-extra';
+import yaml = require('js-yaml');
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
@@ -12,6 +15,8 @@ export class ComponentConfigFactory {
         const { cfg, pkg, dev } = context;
         const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin;
         const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
+        const modules = target === FRONTEND_TARGET ? pkg.frontendModules.values() : pkg.backendModules.values();
+        const staticModules = target === FRONTEND_TARGET ? pkg.frontendStaticModules.values() : pkg.backendStaticModules.values();
         return {
             resolveLoader: {
                 modules: [
@@ -30,8 +35,8 @@ export class ComponentConfigFactory {
                             options: {
                                 target: target,
                                 registed,
-                                modules: [...(pkg as any)[`${target}Modules`].values()],
-                                staticModules: [...(pkg as any)[`${target}StaticModules`].values()]
+                                modules: [...modules],
+                                staticModules: [...staticModules]
                             }
                         }
                     },
@@ -45,3 +50,34 @@ export class ComponentConfigFactory {
     }
 }
 
+export class ComponentConfigConfigFactory {
+    create(config: any, context: CliContext, target: string) {
+        const { cfg, pkg } = context;
+        const c = getConfig(cfg, target);
+        const source = `module.exports.config = ${JSON.stringify(c)};`;
+
+        const homePath = getHomePath(pkg, target);
+        ensureDirSync(homePath);
+        const configPath = path.join(homePath, CONFIG_FILE);
+        writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
+        return {
+            module: {
+                rules: [
+                    {
+                        test: /core[\\/]lib[\\/]common[\\/]config[\\/]dynamic-config\.js$/,
+                        use: {
+                            loader: 'config-loader',
+                            options: {
+                                source
+                            }
+                        }
+                    },
+                ]
+            }
+        };
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return true;
+    }
+}
