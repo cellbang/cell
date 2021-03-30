@@ -4,13 +4,11 @@ import { ClientOptions, Credentials, Body, CreateBucketResult, CreateBucketReque
 import * as OSS from 'ali-oss';
 import { Readable } from 'stream';
 
-const { Wrapper } = OSS as any;
-
 @Component(ObjectStorageService)
 export class ObjectStorageServiceImpl extends AbstractObjectStorageService<OSS> {
 
     protected async doCreateRawCloudService(credentials: Credentials, region: string, clientOptions: ClientOptions, account?: Account): Promise<OSS> {
-        return new Wrapper({
+        return new OSS({
             ...clientOptions,
             accessKeyId: credentials.accessKeyId,
             accessKeySecret: credentials.accessKeySecret,

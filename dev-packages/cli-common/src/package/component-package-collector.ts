@@ -62,7 +62,9 @@ export class ComponentPackageCollector {
         try {
             packagePath = this.pkg.resolveModule(name + '/package.json');
         } catch (error) {
-            console.warn(`Failed to resolve module: ${name}`);
+            if (error.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+                console.warn(`Failed to resolve module: ${name}`);
+            }
         }
         if (!packagePath) {
             return;

@@ -1,9 +1,9 @@
 import * as fs from 'fs';
 import * as lockfile from '@yarnpkg/lockfile';
-import { ApplicationPackage } from '../package';
+import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
-import { ApplicationConfig } from '../package/application-config'; const chalk = require('chalk');
+const chalk = require('chalk');
 
 export function checkPkgVersionConsistency(pkgName: string, projectPath: string) {
     const yarnLockFile = path.resolve(projectPath, 'yarn.lock');

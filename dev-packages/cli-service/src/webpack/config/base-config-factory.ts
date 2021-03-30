@@ -62,7 +62,7 @@ export class BaseConfigFactory {
                     .exclude
                         .add(/node_modules/)
                     .end();
-        
+
         if (target === BACKEND_TARGET) {
             const whitelist = pkg.componentPackages.map(cp => new RegExp(cp.name));
             config
@@ -82,7 +82,7 @@ export class BaseConfigFactory {
                         __filename: false
                     })
                 .end()
-                .devtool('source-map')
+                .devtool('source-map');
         } else {
             config
                 .target('web')

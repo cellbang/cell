@@ -4,7 +4,7 @@ import { checkPkgVersionConsistency } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { HookExecutor } from '../hook';
 import { ExpressionHandler } from '../el';
-import { ApplicationConfig } from '../package/application-config';
+import { ApplicationConfig } from '../package';
 
 export interface CliContext {
     program: CommanderStatic;

@@ -2358,19 +2358,15 @@ ajv@^7.0.0, ajv@^7.0.2, ajv@^7.0.3:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-ali-oss@^5.2.0:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/ali-oss/-/ali-oss-5.3.2.tgz#11259062c838102149bd626cac0e82b513abbdc1"
-  integrity sha512-027NdIg+egthwF/LmXmVdOetchQx/GxyP9wLMyaymlawjSuVmOQM8G0L9ppQSgREp+ERvgKWXq+fw3+ctOSHWQ==
+ali-oss@^6.1.1:
+  version "6.13.2"
+  resolved "https://registry.yarnpkg.com/ali-oss/-/ali-oss-6.13.2.tgz#ebd965b935bb8f436c5c5ef0fc03fd228fbf00a7"
+  integrity sha512-85z+2Cd3ydCmdw/l6oFkaMmyswPVXm2r6a8GI+738s7O6YsDHDSogQ04joymUT2gdFNVWHYWTmXWLKEkD19eEQ==
   dependencies:
     address "^1.0.0"
     agentkeepalive "^3.4.1"
-    any-promise "^1.3.0"
     bowser "^1.6.0"
-    co "^4.6.0"
     co-defer "^1.0.0"
-    co-gather "^0.0.1"
-    co-priority-queue "^1.0.3"
     copy-to "^2.0.1"
     dateformat "^2.0.0"
     debug "^2.2.0"
@@ -2379,22 +2375,24 @@ ali-oss@^5.2.0:
     get-ready "^1.0.0"
     humanize-ms "^1.2.0"
     is-type-of "^1.0.0"
+    js-base64 "^2.5.2"
     jstoxml "^0.2.3"
     merge-descriptors "^1.0.1"
-    mime "^1.3.4"
+    mime "^2.4.5"
     mz-modules "^2.1.0"
     platform "^1.3.1"
+    pump "^3.0.0"
     sdk-base "^2.0.1"
     stream-http "2.8.2"
     stream-wormhole "^1.0.4"
-    urllib "^2.17.1"
+    urllib "^2.33.1"
     utility "^1.8.0"
     xml2js "^0.4.16"
 
-ali-oss@^6.1.1:
-  version "6.13.2"
-  resolved "https://registry.yarnpkg.com/ali-oss/-/ali-oss-6.13.2.tgz#ebd965b935bb8f436c5c5ef0fc03fd228fbf00a7"
-  integrity sha512-85z+2Cd3ydCmdw/l6oFkaMmyswPVXm2r6a8GI+738s7O6YsDHDSogQ04joymUT2gdFNVWHYWTmXWLKEkD19eEQ==
+ali-oss@^6.15.0:
+  version "6.15.0"
+  resolved "https://registry.yarnpkg.com/ali-oss/-/ali-oss-6.15.0.tgz#154a2719f0a1e2e5a30a1a0f580fb99281911fa3"
+  integrity sha512-vMb0+IZJBIGAoAFFFB3zF//Ll7vdVOG5u51kICDr86d01JEJnLWBmvMI3mg7mrUyE7kMTPEkxxA6TLWelBoAzQ==
   dependencies:
     address "^1.0.0"
     agentkeepalive "^3.4.1"
@@ -3879,23 +3877,6 @@ co-defer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/co-defer/-/co-defer-1.0.0.tgz#3e4a787a8eed6b0a21ee287c094f7e8de0d3c818"
   integrity sha1-Pkp4eo7tawoh7ih8CU9+jeDTyBg=
-
-co-gather@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/co-gather/-/co-gather-0.0.1.tgz#efa35fbef02c9f647d8a740b3f5db731862535bc"
-  integrity sha1-76NfvvAsn2R9inQLP123MYYlNbw=
-  dependencies:
-    co-thread "0.0.1"
-
-co-priority-queue@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/co-priority-queue/-/co-priority-queue-1.0.3.tgz#b9646e00e84439fb15563d61b68bee2ba5169b4f"
-  integrity sha1-uWRuAOhEOfsVVj1htovuK6UWm08=
-
-co-thread@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/co-thread/-/co-thread-0.0.1.tgz#57713f0ef4b87e5595d4f23711ffe4b3b6de5e74"
-  integrity sha1-V3E/DvS4flWV1PI3Ef/ks7beXnQ=
 
 co@^4.6.0:
   version "4.6.0"
@@ -13661,7 +13642,7 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-urllib@^2.17.1, urllib@^2.33.1:
+urllib@^2.33.1:
   version "2.36.1"
   resolved "https://registry.yarnpkg.com/urllib/-/urllib-2.36.1.tgz#fbd9fb13bbc140e1fc15bcdba8703d6142a7eb3a"
   integrity sha512-g0Gh7bH5AwfPUzFetxPtJwumGHE6D7KQn0K68MwcJXPgO2K0AliwEIxLAwGMF+TpY75DYAsvz1h9ekagYoq33w==

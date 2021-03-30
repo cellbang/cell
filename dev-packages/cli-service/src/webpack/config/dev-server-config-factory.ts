@@ -11,7 +11,7 @@ export class DevServerConfigFactory {
             .devServer
                 .port(realPort)
                 .open(open)
-                .contentBase(false)
+                .contentBase(false);
 
         if (BACKEND_TARGET === target) {
             config
