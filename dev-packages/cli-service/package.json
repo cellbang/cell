@@ -15,14 +15,10 @@
   },
   "homepage": "https://github.com/cellbang/malagu",
   "files": [
-    "bin",
     "lib",
     "src",
     "templates"
   ],
-  "bin": {
-    "malagu": "./bin/malagu"
-  },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {

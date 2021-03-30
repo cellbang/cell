@@ -2,7 +2,7 @@ import { NPM } from './npm';
 import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
-import { hasProjectYarn } from '../env';
+import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env';
 import { CliContext } from '../context';
 
 export class SpawnError extends Error {
@@ -57,6 +57,10 @@ export function getPackager(packagerIdOrCliContext: string | CliContext): NPM | 
         packagerId = packagerIdOrCliContext.cfg.rootConfig.malagu.packager;
         if (!packagerId) {
             if (hasProjectYarn(cwd)) {
+                packagerId = 'yarn';
+            } else if (hasProjectNpm(cwd)) {
+                packagerId = 'npm';
+            } else if (hasYarn()) {
                 packagerId = 'yarn';
             } else {
                 packagerId = 'npm';

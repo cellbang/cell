@@ -3,8 +3,12 @@
 ## v1.18.0
 
 - feat(cli) splits the original `@malagu/cli` command line tool into three parts: `@malagu/cli-common`, `@malagu/cli` and `@malagu/cli-service`. Among them, `@malagu/cli` will no longer rely on a series of heavy dependencies such as webpack, typescript, etc., and move related dependencies to `@malagu/cli-service`. In addition, the webpack plugin supports chain configuration.
+- feat(oss) upgrade oss sdk
+- feat (cli) `malagu.includeModules` default changed to `true`
 
 - feat(cli) 将原先的 `@malagu/cli` 命令行工具拆分成三部分：`@malagu/cli-common`、`@malagu/cli` 和 `@malagu/cli-service`。其中，`@malagu/cli` 将不再依赖 webpack、typescript 等等一些列重型依赖，将相关的依赖移动到 `@malagu/cli-service` 中。另外，webpack 插件支持链式配置。
+- feat(oss) 升级 oss sdk
+- feat(cli) `malagu.includeModules` 默认值改为 `true`
 
 ## v1.17.0
 
