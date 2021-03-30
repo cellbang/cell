@@ -16,7 +16,6 @@
     "@malagu/serve-static": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
     "@malagu/cli-service": "latest"
   },
   "scripts": {

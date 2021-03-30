@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@yarnpkg/lockfile": "^1.1.0",
-    "babel-loader": "^8.0.6",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
     "fs-extra": "^8.1.0",
@@ -47,9 +46,7 @@
     "temp": "^0.8.3",
     "traverse": "^0.6.6",
     "ts-node": "^8.4.1",
-    "typedoc": "^0.15.0",
     "typescript": "^3.5.3",
-    "update-notifier": "^5.0.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

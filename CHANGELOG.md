@@ -5,10 +5,14 @@
 - feat(cli) splits the original `@malagu/cli` command line tool into three parts: `@malagu/cli-common`, `@malagu/cli` and `@malagu/cli-service`. Among them, `@malagu/cli` will no longer rely on a series of heavy dependencies such as webpack, typescript, etc., and move related dependencies to `@malagu/cli-service`. In addition, the webpack plugin supports chain configuration.
 - feat(oss) upgrade oss sdk
 - feat (cli) `malagu.includeModules` default changed to `true`
+- feat (cli) specifies package management tools through `malagu.packager`, currently supports npm and yarn tools, and if no display is specified, the framework will select the appropriate package management tools for the current project environment, giving preference to yarn tools.
+- feat(cli) The consistency of command behavior is maintained whether the global malagu command is executed or local.
 
 - feat(cli) 将原先的 `@malagu/cli` 命令行工具拆分成三部分：`@malagu/cli-common`、`@malagu/cli` 和 `@malagu/cli-service`。其中，`@malagu/cli` 将不再依赖 webpack、typescript 等等一些列重型依赖，将相关的依赖移动到 `@malagu/cli-service` 中。另外，webpack 插件支持链式配置。
 - feat(oss) 升级 oss sdk
 - feat(cli) `malagu.includeModules` 默认值改为 `true`
+- feat(cli) 通过 `malagu.packager` 指定包管理工具，目前支持 npm 和 yarn 工具，如果没有指定显示指定，框架会更具当前项目环境选择合适包管理工具，优先选择 yarn 工具。
+- feat(cli) 无论是执行全局 malagu 命令，还是局部，都将保持命令行为的一致性。
 
 ## v1.17.0
 
