@@ -1,8 +1,8 @@
 import * as program from 'commander';
-import { CliContext, ContextUtils } from './context';
-import { HookExecutor } from './hook';
+import { HookExecutor, CliContext, ContextUtils } from '@malagu/cli-common';
 const leven = require('leven');
 import * as ora from 'ora';
+import { loadCommand } from './util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 
@@ -78,7 +78,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
         .description('serve a applicaton')
         .action((entry, cmd) => {
-            require('./serve/serve').default({ entry, ...parseOptions(cmd) });
+            loadCommand('serve', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
         });
 
     program
@@ -88,7 +88,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-p, --prod [prod]', 'Create a production build')
         .description('build a application')
         .action((entry, cmd) => {
-            require('./build/build').default({ entry, ...parseOptions(cmd) });
+            loadCommand('build', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
         });
 
     program
@@ -99,7 +99,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-s, --skip-build [skipBuild]', 'Skip the build process')
         .description('deploy a applicaton')
         .action((entry, cmd) => {
-            require('./deploy/deploy').default({ entry, ...parseOptions(cmd) });
+            loadCommand('deploy', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
         });
     const options = minimist(process.argv.slice(2));
     const mode = getMode(options);

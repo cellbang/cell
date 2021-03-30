@@ -1,5 +1,4 @@
-import { BACKEND_TARGET, getMalaguConfig } from '@malagu/cli';
-import { ApplicationConfig } from '@malagu/cli/lib/package/application-config';
+import { BACKEND_TARGET, getMalaguConfig, ApplicationConfig } from '@malagu/cli-service';
 import { ensureFile, existsSync, readFile, writeFile } from 'fs-extra';
 import { prompt } from 'inquirer';
 import { homedir } from 'os';

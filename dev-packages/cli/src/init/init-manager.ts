@@ -3,10 +3,8 @@ import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
-import { HookExecutor } from '../hook/hook-executor';
-import { ContextUtils, CliContext } from '../context';
+import { HookExecutor, ContextUtils, CliContext, getPackager  } from '@malagu/cli-common';
 import * as ora from 'ora';
-import { getPackager } from '../packager';
 const chalk = require('chalk');
 import { ok } from 'assert';
 
@@ -46,8 +44,7 @@ export class InitManager {
 
     async install(): Promise<void> {
         const ctx = await CliContext.create(this.context.program, {}, this.outputDir, true);
-        const packagerId = ctx.cfg.rootConfig.malagu.packager;
-        await getPackager(packagerId).install(this.outputDir, {});
+        await getPackager(ctx).install(this.outputDir, {});
     }
 
     async executeHooks(): Promise<void> {

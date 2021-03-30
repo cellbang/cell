@@ -1,4 +1,4 @@
-import { ServeContext, ConfigurationContext, getMalaguConfig, BACKEND_TARGET } from '@malagu/cli';
+import { ServeContext, ConfigurationContext, getMalaguConfig, BACKEND_TARGET } from '@malagu/cli-service';
 import { LaunchOptions } from 'puppeteer-core';
 import { BrowserFetcher } from 'puppeteer-core/lib/cjs/puppeteer/node/BrowserFetcher';
 import { PUPPETEER_REVISIONS } from 'puppeteer-core/lib/cjs/puppeteer/revisions';

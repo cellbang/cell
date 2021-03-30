@@ -1,4 +1,4 @@
-import { BuildContext, getHomePath } from '@malagu/cli';
+import { BuildContext, getHomePath } from '@malagu/cli-service';
 import { join } from 'path';
 import { writeFile } from 'fs-extra';
 
