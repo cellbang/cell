@@ -33,7 +33,6 @@ The origin of Malagu's name: In my hometown, the homophonic "Ma Lagu" means smal
 
 ```bash
 # Install command-line tools
-npm install -g yarn
 npm install -g @malagu/cli
 
 # Initialization
