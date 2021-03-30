@@ -15,7 +15,6 @@
     "@malagu/oss": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
     "@malagu/cli-service": "latest",
     "@types/mime-types": "^2.1.0"
   },

@@ -33,7 +33,8 @@
     "test": "malaguext test"
   },
   "dependencies": {
-    "@malagu/cli-common": "^1.17.0"
+    "@malagu/cli-common": "^1.17.0",
+    "update-notifier": "^5.0.1"
   },
   "devDependencies": {
     "@malagu/ext-scripts": "^1.17.0",

@@ -16,7 +16,6 @@
     "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
     "@malagu/cli-service": "latest"
   },
   "scripts": {

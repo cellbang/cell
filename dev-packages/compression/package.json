@@ -33,7 +33,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli": "^1.17.0",
+    "@malagu/cli-service": "^1.17.0",
     "@malagu/ext-scripts": "^1.17.0"
   },
   "nyc": {
