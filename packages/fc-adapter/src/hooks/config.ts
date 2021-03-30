@@ -1,4 +1,4 @@
-import { ConfigContext } from '@malagu/cli';
+import { ConfigContext } from '@malagu/cli-service';
 import { DefaultProfileProvider, FaaSAdapterUtils, FaaSAdapterConfiguration } from '@malagu/faas-adapter/lib/hooks';
 
 export default async (context: ConfigContext) => {

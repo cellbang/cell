@@ -1,0 +1,64 @@
+{
+  "name": "@malagu/cli-common",
+  "version": "1.17.0",
+  "description": "Malagu CLI Common.",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "dependencies": {
+    "@yarnpkg/lockfile": "^1.1.0",
+    "babel-loader": "^8.0.6",
+    "chalk": "^2.4.2",
+    "commander": "^2.20.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.0",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "jexl": "^2.2.2",
+    "js-yaml": "^3.13.1",
+    "leven": "^3.1.0",
+    "lodash": "^4.17.19",
+    "lodash.mergewith": "^4.6.2",
+    "lru-cache": "^6.0.0",
+    "ora": "^4.0.2",
+    "rimraf": "^2.6.1",
+    "semver": "^7.3.5",
+    "temp": "^0.8.3",
+    "traverse": "^0.6.6",
+    "ts-node": "^8.4.1",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.5.3",
+    "update-notifier": "^5.0.1",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^1.17.0",
+    "@types/chai": "^4.0.1",
+    "@types/chai-string": "^1.4.0",
+    "@types/fs-extra": "^8.0.0",
+    "@types/js-yaml": "^3.12.1",
+    "@types/lodash.mergewith": "^4.6.6",
+    "@types/yarnpkg__lockfile": "^1.1.3"
+  }
+}

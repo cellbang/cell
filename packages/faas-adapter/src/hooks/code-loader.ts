@@ -1,4 +1,4 @@
-import { DeployContext, getHomePath } from '@malagu/cli';
+import { DeployContext, getHomePath } from '@malagu/cli-service';
 import { CodeLoader, CodeUri, FaaSAdapterConfiguration } from './faas-protocol';
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 import * as JSZip from 'jszip';

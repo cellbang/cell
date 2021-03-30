@@ -8,7 +8,13 @@
   },
   "references": [
     {
+      "path": "../dev-packages/cli-common/compile.tsconfig.json"
+    },
+    {
       "path": "../dev-packages/cli/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/cli-service/compile.tsconfig.json"
     },
     {
       "path": "../dev-packages/compression/compile.tsconfig.json"

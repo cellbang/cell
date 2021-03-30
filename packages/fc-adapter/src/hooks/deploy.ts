@@ -1,4 +1,4 @@
-import { DeployContext } from '@malagu/cli';
+import { DeployContext } from '@malagu/cli-service';
 import { readFile } from 'fs-extra';
 import { Credentials, Account } from '@malagu/cloud';
 import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';

@@ -1,4 +1,4 @@
-import { CliContext } from '@malagu/cli';
+import { CliContext } from '@malagu/cli-service';
 import { FaaSAdapterConfiguration } from './faas-protocol';
 import { FaaSAdapterUtils } from './utils';
 

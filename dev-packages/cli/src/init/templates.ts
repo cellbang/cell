@@ -8,6 +8,5 @@ export const templates: any = {
     'file-service': '{{ templatePath }}/file-service',
     'puppeteer': '{{ templatePath }}/puppeteer',
     'monorepo': '{{ templatePath }}/monorepo',
-    'mycli': '{{ templatePath }}/mycli',
-    'site': 'https://github.com/cellbang/cellbang-site.git'
+    'mycli': '{{ templatePath }}/mycli'
 };

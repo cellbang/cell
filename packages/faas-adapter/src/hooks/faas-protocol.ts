@@ -1,5 +1,5 @@
 import { Credentials, Account } from '@malagu/cloud';
-import { DeployContext } from '@malagu/cli';
+import { DeployContext } from '@malagu/cli-service';
 import * as JSZip from 'jszip';
 
 export interface CodeLoader {

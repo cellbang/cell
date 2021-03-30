@@ -1,4 +1,4 @@
-import { WebpackContext, ConfigurationContext, FRONTEND_TARGET, getWebpackConfig } from '@malagu/cli';
+import { WebpackContext, ConfigurationContext, FRONTEND_TARGET, getWebpackConfig } from '@malagu/cli-service';
 
 export default async (context: WebpackContext) => {
     const { configurations, dev, cfg } = context;
@@ -8,16 +8,16 @@ export default async (context: WebpackContext) => {
         if (!pluginConfig.disable && !dev) {
             delete pluginConfig.disable;
             const CompressionPlugin = require('compression-webpack-plugin');
-            configuration.plugins!.push(
-                    new CompressionPlugin({
+            configuration
+                .plugin('compression')
+                .use(CompressionPlugin, [{
                     // enable reuse of compressed artifacts for incremental development
                     cache: false,
                     threshold: 0,
                     minRatio: 1.2,
                     filename: '[file]',
                     ...pluginConfig
-                })
-            );
+                }]);
         }
     }
 

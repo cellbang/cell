@@ -1,4 +1,4 @@
-import { DeployContext, getHomePath } from '@malagu/cli';
+import { DeployContext, getHomePath } from '@malagu/cli-service';
 import { join } from 'path';
 const chalk = require('chalk');
 import { spawnSync } from 'child_process';

@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@malagu/cli": "latest",
-    "rimraf": "^2.6.3"
+    "@malagu/cli-service": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
