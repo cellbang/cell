@@ -170,7 +170,7 @@ function getMacAppVersion(bundleIdentifier: string) {
     }
 }
 
-exports.getInstalledBrowsers = () => {
+export const getInstalledBrowsers = () => {
     if (hasCheckedBrowsers) {
         return browsers;
     }

@@ -10,14 +10,14 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/rpc": "latest",
-    "@malagu/fc-adapter": "latest",
-    "@malagu/react": "latest",
-    "@malagu/serve-static": "latest"
+    "@malagu/rpc": "1.18.0-next.fc0d29b6",
+    "@malagu/fc-adapter": "1.18.0-next.fc0d29b6",
+    "@malagu/react": "1.18.0-next.fc0d29b6",
+    "@malagu/serve-static": "1.18.0-next.fc0d29b6"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
+    "@malagu/cli": "1.18.0-next.fc0d29b6",
+    "@malagu/cli-service": "1.18.0-next.fc0d29b6",
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.8.5",
     "@types/react-router": "^5.1.7",

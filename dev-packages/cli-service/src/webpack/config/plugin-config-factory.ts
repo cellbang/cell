@@ -159,7 +159,7 @@ export class HtmlWebpackTagsPluginConfigFactory {
         }
 
         const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-        let allConfigs = [...after, ...before.reverse()];
+        const allConfigs = [...after, ...before.reverse()];
         for (let i = 0; i < allConfigs.length; i++) {
             const c = allConfigs[i];
             config

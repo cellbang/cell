@@ -61,7 +61,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
     let frontendConfiguration: webpack.Configuration | undefined;
-    let backendConfiguration :webpack.Configuration | undefined;
+    let backendConfiguration: webpack.Configuration | undefined;
     for (const c of configurations) {
         if (c.name === FRONTEND_TARGET) {
             frontendConfiguration = c;
