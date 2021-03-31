@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.18.1
+
+- feat(compression) upgrade compression-webpack-plugin
+
+
 ## v1.18.0
 
 - feat(cli) splits the original `@malagu/cli` command line tool into three parts: `@malagu/cli-common`, `@malagu/cli` and `@malagu/cli-service`. Among them, `@malagu/cli` will no longer rely on a series of heavy dependencies such as webpack, typescript, etc., and move related dependencies to `@malagu/cli-service`. In addition, the webpack plugin supports chain configuration.
