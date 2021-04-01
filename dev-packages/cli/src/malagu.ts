@@ -1,13 +1,12 @@
 import * as program from 'commander';
-import { HookExecutor, CliContext, ContextUtils } from '@malagu/cli-common';
 const leven = require('leven');
 import * as ora from 'ora';
-import { loadCommand } from './util';
+import { executeHook } from '@malagu/cli-common';
+import { loadCommand, loadContext } from './util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
-
-const minimist = require('minimist');
 const pkg = require('../package.json');
+
 const version = pkg.version;
 updateNotifier({ pkg }).notify();
 
@@ -23,40 +22,10 @@ console.log(`
 ${(('@malagu/cli@' + version) as any).padStart(37, ' ')}  \\_/__/
 `);
 
-function getArrayOptions(options: any, prop: string, shortProp: string) {
-    const value = options[prop] || options[shortProp];
-    if (Array.isArray(value)) {
-        return value.reduce((accumulator, currentValue) => [...accumulator, ...currentValue.split(',')], []);
-    } else if (typeof value === 'string') {
-        return value.split(',');
-    }
-    return [];
-}
-
-function getMode(options: any) {
-    const mode = getArrayOptions(options, 'mode', 'm');
-
-    let fixedMode: string[] = [];
-    if (options._.includes('serve')) {
-        fixedMode = ['local'];
-    } else if (options._.includes('build') || options._.includes('deploy')) {
-        fixedMode = ['remote'];
-    }
-    return [...fixedMode, ...mode.filter((m: any) => fixedMode.indexOf(m) === -1)];
-}
-
-function isDev(options: any) {
-
-    return options._.includes('serve');
-}
-
-function getTargets(options: any) {
-    return getArrayOptions(options, 'targets', 't');
-}
-
 const spinner = ora({ text: 'loading command line context...', discardStdin: false }).start();
 
 (async () => {
+    const context = await loadContext(program, spinner);
     program
         .version(version)
         .description(`Malagu CLI ${version}`)
@@ -78,7 +47,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
         .description('serve a applicaton')
         .action((entry, cmd) => {
-            loadCommand('serve', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
+            loadCommand(context, 'serve', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
         });
 
     program
@@ -88,7 +57,7 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-p, --prod [prod]', 'Create a production build')
         .description('build a application')
         .action((entry, cmd) => {
-            loadCommand('build', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
+            loadCommand(context, 'build', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
         });
 
     program
@@ -99,15 +68,10 @@ const spinner = ora({ text: 'loading command line context...', discardStdin: fal
         .option('-s, --skip-build [skipBuild]', 'Skip the build process')
         .description('deploy a applicaton')
         .action((entry, cmd) => {
-            loadCommand('deploy', '@malagu/cli-service').default(ContextUtils.getCurrent(), { entry, ...parseOptions(cmd) });
+            loadCommand(context, 'deploy', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
         });
-    const options = minimist(process.argv.slice(2));
-    const mode = getMode(options);
-    const targets = getTargets(options);
-    const prod = options.p || options.prod;
-    const context = await CliContext.create(program, { targets, mode, prod, dev: isDev(options), spinner });
-    ContextUtils.setCurrent(context);
-    await new HookExecutor().executeCliHooks(context);
+
+    await executeHook(context, 'Cli');
     spinner.stop();
 
     program
@@ -158,7 +122,7 @@ function suggestCommands(unknownCommand: string) {
     });
 
     if (suggestion) {
-        console.log(`  ${chalk.red(`Did you mean ${chalk.yellow(suggestion)}?`)}`);
+        console.log(`  ${chalk.yellow(`Did you mean ${chalk.yellow(suggestion)}?`)}`);
     }
 }
 

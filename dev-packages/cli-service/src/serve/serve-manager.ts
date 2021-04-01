@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import { startDevServer } from './start-dev-server';
-import { ServiceHookExecutor } from '../hook';
+import { HookExecutor } from '../hook';
 import * as https from 'https';
 import * as http from 'http';
 import { ConfigurationContext, ServiceContextUtils } from '../context';
@@ -24,7 +24,7 @@ export class ServeManager {
                     compiler,
                     entryContextProvider
                 );
-                await new ServiceHookExecutor().executeServeHooks(serveContext);
+                await new HookExecutor().executeServeHooks(serveContext);
             });
     }
 

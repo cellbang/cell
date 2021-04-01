@@ -1,8 +1,7 @@
 import { ApplicationPackage } from '../package';
 import { CommanderStatic } from 'commander';
-import { checkPkgVersionConsistency } from '../util';
+import { checkPkgVersionConsistency, executeHook } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
-import { HookExecutor } from '../hook';
 import { ExpressionHandler } from '../el';
 import { ApplicationConfig } from '../package';
 
@@ -28,14 +27,13 @@ export namespace CliContext {
         if (!skipComponent) {
             for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
                 const config = cfg.getConfig(target);
-                const hookExecutor = new HookExecutor();
-                await hookExecutor.executeConfigHooks({
+                await executeHook({
                     pkg,
                     cfg,
                     program,
                     config: config,
                     ...options
-                });
+                }, 'Config');
 
                 config.env = { ...process.env, _ignoreEl: true };
 

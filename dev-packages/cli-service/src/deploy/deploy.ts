@@ -1,5 +1,5 @@
 
-import { ServiceHookExecutor } from '../hook';
+import { HookExecutor } from '../hook';
 import { BuildManager } from '../build/build-manager';
 import { CliContext } from '@malagu/cli-common';
 import { ServiceContextUtils } from '../context';
@@ -18,7 +18,7 @@ export default async (cliContext: CliContext, options: DeplyOptions) => {
         if (!options.skipBuild) {
             await new BuildManager(ctx).build();
         }
-        const hookExecutor = new ServiceHookExecutor();
+        const hookExecutor = new HookExecutor();
         await hookExecutor.executeDeployHooks(ctx);
     } catch (error) {
         console.error(error);

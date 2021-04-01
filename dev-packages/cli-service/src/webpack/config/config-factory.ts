@@ -1,7 +1,7 @@
 
 import { BaseConfigFactory } from './base-config-factory';
 import { BACKEND_TARGET, FRONTEND_TARGET, getModules, support, CliContext } from '@malagu/cli-common';
-import { ServiceHookExecutor } from '../../hook';
+import { HookExecutor } from '../../hook';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
@@ -68,7 +68,7 @@ export class ConfigFactory {
             configurations.push(configuration);
         }
 
-        await new ServiceHookExecutor().executeWebpackHooks({
+        await new HookExecutor().executeWebpackHooks({
             ...context,
             configurations
         });
