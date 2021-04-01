@@ -3,6 +3,7 @@
 ## v1.18.1
 
 - feat(compression) upgrade compression-webpack-plugin
+- feat(typeorm) upgrade typeorm
 
 
 ## v1.18.0

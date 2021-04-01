@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/web": "^1.18.0",
     "mysql": "^2.17.1",
-    "typeorm": "^0.2.19"
+    "typeorm": "^0.2.32"
   },
   "publishConfig": {
     "access": "public"
