@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "@malagu/cli-common": "^1.18.1",
+    "leven": "^3.1.0",
+    "minimist": "^1.2.5",
     "update-notifier": "^5.0.1"
   },
   "devDependencies": {

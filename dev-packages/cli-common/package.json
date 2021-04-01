@@ -36,17 +36,12 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "jexl": "^2.2.2",
     "js-yaml": "^3.13.1",
-    "leven": "^3.1.0",
-    "lodash": "^4.17.19",
     "lodash.mergewith": "^4.6.2",
     "lru-cache": "^6.0.0",
     "ora": "^4.0.2",
-    "rimraf": "^2.6.1",
     "semver": "^7.3.5",
     "temp": "^0.8.3",
     "traverse": "^0.6.6",
-    "ts-node": "^8.4.1",
-    "typescript": "^3.5.3",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

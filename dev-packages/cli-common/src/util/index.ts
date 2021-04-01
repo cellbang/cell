@@ -3,6 +3,7 @@ import * as lockfile from '@yarnpkg/lockfile';
 import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
+import { CliContext } from '../context';
 const chalk = require('chalk');
 
 export function checkPkgVersionConsistency(pkgName: string, projectPath: string) {
@@ -127,4 +128,14 @@ export function getBackendHomePath(pkg: ApplicationPackage) {
 
 export function getFrontendHomePath(pkg: ApplicationPackage) {
     return getHomePath(pkg, FRONTEND_TARGET);
+}
+
+export function executeHook(context: CliContext, hook: string) {
+    const { pkg } = context;
+    try {
+        const { HookExecutor } = require(pkg.resolveModule('@malagu/cli-service/lib/hook'));
+        return new HookExecutor()[`execute${hook}Hooks`](context);
+    } catch (err) {
+        // noop
+    }
 }

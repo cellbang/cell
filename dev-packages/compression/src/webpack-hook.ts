@@ -16,6 +16,7 @@ export default async (context: WebpackContext) => {
                     threshold: 0,
                     minRatio: 1.2,
                     filename: '[file]',
+                    deleteOriginalAssets: true,
                     ...pluginConfig
                 }]);
         }

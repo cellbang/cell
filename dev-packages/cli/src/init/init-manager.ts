@@ -3,7 +3,7 @@ import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
-import { HookExecutor, ContextUtils, CliContext, getPackager  } from '@malagu/cli-common';
+import { ContextUtils, CliContext, getPackager, executeHook } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
 import { ok } from 'assert';
@@ -49,7 +49,8 @@ export class InitManager {
 
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
-        await new HookExecutor().executeInitHooks(await ContextUtils.createInitContext(await this.getCliContext()));
+        const initContext = await ContextUtils.createInitContext(await this.getCliContext());
+        await executeHook(initContext, 'Init');
         console.log(chalk`{bold.green Success!} Initialized "${ this.templateName }" example in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }

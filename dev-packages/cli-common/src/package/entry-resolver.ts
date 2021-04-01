@@ -3,9 +3,7 @@ import { ComponentPackage } from './package-protocol';
 import { ModulePathBuilder } from './module-path-builder';
 
 export class EntryResolver {
-    constructor(protected readonly pkg: ApplicationPackage) {
-
-    }
+    constructor(protected readonly pkg: ApplicationPackage) {}
 
     resolve(componentPackage: ComponentPackage) {
         const { malaguComponent } = componentPackage;

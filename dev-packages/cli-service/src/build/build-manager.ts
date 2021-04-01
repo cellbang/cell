@@ -3,7 +3,7 @@ import * as webpack from 'webpack';
 import { BuildContext } from '../context';
 import { BACKEND_TARGET } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
-import { ServiceHookExecutor } from '../hook';
+import { HookExecutor } from '../hook';
 
 export class BuildManager {
 
@@ -30,7 +30,7 @@ export class BuildManager {
                 }
             }));
         }
-        const hookExecutor = new ServiceHookExecutor();
+        const hookExecutor = new HookExecutor();
         await hookExecutor.executeBuildHooks(this.ctx);
     }
 

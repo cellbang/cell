@@ -29,6 +29,10 @@
     "test": "malaguext test"
   },
   "dependencies": {
+    "rimraf": "^2.6.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.5.3",
+    "lodash": "^4.17.19",
     "@babel/core": "^7.10.0",
     "@babel/plugin-transform-classes": "^7.10.0",
     "@babel/plugin-transform-runtime": "^7.10.0",

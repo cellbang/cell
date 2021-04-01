@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.18.2
+
+- feat(cli+cli-common+cli-service) Optimize dependencies
+
 ## v1.18.1
 
 - feat(compression) upgrade compression-webpack-plugin
