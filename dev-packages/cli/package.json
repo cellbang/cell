@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-  "version": "1.18.0",
+  "version": "1.18.1",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
@@ -33,11 +33,11 @@
     "test": "malaguext test"
   },
   "dependencies": {
-    "@malagu/cli-common": "^1.18.0",
+    "@malagu/cli-common": "^1.18.1",
     "update-notifier": "^5.0.1"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.18.0",
+    "@malagu/ext-scripts": "^1.18.1",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
   }
