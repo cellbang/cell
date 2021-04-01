@@ -36,7 +36,7 @@ export class BaseConfigFactory {
             .stats('minimal')
             .resolve
                 .extensions
-                    .add('.tsx').add('.ts').add('.js').add('.wasm').add('.mjs').add('.json')
+                    .merge([ '.js', '.tsx', '.ts', '.wasm', '.mjs', '.json' ])
                 .end()
             .end()
             .module

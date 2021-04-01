@@ -12,7 +12,7 @@ export default async (context: WebpackContext) => {
                 .plugin('compression')
                 .use(CompressionPlugin, [{
                     // enable reuse of compressed artifacts for incremental development
-                    cache: false,
+                    cache: true,
                     threshold: 0,
                     minRatio: 1.2,
                     filename: '[file]',

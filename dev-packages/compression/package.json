@@ -3,7 +3,7 @@
   "version": "1.18.0",
   "description": "",
   "dependencies": {
-    "compression-webpack-plugin": "^7.1.2"
+    "compression-webpack-plugin": "^6.1.1"
   },
   "publishConfig": {
     "access": "public"
