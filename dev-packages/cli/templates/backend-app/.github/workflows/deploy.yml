@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: '12'
       - uses: bahmutov/npm-install@v1
+      - run: npm i -g @malagu/cli
       - run: npm run lint --if-present
       - run: npm test
       - if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
