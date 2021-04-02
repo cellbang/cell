@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.18.3
+
+- fix(cli) fix debug and cicd
+
+
 ## v1.18.2
 
 - feat(cli+cli-common+cli-service) Optimize dependencies
