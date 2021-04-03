@@ -9,7 +9,8 @@
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
-    "jszip": "^3.2.2"
+    "jszip": "^3.2.2",
+    "js-yaml": "^4.0.0"
   },
   "publishConfig": {
     "access": "public"

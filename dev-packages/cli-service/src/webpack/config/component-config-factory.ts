@@ -2,7 +2,7 @@
 import { getHomePath, FRONTEND_TARGET, CONFIG_FILE, getConfig, CliContext, getWebpackConfig } from '@malagu/cli-common';
 import * as path from 'path';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
-import yaml = require('js-yaml');
+import { dump } from 'js-yaml';
 import * as WebpackChian from 'webpack-chain';
 
 const nodePathList = (process.env.NODE_PATH || '')
@@ -54,7 +54,7 @@ export class ComponentConfigConfigFactory {
         const homePath = getHomePath(pkg, target);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
-        writeFileSync(configPath, yaml.dump(c), { encoding: 'utf8' });
+        writeFileSync(configPath, dump(c), { encoding: 'utf8' });
         config
             .module
                 .rule('config')

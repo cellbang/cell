@@ -2,7 +2,7 @@ import { Component, Props, ApplicationLog, customizer, ApplicationConfigOptions 
 import mergeWith = require('lodash.mergewith');
 import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 import { existsSync, readFileSync } from 'fs-extra';
-import yaml = require('js-yaml');
+import { load } from 'js-yaml';
 import { ApplicationPackage } from './application-package';
 
 // tslint:disable:no-implicit-dependencies
@@ -44,7 +44,7 @@ export class ApplicationConfig {
             return this._rootConfig;
         }
         if (existsSync(this.pkg.path(CONFIG_FILE))) {
-            this._rootConfig = yaml.load(readFileSync(this.pkg.path(CONFIG_FILE), { encoding: 'utf8' }));
+            this._rootConfig = load(readFileSync(this.pkg.path(CONFIG_FILE), { encoding: 'utf8' }));
         }
         if (this._rootConfig && !this._rootConfig.malagu) {
             this._rootConfig.malagu = {};

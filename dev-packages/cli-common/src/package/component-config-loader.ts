@@ -1,6 +1,6 @@
 import { ApplicationPackage } from './application-package';
 import { customizer } from './package-protocol';
-import yaml = require('js-yaml');
+import { load } from 'js-yaml';
 import { CONFIG_FILE } from '../constants';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
@@ -79,7 +79,7 @@ export class ComponentPackageLoader {
             // noop
         }
         if (fullConfigPath) {
-            return yaml.load(readFileSync(fullConfigPath, { encoding: 'utf8' }));
+            return load(readFileSync(fullConfigPath, { encoding: 'utf8' }));
         }
     }
 }
