@@ -4,7 +4,7 @@ import { prompt } from 'inquirer';
 import { homedir } from 'os';
 import { resolve, sep } from 'path';
 import { Profile } from './faas-protocol';
-const yaml = require('js-yaml');
+import { load, dump } from 'js-yaml';
 
 export namespace FaaSAdapterUtils {
     export function getConfiguration<T>(cfg: ApplicationConfig): T {
@@ -25,7 +25,7 @@ export namespace FaaSAdapterUtils {
         }
 
         const content = await readFile(path, 'utf8');
-        return yaml.safeLoad(content);
+        return load(content);
     }
 
     export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
@@ -82,7 +82,7 @@ export namespace FaaSAdapterUtils {
 
         const path = getProfilePath(profilePath);
         await ensureFile(path);
-        await writeFile(path, yaml.dump(profile));
+        await writeFile(path, dump(profile));
         return profile;
     }
 }

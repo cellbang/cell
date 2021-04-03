@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.18.4
+
+- fix(faas-adapter) using js-yaml load alternate salfLoad
+
 ## v1.18.3
 
 - fix(cli) fix debug and cicd
