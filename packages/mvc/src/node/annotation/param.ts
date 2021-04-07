@@ -9,7 +9,7 @@ export function Param(name?: string): ParameterDecorator {
     return (t, tk, i) => {
         applyParamDecorator(t, tk, i, name);
     };
-};
+}
 
 export function applyParamDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {
     const metadatas: ParamMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.controllerParam, target.constructor, targetKey) || [];

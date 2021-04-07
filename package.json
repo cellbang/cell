@@ -45,6 +45,7 @@
     "uuid": "^8.0.0"
   },
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "prepare": "yarn run prepare:build",
     "prepare:build": "yarn build && lerna run lint",
     "build": "tsc -b configs/root-compilation.tsconfig.json",
