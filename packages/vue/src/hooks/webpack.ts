@@ -8,9 +8,9 @@ export default async (context: WebpackContext) => {
     );
     if (webpackConfig) {
         const isProd = process.env.NODE_ENV === 'production';
-        const { VueLoaderPlugin } = require('vue-loader');
+        const shadowMode = false;
+        const needInlineMinification = isProd;
         const { webpack } = getFrontendMalaguConfig(context.cfg);
-
         const sourceMap = !!webpack.devtool;
         const defaultLoaderOptions = {
             css: {},
@@ -28,8 +28,6 @@ export default async (context: WebpackContext) => {
                 },
             };
         }
-        const shadowMode = false;
-        const needInlineMinification = isProd;
         const cssnanoOptions = {
             preset: [
                 'default',
@@ -180,12 +178,6 @@ export default async (context: WebpackContext) => {
             loaderOptions.stylus
         );
 
-        webpackConfig.plugin('vue-loader').use(VueLoaderPlugin);
-        console.log('================');
-        console.log(
-            'webpackConfig.toString(  >>>>>>',
-            webpackConfig.toString()
-        );
-        console.log('================');
+        webpackConfig.plugin('vue-loader').use(require('vue-loader').VueLoaderPlugin);
     }
 };
