@@ -9,7 +9,7 @@ export function Query(name?: string): ParameterDecorator {
     return (t, tk, i) => {
         applyQueryDecorator(t, tk, i, name);
     };
-};
+}
 
 export function applyQueryDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {
     const metadatas: QueryMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, target.constructor, targetKey) || [];
