@@ -12,7 +12,7 @@ export function Catch(errorTypes: ErrorType | ErrorType[]): MethodDecorator {
     return (t, k, d) => {
         applyCatchDecorator(t, k, d, Array.isArray(errorTypes) ? errorTypes : [ errorTypes ]);
     };
-};
+}
 
 export function applyCatchDecorator(target: any, key: string | symbol, descriptor: TypedPropertyDescriptor<any>, errorTypes: ErrorType[]): void {
     const metadata: CatchMetadata = { errorTypes, target, key, descriptor };

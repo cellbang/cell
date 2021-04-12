@@ -9,7 +9,7 @@ export function Body(name?: string): ParameterDecorator {
     return (t, tk, i) => {
         applyBodyDecorator(t, tk, i, name);
     };
-};
+}
 
 export function applyBodyDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {
     const metadatas: BodyMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.controllerBody, target.constructor, targetKey) || [];
