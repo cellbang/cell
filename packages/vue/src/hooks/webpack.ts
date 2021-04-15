@@ -52,20 +52,19 @@ function createVueRule(webpackConfig: any) {
 }
 
 export default async (context: WebpackContext) => {
-    const { configurations } = context;
+    const { configurations, cfg, pkg, dev } = context;
     const webpackConfig = ConfigurationContext.getFrontendConfiguration(
         configurations
     );
     if (webpackConfig) {
-        const appRootDir = process.cwd();
+        const appRootDir = pkg.projectPath;
         const shadowMode = false;
-        const isProd = process.env.NODE_ENV === 'production';
-        const rootVueOptions = getFrontendMalaguConfig(context.cfg)?.vue ?? {};
+        const rootVueOptions = getFrontendMalaguConfig(cfg)?.vue ?? {};
         const defaultSassLoaderOptions = {
             implementation: require('sass')
         };
         const css = rootVueOptions.css || {};
-        const { extract = isProd, sourceMap = false, loaderOptions = {} as LoaderOptions } = css;
+        const { extract = !dev, sourceMap = false, loaderOptions = {} as LoaderOptions } = css;
 
         let { requireModuleExtension } = css;
         if (typeof requireModuleExtension === 'undefined') {
@@ -110,7 +109,7 @@ export default async (context: WebpackContext) => {
         // if building for production but not extracting CSS, we need to minimize
         // the embbeded inline CSS as they will not be going through the optimizing
         // plugin.
-        const needInlineMinification = isProd && !shouldExtract;
+        const needInlineMinification = !dev && !shouldExtract;
 
         const cssnanoOptions = {
             preset: [
@@ -158,7 +157,7 @@ export default async (context: WebpackContext) => {
                     rule.use('extract-css-loader')
                         .loader(require('mini-css-extract-plugin').loader)
                         .options({
-                            hmr: !isProd,
+                            hmr: dev,
                             publicPath: cssPublicPath,
                         });
                 } else {
@@ -278,7 +277,7 @@ export default async (context: WebpackContext) => {
                 .use(require('mini-css-extract-plugin'), [extractOptions]);
 
             // minify extracted CSS
-            if (isProd) {
+            if (!dev) {
                 webpackConfig
                     .plugin('optimize-css')
                     .use(require('@intervolga/optimize-cssnano-plugin'), [
