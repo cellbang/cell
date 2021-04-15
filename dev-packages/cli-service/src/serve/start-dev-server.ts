@@ -11,7 +11,7 @@ const findPort = require('webpack-dev-server/lib/utils/findPort');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common';
 import * as delay from 'delay';
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 const clearModule = require('clear-module');
 
 let server: any;
@@ -149,7 +149,7 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     return compiler;
 }
 
-export function startDevServer(configurations: WebpackChian[], executeServeHooks: ExecuteServeHooks) {
+export function startDevServer(configurations: WebpackChain[], executeServeHooks: ExecuteServeHooks) {
     processOptions(configurations.map(c => c.toConfig()), { info: false }, (cs: any, options: any) => {
         doStartDevServer(cs, options, executeServeHooks);
     });

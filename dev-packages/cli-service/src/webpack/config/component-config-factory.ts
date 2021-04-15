@@ -3,14 +3,14 @@ import { getHomePath, FRONTEND_TARGET, CONFIG_FILE, getConfig, CliContext, getWe
 import * as path from 'path';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
 import { dump } from 'js-yaml';
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
     .filter(p => !!p);
 
 export class ComponentConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg, dev } = context;
         const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin;
         const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
@@ -46,7 +46,7 @@ export class ComponentConfigFactory {
 }
 
 export class ComponentConfigConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg } = context;
         const c = getConfig(cfg, target);
         const source = `module.exports.config = ${JSON.stringify(c)};`;

@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.18.5
+
+- fix(cli-service) fix typo
+- feat(vue): add style webpack loaders to support vue project
+
 ## v1.18.4
 
 - fix(faas-adapter) using js-yaml load alternate salfLoad

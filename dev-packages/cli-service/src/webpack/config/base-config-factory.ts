@@ -3,11 +3,11 @@ import { BACKEND_TARGET, CliContext, getWebpackConfig } from '@malagu/cli-common
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 export class BaseConfigFactory {
 
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg } = context;
         const sourceMapLoader = getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};

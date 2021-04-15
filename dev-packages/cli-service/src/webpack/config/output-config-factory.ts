@@ -1,10 +1,10 @@
 
 import { BACKEND_TARGET, CliContext, getHomePath } from '@malagu/cli-common';
 import * as path from 'path';
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 export class OutputConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, dev, output } = context;
         const outputPath = output ? path.resolve(pkg.projectPath, output) : path.join(getHomePath(pkg, target), 'dist');
 

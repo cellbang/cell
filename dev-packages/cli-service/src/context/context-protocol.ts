@@ -2,10 +2,10 @@ import * as https from 'https';
 import * as http from 'http';
 import { BACKEND_TARGET, CliContext, FRONTEND_TARGET } from '@malagu/cli-common';
 import * as webpack from 'webpack';
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 export interface ConfigurationContext extends CliContext {
-    configurations: WebpackChian[];
+    configurations: WebpackChain[];
 }
 
 export namespace ConfigurationContext {
@@ -20,7 +20,7 @@ export namespace ConfigurationContext {
         };
     }
 
-    export function getConfiguration(target: string, configurations: WebpackChian[]): undefined | WebpackChian {
+    export function getConfiguration(target: string, configurations: WebpackChain[]): undefined | WebpackChain {
         for (const c of configurations) {
             if (c.get('name') === target) {
                 return c;
@@ -28,27 +28,27 @@ export namespace ConfigurationContext {
         }
     }
 
-    export function getFrontendConfiguration(configurations: WebpackChian[]): undefined | WebpackChian {
+    export function getFrontendConfiguration(configurations: WebpackChain[]): undefined | WebpackChain {
         return getConfiguration(FRONTEND_TARGET, configurations);
     }
 
-    export function getBackendConfiguration(configurations: WebpackChian[]): undefined | WebpackChian {
+    export function getBackendConfiguration(configurations: WebpackChain[]): undefined | WebpackChain {
         return getConfiguration(BACKEND_TARGET, configurations);
     }
 
-    export function hasBackendConfiguration(configurations: WebpackChian[]): boolean {
+    export function hasBackendConfiguration(configurations: WebpackChain[]): boolean {
         return !!getConfiguration(BACKEND_TARGET, configurations);
     }
 
-    export function hasFrontendConfiguration(configurations: WebpackChian[]): boolean {
+    export function hasFrontendConfiguration(configurations: WebpackChain[]): boolean {
         return !!getConfiguration(FRONTEND_TARGET, configurations);
     }
 
-    export function isFrontendConfiguration(configuration: WebpackChian): boolean {
+    export function isFrontendConfiguration(configuration: WebpackChain): boolean {
         return configuration.get('name') === FRONTEND_TARGET;
     }
 
-    export function isBackendConfiguration(configuration: WebpackChian): boolean {
+    export function isBackendConfiguration(configuration: WebpackChain): boolean {
         return configuration.get('name') === BACKEND_TARGET;
     }
 }
