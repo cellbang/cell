@@ -1,6 +1,6 @@
 {
   "name": "@malagu/fc-adapter",
-  "version": "1.18.4",
+  "version": "1.18.5",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
@@ -8,8 +8,8 @@
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.1.1",
     "@alicloud/ram": "^1.0.0",
-    "@malagu/faas-adapter": "^1.18.4",
-    "@malagu/web": "^1.18.4",
+    "@malagu/faas-adapter": "^1.18.5",
+    "@malagu/web": "^1.18.5",
     "@webserverless/fc-express": "^1.0.0",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
@@ -44,8 +44,8 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli-service": "^1.18.4",
-    "@malagu/ext-scripts": "^1.18.4",
+    "@malagu/cli-service": "^1.18.5",
+    "@malagu/ext-scripts": "^1.18.5",
     "@types/jszip": "^3.1.6"
   },
   "nyc": {
