@@ -12,10 +12,10 @@ import { CopyWepackPluginConfigFactory, FilterWarningsPluginConfigFactory,
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
 const chalk = require('chalk');
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 export class ConfigFactory {
-    async create(context: CliContext): Promise<WebpackChian[]> {
+    async create(context: CliContext): Promise<WebpackChain[]> {
         const { cfg, pkg } = context;
 
         for (const m of pkg.rootComponentPackage.malaguComponent!.mode!) {
@@ -59,7 +59,7 @@ export class ConfigFactory {
                 console.log(chalk`malagu {cyan.bold module} - ${ module }`);
             }
 
-            const configuration = new WebpackChian();
+            const configuration = new WebpackChain();
             for (const configFactory of configFactories) {
                 if (configFactory.support(context, target)) {
                     configFactory.create(configuration, context, target);

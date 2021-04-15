@@ -3,10 +3,10 @@ import { CliContext, getWebpackConfig, getConfig, getHomePath, CONFIG_FILE, FRON
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
 export class FilterWarningsPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
         const pluginConfig = getWebpackConfig(cfg, target).filterWarningsPlugin || {};
         const excludeSet = new Set();
@@ -38,7 +38,7 @@ export class FilterWarningsPluginConfigFactory {
 }
 
 export class CopyWepackPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
         for (const assert of (pkg as any)[`${target}Assets`].values()) {
@@ -68,7 +68,7 @@ export class CopyWepackPluginConfigFactory {
 }
 
 export class HardSourceWebpackPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg } = context;
         const homePath = getHomePath(pkg, target);
         const configPath = path.join(homePath, CONFIG_FILE);
@@ -94,7 +94,7 @@ export class HardSourceWebpackPluginConfigFactory {
 }
 
 export class HtmlWebpackPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg } = context;
         const faviconPath = path.join(pkg.projectPath, 'favicon.ico');
         const faviconExists = existsSync(faviconPath);
@@ -129,7 +129,7 @@ export class HtmlWebpackPluginConfigFactory {
 }
 
 export class HtmlWebpackTagsPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
         const pluginConfig = getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
         const before = [];
@@ -174,7 +174,7 @@ export class HtmlWebpackTagsPluginConfigFactory {
 }
 
 export class CleanWebpackPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { CleanWebpackPlugin } = require('clean-webpack-plugin');
         config.plugin('clean').use(CleanWebpackPlugin);
     }
@@ -185,7 +185,7 @@ export class CleanWebpackPluginConfigFactory {
 }
 
 export class FriendlyErrorsWebpackPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { dev } = context;
         const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
         config.plugin('friendlyErrors').use(FriendlyErrorsWebpackPlugin, [{
@@ -203,7 +203,7 @@ export class FriendlyErrorsWebpackPluginConfigFactory {
 }
 
 export class ProgressPluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const ProgressBarPlugin = require('progress-bar-webpack-plugin');
         config.plugin('progressBar').use(ProgressBarPlugin, [{
             format: `${target} build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`
@@ -216,7 +216,7 @@ export class ProgressPluginConfigFactory {
 }
 
 export class ToES5PluginConfigFactory {
-    create(config: WebpackChian, context: CliContext, target: string) {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
         const pluginConfig = getWebpackConfig(cfg, target).toES5Plugin || {};
         const includeConfig = pluginConfig.include || {};

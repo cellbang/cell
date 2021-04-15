@@ -1,9 +1,9 @@
 const url = require('url');
 const ip = require('internal-ip');
 const chalk = require('chalk');
-import * as WebpackChian from 'webpack-chain';
+import * as WebpackChain from 'webpack-chain';
 
-export function getUri(options: WebpackChian.DevServer) {
+export function getUri(options: WebpackChain.DevServer) {
     const protocol = options.get('https') ? 'https' : 'http';
     const hostname = options.get('useLocalIp')
         ? ip.v4.sync() || 'localhost'
@@ -22,7 +22,7 @@ export function getUri(options: WebpackChian.DevServer) {
     });
 }
 
-export function getDevSuccessInfo(options: WebpackChian.DevServer, name: string): string[] {
+export function getDevSuccessInfo(options: WebpackChain.DevServer, name: string): string[] {
     const uri = getUri(options);
     const infos = [];
 
