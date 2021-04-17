@@ -16,6 +16,7 @@
     "@malagu/serve-static": "latest"
   },
   "devDependencies": {
+    "@malagu/cli": "latest",
     "@malagu/cli-service": "latest",
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.8.5",

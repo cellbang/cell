@@ -29,6 +29,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
+    "@malagu/cli": "latest",
     "@malagu/ext-scripts": "latest"
   },
   "nyc": {
