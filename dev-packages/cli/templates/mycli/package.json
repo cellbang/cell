@@ -20,6 +20,7 @@
     "inquirer-autocomplete-prompt": "^1.0.1"
   },
   "devDependencies": {
+    "@malagu/cli": "latest",
     "@types/fs-extra": "^8.0.1",
     "rimraf": "^2.6.3",
     "typescript": "^3.7.2"
