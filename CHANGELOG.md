@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.18.6
+
+- feat(fc-adapter) support `MALAGU_DOMAIN` environment variables
+
 ## v1.18.5
 
 - fix(cli-service) fix typo
