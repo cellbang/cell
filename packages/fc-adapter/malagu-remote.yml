@@ -29,6 +29,7 @@ malagu:
     alias:
       serviceName: ${malagu['faas-adapter'].service.name}
     customDomain:
+      name: ${env.MALAGU_DOMAIN}
       protocol: HTTP
       certConfig:
         # certName: xxx
