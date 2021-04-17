@@ -15,6 +15,7 @@
     "@malagu/typeorm": "latest"
   },
   "devDependencies": {
+    "@malagu/cli": "latest",
     "@malagu/cli-service": "latest"
   },
   "scripts": {
