@@ -1,6 +1,7 @@
 export const templates: any = {
     'backend-app': '{{ templatePath }}/backend-app',
     'sample-app': '{{ templatePath }}/sample-app',
+    'scf-app': '{{ templatePath }}/scf-app',
     'vue-app': '{{ templatePath }}/vue-app',
     'database-app': '{{ templatePath }}/database-app',
     'admin-app': '{{ templatePath }}/admin-app',
