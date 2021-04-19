@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.19.0
+
+- feat(cli) add a `scf-app` template
+
 ## v1.18.6
 
 - feat(fc-adapter) support `MALAGU_DOMAIN` environment variables
