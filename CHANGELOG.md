@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.19.1
+
+- fix(vue) fix peer dep missing
+
 ## v1.19.0
 
 - feat(cli) add a `scf-app` template
