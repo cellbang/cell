@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.19.2
+
+- feat(rpc) support create JsonRpcProxy
+
 ## v1.19.1
 
 - fix(vue) fix peer dep missing
