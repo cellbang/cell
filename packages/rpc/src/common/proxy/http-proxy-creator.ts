@@ -1,53 +1,63 @@
-import { ConsoleLogger, Component, Autowired, Value } from '@malagu/core';
-import { HttpHeaders, HttpMethod, MediaType, RestOperations, XML_HTTP_REQUEST } from '@malagu/web';
+import { ConsoleLogger } from '@malagu/core/lib/common/logger';
+import { RestOperations } from '@malagu/web/lib/common/client/client-protocol';
+import { HttpHeaders, HttpMethod, MediaType, XML_HTTP_REQUEST } from '@malagu/web/lib/common/http';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions, RequestTaskMeta } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';
-import { ConnnectionFactory, JsonRpcProxy, JsonRpcProxyFactory } from '../factory';
+import { ConnnectionFactory, ConnnectionFactoryImpl, JsonRpcProxy, JsonRpcProxyFactory } from '../factory';
 import { Channel, HttpChannel } from '../channal';
 import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 import { AxiosRequestConfig } from 'axios';
 import { ClientConfigProcessor } from '../processor';
+import { DefaultRestOperationsFactory } from '@malagu/web/lib/common/client';
 
-@Component(ProxyCreator)
+export interface MergeOptions {
+        maxCount: number;
+        maxLength: number;
+        timerDelay: number;
+        enabled: boolean;
+}
+
+export interface HttpProxyCreatorOptions<T> {
+
+    connnectionFactory: ConnnectionFactory<Channel>;
+    endpointResolver: EndpointResolver;
+    restOperations: RestOperations;
+    clientConfigProcessor?: ClientConfigProcessor;
+    clientConfig: AxiosRequestConfig;
+    merge: T;
+}
+
+const DEFAULT_OPTIONS: Omit<HttpProxyCreatorOptions<MergeOptions>, 'endpointResolver'> = {
+    connnectionFactory: new ConnnectionFactoryImpl(),
+    restOperations: new DefaultRestOperationsFactory().create(),
+    clientConfig: {},
+    merge: {
+        maxCount: 100,
+        maxLength: 5242880,
+        timerDelay: 35,
+        enabled: false
+    }
+
+};
+
 export class HttpProxyCreator implements ProxyCreator {
 
     protected channelIdSeq = 0;
 
-    @Autowired(ConnnectionFactory)
-    protected connnectionFactory: ConnnectionFactory<Channel>;
-
-    @Autowired(EndpointResolver)
-    protected endpointResolver: EndpointResolver;
-
-    @Autowired(RestOperations)
-    protected restOperations: RestOperations;
-
-    @Autowired(ClientConfigProcessor)
-    protected clientConfigProcessor: ClientConfigProcessor;
-
-    @Value('malagu.rpc.client.config')
-    protected readonly clientConfig: AxiosRequestConfig;
-
-    @Value('malagu.rpc.merge.maxCount')
-    protected readonly maxCount: number;
-
-    @Value('malagu.rpc.merge.maxLength')
-    protected readonly maxLength: number;
-
-    @Value('malagu.rpc.merge.timerDelay')
-    protected readonly timerDelay: number;
-
-    @Value('malagu.rpc.merge.enabled')
-    protected readonly enabled: boolean;
-
     protected requestMap = new Map<string, RequestTaskMeta>();
     protected channelMap = new Map<number, Channel>();
+    protected options: HttpProxyCreatorOptions<MergeOptions>;
+
+    constructor(
+        options: Partial<Omit<HttpProxyCreatorOptions<Partial<MergeOptions>>, 'endpointResolver'>> & Pick<HttpProxyCreatorOptions<Partial<MergeOptions>>, 'endpointResolver'>) {
+        this.options = { ...DEFAULT_OPTIONS, ...options, merge: { ...DEFAULT_OPTIONS.merge, ...options.merge } };
+    }
 
     create<T extends object>(path: string, errorConverters?: ErrorConverter[], target?: object | undefined): JsonRpcProxy<T> {
         const factory = new JsonRpcProxyFactory<T>(target, errorConverters);
-        this.endpointResolver.resolve(path).then(endpoint => this.listen({
+        this.options.endpointResolver.resolve(path).then(endpoint => this.listen({
             path: endpoint,
             onConnection: c => factory.listen(c)
         }));
@@ -60,7 +70,7 @@ export class HttpProxyCreator implements ProxyCreator {
 
     listen(handler: ConnectionHandler, options?: ConnectionOptions): void {
         this.openChannel(handler.path, channel => {
-            const connection = this.connnectionFactory.create(channel, this.createLogger());
+            const connection = this.options.connnectionFactory.create(channel, this.createLogger());
             handler.onConnection(connection);
         }, options);
     }
@@ -80,7 +90,7 @@ export class HttpProxyCreator implements ProxyCreator {
         const serviceName = parts.pop();
         const endpoint = parts.join('/');
         const channel = new HttpChannel(id, async content => {
-            if (this.enabled) {
+            if (this.options.merge.enabled) {
                 if (this.canMerge(endpoint, content)) {
                     this.pushContent(endpoint, content);
                 } else {
@@ -107,8 +117,8 @@ export class HttpProxyCreator implements ProxyCreator {
     protected canMerge(endpoint: string, content: string) {
         const meta = this.requestMap.get(endpoint);
         if (meta) {
-            if (meta.contentLength + content.length > this.maxLength ||
-                meta.contents.length + 1 > this.maxCount) {
+            if (meta.contentLength + content.length > this.options.merge.maxLength ||
+                meta.contents.length + 1 > this.options.merge.maxCount) {
                 return false;
             }
         }
@@ -120,7 +130,7 @@ export class HttpProxyCreator implements ProxyCreator {
         if (!meta) {
             const task = this.createTask(endpoint);
             meta = {
-                id: setTimeout(task, this.timerDelay),
+                id: setTimeout(task, this.options.merge.timerDelay),
                 contents: [],
                 contentLength: 0,
                 task
@@ -149,10 +159,10 @@ export class HttpProxyCreator implements ProxyCreator {
                     [HttpHeaders.CONTENT_TYPE]: MediaType.APPLICATION_JSON_UTF8,
                     [HttpHeaders.X_REQUESTED_WITH]: XML_HTTP_REQUEST
                 },
-                ...this.clientConfig
+                ...this.options.clientConfig
             };
-            await this.clientConfigProcessor.process(config);
-            const { data } = await this.restOperations.request(config);
+            await this.options.clientConfigProcessor?.process(config);
+            const { data } = await this.options.restOperations.request(config);
             if (Array.isArray(data)) {
                 for (const message of data) {
                     const parsed = JSON.parse(message);
