@@ -5,4 +5,4 @@ frontend:
         externals:
           vue: Vue
       htmlWebpackTagsPlugin:
-        vue3: "https://unpkg.com/vue@3.0.7/dist/vue.global${cliContext.dev ? '' : '.prod'}.js"
+        vue3: "https://unpkg.com/vue@3.0.11/dist/vue.global${cliContext.dev ? '' : '.prod'}.js"
