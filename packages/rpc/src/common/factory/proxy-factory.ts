@@ -1,6 +1,5 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
 import { ApplicationError, Disposable, getPropertyNames, Logger, PipeManager, getTargetClass } from '@malagu/core';
-import { Context } from '@malagu/web/lib/node';
 import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 
@@ -96,7 +95,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
 
     protected async onRequest(method: string, ...args: any[]): Promise<any> {
         const now = Date.now();
-        const message = `${getTargetClass(this.target).name}.${method} with traceId[${Context.getTraceId() || 'none'}]`;
+        const message = `${getTargetClass(this.target).name}.${method}`;
         // eslint-disable-next-line no-unused-expressions
         this.logger?.info(`starting ${message}`);
         try {
@@ -112,7 +111,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
             const reason = e.message || '';
             const stack = e.stack || '';
             // eslint-disable-next-line no-unused-expressions
-            this.logger?.error(`Request ${method} failed with error: ${reason} with traceId[${Context.getTraceId() || 'none'}]`, stack);
+            this.logger?.error(`Request ${method} failed with error: ${reason}`, stack);
             throw e;
         } finally {
             // eslint-disable-next-line no-unused-expressions
