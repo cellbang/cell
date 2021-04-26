@@ -18,7 +18,7 @@ export const Widget =
             } else {
                 widgetOption = { ...areaOrWidgetOption };
             }
-            const id = widgetOption.id || [];
+            const id = widgetOption.id ? (Array.isArray(widgetOption.id) ? widgetOption.id : [ widgetOption.id ]) : [];
             const component = widgetOption.component || t;
             Constant([...id, component, WidgetModel], {
                 id: widgetOption.id ? widgetOption.id.toString() : component.name,
