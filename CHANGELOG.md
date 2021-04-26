@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.20.0
+
+- feat(all) The compilation target changed from es5 to es6
+
 ## v1.19.3
 
 - feat(adapter) Add code compression operation when deploying
