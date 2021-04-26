@@ -165,7 +165,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
         await spinner(`Update ${functionMeta.name} function`, async () => {
             const updateFunctionCodeRequest: Lambda.Types.UpdateFunctionCodeRequest = {
                 FunctionName: functionMeta.name,
-                ZipFile: await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX' })
+                ZipFile: await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  })
             };
             await lambdaClient.updateFunctionCode(updateFunctionCodeRequest).promise();
 
@@ -176,7 +176,8 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
     } catch (error) {
         if (error.statusCode === 404) {
             await spinner(`Create ${functionMeta.name} function`, async () => {
-                await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta, await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX' }))).promise();
+                await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
+                    await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
             });
         } else {
             throw error;

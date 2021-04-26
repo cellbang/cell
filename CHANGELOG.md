@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.19.3
+
+- feat(adapter) Add code compression operation when deploying
+
 ## v1.19.2
 
 - feat(rpc) support create JsonRpcProxy
