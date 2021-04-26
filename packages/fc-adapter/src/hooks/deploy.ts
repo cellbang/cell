@@ -310,7 +310,7 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
             await fcClient.updateFunction(serviceName, functionName, {
                 ...opts,
                 code: {
-                    zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
+                    zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
                 },
             });
         });
@@ -322,7 +322,7 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
                 await fcClient.createFunction(serviceName, {
                     ...opts,
                     code: {
-                        zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX'})
+                        zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
                     },
                 });
             });
