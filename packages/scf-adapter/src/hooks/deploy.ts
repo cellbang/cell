@@ -172,7 +172,7 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
 
     if (code) {
         req.Code = new scfModels.Code();
-        req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX' });
+        req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
     }
     cleanObj(req);
 }
@@ -193,7 +193,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
-            updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX' });
+            updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
             await promisify(scfClientExt.UpdateFunctionCode.bind(scfClientExt))(updateFunctionCodeRequest);
 
             await checkStatus(functionMeta.namespace, functionMeta.name);
