@@ -12,7 +12,7 @@ export class BaseConfigFactory {
         const sourceMapLoader = getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
         sourceMapLoaderExclude = Object.keys(sourceMapLoaderExclude).map(key => sourceMapLoaderExclude[key]);
-        sourceMapLoaderExclude = new RegExp(['jsonc-parser|class-transformer|smart-buffer|socks|agent-base', ...sourceMapLoaderExclude].join('|'));
+        sourceMapLoaderExclude = new RegExp(sourceMapLoaderExclude.join('|'));
         const webpackMode = dev ? 'development' : 'production';
         config
             .name(target)

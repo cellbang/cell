@@ -1,5 +1,21 @@
 # Change Log
 
+## v1.20.3
+
+- fix(cli) fix `admin-app` template
+
+## v1.20.2
+
+- fix(cli-service) fix source mapping loader warning
+
+## v1.20.0
+
+- feat(all) The compilation target changed from es5 to es6
+
+## v1.19.3
+
+- feat(adapter) Add code compression operation when deploying
+
 ## v1.19.2
 
 - feat(rpc) support create JsonRpcProxy
