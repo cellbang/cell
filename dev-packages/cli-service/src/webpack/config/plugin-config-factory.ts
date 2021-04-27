@@ -21,7 +21,7 @@ export class FilterWarningsPluginConfigFactory {
             }
         }
 
-        const defaultExclude =  [/Critical dependency: / ];
+        const defaultExclude =  [ /Critical dependency: /, /Cannot find source file/ ];
         if (defaultExclude.length || excludeSet.size) {
             const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
             config
