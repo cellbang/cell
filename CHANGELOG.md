@@ -1,5 +1,8 @@
 # Change Log
 
+## v1.20.3
+
+- fix(cli) fix `admin-app` template
 
 ## v1.20.2
 
