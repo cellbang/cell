@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { App } from '@malagu/vue';
-import Root from './Root.vue';
+import  router from './rouer'
+import Root from './App.vue';
 
-@App(createApp(Root))
-export default class {}
+@App(createApp(Root).use(router))
+export default class { }
