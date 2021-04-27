@@ -1,7 +1,7 @@
 # Change Log
 
 
-## v1.20.1
+## v1.20.2
 
 - fix(cli-service) fix source mapping loader warning
 
