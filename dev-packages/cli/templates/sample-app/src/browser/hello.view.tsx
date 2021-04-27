@@ -3,7 +3,7 @@ import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { WelcomeServer } from '../common/welcome-protocol';
 import { View } from '@malagu/react';
 
-interface Prop {}
+interface Prop { }
 interface State {
     response: string
 }
@@ -26,6 +26,16 @@ export class Hello extends React.Component<Prop, State> {
     }
 
     render() {
-        return <div>{this.state.response}</div>
+        return <div style={{textAlign:'center',marginTop: '40px'}}>
+            <img alt="malagu logo" src="./assets/logo.png"></img>
+            <div className="hello">
+                <h1>{this.state.response}</h1>
+                <p>
+                    For a guide and recipes on how to configure / customize this project,<br />
+                check out the
+                <a href="https://www.yuque.com/cellbang/malagu" target="_blank" rel="noopener">malagu documentation</a>.
+                </p>
+            </div>
+        </div>
     }
 }
