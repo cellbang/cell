@@ -4,7 +4,10 @@
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
-      <a href="https://www.yuque.com/cellbang/malagu" target="_blank" rel="noopener"
+      <a
+        href="https://www.yuque.com/cellbang/malagu"
+        target="_blank"
+        rel="noopener"
         >malagu documentation</a
       >.
     </p>
@@ -15,8 +18,8 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 
