@@ -1,35 +1,34 @@
 <template>
   <div>
-    <img alt="malagu logo" src="../assets/logo.png">
+    <img alt="malagu logo" src="../assets/logo.png" />
     <HelloWorld :msg="message" />
   </div>
 </template>
 
 <script lang="ts">
-import HelloWorld from '../components/HelloWorld.vue'
-import { defineComponent } from 'vue';
-import { RpcUtil } from '@malagu/rpc';
-import { WelcomeServer } from '../../common/welcome-protocol';
+import HelloWorld from "../components/HelloWorld.vue";
+import { defineComponent } from "vue";
+import { RpcUtil } from "@malagu/rpc";
+import { WelcomeServer } from "../../common/welcome-protocol";
 
 const Root = defineComponent({
   components: {
-    HelloWorld
+    HelloWorld,
   },
   data() {
     return {
-      message: 'loading...'
+      message: "loading...",
     };
   },
   mounted() {
     this.load();
-
   },
   methods: {
     async load() {
       const welcomeServer = RpcUtil.get<WelcomeServer>(WelcomeServer);
-      this.message =  await welcomeServer.say();
-    }
-  }
+      this.message = await welcomeServer.say();
+    },
+  },
 });
 
 export default Root;
