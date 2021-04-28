@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.20.4
+
+- feat(cli) update vue-app and sample-app template
+
 ## v1.20.3
 
 - fix(cli) fix `admin-app` template
