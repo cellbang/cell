@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.20.6
+
+- fix(cli-common) fix npm peer error
+- feat(cli-service) `malagu.includeModules` defaults to `undefined`
+
 ## v1.20.5
 
 - fix(all) fix types
