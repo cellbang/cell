@@ -15,11 +15,8 @@
     "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {
-    "@malagu/cli-service": "latest",
-    "@types/react": "^16.9.38",
-    "@types/react-dom": "^16.8.5",
-    "@types/react-router": "^5.1.7",
-    "@types/react-router-dom": "^5.1.5"
+    "@malagu/cl": "latest",
+    "@malagu/cli-service": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
