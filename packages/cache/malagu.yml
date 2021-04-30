@@ -1,4 +1,17 @@
 malagu:
+  webpack:
+    filterWarningsPlugin:
+      cache:
+        - cache-manager-redis
+        - cache-manager-redis-store
+        - cache-manager-ioredis
+        - cache-manager-mongodb
+        - cache-manager-mongoose
+        - cache-manager-fs-binary
+        - cache-manager-fs-hash
+        - cache-manager-hazelcast
+        - cache-manager-memcached-store
+        - cache-manager-memory-store
   cache:
     config:
       default:

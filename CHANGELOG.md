@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.20.5
+
+- fix(all) fix types
+- fix(cache) Fix redis configuration not taking effect
+
 ## v1.20.4
 
 - feat(cli) update vue-app and sample-app template
