@@ -10,7 +10,7 @@ export class DefaultCacheManagerFactory implements CacheManagerFactory {
 
     create(name: string | undefined): CacheManager {
         if (name) {
-            return caching(this.cacheConfig.name);
+            return caching(this.cacheConfig[name]);
         }
         return caching(this.cacheConfig as StoreConfig & CacheOptions);
     }
