@@ -27,19 +27,23 @@ export namespace CliContext {
         if (!skipComponent) {
             for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
                 const config = cfg.getConfig(target);
+                config.env = { ...process.env, _ignoreEl: true };
+                config.pkg = { ...pkg.pkg, _ignoreEl: true};
+                config.cliContext = { ...options, ...program, _ignoreEl: true};
+                const expressionHandler = new ExpressionHandler(config);
+
+                const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
+                jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, config));
+
                 await executeHook({
                     pkg,
                     cfg,
                     program,
                     config: config,
+                    expressionHandler,
                     ...options
                 }, 'Config');
-
-                config.env = { ...process.env, _ignoreEl: true };
-
-                config.pkg = { ...pkg.pkg, _ignoreEl: true};
-                config.cliContext = { ...options, ...program, _ignoreEl: true};
-                new ExpressionHandler(config).handle();
+                expressionHandler.handle();
                 delete config.env;
                 delete config.pkg;
                 delete config.cliContext;
@@ -77,8 +81,8 @@ export namespace ContextUtils {
         return Promise.resolve(cliContext);
     }
 
-    export async function createConfigContext(cliContext: CliContext, config: { [key: string]: any }): Promise<ConfigContext> {
-        return { ...cliContext, config };
+    export async function createConfigContext(cliContext: CliContext, config: { [key: string]: any }, expressionHandler: ExpressionHandler): Promise<ConfigContext> {
+        return { ...cliContext, config, expressionHandler };
     }
 
 }
@@ -89,4 +93,5 @@ export interface InitContext extends CliContext {
 
 export interface ConfigContext extends CliContext {
     config: { [key: string]: any };
+    expressionHandler: ExpressionHandler;
 }

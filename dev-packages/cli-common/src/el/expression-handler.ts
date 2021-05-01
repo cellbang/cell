@@ -1,16 +1,13 @@
 import * as traverse from 'traverse';
-import { JexlEngineProvider } from './jexl-engine-provider';
 import { ExpressionCompiler } from './expression-compiler';
 import { ExpressionContext } from './expression-protocol';
 
 export class ExpressionHandler {
 
-    protected readonly jexlEngineProvider = new JexlEngineProvider();
-
-    protected readonly expressionCompiler = new ExpressionCompiler();
+    readonly expressionCompiler: ExpressionCompiler;
 
     constructor(protected ctx: ExpressionContext) {
-
+        this.expressionCompiler = new ExpressionCompiler(ctx);
     }
 
     handle() {
