@@ -46,6 +46,8 @@ malagu serve
 malagu deploy
 ```
 
+![Create the first application](https://cdn.nlark.com/yuque/0/2021/gif/365432/1617340832190-501736d6-3f55-4833-8753-b02852e6a901.gif)
+
 ## Example
 
 [View Online Sample Template](https://cloud.cellbang.com/?share=c3aa122a-abcd-4ac6-ac03-9b5cb5d5de62#/.theia/template.theia-workspace)
@@ -53,7 +55,7 @@ malagu deploy
 ## Documentation
 
 - [Introduction](https://www.yuque.com/cellbang/malagu/puw7p0)
-- [Quick Start](https://www.yuque.com/cellbang/malagu/qmq79k)
+- [Create the first application](https://www.yuque.com/cellbang/malagu/ogreg3)
 - [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
