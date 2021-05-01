@@ -46,7 +46,7 @@ malagu serve
 malagu deploy
 ```
 
-![Create the first application](https://cdn.nlark.com/yuque/0/2021/gif/365432/1617340832190-501736d6-3f55-4833-8753-b02852e6a901.gif)
+![Quick start](https://cdn.nlark.com/yuque/0/2021/gif/365432/1619859951255-3d935886-7d0e-4010-b3cc-c452cb98d510.gif)
 
 ## Example
 
