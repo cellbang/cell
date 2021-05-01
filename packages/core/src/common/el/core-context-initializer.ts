@@ -1,5 +1,6 @@
 import { Component, Autowired } from '../annotation';
-import { ContextInitializer, ExpressionContext, JexlEngineProvider } from './expression-protocol';
+import { ContainerUtil } from '../container';
+import { ContextInitializer, ExpressionContext, JexlEngineProvider, ExpressionHandler } from './expression-protocol';
 
 @Component(ContextInitializer)
 export class CoreContextInitializer implements ContextInitializer {
@@ -13,6 +14,8 @@ export class CoreContextInitializer implements ContextInitializer {
         jexlEngine.addTransform('replace',
                 (val: string, searchValue: string | RegExp, replaceValue: string) => val && val.replace(new RegExp(searchValue, 'g'), replaceValue));
         jexlEngine.addTransform('regexp',  (pattern: string, flags?: string) => new RegExp(pattern, flags));
+        const expressionHandler = ContainerUtil.get<ExpressionHandler>(ExpressionHandler)
+        jexlEngine.addTransform('eval',  (text: string) => expressionHandler.handle(text));
     }
 
     priority = 500;

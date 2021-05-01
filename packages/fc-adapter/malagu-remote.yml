@@ -2,9 +2,9 @@ backend:
   entry: lib/node/${malagu['faas-adapter'].type}-application-entry
 malagu:
   server:
-    path: "${(malagu['faas-adapter'].customDomain.name || malagu['faas-adapter'].type != 'custom') ? (malagu['faas-adapter'].type == 'api-gateway' ? ('/' + malagu['faas-adapter'].function.name + '/') : '/') : ('/2016-08-15/proxy/' + malagu['faas-adapter'].service.name + '.' + malagu['faas-adapter'].alias.name + '/' + malagu['faas-adapter'].function.name + '/')}"
+    path: "${(malagu['faas-adapter'].customDomain.name|eval || malagu['faas-adapter'].type != 'custom') ? (malagu['faas-adapter'].type == 'api-gateway' ? ('/' + malagu['faas-adapter'].function.name + '/') : '/') : ('/2016-08-15/proxy/' + malagu['faas-adapter'].service.name + '.' + malagu['faas-adapter'].alias.name + '/' + malagu['faas-adapter'].function.name + '/')}"
     _domain: "${ 'HTTPS' in malagu['faas-adapter'].customDomain.protocol ? 'https' : 'http' }://${malagu['faas-adapter'].customDomain.name}"
-    endpoint: "${malagu['faas-adapter'].customDomain.name || !malagu['faas-adapter'].account.id ? malagu['faas-adapter'].customDomain.name ? malagu.server._domain : undefined : ('https://' + malagu['faas-adapter'].account.id + '.' + malagu['faas-adapter'].region + '.fc.aliyuncs.com')}"
+    endpoint: "${(malagu['faas-adapter'].customDomain.name|eval || !malagu['faas-adapter'].account.id) ? malagu['faas-adapter'].customDomain.name ? malagu.server._domain : undefined : ('https://' + malagu['faas-adapter'].account.id + '.' + malagu['faas-adapter'].region + '.fc.aliyuncs.com')}"
   faas-adapter:
     type: custom
     secure: true
@@ -43,7 +43,7 @@ malagu:
             functionName: ${malagu['faas-adapter'].function.name}
     apiGateway:
       stage:
-        name: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'release' : cliContext.prod ? 'release' : 'test'}"
+        name: "${stage|eval == 'prod' ? 'release' : stage }"
         desc: 'Released By Malagu'
       group:
         name: ${pkg.name|replace('-', '_')}

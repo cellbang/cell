@@ -1,5 +1,13 @@
 # Change Log
 
+## v1.21.0
+
+- feat(cli-common + core) el expression supports `eval` conversion, for example, `'1 + 3'| eval` results in `4`
+- feat(fc-adapter + scf-adapter) optimized configuration file
+- feat(cli-common+core) el 表达式支持 `eval` 转换，例如 `'1+3'|eval` 结果为 `4`
+- feat(fc-adapter+scf-adapter) 优化配置文件
+
+
 ## v1.20.6
 
 - fix(cli-common) fix npm peer error

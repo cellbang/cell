@@ -21,7 +21,7 @@ malagu:
       netType: OUTER
     apiGateway:
       release:
-        environmentName: "${'test' in mode ? 'test' : 'pre' in mode ? 'prepub' : 'prod' in mode ? 'release' : cliContext.prod ? 'release' : 'test'}"
+        environmentName: "${stage|eval == 'prod' ? 'release' : stage|eval == 'pre' ? 'prepub' :  stage }"
         desc: 'Released By Malagu'
       service:
         name: malagu
