@@ -14,7 +14,7 @@ export class CoreContextInitializer implements ContextInitializer {
         jexlEngine.addTransform('replace',
                 (val: string, searchValue: string | RegExp, replaceValue: string) => val && val.replace(new RegExp(searchValue, 'g'), replaceValue));
         jexlEngine.addTransform('regexp',  (pattern: string, flags?: string) => new RegExp(pattern, flags));
-        const expressionHandler = ContainerUtil.get<ExpressionHandler>(ExpressionHandler)
+        const expressionHandler = ContainerUtil.get<ExpressionHandler>(ExpressionHandler);
         jexlEngine.addTransform('eval',  (text: string) => expressionHandler.handle(text));
     }
 
