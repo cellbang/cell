@@ -49,7 +49,7 @@ export class NPM {
                 false
                 );
 
-                if (!failed && !err.stdout) {
+                if (!failed && err.stdout) {
                     processOutput = { stdout: err.stdout };
                 }
             } else {

@@ -23,7 +23,6 @@ export function loadStaticModuls(modules: string[]): string {
 export function generateFrontendComponents(context: DynamicContainerContext) {
     const { modules, staticModules, registed } = context;
     return `
-  require('es6-promise/auto');
   require('reflect-metadata');
   const { Container } = require('inversify');
   const { FrontendApplication } = require('@malagu/core/lib/browser');

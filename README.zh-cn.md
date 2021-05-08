@@ -47,6 +47,8 @@ malagu serve
 malagu deploy
 ```
 
+![Quick start](https://cdn.nlark.com/yuque/0/2021/gif/365432/1619859951255-3d935886-7d0e-4010-b3cc-c452cb98d510.gif)
+
 ## 示例
 
 [在线示例模板查看](https://cloud.cellbang.com/?share=c3aa122a-abcd-4ac6-ac03-9b5cb5d5de62#/.theia/template.theia-workspace)
@@ -54,7 +56,7 @@ malagu deploy
 ## 文档
 
 - [介绍](https://www.yuque.com/cellbang/malagu/puw7p0)
-- [快速开始](https://www.yuque.com/cellbang/malagu/qmq79k)
+- [创建第一个应用](https://www.yuque.com/cellbang/malagu/ogreg3)
 - [命令行工具](https://www.yuque.com/cellbang/malagu/xbfpir)
 - [控制器](https://www.yuque.com/cellbang/malagu/cbgl7g)
 - [数据库操作](https://www.yuque.com/cellbang/malagu/ztbcwq)

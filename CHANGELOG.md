@@ -1,5 +1,43 @@
 # Change Log
 
+## v1.21.0
+
+- feat(cli-common + core) el expression supports `eval` conversion, for example, `'1 + 3'| eval` results in `4`
+- feat(fc-adapter + scf-adapter) optimized configuration file
+- feat(cli-common+core) el 表达式支持 `eval` 转换，例如 `'1+3'|eval` 结果为 `4`
+- feat(fc-adapter+scf-adapter) 优化配置文件
+
+
+## v1.20.6
+
+- fix(cli-common) fix npm peer error
+- feat(cli-service) `malagu.includeModules` defaults to `undefined`
+
+## v1.20.5
+
+- fix(all) fix types
+- fix(cache) Fix redis configuration not taking effect
+
+## v1.20.4
+
+- feat(cli) update vue-app and sample-app template
+
+## v1.20.3
+
+- fix(cli) fix `admin-app` template
+
+## v1.20.2
+
+- fix(cli-service) fix source mapping loader warning
+
+## v1.20.0
+
+- feat(all) The compilation target changed from es5 to es6
+
+## v1.19.3
+
+- feat(adapter) Add code compression operation when deploying
+
 ## v1.19.2
 
 - feat(rpc) support create JsonRpcProxy

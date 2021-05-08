@@ -1,3 +1,4 @@
+import { ExpressionContext } from './expression-protocol';
 import { JexlEngineProvider } from './jexl-engine-provider';
 
 interface MiddleExpression {
@@ -12,7 +13,11 @@ export class ExpressionCompiler {
     private BRACKET_BEGIN = '{';
     private BRACKET_END = '}';
 
-    protected readonly jexlEngineProvider: JexlEngineProvider = new JexlEngineProvider();
+    readonly jexlEngineProvider: JexlEngineProvider;
+
+    constructor(protected ctx: ExpressionContext) {
+        this.jexlEngineProvider = new JexlEngineProvider(ctx);
+    }
 
     compileSections(text: string): any[] {
         if (!text || text.indexOf(this.SPECIAL_CHAR) < 0) {

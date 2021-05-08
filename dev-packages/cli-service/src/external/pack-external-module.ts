@@ -199,7 +199,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const { cfg, pkg } = context;
     const config = getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
-    const includes = config.includeModules === undefined ? true : config.includeModules;
+    const includes = config.includeModules;
     const packagerOptions = { frozenLockfile: true, nonInteractive: true, ...config.packagerOptions };
     const scripts: any[] = packagerOptions.scripts || [];
 
