@@ -114,7 +114,7 @@ export function getPort(cfg: ApplicationConfig, target: string, port?: number) {
     if (port !== undefined) {
         return port;
     }
-    const server = getConfig(cfg, target).server || { port: 3000 };
+    const server = getMalaguConfig(cfg, target).server || { port: 3000 };
     return server.port;
 }
 

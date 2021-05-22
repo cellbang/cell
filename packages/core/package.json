@@ -17,6 +17,7 @@
     "loglevel": "^1.6.3",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^6.6.0",
+    "setimmediate": "^1.0.5",
     "source-map-support": "^0.5.13",
     "traverse": "^0.6.6",
     "ts-custom-error": "^3.1.1",

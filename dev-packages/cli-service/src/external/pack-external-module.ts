@@ -4,7 +4,7 @@ import { ConfigurationContext } from '../context';
 import { BACKEND_TARGET, getPackager, getMalaguConfig } from '@malagu/cli-common';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
-import * as webpack from 'webpack';
+import { Stats } from 'webpack';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -160,7 +160,7 @@ function findExternalOrigin(issuer: any): any {
 }
 
 function getExternalModules(stats: any): any[] {
-    if (!stats.compilation.chunks) {
+    if (!stats?.compilation.chunks) {
         return [];
     }
     const externals = new Set();
@@ -194,7 +194,7 @@ function getExternalModules(stats: any): any[] {
  * This will utilize the npm cache at its best and give us the needed results
  * and performance.
  */
-export async function packExternalModules(context: ConfigurationContext, stats: webpack.Stats): Promise<void> {
+export async function packExternalModules(context: ConfigurationContext, stats: Stats | undefined): Promise<void> {
     const verbose = false;
     const { cfg, pkg } = context;
     const config = getMalaguConfig(cfg, BACKEND_TARGET);

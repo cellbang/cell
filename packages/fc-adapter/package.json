@@ -15,6 +15,9 @@
     "fs-extra": "^8.1.0",
     "raw-body": "^2.3.3"
   },
+  "peerDependencies": {
+    "@malagu/cli-service": "^1.21.0"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -44,7 +47,6 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli-service": "^1.21.0",
     "@malagu/ext-scripts": "^1.21.0",
     "@types/jszip": "^3.1.6"
   },
