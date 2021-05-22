@@ -12,6 +12,9 @@
     "tencent-serverless-http": "^1.2.0",
     "tencentcloud-sdk-nodejs": "^3.0.268"
   },
+  "peerDependencies": {
+    "@malagu/cli-service": "^1.21.0"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -41,7 +44,6 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli-service": "^1.21.0",
     "@malagu/ext-scripts": "^1.21.0",
     "@types/jszip": "^3.1.6"
   },

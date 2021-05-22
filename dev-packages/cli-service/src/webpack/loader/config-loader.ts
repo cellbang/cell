@@ -1,7 +1,12 @@
-import { loader } from 'webpack';
+import { LoaderDefinition } from 'webpack';
 
-const configLoader: loader.Loader = function (source, sourceMap) {
-    this.callback(undefined, `exports.config = ${this.query.source};\n\n`, sourceMap);
+export interface ConfigLoaderOptions {
+    source: string;
+}
+
+const configLoader: LoaderDefinition = function (source, sourceMap) {
+    const options = this.getOptions() as ConfigLoaderOptions;
+    this.callback(undefined, `exports.config = ${options.source};\n\n`, sourceMap);
 };
 
 export default configLoader;

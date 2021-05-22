@@ -1,4 +1,4 @@
-import { Disposable } from 'vscode-jsonrpc/lib/events';
+import { Disposable } from 'vscode-jsonrpc';
 
 export {
     Disposable
