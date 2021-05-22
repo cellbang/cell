@@ -127,7 +127,7 @@ export class BaseConfigFactory {
                             generator: {
                                 filename: '[hash].[ext]'
                             }
-                        })                 
+                        })
                     .end()
                     .rule('ignore')
                         .test(/source-map-support/)
