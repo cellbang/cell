@@ -102,7 +102,9 @@ export default async (context: WebpackContext) => {
 
         if (!hasPostCSSConfig) {
             loaderOptions.postcss = {
-                plugins: [require('autoprefixer')],
+                postcssOptions: {
+                    plugins: [require('autoprefixer')],
+                }
             };
         }
 

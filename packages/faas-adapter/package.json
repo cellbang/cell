@@ -12,6 +12,9 @@
     "js-yaml": "^4.0.0",
     "jszip": "^3.2.2"
   },
+  "peerDependencies": {
+    "@malagu/cli-service": "^1.21.0"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -41,7 +44,6 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli-service": "^1.21.0",
     "@malagu/ext-scripts": "^1.21.0",
     "@types/inquirer": "^6.5.0",
     "@types/jszip": "^3.1.6"

@@ -3,6 +3,7 @@ import { BACKEND_TARGET, CliContext, getWebpackConfig } from '@malagu/cli-common
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
+import webpack = require('webpack');
 import * as WebpackChain from 'webpack-chain';
 
 export class BaseConfigFactory {
@@ -64,16 +65,16 @@ export class BaseConfigFactory {
                     .end();
 
         if (target === BACKEND_TARGET) {
-            const whitelist = pkg.componentPackages.map(cp => new RegExp(cp.name));
+            const allowlist = pkg.componentPackages.map(cp => new RegExp(cp.name));
             config
                 .target('node')
                 .externals(dev ? [nodeExternals({
-                    whitelist,
+                    allowlist,
                     modulesDir: path.resolve(pkg.projectPath, '../node_modules')
                 }), nodeExternals({
-                    whitelist
+                    allowlist
                 }), nodeExternals({
-                    whitelist,
+                    allowlist,
                     modulesDir: path.resolve(pkg.projectPath, '../../node_modules')
                 })] : [])
                 .node
@@ -86,13 +87,23 @@ export class BaseConfigFactory {
         } else {
             config
                 .target('web')
-                .node
+                .resolve
                     .merge({
-                        fs: 'empty',
-                        child_process: 'empty',
-                        net: 'empty',
-                        crypto: 'empty'
+                        fallback: {
+                            child_process: false,
+                            net: false,
+                            crypto: false,
+                            os: false,
+                            path: false,
+                            process: false,
+                            timers: false
+                        }
                     })
+                .end()
+                .plugin('buffer')
+                    .use(webpack.ProvidePlugin, [{
+                        Buffer: [ 'buffer', 'Buffer' ]
+                    }])
                 .end()
                 .performance
                     .merge({
@@ -105,18 +116,18 @@ export class BaseConfigFactory {
                         .use('worker-loader')
                             .loader('worker-loader')
                             .options({
-                                name: 'worker-ext.[hash].js'
+                                name: 'worker-ext.[fullhash].js'
                             })
                         .end()
                     .end()
                     .rule('img')
-                        .test(/\.(jpg|png|gif)$/)
-                        .use('file-loader')
-                            .loader('file-loader')
-                            .options({
-                                name: '[hash].[ext]',
-                            })
-                        .end()
+                        .merge({
+                            test: /\.(jpg|png|gif)$/,
+                            type: 'asset/resource',
+                            generator: {
+                                filename: '[hash].[ext]'
+                            }
+                        })                 
                     .end()
                     .rule('ignore')
                         .test(/source-map-support/)
@@ -125,37 +136,48 @@ export class BaseConfigFactory {
                         .end()
                     .end()
                     .rule('svg')
-                        .test(/\.(ttf|eot|svg)(\\?v=\\d+\\.\\d+\\.\\d+)?$/)
-                        .use('url-loader')
-                            .loader('url-loader')
-                            .options({
-                                limit: 10000,
-                                mimetype: 'image/svg+xml'
-                            })
-                        .end()
+                        .merge({
+                            test: /\.(ttf|eot|svg)(\\?v=\\d+\\.\\d+\\.\\d+)?$/,
+                            type: 'asset',
+                            parser: {
+                                dataUrlCondition: {
+                                    maxSize: 10000,
+                                }
+                            },
+                            generator: {
+                                dataUrl: {
+                                    mimetype: 'image/svg+xml'
+                                }
+                            }
+                        })
                     .end()
                     .rule('font')
-                        .test(/\.woff(2)?(\\?v=[0-9]\.[0-9]\.[0-9])?$/)
-                        .use('url-loader')
-                            .loader('url-loader')
-                            .options({
-                                limit: 10000,
-                                mimetype: 'application/font-woff'
-                            })
-                        .end()
+                        .merge({
+                            test: /\.woff(2)?(\\?v=[0-9]\\.[0-9]\\.[0-9])?$/,
+                            type: 'asset',
+                            parser: {
+                                dataUrlCondition: {
+                                    maxSize: 10000,
+                                }
+                            },
+                            generator: {
+                                dataUrl: {
+                                    mimetype: 'image/svg+xml'
+                                }
+                            }
+                        })
                     .end()
                     .rule('wasm')
-                        .test(/\.wasm$/)
-                        .type('javascript/auto')
-                        .use('file-loader')
-                            .loader('file-loader')
-                        .end()
+                        .merge({
+                            test: /\.wasm$/,
+                            type: 'asset/resource'
+                        })
                     .end()
                     .rule('plist')
-                        .test(/\.plist$/)
-                        .use('file-loader')
-                            .loader('file-loader')
-                        .end()
+                        .merge({
+                            test: /\.plist$/,
+                            type: 'asset/resource'
+                        })
                     .end();
         }
 

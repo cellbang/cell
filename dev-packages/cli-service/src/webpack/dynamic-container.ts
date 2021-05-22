@@ -24,6 +24,7 @@ export function generateFrontendComponents(context: DynamicContainerContext) {
     const { modules, staticModules, registed } = context;
     return `
   require('reflect-metadata');
+  require('setimmediate');
   const { Container } = require('inversify');
   const { FrontendApplication } = require('@malagu/core/lib/browser');
   const { CoreFrontendModule } = require('@malagu/core/lib/browser/module');

@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { CliContext, getWebpackConfig, getConfig, getHomePath, CONFIG_FILE, FRONTEND_TARGET, getFrontendMalaguConfig } from '@malagu/cli-common';
+import { CliContext, getWebpackConfig, getConfig, FRONTEND_TARGET, getFrontendMalaguConfig } from '@malagu/cli-common';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
@@ -60,32 +60,6 @@ export class CopyWepackPluginConfigFactory {
                     from: assert,
                     to: path.join(config.output.get('path'), 'assets')
                 }))]);
-    }
-
-    support(context: CliContext, target: string): boolean {
-        return true;
-    }
-}
-
-export class HardSourceWebpackPluginConfigFactory {
-    create(config: WebpackChain, context: CliContext, target: string) {
-        const { pkg, cfg } = context;
-        const homePath = getHomePath(pkg, target);
-        const configPath = path.join(homePath, CONFIG_FILE);
-        const relativeConfigPath = path.relative(pkg.projectPath, configPath);
-        const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-        config
-            .plugin('hardSource')
-                .use(HardSourceWebpackPlugin, [{
-                    ...{
-                        environmentHash: {
-                            root: pkg.projectPath,
-                            directories: [],
-                            files: ['package-lock.json', 'yarn.lock', relativeConfigPath],
-                        }
-                    },
-                    ...getWebpackConfig(cfg, target).hardSourceWebpackPlugin || {}
-                }]);
     }
 
     support(context: CliContext, target: string): boolean {
