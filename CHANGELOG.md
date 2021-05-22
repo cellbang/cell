@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.22.0
+
+- feat(all) upgrade to webpack5
+
+
 ## v1.21.0
 
 - feat(cli-common + core) el expression supports `eval` conversion, for example, `'1 + 3'| eval` results in `4`
