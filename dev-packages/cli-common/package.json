@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-common",
-  "version": "1.22.0",
+  "version": "1.22.1",
   "description": "Malagu CLI Common.",
   "publishConfig": {
     "access": "public"
@@ -49,6 +49,6 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.22.0"
+    "@malagu/ext-scripts": "^1.22.1"
   }
 }
