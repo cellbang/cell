@@ -56,10 +56,10 @@ export class CopyWepackPluginConfigFactory {
         const CopyPlugin = require('copy-webpack-plugin');
         config
             .plugin('copy')
-                .use(CopyPlugin, [assets.map(assert => ({
+                .use(CopyPlugin, [{ patterns: assets.map(assert => ({
                     from: assert,
                     to: path.join(config.output.get('path'), 'assets')
-                }))]);
+                }))}]);
     }
 
     support(context: CliContext, target: string): boolean {
