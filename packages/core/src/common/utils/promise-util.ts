@@ -1,5 +1,5 @@
 export class Deferred<T> {
-    resolve: (value?: T) => void;
+    resolve: (value?: T | PromiseLike<T>) => void;
     reject: (err?: any) => void; // tslint:disable-line
 
     promise = new Promise<T>((resolve, reject) => {

@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.22.1
+
+- fix(vue+cli-service) fix the warning message brought by webpack upgrade
+- fix(cli) fix `vue-app` template lack dependency error
+- fix(vue+cli-service) 修复 webpack 升级带来的警告信息
+- fix(cli) 修复 `vue-app` 模板缺少依赖错误
+
 ## v1.22.0
 
 - feat(all) upgrade to webpack5
