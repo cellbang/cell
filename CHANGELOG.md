@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.22.2
+
+- fix(cli-service) fix copy plugin options
+
 ## v1.22.1
 
 - fix(vue+cli-service) fix the warning message brought by webpack upgrade
