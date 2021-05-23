@@ -13,7 +13,8 @@
     "@malagu/rpc": "latest",
     "@malagu/fc-adapter": "latest",
     "@malagu/vue": "latest",
-    "@malagu/serve-static": "latest"
+    "@malagu/serve-static": "latest",
+    "vue-router": "^3.5.1"
   },
   "devDependencies": {
     "@malagu/cli": "latest",

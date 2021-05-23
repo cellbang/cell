@@ -159,7 +159,6 @@ export default async (context: WebpackContext) => {
                     rule.use('extract-css-loader')
                         .loader(require('mini-css-extract-plugin').loader)
                         .options({
-                            hmr: dev,
                             publicPath: cssPublicPath,
                         });
                 } else {
@@ -279,16 +278,10 @@ export default async (context: WebpackContext) => {
                 .use(require('mini-css-extract-plugin'), [extractOptions]);
 
             // minify extracted CSS
-            if (!dev) {
-                webpackConfig
-                    .plugin('optimize-css')
-                    .use(require('@intervolga/optimize-cssnano-plugin'), [
-                        {
-                            sourceMap: productionSourceMap && sourceMap,
-                            cssnanoOptions,
-                        },
-                    ]);
-            }
+            webpackConfig
+                    .optimization
+                        .minimizer('optimize-css')
+                            .use(require('css-minimizer-webpack-plugin'));
         }
     }
 };
