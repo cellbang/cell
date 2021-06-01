@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.23.0
+
+- feat(schedule) add `@malagu/shedule` component.
+
 ## v1.22.2
 
 - fix(cli-service) fix copy plugin options
