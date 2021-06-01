@@ -1,0 +1,46 @@
+{
+  "name": "@malagu/schedule",
+  "version": "1.22.2",
+  "description": "",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "^1.22.2",
+    "uuid": "^3.4.0",
+    "@types/cron": "^1.7.2",
+    "cron": "^1.8.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "^1.22.2"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}

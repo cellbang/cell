@@ -2,19 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "name": "Malagu Debug",
             "request": "launch",
-            "name": "malagu serve",
-            "program": "${workspaceRoot}/node_modules/@malagu/cli/bin/malagu",
-            "args": [ "serve" ],
+            "runtimeArgs": [
+                "serve"
+            ],
+            "runtimeExecutable": "malagu",
             "cwd": "${workspaceFolder}/app",
-            "sourceMaps": true,
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
             "env": {
                 "NODE_ENV": "development"
             },
-            "smartStep": true,
             "internalConsoleOptions": "openOnSessionStart",
-            "outputCapture": "std"
+            "outputCapture": "std",
+            "type": "pwa-node"
         }
     ]
 }

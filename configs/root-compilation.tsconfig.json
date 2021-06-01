@@ -120,6 +120,9 @@
     },
     {
       "path": "../packages/vue/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/schedule/compile.tsconfig.json"
     }
   ]
 }
