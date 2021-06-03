@@ -14,7 +14,7 @@
     "@malagu/fc-adapter": "latest",
     "@malagu/vue": "latest",
     "@malagu/serve-static": "latest",
-    "vue-router": "^3.5.1"
+    "vue-router": "4"
   },
   "devDependencies": {
     "@malagu/cli": "latest",
