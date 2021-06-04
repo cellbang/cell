@@ -33,6 +33,7 @@
     "test": "malaguext test"
   },
   "dependencies": {
+    "commander": "^2.20.0",
     "@malagu/cli-common": "^1.23.0",
     "leven": "^3.1.0",
     "minimist": "^1.2.5",
