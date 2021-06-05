@@ -6,7 +6,7 @@ import * as path from 'path';
 import { CliContext } from '../context';
 const chalk = require('chalk');
 
-export function checkPkgVersionConsistency(pkgName: string, projectPath: string) {
+export function checkPkgVersionConsistency(pkgName: string | RegExp, projectPath: string) {
     const yarnLockFile = path.resolve(projectPath, 'yarn.lock');
     const npmLockFile = path.resolve(projectPath, 'package-lock.json');
 
@@ -19,13 +19,17 @@ export function checkPkgVersionConsistency(pkgName: string, projectPath: string)
         }
         if (json.object) {
             let pkgVersion = '';
+            let newPkgVersion = '';
             Object.keys(json.object).forEach(pkg => {
+
                 if (pkg.match(pkgName)) {
+                    newPkgVersion = json.object[pkg].version;
                     if (!pkgVersion) {
-                        pkgVersion = json.object[pkg].version;
-                    } else {
+                        pkgVersion = newPkgVersion;
+                    }
+                    if (pkgVersion !== newPkgVersion) {
                         // eslint-disable-next-line max-len
-                        console.log(chalk`malagu {red.bold error} - ${pkgName} package has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(json.object[pkg].version)}], thus will cause some unexpected problem, so pls check`);
+                        console.log(chalk`\nmalagu {red.bold error} - malagu component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
                         process.exit(-1);
                     }
                 }
@@ -33,18 +37,21 @@ export function checkPkgVersionConsistency(pkgName: string, projectPath: string)
         }
     } else if (fs.existsSync(npmLockFile)) {
         const json: { dependencies: { [key: string]: any}} = require(npmLockFile);
-
+        let pkgVersion = '';
+        let newPkgVersion = '';
         Object.keys(json.dependencies).forEach((dep: string) => {
-            if (json.dependencies[dep].dependencies && json.dependencies[dep].dependencies[pkgName]) {
-                // eslint-disable-next-line max-len
-                console.log(chalk`malagu {red.bold error} - ${pkgName} package has existed two different versions[${chalk.yellow(dep)} has version ${chalk.yellow(json.dependencies[dep].dependencies[pkgName].version)} of ${pkgName}], thus will cause some unexpected problem, so pls check`);
-                process.exit(-1);
+            if (dep.match(pkgName)) {
+                newPkgVersion = json.dependencies[dep].version;
+                if (!pkgVersion) {
+                    pkgVersion = newPkgVersion;
+                }
+                if (pkgVersion !== newPkgVersion) {
+                    // eslint-disable-next-line max-len
+                    console.log(chalk`\nmalagu {red.bold error} - malagu component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
+                    process.exit(-1);
+                }
             }
         });
-    } else {
-        // consider the monorepo project case
-        // console.log(chalk`malagu {red.bold error} - Pls generate lock file by Yarn or Npm firstly`);
-        // process.exit(1);
     }
 }
 

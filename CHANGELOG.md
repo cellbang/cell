@@ -2,6 +2,16 @@
 
 ## v1.23.0
 
+- fix(cli) 修复隐式依赖版本不一致问题
+- fix(cli-common) 优化组件版本一致性检查
+- fix(cli) 升级 `vue-app` 模板中 vue-router 依赖版本
+
+- fix(cli) fix the problem of implicit dependency version inconsistency
+- fix(cli-common) optimize component version consistency check
+- fix(cli) upgrade the vue-router dependent version in the `vue-app` template
+
+## v1.23.0
+
 - feat(schedule) add `@malagu/shedule` component.
 
 ## v1.22.2
