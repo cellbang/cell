@@ -16,7 +16,7 @@ export namespace CliContext {
     export async function create(program: CommanderStatic, options: { [key: string]: any } = {}, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
-            checkPkgVersionConsistency('@malagu/core', projectPath);
+            checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
         }
 
         const mode = options.mode || [];
