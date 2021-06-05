@@ -1,12 +1,12 @@
 {
   "name": "@malagu/shell",
-  "version": "1.23.0",
+  "version": "1.23.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/grommet": "^1.23.0",
-    "@malagu/security": "^1.23.0"
+    "@malagu/grommet": "^1.23.1",
+    "@malagu/security": "^1.23.1"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.23.0"
+    "@malagu/ext-scripts": "^1.23.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
