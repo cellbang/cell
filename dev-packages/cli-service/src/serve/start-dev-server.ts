@@ -11,10 +11,12 @@ const findPort = require('webpack-dev-server/lib/utils/findPort');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common';
 import * as delay from 'delay';
-import * as WebpackChain from 'webpack-chain';
+import { ConfigurationContext } from '../context';
 const clearModule = require('clear-module');
 
 let server: any;
+let moduleCaches: string[] = [];
+let mounted = false;
 
 function createCompiler(configuration: webpack.Configuration, options: any, log: any) {
     try {
@@ -34,7 +36,31 @@ function getEntryPath(configuration: webpack.Configuration) {
     return resolve(path as string, filename);
 }
 
-function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
+function mountRuntimeModuleCaches() {
+    if (mounted) {
+        return;
+    }
+    mounted = true;
+    const BuiltinModule = require('module');
+    const Module = module.constructor.length > 1 ? module.constructor : BuiltinModule;
+    const originResolveFilename = Module._resolveFilename.bind(Module);
+    Module._resolveFilename = (...args: any[]) => {
+        const filename = originResolveFilename(...args);
+        if (!moduleCaches.includes(filename)) {
+            moduleCaches.push(filename);
+        }
+        return filename;
+    };
+}
+
+function clearRuntimeModuleCaches() {
+    for (const cache of moduleCaches) {
+        clearModule.single(cache);
+    }
+    moduleCaches = [];
+}
+
+function attachBackendServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
         compiler.watch(options.watchOptions, err => {
@@ -45,10 +71,10 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
     }
     const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);
-        clearModule(entryPath);
-        clearModule.match(/node_modules/);
+        clearRuntimeModuleCaches();
         while (true) {
             if (fs.existsSync(entryPath)) {
+                mountRuntimeModuleCaches();
                 return require(entryPath);
             }
             await delay(200);
@@ -58,7 +84,7 @@ function attachBackendServer(executeServeHooks: ExecuteServeHooks, configuration
 
 }
 
-function doStartDevServer(configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
+function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     const log = createLogger(options);
     let frontendConfiguration: webpack.Configuration | undefined;
     let backendConfiguration: webpack.Configuration | undefined;
@@ -80,9 +106,9 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
         server = new Server(compiler, options, log);
         setupExitSignals(server);
         if (frontendConfiguration && backendConfiguration) {
-            attachBackendServer(executeServeHooks, backendConfiguration, options, log);
+            attachBackendServer(ctx, executeServeHooks, backendConfiguration, options, log);
         } else if (configuration.name === BACKEND_TARGET) {
-            attachBackendServer(executeServeHooks, configuration, options, log, compiler);
+            attachBackendServer(ctx, executeServeHooks, configuration, options, log, compiler);
         }
     } catch (err) {
         if (err.name === 'ValidationError') {
@@ -149,8 +175,8 @@ function doStartDevServer(configurations: webpack.Configuration[], options: any,
     return compiler;
 }
 
-export function startDevServer(configurations: WebpackChain[], executeServeHooks: ExecuteServeHooks) {
-    processOptions(configurations.map(c => c.toConfig()), { info: false }, (cs: any, options: any) => {
-        doStartDevServer(cs, options, executeServeHooks);
+export function startDevServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks) {
+    processOptions(ctx.configurations.map(c => c.toConfig()), { info: false }, (cs: any, options: any) => {
+        doStartDevServer(ctx, cs, options, executeServeHooks);
     });
 }
