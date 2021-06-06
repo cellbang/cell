@@ -32,7 +32,7 @@
     "eslint-plugin-react": "^7.21.5",
     "if-env": "^1.0.4",
     "ignore-styles": "^5.0.1",
-    "jsdom": "^11.5.1",
+    "jsdom": "^16.6.0",
     "lerna": "^2.2.0",
     "nyc": "^15.0.0",
     "rimraf": "^2.6.1",
