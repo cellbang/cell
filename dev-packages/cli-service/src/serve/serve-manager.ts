@@ -15,7 +15,7 @@ export class ServeManager {
     }
 
     start() {
-        startDevServer(this.context.configurations,
+        startDevServer(this.context,
             async (server: http.Server | https.Server, app: Express.Application, compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => {
                 const serveContext = await ServiceContextUtils.createServeContext(
                     this.context,

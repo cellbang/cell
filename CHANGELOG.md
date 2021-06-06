@@ -1,6 +1,16 @@
 # Change Log
 
-## v1.23.0
+## v1.23.2
+
+- feat(cli-service) optimize the cache cleaning mechanism of node backend HMR module
+- fix(compression) fix illegal attribute `cache`
+- feat(cli-service+core) add polyflill of `process`
+
+- feat(cli-service) 优化 node 后端 HMR 模块缓存清理机制
+- fix(compression) 修复不合法属性 `cache`
+- feat(cli-service+core) 添加 `process` 的 polyflill
+
+## v1.23.1
 
 - fix(cli) 修复隐式依赖版本不一致问题
 - fix(cli-common) 优化组件版本一致性检查

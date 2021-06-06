@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "engines": {
     "yarn": "1.0.x || >=1.2.1",
-    "node": ">=8.9.3"
+    "node": ">=12.14.1"
   },
   "resolution": {
-    "**/@types/node": "8.10.20"
+    "**/@types/node": "12"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",

@@ -102,7 +102,8 @@ export class BaseConfigFactory {
                 .end()
                 .plugin('buffer')
                     .use(webpack.ProvidePlugin, [{
-                        Buffer: [ 'buffer', 'Buffer' ]
+                        Buffer: [ 'buffer', 'Buffer' ],
+                        process: 'process/browser'
                     }])
                 .end()
                 .performance
