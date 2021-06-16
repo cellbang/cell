@@ -1,4 +1,4 @@
-import * as requestContext from 'express-http-context';
+import ALS from 'alscontext';
 import { Session } from './session/session-protocol';
 import { Cookies } from './cookies';
 import { Request, Response } from './http/http-protocol';
@@ -15,6 +15,8 @@ export const CURRENT_TENANT_REQUEST_KEY = 'CurrentTenantRequest';
 
 const appAttrs = new Map<string, any>();
 
+const store = new ALS();
+
 export interface Context {
 
     [key: string]: any;
@@ -28,15 +30,15 @@ export interface Context {
 export namespace Context {
 
     export function run(fn: (...args: any[]) => void) {
-        requestContext.ns.run(fn);
+        store.run({}, fn);
     }
 
     export function setCurrent(context: Context) {
-        requestContext.set(CURRENT_CONTEXT_REQUEST_KEY, context);
+        store.set(CURRENT_CONTEXT_REQUEST_KEY, context);
     }
 
     export function getCurrent<T extends Context>(): T {
-        return requestContext.get(CURRENT_CONTEXT_REQUEST_KEY);
+        return store.get(CURRENT_CONTEXT_REQUEST_KEY);
     }
 
     export function getRequest(): Request {
@@ -48,48 +50,48 @@ export namespace Context {
     }
 
     export function getCookies(): Cookies {
-        return requestContext.get(CURRENT_COOKIES_REQUEST_KEY);
+        return store.get(CURRENT_COOKIES_REQUEST_KEY);
     }
 
     export function setCookies(cookies: Cookies): void {
-        requestContext.set(CURRENT_COOKIES_REQUEST_KEY, cookies);
+        store.set(CURRENT_COOKIES_REQUEST_KEY, cookies);
     }
 
     export function getSession(): Session {
-        return requestContext.get(CURRENT_SESSION_REQUEST_KEY);
+        return store.get(CURRENT_SESSION_REQUEST_KEY);
     }
 
     export function setSession(session: Session): void {
-        requestContext.set(CURRENT_SESSION_REQUEST_KEY, session);
+        store.set(CURRENT_SESSION_REQUEST_KEY, session);
     }
 
     export function setTraceId(traceId: string): void {
-        requestContext.set(CURRENT_TRACE_ID_REQUEST_KEY, traceId);
+        store.set(CURRENT_TRACE_ID_REQUEST_KEY, traceId);
     }
 
     export function getTraceId(): string {
-        return requestContext.get(CURRENT_TRACE_ID_REQUEST_KEY);
+        return store.get(CURRENT_TRACE_ID_REQUEST_KEY);
     }
 
     export function setTenant(tenant: string): void {
-        requestContext.set(CURRENT_TENANT_REQUEST_KEY, tenant);
+        store.set(CURRENT_TENANT_REQUEST_KEY, tenant);
     }
 
     export function getTenant(): string {
-        return requestContext.get(CURRENT_TENANT_REQUEST_KEY);
+        return store.get(CURRENT_TENANT_REQUEST_KEY);
     }
 
     export function setSkipAutoEnd(skipAutoEnd: boolean): void {
-        requestContext.set(CURRENT_SKIP_AUTO_END_REQUEST_KEY, skipAutoEnd);
+        store.set(CURRENT_SKIP_AUTO_END_REQUEST_KEY, skipAutoEnd);
     }
 
     export function isSkipAutoEnd(): boolean {
-        return !!requestContext.get(CURRENT_SKIP_AUTO_END_REQUEST_KEY);
+        return !!store.get(CURRENT_SKIP_AUTO_END_REQUEST_KEY);
     }
 
     export function setAttr(key: string, value: any, scope: AttributeScope = AttributeScope.Request) {
         if (scope === AttributeScope.Request) {
-            requestContext.set(key, value);
+            store.set(key, value);
         } else if (scope === AttributeScope.Session) {
             getSession()[key] = value;
         } else {
@@ -100,14 +102,14 @@ export namespace Context {
     export function getAttr<T>(key: string, scope?: AttributeScope): T {
         if (scope) {
             if (scope === AttributeScope.Request) {
-                return requestContext.get(key);
+                return store.get(key);
             } else if (scope === AttributeScope.Session) {
                 return getSession()[key];
             } else {
                 return appAttrs.get(key);
             }
         } else {
-            let value = requestContext.get(key);
+            let value = store.get(key);
             value = value ? value : getSession()[key];
             return value ? value : appAttrs.get(key);
         }

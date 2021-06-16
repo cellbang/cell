@@ -11,7 +11,7 @@
     "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "crc": "^3.8.0",
-    "express-http-context": "^1.2.3",
+    "alscontext": "^0.0.3",
     "node-gzip": "^1.1.2",
     "qs": "^6.9.4",
     "url-pattern": "^1.0.3",
