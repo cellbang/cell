@@ -1,4 +1,5 @@
 import { Middleware, Context, RequestMatcher } from '@malagu/web/lib/node';
+import { getFrontendMalaguConfig } from '@malagu/cli-common';
 import * as serveStatic from 'serve-static';
 import { Value, Component, Autowired } from '@malagu/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
@@ -7,7 +8,6 @@ import { OutgoingMessage } from 'http';
 
 @Component(Middleware)
 export class ServeStaticMiddleware implements Middleware {
-
     @Value('malagu["serve-static"]')
     protected config: { spa: boolean, root: string, path: string, apiPath: string, options: any };
 
@@ -18,6 +18,11 @@ export class ServeStaticMiddleware implements Middleware {
     protected readonly requestMatcher: RequestMatcher;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
+        const { cfg } = ctx;
+        const c = getFrontendMalaguConfig(cfg);
+        const baseHref = c.server?.path;
+        this.config.options.baseHref = baseHref;
+
         const method = ctx.request.method;
         if (!(method === HttpMethod.GET || method === HttpMethod.HEAD) || ctx.request.query['static'] === 'skip') {
             await next();
@@ -61,7 +66,7 @@ export class ServeStaticMiddleware implements Middleware {
                 } else {
                     next().then(resolve).catch(reject);
                 }
-             }) as any);
+            }) as any);
         };
 
         return new Promise(executor);

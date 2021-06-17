@@ -1892,6 +1892,14 @@
   resolved "https://registry.npm.taobao.org/@types/scheduler/download/@types/scheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
 
+"@types/send@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.npmjs.org/@types/send/-/send-0.17.0.tgz#2c8cd6a4a97efd0ae54be3bc16647d864be2f94a"
+  integrity sha512-Kh5ghRpkAcjAak9sCns9XTu9xL/hzJHMQIEi2xLZ8kJ1JVKPly0E0NA7snmSk9Ah7BndN8jEnltzz2VPjBMQIg==
+  dependencies:
+    "@types/mime" "^1"
+    "@types/node" "*"
+
 "@types/serve-static@*":
   version "1.13.9"
   resolved "https://registry.nlark.com/@types/serve-static/download/@types/serve-static-1.13.9.tgz#aacf28a85a05ee29a11fb7c3ead935ac56f33e4e"
@@ -12387,10 +12395,10 @@ semver@^7.2.1, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5:
   dependencies:
     lru-cache "^6.0.0"
 
-send@0.17.1:
+send@0.17.1, send@^0.17.1:
   version "0.17.1"
-  resolved "https://registry.nlark.com/send/download/send-0.17.1.tgz?cache=0&sync_timestamp=1618846901933&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsend%2Fdownload%2Fsend-0.17.1.tgz#c1d8b059f7900f7466dd4938bdc44e11ddb376c8"
-  integrity sha1-wdiwWfeQD3Rm3Uk4vcROEd2zdsg=
+  resolved "https://registry.npmjs.org/send/-/send-0.17.1.tgz#c1d8b059f7900f7466dd4938bdc44e11ddb376c8"
+  integrity sha512-BsVKsiGcQMFwT8UxypobUKyv7irCNRHk1T0G680vk88yf6LBByGcZJOTJCrTP2xVN6yI+XjPJcNuE3V4fT9sAg==
   dependencies:
     debug "2.6.9"
     depd "~1.1.2"
