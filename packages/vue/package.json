@@ -1,11 +1,11 @@
 {
   "name": "@malagu/vue",
-  "version": "1.23.2",
+  "version": "1.23.3",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^1.23.2",
+    "@malagu/core": "^1.23.3",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.8.6",
     "cache-loader": "^4.1.0",
@@ -55,7 +55,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.23.2"
+    "@malagu/ext-scripts": "^1.23.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

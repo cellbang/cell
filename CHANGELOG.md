@@ -1,5 +1,12 @@
 # Change Log
 
+## v1.23.3
+
+- feat(web) 支持环境嗅探式的请求上下文：Async-Hook 和 AsyncLocalStorage。当运行 Nodejs 版本 8.12.0 到 12.17.0 或 13.10.0 之前的版本时，使用来自 node.js 的 Async-Hook API；当运行 Nodejs 版本 12.17.0 或 13.10.0 之前的版本时，使用来自 node.js 的 AsyncLocalStorage。
+
+- feat(web) supports environment sniffing request context: Async-Hook and AsyncLocalStorage. When running Nodejs version 8.12.0 to version before (12.17.0 or 13.10.0), use the Async-Hook API from node.js; When running a version later than Nodejs version (12.17.0 or 13.10.0), use AsyncLocalStorage from node.js.
+
+
 ## v1.23.2
 
 - feat(cli-service) optimize the cache cleaning mechanism of node backend HMR module

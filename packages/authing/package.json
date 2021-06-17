@@ -1,12 +1,12 @@
 {
   "name": "@malagu/authing",
-  "version": "1.23.2",
+  "version": "1.23.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/security": "^1.23.2",
-    "@malagu/web": "^1.23.2",
+    "@malagu/security": "^1.23.3",
+    "@malagu/web": "^1.23.3",
     "authing-js-sdk": "^3.11.0",
     "jsonwebtoken": "^8.5.1",
     "mustache": "^4.0.0",
@@ -41,7 +41,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.23.2",
+    "@malagu/ext-scripts": "^1.23.3",
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.0",
     "@types/url-join": "^4.0.0",
