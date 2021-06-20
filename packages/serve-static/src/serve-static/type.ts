@@ -1,4 +1,3 @@
-
 export interface ServeStatic {
   serveStatic: Function
   mime: any
@@ -17,5 +16,5 @@ export interface ServeStaticOption {
   index?: any
   lastModified?: any
   baseHref: string,
-  root: string
+  root: string,
 }
