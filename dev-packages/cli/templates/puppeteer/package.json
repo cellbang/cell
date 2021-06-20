@@ -10,7 +10,9 @@
     "src"
   ],
   "dependencies": {
+    "@malagu/core": "latest",
     "@malagu/mvc": "latest",
+    "@malagu/web": "latest",
     "@malagu/puppeteer": "latest",
     "@malagu/oss": "latest",
     "@malagu/fc-adapter": "latest"

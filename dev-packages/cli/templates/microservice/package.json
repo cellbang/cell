@@ -10,6 +10,7 @@
     "src"
   ],
   "dependencies": {
+    "@malagu/core": "latest",
     "@malagu/rpc": "latest",
     "@malagu/fc-adapter": "latest"
   },
