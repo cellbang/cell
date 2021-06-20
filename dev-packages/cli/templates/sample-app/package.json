@@ -10,10 +10,12 @@
     "src"
   ],
   "dependencies": {
+    "@malagu/core": "latest",
     "@malagu/rpc": "latest",
     "@malagu/fc-adapter": "latest",
     "@malagu/react": "latest",
-    "@malagu/serve-static": "latest"
+    "@malagu/serve-static": "latest",
+    "react": "^16.12.0"
   },
   "devDependencies": {
     "@malagu/cli": "latest",
