@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.23.4
+
+ - refactor(templates): 显示声明代码内所依赖的包，方便在非扁平式依赖的情况下运行 (#30)
+
 ## v1.23.3
 
 - feat(web) 支持环境嗅探式的请求上下文：Async-Hook 和 AsyncLocalStorage。当运行 Nodejs 版本 8.12.0 到 12.17.0 或 13.10.0 之前的版本时，使用来自 node.js 的 Async-Hook API；当运行 Nodejs 版本 12.17.0 或 13.10.0 之前的版本时，使用来自 node.js 的 AsyncLocalStorage。
