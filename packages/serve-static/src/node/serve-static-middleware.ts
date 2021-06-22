@@ -25,7 +25,7 @@ export class ServeStaticMiddleware implements Middleware {
         const method = ctx.request.method;
 
         if (!(method === HttpMethod.GET || method === HttpMethod.HEAD) || ctx.request.query['static'] === 'skip') {
-            ctx.request.url = ctx.request.url.replace(this.baseHref, '/');
+            if (this.baseHref !== '/') {ctx.request.url = ctx.request.url.replace(this.baseHref, '/'); }
             await next();
             return;
         }
