@@ -13,7 +13,7 @@ export class ServeCompression implements Middleware {
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         const executor = (resolve: any, reject: any) => {
             console.log('<<<<1', 'd111111');
-            compression(this.config)(ctx.request as any, ctx.response as any, (err: any) => {
+            compression(this.config.compressionOtps || {})(ctx.request as any, ctx.response as any, (err: any) => {
                 if (err) {
                     reject(err);
                 } else {
