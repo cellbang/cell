@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.23.4
+## v1.24.0
 
  - feat(faas-adapter+fc-adapter+lambda-dapater+scf-adapter): 适配 Serverless 场景任务调度
  - feat(faas-adapter+fc-adapter+lambda-dapater+scf-adapter): Adapt to serverless scenario task scheduling
