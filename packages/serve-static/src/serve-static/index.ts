@@ -5,11 +5,14 @@ import * as send from 'send';
 import { resolve } from 'path';
 
 const serveStatic = (root: string, opts: ServeStaticOption) => {
+
   const { fallthrough = true, baseHref, setHeaders, redirect } = opts;
-  opts.root = resolve(root);
   const onDirectory = redirect ?
-    createRedirectDirectoryListener :
-    createNotFoundDirectoryListener;
+  createRedirectDirectoryListener :
+  createNotFoundDirectoryListener;
+
+  opts.root = resolve(root);
+
   return (req: any, res: any, next: Function) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       if (fallthrough) {
@@ -27,7 +30,7 @@ const serveStatic = (root: string, opts: ServeStaticOption) => {
     let forwardError = !fallthrough;
 
     const url: URL = new URL(`${req.url.replace(baseHref, '/')}`, `http://${req.headers.host}`);
-    console.log('>>>>>>', url.pathname);
+
     const stream = send(req, url.pathname, opts) as any;
 
     stream.on('directory', onDirectory(url));
@@ -71,10 +74,8 @@ const serveStatic = (root: string, opts: ServeStaticOption) => {
         this.error(404);
         return;
       }
-      // @ts-ignore
-      const _url: URL = new URL(`${this.req.url.replace(baseHref, '/')}`, `http://${this.req.headers.host}`);
       // reformat the URL
-      const loc = encodeURI(_url.href);
+      const loc = encodeURI(url.href);
       const doc = createHtmlDocument('Redirecting', 'Redirecting to <a href="' + loc + '">' +
         loc + '</a>');
 
@@ -101,12 +102,11 @@ const serveStatic = (root: string, opts: ServeStaticOption) => {
       '</body>\n' +
       '</html>\n';
   }
+
 };
 
-const exportServeStatic: ServeStatic = {
+export default {
   serveStatic,
   mime: send.mime
-};
-
-export default exportServeStatic;
+} as ServeStatic;
 

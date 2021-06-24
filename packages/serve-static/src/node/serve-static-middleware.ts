@@ -20,12 +20,10 @@ export class ServeStaticMiddleware implements Middleware {
     protected readonly requestMatcher: RequestMatcher;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        console.log('waiwei', ctx.request.url);
         this.config.options.baseHref = this.baseHref;
         const method = ctx.request.method;
 
         if (!(method === HttpMethod.GET || method === HttpMethod.HEAD) || ctx.request.query['static'] === 'skip') {
-            if (this.baseHref !== '/') {ctx.request.url = ctx.request.url.replace(this.baseHref, '/'); }
             await next();
             return;
         }
