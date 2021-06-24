@@ -4,7 +4,6 @@ import { Value, Component, Autowired } from '@malagu/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
 import { SERVER_PATH, HttpMethod, MediaType, HttpHeaders } from '@malagu/web';
 import { OutgoingMessage } from 'http';
-// import * as compression from 'compression';
 @Component(Middleware)
 export class ServeStaticMiddleware implements Middleware {
     @Value('malagu["server"]["path"]')
