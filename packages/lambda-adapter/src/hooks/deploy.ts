@@ -3,12 +3,12 @@ import * as JSZip from 'jszip';
 import * as ora from 'ora';
 import * as delay from 'delay';
 import { v4 } from 'uuid';
-
 import { Lambda, ApiGatewayV2, IAM } from 'aws-sdk';
 import { Credentials } from '@malagu/cloud';
 import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';
 
 const chalk = require('chalk');
+const camelcaseKeys = require('camelcase-keys');
 
 let lambdaClient: Lambda;
 let apiGatewayClient: ApiGatewayV2;
@@ -23,7 +23,7 @@ export default async (context: DeployContext) => {
     const { region, account, credentials } = await profileProvider.provide(adapterConfig);
     await createClients(region, credentials);
 
-    const { apiGateway, customDomain, alias, type } = adapterConfig;
+    const { apiGateway, customDomain, alias, trigger } = adapterConfig;
     const functionMeta = adapterConfig.function;
     const functionName = functionMeta.name;
     const accountId = account.id;
@@ -41,7 +41,11 @@ export default async (context: DeployContext) => {
 
     await createOrUpdateAlias(alias, functionVersion);
 
-    if (type === 'api-gateway') {
+    if (trigger) {
+        await createTrigger(trigger);
+    }
+
+    if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { apiMapping, api, integration, route, stage } = apiGateway;
         const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionName, region, accountId);
@@ -73,6 +77,28 @@ async function createClients(region: string, credentials: Credentials) {
     lambdaClient = new Lambda(clientConfig);
     apiGatewayClient = new ApiGatewayV2(clientConfig);
     iamClient = new IAM(clientConfig);
+}
+
+async function createTrigger(trigger: any) {
+
+    const listEventSourceMappingsRequest: Lambda.Types.ListEventSourceMappingsRequest = {
+        FunctionName: trigger.functionName,
+        MaxItems: 100
+    };
+    const result = await lambdaClient.listEventSourceMappings(listEventSourceMappingsRequest).promise();
+    const oldEventSourceMapping = result.EventSourceMappings?.find(e => e.EventSourceArn === trigger.eventSourceArn);
+    if (oldEventSourceMapping) {
+        const deleteEventSourceMappingRequest: Lambda.Types.DeleteEventSourceMappingRequest = {
+            UUID: oldEventSourceMapping.UUID!
+        };
+        await lambdaClient.deleteEventSourceMapping(deleteEventSourceMappingRequest).promise();
+
+    }
+    const createEventSourceMappingRequest: Lambda.Types.CreateEventSourceMappingRequest = camelcaseKeys(trigger, { pascalCase: true });
+
+    await spinner(`Set a ${trigger.name} Trigger`, async () => {
+        await lambdaClient.createEventSourceMapping(createEventSourceMappingRequest).promise();
+    });
 }
 
 function parseUpdateFunctionConfigurationRequest(functionMeta: any) {

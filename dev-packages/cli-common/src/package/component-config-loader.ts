@@ -5,6 +5,7 @@ import { CONFIG_FILE } from '../constants';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
 import { mergeWith } from 'lodash';
+import { ExpressionHandler } from '../el';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -28,7 +29,7 @@ export class ComponentPackageLoader {
             configMap.set(m, configForMode || {});
             if (configForMode) {
                 config = mergeWith(config, configForMode, customizer);
-                const modeForConfig = this.getMode(configForMode);
+                const modeForConfig = this.getMode(configForMode, mode);
                 const diffMode = this.diffMode(modeForConfig, configMap);
                 if (diffMode.length > 0) {
                     if (i < mode.length - 1) {
@@ -57,8 +58,11 @@ export class ComponentPackageLoader {
         return result;
     }
 
-    protected getMode(config: any) {
-        return Array.isArray(config.mode) ? config.mode : config.mode ? [config.mode] : [];
+    protected getMode(config: any, mode: string[]) {
+        const newMode: string[] = Array.isArray(config.mode) ? config.mode : config.mode ? [config.mode] : [];
+        const expressionHandler = new ExpressionHandler(config);
+        const ctx = { ...config, currentMode: mode };
+        return newMode.map(m => expressionHandler.evalSync(m, ctx));
     }
 
     loadConfig(nodePackage: NodePackage, mode?: string) {

@@ -1,30 +1,7 @@
-backend: 
-  entry: lib/node/api-gateway-application-entry
+mode: "${'timer' in currentMode ? 'timer' : 'api-gateway'}"
 malagu:
   faas-adapter:
     function:
       runtime: nodejs12.x
     alias:
       functionName: ${malagu['faas-adapter'].function.name}
-    customDomain:
-      # name: abc.com
-      # certificateId: xxxx
-      protocol: http
-      netType: OUTER
-    apiGateway:
-      stage:
-        name: ${stage}
-        Description: 'Created By Malagu'
-      api:
-        name: ${malagu['faas-adapter'].function.name}
-        protocolType: HTTP
-      route:
-        routeKey: ANY /{proxy+}
-      integration:
-        connectionType: INTERNET
-        integrationMethod: POST
-        integrationType: AWS_PROXY
-        payloadFormatVersion: '1.0'
-        timeoutInMillis: 30000
-  server:
-    path: /${stage}/

@@ -1,12 +1,6 @@
-backend: 
-  entry: lib/node/${malagu['faas-adapter'].type}-application-entry
+mode: "${'api-gateway' in currentMode ? 'api-gateway' : 'sample-http' in currentMode ? 'sample-http' : 'timer' in currentMode ? 'timer' : 'http'}"
 malagu:
-  server:
-    path: "${(malagu['faas-adapter'].customDomain.name|eval || malagu['faas-adapter'].type != 'custom') ? (malagu['faas-adapter'].type == 'api-gateway' ? ('/' + malagu['faas-adapter'].function.name + '/') : '/') : ('/2016-08-15/proxy/' + malagu['faas-adapter'].service.name + '.' + malagu['faas-adapter'].alias.name + '/' + malagu['faas-adapter'].function.name + '/')}"
-    _domain: "${ 'HTTPS' in malagu['faas-adapter'].customDomain.protocol ? 'https' : 'http' }://${malagu['faas-adapter'].customDomain.name}"
-    endpoint: "${(malagu['faas-adapter'].customDomain.name|eval || !malagu['faas-adapter'].account.id) ? malagu['faas-adapter'].customDomain.name ? malagu.server._domain : undefined : ('https://' + malagu['faas-adapter'].account.id + '.' + malagu['faas-adapter'].region + '.fc.aliyuncs.com')}"
   faas-adapter:
-    type: custom
     secure: true
     internal: false
     timeout: 600000
@@ -14,58 +8,6 @@ malagu:
       name: ${pkg.name}
     function:
       serviceName: ${malagu['faas-adapter'].service.name}
-      runtime: "${malagu['faas-adapter'].type == 'custom' ? 'custom' : 'nodejs12'}"
       instanceConcurrency: 10
-      bootstrap: 'node backend/dist/index.js'
-    trigger:
-      name: ${malagu['faas-adapter'].function.name}-${malagu['faas-adapter'].alias.name}
-      qualifier: ${malagu['faas-adapter'].alias.name}
-      functionName: ${malagu['faas-adapter'].function.name}
-      serviceName: ${malagu['faas-adapter'].service.name}
-      triggerType: http
-      triggerConfig:
-        authType: anonymous
-        methods: [GET, POST, PUT, DELETE, HEAD, PATCH]
     alias:
       serviceName: ${malagu['faas-adapter'].service.name}
-    customDomain:
-      name: ${env.MALAGU_DOMAIN}
-      protocol: HTTP
-      certConfig:
-        # certName: xxx
-        privateKey: "${ env.SSL_KEY ?: 'ssl/domain.key'}"
-        certificate: "${ env.SSL_PEM ?: 'ssl/domain.pem'}"
-      routeConfig:
-        routes:
-          - path: '/*'
-            serviceName: ${malagu['faas-adapter'].service.name}
-            qualifier: ${malagu['faas-adapter'].alias.name}
-            functionName: ${malagu['faas-adapter'].function.name}
-    apiGateway:
-      stage:
-        name: "${stage|eval == 'prod' ? 'release' : stage }"
-        desc: 'Released By Malagu'
-      group:
-        name: ${pkg.name|replace('-', '_')}
-        description: 'Created By Malagu'
-      api:
-        name: ${malagu['faas-adapter'].function.name|replace('-', '_')}
-        forceNonceCheck: false
-        visibility: PUBLIC
-        description: 'Created By Malagu'
-        authType: ANONYMOUS
-        requestConfig:
-          method: ANY
-          protocol: HTTP,HTTPS
-          postBodyDescription: ''
-          mode: PASSTHROUGH
-          path: '${malagu.server.path}*'
-        serviceConfig:
-          serviceProtocol: FunctionCompute
-          serviceTimeout: 20 # 20s
-          contentTypeValue: 'application/json; charset=UTF-8'
-          functionComputeConfig:
-            serviceName: ${malagu['faas-adapter'].service.name}
-            functionName: ${malagu['faas-adapter'].function.name}
-            qualifier: ${malagu['faas-adapter'].alias.name}
-        resultType: PASSTHROUGH

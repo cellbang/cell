@@ -1,0 +1,38 @@
+backend: 
+  entry: lib/node/api-gateway-application-entry
+malagu:
+  server:
+    path: /${malagu['faas-adapter'].function.name}/
+  faas-adapter:
+    service:
+      name: ${pkg.name}
+    function:
+      runtime: nodejs12
+    apiGateway:
+      stage:
+        name: "${stage|eval == 'prod' ? 'release' : stage }"
+        desc: 'Released By Malagu'
+      group:
+        name: ${pkg.name|replace('-', '_')}
+        description: 'Created By Malagu'
+      api:
+        name: ${malagu['faas-adapter'].function.name|replace('-', '_')}
+        forceNonceCheck: false
+        visibility: PUBLIC
+        description: 'Created By Malagu'
+        authType: ANONYMOUS
+        requestConfig:
+          method: ANY
+          protocol: HTTP,HTTPS
+          postBodyDescription: ''
+          mode: PASSTHROUGH
+          path: '${malagu.server.path}*'
+        serviceConfig:
+          serviceProtocol: FunctionCompute
+          serviceTimeout: 20 # 20s
+          contentTypeValue: 'application/json; charset=UTF-8'
+          functionComputeConfig:
+            serviceName: ${malagu['faas-adapter'].service.name}
+            functionName: ${malagu['faas-adapter'].function.name}
+            qualifier: ${malagu['faas-adapter'].alias.name}
+        resultType: PASSTHROUGH

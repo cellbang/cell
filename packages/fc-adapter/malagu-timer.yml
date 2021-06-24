@@ -1,0 +1,17 @@
+backend: 
+  entry: lib/node/timer-application-entry
+malagu:
+  faas-adapter:
+    function:
+      runtime: nodejs12
+    trigger:
+      name: ${malagu['faas-adapter'].function.name}-${malagu['faas-adapter'].alias.name}-timer
+      qualifier: ${malagu['faas-adapter'].alias.name}
+      functionName: ${malagu['faas-adapter'].function.name}
+      serviceName: ${malagu['faas-adapter'].service.name}
+      triggerType: timer
+      triggerConfig:
+        payload: malagu-timer
+        cronExpression: 0 */1 * * * *  # every minute
+        enable: true
+    
