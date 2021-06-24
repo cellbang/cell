@@ -7,7 +7,6 @@
   "dependencies": {
     "@malagu/web": "^1.23.4",
     "@types/send": "^0.17.0",
-    "compression": "^1.7.4",
     "send": "^0.17.1",
     "serve-static": "^1.14.1"
   },
@@ -40,7 +39,6 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@types/compression": "^1.7.0",
     "@malagu/ext-scripts": "^1.23.4",
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.1",
