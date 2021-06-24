@@ -28,7 +28,7 @@ export default async (context: DeployContext) => {
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials } = await profileProvider.provide(adapterConfig);
     await createClients(region, credentials);
-    const { namespace, apiGateway, customDomain, alias, type } = adapterConfig;
+    const { namespace, apiGateway, customDomain, alias, trigger } = adapterConfig;
     const functionMeta = adapterConfig.function;
     const functionName = functionMeta.name;
 
@@ -45,7 +45,11 @@ export default async (context: DeployContext) => {
 
     await createOrUpdateAlias(alias, functionVersion);
 
-    if (type === 'api-gateway') {
+    if (trigger) {
+        await createTrigger(trigger);
+    }
+
+    if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { usagePlan, strategy, api, service, release } = apiGateway;
         const { serviceId, subDomain } = await createOrUpdateService(service);
@@ -84,6 +88,42 @@ function cleanObj(obj: any) {
             this.update(null);
         }
     });
+}
+
+async function createTrigger(trigger: any) {
+
+    const listTriggerRequest = new scfModels.ListTriggersRequest();
+    listTriggerRequest.Namespace = trigger.namespace;
+    listTriggerRequest.FunctionName = trigger.functionName;
+    listTriggerRequest.Limit = 100;
+    const listTriggersResponse = await promisify(scfClient.ListTriggers.bind(scfClient))(listTriggerRequest);
+    if (listTriggersResponse.Triggers.some((t: any) => t.TriggerName === trigger.name)) {
+        const deleteTriggerRequest = new scfModels.DeleteTriggerRequest();
+        deleteTriggerRequest.Namespace = trigger.namespace;
+        deleteTriggerRequest.FunctionName = trigger.functionName;
+        deleteTriggerRequest.Type = trigger.type;
+        deleteTriggerRequest.TriggerName = trigger.name;
+        deleteTriggerRequest.Qualifier = trigger.qualifier;
+        if (trigger.type === 'cos') {
+            deleteTriggerRequest.TriggerDesc = trigger.triggerDesc;
+        }
+        await promisify(scfClient.DeleteTrigger.bind(scfClient))(deleteTriggerRequest);
+
+    }
+    const createTriggerRequest = new scfModels.CreateTriggerRequest();
+    createTriggerRequest.Namespace = trigger.namespace;
+    createTriggerRequest.FunctionName = trigger.functionName;
+    createTriggerRequest.Qualifier = trigger.qualifier;
+    createTriggerRequest.TriggerName = trigger.name;
+    createTriggerRequest.Type = trigger.type;
+    createTriggerRequest.Enable = trigger.enable;
+    createTriggerRequest.TriggerDesc = trigger.triggerDesc;
+    await spinner(`Set a ${trigger.name} Trigger`, async () => {
+        await promisify(scfClient.CreateTrigger.bind(scfClient))(createTriggerRequest);
+    });
+    console.log(`    - Type: ${trigger.type}`);
+    console.log(`    - TriggerDesc: ${trigger.triggerDesc}`);
+    console.log(`    - Enable: ${trigger.enable}`);
 }
 
 async function createOrUpdateNamespace(namespace: any) {

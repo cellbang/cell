@@ -6,6 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/cloud": "^1.23.4",
+    "@malagu/schedule": "^1.23.4",
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",

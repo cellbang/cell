@@ -1,43 +1,33 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { ContainerProvider, Application } from '@malagu/core';
-import { Dispatcher, Context } from '@malagu/web/lib/node';
-import { HttpContext } from '@malagu/web/lib/node';
+import { Application } from '@malagu/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
+import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
+import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import * as express from 'express';
-import * as proxy from '@webserverless/fc-express';
-const getRawBody = require('raw-body');
 
-const app = express();
-app.use(express.json());
-app.use(express.raw());
-app.use(express.text());
-app.use(express.urlencoded({ extended: true }));
-
-const server = new proxy.Server(app);
-
-async function start() {
-    const c = await container;
+container.then(async c => {
     ContainerProvider.set(c);
+    await c.get<Application>(Application).start();
+
+    const app = express();
+    app.use(express.json());
+    app.use(express.raw());
+    app.use(express.text());
+    app.use(express.urlencoded({ extended: true }));
+
     app.all('*', async (req: any, res: any) => {
+        process.env.ALIBABA_ACCOUNT_ID = req.get('x-fc-account-id');
+        process.env.ALIBABA_ACCESS_KEY_ID = req.get('x-fc-access-key-id');
+        process.env.ALIBABA_ACCESS_KEY_SECRET = req.get('x-fc-access-key-secret');
+        process.env.ALIBABA_SECURITY_TOKEN = req.get('x-fc-security-token');
+        process.env.ALIBABA_REQUEST_ID = req.get('x-fc-request-id');
+        process.env.ALIBABA_REGION = req.get('x-fc-region');
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
-
-    return c.get<Application>(Application).start();
-}
-
-const startPromise = start();
-
-export async function handler(req: any, res: any, context: any) {
-    process.env.ALIBABA_ACCOUNT_ID = context.accountId;
-    process.env.ALIBABA_ACCESS_KEY_ID = context.credentials?.accessKeyId;
-    process.env.ALIBABA_ACCESS_KEY_SECRET = context.credentials?.accessKeySecret;
-    process.env.ALIBABA_SECURITY_TOKEN = context.credentials?.securityToken;
-    process.env.ALIBABA_REQUEST_ID = context.requestId;
-    process.env.ALIBABA_REGION = context.region;
-    process.env.IGNORE_EVENT_HEADER = 'true';
-    process.env.IGNORE_CONTEXT_HEADER = 'true';
-    req.body = await getRawBody(req);
-    await startPromise;
-    server.httpProxy(req, res, context);
-}
+    const server = app.listen(9000);
+    server.timeout = 0;
+    server.keepAliveTimeout = 0;
+    console.log('serve 9000');
+});

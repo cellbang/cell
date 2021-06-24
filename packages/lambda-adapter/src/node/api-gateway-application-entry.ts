@@ -1,7 +1,8 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { ContainerProvider, Application } from '@malagu/core';
-import { Dispatcher, Context } from '@malagu/web/lib/node';
-import { HttpContext } from '@malagu/web/lib/node';
+import { Application } from '@malagu/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
+import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
+import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import * as express from 'express';
 const { createServer, proxy } = require('@vendia/serverless-express');
 
@@ -28,7 +29,6 @@ async function start() {
 const startPromise = start();
 
 export async function handler(event: string, context: any) {
-    console.log();
     await startPromise;
     return proxy(server, event, context, 'PROMISE').promise;
 }
