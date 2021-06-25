@@ -1,7 +1,8 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { ContainerProvider, Application } from '@malagu/core';
-import { Dispatcher, Context } from '@malagu/web/lib/node';
-import { HttpContext } from '@malagu/web/lib/node';
+import { Application } from '@malagu/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
+import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
+import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import * as express from 'express';
 import * as proxy from '@webserverless/fc-express';
 
@@ -34,9 +35,12 @@ export async function handler(event: string, context: any, callback: any) {
     process.env.ALIBABA_SECURITY_TOKEN = context.credentials?.securityToken;
     process.env.ALIBABA_REQUEST_ID = context.requestId;
     process.env.ALIBABA_REGION = context.region;
-    process.env.ALIBABA_REGION = context.region;
     process.env.IGNORE_EVENT_HEADER = 'true';
     process.env.IGNORE_CONTEXT_HEADER = 'true';
-    await startPromise;
+    try {
+        await startPromise;
+    } catch (error) {
+        callback(undefined, error);
+    }
     server.proxy(event, context, callback);
 }

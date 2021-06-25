@@ -23,7 +23,7 @@ export default async (context: DeployContext) => {
     const { region, account, credentials } = await profileProvider.provide(adapterConfig);
     await createClients(adapterConfig, region, credentials, account);
 
-    const { service, trigger, apiGateway, customDomain, alias, type } = adapterConfig;
+    const { service, trigger, apiGateway, customDomain, alias } = adapterConfig;
     const functionMeta = adapterConfig.function;
     const serviceName = service.name;
     const functionName = functionMeta.name;
@@ -42,19 +42,7 @@ export default async (context: DeployContext) => {
 
     await createOrUpdateAlias(alias, versionId);
 
-    if (type === 'http' || type === 'custom') {
-        await createOrUpdateHttpTrigger(trigger, region, account.id);
-        if (customDomain && customDomain.name) {
-            for (const route of customDomain.routeConfig.routes) {
-                route.serviceName = route.serviceName || serviceName;
-                route.functionName = route.functionName || functionName;
-                route.qualifier = route.qualifier || alias.name;
-            }
-            await createOrUpdateCustomDomain(customDomain);
-        }
-    }
-
-    if (type === 'api-gateway') {
+    if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { group, api, stage } = apiGateway;
         const role = await createRoleIfNeed();
@@ -62,6 +50,24 @@ export default async (context: DeployContext) => {
         const apiId = await createOrUpdateApi(region, groupId, subDomain, stage.name, api, role);
         await deployApi(groupId, apiId, stage);
     }
+
+    if (trigger?.triggerType === 'timer') {
+        await createOrUpdateTimerTrigger(trigger);
+    } else if (trigger?.triggerType === 'http') {
+        await createOrUpdateHttpTrigger(trigger, region, account.id);
+    } else if (trigger) {
+        await createOrUpdateTrigger(trigger);
+    }
+
+    if (customDomain && customDomain.name) {
+        for (const route of customDomain.routeConfig.routes) {
+            route.serviceName = route.serviceName || serviceName;
+            route.functionName = route.functionName || functionName;
+            route.qualifier = route.qualifier || alias.name;
+        }
+        await createOrUpdateCustomDomain(customDomain);
+    }
+
     console.log('Deploy finished');
     console.log();
 
@@ -250,13 +256,32 @@ async function createOrUpdateApi(region: string, groupId: string, subDomain: str
 }
 
 async function createOrUpdateHttpTrigger(trigger: any, region: string, accountId: string) {
+    const { functionName, serviceName, triggerConfig } = trigger;
+
+    await createOrUpdateTrigger(trigger);
+
+    console.log(`    - Methods: ${triggerConfig.methods}`);
+    console.log(chalk`    - Url: ${chalk.green.bold(
+        `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
+}
+
+async function createOrUpdateTimerTrigger(trigger: any) {
+    const { triggerConfig } = trigger;
+
+    await createOrUpdateTrigger(trigger);
+
+    console.log(`    - Cron: ${triggerConfig.cronExpression}`);
+    console.log(`    - Enable: ${triggerConfig.enable}`);
+}
+
+async function createOrUpdateTrigger(trigger: any) {
     const opts = { ...trigger };
     opts.triggerName = opts.name;
     delete opts.functionName;
     delete opts.serviceName;
     delete opts.name;
 
-    const { functionName, serviceName, name, triggerConfig } = trigger;
+    const { functionName, serviceName, name } = trigger;
 
     try {
         await fcClient.getTrigger(serviceName, functionName, name);
@@ -273,9 +298,7 @@ async function createOrUpdateHttpTrigger(trigger: any, region: string, accountId
             throw ex;
         }
     }
-    console.log(`    - Methods: ${triggerConfig.methods}`);
-    console.log(chalk`    - Url: ${chalk.green.bold(
-        `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
+
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {

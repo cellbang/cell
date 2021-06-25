@@ -1,12 +1,12 @@
 {
   "name": "@malagu/lambda-adapter",
-  "version": "1.23.4",
+  "version": "1.24.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/faas-adapter": "^1.23.4",
-    "@malagu/web": "^1.23.4",
+    "@malagu/faas-adapter": "^1.24.0",
+    "@malagu/web": "^1.24.0",
     "@vendia/serverless-express": "^3.4.0",
     "aws-sdk": "^2.807.0",
     "express": "^4.17.1"
@@ -33,7 +33,9 @@
     "lib",
     "src",
     "malagu.yml",
-    "malagu-remote.yml"
+    "malagu-remote.yml",
+    "malagu-api-gateway.yml",
+    "malagu-timer.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",
@@ -43,7 +45,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.23.4",
+    "@malagu/ext-scripts": "^1.24.0",
     "@types/jszip": "^3.1.6"
   },
   "nyc": {

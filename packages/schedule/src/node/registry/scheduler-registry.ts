@@ -1,13 +1,17 @@
-import { Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@malagu/core';
 import { CronJob } from 'cron';
 import { SchedulerRegistry, CronJobOptions } from './registry-protocol';
 import { DuplicateSchedulerError, NoSchedulerFoundError } from '../error';
+import { CronJobFactory } from '../factory';
 
 @Component(SchedulerRegistry)
 export class DefaultSchedulerRegistry implements SchedulerRegistry {
 
     @Value('malagu.schedule.defaultCronJobOptions')
     protected readonly defaultCronJobOptions: Partial<CronJobOptions>;
+
+    @Autowired(CronJobFactory)
+    protected readonly cronJobFactory: CronJobFactory;
 
     protected readonly cronJobs = new Map<string, CronJob>();
 
@@ -28,7 +32,7 @@ export class DefaultSchedulerRegistry implements SchedulerRegistry {
         if (job) {
             throw new DuplicateSchedulerError(name);
         }
-        job = new CronJob({...this.defaultCronJobOptions, ...options });
+        job = this.cronJobFactory.create(options);
         this.cronJobs.set(name, job);
         return job;
     }

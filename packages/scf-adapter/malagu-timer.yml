@@ -1,0 +1,12 @@
+backend: 
+  entry: lib/node/timer-application-entry
+malagu:
+  faas-adapter:
+    trigger:
+      name: ${malagu['faas-adapter'].function.name}-${malagu['faas-adapter'].alias.name}-timer
+      qualifier: ${malagu['faas-adapter'].alias.name}
+      functionName: ${malagu['faas-adapter'].function.name}
+      namespace: ${malagu['faas-adapter'].namespace.name}
+      type: timer
+      triggerDesc: 0 */1 * * * * * # every minute
+      enable: OPEN

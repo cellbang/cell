@@ -1,7 +1,6 @@
 stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'prod' : cliContext.prod ? 'prod' : 'test'}" # test, pre, prod
 malagu:
   faas-adapter:
-    type: api-gateway
     function:
       name: ${pkg.name}
       handler: backend/dist/index.handler
