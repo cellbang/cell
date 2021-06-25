@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.24.1
+
+- fix(cli) 修复 monorepo 应用模板
+- refactor(serve-static) 重构 serve-static 组件(#24)
+
+
 ## v1.24.0
 
  - feat(faas-adapter+fc-adapter+lambda-dapater+scf-adapter): 适配 Serverless 场景任务调度
