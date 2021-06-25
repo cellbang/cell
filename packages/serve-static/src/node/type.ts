@@ -1,8 +1,3 @@
-export interface ServeStatic {
-  serveStatic: Function
-  mime: any
-}
-
 export interface ServeStaticOption {
   fallthrough?: boolean
   maxage?: number

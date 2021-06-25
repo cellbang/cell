@@ -1,15 +1,15 @@
 // types
-import type { ServeStatic, ServeStaticOption } from './type';
+import type { ServeStaticOption } from './type';
 // utilities
 import * as send from 'send';
 import { resolve } from 'path';
 
-const serveStatic = (root: string, opts: ServeStaticOption) => {
+export const serveStatic = (root: string, opts: ServeStaticOption) => {
 
   const { fallthrough = true, baseHref, setHeaders, redirect } = opts;
   const onDirectory = redirect ?
-  createRedirectDirectoryListener :
-  createNotFoundDirectoryListener;
+    createRedirectDirectoryListener :
+    createNotFoundDirectoryListener;
 
   opts.root = resolve(root);
 
@@ -105,8 +105,4 @@ const serveStatic = (root: string, opts: ServeStaticOption) => {
 
 };
 
-export default {
-  serveStatic,
-  mime: send.mime
-} as ServeStatic;
-
+export const mime = send.mime;

@@ -7,8 +7,7 @@
   "dependencies": {
     "@malagu/web": "^1.23.4",
     "@types/send": "^0.17.0",
-    "send": "^0.17.1",
-    "serve-static": "^1.14.1"
+    "send": "^0.17.1"
   },
   "publishConfig": {
     "access": "public"
