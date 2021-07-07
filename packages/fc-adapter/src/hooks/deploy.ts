@@ -286,7 +286,16 @@ async function createOrUpdateTrigger(trigger: any) {
     try {
         await fcClient.getTrigger(serviceName, functionName, name);
         await spinner(`Update ${name} trigger`, async () => {
-            await fcClient.updateTrigger(serviceName, functionName, name, opts);
+            try {
+                await fcClient.updateTrigger(serviceName, functionName, name, opts);
+            } catch (error) {
+                if (error.message?.includes('Updating trigger is not supported yet')) {
+                    await fcClient.deleteTrigger(serviceName, functionName, name);
+                    await fcClient.createTrigger(serviceName, functionName, opts);
+                    return;
+                }
+                throw error;
+            }
         });
 
     } catch (ex) {

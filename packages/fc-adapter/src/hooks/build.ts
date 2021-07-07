@@ -6,7 +6,7 @@ import { FaaSAdapterUtils } from '@malagu/faas-adapter/lib/hooks';
 export default async (context: BuildContext) => {
     const { pkg, cfg } = context;
     const adapterConfig = FaaSAdapterUtils.getConfiguration<any>(cfg);
-    if (adapterConfig.type === 'custom') {
+    if (adapterConfig.function?.runtime === 'custom') {
         const destDir = join(getHomePath(pkg), 'bootstrap');
         const bootstrap = adapterConfig.function.bootstrap;
         delete adapterConfig.function.bootstrap;

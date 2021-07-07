@@ -1,4 +1,4 @@
-mode: "${'api-gateway' in currentMode ? 'api-gateway' : 'sample-http' in currentMode ? 'sample-http' : 'timer' in currentMode ? 'timer' : 'http'}"
+mode: "${'api-gateway' in currentMode ? 'api-gateway' : 'sample-http' in currentMode ? 'sample-http' : 'timer' in currentMode ? 'timer' : 'mns-topic' in currentMode ? 'mns-topic' : 'http'}"
 malagu:
   faas-adapter:
     secure: true
