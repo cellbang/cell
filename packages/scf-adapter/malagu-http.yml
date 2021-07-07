@@ -1,0 +1,11 @@
+mode: [ api-gateway-common ]
+backend: 
+  entry: lib/node/http-application-entry
+malagu:
+  faas-adapter:
+    function:
+      type: HTTP
+      bootstrap: /var/lang/node12/bin/node backend/dist/index.js
+    apiGateway:
+      api:
+        serviceScfFunctionType: HTTP

@@ -1,4 +1,4 @@
-mode: "${'timer' in currentMode ? 'timer' : 'api-gateway'}"
+mode: "${'api-gateway' in currentMode ? 'api-gateway' : 'timer' in currentMode ? 'timer' : 'http'}"
 malagu:
   faas-adapter:
     namespace:

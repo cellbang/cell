@@ -6,7 +6,7 @@
     "compression-webpack-plugin": "^8.0.0"
   },
   "peerDependencies": {
-    "@malagu/cli-service": "^1.21.0"
+    "@malagu/cli-service": "^1.26.0"
   },
   "publishConfig": {
     "access": "public"

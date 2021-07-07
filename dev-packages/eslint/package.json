@@ -10,7 +10,7 @@
     "fork-ts-checker-webpack-plugin": "^6.2.10"
   },
   "peerDependencies": {
-    "@malagu/cli-service": "^1.21.0"
+    "@malagu/cli-service": "^1.26.0"
   },
   "publishConfig": {
     "access": "public"

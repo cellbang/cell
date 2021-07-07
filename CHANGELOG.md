@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.26.0
+
+- feat(scf-adapter) Support Web Function 
+
 ## v1.25.1
 - feat(all) Change to rely on fixed version
 - feat(all) 改为依赖固定版本

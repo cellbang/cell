@@ -10,7 +10,7 @@
     "express": "^4.17.1"
   },
   "peerDependencies": {
-    "@malagu/cli-service": "^1.21.0"
+    "@malagu/cli-service": "^1.26.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,43 @@
+backend: 
+  malagu:
+    server:
+      path: /${malagu['faas-adapter'].function.name}/
+malagu:
+  faas-adapter:
+    customDomain:
+      # name: abc.com
+      # certificateId: xxxx
+      protocol: http
+      netType: OUTER
+    apiGateway:
+      release:
+        environmentName: "${stage|eval == 'prod' ? 'release' : stage|eval == 'pre' ? 'prepub' :  stage }"
+        desc: 'Released By Malagu'
+      service:
+        name: malagu
+        protocol: http&https
+      api:
+        name: ${malagu['faas-adapter'].function.name}
+        serviceTimeout: 20 # 20s
+        protocol: HTTP
+        serviceScfIsIntegratedResponse: true
+        serviceScfFunctionName: ${malagu['faas-adapter'].function.name}
+        serviceScfFunctionNamespace: ${malagu['faas-adapter'].namespace.name}
+        serviceScfFunctionQualifier: ${malagu['faas-adapter'].alias.name}
+        serviceWebsocketTransportFunctionName: ${malagu['faas-adapter'].function.name}
+        serviceWebsocketTransportFunctionNamespace: ${malagu['faas-adapter'].namespace.name}
+        serviceWebsocketTransportFunctionQualifier: ${malagu['faas-adapter'].alias.name}
+        requestConfig:
+          path: '${malagu.server.path}*'
+          method: ANY
+      usagePlan:
+        name: ${malagu['faas-adapter'].function.name}
+        environment: ${malagu['faas-adapter'].apiGateway.release.environmentName}
+      strategy:
+        # strategy: 5000
+        environmentName: ${malagu['faas-adapter'].apiGateway.release.environmentName}
+
+frontend:
+  malagu:
+    server:
+      path: "/${stage == 'prod' ? '' : (malagu['faas-adapter'].apiGateway.release.environmentName + '/')}${malagu['faas-adapter'].function.name}/"
