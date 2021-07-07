@@ -1,6 +1,6 @@
 # Change Log
 
-## v1.24.1
+## v1.25.0
 
 - feat(faas-adapter+fc-adapter) supports mns topic message queue trigger, which is enabled by the mode attribute `mode: [mns-topic] `. The sample configuration is as follows:
 ```yaml

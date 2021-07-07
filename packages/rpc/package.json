@@ -1,11 +1,11 @@
 {
   "name": "@malagu/rpc",
-  "version": "1.24.1",
+  "version": "1.25.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "^1.24.1"
+    "@malagu/web": "^1.25.0"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.24.1",
+    "@malagu/ext-scripts": "^1.25.0",
     "@types/url-join": "^4.0.0",
     "@types/uuid": "^3.4.5"
   },
