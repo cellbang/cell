@@ -58,7 +58,7 @@
     "docs": "rimraf gh-pages/docs/next && typedoc --tsconfig configs/typedoc-tsconfig.json --options configs/typedoc.json",
     "test": "yarn test:malagu",
     "test:malagu": "lerna run test --scope \"@malagu/!(example-)*\" --stream --concurrency=1",
-    "publish": "yarn && yarn test && lerna publish",
+    "publish": "yarn && yarn test && lerna publish --exact",
     "next:publish": "lerna publish --exact --canary=next --npm-tag=next --yes"
   },
   "workspaces": [
