@@ -1,24 +1,17 @@
 import { DeployContext } from '@malagu/cli-service';
 import * as JSZip from 'jszip';
 import * as ora from 'ora';
-import { promisify } from 'util';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
-import { Credentials } from '@malagu/cloud';
 import { DefaultCodeLoader, FaaSAdapterUtils, DefaultProfileProvider } from '@malagu/faas-adapter/lib/hooks';
 
-const { scf, common, apigateway } = require('tencentcloud-sdk-nodejs');
+import { scf, apigateway } from 'tencentcloud-sdk-nodejs';
 const chalk = require('chalk');
 
 const ScfClient = scf.v20180416.Client;
-const scfModels = scf.v20180416.Models;
-
 const ApiClient = apigateway.v20180808.Client;
-const apiModels = apigateway.v20180808.Models;
 
-let scfClientExt: any;
-let scfClient: any;
-let apiClient: any;
+let clientConfig: any;
 
 export default async (context: DeployContext) => {
     const { cfg, pkg } = context;
@@ -27,7 +20,20 @@ export default async (context: DeployContext) => {
 
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials } = await profileProvider.provide(adapterConfig);
-    await createClients(region, credentials);
+    clientConfig = {
+        credential: {
+            secretId: credentials.accessKeyId,
+            secretKey: credentials.accessKeySecret,
+        },
+        profile: {
+            signMethod: 'HmacSHA256',
+            httpProfile: {
+                reqMethod: 'POST',
+                reqTimeout: 30,
+            },
+        },
+        region: region,
+    };
     const { namespace, apiGateway, customDomain, alias, trigger } = adapterConfig;
     const functionMeta = adapterConfig.function;
     const functionName = functionMeta.name;
@@ -73,12 +79,23 @@ export default async (context: DeployContext) => {
     console.log();
 };
 
-async function createClients(region: string, credentials: Credentials) {
-    const credential = new common.Credential(credentials.accessKeyId, credentials.accessKeySecret);
+function getScfClient() {
+    return new ScfClient(clientConfig);
+}
 
-    scfClient = new ScfClient(credential, region);
-    scfClientExt = new ScfClient(credential, region, new common.ClientProfile('TC3-HMAC-SHA256'));
-    apiClient = new ApiClient(credential, region);
+function getApiClient() {
+    return new ApiClient(clientConfig);
+}
+
+function getScfClientExt() {
+   return new ScfClient({ ...clientConfig,
+    profile: {
+       signMethod: 'TC3-HMAC-SHA256',
+       httpProfile: {
+           reqMethod: 'POST',
+           reqTimeout: 30
+        }
+    }});
 }
 
 function cleanObj(obj: any) {
@@ -91,14 +108,15 @@ function cleanObj(obj: any) {
 }
 
 async function createTrigger(trigger: any) {
+    const scfClient = getScfClient();
 
-    const listTriggerRequest = new scfModels.ListTriggersRequest();
+    const listTriggerRequest: any = {};
     listTriggerRequest.Namespace = trigger.namespace;
     listTriggerRequest.FunctionName = trigger.functionName;
     listTriggerRequest.Limit = 100;
-    const listTriggersResponse = await promisify(scfClient.ListTriggers.bind(scfClient))(listTriggerRequest);
-    if (listTriggersResponse.Triggers.some((t: any) => t.TriggerName === trigger.name)) {
-        const deleteTriggerRequest = new scfModels.DeleteTriggerRequest();
+    const listTriggersResponse = await scfClient.ListTriggers(listTriggerRequest);
+    if (listTriggersResponse.Triggers?.some((t: any) => t.TriggerName === trigger.name)) {
+        const deleteTriggerRequest: any = {};
         deleteTriggerRequest.Namespace = trigger.namespace;
         deleteTriggerRequest.FunctionName = trigger.functionName;
         deleteTriggerRequest.Type = trigger.type;
@@ -107,10 +125,10 @@ async function createTrigger(trigger: any) {
         if (trigger.type === 'cos') {
             deleteTriggerRequest.TriggerDesc = trigger.triggerDesc;
         }
-        await promisify(scfClient.DeleteTrigger.bind(scfClient))(deleteTriggerRequest);
+        await scfClient.DeleteTrigger(deleteTriggerRequest);
 
     }
-    const createTriggerRequest = new scfModels.CreateTriggerRequest();
+    const createTriggerRequest: any = {};
     createTriggerRequest.Namespace = trigger.namespace;
     createTriggerRequest.FunctionName = trigger.functionName;
     createTriggerRequest.Qualifier = trigger.qualifier;
@@ -119,7 +137,7 @@ async function createTrigger(trigger: any) {
     createTriggerRequest.Enable = trigger.enable;
     createTriggerRequest.TriggerDesc = trigger.triggerDesc;
     await spinner(`Set a ${trigger.name} Trigger`, async () => {
-        await promisify(scfClient.CreateTrigger.bind(scfClient))(createTriggerRequest);
+        await scfClient.CreateTrigger(createTriggerRequest);
     });
     console.log(`    - Type: ${trigger.type}`);
     console.log(`    - TriggerDesc: ${trigger.triggerDesc}`);
@@ -127,26 +145,27 @@ async function createTrigger(trigger: any) {
 }
 
 async function createOrUpdateNamespace(namespace: any) {
-    const listNamespacesRequest = new scfModels.ListNamespacesRequest();
+    const scfClient = getScfClient();
+    const listNamespacesRequest: any = {};
     listNamespacesRequest.Limit = 100;
-    const listNamespacesResponse = await promisify(scfClient.ListNamespaces.bind(scfClient))(listNamespacesRequest);
+    const listNamespacesResponse = await scfClient.ListNamespaces(listNamespacesRequest);
     if (listNamespacesResponse.Namespaces.some((n: any) => n.Name === namespace.name)) {
-        const updateNamespaceRequest = new scfModels.UpdateNamespaceRequest();
+        const updateNamespaceRequest: any = {};
         updateNamespaceRequest.Namespace = namespace.name;
         updateNamespaceRequest.Description = namespace.description;
         if (namespace.description) {
             await spinner(`Update ${namespace.name} namespace`, async () => {
-                await promisify(scfClient.UpdateNamespace.bind(scfClient))(updateNamespaceRequest);
+                await scfClient.UpdateNamespace(updateNamespaceRequest);
             });
         } else {
             await spinner(`Skip ${namespace.name} namespace`, async () => { });
         }
     } else {
         await spinner(`Create a ${namespace.name} namespace`, async () => {
-            const createNamespaceRequest = new scfModels.CreateNamespaceRequest();
+            const createNamespaceRequest: any = {};
             createNamespaceRequest.Namespace = namespace.name;
             createNamespaceRequest.Description = namespace.description;
-            await promisify(scfClient.CreateNamespace.bind(scfClient))(createNamespaceRequest);
+            await scfClient.CreateNamespace(createNamespaceRequest);
         });
     }
 }
@@ -167,19 +186,19 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
         const variables: any[] = [];
         for (const key in env) {
             if (env.hasOwnProperty(key)) {
-                const variable = new scfModels.Variable();
+                const variable: any = {};
                 variable.Key = key;
                 variable.Value = env[key];
                 variables.push(variable);
             }
         }
-        const environment = new scfModels.Environment();
+        const environment: any = {};
         environment.Variables = variables;
         req.Environment = environment;
     }
 
     if (vpcConfig) {
-        req.VpcConfig = new scfModels.VpcConfig();
+        req.VpcConfig = {} as any;
         req.VpcConfig.VpcId = vpcConfig.vpcId;
         req.VpcConfig.SubnetId = vpcConfig.subnetId;
     }
@@ -187,7 +206,7 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     if (layers) {
         req.Layers = [];
         for (const l of layers) {
-            const layer = new scfModels.LayerVersionSimple();
+            const layer: any = {};
             layer.LayerName = l.name;
             layer.LayerVersion = l.version;
             req.Layers.push(layer);
@@ -195,64 +214,67 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     }
 
     if (deadLetterConfig) {
-        req.DeadLetterConfig = new scfModels.DeadLetterConfig();
+        req.DeadLetterConfig = {} as any;
         req.DeadLetterConfig.Type = deadLetterConfig.type;
         req.DeadLetterConfig.Name = deadLetterConfig.name;
         req.DeadLetterConfig.FilterType = deadLetterConfig.filterType;
     }
 
     if (publicNetConfig) {
-        req.PublicNetConfig = new scfModels.PublicNetConfigIn();
+        req.PublicNetConfig = {} as any;
         req.DeadLetterConfig.PublicNetStatus = publicNetConfig.PublicNetStatus;
         if (publicNetConfig.eipConfig) {
-            req.PublicNetConfig.EipConfig = new scfModels.EipConfigIn();
+            req.PublicNetConfig.EipConfig = {} as any;
             req.PublicNetConfig.EipConfig.EipStatus = publicNetConfig.eipConfig.eipStatus;
         }
     }
 
     if (code) {
-        req.Code = new scfModels.Code();
+        req.Code = {} as any;
         req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
     }
     cleanObj(req);
 }
 
 function getFunction(namespace: string, functionName: string) {
-    const getFunctionRequest = new scfModels.GetFunctionRequest();
+    const scfClient = getScfClient();
+    const getFunctionRequest: any = {};
     getFunctionRequest.FunctionName = functionName;
     getFunctionRequest.Namespace = namespace;
-    return promisify(scfClient.GetFunction.bind(scfClient))(getFunctionRequest);
+    return scfClient.GetFunction(getFunctionRequest);
 }
 
 async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
+    const scfClient = getScfClient();
+    const scfClientExt = getScfClientExt();
 
     try {
         await getFunction(functionMeta.namespace, functionMeta.name);
         await spinner(`Update ${functionMeta.name} function`, async () => {
-            const updateFunctionCodeRequest = new scfModels.UpdateFunctionCodeRequest();
+            const updateFunctionCodeRequest: any = {};
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
             updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
-            await promisify(scfClientExt.UpdateFunctionCode.bind(scfClientExt))(updateFunctionCodeRequest);
+            await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
             await checkStatus(functionMeta.namespace, functionMeta.name);
 
-            const updateFunctionConfigurationRequest = new scfModels.UpdateFunctionConfigurationRequest();
+            const updateFunctionConfigurationRequest: any = {};
             updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
             updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
             await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
-            await promisify(scfClient.UpdateFunctionConfiguration.bind(scfClient))(updateFunctionConfigurationRequest);
+            await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
         });
     } catch (error) {
         if (error.code === 'ResourceNotFound.Function') {
             await spinner(`Create ${functionMeta.name} function`, async () => {
-                const createFunctionRequest = new scfModels.CreateFunctionRequest();
+                const createFunctionRequest: any = {};
                 await parseFunctionMeta(createFunctionRequest, functionMeta, code);
                 createFunctionRequest.Handler = functionMeta.handler;
                 createFunctionRequest.CodeSource = functionMeta.codeSource;
                 createFunctionRequest.Type = functionMeta.type;
-                await promisify(scfClientExt.CreateFunction.bind(scfClientExt))(createFunctionRequest);
+                await scfClientExt.CreateFunction(createFunctionRequest);
             });
         } else {
             throw error;
@@ -262,12 +284,13 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
 }
 
 async function publishVersion(namespace: string, functionName: string) {
+    const scfClient = getScfClient();
     const { functionVersion } = await spinner('Publish Version', async () => {
         await checkStatus(namespace, functionName);
-        const publishVersionRequest = new scfModels.PublishVersionRequest();
+        const publishVersionRequest: any = {};
         publishVersionRequest.FunctionName = functionName;
         publishVersionRequest.Namespace = namespace;
-        const { FunctionVersion } = await promisify(scfClient.PublishVersion.bind(scfClient))(publishVersionRequest);
+        const { FunctionVersion } = await scfClient.PublishVersion(publishVersionRequest);
         return {
             functionVersion: FunctionVersion,
             successText: `Publish Version ${FunctionVersion}`
@@ -285,11 +308,11 @@ function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
     const { routingConfig } = aliasMeta;
     if (routingConfig) {
         const { additionalVersionWeights, addtionVersionMatchs } = routingConfig;
-        req.RoutingConfig = new scfModels.RoutingConfig();
+        req.RoutingConfig = {} as any;
         if (additionalVersionWeights) {
             req.RoutingConfig.AdditionalVersionWeights = [];
             for (const w of additionalVersionWeights) {
-                const additionalVersionWeight = new scfModels.VersionWeight();
+                const additionalVersionWeight: any = {};
                 additionalVersionWeight.Version = w.version;
                 additionalVersionWeight.Weight = w.weight;
                 req.RoutingConfig.AdditionalVersionWeights.push(additionalVersionWeight);
@@ -299,7 +322,7 @@ function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
         if (addtionVersionMatchs) {
             req.RoutingConfig.AddtionVersionMatchs = [];
             for (const m of addtionVersionMatchs) {
-                const addtionVersionMatch = new scfModels.VersionMatch();
+                const addtionVersionMatch: any = {};
                 addtionVersionMatch.Version = m.version;
                 addtionVersionMatch.Key = m.key;
                 addtionVersionMatch.Method = m.method;
@@ -312,26 +335,27 @@ function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
 }
 
 async function createOrUpdateAlias(alias: any, functionVersion: string) {
-    const getAliasRequest = new scfModels.GetAliasRequest();
+    const scfClient = getScfClient();
+    const getAliasRequest: any = {};
     getAliasRequest.Name = alias.name;
     getAliasRequest.FunctionName = alias.functionName;
     getAliasRequest.Namespace = alias.namespace;
     try {
         await checkStatus(alias.namespace, alias.functionName);
-        await promisify(scfClient.GetAlias.bind(scfClient))(getAliasRequest);
+        await scfClient.GetAlias(getAliasRequest);
         await spinner(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
             await checkStatus(alias.namespace, alias.functionName);
-            const updateAliasRequest = new scfModels.UpdateAliasRequest();
+            const updateAliasRequest: any = {};
             parseAliasMeta(updateAliasRequest, alias, functionVersion);
-            await promisify(scfClient.UpdateAlias.bind(scfClient))(updateAliasRequest);
+            await scfClient.UpdateAlias(updateAliasRequest);
         });
     } catch (error) {
         if (error.code === 'ResourceNotFound.Alias') {
             await spinner(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
                 await checkStatus(alias.namespace, alias.functionName);
-                const createAliasRequest = new scfModels.CreateAliasRequest();
+                const createAliasRequest: any = {};
                 parseAliasMeta(createAliasRequest, alias, functionVersion);
-                await promisify(scfClient.CreateAlias.bind(scfClient))(createAliasRequest);
+                await scfClient.CreateAlias(createAliasRequest);
             });
         } else {
             throw error;
@@ -352,15 +376,16 @@ function parseServiceMeta(req: any, serviceMeta: any) {
 }
 
 async function createOrUpdateService(service: any) {
-    const describeServicesStatusRequest = new apiModels.DescribeServicesStatusRequest();
+    const apiClient = getApiClient();
+    const describeServicesStatusRequest: any = {};
     let serviceId: string;
     let subDomain: string;
-    const filter = new apiModels.Filter();
+    const filter: any = {};
     filter.Name = 'ServiceName';
     filter.Values = [service.name];
     describeServicesStatusRequest.Filters = [filter];
     describeServicesStatusRequest.Limit = 100;
-    const describeServicesStatusResponse = await promisify(apiClient.DescribeServicesStatus.bind(apiClient))(describeServicesStatusRequest);
+    const describeServicesStatusResponse = await apiClient.DescribeServicesStatus(describeServicesStatusRequest);
     const serviceSet = describeServicesStatusResponse.Result.ServiceSet.filter((item: any) => item.ServiceName === service.name);
     if (serviceSet.length > 1) {
         throw new Error(`There are two or more services named [${service.name}] in the api gateway`);
@@ -368,22 +393,22 @@ async function createOrUpdateService(service: any) {
         await spinner(`Update ${service.name} service`, async () => {
             const [ s ] = serviceSet;
 
-            const modifyServiceRequest = new apiModels.ModifyServiceRequest();
+            const modifyServiceRequest: any = {};
             modifyServiceRequest.ServiceId = s.ServiceId;
             modifyServiceRequest.ServiceName = service.name;
             modifyServiceRequest.Protocol = service.protocol;
             modifyServiceRequest.ServiceDesc = service.description;
             modifyServiceRequest.NetTypes = service.netTypes;
             cleanObj(modifyServiceRequest);
-            await promisify(apiClient.ModifyService.bind(apiClient))(modifyServiceRequest);
+            await apiClient.ModifyService(modifyServiceRequest);
             serviceId = s.ServiceId;
             subDomain = s.OuterSubDomain;
         });
     } else {
         await spinner(`Create ${service.name} service`, async () => {
-            const createServiceRequest = new apiModels.CreateServiceRequest();
+            const createServiceRequest: any = {};
             parseServiceMeta(createServiceRequest, service);
-            const res = await promisify(apiClient.CreateService.bind(apiClient))(createServiceRequest);
+            const res = await apiClient.CreateService(createServiceRequest);
             serviceId = res.ServiceId;
             subDomain = res.OuterSubDomain;
         });
@@ -414,6 +439,7 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
     req.TargetServicesLoadBalanceConf = undefined;
     req.TargetServicesHealthCheckConf = undefined;
     req.ServiceScfFunctionName = apiMeta.serviceScfFunctionName;
+    req.ServiceScfFunctionType = apiMeta.serviceScfFunctionType;
     req.ServiceWebsocketRegisterFunctionName = undefined;
     req.ServiceWebsocketCleanupFunctionName = undefined;
     req.ServiceWebsocketTransportFunctionName = apiMeta.serviceWebsocketTransportFunctionName;
@@ -444,7 +470,7 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
     const { oauthConfig, responseErrorCodes, requestConfig, requestParameters } = apiMeta;
 
     if (requestConfig) {
-        req.RequestConfig = new apiModels.ApiRequestConfig();
+        req.RequestConfig = {};
         req.RequestConfig.Path = requestConfig.path;
         req.RequestConfig.Method = requestConfig.method;
     }
@@ -452,7 +478,7 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
     if (requestParameters) {
         req.RequestParameters = [];
         for (const r of requestParameters) {
-            const item = new apiModels.RequestParameter();
+            const item: any = {};
             item.Name = r.name;
             item.Desc = r.desc;
             item.Postion = r.position;
@@ -464,7 +490,7 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
     }
 
     if (oauthConfig) {
-        req.OauthConfig = new apiModels.OauthConfig();
+        req.OauthConfig = {};
         req.OauthConfig.PublicKey = oauthConfig.publicKey;
         req.OauthConfig.TokenLocation = oauthConfig.tokenLocation;
         req.OauthConfig.LoginRedirectUrl = oauthConfig.loginRedirectUrl;
@@ -473,7 +499,7 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
     if (responseErrorCodes) {
         req.ResponseErrorCodes = [];
         for (const r of responseErrorCodes) {
-            const item = new apiModels.ResponseErrorCodeReq();
+            const item: any = {};
             item.Code = r.code;
             item.Msg = r.msg;
             item.Desc = r.desc;
@@ -486,44 +512,44 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
 }
 
 async function createOrUpdateApi(serviceId: string, subDomain: string, serviceProtocol: string, environmentName: string, api: any) {
+    const apiClient = getApiClient();
     const apiName = api.name;
-    const describeApisStatusRequest = new apiModels.DescribeApisStatusRequest();
-    const filter = new apiModels.Filter();
+    const describeApisStatusRequest: any = {};
+    const filter: any = {};
     let apiId: string;
     filter.Name = 'ApiName';
     filter.Values = [ apiName ];
     describeApisStatusRequest.Filters = [filter];
     describeApisStatusRequest.ServiceId = serviceId;
     describeApisStatusRequest.Limit = 100;
-    const describeApisStatusResponse = await promisify(apiClient.DescribeApisStatus.bind(apiClient))(describeApisStatusRequest);
-    const apiIdStatusSet = describeApisStatusResponse.Result.ApiIdStatusSet.filter((item: any) => item.ApiName === apiName);
-    if (apiIdStatusSet.length > 1) {
+    const describeApisStatusResponse = await apiClient.DescribeApisStatus(describeApisStatusRequest);
+    const apiIdStatusSet = describeApisStatusResponse.Result?.ApiIdStatusSet.filter((item: any) => item.ApiName === apiName);
+    if (!apiIdStatusSet || apiIdStatusSet.length === 0) {
+        await spinner(`Create ${apiName} api`, async () => {
+            const createApiRequest: any = {};
+            parseApiMeta(createApiRequest, api, serviceId);
+            const { Result } = await apiClient.CreateApi(createApiRequest);
+            apiId = Result.ApiId;
+        });
+    } else if (apiIdStatusSet.length > 1) {
         throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
-    } else if (apiIdStatusSet.length === 1) {
+    } else if (apiIdStatusSet?.length === 1) {
         await spinner(`Update ${apiName} api`, async () => {
-            const modifyApiRequest = new apiModels.ModifyApiRequest();
+            const modifyApiRequest: any = {};
             apiId = apiIdStatusSet[0].ApiId;
             parseApiMeta(modifyApiRequest, api, serviceId, apiId);
             try {
-                await promisify(apiClient.ModifyApi.bind(apiClient))(modifyApiRequest);
+                await apiClient.ModifyApi(modifyApiRequest);
             } catch (err) {
                 if (err.code === 'InternalError') {
                     await delay(1000);
-                    await promisify(apiClient.ModifyApi.bind(apiClient))(modifyApiRequest);
+                    await apiClient.ModifyApi(modifyApiRequest);
                 } else {
                     throw err;
                 }
             }
         });
-    } else {
-        await spinner(`Create ${apiName} api`, async () => {
-            const createApiRequest = new apiModels.CreateApiRequest();
-            parseApiMeta(createApiRequest, api, serviceId);
-            const { Result } = await promisify(apiClient.CreateApi.bind(apiClient))(createApiRequest);
-            apiId = Result.ApiId;
-        });
     }
-
     const path = api.requestConfig.path.split('*')[0];
     const protocol = serviceProtocol.includes('https') ? 'https' : 'http';
     console.log(
@@ -546,7 +572,7 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
     if (pathMappingSet) {
         req.PathMappingSet = [];
         for (const m of pathMappingSet) {
-            const item = new apiModels.PathMapping();
+            const item: any = {};
             item.Path = m.path;
             item.Environment = m.environment;
             req.PathMappingSet.push(item);
@@ -557,21 +583,22 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
 }
 
 async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, netSubDomain: string) {
-    const describeServiceSubDomainsRequest = new apiModels.DescribeServiceSubDomainsRequest();
+    const apiClient = getApiClient();
+    const describeServiceSubDomainsRequest: any = {};
     describeServiceSubDomainsRequest.ServiceId = serviceId;
-    const describeApisStatusResponse = await promisify(apiClient.DescribeServiceSubDomains.bind(apiClient))(describeServiceSubDomainsRequest);
+    const describeApisStatusResponse = await apiClient.DescribeServiceSubDomains(describeServiceSubDomainsRequest);
     const result = describeApisStatusResponse.Result;
     if (result.TotalCount > 0 && result.DomainSet.find((d: any) => d.DomainName === customDomain.name)) {
         await spinner(`Update ${customDomain.name} customDomain`, async () => {
-            const modifySubDomainRequest = new apiModels.ModifySubDomainRequest();
+            const modifySubDomainRequest: any = {};
             parseCustomDomainMeta(modifySubDomainRequest, customDomain, serviceId, netSubDomain);
-            await promisify(apiClient.ModifySubDomain.bind(apiClient))(modifySubDomainRequest);
+            await apiClient.ModifySubDomain(modifySubDomainRequest);
         });
     } else {
         await spinner(`Create ${customDomain.name} customDomain`, async () => {
-            const createSubDomainRequest = new apiModels.CreateSubDomainRequest();
+            const createSubDomainRequest: any = {};
             parseCustomDomainMeta(createSubDomainRequest, customDomain, serviceId, netSubDomain);
-            await promisify(apiClient.CreateApi.bind(apiClient))(createSubDomainRequest);
+            await apiClient.CreateApi(createSubDomainRequest);
         });
     }
 
@@ -580,13 +607,14 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
 }
 
 async function releaseService(serviceId: string, release: any) {
+    const apiClient = getApiClient();
     await spinner(chalk`Release {yellow.bold ${release.environmentName}} environment`, async () => {
-        const releaseServiceRequest = new apiModels.ReleaseServiceRequest();
+        const releaseServiceRequest: any = {};
         releaseServiceRequest.ServiceId = serviceId;
         releaseServiceRequest.EnvironmentName = release.environmentName;
         releaseServiceRequest.ReleaseDesc = release.desc;
         cleanObj(releaseServiceRequest);
-        await promisify(apiClient.ReleaseService.bind(apiClient))(releaseServiceRequest);
+        await apiClient.ReleaseService(releaseServiceRequest);
     });
 }
 
@@ -600,56 +628,59 @@ function parseUsagePlanMeta(req: any, usagePalnMeta: any, usagePlanId?: string) 
 }
 
 async function createOrUpdateUsagePlan(usagePlan: any, api: any, apiId: string, serviceId: string) {
-    const describeUsagePlansStatusRequest = new apiModels.DescribeUsagePlansStatusRequest();
-    const filter = new apiModels.Filter();
+    const apiClient = getApiClient();
+    const describeUsagePlansStatusRequest: any = {};
+    const filter: any = {};
     filter.Name = 'UsagePlanName';
     filter.Values = [usagePlan.name];
     describeUsagePlansStatusRequest.Filters = [filter];
     describeUsagePlansStatusRequest.Limit = 100;
-    const describeUsagePlansStatusResponse = await promisify(apiClient.DescribeUsagePlansStatus.bind(apiClient))(describeUsagePlansStatusRequest);
-    const usagePlanStatusSet = describeUsagePlansStatusResponse.Result.UsagePlanStatusSet.filter((item: any) => item.UsagePlanName === usagePlan.name);
-    if (usagePlanStatusSet.length > 1) {
+    const describeUsagePlansStatusResponse = await apiClient.DescribeUsagePlansStatus(describeUsagePlansStatusRequest);
+    const usagePlanStatusSet = describeUsagePlansStatusResponse.Result?.UsagePlanStatusSet.filter((item: any) => item.UsagePlanName === usagePlan.name);
+    if (!usagePlanStatusSet || usagePlanStatusSet.length === 0) {
+        await spinner(`Create ${usagePlan.name} usage plan`, async () => {
+            const createUsagePlanRequest: any = {};
+            parseUsagePlanMeta(createUsagePlanRequest, usagePlan);
+            const { Result } = await apiClient.CreateUsagePlan(createUsagePlanRequest);
+            bindEnvironment(serviceId, apiId, api, usagePlan, Result!.UsagePlanId);
+        });
+    } else if (usagePlanStatusSet.length > 1) {
         throw new Error(`There are two or more usage plan named [${usagePlan.name}] in the api gateway`);
     } else if (usagePlanStatusSet.length === 1) {
         await spinner(`Update ${usagePlan.name} usage plan`, async () => {
             const [ u ] = usagePlanStatusSet;
 
-            const modifyUsagePlanRequest = new apiModels.ModifyUsagePlanRequest();
+            const modifyUsagePlanRequest: any = {};
             parseUsagePlanMeta(modifyUsagePlanRequest, usagePlan, u.UsagePlanId);
-            await promisify(apiClient.ModifyService.bind(apiClient))(modifyUsagePlanRequest);
-            bindEnvironment(serviceId, apiId, api, usagePlan, u.UsagePalnId);
-        });
-    } else {
-        await spinner(`Create ${usagePlan.name} usage plan`, async () => {
-            const createUsagePlanRequest = new apiModels.CreateUsagePlanRequest();
-            parseUsagePlanMeta(createUsagePlanRequest, usagePlan);
-            const { Result } = await promisify(apiClient.CreateService.bind(apiClient))(createUsagePlanRequest);
-            bindEnvironment(serviceId, apiId, api, usagePlan, Result.UsagePalnId);
+            await apiClient.ModifyUsagePlan(modifyUsagePlanRequest);
+            bindEnvironment(serviceId, apiId, api, usagePlan, u.UsagePlanId);
         });
     }
 }
 
 async function bindEnvironment(serviceId: string, apiId: string, api: any, usagePlan: any, usagePalnId: string) {
+    const apiClient = getApiClient();
     await spinner(`Bind ${usagePlan.name} usage plan to ${api.name} api`, async () => {
-        const bindEnvironmentRequest = new apiModels.BindEnvironmentRequest();
+        const bindEnvironmentRequest: any = {};
         bindEnvironmentRequest.ServiceId = serviceId;
         bindEnvironmentRequest.BindType = 'API';
         bindEnvironmentRequest.UsagePlanIds = [ usagePalnId ];
         bindEnvironmentRequest.Environment = usagePlan.environment;
         cleanObj(bindEnvironmentRequest);
-        await promisify(apiClient.bindEnvironment.bind(apiClient))(bindEnvironmentRequest);
+        await apiClient.BindEnvironment(bindEnvironmentRequest);
     });
 }
 
 async function updateApiEnvironmentStrategy(serviceId: string, apiId: string, api: any, strategy: any) {
+    const apiClient = getApiClient();
     await spinner(`Update ${strategy.EnvironmentName} environment strategy to ${api.name} api`, async () => {
-        const modifyApiEnvironmentStrategyRequest = new apiModels.ModifyApiEnvironmentStrategyRequest();
+        const modifyApiEnvironmentStrategyRequest: any = {};
         modifyApiEnvironmentStrategyRequest.ServiceId = serviceId;
         modifyApiEnvironmentStrategyRequest.ApiIds = [ apiId ];
         modifyApiEnvironmentStrategyRequest.EnvironmentName = strategy.environmentName;
         modifyApiEnvironmentStrategyRequest.Strategy = strategy.strategy;
         cleanObj(modifyApiEnvironmentStrategyRequest);
-        await promisify(apiClient.ModifyApiEnvironmentStrategy.bind(apiClient))(modifyApiEnvironmentStrategyRequest);
+        await apiClient.ModifyApiEnvironmentStrategy(modifyApiEnvironmentStrategyRequest);
     });
 }
 
