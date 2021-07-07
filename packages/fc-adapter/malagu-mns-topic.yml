@@ -1,0 +1,20 @@
+backend: 
+  entry: lib/node/event-application-entry
+malagu:
+  faas-adapter:
+    function:
+      runtime: nodejs12
+    trigger:
+      name: ${malagu['faas-adapter'].function.name}-${malagu['faas-adapter'].alias.name}-mns_topic
+      qualifier: ${malagu['faas-adapter'].alias.name}
+      functionName: ${malagu['faas-adapter'].function.name}
+      serviceName: ${malagu['faas-adapter'].service.name}
+      triggerType: mns_topic
+      # invocationRole: acs:ram::123456:role/app-mns-role
+      # sourceARN: acs:mns:cn-hangzhou:123456:/topics/test
+      triggerConfig:
+        # topicName: test-topic
+        notifyContentFormat: JSON
+        notifyStrategy: BACKOFF_RETRY
+        # filterTag: foo
+    

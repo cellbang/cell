@@ -1,4 +1,4 @@
-import ALS from 'alscontext';
+const createNamespace = require('cls-hooked').createNamespace;
 import { Session } from './session/session-protocol';
 import { Cookies } from './cookies';
 import { Request, Response } from './http/http-protocol';
@@ -15,7 +15,7 @@ export const CURRENT_TENANT_REQUEST_KEY = 'CurrentTenantRequest';
 
 const appAttrs = new Map<string, any>();
 
-const store = new ALS();
+const store = createNamespace('3f45efdf-383c-4152-877b-1e98a410e0da');
 
 export interface Context {
 
@@ -30,7 +30,7 @@ export interface Context {
 export namespace Context {
 
     export function run(fn: (...args: any[]) => void) {
-        store.run({}, fn);
+        store.run(() => fn());
     }
 
     export function setCurrent(context: Context) {

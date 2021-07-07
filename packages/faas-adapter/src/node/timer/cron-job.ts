@@ -1,7 +1,7 @@
 import { Disposable } from '@malagu/core';
 import { CronJob, CronTime } from 'cron';
 import { CronJobOptions } from '@malagu/schedule';
-import { Clock } from './timer-protocal';
+import { Clock } from './timer-protocol';
 
 export class FaaSCronJob extends CronJob {
 

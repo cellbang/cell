@@ -1,6 +1,6 @@
 import { Component } from '@malagu/core';
 import { Emitter, Event } from './events';
-import { Clock } from './timer-protocal';
+import { Clock } from './timer-protocol';
 
 @Component(Clock)
 export class ClockImpl implements Clock {

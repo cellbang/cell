@@ -2,6 +2,38 @@
 
 ## v1.24.1
 
+- feat(faas-adapter+fc-adapter) supports mns topic message queue trigger, which is enabled by the mode attribute `mode: [mns-topic] `. The sample configuration is as follows:
+```yaml
+mode: [ mns-topic ]
+malagu:
+  faas-adapter:
+    trigger:
+      invocationRole: acs:ram::123456:role/app-mns-role
+      sourceARN: acs:mns:cn-hangzhou:123456:/topics/test
+      triggerConfig:
+        topicName: test
+        # filterTag: foo
+```
+- fix(web) replace `alscontext` with `cls-hooked` package to fix `undefined` error.
+- feat(faas-adapter) adds the `FaaSEventListener` interface, which can be used to monitor the event when the function is triggered to execute.
+
+- feat(faas-adapter+fc-adapter) 支持 mns topic 消息队列触发器，通过模式属性 `mode: [ mns-topic ] ` 开启。示例配置如下：
+```yaml
+mode: [ mns-topic ]
+malagu:
+  faas-adapter:
+    trigger:
+      invocationRole: acs:ram::123456:role/app-mns-role
+      sourceARN: acs:mns:cn-hangzhou:123456:/topics/test
+      triggerConfig:
+        topicName: test
+        # filterTag: foo
+```
+- fix(web) 使用 `cls-hooked` 包替换 `alscontext`，修复 `undefined` 错误。
+- feat(faas-adapter) 添加 `FaaSEventListener` 接口，可用于监听函数被触发执行的事件。
+
+## v1.24.1
+
 - fix(cli) 修复 monorepo 应用模板
 - refactor(serve-static) 重构 serve-static 组件(#24)
 
