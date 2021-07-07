@@ -5,7 +5,7 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-core": "^1.25.0",
+    "@malagu/oauth2-core": "1.25.0",
     "jose": "^1.28.0"
   },
   "publishConfig": {
