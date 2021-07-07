@@ -54,7 +54,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.25.0",
+    "@malagu/ext-scripts": "1.25.0",
     "@types/traverse": "^0.6.32"
   },
   "nyc": {

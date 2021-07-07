@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.25.1
+- feat(all) Change to rely on fixed version
+- feat(all) 改为依赖固定版本
+
 ## v1.25.0
 
 - feat(faas-adapter+fc-adapter) supports mns topic message queue trigger, which is enabled by the mode attribute `mode: [mns-topic] `. The sample configuration is as follows:

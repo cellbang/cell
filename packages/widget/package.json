@@ -5,7 +5,7 @@
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "^1.25.0"
+    "@malagu/core": "1.25.0"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "^1.25.0"
+    "@malagu/ext-scripts": "1.25.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -5,7 +5,7 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/security": "^1.25.0"
+    "@malagu/security": "1.25.0"
   },
   "publishConfig": {
     "access": "public"
