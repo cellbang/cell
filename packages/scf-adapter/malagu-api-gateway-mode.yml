@@ -1,0 +1,3 @@
+mode: [ api-gateway-common ]
+backend: 
+  entry: lib/node/api-gateway-application-entry

@@ -34,8 +34,8 @@
     "src",
     "malagu.yml",
     "malagu-remote.yml",
-    "malagu-api-gateway.yml",
-    "malagu-timer.yml"
+    "malagu-api-gateway-mode.yml",
+    "malagu-timer-mode.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",

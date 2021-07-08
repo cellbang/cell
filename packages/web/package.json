@@ -15,7 +15,7 @@
     "node-gzip": "^1.1.2",
     "qs": "^6.9.4",
     "url-pattern": "^1.0.3",
-    "uuid": "^3.4.0"
+    "uuid": "^8.0.0"
   },
   "peerDependencies": {
     "@malagu/cli-service": "^1.26.0"
