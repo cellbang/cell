@@ -2058,11 +2058,6 @@
   resolved "https://registry.npm.taobao.org/@types/url-join/download/@types/url-join-4.0.0.tgz#72eff71648a429c7d4acf94e03780e06671369bd"
   integrity sha1-cu/3FkikKcfUrPlOA3gOBmcTab0=
 
-"@types/uuid@^3.4.5":
-  version "3.4.9"
-  resolved "https://registry.npm.taobao.org/@types/uuid/download/@types/uuid-3.4.9.tgz?cache=0&sync_timestamp=1613385816853&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fuuid%2Fdownload%2F%40types%2Fuuid-3.4.9.tgz#fcf01997bbc9f7c09ae5f91383af076d466594e1"
-  integrity sha1-/PAZl7vJ98Ca5fkTg68HbUZllOE=
-
 "@types/uuid@^7.0.3":
   version "7.0.4"
   resolved "https://registry.npm.taobao.org/@types/uuid/download/@types/uuid-7.0.4.tgz?cache=0&sync_timestamp=1613385816853&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fuuid%2Fdownload%2F%40types%2Fuuid-7.0.4.tgz#00a5749810b4ad80bff73a61f9cc9d0d521feb3c"
@@ -14389,7 +14384,7 @@ uuid@^2.0.1:
   resolved "https://registry.nlark.com/uuid/download/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
   integrity sha1-Z+LoY3lyFVMN/zGOW/nc6/1Hsho=
 
-uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2, uuid@^3.3.3, uuid@^3.4.0:
+uuid@^3.0.1, uuid@^3.3.2, uuid@^3.3.3, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.nlark.com/uuid/download/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=

@@ -45,7 +45,7 @@
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.0",
     "@types/url-join": "^4.0.0",
-    "@types/uuid": "^3.4.5",
+    "@types/uuid": "^7.0.3",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },
