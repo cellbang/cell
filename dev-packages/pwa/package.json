@@ -1,6 +1,6 @@
 {
   "name": "@malagu/pwa",
-  "version": "1.26.0",
+  "version": "1.27.0",
   "description": "pwa component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.26.0"
+    "@malagu/ext-scripts": "1.27.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

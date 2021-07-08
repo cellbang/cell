@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.27.0
+
+- fix miss yaml file
+
 ## v1.26.0
 
 - feat(scf-adapter) Support Web Function 
