@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oss",
-  "version": "1.27.0",
+  "version": "1.27.1",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "1.27.0",
+    "@malagu/cloud": "1.27.1",
     "ali-oss": "^6.15.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.27.0",
+    "@malagu/ext-scripts": "1.27.1",
     "@types/ali-oss": "^6.0.5",
     "@types/puppeteer-core": "^2.0.0",
     "bufferutil": "^4.0.1",
