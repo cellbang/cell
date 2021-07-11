@@ -47,6 +47,25 @@ function createVueRule(webpackConfig: any) {
         .end()
         .end();
 
+    webpackConfig.module
+      .rule('ts')
+        .test(/\.ts$/)
+        .end()
+      .rule('tsx')
+        .test(/\.tsx$/)
+          .use('babel-loader')
+            .loader('babel-loader')
+            .options({
+              plugins: ['@babel/plugin-transform-modules-commonjs', '@vue/babel-plugin-jsx']
+            }).end()
+          .use('ts-loader')
+            .loader('ts-loader')
+            .options({
+              experimentalWatchApi: true,
+              transpileOnly: true,
+              appendTsxSuffixTo: ['\.vue$']
+            }).after('babel-loader');
+
     webpackConfig.plugin('vue-loader')
         .use(require('vue-loader').VueLoaderPlugin);
 }
