@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.27.2
+
+- feat(vue) Support Jsx Render (#41)
+
 ## v1.27.0
 
 - fix miss yaml file
