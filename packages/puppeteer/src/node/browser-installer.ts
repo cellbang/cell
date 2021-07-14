@@ -18,7 +18,7 @@ export class DefaultBrowserInstaller implements BrowserInstaller {
         if (bucket && launchOptions.headless) {
 
             const stream = await this.objectStorageService.getStream({ bucket, key });
-            await new Promise((resolve, reject) => {
+            await new Promise<void>((resolve, reject) => {
                 stream.pipe(tar.x({
                     C: setupPath,
                 }))

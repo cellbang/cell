@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.27.4
+
+- fix(rpc) Fix RPC call error
+
 ## v1.27.3
 
 - feat(cli-common) 只有存在模式 `local` 的情况下，才会加载应用中的 `devDependencies` 中的组件

@@ -62,7 +62,8 @@ export class RouteMetadataProviderImpl implements RouteMetadataProvider {
                 if (Array.isArray(merged.path)) {
                     merged.path = merged.path.map(p => this.pathResolver.resolve(p));
                 } else {
-                    merged.path = this.pathResolver.resolve(merged.path || '');
+                    const temp = merged.path ? (Array.isArray(merged.path) ? merged.path : [merged.path]) : [];
+                    merged.path = this.pathResolver.resolve(...temp);
                 }
             } else {
                 merged.from = this.pathResolver.resolve(merged.from || '');
@@ -81,11 +82,11 @@ export class RouteMetadataProviderImpl implements RouteMetadataProvider {
         let realLayout: React.ReactNode | undefined;
         while (current) {
             if (realLayout) {
-                const C = current as React.ComponentType<any>;
+                const C = current as any;
                 realLayout = <C>{realLayout}</C>;
             } else {
                 if (routeMetadata.component) {
-                    const C = routeMetadata.component;
+                    const C = routeMetadata.component as any;
                     realLayout = <C {...props}/>;
                 } else {
                     realLayout = routeMetadata.render!(props);
