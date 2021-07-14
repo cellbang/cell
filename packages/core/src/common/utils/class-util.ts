@@ -16,5 +16,5 @@ export function getPropertyNames(obj: any) {
     } while (obj);
     // get unique property names
 
-    return new Set<string>(propertyNames);
+    return Array.from(new Set<string>(propertyNames));
 }
