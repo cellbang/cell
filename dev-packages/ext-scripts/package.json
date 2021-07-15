@@ -17,6 +17,7 @@
     "@typescript-eslint/eslint-plugin-tslint": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
     "colors": "^1.4.0",
+    "ignore-styles": "^5.0.1",
     "concurrently": "^3.5.0",
     "eslint": "^7.14.0",
     "eslint-plugin-deprecation": "^1.1.0",

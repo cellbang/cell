@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.27.5
+
+- fix(rpc) Fix RPC call error
+
 ## v1.27.4
 
 - fix(rpc) Fix RPC call error
