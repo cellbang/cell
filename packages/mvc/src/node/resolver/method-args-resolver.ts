@@ -1,8 +1,15 @@
 import { MethodArgsResolver } from './resolver-protocol';
 import { Context } from '@malagu/web/lib/node';
 import { Component } from '@malagu/core';
-import { BodyMetadata, RequestHeaderMetadata, ParamMetadata, QueryMetadata, RequestCookieMetadata, RequestSessionMetadata } from '../annotation';
-import { PATH_PARMAS_ATTR } from '../handler';
+import {
+    RequestHeaderMetadata,
+    ParamMetadata,
+    QueryMetadata,
+    RequestCookieMetadata,
+    RequestSessionMetadata,
+    BodyMetadata
+} from '../annotation';
+import {PATH_PARMAS_ATTR, RouteMetadata} from '../handler';
 
 @Component(MethodArgsResolver)
 export class BodyMethodArgsResolver implements MethodArgsResolver {
@@ -85,6 +92,30 @@ export class SessionMethodArgsResolver implements MethodArgsResolver {
             for (const m of sessionMetadatas) {
                 args[m.parameterIndex] = m.name ? session[m.name] : session;
             }
+        }
+    }
+}
+
+@Component(MethodArgsResolver)
+export class RequestMethodArgsResolver implements MethodArgsResolver {
+    readonly priority = 700;
+    async resolve(metadata: RouteMetadata, args: any[]): Promise<void> {
+        const request = Context.getRequest();
+        const requestMetadata = metadata.requestMetadata;
+        if (requestMetadata) {
+            args[requestMetadata.parameterIndex] = request;
+        }
+    }
+}
+
+@Component(MethodArgsResolver)
+export class ResponseMethodArgsResolver implements MethodArgsResolver {
+    readonly priority = 800;
+    async resolve(metadata: RouteMetadata, args: any[]): Promise<void> {
+        const response = Context.getResponse();
+        const responseMetadata = metadata.responseMetadata;
+        if (responseMetadata) {
+            args[responseMetadata.parameterIndex] = response;
         }
     }
 }

@@ -1,6 +1,21 @@
-import { StrOrRegex, ParamMetadata, BodyMetadata, QueryMetadata, RequestHeaderMetadata,
-    ResponseHeaderMetadata, RequestCookieMetadata, ResponseCookieMetadata, RequestSessionMetadata,
-    ResponseSessionMetadata, ViewMetadata, MethodMetadata, CatchMetadata, ControllerMetadata } from '../annotation';
+import {
+    StrOrRegex,
+    ParamMetadata,
+    RequestMetadata,
+    QueryMetadata,
+    RequestHeaderMetadata,
+    ResponseHeaderMetadata,
+    RequestCookieMetadata,
+    ResponseCookieMetadata,
+    RequestSessionMetadata,
+    ResponseSessionMetadata,
+    ViewMetadata,
+    MethodMetadata,
+    CatchMetadata,
+    ControllerMetadata,
+    BodyMetadata,
+    ResponseMetadata,
+} from '../annotation';
 import { ErrorType } from '@malagu/core';
 
 export const MVC_HANDLER_ADAPTER_PRIORITY = 2000;
@@ -16,6 +31,8 @@ export interface Route {
 export interface RouteMetadata {
     controllerMetadata: ControllerMetadata;
     methodMetadata: MethodMetadata | CatchMetadata;
+    requestMetadata?: RequestMetadata;
+    responseMetadata?: ResponseMetadata;
     paramMetadata?: ParamMetadata[];
     bodyMetadata?: BodyMetadata[];
     queryMetadata?: QueryMetadata[];

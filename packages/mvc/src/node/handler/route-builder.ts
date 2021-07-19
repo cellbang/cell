@@ -5,7 +5,7 @@ import { getOwnMetadata, Component, Autowired, Optional, ErrorType } from '@mala
 import { PathResolver } from '@malagu/web';
 import { CatchMetadata } from '../annotation';
 import { RouteMetadata } from './handler-protocol';
-import { getTargetClass } from '@malagu/core/lib/common/utils/proxy-util';
+import { getTargetClass } from '@malagu/core';
 
 @Component()
 export class RouteBuilder {
@@ -86,7 +86,11 @@ export class RouteBuilder {
 
     protected doRouteMetadata(targetConstructor: any, method: string) {
         const viewMetadata = getOwnMetadata(METADATA_KEY.controllerView, targetConstructor, method);
+        const requestMetadata = getOwnMetadata(METADATA_KEY.controllerRequest, targetConstructor, method);
+        const responseMetadata = getOwnMetadata(METADATA_KEY.controllerResponse, targetConstructor, method);
         return {
+            requestMetadata: requestMetadata[0],
+            responseMetadata: responseMetadata[0],
             paramMetadata: getOwnMetadata(METADATA_KEY.controllerParam, targetConstructor, method),
             bodyMetadata: getOwnMetadata(METADATA_KEY.controllerBody, targetConstructor, method),
             queryMetadata: getOwnMetadata(METADATA_KEY.controllerQuery, targetConstructor, method),
