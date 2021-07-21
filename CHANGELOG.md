@@ -1,5 +1,18 @@
 # Change Log
 
+## v1.27.5
+
+- fix(rpc) Fix RPC call error
+
+## v1.27.4
+
+- fix(rpc) Fix RPC call error
+
+## v1.27.3
+
+- feat(cli-common) 只有存在模式 `local` 的情况下，才会加载应用中的 `devDependencies` 中的组件
+- feat(cli-common) When only the mode `local` exists, the components in the `devDependencies` in the application will be loaded
+
 ## v1.27.2
 
 - feat(vue) Support Jsx Render (#41)

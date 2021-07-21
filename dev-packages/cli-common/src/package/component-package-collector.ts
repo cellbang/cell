@@ -29,7 +29,7 @@ export class ComponentPackageCollector {
             return;
         }
 
-        if (this.pkg.pkg.name === pck.name) {
+        if (this.pkg.pkg.name === pck.name && mode.includes('local')) {
             // eslint-disable-next-line guard-for-in
             for (const dependency in pck.devDependencies) {
                 const versionRange = pck.devDependencies[dependency]!;
