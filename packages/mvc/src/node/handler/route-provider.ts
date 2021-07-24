@@ -8,7 +8,7 @@ export class RouteProviderImpl implements RouteProvider {
 
     protected route: Route;
 
-    protected routeDefered = new Deferred<Route>();
+    protected routeDeferred = new Deferred<Route>();
 
     @Autowired(RouteBuilder)
     protected readonly routeBuilder: RouteBuilder;
@@ -16,11 +16,11 @@ export class RouteProviderImpl implements RouteProvider {
     @postConstruct()
     protected async init() {
         this.route = await this.routeBuilder.build();
-        this.routeDefered.resolve(this.route);
+        this.routeDeferred.resolve(this.route);
     }
 
     provide(): Promise<Route> {
-        return this.routeDefered.promise;
+        return this.routeDeferred.promise;
     }
 
 }

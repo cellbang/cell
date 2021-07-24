@@ -1,9 +1,9 @@
 import { Component, Value } from '@malagu/core';
 import { View } from './view-protocol';
 import { Context } from '@malagu/web/lib/node';
-import { render, parse } from 'mustache';
+import { parse, render } from 'mustache';
 import { join } from 'path';
-import { readFileSync } from 'fs-extra';
+import { readFile } from 'fs-extra';
 import { ViewMetadata } from '../annotation/view';
 import { HTML_VIEW_NAME } from '../annotation/html';
 
@@ -20,7 +20,7 @@ export class HtmlView implements View {
     async render(model: any, { metadata }: ViewMetadata): Promise<void> {
         const response = Context.getCurrent().response;
         const { baseViewDir, cache } = this.options;
-        const template = readFileSync(join(__dirname, baseViewDir, metadata!.file), { encoding: 'utf8' });
+        const template = await readFile(join(__dirname, baseViewDir, metadata!.file), { encoding: 'utf8' });
         if (cache) {
             parse(template);
         }
