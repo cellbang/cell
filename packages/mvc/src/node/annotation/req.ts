@@ -4,7 +4,7 @@ export interface RequestMetadata {
     parameterIndex: number;
 }
 
-export function Request(): ParameterDecorator {
+export function Req(): ParameterDecorator {
     return (t, tk, i) => {
         applyRequestDecorator(t, tk, i);
     };
