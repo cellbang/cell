@@ -50,7 +50,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     constructor(
         public target?: any,
         protected errorConverters?: ErrorConverter[],
-        protected pipeMananger?: PipeManager,
+        protected pipeManager?: PipeManager,
         protected logger?: Logger) {
         this.waitForConnection();
     }
@@ -100,7 +100,7 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
         this.logger?.info(`starting ${message}`);
         try {
             // eslint-disable-next-line no-unused-expressions
-            await this.pipeMananger?.apply({ target: this.target, method: method }, args);
+            await this.pipeManager?.apply({ target: this.target, method: method }, args);
 
             return await this.target[method](...args);
         } catch (error) {
