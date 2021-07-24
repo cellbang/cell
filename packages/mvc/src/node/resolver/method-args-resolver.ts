@@ -29,9 +29,9 @@ export class BodyMethodArgsResolver implements MethodArgsResolver {
 export class HeaderMethodArgsResolver implements MethodArgsResolver {
     readonly priority = 200;
     async resolve(metadata: any, args: any[]): Promise<void> {
-        const request = Context.getCurrent().request;
         const headerMetadatas = <RequestHeaderMetadata[]>metadata.requestHeaderMetadata;
         if (headerMetadatas) {
+            const request = Context.getCurrent().request;
             for (const m of headerMetadatas) {
                 args[m.parameterIndex] = m.name ? request.get(m.name) : request.headers;
             }
@@ -100,10 +100,9 @@ export class SessionMethodArgsResolver implements MethodArgsResolver {
 export class RequestMethodArgsResolver implements MethodArgsResolver {
     readonly priority = 700;
     async resolve(metadata: RouteMetadata, args: any[]): Promise<void> {
-        const request = Context.getRequest();
         const requestMetadata = metadata.requestMetadata;
         if (requestMetadata) {
-            args[requestMetadata.parameterIndex] = request;
+            args[requestMetadata.parameterIndex] = Context.getRequest();
         }
     }
 }
@@ -112,10 +111,9 @@ export class RequestMethodArgsResolver implements MethodArgsResolver {
 export class ResponseMethodArgsResolver implements MethodArgsResolver {
     readonly priority = 800;
     async resolve(metadata: RouteMetadata, args: any[]): Promise<void> {
-        const response = Context.getResponse();
         const responseMetadata = metadata.responseMetadata;
         if (responseMetadata) {
-            args[responseMetadata.parameterIndex] = response;
+            args[responseMetadata.parameterIndex] = Context.getResponse();
         }
     }
 }

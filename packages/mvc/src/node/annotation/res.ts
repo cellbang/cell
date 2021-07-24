@@ -4,7 +4,7 @@ export interface ResponseMetadata {
     parameterIndex: number;
 }
 
-export function Response(): ParameterDecorator {
+export function Res(): ParameterDecorator {
     return (t, tk, i) => {
         applyResponseDecorator(t, tk, i);
     };
