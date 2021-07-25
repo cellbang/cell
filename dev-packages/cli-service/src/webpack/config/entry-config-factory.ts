@@ -6,20 +6,25 @@ import * as WebpackChain from 'webpack-chain';
 export class EntryConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg, dev, entry: e } = context;
-        let { entry, devEntry } = getConfig(cfg, target);
+        const c = getConfig(cfg, target)
+        let { entry, devEntry } = c;
+        delete c.entry;
+        delete c.devEntry;
 
         if (dev) {
             entry = devEntry || entry;
         }
 
         entry = e || entry;
-        try {
-            entry = pkg.resolveModule((entry as string).split(path.sep).join('/'));
-        } catch (error) {
-            entry = path.resolve(pkg.projectPath, entry as string);
+        if (e) {
+            try {
+                entry = pkg.resolveModule((e as string).split(path.sep).join('/'));
+            } catch (error) {
+                entry = path.resolve(pkg.projectPath, e as string);
+            }
         }
 
-        config.entry('index').add(entry);
+        config.entry('index').add(entry.path ? entry.path : entry);
     }
 
     support(context: CliContext, target: string): boolean {

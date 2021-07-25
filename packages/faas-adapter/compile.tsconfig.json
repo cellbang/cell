@@ -10,10 +10,10 @@
   ],
   "references": [
     {
-      "path": "../core/compile.tsconfig.json"
+      "path": "../cloud/compile.tsconfig.json"
     },
     {
-      "path": "../cloud/compile.tsconfig.json"
+      "path": "../schedule/compile.tsconfig.json"
     }
   ]
 }

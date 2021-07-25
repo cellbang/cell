@@ -11,6 +11,7 @@ export class ModuleChecker {
             this.pkg.resolveModule(modulePath);
             return true;
         } catch (error) {
+            console.log(resolve(modulePath));
             const projectPath = this.pkg.projectPath.split(sep).join('/');
             if (modulePath.indexOf(projectPath) === 0 && existsSync(resolve(`${modulePath}.ts`))) {
                 return true;

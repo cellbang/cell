@@ -10,12 +10,6 @@
   ],
   "references": [
     {
-      "path": "../core/compile.tsconfig.json"
-    },
-    {
-      "path": "../web/compile.tsconfig.json"
-    },
-    {
       "path": "../security/compile.tsconfig.json"
     }
   ]

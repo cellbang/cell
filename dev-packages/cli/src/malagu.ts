@@ -1,128 +1,67 @@
-import * as program from 'commander';
-const leven = require('leven');
-import * as ora from 'ora';
-import { executeHook } from '@malagu/cli-common';
-import { loadCommand, loadContext } from './util';
-const chalk = require('chalk');
-const updateNotifier = require('update-notifier');
-const pkg = require('../package.json');
+import { fork, ChildProcess } from 'child_process';
+import { Component, Module } from '@malagu/cli-common';
+import { join } from 'path';
+const Watchpack = require('watchpack');
 
-const version = pkg.version;
-updateNotifier({ pkg }).notify();
+const watchpack = new Watchpack({});
 
-console.log(`
-                   ___
- /'\\_/\`\\          /\\_ \\
-/\\      \\     __  \\//\\ \\      __       __   __  __
-\\ \\ \\__\\ \\  /'__\`\\  \\ \\ \\   /'__\`\\   /'_ \`\\/\\ \\/\\ \\
- \\ \\ \\_/\\ \\/\\ \\L\\.\\_ \\_\\ \\_/\\ \\L\\.\\_/\\ \\L\\ \\ \\ \\_\\ \\
-  \\ \\_\\\\ \\_\\ \\__/.\\_\\/\\____\\ \\__/.\\_\\ \\____ \\ \\____/
-   \\/_/ \\/_/\\/__/\\/_/\\/____/\\/__/\\/_/\\/___L\\ \\/___/
-                                       /\\____/
-${(('@malagu/cli@' + version) as any).padStart(37, ' ')}  \\_/__/
-`);
+const argv = process.argv;
+argv.shift();
+argv.shift();
 
-const spinner = ora({ text: 'loading command line context...', discardStdin: false }).start();
+let current: ChildProcess;
 
-(async () => {
-    const context = await loadContext(program, spinner);
-    program
-        .version(version)
-        .description(`Malagu CLI ${version}`)
-        .usage('<command> [options]');
-
-    program
-        .command('init [name] [template]')
-        .option('-o, --output-dir [path]', 'output directory', '.')
-        .description('init a application')
-        .action((name, template, cmd) => {
-            require('./init/init').default({ name, template, outputDir: '.', ...parseOptions(cmd) });
-        });
-
-    program
-        .command('serve [entry]')
-        .option('-o, --open [open]', 'Open browser')
-        .option('-p, --port [port]', 'Port used by the server')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
-        .description('serve a applicaton')
-        .action((entry, cmd) => {
-            loadCommand(context, 'serve', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
-        });
-
-    program
-        .command('build [entry]')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [], [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [], [])
-        .option('-p, --prod [prod]', 'Create a production build')
-        .description('build a application')
-        .action((entry, cmd) => {
-            loadCommand(context, 'build', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
-        });
-
-    program
-        .command('deploy [entry]')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [], [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [], [])
-        .option('-p, --prod [prod]', 'Create a production deployment')
-        .option('-s, --skip-build [skipBuild]', 'Skip the build process')
-        .description('deploy a applicaton')
-        .action((entry, cmd) => {
-            loadCommand(context, 'deploy', '@malagu/cli-service').default(context, { entry, ...parseOptions(cmd) });
-        });
-
-    await executeHook(context, 'Cli');
-    spinner.stop();
-
-    program
-        .arguments('<command>')
-        .action(cmd => {
-          program.outputHelp();
-          console.log('  ' + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`));
-          console.log();
-          suggestCommands(cmd);
-    });
-    program.parse(process.argv);
-
-})().catch(error => {
-    spinner.stop();
-    console.error(error);
-    process.exit(-1);
-});
-
-function camelize(str: string) {
-    return str.replace(/-(\w)/g, (_, c) => c ? c.toUpperCase() : '');
+interface Data {
+    components: Component[];
+    configHookModules: Module[];
+    webpackHookModules: Module[];
+    serveHookModules: Module[];
+    buildHookModules: Module[];
+    deployHookModules: Module[];
 }
 
-// commander passes the Command object itself as options,
-// extract only actual options into a fresh object.
-function parseOptions<T>(cmd: program.Command): T {
-    const options: { [key: string]: any } = {};
-    cmd.options.forEach((o: program.Option) => {
-        const key = camelize(o.long.replace(/^--/, ''));
-        // if an option is not present and Command has a method with the same name
-        // it should not be copied
-        if (typeof cmd[key] !== 'function' && typeof cmd[key] !== 'undefined') {
-            options[key] = cmd[key];
-        }
-    });
-    return <T>options;
-}
+// eslint-disable-next-line no-null/no-null
+const exitListener = (code: number | null) => code !== null && process.exit(code)
 
-function suggestCommands(unknownCommand: string) {
-    const availableCommands = program.commands.map((cmd: program.Command) => cmd._name);
-
-    let suggestion: string = '';
-
-    availableCommands.forEach((cmd: string) => {
-        const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion || '', unknownCommand);
-        if (leven(cmd, unknownCommand) < 3 && isBestMatch) {
-            suggestion = cmd;
-        }
-    });
-
-    if (suggestion) {
-        console.log(`  ${chalk.yellow(`Did you mean ${chalk.yellow(suggestion)}?`)}`);
+function execute() {
+    if (current?.killed === false) {
+        current.removeListener('exit', exitListener);
+        current.kill();
     }
+    current = fork(join(__dirname, 'malagu-main.js'), argv, { stdio: 'inherit' });
+    // eslint-disable-next-line no-null/no-null
+    current.on('exit', exitListener);
+    current.on('message', (messageEvent: MessageEvent<Data>) => {
+        if (messageEvent.type === 'cliContext') {
+            const { components, webpackHookModules, configHookModules, buildHookModules, serveHookModules, deployHookModules } = messageEvent.data;
+            const files = [
+                ...webpackHookModules.map(m => m.path),
+                ...configHookModules.map(m => m.path),
+                ...buildHookModules.map(m => m.path),
+                ...serveHookModules.map(m => m.path),
+                ...deployHookModules.map(m => m.path),
+                ...components.reduce<string[]>((prev, curr) => prev.concat(curr.configFiles), [])
+            ];
+            watchpack.watch({
+                files
+            });
+            watchpack.on('aggregated', () => {
+                execute();
+            });
+        }
+    });
 }
 
+function exit() {
+    if (current?.killed === false) {
+        current.kill();
+    }
+    watchpack.close();
+}
+
+try {
+    execute();
+} catch (error) {
+    exit();
+    process.exit(-1);
+}

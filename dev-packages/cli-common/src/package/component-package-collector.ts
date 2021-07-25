@@ -2,7 +2,7 @@ import { readJsonFile } from './json-file';
 import { NodePackage } from './npm-registry';
 import { ComponentPackage, RawComponentPackage } from './package-protocol';
 import { ApplicationPackage } from './application-package';
-import { ComponentPackageLoader } from './component-config-loader';
+import { ComponentPackageLoader } from './component-package-loader';
 
 export class ComponentPackageCollector {
 

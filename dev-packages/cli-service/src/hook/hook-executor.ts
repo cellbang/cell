@@ -1,23 +1,34 @@
 import { ServeContext, BuildContext, DeployContext, WebpackContext } from '../context';
-import { CliContext, ConfigContext, getBackendConfig, InitContext } from '@malagu/cli-common';
-import { resolve } from 'path';
+import { CliContext, ConfigContext, getBackendConfig, InitContext, Module } from '@malagu/cli-common';
 const chalk = require('chalk');
 
 export class HookExecutor {
 
+    protected print(hookName: string, modules: Module[]) {
+        if (modules.length === 0) {
+            return;
+        }
+        console.log(chalk`\nmalagu {yellow.bold hook} - {bold ${hookName}}`);
+        for (const module of modules) {
+            console.log(chalk`malagu {cyan.bold hook} - ${ module.name }`);
+        }
+    }
+
     executeBuildHooks(context: BuildContext): Promise<any[]> {
         const modules = context.pkg.buildHookModules;
+        this.print('build', modules);
         return this.doExecuteHooks(modules, context, 'buildHooks');
     }
 
     executeDeployHooks(context: DeployContext): Promise<any[]> {
         const modules = context.pkg.deployHookModules;
+        this.print('deploy', modules);
         return this.doExecuteHooks(modules, context, 'deployHooks');
     }
 
     async executeServeHooks(context: ServeContext): Promise<any[]> {
         const modules = context.pkg.serveHookModules;
-        if (modules.size === 0) {
+        if (modules.length === 0) {
             console.log(chalk.yellow('Please provide the serve hook first.'));
             return [];
         }
@@ -26,6 +37,7 @@ export class HookExecutor {
 
     executeWebpackHooks(context: WebpackContext): Promise<any[]> {
         const modules = context.pkg.webpackHookModules;
+        this.print('webpack', modules);
         return this.doExecuteHooks(modules, context, 'webpackHooks');
     }
 
@@ -83,7 +95,7 @@ export class HookExecutor {
 
     }
 
-    protected async doExecuteHooks(modules: Map<string, string>, context: CliContext, hookName: string): Promise<any[]> {
+    protected async doExecuteHooks(modules: Module[], context: CliContext, hookName: string): Promise<any[]> {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
         if (!(process as any)[REGISTER_INSTANCE]) {
@@ -92,27 +104,24 @@ export class HookExecutor {
 
         const result: any = [];
 
-        for (const m of modules.entries()) {
+        for (const m of modules) {
             const properties: string[] = [];
-            const [moduleName, modulePath] = m;
-            if (moduleName.startsWith('@')) {
-                const [p1, p2] = moduleName.split('/');
+            const { componentName } = m;
+            if (componentName.startsWith('@')) {
+                const [p1, p2] = componentName.split('/');
                 properties.push(p1.substring(1));
                 if (p2) {
-                    properties.push(p2.substring(0, p2.lastIndexOf('@')));
+                    properties.push(p2);
                 }
             } else {
-                properties.push(moduleName.substring(0, moduleName.lastIndexOf('@')));
+                properties.push(componentName);
             }
             if (properties.length > 0) {
                 properties.push(hookName);
                 if (this.checkHooks(context, properties)) {
                     result.push(await this.doRequire(
                         context,
-                        resolve(context.pkg.projectPath, 'node_modules', modulePath),
-                        resolve(context.pkg.projectPath, '..', 'node_modules', modulePath),
-                        resolve(context.pkg.projectPath, '..', '..', 'node_modules', modulePath),
-                        modulePath
+                        m.path
                     ));
                 }
             }

@@ -29,10 +29,6 @@ export interface Props {
 
     malagu: any;
 
-    entry?: { [key: string]: string } | string;
-
-    modules?: string[];
-
 }
 
 export interface Component extends Props {
@@ -52,6 +48,14 @@ export interface Component extends Props {
      */
     backend: Props;
 
+    configFiles: string[];
+
+}
+
+export class Module {
+    name: string;
+    path: string;
+    componentName: string;
 }
 
 export class ComponentPackage {

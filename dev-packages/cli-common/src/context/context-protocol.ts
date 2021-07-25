@@ -39,6 +39,7 @@ export namespace CliContext {
                     pkg,
                     cfg,
                     program,
+                    target,
                     config: config,
                     expressionHandler,
                     ...options
@@ -81,8 +82,9 @@ export namespace ContextUtils {
         return Promise.resolve(cliContext);
     }
 
-    export async function createConfigContext(cliContext: CliContext, config: { [key: string]: any }, expressionHandler: ExpressionHandler): Promise<ConfigContext> {
-        return { ...cliContext, config, expressionHandler };
+    export async function createConfigContext(
+        cliContext: CliContext, target: string, config: { [key: string]: any }, expressionHandler: ExpressionHandler): Promise<ConfigContext> {
+        return { ...cliContext, target, config, expressionHandler };
     }
 
 }
@@ -93,5 +95,6 @@ export interface InitContext extends CliContext {
 
 export interface ConfigContext extends CliContext {
     config: { [key: string]: any };
+    target: string;
     expressionHandler: ExpressionHandler;
 }

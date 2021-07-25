@@ -12,7 +12,6 @@ lerna-debug.log
 coverage
 errorShots
 /browser-app
-/app
 .browser_modules
 **/docs/api
 package-backup.json

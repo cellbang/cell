@@ -1,12 +1,12 @@
 import { LoaderDefinition } from 'webpack';
-import { FRONTEND_TARGET } from '@malagu/cli-common';
+import { FRONTEND_TARGET, Module } from '@malagu/cli-common';
 import { generateBackendComponents, generateFrontendComponents } from '../dynamic-container';
 
 export interface ComponentLoaderOptions {
     target: string,
     registed: boolean,
-    modules: string[],
-    staticModules: string[]
+    modules: Module[],
+    staticModules: Module[]
 }
 
 const componentLoader: LoaderDefinition<{}> = function (source, sourceMap) {

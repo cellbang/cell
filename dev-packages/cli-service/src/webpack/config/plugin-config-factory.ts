@@ -1,9 +1,46 @@
 import * as path from 'path';
-import { CliContext, getWebpackConfig, getConfig, FRONTEND_TARGET, getFrontendMalaguConfig } from '@malagu/cli-common';
+import { CliContext, getWebpackConfig, getConfig, getAssets, FRONTEND_TARGET, getFrontendMalaguConfig } from '@malagu/cli-common';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
 import * as WebpackChain from 'webpack-chain';
+import * as Webpack from 'webpack';
+
+export class DefinePluginConfigFactory {
+
+    create(config: WebpackChain, context: CliContext, target: string) {
+        const { cfg } = context;
+        const pluginConfig = getWebpackConfig(cfg, target).definePlugin;
+        if (pluginConfig) {
+            config
+                .plugin('define')
+                    .use(Webpack.DefinePlugin, [ pluginConfig ]);
+        }
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return true;
+    }
+}
+
+export class DotenvPluginConfigFactory {
+
+    create(config: WebpackChain, context: CliContext, target: string) {
+        const { cfg, pkg } = context;
+        const pluginConfig = getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
+        const realPath = path.join(pkg.projectPath, pluginConfig.path);
+        if (existsSync(realPath)) {
+            const Dotenv = require('dotenv-webpack');
+            config
+                .plugin('define')
+                    .use(Dotenv, [ pluginConfig ]);
+        }
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return true;
+    }
+}
 
 export class FilterWarningsPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
@@ -21,13 +58,13 @@ export class FilterWarningsPluginConfigFactory {
             }
         }
 
-        const defaultExclude =  [ /Critical dependency: /, /Cannot find source file/ ];
+        const defaultExclude = [/Critical dependency: /, /Cannot find source file/];
         if (defaultExclude.length || excludeSet.size) {
             const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
             config
                 .plugin('fileWarnings')
                     .use(FilterWarningsPlugin, [{
-                        exclude: [ ...defaultExclude, ...excludeSet]
+                        exclude: [...defaultExclude, ...excludeSet]
                     }]);
         }
     }
@@ -41,13 +78,8 @@ export class CopyWepackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
-        for (const assert of (pkg as any)[`${target}Assets`].values()) {
-            const p = path.join(pkg.projectPath, 'node_modules', assert);
-            if (existsSync(p)) {
-                assets.push(p);
-            } else if (existsSync(path.resolve(assert))) {
-                assets.push(path.resolve(assert));
-            }
+        for (const assert of getAssets(pkg, target)) {
+            assets.push(assert.path);
         }
 
         if (assets.length === 0) {
@@ -56,10 +88,12 @@ export class CopyWepackPluginConfigFactory {
         const CopyPlugin = require('copy-webpack-plugin');
         config
             .plugin('copy')
-                .use(CopyPlugin, [{ patterns: assets.map(assert => ({
-                    from: assert,
-                    to: path.join(config.output.get('path'), 'assets')
-                }))}]);
+                .use(CopyPlugin, [{
+                    patterns: assets.map(assert => ({
+                        from: assert,
+                        to: path.join(config.output.get('path'), 'assets')
+                    }))
+                }]);
     }
 
     support(context: CliContext, target: string): boolean {
@@ -138,7 +172,7 @@ export class HtmlWebpackTagsPluginConfigFactory {
             const c = allConfigs[i];
             config
                 .plugin(`htmlTags${i}`)
-                    .use(HtmlWebpackTagsPlugin, [c]);
+                .use(HtmlWebpackTagsPlugin, [c]);
         }
     }
 
@@ -164,7 +198,7 @@ export class FriendlyErrorsWebpackPluginConfigFactory {
         const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
         config.plugin('friendlyErrors').use(FriendlyErrorsWebpackPlugin, [{
             compilationSuccessInfo: {
-                messages: dev ? getDevSuccessInfo(config.devServer, target) : [ `The ${target} code output to ${chalk.bold.blue(config.output.get('path'))}` ],
+                messages: dev ? getDevSuccessInfo(config.devServer, target) : [`The ${target} code output to ${chalk.bold.blue(config.output.get('path'))}`],
                 notes: []
             },
             clearConsole: dev
