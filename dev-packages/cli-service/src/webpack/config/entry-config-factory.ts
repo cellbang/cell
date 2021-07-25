@@ -6,7 +6,7 @@ import * as WebpackChain from 'webpack-chain';
 export class EntryConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg, dev, entry: e } = context;
-        const c = getConfig(cfg, target)
+        const c = getConfig(cfg, target);
         let { entry, devEntry } = c;
         delete c.entry;
         delete c.devEntry;

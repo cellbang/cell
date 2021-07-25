@@ -21,7 +21,7 @@ interface Data {
 }
 
 // eslint-disable-next-line no-null/no-null
-const exitListener = (code: number | null) => code !== null && process.exit(code)
+const exitListener = (code: number | null) => code !== null && process.exit(code);
 
 function execute() {
     if (current?.killed === false) {
