@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "@malagu/example-backend-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "1.27.6",
+    "@malagu/mvc": "1.27.6",
+    "@malagu/fc-adapter": "1.27.6"
+  },
+  "devDependencies": {
+    "@malagu/cli": "1.27.6",
+    "@malagu/cli-service": "1.27.6"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m test",
+    "deploy:test": "malagu deploy -m test",
+    "deploy:pre": "malagu deploy -m pre",
+    "deploy:prod": "malagu deploy -m prod"
+  }
+}

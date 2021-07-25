@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as lockfile from '@yarnpkg/lockfile';
 import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { Module } from '../package';
 import * as path from 'path';
 import { CliContext } from '../context';
 const chalk = require('chalk');
@@ -92,21 +93,33 @@ export function getBackendConfig(cfg: ApplicationConfig) {
     return cfg.getConfig(BACKEND_TARGET);
 }
 
-export function getModules(pkg: ApplicationPackage, target: string): Map<string, string> {
+export function getAssets(pkg: ApplicationPackage, target: string): Module[] {
+    return (pkg as any)[`${target}Assets`];
+}
+
+export function getFrontendAssets(pkg: ApplicationPackage): Module[] {
+    return getAssets(pkg, FRONTEND_TARGET);
+}
+
+export function getBackendAssets(pkg: ApplicationPackage): Module[] {
+    return getAssets(pkg, BACKEND_TARGET);
+}
+
+export function getModules(pkg: ApplicationPackage, target: string): Module[] {
     return (pkg as any)[`${target}Modules`];
 }
 
-export function getFrontendModules(pkg: ApplicationPackage): Map<string, string> {
+export function getFrontendModules(pkg: ApplicationPackage): Module[] {
     return getModules(pkg, FRONTEND_TARGET);
 }
 
-export function getBackendModules(pkg: ApplicationPackage): Map<string, string> {
+export function getBackendModules(pkg: ApplicationPackage): Module[] {
     return getModules(pkg, BACKEND_TARGET);
 }
 
 export function support(cfg: ApplicationConfig, target: string) {
     const targets = cfg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
-    return (cfg.pkg as any)[`${target}Modules`].size > 0 && targets.includes(target);
+    return (cfg.pkg as any)[`${target}Modules`].length > 0 && targets.includes(target);
 }
 
 export function supportBackend(cfg: ApplicationConfig) {

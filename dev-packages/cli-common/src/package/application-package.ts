@@ -4,10 +4,11 @@ import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
 import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
-import { ComponentPackageLoader } from './component-config-loader';
+import { ComponentPackageLoader } from './component-package-loader';
+import { Module } from './package-protocol';
+
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
-import { ModulePathBuilder } from './module-path-builder';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -53,20 +54,20 @@ export class ApplicationPackage {
         return this._pkg!;
     }
 
-    protected _frontendModules: Map<string, string> | undefined;
-    protected _backendModules: Map<string, string> | undefined;
-    protected _frontendStaticModules: Map<string, string> | undefined;
-    protected _backendStaticModules: Map<string, string> | undefined;
-    protected _frontendAssets: Map<string, string> | undefined;
-    protected _backendAssets: Map<string, string> | undefined;
-    protected _initHookModules: Map<string, string> | undefined;
-    protected _buildHookModules: Map<string, string> | undefined;
-    protected _serveHookModules: Map<string, string> | undefined;
-    protected _deployHookModules: Map<string, string> | undefined;
+    protected _frontendModules: Module[] | undefined;
+    protected _backendModules: Module[] | undefined;
+    protected _frontendStaticModules: Module[] | undefined;
+    protected _backendStaticModules: Module[] | undefined;
+    protected _frontendAssets: Module[] | undefined;
+    protected _backendAssets: Module[] | undefined;
+    protected _initHookModules: Module[] | undefined;
+    protected _buildHookModules: Module[] | undefined;
+    protected _serveHookModules: Module[] | undefined;
+    protected _deployHookModules: Module[] | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
-    protected _webpackHookModules: Map<string, string> | undefined;
-    protected _configHookModules: Map<string, string> | undefined;
-    protected _cliHookModules: Map<string, string> | undefined;
+    protected _webpackHookModules: Module[] | undefined;
+    protected _configHookModules: Module[] | undefined;
+    protected _cliHookModules: Module[] | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
     get rootComponentPackage() {
@@ -112,45 +113,46 @@ export class ApplicationPackage {
         raw.malaguComponent = raw.malaguComponent || {};
         raw.malaguComponent.frontend = raw.malaguComponent.frontend || {};
         raw.malaguComponent.backend = raw.malaguComponent.backend || {};
+        raw.malaguComponent.configFiles = raw.malaguComponent.configFiles || [];
         return new ComponentPackage(raw);
     }
 
-    get frontendModules(): Map<string, string> {
+    get frontendModules(): Module[] {
         if (!this._frontendModules) {
             this._frontendModules = this.computeModules('modules', FRONTEND_TARGET);
         }
         return this._frontendModules;
     }
 
-    get backendModules(): Map<string, string> {
+    get backendModules(): Module[] {
         if (!this._backendModules) {
             this._backendModules = this.computeModules('modules', BACKEND_TARGET);
         }
         return this._backendModules;
     }
 
-    get frontendStaticModules(): Map<string, string> {
+    get frontendStaticModules(): Module[] {
         if (!this._frontendStaticModules) {
             this._frontendStaticModules = this.computeModules('staticModules', FRONTEND_TARGET);
         }
         return this._frontendStaticModules;
     }
 
-    get backendStaticModules(): Map<string, string> {
+    get backendStaticModules(): Module[] {
         if (!this._backendStaticModules) {
             this._backendStaticModules = this.computeModules('staticModules', BACKEND_TARGET);
         }
         return this._backendStaticModules;
     }
 
-    get frontendAssets(): Map<string, string> {
+    get frontendAssets(): Module[] {
         if (!this._frontendAssets) {
             this._frontendAssets = this.computeModules('assets', FRONTEND_TARGET);
         }
         return this._frontendAssets;
     }
 
-    get backendAssets(): Map<string, string> {
+    get backendAssets(): Module[] {
         if (!this._backendAssets) {
             this._backendAssets = this.computeModules('assets', BACKEND_TARGET);
         }
@@ -213,24 +215,20 @@ export class ApplicationPackage {
         return false;
     }
 
-    computeModules(type: string, target?: string): Map<string, string> {
-        const result = new Map<string, string>();
-        let moduleIndex = 1;
-        const modulePathBuilder = new ModulePathBuilder(this);
+    computeModules(type: string, target?: string): Module[] {
+        const result: Module[] = [];
         const moduleMap = new Map<string, boolean>();
         for (const componentPackage of this.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
-                const modulePaths = (target ? component[target][type] : component[type]) || [];
-                for (const modulePath of modulePaths) {
-                    if (typeof modulePath === 'string') {
-                        const realModulePath = modulePathBuilder.build(componentPackage, modulePath);
-                        if (moduleMap.get(realModulePath)) {
+                const modules: Module[] = (target ? component[target][type] : component[type]) || [];
+                for (const m of modules) {
+                    if (typeof m === 'object') {
+                        if (moduleMap.get(m.name)) {
                             continue;
                         }
-                        moduleMap.set(realModulePath, true);
-                        result.set(`${componentPackage.name}@${moduleIndex}`, realModulePath);
-                        moduleIndex = moduleIndex + 1;
+                        moduleMap.set(m.name, true);
+                        result.push(m);
                     }
                 }
             }

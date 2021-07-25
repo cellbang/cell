@@ -7,7 +7,7 @@ import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { CopyWepackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
-    ProgressPluginConfigFactory } from './plugin-config-factory';
+    ProgressPluginConfigFactory, DefinePluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
 const chalk = require('chalk');
@@ -31,19 +31,20 @@ export class ConfigFactory {
 
         const configFactories = [
             new BaseConfigFactory(),
+            new DefinePluginConfigFactory(),
             new FilterWarningsPluginConfigFactory(),
-            new EntryConfigFactory(),
             new OutputConfigFactory(),
             new DevServerConfigFactory(),
             new FriendlyErrorsWebpackPluginConfigFactory(),
             new CopyWepackPluginConfigFactory(),
             new ComponentConfigFactory(),
-            new ComponentConfigConfigFactory(),
             new MalaguYamlConfigFactory(),
             new HtmlWebpackPluginConfigFactory(),
             new HtmlWebpackTagsPluginConfigFactory(),
             new CleanWebpackPluginConfigFactory(),
-            new ProgressPluginConfigFactory()
+            new ProgressPluginConfigFactory(),
+            new EntryConfigFactory(),
+            new ComponentConfigConfigFactory()
         ];
 
         for (const target of targets) {
@@ -52,8 +53,8 @@ export class ConfigFactory {
             }
 
             console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
-            for (const module of getModules(pkg, target).values()) {
-                console.log(chalk`malagu {cyan.bold module} - ${ module }`);
+            for (const module of getModules(pkg, target)) {
+                console.log(chalk`malagu {cyan.bold module} - ${ module.name }`);
             }
 
             const configuration = new WebpackChain();

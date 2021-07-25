@@ -14,8 +14,8 @@ export class ComponentConfigFactory {
         const { cfg, pkg, dev } = context;
         const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin;
         const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
-        const modules = target === FRONTEND_TARGET ? pkg.frontendModules.values() : pkg.backendModules.values();
-        const staticModules = target === FRONTEND_TARGET ? pkg.frontendStaticModules.values() : pkg.backendStaticModules.values();
+        const modules = target === FRONTEND_TARGET ? pkg.frontendModules : pkg.backendModules;
+        const staticModules = target === FRONTEND_TARGET ? pkg.frontendStaticModules : pkg.backendStaticModules;
         config
             .resolveLoader
                 .modules

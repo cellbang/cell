@@ -10,12 +10,6 @@
   ],
   "references": [
     {
-      "path": "../core/compile.tsconfig.json"
-    },
-    {
-      "path": "../widget/compile.tsconfig.json"
-    },
-    {
       "path": "../react/compile.tsconfig.json"
     }
   ]

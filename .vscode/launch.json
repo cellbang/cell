@@ -5,9 +5,10 @@
             "name": "Malagu Debug",
             "request": "launch",
             "runtimeArgs": [
+                "malagu",
                 "serve"
             ],
-            "runtimeExecutable": "malagu",
+            "runtimeExecutable": "npx",
             "cwd": "${workspaceFolder}/app",
             "skipFiles": [
                 "<node_internals>/**"

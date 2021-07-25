@@ -6,9 +6,10 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/app",
             "runtimeArgs": [
+                "malagu",
                 "serve"
             ],
-            "runtimeExecutable": "malagu",
+            "runtimeExecutable": "npx",
             "skipFiles": [
                 "<node_internals>/**"
             ],

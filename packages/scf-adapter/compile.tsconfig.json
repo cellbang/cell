@@ -11,13 +11,7 @@
   ],
   "references": [
     {
-      "path": "../core/compile.tsconfig.json"
-    },
-    {
       "path": "../web/compile.tsconfig.json"
-    },
-    {
-      "path": "../cloud/compile.tsconfig.json"
     },
     {
       "path": "../faas-adapter/compile.tsconfig.json"

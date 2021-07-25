@@ -1,9 +1,13 @@
 import { ApplicationPackage } from './application-package';
 import { ComponentPackage } from './package-protocol';
-import { ModulePathBuilder } from './module-path-builder';
+import { ModuleBuilder } from './module-builder';
 
 export class EntryResolver {
-    constructor(protected readonly pkg: ApplicationPackage) {}
+    protected readonly moduleBuilder: ModuleBuilder;
+
+    constructor(protected readonly pkg: ApplicationPackage) {
+        this.moduleBuilder = new ModuleBuilder(pkg);
+    }
 
     resolve(componentPackage: ComponentPackage) {
         const { malaguComponent } = componentPackage;
@@ -16,19 +20,8 @@ export class EntryResolver {
     }
 
     protected doResolveEntry(componentPackage: ComponentPackage, entry: any) {
-        const modulePathBuilder = new ModulePathBuilder(this.pkg);
         if (entry) {
-            if (typeof entry === 'string') {
-                return modulePathBuilder.build(componentPackage, entry);
-            } else {
-                const result: { [key: string]: string } = {};
-                for (const key in entry) {
-                    if (entry.hasOwnProperty(key)) {
-                        result[key] = modulePathBuilder.build(componentPackage, entry[key]);
-                    }
-                }
-                return result;
-            }
+            return this.moduleBuilder.build(componentPackage, entry);
         }
     }
 

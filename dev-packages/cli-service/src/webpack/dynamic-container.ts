@@ -1,22 +1,24 @@
+import { Module } from '@malagu/cli-common';
+
 export interface DynamicContainerContext {
     registed?: boolean;
-    modules: string[];
-    staticModules: string[];
+    modules: Module[];
+    staticModules: Module[];
 
 }
 
-export function generateImports(modules: string[], fn: 'import' | 'require'): string {
+export function generateImports(modules: Module[], fn: 'import' | 'require'): string {
     let targetModules: string[] = [];
-    targetModules = modules.map((m: string) => {
+    targetModules = modules.map(m => {
         if (fn === 'require') {
-            return `Promise.resolve(require('${m}'))`;
+            return `Promise.resolve(require('${m.path}'))`;
         }
-        return `${fn}('${m}')`;
+        return `${fn}('${m.path}')`;
     });
     return targetModules.map(m => `then(function () { return ${m}.then(load) })`).join('.\n');
 }
 
-export function loadStaticModuls(modules: string[]): string {
+export function loadStaticModuls(modules: Module[]): string {
     return modules.map(m => `container.load(require('${m}').default);`).join('\n');
 }
 

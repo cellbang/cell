@@ -73,6 +73,7 @@ export class ApplicationConfig {
         delete config.modules;
         delete config.staticModules;
         delete config.assets;
+        delete config.configFiles;
 
         config.targets = this.options.targets.length ? this.options.targets : (config.targets || [ FRONTEND_TARGET, BACKEND_TARGET ]);
         config.targets = Array.from(new Set(config.targets));

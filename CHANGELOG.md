@@ -1,5 +1,22 @@
 # Change Log
 
+## v1.28.0
+
+- feat(cli) supports automatically restarting the application after modifying the property file and the code of various plug-ins. (#44)
+- feat(cli-service) supports `dotenv` file, the `.env` file under the project root is automatically loaded by default, or you can customize the file path through the property `malagu.webpack.dotenvPlugin.path`, the relative path is relative to the project root content. (#46)
+- feat(cli-service) supports `Webpack.DefinePlugin` plug-in, which can be configured through the attribute `malagu.webpack.definePlugin` (#46)
+- feat(cli) optimize log output, magic board and code
+- chore: Optimize the build, release and local testing process
+- feat(mvc): add `@Req`, `@Res` Decorator (#45)
+
+- feat(cli) 支持修改属性文件、以及各种插件的代码后自动重启应用。(#44)
+- feat(cli-service) 支持 `dotenv` 文件，默认自动加载项目根下的 `.env` 文件，也可以通过属性 `malagu.webpack.dotenvPlugin.path` 自定义文件路径，相对路径是相对项目根目录。(#46)
+- feat(cli-service) 支持 `Webpack.DefinePlugin` 插件，可以通过属性 `malagu.webpack.definePlugin` 配置 (#46)
+- feat(cli) 优化日志输出、魔板和代码
+- chore: 优化构建、发布和本地测试流程
+- feat(mvc): 添加 `@Req`, `@Res` 装饰器 (#45)
+
+
 ## v1.27.5
 
 - fix(rpc) Fix RPC call error

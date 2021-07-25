@@ -1,12 +1,12 @@
 import { ApplicationPackage } from './application-package';
-import { ComponentPackage } from './package-protocol';
-import { ModulePathBuilder } from './module-path-builder';
+import { ComponentPackage, Module } from './package-protocol';
+import { ModuleBuilder } from './module-builder';
 import { join } from 'path';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ModuleChecker } from './module-checker';
 
 export class ModuleResolver {
-    protected readonly modulePathBuilder = new ModulePathBuilder(this.pkg);
+    protected readonly moduleBuilder = new ModuleBuilder(this.pkg);
     protected readonly moduleChecker = new ModuleChecker(this.pkg);
 
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -20,10 +20,22 @@ export class ModuleResolver {
         this.resolveAssetModule(componentPackage);
     }
 
-    protected addModuleIfExists(componentPackage: ComponentPackage, modulePaths: string[], modulePath: string): void {
-        if (this.moduleChecker.check(this.modulePathBuilder.build(componentPackage, modulePath))) {
-            if (modulePaths.indexOf(modulePath) === -1) {
-                modulePaths.push(modulePath);
+    protected addModuleIfExists(componentPackage: ComponentPackage, modules: Module[], modulePath: string): void {
+        try {
+            const module = this.moduleBuilder.build(componentPackage, modulePath);
+            if (!modules.some(m => m.name === module.name)) {
+                modules.push(module);
+            }
+        } catch (error) {
+            // NoOp
+        }
+    }
+
+    protected addModule(componentPackage: ComponentPackage, modules: Module[], modulePaths: string[]): void {
+        for (const modulePath of modulePaths) {
+            const module = this.moduleBuilder.build(componentPackage, modulePath);
+            if (!modules.some(m => m.name === module.name)) {
+                modules.push(module);
             }
         }
     }
@@ -32,14 +44,17 @@ export class ModuleResolver {
         const prop = `${target}s`;
         suffix = suffix || target;
         const malaguComponent = componentPackage.malaguComponent!;
-        malaguComponent.frontend = malaguComponent.frontend || [];
-        malaguComponent.backend = malaguComponent.backend || [];
+        malaguComponent.frontend = malaguComponent.frontend || {};
+        malaguComponent.backend = malaguComponent.backend || {};
 
-        malaguComponent.frontend[prop] = [ ...malaguComponent[prop] || [],  ...malaguComponent.frontend[prop] || [] ];
-        malaguComponent.backend[prop] = [ ...malaguComponent[prop] || [],  ...malaguComponent.backend[prop] || [] ];
-        const frontendModules = malaguComponent.frontend[prop];
-        const backendModules = malaguComponent.backend[prop];
+        const rawFrontendModules = [ ...malaguComponent[prop] || [],  ...malaguComponent.frontend[prop] || [] ];
+        const rawBackendModules  = [ ...malaguComponent[prop] || [],  ...malaguComponent.backend[prop] || [] ];
+        const frontendModules: Module[] = malaguComponent.frontend[prop] = [];
+        const backendModules: Module[] = malaguComponent.backend[prop] = [];
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
+
+        this.addModule(componentPackage, frontendModules, rawFrontendModules);
+        this.addModule(componentPackage, backendModules, rawBackendModules);
 
         this.addModuleIfExists(componentPackage, frontendModules, join(libOrSrc, 'common', suffix));
         this.addModuleIfExists(componentPackage, backendModules, join(libOrSrc, 'common', suffix));
@@ -64,24 +79,31 @@ export class ModuleResolver {
     resolveHookModule(componentPackage: ComponentPackage): void {
         const malaguComponent = componentPackage.malaguComponent!;
 
-        malaguComponent.webpackHooks = malaguComponent.webpackHooks || [];
-        malaguComponent.initHooks = malaguComponent.initHooks || [];
-        malaguComponent.configHooks = malaguComponent.configHooks || [];
-        malaguComponent.buildHooks = malaguComponent.buildHooks || [];
-        malaguComponent.deployHooks = malaguComponent.deployHooks || [];
-        malaguComponent.serveHooks = malaguComponent.serveHooks || [];
-        malaguComponent.webpackHooks = malaguComponent.webpackHooks || [];
-        malaguComponent.cliHooks = malaguComponent.cliHooks || [];
+        const rawWebpackHooks = malaguComponent.webpackHooks || [];
+        const rawInitHooks = malaguComponent.initHooks || [];
+        const rawConfigHooks = malaguComponent.configHooks || [];
+        const rawBuildHooks = malaguComponent.buildHooks || [];
+        const rawDeployHooks = malaguComponent.deployHooks || [];
+        const rawServeHooks = malaguComponent.serveHooks || [];
+        const rawCliHooks = malaguComponent.cliHooks || [];
 
-        const webpackHooks = malaguComponent.webpackHooks;
-        const initHooks = malaguComponent.initHooks;
-        const configHooks = malaguComponent.configHooks;
-        const buildHooks = malaguComponent.buildHooks;
-        const deployHooks = malaguComponent.deployHooks;
-        const serveHooks = malaguComponent.serveHooks;
-        const cliHooks = malaguComponent.cliHooks;
+        const webpackHooks: Module[] = malaguComponent.webpackHooks = [];
+        const initHooks: Module[] = malaguComponent.initHooks = [];
+        const configHooks: Module[] = malaguComponent.configHooks = [];
+        const buildHooks: Module[] = malaguComponent.buildHooks = [];
+        const deployHooks: Module[] = malaguComponent.deployHooks = [];
+        const serveHooks: Module[] = malaguComponent.serveHooks = [];
+        const cliHooks: Module[] = malaguComponent.cliHooks = [];
 
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
+
+        this.addModule(componentPackage, webpackHooks, rawWebpackHooks);
+        this.addModule(componentPackage, initHooks, rawInitHooks);
+        this.addModule(componentPackage, configHooks, rawConfigHooks);
+        this.addModule(componentPackage, buildHooks, rawBuildHooks);
+        this.addModule(componentPackage, deployHooks, rawDeployHooks);
+        this.addModule(componentPackage, serveHooks, rawServeHooks);
+        this.addModule(componentPackage, cliHooks, rawCliHooks);
 
         this.addModuleIfExists(componentPackage, webpackHooks, join(libOrSrc, 'hooks', 'webpack'));
         this.addModuleIfExists(componentPackage, webpackHooks, join(libOrSrc, 'webpack-hook'));
@@ -103,10 +125,13 @@ export class ModuleResolver {
     resolveAssetModule(componentPackage: ComponentPackage): void {
         const malaguComponent = componentPackage.malaguComponent!;
 
-        malaguComponent.frontend.assets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
-        malaguComponent.backend.assets = [ ...malaguComponent.assets || [],  ...malaguComponent.backend.assets || [] ];
-        const frontendAssets = malaguComponent.frontend.assets;
-        const backendAssets = malaguComponent.backend.assets;
+        const rawFrontendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
+        const rawBackendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.backend.assets || [] ];
+        const frontendAssets: Module[] = malaguComponent.frontend.assets = [];
+        const backendAssets: Module[] = malaguComponent.backend.assets = [];
+
+        this.addModule(componentPackage, frontendAssets, rawFrontendAssets);
+        this.addModule(componentPackage, backendAssets, rawBackendAssets);
 
         this.addModuleIfExists(componentPackage, frontendAssets, join('src', 'assets'));
         this.addModuleIfExists(componentPackage, backendAssets, join('src', 'assets'));
