@@ -1,6 +1,6 @@
 import { fork, ChildProcess } from 'child_process';
 import { Component, Module } from '@malagu/cli-common';
-import { join } from 'path';
+import { join, sep } from 'path';
 const Watchpack = require('watchpack');
 
 const watchpack = new Watchpack({});
@@ -43,7 +43,7 @@ function execute() {
                 ...components.reduce<string[]>((prev, curr) => prev.concat(curr.configFiles), [])
             ];
             watchpack.watch({
-                files
+                files: files.map(f => f.split('/').join(sep))
             });
             watchpack.on('aggregated', () => {
                 execute();
@@ -58,6 +58,8 @@ function exit() {
     }
     watchpack.close();
 }
+
+process.on('exit', exit);
 
 try {
     execute();

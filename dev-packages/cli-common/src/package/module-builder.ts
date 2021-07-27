@@ -35,7 +35,7 @@ export class ModuleBuilder {
     build(componentPackage: ComponentPackage, modulePath: string): Module {
         return {
             name: join(componentPackage.name, modulePath).split(sep).join('/'),
-            path: this.buildPath(componentPackage, modulePath),
+            path: this.buildPath(componentPackage, modulePath).split(sep).join('/'),
             componentName: componentPackage.name
         };
     }

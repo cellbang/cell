@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.28.1
+
+- fix(cli+cli-common) fix windows path compatibility issues
+- fix(cli+cli-common) 修复 windows 路径兼容性问题
+
+
 ## v1.28.0
 
 - feat(cli) supports automatically restarting the application after modifying the property file and the code of various plug-ins. (#44)
