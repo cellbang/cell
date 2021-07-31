@@ -9,7 +9,7 @@
                 "serve"
             ],
             "runtimeExecutable": "npx",
-            "cwd": "${workspaceFolder}/app",
+            "cwd": "${workspaceFolder}/examples/backend-app",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -18,7 +18,7 @@
             },
             "internalConsoleOptions": "openOnSessionStart",
             "outputCapture": "std",
-            "type": "pwa-node"
+            "type": "pwa-node",
         }
     ]
 }

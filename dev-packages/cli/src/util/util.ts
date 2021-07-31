@@ -2,7 +2,7 @@ import { CliContext } from '@malagu/cli-common';
 const minimist = require('minimist');
 const chalk = require('chalk');
 import * as ora from 'ora';
-import { CommanderStatic } from 'commander';
+import { Command } from 'commander';
 
 export function loadCommand(context: CliContext, commandName: string, moduleName: string) {
     const { pkg } = context;
@@ -22,7 +22,7 @@ export function loadCommand(context: CliContext, commandName: string, moduleName
     }
 }
 
-export function loadContext(program: CommanderStatic, spinner: ora.Ora) {
+export function loadContext(program: Command, spinner: ora.Ora) {
     const options = minimist(process.argv.slice(2));
     const mode = getMode(options);
     const targets = getTargets(options);

@@ -40,4 +40,4 @@ malagu:
 frontend:
   malagu:
     server:
-      path: "/${stage == 'prod' ? '' : (malagu['faas-adapter'].apiGateway.release.environmentName + '/')}${malagu['faas-adapter'].function.name}/"
+      path: "/${stage|eval == 'prod' ? '' : (malagu['faas-adapter'].apiGateway.release.environmentName + '/')}${malagu['faas-adapter'].function.name}/"
