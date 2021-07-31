@@ -1,5 +1,15 @@
 # Change Log
 
+## v1.29.0
+
+- feat(cli) upgrade dependency package `commander`
+- feat(cli) optimized log output style
+- fix(scf-adapter) fixes the problem of attribute configuration
+
+- feat(cli) 升级依赖包 `commander`
+- feat(cli) 优化日志输出样式
+- fix(scf-adapter) 修复属性配置问题
+
 ## v1.28.1
 
 - fix(cli+cli-common) fix windows path compatibility issues
