@@ -102,7 +102,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             }
 
         });
-    program.addHelpText('after', '\nUse "malagu [command] --help" for more information about a command.')
+    program.addHelpText('after', '\nUse "malagu [command] --help" for more information about a command.');
     program.parse(process.argv);
 
 })().catch(error => {
