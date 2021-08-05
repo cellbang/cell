@@ -1,12 +1,15 @@
 
-import { BACKEND_TARGET, CliContext, getHomePath } from '@malagu/cli-common';
+import { BACKEND_TARGET, CliContext, setProjectHomePath, getProjectHomePathForTarget } from '@malagu/cli-common';
 import * as path from 'path';
 import * as WebpackChain from 'webpack-chain';
 
 export class OutputConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { pkg, dev, output } = context;
-        const outputPath = output ? path.resolve(pkg.projectPath, output) : path.join(getHomePath(pkg, target), 'dist');
+        const { dev, output } = context;
+        if (output) {
+            setProjectHomePath(path.join(process.cwd(), output));
+        }
+        const outputPath = path.join(getProjectHomePathForTarget(target), 'dist');
 
         config.output.path(outputPath);
 

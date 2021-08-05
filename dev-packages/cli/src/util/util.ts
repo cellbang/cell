@@ -27,7 +27,7 @@ export function loadContext(program: Command, spinner: ora.Ora) {
     const mode = getMode(options);
     const targets = getTargets(options);
     const prod = options.p || options.prod;
-    return CliContext.create(program, { targets, mode, prod, dev: isDev(options), spinner });
+    return CliContext.create(program, { args: options._, targets, mode, prod, dev: isDev(options), spinner });
 }
 
 function getArrayOptions(options: any, prop: string, shortProp: string) {
@@ -53,7 +53,6 @@ function getMode(options: any) {
 }
 
 function isDev(options: any) {
-
     return options._.includes('serve');
 }
 

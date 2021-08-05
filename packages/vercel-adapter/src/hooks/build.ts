@@ -1,10 +1,10 @@
-import { BuildContext, ConfigurationContext, getHomePath, getMalaguConfig } from '@malagu/cli-service';
+import { BuildContext, ConfigurationContext, getProjectHomePath, getMalaguConfig } from '@malagu/cli-service';
 import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
 import * as merge from 'webpack-merge';
 
 export default async (context: BuildContext) => {
-    const { pkg, cfg, configurations } = context;
+    const { cfg, configurations } = context;
     let vercelConfig: any = {};
     for (const c of configurations) {
         const config = getMalaguConfig(cfg, c.get('name')).vercel.config;
@@ -22,6 +22,6 @@ export default async (context: BuildContext) => {
         });
     }
 
-    const destDir = resolve(getHomePath(pkg), 'vercel.json');
+    const destDir = resolve(getProjectHomePath(), 'vercel.json');
     await writeJSON(destDir, vercelConfig, { spaces: 2 });
 };

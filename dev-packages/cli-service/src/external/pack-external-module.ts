@@ -5,6 +5,7 @@ import { BACKEND_TARGET, getPackager, getMalaguConfig } from '@malagu/cli-common
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import { Stats } from 'webpack';
+import { getCurrentRuntimePath } from '@malagu/cli-common/lib/util';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -77,7 +78,7 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
             // Check if the module has any peer dependencies and include them too
             try {
                 const modulePackagePath = join(
-                    dirname(join(process.cwd(), packagePath)),
+                    dirname(join(getCurrentRuntimePath(), packagePath)),
                     'node_modules',
                     module.external,
                     'package.json'

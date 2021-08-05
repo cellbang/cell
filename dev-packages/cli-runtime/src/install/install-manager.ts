@@ -1,28 +1,31 @@
 import { resolve } from 'path';
-import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
+import { existsSync, copy, readFile, writeFile } from 'fs-extra';
 const inquirer = require('inquirer');
-import { templates } from './templates';
+import { templates } from './runtimes';
+import uninstall from '../uninstall/uninstall';
 import { spawnSync } from 'child_process';
 import { ContextUtils, CliContext, getPackager, executeHook } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
 import { ok } from 'assert';
+import { getRuntimePath } from '@malagu/cli-common/lib/util';
+import { basename, join } from 'path';
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
-const PLACEHOLD = '{{ templatePath }}';
+const PLACEHOLD = '{{ runtimePath }}';
 
-const remoteTemplateRegex = /^(https?:|git@)/i;
+const remoteRuntimeRegex = /^(https?:|git@)/i;
 
-export interface Template {
+export interface Runtime {
     name: string;
     location: string;
 }
 
-export class InitManager {
+export class InstallManager {
 
     protected source: any[];
-    protected templateName: string;
+    protected runtimeName: string;
     protected location: string;
     protected cliContext: CliContext;
     constructor(protected readonly context: any) {
@@ -30,16 +33,15 @@ export class InitManager {
     }
 
     async output(): Promise<void> {
-        await this.selectTemplate();
+        await this.selectRuntime();
         await this.checkOutputDir();
         await this.doOutput();
     }
 
     async render(): Promise<void> {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
-        const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
-        packageJson.name = this.context.name;
-        await writeJSON(packageJsonPath, packageJson, { encoding: 'utf8', spaces: 2 });
+        const packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
+        await writeFile(packageJsonPath, packageContent);
     }
 
     async install(): Promise<void> {
@@ -51,21 +53,20 @@ export class InitManager {
         const outputDir = this.outputDir;
         const initContext = await ContextUtils.createInitContext(await this.getCliContext());
         await executeHook(initContext, 'Init');
-        console.log(chalk`{bold.green Success!} Initialized "${ this.templateName }" example in {bold.blue ${outputDir}}.`);
+        console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }
 
     protected async getCliContext(): Promise<CliContext> {
         if (!this.cliContext) {
             this.cliContext = await CliContext.create(this.context.program, {}, this.outputDir);
-            this.cliContext.name = this.context.name;
-            this.cliContext.outputDir = this.context.outputDir;
+            this.cliContext.alias = this.context.alias;
         }
         return this.cliContext;
     }
 
     protected get outputDir(): string {
-        return resolve(process.cwd(), this.context.outputDir, this.context.name);
+        return getRuntimePath(this.context.alias || this.runtimeName);
     }
 
     protected async checkOutputDir(): Promise<void> {
@@ -73,35 +74,44 @@ export class InitManager {
             const answers = await inquirer.prompt([{
                 name: 'overwrite',
                 type: 'confirm',
-                message: 'App already exists, overwrite the app'
+                message: 'Runtime already exists, overwrite the runtime'
             }]);
             if (!answers.overwrite) {
                 process.exit(0);
             }
+            await uninstall({ runtime: this.context.alias || this.runtimeName });
         }
     }
 
-    protected toOfficialTemplate(name: string, location: string): any {
+    protected toOfficialRuntime(name: string, location: string): any {
         return { name: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
     }
 
-    protected toThirdPartyTemplate(item: any): any {
+    protected toThirdPartyRuntime(item: any): any {
         return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
     }
 
-    protected async selectTemplate(): Promise<void> {
-        const { name, template } = this.context;
-        if (template) {
-            this.templateName = template;
-            if (remoteTemplateRegex.test(template)) {
-                this.location = template;
+    protected async selectRuntime(): Promise<void> {
+        const { runtime } = this.context;
+        if (runtime) {
+            this.runtimeName = runtime;
+            if (remoteRuntimeRegex.test(runtime)) {
+                this.location = runtime;
             } else {
                 Object.keys(templates).forEach(key => {
-                    if (key === template) {
+                    if (key === runtime) {
                         this.location = templates[key];
+                        return;
                     }
                 });
-                ok(this.location, `"${template}" template not found`);
+            }
+            if (!this.location && runtime.startsWith('.')) {
+                this.location = join(process.cwd(), runtime);
+                this.runtimeName = basename(this.location);
+            }
+
+            if (this.location) {
+                ok(this.location, `"${runtime}" runtime not found`);
             }
             return;
         }
@@ -110,37 +120,36 @@ export class InitManager {
             name: 'item',
             type: 'autocomplete',
             pageSize: 12,
-            message: 'Select a template to init',
+            message: 'Select a runtime to install',
             source: async (answersSoFar: any, input: string) => {
                 if (!this.source) {
-                    const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
+                    const officialTemplates = Object.keys(templates).map(key => this.toOfficialRuntime(key, templates[key]));
                     this.source = officialTemplates;
                     spinner.stop();
                 }
                 return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
             }
         }]);
-        this.templateName = answers.item.name;
-        this.context.name = name || answers.item.name;
+        this.runtimeName = answers.item.name;
         this.location = answers.item.location;
     }
 
     protected get realLocation() {
-        return this.location.replace(PLACEHOLD, resolve(__dirname, '..', '..', 'templates'));
+        return this.location.replace(PLACEHOLD, resolve(__dirname, '..', '..', 'runtimes'));
     }
 
     protected async doOutput(): Promise<void> {
-        if (remoteTemplateRegex.test(this.location)) {
-            this.outputRemoteTempate();
+        if (remoteRuntimeRegex.test(this.location)) {
+            this.outputRemoteRuntime();
         } else {
-            await this.outputLocalTemplate();
+            await this.outputLocalRuntime();
         }
     }
-    protected async outputLocalTemplate(): Promise<void> {
+    protected async outputLocalRuntime(): Promise<void> {
         await copy(this.realLocation, this.outputDir);
     }
 
-    protected outputRemoteTempate(): void {
+    protected outputRemoteRuntime(): void {
         spawnSync('git', ['clone', '--depth=1', this.location, this.outputDir], { stdio: 'inherit' });
     }
 }

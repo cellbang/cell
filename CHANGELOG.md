@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.30.0
+
+- feat(cli-runtime) Support runtime mode
+
 ## v1.29.0
 
 - feat(cli) upgrade dependency package `commander`

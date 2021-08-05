@@ -20,8 +20,15 @@ interface Data {
     deployHookModules: Module[];
 }
 
-// eslint-disable-next-line no-null/no-null
-const exitListener = (code: number | null) => code !== null && process.exit(code);
+const exitListener = (code: number | null) => {
+    // eslint-disable-next-line no-null/no-null
+    if (code !== null) {
+        process.exit(code);
+    } else {
+        process.exit(-1);
+    }
+
+};
 
 function execute() {
     if (current?.killed === false) {
@@ -31,6 +38,7 @@ function execute() {
     current = fork(join(__dirname, 'malagu.js'), argv, { stdio: 'inherit' });
     // eslint-disable-next-line no-null/no-null
     current.on('exit', exitListener);
+    current.on('error', () => process.exit(-1))
     current.on('message', (messageEvent: MessageEvent<Data>) => {
         if (messageEvent.type === 'cliContext') {
             const { components, webpackHookModules, configHookModules, buildHookModules, serveHookModules, deployHookModules } = messageEvent.data;

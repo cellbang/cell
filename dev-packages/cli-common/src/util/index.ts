@@ -1,18 +1,20 @@
-import * as fs from 'fs';
+import { readFileSync, existsSync, ensureFileSync, writeFileSync } from 'fs-extra';
 import * as lockfile from '@yarnpkg/lockfile';
 import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Module } from '../package';
 import * as path from 'path';
 import { CliContext } from '../context';
+import { homedir } from 'os';
+import { load, dump } from 'js-yaml';
 const chalk = require('chalk');
 
 export function checkPkgVersionConsistency(pkgName: string | RegExp, projectPath: string) {
     const yarnLockFile = path.resolve(projectPath, 'yarn.lock');
     const npmLockFile = path.resolve(projectPath, 'package-lock.json');
 
-    if (fs.existsSync(yarnLockFile)) {
-        const file = fs.readFileSync(yarnLockFile, 'utf8');
+    if (existsSync(yarnLockFile)) {
+        const file = readFileSync(yarnLockFile, 'utf8');
         const json = lockfile.parse(file);
         if (json.type !== 'success') {
             console.log(chalk`malagu {red.bold error} - yarn.lock file is in conflict status, pls solve the conflict then run the command again`);
@@ -36,7 +38,7 @@ export function checkPkgVersionConsistency(pkgName: string | RegExp, projectPath
                 }
             });
         }
-    } else if (fs.existsSync(npmLockFile)) {
+    } else if (existsSync(npmLockFile)) {
         const json: { dependencies: { [key: string]: any}} = require(npmLockFile);
         let pkgVersion = '';
         let newPkgVersion = '';
@@ -138,16 +140,24 @@ export function getPort(cfg: ApplicationConfig, target: string, port?: number) {
     return server.port;
 }
 
-export function getHomePath(pkg: ApplicationPackage, target: string = '') {
-    return path.resolve(pkg.projectPath, '.malagu', target);
+export function getProjectHomePathForTarget(target: string) {
+    return path.join(getProjectHomePath(), target);
 }
 
-export function getBackendHomePath(pkg: ApplicationPackage) {
-    return getHomePath(pkg, BACKEND_TARGET);
+export function getBackendProjectHomePath(pkg: ApplicationPackage) {
+    return getProjectHomePathForTarget(BACKEND_TARGET);
 }
 
-export function getFrontendHomePath(pkg: ApplicationPackage) {
-    return getHomePath(pkg, FRONTEND_TARGET);
+export function getFrontendProjectHomePath(pkg: ApplicationPackage) {
+    return getProjectHomePathForTarget(FRONTEND_TARGET);
+}
+
+export function getProjectHomePath() {
+    return process.env.MALAGU_PROJECT_HOME_PATH ? process.env.MALAGU_PROJECT_HOME_PATH : path.join(getCurrentRuntimePath(), '.malagu');
+}
+
+export function setProjectHomePath(projectHomePath: string) {
+    process.env.MALAGU_PROJECT_HOME_PATH = projectHomePath;
 }
 
 export function executeHook(context: CliContext, hook: string) {
@@ -158,4 +168,36 @@ export function executeHook(context: CliContext, hook: string) {
     } catch (err) {
         // noop
     }
+}
+
+export function getMalaguHomePath() {
+    return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.malagu');
+}
+
+export function getSettingsPath() {
+    return path.join(getMalaguHomePath(), 'settings.yml');
+}
+
+export function getSettings() {
+    const settingsPath = getSettingsPath();
+    if (existsSync(settingsPath)) {
+        const content = readFileSync(settingsPath, 'utf8');
+        return load(content);
+    }
+    return {};
+}
+
+export async function saveSettings(settings: any) {
+    const settingsPath = getSettingsPath();
+    ensureFileSync(settingsPath);
+    return writeFileSync(settingsPath, dump(settings), { encoding: 'utf8' });
+}
+
+export function getRuntimePath(runtime: string) {
+    return runtime ? path.join(getMalaguHomePath(), 'runtimes', runtime) : process.cwd();
+}
+
+export function getCurrentRuntimePath() {
+    const { defaultRuntime } = getSettings();
+    return getRuntimePath(defaultRuntime);
 }

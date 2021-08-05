@@ -6,6 +6,7 @@ import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
 import { mergeWith } from 'lodash';
 import { ExpressionHandler } from '../el';
+import { join } from 'path';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -71,10 +72,9 @@ export class ComponentPackageLoader {
 
         try {
             if (this.pkg.isRoot(nodePackage)) {
-                if (existsSync(this.pkg.path(configPath))) {
-                    fullConfigPath = this.pkg.path(configPath);
+                if (existsSync(join(nodePackage.modulePath, configPath))) {
+                    fullConfigPath = join(nodePackage.modulePath, configPath);
                 }
-
             } else {
                 fullConfigPath = this.pkg.resolveModule(nodePackage.name + `/${configPath}`);
             }

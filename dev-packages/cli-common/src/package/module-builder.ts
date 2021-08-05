@@ -21,10 +21,28 @@ export class ModuleBuilder {
            return this.pkg.resolveModule(realPath);
         } catch (error) {
             const projectPath = this.pkg.projectPath.split(sep).join('/');
-            if (realPath.indexOf(projectPath) === 0 && existsSync(resolve(`${realPath}.ts`))) {
-                return resolve(`${realPath}.ts`);
-            } else if (realPath.indexOf(projectPath) === 0 && existsSync(resolve(realPath))) {
-                return resolve(realPath);
+            if (realPath.indexOf(projectPath) === 0) {
+                if (existsSync(resolve(`${realPath}.ts`))) {
+                    return resolve(`${realPath}.ts`);
+                } else if (existsSync(resolve(realPath))) {
+                    return resolve(realPath);
+                } else if (this.pkg.projectPath !== process.cwd()) {
+                    realPath = join(process.cwd(), modulePath).split(sep).join('/');
+                    if (existsSync(realPath)) {
+                        return realPath;
+                    } else if (existsSync(`${realPath}.js`)) {
+                        return `${realPath}.js`;
+                    } else if (existsSync(`${realPath}.ts`)) {
+                        return `${realPath}.ts`;
+                    }
+                }
+            } else if (realPath.indexOf(process.cwd()) === 0) {
+                if (existsSync(resolve(`${realPath}.ts`))) {
+                    return resolve(`${realPath}.ts`);
+                } else if (existsSync(resolve(realPath))) {
+                    return resolve(realPath);
+
+                } 
             } else if (existsSync(resolve(this.pkg.resolveModulePath(componentPackage.name), modulePath))) {
                 return resolve(this.pkg.resolveModulePath(componentPackage.name), modulePath);
             }

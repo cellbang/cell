@@ -1,6 +1,6 @@
 import { ApplicationPackage } from '../package';
 import { Command } from 'commander';
-import { checkPkgVersionConsistency, executeHook } from '../util';
+import { checkPkgVersionConsistency, executeHook, getCurrentRuntimePath } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
 import { ApplicationConfig } from '../package';
@@ -13,7 +13,8 @@ export interface CliContext {
 }
 
 export namespace CliContext {
-    export async function create(program: Command, options: { [key: string]: any } = {}, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
+    export async function create(
+        program: Command, options: { [key: string]: any } = {}, projectPath: string = getCurrentRuntimePath(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
             checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
@@ -29,6 +30,7 @@ export namespace CliContext {
                 const config = cfg.getConfig(target);
                 config.env = { ...process.env, _ignoreEl: true };
                 config.pkg = { ...pkg.pkg, _ignoreEl: true};
+                config.currentRuntimePath = getCurrentRuntimePath();
                 config.cliContext = { ...options, ...program, _ignoreEl: true};
                 const expressionHandler = new ExpressionHandler(config);
 
@@ -48,6 +50,7 @@ export namespace CliContext {
                 delete config.env;
                 delete config.pkg;
                 delete config.cliContext;
+                delete config.currentRuntimePath;
             }
 
         }
@@ -74,7 +77,7 @@ export namespace ContextUtils {
         _current = current;
     }
 
-    export function createCliContext(program: Command, options: { [key: string]: any } = {}, projectPath: string = process.cwd()): Promise<CliContext> {
+    export function createCliContext(program: Command, options: { [key: string]: any } = {}, projectPath: string = getCurrentRuntimePath()): Promise<CliContext> {
         return CliContext.create(program, options, projectPath);
     }
 

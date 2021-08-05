@@ -123,6 +123,9 @@
     },
     {
       "path": "../packages/schedule/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/cli-runtime/compile.tsconfig.json"
     }
   ]
 }

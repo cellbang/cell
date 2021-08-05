@@ -79,6 +79,10 @@ export class ComponentPackage {
         return this.raw.malaguComponent;
     }
 
+    get modulePath(): string {
+        return this.raw.modulePath || '';
+    }
+
     getAuthor(): string {
         if (this.raw.publisher) {
             return this.raw.publisher.username;

@@ -1,4 +1,4 @@
-import { Autowired, Component, Prioritizeable } from '@malagu/core';
+import { Autowired, Component, Optional, Prioritizeable } from '@malagu/core';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
 import { NotFoundError } from '../error';
 import { NotFoundAndContinueError } from '../error';
@@ -11,7 +11,8 @@ export class HandlerMappingImpl implements HandlerMapping {
 
     constructor(
         @Autowired(HandlerAdapter)
-        protected readonly handlerAdapters: HandlerAdapter[]
+        @Optional()
+        protected readonly handlerAdapters: HandlerAdapter[] = []
     ) {
         this.prioritized = Prioritizeable.prioritizeAllSync(this.handlerAdapters).map(c => c.value);
     }
