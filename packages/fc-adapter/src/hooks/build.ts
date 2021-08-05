@@ -1,13 +1,13 @@
-import { BuildContext, getHomePath } from '@malagu/cli-service';
+import { BuildContext, getProjectHomePath } from '@malagu/cli-service';
 import { join } from 'path';
 import { writeFile } from 'fs-extra';
 import { FaaSAdapterUtils } from '@malagu/faas-adapter/lib/hooks';
 
 export default async (context: BuildContext) => {
-    const { pkg, cfg } = context;
+    const { cfg } = context;
     const adapterConfig = FaaSAdapterUtils.getConfiguration<any>(cfg);
     if (adapterConfig.function?.runtime === 'custom') {
-        const destDir = join(getHomePath(pkg), 'bootstrap');
+        const destDir = join(getProjectHomePath(), 'bootstrap');
         const bootstrap = adapterConfig.function.bootstrap;
         delete adapterConfig.function.bootstrap;
 

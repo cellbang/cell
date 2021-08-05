@@ -1,10 +1,10 @@
 import { BACKEND_TARGET, getMalaguConfig, ApplicationConfig } from '@malagu/cli-service';
 import { ensureFile, existsSync, readFile, writeFile } from 'fs-extra';
 import { prompt } from 'inquirer';
-import { homedir } from 'os';
 import { resolve, sep } from 'path';
 import { Profile } from './faas-protocol';
 import { load, dump } from 'js-yaml';
+import { getMalaguHomePath } from '@malagu/cli-common/lib/util';
 
 export namespace FaaSAdapterUtils {
     export function getConfiguration<T>(cfg: ApplicationConfig): T {
@@ -13,7 +13,7 @@ export namespace FaaSAdapterUtils {
     }
 
     export function getProfilePath(profilePath: string) {
-        return resolve(homedir(), '.malagu', profilePath.split('/').join(sep));
+        return resolve(getMalaguHomePath(), profilePath.split('/').join(sep));
     }
 
     export async function getProfileFromFile(profilePath: string): Promise<Profile | undefined> {

@@ -1,4 +1,4 @@
-import { DeployContext, getHomePath } from '@malagu/cli-service';
+import { DeployContext, getProjectHomePath } from '@malagu/cli-service';
 import { CodeLoader, CodeUri, FaaSAdapterConfiguration } from './faas-protocol';
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 import * as JSZip from 'jszip';
@@ -7,8 +7,7 @@ const chalk = require('chalk');
 
 export class DefaultCodeLoader implements CodeLoader {
     async load(ctx: DeployContext, config: FaaSAdapterConfiguration): Promise<JSZip> {
-        const { pkg } = ctx;
-        let codeDir = getHomePath(pkg);
+        let codeDir = getProjectHomePath();
         if (!existsSync(codeDir)) {
             console.log(chalk`{yellow Please build app first with "malagu build"}`);
             throw Error('Please build app first with "malagu build"');

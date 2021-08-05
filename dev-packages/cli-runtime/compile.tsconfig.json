@@ -11,9 +11,6 @@
   "references": [
     {
       "path": "../cli-common/compile.tsconfig.json"
-    },
-    {
-      "path": "../cli-runtime/compile.tsconfig.json"
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "name": "static-site",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "@malagu/core": "1.30.0-next.c2797b00",
+    "@malagu/scf-adapter": "1.30.0-next.c2797b00",
+    "@malagu/serve-static": "1.30.0-next.c2797b00"
+  },
+  "devDependencies": {
+    "@malagu/cli": "1.30.0-next.c2797b00",
+    "@malagu/cli-service": "1.30.0-next.c2797b00"
+  }
+}

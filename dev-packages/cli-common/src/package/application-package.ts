@@ -1,14 +1,16 @@
 import * as paths from 'path';
 import { readJsonFile } from './json-file';
-import { NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
-import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage } from './package-protocol';
+import { Dependencies, NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
+import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage, customizer } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ComponentPackageLoader } from './component-package-loader';
 import { Module } from './package-protocol';
+import mergeWith = require('lodash.mergewith');
 
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
+import { getCurrentRuntimePath } from '../util';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -48,7 +50,19 @@ export class ApplicationPackage {
             } else {
                 this._pkg = {} as PublishedNodePackage;
             }
-            this._pkg!.name = this._pkg!.name || paths.basename(this.projectPath);
+            if (process.cwd() !== this.projectPath) {
+                if (existsSync(paths.join(process.cwd(), 'package.json'))) {
+                    const tmp = readJsonFile(paths.join(process.cwd(), 'package.json'));
+                    this._pkg!.name = tmp.name || paths.basename(process.cwd());
+                    this._pkg!.version = tmp.version || 'latest';
+                    this._pkg!.devDependencies = { ...this._pkg!.devDependencies, ...tmp.devDependencies } as Dependencies
+                } else {
+                    this._pkg!.name = paths.basename(process.cwd());
+                }
+            } else {
+                this._pkg!.name = this._pkg!.name || paths.basename(this.projectPath);
+                this._pkg!.version = this._pkg!.version || 'latest';
+            }
             this._pkg!.version = this._pkg!.version || 'latest';
         }
         return this._pkg!;
@@ -73,7 +87,15 @@ export class ApplicationPackage {
     get rootComponentPackage() {
         if (!this._rootComponentPackage) {
             this.pkg.malaguComponent = {};
-            this.componentPackageLoader.load(this.pkg, this.options.mode);
+            this.pkg.modulePath = this.projectPath;
+            if (process.cwd() !== this.projectPath) {
+                const virtualPkg = { malaguComponent: { mode: [] }, modulePath: process.cwd() };
+                this.componentPackageLoader.load(virtualPkg, this.options.mode);
+                this.componentPackageLoader.load(this.pkg, virtualPkg.malaguComponent.mode);
+                this.pkg.malaguComponent = mergeWith(this.pkg.malaguComponent, virtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode }, customizer);
+            } else {
+                this.componentPackageLoader.load(this.pkg, this.options.mode);
+            }
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
@@ -209,7 +231,7 @@ export class ApplicationPackage {
     }
 
     isRoot(componentPackage: ComponentPackage | NodePackage) {
-        if (componentPackage.name === this.pkg.name) {
+        if (componentPackage.modulePath) {
             return true;
         }
         return false;
@@ -273,7 +295,10 @@ export class ApplicationPackage {
      */
     get resolveModule(): ApplicationModuleResolver {
         if (!this._moduleResolver) {
-            const resolutionPaths = [this.packagePath || process.cwd()];
+            const resolutionPaths = [this.packagePath || getCurrentRuntimePath()];
+            if (process.cwd() !== this.packagePath) {
+                resolutionPaths.push(process.cwd());
+            }
             this._moduleResolver = modulePath => require.resolve(modulePath, { paths: resolutionPaths });
         }
         return this._moduleResolver!;

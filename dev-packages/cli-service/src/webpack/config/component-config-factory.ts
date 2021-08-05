@@ -1,9 +1,10 @@
 
-import { getHomePath, FRONTEND_TARGET, CONFIG_FILE, getConfig, CliContext, getWebpackConfig } from '@malagu/cli-common';
+import { FRONTEND_TARGET, CONFIG_FILE, getConfig, CliContext, getWebpackConfig, getProjectHomePathForTarget } from '@malagu/cli-common';
 import * as path from 'path';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
 import { dump } from 'js-yaml';
 import * as WebpackChain from 'webpack-chain';
+import { getCurrentRuntimePath } from '@malagu/cli-common/lib/util';
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
@@ -22,7 +23,7 @@ export class ComponentConfigFactory {
                     .merge([
                         path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
                         path.join(__dirname, '..', '..', '..', 'node_modules'),
-                        'node_modules',
+                        path.join(getCurrentRuntimePath(), 'node_modules'),
                         ...nodePathList, // Support for NODE_PATH environment variable
                     ])
                 .end()
@@ -47,11 +48,11 @@ export class ComponentConfigFactory {
 
 export class ComponentConfigConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { cfg, pkg } = context;
+        const { cfg } = context;
         const c = getConfig(cfg, target);
         const source = `module.exports.config = ${JSON.stringify(c)};`;
 
-        const homePath = getHomePath(pkg, target);
+        const homePath = getProjectHomePathForTarget(target);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
         writeFileSync(configPath, dump(c), { encoding: 'utf8' });
