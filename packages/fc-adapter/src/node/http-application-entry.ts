@@ -10,10 +10,6 @@ container.then(async c => {
     await c.get<Application>(Application).start();
 
     const app = express();
-    app.use(express.json());
-    app.use(express.raw());
-    app.use(express.text());
-    app.use(express.urlencoded({ extended: true }));
 
     app.all('*', async (req: any, res: any) => {
         process.env.ALIBABA_ACCOUNT_ID = req.get('x-fc-account-id');

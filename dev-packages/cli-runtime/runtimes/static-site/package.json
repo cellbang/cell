@@ -6,12 +6,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {
-    "@malagu/core": "1.30.0-next.c2797b00",
-    "@malagu/scf-adapter": "1.30.0-next.c2797b00",
-    "@malagu/serve-static": "1.30.0-next.c2797b00"
+    "@malagu/core": "latest",
+    "@malagu/scf-adapter": "latest",
+    "@malagu/serve-static": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "1.30.0-next.c2797b00",
-    "@malagu/cli-service": "1.30.0-next.c2797b00"
+    "@malagu/cli": "latest",
+    "@malagu/cli-service": "latest"
   }
 }

@@ -1,4 +1,3 @@
-import * as express from 'express';
 import { ServeContext } from '@malagu/cli-service';
 export class Deferred {
     resolve: () => void;
@@ -11,10 +10,6 @@ export class Deferred {
 }
 export default async (context: ServeContext) => {
     const { app, entryContextProvider } = context;
-    app.use(express.json());
-    app.use(express.raw());
-    app.use(express.text());
-    app.use(express.urlencoded({ extended: true }));
     let doDispatch: (req: any, res: any) => void;
     const compileDeferred = new Deferred();
 

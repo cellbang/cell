@@ -2,7 +2,10 @@
 
 ## v1.30.0
 
-- feat(cli-runtime) Support runtime mode
+- feat(cli-runtime) Support runtime mode: `malagu runtime install`
+- feat(web) supports the configuration of request body related attributes: `malagu.web.body.limit: 5mb`
+- feat(cli-runtime) 支持请求体相关属性配置：`malagu.web.body.limit: 5mb`
+- feat(cli-runtime) 支持运行时模式: `malagu runtime install`
 
 ## v1.29.0
 

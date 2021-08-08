@@ -10,10 +10,6 @@ import * as proxy from '@webserverless/fc-express';
 let listeners: FaaSEventListener<any>[];
 
 const app = express();
-app.use(express.json());
-app.use(express.raw());
-app.use(express.text());
-app.use(express.urlencoded({ extended: true }));
 
 const server = new proxy.Server(app);
 

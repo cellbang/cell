@@ -15,10 +15,6 @@ container.then(async c => {
     const { port } = configProvider.get<any>('malagu.server', DEFAULT_SERVER_OPTIONS);
 
     const app = express();
-    app.use(express.json());
-    app.use(express.raw());
-    app.use(express.text());
-    app.use(express.urlencoded({ extended: true }));
     app.all('*', async (req: any, res: any) => {
         const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
         const httpContext = new HttpContext(req, res);

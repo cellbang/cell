@@ -55,7 +55,7 @@ export class ApplicationPackage {
                     const tmp = readJsonFile(paths.join(process.cwd(), 'package.json'));
                     this._pkg!.name = tmp.name || paths.basename(process.cwd());
                     this._pkg!.version = tmp.version || 'latest';
-                    this._pkg!.devDependencies = { ...this._pkg!.devDependencies, ...tmp.devDependencies } as Dependencies
+                    this._pkg!.devDependencies = { ...this._pkg!.devDependencies, ...tmp.devDependencies } as Dependencies;
                 } else {
                     this._pkg!.name = paths.basename(process.cwd());
                 }

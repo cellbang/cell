@@ -38,7 +38,7 @@ function execute() {
     current = fork(join(__dirname, 'malagu.js'), argv, { stdio: 'inherit' });
     // eslint-disable-next-line no-null/no-null
     current.on('exit', exitListener);
-    current.on('error', () => process.exit(-1))
+    current.on('error', () => process.exit(-1));
     current.on('message', (messageEvent: MessageEvent<Data>) => {
         if (messageEvent.type === 'cliContext') {
             const { components, webpackHookModules, configHookModules, buildHookModules, serveHookModules, deployHookModules } = messageEvent.data;

@@ -41,8 +41,7 @@ export class ModuleBuilder {
                     return resolve(`${realPath}.ts`);
                 } else if (existsSync(resolve(realPath))) {
                     return resolve(realPath);
-
-                } 
+                }
             } else if (existsSync(resolve(this.pkg.resolveModulePath(componentPackage.name), modulePath))) {
                 return resolve(this.pkg.resolveModulePath(componentPackage.name), modulePath);
             }
