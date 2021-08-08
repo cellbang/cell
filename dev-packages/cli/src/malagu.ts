@@ -24,8 +24,8 @@ console.log(`
 ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
 ╭──────────────────────────────────────────────────╮
-│      Serverless Frist Development Framework      │${defaultRuntime ? '\n│' + 
-chalk.yellow(`Runtime<${defaultRuntime}>`.padStart(25 + Math.floor((9 + defaultRuntime.length)/2)).padEnd(50))+ '│' : ''}
+│      Serverless Frist Development Framework      │${defaultRuntime ? '\n│' +
+chalk.yellow(`Runtime<${defaultRuntime}>`.padStart(25 + Math.floor((9 + defaultRuntime.length) / 2)).padEnd(50)) + '│' : ''}
 ╰──────────────────────────────────────────────────╯
 `);
 

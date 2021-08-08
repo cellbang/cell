@@ -3,13 +3,16 @@ import { MiddlewareProvider } from '../middleware';
 import { ErrorHandlerProvider } from '../error/error-hander-provider';
 import { Dispatcher } from './dispatcher-protocol';
 import { Component, Autowired, Logger } from '@malagu/core';
-import { HandlerExecutionChain } from '../handler/handler-protocol';
+import { HandlerExecutionChain, HandlerMapping } from '../handler/handler-protocol';
 
 @Component(Dispatcher)
 export class DispatcherImpl implements Dispatcher<Context> {
 
     @Autowired(HandlerExecutionChain)
     protected handlerExecutionChain: HandlerExecutionChain;
+
+    @Autowired(HandlerMapping)
+    protected readonly handlerMapping: HandlerMapping;
 
     @Autowired(MiddlewareProvider)
     protected middlewareProvider: MiddlewareProvider;
@@ -24,7 +27,7 @@ export class DispatcherImpl implements Dispatcher<Context> {
         try {
             Context.setCurrent(ctx);
             const middlewares = this.middlewareProvider.provide();
-            await this.handlerExecutionChain.execute(middlewares);
+            await this.handlerExecutionChain.execute(middlewares, () => this.handlerMapping.handle());
         } catch (err) {
             this.logger.error(err);
             await this.handleError(ctx, err);

@@ -35,7 +35,7 @@ export default async (options: UninstallOptions) => {
         if (runtime) {
             const runtimePath = getRuntimePath(runtime);
             if (existsSync(runtimePath)) {
-                const spinner = ora({ text: 'Uninstall...', discardStdin: false }).start();
+                const spinner = ora({ text: 'Uninstalling...', discardStdin: false }).start();
                 rimraf.sync(runtimePath);
                 const settings = getSettings();
                 if (runtime === settings.defaultRuntime) {

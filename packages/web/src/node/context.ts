@@ -33,6 +33,10 @@ export namespace Context {
         store.run(() => fn());
     }
 
+    export function bind(fn: (...args: any[]) => void, context?: any) {
+        return store.bind(fn, context);
+    }
+
     export function setCurrent(context: Context) {
         store.set(CURRENT_CONTEXT_REQUEST_KEY, context);
     }

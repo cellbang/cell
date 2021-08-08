@@ -16,11 +16,7 @@ export function compose(middlewares: Middleware[]) {
             if (!middleware) {
                 return Promise.resolve();
             }
-            try {
-                return middleware.handle(ctx, (): Promise<void> => dispatch(i + 1));
-            } catch (err) {
-                return Promise.reject(err);
-            }
+            return middleware.handle(ctx, (): Promise<void> => dispatch(i + 1));
         };
         return dispatch(0);
     };
