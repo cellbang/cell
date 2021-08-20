@@ -1,4 +1,4 @@
-backend: 
+backend:
   malagu:
     server:
       path: /${malagu['faas-adapter'].function.name}/
@@ -9,6 +9,7 @@ malagu:
       # certificateId: xxxx
       protocol: http
       netType: OUTER
+      isDefaultMapping: true
     apiGateway:
       release:
         environmentName: "${stage|eval == 'prod' ? 'release' : stage|eval == 'pre' ? 'prepub' :  stage }"
