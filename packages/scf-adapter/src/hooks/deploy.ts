@@ -592,6 +592,7 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
         await spinner(`Update ${customDomain.name} customDomain`, async () => {
             const modifySubDomainRequest: any = {};
             parseCustomDomainMeta(modifySubDomainRequest, customDomain, serviceId, netSubDomain);
+            delete modifySubDomainRequest.NetSubDomain;
             await apiClient.ModifySubDomain(modifySubDomainRequest);
         });
     } else {
