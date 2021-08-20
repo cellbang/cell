@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.30.2
+
+- fix(scf-adapter): 更新腾讯云 sdk，并修复自定义域名问题 (#51)
+- fix(cli-service): 在 package.json 中声明依赖 chalk (#49)
+
 ## v1.30.0
 
 - feat(cli-runtime) Support runtime mode: `malagu runtime install`
