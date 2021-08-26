@@ -26,45 +26,43 @@ function createVueRule(webpackConfig: any) {
 
     webpackConfig.resolve
         .alias
-        .set(
-            'vue$',
-            'vue/dist/vue.runtime.esm-bundler.js'
-        );
+            .set(
+                'vue$',
+                'vue/dist/vue.runtime.esm-bundler.js'
+            );
 
     webpackConfig.module
         .rule('vue')
-        .test(/\.vue$/)
-        .use('cache-loader')
-        .loader(require.resolve('cache-loader'))
-        .options(vueLoaderCacheConfig)
-        .end()
-        .use('vue-loader')
-        .loader(require.resolve('vue-loader'))
-        .options({
-            ...vueLoaderCacheConfig,
-            babelParserPlugins: ['jsx', 'classProperties', 'decorators-legacy']
-        })
-        .end()
-        .end();
+            .test(/\.vue$/)
+            .use('cache-loader')
+                .loader(require.resolve('cache-loader'))
+                .options(vueLoaderCacheConfig)
+                .end()
+            .use('vue-loader')
+                .loader(require.resolve('vue-loader'))
+                .options({
+                    ...vueLoaderCacheConfig,
+                    babelParserPlugins: ['jsx', 'classProperties', 'decorators-legacy']
+                });
 
     webpackConfig.module
-      .rule('ts')
-        .test(/\.ts$/)
-        .end()
-      .rule('tsx')
-        .test(/\.tsx$/)
-          .use('babel-loader')
-            .loader('babel-loader')
-            .options({
-              plugins: ['@babel/plugin-transform-modules-commonjs', '@vue/babel-plugin-jsx']
-            }).end()
-          .use('ts-loader')
-            .loader('ts-loader')
-            .options({
-              experimentalWatchApi: true,
-              transpileOnly: true,
-              appendTsxSuffixTo: ['\.vue$']
-            }).after('babel-loader');
+        .rule('ts')
+            .test(/\.ts$/)
+            .end()
+        .rule('tsx')
+            .test(/\.tsx$/)
+            .use('babel-loader')
+                .loader('babel-loader')
+                .options({
+                    plugins: ['@babel/plugin-transform-modules-commonjs', '@vue/babel-plugin-jsx']
+                }).end()
+            .use('ts-loader')
+                .loader('ts-loader')
+                .options({
+                    experimentalWatchApi: true,
+                    transpileOnly: true,
+                    appendTsxSuffixTo: ['\.vue$']
+                }).after('babel-loader');
 
     webpackConfig.plugin('vue-loader')
         .use(require('vue-loader').VueLoaderPlugin);
@@ -301,6 +299,26 @@ export default async (context: WebpackContext) => {
                     .optimization
                         .minimizer('optimize-css')
                             .use(require('css-minimizer-webpack-plugin'));
+
+            webpackConfig.module
+                .rule('img')
+                    .merge({
+                        generator: {
+                            publicPath: '../',
+                        }
+                    }).end()
+                .rule('svg')
+                    .merge({
+                        generator: {
+                            publicPath: '../',
+                        }
+                    }).end()
+                .rule('font')
+                    .merge({
+                        generator: {
+                            publicPath: '../',
+                        }
+                    }).end();
         }
     }
 };

@@ -126,7 +126,7 @@ export class BaseConfigFactory {
                             test: /\.(jpg|png|gif)$/,
                             type: 'asset/resource',
                             generator: {
-                                filename: '[hash].[ext]'
+                                filename: '[hash][ext]'
                             }
                         })
                     .end()
