@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.30.3
+
+- fix(cli-service) 去除asset文件名中多余的点(.)
+- fix(vue) fix vue webpack hooks indent
+- fix(vue) fix error asset relative path in css
+
 ## v1.30.2
 
 - fix(scf-adapter): 更新腾讯云 sdk，并修复自定义域名问题 (#51)
