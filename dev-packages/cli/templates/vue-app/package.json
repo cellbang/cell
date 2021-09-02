@@ -12,7 +12,7 @@
   "dependencies": {
     "@malagu/core": "latest",
     "@malagu/rpc": "latest",
-    "@malagu/fc-adapter": "latest",
+    "@malagu/scf-adapter": "latest",
     "@malagu/vue": "latest",
     "@malagu/serve-static": "latest",
     "vue-router": "^4.0.8",
