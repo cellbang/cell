@@ -12,7 +12,7 @@
   "dependencies": {
     "@malagu/core": "latest",
     "@malagu/mvc": "latest",
-    "@malagu/fc-adapter": "latest"
+    "@malagu/scf-adapter": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest",

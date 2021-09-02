@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "@app/welcome": "^0.0.1",
-    "@malagu/fc-adapter": "latest"
+    "@malagu/scf-adapter": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest",

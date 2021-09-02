@@ -1,5 +1,5 @@
 {
-  "name": "scf-app",
+  "name": "fc-app",
   "keywords": [
     "malagu-component"
   ],
@@ -12,7 +12,7 @@
   "dependencies": {
     "@malagu/core": "latest",
     "@malagu/mvc": "latest",
-    "@malagu/scf-adapter": "latest"
+    "@malagu/fc-adapter": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest",
