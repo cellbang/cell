@@ -236,11 +236,14 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     cleanObj(req);
 }
 
-function getFunction(namespace: string, functionName: string) {
+function getFunction(namespace: string, functionName: string, qualifier?: string) {
     const scfClient = getScfClient();
     const getFunctionRequest: any = {};
     getFunctionRequest.FunctionName = functionName;
     getFunctionRequest.Namespace = namespace;
+    if (qualifier) {
+        getFunctionRequest.Qualifier = qualifier;
+    }
     return scfClient.GetFunction(getFunctionRequest);
 }
 
@@ -341,10 +344,10 @@ async function createOrUpdateAlias(alias: any, functionVersion: string) {
     getAliasRequest.FunctionName = alias.functionName;
     getAliasRequest.Namespace = alias.namespace;
     try {
-        await checkStatus(alias.namespace, alias.functionName);
+        await checkStatus(alias.namespace, alias.functionName, functionVersion);
         await scfClient.GetAlias(getAliasRequest);
         await spinner(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(alias.namespace, alias.functionName);
+            await checkStatus(alias.namespace, alias.functionName, functionVersion);
             const updateAliasRequest: any = {};
             parseAliasMeta(updateAliasRequest, alias, functionVersion);
             await scfClient.UpdateAlias(updateAliasRequest);
@@ -352,7 +355,7 @@ async function createOrUpdateAlias(alias: any, functionVersion: string) {
     } catch (error) {
         if (error.code === 'ResourceNotFound.Alias') {
             await spinner(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
-                await checkStatus(alias.namespace, alias.functionName);
+                await checkStatus(alias.namespace, alias.functionName, functionVersion);
                 const createAliasRequest: any = {};
                 parseAliasMeta(createAliasRequest, alias, functionVersion);
                 await scfClient.CreateAlias(createAliasRequest);
@@ -685,11 +688,11 @@ async function updateApiEnvironmentStrategy(serviceId: string, apiId: string, ap
     });
 }
 
-async function checkStatus(namespace: string, functionName: string) {
+async function checkStatus(namespace: string, functionName: string, qualifier?: string) {
     let status = 'Updating';
     let times = 200;
     while ((status !== 'Active') && times > 0) {
-        const tempFunc = await getFunction(namespace, functionName);
+        const tempFunc = await getFunction(namespace, functionName, qualifier);
         status = tempFunc.Status;
         await delay(200);
         times = times - 1;
