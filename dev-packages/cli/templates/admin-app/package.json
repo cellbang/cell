@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "@malagu/core": "latest",
-    "@malagu/fc-adapter": "latest",
+    "@malagu/scf-adapter": "latest",
     "@malagu/rpc": "latest",
     "@malagu/serve-static": "latest",
     "@malagu/shell": "latest",
