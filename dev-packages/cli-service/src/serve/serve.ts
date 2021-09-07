@@ -18,7 +18,7 @@ export default async (cliContext: CliContext, options: ServeOptions) => {
         if (ctx.configurations.length === 0) {
             throw new Error('No malagu module found.');
         }
-        new ServeManager(ctx).start();
+       await new ServeManager(ctx).start();
     } catch (error) {
         console.error(error);
         process.exit(-1);
