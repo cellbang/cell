@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.32.0
+
+- feat(cli-service+web) 升级 `webpack-dev-server` 和 `axois` 
+- feat(cli-service+web) upgrade `webpack-dev-server` and `axois` 
+
 ## v1.30.3
 
 - fix(cli-service) 去除asset文件名中多余的点(.)

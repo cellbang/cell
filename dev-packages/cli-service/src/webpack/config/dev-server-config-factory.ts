@@ -11,12 +11,18 @@ export class DevServerConfigFactory {
             .devServer
                 .port(realPort)
                 .open(open)
-                .contentBase(false);
+                .merge({
+                    static: false
+                });
 
         if (BACKEND_TARGET === target) {
             config
                 .devServer
-                    .writeToDisk(true);
+                    .merge({
+                        devMiddleware: {
+                            writeToDisk: true
+                        }
+                    });
         }
     }
 

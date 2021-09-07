@@ -1,13 +1,8 @@
 import * as fs from 'fs';
-import * as net from 'net';
 import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
-const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
-const colors = require('webpack-dev-server/lib/utils/colors');
-const processOptions = require('webpack-dev-server/lib/utils/processOptions');
-const createLogger = require('webpack-dev-server/lib/utils/createLogger');
-const findPort = require('webpack-dev-server/lib/utils/findPort');
+// const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
 import { ExecuteServeHooks } from './serve-manager';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common';
 import * as delay from 'delay';
@@ -23,7 +18,7 @@ function createCompiler(configuration: webpack.Configuration, options: any, log:
         return webpack(configuration);
     } catch (err) {
         if (err instanceof (webpack as any).WebpackOptionsValidationError) {
-            log.error(colors.error(options.stats.colors, err.message));
+            log.error(err.message);
             process.exit(1);
         }
         throw err;
@@ -80,12 +75,11 @@ function attachBackendServer(ctx: ConfigurationContext, executeServeHooks: Execu
             await delay(200);
         }
     };
-    executeServeHooks(server.listeningApp, server.app, compiler, entryContextProvider);
+    executeServeHooks(server.server, server.app, compiler, entryContextProvider);
 
 }
 
-function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
-    const log = createLogger(options);
+async function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
     let frontendConfiguration: webpack.Configuration | undefined;
     let backendConfiguration: webpack.Configuration | undefined;
     for (const c of configurations) {
@@ -97,86 +91,32 @@ function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Con
     }
     const configuration = frontendConfiguration || backendConfiguration;
     if (!configuration) {
-        log.error(colors.error(options.stats.colors, 'No suitable target found.'));
+        console.error('No suitable target found.');
         process.exit(-1);
     }
-    const compiler = createCompiler(configuration, options, log);
+    const compiler = createCompiler(configuration, options, console);
 
     try {
-        server = new Server(compiler, options, log);
-        setupExitSignals(server);
+        server = new Server(options, compiler);
+        await server.start();
         if (frontendConfiguration && backendConfiguration) {
-            attachBackendServer(ctx, executeServeHooks, backendConfiguration, options, log);
+            attachBackendServer(ctx, executeServeHooks, backendConfiguration, options, console);
         } else if (configuration.name === BACKEND_TARGET) {
-            attachBackendServer(ctx, executeServeHooks, configuration, options, log, compiler);
+            attachBackendServer(ctx, executeServeHooks, configuration, options, console, compiler);
         }
     } catch (err) {
         if (err.name === 'ValidationError') {
-            log.error(colors.error(options.stats.colors, err.message));
-            process.exit(1);
+            console.error(err.message);
+        } else {
+            console.error(err);
         }
-
-        throw err;
-    }
-
-    if (options.socket) {
-        server.listeningApp.on('error', (e: any) => {
-            if (e.code === 'EADDRINUSE') {
-                const clientSocket = new net.Socket();
-
-                clientSocket.on('error', (err: any) => {
-                    if (err.code === 'ECONNREFUSED') {
-                        // No other server listening on this socket so it can be safely removed
-                        fs.unlinkSync(options.socket);
-
-                        server.listen(options.socket, options.host, (error: Error | undefined) => {
-                            if (error) {
-                                throw error;
-                            }
-                        });
-                    }
-                });
-
-                clientSocket.connect({ path: options.socket }, () => {
-                    throw new Error('This socket is already used');
-                });
-            }
-        });
-
-        server.listen(options.socket, options.host, (err: Error | undefined) => {
-            if (err) {
-                throw err;
-            }
-
-            // chmod 666 (rw rw rw)
-            const READ_WRITE = 438;
-
-            fs.chmod(options.socket, READ_WRITE, e => {
-                if (e) {
-                    throw e;
-                }
-            });
-        });
-    } else {
-        findPort(options.port)
-            .then((port: any) => {
-                options.port = port;
-                server.listen(options.port, options.host, (err: Error | undefined) => {
-                    if (err) {
-                        throw err;
-                    }
-                });
-            })
-            .catch((err: Error) => {
-                throw err;
-            });
+        process.exit(2);
     }
 
     return compiler;
 }
 
 export function startDevServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks) {
-    processOptions(ctx.configurations.map(c => c.toConfig()), { info: false }, (cs: any, options: any) => {
-        doStartDevServer(ctx, cs, options, executeServeHooks);
-    });
+    const cs = ctx.configurations.map(c => c.toConfig());
+    return doStartDevServer(ctx, cs, cs[cs.length - 1].devServer, executeServeHooks);
 }

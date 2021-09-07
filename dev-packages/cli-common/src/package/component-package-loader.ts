@@ -4,7 +4,7 @@ import { load } from 'js-yaml';
 import { CONFIG_FILE } from '../constants';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
-import { mergeWith } from 'lodash';
+import mergeWith = require('lodash.mergewith');
 import { ExpressionHandler } from '../el';
 import { join } from 'path';
 

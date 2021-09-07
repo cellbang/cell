@@ -34,19 +34,24 @@ export class BaseConfigFactory {
                 .end()
             .end()
             .devtool(dev ? 'source-map' : false)
-            .stats('minimal')
+            .stats('errors-only')
+            .merge({
+                infrastructureLogging: {
+                    level: 'error',
+                }
+            })
             .resolve
                 .extensions
-                    .merge([ '.js', '.tsx', '.ts', '.wasm', '.mjs', '.json' ])
+                    .merge([ '.js', '.ts', '.tsx', '.wasm', '.mjs', '.json' ])
                 .end()
             .end()
             .module
                 .rule('js')
                     .test(/\.js$/)
+                    .enforce('pre')
                     .use('source-map-loader')
                         .loader('source-map-loader')
                     .end()
-                    .enforce('pre')
                     .exclude
                         .add(sourceMapLoaderExclude)
                     .end()
