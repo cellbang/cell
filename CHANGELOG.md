@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.33.0
+
+- feat(cli) add `schedule` template
+
 ## 1.32.0
 
 - feat(cli-service+web) 升级 `webpack-dev-server` 和 `axois` 
