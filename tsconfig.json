@@ -157,6 +157,9 @@
       ],
       "@malagu/cli-runtime/lib/*": [
         "dev-packages/cli-runtime/src/*"
+      ],
+      "@malagu/example-schedule/*": [
+        "examples/schedule/*"
       ]
     }
   },
