@@ -132,16 +132,7 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
 }
 
 function getExternalModuleName(module: any): string {
-    const path = /^external "(.*)"$/.exec(module.identifier())![1];
-    const pathComponents = path.split('/');
-    const main = pathComponents[0];
-
-    // this is a package within a namespace
-    if (main.charAt(0) === '@') {
-        return `${main}/${pathComponents[1]}`;
-    }
-
-    return main;
+    return module.userRequest ;
 }
 
 function isExternalModule(module: any): boolean {
