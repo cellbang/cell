@@ -5,6 +5,7 @@ import { BACKEND_TARGET, getPackager, getMalaguConfig } from '@malagu/cli-common
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import { Stats } from 'webpack';
+import type { ExternalModule } from 'webpack';
 import { getCurrentRuntimePath } from '@malagu/cli-common/lib/util';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
@@ -131,20 +132,11 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
     return prodModules;
 }
 
-function getExternalModuleName(module: any): string {
-    const path = /^external "(.*)"$/.exec(module.identifier())![1];
-    const pathComponents = path.split('/');
-    const main = pathComponents[0];
-
-    // this is a package within a namespace
-    if (main.charAt(0) === '@') {
-        return `${main}/${pathComponents[1]}`;
-    }
-
-    return main;
+function getExternalModuleName(module: ExternalModule): string {
+    return module.userRequest ;
 }
 
-function isExternalModule(module: any): boolean {
+function isExternalModule(module: ExternalModule): boolean {
     return module.identifier().startsWith('external ') && !isBuiltinModule(getExternalModuleName(module));
 }
 
