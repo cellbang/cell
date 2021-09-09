@@ -1,6 +1,7 @@
 [English](./README.md) | 简体中文
 
-# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
+![Quick start](https://cdn.nlark.com/yuque/0/2021/svg/365432/1631213735164-4e66c160-84d2-439e-95be-20d337a114b2.svg?date=1631213780270) 
+# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0) 
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
