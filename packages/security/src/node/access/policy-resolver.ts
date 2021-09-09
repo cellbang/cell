@@ -1,6 +1,5 @@
-import { ACCESS_ABSTAIN, ACCESS_DENIED, ACCESS_GRANTED, PolicyResolver, SecurityMetadata, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
-import { eval } from 'jexl';
-import { Component } from '@malagu/core';
+import { ACCESS_ABSTAIN, ACCESS_DENIED, ACCESS_GRANTED, JexlEngineProvider, PolicyResolver, SecurityMetadata, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
+import { Autowired, Component } from '@malagu/core';
 import { Context } from '@malagu/web/lib/node';
 import { AclPolicy, Effect, ElPolicy, Policy, PolicyType, Statement } from '../../common';
 import { contains } from 'micromatch';
@@ -8,9 +7,14 @@ import { contains } from 'micromatch';
 @Component(PolicyResolver)
 export class ElPolicyResolver implements PolicyResolver {
 
+    @Autowired(JexlEngineProvider)
+    protected readonly jexlEngineProvider: JexlEngineProvider<any>;
+
     async resolve(policy: ElPolicy, securityMetadata: SecurityMetadata): Promise<number> {
+        const expression = this.jexlEngineProvider.provide().createExpression(policy.el);
         // eslint-disable-next-line no-eval
-        if (await eval(policy.el, policy.context || Context.getAttr(SECURITY_EXPRESSION_CONTEXT_KEY)) === true) {
+        const result = await expression.eval(policy.context || Context.getAttr(SECURITY_EXPRESSION_CONTEXT_KEY));
+        if (result === true) {
             return ACCESS_GRANTED;
         };
         return ACCESS_DENIED;

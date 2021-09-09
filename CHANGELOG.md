@@ -5,8 +5,10 @@
 
 - feat(core) Improve tools
 - feat(core) add new decorator `@Unmanaged()`
+- feat(security) - feat(security) adds the `JexlEngineProvider` interface to EL Policy to facilitate independent extension of expression functions
 - feat(core) 完善工具类
 - feat(core) 添加新装饰器 `@Unmanaged()` 
+- feat(security) 为 EL Policy 添加 `JexlEngineProvider` 接口，方便独立扩展表达式函数
 
 
 ## 1.33.0
