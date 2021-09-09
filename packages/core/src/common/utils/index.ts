@@ -7,3 +7,5 @@ export * from './disposable';
 export * from './os';
 export * from './proxy-util';
 export * from './annotation-util';
+export * from './cancellation';
+export * from './event';
