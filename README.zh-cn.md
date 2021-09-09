@@ -47,7 +47,7 @@ malagu serve
 malagu deploy
 ```
 
-![Quick start](https://cdn.nlark.com/yuque/0/2021/gif/365432/1619859951255-3d935886-7d0e-4010-b3cc-c452cb98d510.gif)
+![Quick start](https://cdn.nlark.com/yuque/0/2021/gif/365432/1631211054396-6fbedbd4-b57a-4d80-bdc3-7136bc9bf8c4.gif?date=1631211077631)
 
 ## 示例
 
