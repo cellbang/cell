@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.34.0
+
+- feat(core) Improve tools
+- feat(core) 完善工具类
+
 ## 1.33.0
 
 - feat(cli) add `schedule` template
