@@ -5,6 +5,7 @@ export const AccessDecisionVoter = Symbol('AccessDecisionVoter');
 export const SecurityMetadataSource = Symbol('SecurityMetadataSource');
 export const PolicyResolver = Symbol('PolicyResolver');
 export const SecurityExpressionContextHandler = Symbol('SecurityExpressionContextHandler');
+export const JexlEngineProvider = Symbol('JexlEngineProvider');
 export const PolicyProvider = Symbol('PolicyProvider');
 export const PolicyFactory = Symbol('PolicyFactory');
 export const ResourceNameResolver = Symbol('ResourceNameResolver');
@@ -37,6 +38,10 @@ export interface PolicyFactory {
 export interface PolicyResolver {
     resolve(policy: Policy, securityMetadata: SecurityMetadata): Promise<number>;
     support(policy: Policy, securityMetadata: SecurityMetadata): Promise<boolean>;
+}
+
+export interface JexlEngineProvider<T> {
+    provide(): T
 }
 
 export interface SecurityExpressionContextHandler {
