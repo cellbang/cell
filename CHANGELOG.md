@@ -2,8 +2,12 @@
 
 ## 1.34.0
 
+
 - feat(core) Improve tools
+- feat(core) add new decorator `@Unmanaged()`
 - feat(core) 完善工具类
+- feat(core) 添加新装饰器 `@Unmanaged()` 
+
 
 ## 1.33.0
 

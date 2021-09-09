@@ -10,3 +10,4 @@ export * from './target-name';
 export * from './injectable';
 export * from './aspect';
 export * from './service';
+export * from './unmanaged';
