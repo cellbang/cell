@@ -2,6 +2,11 @@
 
 ## 1.34.0
 
+- fix(serve-static) Fixes that when using the `@malagu/serve-static` component, the front-end build product is forced to be output to the non-memory file system during the local runtime.
+- fix(serve-static) 修复在使用 `@malagu/serve-static` 组件时，本地运行时强制前端构建产物输出到非内存文件系统中。
+
+## 1.34.0
+
 
 - feat(core) Improve tools
 - feat(core) add new decorator `@Unmanaged()`
