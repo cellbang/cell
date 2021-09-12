@@ -33,12 +33,12 @@ export class BaseConfigFactory {
                     }])
                 .end()
             .end()
-            .devtool(dev ? 'source-map' : false)
             .stats('errors-only')
             .merge({
                 infrastructureLogging: {
                     level: 'error',
-                }
+                },
+                devtool:  dev ? 'eval-cheap-module-source-map' : false
             })
             .resolve
                 .extensions
@@ -88,7 +88,9 @@ export class BaseConfigFactory {
                         __filename: false
                     })
                 .end()
-                .devtool('source-map');
+                .merge({
+                    devtool:  dev ? 'eval-cheap-module-source-map' : 'nosources-source-map'
+                });
         } else {
             config
                 .target('web')

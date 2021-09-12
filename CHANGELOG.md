@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.35.0
+
+- feat(cli-service) 优化 sourcemap 生成策略
+- feat(all) 将 malagu 编译为 ES2017
+- feat(cli-service) optimize sourcemap generation strategy
+- feat(all) Transpile malagu to ES2017
+
+
 ## 1.34.0
 
 - fix(serve-static) Fixes that when using the `@malagu/serve-static` component, the front-end build product is forced to be output to the non-memory file system during the local runtime.
