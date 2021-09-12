@@ -17,7 +17,7 @@
     "emitDecoratorMetadata": true,
     "downlevelIteration": true,
     "lib": [
-      "es6",
+      "ES2017",
       "dom"
     ],
     "sourceMap": true,

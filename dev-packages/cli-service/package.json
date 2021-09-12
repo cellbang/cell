@@ -51,7 +51,7 @@
     "memory-fs": "^0.5.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "rimraf": "^2.6.1",
-    "source-map-loader": "^2.0.2",
+    "source-map-loader": "^3.0.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.2",
     "ts-loader": "^9.1.2",
