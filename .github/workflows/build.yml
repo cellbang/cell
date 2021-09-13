@@ -13,45 +13,45 @@ on:
 
 jobs:
 
-#   build:
-#     name: ${{ matrix.os }}, Node.js v${{ matrix.node }}
+  build:
+    name: ${{ matrix.os }}, Node.js v${{ matrix.node }}
 
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         os: [windows-2019, ubuntu-18.04, macos-10.15]
-#         node: ['12.x']
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2019, ubuntu-18.04, macos-10.15]
+        node: ['12.x']
 
-#     runs-on: ${{ matrix.os }}
-#     timeout-minutes: 60
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
 
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0 # To fetch all history for all branches and tags. (Will be required for caching with lerna: https://github.com/markuplint/markuplint/pull/111)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # To fetch all history for all branches and tags. (Will be required for caching with lerna: https://github.com/markuplint/markuplint/pull/111)
 
-#       - name: Use Node.js ${{ matrix.node }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node }}
-#           registry-url: 'https://registry.npmjs.org'
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: 'https://registry.npmjs.org'
 
-#       - name: Build
-#         shell: bash
-#         run: |
-#           yarn --skip-integrity-check --network-timeout 100000
-#         env:
-#           NODE_OPTIONS: --max_old_space_size=4096
+      - name: Build
+        shell: bash
+        run: |
+          yarn --skip-integrity-check --network-timeout 100000
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096
           
-#       - name: Test
-#         if: matrix.tests != 'skip'
-#         shell: bash
-#         run: |
-#           yarn test
+      - name: Test
+        if: matrix.tests != 'skip'
+        shell: bash
+        run: |
+          yarn test
   
   publish:
-#     needs: build
+    needs: build
     if: github.ref == 'refs/heads/master' && github.event_name != 'schedule' # We still publish the manually dispatched workflows: 'workflow_dispatch'.
     runs-on: ubuntu-18.04
 
