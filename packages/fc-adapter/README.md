@@ -1,1 +1,0 @@
-# Malagu - FC Adapter Component

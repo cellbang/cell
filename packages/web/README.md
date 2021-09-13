@@ -1,1 +1,0 @@
-# Malagu - Web Component

@@ -1,1 +1,0 @@
-export const LOCALE_REACT_CONTEXT_PRIORITY = 3000;

@@ -1,1 +1,0 @@
-# Malagu - FaaS Adapter Component

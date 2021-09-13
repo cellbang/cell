@@ -1,1 +1,0 @@
-# Malagu - OSS Component

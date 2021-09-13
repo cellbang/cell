@@ -1,8 +1,0 @@
-frontend:
-    malagu:
-      webpack:
-        config:
-          externals:
-            material-ui: window["material-ui"]
-        htmlWebpackTagsPlugin:
-          material-ui: "https://cdn.jsdelivr.net/npm/@material-ui/core@4/umd/material-ui.${cliContext.dev ? 'development' : 'production.min'}.js"

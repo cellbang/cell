@@ -1,6 +1,0 @@
-frontend:
-  malagu:
-    vue:
-      path: ${malagu.server.path}
-      
-  

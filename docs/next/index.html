@@ -1,0 +1,345 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Malagu TypeDoc</title>
+	<meta name="description" content="Documentation for Malagu TypeDoc">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Malagu TypeDoc</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>Malagu TypeDoc</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p>English | <a href="./README.zh-cn.md">简体中文</a></p>
+				<p><img src="https://cdn.nlark.com/yuque/0/2021/svg/365432/1631213735164-4e66c160-84d2-439e-95be-20d337a114b2.svg?date=1631213780270" alt="Quick start"> </p>
+				<a href="#malagu" id="malagu" style="color: inherit; text-decoration: none;">
+					<h1><a href="https://www.yuque.com/cellbang/malagu/puw7p0">Malagu</a></h1>
+				</a>
+				<p><a href="https://github.com/cellbang/malagu/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
+					<a href="https://www.npmjs.com/org/malagu"><img src="https://img.shields.io/npm/v/@malagu/core.svg?style=flat" alt="npm version"></a>
+					<a href="https://www.npmjs.com/org/malagu"><img src="https://img.shields.io/npm/dm/@malagu/core.svg?style=flat" alt="npm downloads"></a>
+				<a href="https://www.travis-ci.org/cellbang/malagu"><img src="https://www.travis-ci.org/cellbang/malagu.svg?branch=master" alt="TravisCI"></a> </p>
+				<p>Malagu is a Serverless First, componentized, platform-independent progressive application framework based on TypeScript.</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Convention is greater than configuration, zero configuration, ready to use out of the box</li>
+					<li>Spring Boot for TypeScript</li>
+					<li>Serverless First</li>
+					<li>The platform is not locked</li>
+					<li>Support front-end and back-end integration, and the front-end frame is not locked</li>
+					<li>Support microservices</li>
+					<li>Componentization, progressive</li>
+					<li>Pluginization of command line tools</li>
+					<li>Dependency injection</li>
+					<li>Aspect Oriented Programming (AOP)</li>
+					<li>Integrate with popular ORM framework and use decorator declarative transaction management</li>
+					<li>Support OIDC certification</li>
+					<li>Support OAuth2 authorization</li>
+					<li>Use rxjs to manage status</li>
+					<li>Provides two interface styles, REST and RPC</li>
+				</ul>
+				<p>The origin of Malagu&#39;s name: In my hometown, the homophonic &quot;Ma Lagu&quot; means small stones. The small stones can be piled up to build high-rise buildings, roads and bridges, and the arrangement of Malagu components can realize ever-changing applications.</p>
+				<a href="#quick-start" id="quick-start" style="color: inherit; text-decoration: none;">
+					<h2>Quick start</h2>
+				</a>
+				<pre><code class="language-bash"><span class="hljs-comment"># Install command-line tools</span>
+npm install -g @malagu/cli
+
+<span class="hljs-comment"># Initialization</span>
+malagu init project-name
+<span class="hljs-built_in">cd</span> project-name <span class="hljs-comment"># Enter the project root directory</span>
+
+<span class="hljs-comment"># Running</span>
+malagu serve
+
+<span class="hljs-comment"># Deployment</span>
+malagu deploy</code></pre>
+				<p><img src="https://cdn.nlark.com/yuque/0/2021/gif/365432/1631211054396-6fbedbd4-b57a-4d80-bdc3-7136bc9bf8c4.gif?date=1631211077631" alt="Quick start"></p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h2>Example</h2>
+				</a>
+				<p><a href="https://cloud.cellbang.com/?share=2b89fe47-0208-43da-94e1-ded64ddd51fd#/templates">View Online Sample Template</a></p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<ul>
+					<li><a href="https://www.yuque.com/cellbang/malagu/puw7p0">Introduction</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/ogreg3">Create the first application</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/xbfpir">Command line tools</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/cbgl7g">Controller</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/ztbcwq">Database operations</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/wtiy6s">Microservice</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/qhl0km">Authentication and authorization</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/hh1mng">Cloud Platform Adaptation</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/fw025h">Dependency injection</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/qaqomw">Component design</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/vl9wbw">Front-end architecture</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/fum7u8">React development</a></li>
+					<li><a href="https://www.yuque.com/cellbang/malagu/fi6lxi">Front and back-end integrated development</a></li>
+				</ul>
+				<a href="#dependency-injection" id="dependency-injection" style="color: inherit; text-decoration: none;">
+					<h2>Dependency injection</h2>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Class object injection</span>
+<span class="hljs-meta">@Component</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> </span>{
+
+}
+
+<span class="hljs-meta">@Component</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">B</span> </span>{
+    <span class="hljs-meta">@Autowired</span>()
+    <span class="hljs-keyword">protected</span> a: A;
+}
+
+<span class="hljs-comment">// Configuration property injection</span>
+<span class="hljs-meta">@Component</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> </span>{
+    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&#x27;foo&#x27;</span>) <span class="hljs-comment">// Support EL expression syntax, such as @Value(&#x27;obj.xxx&#x27;), @Value(&#x27;arr[1]&#x27;) etc.</span>
+    <span class="hljs-keyword">protected</span> foo: <span class="hljs-built_in">string</span>;
+}</code></pre>
+				<a href="#database-operations" id="database-operations" style="color: inherit; text-decoration: none;">
+					<h2>Database operations</h2>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { Controller, Get, Param, Delete, Put, Post, Body } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@malagu/mvc/lib/node&#x27;</span>;
+<span class="hljs-keyword">import</span> { Transactional, OrmContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@malagu/typeorm/lib/node&#x27;</span>;
+<span class="hljs-keyword">import</span> { User } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./entity&#x27;</span>;
+<span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;users&#x27;</span>)
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>{
+
+    <span class="hljs-meta">@Get</span>()
+    <span class="hljs-meta">@Transactional</span>({ <span class="hljs-attr">readOnly</span>: <span class="hljs-literal">true</span> })
+    list(): <span class="hljs-built_in">Promise</span>&lt;User[]&gt; {
+        <span class="hljs-keyword">const</span> repo = OrmContext.getRepository(User);
+        <span class="hljs-keyword">return</span> repo.find();
+    }
+    <span class="hljs-meta">@Get</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)
+    <span class="hljs-meta">@Transactional</span>({ <span class="hljs-attr">readOnly</span>: <span class="hljs-literal">true</span> })
+    get(<span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) id: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">Promise</span>&lt;User | <span class="hljs-literal">undefined</span>&gt; {
+        <span class="hljs-keyword">const</span> repo = OrmContext.getRepository(User);
+        <span class="hljs-keyword">return</span> repo.findOne(id);
+    }
+    <span class="hljs-meta">@Delete</span>(<span class="hljs-string">&#x27;:id&#x27;</span>)
+    <span class="hljs-meta">@Transactional</span>()
+    <span class="hljs-keyword">async</span> remove(<span class="hljs-meta">@Param</span>(<span class="hljs-string">&#x27;id&#x27;</span>) id: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-keyword">const</span> repo = OrmContext.getRepository(User);
+        <span class="hljs-keyword">await</span> repo.delete(id);
+    }
+    <span class="hljs-meta">@Put</span>()
+    <span class="hljs-meta">@Transactional</span>()
+    <span class="hljs-keyword">async</span> modify(<span class="hljs-meta">@Body</span>() user: User): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-keyword">const</span> repo = OrmContext.getRepository(User);
+        <span class="hljs-keyword">await</span> repo.update(user.id, user);
+    }
+    <span class="hljs-meta">@Post</span>()
+    <span class="hljs-meta">@Transactional</span>()
+    create(<span class="hljs-meta">@Body</span>() user: User): <span class="hljs-built_in">Promise</span>&lt;User&gt; {
+        <span class="hljs-keyword">const</span> repo = OrmContext.getRepository(User);
+        <span class="hljs-keyword">return</span> repo.save(user);
+    }
+}</code></pre>
+				<a href="#discuss-group" id="discuss-group" style="color: inherit; text-decoration: none;">
+					<h2>Discuss group</h2>
+				</a>
+				<p><img src="https://cdn.nlark.com/yuque/0/2020/png/365432/1606829901447-499234ed-58f0-4c60-8760-735f8e7feac8.png#align=left&display=inline&height=461&margin=%5Bobject%20Object%5D&name=%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png&originHeight=461&originWidth=722&size=167559&status=done&style=none&width=722" alt="群二维码.png"></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/antd.html">antd</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/authing.html">authing</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/cache.html">cache</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/cloud.html">cloud</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/core.html">core</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/cos.html">cos</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/express_adapter.html">express-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/faas_adapter.html">faas-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/fc_adapter.html">fc-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/grommet.html">grommet</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/lambda_adapter.html">lambda-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/logger.html">logger</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/material_ui.html">material-<wbr>ui</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/mvc.html">mvc</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/oauth2_client.html">oauth2-<wbr>client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/oauth2_core.html">oauth2-<wbr>core</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/oauth2_jose.html">oauth2-<wbr>jose</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/oidc_provider.html">oidc-<wbr>provider</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/oss.html">oss</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/puppeteer.html">puppeteer</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/react.html">react</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/rpc.html">rpc</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/s3.html">s3</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/scf_adapter.html">scf-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/schedule.html">schedule</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/security.html">security</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/serve_static.html">serve-<wbr>static</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/shell.html">shell</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/typeorm.html">typeorm</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/vercel_adapter.html">vercel-<wbr>adapter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/vue.html">vue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/web.html">web</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/widget.html">widget</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

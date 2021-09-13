@@ -1,8 +1,0 @@
-frontend:
-  malagu:
-    logger:
-      level: error
-backend:
-  malagu:
-    logger:
-      level: info

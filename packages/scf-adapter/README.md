@@ -1,1 +1,0 @@
-# Malagu - SCF Adapter Component

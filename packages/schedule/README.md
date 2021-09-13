@@ -1,1 +1,0 @@
-# Malagu - Schedule Component
