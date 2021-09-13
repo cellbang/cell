@@ -6,7 +6,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
 [![npm downloads](https://img.shields.io/npm/dm/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
-[![TravisCI](https://www.travis-ci.org/cellbang/malagu.svg?branch=master)](https://www.travis-ci.org/cellbang/malagu) 
+[![Build Status](https://github.com/cellbang/malagu/workflows/Build/badge.svg?branch=master)](https://github.com/cellbang/malagu/actions?query=branch%3Amaster+event%3Apush+event%3Aschedule)
 
 Malagu 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐进式应用框架。
 
