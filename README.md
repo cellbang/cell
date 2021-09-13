@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-cn.md)
 
-![Quick start](https://cdn.nlark.com/yuque/0/2021/svg/365432/1631213735164-4e66c160-84d2-439e-95be-20d337a114b2.svg?date=1631213780270) 
+![Malagu Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20Logo%20Green.svg?Expires=1631577690&OSSAccessKeyId=TMP.3Khb7eYKhroxuo5ccz1ksxvv4ftMBha1oQrKsJissh97kHbSxQU7i4KYCNee82JgmDmyyhZzrczY189QZ4UMgYxwMHTMXj&Signature=H2Bc1grlec9ro%2Bz0cXnUxAJJNug%3D) 
 # [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
@@ -137,4 +137,5 @@ export class UserController {
 
 ## Discuss group
 
-![群二维码.png](https://cdn.nlark.com/yuque/0/2020/png/365432/1606829901447-499234ed-58f0-4c60-8760-735f8e7feac8.png#align=left&display=inline&height=461&margin=%5Bobject%20Object%5D&name=%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png&originHeight=461&originWidth=722&size=167559&status=done&style=none&width=722)
+![群二维码.png](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+
