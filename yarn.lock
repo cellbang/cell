@@ -13774,6 +13774,11 @@ typedoc-plugin-external-module-map@^1.2.1:
   resolved "https://registry.npm.taobao.org/typedoc-plugin-external-module-map/download/typedoc-plugin-external-module-map-1.2.1.tgz#32669a6b81e57962d2dae80d7a6ef8f5d0be65dd"
   integrity sha1-Mmaaa4HleWLS2ugNem749dC+Zd0=
 
+typedoc-plugin-remove-references@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-remove-references/-/typedoc-plugin-remove-references-0.0.5.tgz#08b129d2697e50208c807e06c3662fd2fc86a925"
+  integrity sha512-DSZ7kM/Y90CgZUKt8MiDsoi4fvrJyleHydj3ncGyqDqMdhuMes2E/4I6mSmXBrVdTjYhVH6BeoOFSbj2pQ821g==
+
 typedoc@^0.17.7:
   version "0.17.8"
   resolved "https://registry.nlark.com/typedoc/download/typedoc-0.17.8.tgz#96b67e9454aa7853bfc4dc9a55c8a07adfd5478e"

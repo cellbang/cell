@@ -10,16 +10,19 @@
     "**/@types/node": "12"
   },
   "devDependencies": {
-    "@types/mocha": "^8.2.0",
     "@types/chai-string": "^1.4.0",
     "@types/jsdom": "^11.0.4",
+    "@types/mocha": "^8.2.0",
     "@types/node": "12",
     "@types/sinon": "^2.3.5",
     "chai-string": "^1.4.0",
     "electron-mocha": "^8.2.0",
     "jsdom": "^16.6.0",
     "lerna": "^2.2.0",
-    "sinon": "^3.3.0"
+    "sinon": "^3.3.0",
+    "typedoc": "^0.17.7",
+    "typedoc-plugin-external-module-map": "^1.2.1",
+    "typedoc-plugin-remove-references": "^0.0.5"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
