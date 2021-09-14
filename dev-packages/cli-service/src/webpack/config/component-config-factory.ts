@@ -23,7 +23,7 @@ export class ComponentConfigFactory {
                     .merge([
                         path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
                         path.join(__dirname, '..', '..', '..', 'node_modules'),
-                        path.join(__dirname, '..', '..', '..', '..', '..', 'node_modules'),
+                        path.join(__dirname, '..', '..', '..', '..', '..', '..', 'node_modules'),
                         path.join(getCurrentRuntimePath(), 'node_modules'),
                         ...nodePathList, // Support for NODE_PATH environment variable
                     ])
