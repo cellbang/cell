@@ -19,7 +19,7 @@ export function generateImports(modules: Module[], fn: 'import' | 'require'): st
 }
 
 export function loadStaticModuls(modules: Module[]): string {
-    return modules.map(m => `container.load(require('${m}').default);`).join('\n');
+    return modules.map(m => `container.load(require('${m.path}').default);`).join('\n');
 }
 
 export function generateFrontendComponents(context: DynamicContainerContext) {
