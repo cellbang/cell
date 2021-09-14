@@ -214,8 +214,7 @@ export class ProgressPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const ProgressBarPlugin = require('progress-bar-webpack-plugin');
         config.plugin('progressBar').use(ProgressBarPlugin, [{
-            format: `${target} build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
-            callback: () => console.log('\n')
+            format: `${target} build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`
         }]);
     }
 
