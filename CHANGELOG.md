@@ -1,8 +1,11 @@
 # Change Log
 
-## 1.35.1
+## 1.35.2
 
 - fix(cli-service) 修复 `ts-node` 等模块找不到错误
+
+## 1.35.1
+
 - fix(cli-service) 修复静态模块加载错误
 
 
