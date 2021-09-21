@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-cn.md)
 
-![Malagu Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20Logo%20Green.svg?Expires=1631577690&OSSAccessKeyId=TMP.3Khb7eYKhroxuo5ccz1ksxvv4ftMBha1oQrKsJissh97kHbSxQU7i4KYCNee82JgmDmyyhZzrczY189QZ4UMgYxwMHTMXj&Signature=H2Bc1grlec9ro%2Bz0cXnUxAJJNug%3D) 
+![Malagu Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20Logo%20Green.svg?Expires=1632252546&OSSAccessKeyId=TMP.3KfrELoZDxJDzeM4iQFkgBnEFCmnbAh74cQe3munSLZowEXEaHVn6mx79uN7Zi6DvpKzAXDwNzZLiSj6DS3ZU3QBftZqBL&Signature=yGYlNr87qT5PG6l%2B3gGtdT9XA%2BY%3D) 
 # [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
