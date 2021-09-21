@@ -9,9 +9,6 @@
     "command-exists": "^1.2.9",
     "express": "^4.17.1"
   },
-  "peerDependencies": {
-    "@malagu/cli-service": "^1.26.0"
-  },
   "publishConfig": {
     "access": "public"
   },

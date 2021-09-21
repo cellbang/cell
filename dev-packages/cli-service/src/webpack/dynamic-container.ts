@@ -29,10 +29,8 @@ export function generateFrontendComponents(context: DynamicContainerContext) {
   require('setimmediate');
   const { Container } = require('inversify');
   const { FrontendApplication } = require('@malagu/core/lib/browser');
-  const { CoreFrontendModule } = require('@malagu/core/lib/browser/module');
   
   const container = new Container({ skipBaseClassChecks: true });
-  container.load(CoreFrontendModule);
   
   ${loadStaticModuls(staticModules)}
   
@@ -65,11 +63,9 @@ export function generateBackendComponents(context: DynamicContainerContext) {
     return `
   require('reflect-metadata');
   const { Container } = require('inversify');
-  const { CoreBackendModule } = require('@malagu/core/lib/node/module');
   require('source-map-support').install();
   
   const container = new Container({ skipBaseClassChecks: true });
-  container.load(CoreBackendModule);
   
   ${loadStaticModuls(staticModules)}
   

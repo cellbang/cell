@@ -13,9 +13,6 @@
     "js-yaml": "^4.0.0",
     "jszip": "^3.2.2"
   },
-  "peerDependencies": {
-    "@malagu/cli-service": "^1.26.0"
-  },
   "publishConfig": {
     "access": "public"
   },

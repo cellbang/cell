@@ -1,6 +1,5 @@
-import { Component, Autowired } from '../annotation';
+import { Component, Autowired, getTarget } from '@malagu/core';
 import { PipeManager, PipeProvider, MethodMetadata } from './pipe-protocol';
-import { getTarget } from '../utils';
 
 @Component(PipeManager)
 export class PipeManagerImpl implements PipeManager {

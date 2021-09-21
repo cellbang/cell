@@ -1,13 +1,13 @@
-import { Component, Value } from '../annotation';
+import { Component, Value } from '@malagu/core';
 import { PipeTransform, ArgumentMetadata } from './pipe-protocol';
-import { ValidationErrors } from '../error';
+import { ValidationErrors } from './validation-errors';
 import { validate } from 'class-validator';
 import { classToPlain, plainToClass } from 'class-transformer';
 
 @Component(PipeTransform)
 export class ValidationPipe implements PipeTransform<any> {
 
-    @Value('malagu.core.validationPipeOptions')
+    @Value('malagu.web.validationPipeOptions')
     protected options: any;
 
     readonly priority = 1000;

@@ -1,4 +1,4 @@
-import { Type } from '../utils';
+import { Type } from '@malagu/core';
 
 export const PipeTransform = Symbol('PipeTransform');
 export const PipeProvider = Symbol('PipeProvider');

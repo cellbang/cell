@@ -1,9 +1,10 @@
 import { Context } from '../context';
-import { Component, Autowired, Prioritizeable, ValidationErrors } from '@malagu/core';
+import { Component, Autowired, Prioritizeable } from '@malagu/core';
 import { injectable } from 'inversify';
 import { ErrorHandler, DEFALUT_ERROR_HANDlER_PRIORITY, HTTP_ERROR_HANDlER_PRIORITY, VALIDATION_ERRORS_ERROR_HANDlER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
 import { HttpStatus } from '../../common/http';
+import { ValidationErrors } from '../../common/pipe';
 
 @injectable()
 export abstract class AbstractErrorHandler implements ErrorHandler {

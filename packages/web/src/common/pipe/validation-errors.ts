@@ -1,4 +1,4 @@
-import { CustomError } from './cutom-error';
+import { CustomError } from '@malagu/core';
 import { ValidationError } from 'class-validator';
 
 export class ValidationErrors extends CustomError {

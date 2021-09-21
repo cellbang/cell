@@ -5,7 +5,8 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "1.35.2"
+    "@malagu/web": "1.35.2",
+    "vscode-jsonrpc": "^5.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,9 +1,9 @@
 import { MaybePromise } from '../utils/prioritizeable';
 import { Deferred } from '../utils/promise-util';
+import { Emitter, Event } from '../utils/event';
 import { injectable } from 'inversify';
 import { Logger } from '../logger';
 import { Autowired, Component } from '../annotation';
-import { Emitter, Event } from 'vscode-jsonrpc';
 
 export const ApplicationLifecycle = Symbol('ApplicationLifecycle');
 export const Application = Symbol('Application');

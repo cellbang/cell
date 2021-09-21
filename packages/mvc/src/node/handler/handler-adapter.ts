@@ -1,10 +1,9 @@
 import { Component, Autowired, Value } from '@malagu/core';
-import { PathResolver } from '@malagu/web';
+import { PathResolver, PipeManager } from '@malagu/web';
 import { Context, RequestMatcher, HandlerAdapter } from '@malagu/web/lib/node';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { MVC_HANDLER_ADAPTER_PRIORITY, RouteMetadataMatcher } from './handler-protocol';
 import { MVC_PATH } from '../../common';
-import { PipeManager } from '@malagu/core';
 import { NotFoundAndContinueError } from '@malagu/web/lib/node';
 
 @Component(HandlerAdapter)

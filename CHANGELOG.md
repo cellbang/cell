@@ -1,5 +1,21 @@
 # Change Log
 
+## 1.36.0
+
+- feat(core) 升级 inversifyjs 版本为 v5.1.1
+- feat(core) 修改 core 模块为静态模块，移除 `auto` 属性配置
+- feat(core+web) 将 pipe 功能移动到 `@malagu/web` 组件
+- feat(core) `ContainerProvider` 提供一个异步获取容器方法：`asyncProvide`
+- feat(typeorm) 升级 typeorm 版本为 v0.2.37
+- feat(mysql) 升级 typeorm 版本为 v2.18.1
+
+- feat(core) upgrade inversifyjs version to v5.1.1
+- feat(core) modify the core module as a static module, remove the `auto` attribute configuration
+- feat(core+web) moves the pipe function to the `@malagu/web` component
+- feat(core) `ContainerProvider` provides an asynchronous method to obtain the container: `asyncProvide`
+- feat(typeorm) upgrade typeorm version to v0.2.37
+- feat(mysql) upgrade typeorm version to v2.18.1
+
 ## 1.35.2
 
 - fix(cli-service) 修复 `ts-node` 等模块找不到错误
