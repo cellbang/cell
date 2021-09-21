@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ArgumentMetadata | Malagu TypeDoc</title>
+	<title>PipeManager | Malagu TypeDoc</title>
 	<meta name="description" content="Documentation for Malagu TypeDoc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/core.html">core</a>
+					<a href="../modules/web.html">web</a>
 				</li>
 				<li>
-					<a href="core.argumentmetadata.html">ArgumentMetadata</a>
+					<a href="web.pipemanager.html">PipeManager</a>
 				</li>
 			</ul>
-			<h1>Interface ArgumentMetadata</h1>
+			<h1>Interface PipeManager</h1>
 		</div>
 	</div>
 </header>
@@ -71,8 +71,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ArgumentMetadata</span>
+						<span class="target">PipeManager</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implemented by</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../classes/web.pipemanagerimpl.html" class="tsd-signature-type">PipeManagerImpl</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -80,36 +86,41 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="core.argumentmetadata.html#argtype" class="tsd-kind-icon">arg<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="core.argumentmetadata.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="web.pipemanager.html#apply" class="tsd-kind-icon">apply</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="argtype" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> arg<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">arg<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="core.type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4ed0cdd1/packages/core/src/common/pipe/pipe-protocol.ts#L9">packages/core/src/common/pipe/pipe-protocol.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="data" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4ed0cdd1/packages/core/src/common/pipe/pipe-protocol.ts#L11">packages/core/src/common/pipe/pipe-protocol.ts:11</a></li>
-						</ul>
-					</aside>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="apply" class="tsd-anchor"></a>
+					<h3>apply</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span>metadata<span class="tsd-signature-symbol">: </span><a href="web.methodmetadata.html" class="tsd-signature-type">MethodMetadata</a>, args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8c5dcc59/packages/web/src/common/pipe/pipe-protocol.ts#L31">packages/web/src/common/pipe/pipe-protocol.ts:31</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>metadata: <a href="web.methodmetadata.html" class="tsd-signature-type">MethodMetadata</a></h5>
+								</li>
+								<li>
+									<h5>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -120,40 +131,13 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/core.html">core</a>
+						<a href="../modules/web.html">web</a>
 						<ul>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.annotationutil.html">Annotation<wbr>Util</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
-								<a href="../modules/core.applicationerror.html">Application<wbr>Error</a>
+								<a href="../modules/web.context.html">Context</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.cancellationtoken.html">Cancellation<wbr>Token</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.configutil.html">Config<wbr>Util</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.containerprovider.html">Container<wbr>Provider</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.containerutil.html">Container<wbr>Util</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.disposable.html">Disposable</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
-								<a href="../modules/core.event.html">Event</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.os.html">OS</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
-								<a href="../modules/core.prioritizeable.html">Prioritizeable</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.waituntilevent.html">Wait<wbr>Until<wbr>Event</a>
+								<a href="../modules/web.urlutil.html">Url<wbr>Util</a>
 							</li>
 						</ul>
 					</li>
@@ -164,13 +148,10 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="core.argumentmetadata.html" class="tsd-kind-icon">Argument<wbr>Metadata</a>
+						<a href="web.pipemanager.html" class="tsd-kind-icon">Pipe<wbr>Manager</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="core.argumentmetadata.html#argtype" class="tsd-kind-icon">arg<wbr>Type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="core.argumentmetadata.html#data" class="tsd-kind-icon">data</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="web.pipemanager.html#apply" class="tsd-kind-icon">apply</a>
 							</li>
 						</ul>
 					</li>
@@ -197,7 +178,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
