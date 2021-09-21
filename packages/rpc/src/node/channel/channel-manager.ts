@@ -1,7 +1,7 @@
 import { Context, NotFoundError } from '@malagu/web/lib/node';
 import { optional } from 'inversify';
-import { ConnectionHandler, ConnnectionFactory, Channel } from '../../common';
-import { Component, Autowired, ConsoleLogger, Deferred } from '@malagu/core';
+import { ConnectionHandler, ConnnectionFactory, Channel, ConsoleLogger } from '../../common';
+import { Component, Autowired, Deferred } from '@malagu/core';
 import { CURRENT_CHANNEL_STRATEGY_REQUEST_KEY, ChannelStrategy } from './channel-protocol';
 
 // tslint:disable:no-any

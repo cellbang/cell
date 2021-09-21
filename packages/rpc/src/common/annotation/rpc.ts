@@ -1,5 +1,5 @@
-import { ComponentDecorator, applyComponentDecorator, ComponentOption, PipeManager, parseComponentOption, Logger } from '@malagu/core';
-import { AOP_POINTCUT } from '@malagu/web';
+import { ComponentDecorator, applyComponentDecorator, ComponentOption, parseComponentOption, Logger } from '@malagu/core';
+import { AOP_POINTCUT, PipeManager } from '@malagu/web';
 import { ConnectionHandler } from '../handler';
 import { JsonRpcConnectionHandler } from '../factory';
 import { RpcUtil, ConverterUtil } from '../utils';

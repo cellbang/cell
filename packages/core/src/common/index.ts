@@ -7,5 +7,4 @@ export * from './aop';
 export * from './constants';
 export * from './config';
 export * from './error';
-export * from './pipe';
 export * from './el';

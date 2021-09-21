@@ -1,6 +1,5 @@
-import { Component, Autowired } from '../annotation';
+import { Component, Autowired, Optional, Prioritizeable } from '@malagu/core';
 import { PipeTransform, PipeProvider } from './pipe-protocol';
-import { Prioritizeable } from '../utils';
 
 @Component(PipeProvider)
 export class PipeProviderImpl implements PipeProvider {
@@ -8,7 +7,7 @@ export class PipeProviderImpl implements PipeProvider {
     protected prioritized: PipeTransform[];
 
     constructor(
-        @Autowired(PipeTransform)
+        @Autowired(PipeTransform) @Optional()
         protected readonly pipes: PipeTransform[]
     ) { }
 

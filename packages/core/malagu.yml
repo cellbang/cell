@@ -1,4 +1,3 @@
-auto: false
 malagu:
   name: 'Malagu Framework'
   hostDomId: malagu-root
@@ -15,8 +14,3 @@ frontend:
   entry: lib/common/application/application-entry
 backend:
   entry: lib/common/application/application-entry
-  malagu:
-    core:
-      validationPipeOptions:
-        detailedOutputDisabled: false
-        transformEnabled: true
