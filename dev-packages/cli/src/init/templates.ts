@@ -4,6 +4,7 @@ export const templates: any = {
     'fc-app': '{{ templatePath }}/fc-app',
     'vue-app': '{{ templatePath }}/vue-app',
     'database-app': '{{ templatePath }}/database-app',
+    'accounts': '{{ templatePath }}/accounts',
     'schedule': '{{ templatePath }}/schedule',
     'admin-app': '{{ templatePath }}/admin-app',
     'microservice': '{{ templatePath }}/microservice',

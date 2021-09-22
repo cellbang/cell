@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.37.0
+
+- feat(cli) Added `accounts` template. The authentication and authorization functions are quickly realized through this template, which comes from real business scenarios.
+- feat(cli) 添加 `accounts` 模板。通过该模板快速实现认证与授权功能，该模板来自于真实业务场景。
+
+
+
 ## 1.36.0
 
 - feat(core) 升级 inversifyjs 版本为 v5.1.1

@@ -7987,6 +7987,11 @@ is-yarn-global@^0.3.0:
   resolved "https://registry.nlark.com/is-yarn-global/download/is-yarn-global-0.3.0.tgz?cache=0&sync_timestamp=1619356824740&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-yarn-global%2Fdownload%2Fis-yarn-global-0.3.0.tgz#d502d3382590ea3004893746754c89139973e232"
   integrity sha1-1QLTOCWQ6jAEiTdGdUyJE5lz4jI=
 
+is_js@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/is_js/-/is_js-0.9.0.tgz#0ab94540502ba7afa24c856aa985561669e9c52d"
+  integrity sha1-CrlFQFArp6+iTIVqqYVWFmnpxS0=
+
 isarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.npm.taobao.org/isarray/download/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
@@ -11859,6 +11864,13 @@ repeating@^2.0.0:
   integrity sha1-UhTFOpJtNVJwdSf7q0FdvAjQbdo=
   dependencies:
     is-finite "^1.0.0"
+
+request-ip@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/request-ip/-/request-ip-2.1.3.tgz#99ab2bafdeaf2002626e28083cb10597511d9e14"
+  integrity sha512-J3qdE/IhVM3BXkwMIVO4yFrvhJlU3H7JH16+6yHucadT4fePnR8dyh+vEs6FIx0S2x5TCt2ptiPfHcn0sqhbYQ==
+  dependencies:
+    is_js "^0.9.0"
 
 request@^2.88.2:
   version "2.88.2"

@@ -1,0 +1,9 @@
+frontend:
+  malagu:
+    themes:
+      default:
+        label: 蓝色
+        props:
+          global:
+            colors:
+              brand: '#2d85f0'

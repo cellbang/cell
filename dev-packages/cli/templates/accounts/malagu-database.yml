@@ -1,0 +1,12 @@
+backend: 
+  malagu:
+    typeorm:
+      ormConfig: # 请修改为你自己的数据库连接
+        - type: "${ env.DE_TYPE ?: 'mysql'}"
+          host: "${ env.DB_HOST ?: 'localhost'}"
+          port: "${ env.DB_PORT ?: 3306}"
+          synchronize: true
+          logging: query
+          username: "${ env.DB_USERNAME ?: 'root'}"
+          password: "${ env.DB_PASSWORD ?: '123456'}"
+          database: "${ env.DB_DATABASE ?: 'test'}"
