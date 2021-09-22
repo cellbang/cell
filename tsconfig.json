@@ -160,6 +160,9 @@
       ],
       "@malagu/example-schedule/*": [
         "examples/schedule/*"
+      ],
+      "@malagu/example-accounts/*": [
+        "examples/accounts/*"
       ]
     }
   },

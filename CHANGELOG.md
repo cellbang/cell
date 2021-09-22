@@ -6,7 +6,6 @@
 - feat(cli) 添加 `accounts` 模板。通过该模板快速实现认证与授权功能，该模板来自于真实业务场景。
 
 
-
 ## 1.36.0
 
 - feat(core) 升级 inversifyjs 版本为 v5.1.1
@@ -14,7 +13,7 @@
 - feat(core+web) 将 pipe 功能移动到 `@malagu/web` 组件
 - feat(core) `ContainerProvider` 提供一个异步获取容器方法：`asyncProvide`
 - feat(typeorm) 升级 typeorm 版本为 v0.2.37
-- feat(mysql) 升级 typeorm 版本为 v2.18.1
+- feat(typeorm) 升级 mysql 版本为 v2.18.1
 
 - feat(core) upgrade inversifyjs version to v5.1.1
 - feat(core) modify the core module as a static module, remove the `auto` attribute configuration
