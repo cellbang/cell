@@ -39,8 +39,8 @@ export class EndpointResolverImpl implements EndpointResolver {
             throw new EndpointNotFoundError(serviceIdentifier);
         }
         return result
-            .replace('{rpcPath}', await this.pathResolver.resolve(this.rpcPath))
-            .replace('{serviceIdentifier}', serviceIdentifier);
+            .replace(/{rpcPath}/g, await this.pathResolver.resolve(this.rpcPath))
+            .replace(/{serviceIdentifier}/g, serviceIdentifier);
     }
 
 }
