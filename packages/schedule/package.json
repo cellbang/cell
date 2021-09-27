@@ -1,11 +1,11 @@
 {
   "name": "@malagu/schedule",
-  "version": "1.37.1",
+  "version": "1.38.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "1.37.1",
+    "@malagu/core": "1.38.0",
     "@types/cron": "^1.7.2",
     "cron": "^1.8.2",
     "uuid": "^8.0.0"
@@ -38,7 +38,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.37.1"
+    "@malagu/ext-scripts": "1.38.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
