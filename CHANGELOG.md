@@ -1,7 +1,10 @@
 # Change Log
 
+## 1.38.0
+- feat(cli) 优化微服务模板 `microservice`
+
 ## 1.37.1
-- fix(vue) 支持从 yml 中读取 cache-loader 和 vue-loader 的配置 (#62)
+- feat(vue) 支持从 yml 中读取 cache-loader 和 vue-loader 的配置 (#62)
 
 ## 1.37.0
 

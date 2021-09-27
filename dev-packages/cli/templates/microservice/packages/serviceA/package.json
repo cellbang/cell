@@ -1,0 +1,31 @@
+{
+  "name": "@microservice/service-a",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "latest",
+    "@malagu/rpc": "latest",
+    "@malagu/scf-adapter": "latest",
+    "@microservice/api": "0.0.0"
+  },
+  "devDependencies": {
+    "@malagu/cli": "latest",
+    "@malagu/cli-service": "latest"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "tsc",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m test",
+    "deploy:test": "malagu deploy -m test",
+    "deploy:pre": "malagu deploy -m pre",
+    "deploy:prod": "malagu deploy -m prod"
+  }
+}

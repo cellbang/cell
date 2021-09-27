@@ -1,0 +1,26 @@
+{
+  "name": "@microservice/api",
+  "keywords": [
+    "malagu-component"
+  ],
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "latest",
+    "@malagu/rpc": "latest"
+  },
+  "devDependencies": {
+    "@malagu/cli": "latest",
+    "@malagu/cli-service": "latest"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "tsc"
+  }
+}

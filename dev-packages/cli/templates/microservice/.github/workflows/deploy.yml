@@ -16,10 +16,13 @@ jobs:
       - run: npm test
       - if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
         env: ${{ secrets }}
+        working-directory: examples/backend-app
         run: npx malagu deploy -m prod
       - if: ${{ github.ref == 'refs/heads/pre' }}
         env: ${{ secrets }}
+        working-directory: examples/backend-app
         run: npx malagu deploy -m pre
       - if: ${{ github.ref != 'refs/heads/master' && github.ref == 'refs/heads/main' && github.ref != 'refs/heads/pre' }}
         env: ${{ secrets }}
+        working-directory: examples/backend-app
         run: npx malagu deploy -m test
