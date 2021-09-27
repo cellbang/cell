@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.37.1
+- fix(vue) 支持从 yml 中读取 cache-loader 和 vue-loader 的配置 (#62)
+
 ## 1.37.0
 
 - feat(cli) Added `accounts` template. The authentication and authorization functions are quickly realized through this template, which comes from real business scenarios.
