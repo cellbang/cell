@@ -68,6 +68,7 @@ export class ApplicationConfig {
         delete config.configHooks;
         delete config.buildHooks;
         delete config.deployHooks;
+        delete config.infoHooks;
         delete config.serveHooks;
         delete config.cliHooks;
         delete config.modules;
@@ -75,7 +76,7 @@ export class ApplicationConfig {
         delete config.assets;
         delete config.configFiles;
 
-        config.targets = this.options.targets.length ? this.options.targets : (config.targets || [ FRONTEND_TARGET, BACKEND_TARGET ]);
+        config.targets = this.options.targets.length ? this.options.targets : (config.targets || [FRONTEND_TARGET, BACKEND_TARGET]);
         config.targets = Array.from(new Set(config.targets));
         self[configProperty] = config;
         return config;

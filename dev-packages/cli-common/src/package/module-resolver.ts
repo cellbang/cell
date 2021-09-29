@@ -47,8 +47,8 @@ export class ModuleResolver {
         malaguComponent.frontend = malaguComponent.frontend || {};
         malaguComponent.backend = malaguComponent.backend || {};
 
-        const rawFrontendModules = [ ...malaguComponent[prop] || [],  ...malaguComponent.frontend[prop] || [] ];
-        const rawBackendModules  = [ ...malaguComponent[prop] || [],  ...malaguComponent.backend[prop] || [] ];
+        const rawFrontendModules = [...malaguComponent[prop] || [], ...malaguComponent.frontend[prop] || []];
+        const rawBackendModules = [...malaguComponent[prop] || [], ...malaguComponent.backend[prop] || []];
         const frontendModules: Module[] = malaguComponent.frontend[prop] = [];
         const backendModules: Module[] = malaguComponent.backend[prop] = [];
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
@@ -84,6 +84,7 @@ export class ModuleResolver {
         const rawConfigHooks = malaguComponent.configHooks || [];
         const rawBuildHooks = malaguComponent.buildHooks || [];
         const rawDeployHooks = malaguComponent.deployHooks || [];
+        const rawInfoHooks = malaguComponent.infoHooks || [];
         const rawServeHooks = malaguComponent.serveHooks || [];
         const rawCliHooks = malaguComponent.cliHooks || [];
 
@@ -92,6 +93,7 @@ export class ModuleResolver {
         const configHooks: Module[] = malaguComponent.configHooks = [];
         const buildHooks: Module[] = malaguComponent.buildHooks = [];
         const deployHooks: Module[] = malaguComponent.deployHooks = [];
+        const infoHooks: Module[] = malaguComponent.infoHooks = [];
         const serveHooks: Module[] = malaguComponent.serveHooks = [];
         const cliHooks: Module[] = malaguComponent.cliHooks = [];
 
@@ -102,6 +104,7 @@ export class ModuleResolver {
         this.addModule(componentPackage, configHooks, rawConfigHooks);
         this.addModule(componentPackage, buildHooks, rawBuildHooks);
         this.addModule(componentPackage, deployHooks, rawDeployHooks);
+        this.addModule(componentPackage, infoHooks, rawInfoHooks);
         this.addModule(componentPackage, serveHooks, rawServeHooks);
         this.addModule(componentPackage, cliHooks, rawCliHooks);
 
@@ -115,6 +118,8 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, buildHooks, join(libOrSrc, 'build-hook'));
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'hooks', 'deploy'));
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'deploy-hook'));
+        this.addModuleIfExists(componentPackage, infoHooks, join(libOrSrc, 'hooks', 'info'));
+        this.addModuleIfExists(componentPackage, infoHooks, join(libOrSrc, 'info-hook'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'hooks', 'serve'));
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'serve-hook'));
         this.addModuleIfExists(componentPackage, cliHooks, join(libOrSrc, 'hooks', 'cli'));
@@ -125,8 +130,8 @@ export class ModuleResolver {
     resolveAssetModule(componentPackage: ComponentPackage): void {
         const malaguComponent = componentPackage.malaguComponent!;
 
-        const rawFrontendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
-        const rawBackendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.backend.assets || [] ];
+        const rawFrontendAssets = [...malaguComponent.assets || [], ...malaguComponent.frontend.assets || []];
+        const rawBackendAssets = [...malaguComponent.assets || [], ...malaguComponent.backend.assets || []];
         const frontendAssets: Module[] = malaguComponent.frontend.assets = [];
         const backendAssets: Module[] = malaguComponent.backend.assets = [];
 

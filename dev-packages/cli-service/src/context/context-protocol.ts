@@ -67,6 +67,10 @@ export namespace ServiceContextUtils {
         return createConfigurationContext(cliContext, options);
     }
 
+    export function createInfoContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<InfoContext> {
+        return createConfigurationContext(cliContext, options);
+    }
+
     export function createWebpackContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<WebpackContext> {
         return createConfigurationContext(cliContext, options);
     }
@@ -89,6 +93,10 @@ export interface BuildContext extends ConfigurationContext {
 }
 
 export interface DeployContext extends ConfigurationContext {
+
+}
+
+export interface InfoContext extends ConfigurationContext {
 
 }
 

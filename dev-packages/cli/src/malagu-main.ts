@@ -18,6 +18,7 @@ interface Data {
     serveHookModules: Module[];
     buildHookModules: Module[];
     deployHookModules: Module[];
+    infoHookModules: Module[];
 }
 
 const exitListener = (code: number | null) => {
@@ -41,13 +42,14 @@ function execute() {
     current.on('error', () => process.exit(-1));
     current.on('message', (messageEvent: MessageEvent<Data>) => {
         if (messageEvent.type === 'cliContext') {
-            const { components, webpackHookModules, configHookModules, buildHookModules, serveHookModules, deployHookModules } = messageEvent.data;
+            const { components, webpackHookModules, configHookModules, buildHookModules, serveHookModules, deployHookModules, infoHookModules } = messageEvent.data;
             const files = [
                 ...webpackHookModules.map(m => m.path),
                 ...configHookModules.map(m => m.path),
                 ...buildHookModules.map(m => m.path),
                 ...serveHookModules.map(m => m.path),
                 ...deployHookModules.map(m => m.path),
+                ...infoHookModules.map(m => m.path),
                 ...components.reduce<string[]>((prev, curr) => prev.concat(curr.configFiles), [])
             ];
             watchpack.watch({

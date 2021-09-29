@@ -78,6 +78,7 @@ export class ApplicationPackage {
     protected _buildHookModules: Module[] | undefined;
     protected _serveHookModules: Module[] | undefined;
     protected _deployHookModules: Module[] | undefined;
+    protected _infoHookModules: Module[] | undefined;
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Module[] | undefined;
     protected _configHookModules: Module[] | undefined;
@@ -221,6 +222,13 @@ export class ApplicationPackage {
             this._deployHookModules = this.computeModules('deployHooks');
         }
         return this._deployHookModules;
+    }
+
+    get infoHookModules() {
+        if (!this._infoHookModules) {
+            this._infoHookModules = this.computeModules('infoHooks');
+        }
+        return this._infoHookModules;
     }
 
     get webpackHookModules() {

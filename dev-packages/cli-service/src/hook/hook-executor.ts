@@ -1,4 +1,4 @@
-import { ServeContext, BuildContext, DeployContext, WebpackContext } from '../context';
+import { ServeContext, BuildContext, DeployContext, WebpackContext, InfoContext } from '../context';
 import { CliContext, ConfigContext, getBackendConfig, InitContext, Module } from '@malagu/cli-common';
 const chalk = require('chalk');
 
@@ -10,7 +10,7 @@ export class HookExecutor {
         }
         console.log(chalk`\nmalagu {yellow.bold hook} - {bold ${hookName}}`);
         for (const module of modules) {
-            console.log(chalk`malagu {cyan.bold hook} - ${ module.name }`);
+            console.log(chalk`malagu {cyan.bold hook} - ${module.name}`);
         }
     }
 
@@ -24,6 +24,12 @@ export class HookExecutor {
         const modules = context.pkg.deployHookModules;
         this.print('deploy', modules);
         return this.doExecuteHooks(modules, context, 'deployHooks');
+    }
+
+    executeInfoHooks(context: InfoContext): Promise<any[]> {
+        const modules = context.pkg.infoHookModules;
+        this.print('info', modules);
+        return this.doExecuteHooks(modules, context, 'infoHooks');
     }
 
     async executeServeHooks(context: ServeContext): Promise<any[]> {

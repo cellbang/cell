@@ -25,7 +25,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
 ╭──────────────────────────────────────────────────╮
 │      Serverless Frist Development Framework      │${defaultRuntime ? '\n│' +
-chalk.yellow(`Runtime<${defaultRuntime}>`.padStart(25 + Math.floor((9 + defaultRuntime.length) / 2)).padEnd(50)) + '│' : ''}
+        chalk.yellow(`Runtime<${defaultRuntime}>`.padStart(25 + Math.floor((9 + defaultRuntime.length) / 2)).padEnd(50)) + '│' : ''}
 ╰──────────────────────────────────────────────────╯
 `);
 
@@ -90,6 +90,13 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .description('deploy a applicaton')
         .action((entry, options) => {
             loadCommand(context, 'deploy', '@malagu/cli-service').default(context, { entry, ...options });
+        });
+
+    program
+        .command('info [entry]')
+        .description('display information about the service, temporarily only supports tencent-scf')
+        .action(entry => {
+            loadCommand(context, 'info', '@malagu/cli-service').default(context, { entry });
         });
 
     const runtimeCmd = program
