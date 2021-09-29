@@ -1,0 +1,6 @@
+targets:
+  - backend
+malagu:
+  faas-adapter:
+    function:
+      name: ServiceB

@@ -1,0 +1,4 @@
+malagu:
+  rpc:
+    # 将默认的微服务 Endpoint 改成您自己的
+    defaultEndpoint: https://service-e6ozizj8-1234567.gz.apigw.tencentcs.com/test/{serviceIdentifier}/api/{serviceIdentifier}

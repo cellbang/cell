@@ -4,6 +4,7 @@
         {
             "name": "Malagu Debug",
             "request": "launch",
+            "cwd": "${workspaceFolder}/examples/backend-app",
             "runtimeArgs": [
                 "malagu",
                 "serve"

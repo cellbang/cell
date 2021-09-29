@@ -1,0 +1,7 @@
+targets:
+  - backend
+malagu:
+  faas-adapter:
+    function:
+      name: ServiceA
+
