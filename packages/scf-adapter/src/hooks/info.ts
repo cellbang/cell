@@ -33,17 +33,17 @@ export default async (context: CliContext) => {
     const functionName = functionMeta.name;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of SCF...`);
-    
+
     console.log(chalk`{bold.cyan - SCF:}`);
 
     try {
         const functionInfo = await getFunction(namespace.name, functionName);
 
-        console.log(`FunctionName : ${functionInfo.FunctionName}`);
-        console.log(`FunctionVersion : ${functionInfo.FunctionVersion}`);
-        console.log(`Status : ${functionInfo.Status}`);
-        console.log(`Qualifier : ${functionInfo.Qualifier}`);
-        console.log(`Timeout : ${functionInfo.Timeout}`);
+        console.log(`    - FunctionName : ${functionInfo.FunctionName}`);
+        console.log(`    - FunctionVersion : ${functionInfo.FunctionVersion}`);
+        console.log(`    - Status : ${functionInfo.Status}`);
+        console.log(`    - Qualifier : ${functionInfo.Qualifier}`);
+        console.log(`    - Timeout : ${functionInfo.Timeout}`);
     } catch (error) {
         if (error.code === 'ResourceNotFound.Function') {
             console.log('No Fuction Found');
@@ -59,10 +59,12 @@ export default async (context: CliContext) => {
         if (tiggerList) {
             tiggerList.forEach(item => {
                 const triggerDesc = JSON.parse(item.TriggerDesc);
-                console.log(`serviceName : ${triggerDesc.service.serviceName}`);
-                console.log(`Type : ${item.Type}`);
-                console.log(`AvailableStatus : ${item.AvailableStatus}`);
-                console.log(`subDomain : ${triggerDesc.service.subDomain}`);
+                console.log(`    - serviceName : ${triggerDesc.service.serviceName}`);
+                console.log(`    - Type : ${item.Type}`);
+                console.log(`    - AvailableStatus : ${item.AvailableStatus}`);
+                if ( item.Type === 'apigw') {
+                     console.log(`    - subDomain : ${triggerDesc.service.subDomain}`);
+                }
 
             });
         } else {
