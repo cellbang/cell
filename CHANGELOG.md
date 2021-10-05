@@ -1,5 +1,8 @@
 # Change Log
 
+## 1.39.0
+- feat(fc-adapter+scf-adapter) add 'malagu info' command for tencent-scf and aliyun-fc
+
 ## 1.38.0
 - feat(cli) 优化微服务模板 `microservice`
 
