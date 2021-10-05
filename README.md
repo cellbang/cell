@@ -1,7 +1,7 @@
 English | [简体中文](./README.zh-cn.md)
 
 ![Malagu Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20Logo%20Green.svg) 
-# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0)
+# [Malagu](https://malagu.cellbang.com/)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
@@ -55,19 +55,19 @@ malagu deploy
 
 ## Documentation
 
-- [Introduction](https://www.yuque.com/cellbang/malagu/puw7p0)
-- [Create the first application](https://www.yuque.com/cellbang/malagu/ogreg3)
-- [Command line tools](https://www.yuque.com/cellbang/malagu/xbfpir)
-- [Controller](https://www.yuque.com/cellbang/malagu/cbgl7g)
-- [Database operations](https://www.yuque.com/cellbang/malagu/ztbcwq)
-- [Microservice](https://www.yuque.com/cellbang/malagu/wtiy6s)
-- [Authentication and authorization](https://www.yuque.com/cellbang/malagu/qhl0km)
-- [Cloud Platform Adaptation](https://www.yuque.com/cellbang/malagu/hh1mng)
-- [Dependency injection](https://www.yuque.com/cellbang/malagu/fw025h)
-- [Component design](https://www.yuque.com/cellbang/malagu/qaqomw)
-- [Front-end architecture](https://www.yuque.com/cellbang/malagu/vl9wbw)
-- [React development](https://www.yuque.com/cellbang/malagu/fum7u8)
-- [Front and back-end integrated development](https://www.yuque.com/cellbang/malagu/fi6lxi)
+- [Introduction](https://malagu.cellbang.com/guide/%E4%BB%8B%E7%BB%8D)
+- [Create the first application](https://malagu.cellbang.com/guide/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8)
+- [Command line tools](https://malagu.cellbang.com/guide/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7)
+- [Controller](https://malagu.cellbang.com/guide/%E6%8E%A7%E5%88%B6%E5%99%A8)
+- [Database operations](https://malagu.cellbang.com/guide/%E6%95%B0%E6%8D%AE%E5%BA%93typeorm)
+- [Microservice](https://malagu.cellbang.com/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1)
+- [Authentication and authorization](https://malagu.cellbang.com/guide/%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83)
+- [Cloud Platform Adaptation](https://malagu.cellbang.com/cloud/%E4%BA%91%E5%B9%B3%E5%8F%B0%E9%80%82%E9%85%8D)
+- [Dependency injection](https://malagu.cellbang.com/guide/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
+- [Component design](https://malagu.cellbang.com/guide/%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1)
+- [Front-end architecture](https://malagu.cellbang.com/guide/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84)
+- [React development](https://malagu.cellbang.com/dev/react)
+- [Front and back-end integrated development](https://malagu.cellbang.com/dev/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%B8%80%E4%BD%93%E5%8C%96%E5%BC%80%E5%8F%91)
 
 
 ## Dependency injection
