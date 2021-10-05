@@ -3,7 +3,7 @@
 
 ![Malagu Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20Logo%20Green.svg) 
 
-# [Malagu](https://www.yuque.com/cellbang/malagu/puw7p0) 
+# [Malagu](https://malagu.cellbang.com/) 
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/malagu/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@malagu/core.svg?style=flat)](https://www.npmjs.com/org/malagu)
@@ -58,19 +58,19 @@ malagu deploy
 
 ## 文档
 
-- [介绍](https://www.yuque.com/cellbang/malagu/puw7p0)
-- [创建第一个应用](https://www.yuque.com/cellbang/malagu/ogreg3)
-- [命令行工具](https://www.yuque.com/cellbang/malagu/xbfpir)
-- [控制器](https://www.yuque.com/cellbang/malagu/cbgl7g)
-- [数据库操作](https://www.yuque.com/cellbang/malagu/ztbcwq)
-- [微服务](https://www.yuque.com/cellbang/malagu/wtiy6s)
-- [认证与授权](https://www.yuque.com/cellbang/malagu/qhl0km)
-- [云平台适配](https://www.yuque.com/cellbang/malagu/hh1mng)
-- [依赖注入](https://www.yuque.com/cellbang/malagu/fw025h)
-- [组件设计](https://www.yuque.com/cellbang/malagu/qaqomw)
-- [前端架构](https://www.yuque.com/cellbang/malagu/vl9wbw)
-- [React 开发](https://www.yuque.com/cellbang/malagu/fum7u8)
-- [前后端一体化开发](https://www.yuque.com/cellbang/malagu/fi6lxi)
+- [介绍](https://malagu.cellbang.com/guide/%E4%BB%8B%E7%BB%8D)
+- [创建第一个应用](https://malagu.cellbang.com/guide/%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8)
+- [命令行工具](https://malagu.cellbang.com/guide/%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7)
+- [控制器](https://malagu.cellbang.com/guide/%E6%8E%A7%E5%88%B6%E5%99%A8)
+- [数据库操作](https://malagu.cellbang.com/guide/%E6%95%B0%E6%8D%AE%E5%BA%93typeorm)
+- [微服务](https://malagu.cellbang.com/dev/%E5%BE%AE%E6%9C%8D%E5%8A%A1)
+- [认证与授权](https://malagu.cellbang.com/guide/%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%8E%88%E6%9D%83)
+- [云平台适配](https://malagu.cellbang.com/cloud/%E4%BA%91%E5%B9%B3%E5%8F%B0%E9%80%82%E9%85%8D)
+- [依赖注入](https://malagu.cellbang.com/guide/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
+- [组件设计](https://malagu.cellbang.com/guide/%E7%BB%84%E4%BB%B6%E8%AE%BE%E8%AE%A1)
+- [前端架构](https://malagu.cellbang.com/guide/%E5%89%8D%E7%AB%AF%E6%9E%B6%E6%9E%84)
+- [React 开发](https://malagu.cellbang.com/dev/react)
+- [前后端一体化开发](https://malagu.cellbang.com/dev/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%B8%80%E4%BD%93%E5%8C%96%E5%BC%80%E5%8F%91)
 
 
 ## 依赖注入
