@@ -37,8 +37,10 @@ export namespace OrmContext {
         let entityManagerMap = Context.getAttr<Map<string, EntityManager[]>>(CURRENT_ORM_CONTEXT_REQUEST_KEY, AttributeScope.Request);
         if (!entityManagerMap) {
             entityManagerMap = new Map<string, EntityManager[]>();
-            entityManagerMap.set(name, []);
             Context.setAttr(CURRENT_ORM_CONTEXT_REQUEST_KEY, entityManagerMap);
+        }
+        if (!entityManagerMap.get(name)) {
+            entityManagerMap.set(name, []);
         }
         entityManagerMap.get(name)!.push(entityManager);
     }
