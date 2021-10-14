@@ -1,6 +1,7 @@
 import { Component } from '@malagu/core';
 import { ClientOptions, Credentials, CreateBucketResult, Body, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest, CopyObjectRequest,
-    HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService, PutObjectRequest, AbstractObjectStorageService } from '@malagu/cloud';
+    HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService,
+    PutObjectRequest, AbstractObjectStorageService, Account } from '@malagu/cloud';
 import { Readable } from 'stream';
 import { promisify } from 'util';
 const COS = require('cos-nodejs-sdk-v5');
@@ -81,7 +82,7 @@ export class ObjectStorageServiceImpl extends AbstractObjectStorageService<any> 
     async getObject(request: GetObjectRequest): Promise<Body> {
         const service = await this.getRawCloudService();
         const { bucket, key } = request;
-        const result = await promisify(service.getObject)({ Bucket: bucket, Key: key, Region: this.region});
+        const result = await promisify(service.getObject.bind(service))({ Bucket: bucket, Key: key, Region: this.region});
         return result.Body;
     }
 

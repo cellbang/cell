@@ -1,6 +1,7 @@
 import { Component } from '@malagu/core';
 import { ClientOptions, Credentials, Body, CreateBucketResult, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest, CopyObjectRequest,
-    HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService, PutObjectRequest, AbstractObjectStorageService } from '@malagu/cloud';
+    HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService,
+    PutObjectRequest, AbstractObjectStorageService, Account } from '@malagu/cloud';
 import * as OSS from 'ali-oss';
 import { Readable } from 'stream';
 
