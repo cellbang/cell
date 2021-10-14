@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.39.1
+- fix(typeorm) 修复多数据错误
+- fix(cos) 修复下载对象错误
+
 ## 1.39.0
 - feat(fc-adapter+scf-adapter) add 'malagu info' command for tencent-scf and aliyun-fc
 
