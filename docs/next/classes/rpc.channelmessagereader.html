@@ -71,13 +71,19 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="rpc.abstractmessagereader.html" class="tsd-signature-type">AbstractMessageReader</a>
+						<span class="tsd-signature-type">AbstractMessageReader</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">ChannelMessageReader</span>
 							</li>
 						</ul>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><span class="tsd-signature-type">MessageReader</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -114,7 +120,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="rpc.channelmessagereader.html#fireclose" class="tsd-kind-icon">fire<wbr>Close</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="rpc.channelmessagereader.html#fireerror" class="tsd-kind-icon">fire<wbr>Error</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="rpc.channelmessagereader.html#firepartialmessage" class="tsd-kind-icon">fire<wbr>Partial<wbr>Message</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rpc.channelmessagereader.html#listen" class="tsd-kind-icon">listen</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="rpc.channelmessagereader.html#listen" class="tsd-kind-icon">listen</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="rpc.channelmessagereader.html#readmessage" class="tsd-kind-icon">read<wbr>Message</a></li>
 							</ul>
 						</section>
@@ -132,9 +138,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#constructor">constructor</a></p>
+								<p>Overrides AbstractMessageReader.__constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L60">packages/rpc/src/common/factory/reader.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L8">packages/rpc/src/common/factory/reader.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -156,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataCallback</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L59">packages/rpc/src/common/factory/reader.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L7">packages/rpc/src/common/factory/reader.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -166,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">channel<span class="tsd-signature-symbol">:</span> <a href="../modules/rpc.channel.html" class="tsd-signature-type">Channel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L62">packages/rpc/src/common/factory/reader.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L10">packages/rpc/src/common/factory/reader.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -176,7 +182,7 @@
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>message<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L60">packages/rpc/src/common/factory/reader.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L8">packages/rpc/src/common/factory/reader.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"initial"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"listening"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"closed"</span><span class="tsd-signature-symbol"> = &quot;initial&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L58">packages/rpc/src/common/factory/reader.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L6">packages/rpc/src/common/factory/reader.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,9 +208,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#onclose">onClose</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#onclose">onClose</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L31">packages/rpc/src/common/factory/reader.ts:31</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:46</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -220,9 +226,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#onerror">onError</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#onerror">onError</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L23">packages/rpc/src/common/factory/reader.ts:23</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:44</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/core.applicationerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -238,9 +244,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#onpartialmessage">onPartialMessage</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#onpartialmessage">onPartialMessage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L39">packages/rpc/src/common/factory/reader.ts:39</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:48</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PartialMessageInfo</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -259,9 +265,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#dispose">dispose</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#dispose">dispose</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L18">packages/rpc/src/common/factory/reader.ts:18</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:43</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -277,9 +283,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#fireclose">fireClose</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#fireclose">fireClose</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L35">packages/rpc/src/common/factory/reader.ts:35</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:47</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -295,9 +301,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#fireerror">fireError</a></p>
+								<p>Overrides AbstractMessageReader.fireError</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L93">packages/rpc/src/common/factory/reader.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L42">packages/rpc/src/common/factory/reader.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -319,9 +325,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="rpc.abstractmessagereader.html">AbstractMessageReader</a>.<a href="rpc.abstractmessagereader.html#firepartialmessage">firePartialMessage</a></p>
+								<p>Inherited from <a href="rpc.channelmessagereader.html">ChannelMessageReader</a>.<a href="rpc.channelmessagereader.html#firepartialmessage">firePartialMessage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L43">packages/rpc/src/common/factory/reader.ts:43</a></li>
+									<li>Defined in node_modules/vscode-jsonrpc/lib/common/messageReader.d.ts:49</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -334,17 +340,18 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="listen" class="tsd-anchor"></a>
 					<h3>listen</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">listen<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DataCallback</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">listen<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DataCallback</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Disposable</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides AbstractMessageReader.listen</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L69">packages/rpc/src/common/factory/reader.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L17">packages/rpc/src/common/factory/reader.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -353,7 +360,7 @@
 									<h5>callback: <span class="tsd-signature-type">DataCallback</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Disposable</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -367,7 +374,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8f2e7ae7/packages/rpc/src/common/factory/reader.ts#L84">packages/rpc/src/common/factory/reader.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e37801d0/packages/rpc/src/common/factory/reader.ts#L33">packages/rpc/src/common/factory/reader.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -447,7 +454,7 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="rpc.channelmessagereader.html#firepartialmessage" class="tsd-kind-icon">fire<wbr>Partial<wbr>Message</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="rpc.channelmessagereader.html#listen" class="tsd-kind-icon">listen</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
