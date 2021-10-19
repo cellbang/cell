@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.39.2
+- fix(rpc) 修复 rpc 接口参数为数组的时候解析不正确
+- feat(web) 升级 class-transformer 和 class-validator
+
+- fix(rpc) fixes incorrect parsing when the rpc interface parameter is an array
+- feat(web) upgrade class-transformer and class-validator
+
 ## 1.39.1
 - fix(typeorm) 修复多数据错误
 - fix(cos) 修复下载对象错误
