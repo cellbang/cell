@@ -1,57 +1,5 @@
-import { DataCallback, PartialMessageInfo } from 'vscode-jsonrpc';
+import { DataCallback, AbstractMessageReader, Disposable } from 'vscode-jsonrpc';
 import { Channel } from '../channal/channel-protocol';
-import { Emitter, Event } from 'vscode-jsonrpc/lib/events';
-
-export abstract class AbstractMessageReader {
-
-    private errorEmitter: Emitter<Error>;
-    private closeEmitter: Emitter<void>;
-
-    private partialMessageEmitter: Emitter<PartialMessageInfo>;
-
-    constructor() {
-        this.errorEmitter = new Emitter<Error>();
-        this.closeEmitter = new Emitter<void>();
-        this.partialMessageEmitter = new Emitter<PartialMessageInfo>();
-    }
-
-    public dispose(): void {
-        this.errorEmitter.dispose();
-        this.closeEmitter.dispose();
-    }
-
-    public get onError(): Event<Error> {
-        return this.errorEmitter.event;
-    }
-
-    protected fireError(error: any): void {
-        this.errorEmitter.fire(this.asError(error));
-    }
-
-    public get onClose(): Event<void> {
-        return this.closeEmitter.event;
-    }
-
-    protected fireClose(): void {
-        this.closeEmitter.fire(undefined);
-    }
-
-    public get onPartialMessage(): Event<PartialMessageInfo> {
-        return this.partialMessageEmitter.event;
-    }
-
-    protected firePartialMessage(info: PartialMessageInfo): void {
-        this.partialMessageEmitter.fire(info);
-    }
-
-    private asError(error: any): Error {
-        if (error instanceof Error) {
-            return error;
-        } else {
-            return new Error(`Reader received error. Reason: ${typeof (error.message) === 'string' ? error.message : 'unknown'}`);
-        }
-    }
-}
 
 export class ChannelMessageReader extends AbstractMessageReader {
 
@@ -66,7 +14,7 @@ export class ChannelMessageReader extends AbstractMessageReader {
         );
     }
 
-    listen(callback: DataCallback): void {
+    listen(callback: DataCallback): Disposable {
         if (this.state === 'initial') {
             this.state = 'listening';
             this.callback = callback;
@@ -79,6 +27,7 @@ export class ChannelMessageReader extends AbstractMessageReader {
                 }
             }
         }
+        return Disposable.create(() => {});
     }
 
     protected readMessage(message: any): void {
