@@ -2,7 +2,7 @@ stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'pr
 malagu:
   faas-adapter:
     function:
-      name: ${pkg.name}
+      name: ${pkg.name|replace('@', '')|replace('/', '-')}
       handler: backend/dist/index.handler
       codeUri:
         exclude: malagu.yml

@@ -16,8 +16,8 @@
     "@malagu/schedule": "1.39.3"
   },
   "devDependencies": {
-    "@malagu/cli": "1.39.3",
-    "@malagu/cli-service": "1.39.3"
+    "@malagu/cli-service": "1.39.3",
+    "@malagu/cli": "1.39.3"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
