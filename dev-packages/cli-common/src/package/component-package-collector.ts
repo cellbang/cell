@@ -24,16 +24,25 @@ export class ComponentPackageCollector {
         return this.sorted;
     }
 
+    protected matchDevDependency(dependency: string, mode: string[]): boolean {
+        if (mode.includes('remote') && !dependency.endsWith('plugin') && dependency !== '@malagu/cli-service') {
+            return false;
+        }
+        return true;
+    }
+
     protected collectPackages(pck: NodePackage, mode: string[]): void {
         if (!pck.dependencies) {
             return;
         }
 
-        if (this.pkg.pkg.name === pck.name && mode.includes('local')) {
+        if (this.pkg.pkg.name === pck.name) {
             // eslint-disable-next-line guard-for-in
             for (const dependency in pck.devDependencies) {
-                const versionRange = pck.devDependencies[dependency]!;
-                this.collectPackage(dependency, versionRange, mode);
+                if (this.matchDevDependency(dependency, mode)) {
+                    const versionRange = pck.devDependencies[dependency]!;
+                    this.collectPackage(dependency, versionRange, mode);
+                }
             }
         }
 
@@ -63,7 +72,7 @@ export class ComponentPackageCollector {
             packagePath = this.pkg.resolveModule(name + '/package.json');
         } catch (error) {
             if (error.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
-                console.warn(`Failed to resolve module: ${name}`);
+                // console.warn(`Failed to resolve module: ${name}`);
             }
         }
         if (!packagePath) {

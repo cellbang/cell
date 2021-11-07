@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "@malagu/core": "1.39.3",
-    "@malagu/fc-adapter": "1.39.3",
+    "@malagu/scf-adapter": "1.39.3",
     "@malagu/mvc": "1.39.3"
   },
   "devDependencies": {

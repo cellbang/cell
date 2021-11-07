@@ -55,16 +55,19 @@ export namespace ConfigurationContext {
 
 export namespace ServiceContextUtils {
 
-    export async function createConfigurationContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<BuildContext> {
+    export async function createConfigurationContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<ConfigurationContext> {
         return ConfigurationContext.create(cliContext, options);
     }
 
-    export function createBuildContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<BuildContext> {
+    export async function createBuildContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<BuildContext> {
         return createConfigurationContext(cliContext, options);
     }
 
-    export function createDeployContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<DeployContext> {
-        return createConfigurationContext(cliContext, options);
+    export async function createDeployContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<DeployContext> {
+        return {
+            ...options,
+            ...cliContext
+        };
     }
 
     export function createWebpackContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<WebpackContext> {
@@ -88,7 +91,7 @@ export interface BuildContext extends ConfigurationContext {
 
 }
 
-export interface DeployContext extends ConfigurationContext {
+export interface DeployContext extends CliContext {
 
 }
 

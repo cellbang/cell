@@ -1,8 +1,9 @@
 import { ApplicationPackage } from '../package';
 import { Command } from 'commander';
-import { checkPkgVersionConsistency, executeHook, getCurrentRuntimePath } from '../util';
+import { checkPkgVersionConsistency, getCurrentRuntimePath } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
+import { HookExecutor } from '../hook';
 import { ApplicationConfig } from '../package';
 
 export interface CliContext {
@@ -37,7 +38,7 @@ export namespace CliContext {
                 const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
                 jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, config));
 
-                await executeHook({
+                await new HookExecutor().executeHooks({
                     pkg,
                     cfg,
                     program,
@@ -45,7 +46,8 @@ export namespace CliContext {
                     config: config,
                     expressionHandler,
                     ...options
-                }, 'Config');
+                }, 'configHooks');
+
                 expressionHandler.handle();
                 delete config.env;
                 delete config.pkg;

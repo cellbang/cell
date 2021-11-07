@@ -46,7 +46,8 @@
     "semver": "^7.3.5",
     "temp": "^0.8.3",
     "traverse": "^0.6.6",
-    "uuid": "^8.0.0"
+    "uuid": "^8.0.0",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {
     "@malagu/ext-scripts": "1.39.3"

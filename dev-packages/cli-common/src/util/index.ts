@@ -4,7 +4,6 @@ import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Module } from '../package';
 import * as path from 'path';
-import { CliContext } from '../context';
 import { homedir } from 'os';
 import { load, dump } from 'js-yaml';
 const chalk = require('chalk');
@@ -158,16 +157,6 @@ export function getProjectHomePath() {
 
 export function setProjectHomePath(projectHomePath: string) {
     process.env.MALAGU_PROJECT_HOME_PATH = projectHomePath;
-}
-
-export function executeHook(context: CliContext, hook: string) {
-    const { pkg } = context;
-    try {
-        const { HookExecutor } = require(pkg.resolveModule('@malagu/cli-service/lib/hook'));
-        return new HookExecutor()[`execute${hook}Hooks`](context);
-    } catch (err) {
-        // noop
-    }
 }
 
 export function getMalaguHomePath() {

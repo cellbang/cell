@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
 import { spawnSync } from 'child_process';
-import { ContextUtils, CliContext, getPackager, executeHook } from '@malagu/cli-common';
+import { ContextUtils, CliContext, getPackager, HookExecutor } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
 import { ok } from 'assert';
@@ -52,7 +52,7 @@ export class InstallManager {
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
         const initContext = await ContextUtils.createInitContext(await this.getCliContext());
-        await executeHook(initContext, 'Init');
+        await new HookExecutor().executeInitHooks(initContext);
         console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);
         process.exit(0);
     }

@@ -13,7 +13,7 @@ malagu:
         name: "${stage|eval == 'prod' ? 'release' : stage }"
         desc: 'Released By Malagu'
       group:
-        name: ${pkg.name|replace('-', '_')}
+        name: ${malagu['faas-adapter'].function.name|replace('-', '_')}
         description: 'Created By Malagu'
       api:
         name: ${malagu['faas-adapter'].function.name|replace('-', '_')}

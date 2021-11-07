@@ -2,8 +2,8 @@ import { program, Command } from 'commander';
 
 const leven = require('leven');
 import * as ora from 'ora';
-import { executeHook, getSettings } from '@malagu/cli-common';
-import { loadCommand, loadContext } from './util';
+import { getSettings, HookExecutor } from '@malagu/cli-common';
+import { loadContext } from './util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
@@ -60,38 +60,6 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             require('./init/init').default({ name, template, outputDir: '.', ...options });
         });
 
-    program
-        .command('serve [entry]')
-        .option('-o, --open [open]', 'Open browser')
-        .option('-p, --port [port]', 'Port used by the server')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [])
-        .description('serve a applicaton')
-        .action((entry, options) => {
-            loadCommand(context, 'serve', '@malagu/cli-service').default(context, { entry, ...options });
-        });
-
-    program
-        .command('build [entry]')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [], [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [], [])
-        .option('-p, --prod [prod]', 'Create a production build')
-        .description('build a application')
-        .action((entry, options) => {
-            loadCommand(context, 'build', '@malagu/cli-service').default(context, { entry, ...options });
-        });
-
-    program
-        .command('deploy [entry]')
-        .option('-t, --targets [targets]', 'Specify application targets', value => value ? value.split(',') : [], [])
-        .option('-m, --mode [mode]', 'Specify application mode', value => value ? value.split(',') : [], [])
-        .option('-p, --prod [prod]', 'Create a production deployment')
-        .option('-s, --skip-build [skipBuild]', 'Skip the build process')
-        .description('deploy a applicaton')
-        .action((entry, options) => {
-            loadCommand(context, 'deploy', '@malagu/cli-service').default(context, { entry, ...options });
-        });
-
     const runtimeCmd = program
         .command('runtime [command]')
         .description('management runtime');
@@ -124,7 +92,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             require('@malagu/cli-runtime/lib/uninstall/uninstall').default({ runtime });
         });
 
-    await executeHook(context, 'Cli');
+    await new HookExecutor().executeHooks(context, 'cliHooks');
     spinner.stop();
 
     program
@@ -163,6 +131,8 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 
 function suggestCommands(unknownCommand: string, main: Command) {
     const availableCommands = main.commands.map((cmd: Command) => cmd.name());
+
+    console.log(availableCommands);
 
     let suggestion: string = '';
 
