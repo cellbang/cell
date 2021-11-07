@@ -295,9 +295,10 @@ export class ApplicationPackage {
      */
     get resolveModule(): ApplicationModuleResolver {
         if (!this._moduleResolver) {
-            const resolutionPaths = [this.packagePath || getCurrentRuntimePath()];
-            if (process.cwd() !== this.packagePath) {
-                resolutionPaths.push(process.cwd());
+            const resolutionPaths = [this.packagePath || `${getCurrentRuntimePath()}/package.json`];
+            const cwdPackagePath = `${process.cwd()}/package.json`;
+            if (cwdPackagePath !== this.packagePath) {
+                resolutionPaths.push(cwdPackagePath);
             }
             this._moduleResolver = modulePath => require.resolve(modulePath, { paths: resolutionPaths });
         }

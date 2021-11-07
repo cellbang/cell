@@ -3,7 +3,7 @@ import * as webpack from 'webpack';
 import { BuildContext } from '../context';
 import { BACKEND_TARGET } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
-import { HookExecutor } from '../hook';
+import { HookExecutor } from '../hooks';
 
 export class BuildManager {
 

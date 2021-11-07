@@ -1,5 +1,6 @@
-import { ServeContext, BuildContext, DeployContext, WebpackContext } from '../context';
-import { CliContext, ConfigContext, getBackendConfig, InitContext, Module } from '@malagu/cli-common';
+import { CliContext, ConfigContext, InitContext } from '../context';
+import { Module } from '../package';
+import { getBackendConfig } from '../util';
 const chalk = require('chalk');
 
 export class HookExecutor {
@@ -12,33 +13,6 @@ export class HookExecutor {
         for (const module of modules) {
             console.log(chalk`malagu {cyan.bold hook} - ${ module.name }`);
         }
-    }
-
-    executeBuildHooks(context: BuildContext): Promise<any[]> {
-        const modules = context.pkg.buildHookModules;
-        this.print('build', modules);
-        return this.doExecuteHooks(modules, context, 'buildHooks');
-    }
-
-    executeDeployHooks(context: DeployContext): Promise<any[]> {
-        const modules = context.pkg.deployHookModules;
-        this.print('deploy', modules);
-        return this.doExecuteHooks(modules, context, 'deployHooks');
-    }
-
-    async executeServeHooks(context: ServeContext): Promise<any[]> {
-        const modules = context.pkg.serveHookModules;
-        if (modules.length === 0) {
-            console.log(chalk.yellow('Please provide the serve hook first.'));
-            return [];
-        }
-        return this.doExecuteHooks(modules, context, 'serveHooks');
-    }
-
-    executeWebpackHooks(context: WebpackContext): Promise<any[]> {
-        const modules = context.pkg.webpackHookModules;
-        this.print('webpack', modules);
-        return this.doExecuteHooks(modules, context, 'webpackHooks');
     }
 
     executeCliHooks(context: CliContext): Promise<any[]> {

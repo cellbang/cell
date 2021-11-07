@@ -1,26 +1,7 @@
 import { CliContext } from '@malagu/cli-common';
 const minimist = require('minimist');
-const chalk = require('chalk');
 import * as ora from 'ora';
 import { Command } from 'commander';
-
-export function loadCommand(context: CliContext, commandName: string, moduleName: string) {
-    const { pkg } = context;
-
-    const isNotFoundError = (err: Error) => err.message.match(/Cannot find module/);
-    try {
-        return require(pkg.resolveModule(`${moduleName}/lib/${commandName}/${commandName}`));
-    } catch (err) {
-        if (isNotFoundError(err)) {
-            console.log();
-            console.log(`  Command ${chalk.cyan(`malagu ${commandName}`)} requires ${chalk.cyan(`${moduleName}`)} to be installed.`);
-            console.log();
-            process.exit(-1);
-        } else {
-            throw err;
-        }
-    }
-}
 
 export function loadContext(program: Command, spinner: ora.Ora) {
     const options = minimist(process.argv.slice(2));

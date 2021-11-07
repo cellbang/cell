@@ -1,6 +1,6 @@
 import * as webpack from 'webpack';
 import { startDevServer } from './start-dev-server';
-import { HookExecutor } from '../hook';
+import { HookExecutor } from '../hooks';
 import * as https from 'https';
 import * as http from 'http';
 import { ConfigurationContext, ServiceContextUtils } from '../context';
