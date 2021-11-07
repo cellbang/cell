@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.40.0
+
+- feat(cli+cli-common+cli-service) Hook 机制重构，且 cli-service 完全基于 Hook 实现命令行
+- feat(cli+cli-common+cli-service) Hook mechanism is refactored, and cli-service is completely based on Hook to implement command line
+
 ## 1.39.2
 - fix(rpc) 修复 rpc 接口参数为数组的时候解析不正确
 - feat(web) 升级 class-transformer 和 class-validator
