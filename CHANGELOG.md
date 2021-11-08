@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.40.1
+
+- fix(cli-common) miss typescript package
+
 ## 1.40.0
 
 - feat(cli+cli-common+cli-service) Hook 机制重构，且 cli-service 完全基于 Hook 实现命令行
