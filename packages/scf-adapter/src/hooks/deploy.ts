@@ -602,7 +602,7 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
         await spinner(`Create ${customDomain.name} customDomain`, async () => {
             const createSubDomainRequest: any = {};
             parseCustomDomainMeta(createSubDomainRequest, customDomain, serviceId, netSubDomain);
-            await apiClient.CreateApi(createSubDomainRequest);
+            await apiClient.BindSubDomain(createSubDomainRequest);
         });
     }
 
