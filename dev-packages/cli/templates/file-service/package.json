@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "@malagu/cli-service": "latest",
-    "@types/mime-types": "^2.1.0"
+    "@types/mime-types": "^2.1.0",
+    "@malagu/fc-plugin": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

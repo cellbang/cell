@@ -1,0 +1,45 @@
+backend:
+  malagu:
+    server:
+      path: /${malagu.cloud.faas.function.name}/
+malagu:
+  cloud:
+    faas:
+      customDomain:
+        # name: abc.com
+        # certificateId: xxxx
+        protocol: http
+        netType: OUTER
+        isDefaultMapping: true
+      apiGateway:
+        release:
+          environmentName: "${stage|eval == 'prod' ? 'release' : stage|eval == 'pre' ? 'prepub' :  stage }"
+          desc: 'Released By Malagu'
+        service:
+          name: malagu
+          protocol: http&https
+        api:
+          name: ${malagu.cloud.faas.function.name}
+          serviceTimeout: 20 # 20s
+          protocol: HTTP
+          serviceScfIsIntegratedResponse: true
+          serviceScfFunctionName: ${malagu.cloud.faas.function.name}
+          serviceScfFunctionNamespace: ${malagu.cloud.faas.namespace.name}
+          serviceScfFunctionQualifier: ${malagu.cloud.faas.alias.name}
+          serviceWebsocketTransportFunctionName: ${malagu.cloud.faas.function.name}
+          serviceWebsocketTransportFunctionNamespace: ${malagu.cloud.faas.namespace.name}
+          serviceWebsocketTransportFunctionQualifier: ${malagu.cloud.faas.alias.name}
+          requestConfig:
+            path: '${malagu.server.path}*'
+            method: ANY
+        usagePlan:
+          name: ${malagu.cloud.faas.function.name}
+          environment: ${malagu.cloud.faas.apiGateway.release.environmentName}
+        strategy:
+          # strategy: 5000
+          environmentName: ${malagu.cloud.faas.apiGateway.release.environmentName}
+
+frontend:
+  malagu:
+    server:
+      path: "/${stage|eval == 'prod' ? '' : (malagu.cloud.faas.apiGateway.release.environmentName + '/')}${malagu.cloud.faas.function.name}/"

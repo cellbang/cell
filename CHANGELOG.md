@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.0.0
+
+- feat(*-adapter) 将构建部署相关逻辑抽象为独立的组件 *-plugin，以方便复用
+- feat(code-loader-plugin) 将代码加载打包逻辑抽象为独立组件
+
+- feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
+- feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
+
 ## 1.40.1
 
 - fix(cli-common) miss typescript package

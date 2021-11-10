@@ -20,7 +20,9 @@
   },
   "devDependencies": {
     "@malagu/cli": "1.40.1",
-    "@malagu/cli-service": "1.40.1"
+    "@malagu/cli-service": "1.40.1",
+    "@malagu/scf-plugin": "1.40.1"
+
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

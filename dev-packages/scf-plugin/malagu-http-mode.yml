@@ -1,0 +1,12 @@
+mode: [ api-gateway-common ]
+backend: 
+  entry: '@malagu/scf-adapter/lib/node/http-application-entry'
+malagu:
+  cloud:
+    faas:
+      function:
+        type: HTTP
+        bootstrap: /var/lang/node12/bin/node backend/dist/index.js
+      apiGateway:
+        api:
+          serviceScfFunctionType: HTTP

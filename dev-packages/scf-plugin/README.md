@@ -1,0 +1,1 @@
+# Malagu - SCF Plugin Component

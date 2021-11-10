@@ -34,8 +34,6 @@ export interface Props {
 export interface Component extends Props {
     name: any;
 
-    auto?: boolean;
-
     mode?: string[];
 
     /**

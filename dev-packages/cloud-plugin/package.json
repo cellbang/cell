@@ -1,0 +1,50 @@
+{
+  "name": "@malagu/cloud-plugin",
+  "version": "1.40.1",
+  "description": "",
+  "main": "lib/hooks/index.js",
+  "typings": "lib/hooks/index.d.ts",
+  "dependencies": {
+    "@malagu/cli-common": "1.40.1",
+    "dotenv": "^8.2.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.1",
+    "js-yaml": "^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component", "malagu-plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-remote.yml"
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "1.40.1",
+    "@types/inquirer": "^6.5.0",
+    "@types/jszip": "^3.1.6"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}
