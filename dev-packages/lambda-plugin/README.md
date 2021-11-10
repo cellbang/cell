@@ -1,0 +1,1 @@
+# Malagu - Lambda Plugin Component

@@ -1,0 +1,39 @@
+backend: 
+  entry: '@malagu/fc-adapter/lib/node/api-gateway-application-entry'
+malagu:
+  server:
+    path: /${malagu.cloud.faas.function.name}/
+  cloud:
+    faas:
+      service:
+        name: ${pkg.name}
+      function:
+        runtime: nodejs12
+      apiGateway:
+        stage:
+          name: "${stage|eval == 'prod' ? 'release' : stage }"
+          desc: 'Released By Malagu'
+        group:
+          name: ${malagu.cloud.faas.function.name|replace('-', '_')}
+          description: 'Created By Malagu'
+        api:
+          name: ${malagu.cloud.faas.function.name|replace('-', '_')}
+          forceNonceCheck: false
+          visibility: PUBLIC
+          description: 'Created By Malagu'
+          authType: ANONYMOUS
+          requestConfig:
+            method: ANY
+            protocol: HTTP,HTTPS
+            postBodyDescription: ''
+            mode: PASSTHROUGH
+            path: '${malagu.server.path}*'
+          serviceConfig:
+            serviceProtocol: FunctionCompute
+            serviceTimeout: 20 # 20s
+            contentTypeValue: 'application/json; charset=UTF-8'
+            functionComputeConfig:
+              serviceName: ${malagu.cloud.faas.service.name}
+              functionName: ${malagu.cloud.faas.function.name}
+              qualifier: ${malagu.cloud.faas.alias.name}
+          resultType: PASSTHROUGH

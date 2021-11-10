@@ -126,6 +126,21 @@
     },
     {
       "path": "../dev-packages/cli-runtime/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/cloud-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/code-loader-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/fc-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/lambda-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/scf-plugin/compile.tsconfig.json"
     }
   ]
 }

@@ -1,0 +1,13 @@
+mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'http-mode'}"
+malagu:
+  cloud:
+    faas:
+      namespace:
+        name: default
+      function:
+        handler: index.handler
+        namespace: ${malagu.cloud.faas.namespace.name}
+        runtime: Nodejs12.16
+      alias:
+        functionName: ${malagu.cloud.faas.function.name}
+        namespace: ${malagu.cloud.faas.namespace.name}

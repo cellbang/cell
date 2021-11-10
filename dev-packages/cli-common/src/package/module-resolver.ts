@@ -119,7 +119,6 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, serveHooks, join(libOrSrc, 'serve-hook'));
         this.addModuleIfExists(componentPackage, cliHooks, join(libOrSrc, 'hooks', 'cli'));
         this.addModuleIfExists(componentPackage, cliHooks, join(libOrSrc, 'cli-hook'));
-
     }
 
     resolveAssetModule(componentPackage: ComponentPackage): void {

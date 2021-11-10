@@ -1,0 +1,13 @@
+backend: 
+  entry: '@malagu/scf-adapter/lib/node/timer-application-entry'
+malagu:
+  cloud:
+    faas:
+      trigger:
+        name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}-timer
+        qualifier: ${malagu.cloud.faas.alias.name}
+        functionName: ${malagu.cloud.faas.function.name}
+        namespace: ${malagu.cloud.faas.namespace.name}
+        type: timer
+        triggerDesc: 0 */1 * * * * * # every minute
+        enable: OPEN

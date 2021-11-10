@@ -163,6 +163,21 @@
       ],
       "@malagu/example-accounts/*": [
         "examples/accounts/*"
+      ],
+      "@malagu/cloud-plugin/lib/*": [
+        "dev-packages/cloud-plugin/src/*"
+      ],
+      "@malagu/code-loader-plugin/lib/*": [
+        "dev-packages/code-loader-plugin/src/*"
+      ],
+      "@malagu/fc-plugin/lib/*": [
+        "dev-packages/fc-plugin/src/*"
+      ],
+      "@malagu/lambda-plugin/lib/*": [
+        "dev-packages/lambda-plugin/src/*"
+      ],
+      "@malagu/scf-plugin/lib/*": [
+        "dev-packages/scf-plugin/src/*"
       ]
     }
   },

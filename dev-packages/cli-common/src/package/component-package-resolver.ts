@@ -1,5 +1,5 @@
 import { ApplicationPackage } from './application-package';
-import { ComponentPackage, Component } from './package-protocol';
+import { ComponentPackage } from './package-protocol';
 import { EntryResolver } from './entry-resolver';
 import { ModuleResolver } from './module-resolver';
 
@@ -11,11 +11,7 @@ export class ComponentPackageResolver {
     }
 
     resolve(componentPackage: ComponentPackage) {
-        const malaguComponent = <Component>componentPackage.malaguComponent;
-        if (malaguComponent.auto !== false) {
-            this.moduleResolver.resolve(componentPackage);
-        }
-        delete malaguComponent.auto;
+        this.moduleResolver.resolve(componentPackage);
         new EntryResolver(this.pkg).resolve(componentPackage);
     }
 }

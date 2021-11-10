@@ -1,0 +1,13 @@
+malagu:
+  cloud:
+    profilePath: tencent/profile.yml
+    regions:
+      - ap-guangzhou
+      - ap-shanghai
+      - ap-beijing
+      - ap-chengdu
+      - ap-hongkong
+      - ap-mumbai
+      - ap-singapore
+      - na-siliconvalley
+      - na-toronto

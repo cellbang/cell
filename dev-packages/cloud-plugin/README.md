@@ -1,0 +1,1 @@
+# Malagu - Cloud Plugin Component

@@ -1,0 +1,14 @@
+mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'sample-http' in currentMode ? 'sample-http-mode' : 'timer' in currentMode ? 'timer-mode' : 'mns-topic' in currentMode ? 'mns-topic-mode' : 'http-mode'}"
+malagu:
+  cloud:
+    faas:
+      secure: true
+      internal: false
+      timeout: 600000
+      service:
+        name: ${malagu.cloud.faas.function.name}
+      function:
+        serviceName: ${malagu.cloud.faas.service.name}
+        instanceConcurrency: 10
+      alias:
+        serviceName: ${malagu.cloud.faas.service.name}

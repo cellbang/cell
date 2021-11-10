@@ -1,7 +1,0 @@
-mode: "${'timer' in currentMode ? 'timer-mode' : 'api-gateway-mode'}"
-malagu:
-  faas-adapter:
-    function:
-      runtime: nodejs12.x
-    alias:
-      functionName: ${malagu['faas-adapter'].function.name}
