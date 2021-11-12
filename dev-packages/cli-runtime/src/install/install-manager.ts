@@ -7,9 +7,9 @@ import { spawnSync } from 'child_process';
 import { ContextUtils, CliContext, getPackager, HookExecutor } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
-import { ok } from 'assert';
 import { getRuntimePath } from '@malagu/cli-common/lib/util';
 import { basename, join } from 'path';
+const leven = require('leven');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
@@ -39,8 +39,10 @@ export class InstallManager {
     }
 
     async render(): Promise<void> {
+        const pkg = require('../../package.json');
         const packageJsonPath = resolve(this.outputDir, 'package.json');
-        const packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
+        let packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
+        packageContent = packageContent.replace('{{ version }}', pkg.version);
         await writeFile(packageJsonPath, packageContent);
     }
 
@@ -101,7 +103,7 @@ export class InstallManager {
                 Object.keys(templates).forEach(key => {
                     if (key === runtime) {
                         this.location = templates[key];
-                        return;
+                        return false;
                     }
                 });
             }
@@ -110,8 +112,21 @@ export class InstallManager {
                 this.runtimeName = basename(this.location);
             }
 
-            if (this.location) {
-                ok(this.location, `"${runtime}" runtime not found`);
+            if (!this.location) {
+                let suggestion: string = '';
+                Object.keys(templates).forEach(key => {
+                    const isBestMatch = leven(key, runtime) < leven(suggestion, runtime);
+                    if (isBestMatch) {
+                        suggestion = key;
+                    }
+                });
+            
+                if (suggestion) {
+                    console.log(`  "${runtime}" runtime not found. ${chalk.yellow(`Did you mean ${chalk.green(suggestion)}?`)}`);
+                } else {
+                    console.error(`malagu error - "${runtime}" runtime not found`);
+                }
+                process.exit(-1);
             }
             return;
         }
