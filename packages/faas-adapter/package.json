@@ -6,12 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/cloud": "1.40.1",
-    "@malagu/schedule": "1.40.1",
-    "dotenv": "^8.2.0",
-    "fs-extra": "^8.1.0",
-    "inquirer": "^6.5.1",
-    "js-yaml": "^4.0.0",
-    "jszip": "^3.2.2"
+    "@malagu/schedule": "1.40.1"
   },
   "publishConfig": {
     "access": "public"
@@ -42,9 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.40.1",
-    "@types/inquirer": "^6.5.0",
-    "@types/jszip": "^3.1.6"
+    "@malagu/ext-scripts": "1.40.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

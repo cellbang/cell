@@ -120,7 +120,7 @@ export class InstallManager {
                         suggestion = key;
                     }
                 });
-            
+
                 if (suggestion) {
                     console.log(`  "${runtime}" runtime not found. ${chalk.yellow(`Did you mean ${chalk.green(suggestion)}?`)}`);
                 } else {

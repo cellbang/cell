@@ -69,7 +69,7 @@ function exit() {
 }
 
 process.on('exit', exit);
-
+process.on('SIGINT', exit);
 try {
     execute();
 } catch (error) {

@@ -25,7 +25,7 @@ export class ComponentPackageCollector {
     }
 
     protected matchDevDependency(dependency: string, mode: string[]): boolean {
-        
+
         if (mode.includes('remote') && !dependency.endsWith('plugin') && dependency !== '@malagu/cli-service') {
             return false;
         }
