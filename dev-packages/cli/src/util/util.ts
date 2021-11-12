@@ -1,5 +1,5 @@
 import { ApplicationPackage, CliContext, getCurrentRuntimePath, setTempRuntime } from '@malagu/cli-common';
-import installRuntime from '@malagu/cli-runtime/lib/install/install'
+import installRuntime from '@malagu/cli-runtime/lib/install/install';
 const minimist = require('minimist');
 import * as ora from 'ora';
 import { Command } from 'commander';

@@ -41,8 +41,7 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "1.40.1",
-    "@types/inquirer": "^6.5.0",
-    "@types/jszip": "^3.1.6"
+    "@types/inquirer": "^6.5.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

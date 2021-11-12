@@ -45,12 +45,12 @@ export class DefaultUserResponseClient implements UserResponseClient<OAuth2UserR
                 }
             };
             if (httpMethod === HttpMethod.POST) {
-                config.headers[HttpHeaders.CONTENT_TYPE] = `${MediaType.APPLICATION_FORM_URLENCODED};charset=UTF-8`;
+                config.headers![HttpHeaders.CONTENT_TYPE] = `${MediaType.APPLICATION_FORM_URLENCODED};charset=UTF-8`;
                 config.data = qs.stringify({
                     [OAuth2ParameterNames.ACCESS_TOKEN]: accessToken.tokenValue
                 });
             } else {
-                config.headers[HttpHeaders.AUTHORIZATION] = `Bearer ${accessToken.tokenValue}`;
+                config.headers![HttpHeaders.AUTHORIZATION] = `Bearer ${accessToken.tokenValue}`;
 
             }
             response = await this.restOperations.request<{ [key: string]: any }>(config);

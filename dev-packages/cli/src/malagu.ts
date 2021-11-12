@@ -64,20 +64,22 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
 
     const runtimeCmd = program
         .command('runtime [command]')
+        .alias('r')
         .description('management runtime');
 
     runtimeCmd
         .command('install [runtime] [alias]')
+        .alias('i')
         .description('install a runtime')
         .option('-v, --version [version]', 'Specify runtime version', 'latest')
-        .action((runtime, alias, options) => {
-            require('@malagu/cli-runtime/lib/install/install').default({ runtime, alias, ...options });
+        .action((r, alias, options) => {
+            require('@malagu/cli-runtime/lib/install/install').default({ runtime: r, alias, ...options });
         });
     runtimeCmd
         .command('use [runtime]')
         .description('use a runtime')
-        .action(runtime => {
-            require('@malagu/cli-runtime/lib/use/use').default({ runtime });
+        .action(r => {
+            require('@malagu/cli-runtime/lib/use/use').default({ runtime: r });
         });
 
     runtimeCmd
@@ -90,8 +92,8 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
     runtimeCmd
         .command('uninstall [runtime]')
         .description('uninstall a runtime')
-        .action(runtime => {
-            require('@malagu/cli-runtime/lib/uninstall/uninstall').default({ runtime });
+        .action(r => {
+            require('@malagu/cli-runtime/lib/uninstall/uninstall').default({ runtime: r });
         });
 
     await new HookExecutor().executeHooks(context, 'cliHooks');

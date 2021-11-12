@@ -6,6 +6,8 @@
 - feat(code-loader-plugin) 将代码加载打包逻辑抽象为独立组件
 - feat(cli-runtime) 添加 `scf` 运行时
 - feat(cli) 支持属性文件定义运行时
+- feat(parent) 升级 lerna 版本到 4.0.0
+- feat(parent) 升级 axios 版本到 0.24.0
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components

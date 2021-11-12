@@ -39,8 +39,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.40.1",
-    "@types/jszip": "^3.1.6"
+    "@malagu/ext-scripts": "1.40.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
