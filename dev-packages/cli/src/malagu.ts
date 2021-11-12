@@ -2,17 +2,21 @@ import { program, Command } from 'commander';
 
 const leven = require('leven');
 import * as ora from 'ora';
-import { getSettings, HookExecutor } from '@malagu/cli-common';
-import { loadContext } from './util';
+import { getCurrentRuntime, HookExecutor } from '@malagu/cli-common';
+import { loadContext, initRuntime } from './util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
 
 const version = pkg.version;
 updateNotifier({ pkg }).notify();
-const { defaultRuntime } = getSettings();
 
-console.log(`
+const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
+
+(async () => {
+    await initRuntime();
+    const runtime = getCurrentRuntime();
+    console.log(`
                    ___
  /'\\_/\`\\          /\\_ \\
 /\\      \\     __  \\//\\ \\      __       __   __  __
@@ -24,14 +28,12 @@ console.log(`
 ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
 ╭──────────────────────────────────────────────────╮
-│      Serverless Frist Development Framework      │${defaultRuntime ? '\n│' +
-chalk.yellow(`Runtime<${defaultRuntime}>`.padStart(25 + Math.floor((9 + defaultRuntime.length) / 2)).padEnd(50)) + '│' : ''}
+│      Serverless Frist Development Framework      │${runtime ? '\n│' +
+chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length) / 2)).padEnd(50)) + '│' : ''}
 ╰──────────────────────────────────────────────────╯
 `);
 
-const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false }).start();
-
-(async () => {
+    spinner.start();
     const context = await loadContext(program, spinner);
     const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules } = context.pkg;
 
@@ -137,7 +139,7 @@ function suggestCommands(unknownCommand: string, main: Command) {
     let suggestion: string = '';
 
     availableCommands.forEach((cmd: string) => {
-        const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion || '', unknownCommand);
+        const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion, unknownCommand);
         if (leven(cmd, unknownCommand) <= 3 && isBestMatch) {
             suggestion = cmd;
         }

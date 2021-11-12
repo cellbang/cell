@@ -4,9 +4,13 @@
 
 - feat(*-adapter) 将构建部署相关逻辑抽象为独立的组件 *-plugin，以方便复用
 - feat(code-loader-plugin) 将代码加载打包逻辑抽象为独立组件
+- feat(cli-runtime) 添加 `scf` 运行时
+- feat(cli) 支持属性文件定义运行时
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
+- feat(cli-runtime) add `scf` runtime
+- feat(cli) supports property file definition runtime
 
 ## 1.40.1
 

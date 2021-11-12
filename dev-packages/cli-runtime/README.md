@@ -1,1 +1,1 @@
-# Malagu CLI
+# Malagu CLI Runtime

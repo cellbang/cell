@@ -176,6 +176,20 @@ export function getSettings() {
     return {};
 }
 
+let _tempRuntime: string | undefined;
+
+export function setTempRuntime(tempRuntime: string) {
+    _tempRuntime = tempRuntime;
+}
+
+export function getCurrentRuntime() {
+    if (_tempRuntime) {
+        return _tempRuntime;
+    }
+    const { defaultRuntime } = getSettings();
+    return defaultRuntime;
+}
+
 export async function saveSettings(settings: any) {
     const settingsPath = getSettingsPath();
     ensureFileSync(settingsPath);
@@ -187,6 +201,6 @@ export function getRuntimePath(runtime: string) {
 }
 
 export function getCurrentRuntimePath() {
-    const { defaultRuntime } = getSettings();
-    return getRuntimePath(defaultRuntime);
+    const runtime = getCurrentRuntime();
+    return getRuntimePath(runtime);
 }

@@ -1,0 +1,15 @@
+{
+  "name": "scf",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@malagu/cli": "latest",
+    "@malagu/cli-service": "latest",
+    "@malagu/scf-plugin": "latest"
+  }
+}

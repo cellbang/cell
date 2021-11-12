@@ -1,7 +1,24 @@
-import { CliContext } from '@malagu/cli-common';
+import { ApplicationPackage, CliContext, getCurrentRuntimePath, setTempRuntime } from '@malagu/cli-common';
+import installRuntime from '@malagu/cli-runtime/lib/install/install'
 const minimist = require('minimist');
 import * as ora from 'ora';
 import { Command } from 'commander';
+import { existsSync } from 'fs-extra';
+
+export async function initRuntime() {
+    const options = minimist(process.argv.slice(2));
+    const mode = getMode(options);
+    const pkg = ApplicationPackage.create({ projectPath: process.cwd() , mode });
+    const runtime = pkg.rootComponentPackage.malaguComponent?.runtime;
+    if (runtime) {
+        setTempRuntime(runtime);
+        const runtimePath = getCurrentRuntimePath();
+        if (!existsSync(runtimePath)) {
+            await installRuntime({ runtime });
+        }
+    }
+
+}
 
 export function loadContext(program: Command, spinner: ora.Ora) {
     const options = minimist(process.argv.slice(2));

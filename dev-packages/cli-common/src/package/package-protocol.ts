@@ -34,6 +34,8 @@ export interface Props {
 export interface Component extends Props {
     name: any;
 
+    runtime?: string;
+
     mode?: string[];
 
     /**
