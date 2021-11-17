@@ -1,0 +1,1 @@
+# Malagu - Static Plugin Component

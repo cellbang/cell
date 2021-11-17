@@ -141,6 +141,12 @@
     },
     {
       "path": "../dev-packages/scf-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/frameworks/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/static-plugin/compile.tsconfig.json"
     }
   ]
 }

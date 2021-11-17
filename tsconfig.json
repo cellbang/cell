@@ -178,6 +178,15 @@
       ],
       "@malagu/scf-plugin/lib/*": [
         "dev-packages/scf-plugin/src/*"
+      ],
+      "@malagu/frameworks/lib/*": [
+        "dev-packages/frameworks/src/*"
+      ],
+      "@malagu/static-plugin/lib/*": [
+        "dev-packages/static-plugin/src/*"
+      ],
+      "@malagu/static-plugin/*": [
+        "dev-packages/static-plugin/*"
       ]
     }
   },

@@ -37,6 +37,12 @@ export class ComponentPackageCollector {
             return;
         }
 
+        // eslint-disable-next-line guard-for-in
+        for (const dependency in pck.dependencies) {
+            const versionRange = pck.dependencies[dependency]!;
+            this.collectPackage(dependency, versionRange, mode);
+        }
+
         if (this.pkg.pkg.name === pck.name) {
             // eslint-disable-next-line guard-for-in
             for (const dependency in pck.devDependencies) {
@@ -45,12 +51,6 @@ export class ComponentPackageCollector {
                     this.collectPackage(dependency, versionRange, mode);
                 }
             }
-        }
-
-        // eslint-disable-next-line guard-for-in
-        for (const dependency in pck.dependencies) {
-            const versionRange = pck.dependencies[dependency]!;
-            this.collectPackage(dependency, versionRange, mode);
         }
     }
 

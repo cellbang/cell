@@ -8,11 +8,15 @@
 - feat(cli) 支持属性文件定义运行时
 - feat(parent) 升级 lerna 版本到 4.0.0
 - feat(parent) 升级 axios 版本到 0.24.0
+- feat(static-plugin) 添加插件 `@malagu/static-plugin`
+- feat(frameworks) 添加组件 `@malagu/frameworks`
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
 - feat(cli-runtime) add `scf` runtime
 - feat(cli) supports property file definition runtime
+- feat(static-plugin) add plugin `@malagu/static-plugin`
+- feat(frameworks) add component `@malagu/frameworks`
 
 ## 1.40.1
 

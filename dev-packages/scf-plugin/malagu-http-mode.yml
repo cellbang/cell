@@ -1,6 +1,4 @@
 mode: [ api-gateway-common ]
-backend: 
-  entry: '@malagu/scf-adapter/lib/node/http-application-entry'
 malagu:
   cloud:
     faas:
