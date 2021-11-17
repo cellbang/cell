@@ -1,0 +1,44 @@
+{
+  "name": "@malagu/static-plugin",
+  "version": "1.40.1",
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@malagu/frameworks": "1.40.1",
+    "@malagu/cli-service": "1.40.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component", "malagu-plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "1.40.1"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  }
+}
