@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/security": "1.40.1",
     "@malagu/web": "1.40.1",
-    "authing-js-sdk": "^3.11.0",
+    "authing-js-sdk": "^4.22.24",
     "jsonwebtoken": "^8.5.1",
     "mustache": "^4.0.0",
     "querystring": "^0.2.0",

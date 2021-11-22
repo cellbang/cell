@@ -6,7 +6,8 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/web": "1.40.1",
-    "oidc-provider": "^6.29.5"
+    "@types/oidc-provider": "^7.8.1",
+    "oidc-provider": "^7.10.1"
   },
   "publishConfig": {
     "access": "public"

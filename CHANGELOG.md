@@ -11,6 +11,7 @@
 - feat(static-plugin) 添加插件 `@malagu/static-plugin`
 - feat(frameworks) 添加组件 `@malagu/frameworks`
 - feat(static-plugin) 优化代码
+- fix(all) fix Dependabot alerts
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
@@ -19,6 +20,7 @@
 - feat(static-plugin) add plugin `@malagu/static-plugin`
 - feat(frameworks) add component `@malagu/frameworks`
 - feat(static-plugin) optimized code
+- fix(all) fix Dependabot alerts
 
 ## 1.40.1
 
