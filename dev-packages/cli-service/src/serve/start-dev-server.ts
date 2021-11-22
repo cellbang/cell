@@ -118,5 +118,5 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
 
 export function startDevServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks) {
     const cs = ctx.configurations.map(c => c.toConfig());
-    return doStartDevServer(ctx, cs, cs[cs.length - 1].devServer, executeServeHooks);
+    return doStartDevServer(ctx, cs, (cs[cs.length - 1] as any).devServer, executeServeHooks);
 }

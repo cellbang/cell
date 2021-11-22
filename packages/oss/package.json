@@ -6,7 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/cloud": "1.40.1",
-    "ali-oss": "^6.15.0"
+    "ali-oss": "^6.16.0"
   },
   "publishConfig": {
     "access": "public"

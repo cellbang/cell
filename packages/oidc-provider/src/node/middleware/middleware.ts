@@ -3,6 +3,8 @@ import { Context, Middleware, RequestMatcher } from '@malagu/web/lib/node';
 import { OIDC_MIDDLEWARE_PRIORITY } from './middleware-protocol';
 import { PathResolver } from '@malagu/web';
 import { OidcProvider } from '../oidc';
+import { IncomingMessage, ServerResponse } from 'http';
+import { Http2ServerRequest, Http2ServerResponse } from 'http2';
 
 @Component(Middleware)
 export class OidcMiddleware implements Middleware {
@@ -19,10 +21,15 @@ export class OidcMiddleware implements Middleware {
     @Autowired(OidcProvider)
     protected readonly oidcProvider: OidcProvider;
 
+    protected callback: (req: IncomingMessage | Http2ServerRequest, res: ServerResponse | Http2ServerResponse) => void;
+
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         if (await this.match()) {
             const oidc = await this.oidcProvider.get();
-            oidc.callback(ctx.request as any, ctx.request as any);
+            if (!this.callback) {
+                this.callback = oidc.callback();
+            }
+            this.callback(ctx.request, ctx.response);
             return;
         }
         await next();
