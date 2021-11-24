@@ -10,6 +10,7 @@ export class ApplicationConfigOptions {
 
 export class ApplicationPackageOptions {
     readonly mode: string[];
+    readonly runtime?: string;
     readonly projectPath: string;
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;

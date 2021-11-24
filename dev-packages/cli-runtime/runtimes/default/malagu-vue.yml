@@ -1,0 +1,9 @@
+backend:
+  malagu:
+    server:
+      path: /
+    cloud:
+      faas:
+        apiGateway:
+            release:
+              environmentName: release

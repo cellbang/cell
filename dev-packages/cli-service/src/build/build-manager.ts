@@ -1,7 +1,7 @@
 
 import * as webpack from 'webpack';
 import { BuildContext } from '../context';
-import { BACKEND_TARGET } from '@malagu/cli-common';
+import { BACKEND_TARGET, spawnProcess } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
 import { HookExecutor } from '../hooks';
 
@@ -14,6 +14,12 @@ export class BuildManager {
     async build(): Promise<void> {
         if (this.ctx.configurations.length === 0) {
             throw new Error('No malagu module found.');
+        }
+
+        const buildCommand: string = this.ctx.framework?.settings.buildCommand;
+        if (buildCommand) {
+            const args = buildCommand.split(/\s+/);
+            await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
         }
 
         for (const configuration of this.ctx.configurations) {
@@ -30,6 +36,7 @@ export class BuildManager {
                 }
             }));
         }
+
         const hookExecutor = new HookExecutor();
         await hookExecutor.executeBuildHooks(this.ctx);
     }

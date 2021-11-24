@@ -1,7 +1,7 @@
 import * as JSZip from 'jszip';
 
 export interface CodeLoader {
-    load(codeUri: string | CodeUri): Promise<JSZip>;
+    load(codeDir: string, codeUri: string | CodeUri): Promise<JSZip>;
 }
 
 export interface Deployer<P, R> {

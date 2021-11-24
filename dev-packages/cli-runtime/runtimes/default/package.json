@@ -1,5 +1,5 @@
 {
-  "name": "scf",
+  "name": "default",
   "keywords": [
     "malagu-component"
   ],
@@ -7,12 +7,16 @@
   "license": "MIT",
   "dependencies": {
     "@malagu/scf-adapter": "next",
-    "@malagu/serve-static": "next"
-  },
-  "devDependencies": {
+    "@malagu/fc-adapter": "next",
+    "@malagu/lambda-adapter": "next",
+    "@malagu/serve-static": "next",
     "@malagu/cli": "next",
     "@malagu/cli-service": "next",
     "@malagu/scf-plugin": "next",
+    "@malagu/fc-plugin": "next",
+    "@malagu/lambda-plugin": "next",
     "@malagu/static-plugin": "next"
+  },
+  "devDependencies": {
   }
 }

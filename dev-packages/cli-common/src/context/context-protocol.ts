@@ -1,39 +1,57 @@
 import { ApplicationPackage } from '../package';
 import { Command } from 'commander';
-import { checkPkgVersionConsistency, getCurrentRuntimePath } from '../util';
+import { checkPkgVersionConsistency, getRuntimePath } from '../util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
 import { HookExecutor } from '../hook';
 import { ApplicationConfig } from '../package';
+import { Framework, FrameworkUtils, frameworks } from '@malagu/frameworks';
+import { ExpressionContext } from '../el';
 
 export interface CliContext {
     program: Command;
     pkg: ApplicationPackage;
     cfg: ApplicationConfig;
+    framework?: Framework;
     [key: string]: any;
 }
 
 export namespace CliContext {
     export async function create(
-        program: Command, options: { [key: string]: any } = {}, projectPath: string = getCurrentRuntimePath(), skipComponent = false): Promise<CliContext> {
+        program: Command, options: { [key: string]: any } = {}, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
             checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
         }
 
-        const mode = options.mode || [];
+        let mode = options.mode || [];
         const targets = options.targets || [];
-        const pkg = ApplicationPackage.create({ projectPath, mode });
+        const runtime = options.runtime;
+        if (runtime) {
+            projectPath = getRuntimePath(runtime);
+        }
+        const framework = await FrameworkUtils.detect(frameworks);
+        if (framework) {
+            mode.push(...framework.useMode);
+            mode = Array.from(new Set<string>(mode));
+        }
+        const pkg = ApplicationPackage.create({ projectPath, runtime, mode });
         const cfg = new ApplicationConfig({ targets, program }, pkg);
+        const handleExpression = (obj: any, ctx?: ExpressionContext) => {
+            const expressionHandler = new ExpressionHandler();
+            const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
+            jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, ctx || obj));
+            expressionHandler.handle(obj, ctx || obj);
+        };
 
         if (!skipComponent) {
             for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
                 const config = cfg.getConfig(target);
                 config.env = { ...process.env, _ignoreEl: true };
                 config.pkg = { ...pkg.pkg, _ignoreEl: true};
-                config.currentRuntimePath = getCurrentRuntimePath();
+                config.currentRuntimePath = projectPath;
                 config.cliContext = { ...options, ...program, _ignoreEl: true};
-                const expressionHandler = new ExpressionHandler(config);
+                const expressionHandler = new ExpressionHandler();
 
                 const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
                 jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, config));
@@ -48,7 +66,7 @@ export namespace CliContext {
                     ...options
                 }, 'configHooks');
 
-                expressionHandler.handle();
+                expressionHandler.handle(config);
                 delete config.env;
                 delete config.pkg;
                 delete config.cliContext;
@@ -56,9 +74,20 @@ export namespace CliContext {
             }
 
         }
+        if (framework) {
+            handleExpression(framework, {
+                backend: cfg.getConfig(BACKEND_TARGET),
+                frontend: cfg.getConfig(FRONTEND_TARGET),
+                ...cfg.getConfig(BACKEND_TARGET)
+            });
+            for (const key of Object.keys(framework.settings.env || {})) {
+                process.env[key] = framework.settings.env[key];
+            }
+        }
 
         return <CliContext> {
             ...options,
+            framework,
             pkg,
             cfg,
             dest: 'dist',
@@ -79,7 +108,8 @@ export namespace ContextUtils {
         _current = current;
     }
 
-    export function createCliContext(program: Command, options: { [key: string]: any } = {}, projectPath: string = getCurrentRuntimePath()): Promise<CliContext> {
+    export function createCliContext(
+        program: Command, options: { [key: string]: any } = {}, projectPath?: string): Promise<CliContext> {
         return CliContext.create(program, options, projectPath);
     }
 

@@ -29,7 +29,13 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "malagu.yml",
+    "malagu-remote.yml",
+    "malagu-http-mode.yml",
+    "malagu-sample-http-mode.yml",
+    "malagu-api-gateway-mode.yml",
+    "malagu-timer-mode.yml",
+    "malagu-mns-topic-mode.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",

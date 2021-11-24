@@ -1,0 +1,2 @@
+backend: 
+  entry: lib/node/timer-application-entry

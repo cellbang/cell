@@ -3,6 +3,7 @@ import { getSettings, saveSettings } from '@malagu/cli-common/lib/util';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 import { ok } from 'assert';
+import { Runtimes } from '../runtime-protocol';
 import { getInstalledRuntimes } from '../util';
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
@@ -15,12 +16,12 @@ export async function selectRuntime(): Promise<string> {
     const answers = await inquirer.prompt([{
         name: 'item',
         type: 'autocomplete',
-        default: getSettings().defaultRuntime || 'empty',
+        default: getSettings().defaultRuntime || Runtimes.empty,
         pageSize: 12,
         message: 'Select a runtime to use (as default)',
         source: async (answersSoFar: any, input: string) => {
             let runtimes = await getInstalledRuntimes();
-            runtimes = [ { name: 'empty', version: '' }, ...runtimes ];
+            runtimes = [ { name: Runtimes.empty, version: '' }, ...runtimes ];
             return runtimes.map(r => ({ name: chalk`${r.name} {italic.gray runtime}`, value: r }));
         }
     }]);
@@ -44,7 +45,7 @@ export default async (options: UseOptions) => {
         }
         if (runtime) {
             const settings = getSettings();
-            if (runtime === 'empty') {
+            if (runtime === Runtimes.empty) {
                 delete settings.defaultRuntime;
             } else {
                 settings.defaultRuntime = runtime;

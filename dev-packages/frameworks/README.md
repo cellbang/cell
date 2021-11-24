@@ -1,1 +1,1 @@
-# Malagu - Static Plugin Component
+# Malagu Frameworks

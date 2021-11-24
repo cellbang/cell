@@ -28,6 +28,7 @@
     "test": "malaguext test"
   },
   "dependencies": {
+    "@malagu/frameworks": "1.40.1",
     "@types/fs-extra": "^8.0.0",
     "@types/js-yaml": "^3.12.1",
     "@types/lodash.mergewith": "^4.6.6",
