@@ -1,4 +1,4 @@
-import { CliContext } from '@malagu/cli-common';
+import { CliContext, getProjectHomePath } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
 import * as ora from 'ora';
 import * as delay from 'delay';
@@ -15,7 +15,7 @@ let apiGatewayClient: ApiGatewayV2;
 let iamClient: IAM;
 
 export default async (context: CliContext) => {
-    const { cfg, pkg } = context;
+    const { cfg, pkg, runtime } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const faasConfig = cloudConfig.faas;
@@ -35,7 +35,7 @@ export default async (context: CliContext) => {
     await createRoleIfNeed(functionMeta, accountId, region);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(functionMeta.codeUri);
+    const zip = await codeLoader.load(getProjectHomePath(runtime), functionMeta.codeUri);
     await createOrUpdateFunction(functionMeta, zip);
 
     const functionVersion = await publishVersion(functionName);

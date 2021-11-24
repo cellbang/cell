@@ -6,7 +6,7 @@ import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import { Stats } from 'webpack';
 import type { ExternalModule } from 'webpack';
-import { getCurrentRuntimePath } from '@malagu/cli-common/lib/util';
+import { getRuntimePath } from '@malagu/cli-common/lib/util';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -61,7 +61,7 @@ function removeExcludedModules(modules: string[], packageForceExcludes: string[]
  * Resolve the needed versions of production dependencies for external modules.
  * @this - The active plugin instance
  */
-function getProdModules(externalModules: any[], packagePath: string, dependencyGraph: any, forceExcludes: string[]): any[] {
+function getProdModules(externalModules: any[], packagePath: string, dependencyGraph: any, forceExcludes: string[], runtime?: string): any[] {
     const packageJson = readJSONSync(packagePath);
     const prodModules: string[] = [];
 
@@ -79,7 +79,7 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
             // Check if the module has any peer dependencies and include them too
             try {
                 const modulePackagePath = join(
-                    dirname(join(getCurrentRuntimePath(), packagePath)),
+                    dirname(join(getRuntimePath(runtime), packagePath)),
                     'node_modules',
                     module.external,
                     'package.json'
@@ -91,7 +91,8 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
                         Object.keys(peerDependencies).map(value => ({ external: value })),
                         packagePath,
                         dependencyGraph,
-                        forceExcludes
+                        forceExcludes,
+                        runtime
                     );
                     prodModules.push(...peerModules);
                 }
@@ -189,7 +190,7 @@ function getExternalModules(stats: any): any[] {
  */
 export async function packExternalModules(context: ConfigurationContext, stats: Stats | undefined): Promise<void> {
     const verbose = false;
-    const { cfg, pkg } = context;
+    const { cfg, pkg, runtime } = context;
     const config = getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const includes = config.includeModules;
@@ -236,7 +237,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const externalModules = getExternalModules(stats).concat(packageForceIncludes.map((whitelistedPackage: string) => ({
         external: whitelistedPackage
     })));
-    const compositeModules = uniq(getProdModules(externalModules, packagePath, dependencyGraph, packageForceExcludes));
+    const compositeModules = uniq(getProdModules(externalModules, packagePath, dependencyGraph, packageForceExcludes, runtime));
     removeExcludedModules(compositeModules, packageForceExcludes, true);
 
     if (isEmpty(compositeModules)) {

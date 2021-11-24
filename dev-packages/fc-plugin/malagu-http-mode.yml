@@ -1,5 +1,3 @@
-backend: 
-  entry: '@malagu/fc-adapter/lib/node/http-application-entry'
 malagu:
   server:
     path: "${(malagu.cloud.faas.customDomain.name|eval) ? '/' : ('/2016-08-15/proxy/' + malagu.cloud.faas.service.name + '.' + malagu.cloud.faas.alias.name + '/' + malagu.cloud.faas.function.name + '/')}"

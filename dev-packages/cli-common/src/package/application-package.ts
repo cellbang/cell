@@ -10,7 +10,7 @@ import mergeWith = require('lodash.mergewith');
 
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
-import { getCurrentRuntimePath } from '../util';
+import { getRuntimePath } from '../util';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -108,12 +108,22 @@ export class ApplicationPackage {
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
             const mode = this.rootComponentPackage.malaguComponent!.mode!;
+            const components = this.rootComponentPackage.malaguComponent!.components;
+            const devComponents = this.rootComponentPackage.malaguComponent!.devComponents;
 
             const collector = new ComponentPackageCollector(
                 this,
                 mode
             );
-            this._componentPackages = collector.collect(this.pkg);
+            if (components || devComponents) {
+                this._componentPackages = collector.collect({
+                    ...this.pkg,
+                    dependencies: components || {},
+                    devDependencies: devComponents || {}
+                });
+            } else {
+                this._componentPackages = collector.collect(this.pkg);
+            }
             this._componentPackages.push(this.rootComponentPackage);
             for (const componentPackage of this._componentPackages) {
                 this.componentPackageResolver.resolve(componentPackage);
@@ -296,7 +306,7 @@ export class ApplicationPackage {
      */
     get resolveModule(): ApplicationModuleResolver {
         if (!this._moduleResolver) {
-            const resolutionPaths = [this.packagePath || `${getCurrentRuntimePath()}/package.json`];
+            const resolutionPaths = [this.packagePath || `${getRuntimePath(this.options.runtime)}/package.json`];
             const cwdPackagePath = `${process.cwd()}/package.json`;
             if (cwdPackagePath !== this.packagePath) {
                 resolutionPaths.push(cwdPackagePath);

@@ -1,5 +1,3 @@
-backend: 
-  entry: '@malagu/fc-adapter/lib/node/timer-application-entry'
 malagu:
   cloud:
     faas:

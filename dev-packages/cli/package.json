@@ -33,6 +33,7 @@
     "test": "malaguext test"
   },
   "dependencies": {
+    "@malagu/frameworks": "1.40.1",
     "@malagu/cli-common": "1.40.1",
     "@malagu/cli-runtime": "1.40.1",
     "commander": "^8.1.0",

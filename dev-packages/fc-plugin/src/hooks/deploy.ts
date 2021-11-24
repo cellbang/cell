@@ -1,4 +1,4 @@
-import { CliContext } from '@malagu/cli-service';
+import { CliContext, getProjectHomePath } from '@malagu/cli-common';
 import { readFile } from 'fs-extra';
 const FCClient = require('@alicloud/fc2');
 import  * as JSZip from 'jszip';
@@ -15,7 +15,7 @@ let ram: any;
 
 export default async (context: CliContext) => {
 
-    const { cfg, pkg } = context;
+    const { cfg, pkg, runtime } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const faasConfig = cloudConfig.faas;
@@ -35,7 +35,7 @@ export default async (context: CliContext) => {
     await createOrUpdateService(serviceName, service);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(functionMeta.codeUri);
+    const zip = await codeLoader.load(getProjectHomePath(runtime), functionMeta.codeUri);
     delete functionMeta.codeUri;
     await createOrUpdateFunction(functionName, functionMeta, zip);
 

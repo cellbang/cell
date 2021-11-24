@@ -61,7 +61,7 @@ export class ComponentPackageLoader {
 
     protected getMode(config: any, mode: string[]) {
         const newMode: string[] = Array.isArray(config.mode) ? config.mode : config.mode ? [config.mode] : [];
-        const expressionHandler = new ExpressionHandler(config);
+        const expressionHandler = new ExpressionHandler();
         const ctx = { ...config, currentMode: mode };
         return newMode.map(m => expressionHandler.evalSync(m, ctx));
     }

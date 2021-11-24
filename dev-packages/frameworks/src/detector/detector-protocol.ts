@@ -28,6 +28,10 @@ export interface FrameworkDetectionItem {
      */
     name: string;
 
+    useRuntime: string;
+
+    useMode: string[];
+
     detectors?: {
       /**
        * Collection of detectors that must be matched for the framework
@@ -41,6 +45,7 @@ export interface FrameworkDetectionItem {
       some?: FrameworkDetectionItem[];
     };
 
-    outputDir?: string;
+    settings: Record<string, any>;
+
   }
 

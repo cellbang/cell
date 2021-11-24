@@ -5,8 +5,8 @@ import { spawnSync } from 'child_process';
 const commandExists = require('command-exists');
 
 export default async (context: DeployContext) => {
-    const { pkg, prod } = context;
-    const cwd = getProjectHomePath();
+    const { pkg, prod, runtime} = context;
+    const cwd = getProjectHomePath(runtime);
     console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Vercel...`);
     try {
         await commandExists('vercel');

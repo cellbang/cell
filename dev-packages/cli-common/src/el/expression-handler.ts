@@ -6,19 +6,23 @@ export class ExpressionHandler {
 
     readonly expressionCompiler: ExpressionCompiler;
 
-    constructor(protected ctx: ExpressionContext) {
-        this.expressionCompiler = new ExpressionCompiler(ctx);
+    constructor() {
+        this.expressionCompiler = new ExpressionCompiler();
     }
 
-    handle() {
+    handle(textOrObj: string | Object, ctx?: ExpressionContext) {
         const self = this;
-        traverse(this.ctx).forEach(function (value: any) {
-            if (typeof value === 'string') {
-                this.update(self.evalSync(value, self.ctx));
-            } else if (value && value._ignoreEl === true) {
-                this.update(value, true);
-            }
-        });
+        if (typeof textOrObj === 'string') {
+            return this.evalSync(textOrObj, ctx || {});
+        } else {
+            traverse(textOrObj).forEach(function (value: any) {
+                if (typeof value === 'string') {
+                    this.update(self.evalSync(value, ctx || textOrObj));
+                } else if (value && value._ignoreEl === true) {
+                    this.update(value, true);
+                }
+            });
+        }
     }
 
     evalSync(text: string, ctx: ExpressionContext): any {

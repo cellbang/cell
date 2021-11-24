@@ -12,6 +12,7 @@
 - feat(frameworks) 添加组件 `@malagu/frameworks`
 - feat(static-plugin) 优化代码
 - fix(all) fix Dependabot alerts
+- feat(cli) 支持智能适配运行时和模式
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
@@ -21,6 +22,7 @@
 - feat(frameworks) add component `@malagu/frameworks`
 - feat(static-plugin) optimized code
 - fix(all) fix Dependabot alerts
+- feat(cli) supports smart adaptation of runtime and mode
 
 ## 1.40.1
 

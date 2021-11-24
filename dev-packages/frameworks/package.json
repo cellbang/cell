@@ -4,15 +4,10 @@
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "dependencies": {
-    "@malagu/cli-common": "1.40.1"
-  },
+  "dependencies": {},
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "malagu-component"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,8 +19,7 @@
   "homepage": "https://github.com/cellbang/malagu",
   "files": [
     "lib",
-    "src",
-    "malagu.yml"
+    "src"
   ],
   "scripts": {
     "lint": "malaguext lint",
