@@ -139,20 +139,20 @@ export function getPort(cfg: ApplicationConfig, target: string, port?: number) {
     return server.port;
 }
 
-export function getProjectHomePathForTarget(target: string) {
-    return path.join(getProjectHomePath(), target);
+export function getProjectHomePathForTarget(target: string, runtime?: string) {
+    return path.join(getProjectHomePath(runtime), target);
 }
 
-export function getBackendProjectHomePath(pkg: ApplicationPackage) {
-    return getProjectHomePathForTarget(BACKEND_TARGET);
+export function getBackendProjectHomePath(pkg: ApplicationPackage, runtime?: string) {
+    return getProjectHomePathForTarget(BACKEND_TARGET, runtime);
 }
 
-export function getFrontendProjectHomePath(pkg: ApplicationPackage) {
-    return getProjectHomePathForTarget(FRONTEND_TARGET);
+export function getFrontendProjectHomePath(pkg: ApplicationPackage, runtime?: string) {
+    return getProjectHomePathForTarget(FRONTEND_TARGET, runtime);
 }
 
-export function getProjectHomePath() {
-    return process.env.MALAGU_PROJECT_HOME_PATH ? process.env.MALAGU_PROJECT_HOME_PATH : path.join(getCurrentRuntimePath(), '.malagu');
+export function getProjectHomePath(runtime?: string) {
+    return process.env.MALAGU_PROJECT_HOME_PATH ? process.env.MALAGU_PROJECT_HOME_PATH : path.join(getRuntimePath(runtime), '.malagu');
 }
 
 export function setProjectHomePath(projectHomePath: string) {
@@ -176,31 +176,13 @@ export function getSettings() {
     return {};
 }
 
-let _tempRuntime: string | undefined;
-
-export function setTempRuntime(tempRuntime: string) {
-    _tempRuntime = tempRuntime;
-}
-
-export function getCurrentRuntime() {
-    if (_tempRuntime) {
-        return _tempRuntime;
-    }
-    const { defaultRuntime } = getSettings();
-    return defaultRuntime;
-}
-
 export async function saveSettings(settings: any) {
     const settingsPath = getSettingsPath();
     ensureFileSync(settingsPath);
     return writeFileSync(settingsPath, dump(settings), { encoding: 'utf8' });
 }
 
-export function getRuntimePath(runtime: string) {
+export function getRuntimePath(runtime?: string) {
     return runtime ? path.join(getMalaguHomePath(), 'runtimes', runtime) : process.cwd();
 }
 
-export function getCurrentRuntimePath() {
-    const runtime = getCurrentRuntime();
-    return getRuntimePath(runtime);
-}

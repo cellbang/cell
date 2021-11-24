@@ -1,6 +1,7 @@
-import { getMalaguHomePath } from '@malagu/cli-common/lib/util';
+import { getRuntimePath, getMalaguHomePath } from '@malagu/cli-common/lib/util';
 import { existsSync, readdir, readJSON } from 'fs-extra';
 import { join } from 'path';
+import installRuntime from '../install/install';
 
 export interface Runtime {
     name: string;
@@ -28,4 +29,11 @@ export async function getInstalledRuntimes() {
         }
     }
     return result;
+}
+
+export async function installRuntimeIfNeed(runtime: string): Promise<void> {
+    const runtimePath = getRuntimePath(runtime);
+    if (!existsSync(runtimePath)) {
+        await installRuntime({ runtime });
+    }
 }

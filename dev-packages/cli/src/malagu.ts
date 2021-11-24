@@ -2,7 +2,7 @@ import { program, Command } from 'commander';
 
 const leven = require('leven');
 import * as ora from 'ora';
-import { getCurrentRuntime, HookExecutor } from '@malagu/cli-common';
+import { HookExecutor } from '@malagu/cli-common';
 import { loadContext, initRuntime } from './util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
@@ -14,8 +14,7 @@ updateNotifier({ pkg }).notify();
 const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
 
 (async () => {
-    await initRuntime();
-    const runtime = getCurrentRuntime();
+    const runtime = await initRuntime();
     console.log(`
                    ___
  /'\\_/\`\\          /\\_ \\
@@ -34,7 +33,7 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
 `);
 
     spinner.start();
-    const context = await loadContext(program, spinner);
+    const context = await loadContext(program, spinner, runtime);
     const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules } = context.pkg;
 
     if (context.args.includes('serve') || context.args.includes('build')) {

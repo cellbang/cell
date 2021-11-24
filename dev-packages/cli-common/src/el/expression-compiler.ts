@@ -1,4 +1,3 @@
-import { ExpressionContext } from './expression-protocol';
 import { JexlEngineProvider } from './jexl-engine-provider';
 
 interface MiddleExpression {
@@ -15,8 +14,8 @@ export class ExpressionCompiler {
 
     readonly jexlEngineProvider: JexlEngineProvider;
 
-    constructor(protected ctx: ExpressionContext) {
-        this.jexlEngineProvider = new JexlEngineProvider(ctx);
+    constructor() {
+        this.jexlEngineProvider = new JexlEngineProvider();
     }
 
     compileSections(text: string): any[] {

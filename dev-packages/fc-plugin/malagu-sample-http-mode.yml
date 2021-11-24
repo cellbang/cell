@@ -1,5 +1,3 @@
-backend: 
-  entry: '@malagu/fc-adapter/lib/node/sample-http-application-entry'
 malagu:
   server:
     _domain: "${ 'HTTPS' in malagu.cloud.faas.customDomain.protocol ? 'https' : 'http' }://${malagu.cloud.faas.customDomain.name}"

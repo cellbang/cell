@@ -1,4 +1,3 @@
-import { getProjectHomePath } from '@malagu/cli-common';
 import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
 import * as JSZip from 'jszip';
 import { join, resolve } from 'path';
@@ -6,8 +5,7 @@ import { CodeLoader, CodeUri } from './code-protocol';
 const chalk = require('chalk');
 
 export class DefaultCodeLoader implements CodeLoader {
-    async load(codeUri: string | CodeUri): Promise<JSZip> {
-        let codeDir = getProjectHomePath();
+    async load(codeDir: string, codeUri: string | CodeUri): Promise<JSZip> {
         if (!existsSync(codeDir)) {
             console.log(chalk`{yellow Please build app first with "malagu build"}`);
             throw Error('Please build app first with "malagu build"');

@@ -1,11 +1,8 @@
 import { Jexl } from 'jexl';
-import { ExpressionContext } from './expression-protocol';
 
 export class JexlEngineProvider {
 
     protected jexlEngine: any;
-
-    constructor(protected ctx: ExpressionContext) {}
 
     provide(): any {
 

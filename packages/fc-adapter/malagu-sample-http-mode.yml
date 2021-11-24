@@ -1,0 +1,2 @@
+backend: 
+  entry: lib/node/sample-http-application-entry
