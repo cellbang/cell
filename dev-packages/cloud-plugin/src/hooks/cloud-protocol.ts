@@ -28,3 +28,10 @@ export interface CloudConfiguration {
     [key: string]: any;
 }
 
+export interface CmdOptions {
+    accountId: string;
+    accessKeyId: string;
+    accessKeySecret: string;
+    region: string;
+    token?: string;
+}
