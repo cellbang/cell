@@ -37,7 +37,7 @@ export class DefaultProfileProvider implements ProfileProvider {
     }
 
     protected async getProfileFromDotEnv() {
-        const profile: Profile = <Profile>{};
+        const profile: Profile = <Profile>{ credentials: {}, account: {} };
         if (dotenv) {
             if (dotenv.error) {
                 return profile;

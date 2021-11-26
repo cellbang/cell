@@ -1,5 +1,5 @@
 
-import { getSettings } from '@malagu/cli-common/lib/util';
+import { SettingsUtil } from '@malagu/cli-common';
 import { Runtimes } from '../runtime-protocol';
 const chalk = require('chalk');
 import { getInstalledRuntimes } from '../util';
@@ -9,7 +9,7 @@ export interface ListOptions {
 
 export default async (options: ListOptions) => {
     try {
-        const { defaultRuntime } = getSettings();
+        const { defaultRuntime } = SettingsUtil.getSettings();
         let runtimes = await getInstalledRuntimes();
         runtimes = [ { name: Runtimes.empty, version: '' }, ...runtimes ];
         for (const runtime of runtimes) {

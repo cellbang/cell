@@ -1,11 +1,10 @@
-import { readFileSync, existsSync, ensureFileSync, writeFileSync } from 'fs-extra';
+import { readFileSync, existsSync } from 'fs-extra';
 import * as lockfile from '@yarnpkg/lockfile';
 import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Module } from '../package';
 import * as path from 'path';
 import { homedir } from 'os';
-import { load, dump } from 'js-yaml';
 const chalk = require('chalk');
 
 export function checkPkgVersionConsistency(pkgName: string | RegExp, projectPath: string) {
@@ -161,25 +160,6 @@ export function setProjectHomePath(projectHomePath: string) {
 
 export function getMalaguHomePath() {
     return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.malagu');
-}
-
-export function getSettingsPath() {
-    return path.join(getMalaguHomePath(), 'settings.yml');
-}
-
-export function getSettings() {
-    const settingsPath = getSettingsPath();
-    if (existsSync(settingsPath)) {
-        const content = readFileSync(settingsPath, 'utf8');
-        return load(content);
-    }
-    return {};
-}
-
-export async function saveSettings(settings: any) {
-    const settingsPath = getSettingsPath();
-    ensureFileSync(settingsPath);
-    return writeFileSync(settingsPath, dump(settings), { encoding: 'utf8' });
 }
 
 export function getRuntimePath(runtime?: string) {

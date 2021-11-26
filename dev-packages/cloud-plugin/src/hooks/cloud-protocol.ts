@@ -13,6 +13,7 @@ export interface Profile {
     account: Account
     credentials: Credentials;
     region: string;
+    token?: string;
 }
 
 export interface ProfileProvider {
@@ -28,10 +29,10 @@ export interface CloudConfiguration {
     [key: string]: any;
 }
 
-export interface CmdOptions {
-    accountId: string;
-    accessKeyId: string;
-    accessKeySecret: string;
-    region: string;
+export interface ConfigOptions {
+    accountId?: string;
+    accessKeyId?: string;
+    accessKeySecret?: string;
+    region?: string;
     token?: string;
 }

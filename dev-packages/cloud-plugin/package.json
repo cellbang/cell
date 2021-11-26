@@ -9,8 +9,7 @@
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
-    "js-yaml": "^4.0.0",
-    "lodash.merge": "^4.6.2"
+    "js-yaml": "^4.0.0"
   },
   "publishConfig": {
     "access": "public"
@@ -43,8 +42,7 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "1.40.1",
-    "@types/inquirer": "^6.5.0",
-    "@types/lodash.merge": "^4.6.6"
+    "@types/inquirer": "^6.5.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
