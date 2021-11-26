@@ -1,5 +1,5 @@
 
-import { getRuntimePath, getSettings, saveSettings } from '@malagu/cli-common/lib/util';
+import { getRuntimePath, SettingsUtil } from '@malagu/cli-common';
 const rimraf = require('rimraf');
 import { existsSync } from 'fs-extra';
 import { getInstalledRuntimes } from '../util';
@@ -37,10 +37,9 @@ export default async (options: UninstallOptions) => {
             if (existsSync(runtimePath)) {
                 const spinner = ora({ text: 'Uninstalling...', discardStdin: false }).start();
                 rimraf.sync(runtimePath);
-                const settings = getSettings();
+                const settings = SettingsUtil.getSettings();
                 if (runtime === settings.defaultRuntime) {
-                    delete settings.defaultRuntime;
-                    await saveSettings(settings);
+                    SettingsUtil.updateSettings({ defaultRuntime: undefined });
                 }
                 spinner.stop();
             }

@@ -1,5 +1,5 @@
 
-import { getSettings, saveSettings } from '@malagu/cli-common/lib/util';
+import { SettingsUtil } from '@malagu/cli-common';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 import { ok } from 'assert';
@@ -16,7 +16,7 @@ export async function selectRuntime(): Promise<string> {
     const answers = await inquirer.prompt([{
         name: 'item',
         type: 'autocomplete',
-        default: getSettings().defaultRuntime || Runtimes.empty,
+        default: SettingsUtil.getSettings().defaultRuntime || Runtimes.empty,
         pageSize: 12,
         message: 'Select a runtime to use (as default)',
         source: async (answersSoFar: any, input: string) => {
@@ -44,13 +44,11 @@ export default async (options: UseOptions) => {
             ok(existed, `"${runtime}" runtime not found`);
         }
         if (runtime) {
-            const settings = getSettings();
             if (runtime === Runtimes.empty) {
-                delete settings.defaultRuntime;
+                SettingsUtil.updateSettings({ defaultRuntime: undefined });
             } else {
-                settings.defaultRuntime = runtime;
+                SettingsUtil.updateSettings({ defaultRuntime: runtime });
             }
-            await saveSettings(settings);
         }
     } catch (error) {
         console.error(error);

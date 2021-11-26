@@ -5,3 +5,4 @@ export * from './packager';
 export * from './util';
 export * from './env';
 export * from './hook';
+export * from './settings';

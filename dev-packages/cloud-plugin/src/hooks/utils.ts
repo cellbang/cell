@@ -1,10 +1,9 @@
 import { ensureFile, existsSync, readFile, writeFile } from 'fs-extra';
 import { prompt } from 'inquirer';
 import { resolve, sep } from 'path';
-import { CloudConfiguration, CmdOptions, Profile } from './cloud-protocol';
+import { CloudConfiguration, Profile } from './cloud-protocol';
 import { load, dump } from 'js-yaml';
 import { ApplicationConfig, BACKEND_TARGET, getMalaguConfig, getMalaguHomePath } from '@malagu/cli-common';
-const merge = require('lodash.merge');
 
 export namespace CloudUtils {
 
@@ -28,13 +27,15 @@ export namespace CloudUtils {
         return load(content);
     }
 
-    export async function getProfileFromQuestion(profile: Profile, regions: string[]): Promise<Profile> {
+    export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
         const mark = (source: string) => {
             if (source) {
                 const subStr = source.slice(-4);
                 return `***********${subStr}`;
             }
         };
+        let profile = { account: { id: '' }, credentials: { accessKeyId: '', accessKeySecret: '' }, region: '' };
+        profile = await getProfileFromFile(profilePath) || profile;
         const markedAccountId = mark(profile.account.id);
         const markedaccessKeyId = mark(profile.credentials.accessKeyId);
         const markedAccessKeySecret = mark(profile.credentials.accessKeySecret);
@@ -78,20 +79,7 @@ export namespace CloudUtils {
         }
 
         profile.region = region;
-
-        return profile;
-    }
-
-    export function getProfileFromCmd(opts: CmdOptions): Profile {
-        const profile: Profile = {
-            account: { id: opts.accountId },
-            credentials: {
-                accessKeyId: opts.accessKeyId,
-                accessKeySecret: opts.accessKeySecret,
-                token: opts.token,
-            },
-            region: opts.region
-        };
+        await saveProfile(profilePath, profile);
         return profile;
     }
 
@@ -99,28 +87,5 @@ export namespace CloudUtils {
         const path = getProfilePath(profilePath);
         await ensureFile(path);
         await writeFile(path, dump(profile));
-    }
-
-    export async function getProfile(profilePath: string, regions: string[], opts: CmdOptions): Promise<Profile> {
-        const initProfile = { account: { id: '' }, credentials: { accessKeyId: '', accessKeySecret: '' }, region: '' };
-        let profile = await getProfileFromFile(profilePath) || initProfile;
-
-        if (opts.accessKeyId && opts.accessKeySecret) {
-            const cmdProfile = getProfileFromCmd(opts);
-            profile = merge(profile, cmdProfile);
-        } else {
-            profile = await getProfileFromQuestion(profile, regions);
-        }
-
-        await saveProfile(profilePath, profile);
-        return profile;
-    }
-
-    export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
-        const initProfile = { account: { id: '' }, credentials: { accessKeyId: '', accessKeySecret: '' }, region: '' };
-        let profile = await getProfileFromFile(profilePath) || initProfile;
-        profile = await getProfileFromQuestion(profile, regions);
-        await saveProfile(profilePath, profile);
-        return profile;
     }
 }
