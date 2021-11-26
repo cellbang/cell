@@ -2,8 +2,9 @@ import { program, Command } from 'commander';
 
 const leven = require('leven');
 import * as ora from 'ora';
-import { HookExecutor } from '@malagu/cli-common';
-import { loadContext, initRuntime } from './util';
+import { HookExecutor, SettingsUtil } from '@malagu/cli-common';
+import { loadContext, initRuntime, includesCommand } from './util';
+import { FrameworkUtils, frameworks } from '@malagu/frameworks';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
@@ -14,7 +15,9 @@ updateNotifier({ pkg }).notify();
 const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
 
 (async () => {
-    const runtime = await initRuntime();
+    const framework = await FrameworkUtils.detect(frameworks);
+    const settings = SettingsUtil.getSettings();
+    const runtime = await initRuntime(settings, framework);
     console.log(`
                    ___
  /'\\_/\`\\          /\\_ \\
@@ -33,10 +36,10 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
 `);
 
     spinner.start();
-    const context = await loadContext(program, spinner, runtime);
+    const context = await loadContext(program, spinner, settings, framework, runtime);
     const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules } = context.pkg;
 
-    if (context.args.includes('serve') || context.args.includes('build')) {
+    if (includesCommand(context.args, settings.compileCommands)) {
         process.send!({
             type: 'cliContext',
             data: {

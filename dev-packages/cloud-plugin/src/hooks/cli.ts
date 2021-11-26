@@ -1,5 +1,5 @@
 import { CliContext } from '@malagu/cli-common';
-import { CmdOptions } from '.';
+import { ConfigOptions, Profile } from './cloud-protocol';
 import { CloudUtils } from './utils';
 
 export default async (context: CliContext) => {
@@ -12,8 +12,18 @@ export default async (context: CliContext) => {
         .option('-k, --access-key-secret [accessKeySecret]', 'Access key secret')
         .option('-t, --token [token]', 'Access token')
         .option('-r, --region [region]', 'Region of deployment')
-        .action((opts: CmdOptions) => {
+        .action(async (opts: ConfigOptions) => {
             const { regions, profilePath } = CloudUtils.getConfiguration(cfg);
-            CloudUtils.getProfile(profilePath, regions, opts);
+            if (opts.accessKeyId || opts.accessKeySecret || opts.accountId || opts.region) {
+                const profile = await CloudUtils.getProfileFromFile(profilePath) || <Profile>{ credentials: {}, account: {} };
+                profile.account.id = opts.accountId || profile.account.id;
+                profile.credentials.accessKeyId = opts.accessKeyId || profile.credentials.accessKeyId;
+                profile.credentials.accessKeySecret = opts.accessKeySecret || profile.credentials.accessKeySecret;
+                profile.region = opts.region || profile.region;
+                profile.token = opts.token || profile.token;
+                await CloudUtils.saveProfile(profilePath, profile);
+                return;
+            }
+            CloudUtils.promptForProfile(profilePath, regions);
         });
 };

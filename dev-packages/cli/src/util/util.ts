@@ -1,20 +1,20 @@
-import { ApplicationPackage, CliContext, getSettings } from '@malagu/cli-common';
+import { ApplicationPackage, CliContext } from '@malagu/cli-common';
 import { installRuntimeIfNeed, Runtimes } from '@malagu/cli-runtime';
-import { FrameworkUtils, frameworks } from '@malagu/frameworks';
+import { Framework } from '@malagu/frameworks';
 const minimist = require('minimist');
 import * as ora from 'ora';
 import { Command } from 'commander';
+import { Settings } from '@malagu/cli-common';
 
-export async function initRuntime() {
+export async function initRuntime(settings: Settings, framework?: Framework) {
     const options = minimist(process.argv.slice(2));
-    const mode = getMode(options);
+    const mode = getMode(options, settings);
     const pkg = ApplicationPackage.create({ projectPath: process.cwd() , mode });
     let runtime = pkg.rootComponentPackage.malaguComponent?.runtime;
-    runtime = runtime || getSettings().defaultRuntime;
+    runtime = runtime || settings.defaultRuntime;
     if (runtime) {
         await installRuntimeIfNeed(runtime);
     } else {
-        const framework = await FrameworkUtils.detect(frameworks);
         if (framework) {
             runtime = framework.useRuntime;
             if (runtime && runtime !== Runtimes.empty) {
@@ -26,12 +26,13 @@ export async function initRuntime() {
 
 }
 
-export async function loadContext(program: Command, spinner: ora.Ora, runtime?: string): Promise<CliContext> {
+export async function loadContext(program: Command, spinner: ora.Ora, settings: Settings, framework?: Framework, runtime?: string): Promise<CliContext> {
     const options = minimist(process.argv.slice(2));
-    const mode = getMode(options);
+    const args: string[] = options._;
+    const mode = getMode(options, settings);
     const targets = getTargets(options);
     const prod = options.p || options.prod;
-    return CliContext.create(program, { args: options._, targets, mode, prod, dev: isDev(options), spinner, runtime });
+    return CliContext.create(program, { args, targets, mode, prod, dev: isDev(args, settings), spinner, runtime, framework });
 }
 
 function getArrayOptions(options: any, prop: string, shortProp: string): string[] {
@@ -44,20 +45,35 @@ function getArrayOptions(options: any, prop: string, shortProp: string): string[
     return [];
 }
 
-function getMode(options: any) {
+function getMode(options: any, settings: Settings) {
     const mode = getArrayOptions(options, 'mode', 'm');
-
-    let fixedMode: string[] = [];
-    if (options._.includes('serve')) {
-        fixedMode = ['local'];
-    } else if (options._.includes('build') || options._.includes('deploy')) {
-        fixedMode = ['remote'];
+    if (!settings.modeCommands) {
+        return mode;
     }
-    return [...fixedMode, ...mode.filter((m: any) => fixedMode.indexOf(m) === -1)];
+
+    const commandMode: string[] = [];
+    for (const key of Object.keys(settings.modeCommands)) {
+        if (includesCommand(options._, settings.modeCommands[key])) {
+            commandMode.push(key);
+        }
+    }
+    return [...commandMode, ...mode.filter((m: any) => commandMode.indexOf(m) === -1)];
 }
 
-function isDev(options: any) {
-    return options._.includes('serve');
+export function includesCommand(args: string[], commands: string[] = []): boolean {
+    if (args.length === 0) {
+        return false;
+    }
+    for (const command of commands) {
+        if (args.includes(command)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function isDev(args: string[], settings: Settings) {
+    return includesCommand(args, settings.serveCommand ? [ settings.serveCommand ] : []);
 }
 
 function getTargets(options: any) {

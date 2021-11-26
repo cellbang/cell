@@ -5,7 +5,7 @@ import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
 import { HookExecutor } from '../hook';
 import { ApplicationConfig } from '../package';
-import { Framework, FrameworkUtils, frameworks } from '@malagu/frameworks';
+import { Framework } from '@malagu/frameworks';
 import { ExpressionContext } from '../el';
 
 export interface CliContext {
@@ -30,7 +30,7 @@ export namespace CliContext {
         if (runtime) {
             projectPath = getRuntimePath(runtime);
         }
-        const framework = await FrameworkUtils.detect(frameworks);
+        const { framework } = options;
         if (framework) {
             mode.push(...framework.useMode);
             mode = Array.from(new Set<string>(mode));
