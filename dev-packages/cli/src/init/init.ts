@@ -1,16 +1,9 @@
 
-import * as program from 'commander';
-import { InitManager } from './init-manager';
-
-export interface InitOptions {
-    name?: string;
-    template?: boolean;
-    outputDir: string;
-}
+import { InitManager, InitOptions } from './init-manager';
 
 export default async (options: InitOptions) => {
     try {
-        const initManager = new InitManager({ ...options, program });
+        const initManager = new InitManager(options);
         await initManager.output();
         await initManager.render();
         await initManager.install();

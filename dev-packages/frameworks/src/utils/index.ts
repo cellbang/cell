@@ -1,1 +1,1 @@
-export * from './framework-utils';
+export * from './framework-util';

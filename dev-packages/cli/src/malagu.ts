@@ -1,10 +1,7 @@
-import { program, Command } from 'commander';
-
 const leven = require('leven');
 import * as ora from 'ora';
-import { HookExecutor, SettingsUtil } from '@malagu/cli-common';
-import { loadContext, initRuntime, includesCommand } from './util';
-import { FrameworkUtils, frameworks } from '@malagu/frameworks';
+import { HookExecutor, CommandUtil, program, Command } from '@malagu/cli-common';
+import { Runtimes, RuntimeUtil } from '@malagu/cli-runtime';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
@@ -15,9 +12,16 @@ updateNotifier({ pkg }).notify();
 const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
 
 (async () => {
-    const framework = await FrameworkUtils.detect(frameworks);
-    const settings = SettingsUtil.getSettings();
-    const runtime = await initRuntime(settings, framework);
+    const { runtime, framework, settings } = await RuntimeUtil.initRuntime();
+    let runtimeStrLine = '';
+    if (runtime && runtime !== Runtimes.empty) {
+        let runtimeStr = runtime;
+        if (framework) {
+            runtimeStr = runtime === Runtimes.default ? framework.name : `${runtime}.${framework.name}`;
+        }
+        runtimeStrLine = '\n│';
+        runtimeStrLine += chalk`yellow{Runtime<${runtimeStr}>}`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50) + '│';
+    }
     console.log(`
                    ___
  /'\\_/\`\\          /\\_ \\
@@ -30,16 +34,15 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
 ╭──────────────────────────────────────────────────╮
-│      Serverless Frist Development Framework      │${runtime ? '\n│' +
-chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length) / 2)).padEnd(50)) + '│' : ''}
+│      Serverless Frist Development Framework      │${runtimeStrLine}
 ╰──────────────────────────────────────────────────╯
 `);
 
     spinner.start();
-    const context = await loadContext(program, spinner, settings, framework, runtime);
+    const context = await CommandUtil.loadContext(settings, framework, runtime, undefined, spinner);
     const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules } = context.pkg;
 
-    if (includesCommand(context.args, settings.compileCommands)) {
+    if (CommandUtil.includesCommand(context.args, settings.compileCommands)) {
         process.send!({
             type: 'cliContext',
             data: {
@@ -54,6 +57,8 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
     }
     program
         .version(version, '-v, --version', 'version for malagu')
+        .option('-t, --targets [targets]', 'targets for malagu', value => value ? value.split(',') : [])
+        .option('-m, --mode [mode]', 'mode for malagu', value => value ? value.split(',') : [])
         .usage('<command> [options]');
 
     program
@@ -64,16 +69,24 @@ chalk.yellow(`Runtime<${runtime}>`.padStart(25 + Math.floor((9 + runtime.length)
             require('./init/init').default({ name, template, outputDir: '.', ...options });
         });
 
+    program
+        .command('config')
+        .option('--frameworks-url [frameworksUrl]', 'frameworks url')
+        .option('--frameworks-upstream-url [frameworksUpStreamUrl]', 'frameworks upstream url')
+        .description('config properties')
+        .action(options => {
+            require('./config/config').default(context, { ...options });
+        });
+
     const runtimeCmd = program
         .command('runtime [command]')
         .alias('r')
         .description('management runtime');
-
     runtimeCmd
         .command('install [runtime] [alias]')
         .alias('i')
         .description('install a runtime')
-        .option('-v, --version [version]', 'Specify runtime version', 'latest')
+        .option('-v, --version [version]', 'specify runtime version', 'latest')
         .action((r, alias, options) => {
             require('@malagu/cli-runtime/lib/install/install').default({ runtime: r, alias, ...options });
         });

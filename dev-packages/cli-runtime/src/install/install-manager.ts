@@ -4,11 +4,11 @@ const inquirer = require('inquirer');
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
 import { spawnSync } from 'child_process';
-import { ContextUtils, CliContext, getPackager, HookExecutor } from '@malagu/cli-common';
+import { ContextUtils, CliContext, getPackager, HookExecutor, PathUtil, CommandUtil } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
-import { getRuntimePath } from '@malagu/cli-common/lib/util';
 import { basename, join } from 'path';
+import { RuntimeUtil } from '../util';
 const leven = require('leven');
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
@@ -22,13 +22,18 @@ export interface Runtime {
     location: string;
 }
 
+export interface InstallOptions {
+    runtime?: string;
+    alias?: string;
+}
+
 export class InstallManager {
 
     protected source: any[];
     protected runtimeName: string;
     protected location: string;
     protected cliContext: CliContext;
-    constructor(protected readonly context: any) {
+    constructor(protected readonly opts: InstallOptions) {
 
     }
 
@@ -47,8 +52,8 @@ export class InstallManager {
     }
 
     async install(): Promise<void> {
-        const ctx = await CliContext.create(this.context.program, {}, this.outputDir, true);
-        await getPackager(ctx).install(this.outputDir, {});
+        const pkg = CommandUtil.getPkg(undefined, this.outputDir);
+        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install(this.outputDir, {});
     }
 
     async executeHooks(): Promise<void> {
@@ -61,14 +66,14 @@ export class InstallManager {
 
     protected async getCliContext(): Promise<CliContext> {
         if (!this.cliContext) {
-            this.cliContext = await CliContext.create(this.context.program, {}, this.outputDir);
-            this.cliContext.alias = this.context.alias;
+            this.cliContext = await RuntimeUtil.initRuntimeAndLoadContext(this.outputDir);
+            this.cliContext.alias = this.opts.alias;
         }
         return this.cliContext;
     }
 
     protected get outputDir(): string {
-        return getRuntimePath(this.context.alias || this.runtimeName);
+        return PathUtil.getRuntimePath(this.opts.alias || this.runtimeName);
     }
 
     protected async checkOutputDir(): Promise<void> {
@@ -81,7 +86,7 @@ export class InstallManager {
             if (!answers.overwrite) {
                 process.exit(0);
             }
-            await uninstall({ runtime: this.context.alias || this.runtimeName });
+            await uninstall({ runtime: this.opts.alias || this.runtimeName });
         }
     }
 
@@ -94,7 +99,7 @@ export class InstallManager {
     }
 
     protected async selectRuntime(): Promise<void> {
-        const { runtime } = this.context;
+        const { runtime } = this.opts;
         if (runtime) {
             this.runtimeName = runtime;
             if (remoteRuntimeRegex.test(runtime)) {

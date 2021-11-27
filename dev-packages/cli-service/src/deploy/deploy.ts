@@ -12,7 +12,6 @@ export interface DeplyOptions {
 export default async (cliContext: CliContext, options: DeplyOptions) => {
     try {
         const ctx = await ServiceContextUtils.createDeployContext(cliContext, {
-            dev: false,
             ...options
         });
         if (!options.skipBuild) {

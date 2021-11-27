@@ -1,4 +1,4 @@
-import { ServeContext, ConfigurationContext, getMalaguConfig, BACKEND_TARGET } from '@malagu/cli-service';
+import { ServeContext, ConfigurationContext, ConfigUtil, BACKEND_TARGET } from '@malagu/cli-service';
 import { LaunchOptions } from 'puppeteer-core';
 import { BrowserFetcher } from 'puppeteer-core/lib/cjs/puppeteer/node/BrowserFetcher';
 import { PUPPETEER_REVISIONS } from 'puppeteer-core/lib/cjs/puppeteer/revisions';
@@ -8,7 +8,7 @@ export default async (ctx: ServeContext) => {
     const { cfg, configurations, pkg } = ctx;
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, configurations);
     if (configuration) {
-        const launchOptions = <LaunchOptions>getMalaguConfig(cfg, BACKEND_TARGET).puppeteer.launchOptions;
+        const launchOptions = <LaunchOptions>ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET).puppeteer.launchOptions;
         if (!launchOptions.executablePath) {
             const browserFetcher = new BrowserFetcher(pkg.projectPath);
             const product = launchOptions.product || 'chromium';

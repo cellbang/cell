@@ -15,6 +15,7 @@
 - feat(cli) 支持智能适配运行时和模式
 - feat(cloud-plugin) 支持命令行参数输入账号配置信息 (#72)
 - feat(cli + cli-common) 优化模式命令
+- feat(cli) 支持 `malagu config` 命令
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
@@ -27,6 +28,7 @@
 - feat(cli) supports smart adaptation of runtime and mode
 - feat(cloud-plugin) supports command line parameters to input account configuration information (#72)
 - feat(cli + cli-common) optimization mode command
+- feat(cli) Support `malagu config` command
 
 ## 1.40.1
 

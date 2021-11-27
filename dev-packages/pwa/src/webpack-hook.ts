@@ -1,10 +1,10 @@
-import { WebpackContext, getFrontendWebpackConfig, ConfigurationContext } from '@malagu/cli-service';
+import { WebpackContext, ConfigUtil, ConfigurationContext } from '@malagu/cli-service';
 
 export default async (context: WebpackContext) => {
     const { dev, cfg, configurations } = context;
     const config = ConfigurationContext.getFrontendConfiguration(configurations);
     if (config) {
-        const pluginConfig = getFrontendWebpackConfig(cfg).workboxWebpackPlugin || {};
+        const pluginConfig = ConfigUtil.getFrontendWebpackConfig(cfg).workboxWebpackPlugin || {};
         if (!dev || pluginConfig.generateInDevMode) {
             const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
             delete pluginConfig.generateInDevMode;

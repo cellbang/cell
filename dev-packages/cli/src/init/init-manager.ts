@@ -3,10 +3,11 @@ import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
 import { spawnSync } from 'child_process';
-import { ContextUtils, CliContext, getPackager, HookExecutor } from '@malagu/cli-common';
+import { ContextUtils, CliContext, getPackager, HookExecutor, CommandUtil } from '@malagu/cli-common';
 import * as ora from 'ora';
 const chalk = require('chalk');
 import { ok } from 'assert';
+import { RuntimeUtil } from '@malagu/cli-runtime';
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
@@ -19,13 +20,19 @@ export interface Template {
     location: string;
 }
 
+export interface InitOptions {
+    name?: string;
+    template?: string;
+    outputDir: string;
+}
+
 export class InitManager {
 
     protected source: any[];
     protected templateName: string;
     protected location: string;
     protected cliContext: CliContext;
-    constructor(protected readonly context: any) {
+    constructor(protected readonly opts: InitOptions) {
 
     }
 
@@ -38,13 +45,13 @@ export class InitManager {
     async render(): Promise<void> {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
         const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
-        packageJson.name = this.context.name;
+        packageJson.name = this.opts.name;
         await writeJSON(packageJsonPath, packageJson, { encoding: 'utf8', spaces: 2 });
     }
 
     async install(): Promise<void> {
-        const ctx = await CliContext.create(this.context.program, {}, this.outputDir, true);
-        await getPackager(ctx).install(this.outputDir, {});
+        const pkg = CommandUtil.getPkg(undefined, this.outputDir);
+        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install(this.outputDir, {});
     }
 
     async executeHooks(): Promise<void> {
@@ -57,15 +64,15 @@ export class InitManager {
 
     protected async getCliContext(): Promise<CliContext> {
         if (!this.cliContext) {
-            this.cliContext = await CliContext.create(this.context.program, {}, this.outputDir);
-            this.cliContext.name = this.context.name;
-            this.cliContext.outputDir = this.context.outputDir;
+            this.cliContext = await RuntimeUtil.initRuntimeAndLoadContext(this.outputDir);
+            this.cliContext.name = this.opts.name;
+            this.cliContext.outputDir = this.opts.outputDir;
         }
         return this.cliContext;
     }
 
     protected get outputDir(): string {
-        return resolve(process.cwd(), this.context.outputDir, this.context.name);
+        return resolve(process.cwd(), this.opts.outputDir, this.opts.name!);
     }
 
     protected async checkOutputDir(): Promise<void> {
@@ -90,7 +97,7 @@ export class InitManager {
     }
 
     protected async selectTemplate(): Promise<void> {
-        const { name, template } = this.context;
+        const { name, template } = this.opts;
         if (template) {
             this.templateName = template;
             if (remoteTemplateRegex.test(template)) {
@@ -121,7 +128,7 @@ export class InitManager {
             }
         }]);
         this.templateName = answers.item.name;
-        this.context.name = name || answers.item.name;
+        this.opts.name = name || answers.item.name;
         this.location = answers.item.location;
     }
 

@@ -128,25 +128,25 @@
       "path": "../dev-packages/cli-runtime/compile.tsconfig.json"
     },
     {
-      "path": "../dev-packages/cloud-plugin/compile.tsconfig.json"
+      "path": "../plugins/cloud-plugin/compile.tsconfig.json"
     },
     {
-      "path": "../dev-packages/code-loader-plugin/compile.tsconfig.json"
+      "path": "../plugins/code-loader-plugin/compile.tsconfig.json"
     },
     {
-      "path": "../dev-packages/fc-plugin/compile.tsconfig.json"
+      "path": "../plugins/fc-plugin/compile.tsconfig.json"
     },
     {
-      "path": "../dev-packages/lambda-plugin/compile.tsconfig.json"
+      "path": "../plugins/lambda-plugin/compile.tsconfig.json"
     },
     {
-      "path": "../dev-packages/scf-plugin/compile.tsconfig.json"
+      "path": "../plugins/scf-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../plugins/static-plugin/compile.tsconfig.json"
     },
     {
       "path": "../dev-packages/frameworks/compile.tsconfig.json"
-    },
-    {
-      "path": "../dev-packages/static-plugin/compile.tsconfig.json"
     }
   ]
 }

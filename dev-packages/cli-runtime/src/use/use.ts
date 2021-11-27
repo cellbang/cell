@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { Runtimes } from '../runtime-protocol';
-import { getInstalledRuntimes } from '../util';
+import { RuntimeUtil } from '../util';
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 export interface UseOptions {
@@ -20,7 +20,7 @@ export async function selectRuntime(): Promise<string> {
         pageSize: 12,
         message: 'Select a runtime to use (as default)',
         source: async (answersSoFar: any, input: string) => {
-            let runtimes = await getInstalledRuntimes();
+            let runtimes = await RuntimeUtil.getInstalledRuntimes();
             runtimes = [ { name: Runtimes.empty, version: '' }, ...runtimes ];
             return runtimes.map(r => ({ name: chalk`${r.name} {italic.gray runtime}`, value: r }));
         }
@@ -34,7 +34,7 @@ export default async (options: UseOptions) => {
         if (!runtime) {
             runtime = await selectRuntime();
         } else {
-            const runtimes = await getInstalledRuntimes();
+            const runtimes = await RuntimeUtil.getInstalledRuntimes();
             let existed = false;
             for (const r of runtimes) {
                 if (r.name === runtime) {

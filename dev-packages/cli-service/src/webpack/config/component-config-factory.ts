@@ -1,5 +1,5 @@
 
-import { FRONTEND_TARGET, CONFIG_FILE, getConfig, CliContext, getWebpackConfig, getProjectHomePathForTarget, getRuntimePath } from '@malagu/cli-common';
+import { FRONTEND_TARGET, CONFIG_FILE, ConfigUtil, CliContext, PathUtil } from '@malagu/cli-common';
 import * as path from 'path';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
 import { dump } from 'js-yaml';
@@ -12,7 +12,7 @@ const nodePathList = (process.env.NODE_PATH || '')
 export class ComponentConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg, dev, runtime } = context;
-        const pluginConfig = getWebpackConfig(cfg, target).workboxWebpackPlugin;
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).workboxWebpackPlugin;
         const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
         const modules = target === FRONTEND_TARGET ? pkg.frontendModules : pkg.backendModules;
         const staticModules = target === FRONTEND_TARGET ? pkg.frontendStaticModules : pkg.backendStaticModules;
@@ -23,7 +23,7 @@ export class ComponentConfigFactory {
                         path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
                         path.join(__dirname, '..', '..', '..', 'node_modules'),
                         path.join(__dirname, '..', '..', '..', '..', '..', '..', 'node_modules'),
-                        path.join(getRuntimePath(runtime), 'node_modules'),
+                        path.join(PathUtil.getRuntimePath(runtime), 'node_modules'),
                         ...nodePathList, // Support for NODE_PATH environment variable
                     ])
                 .end()
@@ -49,10 +49,10 @@ export class ComponentConfigFactory {
 export class ComponentConfigConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, runtime } = context;
-        const c = getConfig(cfg, target);
+        const c = ConfigUtil.getConfig(cfg, target);
         const source = `module.exports.config = ${JSON.stringify(c)};`;
 
-        const homePath = getProjectHomePathForTarget(target, runtime);
+        const homePath = PathUtil.getProjectHomePathForTarget(target, runtime);
         ensureDirSync(homePath);
         const configPath = path.join(homePath, CONFIG_FILE);
         writeFileSync(configPath, dump(c), { encoding: 'utf8' });

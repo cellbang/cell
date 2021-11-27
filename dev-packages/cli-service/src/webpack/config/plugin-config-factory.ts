@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { CliContext, getWebpackConfig, getConfig, getAssets, FRONTEND_TARGET, getFrontendMalaguConfig } from '@malagu/cli-common';
+import { CliContext, ConfigUtil, FRONTEND_TARGET } from '@malagu/cli-common';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
@@ -10,7 +10,7 @@ export class DefinePluginConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
-        const pluginConfig = getWebpackConfig(cfg, target).definePlugin;
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).definePlugin;
         if (pluginConfig) {
             config
                 .plugin('define')
@@ -27,7 +27,7 @@ export class DotenvPluginConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg } = context;
-        const pluginConfig = getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
         const realPath = path.join(pkg.projectPath, pluginConfig.path);
         if (existsSync(realPath)) {
             const Dotenv = require('dotenv-webpack');
@@ -45,7 +45,7 @@ export class DotenvPluginConfigFactory {
 export class FilterWarningsPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
-        const pluginConfig = getWebpackConfig(cfg, target).filterWarningsPlugin || {};
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).filterWarningsPlugin || {};
         const excludeSet = new Set();
         for (const key in pluginConfig) {
             if (pluginConfig.hasOwnProperty(key)) {
@@ -78,7 +78,7 @@ export class CopyWepackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
-        for (const assert of getAssets(pkg, target)) {
+        for (const assert of ConfigUtil.getAssets(pkg, target)) {
             assets.push(assert.path);
         }
 
@@ -112,7 +112,7 @@ export class HtmlWebpackPluginConfigFactory {
         const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
         const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
 
-        const c = getFrontendMalaguConfig(cfg);
+        const c = ConfigUtil.getFrontendMalaguConfig(cfg);
         const baseHref = c.server?.path;
 
         config
@@ -121,8 +121,8 @@ export class HtmlWebpackPluginConfigFactory {
                     title: 'Malagu App',
                     template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
                     favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
-                    templateParameters: getConfig(cfg, FRONTEND_TARGET),
-                    ...getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
+                    templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
+                    ...ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
                     ...(templateExists ? { template: templatePath } : {}),
                     ...(faviconExists ? { favicon: faviconPath } : {})
                 }])
@@ -139,7 +139,7 @@ export class HtmlWebpackPluginConfigFactory {
 export class HtmlWebpackTagsPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;
-        const pluginConfig = getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
         const before = [];
         const after = [];
         for (const key in pluginConfig) {

@@ -1,4 +1,4 @@
-import { WebpackContext, getWebpackConfig } from '@malagu/cli-service';
+import { WebpackContext, ConfigUtil } from '@malagu/cli-service';
 import { existsSync } from 'fs';
 import { join } from 'path';
 export default async (context: WebpackContext) => {
@@ -11,7 +11,7 @@ export default async (context: WebpackContext) => {
         for (const config of configurations) {
             const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
             const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-            const pluginConfig = getWebpackConfig(cfg, config.get('name')).forkTSCheckerWebpackPlugin || {};
+            const pluginConfig = ConfigUtil.getWebpackConfig(cfg, config.get('name')).forkTSCheckerWebpackPlugin || {};
             config
                 .plugin('tsChecker')
                     .use(ForkTsCheckerWebpackPlugin, [{ ...{ eslint: true }, ...pluginConfig }])

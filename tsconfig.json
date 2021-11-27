@@ -165,25 +165,25 @@
         "examples/accounts/*"
       ],
       "@malagu/cloud-plugin/lib/*": [
-        "dev-packages/cloud-plugin/src/*"
+        "plugins/cloud-plugin/src/*"
       ],
       "@malagu/code-loader-plugin/lib/*": [
-        "dev-packages/code-loader-plugin/src/*"
+        "plugins/code-loader-plugin/src/*"
       ],
       "@malagu/fc-plugin/lib/*": [
-        "dev-packages/fc-plugin/src/*"
+        "plugins/fc-plugin/src/*"
       ],
       "@malagu/lambda-plugin/lib/*": [
-        "dev-packages/lambda-plugin/src/*"
+        "plugins/lambda-plugin/src/*"
       ],
       "@malagu/scf-plugin/lib/*": [
-        "dev-packages/scf-plugin/src/*"
+        "plugins/scf-plugin/src/*"
       ],
       "@malagu/frameworks/lib/*": [
         "dev-packages/frameworks/src/*"
       ],
       "@malagu/static-plugin/lib/*": [
-        "dev-packages/static-plugin/src/*"
+        "plugins/static-plugin/src/*"
       ],
       "@malagu/static-plugin/*": [
         "dev-packages/static-plugin/*"

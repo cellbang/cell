@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebpackContext, ConfigurationContext } from '@malagu/cli-service';
-import { getFrontendMalaguConfig } from '@malagu/cli-common';
+import { WebpackContext, ConfigurationContext, ConfigUtil } from '@malagu/cli-service';
 
 interface LoaderOptions {
     css: any,
@@ -72,7 +71,7 @@ export default async (context: WebpackContext) => {
     if (webpackConfig) {
         const appRootDir = pkg.projectPath;
         const shadowMode = false;
-        const rootVueOptions = getFrontendMalaguConfig(cfg)?.vue ?? {};
+        const rootVueOptions = ConfigUtil.getFrontendMalaguConfig(cfg)?.vue ?? {};
         const rootcacheLoaderConfig = rootVueOptions.cacheLoader ?? {};
         const rootvueLoaderConfig = rootVueOptions.vueLoader ?? {};
         let cacheLoaderConfig = {};
