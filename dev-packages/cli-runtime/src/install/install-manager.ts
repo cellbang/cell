@@ -52,6 +52,7 @@ export class InstallManager {
     }
 
     async install(): Promise<void> {
+        console.log(chalk`The {yellow ${this.runtimeName}} runtime is being installed...`);
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
         await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install(this.outputDir, {});
     }
@@ -61,7 +62,6 @@ export class InstallManager {
         const initContext = await ContextUtils.createInitContext(await this.getCliContext());
         await new HookExecutor().executeInitHooks(initContext);
         console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);
-        process.exit(0);
     }
 
     protected async getCliContext(): Promise<CliContext> {
