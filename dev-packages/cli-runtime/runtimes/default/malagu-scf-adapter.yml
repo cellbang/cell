@@ -1,3 +1,3 @@
 mode: scf
 components:
-  '@malagu/scf-adapter': next
+  '@malagu/scf-adapter': latest

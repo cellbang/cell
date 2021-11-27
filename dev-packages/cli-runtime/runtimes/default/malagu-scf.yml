@@ -1,2 +1,2 @@
 components:
-  '@malagu/scf-plugin': next
+  '@malagu/scf-plugin': latest
