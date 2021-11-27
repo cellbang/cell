@@ -1,19 +1,20 @@
 {
   "name": "@malagu/lambda-plugin",
-  "version": "1.40.1",
+  "version": "2.0.0",
   "description": "",
   "dependencies": {
-    "@malagu/cloud-plugin": "1.40.1",
-    "@malagu/code-loader-plugin": "1.40.1",
+    "@malagu/cloud-plugin": "2.0.0",
+    "@malagu/code-loader-plugin": "2.0.0",
+    "aws-sdk": "^2.807.0",
     "fs-extra": "^8.1.0",
-    "jszip": "^3.7.1",
-    "aws-sdk": "^2.807.0"
+    "jszip": "^3.7.1"
   },
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
-    "malagu-component", "malagu-plugin"
+    "malagu-component",
+    "malagu-plugin"
   ],
   "license": "MIT",
   "repository": {
@@ -40,7 +41,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.40.1"
+    "@malagu/ext-scripts": "2.0.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
