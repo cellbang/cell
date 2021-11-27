@@ -1,2 +1,2 @@
 components:
-  '@malagu/fc-adapter': next
+  '@malagu/fc-adapter': latest

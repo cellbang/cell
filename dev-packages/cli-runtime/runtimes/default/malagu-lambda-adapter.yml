@@ -1,2 +1,2 @@
 components:
-  '@malagu/lambda-adapter': next
+  '@malagu/lambda-adapter': latest

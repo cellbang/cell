@@ -1,2 +1,2 @@
 components:
-  '@malagu/cli-service': next
+  '@malagu/cli-service': latest

@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.1
+## 2.0.3
 - fix(cli) 修复模板字符串格式错误
 - feat(cli-runtime) 优化消息提醒和退出机制
 
