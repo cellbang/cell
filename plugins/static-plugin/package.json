@@ -1,18 +1,19 @@
 {
   "name": "@malagu/static-plugin",
-  "version": "1.40.1",
+  "version": "2.0.0",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/frameworks": "1.40.1",
-    "@malagu/cli-service": "1.40.1"
+    "@malagu/cli-service": "2.0.0",
+    "@malagu/frameworks": "2.0.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
-    "malagu-component", "malagu-plugin"
+    "malagu-component",
+    "malagu-plugin"
   ],
   "license": "MIT",
   "repository": {
@@ -36,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "1.40.1"
+    "@malagu/ext-scripts": "2.0.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
