@@ -20,7 +20,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             runtimeStr = runtime === Runtimes.default ? framework.name : `${runtime}.${framework.name}`;
         }
         runtimeStrLine = '\n│';
-        runtimeStrLine += chalk`yellow{Runtime<${runtimeStr}>}`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50) + '│';
+        runtimeStrLine += chalk.yellow(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
     }
     console.log(`
                    ___
