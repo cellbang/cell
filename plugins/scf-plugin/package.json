@@ -48,5 +48,5 @@
   "nyc": {
     "extends": "../../configs/nyc.json"
   },
-  "gitHead": "5efea7f4520f173fb7f1050bfbb524f7cc544a72"
+  "gitHead": "357edad957e0c2818b7177e5806c5f7da8c13196"
 }
