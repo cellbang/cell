@@ -6,16 +6,16 @@
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {
-    "@malagu/scf-adapter": "next",
-    "@malagu/fc-adapter": "next",
-    "@malagu/lambda-adapter": "next",
-    "@malagu/serve-static": "next",
-    "@malagu/cli": "next",
-    "@malagu/cli-service": "next",
-    "@malagu/scf-plugin": "next",
-    "@malagu/fc-plugin": "next",
-    "@malagu/lambda-plugin": "next",
-    "@malagu/static-plugin": "next"
+    "@malagu/scf-adapter": "latest",
+    "@malagu/fc-adapter": "latest",
+    "@malagu/lambda-adapter": "latest",
+    "@malagu/serve-static": "latest",
+    "@malagu/cli": "latest",
+    "@malagu/cli-service": "latest",
+    "@malagu/scf-plugin": "latest",
+    "@malagu/fc-plugin": "latest",
+    "@malagu/lambda-plugin": "latest",
+    "@malagu/static-plugin": "latest"
   },
   "devDependencies": {
   }
