@@ -2,6 +2,10 @@ export interface Settings {
     defaultRuntime?: string;
     modeCommands?: { [key: string]: string[] };
     serveCommand?: string;
+    frameworks?: {
+        url: string;
+        upstreamUrl?: string;
+    }
     compileCommands?: string[];
 }
 

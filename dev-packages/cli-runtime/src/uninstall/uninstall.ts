@@ -1,8 +1,8 @@
 
-import { getRuntimePath, SettingsUtil } from '@malagu/cli-common';
+import { PathUtil, SettingsUtil } from '@malagu/cli-common';
 const rimraf = require('rimraf');
 import { existsSync } from 'fs-extra';
-import { getInstalledRuntimes } from '../util';
+import { RuntimeUtil } from '../util';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 import * as ora from 'ora';
@@ -19,7 +19,7 @@ export async function selectRuntime(): Promise<string> {
         pageSize: 12,
         message: 'Select a runtime to uninstall',
         source: async (answersSoFar: any, input: string) => {
-            const runtimes = await getInstalledRuntimes();
+            const runtimes = await RuntimeUtil.getInstalledRuntimes();
             return runtimes.map(r => ({ name: chalk`${r.name} {italic.gray runtime}`, value: r }));
         }
     }]);
@@ -33,7 +33,7 @@ export default async (options: UninstallOptions) => {
             runtime = await selectRuntime();
         }
         if (runtime) {
-            const runtimePath = getRuntimePath(runtime);
+            const runtimePath = PathUtil.getRuntimePath(runtime);
             if (existsSync(runtimePath)) {
                 const spinner = ora({ text: 'Uninstalling...', discardStdin: false }).start();
                 rimraf.sync(runtimePath);

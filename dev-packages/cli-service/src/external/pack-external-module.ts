@@ -1,12 +1,11 @@
 import { remove, isEmpty, get, isNil, pick, uniq, defaults, now } from 'lodash';
 import { join, dirname, relative } from 'path';
 import { ConfigurationContext } from '../context';
-import { BACKEND_TARGET, getPackager, getMalaguConfig } from '@malagu/cli-common';
+import { BACKEND_TARGET, getPackager, ConfigUtil, PathUtil } from '@malagu/cli-common';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 const isBuiltinModule = require('is-builtin-module');
 import { Stats } from 'webpack';
 import type { ExternalModule } from 'webpack';
-import { getRuntimePath } from '@malagu/cli-common/lib/util';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -79,7 +78,7 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
             // Check if the module has any peer dependencies and include them too
             try {
                 const modulePackagePath = join(
-                    dirname(join(getRuntimePath(runtime), packagePath)),
+                    dirname(join(PathUtil.getRuntimePath(runtime), packagePath)),
                     'node_modules',
                     module.external,
                     'package.json'
@@ -191,7 +190,7 @@ function getExternalModules(stats: any): any[] {
 export async function packExternalModules(context: ConfigurationContext, stats: Stats | undefined): Promise<void> {
     const verbose = false;
     const { cfg, pkg, runtime } = context;
-    const config = getMalaguConfig(cfg, BACKEND_TARGET);
+    const config = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const includes = config.includeModules;
     const packagerOptions = { frozenLockfile: true, nonInteractive: true, ...config.packagerOptions };
@@ -214,7 +213,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     {}
     );
 
-    const packager = getPackager(context);
+    const packager = getPackager(context.cfg.rootConfig.packager, context.pkg.projectPath);
 
     const sectionNames = packager.copyPackageSectionNames;
     const packageJson = await readJSON(packagePath);

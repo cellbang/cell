@@ -9,6 +9,7 @@ export class ApplicationConfigOptions {
 }
 
 export class ApplicationPackageOptions {
+    readonly dev: boolean;
     readonly mode: string[];
     readonly runtime?: string;
     readonly projectPath: string;

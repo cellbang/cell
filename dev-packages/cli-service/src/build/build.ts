@@ -10,7 +10,6 @@ export interface BuildOptions {
 export default async (cliContext: CliContext, options: BuildOptions) => {
     try {
         const ctx = await ServiceContextUtils.createBuildContext(cliContext, {
-            dev: false,
             ...options
         });
         await new BuildManager(ctx).build();

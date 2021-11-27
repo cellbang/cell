@@ -1,6 +1,6 @@
 import { CliContext, ConfigContext, InitContext } from '../context';
 import { Module } from '../package';
-import { getBackendConfig } from '../util';
+import { ConfigUtil } from '../utils';
 const chalk = require('chalk');
 
 export class HookExecutor {
@@ -36,7 +36,7 @@ export class HookExecutor {
     }
 
     protected checkHooks(context: CliContext, properties: string[]): boolean {
-        const config = getBackendConfig(context.cfg);
+        const config = ConfigUtil.getBackendConfig(context.cfg);
         let current: any = config;
         for (const p of properties) {
             current = current[p];
