@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.1
+- fix(cli) 修复模板字符串格式错误
+- feat(cli-runtime) 优化消息提醒和退出机制
+
 ## 2.0.0
 
 - feat(*-adapter) 将构建部署相关逻辑抽象为独立的组件 *-plugin，以方便复用
