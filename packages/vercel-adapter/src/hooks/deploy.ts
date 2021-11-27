@@ -1,4 +1,4 @@
-import { DeployContext, getProjectHomePath } from '@malagu/cli-service';
+import { DeployContext, PathUtil } from '@malagu/cli-service';
 import { join } from 'path';
 const chalk = require('chalk');
 import { spawnSync } from 'child_process';
@@ -6,7 +6,7 @@ const commandExists = require('command-exists');
 
 export default async (context: DeployContext) => {
     const { pkg, prod, runtime} = context;
-    const cwd = getProjectHomePath(runtime);
+    const cwd = PathUtil.getProjectHomePath(runtime);
     console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Vercel...`);
     try {
         await commandExists('vercel');

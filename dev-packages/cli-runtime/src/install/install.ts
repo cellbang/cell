@@ -1,15 +1,9 @@
 
-import * as program from 'commander';
-import { InstallManager } from './install-manager';
-
-export interface InstallOptions {
-    runtime?: string;
-    alias?: string;
-}
+import { InstallManager, InstallOptions } from './install-manager';
 
 export default async (options: InstallOptions) => {
     try {
-        const installManager = new InstallManager({ ...options, program });
+        const installManager = new InstallManager(options);
         await installManager.output();
         await installManager.render();
         await installManager.install();

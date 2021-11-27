@@ -1,5 +1,5 @@
 
-import { BACKEND_TARGET, CliContext, getWebpackConfig } from '@malagu/cli-common';
+import { BACKEND_TARGET, CliContext, ConfigUtil } from '@malagu/cli-common';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
@@ -10,7 +10,7 @@ export class BaseConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg } = context;
-        const sourceMapLoader = getWebpackConfig(cfg, target).sourceMapLoader || {};
+        const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
         sourceMapLoaderExclude = Object.keys(sourceMapLoaderExclude).map(key => sourceMapLoaderExclude[key]);
         sourceMapLoaderExclude = new RegExp(sourceMapLoaderExclude.join('|'));

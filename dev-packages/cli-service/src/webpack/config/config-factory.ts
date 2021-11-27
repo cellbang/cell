@@ -1,6 +1,6 @@
 
 import { BaseConfigFactory } from './base-config-factory';
-import { BACKEND_TARGET, FRONTEND_TARGET, getModules, support, CliContext } from '@malagu/cli-common';
+import { BACKEND_TARGET, FRONTEND_TARGET, ConfigUtil, CliContext } from '@malagu/cli-common';
 import { HookExecutor } from '../../hooks';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
@@ -48,12 +48,12 @@ export class ConfigFactory {
         ];
 
         for (const target of targets) {
-            if (!support(cfg, target)) {
+            if (!ConfigUtil.support(cfg, target)) {
                 continue;
             }
 
             console.log(chalk`\nmalagu {yellow.bold target} - {bold ${target}}`);
-            for (const module of getModules(pkg, target)) {
+            for (const module of ConfigUtil.getModules(pkg, target)) {
                 console.log(chalk`malagu {cyan.bold module} - ${ module.name }`);
             }
 

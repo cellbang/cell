@@ -24,12 +24,12 @@ export class ComponentPackageCollector {
         return this.sorted;
     }
 
-    protected matchDevDependency(dependency: string, mode: string[]): boolean {
+    protected isPlugin(pck: NodePackage): boolean {
 
-        if (mode.includes('remote') && !dependency.endsWith('plugin') && dependency !== '@malagu/cli-service') {
-            return false;
+        if (pck.keywords?.includes('malagu-plugin')) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     protected collectPackages(pck: NodePackage, mode: string[]): void {
@@ -40,16 +40,14 @@ export class ComponentPackageCollector {
         // eslint-disable-next-line guard-for-in
         for (const dependency in pck.dependencies) {
             const versionRange = pck.dependencies[dependency]!;
-            this.collectPackage(dependency, versionRange, mode);
+            this.collectPackage(dependency, versionRange, mode, false);
         }
 
         if (this.pkg.pkg.name === pck.name) {
             // eslint-disable-next-line guard-for-in
             for (const dependency in pck.devDependencies) {
-                if (this.matchDevDependency(dependency, mode)) {
-                    const versionRange = pck.devDependencies[dependency]!;
-                    this.collectPackage(dependency, versionRange, mode);
-                }
+                const versionRange = pck.devDependencies[dependency]!;
+                this.collectPackage(dependency, versionRange, mode, true);
             }
         }
     }
@@ -62,7 +60,7 @@ export class ComponentPackageCollector {
         this.parent = current;
     }
 
-    protected collectPackage(name: string, versionRange: string, mode: string[]): void {
+    protected collectPackage(name: string, versionRange: string, mode: string[], dev: boolean): void {
         if (this.visited.has(name)) {
             return;
         }
@@ -80,7 +78,7 @@ export class ComponentPackageCollector {
             return;
         }
         const pck: NodePackage = readJsonFile(packagePath);
-        if (RawComponentPackage.is(pck)) {
+        if (RawComponentPackage.is(pck) && (this.pkg.dev || (!dev || this.isPlugin(pck)))) {
             pck.version = versionRange;
             pck.malaguComponent = {} as any;
             this.componentPackageLoader.load(pck, mode);

@@ -1,6 +1,6 @@
 import { load, dump } from 'js-yaml';
 import { readFileSync, existsSync, ensureFileSync, writeFileSync } from 'fs-extra';
-import { getMalaguHomePath } from '../util';
+import { PathUtil } from '../utils';
 import * as path from 'path';
 import { DEFAULT_SETTINGS, Settings } from './settings-protocol';
 import mergeWith = require('lodash.mergewith');
@@ -8,7 +8,7 @@ import { customizer } from '../package/package-protocol';
 
 export namespace SettingsUtil {
     export function getSettingsPath() {
-        return path.join(getMalaguHomePath(), 'settings.yml');
+        return path.join(PathUtil.getMalaguHomePath(), 'settings.yml');
     }
 
     function doGetSettings(): Settings {

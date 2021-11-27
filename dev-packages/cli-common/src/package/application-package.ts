@@ -10,7 +10,7 @@ import mergeWith = require('lodash.mergewith');
 
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
-import { getRuntimePath } from '../util';
+import { PathUtil } from '../utils';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -18,6 +18,7 @@ import { getRuntimePath } from '../util';
 
 export class ApplicationPackage {
     readonly projectPath: string;
+    readonly dev: boolean;
     readonly log: ApplicationLog;
     readonly error: ApplicationLog;
     protected componentPackageLoader = new ComponentPackageLoader(this);
@@ -27,6 +28,7 @@ export class ApplicationPackage {
         protected readonly options: ApplicationPackageOptions
     ) {
         this.projectPath = options.projectPath;
+        this.dev = options.dev;
         this.log = options.log || console.log.bind(console);
         this.error = options.error || console.error.bind(console);
     }
@@ -82,6 +84,7 @@ export class ApplicationPackage {
     protected _componentPackages: ComponentPackage[] | undefined;
     protected _webpackHookModules: Module[] | undefined;
     protected _configHookModules: Module[] | undefined;
+    protected _propsHookModules: Module[] | undefined;
     protected _cliHookModules: Module[] | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
@@ -213,6 +216,13 @@ export class ApplicationPackage {
         return this._configHookModules;
     }
 
+    get propsHookModules() {
+        if (!this._propsHookModules) {
+            this._propsHookModules = this.computeModules('propsHooks');
+        }
+        return this._propsHookModules;
+    }
+
     get buildHookModules() {
         if (!this._buildHookModules) {
             this._buildHookModules = this.computeModules('buildHooks');
@@ -306,7 +316,7 @@ export class ApplicationPackage {
      */
     get resolveModule(): ApplicationModuleResolver {
         if (!this._moduleResolver) {
-            const resolutionPaths = [this.packagePath || `${getRuntimePath(this.options.runtime)}/package.json`];
+            const resolutionPaths = [this.packagePath || `${PathUtil.getRuntimePath(this.options.runtime)}/package.json`];
             const cwdPackagePath = `${process.cwd()}/package.json`;
             if (cwdPackagePath !== this.packagePath) {
                 resolutionPaths.push(cwdPackagePath);

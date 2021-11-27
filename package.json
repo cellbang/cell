@@ -48,6 +48,7 @@
   "workspaces": [
     "dev-packages/*",
     "packages/*",
+    "plugins/*",
     "examples/*"
   ]
 }

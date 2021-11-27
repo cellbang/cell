@@ -1,12 +1,12 @@
 
-import { getConfig, CliContext } from '@malagu/cli-common';
+import { ConfigUtil, CliContext } from '@malagu/cli-common';
 import * as path from 'path';
 import * as WebpackChain from 'webpack-chain';
 
 export class EntryConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg, dev, entry: e } = context;
-        const c = getConfig(cfg, target);
+        const c = ConfigUtil.getConfig(cfg, target);
         let { entry, devEntry } = c;
         delete c.entry;
         delete c.devEntry;

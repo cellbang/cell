@@ -3,7 +3,6 @@ import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
 import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env';
-import { CliContext } from '../context';
 
 export class SpawnError extends Error {
     constructor(message: string, public stdout: any, public stderr: any) {
@@ -46,31 +45,24 @@ export function spawnProcess(command: string, args: string[], options: any) {
     });
 }
 
-export function getPackager(packagerIdOrCliContext: string | CliContext): NPM | Yarn {
+export function getPackager(packagerId?: 'npm' | 'yarn', cwd = process.cwd()): NPM | Yarn {
     const registeredPackagers = {
         npm: new NPM(),
         yarn: new Yarn()
     };
-    let packagerId: string;
-    if (typeof packagerIdOrCliContext !== 'string') {
-        const cwd = packagerIdOrCliContext.pkg.projectPath;
-        packagerId = packagerIdOrCliContext.cfg.rootConfig.malagu.packager;
-        if (!packagerId) {
-            if (hasProjectYarn(cwd)) {
-                packagerId = 'yarn';
-            } else if (hasProjectNpm(cwd)) {
-                packagerId = 'npm';
-            } else if (hasYarn()) {
-                packagerId = 'yarn';
-            } else {
-                packagerId = 'npm';
-            }
+    if (!packagerId) {
+        if (hasProjectYarn(cwd)) {
+            packagerId = 'yarn';
+        } else if (hasProjectNpm(cwd)) {
+            packagerId = 'npm';
+        } else if (hasYarn()) {
+            packagerId = 'yarn';
+        } else {
+            packagerId = 'npm';
         }
-    } else {
-        packagerId = packagerIdOrCliContext;
     }
     if (packagerId in registeredPackagers) {
-        return (registeredPackagers as any)[packagerId];
+        return registeredPackagers[packagerId];
     }
     const message = `Could not find packager '${packagerId}'`;
     console.log(`ERROR: ${message}`);
