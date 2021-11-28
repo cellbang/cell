@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.0.4
+- fix(web) Upgrade class-transformer to v0.5.1
+
 ## 2.0.3
 - fix(cli) 修复模板字符串格式错误
 - feat(cli-runtime) 优化消息提醒和退出机制
