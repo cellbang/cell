@@ -74,5 +74,19 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    {
+        name: 'express',
+        useRuntime: 'default',
+        useMode: [ 'node' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"express":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
     }
 ];

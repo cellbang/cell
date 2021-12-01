@@ -187,6 +187,9 @@
       ],
       "@malagu/static-plugin/*": [
         "dev-packages/static-plugin/*"
+      ],
+      "@malagu/node-plugin/lib/*": [
+        "plugins/node-plugin/src/*"
       ]
     }
   },

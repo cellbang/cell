@@ -1,0 +1,1 @@
+# Malagu - Node Plugin Component

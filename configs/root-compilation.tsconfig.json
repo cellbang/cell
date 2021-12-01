@@ -147,6 +147,9 @@
     },
     {
       "path": "../dev-packages/frameworks/compile.tsconfig.json"
+    },
+    {
+      "path": "../plugins/node-plugin/compile.tsconfig.json"
     }
   ]
 }

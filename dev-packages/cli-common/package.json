@@ -53,6 +53,5 @@
   },
   "devDependencies": {
     "@malagu/ext-scripts": "2.0.4"
-  },
-  "gitHead": "07929cacd0333a8844381cfb2ba3eded3bae8b25"
+  }
 }
