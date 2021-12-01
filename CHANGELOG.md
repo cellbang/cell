@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.0.5
+- feat(node-plugin) add `@malagu/node-plugin` compnent
+
 ## 2.0.4
 - fix(web) Upgrade class-transformer to v0.5.1
 
