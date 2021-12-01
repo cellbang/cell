@@ -15,7 +15,8 @@
     "@malagu/scf-plugin": "latest",
     "@malagu/fc-plugin": "latest",
     "@malagu/lambda-plugin": "latest",
-    "@malagu/static-plugin": "latest"
+    "@malagu/static-plugin": "latest",
+    "@malagu/node-plugin": "latest"
   },
   "devDependencies": {
   }

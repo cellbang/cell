@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.5
+## 2.0.6
 - feat(node-plugin) add `@malagu/node-plugin` compnent
 
 ## 2.0.4

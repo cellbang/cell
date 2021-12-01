@@ -1,4 +1,3 @@
-import { ApplicationPackage } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
 import { homedir } from 'os';
@@ -8,11 +7,11 @@ export namespace PathUtil {
         return path.join(getProjectHomePath(runtime), target);
     }
 
-    export function getBackendProjectHomePath(pkg: ApplicationPackage, runtime?: string) {
+    export function getBackendProjectHomePath(runtime?: string) {
         return getProjectHomePathForTarget(BACKEND_TARGET, runtime);
     }
 
-    export function getFrontendProjectHomePath(pkg: ApplicationPackage, runtime?: string) {
+    export function getFrontendProjectHomePath(runtime?: string) {
         return getProjectHomePathForTarget(FRONTEND_TARGET, runtime);
     }
 
