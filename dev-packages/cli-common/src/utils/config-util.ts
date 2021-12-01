@@ -66,7 +66,7 @@ export namespace ConfigUtil {
 
     export function support(cfg: ApplicationConfig, target: string) {
         const targets = cfg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
-        return (cfg.pkg as any)[`${target}Modules`].length > 0 && targets.includes(target);
+        return targets.includes(target);
     }
 
     export function supportBackend(cfg: ApplicationConfig) {

@@ -12,10 +12,13 @@ const nodePathList = (process.env.NODE_PATH || '')
 export class ComponentConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg, dev, runtime } = context;
-        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).workboxWebpackPlugin;
-        const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
         const modules = target === FRONTEND_TARGET ? pkg.frontendModules : pkg.backendModules;
         const staticModules = target === FRONTEND_TARGET ? pkg.frontendStaticModules : pkg.backendStaticModules;
+        if (modules.length === 0 && staticModules.length === 0) {
+            return;
+        }
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).workboxWebpackPlugin;
+        const registed = pluginConfig && (!dev || pluginConfig.generateInDevMode);
         config
             .resolveLoader
                 .modules

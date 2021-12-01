@@ -12,10 +12,6 @@ export class BuildManager {
     }
 
     async build(): Promise<void> {
-        if (this.ctx.configurations.length === 0) {
-            throw new Error('No malagu module found.');
-        }
-
         const buildCommand: string = this.ctx.framework?.settings.buildCommand;
         if (buildCommand) {
             const args = buildCommand.split(/\s+/);
