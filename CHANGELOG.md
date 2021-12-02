@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.0.7
+## 2.0.8
 - feat(node-plugin) add `@malagu/node-plugin` compnent
 - feat(scf-plugin) 优化 API 网关路由
 - feat(scf-plugin) optimize API gateway routing
