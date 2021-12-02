@@ -35,7 +35,7 @@ export default async (context: CliContext) => {
     await createOrUpdateService(serviceName, service);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectHomePath(runtime), functionMeta.codeUri);
+    const zip = await codeLoader.load(PathUtil.getProjectDistPath(runtime), functionMeta.codeUri);
     delete functionMeta.codeUri;
     await createOrUpdateFunction(functionName, functionMeta, zip);
 

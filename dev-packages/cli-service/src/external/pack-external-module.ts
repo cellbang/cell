@@ -205,7 +205,8 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     // Read plugin configuration
     const packageForceIncludes = includes.forceInclude || [];
     const packageForceExcludes = includes.forceExclude || [];
-    const packagePath = includes.packagePath && join(pkg.projectPath, includes.packagePath) || pkg.packagePath;
+    const packageForceIncludeAll = includes.forceIncludeAll;
+    const packagePath = includes.packagePath && join(process.cwd(), includes.packagePath) || join(process.cwd(), 'package.json');
     const packageScripts = scripts.reduce((accumulator, script, index) => {
         accumulator[`script${index}`] = script;
         return accumulator;
@@ -213,16 +214,23 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     {}
     );
 
-    const packager = getPackager(context.cfg.rootConfig.packager, context.pkg.projectPath);
+    const packager = getPackager(context.cfg.rootConfig.packager, process.cwd());
 
     const sectionNames = packager.copyPackageSectionNames;
     const packageJson = await readJSON(packagePath);
+    if (packageForceIncludeAll) {
+        for (const d of Object.keys(packageJson.dependencies)) {
+            if (!packageForceIncludes.includes(d)) {
+                packageForceIncludes.push(d);
+            }
+        }
+    }
     const packageSections = pick(packageJson, sectionNames);
     if (!isEmpty(packageSections)) {
         console.log(`Using package.json sections ${Object.keys(packageSections).join(', ')}`);
     }
 
-    const dependencyGraph = await packager.getProdDependencies(pkg.projectPath, 1);
+    const dependencyGraph = await packager.getProdDependencies(process.cwd(), 1);
 
     const problems = dependencyGraph.problems || [];
     if (verbose && !isEmpty(problems)) {

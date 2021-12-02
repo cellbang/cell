@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.1.0
+
+- feat(frameworks) 支持 expressjs、koajs、nestjs 框架部署
+- feat(cli-service) 优化构建输出目录结构
+
+- feat(frameworks) supports expressjs, koajs, nestjs framework deployment
+- feat(cli-service) optimize the structure of the output directory structure
+
 ## 2.0.9
 
 - fix(scf-plugin) fix InvalidParameter.FormatError

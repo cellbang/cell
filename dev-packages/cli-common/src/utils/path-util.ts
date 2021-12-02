@@ -3,6 +3,21 @@ import * as path from 'path';
 import { homedir } from 'os';
 
 export namespace PathUtil {
+    export function getProjectDistPathForTarget(target: string, runtime?: string) {
+        return path.join(getProjectDistPath(runtime), target);
+    }
+
+    export function getProjectDistPath(runtime?: string) {
+        return path.join(getProjectHomePath(runtime), 'dist');
+    }
+
+    export function getBackendProjectDistPath(runtime?: string) {
+        return getProjectDistPathForTarget(BACKEND_TARGET, runtime);
+    }
+
+    export function getFrontendProjectDistPath(runtime?: string) {
+        return getProjectDistPathForTarget(FRONTEND_TARGET, runtime);
+    }
     export function getProjectHomePathForTarget(target: string, runtime?: string) {
         return path.join(getProjectHomePath(runtime), target);
     }

@@ -9,7 +9,7 @@ export class OutputConfigFactory {
         if (output) {
             PathUtil.setProjectHomePath(path.join(process.cwd(), output));
         }
-        const outputPath = path.join(PathUtil.getProjectHomePathForTarget(target, runtime), 'dist');
+        const outputPath = path.join(PathUtil.getProjectDistPathForTarget(target, runtime));
 
         config.output.path(outputPath);
 

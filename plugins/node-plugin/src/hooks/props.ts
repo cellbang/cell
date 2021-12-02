@@ -5,7 +5,7 @@ import { join } from 'path';
 export default async (context: PropsContext) => {
     const { props, target } = context;
     const cwd = process.cwd();
-    const entries = [ 'app.ts', 'src/app.ts', 'app.js', 'src/app.ts', 'index.ts', 'src/index.ts', 'index.js', 'src/index.js' ]
+    const entries = [ 'app.ts', 'src/app.ts', 'app.js', 'src/app.js', 'main.ts', 'src/main.ts', 'main.js', 'src/main.js', 'index.ts', 'src/index.ts', 'index.js', 'src/index.js' ]
     if (target === BACKEND_TARGET) {
         if (!props.entry) {
             for (const entry of entries) {
