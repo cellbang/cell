@@ -1,4 +1,4 @@
-import { CliContext, PathUtil } from '@malagu/cli-common';
+import { CliContext, ConfigUtil, PathUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
 import * as ora from 'ora';
 import * as traverse from 'traverse';
@@ -15,6 +15,8 @@ let clientConfig: any;
 
 export default async (context: CliContext) => {
     const { cfg, pkg, runtime } = context;
+
+    const { stage } = ConfigUtil.getBackendConfig(cfg);
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const faasConfig = cloudConfig.faas;
@@ -74,7 +76,7 @@ export default async (context: CliContext) => {
             updateApiEnvironmentStrategy(serviceId, apiId, api, strategy);
         }
 
-        await releaseService(serviceId, release);
+        await releaseService(serviceId, release, stage);
 
     }
     console.log('Deploy finished');
@@ -612,9 +614,9 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
         `${customDomain.protocol.includes('https') ? 'https' : 'http'}://${customDomain.name}`)}`);
 }
 
-async function releaseService(serviceId: string, release: any) {
+async function releaseService(serviceId: string, release: any, stage: string) {
     const apiClient = getApiClient();
-    await spinner(chalk`Release {yellow.bold ${release.environmentName}} environment`, async () => {
+    await spinner(chalk`Release {yellow.bold ${stage}} environment`, async () => {
         const releaseServiceRequest: any = {};
         releaseServiceRequest.ServiceId = serviceId;
         releaseServiceRequest.EnvironmentName = release.environmentName;

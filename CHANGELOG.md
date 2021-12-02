@@ -1,7 +1,9 @@
 # Change Log
 
-## 2.0.6
+## 2.0.7
 - feat(node-plugin) add `@malagu/node-plugin` compnent
+- feat(scf-plugin) 优化 API 网关路由
+- feat(scf-plugin) optimize API gateway routing
 
 ## 2.0.4
 - fix(web) Upgrade class-transformer to v0.5.1

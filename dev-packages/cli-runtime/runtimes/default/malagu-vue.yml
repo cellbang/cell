@@ -1,5 +1,0 @@
-stage: prod
-backend:
-  malagu:
-    server:
-      path: /
