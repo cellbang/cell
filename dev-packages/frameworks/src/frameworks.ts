@@ -88,5 +88,33 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    {
+        name: 'koa',
+        useRuntime: 'default',
+        useMode: [ 'node' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"koa":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'nest',
+        useRuntime: 'default',
+        useMode: ['node', 'unpackage'],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"@nestjs\\/core":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
     }
 ];

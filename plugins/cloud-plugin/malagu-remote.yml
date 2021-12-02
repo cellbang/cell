@@ -4,9 +4,9 @@ malagu:
     faas:
       function:
         name: ${pkg.name|replace('@', '')|replace('/', '-')}
-        handler: backend/dist/index.handler
+        handler: backend/index.handler
         codeUri:
-          exclude: malagu.yml
+          exclude: ${'malagu.*yml$'|regexp}
         memorySize: 512
         timeout: 15
       alias:

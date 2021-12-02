@@ -1,4 +1,4 @@
-import { ConfigurationContext, FRONTEND_TARGET, WebpackContext, PathUtil } from '@malagu/cli-service';
+import { ConfigurationContext, WebpackContext, PathUtil } from '@malagu/cli-service';
 import { join } from 'path';
 const rimraf = require('rimraf');
 
@@ -11,7 +11,7 @@ export default async (context: WebpackContext) => {
     if (config && !projectHomePath.startsWith(process.cwd())) {
         if (framework) {
             const CopyPlugin = require('copy-webpack-plugin');
-            const to = join(config.output.get('path'), '..', '..', FRONTEND_TARGET, 'dist');
+            const to = PathUtil.getFrontendProjectDistPath(runtime);
             rimraf.sync(to);
             config
                 .plugin('copyFrontend')

@@ -4,7 +4,7 @@ malagu:
     faas:
       function:
         type: HTTP
-        bootstrap: /var/lang/node12/bin/node backend/dist/index.js
+        bootstrap: /var/lang/node12/bin/node backend/index.js
       apiGateway:
         api:
           serviceScfFunctionType: HTTP

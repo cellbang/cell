@@ -8,19 +8,19 @@ frontend:
     vercel:
       config:
         builds:
-          - src: 'frontend/dist/**'
+          - src: 'frontend/**'
             use: '@now/static'
         routes:
           - src: /(.*)
-            dest: frontend/dist/$1
+            dest: frontend/$1
 
 backend:
   malagu:
     vercel:
       config:
         builds:
-          - src: 'backend/dist/**'
+          - src: 'backend/**'
             use: '@now/node'
         routes:
           - src: /api
-            dest: backend/dist/index.js
+            dest: backend/index.js

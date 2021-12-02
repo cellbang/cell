@@ -7,7 +7,7 @@ malagu:
     faas:
       function:
         runtime: custom
-        bootstrap: 'node backend/dist/index.js'
+        bootstrap: 'node backend/index.js'
       trigger:
         name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}
         qualifier: ${malagu.cloud.faas.alias.name}
