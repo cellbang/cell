@@ -4,16 +4,16 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.0.7",
+  "version": "2.0.8",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.0.7",
-    "@malagu/mvc": "2.0.7",
-    "@malagu/scf-adapter": "2.0.7"
+    "@malagu/core": "2.0.8",
+    "@malagu/mvc": "2.0.8",
+    "@malagu/scf-adapter": "2.0.8"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
