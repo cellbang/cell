@@ -12,7 +12,7 @@ malagu:
           environmentName: release
           desc: 'Released By Malagu'
         service:
-          name: ${malagu.cloud.faas.function.name}_${stage|eval}
+          name: ${malagu.cloud.faas.function.name|replace('-', '_')}_${stage|eval}
           protocol: http&https
         api:
           name: ${malagu.cloud.faas.function.name}

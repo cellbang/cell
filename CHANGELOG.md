@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.9
+
+- fix(scf-plugin) fix InvalidParameter.FormatError
+
 ## 2.0.8
 - feat(node-plugin) add `@malagu/node-plugin` compnent
 - feat(scf-plugin) 优化 API 网关路由
