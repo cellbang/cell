@@ -6,7 +6,7 @@ const commandExists = require('command-exists');
 
 export default async (context: DeployContext) => {
     const { pkg, prod, runtime} = context;
-    const cwd = PathUtil.getProjectHomePath(runtime);
+    const cwd = PathUtil.getProjectDistPath(runtime);
     console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Vercel...`);
     try {
         await commandExists('vercel');

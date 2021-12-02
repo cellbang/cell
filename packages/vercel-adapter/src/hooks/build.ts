@@ -18,10 +18,10 @@ export default async (context: BuildContext) => {
     if (!ConfigurationContext.hasFrontendConfiguration(configurations)) {
         vercelConfig.routes.push({
             src: '/.*',
-            dest: 'backend/dist/index.js'
+            dest: 'backend/index.js'
         });
     }
 
-    const destDir = resolve(PathUtil.getProjectHomePath(runtime), 'vercel.json');
+    const destDir = resolve(PathUtil.getProjectDistPath(runtime), 'vercel.json');
     await writeJSON(destDir, vercelConfig, { spaces: 2 });
 };

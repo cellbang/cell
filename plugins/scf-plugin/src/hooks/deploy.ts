@@ -48,7 +48,7 @@ export default async (context: CliContext) => {
     await createOrUpdateNamespace(namespace);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectHomePath(runtime), functionMeta.codeUri);
+    const zip = await codeLoader.load(PathUtil.getProjectDistPath(runtime), functionMeta.codeUri);
     await createOrUpdateFunction(functionMeta, zip);
 
     const functionVersion = await publishVersion(namespace.name, functionName);

@@ -10,6 +10,7 @@ export class BaseConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg } = context;
+        const includeModules = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET).includeModules;
         const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
         sourceMapLoaderExclude = Object.keys(sourceMapLoaderExclude).map(key => sourceMapLoaderExclude[key]);
@@ -71,17 +72,29 @@ export class BaseConfigFactory {
 
         if (target === BACKEND_TARGET) {
             const allowlist = pkg.componentPackages.map(cp => new RegExp(cp.name));
+            const externals = [nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(pkg.projectPath, './node_modules')
+            }), nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(pkg.projectPath, '../node_modules')
+            }), nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(pkg.projectPath, '../../node_modules')
+            }), nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(process.cwd(), './node_modules')
+            }), nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(process.cwd(), '../node_modules')
+            }), nodeExternals({
+                allowlist,
+                modulesDir: path.resolve(process.cwd(), '../../node_modules')
+            })];
+
             config
                 .target('node')
-                .externals(dev ? [nodeExternals({
-                    allowlist,
-                    modulesDir: path.resolve(pkg.projectPath, '../node_modules')
-                }), nodeExternals({
-                    allowlist
-                }), nodeExternals({
-                    allowlist,
-                    modulesDir: path.resolve(pkg.projectPath, '../../node_modules')
-                })] : [])
+                .externals(dev ? externals : includeModules?.forceIncludeAll ? externals : [])
                 .node
                     .merge({
                         __dirname: false,
@@ -89,7 +102,8 @@ export class BaseConfigFactory {
                     })
                 .end()
                 .merge({
-                    devtool:  dev ? 'eval-cheap-module-source-map' : 'nosources-source-map'
+                    devtool:  dev ? 'eval-cheap-module-source-map' : 'nosources-source-map',
+                    externalsPresets: { node: true }
                 });
         } else {
             config

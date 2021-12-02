@@ -28,7 +28,7 @@ export class DefaultCodeLoader implements CodeLoader {
             const fullPath = join(codeDir, fileName);
             if (!codeUri?.include || !this.match(codeUri.include, fullPath)) {
                 if (codeUri?.exclude && this.match(codeUri.exclude, fullPath)) {
-                    return;
+                    continue;
                 }
             }
 

@@ -1,5 +1,5 @@
 
-import { FRONTEND_TARGET, CONFIG_FILE, ConfigUtil, CliContext, PathUtil } from '@malagu/cli-common';
+import { FRONTEND_TARGET, ConfigUtil, CliContext, PathUtil } from '@malagu/cli-common';
 import * as path from 'path';
 import { ensureDirSync, writeFileSync } from 'fs-extra';
 import { dump } from 'js-yaml';
@@ -55,17 +55,17 @@ export class ComponentConfigConfigFactory {
         const c = ConfigUtil.getConfig(cfg, target);
         const source = `module.exports.config = ${JSON.stringify(c)};`;
 
-        const homePath = PathUtil.getProjectHomePathForTarget(target, runtime);
-        ensureDirSync(homePath);
-        const configPath = path.join(homePath, CONFIG_FILE);
-        writeFileSync(configPath, dump(c), { encoding: 'utf8' });
+        const distPath = PathUtil.getProjectDistPath(runtime);
+        ensureDirSync(distPath);
+        const configPath = path.join(distPath, `malagu.${target}.yml`);
+        writeFileSync(configPath, dump(c, { skipInvalid: true }), { encoding: 'utf8' });
         config
             .module
                 .rule('config')
                     .test(/core[\\/]lib[\\/]common[\\/]config[\\/]dynamic-config\.js$/)
                     .use('config-loader')
                         .loader('config-loader')
-                        .options( {
+                        .options({
                             source
                         });
     }
