@@ -45,5 +45,6 @@
     "@malagu/ext-scripts": "2.0.9",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
-  }
+  },
+  "gitHead": "29768c7449248dd6d13afb783000a335719f90b9"
 }

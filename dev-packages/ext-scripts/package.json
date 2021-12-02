@@ -44,5 +44,6 @@
     "ext:test": "nyc mocha --opts ../../configs/mocha.opts \"./lib/**/*.*spec.js\"",
     "ext:test:watch": "mocha -w --opts ../../configs/mocha.opts \"./lib/**/*.*spec.js\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
-  }
+  },
+  "gitHead": "29768c7449248dd6d13afb783000a335719f90b9"
 }
