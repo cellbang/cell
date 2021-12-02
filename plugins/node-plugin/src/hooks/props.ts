@@ -10,7 +10,7 @@ export default async (context: PropsContext) => {
         if (!props.entry) {
             for (const entry of entries) {
                 if (existsSync(join(cwd, entry))) {
-                    props.entry = entry;
+                    props.entry = join(cwd, entry);
                     break;
                 }
             }

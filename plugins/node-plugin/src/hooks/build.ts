@@ -10,7 +10,7 @@ if (typeof app === 'object' && app.default) {
     target = app.default;
 }
 if (typeof target === 'function') {
-    if (typeof target.listen === 'funtion') {
+    if (typeof target.listen === 'function') {
         const server = target.listen(PORT);
         if (typeof server === 'object') {
             server.timeout = 0;
