@@ -1,4 +1,5 @@
-import { CliContext, PathUtil, ConfigUtil } from '@malagu/cli-common';
+import { ConfigUtil } from '@malagu/cli-common';
+import { BuildContext, ConfigurationContext } from '@malagu/cli-service';
 import { join } from 'path';
 import { renameSync, writeFileSync } from 'fs-extra';
 
@@ -10,18 +11,24 @@ if (typeof app === 'object' && app.default) {
 }
 if (typeof target === 'function') {
     if (typeof target.listen === 'funtion') {
-        target.listen(PORT);
+        const server = target.listen(PORT);
+        if (typeof server === 'object') {
+            server.timeout = 0;
+            server.keepAliveTimeout = 0;
+        }
     } else {
         target(PORT);
     }
 }
 `;
 
-export default async (context: CliContext) => {
-    const { cfg, runtime } = context;
-    const port = ConfigUtil.getBackendMalaguConfig(cfg).server?.port || 3000;
-    const oldIndexPath = join(PathUtil.getBackendProjectHomePath(runtime), 'index.js');
-    const newIndexPath = join(PathUtil.getBackendProjectHomePath(runtime), '_index.js');
+export default async (context: BuildContext) => {
+    const { cfg, configurations } = context;
+    const configuration = ConfigurationContext.getBackendConfiguration(configurations);
+    const outputPath = configuration?.output.get('path');
+    const port = ConfigUtil.getBackendMalaguConfig(cfg).server?.port || 9000;
+    const oldIndexPath = join(outputPath, 'index.js');
+    const newIndexPath = join(outputPath, '_index.js');
     renameSync(oldIndexPath, newIndexPath);
     writeFileSync(oldIndexPath, entryContent.replace(/PORT/g, port), { encoding: 'utf8' });
 };

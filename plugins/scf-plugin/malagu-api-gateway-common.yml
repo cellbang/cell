@@ -1,7 +1,3 @@
-backend:
-  malagu:
-    server:
-      path: /${malagu.cloud.faas.function.name}/
 malagu:
   cloud:
     faas:
@@ -13,10 +9,10 @@ malagu:
         isDefaultMapping: true
       apiGateway:
         release:
-          environmentName: "${stage|eval == 'prod' ? 'release' : stage|eval == 'pre' ? 'prepub' :  stage }"
+          environmentName: release
           desc: 'Released By Malagu'
         service:
-          name: malagu
+          name: ${malagu.cloud.faas.function.name}_${stage|eval}
           protocol: http&https
         api:
           name: ${malagu.cloud.faas.function.name}
@@ -30,7 +26,7 @@ malagu:
           serviceWebsocketTransportFunctionNamespace: ${malagu.cloud.faas.namespace.name}
           serviceWebsocketTransportFunctionQualifier: ${malagu.cloud.faas.alias.name}
           requestConfig:
-            path: '${malagu.server.path}*'
+            path: /
             method: ANY
         usagePlan:
           name: ${malagu.cloud.faas.function.name}
@@ -38,8 +34,3 @@ malagu:
         strategy:
           # strategy: 5000
           environmentName: ${malagu.cloud.faas.apiGateway.release.environmentName}
-
-frontend:
-  malagu:
-    server:
-      path: "/${stage|eval == 'prod' ? '' : (malagu.cloud.faas.apiGateway.release.environmentName + '/')}${malagu.cloud.faas.function.name}/"
