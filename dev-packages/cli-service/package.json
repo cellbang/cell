@@ -21,7 +21,8 @@
   "files": [
     "lib",
     "src",
-    "templates"
+    "templates",
+    "malagu-unpackage.yml"
   ],
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

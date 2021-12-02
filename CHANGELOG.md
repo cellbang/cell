@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.1.0
+## 2.1.1
 
 - feat(frameworks) 支持 expressjs、koajs、nestjs 框架部署
 - feat(cli-service) 优化构建输出目录结构
