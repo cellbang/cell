@@ -8,10 +8,14 @@
   "module": "commonjs",
   "target": "es6",
   "hideGenerator": true,
-  "external-modulemap": ".*\/packages\/([\\w\\-_]+)\/",
+  "external-modulemap": ".*\/(packages|dev-packages|plugins)\/([\\w\\-_]+)\/",
   "name": "Malagu TypeDoc",
   "exclude": [
-    "**/+(dev-packages|examples|typings)/**/*",
-    "**/*spec.ts"
+    "**/+(examples|typings)/**/*",
+    "**/*spec.ts",
+    "packages/*/lib",
+    "plugins/*/lib",
+    "dev-packages/*/lib",
+    "**/node_modules"
   ]
 }
