@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.1.2
+
+- feat(cli+cloud-plugin) 支持 `malagu config --show` 显示完整配置信息
+- feat(cli-common) 组件配置配置文件支持 yml 和 yaml 两种后缀；模式文件也支持两种格式：`malagu.[mode].yml` 和 `malagu-[mode].yml`
+- feat(cli-common) 支持配置文件别名配置 `malagu config --config-file-alias deploy`，默认总会加载 malagu 别名的配置文件，如 malagu.yml，现在可以额外指定其他别名
+
 ## 2.1.1
 
 - feat(frameworks) 支持 expressjs、koajs、nestjs 框架部署

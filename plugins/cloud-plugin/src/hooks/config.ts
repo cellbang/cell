@@ -1,6 +1,7 @@
 import { CliContext } from '@malagu/cli-common';
 import { ConfigOptions, Profile } from './cloud-protocol';
 import { CloudUtils } from './utils';
+import { readFileSync, existsSync } from 'fs-extra';
 
 export default async (context: CliContext) => {
     const { cfg, options } = context;
@@ -15,6 +16,12 @@ export default async (context: CliContext) => {
         profile.token = opts.token || profile.token;
         await CloudUtils.saveProfile(profilePath, profile);
         return;
+    }
+    if (opts.show) {
+        const fullProfilePath = CloudUtils.getProfilePath(profilePath);
+        if (existsSync(fullProfilePath)) {
+            console.log(readFileSync(fullProfilePath, { encoding: 'utf8' }));
+        }
     }
     if (Object.keys(opts).length === 0) {
         console.log(`Config ${name} cloud account:`)
