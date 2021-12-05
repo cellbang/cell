@@ -1,7 +1,6 @@
 import { ApplicationPackage } from './application-package';
 import { customizer } from './package-protocol';
 import { load } from 'js-yaml';
-import { CONFIG_FILE } from '../constants';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
 import mergeWith = require('lodash.mergewith');
@@ -66,21 +65,45 @@ export class ComponentPackageLoader {
         return newMode.map(m => expressionHandler.evalSync(m, ctx));
     }
 
-    loadConfig(nodePackage: NodePackage, configFiles: string[], mode?: string) {
-        const configPath = mode ? `malagu-${mode}.yml` : CONFIG_FILE;
-        let fullConfigPath: string | undefined = undefined;
-
-        try {
-            if (this.pkg.isRoot(nodePackage)) {
-                if (existsSync(join(nodePackage.modulePath, configPath))) {
-                    fullConfigPath = join(nodePackage.modulePath, configPath);
-                }
+    protected parseConfigPaths(mode?: string): string[] {
+        const configFileAliases = [ 'malagu' ];
+        const configFileAlias = this.pkg.settings?.configFileAlias;
+        if (configFileAlias) {
+            configFileAliases.push(configFileAlias);
+        }
+        const paths: string[] = [];
+        for (const alias of configFileAliases) {
+            if (mode) {
+                paths.push(`${alias}.${mode}.yml`);
+                paths.push(`${alias}.${mode}.yaml`);
+                paths.push(`${alias}-${mode}.yml`);
+                paths.push(`${alias}-${mode}.yaml`);
             } else {
-                fullConfigPath = this.pkg.resolveModule(nodePackage.name + `/${configPath}`);
+                paths.push(`${alias}.yml`);
+                paths.push(`${alias}.yaml`);
             }
+        }
+        return paths;
+    }
 
-        } catch (err) {
-            // noop
+    loadConfig(nodePackage: NodePackage, configFiles: string[], mode?: string) {
+        const configPaths = this.parseConfigPaths(mode);
+        let fullConfigPath: string | undefined = undefined;
+        for (const configPath of configPaths) {
+            try {
+                if (this.pkg.isRoot(nodePackage)) {
+                    if (existsSync(join(nodePackage.modulePath, configPath))) {
+                        fullConfigPath = join(nodePackage.modulePath, configPath);
+                    }
+                } else {
+                    fullConfigPath = this.pkg.resolveModule(nodePackage.name + `/${configPath}`);
+                }
+                if (fullConfigPath) {
+                    break;
+                }
+            } catch (err) {
+                // noop
+            }
         }
         if (fullConfigPath) {
             configFiles.push(fullConfigPath);

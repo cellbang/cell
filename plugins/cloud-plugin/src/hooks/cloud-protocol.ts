@@ -36,4 +36,5 @@ export interface ConfigOptions {
     accessKeySecret?: string;
     region?: string;
     token?: string;
+    show?: boolean;
 }

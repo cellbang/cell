@@ -4,6 +4,7 @@ import { Dependencies, NodePackage, PublishedNodePackage, sortByKey } from './np
 import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage, customizer } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { Settings } from '../settings/settings-protocol';
 import { ComponentPackageLoader } from './component-package-loader';
 import { Module } from './package-protocol';
 import mergeWith = require('lodash.mergewith');
@@ -19,6 +20,7 @@ import { PathUtil } from '../utils';
 export class ApplicationPackage {
     readonly projectPath: string;
     readonly dev: boolean;
+    readonly settings?: Settings;
     readonly log: ApplicationLog;
     readonly error: ApplicationLog;
     protected componentPackageLoader = new ComponentPackageLoader(this);
@@ -29,6 +31,8 @@ export class ApplicationPackage {
     ) {
         this.projectPath = options.projectPath;
         this.dev = options.dev;
+        this.settings = options.settings;
+
         this.log = options.log || console.log.bind(console);
         this.error = options.error || console.error.bind(console);
     }

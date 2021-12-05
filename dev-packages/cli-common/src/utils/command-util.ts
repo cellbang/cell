@@ -19,7 +19,7 @@ export namespace CommandUtil {
         const mode = getMode(options, settings);
         const targets = getTargets(options);
         const prod = options.p || options.prod;
-        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), spinner, runtime, framework });
+        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), spinner, runtime, framework, settings });
     }
 
     function getArrayOptions(options: any, prop: string, shortProp: string): string[] {
