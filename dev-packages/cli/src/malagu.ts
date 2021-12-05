@@ -73,6 +73,8 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
         .command('config')
         .option('--frameworks-url [frameworksUrl]', 'frameworks url')
         .option('--frameworks-upstream-url [frameworksUpStreamUrl]', 'frameworks upstream url')
+        .option('--config-file-alias [configFileAlias]', 'config file alias')
+        .option('--show [show]', 'show properties details')
         .description('config properties')
         .action(options => {
             require('./config/config').default(context, { ...options });

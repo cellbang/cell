@@ -1,5 +1,6 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
 import { Command } from 'commander';
+import { Settings } from '../settings/settings-protocol';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 
@@ -15,6 +16,7 @@ export class ApplicationPackageOptions {
     readonly projectPath: string;
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
+    readonly settings?: Settings;
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;

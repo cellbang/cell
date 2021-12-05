@@ -7,6 +7,7 @@ export interface Settings {
         upstreamUrl?: string;
     }
     compileCommands?: string[];
+    configFileAlias?: string;
 }
 
 export const DEFAULT_SETTINGS = {

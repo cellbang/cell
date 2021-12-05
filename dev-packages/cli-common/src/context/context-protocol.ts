@@ -7,12 +7,14 @@ import { HookExecutor } from '../hook';
 import { ApplicationConfig } from '../package';
 import { Framework } from '@malagu/frameworks';
 import { ExpressionContext } from '../el';
+import { Settings } from '../settings/settings-protocol';
 
 export interface CliContext {
     program: Command;
     pkg: ApplicationPackage;
     cfg: ApplicationConfig;
     framework?: Framework;
+    settings?: Settings;
     [key: string]: any;
 }
 
