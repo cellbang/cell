@@ -1,6 +1,6 @@
 malagu:
   cloud:
-    name: alibaba
+    name: alibaba cloud
     profilePath: alibaba/profile.yml
     regions:
       - cn-qingdao

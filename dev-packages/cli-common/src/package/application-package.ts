@@ -90,6 +90,7 @@ export class ApplicationPackage {
     protected _configHookModules: Module[] | undefined;
     protected _propsHookModules: Module[] | undefined;
     protected _cliHookModules: Module[] | undefined;
+    protected _infoHookModules: Module[] | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
     get rootComponentPackage() {
@@ -204,6 +205,13 @@ export class ApplicationPackage {
             this._cliHookModules = this.computeModules('cliHooks');
         }
         return this._cliHookModules;
+    }
+
+    get infoHookModules() {
+        if (!this._infoHookModules) {
+            this._infoHookModules = this.computeModules('infoHooks');
+        }
+        return this._infoHookModules;
     }
 
     get initHookModules() {

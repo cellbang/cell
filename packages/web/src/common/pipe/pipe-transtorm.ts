@@ -2,7 +2,7 @@ import { Component, Value } from '@malagu/core';
 import { PipeTransform, ArgumentMetadata } from './pipe-protocol';
 import { ValidationErrors } from './validation-errors';
 import { validate } from 'class-validator';
-import { classToPlain, plainToClass } from 'class-transformer';
+import { instanceToPlain, plainToInstance } from 'class-transformer';
 
 @Component(PipeTransform)
 export class ValidationPipe implements PipeTransform<any> {
@@ -24,7 +24,7 @@ export class ValidationPipe implements PipeTransform<any> {
         const isNil = value !== originalValue;
         const isPrimitive = this.isPrimitive(value);
         this.stripProtoKeys(value);
-        let entity = plainToClass(
+        let entity = plainToInstance(
             argType,
             value,
             opts.transformOptions,
@@ -59,7 +59,7 @@ export class ValidationPipe implements PipeTransform<any> {
             return originalValue;
         }
         return Object.keys(opts.validatorOptions).length > 0
-            ? classToPlain(entity, opts.transformOptions)
+            ? instanceToPlain(entity, opts.transformOptions)
             : value;
     }
 

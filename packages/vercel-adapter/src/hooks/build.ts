@@ -1,27 +1,27 @@
-import { BuildContext, ConfigurationContext, ConfigUtil, PathUtil } from '@malagu/cli-service';
+import { BuildContext, FRONTEND_TARGET, BACKEND_TARGET, ConfigUtil, PathUtil } from '@malagu/cli-common';
 import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
 import * as merge from 'webpack-merge';
 
 export default async (context: BuildContext) => {
-    const { cfg, configurations, runtime } = context;
+    const { cfg, runtime } = context;
     let vercelConfig: any = {};
-    for (const c of configurations) {
-        const config = ConfigUtil.getMalaguConfig(cfg, c.get('name')).vercel.config;
-        if (ConfigurationContext.isBackendConfiguration(c)) {
-            vercelConfig = merge(config, vercelConfig);
-        } else {
-            vercelConfig = merge(vercelConfig, config);
-        }
-    }
 
-    if (!ConfigurationContext.hasFrontendConfiguration(configurations)) {
+    if (ConfigUtil.support(cfg, FRONTEND_TARGET)) {
+        const config = ConfigUtil.getFrontendMalaguConfig(cfg).vercel.config;
+        vercelConfig = merge(vercelConfig, config);
+    } else {
         vercelConfig.routes.push({
             src: '/.*',
             dest: 'backend/index.js'
         });
     }
 
-    const destDir = resolve(PathUtil.getProjectDistPath(runtime), 'vercel.json');
-    await writeJSON(destDir, vercelConfig, { spaces: 2 });
+    if (ConfigUtil.support(cfg, BACKEND_TARGET)) {
+        const config = ConfigUtil.getFrontendMalaguConfig(cfg).vercel.config;
+        vercelConfig = merge(config, vercelConfig);
+    }
+
+    const configPath = resolve(PathUtil.getProjectDistPath(runtime), 'vercel.json');
+    await writeJSON(configPath, vercelConfig, { spaces: 2 });
 };

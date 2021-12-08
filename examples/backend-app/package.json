@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@malagu/example-backend-app",
+  "name": "@malagu/example-backend-app2",
   "keywords": [
     "malagu-component"
   ],
@@ -13,12 +13,12 @@
   "dependencies": {
     "@malagu/core": "2.1.2",
     "@malagu/mvc": "2.1.2",
-    "@malagu/scf-adapter": "2.1.2"
+    "@malagu/fc-adapter": "2.1.2"
   },
   "devDependencies": {
     "@malagu/cli": "2.1.2",
     "@malagu/cli-service": "2.1.2",
-    "@malagu/scf-plugin": "2.1.2"
+    "@malagu/fc-plugin": "2.1.2"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

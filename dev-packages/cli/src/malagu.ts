@@ -22,6 +22,9 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         runtimeStrLine = '\n│';
         runtimeStrLine += chalk.yellow(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
     }
+    if (settings.banner) {
+        console.log(settings.banner.replace('{ version }', version).replace('{ runtime }', runtimeStrLine));
+    } else {
     console.log(`
                    ___
  /'\\_/\`\\          /\\_ \\
@@ -37,6 +40,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 │      Serverless Frist Development Framework      │${runtimeStrLine}
 ╰──────────────────────────────────────────────────╯
 `);
+    }
 
     spinner.start();
     const context = await CommandUtil.loadContext(settings, framework, runtime, undefined, spinner);
@@ -68,14 +72,20 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
         .action((name, template, options) => {
             require('./init/init').default({ name, template, outputDir: '.', ...options });
         });
+    program
+        .command('info')
+        .description('display information about application')
+        .action(options => {
+            require('./info/info').default(context, { ...options });
+        });
 
     program
         .command('config')
         .option('--frameworks-url [frameworksUrl]', 'frameworks url')
         .option('--frameworks-upstream-url [frameworksUpStreamUrl]', 'frameworks upstream url')
         .option('--config-file-alias [configFileAlias]', 'config file alias')
-        .option('--show [show]', 'show properties details')
-        .description('config properties')
+        .option('--show [show]', 'show properties for the application')
+        .description('configure properties for the application')
         .action(options => {
             require('./config/config').default(context, { ...options });
         });

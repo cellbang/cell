@@ -1,5 +1,3 @@
-backend: 
-  entry: '@malagu/lambda-adapter/lib/node/api-gateway-application-entry'
 malagu:
   cloud:
     faas:
@@ -21,7 +19,7 @@ malagu:
           connectionType: INTERNET
           integrationMethod: POST
           integrationType: AWS_PROXY
-          payloadFormatVersion: '1.0'
+          payloadFormatVersion: '2.0'
           timeoutInMillis: 30000
   server:
     path: /${stage}/

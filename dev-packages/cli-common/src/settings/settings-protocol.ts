@@ -8,6 +8,7 @@ export interface Settings {
     }
     compileCommands?: string[];
     configFileAlias?: string;
+    banner?: string;
 }
 
 export const DEFAULT_SETTINGS = {

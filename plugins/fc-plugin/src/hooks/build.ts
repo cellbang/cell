@@ -1,9 +1,9 @@
-import { CliContext, PathUtil } from '@malagu/cli-common';
+import { BuildContext, PathUtil } from '@malagu/cli-common';
 import { join } from 'path';
 import { writeFile } from 'fs-extra';
 import { CloudUtils } from '@malagu/cloud-plugin';
 
-export default async (context: CliContext) => {
+export default async (context: BuildContext) => {
     const { cfg, runtime } = context;
     const faasConfig = CloudUtils.getConfiguration(cfg).faas;
     if (faasConfig.function?.runtime === 'custom') {

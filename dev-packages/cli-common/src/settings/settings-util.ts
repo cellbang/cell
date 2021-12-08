@@ -14,7 +14,7 @@ export namespace SettingsUtil {
     function doGetSettings(): Settings {
         const settingsPath = getSettingsPath();
         if (existsSync(settingsPath)) {
-            const content = readFileSync(settingsPath, 'utf8');
+            const content = readFileSync(settingsPath, { encoding: 'utf8' });
             return load(content) || {};
         }
         return {};
