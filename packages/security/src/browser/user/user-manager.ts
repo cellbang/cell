@@ -64,7 +64,7 @@ export class UserManagerImpl implements UserManager {
         if (userStr) {
             this.userInfoSubject.next(JSON.parse(userStr));
         } else {
-            if (!await this.getUesrInfo()) {
+            if (!await this.getUserInfo()) {
                 if (this.loginRequired) {
                     this.openLoginPage();
                 }
@@ -92,7 +92,7 @@ export class UserManagerImpl implements UserManager {
         window.location.href = await this.pathResolver.resolve(this.logoutSuccessUrl.replace(/{redirect}/g, encodeURI(window.location.href)));
     }
 
-    async getUesrInfo(): Promise<User | undefined> {
+    async getUserInfo(): Promise<User | undefined> {
         const { url, method } = this.userInfoEndpoint;
         const { data } = await this.restOperations.request({ url: await this.pathResolver.resolve(url), method });
         this.userInfoSubject.next(data);
