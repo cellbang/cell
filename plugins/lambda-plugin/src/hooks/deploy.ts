@@ -1,11 +1,11 @@
-import { CliContext, PathUtil } from '@malagu/cli-common';
+import { CliContext, PathUtil, SpinnerUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
-import * as ora from 'ora';
 import * as delay from 'delay';
 import { v4 } from 'uuid';
 import { Lambda, ApiGatewayV2, IAM } from 'aws-sdk';
-import { CloudUtils, DefaultProfileProvider, Credentials } from '@malagu/cloud-plugin';
+import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
+import { createClients, getAlias, getApi, getApiMapping, getCustomDomain, getFunction, getIntegration, getRoute, getStage, getTrigger } from './utils';
 
 const chalk = require('chalk');
 const camelcaseKeys = require('camelcase-keys');
@@ -22,7 +22,11 @@ export default async (context: CliContext) => {
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
-    await createClients(region, credentials);
+    
+    const clients = await createClients(region, credentials);
+    lambdaClient = clients.lambdaClient;
+    apiGatewayClient = clients.apiGatewayClient;
+    iamClient = clients.iamClient;
 
     const { apiGateway, customDomain, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
@@ -62,32 +66,12 @@ export default async (context: CliContext) => {
         }
 
     }
-    console.log('Deploy finished');
     console.log();
 };
 
-async function createClients(region: string, credentials: Credentials) {
-    const clientConfig = {
-        region,
-        credentials: {
-            accessKeyId: credentials.accessKeyId,
-            secretAccessKey: credentials.accessKeySecret,
-            sessionToken: credentials.token
-        }
-    };
-    lambdaClient = new Lambda(clientConfig);
-    apiGatewayClient = new ApiGatewayV2(clientConfig);
-    iamClient = new IAM(clientConfig);
-}
-
 async function createTrigger(trigger: any) {
-
-    const listEventSourceMappingsRequest: Lambda.Types.ListEventSourceMappingsRequest = {
-        FunctionName: trigger.functionName,
-        MaxItems: 100
-    };
-    const result = await lambdaClient.listEventSourceMappings(listEventSourceMappingsRequest).promise();
-    const oldEventSourceMapping = result.EventSourceMappings?.find(e => e.EventSourceArn === trigger.eventSourceArn);
+    
+    const oldEventSourceMapping = await getTrigger(lambdaClient, trigger.functionName, trigger.eventSourceArn);
     if (oldEventSourceMapping) {
         const deleteEventSourceMappingRequest: Lambda.Types.DeleteEventSourceMappingRequest = {
             UUID: oldEventSourceMapping.UUID!
@@ -97,7 +81,7 @@ async function createTrigger(trigger: any) {
     }
     const createEventSourceMappingRequest: Lambda.Types.CreateEventSourceMappingRequest = camelcaseKeys(trigger, { pascalCase: true });
 
-    await spinner(`Set a ${trigger.name} Trigger`, async () => {
+    await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
         await lambdaClient.createEventSourceMapping(createEventSourceMappingRequest).promise();
     });
 }
@@ -181,15 +165,11 @@ function parseCreateFunctionRequest(functionMeta: any, code: ArrayBuffer) {
     return req;
 }
 
-function getFunction(functionName: string) {
-    return lambdaClient.getFunction({ FunctionName: functionName }).promise();
-}
-
 async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
 
-    try {
-        await getFunction(functionMeta.name);
-        await spinner(`Update ${functionMeta.name} function`, async () => {
+    const functionInfo = await getFunction(lambdaClient, functionMeta.name);
+    if (functionInfo) {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
             const updateFunctionCodeRequest: Lambda.Types.UpdateFunctionCodeRequest = {
                 FunctionName: functionMeta.name,
                 ZipFile: await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  })
@@ -200,17 +180,12 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
 
             await lambdaClient.updateFunctionConfiguration(parseUpdateFunctionConfigurationRequest(functionMeta)).promise();
         });
-    } catch (error) {
-        if (error.statusCode === 404) {
-            await spinner(`Create ${functionMeta.name} function`, async () => {
-                await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
-                    await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
-            });
-        } else {
-            throw error;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
+            await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
+                await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
+        });
     }
-
 }
 
 async function createRoleIfNeed(functionMeta: any, accountId: string, region: string) {
@@ -221,8 +196,8 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
             functionMeta.role = Role.Arn;
         } catch (error) {
             if (error.statusCode === 404) {
-                await spinner(`Create ${roleName} role`, async () => {
-                    await iamClient.createRole({
+                await SpinnerUtil.start(`Create ${roleName} role`, async () => {
+                    const { Role } = await iamClient.createRole({
                         RoleName: roleName,
                         AssumeRolePolicyDocument: JSON.stringify({
                             Version: '2012-10-17',
@@ -258,7 +233,12 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
                         }
                     )}).promise();
                     await iamClient.attachRolePolicy({ RoleName: roleName, PolicyArn: Policy?.Arn! }).promise();
-
+                    await new Promise<void>(r =>  {
+                        setTimeout(() => {
+                            r();
+                        }, 3000);
+                    });
+                    functionMeta.role = Role.Arn;
                 });
             } else {
                 throw error;
@@ -268,7 +248,7 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
 }
 
 async function publishVersion(functionName: string) {
-    const { functionVersion } = await spinner('Publish Version', async () => {
+    const { functionVersion } = await SpinnerUtil.start('Publish Version', async () => {
         await checkStatus(functionName);
         const { Version } = await lambdaClient.publishVersion({ FunctionName: functionName }).promise();
         return {
@@ -304,25 +284,17 @@ function parseUpdateAliasRequest(aliasMeta: any, functionVersion: string) {
 }
 
 async function createOrUpdateAlias(alias: any, functionVersion: string) {
-    const getAliasRequest: Lambda.Types.GetAliasRequest = {
-        FunctionName: alias.functionName,
-        Name: alias.name
-    };
-    try {
-        await lambdaClient.getAlias(getAliasRequest).promise();
-        await spinner(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
+    const aliasInfo = await getAlias(lambdaClient, alias.functionName, alias.name);
+    if (aliasInfo) {
+        await SpinnerUtil.start(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
             await checkStatus(alias.functionName);
             await lambdaClient.updateAlias(parseUpdateAliasRequest(alias, functionVersion)).promise();
         });
-    } catch (error) {
-        if (error.statusCode === 404) {
-            await spinner(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
-                await checkStatus(alias.functionName);
-                await lambdaClient.createAlias(parseCreateAliasRequest(alias, functionVersion)).promise();
-            });
-        } else {
-            throw error;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
+            await checkStatus(alias.functionName);
+            await lambdaClient.createAlias(parseCreateAliasRequest(alias, functionVersion)).promise();
+        });
     }
 }
 
@@ -414,18 +386,15 @@ function parseUpdateIntegrationRequest(integrationMeta: any, apiId: string, inte
 
 async function createOrUpdateApi(api: any, functionName: string, region: string, accountId: string) {
     const apiName = api.name;
-    const { Items } = await apiGatewayClient.getApis({ MaxResults: '500' }).promise();
-    const items = (Items || []).filter(item => item.Name === apiName);
+    const apiInfo = await getApi(apiGatewayClient, apiName);
     let result: ApiGatewayV2.UpdateApiResponse | ApiGatewayV2.CreateApiResponse;
-    if (items.length > 1) {
-        throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
-    } else if (items.length === 1) {
-        result = await spinner(`Update ${apiName} api`, async () => {
-            const apiId = items[0].ApiId!;
+    if (apiInfo) {
+        result = await SpinnerUtil.start(`Update ${apiName} api`, async () => {
+            const apiId = apiInfo.ApiId!;
             return apiGatewayClient.updateApi(parseUpdateApiRequest(api, apiId)).promise();
         });
     } else {
-        result = await spinner(`Create ${apiName} api`, () => apiGatewayClient.createApi(parseCreateApiRequest(api)).promise());
+        result = await SpinnerUtil.start(`Create ${apiName} api`, () => apiGatewayClient.createApi(parseCreateApiRequest(api)).promise());
         await lambdaClient.addPermission({
             FunctionName:  functionName,
             StatementId: 'malagu-apigateway',
@@ -439,19 +408,16 @@ async function createOrUpdateApi(api: any, functionName: string, region: string,
 }
 
 async function createOrUpdateIntegration(integrationMeta: any, apiId: string) {
-    const { Items } = await apiGatewayClient.getIntegrations({ ApiId: apiId, MaxResults: '100' }).promise();
-    const items = Items || [];
+    const integrationInfo = await getIntegration(apiGatewayClient, apiId);
     let result: ApiGatewayV2.UpdateIntegrationResult | ApiGatewayV2.CreateIntegrationResult;
-    if (items.length > 1) {
-        throw new Error(`There are two or more integrations in the api [${apiId}]`);
-    } else if (items.length === 1) {
-        const integrationId = items[0].IntegrationId!;
-        await spinner(`Update ${integrationId} integration`, async () => {
+    if (integrationInfo) {
+        const integrationId = integrationInfo.IntegrationId!;
+        await SpinnerUtil.start(`Update ${integrationId} integration`, async () => {
             result = await apiGatewayClient.updateIntegration(parseUpdateIntegrationRequest(integrationMeta, apiId, integrationId)).promise();
 
         });
     } else {
-        await spinner('Create integration', async () => {
+        await SpinnerUtil.start('Create integration', async () => {
             result = await apiGatewayClient.createIntegration(parseCreateIntegrationRequest(integrationMeta, apiId)).promise();
         });
     }
@@ -490,19 +456,15 @@ function parseUpdateRouteRequest(routeMeta: any, apiId: string, integrationId: s
 }
 
 async function createOrUpdateRoute(routeMeta: any, apiId: string, integrationId: string) {
-    const { Items } = await apiGatewayClient.getRoutes({ ApiId: apiId }).promise();
-    const items = Items || [];
+    const routeInfo = await getRoute(apiGatewayClient, apiId);
     let result: ApiGatewayV2.UpdateRouteResult | ApiGatewayV2.CreateRouteResult;
-    if (items.length > 1) {
-        throw new Error(`There are two or more routes in the api [${apiId}]`);
-    } else if (items.length === 1) {
-        const routeId = items[0].RouteId!;
-        await spinner(`Update route: ${routeMeta.routeKey}`, async () => {
+    if (routeInfo) {
+        const routeId = routeInfo.RouteId!;
+        await SpinnerUtil.start(`Update route: ${routeMeta.routeKey}`, async () => {
             result = await apiGatewayClient.updateRoute(parseUpdateRouteRequest(routeMeta, apiId, integrationId, routeId)).promise();
-
         });
     } else {
-        await spinner(`Create route: ${routeMeta.routeKey}`, async () => {
+        await SpinnerUtil.start(`Create route: ${routeMeta.routeKey}`, async () => {
             result = await apiGatewayClient.createRoute(parseCreateRouteRequest(routeMeta, apiId, integrationId)).promise();
         });
     }
@@ -554,19 +516,15 @@ function parseCreateDomainNameRequest(customDomainMeta: any) {
 }
 
 async function bindOrUpdateCustomDomain(customDomain: any) {
-    try {
-        await apiGatewayClient.getDomainName({ DomainName: customDomain.name }).promise();
-        await spinner(`Update ${customDomain.name} customDomain`, async () => {
+    const customDomainInfo = await getCustomDomain(apiGatewayClient, customDomain.name);
+    if (customDomainInfo) {
+        await SpinnerUtil.start(`Update ${customDomain.name} customDomain`, async () => {
             await apiGatewayClient.updateDomainName(parseUpdateDomainNameRequest(customDomain)).promise();
         });
-    } catch (error) {
-        if (error.statusCode === 404) {
-            await spinner(`Create ${customDomain.name} customDomain`, async () => {
-                await apiGatewayClient.createDomainName(parseCreateDomainNameRequest(customDomain)).promise();
-            });
-        } else {
-            throw error;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${customDomain.name} customDomain`, async () => {
+            await apiGatewayClient.createDomainName(parseCreateDomainNameRequest(customDomain)).promise();
+        });
     }
 
     console.log(chalk`    - Url: ${chalk.green.bold(`https://${customDomain.name}`)}`);
@@ -591,18 +549,14 @@ function parseUpdateApiMappingRequest(apiMappingMeta: any, domainName: string, a
 }
 
 async function createOrUpdateApiMapping(apiMapping: any, domainName: string, apiId: string, stageName: string) {
-    const { Items } = await apiGatewayClient.getApiMappings({ DomainName: domainName }).promise();
-    const items = Items || [];
-
-    if (items.length > 1) {
-        throw new Error(`There are two or more apiMapping named in the domainName [${domainName}]`);
-    } else if (items.length === 1) {
-        const apiMappingId = items[0].ApiMappingId!;
-        await spinner(`Update ${apiMappingId} api mapping  for ${domainName}`, async () => {
+    const apiMappingInfo = await getApiMapping(apiGatewayClient, domainName);
+    if (apiMappingInfo) {
+        const apiMappingId = apiMappingInfo.ApiMappingId!;
+        await SpinnerUtil.start(`Update ${apiMappingId} api mapping  for ${domainName}`, async () => {
             await apiGatewayClient.updateApiMapping(parseUpdateApiMappingRequest(apiMapping, domainName, apiId, stageName, apiMappingId)).promise();
         });
     } else {
-        await spinner(`Create api mapping for ${domainName}`, async () => {
+        await SpinnerUtil.start(`Create api mapping for ${domainName}`, async () => {
             await apiGatewayClient.createApiMapping(parseCreateApiMappingRequest(apiMapping, domainName, apiId, stageName)).promise();
         });
     }
@@ -649,24 +603,18 @@ function parseCreateStageRequest(stageMeta: any, apiId: string, deploymentId?: s
 }
 
 async function createOrUpdateStage(stage: any, apiId: string) {
-    try {
-        await apiGatewayClient.getStage({ ApiId: apiId, StageName: stage.name }).promise();
-        await spinner(chalk`Deploy {yellow.bold ${stage.name}} stage`, async () => {
+    const stageInfo = await getStage(apiGatewayClient, apiId, stage.name);
+    if (stageInfo) {
+        await SpinnerUtil.start(chalk`Update {yellow.bold ${stage.name}} stage`, async () => {
             const { DeploymentId } = await createDeployment(apiId, stage.name);
             await apiGatewayClient.updateStage(parseUpdateStageRequest(stage, apiId, DeploymentId)).promise();
         });
-    } catch (error) {
-        if (error.statusCode === 404) {
-            await spinner(`Create ${stage.name} stage`, async () => {
-                await apiGatewayClient.createStage(parseCreateStageRequest(stage, apiId)).promise();
-                await spinner(chalk`Deploy {yellow.bold ${stage.name}} stage`, async () => {
-                    const { DeploymentId } = await createDeployment(apiId, stage.name);
-                    await apiGatewayClient.updateStage(parseUpdateStageRequest(stage, apiId, DeploymentId)).promise();
-                });
-            });
-        } else {
-            throw error;
-        }
+    } else {
+        await SpinnerUtil.start(`Create {yellow.bold ${stage.name}} stage`, async () => {
+            await apiGatewayClient.createStage(parseCreateStageRequest(stage, apiId)).promise();
+            const { DeploymentId } = await createDeployment(apiId, stage.name);
+            await apiGatewayClient.updateStage(parseUpdateStageRequest(stage, apiId, DeploymentId)).promise();
+        });
     }
 }
 
@@ -678,34 +626,12 @@ async function checkStatus(functionName: string) {
     let state = 'Pending';
     let times = 200;
     while ((state !== 'Active') && times > 0) {
-        const tempFunc = await getFunction(functionName);
-        state = tempFunc.Configuration?.State!;
+        const tempFunc = await getFunction(lambdaClient, functionName);
+        state = tempFunc?.Configuration?.State!;
         await delay(500);
         times = times - 1;
     }
     if (state !== 'Active') {
         throw new Error(`Please check function status: ${functionName}`);
-    }
-}
-
-async function spinner(options: string | ora.Options | undefined, cb: () => any, successText?: string, failText?: string) {
-    let opts: any = options;
-    if (typeof options === 'string') {
-        opts = { text: options, discardStdin: false };
-    } else {
-        opts.discardStdin = false;
-    }
-    const s = ora(opts).start();
-    try {
-        const ret = await cb();
-        if (ret && ret.successText) {
-            s.succeed(ret.successText);
-        } else {
-            s.succeed(successText);
-        }
-        return ret;
-    } catch (error) {
-        s.fail(failText);
-        throw error;
     }
 }

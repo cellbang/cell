@@ -1,5 +1,4 @@
-import { ConfigUtil } from '@malagu/cli-common';
-import { BuildContext, ConfigurationContext } from '@malagu/cli-service';
+import { ConfigUtil, BuildContext, PathUtil } from '@malagu/cli-common';
 import { join } from 'path';
 import { renameSync, writeFileSync, existsSync } from 'fs-extra';
 
@@ -24,9 +23,8 @@ if (typeof target === 'function') {
 `;
 
 export default async (context: BuildContext) => {
-    const { cfg, configurations } = context;
-    const configuration = ConfigurationContext.getBackendConfiguration(configurations);
-    const outputPath = configuration?.output.get('path');
+    const { cfg, runtime } = context;
+    const outputPath = PathUtil.getBackendProjectDistPath(runtime);
     const port = ConfigUtil.getBackendMalaguConfig(cfg).server?.port || 9000;
     const oldIndexPath = join(outputPath, 'index.js');
     const newIndexPath = join(outputPath, '_index.js');

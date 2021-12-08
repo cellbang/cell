@@ -1,19 +1,17 @@
-import { CliContext, ConfigUtil, PathUtil } from '@malagu/cli-common';
+import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
-import * as ora from 'ora';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
-import { scf, apigateway } from 'tencentcloud-sdk-nodejs';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
+import { checkStatus, createClients, getAlias, getApi, getCustomDomain, getFunction, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
 const chalk = require('chalk');
 
-const ScfClient = scf.v20180416.Client;
-const ApiClient = apigateway.v20180808.Client;
+let scfClient: any;
+let scfClientExt: any;
+let apiClient: any;
 
-let clientConfig: any;
-
-export default async (context: CliContext) => {
+export default async (context: DeployContext) => {
     const { cfg, pkg, runtime } = context;
 
     const { stage } = ConfigUtil.getBackendConfig(cfg);
@@ -24,20 +22,11 @@ export default async (context: CliContext) => {
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials } = await profileProvider.provide(cloudConfig);
 
-    clientConfig = {
-        credential: {
-            secretId: credentials.accessKeyId,
-            secretKey: credentials.accessKeySecret,
-        },
-        profile: {
-            signMethod: 'HmacSHA256',
-            httpProfile: {
-                reqMethod: 'POST',
-                reqTimeout: 30,
-            },
-        },
-        region: region,
-    };
+    const clients = await createClients(region, credentials);
+    scfClient = clients.scfClient;
+    scfClientExt = clients.scfClientExt;
+    apiClient = clients.apiClient;
+
     const { namespace, apiGateway, customDomain, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
     const functionName = functionMeta.name;
@@ -79,28 +68,8 @@ export default async (context: CliContext) => {
         await releaseService(serviceId, release, stage);
 
     }
-    console.log('Deploy finished');
     console.log();
 };
-
-function getScfClient() {
-    return new ScfClient(clientConfig);
-}
-
-function getApiClient() {
-    return new ApiClient(clientConfig);
-}
-
-function getScfClientExt() {
-   return new ScfClient({ ...clientConfig,
-    profile: {
-       signMethod: 'TC3-HMAC-SHA256',
-       httpProfile: {
-           reqMethod: 'POST',
-           reqTimeout: 30
-        }
-    }});
-}
 
 function cleanObj(obj: any) {
     traverse(obj).forEach(function (value: any) {
@@ -112,14 +81,8 @@ function cleanObj(obj: any) {
 }
 
 async function createTrigger(trigger: any) {
-    const scfClient = getScfClient();
-
-    const listTriggerRequest: any = {};
-    listTriggerRequest.Namespace = trigger.namespace;
-    listTriggerRequest.FunctionName = trigger.functionName;
-    listTriggerRequest.Limit = 100;
-    const listTriggersResponse = await scfClient.ListTriggers(listTriggerRequest);
-    if (listTriggersResponse.Triggers?.some((t: any) => t.TriggerName === trigger.name)) {
+    const triggerInfo = await getTrigger(scfClient, trigger.namespace, trigger.functionName, trigger.name);
+    if (triggerInfo) {
         const deleteTriggerRequest: any = {};
         deleteTriggerRequest.Namespace = trigger.namespace;
         deleteTriggerRequest.FunctionName = trigger.functionName;
@@ -140,7 +103,7 @@ async function createTrigger(trigger: any) {
     createTriggerRequest.Type = trigger.type;
     createTriggerRequest.Enable = trigger.enable;
     createTriggerRequest.TriggerDesc = trigger.triggerDesc;
-    await spinner(`Set a ${trigger.name} Trigger`, async () => {
+    await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
         await scfClient.CreateTrigger(createTriggerRequest);
     });
     console.log(`    - Type: ${trigger.type}`);
@@ -149,23 +112,20 @@ async function createTrigger(trigger: any) {
 }
 
 async function createOrUpdateNamespace(namespace: any) {
-    const scfClient = getScfClient();
-    const listNamespacesRequest: any = {};
-    listNamespacesRequest.Limit = 100;
-    const listNamespacesResponse = await scfClient.ListNamespaces(listNamespacesRequest);
-    if (listNamespacesResponse.Namespaces.some((n: any) => n.Name === namespace.name)) {
+    const namespaceInfo = await getNamespace(scfClient, namespace.name);
+    if (namespaceInfo) {
         const updateNamespaceRequest: any = {};
         updateNamespaceRequest.Namespace = namespace.name;
         updateNamespaceRequest.Description = namespace.description;
         if (namespace.description) {
-            await spinner(`Update ${namespace.name} namespace`, async () => {
+            await SpinnerUtil.start(`Update ${namespace.name} namespace`, async () => {
                 await scfClient.UpdateNamespace(updateNamespaceRequest);
             });
         } else {
-            await spinner(`Skip ${namespace.name} namespace`, async () => { });
+            await SpinnerUtil.start(`Skip ${namespace.name} namespace`, async () => { });
         }
     } else {
-        await spinner(`Create a ${namespace.name} namespace`, async () => {
+        await SpinnerUtil.start(`Create a ${namespace.name} namespace`, async () => {
             const createNamespaceRequest: any = {};
             createNamespaceRequest.Namespace = namespace.name;
             createNamespaceRequest.Description = namespace.description;
@@ -240,23 +200,11 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     cleanObj(req);
 }
 
-function getFunction(namespace: string, functionName: string, qualifier?: string) {
-    const scfClient = getScfClient();
-    const getFunctionRequest: any = {};
-    getFunctionRequest.FunctionName = functionName;
-    getFunctionRequest.Namespace = namespace;
-    if (qualifier) {
-        getFunctionRequest.Qualifier = qualifier;
-    }
-    return scfClient.GetFunction(getFunctionRequest);
-}
-
 async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
-    const scfClientExt = getScfClientExt();
+    const functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
 
-    try {
-        await getFunction(functionMeta.namespace, functionMeta.name);
-        await spinner(`Update ${functionMeta.name} function`, async () => {
+    if (functionInfo) {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
             const updateFunctionCodeRequest: any = {};
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
@@ -264,36 +212,30 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
             updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
             await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
-            await checkStatus(functionMeta.namespace, functionMeta.name);
+            await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
 
             const updateFunctionConfigurationRequest: any = {};
             updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
             updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
             await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
-            const scfClient = getScfClient();
             await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
         });
-    } catch (error) {
-        if (error.code === 'ResourceNotFound.Function') {
-            await spinner(`Create ${functionMeta.name} function`, async () => {
-                const createFunctionRequest: any = {};
-                await parseFunctionMeta(createFunctionRequest, functionMeta, code);
-                createFunctionRequest.Handler = functionMeta.handler;
-                createFunctionRequest.CodeSource = functionMeta.codeSource;
-                createFunctionRequest.Type = functionMeta.type;
-                await scfClientExt.CreateFunction(createFunctionRequest);
-            });
-        } else {
-            throw error;
-        }
+    }  else {
+        await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
+            const createFunctionRequest: any = {};
+            await parseFunctionMeta(createFunctionRequest, functionMeta, code);
+            createFunctionRequest.Handler = functionMeta.handler;
+            createFunctionRequest.CodeSource = functionMeta.codeSource;
+            createFunctionRequest.Type = functionMeta.type;
+            await scfClientExt.CreateFunction(createFunctionRequest);
+        });
     }
 
 }
 
 async function publishVersion(namespace: string, functionName: string) {
-    const scfClient = getScfClient();
-    const { functionVersion } = await spinner('Publish Version', async () => {
-        await checkStatus(namespace, functionName);
+    const { functionVersion } = await SpinnerUtil.start('Publish Version', async () => {
+        await checkStatus(scfClient, namespace, functionName);
         const publishVersionRequest: any = {};
         publishVersionRequest.FunctionName = functionName;
         publishVersionRequest.Namespace = namespace;
@@ -342,31 +284,21 @@ function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
 }
 
 async function createOrUpdateAlias(alias: any, functionVersion: string) {
-    const scfClient = getScfClient();
-    const getAliasRequest: any = {};
-    getAliasRequest.Name = alias.name;
-    getAliasRequest.FunctionName = alias.functionName;
-    getAliasRequest.Namespace = alias.namespace;
-    try {
-        await checkStatus(alias.namespace, alias.functionName, functionVersion);
-        await scfClient.GetAlias(getAliasRequest);
-        await spinner(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(alias.namespace, alias.functionName, functionVersion);
+    const aliasInfo = await getAlias(scfClient, alias.name, alias.namespace, alias.functionName, functionVersion);
+    if (aliasInfo) {
+        await SpinnerUtil.start(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
+            await checkStatus(scfClient, alias.namespace, alias.functionName, functionVersion);
             const updateAliasRequest: any = {};
             parseAliasMeta(updateAliasRequest, alias, functionVersion);
             await scfClient.UpdateAlias(updateAliasRequest);
         });
-    } catch (error) {
-        if (error.code === 'ResourceNotFound.Alias') {
-            await spinner(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
-                await checkStatus(alias.namespace, alias.functionName, functionVersion);
-                const createAliasRequest: any = {};
-                parseAliasMeta(createAliasRequest, alias, functionVersion);
-                await scfClient.CreateAlias(createAliasRequest);
-            });
-        } else {
-            throw error;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
+            await checkStatus(scfClient, alias.namespace, alias.functionName, functionVersion);
+            const createAliasRequest: any = {};
+            parseAliasMeta(createAliasRequest, alias, functionVersion);
+            await scfClient.CreateAlias(createAliasRequest);
+        });
     }
 }
 
@@ -383,36 +315,25 @@ function parseServiceMeta(req: any, serviceMeta: any) {
 }
 
 async function createOrUpdateService(service: any) {
-    const apiClient = getApiClient();
-    const describeServicesStatusRequest: any = {};
     let serviceId: string;
     let subDomain: string;
-    const filter: any = {};
-    filter.Name = 'ServiceName';
-    filter.Values = [service.name];
-    describeServicesStatusRequest.Filters = [filter];
-    describeServicesStatusRequest.Limit = 100;
-    const describeServicesStatusResponse = await apiClient.DescribeServicesStatus(describeServicesStatusRequest);
-    const serviceSet = describeServicesStatusResponse.Result.ServiceSet.filter((item: any) => item.ServiceName === service.name);
-    if (serviceSet.length > 1) {
-        throw new Error(`There are two or more services named [${service.name}] in the api gateway`);
-    } else if (serviceSet.length === 1) {
-        await spinner(`Update ${service.name} service`, async () => {
-            const [ s ] = serviceSet;
+    const serviceInfo = await getService(apiClient, service.name);
+   if (serviceInfo) {
+        await SpinnerUtil.start(`Update ${service.name} service`, async () => {
 
             const modifyServiceRequest: any = {};
-            modifyServiceRequest.ServiceId = s.ServiceId;
+            modifyServiceRequest.ServiceId = serviceInfo.ServiceId;
             modifyServiceRequest.ServiceName = service.name;
             modifyServiceRequest.Protocol = service.protocol;
             modifyServiceRequest.ServiceDesc = service.description;
             modifyServiceRequest.NetTypes = service.netTypes;
             cleanObj(modifyServiceRequest);
             await apiClient.ModifyService(modifyServiceRequest);
-            serviceId = s.ServiceId;
-            subDomain = s.OuterSubDomain;
+            serviceId = serviceInfo.ServiceId;
+            subDomain = serviceInfo.OuterSubDomain;
         });
     } else {
-        await spinner(`Create ${service.name} service`, async () => {
+        await SpinnerUtil.start(`Create ${service.name} service`, async () => {
             const createServiceRequest: any = {};
             parseServiceMeta(createServiceRequest, service);
             const res = await apiClient.CreateService(createServiceRequest);
@@ -519,31 +440,20 @@ function parseApiMeta(req: any, apiMeta: any, serviceId: string, apiId?: string)
 }
 
 async function createOrUpdateApi(serviceId: string, subDomain: string, serviceProtocol: string, environmentName: string, api: any) {
-    const apiClient = getApiClient();
     const apiName = api.name;
-    const describeApisStatusRequest: any = {};
-    const filter: any = {};
     let apiId: string;
-    filter.Name = 'ApiName';
-    filter.Values = [ apiName ];
-    describeApisStatusRequest.Filters = [filter];
-    describeApisStatusRequest.ServiceId = serviceId;
-    describeApisStatusRequest.Limit = 100;
-    const describeApisStatusResponse = await apiClient.DescribeApisStatus(describeApisStatusRequest);
-    const apiIdStatusSet = describeApisStatusResponse.Result?.ApiIdStatusSet.filter((item: any) => item.ApiName === apiName);
-    if (!apiIdStatusSet || apiIdStatusSet.length === 0) {
-        await spinner(`Create ${apiName} api`, async () => {
+    const apiInfo = await getApi(apiClient, serviceId, apiName);
+    if (!apiInfo) {
+        await SpinnerUtil.start(`Create ${apiName} api`, async () => {
             const createApiRequest: any = {};
             parseApiMeta(createApiRequest, api, serviceId);
             const { Result } = await apiClient.CreateApi(createApiRequest);
             apiId = Result.ApiId;
         });
-    } else if (apiIdStatusSet.length > 1) {
-        throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
-    } else if (apiIdStatusSet?.length === 1) {
-        await spinner(`Update ${apiName} api`, async () => {
+    } else {
+        await SpinnerUtil.start(`Update ${apiName} api`, async () => {
             const modifyApiRequest: any = {};
-            apiId = apiIdStatusSet[0].ApiId;
+            apiId = apiInfo.ApiId;
             parseApiMeta(modifyApiRequest, api, serviceId, apiId);
             try {
                 await apiClient.ModifyApi(modifyApiRequest);
@@ -590,20 +500,16 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
 }
 
 async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, netSubDomain: string) {
-    const apiClient = getApiClient();
-    const describeServiceSubDomainsRequest: any = {};
-    describeServiceSubDomainsRequest.ServiceId = serviceId;
-    const describeApisStatusResponse = await apiClient.DescribeServiceSubDomains(describeServiceSubDomainsRequest);
-    const result = describeApisStatusResponse.Result;
-    if (result.TotalCount > 0 && result.DomainSet.find((d: any) => d.DomainName === customDomain.name)) {
-        await spinner(`Update ${customDomain.name} customDomain`, async () => {
+    const customDomainInfo = await getCustomDomain(apiClient, serviceId, customDomain.name);
+    if (customDomainInfo) {
+        await SpinnerUtil.start(`Update ${customDomain.name} customDomain`, async () => {
             const modifySubDomainRequest: any = {};
             parseCustomDomainMeta(modifySubDomainRequest, customDomain, serviceId, netSubDomain);
             delete modifySubDomainRequest.NetSubDomain;
             await apiClient.ModifySubDomain(modifySubDomainRequest);
         });
     } else {
-        await spinner(`Create ${customDomain.name} customDomain`, async () => {
+        await SpinnerUtil.start(`Create ${customDomain.name} customDomain`, async () => {
             const createSubDomainRequest: any = {};
             parseCustomDomainMeta(createSubDomainRequest, customDomain, serviceId, netSubDomain);
             await apiClient.BindSubDomain(createSubDomainRequest);
@@ -615,8 +521,7 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
 }
 
 async function releaseService(serviceId: string, release: any, stage: string) {
-    const apiClient = getApiClient();
-    await spinner(chalk`Release {yellow.bold ${stage}} environment`, async () => {
+    await SpinnerUtil.start(chalk`Release {yellow.bold ${stage}} environment`, async () => {
         const releaseServiceRequest: any = {};
         releaseServiceRequest.ServiceId = serviceId;
         releaseServiceRequest.EnvironmentName = release.environmentName;
@@ -636,39 +541,26 @@ function parseUsagePlanMeta(req: any, usagePalnMeta: any, usagePlanId?: string) 
 }
 
 async function createOrUpdateUsagePlan(usagePlan: any, api: any, apiId: string, serviceId: string) {
-    const apiClient = getApiClient();
-    const describeUsagePlansStatusRequest: any = {};
-    const filter: any = {};
-    filter.Name = 'UsagePlanName';
-    filter.Values = [usagePlan.name];
-    describeUsagePlansStatusRequest.Filters = [filter];
-    describeUsagePlansStatusRequest.Limit = 100;
-    const describeUsagePlansStatusResponse = await apiClient.DescribeUsagePlansStatus(describeUsagePlansStatusRequest);
-    const usagePlanStatusSet = describeUsagePlansStatusResponse.Result?.UsagePlanStatusSet.filter((item: any) => item.UsagePlanName === usagePlan.name);
-    if (!usagePlanStatusSet || usagePlanStatusSet.length === 0) {
-        await spinner(`Create ${usagePlan.name} usage plan`, async () => {
+    const usagePlanInfo = await getUsagePlan(apiClient, usagePlan.name);
+    if (!usagePlanInfo) {
+        await SpinnerUtil.start(`Create ${usagePlan.name} usage plan`, async () => {
             const createUsagePlanRequest: any = {};
             parseUsagePlanMeta(createUsagePlanRequest, usagePlan);
             const { Result } = await apiClient.CreateUsagePlan(createUsagePlanRequest);
             bindEnvironment(serviceId, apiId, api, usagePlan, Result!.UsagePlanId);
         });
-    } else if (usagePlanStatusSet.length > 1) {
-        throw new Error(`There are two or more usage plan named [${usagePlan.name}] in the api gateway`);
-    } else if (usagePlanStatusSet.length === 1) {
-        await spinner(`Update ${usagePlan.name} usage plan`, async () => {
-            const [ u ] = usagePlanStatusSet;
-
+    } else {
+        await SpinnerUtil.start(`Update ${usagePlan.name} usage plan`, async () => {
             const modifyUsagePlanRequest: any = {};
-            parseUsagePlanMeta(modifyUsagePlanRequest, usagePlan, u.UsagePlanId);
+            parseUsagePlanMeta(modifyUsagePlanRequest, usagePlan, usagePlanInfo.UsagePlanId);
             await apiClient.ModifyUsagePlan(modifyUsagePlanRequest);
-            bindEnvironment(serviceId, apiId, api, usagePlan, u.UsagePlanId);
+            bindEnvironment(serviceId, apiId, api, usagePlan, usagePlanInfo.UsagePlanId);
         });
     }
 }
 
 async function bindEnvironment(serviceId: string, apiId: string, api: any, usagePlan: any, usagePalnId: string) {
-    const apiClient = getApiClient();
-    await spinner(`Bind ${usagePlan.name} usage plan to ${api.name} api`, async () => {
+    await SpinnerUtil.start(`Bind ${usagePlan.name} usage plan to ${api.name} api`, async () => {
         const bindEnvironmentRequest: any = {};
         bindEnvironmentRequest.ServiceId = serviceId;
         bindEnvironmentRequest.BindType = 'API';
@@ -680,8 +572,7 @@ async function bindEnvironment(serviceId: string, apiId: string, api: any, usage
 }
 
 async function updateApiEnvironmentStrategy(serviceId: string, apiId: string, api: any, strategy: any) {
-    const apiClient = getApiClient();
-    await spinner(`Update ${strategy.EnvironmentName} environment strategy to ${api.name} api`, async () => {
+    await SpinnerUtil.start(`Update ${strategy.EnvironmentName} environment strategy to ${api.name} api`, async () => {
         const modifyApiEnvironmentStrategyRequest: any = {};
         modifyApiEnvironmentStrategyRequest.ServiceId = serviceId;
         modifyApiEnvironmentStrategyRequest.ApiIds = [ apiId ];
@@ -690,40 +581,4 @@ async function updateApiEnvironmentStrategy(serviceId: string, apiId: string, ap
         cleanObj(modifyApiEnvironmentStrategyRequest);
         await apiClient.ModifyApiEnvironmentStrategy(modifyApiEnvironmentStrategyRequest);
     });
-}
-
-async function checkStatus(namespace: string, functionName: string, qualifier?: string) {
-    let status = 'Updating';
-    let times = 200;
-    while ((status !== 'Active') && times > 0) {
-        const tempFunc = await getFunction(namespace, functionName, qualifier);
-        status = tempFunc.Status;
-        await delay(200);
-        times = times - 1;
-    }
-    if (status !== 'Active') {
-        throw new Error(`Please check function status: ${functionName}`);
-    }
-}
-
-async function spinner(options: string | ora.Options | undefined, cb: () => any, successText?: string, failText?: string) {
-    let opts: any = options;
-    if (typeof options === 'string') {
-        opts = { text: options, discardStdin: false };
-    } else {
-        opts.discardStdin = false;
-    }
-    const s = ora(opts).start();
-    try {
-        const ret = await cb();
-        if (ret && ret.successText) {
-            s.succeed(ret.successText);
-        } else {
-            s.succeed(successText);
-        }
-        return ret;
-    } catch (error) {
-        s.fail(failText);
-        throw error;
-    }
 }

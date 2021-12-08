@@ -15,6 +15,7 @@ export interface CliContext {
     cfg: ApplicationConfig;
     framework?: Framework;
     settings?: Settings;
+    output: Record<string, any>;
     [key: string]: any;
 }
 
@@ -23,6 +24,7 @@ export interface CreateCliContextOptions extends Record<string, any> {
     targets: string[];
     mode: string[];
     prod: boolean;
+    settings?: Settings;
     dev: boolean;
     runtime?: string;
     framework?: Framework;
@@ -46,7 +48,7 @@ export namespace CliContext {
             mode.push(...framework.useMode);
             mode = Array.from(new Set<string>(mode));
         }
-        const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev });
+        const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings });
         const cfg = new ApplicationConfig({ targets, program }, pkg);
         const handleExpression = (obj: any, ctx?: ExpressionContext) => {
             const expressionHandler = new ExpressionHandler();
@@ -74,6 +76,7 @@ export namespace CliContext {
                     target,
                     props: config,
                     expressionHandler,
+                    output: {},
                     ...options
                 }, 'propsHooks');
 
@@ -102,7 +105,8 @@ export namespace CliContext {
             pkg,
             cfg,
             dest: 'dist',
-            program
+            program,
+            output: {}
         };
     }
 }
@@ -131,6 +135,18 @@ export namespace ContextUtils {
         return cliContext;
     }
 
+    export async function createInfoContext(cliContext: CliContext): Promise<ConfigContext> {
+        return cliContext;
+    }
+
+    export async function createDeployContext(cliContext: CliContext): Promise<DeployContext> {
+        return cliContext;
+    }
+
+    export async function createBuildContext(cliContext: CliContext): Promise<BuildContext> {
+        return cliContext;
+    }
+
     export async function createPropsContext(
         cliContext: CliContext, target: string, props: { [key: string]: any }, expressionHandler: ExpressionHandler): Promise<PropsContext> {
         return { ...cliContext, target, props, expressionHandler };
@@ -146,8 +162,20 @@ export interface ConfigContext extends CliContext {
 
 }
 
+export interface InfoContext extends CliContext {
+
+}
+
 export interface PropsContext extends CliContext {
     props: { [key: string]: any };
     target: string;
     expressionHandler: ExpressionHandler;
+}
+
+export interface BuildContext extends CliContext {
+
+}
+
+export interface DeployContext extends CliContext {
+
 }

@@ -1,5 +1,14 @@
 # Change Log
 
+## 2.2.0
+
+- feat(cli-common) 支持 info 插件，优化 `malagu info` 命令
+- feat(lambda-plugin) 添加 info 插件
+- feat(cloud-plugin) 支持 `malagu config --show-profile` 显示账号配置信息
+- feat(cli-common) 美好日志输出，并支持 banner 自定义设置
+- fix(cli) 修复`malagu config --config-file-alias deploy` 命令不生效问题
+
+
 ## 2.1.2
 
 - feat(cli+cloud-plugin) 支持 `malagu config --show` 显示完整配置信息

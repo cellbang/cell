@@ -1,9 +1,8 @@
 
 import * as webpack from 'webpack';
-import { BuildContext } from '../context';
-import { BACKEND_TARGET, spawnProcess } from '@malagu/cli-common';
+import { BACKEND_TARGET, spawnProcess, HookExecutor, BuildContext } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
-import { HookExecutor } from '../hooks';
+import { ServiceContextUtils } from '../context';
 
 export class BuildManager {
 
@@ -18,7 +17,9 @@ export class BuildManager {
             await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
         }
 
-        for (const configuration of this.ctx.configurations) {
+        const context = await ServiceContextUtils.createConfigurationContext(this.ctx);
+
+        for (const configuration of context.configurations) {
             const compiler = webpack(configuration.toConfig());
             await new Promise<void>((resolve, reject) => compiler.run((err, stats) => {
                 if (err) {
@@ -26,7 +27,7 @@ export class BuildManager {
                     return;
                 }
                 if (configuration.get('name') === BACKEND_TARGET) {
-                    packExternalModules(this.ctx, stats).then(resolve).catch(reject);
+                    packExternalModules(context, stats).then(resolve).catch(reject);
                 } else {
                     resolve();
                 }

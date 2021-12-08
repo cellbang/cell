@@ -1,19 +1,16 @@
-import { CliContext, PathUtil } from '@malagu/cli-common';
+import { DeployContext, PathUtil, SpinnerUtil } from '@malagu/cli-common';
 import { readFile } from 'fs-extra';
-const FCClient = require('@alicloud/fc2');
 import  * as JSZip from 'jszip';
-import * as ora from 'ora';
-import { CloudUtils, DefaultProfileProvider, Credentials, Account } from '@malagu/cloud-plugin';
+import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-const CloudAPI = require('@alicloud/cloudapi');
-const Ram = require('@alicloud/ram');
+import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger } from './utils';
 const chalk = require('chalk');
 
 let fcClient: any;
 let apiClient: any;
 let ram: any;
 
-export default async (context: CliContext) => {
+export default async (context: DeployContext) => {
 
     const { cfg, pkg, runtime } = context;
 
@@ -22,7 +19,10 @@ export default async (context: CliContext) => {
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
-    await createClients(faasConfig, region, credentials, account);
+    const clients = await createClients(faasConfig, region, credentials, account);
+    fcClient = clients.fcClient;
+    apiClient = clients.apiClient;
+    ram = clients.ram;
 
     const { service, trigger, apiGateway, customDomain, alias } = faasConfig;
     const functionMeta = faasConfig.function;
@@ -74,32 +74,8 @@ export default async (context: CliContext) => {
 
 };
 
-async function createClients(faasConfig: any, region: string, credentials: Credentials, account: Account) {
-    fcClient = new FCClient(account.id, {
-        accessKeyID: credentials.accessKeyId,
-        accessKeySecret: credentials.accessKeySecret,
-        securityToken: credentials.token,
-        region,
-        timeout: faasConfig.timeout,
-        secure: faasConfig.secure,
-        internal: faasConfig.internal
-    });
-
-    apiClient = new CloudAPI({
-        accessKeyId: credentials.accessKeyId,
-        accessKeySecret: credentials.accessKeySecret,
-        endpoint: `http://apigateway.${region}.aliyuncs.com`,
-    });
-
-    ram = new Ram({
-        accessKeyId: credentials.accessKeyId,
-        accessKeySecret: credentials.accessKeySecret,
-        endpoint: 'https://ram.aliyuncs.com'
-    });
-}
-
 async function deployApi(groupId: string, apiId: string, stage: any) {
-    await spinner(chalk`Deploy {yellow.bold ${stage.name}} environment`, async () => {
+    await SpinnerUtil.start(chalk`Deploy {yellow.bold ${stage.name}} environment`, async () => {
         await apiClient.deployApi({
             GroupId: groupId,
             ApiId: apiId,
@@ -227,21 +203,14 @@ function parseApiMeta(apiMeta: any, region: string, groupId: string, role: any, 
 async function createOrUpdateApi(region: string, groupId: string, subDomain: string, stage: string, api: any, role: any) {
     const apiName = api.name;
     let apiId: string;
-    const result = await apiClient.describeApis({
-        ApiName: apiName,
-        GroupId: groupId,
-        PageSize: 100
-    });
-    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName) : [];
-    if (apis.length > 1) {
-        throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
-    } else if (apis.length === 1) {
-        await spinner(`Update ${apiName} api`, async () => {
-            apiId = apis[0].ApiId;
+    const apiInfo = await getApi(apiClient, groupId, apiName);
+    if (apiInfo) {
+        await SpinnerUtil.start(`Update ${apiName} api`, async () => {
+            apiId = apiInfo.ApiId;
             apiClient.modifyApi(parseApiMeta(api, region, groupId, role, apiId));
         });
     } else {
-        await spinner(`Create ${apiName} api`, async () => {
+        await SpinnerUtil.start(`Create ${apiName} api`, async () => {
             const { ApiId } = await apiClient.createApi(parseApiMeta(api, region, groupId, role));
             apiId = ApiId;
         });
@@ -284,9 +253,9 @@ async function createOrUpdateTrigger(trigger: any) {
 
     const { functionName, serviceName, name } = trigger;
 
-    try {
-        await fcClient.getTrigger(serviceName, functionName, name);
-        await spinner(`Update ${name} trigger`, async () => {
+    const triggerInfo = await getTrigger(fcClient, serviceName, functionName, name);
+    if (triggerInfo) {
+        await SpinnerUtil.start(`Update ${name} trigger`, async () => {
             try {
                 await fcClient.updateTrigger(serviceName, functionName, name, opts);
             } catch (error) {
@@ -298,15 +267,10 @@ async function createOrUpdateTrigger(trigger: any) {
                 throw error;
             }
         });
-
-    } catch (ex) {
-        if (ex.code === 'TriggerNotFound') {
-            await spinner(`Create ${name} trigger`, async () => {
-                await fcClient.createTrigger(serviceName, functionName, opts);
-            });
-        } else {
-            throw ex;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${name} trigger`, async () => {
+            await fcClient.createTrigger(serviceName, functionName, opts);
+        });
     }
 
 }
@@ -314,19 +278,15 @@ async function createOrUpdateTrigger(trigger: any) {
 async function createOrUpdateService(serviceName: string, option: any) {
     const opt = { ...option };
     delete opt.name;
-    try {
-        await fcClient.getService(serviceName);
-        await spinner(`Update ${serviceName} service`, async () => {
+    const serviceInfo = await getService(fcClient, serviceName);
+    if (serviceInfo) {
+        await SpinnerUtil.start(`Update ${serviceName} service`, async () => {
             await fcClient.updateService(serviceName, opt);
+        }); 
+    } else {
+        await SpinnerUtil.start(`Create ${serviceName} service`, async () => {
+            await fcClient.createService(serviceName, opt);
         });
-    } catch (ex) {
-        if (ex.code === 'ServiceNotFound') {
-            await spinner(`Create ${serviceName} service`, async () => {
-                await fcClient.createService(serviceName, opt);
-            });
-        } else {
-            throw ex;
-        }
     }
 }
 
@@ -337,9 +297,10 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
     delete opts.name;
     delete opts.env;
     delete opts.serviceName;
-    try {
-        await fcClient.getFunction(serviceName, functionName);
-        await spinner(`Update ${functionName} function`, async () => {
+
+    const functionInfo = await getFunction(fcClient, serviceName, functionName);
+    if (functionInfo) {
+        await SpinnerUtil.start(`Update ${functionName} function`, async () => {
             await fcClient.updateFunction(serviceName, functionName, {
                 ...opts,
                 code: {
@@ -347,21 +308,16 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
                 },
             });
         });
-
-    } catch (ex) {
-        if (ex.code === 'FunctionNotFound') {
-            opts.functionName = functionName;
-            await spinner(`Create ${functionName} function`, async () => {
-                await fcClient.createFunction(serviceName, {
-                    ...opts,
-                    code: {
-                        zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
-                    },
-                });
+    } else {
+        opts.functionName = functionName;
+        await SpinnerUtil.start(`Create ${functionName} function`, async () => {
+            await fcClient.createFunction(serviceName, {
+                ...opts,
+                code: {
+                    zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
+                },
             });
-        } else {
-            throw ex;
-        }
+        });
     }
 }
 
@@ -387,8 +343,9 @@ async function createOrUpdateCustomDomain(customDomain: any) {
     if (routeConfig) {
         opts.routeConfig = routeConfig;
     }
-    try {
-        const { data } = await fcClient.getCustomDomain(name);
+    const customDomainInfo = await getCustomDomain(fcClient, name);
+    if (customDomainInfo) {
+        const { data } = customDomainInfo;
         const routes: any[] = [];
         if (data?.routeConfig?.routes) {
             for (const route of data.routeConfig.routes) {
@@ -402,38 +359,29 @@ async function createOrUpdateCustomDomain(customDomain: any) {
             }
             opts.routeConfig.routes = [ ...opts.routeConfig.routes, ...routes ];
         }
-        await spinner(`Update ${name} custom domain`, async () => {
+        await SpinnerUtil.start(`Update ${name} custom domain`, async () => {
             await fcClient.updateCustomDomain(name, opts);
         });
-
-    } catch (ex) {
-        if (ex.code === 'DomainNameNotFound') {
-            opts.domainName = name;
-            await spinner(`Create ${name} custom domain`, async () => {
-                await fcClient.createCustomDomain(name, opts);
-            });
-        } else {
-            throw ex;
-        }
+    } else {
+        opts.domainName = name;
+        await SpinnerUtil.start(`Create ${name} custom domain`, async () => {
+            await fcClient.createCustomDomain(name, opts);
+        });
     }
     console.log(chalk`    - Url: ${chalk.green.bold(
         `${protocol.includes('HTTPS') ? 'https' : 'http'}://${name}`)}`);
 }
 
 async function createOrUpdateAlias(alias: any, versionId: string) {
-    try {
-        await fcClient.getAlias(alias.serviceName, alias.name);
-        await spinner(`Update ${alias.name} alias to version ${versionId}`, async () => {
+    const aliasInfo = await getAlias(fcClient, alias.name, alias.serviceName);
+    if (aliasInfo) {
+        await SpinnerUtil.start(`Update ${alias.name} alias to version ${versionId}`, async () => {
             await fcClient.updateAlias(alias.serviceName, alias.name, versionId);
         });
-    } catch (ex) {
-        if (ex.code === 'AliasNotFound') {
-            await spinner(`Create ${alias.name} alias to version ${versionId}`, async () => {
-                await fcClient.createAlias(alias.serviceName, alias.name, versionId);
-            });
-        } else {
-            throw ex;
-        }
+    } else {
+        await SpinnerUtil.start(`Create ${alias.name} alias to version ${versionId}`, async () => {
+            await fcClient.createAlias(alias.serviceName, alias.name, versionId);
+        });
     }
 }
 
@@ -449,28 +397,20 @@ async function createOrUpdateGroup(group: any) {
     const { name } = group;
     let groupId: string;
     let subDomain: string;
-    const res = await apiClient.describeApiGroups({
-        GroupName: name // filter out
-    }, { timeout: 10000 });
-
-    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute : [];
-    const list = groups.filter((item: any) => item.GroupName === name);
-    if (list.length > 1) {
-        throw new Error(`There are two or more groups named [${name}] in the api gateway`);
-    } else if (list.length === 1) {
-        groupId = list[0].GroupId;
-        subDomain = list[0].SubDomain;
-        await spinner(`Update ${name} group`, async () => {
+    const groupInfo = await getGroup(apiClient, name);
+    if (groupInfo) {
+        groupId = groupInfo.GroupId;
+        subDomain = groupInfo.SubDomain;
+        await SpinnerUtil.start(`Update ${name} group`, async () => {
             await apiClient.modifyApiGroup(parseGroupMeta(group, groupId), { timeout: 10000 });
-        });
+        }); 
     } else {
-        await spinner(`Create ${name} group`, async () => {
+        await SpinnerUtil.start(`Create ${name} group`, async () => {
             const { GroupId, SubDomain } = await apiClient.createApiGroup(parseGroupMeta(group), { timeout: 10000 });
             groupId = GroupId;
             subDomain = SubDomain;
         });
     }
-
     return { groupId: groupId!, subDomain: subDomain! };
 }
 
@@ -507,7 +447,7 @@ async function createRoleIfNeed() {
     }
 
     if (!role) {
-        await spinner(`Create ${roleName} role`, async () => {
+        await SpinnerUtil.start(`Create ${roleName} role`, async () => {
             role = await ram.createRole(parseRoleMeta(roleName));
         });
     }
@@ -518,7 +458,7 @@ async function createRoleIfNeed() {
     const policy = policies.Policies.Policy.find((item: any) => item.PolicyName === policyName);
 
     if (!policy) {
-        await spinner(`Attach ${policyName} policy`, async () => {
+        await SpinnerUtil.start(`Attach ${policyName} policy`, async () => {
             await ram.attachPolicyToRole({
                 PolicyType: 'System',
                 PolicyName: policyName,
@@ -528,21 +468,4 @@ async function createRoleIfNeed() {
     }
 
     return role;
-}
-
-async function spinner(options: string | ora.Options | undefined, cb: () => any) {
-    let opts: any = options;
-    if (typeof options === 'string') {
-        opts = { text: options, discardStdin: false };
-    } else {
-        opts.discardStdin = false;
-    }
-    const s = ora(opts).start();
-    try {
-        await cb();
-        s.succeed();
-    } catch (error) {
-        s.fail();
-        throw error;
-    }
 }

@@ -37,4 +37,6 @@ export interface ConfigOptions {
     region?: string;
     token?: string;
     show?: boolean;
+    logout?: boolean;
+    showProfile?: boolean;
 }
