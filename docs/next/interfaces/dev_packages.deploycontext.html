@@ -71,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">CliContext</span>
+						<a href="../modules/dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">DeployContext</span>
@@ -93,6 +93,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#cfg" class="tsd-kind-icon">cfg</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#framework" class="tsd-kind-icon">framework</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#output" class="tsd-kind-icon">output</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#pkg" class="tsd-kind-icon">pkg</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#program" class="tsd-kind-icon">program</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dev_packages.deploycontext.html#settings" class="tsd-kind-icon">settings</a></li>
@@ -112,11 +113,11 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="cfg" class="tsd-anchor"></a>
 					<h3>cfg</h3>
-					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApplicationConfig</span></div>
+					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <a href="../classes/dev_packages.applicationconfig.html" class="tsd-signature-type">ApplicationConfig</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="../modules/dev_packages.configurationcontext.html">ConfigurationContext</a>.<a href="../modules/dev_packages.configurationcontext.html#cfg">cfg</a></p>
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#cfg">cfg</a></p>
 						<ul>
-							<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:10</li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L15">dev-packages/cli-common/src/context/context-protocol.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -125,20 +126,31 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> framework</h3>
 					<div class="tsd-signature tsd-kind-icon">framework<span class="tsd-signature-symbol">:</span> <a href="dev_packages.framework.html" class="tsd-signature-type">Framework</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="../modules/dev_packages.configurationcontext.html">ConfigurationContext</a>.<a href="../modules/dev_packages.configurationcontext.html#framework">framework</a></p>
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#framework">framework</a></p>
 						<ul>
-							<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:11</li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L16">dev-packages/cli-common/src/context/context-protocol.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="output" class="tsd-anchor"></a>
+					<h3>output</h3>
+					<div class="tsd-signature tsd-kind-icon">output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#output">output</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L18">dev-packages/cli-common/src/context/context-protocol.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="pkg" class="tsd-anchor"></a>
 					<h3>pkg</h3>
-					<div class="tsd-signature tsd-kind-icon">pkg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApplicationPackage</span></div>
+					<div class="tsd-signature tsd-kind-icon">pkg<span class="tsd-signature-symbol">:</span> <a href="../classes/dev_packages.applicationpackage.html" class="tsd-signature-type">ApplicationPackage</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="../modules/dev_packages.configurationcontext.html">ConfigurationContext</a>.<a href="../modules/dev_packages.configurationcontext.html#pkg">pkg</a></p>
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#pkg">pkg</a></p>
 						<ul>
-							<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:9</li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L14">dev-packages/cli-common/src/context/context-protocol.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,9 +159,9 @@
 					<h3>program</h3>
 					<div class="tsd-signature tsd-kind-icon">program<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="../modules/dev_packages.configurationcontext.html">ConfigurationContext</a>.<a href="../modules/dev_packages.configurationcontext.html#program">program</a></p>
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#program">program</a></p>
 						<ul>
-							<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:8</li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L13">dev-packages/cli-common/src/context/context-protocol.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -158,9 +170,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> settings</h3>
 					<div class="tsd-signature tsd-kind-icon">settings<span class="tsd-signature-symbol">:</span> <a href="dev_packages.settings.html" class="tsd-signature-type">Settings</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="../modules/dev_packages.configurationcontext.html">ConfigurationContext</a>.<a href="../modules/dev_packages.configurationcontext.html#settings">settings</a></p>
+						<p>Inherited from <a href="../modules/dev_packages.clicontext.html">CliContext</a>.<a href="../modules/dev_packages.clicontext.html#settings">settings</a></p>
 						<ul>
-							<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:12</li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L17">dev-packages/cli-common/src/context/context-protocol.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -171,28 +183,28 @@
 					<a name="create" class="tsd-anchor"></a>
 					<h3>create</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CreateCliContextOptions</span>, projectPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, skipComponent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CliContext</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="dev_packages.createclicontextoptions.html" class="tsd-signature-type">CreateCliContextOptions</a>, projectPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, skipComponent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in dev-packages/cli-common/lib/context/context-protocol.d.ts:25</li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L34">dev-packages/cli-common/src/context/context-protocol.ts:34</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <span class="tsd-signature-type">CreateCliContextOptions</span></h5>
+									<h5>options: <a href="dev_packages.createclicontextoptions.html" class="tsd-signature-type">CreateCliContextOptions</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> projectPath: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> projectPath: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skipComponent: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> skipComponent: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CliContext</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -224,6 +236,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="dev_packages.deploycontext.html#framework" class="tsd-kind-icon">framework</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dev_packages.deploycontext.html#output" class="tsd-kind-icon">output</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="dev_packages.deploycontext.html#pkg" class="tsd-kind-icon">pkg</a>

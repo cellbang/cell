@@ -74,8 +74,11 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createbuildcontext" class="tsd-kind-icon">create<wbr>Build<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createclicontext" class="tsd-kind-icon">create<wbr>Cli<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createconfigcontext" class="tsd-kind-icon">create<wbr>Config<wbr>Context</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createdeploycontext" class="tsd-kind-icon">create<wbr>Deploy<wbr>Context</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createinfocontext" class="tsd-kind-icon">create<wbr>Info<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createinitcontext" class="tsd-kind-icon">create<wbr>Init<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#createpropscontext" class="tsd-kind-icon">create<wbr>Props<wbr>Context</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="dev_packages.contextutils.html#getcurrent" class="tsd-kind-icon">get<wbr>Current</a></li>
@@ -88,6 +91,29 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="createbuildcontext" class="tsd-anchor"></a>
+					<h3>create<wbr>Build<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Build<wbr>Context<span class="tsd-signature-symbol">(</span>cliContext<span class="tsd-signature-symbol">: </span><a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.buildcontext.html" class="tsd-signature-type">BuildContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L146">dev-packages/cli-common/src/context/context-protocol.ts:146</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cliContext: <a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.buildcontext.html" class="tsd-signature-type">BuildContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
 					<a name="createclicontext" class="tsd-anchor"></a>
 					<h3>create<wbr>Cli<wbr>Context</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
@@ -97,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L122">dev-packages/cli-common/src/context/context-protocol.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L126">dev-packages/cli-common/src/context/context-protocol.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -123,7 +149,53 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L130">dev-packages/cli-common/src/context/context-protocol.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L134">dev-packages/cli-common/src/context/context-protocol.ts:134</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cliContext: <a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.configcontext.html" class="tsd-signature-type">ConfigContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="createdeploycontext" class="tsd-anchor"></a>
+					<h3>create<wbr>Deploy<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Deploy<wbr>Context<span class="tsd-signature-symbol">(</span>cliContext<span class="tsd-signature-symbol">: </span><a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.deploycontext.html" class="tsd-signature-type">DeployContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L142">dev-packages/cli-common/src/context/context-protocol.ts:142</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cliContext: <a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.deploycontext.html" class="tsd-signature-type">DeployContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="createinfocontext" class="tsd-anchor"></a>
+					<h3>create<wbr>Info<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Info<wbr>Context<span class="tsd-signature-symbol">(</span>cliContext<span class="tsd-signature-symbol">: </span><a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/dev_packages.configcontext.html" class="tsd-signature-type">ConfigContext</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L138">dev-packages/cli-common/src/context/context-protocol.ts:138</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -146,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L126">dev-packages/cli-common/src/context/context-protocol.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L130">dev-packages/cli-common/src/context/context-protocol.ts:130</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -169,7 +241,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L134">dev-packages/cli-common/src/context/context-protocol.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L150">dev-packages/cli-common/src/context/context-protocol.ts:150</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -206,7 +278,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L114">dev-packages/cli-common/src/context/context-protocol.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L118">dev-packages/cli-common/src/context/context-protocol.ts:118</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="dev_packages.clicontext.html" class="tsd-signature-type">CliContext</a></h4>
@@ -223,7 +295,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/b4692e64/dev-packages/cli-common/src/context/context-protocol.ts#L118">dev-packages/cli-common/src/context/context-protocol.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/43da3604/dev-packages/cli-common/src/context/context-protocol.ts#L122">dev-packages/cli-common/src/context/context-protocol.ts:122</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -249,10 +321,19 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="dev_packages.contextutils.html#createbuildcontext" class="tsd-kind-icon">create<wbr>Build<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="dev_packages.contextutils.html#createclicontext" class="tsd-kind-icon">create<wbr>Cli<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="dev_packages.contextutils.html#createconfigcontext" class="tsd-kind-icon">create<wbr>Config<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="dev_packages.contextutils.html#createdeploycontext" class="tsd-kind-icon">create<wbr>Deploy<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="dev_packages.contextutils.html#createinfocontext" class="tsd-kind-icon">create<wbr>Info<wbr>Context</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="dev_packages.contextutils.html#createinitcontext" class="tsd-kind-icon">create<wbr>Init<wbr>Context</a>
