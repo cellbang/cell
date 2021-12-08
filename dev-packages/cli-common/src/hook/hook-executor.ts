@@ -1,4 +1,4 @@
-import { CliContext, ConfigContext, InitContext } from '../context';
+import { BuildContext, CliContext, ConfigContext, DeployContext, InfoContext, InitContext } from '../context';
 import { Module } from '../package';
 import { ConfigUtil } from '../utils';
 const chalk = require('chalk');
@@ -15,6 +15,16 @@ export class HookExecutor {
         }
     }
 
+    executeBuildHooks(context: BuildContext): Promise<any[]> {
+        const modules = context.pkg.buildHookModules;
+        return this.doExecuteHooks(modules, context, 'buildHooks');
+    }
+
+    executeDeployHooks(context: DeployContext): Promise<any[]> {
+        const modules = context.pkg.deployHookModules;
+        return this.doExecuteHooks(modules, context, 'deployHooks');
+    }
+
     executeCliHooks(context: CliContext): Promise<any[]> {
         const modules = context.pkg.cliHookModules;
         return this.doExecuteHooks(modules, context, 'cliHooks');
@@ -28,6 +38,11 @@ export class HookExecutor {
     executeConfigHooks(context: ConfigContext): Promise<any[]> {
         const modules = context.pkg.configHookModules;
         return this.doExecuteHooks(modules, context, 'configHooks');
+    }
+
+    executeInfoHooks(context: InfoContext): Promise<any[]> {
+        const modules = context.pkg.infoHookModules;
+        return this.doExecuteHooks(modules, context, 'infoHooks');
     }
 
     async executeHooks(context: CliContext, hookName: string): Promise<any[]> {

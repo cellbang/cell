@@ -190,6 +190,12 @@
       ],
       "@malagu/node-plugin/lib/*": [
         "plugins/node-plugin/src/*"
+      ],
+      "@malagu/example-backend-app1/*": [
+        "examples/backend-app/*"
+      ],
+      "@malagu/example-backend-app2/*": [
+        "examples/backend-app/*"
       ]
     }
   },

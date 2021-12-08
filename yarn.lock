@@ -3307,13 +3307,10 @@
     "@typescript-eslint/types" "4.22.0"
     eslint-visitor-keys "^2.0.0"
 
-"@vendia/serverless-express@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.nlark.com/@vendia/serverless-express/download/@vendia/serverless-express-3.4.0.tgz#156f47d364b067ae6fa678a914c51887f494321a"
-  integrity sha1-FW9H02SwZ65vpnipFMUYh/SUMho=
-  dependencies:
-    binary-case "^1.0.0"
-    type-is "^1.6.16"
+"@vendia/serverless-express@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@vendia/serverless-express/-/serverless-express-4.5.2.tgz#b9ddcea0590fb171cf9f64b9a677f183708e62b6"
+  integrity sha512-mekBOPnBxfhIvBYKVwfvjp9NtS+bOs3F08Vudxa3Fb7zkxtdjRn0UMLRT6zwWf6i4V5rjk2aEhzbIDSCV1GQ0w==
 
 "@vue/babel-helper-vue-transform-on@^1.0.2":
   version "1.0.2"
@@ -4440,7 +4437,7 @@ bignumber.js@^9.0.0:
   resolved "https://registry.npm.taobao.org/bignumber.js/download/bignumber.js-9.0.1.tgz#8d7ba124c882bfd8e43260c67475518d0689e4e5"
   integrity sha1-jXuhJMiCv9jkMmDGdHVRjQaJ5OU=
 
-binary-case@^1.0.0, binary-case@^1.1.4:
+binary-case@^1.1.4:
   version "1.1.4"
   resolved "https://registry.npm.taobao.org/binary-case/download/binary-case-1.1.4.tgz#d687104d59e38f2b9e658d3a58936963c59ab931"
   integrity sha1-1ocQTVnjjyueZY06WJNpY8WauTE=

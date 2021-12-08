@@ -1,8 +1,6 @@
 
-import { HookExecutor } from '../hooks';
 import build from '../build/build';
-import { CliContext } from '@malagu/cli-common';
-import { ServiceContextUtils } from '../context';
+import { CliContext, ContextUtils, HookExecutor } from '@malagu/cli-common';
 
 export interface DeplyOptions {
     entry?: string;
@@ -11,7 +9,8 @@ export interface DeplyOptions {
 
 export default async (cliContext: CliContext, options: DeplyOptions) => {
     try {
-        const ctx = await ServiceContextUtils.createDeployContext(cliContext, {
+        const ctx = await ContextUtils.createDeployContext({
+            ...cliContext,
             ...options
         });
         if (!options.skipBuild) {

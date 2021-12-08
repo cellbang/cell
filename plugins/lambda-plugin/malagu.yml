@@ -1,6 +1,6 @@
 malagu:
   cloud:
-    name: aws
+    name: aws cloud
     profilePath: aws/profile.yml
     regions:
       - us-east-1

@@ -1,6 +1,7 @@
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
 import { homedir } from 'os';
+import { v5 } from 'uuid';
 
 export namespace PathUtil {
     export function getProjectDistPathForTarget(target: string, runtime?: string) {
@@ -8,6 +9,13 @@ export namespace PathUtil {
     }
 
     export function getProjectDistPath(runtime?: string) {
+        if (runtime) {
+            return path.join(getProjectDistParentPath(runtime), v5(process.cwd(), v5.URL));
+        }
+        return path.join(getProjectHomePath(runtime), 'dist');
+    }
+
+    export function getProjectDistParentPath(runtime: string) {
         return path.join(getProjectHomePath(runtime), 'dist');
     }
 

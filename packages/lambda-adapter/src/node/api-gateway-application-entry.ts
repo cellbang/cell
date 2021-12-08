@@ -5,11 +5,11 @@ import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol'
 import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
 import * as express from 'express';
-const { createServer, proxy } = require('@vendia/serverless-express');
+const createProxy = require('@vendia/serverless-express');
 
 const app = express();
 
-const server = createServer(app);
+const proxy = createProxy({ app });
 
 let listeners: FaaSEventListener<any>[];
 
@@ -31,5 +31,5 @@ const startPromise = start();
 export async function handler(event: string, context: any) {
     await startPromise;
     await Promise.all(listeners.map(l => l.onTrigger(event)));
-    return proxy(server, event, context, 'PROMISE').promise;
+    return proxy(event, context);
 }

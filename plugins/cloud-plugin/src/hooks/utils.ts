@@ -28,13 +28,13 @@ export namespace CloudUtils {
     }
 
     export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
-        const mark = (source: string) => {
+        const mark = (source?: string) => {
             if (source) {
                 const subStr = source.slice(-4);
                 return `***********${subStr}`;
             }
         };
-        let profile = { account: { id: '' }, credentials: { accessKeyId: '', accessKeySecret: '' }, region: '' };
+        let profile: Profile = { account: { id: '' }, credentials: { accessKeyId: '', accessKeySecret: '' }, region: '' };
         profile = await getProfileFromFile(profilePath) || profile;
         const markedAccountId = mark(profile.account.id);
         const markedaccessKeyId = mark(profile.credentials.accessKeyId);

@@ -1,6 +1,6 @@
 malagu:
   cloud:
-    name: tencent
+    name: tencent cloud
     profilePath: tencent/profile.yml
     regions:
       - ap-guangzhou

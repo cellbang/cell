@@ -29,7 +29,7 @@ export function getDevSuccessInfo(options: WebpackChain.DevServer, name: string)
     if (options.has('socket')) {
         infos.push(`Listening to socket at ${chalk.green(options.get('socket'))}`);
     } else {
-        infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.bold.green(uri)}`);
+        infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.bold.green(uri)} 🎉`);
     }
 
     if (options.has('historyApiFallback')) {

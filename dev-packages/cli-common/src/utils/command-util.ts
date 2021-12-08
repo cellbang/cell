@@ -10,7 +10,7 @@ export namespace CommandUtil {
     export function getPkg(settings: Settings = SettingsUtil.getSettings(), projectPath = process.cwd()) {
         const options = minimist(process.argv.slice(2));
         const mode = getMode(options, settings);
-        return ApplicationPackage.create({ projectPath, mode, dev: isDev(options._, settings) });
+        return ApplicationPackage.create({ projectPath, mode, dev: isDev(options._, settings), settings });
     }
 
     export async function loadContext(settings: Settings, framework?: Framework, runtime?: string, projectPath?: string, spinner?: ora.Ora): Promise<CliContext> {

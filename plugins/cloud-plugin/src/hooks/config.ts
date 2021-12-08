@@ -1,11 +1,14 @@
 import { CliContext } from '@malagu/cli-common';
 import { ConfigOptions, Profile } from './cloud-protocol';
 import { CloudUtils } from './utils';
-import { readFileSync, existsSync } from 'fs-extra';
+import { DefaultProfileProvider } from './profile-provider';
+import { dump } from 'js-yaml';
 
 export default async (context: CliContext) => {
     const { cfg, options } = context;
-    const { regions, profilePath, name } = CloudUtils.getConfiguration(cfg);
+    const config = CloudUtils.getConfiguration(cfg);
+
+    const { regions, profilePath, name } = config;
     const opts = options as ConfigOptions;
     if (opts.accessKeyId || opts.accessKeySecret || opts.accountId || opts.region) {
         const profile = await CloudUtils.getProfileFromFile(profilePath) || <Profile>{ credentials: {}, account: {} };
@@ -15,13 +18,23 @@ export default async (context: CliContext) => {
         profile.region = opts.region || profile.region;
         profile.token = opts.token || profile.token;
         await CloudUtils.saveProfile(profilePath, profile);
-        return;
     }
     if (opts.show) {
-        const fullProfilePath = CloudUtils.getProfilePath(profilePath);
-        if (existsSync(fullProfilePath)) {
-            console.log(readFileSync(fullProfilePath, { encoding: 'utf8' }));
+        context.output.profile = await new DefaultProfileProvider().provide(config, true);
+    }
+    if (opts.showProfile) {
+        context.output.profile = await CloudUtils.getProfileFromFile(profilePath);
+        if (context.output.profile) {
+            console.log(dump(context.output));
         }
+    }
+    if (opts.logout) {
+        const profile: any = await CloudUtils.getProfileFromFile(profilePath) || <Profile>{ credentials: {}, account: {} };
+        profile.account.id = undefined;
+        profile.credentials.accessKeyId = undefined;
+        profile.credentials.accessKeySecret = undefined;
+        profile.token = undefined;
+        await CloudUtils.saveProfile(profilePath, profile);
     }
     if (Object.keys(opts).length === 0) {
         console.log(`Config ${name} cloud account:`)
