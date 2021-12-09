@@ -1,4 +1,5 @@
 export const frameworks = [
+    // frontend
     {
         name: 'create-react-app',
         useRuntime: 'default',
@@ -75,6 +76,59 @@ export const frameworks = [
             ]
         }
     },
+    {
+        name: 'svelte',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'public',
+            buildCommand: 'npm run build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"svelte":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'preact',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'build',
+            buildCommand: 'npx preact build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"preact":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'ember',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'dist',
+            buildCommand: 'npx ember-cli build --environment=production'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"ember-cli":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+
+    // backend
     {
         name: 'express',
         useRuntime: 'default',
