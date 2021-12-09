@@ -198,7 +198,7 @@ export class FriendlyErrorsWebpackPluginConfigFactory {
         const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
         config.plugin('friendlyErrors').use(FriendlyErrorsWebpackPlugin, [{
             compilationSuccessInfo: {
-                messages: dev ? getDevSuccessInfo(config.devServer, target) : [`The ${target} code output to ${chalk.bold.blue(config.output.get('path'))}`],
+                messages: dev ? getDevSuccessInfo(config.devServer, target) : [`The ${target} code output to ${chalk.bold.blue(config.output.get('path'))} 🎉`],
                 notes: []
             },
             clearConsole: dev

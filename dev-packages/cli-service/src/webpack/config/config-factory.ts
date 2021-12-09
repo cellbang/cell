@@ -1,6 +1,6 @@
 
 import { BaseConfigFactory } from './base-config-factory';
-import { BACKEND_TARGET, FRONTEND_TARGET, ConfigUtil, CliContext, LoggerUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET, FRONTEND_TARGET, ConfigUtil, CliContext } from '@malagu/cli-common';
 import { HookExecutor } from '../../hooks';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
@@ -16,11 +16,6 @@ export class ConfigFactory {
     async create(ctx: CliContext): Promise<WebpackChain[]> {
         const { cfg } = ctx;
         const targets = [ BACKEND_TARGET, FRONTEND_TARGET ];
-
-        LoggerUtil.printStage(ctx);
-        LoggerUtil.printMode(ctx);
-        LoggerUtil.printTargets(ctx);
-        LoggerUtil.printComponents(ctx);
 
         const configurations = [];
 
