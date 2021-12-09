@@ -25,6 +25,7 @@ export interface Runtime {
 export interface InstallOptions {
     runtime?: string;
     alias?: string;
+    forceInstallComponent?: boolean;
 }
 
 export class InstallManager {
@@ -48,13 +49,22 @@ export class InstallManager {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
         let packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
         packageContent = packageContent.replace('{{ version }}', pkg.version);
+        if (this.opts.forceInstallComponent) {
+            const runtimePkg = JSON.parse(packageContent);
+            if (runtimePkg.malagu?.components || runtimePkg.malagu?.devComponents) {
+                const { components, devComponents } = runtimePkg.malagu;
+                runtimePkg.dependencies = { ...runtimePkg.dependencies, ...components };
+                runtimePkg.devDependencies = { ...runtimePkg.devDependencies, ...devComponents };
+                packageContent = JSON.stringify(runtimePkg);
+            }
+        }
         await writeFile(packageJsonPath, packageContent);
     }
 
     async install(): Promise<void> {
         console.log(chalk`The {yellow ${this.runtimeName}} runtime is being installed...`);
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install(this.outputDir, {});
+        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install();
     }
 
     async executeHooks(): Promise<void> {

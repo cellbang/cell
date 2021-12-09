@@ -1,7 +1,8 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readJSON, writeJSON } from 'fs-extra';
+import { AddOptions, InstallOptions, PruneOptions, Packager } from './packager-protocol';
 
-export class NPM {
+export class NPM implements Packager {
     get lockfileName() {
         return 'package-lock.json';
     }
@@ -14,7 +15,7 @@ export class NPM {
         return true;
     }
 
-    async getProdDependencies(cwd: string, depth: number) {
+    async getProdDependencies(depth: number, cwd = process.cwd()) {
         // Get first level dependency graph
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = [
@@ -98,20 +99,32 @@ export class NPM {
         return lockfile;
     }
 
-    install(cwd: string) {
+    install(opts?: InstallOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['install'];
-        return spawnProcess(command, args, { cwd, stdio: 'inherit' });
+        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
-    prune(cwd: string) {
+    add(packages: string[], opts?: AddOptions, cwd = process.cwd()) {
+        const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
+        const args = ['add', ...packages];
+        if (opts?.exact) {
+            args.push('--save-exact');
+        }
+        if (opts?.dev) {
+            args.push('--save-dev');
+        }
+        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
+    }
+
+    prune(opts?: PruneOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['prune'];
 
-        return spawnProcess(command, args, { cwd });
+        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit'  });
     }
 
-    runScripts(cwd: string, scriptNames: string[]) {
+    runScripts(scriptNames: string[], cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const promises = scriptNames.map(scriptName => {
             const args = ['run', scriptName];

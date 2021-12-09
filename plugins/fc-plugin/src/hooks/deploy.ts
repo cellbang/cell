@@ -30,6 +30,10 @@ export default async (context: DeployContext) => {
     const functionName = functionMeta.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
+    console.log(chalk`{bold.cyan - Profile: }`);
+    console.log(`    - AccountId: ${account?.id}`);
+    console.log(`    - Region: ${region}`);
+
     console.log(chalk`{bold.cyan - FC:}`);
 
     await createOrUpdateService(serviceName, service);

@@ -5,19 +5,20 @@
   ],
   "version": "0.0.0",
   "license": "MIT",
-  "dependencies": {
-    "@malagu/scf-adapter": "latest",
-    "@malagu/fc-adapter": "latest",
-    "@malagu/lambda-adapter": "latest",
-    "@malagu/serve-static": "latest",
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
-    "@malagu/scf-plugin": "latest",
-    "@malagu/fc-plugin": "latest",
-    "@malagu/lambda-plugin": "latest",
-    "@malagu/static-plugin": "latest",
-    "@malagu/node-plugin": "latest"
-  },
-  "devDependencies": {
+  "dependencies": {},
+  "malagu": {
+    "components": {
+      "@malagu/scf-adapter": "{{ version }}",
+      "@malagu/fc-adapter": "{{ version }}",
+      "@malagu/lambda-adapter": "{{ version }}",
+      "@malagu/serve-static": "{{ version }}",
+      "@malagu/cli": "{{ version }}",
+      "@malagu/cli-service": "{{ version }}",
+      "@malagu/scf-plugin": "{{ version }}",
+      "@malagu/fc-plugin": "{{ version }}",
+      "@malagu/lambda-plugin": "{{ version }}",
+      "@malagu/static-plugin": "{{ version }}",
+      "@malagu/node-plugin": "{{ version }}"
+    }
   }
 }

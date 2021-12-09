@@ -98,6 +98,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
         .command('install [runtime] [alias]')
         .alias('i')
         .description('install a runtime')
+        .option('-f, --force-install-component [forceInstallComponent]', 'force install component')
         .option('-v, --version [version]', 'specify runtime version', 'latest')
         .action((r, alias, options) => {
             require('@malagu/cli-runtime/lib/install/install').default({ runtime: r, alias, ...options });

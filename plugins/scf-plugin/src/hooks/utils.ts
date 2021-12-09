@@ -120,8 +120,8 @@ export async function getFunction(client: any, namespaceName: string, functionNa
         const result = await doGetFunction(client, namespaceName, functionName);
         if (print) {
             console.log(chalk`{bold.cyan - Function: }`);
-            console.log(`    - Name: ${result.FunctionName}`);
-            console.log(`    - Type: ${result.Type}`);
+            console.log(`    - FunctionName: ${result.FunctionName}`);
+            console.log(`    - FunctionType: ${result.Type}`);
             console.log(`    - MemorySize: ${result.MemorySize}`);
             console.log(`    - Role: ${result.Role}`);
             console.log(`    - Status: ${result.Status}`);
@@ -191,8 +191,8 @@ export async function getNamespace(client: any, namespaceName: string, print = f
     if (result) {
         if (print) {
             console.log(chalk`{bold.cyan - Namespace: }`);
-            console.log(`    - Name: ${result.Name}`);
-            console.log(`    - Type: ${result.Type}`);
+            console.log(`    - NamespaceName: ${result.Name}`);
+            console.log(`    - NamespaceType: ${result.Type}`);
         }
         return result;
     }
@@ -239,7 +239,7 @@ export async function getApi(client: any, serviceId: string, apiName: string, pr
         if (print) {
             console.log(chalk`{bold.cyan - API: }`);
             console.log(`    - ApiId: ${result.ApiId}`);
-            console.log(`    - Name: ${result.ApiName}`);
+            console.log(`    - ApiName: ${result.ApiName}`);
             console.log(`    - Protocol: ${result.Protocol}`);
         }
         return result;

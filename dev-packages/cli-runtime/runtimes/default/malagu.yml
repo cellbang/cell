@@ -1,2 +1,2 @@
 components:
-  '@malagu/cli-service': latest
+  '@malagu/cli-service': ${version}

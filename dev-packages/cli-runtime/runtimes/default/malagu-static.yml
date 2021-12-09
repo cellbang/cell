@@ -2,5 +2,5 @@ targets:
   - backend
 mode: "${'fc' in currentMode ? 'fc-adapter' : 'lambda' in currentMode ? 'lambda-adapter' : 'scf-adapter' }"
 components:
-  '@malagu/serve-static': latest
-  '@malagu/static-plugin': latest
+  '@malagu/serve-static': ${version}
+  '@malagu/static-plugin': ${version}

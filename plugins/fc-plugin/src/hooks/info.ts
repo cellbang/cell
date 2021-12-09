@@ -26,6 +26,10 @@ export default async (context: InfoContext) => {
     const functionName = functionMeta.name;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
+    console.log(chalk`{bold.cyan - Profile: }`);
+    console.log(`    - AccountId: ${account?.id}`);
+    console.log(`    - Region: ${region}`);
+    
     context.output.serviceInfo = await getService(fcClient, serviceName, true);
     if (!context.output.serviceInfo) {
         return;

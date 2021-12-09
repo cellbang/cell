@@ -12,6 +12,7 @@ import mergeWith = require('lodash.mergewith');
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
 import { PathUtil } from '../utils';
+import { RuntimeUtil } from '../utils';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -21,6 +22,7 @@ export class ApplicationPackage {
     readonly projectPath: string;
     readonly dev: boolean;
     readonly settings?: Settings;
+    readonly runtime?: string;
     readonly log: ApplicationLog;
     readonly error: ApplicationLog;
     protected componentPackageLoader = new ComponentPackageLoader(this);
@@ -31,6 +33,7 @@ export class ApplicationPackage {
     ) {
         this.projectPath = options.projectPath;
         this.dev = options.dev;
+        this.runtime = options.runtime;
         this.settings = options.settings;
 
         this.log = options.log || console.log.bind(console);
@@ -57,8 +60,9 @@ export class ApplicationPackage {
                 this._pkg = {} as PublishedNodePackage;
             }
             if (process.cwd() !== this.projectPath) {
-                if (existsSync(paths.join(process.cwd(), 'package.json'))) {
-                    const tmp = readJsonFile(paths.join(process.cwd(), 'package.json'));
+                const cwdPackagePath = paths.join(process.cwd(), 'package.json');
+                if (existsSync(cwdPackagePath)) {
+                    const tmp = readJsonFile(cwdPackagePath);
                     this._pkg!.name = tmp.name || paths.basename(process.cwd());
                     this._pkg!.version = tmp.version || 'latest';
                     this._pkg!.devDependencies = { ...this._pkg!.devDependencies, ...tmp.devDependencies } as Dependencies;
@@ -124,10 +128,21 @@ export class ApplicationPackage {
                 mode
             );
             if (components || devComponents) {
+                const dependencies = components || {};
+                const  devDependencies = devComponents || {};
+                for (const key in components) {
+                    if (Object.prototype.hasOwnProperty.call(components, key)) {
+                        const version = components[key];
+                        if (version?.includes('$')) {
+                            components[key] = version.replace('${version}', RuntimeUtil.getVersion());
+                        }
+
+                    }
+                }
                 this._componentPackages = collector.collect({
                     ...this.pkg,
-                    dependencies: components || {},
-                    devDependencies: devComponents || {}
+                    dependencies,
+                    devDependencies
                 });
             } else {
                 this._componentPackages = collector.collect(this.pkg);

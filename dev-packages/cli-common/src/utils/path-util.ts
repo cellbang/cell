@@ -2,6 +2,7 @@ import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
 import { homedir } from 'os';
 import { v5 } from 'uuid';
+import { RuntimeUtil } from './runtime-util';
 
 export namespace PathUtil {
     export function getProjectDistPathForTarget(target: string, runtime?: string) {
@@ -51,6 +52,10 @@ export namespace PathUtil {
     }
 
     export function getRuntimePath(runtime?: string) {
-        return runtime ? path.join(getMalaguHomePath(), 'runtimes', runtime) : process.cwd();
+        if (runtime) {
+            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.join(getMalaguHomePath(), 'runtimes');
+            return path.join(basePath, RuntimeUtil.getVersion(), runtime);
+        }
+        return process.cwd();
     }
 }

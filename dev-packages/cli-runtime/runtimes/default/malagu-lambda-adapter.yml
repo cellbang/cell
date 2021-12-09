@@ -1,2 +1,2 @@
 components:
-  '@malagu/lambda-adapter': latest
+  '@malagu/lambda-adapter': ${version}

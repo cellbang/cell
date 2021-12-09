@@ -1,2 +1,2 @@
 components:
-  '@malagu/lambda-plugin': latest
+  '@malagu/lambda-plugin': ${version}

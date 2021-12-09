@@ -20,7 +20,7 @@ export default async (context: DeployContext) => {
     const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
-    const { region, credentials } = await profileProvider.provide(cloudConfig);
+    const { region, credentials, account } = await profileProvider.provide(cloudConfig);
 
     const clients = await createClients(region, credentials);
     scfClient = clients.scfClient;
@@ -32,6 +32,10 @@ export default async (context: DeployContext) => {
     const functionName = functionMeta.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
+    console.log(chalk`{bold.cyan - Profile: }`);
+    console.log(`    - AccountId: ${account?.id}`);
+    console.log(`    - Region: ${region}`);
+
     console.log(chalk`{bold.cyan - SCF:}`);
 
     await createOrUpdateNamespace(namespace);

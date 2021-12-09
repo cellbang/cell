@@ -3,6 +3,7 @@ import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
 import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env';
+import { Packager } from '../packager/packager-protocol';
 
 export class SpawnError extends Error {
     constructor(message: string, public stdout: any, public stderr: any) {
@@ -45,7 +46,7 @@ export function spawnProcess(command: string, args: string[], options: any) {
     });
 }
 
-export function getPackager(packagerId?: 'npm' | 'yarn', cwd = process.cwd()): NPM | Yarn {
+export function getPackager(packagerId?: 'npm' | 'yarn', cwd = process.cwd()): Packager {
     const registeredPackagers = {
         npm: new NPM(),
         yarn: new Yarn()

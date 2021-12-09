@@ -34,6 +34,10 @@ export default async (context: CliContext) => {
     const accountId = account.id;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
+    console.log(chalk`{bold.cyan - Profile: }`);
+    console.log(`    - AccountId: ${account?.id}`);
+    console.log(`    - Region: ${region}`);
+
     console.log(chalk`{bold.cyan - Lambda:}`);
 
     await createRoleIfNeed(functionMeta, accountId, region);
