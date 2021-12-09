@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.3.0
+
+- feat(cli-common) 支持多版本运行时
+- feat(cli-common) 支持运行时组件按需加载
+- feat(cli-runtime) 运行时模板渲染优化
+- feat(plugins) 日志输出优化 
+
 ## 2.2.2
 
 - fix(cli-service) 修复构建时文件目录不存在

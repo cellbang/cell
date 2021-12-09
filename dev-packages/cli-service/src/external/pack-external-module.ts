@@ -230,7 +230,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         console.log(`Using package.json sections ${Object.keys(packageSections).join(', ')}`);
     }
 
-    const dependencyGraph = await packager.getProdDependencies(process.cwd(), 1);
+    const dependencyGraph = await packager.getProdDependencies(1);
 
     const problems = dependencyGraph.problems || [];
     if (verbose && !isEmpty(problems)) {
@@ -280,7 +280,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         try {
             let packageLockFile = await packager.readLockfile(packageLockPath);
             packageLockFile = packager.rebaseLockfile(relPath, packageLockFile);
-            await packager.writeLockfile(join(compositeModulePath, packager.lockfileName), packageLockFile);
+            packager.writeLockfile(join(compositeModulePath, packager.lockfileName), packageLockFile);
         } catch (err) {
             console.warn(`Warning: Could not read lock file: ${err.message}`);
         }
@@ -288,21 +288,21 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
 
     const start = now();
     console.log('Packing external modules: ' + compositeModules.join(', '));
-    await packager.install(compositeModulePath, packagerOptions);
+    await packager.install(packagerOptions, compositeModulePath);
     if (verbose) {
         console.log(`Package took [${now() - start} ms]`);
     }
 
     // Prune extraneous packages - removes not needed ones
     const startPrune = now();
-    await packager.prune(compositeModulePath, packagerOptions);
+    await packager.prune(packagerOptions, compositeModulePath);
     if (verbose) {
         console.log(`Prune: ${compositeModulePath} [${now() - startPrune} ms]`);
     }
 
     // Prune extraneous packages - removes not needed ones
     const startRunScripts = now();
-    await packager.runScripts(compositeModulePath, Object.keys(packageScripts));
+    await packager.runScripts(Object.keys(packageScripts), compositeModulePath);
     if (verbose) {
         console.log(`Run scripts: ${compositeModulePath} [${now() - startRunScripts} ms]`);
     }

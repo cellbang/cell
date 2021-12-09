@@ -4,3 +4,4 @@ export * from './config-util';
 export * from './path-util';
 export * from './logger-util';
 export * from './spinner-util';
+export * from './runtime-util';

@@ -8,7 +8,7 @@ import { customizer } from '../package/package-protocol';
 
 export namespace SettingsUtil {
     export function getSettingsPath() {
-        return path.join(PathUtil.getMalaguHomePath(), 'settings.yml');
+        return process.env.MALAGU_SETTINGS_PATH ? process.env.MALAGU_SETTINGS_PATH : path.join(PathUtil.getMalaguHomePath(), 'settings.yml');
     }
 
     function doGetSettings(): Settings {

@@ -14,7 +14,7 @@ export default async (context: InfoContext) => {
     const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
-    const { region, credentials } = await profileProvider.provide(cloudConfig);
+    const { region, credentials, account } = await profileProvider.provide(cloudConfig);
 
     const clients = await createClients(region, credentials);
     lambdaClient = clients.lambdaClient;
@@ -25,6 +25,9 @@ export default async (context: InfoContext) => {
     const functionName = functionMeta.name;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
+    console.log(chalk`{bold.cyan - Profile: }`);
+    console.log(`    - AccountId: ${account?.id}`);
+    console.log(`    - Region: ${region}`);
 
     context.output.functionInfo = await getFunction(lambdaClient, functionName, true);
     if (!context.output.functionInfo) {

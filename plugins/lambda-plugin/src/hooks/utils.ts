@@ -64,7 +64,7 @@ export async function getApi(client: ApiGatewayV2, apiName: string, print = fals
         if (print) {
             console.log(chalk`{bold.cyan - API: }`);
             console.log(`    - ApiId: ${result.ApiId}`);
-            console.log(`    - Name: ${result.Name}`);
+            console.log(`    - ApiName: ${result.Name}`);
             console.log(`    - ApiEndpoint: ${result.ApiEndpoint}`);
             console.log(`    - ProtocolType: ${result.ProtocolType}`);
         }
@@ -201,7 +201,7 @@ export async function getAlias(client: Lambda, functionName: string, aliasName: 
         const result = await client.getAlias({ FunctionName: functionName, Name: aliasName }).promise();
         if (print) {
             console.log(chalk`{bold.cyan - Alias:}`);
-            console.log(`    - Name: ${result.Name}`);
+            console.log(`    - AliasName: ${result.Name}`);
             console.log(`    - FunctionVersion: ${result.FunctionVersion}`);
         }
         return result

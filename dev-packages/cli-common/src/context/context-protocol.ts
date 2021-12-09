@@ -1,6 +1,6 @@
 import { ApplicationPackage } from '../package';
 import { program, Command } from '../command';
-import { ComponentUtil, PathUtil } from '../utils';
+import { ComponentUtil, PathUtil, SpinnerUtil } from '../utils';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
 import { HookExecutor } from '../hook';
@@ -8,6 +8,7 @@ import { ApplicationConfig } from '../package';
 import { Framework } from '@malagu/frameworks';
 import { ExpressionContext } from '../el';
 import { Settings } from '../settings/settings-protocol';
+import { getPackager } from '../packager';
 
 export interface CliContext {
     program: Command;
@@ -31,6 +32,45 @@ export interface CreateCliContextOptions extends Record<string, any> {
 }
 
 export namespace CliContext {
+
+    async function installComponent(pkg: ApplicationPackage, component: string, version: string, dev = false) {
+        try {
+             pkg.resolveModule(component + '/package.json');
+        } catch (error) {
+            if (error.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+                // NoOp
+            }
+            if (error.code === 'MODULE_NOT_FOUND') {
+                const packager = getPackager();
+                await SpinnerUtil.start(`Install ${component}@${version}`, async () => {
+                    await packager.add([ `${component}@${version}` ], { exact: true, dev });
+                });
+            }
+        }
+    }
+
+    async function installComponents(pkg: ApplicationPackage) {
+        const components = pkg.rootComponentPackage.malaguComponent!.components;
+        const devComponents = pkg.rootComponentPackage.malaguComponent!.devComponents;
+        if (components) {
+            for (const component in components) {
+                if (Object.prototype.hasOwnProperty.call(components, component)) {
+                    const version = components[component];
+                    await installComponent(pkg, component, version);
+                }
+            }
+        }
+
+        if (devComponents) {
+            for (const component in devComponents) {
+                if (Object.prototype.hasOwnProperty.call(devComponents, component)) {
+                    const version = devComponents[component];
+                    await installComponent(pkg, component, version);
+                }
+            }
+        }
+    }
+
     export async function create(options: CreateCliContextOptions, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
@@ -49,6 +89,9 @@ export namespace CliContext {
             mode = Array.from(new Set<string>(mode));
         }
         const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings });
+
+        await installComponents(pkg);
+
         const cfg = new ApplicationConfig({ targets, program }, pkg);
         const handleExpression = (obj: any, ctx?: ExpressionContext) => {
             const expressionHandler = new ExpressionHandler();

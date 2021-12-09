@@ -1,7 +1,8 @@
 import { spawnProcess, SpawnError } from './utils';
 import { readFile, writeFile } from 'fs-extra';
+import { Packager , InstallOptions, PruneOptions, AddOptions} from './packager-protocol';
 
-export class Yarn {
+export class Yarn implements Packager {
     get lockfileName() {
         return 'yarn.lock';
     }
@@ -14,7 +15,7 @@ export class Yarn {
         return false;
     }
 
-    async getProdDependencies(cwd: string, depth: number) {
+    async getProdDependencies(depth: number, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const args = ['list', `--depth=${depth || 1}`, '--json', '--production'];
         // If we need to ignore some errors add them here
@@ -94,29 +95,41 @@ export class Yarn {
         return replacements.reduce((__, replacement) => __.replace(replacement.oldRef, replacement.newRef), lockfile);
     }
 
-    install(cwd: string, packagerOptions: any) {
+    install(opts?: InstallOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const args = ['install'];
 
         // Convert supported packagerOptions
-        if (packagerOptions.ignoreScripts) {
+        if (opts?.ignoreScripts) {
             args.push('--ignore-scripts');
         }
-        if (packagerOptions.frozenLockfile) {
+        if (opts?.frozenLockfile) {
             args.push('--frozen-lockfile');
         }
-        if (packagerOptions.nonInteractive) {
+        if (opts?.nonInteractive) {
             args.push('--non-interactive');
         }
-        return spawnProcess(command, args, { cwd, stdio: 'inherit' });
+        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
+    }
+
+    add(packages: string[], opts?: AddOptions, cwd = process.cwd()) {
+        const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
+        const args = ['add', ...packages];
+        if (opts?.exact) {
+            args.push('--exact');
+        }
+        if (opts?.dev) {
+            args.push('--dev');
+        }
+        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
     // "Yarn install" prunes automatically
-    prune(cwd: string, packagerOptions: any) {
-        return this.install(cwd, packagerOptions);
+    prune(opts?: PruneOptions, cwd = process.cwd()) {
+        return this.install(opts, cwd);
     }
 
-    runScripts(cwd: string, scriptNames: string[]) {
+    runScripts(scriptNames: string[], cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const promises = scriptNames.map(scriptName => {
             const args = ['run', scriptName];
