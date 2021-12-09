@@ -4,21 +4,21 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.2.1",
+  "version": "2.2.2",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.2.1",
-    "@malagu/fc-adapter": "2.2.1",
-    "@malagu/mvc": "2.2.1"
+    "@malagu/core": "2.2.2",
+    "@malagu/fc-adapter": "2.2.2",
+    "@malagu/mvc": "2.2.2"
   },
   "devDependencies": {
-    "@malagu/cli": "2.2.1",
-    "@malagu/cli-service": "2.2.1",
-    "@malagu/fc-plugin": "2.2.1"
+    "@malagu/cli": "2.2.2",
+    "@malagu/cli-service": "2.2.2",
+    "@malagu/fc-plugin": "2.2.2"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
