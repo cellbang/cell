@@ -1,6 +1,10 @@
 # Change Log
 
-## 2.2.0
+## 2.2.2
+
+- fix(cli-service) 修复构建时文件目录不存在
+
+## 2.2.1
 
 - feat(cli-common) 支持 info 插件，优化 `malagu info` 命令
 - feat(lambda-plugin) 添加 info 插件
