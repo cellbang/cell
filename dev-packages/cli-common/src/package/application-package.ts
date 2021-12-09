@@ -12,7 +12,6 @@ import mergeWith = require('lodash.mergewith');
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
 import { PathUtil } from '../utils';
-import { RuntimeUtil } from '../utils';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -123,22 +122,10 @@ export class ApplicationPackage {
             const components = this.rootComponentPackage.malaguComponent!.components;
             const devComponents = this.rootComponentPackage.malaguComponent!.devComponents;
 
-            const collector = new ComponentPackageCollector(
-                this,
-                mode
-            );
+            const collector = new ComponentPackageCollector(this, mode);
             if (components || devComponents) {
                 const dependencies = components || {};
                 const  devDependencies = devComponents || {};
-                for (const key in components) {
-                    if (Object.prototype.hasOwnProperty.call(components, key)) {
-                        const version = components[key];
-                        if (version?.includes('$')) {
-                            components[key] = version.replace('${version}', RuntimeUtil.getVersion());
-                        }
-
-                    }
-                }
                 this._componentPackages = collector.collect({
                     ...this.pkg,
                     dependencies,

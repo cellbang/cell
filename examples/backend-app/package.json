@@ -4,21 +4,21 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.2.2",
+  "version": "2.3.0",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.2.2",
-    "@malagu/lambda-adapter": "2.2.2",
-    "@malagu/mvc": "2.2.2"
+    "@malagu/core": "2.3.0",
+    "@malagu/lambda-adapter": "2.3.0",
+    "@malagu/mvc": "2.3.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.2.2",
-    "@malagu/cli-service": "2.2.2",
-    "@malagu/lambda-plugin": "2.2.2"
+    "@malagu/cli": "2.3.0",
+    "@malagu/cli-service": "2.3.0",
+    "@malagu/lambda-plugin": "2.3.0"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

@@ -48,7 +48,7 @@ export class InstallManager {
         const pkg = require('../../package.json');
         const packageJsonPath = resolve(this.outputDir, 'package.json');
         let packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
-        packageContent = packageContent.replace('{{ version }}', pkg.version);
+        packageContent = packageContent.replace(/{{ version }}/g, pkg.version);
         if (this.opts.forceInstallComponent) {
             const runtimePkg = JSON.parse(packageContent);
             if (runtimePkg.malagu?.components || runtimePkg.malagu?.devComponents) {
