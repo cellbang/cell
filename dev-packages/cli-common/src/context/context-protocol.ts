@@ -1,6 +1,6 @@
 import { ApplicationPackage } from '../package';
 import { program, Command } from '../command';
-import { ComponentUtil, PathUtil, SpinnerUtil } from '../utils';
+import { ComponentUtil, PathUtil, RuntimeUtil, SpinnerUtil } from '../utils';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el';
 import { HookExecutor } from '../hook';
@@ -9,6 +9,8 @@ import { Framework } from '@malagu/frameworks';
 import { ExpressionContext } from '../el';
 import { Settings } from '../settings/settings-protocol';
 import { getPackager } from '../packager';
+import * as ora from 'ora';
+const chalk = require('chalk');
 
 export interface CliContext {
     program: Command;
@@ -33,7 +35,7 @@ export interface CreateCliContextOptions extends Record<string, any> {
 
 export namespace CliContext {
 
-    async function installComponent(pkg: ApplicationPackage, component: string, version: string, dev = false) {
+    async function installComponent(pkg: ApplicationPackage, component: string, version: string, spinner?: ora.Ora, dev = false) {
         try {
              pkg.resolveModule(component + '/package.json');
         } catch (error) {
@@ -41,22 +43,27 @@ export namespace CliContext {
                 // NoOp
             }
             if (error.code === 'MODULE_NOT_FOUND') {
+                spinner?.stop();
                 const packager = getPackager();
-                await SpinnerUtil.start(`Install ${component}@${version}`, async () => {
-                    await packager.add([ `${component}@${version}` ], { exact: true, dev });
-                });
+                await SpinnerUtil.start({ text: chalk`Installing {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime...`}, async () => {
+                    await packager.add([ `${component}@${version}` ], { exact: true, dev, stdio: 'pipe' }, PathUtil.getRuntimePath(pkg.runtime));
+                }, chalk`Installed {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime`);
             }
         }
     }
 
-    async function installComponents(pkg: ApplicationPackage) {
+    async function installComponents(pkg: ApplicationPackage, spinner?: ora.Ora) {
         const components = pkg.rootComponentPackage.malaguComponent!.components;
         const devComponents = pkg.rootComponentPackage.malaguComponent!.devComponents;
         if (components) {
             for (const component in components) {
                 if (Object.prototype.hasOwnProperty.call(components, component)) {
-                    const version = components[component];
-                    await installComponent(pkg, component, version);
+                    let version = components[component];
+                    if (version?.includes('$')) {
+                        version = version.replace('${version}', RuntimeUtil.getVersion());
+                        components[component] = version;
+                    }
+                    await installComponent(pkg, component, version, spinner);
                 }
             }
         }
@@ -64,8 +71,12 @@ export namespace CliContext {
         if (devComponents) {
             for (const component in devComponents) {
                 if (Object.prototype.hasOwnProperty.call(devComponents, component)) {
-                    const version = devComponents[component];
-                    await installComponent(pkg, component, version);
+                    let version = devComponents[component];
+                    if (version?.includes('$')) {
+                        version = version.replace('${version}', RuntimeUtil.getVersion());
+                        devComponents[component] = version;
+                    }
+                    await installComponent(pkg, component, version, spinner, true);
                 }
             }
         }
@@ -89,8 +100,7 @@ export namespace CliContext {
             mode = Array.from(new Set<string>(mode));
         }
         const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings });
-
-        await installComponents(pkg);
+        await installComponents(pkg, options.spinner);
 
         const cfg = new ApplicationConfig({ targets, program }, pkg);
         const handleExpression = (obj: any, ctx?: ExpressionContext) => {

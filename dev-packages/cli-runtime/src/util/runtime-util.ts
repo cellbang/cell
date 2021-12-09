@@ -45,13 +45,13 @@ export namespace RuntimeUtil {
     }
 
     export async function getInstalledRuntimes() {
-        const runtimesPath = join(PathUtil.getMalaguHomePath(), 'runtimes');
+        const runtimeRootPath = PathUtil.getCurrentRuntimeRootPath();
         const result: Runtime[] = [];
 
-        if (existsSync(runtimesPath)) {
-            const runtimes = await readdir(runtimesPath);
+        if (existsSync(runtimeRootPath)) {
+            const runtimes = await readdir(runtimeRootPath);
             for (const runtime of runtimes) {
-                const packageJsonPath = join(runtimesPath, runtime, 'package.json');
+                const packageJsonPath = join(runtimeRootPath, runtime, 'package.json');
                 if (existsSync(packageJsonPath)) {
                     const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
                     result.push({

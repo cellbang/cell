@@ -112,6 +112,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
     runtimeCmd
         .command('list')
+        .alias('ls')
         .description('list all runtimes')
         .action(() => {
             require('@malagu/cli-runtime/lib/list/list').default({});
@@ -119,6 +120,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
     runtimeCmd
         .command('uninstall [runtime]')
+        .alias('u')
         .description('uninstall a runtime')
         .action(r => {
             require('@malagu/cli-runtime/lib/uninstall/uninstall').default({ runtime: r });

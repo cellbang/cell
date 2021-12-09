@@ -58,4 +58,13 @@ export namespace PathUtil {
         }
         return process.cwd();
     }
+
+    export function getRuntimeRootPath(version?: string) {
+        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.join(getMalaguHomePath(), 'runtimes');
+        return version ? path.join(basePath, RuntimeUtil.getVersion()) : basePath;
+    }
+
+    export function getCurrentRuntimeRootPath() {
+        return getRuntimeRootPath(RuntimeUtil.getVersion());
+    }
 }
