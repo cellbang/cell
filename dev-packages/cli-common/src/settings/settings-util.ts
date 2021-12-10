@@ -30,6 +30,12 @@ export namespace SettingsUtil {
         saveSettings(settings);
     }
 
+    export function resetSettings(parts: Record<string, any>) {
+        let settings = doGetSettings();
+        settings = { ...settings, ...parts };
+        saveSettings(settings);
+    }
+
     export function saveSettings(settings: Settings) {
         const settingsPath = getSettingsPath();
         ensureFileSync(settingsPath);

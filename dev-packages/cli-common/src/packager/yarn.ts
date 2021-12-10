@@ -113,7 +113,7 @@ export class Yarn implements Packager {
     }
 
     add(packages: string[], opts?: AddOptions, cwd = process.cwd()) {
-        const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
+        const command = /^win/.test(process.platform) ? 'yarn.cmd' : 'yarn';
         const args = ['add', ...packages];
         if (opts?.exact) {
             args.push('--exact');
