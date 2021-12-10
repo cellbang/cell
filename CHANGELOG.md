@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.3.3
+## 2.3.4
 
 - feat(cli-common) 支持多版本运行时
 - feat(cli-common) 支持运行时组件按需加载

@@ -1,7 +1,7 @@
 // @ts-check
 
 const path = require('path');
-const chalk = require('chalk').default;
+const chalk = require('chalk');
 const cp = require('child_process');
 
 let code = 0;
