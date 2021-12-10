@@ -45,7 +45,7 @@ export default async (options: UseOptions) => {
         }
         if (runtime) {
             if (runtime === Runtimes.empty) {
-                SettingsUtil.updateSettings({ defaultRuntime: undefined });
+                SettingsUtil.resetSettings({ defaultRuntime: undefined });
             } else {
                 SettingsUtil.updateSettings({ defaultRuntime: runtime });
             }
