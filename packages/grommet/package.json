@@ -1,11 +1,11 @@
 {
   "name": "@malagu/grommet",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "2.4.2",
+    "@malagu/react": "2.4.3",
     "@types/styled-components": "^5.1.1",
     "grommet": "^2.16.3",
     "grommet-icons": "^4.4.0",
@@ -42,7 +42,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.4.2"
+    "@malagu/ext-scripts": "2.4.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

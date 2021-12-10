@@ -1,13 +1,13 @@
 {
   "name": "@malagu/fc-plugin",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
   "dependencies": {
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.1.1",
     "@alicloud/ram": "^1.0.0",
-    "@malagu/cloud-plugin": "2.4.2",
-    "@malagu/code-loader-plugin": "2.4.2",
+    "@malagu/cloud-plugin": "2.4.3",
+    "@malagu/code-loader-plugin": "2.4.3",
     "fs-extra": "^8.1.0",
     "jszip": "^3.7.1"
   },
@@ -46,7 +46,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.4.2"
+    "@malagu/ext-scripts": "2.4.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
