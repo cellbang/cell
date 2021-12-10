@@ -44,7 +44,7 @@ export namespace CliContext {
             }
             if (error.code === 'MODULE_NOT_FOUND') {
                 spinner?.stop();
-                const packager = getPackager();
+                const packager = getPackager(undefined, PathUtil.getRuntimePath(pkg.runtime));
                 await SpinnerUtil.start({ text: chalk`Installing {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime...`}, async () => {
                     await packager.add([ `${component}@${version}` ], { exact: true, dev, stdio: 'pipe' }, PathUtil.getRuntimePath(pkg.runtime));
                 }, chalk`Installed {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime`);

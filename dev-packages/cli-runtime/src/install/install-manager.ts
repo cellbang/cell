@@ -55,7 +55,7 @@ export class InstallManager {
                 const { components, devComponents } = runtimePkg.malagu;
                 runtimePkg.dependencies = { ...runtimePkg.dependencies, ...components };
                 runtimePkg.devDependencies = { ...runtimePkg.devDependencies, ...devComponents };
-                packageContent = JSON.stringify(runtimePkg);
+                packageContent = JSON.stringify(runtimePkg, undefined, 2);
             }
         }
         await writeFile(packageJsonPath, packageContent);
@@ -64,7 +64,7 @@ export class InstallManager {
     async install(): Promise<void> {
         console.log(chalk`The {yellow ${this.runtimeName}} runtime is being installed...`);
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install();
+        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({}, this.outputDir);
     }
 
     async executeHooks(): Promise<void> {
