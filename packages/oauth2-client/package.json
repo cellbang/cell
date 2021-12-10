@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-client",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-jose": "2.4.2"
+    "@malagu/oauth2-jose": "2.4.3"
   },
   "publishConfig": {
     "access": "public"
