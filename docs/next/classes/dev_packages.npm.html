@@ -75,6 +75,12 @@
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/dev_packages.packager.html" class="tsd-signature-type">Packager</a></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -91,6 +97,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dev_packages.npm.html#_rebasefilereferences" class="tsd-kind-icon">_rebase<wbr>File<wbr>References</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dev_packages.npm.html#add" class="tsd-kind-icon">add</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dev_packages.npm.html#getproddependencies" class="tsd-kind-icon">get<wbr>Prod<wbr>Dependencies</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dev_packages.npm.html#install" class="tsd-kind-icon">install</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="dev_packages.npm.html#prune" class="tsd-kind-icon">prune</a></li>
@@ -115,7 +122,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L9">dev-packages/cli-common/src/packager/npm.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L10">dev-packages/cli-common/src/packager/npm.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">[]</span></h4>
@@ -132,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L5">dev-packages/cli-common/src/packager/npm.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L6">dev-packages/cli-common/src/packager/npm.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -149,7 +156,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L13">dev-packages/cli-common/src/packager/npm.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L14">dev-packages/cli-common/src/packager/npm.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -169,7 +176,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L71">dev-packages/cli-common/src/packager/npm.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L72">dev-packages/cli-common/src/packager/npm.ts:72</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -186,25 +193,54 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getproddependencies" class="tsd-anchor"></a>
-					<h3>get<wbr>Prod<wbr>Dependencies</h3>
+					<a name="add" class="tsd-anchor"></a>
+					<h3>add</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Prod<wbr>Dependencies<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, depth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>packages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, opts<span class="tsd-signature-symbol">?: </span><a href="../interfaces/dev_packages.addoptions.html" class="tsd-signature-type">AddOptions</a>, cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L17">dev-packages/cli-common/src/packager/npm.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L108">dev-packages/cli-common/src/packager/npm.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cwd: <span class="tsd-signature-type">string</span></h5>
+									<h5>packages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> opts: <a href="../interfaces/dev_packages.addoptions.html" class="tsd-signature-type">AddOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getproddependencies" class="tsd-anchor"></a>
+					<h3>get<wbr>Prod<wbr>Dependencies</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Prod<wbr>Dependencies<span class="tsd-signature-symbol">(</span>depth<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L18">dev-packages/cli-common/src/packager/npm.ts:18</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
 									<h5>depth: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -215,19 +251,22 @@
 					<a name="install" class="tsd-anchor"></a>
 					<h3>install</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">install<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">install<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">?: </span><a href="../interfaces/dev_packages.installoptions.html" class="tsd-signature-type">InstallOptions</a>, cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L101">dev-packages/cli-common/src/packager/npm.ts:101</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L102">dev-packages/cli-common/src/packager/npm.ts:102</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cwd: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> opts: <a href="../interfaces/dev_packages.installoptions.html" class="tsd-signature-type">InstallOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -238,19 +277,22 @@
 					<a name="prune" class="tsd-anchor"></a>
 					<h3>prune</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">prune<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">prune<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">?: </span><a href="../interfaces/dev_packages.pruneoptions.html" class="tsd-signature-type">PruneOptions</a>, cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L107">dev-packages/cli-common/src/packager/npm.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L120">dev-packages/cli-common/src/packager/npm.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cwd: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> opts: <a href="../interfaces/dev_packages.pruneoptions.html" class="tsd-signature-type">PruneOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -266,8 +308,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/dev_packages.packager.html">Packager</a>.<a href="../interfaces/dev_packages.packager.html#readlockfile">readLockfile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L63">dev-packages/cli-common/src/packager/npm.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L64">dev-packages/cli-common/src/packager/npm.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -289,8 +332,9 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/dev_packages.packager.html">Packager</a>.<a href="../interfaces/dev_packages.packager.html#rebaselockfile">rebaseLockfile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L87">dev-packages/cli-common/src/packager/npm.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L88">dev-packages/cli-common/src/packager/npm.ts:88</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -318,22 +362,22 @@
 					<a name="runscripts" class="tsd-anchor"></a>
 					<h3>run<wbr>Scripts</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">run<wbr>Scripts<span class="tsd-signature-symbol">(</span>cwd<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, scriptNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">run<wbr>Scripts<span class="tsd-signature-symbol">(</span>scriptNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, cwd<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L114">dev-packages/cli-common/src/packager/npm.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L127">dev-packages/cli-common/src/packager/npm.ts:127</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cwd: <span class="tsd-signature-type">string</span></h5>
+									<h5>scriptNames: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
-									<h5>scriptNames: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cwd: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -350,7 +394,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/6ce59547/dev-packages/cli-common/src/packager/npm.ts#L67">dev-packages/cli-common/src/packager/npm.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/42ad8bd9/dev-packages/cli-common/src/packager/npm.ts#L68">dev-packages/cli-common/src/packager/npm.ts:68</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -400,6 +444,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="dev_packages.npm.html#_rebasefilereferences" class="tsd-kind-icon">_rebase<wbr>File<wbr>References</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="dev_packages.npm.html#add" class="tsd-kind-icon">add</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="dev_packages.npm.html#getproddependencies" class="tsd-kind-icon">get<wbr>Prod<wbr>Dependencies</a>
