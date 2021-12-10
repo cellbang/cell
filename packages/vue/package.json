@@ -1,13 +1,13 @@
 {
   "name": "@malagu/vue",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "@malagu/core": "2.4.2",
+    "@malagu/core": "2.4.3",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.8.6",
@@ -56,7 +56,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.4.2"
+    "@malagu/ext-scripts": "2.4.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

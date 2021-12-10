@@ -1,11 +1,11 @@
 {
   "name": "@malagu/antd",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "2.4.2",
+    "@malagu/react": "2.4.3",
     "antd": "^4.0.2",
     "dayjs": "^1.8.22",
     "react": "^16.12.0",
@@ -40,7 +40,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.4.2"
+    "@malagu/ext-scripts": "2.4.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

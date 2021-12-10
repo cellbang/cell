@@ -1,6 +1,10 @@
 # Change Log
 
-## 2.3.4
+## 2.4.3
+
+feat(framework): frontend framework deploy support svelte, preact, ember (#77)
+
+## 2.4.2
 
 - feat(cli-common) 支持多版本运行时
 - feat(cli-common) 支持运行时组件按需加载
