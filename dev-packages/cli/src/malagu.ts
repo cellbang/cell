@@ -22,8 +22,9 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         runtimeStrLine = '\n│';
         runtimeStrLine += chalk.yellow(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
     }
-    if (settings.banner) {
-        console.log(settings.banner.replace('{ version }', version).replace('{ runtime }', runtimeStrLine));
+    const banner = process.env.MALAGU_BANNER || settings.banner;
+    if (banner) {
+        console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStrLine));
     } else {
     console.log(`
                    ___

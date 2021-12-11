@@ -54,7 +54,7 @@ export async function getRoute(client: ApiGatewayV2, apiId: string, print = fals
     }
 }
 
-export async function getApi(client: ApiGatewayV2, apiName: string, print = false) {
+export async function getApi(client: ApiGatewayV2, apiName: string, print = false, stageName?: string) {
     const { Items } = await client.getApis({ MaxResults: '500' }).promise();
     const items = (Items || []).filter(item => item.Name === apiName);
     if (items.length > 1) {
@@ -67,6 +67,7 @@ export async function getApi(client: ApiGatewayV2, apiName: string, print = fals
             console.log(`    - ApiName: ${result.Name}`);
             console.log(`    - ApiEndpoint: ${result.ApiEndpoint}`);
             console.log(`    - ProtocolType: ${result.ProtocolType}`);
+            console.log(`    - ApiUrl: ${result.ApiEndpoint}/${stageName}/`);
         }
         return result;
     }
@@ -120,18 +121,18 @@ export async function getCustomDomain(client: ApiGatewayV2, customDomainName: st
     }
 }
 
-export async function getApiMapping(client: ApiGatewayV2, domainName: string, print = false) {
-    const { Items } = await client.getApiMappings({ DomainName: domainName }).promise();
-    const items = Items || [];
+export async function getApiMapping(client: ApiGatewayV2, domainName: string, apiId: string, stageName: string, print = false) {
+    const { Items } = await client.getApiMappings({ DomainName: domainName  }).promise();
+    const result = (Items || []).find(item => item.ApiId === apiId && stageName === item.Stage);
 
-    if (items.length > 1) {
-        throw new Error(`There are two or more apiMapping named in the domainName [${domainName}]`);
-    } else if (items.length === 1) {
-        const result = items[0];
+    if(result) {
         if (print) {
             console.log(chalk`{bold.cyan - ApiMapping: }`);
             console.log(`    - ApiMappingId: ${result.ApiMappingId}`);
             console.log(`    - ApiMappingKey: ${result.ApiMappingKey}`);
+            console.log(`    - Stage: ${result.Stage}`);
+            console.log(`    - ApiUrl: https://${domainName}/${result.ApiMappingKey?.split('*')[0]}`);
+
         }
         return result;
     }

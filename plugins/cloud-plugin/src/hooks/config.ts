@@ -16,7 +16,7 @@ export default async (context: CliContext) => {
         profile.credentials.accessKeyId = opts.accessKeyId || profile.credentials.accessKeyId;
         profile.credentials.accessKeySecret = opts.accessKeySecret || profile.credentials.accessKeySecret;
         profile.region = opts.region || profile.region;
-        profile.token = opts.token || profile.token;
+        profile.credentials.token = opts.token || profile.credentials.token;
         await CloudUtils.saveProfile(profilePath, profile);
     }
     if (opts.show) {
@@ -33,7 +33,7 @@ export default async (context: CliContext) => {
         profile.account.id = undefined;
         profile.credentials.accessKeyId = undefined;
         profile.credentials.accessKeySecret = undefined;
-        profile.token = undefined;
+        profile.credentials.token = undefined;
         await CloudUtils.saveProfile(profilePath, profile);
     }
     if (Object.keys(opts).length === 0) {

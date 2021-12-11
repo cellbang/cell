@@ -4,19 +4,28 @@ const FCClient = require('@alicloud/fc2');
 const CloudAPI = require('@alicloud/cloudapi');
 const Ram = require('@alicloud/ram');
 
-export async function getCustomDomain(client: any, customDomainName: string, print = false) {
+export async function getCustomDomain(client: any, customDomainName: string, print = false, qualifier?: string) {
     try {
         const result = await client.getCustomDomain(customDomainName);
         if (print) {
             console.log(chalk`{bold.cyan - CustomDomain: }`);
             console.log(`    - DomainName: ${result.data.domainName}`);
-            console.log(`    - Protocol: ${result.protocol}`);
-            console.log(`    - LastModifiedTime: ${result.lastModifiedTime}`);
+            console.log(`    - Protocol: ${result.data.protocol}`);
+            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
             const routeConfig = result.data.routeConfig;
+            let path = '';
             if (routeConfig?.routes?.length) {
                 console.log('    - RouteConfig: ');
-                console.log(`        - Routes: ${routeConfig.routes}`);
+                for (const route of routeConfig.routes) {
+                    console.log(`        - Path: ${route.path}`);
+                    console.log(`          Methods: ${route.methods}`);
+
+                    if (route.qualifier === qualifier) {
+                        path = route.path?.split('*')[0] || '';
+                    }
+                }
             }
+            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https' : 'http'}://${customDomainName}${path}`);
         }
         return result;
     } catch (ex) {
@@ -121,7 +130,7 @@ export async function getService(client: any, serviceName: string, print = false
     }
 }
 
-export async function getApi(client: any, groupId: string, apiName: string, print = false) {
+export async function getApi(client: any, groupId: string, apiName: string, print = false, subDomain?: string, path?: string, protocol?: string) {
     const result = await client.describeApis({
         ApiName: apiName,
         GroupId: groupId,
@@ -136,14 +145,11 @@ export async function getApi(client: any, groupId: string, apiName: string, prin
             console.log(chalk`{bold.cyan - API: }`);
             console.log(`    - ApiId : ${result.ApiId}`);
             console.log(`    - ApiName : ${result.ApiName}`);
-            console.log(`    - ServiceProtocol : ${result.ServiceConfig.ServiceProtocol}`);
-            console.log(`    - ServiceTimeout : ${result.ServiceConfig.ServiceTimeout}`);
-            console.log(`    - ServiceAddress : ${result.ServiceConfig.ServiceAddress}`);
-            console.log(`    - ServiceHttpMethod : ${result.ServiceConfig.ServiceHttpMethod}`);
-            console.log(`    - AuthType : ${result.AuthType}`);
-            console.log(`    - ForceNonceCheck : ${result.ForceNonceCheck}`);
             console.log(`    - Visibility : ${result.Visibility}`);
-            console.log(`    - ModifyTime : ${result.ModifyTime}`);
+            console.log(`    - ModifiedTime : ${result.ModifyTime}`);
+            if (subDomain && path && protocol) {
+                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https' : 'http'}://${subDomain!}${path.split('*')[0]}`);
+            }
         }
         return result;
     } 
@@ -186,14 +192,13 @@ export async function getTrigger(client: any, serviceName: string, functionName:
             console.log(`    - Qualifier: ${result.data.qualifier}`);
             console.log(`    - InvocationRole: ${result.data.invocationRole}`);
             console.log(`    - SourceArn: ${result.data.sourceArn}`);
-            console.log(`    - LastModifiedTime	: ${result.data.lastModifiedTime}`)
-            if (result.triggerType === 'http') {
+            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`)
+            if (result.data.triggerType === 'http') {
                 console.log(`    - Methods: ${result.data.triggerConfig.methods}`);
                 if (region && accountId) {
-                    console.log(chalk`    - Url: ${chalk.green.bold(
-                        `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${result.data.qualifier}/${functionName}/`)}`);
+                    console.log(`    - ApiUrl: https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${result.data.qualifier}/${functionName}/`);
                 }
-            } else if (result.triggerType === 'timer') {
+            } else if (result.data.triggerType === 'timer') {
                 console.log(`    - Cron: ${result.data.triggerConfig.cronExpression}`);
                 console.log(`    - Enable: ${result.data.triggerConfig.enable}`);
             }

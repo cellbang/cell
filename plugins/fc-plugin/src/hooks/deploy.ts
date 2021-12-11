@@ -70,7 +70,7 @@ export default async (context: DeployContext) => {
             route.functionName = route.functionName || functionName;
             route.qualifier = route.qualifier || alias.name;
         }
-        await createOrUpdateCustomDomain(customDomain);
+        await createOrUpdateCustomDomain(customDomain, alias.name);
     }
 
     console.log('Deploy finished');
@@ -325,7 +325,7 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
     }
 }
 
-async function createOrUpdateCustomDomain(customDomain: any) {
+async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) {
     const { name, protocol, certConfig, routeConfig } = customDomain;
     const opts: any = {
         protocol
@@ -372,8 +372,16 @@ async function createOrUpdateCustomDomain(customDomain: any) {
             await fcClient.createCustomDomain(name, opts);
         });
     }
+    let path = '';
+    if (opts.routeConfig?.routes?.length) {
+        for (const route of opts.routeConfig.routes) {
+            if (route.qualifier === qualifier) {
+                path = route.path?.split('*')[0] || '';
+            }
+        }
+    }
     console.log(chalk`    - Url: ${chalk.green.bold(
-        `${protocol.includes('HTTPS') ? 'https' : 'http'}://${name}`)}`);
+        `${protocol.includes('HTTPS') ? 'https' : 'http'}://${name}${path}`)}`);
 }
 
 async function createOrUpdateAlias(alias: any, versionId: string) {

@@ -1,11 +1,6 @@
 malagu:
   cloud:
     faas:
-      customDomain:
-        # name: abc.com
-        # certificateId: xxxx
-        protocol: http
-        netType: OUTER
       apiGateway:
         stage:
           name: ${stage}
@@ -21,5 +16,11 @@ malagu:
           integrationType: AWS_PROXY
           payloadFormatVersion: '2.0'
           timeoutInMillis: 30000
+        customDomain:
+          # name: abc.com
+          # certificateArn: xxxx
+          hostedZoneId: REGIONAL
+          apiMapping:
+            apiMappingKey: '${stage}/*'
   server:
     path: /${stage}/

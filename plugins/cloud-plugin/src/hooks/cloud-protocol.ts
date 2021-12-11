@@ -13,7 +13,6 @@ export interface Profile {
     account: Account
     credentials: Credentials;
     region: string;
-    token?: string;
 }
 
 export interface ProfileProvider {
