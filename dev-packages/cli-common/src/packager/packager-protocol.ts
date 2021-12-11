@@ -2,6 +2,7 @@ export interface InstallOptions {
     ignoreScripts?: boolean;
     frozenLockfile?: boolean;
     nonInteractive?: boolean;
+    networkConcurrency?: string;
     stdio?: string;
 }
 

@@ -1,11 +1,9 @@
-import { remove, isEmpty, get, isNil, pick, uniq, defaults, now } from 'lodash';
+import { remove, isEmpty, get, pick, uniq, defaults, now, unset, flatMap } from 'lodash';
 import { join, dirname, relative } from 'path';
 import { ConfigurationContext } from '../context';
-import { BACKEND_TARGET, getPackager, ConfigUtil, PathUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET, getPackager, ConfigUtil } from '@malagu/cli-common';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
-const isBuiltinModule = require('is-builtin-module');
 import { Stats } from 'webpack';
-import type { ExternalModule } from 'webpack';
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -78,22 +76,30 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
             // Check if the module has any peer dependencies and include them too
             try {
                 const modulePackagePath = join(
-                    dirname(join(PathUtil.getRuntimePath(runtime), packagePath)),
+                    dirname(packagePath),
                     'node_modules',
                     module.external,
                     'package.json'
                 );
-                const peerDependencies = readJSONSync(modulePackagePath).peerDependencies;
+                const { peerDependencies, peerDependenciesMeta } = readJSONSync(modulePackagePath);
                 if (!isEmpty(peerDependencies)) {
-                    console.log(`Adding explicit peers for dependency ${module.external}`);
-                    const peerModules = getProdModules(
-                        Object.keys(peerDependencies).map(value => ({ external: value })),
-                        packagePath,
-                        dependencyGraph,
-                        forceExcludes,
-                        runtime
-                    );
-                    prodModules.push(...peerModules);
+
+                    if (!isEmpty(peerDependenciesMeta)) {
+                        for (const key of Object.keys(peerDependencies)) {
+                            if (peerDependenciesMeta[key]?.optional === true) {
+                                unset(peerDependencies, key);
+                            }
+                        }
+                    }
+                    if (!isEmpty(peerDependencies)) {
+                        const peerModules = getProdModules(Object.keys(peerDependencies).map(value => ({ external: value })),
+                            packagePath,
+                            dependencyGraph,
+                            forceExcludes,
+                            runtime
+                        );
+                        prodModules.push(...peerModules);
+                    }
                 }
             } catch (e) {
                 console.log(`WARNING: Could not check for peer dependencies of ${module.external}`);
@@ -103,6 +109,9 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
                 // Add transient dependencies if they appear not in the service's dev dependencies
                 const originInfo = get(dependencyGraph, 'dependencies', {})[module.origin] || {};
                 moduleVersion = get(get(originInfo, 'dependencies', {})[module.external], 'version');
+                if (typeof moduleVersion === 'object') {
+                    moduleVersion = moduleVersion.optional;
+                }
                 if (!moduleVersion) {
                     console.log(`WARNING: Could not determine version of module ${module.external}`);
                 }
@@ -132,47 +141,8 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
     return prodModules;
 }
 
-function getExternalModuleName(module: ExternalModule): string {
-    return module.userRequest ;
-}
-
-function isExternalModule(module: ExternalModule): boolean {
-    return module.identifier().startsWith('external ') && !isBuiltinModule(getExternalModuleName(module));
-}
-
-/**
- * Find the original module that required the transient dependency. Returns
- * undefined if the module is a first level dependency.
- * @param {Object} issuer - Module issuer
- */
-function findExternalOrigin(issuer: any): any {
-    if (!isNil(issuer) && issuer.rawRequest.startsWith('./')) {
-        return findExternalOrigin(issuer.issuer);
-    }
-    return issuer;
-}
-
 function getExternalModules(stats: any): any[] {
-    if (!stats?.compilation.chunks) {
-        return [];
-    }
-    const externals = new Set();
-    for (const chunk of stats.compilation.chunks) {
-        if (!chunk.modulesIterable) {
-            continue;
-        }
-
-        // Explore each module within the chunk (built inputs):
-        for (const module of chunk.modulesIterable) {
-            if (isExternalModule(module)) {
-                externals.add({
-                    origin: get(findExternalOrigin(module.issuer), 'rawRequest'),
-                    external: getExternalModuleName(module)
-                });
-            }
-        }
-    }
-    return Array.from(externals);
+    return flatMap(stats.stats, compileStats => compileStats.externalModules);
 }
 /**
  * We need a performant algorithm to install the packages for each single
@@ -193,7 +163,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const config = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const includes = config.includeModules;
-    const packagerOptions = { frozenLockfile: true, nonInteractive: true, ...config.packagerOptions };
+    const packagerOptions = { nonInteractive: true, ...config.packagerOptions };
     const scripts: any[] = packagerOptions.scripts || [];
 
     if (!includes || !configuration) {
@@ -211,7 +181,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         accumulator[`script${index}`] = script;
         return accumulator;
     },
-    {}
+        {}
     );
 
     const packager = getPackager(context.cfg.rootConfig.packager, process.cwd());
@@ -244,7 +214,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const externalModules = getExternalModules(stats).concat(packageForceIncludes.map((whitelistedPackage: string) => ({
         external: whitelistedPackage
     })));
-    const compositeModules = uniq(getProdModules(externalModules, packagePath, dependencyGraph, packageForceExcludes, runtime));
+    const compositeModules = uniq(getProdModules(uniq(externalModules), packagePath, dependencyGraph, packageForceExcludes, runtime));
     removeExcludedModules(compositeModules, packageForceExcludes, true);
 
     if (isEmpty(compositeModules)) {
@@ -276,7 +246,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const packageLockPath = join(dirname(packagePath), packager.lockfileName);
     const hasPackageLock = await pathExists(packageLockPath);
     if (hasPackageLock) {
-        console.log('Package lock found - Using locked versions');
+        console.log('🔒  malagu package lock found - Using locked versions');
         try {
             let packageLockFile = await packager.readLockfile(packageLockPath);
             packageLockFile = packager.rebaseLockfile(relPath, packageLockFile);
@@ -287,7 +257,9 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     }
 
     const start = now();
-    console.log('Packing external modules: ' + compositeModules.join(', '));
+    for (const compositeModule of compositeModules) {
+        console.log(`📦  malagu external modules - ${compositeModule}`);
+    }
     await packager.install(packagerOptions, compositeModulePath);
     if (verbose) {
         console.log(`Package took [${now() - start} ms]`);

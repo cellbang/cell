@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.5.0
+
+- fix(cli-service) 修复排除包存在的一些问题
+- feat(cli-service) 后端只有在 `prod` 模式下才会压缩混淆
+- feat(cli-service) 后端 sourcemap 只有在本地运行才会生成
+- fix(cli-runtime) 修复找不到模块警告
+
+
 ## 2.4.4
 
 - feat(cli-common) 提供 `MALAGU_CONFIG_FILE_ALIAS` 环境变量方式配置，优先级比配置文件高

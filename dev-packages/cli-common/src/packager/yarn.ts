@@ -47,7 +47,7 @@ export class Yarn implements Packager {
             }
 
         }
-        const parsedTree = JSON.parse(processOutput.stdout);
+        const parsedTree = JSON.parse(processOutput?.stdout);
         const convertTrees = (trees: any) =>
             trees.reduce((accumulator: any, tree: any) => {
                 const splitModule = tree.name.split('@');
@@ -109,6 +109,9 @@ export class Yarn implements Packager {
         if (opts?.nonInteractive) {
             args.push('--non-interactive');
         }
+        if (opts?.networkConcurrency) {
+            args.push(`--network-concurrency ${opts.networkConcurrency}`);
+          }
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 

@@ -10,7 +10,8 @@ export class BaseConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg } = context;
-        const includeModules = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET).includeModules;
+        const mode = ConfigUtil.getBackendConfig(cfg).mode || [];
+        const includeModules = ConfigUtil.getBackendMalaguConfig(cfg).includeModules;
         const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
         sourceMapLoaderExclude = Object.keys(sourceMapLoaderExclude).map(key => sourceMapLoaderExclude[key]);
@@ -94,6 +95,9 @@ export class BaseConfigFactory {
 
             config
                 .target('node')
+                .optimization
+                    .minimize(!dev && mode.includes('prod'))
+                .end()
                 .externals(dev ? externals : includeModules?.forceIncludeAll ? externals : [])
                 .node
                     .merge({
@@ -102,12 +106,15 @@ export class BaseConfigFactory {
                     })
                 .end()
                 .merge({
-                    devtool:  dev ? 'eval-cheap-module-source-map' : 'nosources-source-map',
+                    devtool:  dev ? 'eval-cheap-module-source-map' : false,
                     externalsPresets: { node: true }
                 });
         } else {
             config
                 .target('web')
+                .optimization
+                    .minimize(!dev)
+                .end()
                 .resolve
                     .merge({
                         fallback: {
