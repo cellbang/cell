@@ -167,8 +167,6 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 function suggestCommands(unknownCommand: string, main: Command) {
     const availableCommands = main.commands.map((cmd: Command) => cmd.name());
 
-    console.log(availableCommands);
-
     let suggestion: string = '';
 
     availableCommands.forEach((cmd: string) => {

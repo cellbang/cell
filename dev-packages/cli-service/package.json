@@ -52,7 +52,6 @@
     "html-webpack-tags-plugin": "^3.0.1",
     "ignore-loader": "^0.1.2",
     "internal-ip": "^6.2.0",
-    "is-builtin-module": "^3.0.0",
     "lodash": "4.17.21",
     "memory-fs": "^0.5.0",
     "progress-bar-webpack-plugin": "^2.1.0",
