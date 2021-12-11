@@ -67,7 +67,7 @@ export class ComponentPackageLoader {
 
     protected parseConfigPaths(mode?: string): string[] {
         const configFileAliases = [ 'malagu' ];
-        const configFileAlias = this.pkg.settings?.configFileAlias;
+        const configFileAlias = process.env.MALAGU_CONFIG_FILE_ALIAS || this.pkg.settings?.configFileAlias;
         if (configFileAlias) {
             configFileAliases.push(configFileAlias);
         }

@@ -4,7 +4,7 @@ malagu:
   cloud:
     faas:
       service:
-        name: ${pkg.name}
+        name: malagu
       function:
         runtime: nodejs12
       apiGateway:

@@ -20,7 +20,7 @@ export default async (context: InfoContext) => {
     lambdaClient = clients.lambdaClient;
     apiGatewayClient = clients.apiGatewayClient;
     
-    const { alias, apiGateway, customDomain } = faasConfig;
+    const { alias, apiGateway } = faasConfig;
     const functionMeta = faasConfig.function;
     const functionName = functionMeta.name;
 
@@ -38,16 +38,16 @@ export default async (context: InfoContext) => {
     context.output.triggerInfo = await getTrigger(lambdaClient, functionName, undefined, alias.name, true);
 
     if (apiGateway) {
-        const { api, stage } = apiGateway;
-        context.output.apiInfo = await getApi(apiGatewayClient, api.name, true);
+        const { api, stage, customDomain } = apiGateway;
+        context.output.apiInfo = await getApi(apiGatewayClient, api.name, true, stage.name);
         if (context.output.apiInfo) {
             const apiId = context.output.apiInfo.ApiId!;
             context.output.integrationInfo = await getIntegration(apiGatewayClient, apiId, true);
             context.output.routeInfo = await getRoute(apiGatewayClient, apiId, true);
             context.output.stageInfo = await getStage(apiGatewayClient, apiId, stage.name, true);
-            if (customDomain.name) {
+            if (customDomain?.name) {
                 context.output.customDomainInfo = await getCustomDomain(apiGatewayClient, customDomain.name, true);  
-                context.output.apiMappingInfo = await getApiMapping(apiGatewayClient, customDomain.name, true)              
+                context.output.apiMappingInfo = await getApiMapping(apiGatewayClient, customDomain.name, apiId, stage.name, true)              
             }
         }
     }

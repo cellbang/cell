@@ -1,12 +1,6 @@
 malagu:
   cloud:
     faas:
-      customDomain:
-        # name: abc.com
-        # certificateId: xxxx
-        protocol: http
-        netType: OUTER
-        isDefaultMapping: true
       apiGateway:
         release:
           environmentName: release
@@ -34,3 +28,12 @@ malagu:
         strategy:
           # strategy: 5000
           environmentName: ${malagu.cloud.faas.apiGateway.release.environmentName}
+        customDomain:
+          # name: abc.com
+          # certificateId: xxxx
+          protocol: http
+          netType: OUTER
+          isDefaultMapping: true
+          pathMapping:
+            path: /
+            environment: ${malagu.cloud.faas.apiGateway.release.environmentName}

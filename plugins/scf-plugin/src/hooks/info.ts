@@ -19,7 +19,7 @@ export default async (context: InfoContext) => {
     scfClient = clients.scfClient;
     apiClient = clients.apiClient;
     
-    const { namespace, apiGateway, alias, customDomain } = faasConfig;
+    const { namespace, apiGateway, alias } = faasConfig;
     const functionMeta = faasConfig.function;
     const functionName = functionMeta.name;
 
@@ -43,17 +43,19 @@ export default async (context: InfoContext) => {
     context.output.triggerInfo = await getTrigger(scfClient, namespace.name, functionName, undefined, alias.name, true);
 
     if (apiGateway) {
-        const { usagePlan, api, service } = apiGateway;
+        const { usagePlan, api, service, release, customDomain } = apiGateway;
         context.output.serviceInfo = await getService(apiClient, service.name, true);
         if (context.output.serviceInfo) {
             const serviceId = context.output.serviceInfo.ServiceId;
-            context.output.apiInfo = await getApi(apiClient, serviceId, api.name, true);
+            const subDomain = context.output.serviceInfo.OuterSubDomain;
+            const protocol = context.output.serviceInfo.Protocol;
+            context.output.apiInfo = await getApi(apiClient, serviceId, api.name, true, subDomain, protocol, release.environmentName);
 
             if (usagePlan.name) {
                 context.output.usagePlanInfo = await getUsagePlan(apiClient, usagePlan.name, true);
             }
-            if (customDomain.name) {
-                context.output.customDomainInfo = await getCustomDomain(apiClient, serviceId, customDomain.name, true);  
+            if (customDomain?.name) {
+                context.output.customDomainInfo = await getCustomDomain(apiClient, serviceId, customDomain.name, true, release.environmentName);  
             }
         }
     }

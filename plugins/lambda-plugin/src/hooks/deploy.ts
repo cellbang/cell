@@ -28,7 +28,7 @@ export default async (context: CliContext) => {
     apiGatewayClient = clients.apiGatewayClient;
     iamClient = clients.iamClient;
 
-    const { apiGateway, customDomain, alias, trigger } = faasConfig;
+    const { apiGateway, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
     const functionName = functionMeta.name;
     const accountId = account.id;
@@ -56,7 +56,7 @@ export default async (context: CliContext) => {
 
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
-        const { apiMapping, api, integration, route, stage } = apiGateway;
+        const { customDomain, api, integration, route, stage } = apiGateway;
         const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionName, region, accountId);
         integration.integrationUri = `arn:aws:lambda:${region}:${accountId}:function:${functionName}:${stage.name}`;
         const prev = await createOrUpdateIntegration(integration, ApiId!);
@@ -64,9 +64,12 @@ export default async (context: CliContext) => {
         await createOrUpdateStage(stage, ApiId!);
         console.log(chalk`    - Url: {green.bold ${ApiEndpoint}/${stage.name}/}`);
 
-        if (customDomain.name) {
-            await bindOrUpdateCustomDomain(customDomain);
-            await createOrUpdateApiMapping(apiMapping, customDomain.name, ApiId!, stage.name);
+        if (customDomain?.name) {
+            const { apiMapping } = customDomain;
+            await bindOrUpdateCustomDomain(customDomain, ApiEndpoint || '');
+            if (apiMapping) {
+                await createOrUpdateApiMapping(apiMapping, customDomain.name, ApiId!, stage.name);
+            }
         }
 
     }
@@ -476,7 +479,7 @@ async function createOrUpdateRoute(routeMeta: any, apiId: string, integrationId:
     return result!;
 }
 
-function parseUpdateDomainNameRequest(customDomainMeta: any) {
+function parseUpdateDomainNameRequest(customDomainMeta: any, apiEndpoint: string) {
     const req: ApiGatewayV2.UpdateDomainNameRequest = {
         DomainName: customDomainMeta.name
     };
@@ -487,7 +490,7 @@ function parseUpdateDomainNameRequest(customDomainMeta: any) {
         req.DomainNameConfigurations = [];
         for (const config of domainNameConfigurations) {
             req.DomainNameConfigurations.push({
-                ApiGatewayDomainName: config.ApiGatewayDomainName,
+                ApiGatewayDomainName: config.ApiGatewayDomainName || apiEndpoint.replace('https://', ''),
                 CertificateArn: config.certificateArn,
                 CertificateName: config.certificateName,
                 DomainNameStatus: config.domainNameStatus,
@@ -511,27 +514,25 @@ function parseUpdateDomainNameRequest(customDomainMeta: any) {
     return req;
 }
 
-function parseCreateDomainNameRequest(customDomainMeta: any) {
+function parseCreateDomainNameRequest(customDomainMeta: any, apiEndpoint: string) {
     const req: ApiGatewayV2.CreateDomainNameRequest = {
-        ...parseUpdateDomainNameRequest(customDomainMeta),
+        ...parseUpdateDomainNameRequest(customDomainMeta, apiEndpoint),
     };
     return req;
 
 }
 
-async function bindOrUpdateCustomDomain(customDomain: any) {
+async function bindOrUpdateCustomDomain(customDomain: any, apiEndpoint: string) {
     const customDomainInfo = await getCustomDomain(apiGatewayClient, customDomain.name);
     if (customDomainInfo) {
         await SpinnerUtil.start(`Update ${customDomain.name} customDomain`, async () => {
-            await apiGatewayClient.updateDomainName(parseUpdateDomainNameRequest(customDomain)).promise();
+            await apiGatewayClient.updateDomainName(parseUpdateDomainNameRequest(customDomain, apiEndpoint)).promise();
         });
     } else {
         await SpinnerUtil.start(`Create ${customDomain.name} customDomain`, async () => {
-            await apiGatewayClient.createDomainName(parseCreateDomainNameRequest(customDomain)).promise();
+            await apiGatewayClient.createDomainName(parseCreateDomainNameRequest(customDomain, apiEndpoint)).promise();
         });
     }
-
-    console.log(chalk`    - Url: ${chalk.green.bold(`https://${customDomain.name}`)}`);
 }
 
 function parseCreateApiMappingRequest(apiMappingMeta: any, domainName: string, apiId: string, stageName: string) {
@@ -553,7 +554,7 @@ function parseUpdateApiMappingRequest(apiMappingMeta: any, domainName: string, a
 }
 
 async function createOrUpdateApiMapping(apiMapping: any, domainName: string, apiId: string, stageName: string) {
-    const apiMappingInfo = await getApiMapping(apiGatewayClient, domainName);
+    const apiMappingInfo = await getApiMapping(apiGatewayClient, domainName, apiId, stageName);
     if (apiMappingInfo) {
         const apiMappingId = apiMappingInfo.ApiMappingId!;
         await SpinnerUtil.start(`Update ${apiMappingId} api mapping  for ${domainName}`, async () => {
@@ -564,6 +565,8 @@ async function createOrUpdateApiMapping(apiMapping: any, domainName: string, api
             await apiGatewayClient.createApiMapping(parseCreateApiMappingRequest(apiMapping, domainName, apiId, stageName)).promise();
         });
     }
+    console.log(chalk`    - Url: ${chalk.green.bold(`https://${domainName}/${apiMapping.apiMappingKey?.split('*')[0]}`)}`);
+
 }
 
 function parseUpdateStageRequest(stageMeta: any, apiId: string, deploymentId?: string) {

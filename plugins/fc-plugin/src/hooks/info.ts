@@ -51,11 +51,14 @@ export default async (context: InfoContext) => {
         context.output.groupInfo = await getGroup(apiClient, group.name, true);
         if (context.output.groupInfo) {
             const groupId = context.output.groupInfo.GroupId;
-            context.output.apiInfo = await getApi(apiClient, groupId, api.name, true);
+            const subDomain = context.output.groupInfo.SubDomain;
+            const path = api.requestConfig.path;
+            const protocol = api.requestConfig.protocol;
+            context.output.apiInfo = await getApi(apiClient, groupId, api.name, true, subDomain, path, protocol);
         }
     }
 
     if (customDomain?.name) {
-        context.output.groupInfo = await getCustomDomain(fcClient, customDomain.name, true);
+        context.output.groupInfo = await getCustomDomain(fcClient, customDomain.name, true, alias.name);
     }
 };

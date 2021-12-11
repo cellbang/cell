@@ -27,7 +27,7 @@ export default async (context: DeployContext) => {
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
 
-    const { namespace, apiGateway, customDomain, alias, trigger } = faasConfig;
+    const { namespace, apiGateway, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
     const functionName = functionMeta.name;
 
@@ -54,11 +54,11 @@ export default async (context: DeployContext) => {
 
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
-        const { usagePlan, strategy, api, service, release } = apiGateway;
+        const { usagePlan, strategy, api, service, release, customDomain } = apiGateway;
         const { serviceId, subDomain } = await createOrUpdateService(service);
         const apiId = await createOrUpdateApi(serviceId, subDomain, service.protocol, release.environmentName, api);
-        if (customDomain.name) {
-            await bindOrUpdateCustomDomain(serviceId, customDomain, subDomain);
+        if (customDomain?.name) {
+            await bindOrUpdateCustomDomain(serviceId, customDomain, subDomain, release.environmentName);
         }
 
         if (usagePlan.maxRequestNum !== undefined || usagePlan.maxRequestNumPreSec !== undefined) {
@@ -488,22 +488,19 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
     req.NetType = customDomainMeta.netType;
     req.NetSubDomain = netSubDomain;
 
-    const { pathMappingSet } = customDomainMeta;
+    const { pathMapping } = customDomainMeta;
 
-    if (pathMappingSet) {
-        req.PathMappingSet = [];
-        for (const m of pathMappingSet) {
-            const item: any = {};
-            item.Path = m.path;
-            item.Environment = m.environment;
-            req.PathMappingSet.push(item);
-        }
+    if (pathMapping) {
+        req.PathMappingSet = [{
+            Path: pathMapping.path,
+            Environment: pathMapping.environment
+        }];
     }
     cleanObj(req);
 
 }
 
-async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, netSubDomain: string) {
+async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, netSubDomain: string, environmentName: string) {
     const customDomainInfo = await getCustomDomain(apiClient, serviceId, customDomain.name);
     if (customDomainInfo) {
         await SpinnerUtil.start(`Update ${customDomain.name} customDomain`, async () => {
@@ -520,8 +517,10 @@ async function bindOrUpdateCustomDomain(serviceId: string, customDomain: any, ne
         });
     }
 
+    const { pathMapping } = customDomain;
+    const path = pathMapping?.path || '';
     console.log(chalk`    - Url: ${chalk.green.bold(
-        `${customDomain.protocol.includes('https') ? 'https' : 'http'}://${customDomain.name}`)}`);
+        `${customDomain.protocol.includes('https') ? 'https' : 'http'}://${customDomain.name}${path}`)}`);
 }
 
 async function releaseService(serviceId: string, release: any, stage: string) {

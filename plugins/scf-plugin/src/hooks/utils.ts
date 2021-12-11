@@ -29,7 +29,7 @@ export async function getUsagePlan(client: any, usagePlanName: string, print = f
     }
 }
 
-export async function getCustomDomain(client: any, serviceId: string, customDomainName: string, print = false) {
+export async function getCustomDomain(client: any, serviceId: string, customDomainName: string, print = false, environmentName?: string) {
     const describeServiceSubDomainsRequest: any = {};
     describeServiceSubDomainsRequest.ServiceId = serviceId;
     const describeApisStatusResponse = await client.DescribeServiceSubDomains(describeServiceSubDomainsRequest);
@@ -42,6 +42,16 @@ export async function getCustomDomain(client: any, serviceId: string, customDoma
             console.log(`    - CertificateId: ${result.CertificateId}`);
             console.log(`    - Protocol: ${result.Protocol}`);
             console.log(`    - IsDefaultMapping: ${result.IsDefaultMapping}`);
+            if (environmentName) {
+                const mappings = await client.DescribeServiceSubDomainMappings({ ServiceId: serviceId, SubDomain: customDomainName });
+                let path = '';
+                for (const mapping of mappings.Result?.PathMappingSet || []) {
+                    if (mapping.Environment === environmentName) {
+                        path = mapping.Path?.split('*')[0];
+                    }
+                }
+                console.log(`    - Url: ${result.Protocol.includes('https') ? 'https' : 'http'}://${result.DomainName}${path}`);
+            }
         }
         return result;
     }
@@ -224,7 +234,7 @@ export async function getService(client: any, serviceName: string, print = false
     }
 }
 
-export async function getApi(client: any, serviceId: string, apiName: string, print = false) {
+export async function getApi(client: any, serviceId: string, apiName: string, print = false, subDomain?: string, serviceProtocol?: string, environmentName?: string) {
     const describeApisStatusRequest: any = {};
     const filter: any = {};
     filter.Name = 'ApiName';
@@ -241,6 +251,11 @@ export async function getApi(client: any, serviceId: string, apiName: string, pr
             console.log(`    - ApiId: ${result.ApiId}`);
             console.log(`    - ApiName: ${result.ApiName}`);
             console.log(`    - Protocol: ${result.Protocol}`);
+            if (subDomain && serviceProtocol) {
+                const path = result.Path?.split('*')[0];
+                const protocol = serviceProtocol.includes('https') ? 'https' : 'http';
+                console.log(`    - ApiUrl: ${protocol}://${subDomain!}${environmentName === 'release' ? '' : `/${environmentName}`}${path}`);
+            }
         }
         return result;
     } else if (apiIdStatusSet.length > 1) {
@@ -253,6 +268,7 @@ export async function createClients(region: string, credentials: Credentials) {
         credential: {
             secretId: credentials.accessKeyId,
             secretKey: credentials.accessKeySecret,
+            token: credentials.token
         },
         profile: {
             signMethod: 'HmacSHA256',

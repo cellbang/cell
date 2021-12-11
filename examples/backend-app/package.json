@@ -12,13 +12,13 @@
   ],
   "dependencies": {
     "@malagu/core": "2.4.3",
-    "@malagu/lambda-adapter": "2.4.3",
+    "@malagu/scf-adapter": "2.4.3",
     "@malagu/mvc": "2.4.3"
   },
   "devDependencies": {
     "@malagu/cli": "2.4.3",
     "@malagu/cli-service": "2.4.3",
-    "@malagu/lambda-plugin": "2.4.3"
+    "@malagu/scf-plugin": "2.4.3"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

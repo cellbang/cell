@@ -1,8 +1,16 @@
 # Change Log
 
+## 2.4.4
+
+- feat(cli-common) 提供 `MALAGU_CONFIG_FILE_ALIAS` 环境变量方式配置，优先级比配置文件高
+- feat(cli) 提供 `MALAGU_BANNER` 环境变量方式配置，优先级比配置文件高
+- fix(cloud-plugin) 修复 `profile.credentials.token` 赋值
+- fix(*-plugin) 优化日志输出和自定义域名配置
+
+
 ## 2.4.3
 
-feat(framework): frontend framework deploy support svelte, preact, ember (#77)
+- feat(framework): frontend framework deploy support svelte, preact, ember (#77)
 
 ## 2.4.2
 
