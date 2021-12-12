@@ -31,6 +31,11 @@ export namespace RuntimeUtil {
                 }
             }
         }
+        if (framework) {
+            for (const key of Object.keys(framework.settings.env || {})) {
+                process.env[key] = framework.settings.env[key];
+            }
+        }
         return {
             settings,
             runtime,

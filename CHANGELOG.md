@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.5.2
+
+- fix(*) 修复 `malagu` 框架运行报错
+
 ## 2.5.1
 
 - feat(framework) 适配 `malagu` 框架
