@@ -20,7 +20,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             runtimeStr = runtime === Runtimes.default ? framework.name : `${runtime}.${framework.name}`;
         }
         runtimeStrLine = '\n│';
-        runtimeStrLine += chalk.yellow(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
+        runtimeStrLine += chalk.yellow.bold(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
     }
     const banner = process.env.MALAGU_BANNER || settings.banner;
     if (banner) {
@@ -84,6 +84,7 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
     program
         .command('config')
+        .option('--default-mode [defaultMode]', 'default mode', value => value ? value.split(',') : [])
         .option('--frameworks-url [frameworksUrl]', 'frameworks url')
         .option('--frameworks-upstream-url [frameworksUpStreamUrl]', 'frameworks upstream url')
         .option('--config-file-alias [configFileAlias]', 'config file alias')

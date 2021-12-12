@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.5.5
+
+- feat(node-plugin) 添加 `serve hook` 插件，支持 HMR
+- fix(serve-static) 修复静态文件 root 路径
+- feat(cli-common) 提供 `malagu config --default-mode` 配置属性，用于配置默认 mode
+- feat(cli) 添加 nest-app 和 koa-app 应用模板
+
 ## 2.5.4
 
 - feat(framework) 优化 `malagu` 框架的默认构建目录

@@ -4,7 +4,7 @@ import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
 // const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
 import { ExecuteServeHooks } from './serve-manager';
-import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common';
+import { BACKEND_TARGET, ConfigUtil, FRONTEND_TARGET } from '@malagu/cli-common';
 import * as delay from 'delay';
 import { ConfigurationContext } from '../context';
 const clearModule = require('clear-module');
@@ -118,5 +118,7 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
 
 export function startDevServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks) {
     const cs = ctx.configurations.map(c => c.toConfig());
-    return doStartDevServer(ctx, cs, (cs[cs.length - 1] as any).devServer, executeServeHooks);
+    const devServer = (cs[cs.length - 1] as any).devServer;
+    const port = ConfigUtil.getBackendWebpackConfig(ctx.cfg)?.innerPort || devServer.port;
+    return doStartDevServer(ctx, cs, { ...devServer, port }, executeServeHooks);
 }

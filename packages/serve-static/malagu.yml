@@ -1,7 +1,7 @@
 malagu: 
   serve-static: 
     spa: true
-    root: ${currentRuntimePath}/.malagu/dist/frontend
+    root: ${frontendProjectDistPath}
     options:
       maxAge: 31536000000
       # htmlMaxAge: 31536000000
