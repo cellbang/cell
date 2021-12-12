@@ -14,7 +14,7 @@ export interface Runtime {
 export namespace RuntimeUtil {
     export async function initRuntime() {
         const settings = SettingsUtil.getSettings();
-        const framework = await FrameworkUtil.detect({
+        let framework = await FrameworkUtil.detect({
             url: settings.frameworks?.url,
             upstreamUrl: settings.frameworks?.upstreamUrl
         });
@@ -31,6 +31,7 @@ export namespace RuntimeUtil {
                 }
             }
         }
+        framework = framework?.useRuntime === runtime ? framework : undefined;
         if (framework) {
             for (const key of Object.keys(framework.settings.env || {})) {
                 process.env[key] = framework.settings.env[key];
@@ -39,7 +40,7 @@ export namespace RuntimeUtil {
         return {
             settings,
             runtime,
-            framework: framework?.useRuntime === runtime ? framework : undefined
+            framework
         };
 
     }

@@ -10,6 +10,9 @@ export namespace PathUtil {
     }
 
     export function getProjectDistPath(runtime?: string) {
+        if (process.env.MALAGU_PROJECT_DIST_PATH) {
+            return path.resolve(process.cwd(), process.env.MALAGU_PROJECT_DIST_PATH);
+        }
         if (runtime) {
             return path.join(getProjectDistParentPath(runtime), v5(process.cwd(), v5.URL));
         }
@@ -40,7 +43,7 @@ export namespace PathUtil {
     }
 
     export function getProjectHomePath(runtime?: string) {
-        return process.env.MALAGU_PROJECT_HOME_PATH ? process.env.MALAGU_PROJECT_HOME_PATH : path.join(getRuntimePath(runtime), '.malagu');
+        return process.env.MALAGU_PROJECT_HOME_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH) : path.join(getRuntimePath(runtime), '.malagu');
     }
 
     export function setProjectHomePath(projectHomePath: string) {
