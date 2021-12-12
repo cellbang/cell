@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.5.3
+
+- feat(framework) 优化 `malagu` 框架的默认构建目录
+- fix(cli) 优化 `malagu init` 命令初始化模板后没有正确安装依赖包
+- fix(cli-common) 提供环境变量 `MALAGU_PROJECT_DIST_PATH` 配置项目构建目录
+
 ## 2.5.2
 
 - fix(*) 修复 `malagu` 框架运行报错

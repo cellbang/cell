@@ -133,11 +133,7 @@ export const frameworks = [
         name: 'express',
         useRuntime: 'default',
         useMode: [ 'node' ],
-        settings: {
-            env: {
-                MALAGU_PROJECT_HOME_PATH: '.malagu'
-            }
-        },
+        settings: {},
         detectors: {
             every: [
                 {
@@ -180,7 +176,12 @@ export const frameworks = [
         name: 'malagu',
         useRuntime: 'default',
         useMode: [ 'malagu' ],
-        settings: {},
+        settings: {
+            env: {
+                MALAGU_PROJECT_HOME_PATH: '.malagu',
+                MALAGU_PROJECT_DIST_PATH: '.malagu/dist'
+            }
+        },
         detectors: {
             some: [
                 {

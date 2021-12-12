@@ -51,7 +51,7 @@ export class InitManager {
 
     async install(): Promise<void> {
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install();
+        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({}, this.outputDir);
     }
 
     async executeHooks(): Promise<void> {
