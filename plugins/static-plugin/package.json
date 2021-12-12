@@ -1,12 +1,12 @@
 {
   "name": "@malagu/static-plugin",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/cli-service": "2.5.0",
-    "@malagu/frameworks": "2.5.0"
+    "@malagu/cli-service": "2.5.1",
+    "@malagu/frameworks": "2.5.1"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.0"
+    "@malagu/ext-scripts": "2.5.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
