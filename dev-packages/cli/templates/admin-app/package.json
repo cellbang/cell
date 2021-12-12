@@ -11,7 +11,6 @@
   ],
   "dependencies": {
     "@malagu/core": "latest",
-    "@malagu/scf-adapter": "latest",
     "@malagu/rpc": "latest",
     "@malagu/serve-static": "latest",
     "@malagu/shell": "latest",
@@ -21,12 +20,9 @@
     "grommet": "^2.16.3",
     "react": "^16.12.0",
     "typeorm": "^0.2.32"
-
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
-    "@malagu/scf-plugin": "latest"
+    "@malagu/cli": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

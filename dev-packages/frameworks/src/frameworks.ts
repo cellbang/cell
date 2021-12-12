@@ -170,5 +170,24 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    // ranked last
+    {
+        name: 'malagu',
+        useRuntime: 'default',
+        useMode: ['malagu'],
+        settings: {},
+        detectors: {
+            some: [
+                {
+                    path: 'package.json',
+                    matchContent: '"devDependencies":\\s*{[^}]*"@malagu\\/cli":\\s*".+?"[^}]*}',
+                },
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"@malagu\\/cli":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
     }
 ];

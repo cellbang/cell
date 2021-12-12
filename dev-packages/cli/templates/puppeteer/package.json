@@ -14,13 +14,10 @@
     "@malagu/mvc": "latest",
     "@malagu/web": "latest",
     "@malagu/puppeteer": "latest",
-    "@malagu/oss": "latest",
-    "@malagu/fc-adapter": "latest"
+    "@malagu/oss": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
-    "@malagu/fc-plugin": "latest"
+    "@malagu/cli": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

@@ -25,9 +25,7 @@
     "request-ip": "^2.1.3"
   },
   "devDependencies": {
-    "@malagu/cli": "2.5.0",
-    "@malagu/cli-service": "2.5.0",
-    "@malagu/scf-plugin": "2.5.0"
+    "@malagu/cli": "2.5.0"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

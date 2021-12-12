@@ -12,12 +12,10 @@
   "dependencies": {
     "@malagu/core": "latest",
     "@malagu/rpc": "latest",
-    "@malagu/scf-adapter": "latest",
     "@microservice/api": "0.0.0"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest"
+    "@malagu/cli": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

@@ -11,16 +11,14 @@
   ],
   "dependencies": {
     "@malagu/core": "latest",
-    "@malagu/fc-adapter": "latest",
     "@malagu/mvc": "latest",
     "@malagu/oss": "latest",
     "@malagu/cloud": "latest",
     "@malagu/web": "latest"
   },
   "devDependencies": {
-    "@malagu/cli-service": "latest",
-    "@types/mime-types": "^2.1.0",
-    "@malagu/fc-plugin": "latest"
+    "@malagu/cli": "latest",
+    "@types/mime-types": "^2.1.0"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

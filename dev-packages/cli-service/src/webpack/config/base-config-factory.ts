@@ -10,7 +10,7 @@ export class BaseConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg } = context;
-        const mode = ConfigUtil.getBackendConfig(cfg).mode || [];
+        const stage = ConfigUtil.getBackendConfig(cfg).stage;
         const includeModules = ConfigUtil.getBackendMalaguConfig(cfg).includeModules;
         const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
@@ -96,7 +96,7 @@ export class BaseConfigFactory {
             config
                 .target('node')
                 .optimization
-                    .minimize(!dev && mode.includes('prod'))
+                    .minimize(!dev && stage === 'prod')
                 .end()
                 .externals(dev ? externals : includeModules?.forceIncludeAll ? externals : [])
                 .node
