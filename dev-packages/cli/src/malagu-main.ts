@@ -1,6 +1,6 @@
 import { fork, ChildProcess } from 'child_process';
 import { Component, Module } from '@malagu/cli-common';
-import { sep } from 'path';
+import { sep, join, delimiter } from 'path';
 const Watchpack = require('watchpack');
 
 const watchpack = new Watchpack({});
@@ -37,6 +37,13 @@ function execute() {
         current.removeListener('exit', exitListener);
         current.kill();
     }
+    const nodePaths = Array.from(new Set<string>([
+        join(process.cwd(), 'node_modules'),
+        join(process.cwd(), '..', 'node_modules'),
+        join(process.cwd(), '..', '..', 'node_modules'),
+        join(process.cwd(), '..', '..', '..', 'node_modules')
+    ]));
+    process.env.NODE_PATH = nodePaths.join(delimiter);
     const malaguPath = require.resolve('@malagu/cli/lib/malagu', { paths: [ process.cwd(), __dirname ] });
     current = fork(malaguPath, argv, { stdio: 'inherit' });
     // eslint-disable-next-line no-null/no-null

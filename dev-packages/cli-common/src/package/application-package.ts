@@ -330,10 +330,10 @@ export class ApplicationPackage {
      */
     get resolveModule(): ApplicationModuleResolver {
         if (!this._moduleResolver) {
-            const resolutionPaths = [this.packagePath || `${PathUtil.getRuntimePath(this.options.runtime)}/package.json`];
+            let resolutionPaths = [this.packagePath || `${PathUtil.getRuntimePath(this.options.runtime)}/package.json`];
             const cwdPackagePath = `${process.cwd()}/package.json`;
             if (cwdPackagePath !== this.packagePath) {
-                resolutionPaths.push(cwdPackagePath);
+                resolutionPaths = [cwdPackagePath, ...resolutionPaths];
             }
             this._moduleResolver = modulePath => require.resolve(modulePath, { paths: resolutionPaths });
         }
