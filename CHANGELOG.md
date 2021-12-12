@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.5.3
+## 2.5.4
 
 - feat(framework) 优化 `malagu` 框架的默认构建目录
 - fix(cli) 优化 `malagu init` 命令初始化模板后没有正确安装依赖包

@@ -176,12 +176,7 @@ export const frameworks = [
         name: 'malagu',
         useRuntime: 'default',
         useMode: [ 'malagu' ],
-        settings: {
-            env: {
-                MALAGU_PROJECT_HOME_PATH: '.malagu',
-                MALAGU_PROJECT_DIST_PATH: '.malagu/dist'
-            }
-        },
+        settings: {},
         detectors: {
             some: [
                 {
