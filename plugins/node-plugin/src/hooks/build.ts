@@ -3,13 +3,15 @@ import { join } from 'path';
 import { renameSync, writeFileSync, existsSync } from 'fs-extra';
 
 const entryContent =  `
+process.env.SERVER_PATH = {{ path }};
+process.env.SERVER_PORT = {{ port }};
 const app = require('./_index');
 let target = app;
 if (typeof app === 'object' && app.default) {
     target = app.default;
 }
 if (target && typeof target.listen === 'function') {
-    const server = target.listen(PORT);
+    const server = target.listen({{ port }});
     if (typeof server === 'object') {
         server.timeout = 0;
         server.keepAliveTimeout = 0;
@@ -25,11 +27,13 @@ if (typeof target === 'function') {
 export default async (context: BuildContext) => {
     const { cfg, runtime } = context;
     const outputPath = PathUtil.getBackendProjectDistPath(runtime);
-    const port = ConfigUtil.getBackendMalaguConfig(cfg).server?.port || 9000;
+    const server = ConfigUtil.getBackendMalaguConfig(cfg).server;
+    const port = server?.port || 9000;
+    const path = server?.path;
     const oldIndexPath = join(outputPath, 'index.js');
     const newIndexPath = join(outputPath, '_index.js');
     if (existsSync(oldIndexPath)) {
         renameSync(oldIndexPath, newIndexPath);
-        writeFileSync(oldIndexPath, entryContent.replace(/PORT/g, port), { encoding: 'utf8' });
+        writeFileSync(oldIndexPath, entryContent.replace(/{{ port }}/g, port).replace(/{{ path }}/g, path), { encoding: 'utf8' });
     }
 };

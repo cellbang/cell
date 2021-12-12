@@ -94,11 +94,14 @@ export namespace CliContext {
         if (runtime) {
             projectPath = PathUtil.getRuntimePath(runtime);
         }
-        const { framework } = options;
+        const { framework, settings } = options;
+        if (settings?.defaultMode?.length) {
+            mode.push(...settings.defaultMode);
+        }
         if (framework) {
             mode.push(...framework.useMode);
-            mode = Array.from(new Set<string>(mode));
         }
+        mode = Array.from(new Set<string>(mode));
         const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings });
         await installComponents(pkg, options.spinner);
 
@@ -116,6 +119,8 @@ export namespace CliContext {
                 config.env = { ...process.env, _ignoreEl: true };
                 config.pkg = { ...pkg.pkg, _ignoreEl: true};
                 config.currentRuntimePath = projectPath;
+                config.frontendProjectDistPath = PathUtil.getFrontendProjectDistPath(runtime);
+                config.backendProjectDistPath = PathUtil.getBackendProjectDistPath(runtime);
                 config.cliContext = { ...options, ...program, _ignoreEl: true};
                 const expressionHandler = new ExpressionHandler();
 
@@ -138,6 +143,8 @@ export namespace CliContext {
                 delete config.pkg;
                 delete config.cliContext;
                 delete config.currentRuntimePath;
+                delete config.frontendProjectDistPath;
+                delete config.backendProjectDistPath;
             }
 
         }

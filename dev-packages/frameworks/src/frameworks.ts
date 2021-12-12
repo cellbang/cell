@@ -175,7 +175,7 @@ export const frameworks = [
     {
         name: 'malagu',
         useRuntime: 'default',
-        useMode: [ 'malagu' ],
+        useMode: [ 'auto' ],
         settings: {},
         detectors: {
             some: [

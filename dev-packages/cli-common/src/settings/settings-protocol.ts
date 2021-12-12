@@ -1,5 +1,6 @@
 export interface Settings {
     defaultRuntime?: string;
+    defaultMode?: string[];
     modeCommands?: { [key: string]: string[] };
     serveCommand?: string;
     frameworks?: {

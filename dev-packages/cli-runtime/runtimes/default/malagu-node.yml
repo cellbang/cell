@@ -3,9 +3,13 @@ targets:
 mode: "${'fc' in currentMode ? 'fc' : 'lambda' in currentMode ? 'lambda' : 'scf' }"
 components:
   '@malagu/node-plugin': ${version}
+malagu:
+  server:
+    port: 9000
 backend:
   malagu:
     webpack:
+      innerPort: 10086
       filterWarningsPlugin:
         node:
           - "Module not found: Error: Can't resolve"

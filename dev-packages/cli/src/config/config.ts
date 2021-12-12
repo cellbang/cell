@@ -6,6 +6,7 @@ export interface ConfigOptions {
     frameworksUrl?: string;
     frameworksUpstreamUrl?: boolean;
     configFileAlias?: string;
+    defaultMode?: string[];
     show?: boolean;
 }
 
@@ -13,6 +14,11 @@ export default async (cliContext: CliContext, options: ConfigOptions) => {
     try {
         cliContext.options = options;
         const ctx = await ContextUtils.createConfigContext(cliContext);
+        if (options.defaultMode?.length) {
+            SettingsUtil.updateSettings({
+                defaultMode: options.defaultMode
+            });
+        }
         if (options.frameworksUpstreamUrl || options.frameworksUrl) {
             SettingsUtil.updateSettings({
                 frameworks: {

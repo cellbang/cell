@@ -1,7 +1,8 @@
 export const templates: any = {
     'backend-app': '{{ templatePath }}/backend-app',
     'sample-app': '{{ templatePath }}/sample-app',
-    'fc-app': '{{ templatePath }}/fc-app',
+    'nest-app': '{{ templatePath }}/nest-app',
+    'koa-app': '{{ templatePath }}/koa-app',
     'vue-app': '{{ templatePath }}/vue-app',
     'database-app': '{{ templatePath }}/database-app',
     'accounts': '{{ templatePath }}/accounts',
