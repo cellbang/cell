@@ -25,6 +25,7 @@ export interface Runtime {
 export interface InstallOptions {
     runtime?: string;
     alias?: string;
+    quiet?: boolean;
     forceInstallComponent?: boolean;
 }
 
@@ -62,16 +63,22 @@ export class InstallManager {
     }
 
     async install(): Promise<void> {
-        console.log(chalk`The {yellow ${this.runtimeName}} runtime is being installed...`);
-        const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({}, this.outputDir);
+        if (this.opts.forceInstallComponent) {
+            if (!this.opts.quiet) {
+                console.log(chalk`The {yellow.bold ${this.runtimeName}} runtime is being installed...`);
+            }
+            const pkg = CommandUtil.getPkg(undefined, this.outputDir);
+            await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({ stdio: this.opts.quiet ? 'pipe' : undefined }, this.outputDir);
+        }
     }
 
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
         const initContext = await ContextUtils.createInitContext(await this.getCliContext());
         await new HookExecutor().executeInitHooks(initContext);
-        console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);
+        if (!this.opts.quiet) {
+            console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);
+        }
     }
 
     protected async getCliContext(): Promise<CliContext> {

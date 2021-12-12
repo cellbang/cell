@@ -128,8 +128,8 @@ export class ApplicationPackage {
                 const  devDependencies = devComponents || {};
                 this._componentPackages = collector.collect({
                     ...this.pkg,
-                    dependencies,
-                    devDependencies
+                    dependencies: { ...dependencies, ...this.pkg.dependencies },
+                    devDependencies: { ...devDependencies, ...this.pkg.devDependencies }
                 });
             } else {
                 this._componentPackages = collector.collect(this.pkg);

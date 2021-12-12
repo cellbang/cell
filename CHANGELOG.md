@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.5.1
+
+- feat(framework) 适配 `malagu` 框架
+- feat(cli) 当发现当前目录下存在 `@malagu/cli` 包，优先使用本地的命令
+- feat(cli-runtime) 安装运行时的时候，提供 `quiet` 参数用于控制不输出日志信息
+- feat(cli-runtime) 分别提供 `malagu`、`compression`、`eslint` 模式配置文件，方便开发者一键开启响应功能
+
 ## 2.5.0
 
 - fix(cli-service) 修复排除包存在的一些问题

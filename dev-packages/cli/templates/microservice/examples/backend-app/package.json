@@ -12,14 +12,11 @@
   "dependencies": {
     "@malagu/core": "latest",
     "@malagu/mvc": "latest",
-    "@malagu/scf-adapter": "latest",
     "@microservice/api": "0.0.0"
 
   },
   "devDependencies": {
     "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
-    "@malagu/scf-plugin": "latest",
     "@microservice/service-a": "0.0.0",
     "@microservice/service-b": "0.0.0"
   },

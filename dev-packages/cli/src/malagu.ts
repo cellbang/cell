@@ -45,18 +45,20 @@ ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
     spinner.start();
     const context = await CommandUtil.loadContext(settings, framework, runtime, undefined, spinner);
-    const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules } = context.pkg;
+    const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules, infoHookModules, propsHookModules } = context.pkg;
 
     if (CommandUtil.includesCommand(context.args, settings.compileCommands)) {
         process.send!({
             type: 'cliContext',
             data: {
                 components: componentPackages.map(c => c.malaguComponent),
-                configHookModules: configHookModules,
-                webpackHookModules: webpackHookModules,
-                serveHookModules: serveHookModules,
-                buildHookModules: buildHookModules,
-                deployHookModules: deployHookModules
+                configHookModules,
+                webpackHookModules,
+                serveHookModules,
+                buildHookModules,
+                deployHookModules,
+                infoHookModules,
+                propsHookModules
             }
         });
     }

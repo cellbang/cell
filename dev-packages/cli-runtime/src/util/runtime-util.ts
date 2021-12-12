@@ -69,7 +69,7 @@ export namespace RuntimeUtil {
     export async function installRuntimeIfNeed(runtime: string): Promise<void> {
         const runtimePath = PathUtil.getRuntimePath(runtime);
         if (!existsSync(runtimePath)) {
-            await installRuntime({ runtime });
+            await installRuntime({ runtime, quiet: true });
         }
     }
 

@@ -2,12 +2,12 @@ import { WebpackContext, ConfigUtil } from '@malagu/cli-service';
 import { existsSync } from 'fs';
 import { join } from 'path';
 export default async (context: WebpackContext) => {
-    const { pkg, cfg, configurations } = context;
-    if (existsSync(join(pkg.projectPath, '.eslintrc.js' )) ||
-        existsSync(join(pkg.projectPath, '.eslintrc.yml')) ||
-        existsSync(join(pkg.projectPath, '.eslintrc.yaml')) ||
-        existsSync(join(pkg.projectPath, '.eslintrc.json')) ||
-        existsSync(join(pkg.projectPath, '.eslintrc'))) {
+    const { cfg, configurations } = context;
+    if (existsSync(join(process.cwd(), '.eslintrc.js' )) ||
+        existsSync(join(process.cwd(), '.eslintrc.yml')) ||
+        existsSync(join(process.cwd(), '.eslintrc.yaml')) ||
+        existsSync(join(process.cwd(), '.eslintrc.json')) ||
+        existsSync(join(process.cwd(), '.eslintrc'))) {
         for (const config of configurations) {
             const ForkTsCheckerNotifierWebpackPlugin = require('fork-ts-checker-notifier-webpack-plugin');
             const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');

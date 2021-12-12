@@ -11,13 +11,10 @@
     "src"
   ],
   "dependencies": {
-    "@app/welcome": "^0.0.1",
-    "@malagu/scf-adapter": "latest"
+    "@app/welcome": "^0.0.1"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/cli-service": "latest",
-    "@malagu/scf-plugin": "latest"
+    "@malagu/cli": "latest"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
