@@ -1,5 +1,14 @@
 # Change Log
 
+## 2.5.6
+
+- feat(frameworks + cli-service) 支持 compileCommand、serveCommand、buildCommand、deployCommand 命令配置
+- feat(cli-service) 支持 webpack 属性配置，与 malagu.webpack 等效
+- feat(cli-service) 支持 includeModules 属性配置，与 malagu.includeModules 等效
+- feat(cli) 支持 framework 属性配置
+- feat(cloud-plugin) 支持 cloud 属性配置，与 malagu.webpack 等效
+
+
 ## 2.5.5
 
 - feat(node-plugin) 添加 `serve hook` 插件，支持 HMR

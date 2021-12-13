@@ -1,4 +1,4 @@
-import { PathUtil, CommandUtil, SettingsUtil } from '@malagu/cli-common';
+import { PathUtil, CommandUtil, SettingsUtil, ConfigUtil } from '@malagu/cli-common';
 import { existsSync, readdir, readJSON } from 'fs-extra';
 import { join } from 'path';
 import { FrameworkUtil } from '@malagu/frameworks';
@@ -19,7 +19,8 @@ export namespace RuntimeUtil {
             upstreamUrl: settings.frameworks?.upstreamUrl
         });
         const pkg = CommandUtil.getPkg(settings);
-        let runtime = pkg.rootComponentPackage.malaguComponent?.runtime;
+        const config = pkg.rootComponentPackage.malaguComponent;
+        let runtime = config?.runtime;
         runtime = runtime || settings.defaultRuntime;
         if (runtime) {
             await installRuntimeIfNeed(runtime);
@@ -30,6 +31,9 @@ export namespace RuntimeUtil {
                     await installRuntimeIfNeed(runtime);
                 }
             }
+        }
+        if (config?.framework) {
+            framework = ConfigUtil.merge(framework, config.framework);
         }
         framework = framework?.useRuntime === runtime ? framework : undefined;
         if (framework) {

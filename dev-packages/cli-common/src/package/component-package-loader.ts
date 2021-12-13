@@ -1,11 +1,10 @@
 import { ApplicationPackage } from './application-package';
-import { customizer } from './package-protocol';
 import { load } from 'js-yaml';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
-import mergeWith = require('lodash.mergewith');
 import { ExpressionHandler } from '../el';
 import { join } from 'path';
+import { ConfigUtil } from '../utils';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -33,7 +32,7 @@ export class ComponentPackageLoader {
             const configForMode = this.loadConfig(nodePackage, configFiles, m);
             configMap.set(m, configForMode || {});
             if (configForMode) {
-                config = mergeWith(config, configForMode, customizer);
+                config = ConfigUtil.merge(config, configForMode);
                 const modeForConfig = this.getMode(configForMode, mode);
                 const diffMode = this.diffMode(modeForConfig, configMap);
                 if (diffMode.length > 0) {

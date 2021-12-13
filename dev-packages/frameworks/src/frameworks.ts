@@ -6,7 +6,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            buildCommand: 'npx react-scripts build',
+            compileCommand: 'npx react-scripts build',
             env: {
                 PUBLIC_URL: '${frontend.malagu.server.path}'
             }
@@ -31,7 +31,7 @@ export const frameworks = [
         useMode: [ 'static', 'vue' ],
         settings: {
             outputDir: 'dist',
-            buildCommand: 'npx vue-cli-service build'
+            compileCommand: 'npx vue-cli-service build'
         },
         detectors: {
             every: [
@@ -48,7 +48,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            buildCommand: 'npx vite build --base ${frontend.malagu.server.path}'
+            compileCommand: 'npx vite build --base ${frontend.malagu.server.path}'
         },
         detectors: {
             every: [
@@ -65,7 +65,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            buildCommand: 'npx ng build --base-href ${frontend.malagu.server.path}'
+            compileCommand: 'npx ng build --base-href ${frontend.malagu.server.path}'
         },
         detectors: {
             every: [
@@ -82,7 +82,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'public',
-            buildCommand: 'npm run build'
+            compileCommand: 'npm run build'
         },
         detectors: {
             every: [
@@ -99,7 +99,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            buildCommand: 'npx preact build'
+            compileCommand: 'npx preact build'
         },
         detectors: {
             every: [
@@ -116,7 +116,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            buildCommand: 'npx ember-cli build --environment=production'
+            compileCommand: 'npx ember-cli build --environment=production'
         },
         detectors: {
             every: [

@@ -46,7 +46,13 @@ export class BuildManager {
         this.log();
         this.cleanDistDir();
 
-        const buildCommand: string = this.ctx.framework?.settings.buildCommand;
+        const compileCommand: string = this.ctx.framework?.settings?.compileCommand;
+        if (compileCommand) {
+            const args = compileCommand.split(/\s+/);
+            await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
+        }
+
+        const buildCommand: string = this.ctx.framework?.settings?.buildCommand;
         if (buildCommand) {
             const args = buildCommand.split(/\s+/);
             await spawnProcess(args.shift()!, args, { stdio: 'inherit' });

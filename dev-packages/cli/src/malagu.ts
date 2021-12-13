@@ -14,17 +14,19 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 (async () => {
     const { runtime, framework, settings } = await RuntimeUtil.initRuntime();
     let runtimeStrLine = '';
+    let runtimeStr = '';
     if (runtime && runtime !== Runtimes.empty) {
-        let runtimeStr = runtime;
+        runtimeStr = runtime;
         if (framework) {
             runtimeStr = runtime === Runtimes.default ? framework.name : `${runtime}.${framework.name}`;
         }
+        runtimeStr = `Runtime<${runtimeStr}>`;
         runtimeStrLine = '\n│';
-        runtimeStrLine += chalk.yellow.bold(`Runtime<${runtimeStr}>`.padStart(25 + Math.floor((9 + runtimeStr.length) / 2)).padEnd(50)) + '│';
+        runtimeStrLine += chalk.yellow.bold(runtimeStr.padStart(25 + Math.floor(runtimeStr.length / 2)).padEnd(50)) + '│';
     }
     const banner = process.env.MALAGU_BANNER || settings.banner;
     if (banner) {
-        console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStrLine));
+        console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStr));
     } else {
     console.log(`
                    ___
