@@ -1,12 +1,12 @@
 {
   "name": "@malagu/fc-adapter",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/faas-adapter": "2.5.5",
-    "@malagu/web": "2.5.5",
+    "@malagu/faas-adapter": "2.5.6",
+    "@malagu/web": "2.5.6",
     "@webserverless/fc-express": "^1.0.0",
     "express": "^4.17.1",
     "raw-body": "^2.3.3"
@@ -45,7 +45,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.5"
+    "@malagu/ext-scripts": "2.5.6"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
