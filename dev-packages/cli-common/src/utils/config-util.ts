@@ -1,6 +1,7 @@
 import { ApplicationPackage, ApplicationConfig } from '../package';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Module } from '../package';
+import mergeWith = require('lodash.mergewith');
 
 export namespace ConfigUtil {
     export function getWebpackConfig(cfg: ApplicationConfig, target: string) {
@@ -83,5 +84,16 @@ export namespace ConfigUtil {
         }
         const server = getMalaguConfig(cfg, target).server || { port: 3000 };
         return server.port;
+    }
+
+    export function merge(...objects: any[]) {
+        const customizer = (objValue: any, srcValue: any) => {
+            if (Array.isArray(objValue)) {
+                return srcValue;
+            }
+        };
+        const last = objects[objects.length - 1];
+        const [first, ...rest] = objects;
+        return mergeWith(first, ...rest, typeof last === 'function' ? customizer : undefined);
     }
 }

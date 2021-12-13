@@ -1,17 +1,16 @@
 import * as paths from 'path';
 import { readJsonFile } from './json-file';
 import { Dependencies, NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
-import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage, customizer } from './package-protocol';
+import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Settings } from '../settings/settings-protocol';
 import { ComponentPackageLoader } from './component-package-loader';
 import { Module } from './package-protocol';
-import mergeWith = require('lodash.mergewith');
 
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
-import { PathUtil } from '../utils';
+import { PathUtil, ConfigUtil } from '../utils';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -103,8 +102,8 @@ export class ApplicationPackage {
             if (process.cwd() !== this.projectPath) {
                 const virtualPkg = { malaguComponent: { mode: [] }, modulePath: process.cwd() };
                 this.componentPackageLoader.load(virtualPkg, this.options.mode);
-                this.componentPackageLoader.load(this.pkg, virtualPkg.malaguComponent.mode);
-                this.pkg.malaguComponent = mergeWith(this.pkg.malaguComponent, virtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode }, customizer);
+                this.componentPackageLoader.load(this.pkg, virtualPkg.malaguComponent.mode || []);
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, virtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode });
             } else {
                 this.componentPackageLoader.load(this.pkg, this.options.mode);
             }

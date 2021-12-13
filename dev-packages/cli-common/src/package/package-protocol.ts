@@ -21,12 +21,6 @@ export class ApplicationPackageOptions {
 
 export type ApplicationModuleResolver = (modulePath: string) => string;
 
-export function customizer(objValue: any, srcValue: any) {
-    if (Array.isArray(objValue)) {
-        return srcValue;
-    }
-}
-
 export interface Props {
 
     [key: string]: any;

@@ -1,6 +1,6 @@
 
 import build from '../build/build';
-import { CliContext, ContextUtils, HookExecutor } from '@malagu/cli-common';
+import { CliContext, ContextUtils, HookExecutor, spawnProcess } from '@malagu/cli-common';
 
 export interface DeplyOptions {
     entry?: string;
@@ -15,6 +15,12 @@ export default async (cliContext: CliContext, options: DeplyOptions) => {
         });
         if (!options.skipBuild) {
             await build(cliContext, options);
+        }
+
+        const deployCommand: string = cliContext.framework?.settings?.deployCommand;
+        if (deployCommand) {
+            const args = deployCommand.split(/\s+/);
+            await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
         }
         const hookExecutor = new HookExecutor();
         await hookExecutor.executeDeployHooks(ctx);

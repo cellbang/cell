@@ -1,9 +1,9 @@
-import { Component, Props, ApplicationLog, customizer, ApplicationConfigOptions } from './package-protocol';
-import mergeWith = require('lodash.mergewith');
+import { Component, Props, ApplicationLog, ApplicationConfigOptions } from './package-protocol';
 import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 import { existsSync, readFileSync } from 'fs-extra';
 import { load } from 'js-yaml';
 import { ApplicationPackage } from './application-package';
+import { ConfigUtil } from '../utils';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -31,7 +31,7 @@ export class ApplicationConfig {
         for (const componentPackage of this.pkg.componentPackages) {
             const component = componentPackage.malaguComponent;
             if (component) {
-                props = mergeWith(props, component, customizer);
+                props = ConfigUtil.merge(props, component);
             }
         }
 
@@ -61,7 +61,7 @@ export class ApplicationConfig {
         let config: any = { ...this.props };
         delete config.backend;
         delete config.frontend;
-        config = mergeWith(config, this.props[target], customizer);
+        config = ConfigUtil.merge(config, this.props[target]);
 
         delete config.webpackHooks;
         delete config.initHooks;

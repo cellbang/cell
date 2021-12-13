@@ -42,6 +42,19 @@ export class ConfigFactory {
                 continue;
             }
 
+            const config = ConfigUtil.getConfig(cfg, target);
+
+            config.malagu = config.malagu || {};
+            config.malagu.webpack = ConfigUtil.merge(config.malagu.webpack, config.webpack);
+            config.webpack = config.malagu.webpack;
+
+            if (typeof config.includeModules === 'boolean' || typeof config.malagu.includeModules === 'boolean') {
+                config.malagu.includeModules = config.includeModules;
+            } else {
+                config.malagu.includeModules = ConfigUtil.merge(config.malagu.includeModules, config.includeModules);
+                config.includeModules = config.malagu.includeModules;
+            }
+
             const configuration = new WebpackChain();
             for (const configFactory of configFactories) {
                 if (configFactory.support(ctx, target)) {

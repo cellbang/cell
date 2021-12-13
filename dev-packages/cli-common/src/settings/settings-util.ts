@@ -1,10 +1,8 @@
 import { load, dump } from 'js-yaml';
 import { readFileSync, existsSync, ensureFileSync, writeFileSync } from 'fs-extra';
-import { PathUtil } from '../utils';
+import { PathUtil, ConfigUtil } from '../utils';
 import * as path from 'path';
 import { DEFAULT_SETTINGS, Settings } from './settings-protocol';
-import mergeWith = require('lodash.mergewith');
-import { customizer } from '../package/package-protocol';
 
 export namespace SettingsUtil {
     export function getSettingsPath() {
@@ -26,7 +24,7 @@ export namespace SettingsUtil {
 
     export function updateSettings(parts: Record<string, any>) {
         let settings = doGetSettings();
-        settings = mergeWith(settings, parts, customizer);
+        settings = ConfigUtil.merge(settings, parts);
         saveSettings(settings);
     }
 

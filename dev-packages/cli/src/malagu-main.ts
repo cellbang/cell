@@ -64,7 +64,7 @@ function execute() {
                 ...(components || []).reduce<string[]>((prev, curr) => prev.concat(curr.configFiles), [])
             ];
             watchpack.watch({
-                files: files.map(f => f.split('/').join(sep)),
+                files: files.map(f => f?.split('/').join(sep)),
                 aggregateTimeout: 1000
             });
             watchpack.on('aggregated', () => {
