@@ -124,7 +124,7 @@ function doGetFunction(client: any, namespace: string, functionName: string, qua
 }
 
 
-export async function getFunction(client: any, namespaceName: string, functionName: string, print = false) {
+export async function getFunction(client: any, namespaceName: string, functionName: string, qualifier?: string, print = false) {
 
     try {
         const result = await doGetFunction(client, namespaceName, functionName);

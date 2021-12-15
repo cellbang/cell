@@ -138,7 +138,7 @@ export async function getApiMapping(client: ApiGatewayV2, domainName: string, ap
     }
 }
 
-export async function getFunction(client: Lambda, functionName: string, print = false) {
+export async function getFunction(client: Lambda, functionName: string, qualifier?: string, print = false) {
 
     try {
         const result = await client.getFunction({ FunctionName: functionName }).promise();

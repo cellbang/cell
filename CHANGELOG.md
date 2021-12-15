@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.5.7
+
+- fix(scf-plugin) 修复 `malagu info` 切环境信息不对
+- fix(cli-service) 修复 malagu 框架在运行时背景下构建问题
+
 ## 2.5.6
 
 - feat(frameworks + cli-service) 支持 compileCommand、serveCommand、buildCommand、deployCommand 命令配置

@@ -28,7 +28,7 @@ export default async (context: InfoContext) => {
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
 
-    context.output.functionInfo = await getFunction(scfClient, namespace.name, functionName, true);
+    context.output.functionInfo = await getFunction(scfClient, namespace.name, functionName, alias.name, true);
     if (!context.output.functionInfo) {
         return;
     }

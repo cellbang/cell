@@ -1,7 +1,7 @@
 const leven = require('leven');
 import * as ora from 'ora';
 import { HookExecutor, CommandUtil, program, Command } from '@malagu/cli-common';
-import { Runtimes, RuntimeUtil } from '@malagu/cli-runtime';
+import { BannerUtil } from './utils';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
@@ -12,38 +12,8 @@ updateNotifier({ pkg }).notify();
 const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
 
 (async () => {
-    const { runtime, framework, settings } = await RuntimeUtil.initRuntime();
-    let runtimeStrLine = '';
-    let runtimeStr = '';
-    if (runtime && runtime !== Runtimes.empty) {
-        runtimeStr = runtime;
-        if (framework) {
-            runtimeStr = runtime === Runtimes.default ? framework.name : `${runtime}.${framework.name}`;
-        }
-        runtimeStr = `Runtime<${runtimeStr}>`;
-        runtimeStrLine = '\n│';
-        runtimeStrLine += chalk.yellow.bold(runtimeStr.padStart(25 + Math.floor(runtimeStr.length / 2)).padEnd(50)) + '│';
-    }
-    const banner = process.env.MALAGU_BANNER || settings.banner;
-    if (banner) {
-        console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStr));
-    } else {
-    console.log(`
-                   ___
- /'\\_/\`\\          /\\_ \\
-/\\      \\     __  \\//\\ \\      __       __   __  __
-\\ \\ \\__\\ \\  /'__\`\\  \\ \\ \\   /'__\`\\   /'_ \`\\/\\ \\/\\ \\
- \\ \\ \\_/\\ \\/\\ \\L\\.\\_ \\_\\ \\_/\\ \\L\\.\\_/\\ \\L\\ \\ \\ \\_\\ \\
-  \\ \\_\\\\ \\_\\ \\__/.\\_\\/\\____\\ \\__/.\\_\\ \\____ \\ \\____/
-   \\/_/ \\/_/\\/__/\\/_/\\/____/\\/__/\\/_/\\/___L\\ \\/___/
-                                       /\\____/
-${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
-
-╭──────────────────────────────────────────────────╮
-│      Serverless Frist Development Framework      │${runtimeStrLine}
-╰──────────────────────────────────────────────────╯
-`);
-    }
+    const { runtime, framework, settings } = JSON.parse(process.env.MALAGU_RFS!);
+    BannerUtil.print(version, settings, runtime, framework);
 
     spinner.start();
     const context = await CommandUtil.loadContext(settings, framework, runtime, undefined, spinner);

@@ -7,7 +7,7 @@ import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { CopyWepackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
-    ProgressPluginConfigFactory, DefinePluginConfigFactory } from './plugin-config-factory';
+    ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
 import * as WebpackChain from 'webpack-chain';
@@ -34,6 +34,7 @@ export class ConfigFactory {
             new CleanWebpackPluginConfigFactory(),
             new ProgressPluginConfigFactory(),
             new EntryConfigFactory(),
+            new NormalModuleReplacementPluginConfigFactory(),
             new ComponentConfigConfigFactory()
         ];
 
