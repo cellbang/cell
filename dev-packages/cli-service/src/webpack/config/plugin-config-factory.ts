@@ -201,7 +201,6 @@ export class NormalModuleReplacementPluginConfigFactory {
                 if (resource.createData?.resource?.startsWith(runtimePath)) {
                     const newResource = resource.createData.resource.replace(runtimePath, process.cwd());
                     if (existsSync(newResource)) {
-                        console.log(resource.createData.request);
                         if (resource.createData.request && resource.createData.userRequest) {
                             resource.createData.request = resource.createData.request.replace(runtimePath, process.cwd());
                             resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, process.cwd());

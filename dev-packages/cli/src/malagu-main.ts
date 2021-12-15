@@ -50,7 +50,7 @@ async function execute() {
     process.env.MALAGU_RFS = JSON.stringify({ runtime, settings, framework });
     const runtimePath = PathUtil.getRuntimePath(runtime);
     if (runtimePath !== process.cwd()) {
-        nodePaths.push(join(process.cwd(), 'node_modules'));
+        nodePaths.push(join(runtimePath, 'node_modules'));
     }
     process.env.NODE_PATH = nodePaths.join(delimiter);
     const malaguPath = require.resolve('@malagu/cli/lib/malagu', { paths: [ process.cwd(), __dirname ] });
