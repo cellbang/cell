@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.5.8
+
+- fix(cli) 修复部分项目模块依赖加载不到
+- fix(cli-service) 去掉多余日志信息
+
 ## 2.5.7
 
 - fix(scf-plugin) 修复 `malagu info` 切环境信息不对
