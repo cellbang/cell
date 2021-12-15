@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { CliContext, ConfigUtil, FRONTEND_TARGET } from '@malagu/cli-common';
+import { BACKEND_TARGET, CliContext, ConfigUtil, FRONTEND_TARGET, PathUtil } from '@malagu/cli-common';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
@@ -189,6 +189,32 @@ export class CleanWebpackPluginConfigFactory {
 
     support(context: CliContext, target: string): boolean {
         return true;
+    }
+}
+
+export class NormalModuleReplacementPluginConfigFactory {
+    create(config: WebpackChain, context: CliContext, target: string) {
+        const runtimePath = PathUtil.getRuntimePath(context.runtime);
+        config
+            .plugin('replace')
+            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath), resource => {
+                if (resource.createData?.resource?.startsWith(runtimePath)) {
+                    const newResource = resource.createData.resource.replace(runtimePath, process.cwd());
+                    if (existsSync(newResource)) {
+                        console.log(resource.createData.request);
+                        if (resource.createData.request && resource.createData.userRequest) {
+                            resource.createData.request = resource.createData.request.replace(runtimePath, process.cwd());
+                            resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, process.cwd());
+                            resource.createData.resource = newResource;
+                            resource.createData.context = resource.createData.context.replace(runtimePath, process.cwd());
+                        }
+                    }
+                }
+            }]);
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return target === BACKEND_TARGET;
     }
 }
 

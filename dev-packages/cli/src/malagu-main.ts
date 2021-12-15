@@ -1,6 +1,7 @@
 import { fork, ChildProcess } from 'child_process';
-import { Component, Module } from '@malagu/cli-common';
+import { Component, Module, PathUtil } from '@malagu/cli-common';
 import { sep, join, delimiter } from 'path';
+import { RuntimeUtil } from '@malagu/cli-runtime';
 const Watchpack = require('watchpack');
 
 const watchpack = new Watchpack({});
@@ -32,17 +33,25 @@ const exitListener = (code: number | null) => {
 
 };
 
-function execute() {
+async function execute() {
     if (current?.killed === false) {
         current.removeListener('exit', exitListener);
         current.kill();
     }
+    const { runtime, framework, settings } = await RuntimeUtil.initRuntime();
+
     const nodePaths = Array.from(new Set<string>([
         join(process.cwd(), 'node_modules'),
         join(process.cwd(), '..', 'node_modules'),
         join(process.cwd(), '..', '..', 'node_modules'),
         join(process.cwd(), '..', '..', '..', 'node_modules')
     ]));
+
+    process.env.MALAGU_RFS = JSON.stringify({ runtime, settings, framework });
+    const runtimePath = PathUtil.getRuntimePath(runtime);
+    if (runtimePath !== process.cwd()) {
+        nodePaths.push(join(process.cwd(), 'node_modules'));
+    }
     process.env.NODE_PATH = nodePaths.join(delimiter);
     const malaguPath = require.resolve('@malagu/cli/lib/malagu', { paths: [ process.cwd(), __dirname ] });
     current = fork(malaguPath, argv, { stdio: 'inherit' });

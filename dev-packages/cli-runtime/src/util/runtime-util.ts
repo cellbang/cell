@@ -20,6 +20,9 @@ export namespace RuntimeUtil {
         });
         const pkg = CommandUtil.getPkg(settings);
         const config = pkg.rootComponentPackage.malaguComponent;
+        if (config?.framework) {
+            framework = ConfigUtil.merge(framework, config.framework);
+        }
         let runtime = config?.runtime;
         runtime = runtime || settings.defaultRuntime;
         if (runtime) {
@@ -31,9 +34,6 @@ export namespace RuntimeUtil {
                     await installRuntimeIfNeed(runtime);
                 }
             }
-        }
-        if (config?.framework) {
-            framework = ConfigUtil.merge(framework, config.framework);
         }
         framework = framework?.useRuntime === runtime ? framework : undefined;
         if (framework) {
