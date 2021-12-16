@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.6.0
+
+- feat(cli) 添加 `malagu props` 命令，用户显示当前应用完整属性配置信息
+- feat(cloud-plugin) 云厂商 profile 文件添加 `stage` 属性表示当前环境，优先级低于应用根组件属性的 `stage`，高于其他
+- fix(cli-common) 修复部署报错
+- refactor(cli-common) 重构 framework 在属性配置文件中的格式
+
 ## 2.5.9
 
 - fix(cli) 修复 frameworks 中的表达式解释与配置文件中不一致问题

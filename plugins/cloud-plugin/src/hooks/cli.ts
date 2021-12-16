@@ -12,6 +12,7 @@ export default async (context: CliContext) => {
             .option('--access-key-secret [accessKeySecret]', `${name} access key secret`)
             .option('--token [token]', `${name} access token`)
             .option('--region [region]', `${name} region`)
+            .option('--stage [stage]', `${name} stage`)
             .option('--logout [logout]', `logout ${name}`)
             .option('--show-profile [showProfile]', `show ${name} profile`);
 

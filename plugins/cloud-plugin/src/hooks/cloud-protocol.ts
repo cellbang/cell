@@ -13,6 +13,8 @@ export interface Profile {
     account: Account
     credentials: Credentials;
     region: string;
+    stage?: string;
+
 }
 
 export interface ProfileProvider {
@@ -38,4 +40,5 @@ export interface ConfigOptions {
     show?: boolean;
     logout?: boolean;
     showProfile?: boolean;
+    stage?: string;
 }

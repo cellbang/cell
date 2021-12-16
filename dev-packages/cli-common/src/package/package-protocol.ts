@@ -1,6 +1,7 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
 import { Command } from 'commander';
 import { Settings } from '../settings/settings-protocol';
+import { Framework } from '@malagu/frameworks';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 
@@ -17,6 +18,7 @@ export class ApplicationPackageOptions {
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
     readonly settings?: Settings;
+    readonly framework?: Framework;
 }
 
 export type ApplicationModuleResolver = (modulePath: string) => string;
