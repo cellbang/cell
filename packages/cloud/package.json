@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cloud",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.5.9",
+    "@malagu/core": "2.5.10",
     "camelcase-keys": "^6.2.2"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.9",
+    "@malagu/ext-scripts": "2.5.10",
     "bufferutil": "^4.0.1",
     "utf-8-validate": "^5.0.2"
   },

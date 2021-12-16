@@ -1,12 +1,12 @@
 {
   "name": "@malagu/faas-adapter",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.5.9",
-    "@malagu/schedule": "2.5.9"
+    "@malagu/cloud": "2.5.10",
+    "@malagu/schedule": "2.5.10"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.9"
+    "@malagu/ext-scripts": "2.5.10"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
