@@ -10,12 +10,13 @@ export default async (context: CliContext) => {
 
     const { regions, profilePath, name } = config;
     const opts = options as ConfigOptions;
-    if (opts.accessKeyId || opts.accessKeySecret || opts.accountId || opts.region) {
+    if (opts.accessKeyId || opts.accessKeySecret || opts.accountId || opts.region || opts.stage) {
         const profile = await CloudUtils.getProfileFromFile(profilePath) || <Profile>{ credentials: {}, account: {} };
         profile.account.id = opts.accountId || profile.account.id;
         profile.credentials.accessKeyId = opts.accessKeyId || profile.credentials.accessKeyId;
         profile.credentials.accessKeySecret = opts.accessKeySecret || profile.credentials.accessKeySecret;
         profile.region = opts.region || profile.region;
+        profile.stage = opts.stage || profile.stage;
         profile.credentials.token = opts.token || profile.credentials.token;
         await CloudUtils.saveProfile(profilePath, profile);
     }

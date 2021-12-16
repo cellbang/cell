@@ -6,7 +6,6 @@ import { ExpressionHandler } from '../el';
 import { HookExecutor } from '../hook';
 import { ApplicationConfig } from '../package';
 import { Framework } from '@malagu/frameworks';
-import { ExpressionContext } from '../el';
 import { Settings } from '../settings/settings-protocol';
 import { getPackager } from '../packager';
 import * as ora from 'ora';
@@ -82,6 +81,49 @@ export namespace CliContext {
         }
     }
 
+    async function renderConfig(pkg: ApplicationPackage, cfg: ApplicationConfig, options: CreateCliContextOptions, otherConfig: any) {
+        for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
+            const config = cfg.getConfig(target);
+            const envForConfig = config.env || {};
+            config.env = { ...otherConfig.env, ...envForConfig };
+            config.pkg = otherConfig.pkg;
+            config.currentRuntimePath = otherConfig.currentRuntimePath;
+            config.frontendProjectDistPath = otherConfig.frontendProjectDistPath;
+            config.backendProjectDistPath = otherConfig.backendProjectDistPath;
+            config.cliContext = otherConfig.cliContext;
+            const expressionHandler = new ExpressionHandler();
+
+            const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
+            jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, { ...config, ...otherConfig }));
+
+            await new HookExecutor().executeHooks({
+                pkg,
+                cfg,
+                program,
+                target,
+                props: config,
+                expressionHandler,
+                output: {},
+                ...options
+            }, 'propsHooks');
+
+            expressionHandler.handle(config);
+            delete config.pkg;
+            delete config.cliContext;
+            delete config.currentRuntimePath;
+            delete config.frontendProjectDistPath;
+            delete config.backendProjectDistPath;
+
+            for (const key of Object.keys(config.env)) {
+                if (key in envForConfig) {
+                    process.env[key] = config.env[key];
+                } else {
+                    delete config.env[key];
+                }
+            }
+        }
+    }
+
     export async function create(options: CreateCliContextOptions, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
@@ -102,55 +144,22 @@ export namespace CliContext {
             mode.push(...framework.useMode);
         }
         mode = Array.from(new Set<string>(mode));
-        const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings });
+        const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings, framework });
         await installComponents(pkg, options.spinner);
 
         const cfg = new ApplicationConfig({ targets, program }, pkg);
-        const handleExpression = (obj: any, ctx?: ExpressionContext) => {
-            const expressionHandler = new ExpressionHandler();
-            const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
-            jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, ctx || obj));
-            expressionHandler.handle(obj, ctx || obj);
+
+        const otherConfig = {
+            env: { ...process.env, _ignoreEl: true },
+            pkg: { ...pkg.pkg, _ignoreEl: true },
+            currentRuntimePath: projectPath,
+            frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(runtime),
+            backendProjectDistPath: PathUtil.getBackendProjectDistPath(runtime),
+            cliContext: { ...options, ...program, _ignoreEl: true},
         };
 
         if (!skipComponent) {
-            for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
-                const config = cfg.getConfig(target);
-                config.env = { ...process.env, _ignoreEl: true };
-                config.pkg = { ...pkg.pkg, _ignoreEl: true};
-                config.currentRuntimePath = projectPath;
-                config.frontendProjectDistPath = PathUtil.getFrontendProjectDistPath(runtime);
-                config.backendProjectDistPath = PathUtil.getBackendProjectDistPath(runtime);
-                config.cliContext = { ...options, ...program, _ignoreEl: true};
-                const expressionHandler = new ExpressionHandler();
-
-                const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
-                jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, config));
-
-                await new HookExecutor().executeHooks({
-                    pkg,
-                    cfg,
-                    program,
-                    target,
-                    props: config,
-                    expressionHandler,
-                    output: {},
-                    ...options
-                }, 'propsHooks');
-
-                expressionHandler.handle(config);
-            }
-
-        }
-        if (framework) {
-            handleExpression(framework, {
-                backend: cfg.getConfig(BACKEND_TARGET),
-                frontend: cfg.getConfig(FRONTEND_TARGET),
-                ...cfg.getConfig(BACKEND_TARGET)
-            });
-            for (const key of Object.keys(framework.settings.env || {})) {
-                process.env[key] = framework.settings.env[key];
-            }
+            await renderConfig(pkg, cfg, options, otherConfig);
         }
 
         return <CliContext> {

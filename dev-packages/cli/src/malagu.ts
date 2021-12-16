@@ -48,6 +48,15 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             require('./init/init').default({ name, template, outputDir: '.', ...options });
         });
     program
+        .command('props')
+        .description('display properties about application')
+        .option('-n, --name [name]', 'get the property value of the specified name')
+        .option('-f, --frontend [frontend]', 'frontend properties')
+        .option('--backend [backend]', 'backend properties')
+        .action(options => {
+            require('./props/props').default(context, { ...options });
+        });
+    program
         .command('info')
         .description('display information about application')
         .action(options => {

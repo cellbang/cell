@@ -35,6 +35,11 @@ export class ApplicationConfig {
             }
         }
 
+        if (this.pkg.framework) {
+            const settings = this.pkg.framework.settings || {};
+            props = ConfigUtil.merge(settings, props);
+        }
+
         return props;
     }
 

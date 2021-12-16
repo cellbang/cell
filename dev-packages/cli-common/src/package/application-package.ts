@@ -11,6 +11,7 @@ import { Module } from './package-protocol';
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
 import { PathUtil, ConfigUtil } from '../utils';
+import { Framework } from '@malagu/frameworks';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -21,6 +22,7 @@ export class ApplicationPackage {
     readonly dev: boolean;
     readonly settings?: Settings;
     readonly runtime?: string;
+    readonly framework?: Framework;
     readonly log: ApplicationLog;
     readonly error: ApplicationLog;
     protected componentPackageLoader = new ComponentPackageLoader(this);
@@ -33,6 +35,7 @@ export class ApplicationPackage {
         this.dev = options.dev;
         this.runtime = options.runtime;
         this.settings = options.settings;
+        this.framework = options.framework;
 
         this.log = options.log || console.log.bind(console);
         this.error = options.error || console.error.bind(console);

@@ -1,6 +1,6 @@
 
 import * as webpack from 'webpack';
-import { BACKEND_TARGET, spawnProcess, HookExecutor, BuildContext, PathUtil, LoggerUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET, spawnProcess, HookExecutor, BuildContext, PathUtil, LoggerUtil, ConfigUtil } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
 import { ServiceContextUtils } from '../context';
 import { readdirSync, statSync, existsSync } from 'fs-extra';
@@ -45,14 +45,16 @@ export class BuildManager {
     async build(): Promise<void> {
         this.log();
         this.cleanDistDir();
+        const backendConfig = ConfigUtil.getBackendConfig(this.ctx.cfg);
+        const frontendConfig = ConfigUtil.getFrontendConfig(this.ctx.cfg);
 
-        const compileCommand: string = this.ctx.framework?.settings?.compileCommand;
+        const compileCommand: string = backendConfig.compileCommand || frontendConfig.compileCommand;
         if (compileCommand) {
             const args = compileCommand.split(/\s+/);
             await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
         }
 
-        const buildCommand: string = this.ctx.framework?.settings?.buildCommand;
+        const buildCommand: string = backendConfig.buildCommand || frontendConfig.buildCommand;
         if (buildCommand) {
             const args = buildCommand.split(/\s+/);
             await spawnProcess(args.shift()!, args, { stdio: 'inherit' });

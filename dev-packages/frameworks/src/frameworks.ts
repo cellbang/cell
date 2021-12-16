@@ -7,8 +7,10 @@ export const frameworks = [
         settings: {
             outputDir: 'build',
             compileCommand: 'npx react-scripts build',
-            env: {
-                PUBLIC_URL: '${frontend.malagu.server.path}'
+            frontend: {
+                env: {
+                    PUBLIC_URL: '${malagu.server.path}'
+                }
             }
         },
         detectors: {
@@ -48,7 +50,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx vite build --base ${frontend.malagu.server.path}'
+            frontend: {
+                compileCommand: 'npx vite build --base ${malagu.server.path}'
+            }
         },
         detectors: {
             every: [
@@ -65,7 +69,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            compileCommand: 'npx ng build --base-href ${frontend.malagu.server.path}'
+            frontend: {
+                compileCommand: 'npx ng build --base-href ${frontend.malagu.server.path}'
+            }
         },
         detectors: {
             every: [
