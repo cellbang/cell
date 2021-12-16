@@ -146,7 +146,8 @@ export namespace CliContext {
             handleExpression(framework, {
                 backend: cfg.getConfig(BACKEND_TARGET),
                 frontend: cfg.getConfig(FRONTEND_TARGET),
-                ...cfg.getConfig(BACKEND_TARGET)
+                ...cfg.getConfig(BACKEND_TARGET),
+                pkg: pkg.pkg,
             });
             for (const key of Object.keys(framework.settings.env || {})) {
                 process.env[key] = framework.settings.env[key];
