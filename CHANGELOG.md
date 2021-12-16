@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.6.0
+## 2.5.10
 
 - feat(cli) 添加 `malagu props` 命令，用户显示当前应用完整属性配置信息
 - feat(cloud-plugin) 云厂商 profile 文件添加 `stage` 属性表示当前环境，优先级低于应用根组件属性的 `stage`，高于其他

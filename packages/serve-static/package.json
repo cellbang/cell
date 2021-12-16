@@ -1,11 +1,11 @@
 {
   "name": "@malagu/serve-static",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/web": "2.5.9",
+    "@malagu/web": "2.5.10",
     "@types/send": "^0.17.0",
     "send": "^0.17.1"
   },
@@ -38,7 +38,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.9",
+    "@malagu/ext-scripts": "2.5.10",
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.1",
     "@types/url-join": "^4.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-runtime",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "Malagu CLI Runtime.",
   "publishConfig": {
     "access": "public"
@@ -29,13 +29,13 @@
     "test": "malaguext test"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.5.9",
+    "@malagu/cli-common": "2.5.10",
     "leven": "^3.1.0",
     "minimist": "^1.2.5",
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.9",
+    "@malagu/ext-scripts": "2.5.10",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
   },

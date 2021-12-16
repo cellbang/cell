@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-service",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "Malagu CLI Service.",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "test": "malaguext test"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.5.9",
+    "@malagu/cli-common": "2.5.10",
     "@types/friendly-errors-webpack-plugin": "^0.1.3",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.5.0",
@@ -68,7 +68,7 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.9"
+    "@malagu/ext-scripts": "2.5.10"
   },
   "gitHead": "29768c7449248dd6d13afb783000a335719f90b9"
 }
