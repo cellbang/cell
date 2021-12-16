@@ -74,9 +74,9 @@ export async function getFunction(client: any, serviceName: string, functionName
     }
 }
 
-export async function getService(client: any, serviceName: string, print = false) {
+export async function getService(client: any, serviceName: string, qualifier?: string, print = false) {
     try {
-        const result = await client.getService(serviceName);
+        const result = await client.getService(serviceName, qualifier);
         if (print) {
             console.log(chalk`{bold.cyan - Service: }`);
             console.log(`    - ServiceName: ${result.data.serviceName}`);

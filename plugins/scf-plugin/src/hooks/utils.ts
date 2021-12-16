@@ -84,7 +84,9 @@ export async function getAlias(client: any, aliasName: string, namespaceName: st
     getAliasRequest.FunctionName = functionName;
     getAliasRequest.Namespace = namespaceName;
     try {
-        await checkStatus(client, namespaceName, functionName, functionVersion);
+        if (print) {
+            await checkStatus(client, namespaceName, functionName, functionVersion);
+        }
         const result = await client.GetAlias(getAliasRequest);
         if (print) {
             console.log(chalk`{bold.cyan - Alias: }`);
@@ -127,7 +129,7 @@ function doGetFunction(client: any, namespace: string, functionName: string, qua
 export async function getFunction(client: any, namespaceName: string, functionName: string, qualifier?: string, print = false) {
 
     try {
-        const result = await doGetFunction(client, namespaceName, functionName);
+        const result = await doGetFunction(client, namespaceName, functionName, qualifier);
         if (print) {
             console.log(chalk`{bold.cyan - Function: }`);
             console.log(`    - FunctionName: ${result.FunctionName}`);

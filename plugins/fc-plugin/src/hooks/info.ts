@@ -30,7 +30,7 @@ export default async (context: InfoContext) => {
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
     
-    context.output.serviceInfo = await getService(fcClient, serviceName, true);
+    context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
     if (!context.output.serviceInfo) {
         return;
     }
