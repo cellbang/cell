@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ActionNameResolver | Malagu TypeDoc</title>
+	<title>PropsOptions | Malagu TypeDoc</title>
 	<meta name="description" content="Documentation for Malagu TypeDoc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/packages.html">packages</a>
+					<a href="../modules/dev_packages.html">dev-packages</a>
 				</li>
 				<li>
-					<a href="packages.actionnameresolver.html">ActionNameResolver</a>
+					<a href="dev_packages.propsoptions.html">PropsOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ActionNameResolver</h1>
+			<h1>Interface PropsOptions</h1>
 		</div>
 	</div>
 </header>
@@ -71,14 +71,8 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ActionNameResolver</span>
+						<span class="target">PropsOptions</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implemented by</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../classes/packages.defaultactionnameresolver.html" class="tsd-signature-type">DefaultActionNameResolver</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -86,38 +80,47 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Methods</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="packages.actionnameresolver.html#resolve" class="tsd-kind-icon">resolve</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dev_packages.propsoptions.html#backend" class="tsd-kind-icon">backend</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dev_packages.propsoptions.html#frontend" class="tsd-kind-icon">frontend</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dev_packages.propsoptions.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="resolve" class="tsd-anchor"></a>
-					<h3>resolve</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="packages.methodsecuritymetadatacontext.html" class="tsd-signature-type">MethodSecurityMetadataContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/fbdb0240/packages/security/src/node/access/access-protocol.ts#L92">packages/security/src/node/access/access-protocol.ts:92</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>ctx: <a href="packages.methodsecuritymetadatacontext.html" class="tsd-signature-type">MethodSecurityMetadataContext</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="backend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> backend</h3>
+					<div class="tsd-signature tsd-kind-icon">backend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/fbdb0240/dev-packages/cli/src/props/props.ts#L8">dev-packages/cli/src/props/props.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="frontend" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> frontend</h3>
+					<div class="tsd-signature tsd-kind-icon">frontend<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/fbdb0240/dev-packages/cli/src/props/props.ts#L9">dev-packages/cli/src/props/props.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/fbdb0240/dev-packages/cli/src/props/props.ts#L10">dev-packages/cli/src/props/props.ts:10</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -127,10 +130,10 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/dev_packages.html">dev-<wbr>packages</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/packages.html">packages</a>
 					</li>
 				</ul>
@@ -140,10 +143,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="packages.actionnameresolver.html" class="tsd-kind-icon">Action<wbr>Name<wbr>Resolver</a>
+						<a href="dev_packages.propsoptions.html" class="tsd-kind-icon">Props<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="packages.actionnameresolver.html#resolve" class="tsd-kind-icon">resolve</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dev_packages.propsoptions.html#backend" class="tsd-kind-icon">backend</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dev_packages.propsoptions.html#frontend" class="tsd-kind-icon">frontend</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dev_packages.propsoptions.html#name" class="tsd-kind-icon">name</a>
 							</li>
 						</ul>
 					</li>
@@ -170,7 +179,7 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
