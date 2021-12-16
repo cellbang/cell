@@ -1,9 +1,9 @@
 {
   "name": "@malagu/node-plugin",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.5.8"
+    "@malagu/cli-common": "2.5.9"
   },
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.8"
+    "@malagu/ext-scripts": "2.5.9"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
