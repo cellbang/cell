@@ -141,7 +141,7 @@ export async function getApiMapping(client: ApiGatewayV2, domainName: string, ap
 export async function getFunction(client: Lambda, functionName: string, qualifier?: string, print = false) {
 
     try {
-        const result = await client.getFunction({ FunctionName: functionName }).promise();
+        const result = await client.getFunction({ FunctionName: functionName, Qualifier: qualifier }).promise();
         if (print && result.Configuration) {
             const functionInfo = result.Configuration;
             console.log(chalk`{bold.cyan - Function:}`);

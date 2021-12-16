@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.5.9
+
+- fix(cli) 修复 frameworks 中的表达式解释与配置文件中不一致问题
+- fix(scf-plugin + fc-plugin + lambda-plugin) 修复按环境查询信息不正确
+
 ## 2.5.8
 
 - fix(cli) 修复部分项目模块依赖加载不到

@@ -139,12 +139,6 @@ export namespace CliContext {
                 }, 'propsHooks');
 
                 expressionHandler.handle(config);
-                delete config.env;
-                delete config.pkg;
-                delete config.cliContext;
-                delete config.currentRuntimePath;
-                delete config.frontendProjectDistPath;
-                delete config.backendProjectDistPath;
             }
 
         }
