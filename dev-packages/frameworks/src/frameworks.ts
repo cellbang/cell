@@ -68,9 +68,9 @@ export const frameworks = [
         useRuntime: 'default',
         useMode: [ 'static' ],
         settings: {
-            outputDir: 'build',
+            outputDir: 'dist/${pkg.name}',
             frontend: {
-                compileCommand: 'npx ng build --base-href ${frontend.malagu.server.path}'
+                compileCommand: 'npx ng build --base-href ${malagu.server.path}'
             }
         },
         detectors: {
