@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-core",
-  "version": "2.5.10",
+  "version": "2.5.11",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/security": "2.5.10"
+    "@malagu/security": "2.5.11"
   },
   "publishConfig": {
     "access": "public"
