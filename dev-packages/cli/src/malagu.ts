@@ -52,7 +52,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .description('display properties about application')
         .option('-n, --name [name]', 'get the property value of the specified name')
         .option('-f, --frontend [frontend]', 'frontend properties')
-        .option('--backend [backend]', 'backend properties')
+        .option('-b, --backend [backend]', 'backend properties')
         .action(options => {
             require('./props/props').default(context, { ...options });
         });

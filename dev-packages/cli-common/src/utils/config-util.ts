@@ -94,6 +94,6 @@ export namespace ConfigUtil {
         };
         const last = objects[objects.length - 1];
         const [first, ...rest] = objects;
-        return mergeWith(first, ...rest, typeof last === 'function' ? customizer : undefined);
+        return mergeWith(first, ...rest, typeof last === 'function' ? last : customizer);
     }
 }

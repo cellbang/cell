@@ -30,7 +30,7 @@ export const frameworks = [
     {
         name: 'vue',
         useRuntime: 'default',
-        useMode: [ 'static', 'vue' ],
+        useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
             compileCommand: 'npx vue-cli-service build'

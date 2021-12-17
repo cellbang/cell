@@ -116,7 +116,7 @@ export namespace CliContext {
 
             for (const key of Object.keys(config.env)) {
                 if (key in envForConfig) {
-                    process.env[key] = config.env[key];
+                    process.env[key] = expressionHandler.handle(config.env[key], config);
                 } else {
                     delete config.env[key];
                 }
