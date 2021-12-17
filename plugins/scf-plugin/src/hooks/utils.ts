@@ -148,7 +148,7 @@ export async function getFunction(client: any, namespaceName: string, functionNa
             console.log(`    - TraceEnable: ${result.TraceEnable}`);
             console.log(`    - UseGpu: ${result.UseGpu}`);
             console.log(`    - PublicNetStatus: ${result.PublicNetConfig?.PublicNetStatus}`);
-            console.log(`    - ModTime: ${result.ModTime}`);
+            console.log(`    - LastModifiedTime: ${result.ModTime}`);
 
             const vpcConfig = result.VpcConfig;
             if (vpcConfig?.SubnetId) {

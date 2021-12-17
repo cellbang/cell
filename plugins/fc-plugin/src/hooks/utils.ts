@@ -25,7 +25,7 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
                     }
                 }
             }
-            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https' : 'http'}://${customDomainName}${path}`);
+            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https': 'http'}://${customDomainName}${path}`);
         }
         return result;
     } catch (ex) {
@@ -58,12 +58,12 @@ export async function getFunction(client: any, serviceName: string, functionName
         const result = await client.getFunction(serviceName, functionName);
         if (print) {
             console.log(chalk`{bold.cyan - Function: }`);
-            console.log(`    - FunctionName : ${result.data.functionName}`);
-            console.log(`    - Timeout : ${result.data.timeout}`);
-            console.log(`    - MemorySize : ${result.data.memorySize}`);
-            console.log(`    - Runtime : ${result.data.runtime}`);
-            console.log(`    - CAPort : ${result.data.caPort}`);
-            console.log(`    - LastModifiedTime : ${result.data.lastModifiedTime}`);
+            console.log(`    - FunctionName: ${result.data.functionName}`);
+            console.log(`    - Timeout: ${result.data.timeout}`);
+            console.log(`    - MemorySize: ${result.data.memorySize}`);
+            console.log(`    - Runtime: ${result.data.runtime}`);
+            console.log(`    - CAPort: ${result.data.caPort}`);
+            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
         }
         return result;
 
@@ -136,19 +136,19 @@ export async function getApi(client: any, groupId: string, apiName: string, prin
         GroupId: groupId,
         PageSize: 100
     });
-    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName) : [];
+    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName): [];
     if (apis.length > 1) {
         throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
     } else if (apis.length === 1) {
         const result = apis[0];
         if (print) {
             console.log(chalk`{bold.cyan - API: }`);
-            console.log(`    - ApiId : ${result.ApiId}`);
-            console.log(`    - ApiName : ${result.ApiName}`);
-            console.log(`    - Visibility : ${result.Visibility}`);
-            console.log(`    - ModifiedTime : ${result.ModifyTime}`);
+            console.log(`    - ApiId: ${result.ApiId}`);
+            console.log(`    - ApiName: ${result.ApiName}`);
+            console.log(`    - Visibility: ${result.Visibility}`);
+            console.log(`    - ModifiedTime: ${result.ModifyTime}`);
             if (subDomain && path && protocol) {
-                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https' : 'http'}://${subDomain!}${path.split('*')[0]}`);
+                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https': 'http'}://${subDomain!}${path.split('*')[0]}`);
             }
         }
         return result;
@@ -160,7 +160,7 @@ export async function getGroup(client: any, groupName: string, print = false) {
         GroupName: groupName // filter out
     }, { timeout: 10000 });
 
-    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute : [];
+    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute: [];
     const list = groups.filter((item: any) => item.GroupName === groupName);
     if (list.length > 1) {
         throw new Error(`There are two or more groups named [${groupName}] in the api gateway`);

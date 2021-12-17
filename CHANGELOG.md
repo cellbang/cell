@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.5.11
+
+- fix(framework) 修复 angular 框架构建目录问题
+- fix(fc-plugin) 优化日志输出和统一修改时间字段
+- fix(cli-common) 修复 `env` 中的表达式没有被计算
+
+
 ## 2.5.10
 
 - feat(cli) 添加 `malagu props` 命令，用户显示当前应用完整属性配置信息
