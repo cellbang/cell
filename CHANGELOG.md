@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.6.1
+
+- fix(cli-service) 修复 pick external 报错
+- fix(node-plugin): 修复当 server.path 不为空时， 构建产物异常导致项目启动报错的问题 (#82)
+
 ## 2.6.0
 
 - feat(*) 支持项目 link 能力，确保不同项目之间不会出现覆盖部署
