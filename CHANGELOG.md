@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.6.2
+
+- fix(static-plugin) 修复静态文件没有正常打包
+- fix(lambda-plugin) 修复权限设置错误
+
 ## 2.6.1
 
 - fix(cli-service) 修复 pick external 报错

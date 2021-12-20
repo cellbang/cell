@@ -56,7 +56,7 @@ export default async (context: CliContext) => {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { customDomain, api, integration, route, stage } = apiGateway;
         api.name = `${api.name}_${projectId}`;
-        const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionMeta.name, region, accountId);
+        const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionMeta.name, alias.name, region, accountId);
         integration.integrationUri = `arn:aws:lambda:${region}:${accountId}:function:${functionMeta.name}:${alias.name}`;
         const prev = await createOrUpdateIntegration(integration, ApiId!);
         await createOrUpdateRoute(route, ApiId!, prev.IntegrationId!);
@@ -202,19 +202,20 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
 
             await checkStatus(functionMeta.name);
 
-            await lambdaClient.updateFunctionConfiguration(parseUpdateFunctionConfigurationRequest(functionMeta)).promise();
+            functionInfo = await lambdaClient.updateFunctionConfiguration(parseUpdateFunctionConfigurationRequest(functionMeta)).promise();
         });
     } else {
-        await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
-            await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
+        functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
+            return await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
                 await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
         });
     }
+    functionInfo
 }
 
 async function createRoleIfNeed(functionMeta: any, accountId: string, region: string) {
     if (!functionMeta.role) {
-        const roleName = `${functionMeta.name}-role-malagu`;
+        const roleName = `${functionMeta.name}-role`;
         try {
             const { Role } = await iamClient.getRole({ RoleName: roleName }).promise();
             functionMeta.role = Role.Arn;
@@ -408,7 +409,7 @@ function parseUpdateIntegrationRequest(integrationMeta: any, apiId: string, inte
 
 }
 
-async function createOrUpdateApi(api: any, functionName: string, region: string, accountId: string) {
+async function createOrUpdateApi(api: any, functionName: string, aliasName: string, region: string, accountId: string) {
     const apiName = api.name;
     const apiInfo = await getApi(apiGatewayClient, apiName);
     let result: ApiGatewayV2.UpdateApiResponse | ApiGatewayV2.CreateApiResponse;
@@ -420,8 +421,8 @@ async function createOrUpdateApi(api: any, functionName: string, region: string,
     } else {
         result = await SpinnerUtil.start(`Create ${apiName} api`, () => apiGatewayClient.createApi(parseCreateApiRequest(api)).promise());
         await lambdaClient.addPermission({
-            FunctionName:  functionName,
-            StatementId: 'malagu-apigateway',
+            FunctionName:  `arn:aws:lambda:${region}:${accountId}:function:${functionName}:test`,
+            StatementId: v4(),
             Action: 'lambda:InvokeFunction',
             Principal: 'apigateway.amazonaws.com',
             SourceArn: `arn:aws:execute-api:${region}:${accountId}:${result.ApiId}/*/*/*`

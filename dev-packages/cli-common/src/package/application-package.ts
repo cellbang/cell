@@ -71,6 +71,8 @@ export class ApplicationPackage {
                     this._pkg!.dependencies = tmp.dependencies as Dependencies;
                 } else {
                     this._pkg!.name = paths.basename(process.cwd());
+                    this._pkg!.devDependencies = {};
+                    this._pkg!.dependencies = {};
                 }
             } else {
                 this._pkg!.name = this._pkg!.name || paths.basename(this.projectPath);

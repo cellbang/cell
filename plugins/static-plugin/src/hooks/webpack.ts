@@ -1,14 +1,14 @@
 import { ConfigurationContext, WebpackContext, PathUtil, ConfigUtil } from '@malagu/cli-service';
 import { resolve } from 'path';
 const rimraf = require('rimraf');
+const chalk = require('chalk');
 
 export default async (context: WebpackContext) => {
     const { configurations , cfg } = context;
     const config = ConfigurationContext.getBackendConfiguration(
         configurations
     );
-    const projectHomePath = PathUtil.getProjectHomePath();
-    if (config && !projectHomePath.startsWith(process.cwd())) {
+    if (config) {
         const outputDir = ConfigUtil.getFrontendConfig(cfg).outputDir;
         if (outputDir) {
             const CopyPlugin = require('copy-webpack-plugin');
@@ -19,9 +19,13 @@ export default async (context: WebpackContext) => {
                 .use(CopyPlugin, [{
                     patterns: [{
                         from: resolve(process.cwd(), outputDir),
-                        to
+                        to,
+                        globOptions: {
+                            ignore: [`${PathUtil.getProjectHomePath()}/**`, `${PathUtil.getProjectDistPath()}/**`],
+                        },
                     }]
                 }]);
+            console.log(`💰 The backend code output to ${chalk.bold.blue(to)} 🎉`);
         }
 
     }
