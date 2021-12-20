@@ -1,10 +1,10 @@
 {
   "name": "@malagu/lambda-plugin",
-  "version": "2.5.11",
+  "version": "2.6.0",
   "description": "",
   "dependencies": {
-    "@malagu/cloud-plugin": "2.5.11",
-    "@malagu/code-loader-plugin": "2.5.11",
+    "@malagu/cloud-plugin": "2.6.0",
+    "@malagu/code-loader-plugin": "2.6.0",
     "aws-sdk": "^2.807.0",
     "fs-extra": "^8.1.0",
     "jszip": "^3.7.1"
@@ -41,7 +41,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.5.11"
+    "@malagu/ext-scripts": "2.6.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
