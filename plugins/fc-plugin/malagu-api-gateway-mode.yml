@@ -31,7 +31,5 @@ malagu:
             serviceTimeout: 20 # 20s
             contentTypeValue: 'application/json; charset=UTF-8'
             functionComputeConfig:
-              serviceName: ${malagu.cloud.faas.service.name}
-              functionName: ${malagu.cloud.faas.function.name}
               qualifier: ${malagu.cloud.faas.alias.name}
           resultType: PASSTHROUGH

@@ -6,8 +6,6 @@ malagu:
       trigger:
         name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}-mns_topic
         qualifier: ${malagu.cloud.faas.alias.name}
-        functionName: ${malagu.cloud.faas.function.name}
-        serviceName: ${malagu.cloud.faas.service.name}
         triggerType: mns_topic
         # invocationRole: acs:ram::123456:role/app-mns-role
         # sourceARN: acs:mns:cn-hangzhou:123456:/topics/test

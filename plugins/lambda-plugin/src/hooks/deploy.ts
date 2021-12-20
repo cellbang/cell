@@ -1,4 +1,4 @@
-import { CliContext, PathUtil, SpinnerUtil } from '@malagu/cli-common';
+import { CliContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
 import * as delay from 'delay';
 import { v4 } from 'uuid';
@@ -13,9 +13,10 @@ const camelcaseKeys = require('camelcase-keys');
 let lambdaClient: Lambda;
 let apiGatewayClient: ApiGatewayV2;
 let iamClient: IAM;
+let projectId: string;
 
 export default async (context: CliContext) => {
-    const { cfg, pkg, runtime } = context;
+    const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const faasConfig = cloudConfig.faas;
@@ -30,7 +31,6 @@ export default async (context: CliContext) => {
 
     const { apiGateway, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
-    const functionName = functionMeta.name;
     const accountId = account.id;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
@@ -40,25 +40,24 @@ export default async (context: CliContext) => {
 
     console.log(chalk`{bold.cyan - Lambda:}`);
 
-    await createRoleIfNeed(functionMeta, accountId, region);
-
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(runtime), functionMeta.codeUri);
-    await createOrUpdateFunction(functionMeta, zip);
+    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+    await createOrUpdateFunction(functionMeta, accountId, region, zip);
 
-    const functionVersion = await publishVersion(functionName);
+    const functionVersion = await publishVersion(functionMeta.name);
 
-    await createOrUpdateAlias(alias, functionVersion);
+    await createOrUpdateAlias(alias, functionMeta.name, functionVersion);
 
     if (trigger) {
-        await createTrigger(trigger);
+        await createTrigger(trigger, functionMeta.name);
     }
 
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { customDomain, api, integration, route, stage } = apiGateway;
-        const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionName, region, accountId);
-        integration.integrationUri = `arn:aws:lambda:${region}:${accountId}:function:${functionName}:${stage.name}`;
+        api.name = `${api.name}_${projectId}`;
+        const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionMeta.name, region, accountId);
+        integration.integrationUri = `arn:aws:lambda:${region}:${accountId}:function:${functionMeta.name}:${alias.name}`;
         const prev = await createOrUpdateIntegration(integration, ApiId!);
         await createOrUpdateRoute(route, ApiId!, prev.IntegrationId!);
         await createOrUpdateStage(stage, ApiId!);
@@ -76,9 +75,9 @@ export default async (context: CliContext) => {
     console.log();
 };
 
-async function createTrigger(trigger: any) {
+async function createTrigger(trigger: any, functionName: string) {
     
-    const oldEventSourceMapping = await getTrigger(lambdaClient, trigger.functionName, trigger.eventSourceArn);
+    const oldEventSourceMapping = await getTrigger(lambdaClient, functionName, trigger.eventSourceArn);
     if (oldEventSourceMapping) {
         const deleteEventSourceMappingRequest: Lambda.Types.DeleteEventSourceMappingRequest = {
             UUID: oldEventSourceMapping.UUID!
@@ -172,9 +171,27 @@ function parseCreateFunctionRequest(functionMeta: any, code: ArrayBuffer) {
     return req;
 }
 
-async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
+async function tryCreateProjectId(functionName: string) {
+    projectId = await ProjectUtil.createProjectId();
+    const functionInfo = await getFunction(lambdaClient, `${functionName}_${projectId}`);
+    if (functionInfo) {
+        await tryCreateProjectId(functionName);
+    }
+}
 
-    const functionInfo = await getFunction(lambdaClient, functionMeta.name);
+async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, code: JSZip) {
+    projectId = await ProjectUtil.getProjectId();
+    let functionInfo: any;
+    if (!projectId) {
+        await tryCreateProjectId(functionMeta.name);
+        await ProjectUtil.saveProjectId(projectId);
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+    } else {
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+        functionInfo = await getFunction(lambdaClient, functionMeta.name);
+    }
+    await createRoleIfNeed(functionMeta, accountId, region);
+
     if (functionInfo) {
         await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
             const updateFunctionCodeRequest: Lambda.Types.UpdateFunctionCodeRequest = {
@@ -243,7 +260,7 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
                     await new Promise<void>(r =>  {
                         setTimeout(() => {
                             r();
-                        }, 3000);
+                        }, 5000);
                     });
                     functionMeta.role = Role.Arn;
                 });
@@ -266,17 +283,17 @@ async function publishVersion(functionName: string) {
     return functionVersion;
 }
 
-function parseCreateAliasRequest(aliasMeta: any, functionVersion: string) {
+function parseCreateAliasRequest(aliasMeta: any, functionName: string, functionVersion: string) {
     const req: Lambda.Types.CreateAliasRequest = <Lambda.Types.CreateAliasRequest>{
-        ...parseUpdateAliasRequest(aliasMeta, functionVersion)
+        ...parseUpdateAliasRequest(aliasMeta, functionName, functionVersion)
     };
     return req;
 }
 
-function parseUpdateAliasRequest(aliasMeta: any, functionVersion: string) {
+function parseUpdateAliasRequest(aliasMeta: any, functionName: string, functionVersion: string) {
     const req: Lambda.Types.UpdateAliasRequest = {
         Name: aliasMeta.name,
-        FunctionName: aliasMeta.functionName,
+        FunctionName: functionName,
         Description: aliasMeta.description,
         FunctionVersion: functionVersion
     };
@@ -290,17 +307,17 @@ function parseUpdateAliasRequest(aliasMeta: any, functionVersion: string) {
     return req;
 }
 
-async function createOrUpdateAlias(alias: any, functionVersion: string) {
-    const aliasInfo = await getAlias(lambdaClient, alias.functionName, alias.name);
+async function createOrUpdateAlias(alias: any, functionName: string, functionVersion: string) {
+    const aliasInfo = await getAlias(lambdaClient, functionName, alias.name);
     if (aliasInfo) {
         await SpinnerUtil.start(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(alias.functionName);
-            await lambdaClient.updateAlias(parseUpdateAliasRequest(alias, functionVersion)).promise();
+            await checkStatus(functionName);
+            await lambdaClient.updateAlias(parseUpdateAliasRequest(alias, functionName, functionVersion)).promise();
         });
     } else {
         await SpinnerUtil.start(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(alias.functionName);
-            await lambdaClient.createAlias(parseCreateAliasRequest(alias, functionVersion)).promise();
+            await checkStatus(functionName);
+            await lambdaClient.createAlias(parseCreateAliasRequest(alias, functionName, functionVersion)).promise();
         });
     }
 }
@@ -617,7 +634,7 @@ async function createOrUpdateStage(stage: any, apiId: string) {
             await apiGatewayClient.updateStage(parseUpdateStageRequest(stage, apiId, DeploymentId)).promise();
         });
     } else {
-        await SpinnerUtil.start(`Create {yellow.bold ${stage.name}} stage`, async () => {
+        await SpinnerUtil.start(chalk`Create {yellow.bold ${stage.name}} stage`, async () => {
             await apiGatewayClient.createStage(parseCreateStageRequest(stage, apiId)).promise();
             const { DeploymentId } = await createDeployment(apiId, stage.name);
             await apiGatewayClient.updateStage(parseUpdateStageRequest(stage, apiId, DeploymentId)).promise();

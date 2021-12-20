@@ -3,8 +3,6 @@ import * as webpack from 'webpack';
 import { BACKEND_TARGET, spawnProcess, HookExecutor, BuildContext, PathUtil, LoggerUtil, ConfigUtil } from '@malagu/cli-common';
 import { packExternalModules } from '../external';
 import { ServiceContextUtils } from '../context';
-import { readdirSync, statSync, existsSync } from 'fs-extra';
-import { join } from 'path';
 const rimraf = require('rimraf');
 
 export class BuildManager {
@@ -14,25 +12,7 @@ export class BuildManager {
     }
 
     protected cleanDistDir() {
-        const { runtime } = this.ctx;
-        rimraf.sync(PathUtil.getProjectDistPath(runtime));
-        PathUtil.getProjectDistPath(runtime);
-        const distParentPath = PathUtil.getProjectDistParentPath(runtime);
-        if (runtime && existsSync(distParentPath)) {
-            try {
-                const targets = readdirSync(distParentPath);
-                if (targets.length >= 5) {
-                    for (const target of targets) {
-                        const stats = statSync(join(distParentPath, target));
-                        if (stats.isDirectory() && Date.now() - stats.ctimeMs > 24 * 60 * 60 * 1000) {
-                            rimraf.sync(join(distParentPath, target));
-                        }
-                    }
-                }
-            } catch (error) {
-                // NoOp
-            }
-        }
+        rimraf.sync(PathUtil.getProjectDistPath());
     }
 
     protected log() {

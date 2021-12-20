@@ -4,10 +4,10 @@ import { writeFile } from 'fs-extra';
 import { CloudUtils } from '@malagu/cloud-plugin';
 
 export default async (context: BuildContext) => {
-    const { cfg, runtime } = context;
+    const { cfg } = context;
     const faasConfig = CloudUtils.getConfiguration(cfg).faas;
     if (faasConfig.function?.runtime === 'custom') {
-        const destDir = join(PathUtil.getProjectDistPath(runtime), 'bootstrap');
+        const destDir = join(PathUtil.getProjectDistPath(), 'bootstrap');
         const bootstrap = faasConfig.function.bootstrap;
         delete faasConfig.function.bootstrap;
 

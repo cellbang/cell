@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.6.0
+
+- feat(*) 支持项目 link 能力，确保不同项目之间不会出现覆盖部署
+- feat(cli-service) 移除合并后输出的配置文件，改用 `malagu props`
+- fix(fc-plugin) 修复其他环境没有部署的情况下仍然可以 info 出信息问题
+- fix(cli) fix typo
+- fix(cli-runtime) 修复运行时组件顺序问题
+
 ## 2.5.11
 
 - fix(framework) 修复 angular 框架构建目录问题

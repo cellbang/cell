@@ -153,8 +153,8 @@ export namespace CliContext {
             env: { ...process.env, _ignoreEl: true },
             pkg: { ...pkg.pkg, _ignoreEl: true },
             currentRuntimePath: projectPath,
-            frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(runtime),
-            backendProjectDistPath: PathUtil.getBackendProjectDistPath(runtime),
+            frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(),
+            backendProjectDistPath: PathUtil.getBackendProjectDistPath(),
             cliContext: { ...options, ...program, _ignoreEl: true},
         };
 

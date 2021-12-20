@@ -1,2 +1,2 @@
-components:
+devComponents:
   '@malagu/cli-service': ${version}

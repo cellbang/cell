@@ -6,8 +6,6 @@ malagu:
       trigger:
         name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}-timer
         qualifier: ${malagu.cloud.faas.alias.name}
-        functionName: ${malagu.cloud.faas.function.name}
-        serviceName: ${malagu.cloud.faas.service.name}
         triggerType: timer
         triggerConfig:
           payload: malagu-timer

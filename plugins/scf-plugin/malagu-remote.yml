@@ -8,6 +8,3 @@ malagu:
         handler: index.handler
         namespace: ${malagu.cloud.faas.namespace.name}
         runtime: Nodejs12.16
-      alias:
-        functionName: ${malagu.cloud.faas.function.name}
-        namespace: ${malagu.cloud.faas.namespace.name}

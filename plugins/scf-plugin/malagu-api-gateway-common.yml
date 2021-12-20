@@ -13,11 +13,7 @@ malagu:
           serviceTimeout: 20 # 20s
           protocol: HTTP
           serviceScfIsIntegratedResponse: true
-          serviceScfFunctionName: ${malagu.cloud.faas.function.name}
-          serviceScfFunctionNamespace: ${malagu.cloud.faas.namespace.name}
           serviceScfFunctionQualifier: ${malagu.cloud.faas.alias.name}
-          serviceWebsocketTransportFunctionName: ${malagu.cloud.faas.function.name}
-          serviceWebsocketTransportFunctionNamespace: ${malagu.cloud.faas.namespace.name}
           serviceWebsocketTransportFunctionQualifier: ${malagu.cloud.faas.alias.name}
           requestConfig:
             path: /
