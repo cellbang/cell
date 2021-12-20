@@ -3,16 +3,16 @@ import { resolve } from 'path';
 const rimraf = require('rimraf');
 
 export default async (context: WebpackContext) => {
-    const { configurations, runtime, cfg } = context;
+    const { configurations , cfg } = context;
     const config = ConfigurationContext.getBackendConfiguration(
         configurations
     );
-    const projectHomePath = PathUtil.getProjectHomePath(runtime);
+    const projectHomePath = PathUtil.getProjectHomePath();
     if (config && !projectHomePath.startsWith(process.cwd())) {
         const outputDir = ConfigUtil.getFrontendConfig(cfg).outputDir;
         if (outputDir) {
             const CopyPlugin = require('copy-webpack-plugin');
-            const to = PathUtil.getFrontendProjectDistPath(runtime);
+            const to = PathUtil.getFrontendProjectDistPath();
             rimraf.sync(to);
             config
                 .plugin('copyFrontend')

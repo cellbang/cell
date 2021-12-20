@@ -10,5 +10,3 @@ malagu:
       function:
         serviceName: ${malagu.cloud.faas.service.name}
         instanceConcurrency: 10
-      alias:
-        serviceName: ${malagu.cloud.faas.service.name}

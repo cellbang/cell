@@ -1,4 +1,4 @@
-import { InfoContext } from '@malagu/cli-common';
+import { InfoContext, ProjectUtil } from '@malagu/cli-common';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { createClients, getAlias, getService, getFunction, getApi, getCustomDomain, getTrigger, getGroup } from './utils';
 const chalk = require('chalk');
@@ -21,22 +21,28 @@ export default async (context: InfoContext) => {
     apiClient = clients.apiClient;
 
     const { service, trigger, apiGateway, alias, customDomain } = faasConfig;
-    const functionMeta = faasConfig.function;
-    const serviceName = service.name;
-    const functionName = functionMeta.name;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
-    
-    context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
-    if (!context.output.serviceInfo) {
+
+    const projectId = await ProjectUtil.getProjectId();
+    if (!projectId) {
         return;
     }
+    const functionMeta = faasConfig.function;
+    functionMeta.name = `${functionMeta.name}_${projectId}`;
+    const serviceName = service.name;
+    const functionName = functionMeta.name;
 
     context.output.functionInfo = await getFunction(fcClient, serviceName, functionName, true);
     if (!context.output.functionInfo) {
+        return;
+    }
+    
+    context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
+    if (!context.output.serviceInfo) {
         return;
     }
 
@@ -48,6 +54,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { group, api } = apiGateway;
+        group.name = `${group.name}_${projectId}`;
         context.output.groupInfo = await getGroup(apiClient, group.name, true);
         if (context.output.groupInfo) {
             const groupId = context.output.groupInfo.GroupId;

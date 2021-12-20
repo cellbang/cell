@@ -25,8 +25,8 @@ if (typeof target === 'function') {
 `;
 
 export default async (context: BuildContext) => {
-    const { cfg, runtime } = context;
-    const outputPath = PathUtil.getBackendProjectDistPath(runtime);
+    const { cfg } = context;
+    const outputPath = PathUtil.getBackendProjectDistPath();
     const server = ConfigUtil.getBackendMalaguConfig(cfg).server;
     const port = server?.port || 9000;
     const path = server?.path;

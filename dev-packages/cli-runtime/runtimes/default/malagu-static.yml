@@ -3,4 +3,5 @@ targets:
 mode: auto
 components:
   '@malagu/serve-static': ${version}
+devComponents:
   '@malagu/static-plugin': ${version}

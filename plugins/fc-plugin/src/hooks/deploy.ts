@@ -1,4 +1,4 @@
-import { DeployContext, PathUtil, SpinnerUtil } from '@malagu/cli-common';
+import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
 import { readFile } from 'fs-extra';
 import  * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
@@ -9,10 +9,11 @@ const chalk = require('chalk');
 let fcClient: any;
 let apiClient: any;
 let ram: any;
+let projectId: string;
 
 export default async (context: DeployContext) => {
 
-    const { cfg, pkg, runtime } = context;
+    const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const faasConfig = cloudConfig.faas;
@@ -27,7 +28,6 @@ export default async (context: DeployContext) => {
     const { service, trigger, apiGateway, customDomain, alias } = faasConfig;
     const functionMeta = faasConfig.function;
     const serviceName = service.name;
-    const functionName = functionMeta.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -39,35 +39,40 @@ export default async (context: DeployContext) => {
     await createOrUpdateService(serviceName, service);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(runtime), functionMeta.codeUri);
+    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
     delete functionMeta.codeUri;
-    await createOrUpdateFunction(functionName, functionMeta, zip);
+    await createOrUpdateFunction(functionMeta, zip);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);
 
-    await createOrUpdateAlias(alias, versionId);
+    await createOrUpdateAlias(alias, serviceName, versionId);
 
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { group, api, stage } = apiGateway;
         const role = await createRoleIfNeed();
+        group.name = `${group.name}_${projectId}`;
         const { groupId, subDomain } = await createOrUpdateGroup(group);
+        if (api.serviceConfig.functionComputeConfig) {
+            api.serviceConfig.functionComputeConfig.serviceName = serviceName;
+            api.serviceConfig.functionComputeConfig.functionName = functionMeta.name;
+        }
         const apiId = await createOrUpdateApi(region, groupId, subDomain, stage.name, api, role);
         await deployApi(groupId, apiId, stage);
     }
 
     if (trigger?.triggerType === 'timer') {
-        await createOrUpdateTimerTrigger(trigger);
+        await createOrUpdateTimerTrigger(trigger, serviceName, functionMeta.name);
     } else if (trigger?.triggerType === 'http') {
-        await createOrUpdateHttpTrigger(trigger, region, account.id);
+        await createOrUpdateHttpTrigger(trigger, serviceName, functionMeta.name, region, account.id);
     } else if (trigger) {
-        await createOrUpdateTrigger(trigger);
+        await createOrUpdateTrigger(trigger, serviceName, functionMeta.name);
     }
 
     if (customDomain && customDomain.name) {
         for (const route of customDomain.routeConfig.routes) {
             route.serviceName = route.serviceName || serviceName;
-            route.functionName = route.functionName || functionName;
+            route.functionName = route.functionName || functionMeta.name;
             route.qualifier = route.qualifier || alias.name;
         }
         await createOrUpdateCustomDomain(customDomain, alias.name);
@@ -229,33 +234,33 @@ async function createOrUpdateApi(region: string, groupId: string, subDomain: str
     return apiId!;
 }
 
-async function createOrUpdateHttpTrigger(trigger: any, region: string, accountId: string) {
-    const { functionName, serviceName, triggerConfig } = trigger;
+async function createOrUpdateHttpTrigger(trigger: any, serviceName: string, functionName: string, region: string, accountId: string) {
+    const { triggerConfig } = trigger;
 
-    await createOrUpdateTrigger(trigger);
+    await createOrUpdateTrigger(trigger, serviceName, functionName);
 
     console.log(`    - Methods: ${triggerConfig.methods}`);
     console.log(chalk`    - Url: ${chalk.green.bold(
         `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
 }
 
-async function createOrUpdateTimerTrigger(trigger: any) {
+async function createOrUpdateTimerTrigger(trigger: any, serviceName: string, functionName: string) {
     const { triggerConfig } = trigger;
 
-    await createOrUpdateTrigger(trigger);
+    await createOrUpdateTrigger(trigger, serviceName, functionName);
 
     console.log(`    - Cron: ${triggerConfig.cronExpression}`);
     console.log(`    - Enable: ${triggerConfig.enable}`);
 }
 
-async function createOrUpdateTrigger(trigger: any) {
+async function createOrUpdateTrigger(trigger: any, serviceName: string, functionName: string) {
     const opts = { ...trigger };
     opts.triggerName = opts.name;
     delete opts.functionName;
     delete opts.serviceName;
     delete opts.name;
 
-    const { functionName, serviceName, name } = trigger;
+    const { name } = trigger;
 
     const triggerInfo = await getTrigger(fcClient, serviceName, functionName, name);
     if (triggerInfo) {
@@ -294,7 +299,17 @@ async function createOrUpdateService(serviceName: string, option: any) {
     }
 }
 
-async function createOrUpdateFunction(functionName: string, functionMeta: any, code: JSZip) {
+async function tryCreateProjectId(serviceName: string, functionName: string) {
+    projectId = await ProjectUtil.createProjectId();
+    const functionInfo = await getFunction(fcClient, serviceName, `${functionName}_${projectId}`);
+    if (functionInfo) {
+        await tryCreateProjectId(serviceName, functionName);
+    }
+}
+
+
+
+async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
     const opts = { ...functionMeta };
     const serviceName = opts.serviceName;
     opts.EnvironmentVariables = opts.env;
@@ -302,10 +317,20 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
     delete opts.env;
     delete opts.serviceName;
 
-    const functionInfo = await getFunction(fcClient, serviceName, functionName);
+    projectId = await ProjectUtil.getProjectId();
+    let functionInfo: any;
+    if (!projectId) {
+        await tryCreateProjectId(serviceName, functionMeta.name);
+        await ProjectUtil.saveProjectId(projectId);
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+    } else {
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+        functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
+    }
+
     if (functionInfo) {
-        await SpinnerUtil.start(`Update ${functionName} function`, async () => {
-            await fcClient.updateFunction(serviceName, functionName, {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
+            await fcClient.updateFunction(serviceName, functionMeta.name, {
                 ...opts,
                 code: {
                     zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
@@ -313,8 +338,8 @@ async function createOrUpdateFunction(functionName: string, functionMeta: any, c
             });
         });
     } else {
-        opts.functionName = functionName;
-        await SpinnerUtil.start(`Create ${functionName} function`, async () => {
+        opts.functionName = functionMeta.name;
+        await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             await fcClient.createFunction(serviceName, {
                 ...opts,
                 code: {
@@ -384,15 +409,15 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) 
         `${protocol.includes('HTTPS') ? 'https' : 'http'}://${name}${path}`)}`);
 }
 
-async function createOrUpdateAlias(alias: any, versionId: string) {
-    const aliasInfo = await getAlias(fcClient, alias.name, alias.serviceName);
+async function createOrUpdateAlias(alias: any, serviceName: string, versionId: string) {
+    const aliasInfo = await getAlias(fcClient, alias.name, serviceName);
     if (aliasInfo) {
         await SpinnerUtil.start(`Update ${alias.name} alias to version ${versionId}`, async () => {
-            await fcClient.updateAlias(alias.serviceName, alias.name, versionId);
+            await fcClient.updateAlias(serviceName, alias.name, versionId);
         });
     } else {
         await SpinnerUtil.start(`Create ${alias.name} alias to version ${versionId}`, async () => {
-            await fcClient.createAlias(alias.serviceName, alias.name, versionId);
+            await fcClient.createAlias(serviceName, alias.name, versionId);
         });
     }
 }

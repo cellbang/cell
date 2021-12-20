@@ -1,4 +1,4 @@
-import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil } from '@malagu/cli-common';
+import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil, ProjectUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
@@ -10,9 +10,10 @@ const chalk = require('chalk');
 let scfClient: any;
 let scfClientExt: any;
 let apiClient: any;
+let projectId: string;
 
 export default async (context: DeployContext) => {
-    const { cfg, pkg, runtime } = context;
+    const { cfg, pkg } = context;
 
     const { stage } = ConfigUtil.getBackendConfig(cfg);
 
@@ -29,7 +30,6 @@ export default async (context: DeployContext) => {
 
     const { namespace, apiGateway, alias, trigger } = faasConfig;
     const functionMeta = faasConfig.function;
-    const functionName = functionMeta.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -41,21 +41,26 @@ export default async (context: DeployContext) => {
     await createOrUpdateNamespace(namespace);
 
     const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(runtime), functionMeta.codeUri);
+    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
     await createOrUpdateFunction(functionMeta, zip);
 
-    const functionVersion = await publishVersion(namespace.name, functionName);
+    const functionVersion = await publishVersion(namespace.name, functionMeta.name);
 
-    await createOrUpdateAlias(alias, functionVersion);
+    await createOrUpdateAlias(alias, namespace.name, functionMeta.name, functionVersion);
 
     if (trigger) {
-        await createTrigger(trigger);
+        await createTrigger(trigger, namespace.name, functionMeta.name);
     }
 
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { usagePlan, strategy, api, service, release, customDomain } = apiGateway;
+        service.name = `${service.name}_${projectId}`;
         const { serviceId, subDomain } = await createOrUpdateService(service);
+        api.serviceScfFunctionName = functionMeta.name;
+        api.serviceScfFunctionNamespace = namespace.name;
+        api.serviceWebsocketTransportFunctionName = functionMeta.name;
+        api.serviceWebsocketTransportFunctionNamespace = namespace.name;
         const apiId = await createOrUpdateApi(serviceId, subDomain, service.protocol, release.environmentName, api);
         if (customDomain?.name) {
             await bindOrUpdateCustomDomain(serviceId, customDomain, subDomain, release.environmentName);
@@ -84,12 +89,12 @@ function cleanObj(obj: any) {
     });
 }
 
-async function createTrigger(trigger: any) {
-    const triggerInfo = await getTrigger(scfClient, trigger.namespace, trigger.functionName, trigger.name);
+async function createTrigger(trigger: any, namespaceName: string, functionName: string) {
+    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.name);
     if (triggerInfo) {
         const deleteTriggerRequest: any = {};
-        deleteTriggerRequest.Namespace = trigger.namespace;
-        deleteTriggerRequest.FunctionName = trigger.functionName;
+        deleteTriggerRequest.Namespace = namespaceName;
+        deleteTriggerRequest.FunctionName = functionName;
         deleteTriggerRequest.Type = trigger.type;
         deleteTriggerRequest.TriggerName = trigger.name;
         deleteTriggerRequest.Qualifier = trigger.qualifier;
@@ -100,8 +105,8 @@ async function createTrigger(trigger: any) {
 
     }
     const createTriggerRequest: any = {};
-    createTriggerRequest.Namespace = trigger.namespace;
-    createTriggerRequest.FunctionName = trigger.functionName;
+    createTriggerRequest.Namespace = namespaceName;
+    createTriggerRequest.FunctionName = functionName;
     createTriggerRequest.Qualifier = trigger.qualifier;
     createTriggerRequest.TriggerName = trigger.name;
     createTriggerRequest.Type = trigger.type;
@@ -204,8 +209,26 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     cleanObj(req);
 }
 
+async function tryCreateProjectId(namespaceName: string, functionName: string) {
+    projectId = await ProjectUtil.createProjectId();
+    const functionInfo = await getFunction(scfClient, namespaceName, `${functionName}_${projectId}`);
+    if (functionInfo) {
+        await tryCreateProjectId(namespaceName, functionName);
+    }
+}
+
+
 async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
-    const functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
+    projectId = await ProjectUtil.getProjectId();
+    let functionInfo: any;
+    if (!projectId) {
+        await tryCreateProjectId(functionMeta.namespace, functionMeta.name);
+        await ProjectUtil.saveProjectId(projectId);
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+    } else {
+        functionMeta.name = `${functionMeta.name}_${projectId}`;
+        functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
+    }
 
     if (functionInfo) {
         await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
@@ -252,10 +275,10 @@ async function publishVersion(namespace: string, functionName: string) {
     return functionVersion;
 }
 
-function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
+function parseAliasMeta(req: any, aliasMeta: any, namespaceName: string, functionName: string, functionVersion: string) {
     req.Name = aliasMeta.name;
-    req.FunctionName = aliasMeta.functionName;
-    req.Namespace = aliasMeta.namespace;
+    req.FunctionName = functionName;
+    req.Namespace = namespaceName;
     req.FunctionVersion = functionVersion;
     req.Description = aliasMeta.description;
     const { routingConfig } = aliasMeta;
@@ -287,20 +310,20 @@ function parseAliasMeta(req: any, aliasMeta: any, functionVersion: string) {
     cleanObj(req);
 }
 
-async function createOrUpdateAlias(alias: any, functionVersion: string) {
-    const aliasInfo = await getAlias(scfClient, alias.name, alias.namespace, alias.functionName, functionVersion);
+async function createOrUpdateAlias(alias: any, namespaceName: string, functionName: string, functionVersion: string) {
+    const aliasInfo = await getAlias(scfClient, alias.name, namespaceName, functionName, functionVersion);
     if (aliasInfo) {
         await SpinnerUtil.start(`Update ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(scfClient, alias.namespace, alias.functionName, functionVersion);
+            await checkStatus(scfClient, namespaceName, functionName, functionVersion);
             const updateAliasRequest: any = {};
-            parseAliasMeta(updateAliasRequest, alias, functionVersion);
+            parseAliasMeta(updateAliasRequest, alias, namespaceName, functionName, functionVersion);
             await scfClient.UpdateAlias(updateAliasRequest);
         });
     } else {
         await SpinnerUtil.start(`Create ${alias.name} alias to version ${functionVersion}`, async () => {
-            await checkStatus(scfClient, alias.namespace, alias.functionName, functionVersion);
+            await checkStatus(scfClient, namespaceName, functionName, functionVersion);
             const createAliasRequest: any = {};
-            parseAliasMeta(createAliasRequest, alias, functionVersion);
+            parseAliasMeta(createAliasRequest, alias, namespaceName, functionName, functionVersion);
             await scfClient.CreateAlias(createAliasRequest);
         });
     }

@@ -1,4 +1,4 @@
-import { InfoContext } from '@malagu/cli-common';
+import { InfoContext, ProjectUtil } from '@malagu/cli-common';
 import { Lambda, ApiGatewayV2 } from 'aws-sdk';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { createClients, getAlias, getApi, getApiMapping, getCustomDomain, getFunction, getIntegration, getRoute, getStage, getTrigger } from './utils';
@@ -19,15 +19,20 @@ export default async (context: InfoContext) => {
     const clients = await createClients(region, credentials);
     lambdaClient = clients.lambdaClient;
     apiGatewayClient = clients.apiGatewayClient;
-    
-    const { alias, apiGateway } = faasConfig;
-    const functionMeta = faasConfig.function;
-    const functionName = functionMeta.name;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
+
+    const projectId = await ProjectUtil.getProjectId();
+    if (!projectId) {
+        return;
+    }
+    const { apiGateway, alias } = faasConfig;
+    const functionMeta = faasConfig.function;
+    functionMeta.name = `${functionMeta.name}_${projectId}`;
+    const functionName = functionMeta.name;
 
     context.output.functionInfo = await getFunction(lambdaClient, functionName, alias.name, true);
     if (!context.output.functionInfo) {
@@ -39,6 +44,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { api, stage, customDomain } = apiGateway;
+        api.name = `${api.name}_${projectId}`;
         context.output.apiInfo = await getApi(apiGatewayClient, api.name, true, stage.name);
         if (context.output.apiInfo) {
             const apiId = context.output.apiInfo.ApiId!;
@@ -51,6 +57,5 @@ export default async (context: InfoContext) => {
             }
         }
     }
-
 };
 

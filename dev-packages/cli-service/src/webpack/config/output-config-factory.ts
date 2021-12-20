@@ -5,11 +5,11 @@ import * as WebpackChain from 'webpack-chain';
 
 export class OutputConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { dev, outputDir, runtime } = context;
+        const { dev, outputDir } = context;
         if (outputDir) {
             PathUtil.setProjectHomePath(path.join(process.cwd(), outputDir));
         }
-        const outputPath = path.join(PathUtil.getProjectDistPathForTarget(target, runtime));
+        const outputPath = path.join(PathUtil.getProjectDistPathForTarget(target));
 
         config.output.path(outputPath);
 

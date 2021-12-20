@@ -1,8 +1,6 @@
 
 import { FRONTEND_TARGET, ConfigUtil, CliContext, PathUtil } from '@malagu/cli-common';
 import * as path from 'path';
-import { ensureDirSync, writeFileSync } from 'fs-extra';
-import { dump } from 'js-yaml';
 import * as WebpackChain from 'webpack-chain';
 
 const nodePathList = (process.env.NODE_PATH || '')
@@ -51,14 +49,10 @@ export class ComponentConfigFactory {
 
 export class ComponentConfigConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { cfg, runtime } = context;
+        const { cfg } = context;
         const c = ConfigUtil.getConfig(cfg, target);
         const source = `module.exports.config = ${JSON.stringify(c)};`;
 
-        const distPath = PathUtil.getProjectDistPath(runtime);
-        ensureDirSync(distPath);
-        const configPath = path.join(distPath, `malagu.${target}.yml`);
-        writeFileSync(configPath, dump(c, { skipInvalid: true }), { encoding: 'utf8' });
         config
             .module
                 .rule('config')

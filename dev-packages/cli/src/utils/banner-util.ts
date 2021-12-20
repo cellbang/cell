@@ -33,7 +33,7 @@ export namespace BannerUtil {
 ${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
 
 ╭──────────────────────────────────────────────────╮
-│      Serverless Frist Development Framework      │${runtimeStrLine}
+│      Serverless First Development Framework      │${runtimeStrLine}
 ╰──────────────────────────────────────────────────╯
 `);
         }

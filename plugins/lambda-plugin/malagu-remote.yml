@@ -4,5 +4,3 @@ malagu:
     faas:
       function:
         runtime: nodejs12.x
-      alias:
-        functionName: ${malagu.cloud.faas.function.name}
