@@ -166,7 +166,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const packagerOptions = { nonInteractive: true, ...config.packagerOptions };
     const scripts: any[] = packagerOptions.scripts || [];
 
-    if (!includes || !configuration) {
+    if (isEmpty(includes) && includes !== true || !configuration) {
         return;
     }
 

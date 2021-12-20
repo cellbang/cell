@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import { writeJSON } from 'fs-extra';
 
 export default async (context: BuildContext) => {
-    const { cfg, runtime } = context;
+    const { cfg } = context;
     let vercelConfig: any = {};
 
     if (ConfigUtil.support(cfg, FRONTEND_TARGET)) {
@@ -21,6 +21,6 @@ export default async (context: BuildContext) => {
         vercelConfig = ConfigUtil.merge(config, vercelConfig);
     }
 
-    const configPath = resolve(PathUtil.getProjectDistPath(runtime), 'vercel.json');
+    const configPath = resolve(PathUtil.getProjectDistPath(), 'vercel.json');
     await writeJSON(configPath, vercelConfig, { spaces: 2 });
 };
