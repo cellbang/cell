@@ -213,15 +213,15 @@ export async function getTrigger(client: any, serviceName: string, functionName:
 
 }
 
-export async function createClients(faasConfig: any, region: string, credentials: Credentials, account: Account) {
+export async function createClients(cloudConfig: any, region: string, credentials: Credentials, account: Account) {
     const fcClient = new FCClient(account.id, {
         accessKeyID: credentials.accessKeyId,
         accessKeySecret: credentials.accessKeySecret,
         securityToken: credentials.token,
         region,
-        timeout: faasConfig.timeout,
-        secure: faasConfig.secure,
-        internal: faasConfig.internal
+        timeout: cloudConfig.timeout,
+        secure: cloudConfig.secure,
+        internal: cloudConfig.internal
     });
 
     const apiClient = new CloudAPI({

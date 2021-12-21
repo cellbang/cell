@@ -1,26 +1,25 @@
 malagu:
   cloud:
-    faas:
-      apiGateway:
-        stage:
-          name: ${stage}
-          Description: 'Created By Malagu'
-        api:
-          name: ${malagu.cloud.faas.function.name}
-          protocolType: HTTP
-        route:
-          routeKey: ANY /{proxy+}
-        integration:
-          connectionType: INTERNET
-          integrationMethod: POST
-          integrationType: AWS_PROXY
-          payloadFormatVersion: '2.0'
-          timeoutInMillis: 30000
-        customDomain:
-          # name: abc.com
-          # certificateArn: xxxx
-          hostedZoneId: REGIONAL
-          apiMapping:
-            apiMappingKey: '${stage}/*'
+    apiGateway:
+      stage:
+        name: ${stage}
+        Description: 'Created By Malagu'
+      api:
+        name: ${malagu.cloud.function.name}
+        protocolType: HTTP
+      route:
+        routeKey: ANY /{proxy+}
+      integration:
+        connectionType: INTERNET
+        integrationMethod: POST
+        integrationType: AWS_PROXY
+        payloadFormatVersion: '2.0'
+        timeoutInMillis: 30000
+      customDomain:
+        # name: abc.com
+        # certificateArn: xxxx
+        hostedZoneId: REGIONAL
+        apiMapping:
+          apiMappingKey: '${stage}/*'
   server:
     path: /${stage}/

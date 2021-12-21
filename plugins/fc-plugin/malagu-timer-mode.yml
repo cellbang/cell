@@ -1,14 +1,13 @@
 malagu:
   cloud:
-    faas:
-      function:
-        runtime: nodejs12
-      trigger:
-        name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}-timer
-        qualifier: ${malagu.cloud.faas.alias.name}
-        triggerType: timer
-        triggerConfig:
-          payload: malagu-timer
-          cronExpression: 0 */1 * * * *  # every minute
-          enable: true
+    function:
+      runtime: nodejs12
+    trigger:
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}-timer
+      qualifier: ${malagu.cloud.alias.name}
+      triggerType: timer
+      triggerConfig:
+        payload: malagu-timer
+        cronExpression: 0 */1 * * * *  # every minute
+        enable: true
     

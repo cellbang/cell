@@ -196,6 +196,9 @@
       ],
       "@malagu/example-backend-app2/*": [
         "examples/backend-app/*"
+      ],
+      "@malagu/example-koa-app/*": [
+        "examples/koa-app/*"
       ]
     }
   },

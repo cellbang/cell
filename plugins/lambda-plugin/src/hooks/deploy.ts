@@ -19,7 +19,6 @@ export default async (context: CliContext) => {
     const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
-    const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
@@ -29,8 +28,8 @@ export default async (context: CliContext) => {
     apiGatewayClient = clients.apiGatewayClient;
     iamClient = clients.iamClient;
 
-    const { apiGateway, alias, trigger } = faasConfig;
-    const functionMeta = faasConfig.function;
+    const { apiGateway, alias, trigger } = cloudConfig;
+    const functionMeta = cloudConfig.function;
     const accountId = account.id;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
@@ -273,12 +272,12 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
 }
 
 async function publishVersion(functionName: string) {
-    const { functionVersion } = await SpinnerUtil.start('Publish Version', async () => {
+    const { functionVersion } = await SpinnerUtil.start('Publish version', async () => {
         await checkStatus(functionName);
         const { Version } = await lambdaClient.publishVersion({ FunctionName: functionName }).promise();
         return {
             functionVersion: Version,
-            successText: `Publish Version ${Version}`
+            successText: `Publish version ${Version}`
         };
     });
     return functionVersion;
@@ -421,7 +420,7 @@ async function createOrUpdateApi(api: any, functionName: string, aliasName: stri
     } else {
         result = await SpinnerUtil.start(`Create ${apiName} api`, () => apiGatewayClient.createApi(parseCreateApiRequest(api)).promise());
         await lambdaClient.addPermission({
-            FunctionName:  `arn:aws:lambda:${region}:${accountId}:function:${functionName}:test`,
+            FunctionName:  `arn:aws:lambda:${region}:${accountId}:function:${functionName}:${aliasName}`,
             StatementId: v4(),
             Action: 'lambda:InvokeFunction',
             Principal: 'apigateway.amazonaws.com',

@@ -2,6 +2,5 @@ targets:
   - backend
 malagu:
   cloud:
-    faas:
-      function:
-        name: ServiceB
+    function:
+      name: ServiceB

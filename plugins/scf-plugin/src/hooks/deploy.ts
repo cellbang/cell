@@ -18,7 +18,6 @@ export default async (context: DeployContext) => {
     const { stage } = ConfigUtil.getBackendConfig(cfg);
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
-    const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials, account } = await profileProvider.provide(cloudConfig);
@@ -28,8 +27,8 @@ export default async (context: DeployContext) => {
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
 
-    const { namespace, apiGateway, alias, trigger } = faasConfig;
-    const functionMeta = faasConfig.function;
+    const { namespace, apiGateway, alias, trigger } = cloudConfig;
+    const functionMeta = cloudConfig.function;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -261,7 +260,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
 }
 
 async function publishVersion(namespace: string, functionName: string) {
-    const { functionVersion } = await SpinnerUtil.start('Publish Version', async () => {
+    const { functionVersion } = await SpinnerUtil.start('Publish version', async () => {
         await checkStatus(scfClient, namespace, functionName);
         const publishVersionRequest: any = {};
         publishVersionRequest.FunctionName = functionName;
@@ -269,7 +268,7 @@ async function publishVersion(namespace: string, functionName: string) {
         const { FunctionVersion } = await scfClient.PublishVersion(publishVersionRequest);
         return {
             functionVersion: FunctionVersion,
-            successText: `Publish Version ${FunctionVersion}`
+            successText: `Publish version ${FunctionVersion}`
         };
     });
     return functionVersion;

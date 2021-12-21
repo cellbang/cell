@@ -11,16 +11,15 @@ export default async (context: InfoContext) => {
     const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
-    const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
 
-    const clients = await createClients(faasConfig, region, credentials, account);
+    const clients = await createClients(cloudConfig, region, credentials, account);
     fcClient = clients.fcClient;
     apiClient = clients.apiClient;
 
-    const { service, trigger, apiGateway, alias, customDomain } = faasConfig;
+    const { service, trigger, apiGateway, alias, customDomain } = cloudConfig;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -31,7 +30,7 @@ export default async (context: InfoContext) => {
     if (!projectId) {
         return;
     }
-    const functionMeta = faasConfig.function;
+    const functionMeta = cloudConfig.function;
     functionMeta.name = `${functionMeta.name}_${projectId}`;
     const serviceName = service.name;
     const functionName = functionMeta.name;

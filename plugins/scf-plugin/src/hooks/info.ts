@@ -10,7 +10,6 @@ export default async (context: InfoContext) => {
     const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
-    const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials, account } = await profileProvider.provide(cloudConfig);
@@ -28,8 +27,8 @@ export default async (context: InfoContext) => {
     if (!projectId) {
         return;
     }
-    const { namespace, apiGateway, alias } = faasConfig;
-    const functionMeta = faasConfig.function;
+    const { namespace, apiGateway, alias } = cloudConfig;
+    const functionMeta = cloudConfig.function;
     functionMeta.name = `${functionMeta.name}_${projectId}`;
     const functionName = functionMeta.name;
 

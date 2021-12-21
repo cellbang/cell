@@ -16,17 +16,16 @@ export default async (context: DeployContext) => {
     const { cfg, pkg } = context;
 
     const cloudConfig = CloudUtils.getConfiguration(cfg);
-    const faasConfig = cloudConfig.faas;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
-    const clients = await createClients(faasConfig, region, credentials, account);
+    const clients = await createClients(cloudConfig, region, credentials, account);
     fcClient = clients.fcClient;
     apiClient = clients.apiClient;
     ram = clients.ram;
 
-    const { service, trigger, apiGateway, customDomain, alias } = faasConfig;
-    const functionMeta = faasConfig.function;
+    const { service, trigger, apiGateway, customDomain, alias } = cloudConfig;
+    const functionMeta = cloudConfig.function;
     const serviceName = service.name;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);

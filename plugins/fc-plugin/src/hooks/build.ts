@@ -5,11 +5,11 @@ import { CloudUtils } from '@malagu/cloud-plugin';
 
 export default async (context: BuildContext) => {
     const { cfg } = context;
-    const faasConfig = CloudUtils.getConfiguration(cfg).faas;
-    if (faasConfig.function?.runtime === 'custom') {
+    const config = CloudUtils.getConfiguration(cfg);
+    if (config.function?.runtime === 'custom') {
         const destDir = join(PathUtil.getProjectDistPath(), 'bootstrap');
-        const bootstrap = faasConfig.function.bootstrap;
-        delete faasConfig.function.bootstrap;
+        const bootstrap = config.function.bootstrap;
+        delete config.function.bootstrap;
 
         await writeFile(destDir, `#!/bin/bash\n${bootstrap}`, { mode: 0o755 });
     }

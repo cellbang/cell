@@ -5,12 +5,12 @@ import { CloudUtils } from '@malagu/cloud-plugin';
 
 export default async (context: BuildContext) => {
     const { cfg } = context;
-    const faasConfig = CloudUtils.getConfiguration(cfg).faas;
+    const cloudConfig = CloudUtils.getConfiguration(cfg);
 
-    if (faasConfig.function?.type === 'HTTP') {
+    if (cloudConfig.function?.type === 'HTTP') {
         const destDir = join(PathUtil.getProjectDistPath(), 'scf_bootstrap');
-        const bootstrap = faasConfig.function.bootstrap;
-        delete faasConfig.function.bootstrap;
+        const bootstrap = cloudConfig.function.bootstrap;
+        delete cloudConfig.function.bootstrap;
 
         await writeFile(destDir, `#!/bin/bash\n${bootstrap}`, { mode: 0o755 });
     } else {
