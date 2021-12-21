@@ -5,6 +5,7 @@
   "dependencies": {
     "@malagu/cloud-plugin": "2.6.2",
     "@malagu/code-loader-plugin": "2.6.2",
+    "camelcase-keys": "^6.2.2",
     "aws-sdk": "^2.807.0",
     "fs-extra": "^8.1.0",
     "jszip": "^3.7.1"

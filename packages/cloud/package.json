@@ -5,8 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.6.2",
-    "camelcase-keys": "^6.2.2"
+    "@malagu/core": "2.6.2"
   },
   "publishConfig": {
     "access": "public"

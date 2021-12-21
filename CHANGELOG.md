@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.7.0
+
+- feat(node-plugin) aws lambda 支持 express、koajs 等等
+- feat(*-plugin) 移除 `cloud.faas` 中的 faas，并将 faas 子属性提升
+- fix(node-plugin) 修复并优化 entry 代码
+
 ## 2.6.2
 
 - fix(static-plugin) 修复静态文件没有正常打包

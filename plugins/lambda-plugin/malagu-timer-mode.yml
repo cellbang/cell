@@ -1,5 +1,4 @@
 malagu:
   cloud:
-    faas:
-      trigger:
-        # EventSourceArn: arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525
+    trigger:
+      # EventSourceArn: arn:aws:dynamodb:us-east-2:123456789012:table/my-table/stream/2019-06-10T19:26:16.525

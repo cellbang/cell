@@ -1,9 +1,8 @@
 malagu:
   cloud:
-    faas:
-      trigger:
-        name: ${malagu.cloud.faas.function.name}-${malagu.cloud.faas.alias.name}-timer
-        qualifier: ${malagu.cloud.faas.alias.name}
-        type: timer
-        triggerDesc: 0 */1 * * * * * # every minute
-        enable: OPEN
+    trigger:
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}-timer
+      qualifier: ${malagu.cloud.alias.name}
+      type: timer
+      triggerDesc: 0 */1 * * * * * # every minute
+      enable: OPEN

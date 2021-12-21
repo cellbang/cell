@@ -8,12 +8,11 @@ export default async (context: PropsContext) => {
         const cloudConfig = CloudUtils.getConfiguration(cfg);
         const profileProvider = new DefaultProfileProvider();
         const profile = await profileProvider.provide(cloudConfig);
-        const faasConfig = props.malagu.cloud.faas;
-        if (!faasConfig.account?.id) {
-            faasConfig.account = profile.account;
+        if (!cloudConfig.account?.id) {
+            cloudConfig.account = profile.account;
         }
-        if (!faasConfig.region) {
-            faasConfig.region = profile.region;
+        if (!cloudConfig.region) {
+            cloudConfig.region = profile.region;
         }
     }
 };
