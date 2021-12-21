@@ -1,5 +1,5 @@
 
-import { BACKEND_TARGET, CliContext, ConfigUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET, CliContext, ConfigUtil, PathUtil } from '@malagu/cli-common';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
@@ -9,7 +9,7 @@ import * as WebpackChain from 'webpack-chain';
 export class BaseConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { dev, pkg, cfg } = context;
+        const { dev, pkg, cfg, runtime } = context;
         const stage = ConfigUtil.getBackendConfig(cfg).stage;
         const includeModules = ConfigUtil.getBackendMalaguConfig(cfg).includeModules;
         const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
@@ -95,6 +95,11 @@ export class BaseConfigFactory {
 
             config
                 .target('node')
+                .resolve
+                    .modules
+                        .merge([ 'node_modules', path.join(PathUtil.getRuntimePath(runtime), 'node_modules') ])
+                    .end()
+                .end()
                 .optimization
                     .minimize(!dev && stage === 'prod')
                 .end()

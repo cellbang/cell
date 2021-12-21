@@ -1,6 +1,10 @@
 # Change Log
 
-## 2.7.0
+## 2.7.2
+
+- fix(cli-service) 修复 webpack 无法加载运行时目录下的包
+
+## 2.7.1
 
 - feat(node-plugin) aws lambda 支持 express、koajs 等等
 - feat(*-plugin) 移除 `cloud.faas` 中的 faas，并将 faas 子属性提升
