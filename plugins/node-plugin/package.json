@@ -1,9 +1,9 @@
 {
   "name": "@malagu/node-plugin",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.6.2",
+    "@malagu/cli-common": "2.7.0",
     "@vendia/serverless-express": "^4.5.2"
   },
   "publishConfig": {
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.6.2"
+    "@malagu/ext-scripts": "2.7.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
