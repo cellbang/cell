@@ -1,6 +1,7 @@
 import * as https from 'https';
 import * as http from 'http';
-import { BACKEND_TARGET, CliContext, FRONTEND_TARGET } from '@malagu/cli-common';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import * as webpack from 'webpack';
 import * as WebpackChain from 'webpack-chain';
 

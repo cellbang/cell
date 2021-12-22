@@ -1,5 +1,6 @@
-
-import { CliContext, HookExecutor, ContextUtils, LoggerUtil } from '@malagu/cli-common';
+import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
+import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
 
 export interface InfoOptions {}
 

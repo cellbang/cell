@@ -1,4 +1,6 @@
-import { WebpackContext, ConfigUtil } from '@malagu/cli-service';
+import { WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+
 import { existsSync } from 'fs';
 import { join } from 'path';
 export default async (context: WebpackContext) => {

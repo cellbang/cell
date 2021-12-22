@@ -1,7 +1,7 @@
 
 import { ServeManager } from './serve-manager';
-import { CliContext } from '@malagu/cli-common';
-import { ServiceContextUtils } from '../context';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ServiceContextUtils } from '../context/context-protocol';
 
 export interface ServeOptions {
     entry?: string;

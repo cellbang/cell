@@ -1,5 +1,8 @@
 
-import { FRONTEND_TARGET, ConfigUtil, CliContext, PathUtil } from '@malagu/cli-common';
+import { FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import * as path from 'path';
 import * as WebpackChain from 'webpack-chain';
 

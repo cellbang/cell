@@ -1,8 +1,14 @@
 
 import * as webpack from 'webpack';
-import { BACKEND_TARGET, spawnProcess, HookExecutor, BuildContext, PathUtil, LoggerUtil, ConfigUtil } from '@malagu/cli-common';
-import { packExternalModules } from '../external';
-import { ServiceContextUtils } from '../context';
+import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { spawnProcess } from '@malagu/cli-common/lib/packager/utils';
+import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { BuildContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { packExternalModules } from '../external/pack-external-module';
+import { ServiceContextUtils } from '../context/context-protocol';
 const rimraf = require('rimraf');
 
 export class BuildManager {

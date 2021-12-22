@@ -1,13 +1,16 @@
-import { ApplicationPackage } from '../package';
-import { program, Command } from '../command';
-import { ComponentUtil, PathUtil, RuntimeUtil, SpinnerUtil } from '../utils';
+import { ApplicationPackage } from '../package/application-package';
+import { program, Command } from '../command/command-protocol';
+import { ComponentUtil } from '../utils/component-util';
+import { PathUtil } from '../utils/path-util';
+import { RuntimeUtil } from '../utils/runtime-util';
+import { SpinnerUtil } from '../utils/spinner-util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
-import { ExpressionHandler } from '../el';
-import { HookExecutor } from '../hook';
-import { ApplicationConfig } from '../package';
-import { Framework } from '@malagu/frameworks';
+import { ExpressionHandler } from '../el/expression-handler';
+import { HookExecutor } from '../hook/hook-executor';
+import { ApplicationConfig } from '../package/application-config';
+import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 import { Settings } from '../settings/settings-protocol';
-import { getPackager } from '../packager';
+import { getPackager } from '../packager/utils';
 import * as ora from 'ora';
 const chalk = require('chalk');
 

@@ -1,5 +1,8 @@
 
-import { CliContext, HookExecutor, ContextUtils, SettingsUtil } from '@malagu/cli-common';
+import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
+import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+
 import { dump } from 'js-yaml';
 
 export interface ConfigOptions {

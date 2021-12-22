@@ -1,4 +1,5 @@
-import { Framework, FrameworkDetectionItem, DiskDetectorFilesystem, DetectorFilesystem } from '../detector';
+import { DiskDetectorFilesystem } from '../detector/detector-filesystem';
+import { Framework, FrameworkDetectionItem, DetectorFilesystem } from '../detector/detector-protocol';
 import { frameworks as innerFrameworks } from '../frameworks';
 import axios from 'axios';
 

@@ -1,4 +1,4 @@
-import { CliContext } from '@malagu/cli-common';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import build from '../build/build';
 import serve from '../serve/serve';
 import deploy from '../deploy/deploy';

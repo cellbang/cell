@@ -1,7 +1,9 @@
 import { remove, isEmpty, get, pick, uniq, defaults, now, unset, flatMap } from 'lodash';
 import { join, dirname, relative } from 'path';
-import { ConfigurationContext } from '../context';
-import { BACKEND_TARGET, getPackager, ConfigUtil } from '@malagu/cli-common';
+import { ConfigurationContext } from '../context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { getPackager } from '@malagu/cli-common/lib/packager/utils';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 import { Stats } from 'webpack';
 

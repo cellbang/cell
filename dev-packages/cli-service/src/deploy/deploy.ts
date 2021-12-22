@@ -1,6 +1,9 @@
 
 import build from '../build/build';
-import { CliContext, ConfigUtil, ContextUtils, HookExecutor, spawnProcess } from '@malagu/cli-common';
+import { spawnProcess } from '@malagu/cli-common/lib/packager/utils';
+import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 export interface DeplyOptions {
     entry?: string;

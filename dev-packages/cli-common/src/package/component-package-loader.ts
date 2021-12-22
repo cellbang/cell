@@ -2,9 +2,9 @@ import { ApplicationPackage } from './application-package';
 import { load } from 'js-yaml';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
-import { ExpressionHandler } from '../el';
+import { ExpressionHandler } from '../el/expression-handler';
 import { join } from 'path';
-import { ConfigUtil } from '../utils';
+import { ConfigUtil } from '../utils/config-util';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {

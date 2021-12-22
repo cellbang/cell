@@ -1,5 +1,7 @@
 
-import { BACKEND_TARGET, CliContext, PathUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import * as path from 'path';
 import * as WebpackChain from 'webpack-chain';
 

@@ -1,4 +1,3 @@
-
 import { InitManager, InitOptions } from './init-manager';
 
 export default async (options: InitOptions) => {

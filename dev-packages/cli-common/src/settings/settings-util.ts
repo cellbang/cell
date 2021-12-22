@@ -1,6 +1,7 @@
 import { load, dump } from 'js-yaml';
 import { readFileSync, existsSync, ensureFileSync, writeFileSync } from 'fs-extra';
-import { PathUtil, ConfigUtil } from '../utils';
+import { PathUtil } from '../utils/path-util';
+import { ConfigUtil } from '../utils/config-util';
 import * as path from 'path';
 import { DEFAULT_SETTINGS, Settings } from './settings-protocol';
 

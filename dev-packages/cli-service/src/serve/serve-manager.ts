@@ -1,10 +1,12 @@
 import * as webpack from 'webpack';
 import { startDevServer } from './start-dev-server';
-import { HookExecutor } from '../hooks';
+import { HookExecutor } from '../hooks/hook-executor';
 import * as https from 'https';
 import * as http from 'http';
-import { ConfigurationContext, ServiceContextUtils } from '../context';
-import { ConfigUtil, LoggerUtil, spawnProcess } from '@malagu/cli-common';
+import { ConfigurationContext, ServiceContextUtils } from '../context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
+import { spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 
 export type ExecuteServeHooks = (server: http.Server | https.Server, app: Express.Application,
     compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => Promise<void>;

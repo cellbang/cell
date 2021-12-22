@@ -1,5 +1,8 @@
 
-import { BACKEND_TARGET, CliContext, ConfigUtil, PathUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';

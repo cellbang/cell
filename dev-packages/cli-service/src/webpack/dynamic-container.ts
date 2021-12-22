@@ -1,4 +1,4 @@
-import { Module } from '@malagu/cli-common';
+import { Module } from '@malagu/cli-common/lib/package/package-protocol';
 
 export interface DynamicContainerContext {
     registed?: boolean;

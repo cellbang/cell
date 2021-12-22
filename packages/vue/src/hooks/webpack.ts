@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { WebpackContext, ConfigurationContext, ConfigUtil } from '@malagu/cli-service';
+import { WebpackContext, ConfigurationContext } from '@malagu/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 interface LoaderOptions {
     css: any,

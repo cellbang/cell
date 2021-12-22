@@ -2,11 +2,11 @@ import * as fs from 'fs';
 import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
-// const setupExitSignals = require('webpack-dev-server/lib/utils/setupExitSignals');
 import { ExecuteServeHooks } from './serve-manager';
-import { BACKEND_TARGET, ConfigUtil, FRONTEND_TARGET } from '@malagu/cli-common';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import * as delay from 'delay';
-import { ConfigurationContext } from '../context';
+import { ConfigurationContext } from '../context/context-protocol';
 const clearModule = require('clear-module');
 
 let server: any;
