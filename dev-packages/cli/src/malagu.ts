@@ -1,7 +1,9 @@
 const leven = require('leven');
 import * as ora from 'ora';
-import { HookExecutor, CommandUtil, program, Command } from '@malagu/cli-common';
-import { BannerUtil } from './utils';
+import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { program, Command } from '@malagu/cli-common/lib/command/command-protocol';
+import { BannerUtil } from './utils/banner-util';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');

@@ -1,4 +1,6 @@
-import { WebpackContext, ConfigurationContext, FRONTEND_TARGET, ConfigUtil } from '@malagu/cli-service';
+import { WebpackContext, ConfigurationContext } from '@malagu/cli-service/lib/context/context-protocol';
+import { FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 export default async (context: WebpackContext) => {
     const { configurations, dev, cfg } = context;

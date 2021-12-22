@@ -1,10 +1,10 @@
 
-import { SettingsUtil } from '@malagu/cli-common';
+import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { Runtimes } from '../runtime-protocol';
-import { RuntimeUtil } from '../util';
+import { RuntimeUtil } from '../util/runtime-util';
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 export interface UseOptions {

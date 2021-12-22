@@ -1,6 +1,6 @@
-import { BuildContext, CliContext, ConfigContext, DeployContext, InfoContext, InitContext } from '../context';
-import { Module } from '../package';
-import { ConfigUtil } from '../utils';
+import { BuildContext, CliContext, ConfigContext, DeployContext, InfoContext, InitContext } from '../context/context-protocol';
+import { Module } from '../package/package-protocol';
+import { ConfigUtil } from '../utils/config-util';
 const chalk = require('chalk');
 
 export class HookExecutor {

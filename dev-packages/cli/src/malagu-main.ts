@@ -1,7 +1,9 @@
 import { fork, ChildProcess } from 'child_process';
-import { Component, Module, PathUtil } from '@malagu/cli-common';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { Component, Module } from '@malagu/cli-common/lib/package/package-protocol';
+
 import { sep, join, delimiter } from 'path';
-import { RuntimeUtil } from '@malagu/cli-runtime';
+import { RuntimeUtil } from '@malagu/cli-runtime/lib/util/runtime-util';
 const Watchpack = require('watchpack');
 
 const watchpack = new Watchpack({});

@@ -1,6 +1,7 @@
-import { ApplicationPackage, ApplicationConfig } from '../package';
+import { ApplicationPackage } from '../package/application-package';
+import { ApplicationConfig } from '../package/application-config';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
-import { Module } from '../package';
+import { Module } from '../package/package-protocol';
 import mergeWith = require('lodash.mergewith');
 
 export namespace ConfigUtil {

@@ -1,5 +1,6 @@
 
-import { ConfigUtil, CliContext } from '@malagu/cli-common';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import * as WebpackChain from 'webpack-chain';
 
 export class MalaguYamlConfigFactory {

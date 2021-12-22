@@ -1,5 +1,5 @@
 import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
-import { CliContext } from '../context';
+import { CliContext } from '../context/context-protocol';
 import { ConfigUtil } from './config-util';
 const chalk = require('chalk');
 

@@ -1,4 +1,5 @@
-import { ServeContext, ConfigUtil } from '@malagu/cli-service';
+import { ServeContext } from '@malagu/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 export default async (context: ServeContext) => {
     const { entryContextProvider, server, cfg } = context;

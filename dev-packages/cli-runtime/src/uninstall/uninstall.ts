@@ -1,8 +1,10 @@
 
-import { PathUtil, SettingsUtil } from '@malagu/cli-common';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+
 const rimraf = require('rimraf');
 import { existsSync } from 'fs-extra';
-import { RuntimeUtil } from '../util';
+import { RuntimeUtil } from '../util/runtime-util';
 const inquirer = require('inquirer');
 const chalk = require('chalk');
 import * as ora from 'ora';

@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.7.3
+
+- feat(cli) 优化首次命令执行的性能
+
+
 ## 2.7.2
 
 - fix(cli-service) 修复 webpack 无法加载运行时目录下的包

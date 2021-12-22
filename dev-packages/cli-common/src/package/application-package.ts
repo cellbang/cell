@@ -10,8 +10,9 @@ import { Module } from './package-protocol';
 
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync } from 'fs-extra';
-import { PathUtil, ConfigUtil } from '../utils';
-import { Framework } from '@malagu/frameworks';
+import { PathUtil } from '../utils/path-util';
+import { ConfigUtil } from '../utils/config-util';
+import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 
 // tslint:disable:no-implicit-dependencies
 

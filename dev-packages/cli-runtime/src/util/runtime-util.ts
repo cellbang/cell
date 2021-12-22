@@ -1,7 +1,10 @@
-import { PathUtil, CommandUtil, SettingsUtil } from '@malagu/cli-common';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+
 import { existsSync, readdir, readJSON } from 'fs-extra';
 import { join } from 'path';
-import { FrameworkUtil } from '@malagu/frameworks';
+import { FrameworkUtil } from '@malagu/frameworks/lib/utils/framework-util';
 import installRuntime from '../install/install';
 import { Runtimes } from '../runtime-protocol';
 

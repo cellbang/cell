@@ -1,4 +1,7 @@
-import { ConfigurationContext, WebpackContext, PathUtil, ConfigUtil } from '@malagu/cli-service';
+import { ConfigurationContext, WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+
 import { resolve } from 'path';
 const rimraf = require('rimraf');
 const chalk = require('chalk');

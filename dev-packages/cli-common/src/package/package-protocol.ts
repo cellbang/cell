@@ -1,7 +1,7 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
 import { Command } from 'commander';
 import { Settings } from '../settings/settings-protocol';
-import { Framework } from '@malagu/frameworks';
+import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 

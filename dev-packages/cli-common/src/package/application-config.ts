@@ -3,7 +3,7 @@ import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 import { existsSync, readFileSync } from 'fs-extra';
 import { load } from 'js-yaml';
 import { ApplicationPackage } from './application-package';
-import { ConfigUtil } from '../utils';
+import { ConfigUtil } from '../utils/config-util';
 
 // tslint:disable:no-implicit-dependencies
 

@@ -1,5 +1,5 @@
 import { Runtimes } from '@malagu/cli-runtime/lib/runtime-protocol';
-import { Framework } from '@malagu/frameworks/lib/detector';
+import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 import { Settings } from '@malagu/cli-common/lib/settings/settings-protocol';
 
 const chalk = require('chalk');

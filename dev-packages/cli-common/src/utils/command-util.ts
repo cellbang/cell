@@ -1,9 +1,10 @@
-import { Framework } from '@malagu/frameworks';
+import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 const minimist = require('minimist');
 import * as ora from 'ora';
-import { SettingsUtil, Settings } from '../settings';
-import { ApplicationPackage } from '../package';
-import { CliContext } from '../context';
+import { Settings } from '../settings/settings-protocol';
+import { SettingsUtil } from '../settings/settings-util';
+import { ApplicationPackage } from '../package/application-package';
+import { CliContext } from '../context/context-protocol';
 
 export namespace CommandUtil {
 

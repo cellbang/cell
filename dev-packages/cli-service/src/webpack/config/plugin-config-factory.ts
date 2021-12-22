@@ -1,5 +1,8 @@
 import * as path from 'path';
-import { BACKEND_TARGET, CliContext, ConfigUtil, FRONTEND_TARGET, PathUtil } from '@malagu/cli-common';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');

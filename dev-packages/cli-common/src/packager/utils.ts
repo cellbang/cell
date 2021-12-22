@@ -2,7 +2,7 @@ import { NPM } from './npm';
 import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
-import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env';
+import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env/env';
 import { Packager } from '../packager/packager-protocol';
 
 export class SpawnError extends Error {

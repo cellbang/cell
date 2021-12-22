@@ -1,7 +1,9 @@
 
 import { BaseConfigFactory } from './base-config-factory';
-import { BACKEND_TARGET, FRONTEND_TARGET, ConfigUtil, CliContext } from '@malagu/cli-common';
-import { HookExecutor } from '../../hooks';
+import { FRONTEND_TARGET, BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { HookExecutor } from '../../hooks/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';

@@ -1,8 +1,8 @@
 
-import { SettingsUtil } from '@malagu/cli-common';
+import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
 import { Runtimes } from '../runtime-protocol';
 const chalk = require('chalk');
-import { RuntimeUtil } from '../util';
+import { RuntimeUtil } from '../util/index';
 
 export interface ListOptions {
 }
