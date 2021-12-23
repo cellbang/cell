@@ -1,10 +1,31 @@
-import { BACKEND_TARGET, PathUtil, PropsContext, ConfigUtil } from '@malagu/cli-common';
-import { existsSync, readFileSync, writeFileSync } from 'fs-extra';
+import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { PropsContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { existsSync, readFileSync, writeFileSync, ensureDir } from 'fs-extra';
 import { join, resolve } from 'path';
+import { ApplicationConfig } from '@malagu/cli-common/lib/package/application-config';
+
+function renderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: string) {
+    ensureDir(PathUtil.getProjectHomePath());
+    const server = ConfigUtil.getBackendMalaguConfig(cfg).server;
+    const port = server?.port ?? 9000;
+    const path = server?.path ?? '';
+    let entryContent = readFileSync(entryTemplate, { encoding: 'utf8' });
+    entryContent = entryContent
+        .replace(/{{ entry }}/g, entry)
+        .replace(/{{ port }}/g, port)
+        .replace(/{{ path }}/g, path);
+    const newEntry = join(PathUtil.getProjectHomePath(), 'entry.js');
+    writeFileSync(newEntry, entryContent, { encoding: 'utf8' });
+    return newEntry;
+
+}
 
 export default async (context: PropsContext) => {
-    const { props, target, pkg, cfg } = context;
-    if (target === BACKEND_TARGET && !props.entry && existsSync(PathUtil.getProjectHomePath())) {
+    const { props, target, pkg, cfg, dev } = context;
+    if (target === BACKEND_TARGET && !props.entry) {
         const cwd = process.cwd();
         const mainEntry = pkg.pkg.main;
         if (mainEntry) {
@@ -19,17 +40,15 @@ export default async (context: PropsContext) => {
                 }
             }
         }
-        const server = ConfigUtil.getBackendMalaguConfig(cfg).server;
-        const port = server?.port ?? 9000;
-        const path = server?.path ?? '';
-        const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
-        let entryContent = readFileSync(join(__dirname, '..', isLambda ? 'lambda-entry.js' : 'entry.js'), { encoding: 'utf8' });
-        entryContent = entryContent
-            .replace(/{{ entry }}/g, props.entry)
-            .replace(/{{ port }}/g, port)
-            .replace(/{{ path }}/g, path)
-        props.entry = join(PathUtil.getProjectHomePath(), 'entry.js');
-        writeFileSync(props.entry, entryContent, { encoding: 'utf8' });
-
+        if (dev) {
+            const entryTemplate = join(__dirname, '..', 'entry.js');
+            props.entry = renderEntry(entryTemplate, cfg, props.entry);
+        } else if (CommandUtil.includesCommand(context.args, [ 'build', 'deploy' ])) {
+            const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
+            const entryTemplate = join(__dirname, '..', isLambda ? 'lambda-entry.js' : 'entry.js');
+            props.entry = renderEntry(entryTemplate, cfg, props.entry);
+        } else {
+            props.entry = join(PathUtil.getProjectHomePath(), 'entry.js');
+        }
     }
 };
