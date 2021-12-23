@@ -4,7 +4,7 @@ import { join, resolve } from 'path';
 
 export default async (context: PropsContext) => {
     const { props, target, pkg, cfg } = context;
-    if (target === BACKEND_TARGET && !props.entry) {
+    if (target === BACKEND_TARGET && !props.entry && existsSync(PathUtil.getProjectHomePath())) {
         const cwd = process.cwd();
         const mainEntry = pkg.pkg.main;
         if (mainEntry) {
