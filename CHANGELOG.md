@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.7.6
+
+- fix(node-plugin) 修复文件不存在错误
+- fix(scf-plugin): 修复腾讯云绑定自定义域名报错的问题 (#83)
+
 ## 2.7.5
 
 - fix(node-plugin) 修复文件不存在错误
