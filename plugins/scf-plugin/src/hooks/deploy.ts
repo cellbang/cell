@@ -513,6 +513,7 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
     const { pathMapping } = customDomainMeta;
 
     if (pathMapping) {
+        req.IsDefaultMapping = false;
         req.PathMappingSet = [{
             Path: pathMapping.path,
             Environment: pathMapping.environment

@@ -28,7 +28,7 @@ malagu:
         # certificateId: xxxx
         protocol: http
         netType: OUTER
-        isDefaultMapping: true
+        isDefaultMapping: false
         pathMapping:
           path: /
           environment: ${malagu.cloud.apiGateway.release.environmentName}
