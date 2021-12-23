@@ -122,7 +122,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx ember-cli build --environment=production'
+            compileCommand: 'npx ember build --environment=production'
         },
         detectors: {
             every: [
