@@ -4151,6 +4151,11 @@ autoprefixer@^9.8.6:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
+aws-lambda-fastify@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/aws-lambda-fastify/-/aws-lambda-fastify-2.0.2.tgz#e2a10d58d2b35f67c6831e4f2b2dd3998f05bd10"
+  integrity sha512-fq2jd2bVL2YUhyoL7FgXFAjn+uZv82i205r206PIGq/1/I7DxDsSWyuL+JxwkFKl1TfGWMppOJxqPjwXTQyCzw==
+
 aws-sdk@^2.807.0:
   version "2.896.0"
   resolved "https://registry.nlark.com/aws-sdk/download/aws-sdk-2.896.0.tgz?cache=0&sync_timestamp=1619722810046&other_urls=https%3A%2F%2Fregistry.nlark.com%2Faws-sdk%2Fdownload%2Faws-sdk-2.896.0.tgz#5328ef20000bd7d02ea03f3b7f96dba175946142"
@@ -9306,7 +9311,7 @@ koa-convert@^2.0.0:
     co "^4.6.0"
     koa-compose "^4.1.0"
 
-koa@^2.13.3, koa@^2.13.4:
+koa@^2.13.0, koa@^2.13.3, koa@^2.13.4:
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/koa/-/koa-2.13.4.tgz#ee5b0cb39e0b8069c38d115139c774833d32462e"
   integrity sha512-43zkIKubNbnrULWlHdN5h1g3SEKXOEzoAlRsHOTFpnlDu8JlAOZSMJBLULusuXRequboiwJcj5vtYXKB3k7+2g==

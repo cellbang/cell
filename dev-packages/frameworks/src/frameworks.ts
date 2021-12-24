@@ -266,6 +266,20 @@ export const frameworks = [
         }
     },
     {
+        name: 'fastify',
+        useRuntime: 'default',
+        useMode: [ 'node' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"fastify":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'nest',
         useRuntime: 'default',
         useMode: ['node', 'unpackage'],
