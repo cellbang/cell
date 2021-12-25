@@ -1,11 +1,12 @@
-import { remove, isEmpty, get, pick, uniq, defaults, now, unset, flatMap } from 'lodash';
+import { remove, isEmpty, get, pick, uniq, defaults, now, unset, isNil } from 'lodash';
 import { join, dirname, relative } from 'path';
 import { ConfigurationContext } from '../context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
 import { getPackager } from '@malagu/cli-common/lib/packager/utils';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
-import { Stats } from 'webpack';
+import { Stats, Module, ExternalModule } from 'webpack';
+const isBuiltinModule = require('is-builtin-module');
 
 function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
@@ -115,7 +116,10 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
                     moduleVersion = moduleVersion.optional;
                 }
                 if (!moduleVersion) {
-                    console.log(`WARNING: Could not determine version of module ${module.external}`);
+                    moduleVersion = get(get(dependencyGraph, 'dependencies', {})[module.external], 'version');
+                    if (!moduleVersion) {
+                        console.log(`WARNING: Could not determine version of module ${module.external}`);
+                    }
                 }
                 prodModules.push(moduleVersion ? `${module.external}@${moduleVersion}` : module.external);
             } else if (
@@ -143,9 +147,51 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
     return prodModules;
 }
 
-function getExternalModules(stats: any): any[] {
-    return flatMap(stats.stats, compileStats => compileStats.externalModules);
+function getExternalModuleName(module: ExternalModule): string {
+    return module.userRequest ;
 }
+
+function isExternalModule(module: Module): boolean {
+    return module.identifier().startsWith('external ') && !isBuiltinModule(getExternalModuleName(module as ExternalModule));
+}
+
+/**
+ * Find the original module that required the transient dependency. Returns
+ * undefined if the module is a first level dependency.
+ * @param {Object} issuer - Module issuer
+ */
+// eslint-disable-next-line no-null/no-null
+function findExternalOrigin(stats: Stats, issuer: Module | null): any {
+    if (!isNil(issuer) && (issuer as any).rawRequest.startsWith('./')) {
+        return findExternalOrigin(stats, stats.compilation.moduleGraph.getIssuer(issuer));
+    }
+    return issuer;
+}
+
+function getExternalModules(stats: Stats | undefined): any[] {
+    if (!stats?.compilation.chunks) {
+        return [];
+    }
+    const externals = new Set();
+    for (const chunk of stats.compilation.chunks) {
+        const modules = stats.compilation.chunkGraph.getChunkModules(chunk);
+        if (!modules) {
+            continue;
+        }
+
+        // Explore each module within the chunk (built inputs):
+        for (const module of modules) {
+            if (isExternalModule(module)) {
+                externals.add({
+                    origin: get(findExternalOrigin(stats, stats.compilation.moduleGraph.getIssuer(module)), 'rawRequest'),
+                    external: getExternalModuleName(module as ExternalModule)
+                });
+            }
+        }
+    }
+    return Array.from(externals);
+}
+
 /**
  * We need a performant algorithm to install the packages for each single
  * function (in case we package individually).

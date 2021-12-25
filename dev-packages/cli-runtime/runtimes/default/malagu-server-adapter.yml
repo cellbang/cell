@@ -1,0 +1,2 @@
+Components:
+  '@malagu/express-adapter': ${version}

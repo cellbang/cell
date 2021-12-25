@@ -52,11 +52,13 @@ export class ConfigFactory {
             config.webpack = config.malagu.webpack;
 
             if (typeof config.includeModules === 'boolean' || typeof config.malagu.includeModules === 'boolean') {
-                config.malagu.includeModules = config.includeModules;
+                if (typeof config.includeModules !== 'undefined') {
+                    config.malagu.includeModules = config.includeModules;
+                }
             } else {
                 config.malagu.includeModules = ConfigUtil.merge(config.malagu.includeModules, config.includeModules);
-                config.includeModules = config.malagu.includeModules;
             }
+            config.includeModules = config.malagu.includeModules;
 
             const configuration = new WebpackChain();
             for (const configFactory of configFactories) {

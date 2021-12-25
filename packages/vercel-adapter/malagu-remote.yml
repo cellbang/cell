@@ -9,7 +9,7 @@ frontend:
       config:
         builds:
           - src: 'frontend/**'
-            use: '@now/static'
+            use: '@vercel/static'
         routes:
           - src: /(.*)
             dest: frontend/$1

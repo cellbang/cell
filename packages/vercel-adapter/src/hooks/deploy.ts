@@ -6,7 +6,6 @@ const commandExists = require('command-exists');
 
 export default async (context: DeployContext) => {
     const { pkg, prod} = context;
-    const cwd = PathUtil.getProjectDistPath();
     console.log(`Deploying ${chalk.bold.yellow(pkg.pkg.name)} to Vercel...`);
     try {
         await commandExists('vercel');
@@ -14,5 +13,10 @@ export default async (context: DeployContext) => {
         console.log(chalk`The vercel command does not exist, please install it first: {yellow.bold npm i -g vercel}`);
         process.exit(-1);
     }
-    spawnSync('vercel', prod ? ['--prod', '--local-config', join(cwd, 'vercel.json')] : ['--local-config', join(cwd, 'now.json')], { cwd, stdio: 'inherit' });
+    const args = [];
+    if (prod) {
+        args.push('--prod');
+    }
+    args.push(...['--local-config', join(PathUtil.getProjectDistPath(), 'vercel.json')]);
+    spawnSync('vercel', { cwd: PathUtil.getProjectHomePath(), stdio: 'inherit' });
 };
