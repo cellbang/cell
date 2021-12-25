@@ -223,7 +223,7 @@ export class NormalModuleReplacementPluginConfigFactory {
 export class FriendlyErrorsWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev } = context;
-        const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+        const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
         config.plugin('friendlyErrors').use(FriendlyErrorsWebpackPlugin, [{
             compilationSuccessInfo: {
                 messages: dev ? getDevSuccessInfo(config.devServer, target) : [`The ${target} code output to ${chalk.bold.blue(config.output.get('path'))} 🎉`],
