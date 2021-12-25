@@ -8,7 +8,7 @@ const Watchpack = require('watchpack');
 
 const watchpack = new Watchpack({});
 
-const argv = process.argv;
+const argv = [ ...process.argv ];
 argv.shift();
 argv.shift();
 

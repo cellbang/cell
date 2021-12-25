@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.8.1
+## 2.8.2
 
 - fix(cli-service) Fix problems introduced by webpack upgrade (#84)
 - fix(cli-runtime) 添加传统服务构建模式 `malagu build -m server` 和 vercel 部署模式 `malagu deploy -m vercel`
