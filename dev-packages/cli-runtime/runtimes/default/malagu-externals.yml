@@ -1,0 +1,7 @@
+backend:
+  malagu:
+    includeModules: true
+    webpack:
+      config:
+        externals:
+          vm2: vm2

@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.7.7
+
+- fix(cli-service) Fix problems introduced by webpack upgrade (#84)
+- fix(cli-runtime) 添加传统服务构建模式 `malagu build -m server` 和 vercel 部署模式 `malagu deploy -m vercel`
+- fix(cli-runtime) 添加新模式 `externals`，该模式内置了需要排除的包，比如 vm2 等等，使用方式：`malagu deploy -m externals`
+
 ## 2.7.6
 
 - fix(node-plugin) 修复文件不存在错误
