@@ -1,2 +1,2 @@
-Components:
+components:
   '@malagu/vercel-adapter': ${version}
