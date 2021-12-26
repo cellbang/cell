@@ -4,7 +4,7 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.8.2",
+  "version": "2.8.3",
   "license": "MIT",
   "files": [
     "lib",
@@ -12,20 +12,20 @@
     "malagu.yml"
   ],
   "dependencies": {
-    "@malagu/core": "2.8.2",
-    "@malagu/grommet": "2.8.2",
-    "@malagu/oauth2-client": "2.8.2",
-    "@malagu/oauth2-core": "2.8.2",
-    "@malagu/react": "2.8.2",
-    "@malagu/rpc": "2.8.2",
-    "@malagu/scf-adapter": "2.8.2",
-    "@malagu/security": "2.8.2",
-    "@malagu/serve-static": "2.8.2",
-    "@malagu/typeorm": "2.8.2",
+    "@malagu/core": "2.8.3",
+    "@malagu/grommet": "2.8.3",
+    "@malagu/oauth2-client": "2.8.3",
+    "@malagu/oauth2-core": "2.8.3",
+    "@malagu/react": "2.8.3",
+    "@malagu/rpc": "2.8.3",
+    "@malagu/scf-adapter": "2.8.3",
+    "@malagu/security": "2.8.3",
+    "@malagu/serve-static": "2.8.3",
+    "@malagu/typeorm": "2.8.3",
     "request-ip": "^2.1.3"
   },
   "devDependencies": {
-    "@malagu/cli": "2.8.2"
+    "@malagu/cli": "2.8.3"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

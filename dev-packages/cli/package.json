@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
@@ -33,8 +33,8 @@
     "test": "malaguext test"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.8.2",
-    "@malagu/cli-runtime": "2.8.2",
+    "@malagu/cli-common": "2.8.3",
+    "@malagu/cli-runtime": "2.8.3",
     "commander": "^8.1.0",
     "leven": "^3.1.0",
     "minimist": "^1.2.5",
@@ -42,7 +42,7 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.8.2",
+    "@malagu/ext-scripts": "2.8.3",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
   },
