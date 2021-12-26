@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-jose",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-core": "2.8.2",
+    "@malagu/oauth2-core": "2.8.3",
     "jose": "^1.28.0"
   },
   "publishConfig": {
