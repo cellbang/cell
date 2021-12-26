@@ -133,6 +133,108 @@ export const frameworks = [
             ]
         }
     },
+    {
+        name: 'hexo',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'public',
+            compileCommand: 'npx hexo generate'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"hexo":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'umijs',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'dist',
+            compileCommand: 'npx umi build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"umi":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'ionic-react',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'build',
+            compileCommand: 'npx react-scripts build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/react":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'sveltekit',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'public',
+            compileCommand: 'npx svelte-kit build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@sveltejs\\/kit":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'ionic-angular',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'www',
+            compileCommand: 'npx ng build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/angular":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'nuxtjs',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'dist',
+            compileCommand: 'npx nuxt generate'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"nuxt3?(-edge)?":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
 
     // backend
     {
