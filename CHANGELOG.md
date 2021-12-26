@@ -2,7 +2,7 @@
 
 ## 2.8.3
 
-- feat(frameworks) 支持 hexo、nuxtjs、ionic-angular、sveltekit、ionic-react、umijs
+- feat(frameworks) 支持 hexo、nuxtjs、ionic-angular、sveltekit、ionic-react、umijs 前端框架
 
 ## 2.8.2
 
