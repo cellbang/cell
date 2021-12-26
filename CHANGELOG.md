@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.8.3
+
+- feat(frameworks) 支持 hexo、nuxtjs、ionic-angular、sveltekit、ionic-react、umijs
+
 ## 2.8.2
 
 - fix(cli-service) Fix problems introduced by webpack upgrade (#84)
