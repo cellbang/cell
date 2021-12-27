@@ -1,6 +1,40 @@
 export const frameworks = [
     // frontend
     {
+        name: 'ionic-react',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'build',
+            compileCommand: 'npx react-scripts build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/react":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'ionic-angular',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'www',
+            compileCommand: 'npx ng build'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/angular":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'create-react-app',
         useRuntime: 'default',
         useMode: [ 'static' ],
@@ -95,6 +129,10 @@ export const frameworks = [
                 {
                     path: 'package.json',
                     matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"svelte":\\s*".+?"[^}]*}',
+                },
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"sirv-cli":\\s*".+?"[^}]*}',
                 }
             ]
         }
@@ -163,57 +201,6 @@ export const frameworks = [
                 {
                     path: 'package.json',
                     matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"umi":\\s*".+?"[^}]*}',
-                }
-            ]
-        }
-    },
-    {
-        name: 'ionic-react',
-        useRuntime: 'default',
-        useMode: [ 'static' ],
-        settings: {
-            outputDir: 'build',
-            compileCommand: 'npx react-scripts build'
-        },
-        detectors: {
-            every: [
-                {
-                    path: 'package.json',
-                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/react":\\s*".+?"[^}]*}',
-                }
-            ]
-        }
-    },
-    {
-        name: 'sveltekit',
-        useRuntime: 'default',
-        useMode: [ 'static' ],
-        settings: {
-            outputDir: 'public',
-            compileCommand: 'npx svelte-kit build'
-        },
-        detectors: {
-            every: [
-                {
-                    path: 'package.json',
-                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@sveltejs\\/kit":\\s*".+?"[^}]*}',
-                }
-            ]
-        }
-    },
-    {
-        name: 'ionic-angular',
-        useRuntime: 'default',
-        useMode: [ 'static' ],
-        settings: {
-            outputDir: 'www',
-            compileCommand: 'npx ng build'
-        },
-        detectors: {
-            every: [
-                {
-                    path: 'package.json',
-                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"@ionic\\/angular":\\s*".+?"[^}]*}',
                 }
             ]
         }
