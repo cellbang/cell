@@ -28,7 +28,7 @@ export default async (context: WebpackContext) => {
                         },
                     }]
                 }]);
-            console.log(`💰 The backend code output to ${chalk.bold.blue(to)} 🎉`);
+            console.log(`💰 The frontend code output to ${chalk.bold.blue(to)} 🎉`);
         }
 
     }
