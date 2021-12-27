@@ -1,5 +1,5 @@
 
-import { CliContext, ContextUtils } from '@malagu/cli-common';
+import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
 import { BuildManager } from './build-manager';
 
 export interface BuildOptions {
