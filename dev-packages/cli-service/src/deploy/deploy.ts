@@ -8,6 +8,7 @@ import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 export interface DeplyOptions {
     entry?: string;
     skipBuild?: boolean;
+    exit?: boolean;
 }
 
 export default async (cliContext: CliContext, options: DeplyOptions) => {
@@ -30,6 +31,9 @@ export default async (cliContext: CliContext, options: DeplyOptions) => {
         }
         const hookExecutor = new HookExecutor();
         await hookExecutor.executeDeployHooks(ctx);
+        if (options.exit === false) {
+            process.exit(0);
+        }
     } catch (error) {
         console.error(error);
         process.exit(-1);

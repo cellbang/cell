@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.8.4
+
+- fix(frameworks) fix ember compileCommand 
+- feat(frameworks + node-plugin): support fastify
+- fix(frameworks) 修复 ionic-reac、ionic-angular 框架识别错误的问题 (#87)
+- feat(cli-service) 优化部署完成退出规则
+
 ## 2.8.3
 
 - feat(frameworks) 支持 hexo、nuxtjs、ionic-angular、sveltekit、ionic-react、umijs 前端框架
