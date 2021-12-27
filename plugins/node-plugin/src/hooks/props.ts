@@ -45,7 +45,8 @@ export default async (context: PropsContext) => {
             props.entry = renderEntry(entryTemplate, cfg, props.entry);
         } else if (CommandUtil.includesCommand(context.args, [ 'build', 'deploy' ])) {
             const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
-            const entryTemplate = join(__dirname, '..', isLambda ? 'lambda-entry.js' : 'entry.js');
+            const isFastify = pkg.framework?.name === 'fastify';
+            const entryTemplate = join(__dirname, '..', isLambda ? (isFastify ? 'lambda-fastify-entry.js' :'lambda-entry.js') : 'entry.js');
             props.entry = renderEntry(entryTemplate, cfg, props.entry);
         } else {
             props.entry = join(PathUtil.getProjectHomePath(), 'entry.js');

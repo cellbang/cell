@@ -122,7 +122,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx ember-cli build --environment=production'
+            compileCommand: 'npx ember build --environment=production'
         },
         detectors: {
             every: [
@@ -261,6 +261,20 @@ export const frameworks = [
                 {
                     path: 'package.json',
                     matchContent: '"dependencies":\\s*{[^}]*"koa":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'fastify',
+        useRuntime: 'default',
+        useMode: [ 'node' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"fastify":\\s*".+?"[^}]*}',
                 }
             ]
         }
