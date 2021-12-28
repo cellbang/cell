@@ -22,7 +22,7 @@ export default async (context: CliContext) => {
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
-    
+
     const clients = await createClients(region, credentials);
     lambdaClient = clients.lambdaClient;
     apiGatewayClient = clients.apiGatewayClient;
@@ -75,7 +75,7 @@ export default async (context: CliContext) => {
 };
 
 async function createTrigger(trigger: any, functionName: string) {
-    
+
     const oldEventSourceMapping = await getTrigger(lambdaClient, functionName, trigger.eventSourceArn);
     if (oldEventSourceMapping) {
         const deleteEventSourceMappingRequest: Lambda.Types.DeleteEventSourceMappingRequest = {
@@ -205,11 +205,9 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
         });
     } else {
         functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
-            return await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
-                await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
+            return await createFunctionWithRetry(functionMeta, code);
         });
     }
-    functionInfo
 }
 
 async function createRoleIfNeed(functionMeta: any, accountId: string, region: string) {
@@ -659,3 +657,24 @@ async function checkStatus(functionName: string) {
         throw new Error(`Please check function status: ${functionName}`);
     }
 }
+
+/// This error happens when the role is invalid (which is not the case) or when you try to create the Lambda function just after the role creation.
+/// Amazon needs a few seconds to replicate your new role through all regions.
+/// view detail: `https://stackoverflow.com/questions/37503075/invalidparametervalueexception-the-role-defined-for-the-function-cannot-be-assu`
+async function createFunctionWithRetry(functionMeta: any, code: JSZip) {
+    let times = 10;
+    while (times > 0) {
+        try {
+            return await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
+                await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
+        } catch (err) {
+            if(err.code !== 'InvalidParameterValueException') {
+                throw err;
+            }
+        }
+        await delay(1500);
+        times = times - 1;
+    }
+    throw new Error(`Please try again later`);
+}
+
