@@ -67,6 +67,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 
     program
         .command('config')
+        .option('--default-runtime [defaultRuntime]', 'default runtime')
         .option('--default-mode [defaultMode]', 'default mode', value => value ? value.split(',') : [])
         .option('--frameworks-url [frameworksUrl]', 'frameworks url')
         .option('--frameworks-upstream-url [frameworksUpStreamUrl]', 'frameworks upstream url')

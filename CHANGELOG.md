@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.8.5
+
+- fix(lambda-plugin): 修复 lambda 创建新函数有机率因为新角色未同步导致报错的问题 (#88)
+- fix(static-plugin) fix typo
+- feat(cli) 支持 `malagu config --default-runtime` 选项
+
 ## 2.8.4
 
 - fix(frameworks) fix ember compileCommand 
