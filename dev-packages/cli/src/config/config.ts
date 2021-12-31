@@ -10,6 +10,7 @@ export interface ConfigOptions {
     frameworksUpstreamUrl?: boolean;
     configFileAlias?: string;
     defaultMode?: string[];
+    defaultRuntime?: string[];
     show?: boolean;
 }
 
@@ -20,6 +21,11 @@ export default async (cliContext: CliContext, options: ConfigOptions) => {
         if (options.defaultMode?.length) {
             SettingsUtil.updateSettings({
                 defaultMode: options.defaultMode
+            });
+        }
+        if (options.defaultRuntime) {
+            SettingsUtil.updateSettings({
+                defaultRuntime: options.defaultRuntime
             });
         }
         if (options.frameworksUpstreamUrl || options.frameworksUrl) {
