@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.8.6
+
+- feat(scf-plugin) 优化 `malagu info` 执行效率
+- fix(scf-plugin) 修复 `malagu info` 报函数别名找不到
+- feat(examples) 添加认证与授权相关的示例模板
+
 ## 2.8.5
 
 - fix(lambda-plugin): 修复 lambda 创建新函数有机率因为新角色未同步导致报错的问题 (#88)

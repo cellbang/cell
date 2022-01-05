@@ -199,6 +199,9 @@
       ],
       "@malagu/example-koa-app/*": [
         "examples/koa-app/*"
+      ],
+      "@malagu/example-security-app/*": [
+        "examples/security-app/*"
       ]
     }
   },
