@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.8.7
+
+- fix(cli-runtime) 修复静态网站部署问题
+
+
 ## 2.8.6
 
 - feat(scf-plugin) 优化 `malagu info` 执行效率
