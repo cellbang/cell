@@ -1,2 +1,3 @@
+targets: [ 'none' ]
 devComponents:
   '@malagu/cli-service': ${version}

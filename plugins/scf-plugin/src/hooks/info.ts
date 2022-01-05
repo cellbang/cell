@@ -37,14 +37,10 @@ export default async (context: InfoContext) => {
         return;
     }
 
-    context.output.namespaceInfo = await getNamespace(scfClient, namespace.name, true);
-    if (!context.output.namespaceInfo) {
-        return;
-    }
-
-    context.output.aliasInfo = await getAlias(scfClient, alias.name, namespace.name, functionName, undefined, true);
-
-    context.output.triggerInfo = await getTrigger(scfClient, namespace.name, functionName, undefined, alias.name, true);
+    const tasks: Promise<void>[] = []; 
+    tasks.push(getNamespace(scfClient, namespace.name, true).then(data => context.output.namespaceInfo = data));
+    tasks.push(getAlias(scfClient, alias.name, namespace.name, functionName, undefined, true).then(data => context.output.aliasInfo = data));
+    tasks.push(getTrigger(scfClient, namespace.name, functionName, undefined, alias.name, true).then(data => context.output.triggerInfo = data));
 
     if (apiGateway) {
         const { usagePlan, api, service, release, customDomain } = apiGateway;
@@ -57,11 +53,13 @@ export default async (context: InfoContext) => {
             context.output.apiInfo = await getApi(apiClient, serviceId, api.name, true, subDomain, protocol, release.environmentName);
 
             if (usagePlan.name) {
-                context.output.usagePlanInfo = await getUsagePlan(apiClient, usagePlan.name, true);
+                tasks.push(getUsagePlan(apiClient, usagePlan.name, true).then(data => context.output.usagePlanInfo = data));
             }
             if (customDomain?.name) {
-                context.output.customDomainInfo = await getCustomDomain(apiClient, serviceId, customDomain.name, true, release.environmentName);  
+                tasks.push(getCustomDomain(apiClient, serviceId, customDomain.name, true, release.environmentName).then(data => context.output.customDomainInfo = data));
             }
         }
     }
+
+    await Promise.all(tasks);
 };

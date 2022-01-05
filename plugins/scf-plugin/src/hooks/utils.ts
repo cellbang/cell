@@ -188,7 +188,7 @@ export async function getFunction(client: any, namespaceName: string, functionNa
         }
         return result;
     } catch (error) {
-        if (error.code !== 'ResourceNotFound.Function') {
+        if (error.code !== 'ResourceNotFound.Function' && error.code !== 'ResourceNotFound.Version') {
             throw error;
         }
     }
