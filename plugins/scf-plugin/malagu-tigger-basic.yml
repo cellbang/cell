@@ -1,0 +1,9 @@
+malagu:
+  cloud:
+    trigger:
+      name: ${malagu.cloud.function.name}
+      type: "apigw"
+      enable: "OPEN"
+      triggerDesc: 
+        service: 
+          serviceType: "BASIC"

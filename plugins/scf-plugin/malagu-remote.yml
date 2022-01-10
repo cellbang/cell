@@ -1,4 +1,4 @@
-mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'http-mode'}"
+mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'tigger' in currentMode ? 'tigger-mode' : 'http-mode'}"
 malagu:
   cloud:
     namespace:
