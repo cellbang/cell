@@ -7,3 +7,6 @@ malagu:
       triggerDesc: 
         service: 
           serviceType: "BASIC"
+        api: 
+          requestConfig:
+            path: '/'

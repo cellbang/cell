@@ -1,4 +1,4 @@
-mode: [ tigger-basic ]
+mode: [ tigger-apigw-basic ]
 malagu:
   cloud:
     function:

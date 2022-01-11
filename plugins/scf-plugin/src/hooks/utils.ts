@@ -72,6 +72,10 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                 console.log(`    - Type: ${result.Type}`);
                 console.log(`    - Enable: ${result.Enable}`);
                 console.log(`    - AvailableStatus: ${result.AvailableStatus}`);
+                if(result.Type=='apigw'){
+                    const url = JSON.parse(result.TriggerDesc).service.subDomain;
+                    console.log(chalk`    - Url: {green.bold ${url}}`);
+                }
             }
             return result;
         }
