@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts">
-import HelloWorld from "../components/HelloWorld.vue";
-import { defineComponent } from "vue";
-import { RpcUtil } from "@malagu/rpc";
-import { WelcomeServer } from "../../common/welcome-protocol";
+import HelloWorld from '../components/HelloWorld.vue';
+import { defineComponent } from 'vue';
+import { RpcUtil } from '@malagu/rpc';
+import { WelcomeServer } from '../../common/welcome-protocol';
 
-const logoImage = require("../assets/logo.png");
+const logoImage = require('../assets/logo.png');
 const Root = defineComponent({
   components: {
     HelloWorld,
@@ -19,7 +19,7 @@ const Root = defineComponent({
   data() {
     return {
       logoImage,
-      message: "loading...",
+      message: 'loading...',
     };
   },
   mounted() {
