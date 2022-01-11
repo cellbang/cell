@@ -78,7 +78,7 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                     const path = JSON.parse(result.TriggerDesc)?.api?.requestConfig?.path;
                     const protocol = JSON.parse(result.TriggerDesc)?.service?.protocol.includes('https') ? 'https' : 'http';
                     console.log(
-                        chalk`    - Url: {green.bold ${protocol}://${outerSubDomain!}${aliasName === 'release' ? '' : `/${aliasName}`}${path}}`);
+                        chalk`    - Url: {green.bold ${protocol}://${outerSubDomain!}${path}}`);
                 }
             }
             return result;

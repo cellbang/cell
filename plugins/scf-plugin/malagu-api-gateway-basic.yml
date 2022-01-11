@@ -11,4 +11,4 @@ malagu:
           requestConfig:
             path: '/'
         release:
-          environmentName: ${malagu.cloud.alias.name}
+          environmentName: "release"
