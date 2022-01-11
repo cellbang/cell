@@ -1,0 +1,14 @@
+malagu:
+  cloud:
+    trigger:
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}
+      type: "apigw"
+      enable: "OPEN"
+      triggerDesc: 
+        service: 
+          serviceType: "BASIC"
+        api: 
+          requestConfig:
+            path: '/'
+        release:
+          environmentName: "release"
