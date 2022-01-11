@@ -10,8 +10,8 @@ import HelloWorld from '../components/HelloWorld.vue';
 import { defineComponent } from 'vue';
 import { RpcUtil } from '@malagu/rpc';
 import { WelcomeServer } from '../../common/welcome-protocol';
+import * as logoImage from '../images/logo.png';
 
-const logoImage = require('../assets/logo.png');
 const Root = defineComponent({
   components: {
     HelloWorld,
