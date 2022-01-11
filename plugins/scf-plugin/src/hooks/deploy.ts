@@ -48,7 +48,7 @@ export default async (context: DeployContext) => {
     await createOrUpdateAlias(alias, namespace.name, functionMeta.name, functionVersion);
 
     if (trigger) {
-        await createTrigger(trigger, namespace.name, functionMeta.name);
+        await createTrigger(trigger, namespace.name, functionMeta.name, functionVersion, alias);
     }
 
     if (apiGateway) {
@@ -88,34 +88,41 @@ function cleanObj(obj: any) {
     });
 }
 
-async function createTrigger(trigger: any, namespaceName: string, functionName: string) {
-    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.name);
+async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
+    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, undefined, alias.name);
+    if(triggerInfo?.Type === 'apigw'){
+        const serviceId = JSON.parse(triggerInfo.TriggerDesc)?.service?.serviceId;
+        trigger.triggerDesc.service.serviceId = serviceId;
+    }
     if (triggerInfo) {
         const deleteTriggerRequest: any = {};
         deleteTriggerRequest.Namespace = namespaceName;
         deleteTriggerRequest.FunctionName = functionName;
-        deleteTriggerRequest.Type = trigger.type;
-        deleteTriggerRequest.TriggerName = trigger.name;
-        deleteTriggerRequest.Qualifier = trigger.qualifier;
+        deleteTriggerRequest.Type = triggerInfo.Type;
+        deleteTriggerRequest.TriggerName = triggerInfo.TriggerName;
+        deleteTriggerRequest.Qualifier = triggerInfo.Qualifier;
         if (trigger.type === 'cos') {
-            deleteTriggerRequest.TriggerDesc = trigger.triggerDesc;
+            deleteTriggerRequest.TriggerDesc = triggerInfo.TriggerDesc;
         }
         await scfClient.DeleteTrigger(deleteTriggerRequest);
 
     }
     const createTriggerRequest: any = {};
+    let url: string = '';
     createTriggerRequest.Namespace = namespaceName;
     createTriggerRequest.FunctionName = functionName;
-    createTriggerRequest.Qualifier = trigger.qualifier;
+    createTriggerRequest.Qualifier = alias.name;
     createTriggerRequest.TriggerName = trigger.name;
     createTriggerRequest.Type = trigger.type;
     createTriggerRequest.Enable = trigger.enable;
-    createTriggerRequest.TriggerDesc = trigger.triggerDesc;
+    createTriggerRequest.TriggerDesc = JSON.stringify(trigger.triggerDesc);
     await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
-        await scfClient.CreateTrigger(createTriggerRequest);
+        const Result = await scfClient.CreateTrigger(createTriggerRequest);
+        url = JSON.parse(Result.TriggerInfo.TriggerDesc)?.service?.subDomain;
     });
+    
+    console.log(chalk`    - Url: {green.bold ${url}}`);
     console.log(`    - Type: ${trigger.type}`);
-    console.log(`    - TriggerDesc: ${trigger.triggerDesc}`);
     console.log(`    - Enable: ${trigger.enable}`);
 }
 

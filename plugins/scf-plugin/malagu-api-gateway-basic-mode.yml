@@ -1,0 +1,6 @@
+mode: [ api-gateway-basic ]
+malagu:
+  cloud:
+    function:
+      type: HTTP
+      bootstrap: /var/lang/node12/bin/node backend/index.js
