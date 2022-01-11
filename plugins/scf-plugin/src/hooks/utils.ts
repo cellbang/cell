@@ -69,6 +69,7 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
             if (print) {
                 console.log(chalk`{bold.cyan - Trigger: }`);
                 console.log(`    - TriggerName: ${result.TriggerName}`);
+                console.log(`    - Qualifier: ${result.Qualifier}`);
                 console.log(`    - Type: ${result.Type}`);
                 console.log(`    - Enable: ${result.Enable}`);
                 console.log(`    - AvailableStatus: ${result.AvailableStatus}`);

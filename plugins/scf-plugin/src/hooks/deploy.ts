@@ -89,7 +89,7 @@ function cleanObj(obj: any) {
 }
 
 async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
-    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.name);
+    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, undefined, alias.name);
     if(triggerInfo?.Type === 'apigw'){
         const serviceId = JSON.parse(triggerInfo.TriggerDesc)?.service?.serviceId;
         trigger.triggerDesc.service.serviceId = serviceId;

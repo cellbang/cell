@@ -1,7 +1,7 @@
 malagu:
   cloud:
     trigger:
-      name: ${malagu.cloud.function.name}
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}
       type: "apigw"
       enable: "OPEN"
       triggerDesc: 
