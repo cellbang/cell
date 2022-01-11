@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="malagu logo" src="../assets/logo.png" />
+    <img alt="malagu logo" :src="logoImage" />
     <HelloWorld :msg="message" />
   </div>
 </template>
@@ -11,12 +11,14 @@ import { defineComponent } from "vue";
 import { RpcUtil } from "@malagu/rpc";
 import { WelcomeServer } from "../../common/welcome-protocol";
 
+const logoImage = require("../assets/logo.png");
 const Root = defineComponent({
   components: {
     HelloWorld,
   },
   data() {
     return {
+      logoImage,
       message: "loading...",
     };
   },
