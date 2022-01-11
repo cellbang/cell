@@ -90,11 +90,9 @@ function cleanObj(obj: any) {
 
 async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
     const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.name);
-    if(triggerInfo?.Type == 'apigw'){
-        const url = JSON.parse(triggerInfo.TriggerDesc).service.subDomain;
-        console.log(
-            chalk`    - Url: {green.bold ${url}}`);
-        return;
+    if(triggerInfo?.Type === 'apigw'){
+        const serviceId = JSON.parse(triggerInfo.TriggerDesc)?.service?.serviceId;
+        trigger.triggerDesc.service.serviceId = serviceId;
     }
     if (triggerInfo) {
         const deleteTriggerRequest: any = {};
@@ -120,7 +118,7 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
     createTriggerRequest.TriggerDesc = JSON.stringify(trigger.triggerDesc);
     await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
         const Result = await scfClient.CreateTrigger(createTriggerRequest);
-        url = JSON.parse(Result.TriggerInfo.TriggerDesc).service.subDomain;
+        url = JSON.parse(Result.TriggerInfo.TriggerDesc)?.service?.subDomain;
     });
     
     console.log(chalk`    - Url: {green.bold ${url}}`);

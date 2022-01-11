@@ -10,3 +10,5 @@ malagu:
         api: 
           requestConfig:
             path: '/'
+        release:
+          environmentName: ${malagu.cloud.alias.name}

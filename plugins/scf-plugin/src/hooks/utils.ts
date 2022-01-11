@@ -72,9 +72,12 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                 console.log(`    - Type: ${result.Type}`);
                 console.log(`    - Enable: ${result.Enable}`);
                 console.log(`    - AvailableStatus: ${result.AvailableStatus}`);
-                if(result.Type=='apigw'){
-                    const url = JSON.parse(result.TriggerDesc).service.subDomain;
-                    console.log(chalk`    - ApiUrl: {green.bold ${url}}`);
+                if(result.Type === 'apigw'){
+                    const outerSubDomain = JSON.parse(result.TriggerDesc)?.service?.outerSubDomain;
+                    const path = JSON.parse(result.TriggerDesc)?.api?.requestConfig?.path;
+                    const protocol = JSON.parse(result.TriggerDesc)?.service?.protocol.includes('https') ? 'https' : 'http';
+                    console.log(
+                        chalk`    - Url: {green.bold ${protocol}://${outerSubDomain!}${aliasName === 'release' ? '' : `/${aliasName}`}${path}}`);
                 }
             }
             return result;
