@@ -90,7 +90,7 @@ function cleanObj(obj: any) {
 
 async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
     const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.name);
-    if(triggerInfo && triggerInfo.Type == "apigw"){
+    if(triggerInfo?.Type == 'apigw'){
         const url = JSON.parse(triggerInfo.TriggerDesc).service.subDomain;
         console.log(
             chalk`    - Url: {green.bold ${url}}`);

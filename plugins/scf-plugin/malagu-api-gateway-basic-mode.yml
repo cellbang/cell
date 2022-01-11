@@ -1,4 +1,4 @@
-mode: [ tigger-apigw-basic ]
+mode: [ api-gateway-basic ]
 malagu:
   cloud:
     function:
