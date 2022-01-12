@@ -24,7 +24,7 @@ export default async (context: DeployContext) => {
     apiClient = clients.apiClient;
     ram = clients.ram;
 
-    const { service, trigger, apiGateway, customDomain, alias } = cloudConfig;
+    const { service, trigger, apiGateway, customDomain, alias, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
     const serviceName = service.name;
 
@@ -40,7 +40,7 @@ export default async (context: DeployContext) => {
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
     delete functionMeta.codeUri;
-    await createOrUpdateFunction(functionMeta, zip);
+    await createOrUpdateFunction(functionMeta, zip, disableProjectId);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);
 
@@ -308,7 +308,7 @@ async function tryCreateProjectId(serviceName: string, functionName: string) {
 
 
 
-async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
+async function createOrUpdateFunction(functionMeta: any, code: JSZip, disableProjectId: boolean) {
     const opts = { ...functionMeta };
     const serviceName = opts.serviceName;
     opts.EnvironmentVariables = opts.env;
@@ -318,13 +318,18 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
 
     projectId = await ProjectUtil.getProjectId();
     let functionInfo: any;
-    if (!projectId) {
-        await tryCreateProjectId(serviceName, functionMeta.name);
-        await ProjectUtil.saveProjectId(projectId);
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else {
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
+
+    if (disableProjectId) {
         functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
+    } else {
+      if (!projectId) {
+          await tryCreateProjectId(serviceName, functionMeta.name);
+          await ProjectUtil.saveProjectId(projectId);
+          functionMeta.name = `${functionMeta.name}_${projectId}`;
+      } else {
+          functionMeta.name = `${functionMeta.name}_${projectId}`;
+          functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
+      }
     }
 
     if (functionInfo) {

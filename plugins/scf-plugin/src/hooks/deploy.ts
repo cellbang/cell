@@ -27,7 +27,7 @@ export default async (context: DeployContext) => {
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
 
-    const { namespace, apiGateway, alias, trigger } = cloudConfig;
+    const { namespace, apiGateway, alias, trigger, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
@@ -41,7 +41,7 @@ export default async (context: DeployContext) => {
 
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
-    await createOrUpdateFunction(functionMeta, zip);
+    await createOrUpdateFunction(functionMeta, zip, disableProjectId);
 
     const functionVersion = await publishVersion(namespace.name, functionMeta.name);
 
@@ -210,7 +210,7 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
 
     if (code) {
         req.Code = {} as any;
-        req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
+        req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' });
     }
     cleanObj(req);
 }
@@ -224,16 +224,20 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
 }
 
 
-async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
-    projectId = await ProjectUtil.getProjectId();
+async function createOrUpdateFunction(functionMeta: any, code: JSZip, disableProjectId: boolean) {
     let functionInfo: any;
-    if (!projectId) {
-        await tryCreateProjectId(functionMeta.namespace, functionMeta.name);
-        await ProjectUtil.saveProjectId(projectId);
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else {
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
+    projectId = await ProjectUtil.getProjectId();
+    if (disableProjectId) {
         functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
+    } else {
+        if (!projectId) {
+            await tryCreateProjectId(functionMeta.namespace, functionMeta.name);
+            await ProjectUtil.saveProjectId(projectId);
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+        } else {
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+            functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
+        }
     }
 
     if (functionInfo) {
@@ -242,7 +246,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
-            updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE'  });
+            updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' });
             await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
             await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
@@ -253,7 +257,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip) {
             await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
             await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
         });
-    }  else {
+    } else {
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             const createFunctionRequest: any = {};
             await parseFunctionMeta(createFunctionRequest, functionMeta, code);
