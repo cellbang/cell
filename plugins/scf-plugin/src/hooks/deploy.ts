@@ -231,13 +231,8 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
         await tryCreateProjectId(functionMeta.namespace, functionMeta.name);
         await ProjectUtil.saveProjectId(projectId);
         functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else if (!disableProjectId) {
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
-        functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
-    }
-
-    if (disableProjectId) {
-        functionMeta.name = `${functionMeta.name}`;
+    } else {
+        functionMeta.name = disableProjectId ? `${functionMeta.name}` : `${functionMeta.name}_${projectId}`;
         functionInfo = await getFunction(scfClient, functionMeta.namespace, functionMeta.name);
     }
 

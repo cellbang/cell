@@ -185,15 +185,11 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
         await tryCreateProjectId(functionMeta.name);
         await ProjectUtil.saveProjectId(projectId);
         functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else if (!disableProjectId) {
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
+    } else {
+        functionMeta.name = disableProjectId ? `${functionMeta.name}` : `${functionMeta.name}_${projectId}`;
         functionInfo = await getFunction(lambdaClient, functionMeta.name);
     }
 
-    if(disableProjectId){
-        functionMeta.name = `${functionMeta.name}`;
-        functionInfo = await getFunction(lambdaClient, functionMeta.name);
-    }
     await createRoleIfNeed(functionMeta, accountId, region);
 
     if (functionInfo) {
