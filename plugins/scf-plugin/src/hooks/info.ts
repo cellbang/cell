@@ -23,13 +23,13 @@ export default async (context: InfoContext) => {
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
 
+    const { namespace, apiGateway, alias, disableProjectId } = cloudConfig;
     const projectId = await ProjectUtil.getProjectId();
-    if (!projectId) {
+    if (!projectId && !disableProjectId) {
         return;
     }
-    const { namespace, apiGateway, alias } = cloudConfig;
     const functionMeta = cloudConfig.function;
-    functionMeta.name = `${functionMeta.name}_${projectId}`;
+    functionMeta.name = disableProjectId ? functionMeta.name : `${functionMeta.name}_${projectId}`;
     const functionName = functionMeta.name;
 
     context.output.functionInfo = await getFunction(scfClient, namespace.name, functionName, alias.name, true);
@@ -44,7 +44,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { usagePlan, api, service, release, customDomain } = apiGateway;
-        service.name = `${service.name}_${projectId}`;
+        service.name = disableProjectId ? service.name : `${service.name}_${projectId}`;
         context.output.serviceInfo = await getService(apiClient, service.name, true);
         if (context.output.serviceInfo) {
             const serviceId = context.output.serviceInfo.ServiceId;

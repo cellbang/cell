@@ -19,7 +19,7 @@ export default async (context: InfoContext) => {
     fcClient = clients.fcClient;
     apiClient = clients.apiClient;
 
-    const { service, trigger, apiGateway, alias, customDomain } = cloudConfig;
+    const { service, trigger, apiGateway, alias, customDomain, disableProjectId } = cloudConfig;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -27,11 +27,11 @@ export default async (context: InfoContext) => {
     console.log(`    - Region: ${region}`);
 
     const projectId = await ProjectUtil.getProjectId();
-    if (!projectId) {
+    if (!projectId && !disableProjectId) {
         return;
     }
     const functionMeta = cloudConfig.function;
-    functionMeta.name = `${functionMeta.name}_${projectId}`;
+    functionMeta.name = disableProjectId ? functionMeta.name : `${functionMeta.name}_${projectId}`;
     const serviceName = service.name;
     const functionName = functionMeta.name;
 
@@ -53,7 +53,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { group, api } = apiGateway;
-        group.name = `${group.name}_${projectId}`;
+        group.name = disableProjectId ? group.name : `${group.name}_${projectId}`;
         context.output.groupInfo = await getGroup(apiClient, group.name, true);
         if (context.output.groupInfo) {
             const groupId = context.output.groupInfo.GroupId;

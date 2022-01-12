@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.8.9
+
+- feat(*-plugin) 支持随机后缀 ID 关闭开关，通过属性控制：`malagu.cloud.disableProjectId` (#93)
+
 ## 2.8.8
 
 - feat(scf-plugin) 支持腾讯云函数默认网关触发器, 本模式下网关调用次数不再计费 (#90)
