@@ -24,13 +24,13 @@ export default async (context: InfoContext) => {
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
 
+    const { apiGateway, alias, disableProjectId } = cloudConfig;
     const projectId = await ProjectUtil.getProjectId();
-    if (!projectId) {
+    if (!projectId && !disableProjectId) {
         return;
     }
-    const { apiGateway, alias } = cloudConfig;
     const functionMeta = cloudConfig.function;
-    functionMeta.name = `${functionMeta.name}_${projectId}`;
+    functionMeta.name = disableProjectId ? `${functionMeta.name}` : `${functionMeta.name}_${projectId}`;
     const functionName = functionMeta.name;
 
     context.output.functionInfo = await getFunction(lambdaClient, functionName, alias.name, true);
@@ -43,7 +43,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { api, stage, customDomain } = apiGateway;
-        api.name = `${api.name}_${projectId}`;
+        api.name = disableProjectId ? `${api.name}` : `${api.name}_${projectId}`;
         context.output.apiInfo = await getApi(apiGatewayClient, api.name, true, stage.name);
         if (context.output.apiInfo) {
             const apiId = context.output.apiInfo.ApiId!;

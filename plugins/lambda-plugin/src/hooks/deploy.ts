@@ -28,7 +28,7 @@ export default async (context: CliContext) => {
     apiGatewayClient = clients.apiGatewayClient;
     iamClient = clients.iamClient;
 
-    const { apiGateway, alias, trigger } = cloudConfig;
+    const { apiGateway, alias, trigger, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
     const accountId = account.id;
 
@@ -41,7 +41,7 @@ export default async (context: CliContext) => {
 
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
-    await createOrUpdateFunction(functionMeta, accountId, region, zip);
+    await createOrUpdateFunction(functionMeta, accountId, region, zip, disableProjectId);
 
     const functionVersion = await publishVersion(functionMeta.name);
 
@@ -178,15 +178,20 @@ async function tryCreateProjectId(functionName: string) {
     }
 }
 
-async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, code: JSZip) {
+async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, code: JSZip, disableProjectId: boolean) {
     projectId = await ProjectUtil.getProjectId();
     let functionInfo: any;
-    if (!projectId) {
+    if (!projectId && !disableProjectId) {
         await tryCreateProjectId(functionMeta.name);
         await ProjectUtil.saveProjectId(projectId);
         functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else {
+    } else if (!disableProjectId) {
         functionMeta.name = `${functionMeta.name}_${projectId}`;
+        functionInfo = await getFunction(lambdaClient, functionMeta.name);
+    }
+
+    if(disableProjectId){
+        functionMeta.name = `${functionMeta.name}`;
         functionInfo = await getFunction(lambdaClient, functionMeta.name);
     }
     await createRoleIfNeed(functionMeta, accountId, region);
