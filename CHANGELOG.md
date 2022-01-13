@@ -3,6 +3,7 @@
 ## 2.8.9
 
 - feat(*-plugin) 支持随机后缀 ID 关闭开关，通过属性控制：`malagu.cloud.disableProjectId` (#93)
+- feat(cli+cli-runtimes) 支持新命令行选项：`malagu runtime install --overwrite`
 
 ## 2.8.8
 
