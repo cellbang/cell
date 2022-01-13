@@ -31,6 +31,7 @@ export interface InstallOptions {
     runtime?: string;
     alias?: string;
     quiet?: boolean;
+    overwrite?: boolean;
     forceInstallComponent?: boolean;
 }
 
@@ -100,13 +101,15 @@ export class InstallManager {
 
     protected async checkOutputDir(): Promise<void> {
         if (existsSync(this.outputDir)) {
-            const answers = await inquirer.prompt([{
-                name: 'overwrite',
-                type: 'confirm',
-                message: 'Runtime already exists, overwrite the runtime'
-            }]);
-            if (!answers.overwrite) {
-                process.exit(0);
+            if (!this.opts.overwrite) {
+                const answers = await inquirer.prompt([{
+                    name: 'overwrite',
+                    type: 'confirm',
+                    message: 'Runtime already exists, overwrite the runtime'
+                }]);
+                if (!answers.overwrite) {
+                    process.exit(0);
+                }
             }
             await uninstall({ runtime: this.opts.alias || this.runtimeName });
         }

@@ -87,6 +87,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .alias('i')
         .description('install a runtime')
         .option('-f, --force-install-component [forceInstallComponent]', 'force install component')
+        .option('-o, --overwrite [overwrite]', 'overwrite existing runtime')
         .option('-v, --version [version]', 'specify runtime version', 'latest')
         .action((r, alias, options) => {
             require('@malagu/cli-runtime/lib/install/install').default({ runtime: r, alias, ...options });
