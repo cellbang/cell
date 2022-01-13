@@ -200,7 +200,7 @@ export class NormalModuleReplacementPluginConfigFactory {
         const runtimePath = PathUtil.getRuntimePath(context.runtime);
         config
             .plugin('replace')
-            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath), resource => {
+            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/\\/g, "\\\\")), resource => {
                 if (resource.createData?.resource?.startsWith(runtimePath)) {
                     const newResource = resource.createData.resource.replace(runtimePath, process.cwd());
                     if (existsSync(newResource)) {
