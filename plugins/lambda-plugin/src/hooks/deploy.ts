@@ -181,13 +181,17 @@ async function tryCreateProjectId(functionName: string) {
 async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, code: JSZip, disableProjectId: boolean) {
     projectId = await ProjectUtil.getProjectId();
     let functionInfo: any;
-    if (!projectId && !disableProjectId) {
-        await tryCreateProjectId(functionMeta.name);
-        await ProjectUtil.saveProjectId(projectId);
-        functionMeta.name = `${functionMeta.name}_${projectId}`;
-    } else {
-        functionMeta.name = disableProjectId ? `${functionMeta.name}` : `${functionMeta.name}_${projectId}`;
+    if (disableProjectId) {
         functionInfo = await getFunction(lambdaClient, functionMeta.name);
+    } else {
+        if (!projectId) {
+            await tryCreateProjectId(functionMeta.name);
+            await ProjectUtil.saveProjectId(projectId);
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+        } else {
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+            functionInfo = await getFunction(lambdaClient, functionMeta.name);
+        }
     }
 
     await createRoleIfNeed(functionMeta, accountId, region);

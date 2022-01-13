@@ -1,7 +1,6 @@
 mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'api-gateway-basic' in currentMode ? 'api-gateway-basic-mode' : 'http-mode'}"
 malagu:
   cloud:
-    disableProjectId: false
     namespace:
       name: default
     function:

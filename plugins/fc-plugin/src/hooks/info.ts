@@ -31,7 +31,7 @@ export default async (context: InfoContext) => {
         return;
     }
     const functionMeta = cloudConfig.function;
-    functionMeta.name = disableProjectId ? `${functionMeta.name}` : `${functionMeta.name}_${projectId}`;
+    functionMeta.name = disableProjectId ? functionMeta.name : `${functionMeta.name}_${projectId}`;
     const serviceName = service.name;
     const functionName = functionMeta.name;
 
@@ -53,7 +53,7 @@ export default async (context: InfoContext) => {
 
     if (apiGateway) {
         const { group, api } = apiGateway;
-        group.name = disableProjectId ? `${group.name}` : `${group.name}_${projectId}`;
+        group.name = disableProjectId ? group.name : `${group.name}_${projectId}`;
         context.output.groupInfo = await getGroup(apiClient, group.name, true);
         if (context.output.groupInfo) {
             const groupId = context.output.groupInfo.GroupId;

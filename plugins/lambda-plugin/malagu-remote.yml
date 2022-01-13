@@ -1,6 +1,5 @@
 mode: "${'timer' in currentMode ? 'timer-mode' : 'api-gateway-mode'}"
 malagu:
   cloud:
-    disableProjectId: false
     function:
       runtime: nodejs12.x
