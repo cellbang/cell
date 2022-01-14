@@ -1,0 +1,10 @@
+targets: [ 'none' ]
+malagu:
+  cloud:
+    function:
+      type: HTTP
+      bootstrap: /var/lang/python3/bin/python3 app.py
+      runtime: Python3.6
+      codeUri:
+        value: '.'
+

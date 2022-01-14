@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.9.0
+
+- fix(cli-service) 修复 Window 下运行报错，必须本地依赖 scf-adapter 组件 (#95)
+- fix(code-loader-plugin) 优化代码
+
 ## 2.8.9
 
 - feat(*-plugin) 支持随机后缀 ID 关闭开关，通过属性控制：`malagu.cloud.disableProjectId` (#93)

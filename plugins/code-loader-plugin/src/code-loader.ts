@@ -1,23 +1,25 @@
-import { readdirSync, statSync, readFileSync, existsSync } from 'fs-extra';
+import { readdirSync, statSync, readFileSync } from 'fs-extra';
 import * as JSZip from 'jszip';
 import { join, resolve } from 'path';
 import { CodeLoader, CodeUri } from './code-protocol';
-const chalk = require('chalk');
+
+export function getCodeRootDir(codeDir: string, codeUri: string | CodeUri) {
+    if (typeof codeUri === 'string') {
+        codeUri = { value: codeUri };
+    }
+    if (codeUri?.value) {
+        return resolve(process.cwd(), codeUri.value);
+    }
+    return codeDir;
+}
 
 export class DefaultCodeLoader implements CodeLoader {
     async load(codeDir: string, codeUri: string | CodeUri): Promise<JSZip> {
-        if (!existsSync(codeDir)) {
-            console.log(chalk`{yellow Please build app first with "malagu build"}`);
-            throw Error('Please build app first with "malagu build"');
-        }
-
         const zip = new JSZip();
         if (typeof codeUri === 'string') {
             codeUri = { value: codeUri };
         }
-        if (codeUri?.value) {
-            codeDir = resolve(codeDir, codeUri.value);
-        }
+        codeDir = getCodeRootDir(codeDir, codeUri);
         await this.doLoad(codeDir, zip, codeUri);
         return zip;
     }
