@@ -2,7 +2,7 @@
 
 ## 2.9.0
 
-- fix(cli-service) 修复 Window 下运行报错，必须本地依赖 scf-adapter 组件 (#95)
+- fix(cli-service) 修复 Windows 下运行报错，必须本地依赖 scf-adapter 组件 (#95)
 - fix(code-loader-plugin) 优化代码
 
 ## 2.8.9
