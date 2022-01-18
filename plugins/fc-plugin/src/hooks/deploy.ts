@@ -50,7 +50,7 @@ export default async (context: DeployContext) => {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { group, api, stage } = apiGateway;
         const role = await createRoleIfNeed();
-        group.name = `${group.name}_${projectId}`;
+        group.name = disableProjectId ? group.name : `${group.name}_${projectId}`;
         const { groupId, subDomain } = await createOrUpdateGroup(group);
         if (api.serviceConfig.functionComputeConfig) {
             api.serviceConfig.functionComputeConfig.serviceName = serviceName;

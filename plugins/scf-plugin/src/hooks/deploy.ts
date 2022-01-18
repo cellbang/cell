@@ -54,7 +54,7 @@ export default async (context: DeployContext) => {
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { usagePlan, strategy, api, service, release, customDomain } = apiGateway;
-        service.name = `${service.name}_${projectId}`;
+        service.name = disableProjectId ? service.name : `${service.name}_${projectId}`;
         const { serviceId, subDomain } = await createOrUpdateService(service);
         api.serviceScfFunctionName = functionMeta.name;
         api.serviceScfFunctionNamespace = namespace.name;
