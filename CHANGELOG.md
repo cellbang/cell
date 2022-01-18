@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.9.1
+
+- fix(*-plugin) 修复 api gateway 模式下 disableProjectId 覆盖问题 (#100)
+
 ## 2.9.0
 
 - fix(cli-service) 修复 Windows 下运行报错，必须本地依赖 scf-adapter 组件 (#95)
