@@ -54,7 +54,7 @@ export default async (context: CliContext) => {
     if (apiGateway) {
         console.log(chalk`\n{bold.cyan - API Gateway:}`);
         const { customDomain, api, integration, route, stage } = apiGateway;
-        api.name = `${api.name}_${projectId}`;
+        api.name = disableProjectId ? api.name : `${api.name}_${projectId}`;
         const { ApiId, ApiEndpoint } = await createOrUpdateApi(api, functionMeta.name, alias.name, region, accountId);
         integration.integrationUri = `arn:aws:lambda:${region}:${accountId}:function:${functionMeta.name}:${alias.name}`;
         const prev = await createOrUpdateIntegration(integration, ApiId!);
