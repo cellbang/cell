@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.9.2
+
+- fix(fc-plugin) 修复阿里云函数计算api网关后端超时单位错误 (#101)
+  
 ## 2.9.1
 
 - fix(*-plugin) 修复 api gateway 模式下 disableProjectId 覆盖问题 (#100)
