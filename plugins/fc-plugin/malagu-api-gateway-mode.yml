@@ -27,7 +27,7 @@ malagu:
           path: '${malagu.server.path}*'
         serviceConfig:
           serviceProtocol: FunctionCompute
-          serviceTimeout: 20 # 20s
+          serviceTimeout: 20000 # 20s
           contentTypeValue: 'application/json; charset=UTF-8'
           functionComputeConfig:
             qualifier: ${malagu.cloud.alias.name}
