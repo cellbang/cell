@@ -33,7 +33,10 @@
     "malagu-api-gateway-mode.yml",
     "malagu-timer-mode.yml",
     "malagu-api-gateway-common.yml",
-    "malagu-http-mode.yml"
+    "malagu-http-mode.yml",
+    "malagu-api-gateway-basic-mode.yml",
+    "malagu-api-gateway-basic.yml",
+    "malagu-python.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",
