@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.9.3
+
+- fix(cli-service) 修复微服务模板依赖路径替换错误 (#107)
+- fix(scf-plugin) 修复配置文件缺失 (#105)
+
 ## 2.9.2
 
 - fix(fc-plugin) 修复阿里云函数计算api网关后端超时单位错误 (#102)
