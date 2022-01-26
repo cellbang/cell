@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.9.3
+## 2.9.4
 
 - fix(cli-service) 修复微服务模板依赖路径替换错误 (#107)
 - fix(scf-plugin) 修复配置文件缺失 (#105)
