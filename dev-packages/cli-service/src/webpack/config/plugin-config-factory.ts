@@ -202,13 +202,18 @@ export class NormalModuleReplacementPluginConfigFactory {
             .plugin('replace')
             .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), resource => {
                 if (resource.createData?.resource?.startsWith(runtimePath)) {
-                    const newResource = resource.createData.resource.replace(runtimePath, process.cwd());
+                    let processPath = process.cwd();
+                    let newResource = resource.createData.resource.replace(runtimePath, processPath);
+                    while (!existsSync(newResource) && processPath !== path.parse(process.cwd()).root) {
+                        processPath = path.resolve(processPath, '..');
+                        newResource = resource.createData.resource.replace(runtimePath, processPath);
+                    }
                     if (existsSync(newResource)) {
                         if (resource.createData.request && resource.createData.userRequest) {
-                            resource.createData.request = resource.createData.request.replace(runtimePath, process.cwd());
-                            resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, process.cwd());
+                            resource.createData.request = resource.createData.request.replace(runtimePath, processPath);
+                            resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, processPath);
                             resource.createData.resource = newResource;
-                            resource.createData.context = resource.createData.context.replace(runtimePath, process.cwd());
+                            resource.createData.context = resource.createData.context.replace(runtimePath, processPath);
                         }
                     }
                 }
