@@ -100,7 +100,7 @@ export class RouteBuilder {
             responseCookieMetadata: getOwnMetadata(METADATA_KEY.controllerResponseCookie, targetConstructor, method),
             requestSessionMetadata: getOwnMetadata(METADATA_KEY.controllerRequestSession, targetConstructor, method),
             responseSessionMetadata: getOwnMetadata(METADATA_KEY.controllerResponseSession, targetConstructor, method),
-            viewMetadata:  viewMetadata.lenght ? viewMetadata[0] : {}
+            viewMetadata:  viewMetadata.length ? viewMetadata[0] : {}
         };
     }
 }
