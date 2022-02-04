@@ -6,7 +6,7 @@ import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 import * as Webpack from 'webpack';
 
 export class DefinePluginConfigFactory {
@@ -17,7 +17,7 @@ export class DefinePluginConfigFactory {
         if (pluginConfig) {
             config
                 .plugin('define')
-                    .use(Webpack.DefinePlugin, [ pluginConfig ]);
+                .use(Webpack.DefinePlugin, [pluginConfig]);
         }
     }
 
@@ -36,7 +36,7 @@ export class DotenvPluginConfigFactory {
             const Dotenv = require('dotenv-webpack');
             config
                 .plugin('define')
-                    .use(Dotenv, [ pluginConfig ]);
+                .use(Dotenv, [pluginConfig]);
         }
     }
 
@@ -63,12 +63,16 @@ export class FilterWarningsPluginConfigFactory {
 
         const defaultExclude = [/Critical dependency: /, /Cannot find source file/];
         if (defaultExclude.length || excludeSet.size) {
-            const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-            config
-                .plugin('fileWarnings')
-                    .use(FilterWarningsPlugin, [{
-                        exclude: [...defaultExclude, ...excludeSet]
-                    }]);
+            const excludeReg = [...defaultExclude, ...excludeSet];
+            const messageReg: any = [];
+            excludeReg.forEach(reg => {
+                if (reg instanceof RegExp) {
+                    messageReg.push({
+                        message: reg
+                    });
+                }
+            });
+            config.ignoreWarnings(messageReg);
         }
     }
 
@@ -77,7 +81,7 @@ export class FilterWarningsPluginConfigFactory {
     }
 }
 
-export class CopyWebpackPluginConfigFactory {
+export class CopyWepackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
@@ -91,12 +95,12 @@ export class CopyWebpackPluginConfigFactory {
         const CopyPlugin = require('copy-webpack-plugin');
         config
             .plugin('copy')
-                .use(CopyPlugin, [{
-                    patterns: assets.map(assert => ({
-                        from: assert,
-                        to: path.join(config.output.get('path'), 'assets')
-                    }))
-                }]);
+            .use(CopyPlugin, [{
+                patterns: assets.map(assert => ({
+                    from: assert,
+                    to: path.join(config.output.get('path'), 'assets')
+                }))
+            }]);
     }
 
     support(context: CliContext, target: string): boolean {
@@ -112,7 +116,6 @@ export class HtmlWebpackPluginConfigFactory {
         const templatePath = path.join(pkg.projectPath, 'index.html');
         const templateExists = existsSync(templatePath);
         const HtmlWebpackPlugin = require('html-webpack-plugin');
-        const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
         const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
 
         const c = ConfigUtil.getFrontendMalaguConfig(cfg);
@@ -120,18 +123,17 @@ export class HtmlWebpackPluginConfigFactory {
 
         config
             .plugin('html')
-                .use(HtmlWebpackPlugin, [{
-                    title: 'Malagu App',
-                    template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
-                    favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
-                    templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
-                    ...ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
-                    ...(templateExists ? { template: templatePath } : {}),
-                    ...(faviconExists ? { favicon: faviconPath } : {})
-                }])
-            .end()
-            .plugin('baseHref')
-                .use(BaseHrefWebpackPlugin, [{ baseHref }]);
+            .use(HtmlWebpackPlugin, [{
+                title: 'Malagu App',
+                template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
+                favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
+                templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
+                base: { href: baseHref },
+                ...ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
+                ...(templateExists ? { template: templatePath } : {}),
+                ...(faviconExists ? { favicon: faviconPath } : {})
+            }])
+            .end();
     }
 
     support(context: CliContext, target: string): boolean {
@@ -200,7 +202,7 @@ export class NormalModuleReplacementPluginConfigFactory {
         const runtimePath = PathUtil.getRuntimePath(context.runtime);
         config
             .plugin('replace')
-            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), resource => {
+            .use(Webpack.NormalModuleReplacementPlugin, [new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), resource => {
                 if (resource.createData?.resource?.startsWith(runtimePath)) {
                     let processPath = process.cwd();
                     let newResource = resource.createData.resource.replace(runtimePath, processPath);

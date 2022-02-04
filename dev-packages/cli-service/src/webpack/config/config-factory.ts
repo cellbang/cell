@@ -7,12 +7,12 @@ import { HookExecutor } from '../../hooks/hook-executor';
 import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
-import { CopyWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
+import { CopyWepackPluginConfigFactory as CopyWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
     ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class ConfigFactory {
     async create(ctx: CliContext): Promise<WebpackChain[]> {
