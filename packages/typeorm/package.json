@@ -38,8 +38,7 @@
   },
   "devDependencies": {
     "@malagu/cli-service": "2.9.5",
-    "@malagu/ext-scripts": "2.9.5",
-    "webpack-filter-warnings-plugin": "^1.2.1"
+    "@malagu/ext-scripts": "2.9.5"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

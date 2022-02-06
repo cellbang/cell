@@ -2,7 +2,7 @@
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import * as path from 'path';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class EntryConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {

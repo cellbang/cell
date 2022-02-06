@@ -1,7 +1,7 @@
 const url = require('url');
 const ip = require('internal-ip');
 const chalk = require('chalk');
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export function getUri(options: WebpackChain.DevServer) {
     const protocol = options.get('https') ? 'https' : 'http';

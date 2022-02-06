@@ -12,7 +12,7 @@ import { CopyWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory, Frie
     ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class ConfigFactory {
     async create(ctx: CliContext): Promise<WebpackChain[]> {
