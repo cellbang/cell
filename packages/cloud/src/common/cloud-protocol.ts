@@ -1,5 +1,5 @@
 import { Autowired, ConfigUtil } from '@malagu/core';
-import { AccountProvider } from './account-protocol';
+import { Account, AccountProvider } from './account-protocol';
 import { ClientOptions, ClientOptionsProvider } from './client-protocol';
 import { Credentials, CredentialsProvider } from './credentials-protocol';
 import { RegionProvider } from './region-protocol';
