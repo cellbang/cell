@@ -128,7 +128,7 @@ export class HtmlWebpackPluginConfigFactory {
                     template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
                     favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
                     templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
-                    base: baseHref,
+                    base: { href: baseHref },
                     ...ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
                     ...(templateExists ? { template: templatePath } : {}),
                     ...(faviconExists ? { favicon: faviconPath } : {})
