@@ -40,7 +40,7 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
     protected readonly endpoint: string;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
-        if (this.matchesAuthorizationResponse()) {
+        if (await this.matchesAuthorizationResponse()) {
             await this.processAuthorizationResponse();
         }
         await next();
@@ -81,11 +81,11 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
         await this.redirectStrategy.send(savedRequest?.redirectUrl || authorizationRequest.redirectUri);
     }
 
-    protected matchesAuthorizationResponse() {
+    protected async matchesAuthorizationResponse() {
         if (!AuthorizationResponseUtil.isAuthorizationResponse()) {
             return false;
         }
-        const authorizationRequest = this.authorizationRequestManager.get();
+        const authorizationRequest = await this.authorizationRequestManager.get();
         if (authorizationRequest) {
             return true;
         }

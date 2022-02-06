@@ -1,5 +1,5 @@
 import { Theme } from '@material-ui/core';
-import { ThemeOptions as TO } from '@material-ui/core/styles/createMuiTheme';
+import { ThemeOptions as TO } from '@material-ui/core/styles/';
 
 export const ThemeOptions = Symbol('ThemeOptions');
 export const ThemeProvider = Symbol('ThemeProvider');
