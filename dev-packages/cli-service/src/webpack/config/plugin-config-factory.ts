@@ -77,7 +77,7 @@ export class FilterWarningsPluginConfigFactory {
     }
 }
 
-export class CopyWepackPluginConfigFactory {
+export class CopyWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
