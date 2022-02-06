@@ -2,6 +2,7 @@ import { Component, Props, ApplicationLog, ApplicationConfigOptions } from './pa
 import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
 import { existsSync, readFileSync } from 'fs-extra';
 import { load } from 'js-yaml';
+const cloneDeep = require('lodash.clonedeep');
 import { ApplicationPackage } from './application-package';
 import { ConfigUtil } from '../utils/config-util';
 
@@ -63,7 +64,7 @@ export class ApplicationConfig {
         if (self[configProperty]) {
             return self[configProperty];
         }
-        let config: any = { ...this.props };
+        let config: any = cloneDeep(this.props);
         delete config.backend;
         delete config.frontend;
         config = ConfigUtil.merge(config, this.props[target]);
