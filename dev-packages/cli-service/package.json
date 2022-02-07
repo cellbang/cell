@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@malagu/cli-common": "2.9.5",
-    "friendly-errors-webpack-plugin": "git+https://github.com/JarynChen/friendly-errors-webpack-plugin.git",
+    "friendly-errors-webpack-plugin": "git+https://github.com/cellbang/friendly-errors-webpack-plugin.git",
     "@types/friendly-errors-webpack-plugin": "^0.1.3",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.5.0",
@@ -63,7 +63,6 @@
     "webpack": "^5.52.0",
     "@gem-mine/webpack-chain": "^7.1.0",
     "webpack-dev-server": "^4.5.0",
-    "webpack-filter-warnings-plugin": "^1.2.1",
     "webpack-node-externals": "^3.0.0",
     "worker-loader": "^3.0.8"
   },
