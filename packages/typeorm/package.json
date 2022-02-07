@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@malagu/cli-service": "2.9.6",
-    "@malagu/ext-scripts": "2.9.6",
+    "@malagu/ext-scripts": "2.9.6"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
