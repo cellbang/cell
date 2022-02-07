@@ -4,7 +4,7 @@ import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import * as path from 'path';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 const nodePathList = (process.env.NODE_PATH || '')
     .split(process.platform === 'win32' ? ';' : ':')
