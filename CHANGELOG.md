@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.10.0
+
+- feat(all) support npm8
+
 ## 2.9.6
 
 - fix(cli-common) 修复组件属性计算错误（添加深拷贝）
