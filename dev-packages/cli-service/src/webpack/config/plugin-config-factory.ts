@@ -6,7 +6,7 @@ import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 import * as Webpack from 'webpack';
 
 export class DefinePluginConfigFactory {
@@ -63,12 +63,16 @@ export class FilterWarningsPluginConfigFactory {
 
         const defaultExclude = [/Critical dependency: /, /Cannot find source file/];
         if (defaultExclude.length || excludeSet.size) {
-            const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-            config
-                .plugin('fileWarnings')
-                    .use(FilterWarningsPlugin, [{
-                        exclude: [...defaultExclude, ...excludeSet]
-                    }]);
+            const excludeReg = [...defaultExclude, ...excludeSet];
+            const messageReg: any = [];
+            excludeReg.forEach(reg => {
+                if (reg instanceof RegExp) {
+                    messageReg.push({
+                        message: reg
+                    });
+                }
+            });
+            config.ignoreWarnings(messageReg);
         }
     }
 
@@ -112,7 +116,6 @@ export class HtmlWebpackPluginConfigFactory {
         const templatePath = path.join(pkg.projectPath, 'index.html');
         const templateExists = existsSync(templatePath);
         const HtmlWebpackPlugin = require('html-webpack-plugin');
-        const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
         const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
 
         const c = ConfigUtil.getFrontendMalaguConfig(cfg);
@@ -125,13 +128,12 @@ export class HtmlWebpackPluginConfigFactory {
                     template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
                     favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
                     templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
+                    base: { href: baseHref },
                     ...ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackPlugin || {},
                     ...(templateExists ? { template: templatePath } : {}),
                     ...(faviconExists ? { favicon: faviconPath } : {})
                 }])
-            .end()
-            .plugin('baseHref')
-                .use(BaseHrefWebpackPlugin, [{ baseHref }]);
+            .end();
     }
 
     support(context: CliContext, target: string): boolean {
@@ -228,7 +230,7 @@ export class NormalModuleReplacementPluginConfigFactory {
 export class FriendlyErrorsWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev } = context;
-        const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
+        const FriendlyErrorsWebpackPlugin = require('@malagu/friendly-errors-webpack-plugin');
         config.plugin('friendlyErrors').use(FriendlyErrorsWebpackPlugin, [{
             compilationSuccessInfo: {
                 messages: dev ? getDevSuccessInfo(config.devServer, target) : [`The ${target} code output to ${chalk.bold.blue(config.output.get('path'))} 🎉`],

@@ -2,7 +2,7 @@
 import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class DevServerConfigFactory {
 

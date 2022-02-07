@@ -3,7 +3,7 @@ import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import * as path from 'path';
-import * as WebpackChain from 'webpack-chain';
+import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class OutputConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
@@ -20,7 +20,7 @@ export class OutputConfigFactory {
                 .output
                     .filename('index.js')
                     .libraryTarget('umd')
-                    .devtoolModuleFilenameTemplate(dev ? '[absolute-resource-path]' : undefined);
+                    .devtoolModuleFilenameTemplate(dev ? '[absolute-resource-path]' : '');
         } else {
             config
                 .output
