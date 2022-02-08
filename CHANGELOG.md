@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.10.1
+
+- fix(cli-service+vue) 修复依赖错误
+
 ## 2.10.0
 
 - feat(all) support npm8
