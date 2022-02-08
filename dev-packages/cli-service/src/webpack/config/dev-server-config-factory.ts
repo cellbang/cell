@@ -14,7 +14,8 @@ export class DevServerConfigFactory {
                 .port(realPort)
                 .open(open)
                 .merge({
-                    static: false
+                    static: false,
+                    allowedHosts: [ 'all' ]
                 });
 
         if (BACKEND_TARGET === target) {
