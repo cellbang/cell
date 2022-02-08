@@ -36,7 +36,7 @@
   "dependencies": {
     "@gem-mine/webpack-chain": "^7.1.0",
     "@malagu/cli-common": "2.10.0",
-    "@malagu/friendly-errors-webpack-plugin": "^1.9.1",
+    "friendly-errors-webpack-malagu": "^1.9.1",
     "@types/friendly-errors-webpack-plugin": "^0.1.3",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.5.0",

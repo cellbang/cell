@@ -20,7 +20,7 @@ const findExisting = (context: string, files: string[]) => {
     }
 };
 
-function createVueRule(webpackConfig: any, cacheLoaderConfig: any, vueLoaderConfig: any) {
+function createVueRule(webpackConfig: any, vueLoaderConfig: any) {
     webpackConfig.module.noParse(/^(vue|vue-router|vuex|vuex-router-sync)$/);
 
     webpackConfig.resolve
@@ -33,10 +33,6 @@ function createVueRule(webpackConfig: any, cacheLoaderConfig: any, vueLoaderConf
     webpackConfig.module
         .rule('vue')
             .test(/\.vue$/)
-            .use('cache-loader')
-                .loader(require.resolve('cache-loader'))
-                .options(cacheLoaderConfig)
-                .end()
             .use('vue-loader')
                 .loader(require.resolve('vue-loader'))
                 .options(vueLoaderConfig);
@@ -73,15 +69,8 @@ export default async (context: WebpackContext) => {
         const appRootDir = pkg.projectPath;
         const shadowMode = false;
         const rootVueOptions = ConfigUtil.getFrontendMalaguConfig(cfg)?.vue ?? {};
-        const rootcacheLoaderConfig = rootVueOptions.cacheLoader ?? {};
         const rootvueLoaderConfig = rootVueOptions.vueLoader ?? {};
-        let cacheLoaderConfig = {};
         let vueLoaderConfig = {};
-        if (Array.isArray(rootcacheLoaderConfig)) {
-            rootcacheLoaderConfig.forEach(item => {
-                cacheLoaderConfig = { ...cacheLoaderConfig, ...item };
-              });
-        }
         if (Array.isArray(rootvueLoaderConfig)) {
             rootvueLoaderConfig.forEach(item => {
                 vueLoaderConfig = { ...vueLoaderConfig, ...item };
@@ -251,7 +240,7 @@ export default async (context: WebpackContext) => {
             }
         }
 
-        createVueRule(webpackConfig, cacheLoaderConfig, vueLoaderConfig);
+        createVueRule(webpackConfig, vueLoaderConfig);
 
         createCSSRule('css', /\.css$/);
         createCSSRule('postcss', /\.p(ost)?css$/);
