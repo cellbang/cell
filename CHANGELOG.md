@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.10.2
+
+- feat(cli-service) 默认设置 `allowedHosts` 为 all，确保在云端开发也能正常预览
+
 ## 2.10.1
 
 - fix(cli-service+vue) 修复依赖错误
