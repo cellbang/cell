@@ -6,7 +6,6 @@ import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
-import webpack = require('webpack');
 import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class BaseConfigFactory {
@@ -135,12 +134,6 @@ export class BaseConfigFactory {
                             timers: false
                         }
                     })
-                .end()
-                .plugin('buffer')
-                    .use(webpack.ProvidePlugin, [{
-                        Buffer: [ 'buffer', 'Buffer' ],
-                        process: 'process/browser'
-                    }])
                 .end()
                 .performance
                     .merge({

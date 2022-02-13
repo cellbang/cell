@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.11.1
+
+- fix(cli-service) 修复 `process/browser` 模块找不到问题
+
 ## 2.11.0
 
 - feat(runtime + frameworks) 去掉默认部署到云函数机制，避免默认下载必要的组件
