@@ -4,6 +4,7 @@
 
 - feat(runtime + frameworks) 去掉默认部署到云函数机制，避免默认下载必要的组件
 - fix(vue) 修复图片路径错误
+- fix(core) 将Emitter抽取到单独文件，修复esbuild编译时循环引用无法正确取值的问题
 
 
 ## 2.10.2
