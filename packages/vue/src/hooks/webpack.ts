@@ -298,26 +298,6 @@ export default async (context: WebpackContext) => {
                     .optimization
                         .minimizer('optimize-css')
                             .use(require('css-minimizer-webpack-plugin'));
-
-            webpackConfig.module
-                .rule('img')
-                    .merge({
-                        generator: {
-                            publicPath: '../',
-                        }
-                    }).end()
-                .rule('svg')
-                    .merge({
-                        generator: {
-                            publicPath: '../',
-                        }
-                    }).end()
-                .rule('font')
-                    .merge({
-                        generator: {
-                            publicPath: '../',
-                        }
-                    }).end();
         }
     }
 };
