@@ -1,6 +1,5 @@
 targets:
   - backend
-mode: "${'fc' in currentMode ? 'fc' : 'lambda' in currentMode ? 'lambda' : 'scf' }"
 devComponents:
   '@malagu/node-plugin': ${version}
 malagu:

@@ -1,7 +1,2 @@
-targets:
-  - backend
+targets: [ 'frontend', 'backend' ]
 mode: "${'fc' in currentMode ? 'fc-adapter' : 'lambda' in currentMode ? 'lambda-adapter' : 'server' in currentMode ? 'server-adapter' : 'vercel' in currentMode ? 'vercel-adapter' : 'scf' in currentMode ? 'scf-adapter' : '' }"
-components:
-  '@malagu/serve-static': ${version}
-devComponents:
-  '@malagu/static-plugin': ${version}

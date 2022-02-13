@@ -1,3 +1,2 @@
-mode: scf
 components:
   '@malagu/scf-adapter': ${version}
