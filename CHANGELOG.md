@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.11.0
+
+- feat(runtime + frameworks) 去掉默认部署到云函数机制，避免默认下载必要的组件
+
+
 ## 2.10.2
 
 - feat(cli-service) 默认设置 `allowedHosts` 为 all，确保在云端开发也能正常预览
