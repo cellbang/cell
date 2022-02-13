@@ -1,4 +1,5 @@
-import { Event, Emitter } from './event';
+import { Event } from './event';
+import { Emitter } from './emitter';
 
 export interface Disposable {
     /**
