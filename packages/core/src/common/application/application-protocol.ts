@@ -1,6 +1,7 @@
 import { MaybePromise } from '../utils/prioritizeable';
 import { Deferred } from '../utils/promise-util';
-import { Emitter, Event } from '../utils/event';
+import { Event } from '../utils/event';
+import { Emitter } from '../utils/emitter';
 import { injectable } from 'inversify';
 import { Logger } from '../logger';
 import { Autowired, Component } from '../annotation';
