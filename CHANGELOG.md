@@ -3,6 +3,7 @@
 ## 2.11.1
 
 - fix(cli-service) 修复 `process/browser` 模块找不到问题
+- fix(cli-service) 修复控制台重复输出问题
 
 ## 2.11.0
 
