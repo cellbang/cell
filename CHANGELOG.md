@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.11.2
+
+- fix(cli-service) 更新输出插件 修复进度条重复输出
+
 ## 2.11.1
 
 - fix(cli-service) 修复 `process/browser` 模块找不到问题
