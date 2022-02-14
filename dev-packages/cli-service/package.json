@@ -46,7 +46,7 @@
     "css-loader": "^5.2.4",
     "delay": "^4.3.0",
     "dotenv-webpack": "^7.0.3",
-    "friendly-errors-webpack-malagu": "latest",
+    "friendly-errors-webpack-malagu": "^1.10.0",
     "html-webpack-plugin": "^5.5.0",
     "html-webpack-tags-plugin": "^3.0.1",
     "ignore-loader": "^0.1.2",
