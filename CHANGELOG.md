@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.11.3
+
+- fix(cli-service) 修复编译含有错误或警告时,插件报错问题
+
 ## 2.11.2
 
 - fix(cli-service) 更新输出插件 修复进度条重复输出
