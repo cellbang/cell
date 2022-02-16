@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.11.5
+
+- feat(express-adapter) 支持环境变量设置端口：`SERVER_PORT`
+
 ## 2.11.3
 
 - fix(cli-service) 修复编译含有错误或警告时,插件报错问题

@@ -12,7 +12,7 @@ container.then(async c => {
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
     const configProvider = c.get<ConfigProvider>(ConfigProvider);
-    const { port } = configProvider.get<any>('malagu.server', DEFAULT_SERVER_OPTIONS);
+    const port = parseInt(process.env.SERVER_PORT || '') || configProvider.get<any>('malagu.server', DEFAULT_SERVER_OPTIONS).port;
 
     const app = express();
     app.all('*', async (req: any, res: any) => {
