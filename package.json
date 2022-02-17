@@ -21,7 +21,7 @@
     "lerna": "^4.0.0",
     "sinon": "^11.1.2",
     "typedoc": "^0.17.7",
-    "typedoc-plugin-external-module-map": "^1.2.1",
+    "typedoc-plugin-external-module-map": "~1.2.1",
     "typedoc-plugin-remove-references": "^0.0.5"
   },
   "scripts": {
