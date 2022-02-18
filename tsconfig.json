@@ -208,6 +208,7 @@
   "include": [
     "dev-packages/*/src",
     "packages/*/src",
-    "examples/*/test"
+    "examples/*/test",
+    "plugins/*/src"
   ]
 }
