@@ -32,7 +32,7 @@ const StyledMain = styled.div`
     z-index: 0;
 `;
 
-export function TopLeftLayout({ children }: React.PropsWithChildren<{}>) {
+export function TopLeftLayout({ children }: React.PropsWithChildren<any>) {
     return (
         <StyledWraper>
             <Slot area={AreaType.TopArea}/>
@@ -47,7 +47,7 @@ export function TopLeftLayout({ children }: React.PropsWithChildren<{}>) {
     );
 }
 
-export function MultiTopLayout({ children }: React.PropsWithChildren<{}>) {
+export function MultiTopLayout({ children }: React.PropsWithChildren<any>) {
     return (
         <Box>
             <Slot area={AreaType.TopArea}/>
