@@ -14051,10 +14051,10 @@ typedoc-default-themes@^0.10.2:
   dependencies:
     lunr "^2.3.8"
 
-typedoc-plugin-external-module-map@^1.2.1:
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/typedoc-plugin-external-module-map/-/typedoc-plugin-external-module-map-1.3.2.tgz#5793046d0428898a441b5d811396361eadec80e4"
-  integrity sha512-xs+vQ7XeVOvXlomdAw3xpwm8W59pPQPmfHTl5WvH2OkPFEO7EhABikLlTzLRYCOCEdkRg4LcnCblKmARN0wCIA==
+typedoc-plugin-external-module-map@~1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmmirror.com/typedoc-plugin-external-module-map/-/typedoc-plugin-external-module-map-1.2.1.tgz#32669a6b81e57962d2dae80d7a6ef8f5d0be65dd"
+  integrity sha512-ha+he4JFhCufF6wnpMpeH2XwsMgnYR6IrRUBCiMbZoYoudn6zICX7NA40pMjA35A6afxWNhKZU19pXnvysPK7A==
 
 typedoc-plugin-remove-references@^0.0.5:
   version "0.0.5"

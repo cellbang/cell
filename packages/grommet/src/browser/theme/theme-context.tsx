@@ -5,7 +5,7 @@ import { Grommet, grommet, ThemeType } from 'grommet';
 import { ThemeManager } from '@malagu/widget';
 import { ContainerUtil } from '@malagu/core';
 
-export function ThemeContext({ children }: React.PropsWithChildren<{}>) {
+export function ThemeContext({ children }: React.PropsWithChildren<any>) {
     const themeManager = ContainerUtil.get<ThemeManager<ThemeType>>(ThemeManager);
     const [theme, setTheme] = React.useState(themeManager.currentSubject.value?.props);
     React.useEffect(() => {
