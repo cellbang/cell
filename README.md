@@ -51,9 +51,14 @@ malagu deploy
 
 ![Quick start](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.gif)
 
-## Example
+## Samples
 
-[View Online Sample Template](https://cloud.cellbang.com/?share=2b89fe47-0208-43da-94e1-ded64ddd51fd#/templates)
+- [Backend Sample](https://cloudstudio.net/templates/5QnU8uuBCE)
+- [React Sample](https://cloudstudio.net/templates/5QWIO8Jazj)
+- [Vue Sample](https://cloudstudio.net/templates/5QuWSgAul5)
+- [Shedule Sample](https://cloudstudio.net/templates/5BfaTPi5n5)
+- [Microservice Sample](https://cloudstudio.net/templates/5QxzzZvxvx)
+- [Accounts Sample](https://cloudstudio.net/templates/5QOrLlMcV6)
 
 ## Documentation
 
