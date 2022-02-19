@@ -56,7 +56,12 @@ malagu deploy
 
 ## 示例
 
-[在线示例模板查看](https://cloud.cellbang.com/?share=2b89fe47-0208-43da-94e1-ded64ddd51fd#/templates)
+- [Backend 示例](https://cloudstudio.net/templates/5QnU8uuBCE)
+- [React 示例](https://cloudstudio.net/templates/5QWIO8Jazj)
+- [Vue 示例](https://cloudstudio.net/templates/5QuWSgAul5)
+- [Shedule 示例](https://cloudstudio.net/templates/5BfaTPi5n5)
+- [Microservice 示例](https://cloudstudio.net/templates/5QxzzZvxvx)
+- [Accounts 示例](https://cloudstudio.net/templates/5QOrLlMcV6)
 
 ## 文档
 
