@@ -4,7 +4,7 @@ malagu:
     endpoint: "${(malagu.cloud.customDomain.name|eval || !malagu.cloud.account.id) ? malagu.cloud.customDomain.name ? malagu.server._domain : undefined : ('https://' + malagu.cloud.account.id + '.' + malagu.cloud.region + '.fc.aliyuncs.com')}"
   cloud:
     function:
-      runtime: nodejs12
+      runtime: nodejs14
     trigger:
       name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}-http
       qualifier: ${malagu.cloud.alias.name}
