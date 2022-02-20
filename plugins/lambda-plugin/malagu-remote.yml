@@ -2,4 +2,4 @@ mode: "${'timer' in currentMode ? 'timer-mode' : 'api-gateway-mode'}"
 malagu:
   cloud:
     function:
-      runtime: nodejs12.x
+      runtime: nodejs14.x
