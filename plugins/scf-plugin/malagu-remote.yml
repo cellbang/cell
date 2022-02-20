@@ -6,4 +6,4 @@ malagu:
     function:
       handler: index.handler
       namespace: ${malagu.cloud.namespace.name}
-      runtime: Nodejs12.16
+      runtime: Nodejs16.13

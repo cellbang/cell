@@ -1,7 +1,7 @@
 malagu:
   cloud:
     function:
-      runtime: nodejs12
+      runtime: nodejs14
     trigger:
       name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}-mns_topic
       qualifier: ${malagu.cloud.alias.name}

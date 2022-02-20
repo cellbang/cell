@@ -5,7 +5,7 @@ malagu:
     service:
       name: malagu
     function:
-      runtime: nodejs12
+      runtime: nodejs14
     apiGateway:
       stage:
         name: "${stage|eval == 'prod' ? 'release' : stage }"
