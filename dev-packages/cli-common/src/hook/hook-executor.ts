@@ -88,7 +88,7 @@ export class HookExecutor {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
         if (!(process as any)[REGISTER_INSTANCE]) {
-            register();
+            register({ transpileOnly: true });
         }
 
         const result: any = [];
