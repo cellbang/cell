@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.11.6
+
+- fix(cli-service) 修复.env无法加载
+- feat(cli-common) ts-node添加transpileOnly选项，优化hooks加载速度
+- feat(*-plugin) 升级runtime
+- fix(typedoc) 修复文档生成死循环
+
 ## 2.11.5
 
 - feat(express-adapter) 支持环境变量设置端口：`SERVER_PORT`
