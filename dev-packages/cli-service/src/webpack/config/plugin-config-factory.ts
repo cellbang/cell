@@ -31,7 +31,7 @@ export class DotenvPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg, pkg } = context;
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
-        const realPath = path.join(pkg.projectPath, pluginConfig.path);
+        const realPath = path.join(process.cwd(), pluginConfig.path);
         if (existsSync(realPath)) {
             const Dotenv = require('dotenv-webpack');
             config
@@ -111,9 +111,9 @@ export class CopyWebpackPluginConfigFactory {
 export class HtmlWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg, cfg } = context;
-        const faviconPath = path.join(pkg.projectPath, 'favicon.ico');
+        const faviconPath = path.join(process.cwd(), 'favicon.ico');
         const faviconExists = existsSync(faviconPath);
-        const templatePath = path.join(pkg.projectPath, 'index.html');
+        const templatePath = path.join(process.cwd(), 'index.html');
         const templateExists = existsSync(templatePath);
         const HtmlWebpackPlugin = require('html-webpack-plugin');
         const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
