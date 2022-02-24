@@ -29,7 +29,7 @@ export class DefinePluginConfigFactory {
 export class DotenvPluginConfigFactory {
 
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { cfg, pkg } = context;
+        const { cfg } = context;
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
         const realPath = path.join(process.cwd(), pluginConfig.path);
         if (existsSync(realPath)) {
@@ -110,7 +110,7 @@ export class CopyWebpackPluginConfigFactory {
 
 export class HtmlWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
-        const { pkg, cfg } = context;
+        const { cfg } = context;
         const faviconPath = path.join(process.cwd(), 'favicon.ico');
         const faviconExists = existsSync(faviconPath);
         const templatePath = path.join(process.cwd(), 'index.html');

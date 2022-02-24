@@ -6,7 +6,7 @@
         "noImplicitAny": true,
         "noEmitOnError": false,
         "noImplicitThis": true,
-        "noUnusedLocals": false,
+        "noUnusedLocals": true,
         "strictNullChecks": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
