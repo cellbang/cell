@@ -43,11 +43,11 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .usage('<command> [options]');
 
     program
-        .command('init [name] [template]')
-        .option('-o, --output-dir [path]', 'output directory', '.')
+        .command('init [template]')
+        .option('-o, --output-dir [path]', 'output directory')
         .description('init a application')
-        .action((name, template, options) => {
-            require('./init/init').default({ name, template, outputDir: '.', ...options });
+        .action((template, options) => {
+            require('./init/init').default({ template, ...options });
         });
     program
         .command('props')

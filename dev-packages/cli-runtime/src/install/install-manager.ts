@@ -3,9 +3,8 @@ import { existsSync, copy, readFile, writeFile } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
-import { spawnSync } from 'child_process';
 import { ContextUtils, CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { getPackager } from '@malagu/cli-common/lib/packager/utils';
+import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import {CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
@@ -185,7 +184,7 @@ export class InstallManager {
 
     protected async doOutput(): Promise<void> {
         if (remoteRuntimeRegex.test(this.location)) {
-            this.outputRemoteRuntime();
+            await this.outputRemoteRuntime();
         } else {
             await this.outputLocalRuntime();
         }
@@ -194,7 +193,7 @@ export class InstallManager {
         await copy(this.realLocation, this.outputDir);
     }
 
-    protected outputRemoteRuntime(): void {
-        spawnSync('git', ['clone', '--depth=1', this.location, this.outputDir], { stdio: 'inherit' });
+    protected outputRemoteRuntime(): Promise<any> {
+        return spawnProcess('git', ['clone', '--depth=1', this.location, this.outputDir], { stdio: 'inherit' });
     }
 }

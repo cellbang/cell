@@ -40,6 +40,7 @@
     "minimist": "^1.2.5",
     "update-notifier": "^5.0.1",
     "semver": "^7.3.5",
+    "rimraf": "^3.0.2",
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
