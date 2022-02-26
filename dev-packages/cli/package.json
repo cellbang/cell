@@ -39,6 +39,7 @@
     "leven": "^3.1.0",
     "minimist": "^1.2.5",
     "update-notifier": "^5.0.1",
+    "semver": "^7.3.5",
     "watchpack": "^2.2.0"
   },
   "devDependencies": {

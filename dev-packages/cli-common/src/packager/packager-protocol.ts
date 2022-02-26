@@ -16,6 +16,7 @@ export interface PruneOptions {
 
 export interface AddOptions {
     exact?: boolean;
+    global?: boolean;
     stdio?: string;
     dev?: boolean;
 }

@@ -114,6 +114,9 @@ export class NPM implements Packager {
         if (opts?.dev) {
             args.push('--save-dev');
         }
+        if (opts?.global) {
+            args.push('-g');
+        }
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
