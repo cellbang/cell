@@ -1,10 +1,14 @@
 # Change Log
 
+## 2.12.0
+
+- feat(frameworks) 支持纯静态网站部署 `static-site`
+
 ## 2.11.6
 
-- fix(cli-service) 修复.env无法加载
-- feat(cli-common) ts-node添加transpileOnly选项，优化hooks加载速度
-- feat(*-plugin) 升级runtime
+- fix(cli-service) 修复 .env 无法加载
+- feat(cli-common) ts-node 添加 transpileOnly 选项，优化 hooks 加载速度
+- feat(*-plugin) 升级 runtime
 - fix(typedoc) 修复文档生成死循环
 
 ## 2.11.5

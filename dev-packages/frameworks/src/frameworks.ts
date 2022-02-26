@@ -298,5 +298,20 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    {
+        name: 'static-site',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: '.'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'index.html'
+                }
+            ]
+        }
     }
 ];
