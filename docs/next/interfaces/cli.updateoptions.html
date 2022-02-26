@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ConfigOptions | Malagu TypeDoc</title>
+	<title>UpdateOptions | Malagu TypeDoc</title>
 	<meta name="description" content="Documentation for Malagu TypeDoc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -57,10 +57,10 @@
 					<a href="../modules/cli.html">cli</a>
 				</li>
 				<li>
-					<a href="cli.configoptions.html">ConfigOptions</a>
+					<a href="cli.updateoptions.html">UpdateOptions</a>
 				</li>
 			</ul>
-			<h1>Interface ConfigOptions</h1>
+			<h1>Interface UpdateOptions</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ConfigOptions</span>
+						<span class="target">UpdateOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -82,12 +82,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#configfilealias" class="tsd-kind-icon">config<wbr>File<wbr>Alias</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#defaultmode" class="tsd-kind-icon">default<wbr>Mode</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#defaultruntime" class="tsd-kind-icon">default<wbr>Runtime</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#frameworksupstreamurl" class="tsd-kind-icon">frameworks<wbr>Upstream<wbr>Url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#frameworksurl" class="tsd-kind-icon">frameworks<wbr>Url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.configoptions.html#show" class="tsd-kind-icon">show</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.updateoptions.html#disttag" class="tsd-kind-icon">dist<wbr>Tag</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.updateoptions.html#skipintallingcomponent" class="tsd-kind-icon">skip<wbr>Intalling<wbr>Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cli.updateoptions.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,62 +93,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="configfilealias" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> config<wbr>File<wbr>Alias</h3>
-					<div class="tsd-signature tsd-kind-icon">config<wbr>File<wbr>Alias<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="disttag" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> dist<wbr>Tag</h3>
+					<div class="tsd-signature tsd-kind-icon">dist<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L11">dev-packages/cli/src/config/config.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/update/update.ts#L11">dev-packages/cli/src/update/update.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultmode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default<wbr>Mode</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="skipintallingcomponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> skip<wbr>Intalling<wbr>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">skip<wbr>Intalling<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L12">dev-packages/cli/src/config/config.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/update/update.ts#L12">dev-packages/cli/src/update/update.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="defaultruntime" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default<wbr>Runtime</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Runtime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="version" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> version</h3>
+					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L13">dev-packages/cli/src/config/config.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="frameworksupstreamurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> frameworks<wbr>Upstream<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">frameworks<wbr>Upstream<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L10">dev-packages/cli/src/config/config.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="frameworksurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> frameworks<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">frameworks<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L9">dev-packages/cli/src/config/config.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="show" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> show</h3>
-					<div class="tsd-signature tsd-kind-icon">show<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/config/config.ts#L14">dev-packages/cli/src/config/config.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e4a649fea/dev-packages/cli/src/update/update.ts#L10">dev-packages/cli/src/update/update.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -178,33 +145,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/cli.initmanager.html" class="tsd-kind-icon">Init<wbr>Manager</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="cli.configoptions.html" class="tsd-kind-icon">Config<wbr>Options</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#configfilealias" class="tsd-kind-icon">config<wbr>File<wbr>Alias</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#defaultmode" class="tsd-kind-icon">default<wbr>Mode</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#defaultruntime" class="tsd-kind-icon">default<wbr>Runtime</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#frameworksupstreamurl" class="tsd-kind-icon">frameworks<wbr>Upstream<wbr>Url</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#frameworksurl" class="tsd-kind-icon">frameworks<wbr>Url</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cli.configoptions.html#show" class="tsd-kind-icon">show</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-is-not-exported">
 						<a href="cli.data.html" class="tsd-kind-icon">Data</a>
 					</li>
@@ -220,9 +163,24 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="cli.template.html" class="tsd-kind-icon">Template</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="cli.updateoptions.html" class="tsd-kind-icon">Update<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="cli.updateoptions.html#disttag" class="tsd-kind-icon">dist<wbr>Tag</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="cli.updateoptions.html#skipintallingcomponent" class="tsd-kind-icon">skip<wbr>Intalling<wbr>Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="cli.updateoptions.html#version" class="tsd-kind-icon">version</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="../modules/cli.html#placehold" class="tsd-kind-icon">PLACEHOLD</a>
 					</li>
