@@ -3,6 +3,7 @@
 ## 2.12.0
 
 - feat(frameworks) 支持纯静态网站部署 `static-site`
+- feat(cli + cli-common) 支持命令 `malagu update`，一键升级命令行和组件
 
 ## 2.11.6
 

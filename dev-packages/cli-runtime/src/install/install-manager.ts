@@ -32,7 +32,7 @@ export interface InstallOptions {
     alias?: string;
     quiet?: boolean;
     overwrite?: boolean;
-    forceInstallComponent?: boolean;
+    forceInstallingComponent?: boolean;
 }
 
 export class InstallManager {
@@ -56,7 +56,7 @@ export class InstallManager {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
         let packageContent = await readFile(packageJsonPath, { encoding: 'utf8' });
         packageContent = packageContent.replace(/{{ version }}/g, pkg.version);
-        if (this.opts.forceInstallComponent) {
+        if (this.opts.forceInstallingComponent) {
             const runtimePkg = JSON.parse(packageContent);
             if (runtimePkg.malagu?.components || runtimePkg.malagu?.devComponents) {
                 const { components, devComponents } = runtimePkg.malagu;
@@ -69,7 +69,7 @@ export class InstallManager {
     }
 
     async install(): Promise<void> {
-        if (this.opts.forceInstallComponent) {
+        if (this.opts.forceInstallingComponent) {
             if (!this.opts.quiet) {
                 console.log(chalk`The {yellow.bold ${this.runtimeName}} runtime is being installed...`);
             }

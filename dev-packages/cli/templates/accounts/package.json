@@ -19,6 +19,7 @@
     "@malagu/oauth2-client": "latest",
     "@malagu/rpc": "latest",
     "@malagu/serve-static": "latest",
+    "querystring": "^0.2.1",
     "request-ip": "^2.1.3"
   },
   "devDependencies": {

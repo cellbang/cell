@@ -1851,6 +1851,19 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
+"@malagu/cli@2.11.6":
+  version "2.11.6"
+  resolved "https://registry.yarnpkg.com/@malagu/cli/-/cli-2.11.6.tgz#af31b419819afc0206384287744e69ffdd3d5d02"
+  integrity sha512-KmHzMcrSP8kVvvYEB6zqvIgroO8dftFaPIfveP1m+ZoYAoIZeZZRB3eIcs6JHk6HpR7ltx65e+eHfJkLdJJlkA==
+  dependencies:
+    "@malagu/cli-common" "2.11.6"
+    "@malagu/cli-runtime" "2.11.6"
+    commander "^8.1.0"
+    leven "^3.1.0"
+    minimist "^1.2.5"
+    update-notifier "^5.0.1"
+    watchpack "^2.2.0"
+
 "@malagu/ext-scripts@^0.0.35":
   version "0.0.35"
   resolved "https://registry.npmjs.org/@malagu/ext-scripts/-/ext-scripts-0.0.35.tgz#2d24d6441e3e01543d0412348788019ac449b72d"

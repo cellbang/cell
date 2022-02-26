@@ -37,7 +37,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         });
     }
     program
-        .version(version, '-v, --version', 'version for malagu')
+        .version(version, '-V, --version', 'version for malagu')
         .option('-t, --targets [targets]', 'targets for malagu', value => value ? value.split(',') : [])
         .option('-m, --mode [mode]', 'mode for malagu', value => value ? value.split(',') : [])
         .usage('<command> [options]');
@@ -78,6 +78,16 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             require('./config/config').default(context, { ...options });
         });
 
+    program
+        .command('update')
+        .option('-v, --version [version]', 'version for malagu')
+        .option('-d, --dist-tag [distTag]', 'Which dist-tag to use to find the latest version')
+        .option('-s, --skip-installing-component [skipIntallingComponent]', 'skip installing components')
+        .description('update malagu cli and current project\'s malagu components')
+        .action(options => {
+            require('./update/update').default(context, { ...options });
+        });
+
     const runtimeCmd = program
         .command('runtime [command]')
         .alias('r')
@@ -86,7 +96,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .command('install [runtime] [alias]')
         .alias('i')
         .description('install a runtime')
-        .option('-f, --force-install-component [forceInstallComponent]', 'force install component')
+        .option('-f, --force-installing-component [forceInstallingComponent]', 'force installing component')
         .option('-o, --overwrite [overwrite]', 'overwrite existing runtime')
         .option('-v, --version [version]', 'specify runtime version', 'latest')
         .action((r, alias, options) => {
