@@ -4,6 +4,7 @@
 
 - feat(frameworks) 支持纯静态网站部署 `static-site`
 - feat(cli + cli-common) 支持命令 `malagu update`，一键升级命令行和组件
+- feat(cli) 简化命令 `malagu init`，移除 `name` 选项，`--output-dir` 选项的行为与 `git clone` 的 `dir` 参数保持一致
 
 ## 2.11.6
 

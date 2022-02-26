@@ -1,13 +1,13 @@
-import { resolve } from 'path';
+import { resolve, basename, relative, join } from 'path';
 import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
-import { spawnSync } from 'child_process';
 import { ContextUtils, CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { getPackager } from '@malagu/cli-common/lib/packager/utils';
+import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 import * as ora from 'ora';
+const rimraf = require('rimraf');
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { RuntimeUtil } from '@malagu/cli-runtime';
@@ -24,7 +24,6 @@ export interface Template {
 }
 
 export interface InitOptions {
-    name?: string;
     template?: string;
     outputDir: string;
 }
@@ -47,9 +46,11 @@ export class InitManager {
 
     async render(): Promise<void> {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
-        const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
-        packageJson.name = this.opts.name;
-        await writeJSON(packageJsonPath, packageJson, { encoding: 'utf8', spaces: 2 });
+        if (existsSync(packageJsonPath)) {
+            const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
+            packageJson.name = basename(this.outputDir);
+            await writeJSON(packageJsonPath, packageJson, { encoding: 'utf8', spaces: 2 });
+        }
     }
 
     async install(): Promise<void> {
@@ -68,24 +69,26 @@ export class InitManager {
     protected async getCliContext(): Promise<CliContext> {
         if (!this.cliContext) {
             this.cliContext = await RuntimeUtil.initRuntimeAndLoadContext(this.outputDir);
-            this.cliContext.name = this.opts.name;
-            this.cliContext.outputDir = this.opts.outputDir;
+            this.cliContext.location = this.realLocation;
+            this.cliContext.outputDir = this.outputDir;
         }
         return this.cliContext;
     }
 
     protected get outputDir(): string {
-        return resolve(process.cwd(), this.opts.outputDir, this.opts.name!);
+        return resolve(process.cwd(),  this.opts.outputDir ? this.opts.outputDir : this.location.split('/').pop()!.replace('.git', ''));
     }
 
     protected async checkOutputDir(): Promise<void> {
         if (existsSync(this.outputDir)) {
             const answers = await inquirer.prompt([{
-                name: 'overwrite',
+                name: 'remove',
                 type: 'confirm',
-                message: 'App already exists, overwrite the app'
+                message: `App already exists, remove the app (dir: ${join(relative(process.cwd(), this.outputDir))})`
             }]);
-            if (!answers.overwrite) {
+            if (answers.remove) {
+                rimraf.sync(this.outputDir);
+            } else {
                 process.exit(0);
             }
         }
@@ -100,7 +103,7 @@ export class InitManager {
     }
 
     protected async selectTemplate(): Promise<void> {
-        const { name, template } = this.opts;
+        const { template } = this.opts;
         if (template) {
             this.templateName = template;
             if (remoteTemplateRegex.test(template)) {
@@ -131,7 +134,6 @@ export class InitManager {
             }
         }]);
         this.templateName = answers.item.name;
-        this.opts.name = name || answers.item.name;
         this.location = answers.item.location;
     }
 
@@ -141,7 +143,7 @@ export class InitManager {
 
     protected async doOutput(): Promise<void> {
         if (remoteTemplateRegex.test(this.location)) {
-            this.outputRemoteTempate();
+            await this.outputRemoteTempate();
         } else {
             await this.outputLocalTemplate();
         }
@@ -150,7 +152,8 @@ export class InitManager {
         await copy(this.realLocation, this.outputDir);
     }
 
-    protected outputRemoteTempate(): void {
-        spawnSync('git', ['clone', '--depth=1', this.location, this.outputDir], { stdio: 'inherit' });
+    protected outputRemoteTempate(): Promise<any> {
+        const dir = this.opts.outputDir ? [ this.opts.outputDir ] : [];
+        return spawnProcess('git', [ 'clone', '--depth=1', this.location, ...dir ], { stdio: 'inherit' });
     }
 }
