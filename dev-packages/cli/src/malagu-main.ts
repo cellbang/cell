@@ -1,8 +1,8 @@
 import { fork, ChildProcess } from 'child_process';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { Component, Module } from '@malagu/cli-common/lib/package/package-protocol';
-
-import { sep, join, delimiter, dirname } from 'path';
+import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { sep, join, delimiter, dirname, resolve } from 'path';
 import { RuntimeUtil } from '@malagu/cli-runtime/lib/util/runtime-util';
 const Watchpack = require('watchpack');
 
@@ -36,10 +36,13 @@ const exitListener = (code: number | null) => {
 };
 
 async function execute() {
+    const pkg = CommandUtil.getPkg();
+    let projectPath = pkg.rootComponentPackage.malaguComponent?.projectPath;
+    projectPath = projectPath ? resolve(process.cwd(), projectPath) : process.cwd();
     try {
-        const malaguMainPath = require.resolve('@malagu/cli/lib/malagu-main', { paths: [ process.cwd() ] });
+        const malaguMainPath = require.resolve('@malagu/cli/lib/malagu-main', { paths: [ projectPath ] });
         if (dirname(malaguMainPath) !== __dirname) {
-            const subprocess = fork(malaguMainPath, argv, { stdio: 'inherit' });
+            const subprocess = fork(malaguMainPath, argv, { stdio: 'inherit', cwd: projectPath });
             subprocess.on('exit', exitListener);
             subprocess.on('error', () => process.exit(-1));
             return;
@@ -54,23 +57,23 @@ async function execute() {
         current.removeListener('exit', exitListener);
         current.kill();
     }
-    const { runtime, framework, settings } = await RuntimeUtil.initRuntime();
+    const { runtime, framework, settings } = await RuntimeUtil.initRuntime(projectPath);
 
     const nodePaths = Array.from(new Set<string>([
-        join(process.cwd(), 'node_modules'),
-        join(process.cwd(), '..', 'node_modules'),
-        join(process.cwd(), '..', '..', 'node_modules'),
-        join(process.cwd(), '..', '..', '..', 'node_modules')
+        join(projectPath, 'node_modules'),
+        join(projectPath, '..', 'node_modules'),
+        join(projectPath, '..', '..', 'node_modules'),
+        join(projectPath, '..', '..', '..', 'node_modules')
     ]));
 
     process.env.MALAGU_RFS = JSON.stringify({ runtime, settings, framework });
     const runtimePath = PathUtil.getRuntimePath(runtime);
-    if (runtimePath !== process.cwd()) {
+    if (runtimePath !== projectPath) {
         nodePaths.push(join(runtimePath, 'node_modules'));
     }
     process.env.NODE_PATH = nodePaths.join(delimiter);
     const malaguPath = require.resolve('@malagu/cli/lib/malagu', { paths: [ __dirname ] });
-    current = fork(malaguPath, argv, { stdio: 'inherit' });
+    current = fork(malaguPath, argv, { stdio: 'inherit', cwd: projectPath });
     // eslint-disable-next-line no-null/no-null
     current.on('exit', exitListener);
     current.on('error', () => process.exit(-1));

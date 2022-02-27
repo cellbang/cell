@@ -15,13 +15,13 @@ export interface Runtime {
 }
 
 export namespace RuntimeUtil {
-    export async function initRuntime() {
+    export async function initRuntime(projectPath: string = process.cwd()) {
         const settings = SettingsUtil.getSettings();
         let framework = await FrameworkUtil.detect({
             url: settings.frameworks?.url,
             upstreamUrl: settings.frameworks?.upstreamUrl
         });
-        const pkg = CommandUtil.getPkg(settings);
+        const pkg = CommandUtil.getPkg(settings, projectPath);
         const config = pkg.rootComponentPackage.malaguComponent;
         let runtime = config?.runtime;
         runtime = runtime || settings.defaultRuntime;

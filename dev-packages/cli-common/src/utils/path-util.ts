@@ -5,18 +5,18 @@ import { RuntimeUtil } from './runtime-util';
 
 export namespace PathUtil {
     export function getProjectDistPathForTarget(target: string) {
-        return path.join(getProjectDistPath(), target);
+        return path.resolve(getProjectDistPath(), target);
     }
 
     export function getProjectDistPath() {
         if (process.env.MALAGU_PROJECT_DIST_PATH) {
             return path.resolve(process.cwd(), process.env.MALAGU_PROJECT_DIST_PATH);
         }
-        return path.join(getProjectHomePath(), 'dist');
+        return path.resolve(getProjectHomePath(), 'dist');
     }
 
     export function getProjectDistParentPath() {
-        return path.join(getProjectHomePath(), 'dist');
+        return path.resolve(getProjectHomePath(), 'dist');
     }
 
     export function getBackendProjectDistPath() {
@@ -27,7 +27,7 @@ export namespace PathUtil {
         return getProjectDistPathForTarget(FRONTEND_TARGET);
     }
     export function getProjectHomePathForTarget(target: string) {
-        return path.join(getProjectHomePath(), target);
+        return path.resolve(getProjectHomePath(), target);
     }
 
     export function getBackendProjectHomePath() {
@@ -39,11 +39,11 @@ export namespace PathUtil {
     }
 
     export function getProjectHomePath() {
-        return process.env.MALAGU_PROJECT_HOME_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH) : path.join(process.cwd(), '.malagu');
+        return process.env.MALAGU_PROJECT_HOME_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH) : path.resolve(process.cwd(), '.malagu');
     }
 
     export function getProjectConfigPath() {
-        return process.env.MALAGU_PROJECT_CONFIG_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_CONFIG_PATH) : path.join(getProjectHomePath(), 'project.json');
+        return process.env.MALAGU_PROJECT_CONFIG_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_CONFIG_PATH) : path.resolve(getProjectHomePath(), 'project.json');
     }
 
     export function setProjectHomePath(projectHomePath: string) {
@@ -54,17 +54,21 @@ export namespace PathUtil {
         return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.malagu');
     }
 
+    export function getGlobalMalaguConfigPath() {
+        return process.env.GLOBAL_MALAGU_CONFIG_PATH ? process.env.GLOBAL_MALAGU_CONFIG_PATH : path.resolve(getMalaguHomePath(), 'malagu.yml');
+    }
+
     export function getRuntimePath(runtime?: string) {
         if (runtime) {
-            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.join(getMalaguHomePath(), 'runtimes');
-            return path.join(basePath, RuntimeUtil.getVersion(), runtime);
+            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getMalaguHomePath(), 'runtimes');
+            return path.resolve(basePath, RuntimeUtil.getVersion(), runtime);
         }
         return process.cwd();
     }
 
     export function getRuntimeRootPath(version?: string) {
-        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.join(getMalaguHomePath(), 'runtimes');
-        return version ? path.join(basePath, RuntimeUtil.getVersion()) : basePath;
+        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getMalaguHomePath(), 'runtimes');
+        return version ? path.resolve(basePath, RuntimeUtil.getVersion()) : basePath;
     }
 
     export function getCurrentRuntimeRootPath() {
