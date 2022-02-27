@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.13.0
+
+- feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.malagu/malagu.yml`，可以通过环境变量自定义：`GLOBAL_MALAGU_CONFIG_PATH`
+- feat(cli + cli-common) 支持配置属性 `projectPath`，可以在配置文件中指定项目的真正工作目录，该配置项只在命令行的工作目录的配置文件有效
+
 ## 2.12.0
 
 - feat(frameworks) 支持纯静态网站部署 `static-site`

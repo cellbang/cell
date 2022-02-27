@@ -102,18 +102,25 @@ export class ApplicationPackage {
     protected _infoHookModules: Module[] | undefined;
     protected _rootComponentPackage: ComponentPackage;
 
+    createVirtualPkg(modulePath: string = process.cwd()) {
+        return { malaguComponent: { mode: [] }, modulePath: process.cwd() };
+    }
+
     get rootComponentPackage() {
         if (!this._rootComponentPackage) {
             this.pkg.malaguComponent = {};
             this.pkg.modulePath = this.projectPath;
             if (process.cwd() !== this.projectPath) {
-                const virtualPkg = { malaguComponent: { mode: [] }, modulePath: process.cwd() };
+                const virtualPkg = this.createVirtualPkg();
                 this.componentPackageLoader.load(virtualPkg, this.options.mode);
                 this.componentPackageLoader.load(this.pkg, virtualPkg.malaguComponent.mode || []);
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, virtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode });
             } else {
                 this.componentPackageLoader.load(this.pkg, this.options.mode);
             }
+            const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguConfigPath());
+            this.componentPackageLoader.load(globalVirtualPkg, this.options.mode);
+            this.pkg.malaguComponent = ConfigUtil.merge(globalVirtualPkg.malaguComponent, this.pkg.malaguComponent);
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
