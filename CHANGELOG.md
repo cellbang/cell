@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.13.2
+
+- fix(fc-plugin + scf-plugin) 修复项目 home 目录不存在错误
+
 ## 2.13.1
 
 - fix(node-plugin) 修复windows下entry解析错误

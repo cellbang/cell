@@ -8,7 +8,7 @@ export default async (context: BuildContext) => {
     const { cfg } = context;
     const config = CloudUtils.getConfiguration(cfg);
     const codeRootDir = getCodeRootDir(PathUtil.getProjectDistPath(), config.function.codeUri);
-    ensureDir(codeRootDir);
+    await ensureDir(codeRootDir);
     if (config.function?.runtime === 'custom') {
         const destDir = join(codeRootDir, 'bootstrap');
         const bootstrap = config.function.bootstrap;
