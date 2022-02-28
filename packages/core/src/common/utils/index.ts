@@ -9,3 +9,4 @@ export * from './proxy-util';
 export * from './annotation-util';
 export * from './cancellation';
 export * from './event';
+export * from './emitter';

@@ -13,6 +13,7 @@ function renderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: strin
     const port = server?.port ?? 9000;
     const path = server?.path ?? '';
     let entryContent = readFileSync(entryTemplate, { encoding: 'utf8' });
+    entry = entry.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     entryContent = entryContent
         .replace(/{{ entry }}/g, entry)
         .replace(/{{ port }}/g, port)
