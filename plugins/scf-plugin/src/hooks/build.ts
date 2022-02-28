@@ -8,7 +8,7 @@ export default async (context: BuildContext) => {
     const { cfg } = context;
     const cloudConfig = CloudUtils.getConfiguration(cfg);
     const codeRootDir = getCodeRootDir(PathUtil.getProjectDistPath(), cloudConfig.function.codeUri);
-    ensureDir(codeRootDir);
+    await ensureDir(codeRootDir);
     if (cloudConfig.function?.type === 'HTTP') {
         const destDir = join(codeRootDir, 'scf_bootstrap');
         const bootstrap = cloudConfig.function.bootstrap;
