@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.13.1
+
+- fix(node-plugin) 修复windows下entry解析错误
+
 ## 2.13.0
 
 - feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.malagu/malagu.yml`，可以通过环境变量自定义：`GLOBAL_MALAGU_CONFIG_PATH`
