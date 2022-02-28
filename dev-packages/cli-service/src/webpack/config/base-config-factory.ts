@@ -122,19 +122,6 @@ export class BaseConfigFactory {
                 .optimization
                     .minimize(!dev)
                 .end()
-                .resolve
-                    .merge({
-                        fallback: {
-                            child_process: false,
-                            net: false,
-                            crypto: false,
-                            os: false,
-                            path: false,
-                            process: false,
-                            timers: false
-                        }
-                    })
-                .end()
                 .performance
                     .merge({
                         hints: false

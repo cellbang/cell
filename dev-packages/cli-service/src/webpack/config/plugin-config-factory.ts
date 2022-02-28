@@ -257,3 +257,14 @@ export class ProgressPluginConfigFactory {
         return process.env.CI !== 'true' && !process.env.VSCODE_PID;
     }
 }
+
+export class NodePolyfillPluginConfigFactory {
+    create(config: WebpackChain, context: CliContext, target: string) {
+        const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+        config.plugin('progressBar').use(NodePolyfillPlugin);
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return target === FRONTEND_TARGET;
+    }
+}

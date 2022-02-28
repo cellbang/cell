@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.13.3
+
+- feat(cli-service) 支持 webpack 插件 node-polyfill-webpack-plugin
+
 ## 2.13.2
 
 - fix(fc-plugin + scf-plugin) 修复项目 home 目录不存在错误
