@@ -9,7 +9,7 @@ import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { DotenvPluginConfigFactory, CopyWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
     HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
-    ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory } from './plugin-config-factory';
+    ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory, NodePolyfillPluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
 import * as WebpackChain from '@gem-mine/webpack-chain';
@@ -38,7 +38,8 @@ export class ConfigFactory {
             new ProgressPluginConfigFactory(),
             new EntryConfigFactory(),
             new NormalModuleReplacementPluginConfigFactory(),
-            new ComponentConfigConfigFactory()
+            new ComponentConfigConfigFactory(),
+            new NodePolyfillPluginConfigFactory()
         ];
 
         for (const target of targets) {
