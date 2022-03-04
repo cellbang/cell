@@ -42,14 +42,14 @@ export default async (cliContext: CliContext, options: UpdateOptions) => {
         if (version) {
             if (version !== pkg.version) {
                 await updatePackage(version, options.skipIntallingComponent);
-                await getPackager().add([`${pkg.name}@${version}`], { global: true });
+                await getPackager('npm').add([`${pkg.name}@${version}`], { global: true });
             }
         } else {
             const notifier = updateNotifier({ pkg, distTag: options.distTag });
             const { latest, current } = await notifier.fetchInfo();
             if (semver.gt(latest, current)) {
                 await updatePackage(latest, options.skipIntallingComponent);
-                await getPackager().add([`${pkg.name}@${latest}`], { global: true });
+                await getPackager('npm').add([`${pkg.name}@${latest}`], { global: true });
             }
         }
     } catch (error) {
