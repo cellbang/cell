@@ -4,22 +4,22 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.13.4",
+  "version": "2.13.5",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.13.4",
-    "@malagu/react": "2.13.4",
-    "@malagu/rpc": "2.13.4",
-    "@malagu/scf-adapter": "2.13.4",
-    "@malagu/serve-static": "2.13.4",
+    "@malagu/core": "2.13.5",
+    "@malagu/react": "2.13.5",
+    "@malagu/rpc": "2.13.5",
+    "@malagu/scf-adapter": "2.13.5",
+    "@malagu/serve-static": "2.13.5",
     "react": "^16.12.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.13.4"
+    "@malagu/cli": "2.13.5"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
