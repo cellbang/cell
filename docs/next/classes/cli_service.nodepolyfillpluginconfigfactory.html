@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>NoOpClientConfigProcessor | Malagu TypeDoc</title>
+	<title>NodePolyfillPluginConfigFactory | Malagu TypeDoc</title>
 	<meta name="description" content="Documentation for Malagu TypeDoc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,13 +54,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/rpc.html">rpc</a>
+					<a href="../modules/cli_service.html">cli-service</a>
 				</li>
 				<li>
-					<a href="rpc.noopclientconfigprocessor.html">NoOpClientConfigProcessor</a>
+					<a href="cli_service.nodepolyfillpluginconfigfactory.html">NodePolyfillPluginConfigFactory</a>
 				</li>
 			</ul>
-			<h1>Class NoOpClientConfigProcessor</h1>
+			<h1>Class NodePolyfillPluginConfigFactory</h1>
 		</div>
 	</div>
 </header>
@@ -71,14 +71,8 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">NoOpClientConfigProcessor</span>
+						<span class="target">NodePolyfillPluginConfigFactory</span>
 					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/rpc.clientconfigprocessor.html" class="tsd-signature-type">ClientConfigProcessor</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -88,7 +82,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rpc.noopclientconfigprocessor.html#process" class="tsd-kind-icon">process</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cli_service.nodepolyfillpluginconfigfactory.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cli_service.nodepolyfillpluginconfigfactory.html#support" class="tsd-kind-icon">support</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,26 +92,57 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="process" class="tsd-anchor"></a>
-					<h3>process</h3>
+					<a name="create" class="tsd-anchor"></a>
+					<h3>create</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">process<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosRequestConfig</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebpackChain</span>, context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/rpc.clientconfigprocessor.html">ClientConfigProcessor</a>.<a href="../interfaces/rpc.clientconfigprocessor.html#process">process</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4585c12c3/packages/rpc/src/common/processor/client-config-processor.ts#L8">packages/rpc/src/common/processor/client-config-processor.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4585c12c3/dev-packages/cli-service/src/webpack/config/plugin-config-factory.ts#L262">dev-packages/cli-service/src/webpack/config/plugin-config-factory.ts:262</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <span class="tsd-signature-type">AxiosRequestConfig</span></h5>
+									<h5>config: <span class="tsd-signature-type">WebpackChain</span></h5>
+								</li>
+								<li>
+									<h5>context: <a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+								<li>
+									<h5>target: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="support" class="tsd-anchor"></a>
+					<h3>support</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">support<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4585c12c3/dev-packages/cli-service/src/webpack/config/plugin-config-factory.ts#L267">dev-packages/cli-service/src/webpack/config/plugin-config-factory.ts:267</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>context: <a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+								<li>
+									<h5>target: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -129,16 +155,13 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/rpc.html">rpc</a>
+						<a href="../modules/cli_service.html">cli-<wbr>service</a>
 						<ul>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/rpc.channel.html">Channel</a>
+								<a href="../modules/cli_service.configurationcontext.html">Configuration<wbr>Context</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/rpc.converterutil.html">Converter<wbr>Util</a>
-							</li>
-							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/rpc.rpcutil.html">Rpc<wbr>Util</a>
+								<a href="../modules/cli_service.servicecontextutils.html">Service<wbr>Context<wbr>Utils</a>
 							</li>
 						</ul>
 					</li>
@@ -149,10 +172,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="rpc.noopclientconfigprocessor.html" class="tsd-kind-icon">No<wbr>OpClient<wbr>Config<wbr>Processor</a>
+						<a href="cli_service.nodepolyfillpluginconfigfactory.html" class="tsd-kind-icon">Node<wbr>Polyfill<wbr>Plugin<wbr>Config<wbr>Factory</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="rpc.noopclientconfigprocessor.html#process" class="tsd-kind-icon">process</a>
+								<a href="cli_service.nodepolyfillpluginconfigfactory.html#create" class="tsd-kind-icon">create</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="cli_service.nodepolyfillpluginconfigfactory.html#support" class="tsd-kind-icon">support</a>
 							</li>
 						</ul>
 					</li>
