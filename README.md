@@ -48,8 +48,7 @@ malagu serve
 # Deployment
 malagu deploy
 ```
-
-![Quick start](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Malagu%20%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B.gif)
+[![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104)
 
 ## Samples
 
