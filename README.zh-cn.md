@@ -52,7 +52,7 @@ malagu serve
 malagu deploy
 ```
 
-[![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104)
+[![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104?speed=2.5&autoplay=1)
 
 ## 示例
 
