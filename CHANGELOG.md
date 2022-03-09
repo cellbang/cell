@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.13.6
+
+- feat(cloud-plugin) 新增sync属性
+
 ## 2.13.5
 
 - fix(cli) 修复 `malagu update` 命令不生效
