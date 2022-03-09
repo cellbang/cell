@@ -27,7 +27,7 @@ export default async (context: DeployContext) => {
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
 
-    const { namespace, apiGateway, alias, trigger, disableProjectId, disableFunService } = cloudConfig;
+    const { namespace, apiGateway, alias, trigger, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
@@ -37,8 +37,9 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - SCF:}`);
 
-    if (!disableFunService) {
+    if (!namespace.sync) {
         await createOrUpdateNamespace(namespace);
+        delete namespace.sync;
     }
    
     const codeLoader = new DefaultCodeLoader();

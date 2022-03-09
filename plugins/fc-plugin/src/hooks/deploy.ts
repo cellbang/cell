@@ -24,7 +24,7 @@ export default async (context: DeployContext) => {
     apiClient = clients.apiClient;
     ram = clients.ram;
 
-    const { service, trigger, apiGateway, customDomain, alias, disableProjectId, disableFunService } = cloudConfig;
+    const { service, trigger, apiGateway, customDomain, alias, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
     const serviceName = service.name;
 
@@ -35,8 +35,9 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - FC:}`);
 
-    if (!disableFunService) {
+    if (!service.sync) {
         await createOrUpdateService(serviceName, service);
+        delete service.sync;
     }
 
     const codeLoader = new DefaultCodeLoader();
