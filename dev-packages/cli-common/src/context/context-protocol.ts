@@ -93,6 +93,7 @@ export namespace CliContext {
             config.currentRuntimePath = otherConfig.currentRuntimePath;
             config.frontendProjectDistPath = otherConfig.frontendProjectDistPath;
             config.backendProjectDistPath = otherConfig.backendProjectDistPath;
+            config.projectDir = process.cwd();
             config.cliContext = otherConfig.cliContext;
             const expressionHandler = new ExpressionHandler();
 
@@ -113,6 +114,7 @@ export namespace CliContext {
             expressionHandler.handle(config);
             delete config.pkg;
             delete config.cliContext;
+            delete config.projectDir;
             delete config.currentRuntimePath;
             delete config.frontendProjectDistPath;
             delete config.backendProjectDistPath;
