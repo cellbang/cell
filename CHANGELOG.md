@@ -3,6 +3,7 @@
 ## 2.13.6
 
 - feat(cloud-plugin) 新增sync属性
+- feat(*) 新增编译期 EL 表达式变量 projectDir，用于获取当前项目的绝对路径，例如可以在属性配置文件中写法如下：${projectDir}
 
 ## 2.13.5
 
