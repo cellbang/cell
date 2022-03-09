@@ -6,6 +6,7 @@ malagu:
     timeout: 600000
     service:
       name: ${malagu.cloud.function.name}
+      sync: true
     function:
       serviceName: ${malagu.cloud.service.name}
       instanceConcurrency: 10

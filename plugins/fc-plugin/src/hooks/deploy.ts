@@ -35,7 +35,10 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - FC:}`);
 
-    await createOrUpdateService(serviceName, service);
+    if (service.sync) {
+        await createOrUpdateService(serviceName, service);
+        delete service.sync;
+    }
 
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
