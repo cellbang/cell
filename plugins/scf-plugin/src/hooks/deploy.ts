@@ -37,8 +37,11 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - SCF:}`);
 
-    await createOrUpdateNamespace(namespace);
-
+    if (namespace.sync) {
+        await createOrUpdateNamespace(namespace);
+        delete namespace.sync;
+    }
+   
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
     await createOrUpdateFunction(functionMeta, zip, disableProjectId);

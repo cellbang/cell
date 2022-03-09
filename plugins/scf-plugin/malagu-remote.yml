@@ -3,6 +3,7 @@ malagu:
   cloud:
     namespace:
       name: default
+      sync: true
     function:
       handler: index.handler
       namespace: ${malagu.cloud.namespace.name}
