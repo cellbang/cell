@@ -35,7 +35,7 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - FC:}`);
 
-    if (!service.sync) {
+    if (service.sync) {
         await createOrUpdateService(serviceName, service);
         delete service.sync;
     }

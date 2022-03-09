@@ -37,7 +37,7 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - SCF:}`);
 
-    if (!namespace.sync) {
+    if (namespace.sync) {
         await createOrUpdateNamespace(namespace);
         delete namespace.sync;
     }
