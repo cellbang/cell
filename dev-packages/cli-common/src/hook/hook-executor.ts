@@ -3,6 +3,11 @@ import { Module } from '../package/package-protocol';
 import { ConfigUtil } from '../utils/config-util';
 const chalk = require('chalk');
 
+export enum HookStage {
+    on = 'default',
+    before = 'before'
+}
+
 export class HookExecutor {
 
     protected print(hookName: string, modules: Module[]) {
@@ -15,39 +20,39 @@ export class HookExecutor {
         }
     }
 
-    executeBuildHooks(context: BuildContext): Promise<any[]> {
+    executeBuildHooks(context: BuildContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.buildHookModules;
-        return this.doExecuteHooks(modules, context, 'buildHooks');
+        return this.doExecuteHooks(modules, context, 'buildHooks', stage);
     }
 
-    executeDeployHooks(context: DeployContext): Promise<any[]> {
+    executeDeployHooks(context: DeployContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.deployHookModules;
-        return this.doExecuteHooks(modules, context, 'deployHooks');
+        return this.doExecuteHooks(modules, context, 'deployHooks', stage);
     }
 
-    executeCliHooks(context: CliContext): Promise<any[]> {
+    executeCliHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.cliHookModules;
-        return this.doExecuteHooks(modules, context, 'cliHooks');
+        return this.doExecuteHooks(modules, context, 'cliHooks', stage);
     }
 
-    executeInitHooks(context: InitContext): Promise<any[]> {
+    executeInitHooks(context: InitContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.initHookModules;
-        return this.doExecuteHooks(modules, context, 'initHooks');
+        return this.doExecuteHooks(modules, context, 'initHooks', stage);
     }
 
-    executeConfigHooks(context: ConfigContext): Promise<any[]> {
+    executeConfigHooks(context: ConfigContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.configHookModules;
-        return this.doExecuteHooks(modules, context, 'configHooks');
+        return this.doExecuteHooks(modules, context, 'configHooks', stage);
     }
 
-    executeInfoHooks(context: InfoContext): Promise<any[]> {
+    executeInfoHooks(context: InfoContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.infoHookModules;
-        return this.doExecuteHooks(modules, context, 'infoHooks');
+        return this.doExecuteHooks(modules, context, 'infoHooks', stage);
     }
 
-    async executeHooks(context: CliContext, hookName: string): Promise<any[]> {
+    async executeHooks(context: CliContext, hookName: string, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.computeModules(hookName);
-        return this.doExecuteHooks(modules, context, hookName);
+        return this.doExecuteHooks(modules, context, hookName, stage);
     }
 
     protected checkHooks(context: CliContext, properties: string[]): boolean {
@@ -63,28 +68,14 @@ export class HookExecutor {
         return current !== false ? true : false;
     }
 
-    protected async doRequire(context: CliContext, ...paths: string[]) {
-        let lastError: Error | undefined;
-        for (const path of paths) {
-            try {
-                return await require(path).default(context);
-            } catch (error) {
-                lastError = error;
-                if (error && error.code === 'MODULE_NOT_FOUND') {
-                    continue;
-                } else {
-                    throw error;
-                }
-            }
+    protected async doRequire(context: CliContext, path: string, stage: HookStage = HookStage.on) {
+        const obj = require(path);
+        if (stage in obj) {
+            return obj[stage](context);
         }
-
-        if (lastError) {
-            throw lastError;
-        }
-
     }
 
-    protected async doExecuteHooks(modules: Module[], context: CliContext, hookName: string): Promise<any[]> {
+    protected async doExecuteHooks(modules: Module[], context: CliContext, hookName: string, stage?: HookStage): Promise<any[]> {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
         if (!(process as any)[REGISTER_INSTANCE]) {
@@ -110,7 +101,8 @@ export class HookExecutor {
                 if (this.checkHooks(context, properties)) {
                     result.push(await this.doRequire(
                         context,
-                        m.path
+                        m.path,
+                        stage
                     ));
                 }
             }

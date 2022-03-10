@@ -2,7 +2,7 @@
 import * as webpack from 'webpack';
 import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
 import { spawnProcess } from '@malagu/cli-common/lib/packager/utils';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { BuildContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
@@ -29,6 +29,8 @@ export class BuildManager {
     }
 
     async build(): Promise<void> {
+        const hookExecutor = new HookExecutor();
+        await hookExecutor.executeBuildHooks(this.ctx, HookStage.before);
         this.log();
         this.cleanDistDir();
         const backendConfig = ConfigUtil.getBackendConfig(this.ctx.cfg);
@@ -63,7 +65,6 @@ export class BuildManager {
             }));
         }
 
-        const hookExecutor = new HookExecutor();
         await hookExecutor.executeBuildHooks(this.ctx);
     }
 

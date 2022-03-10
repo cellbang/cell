@@ -1,6 +1,6 @@
 
 import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
 
 import { dump } from 'js-yaml';
@@ -18,6 +18,8 @@ export default async (cliContext: CliContext, options: ConfigOptions) => {
     try {
         cliContext.options = options;
         const ctx = await ContextUtils.createConfigContext(cliContext);
+        const hookExecutor = new HookExecutor();
+        await hookExecutor.executeConfigHooks(ctx, HookStage.before);
         if (options.defaultMode?.length) {
             SettingsUtil.updateSettings({
                 defaultMode: options.defaultMode
@@ -44,7 +46,6 @@ export default async (cliContext: CliContext, options: ConfigOptions) => {
         if (options.show) {
             cliContext.output.settings = SettingsUtil.getSettings();
         }
-        const hookExecutor = new HookExecutor();
         await hookExecutor.executeConfigHooks(ctx);
         if (options.show) {
             console.log(dump(cliContext.output));

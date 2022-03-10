@@ -1,4 +1,4 @@
-import { ContextUtils, CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 import { dump } from 'js-yaml';
 import * as traverse from 'traverse';
@@ -13,7 +13,7 @@ export interface PropsOptions {
 export default async (cliContext: CliContext, options: PropsOptions) => {
     try {
         cliContext.options = options;
-        const ctx = await ContextUtils.createInfoContext(cliContext);
+        const ctx = cliContext;
         let backendProps: any;
         let frontendProps: any;
 

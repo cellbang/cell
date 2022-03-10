@@ -1,8 +1,13 @@
 # Change Log
 
+## 2.14.0
+
+- feat(cli-*) Hook 机制支持 `before` 阶段，例如 Build Hook 的 `before` 阶段表示在构建之前执行，只需在 Hook 文件中导出 `before` 方法即可
+- feat(node-plugin) 修复 nestjs 应用端口冲突和部署报错问题
+
 ## 2.13.6
 
-- feat(cloud-plugin) 新增sync属性
+- feat(cloud-plugin) 新增 sync 属性
 - feat(*) 新增编译期 EL 表达式变量 projectDir，用于获取当前项目的绝对路径，例如可以在属性配置文件中写法如下：${projectDir}
 
 ## 2.13.5

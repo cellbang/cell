@@ -19,7 +19,7 @@ export class ConfigFactory {
         const { cfg } = ctx;
         const targets = [ BACKEND_TARGET, FRONTEND_TARGET ];
 
-        const configurations = [];
+        const configurations: WebpackChain[] = [];
 
         const configFactories = [
             new DotenvPluginConfigFactory(),
@@ -41,6 +41,11 @@ export class ConfigFactory {
             new ComponentConfigConfigFactory(),
             new NodePolyfillPluginConfigFactory()
         ];
+
+        await new HookExecutor().executeBeforeWebpackHooks({
+            ...ctx,
+            configurations
+        });
 
         for (const target of targets) {
             if (!ConfigUtil.support(cfg, target)) {

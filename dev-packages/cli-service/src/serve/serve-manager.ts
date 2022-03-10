@@ -25,6 +25,8 @@ export class ServeManager {
     }
 
     async start() {
+        await new HookExecutor().executeBeforeServeHooks(this.context);
+
         this.log();
 
         const backendConfig = ConfigUtil.getBackendConfig(this.context.cfg);

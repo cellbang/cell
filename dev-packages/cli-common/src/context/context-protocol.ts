@@ -6,7 +6,7 @@ import { RuntimeUtil } from '../utils/runtime-util';
 import { SpinnerUtil } from '../utils/spinner-util';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el/expression-handler';
-import { HookExecutor } from '../hook/hook-executor';
+import { HookExecutor, HookStage } from '../hook/hook-executor';
 import { ApplicationConfig } from '../package/application-config';
 import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 import { Settings } from '../settings/settings-protocol';
@@ -109,9 +109,21 @@ export namespace CliContext {
                 expressionHandler,
                 output: {},
                 ...options
-            }, 'propsHooks');
+            }, 'propsHooks', HookStage.before);
 
             expressionHandler.handle(config);
+
+            await new HookExecutor().executeHooks({
+                pkg,
+                cfg,
+                program,
+                target,
+                props: config,
+                expressionHandler,
+                output: {},
+                ...options
+            }, 'propsHooks');
+
             delete config.pkg;
             delete config.cliContext;
             delete config.projectDir;
