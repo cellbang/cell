@@ -25,7 +25,7 @@ function renderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: strin
 }
 
 export default async (context: PropsContext) => {
-    const { props, target, pkg, cfg, dev } = context;
+    const { props, target, pkg, cfg } = context;
     if (target === BACKEND_TARGET && !props.entry) {
         const cwd = process.cwd();
         const mainEntry = pkg.pkg.main;
@@ -41,16 +41,12 @@ export default async (context: PropsContext) => {
                 }
             }
         }
-        if (dev) {
-            const entryTemplate = join(__dirname, '..', 'entry.js');
-            props.entry = renderEntry(entryTemplate, cfg, props.entry);
-        } else if (CommandUtil.includesCommand(context.args, [ 'build', 'deploy' ])) {
+        
+        if (CommandUtil.includesCommand(context.args, [ 'build', 'deploy' ])) {
             const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
             const isFastify = pkg.framework?.name === 'fastify';
             const entryTemplate = join(__dirname, '..', isLambda ? (isFastify ? 'lambda-fastify-entry.js' :'lambda-entry.js') : 'entry.js');
             props.entry = renderEntry(entryTemplate, cfg, props.entry);
-        } else {
-            props.entry = join(PathUtil.getProjectHomePath(), 'entry.js');
         }
     }
 };

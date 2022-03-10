@@ -1,6 +1,6 @@
 const leven = require('leven');
 import * as ora from 'ora';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 import { program, Command } from '@malagu/cli-common/lib/command/command-protocol';
 import { BannerUtil } from './utils/banner-util';
@@ -19,6 +19,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 
     spinner.start();
     const context = await CommandUtil.loadContext(settings, framework, runtime, undefined, spinner);
+    await new HookExecutor().executeHooks(context, 'cliHooks', HookStage.before);
     const { componentPackages, configHookModules, webpackHookModules, serveHookModules, buildHookModules, deployHookModules, infoHookModules, propsHookModules } = context.pkg;
 
     if (CommandUtil.includesCommand(context.args, settings.compileCommands)) {

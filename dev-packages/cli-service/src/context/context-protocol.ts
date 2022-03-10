@@ -81,6 +81,14 @@ export interface WebpackContext extends ConfigurationContext {
 
 }
 
+export interface BeforeWebpackContext extends ConfigurationContext {
+
+}
+
+export interface BeforeServeContext extends ConfigurationContext {
+
+}
+
 export interface ServeContext extends ConfigurationContext {
     server: http.Server | https.Server;
     app: any;

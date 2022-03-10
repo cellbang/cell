@@ -1,5 +1,5 @@
-import { ServeContext, WebpackContext } from '../context';
-import { HookExecutor as BaseHookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { BeforeServeContext, ServeContext, WebpackContext } from '../context';
+import { HookExecutor as BaseHookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 const chalk = require('chalk');
 
 export class HookExecutor extends BaseHookExecutor {
@@ -13,9 +13,19 @@ export class HookExecutor extends BaseHookExecutor {
         return this.doExecuteHooks(modules, context, 'serveHooks');
     }
 
+    async executeBeforeServeHooks(context: BeforeServeContext): Promise<any[]> {
+        const modules = context.pkg.serveHookModules;
+        return this.doExecuteHooks(modules, context, 'serveHooks', HookStage.before);
+    }
+
     executeWebpackHooks(context: WebpackContext): Promise<any[]> {
         const modules = context.pkg.webpackHookModules;
         return this.doExecuteHooks(modules, context, 'webpackHooks');
+    }
+
+    executeBeforeWebpackHooks(context: WebpackContext): Promise<any[]> {
+        const modules = context.pkg.webpackHookModules;
+        return this.doExecuteHooks(modules, context, 'webpackHooks', HookStage.before);
     }
 
 }

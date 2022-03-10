@@ -1,7 +1,7 @@
 
 import build from '../build/build';
 import { spawnProcess } from '@malagu/cli-common/lib/packager/utils';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
+import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
@@ -17,6 +17,8 @@ export default async (cliContext: CliContext, options: DeplyOptions) => {
             ...cliContext,
             ...options
         });
+        const hookExecutor = new HookExecutor();
+        await hookExecutor.executeDeployHooks(ctx, HookStage.before);
         if (!options.skipBuild) {
             await build(cliContext, options);
         }
@@ -29,7 +31,6 @@ export default async (cliContext: CliContext, options: DeplyOptions) => {
             const args = deployCommand.split(/\s+/);
             await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
         }
-        const hookExecutor = new HookExecutor();
         await hookExecutor.executeDeployHooks(ctx);
         if (options.exit === false) {
             process.exit(0);

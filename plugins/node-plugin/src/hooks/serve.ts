@@ -2,7 +2,7 @@ import { ServeContext } from '@malagu/cli-service/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 export default async (context: ServeContext) => {
-    const { entryContextProvider, server, cfg } = context;
+    const { entryContextProvider, cfg } = context;
     let { port, path } = ConfigUtil.getBackendMalaguConfig(cfg).server;
     port = port || 9000;
     process.env.SERVER_PATH = path;
@@ -14,22 +14,19 @@ export default async (context: ServeContext) => {
             targetServer.close();
         }
         const app = await entryContextProvider();
-        let target = app;
+        let target = await app;
         if (typeof app === 'object' && app.default) {
-            target = app.default;
+            target = await app.default;
         }
         if (target && typeof target.listen === 'function') {
             targetServer = target.listen(port);
+            targetServer = target.close ? target : targetServer;
             return;
         }
 
         if (typeof target === 'function') {
-            target(port);
+            targetServer = await target(port);
         }
-        if (!targetServer?.close) {
-            server.close();
-        }
-
     });
 
 };
