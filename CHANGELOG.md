@@ -3,7 +3,7 @@
 ## 2.14.0
 
 - feat(cli-*) Hook 机制支持 `before` 阶段，例如 Build Hook 的 `before` 阶段表示在构建之前执行，只需在 Hook 文件中导出 `before` 方法即可
-- feat(node-plugin) 修复 nestjs 应用端口冲突和部署报错问题
+- fix(node-plugin) 修复 nestjs 应用端口冲突和部署报错问题
 
 ## 2.13.6
 
