@@ -90,6 +90,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="cli_service.hookexecutor.html#checkhooks" class="tsd-kind-icon">check<wbr>Hooks</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="cli_service.hookexecutor.html#doexecutehooks" class="tsd-kind-icon">do<wbr>Execute<wbr>Hooks</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="cli_service.hookexecutor.html#dorequire" class="tsd-kind-icon">do<wbr>Require</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cli_service.hookexecutor.html#executebeforeservehooks" class="tsd-kind-icon">execute<wbr>Before<wbr>Serve<wbr>Hooks</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="cli_service.hookexecutor.html#executebeforewebpackhooks" class="tsd-kind-icon">execute<wbr>Before<wbr>Webpack<wbr>Hooks</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="cli_service.hookexecutor.html#executebuildhooks" class="tsd-kind-icon">execute<wbr>Build<wbr>Hooks</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="cli_service.hookexecutor.html#executeclihooks" class="tsd-kind-icon">execute<wbr>Cli<wbr>Hooks</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="cli_service.hookexecutor.html#executeconfighooks" class="tsd-kind-icon">execute<wbr>Config<wbr>Hooks</a></li>
@@ -118,7 +120,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#checkhooks">checkHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L53">dev-packages/cli-common/src/hook/hook-executor.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L58">dev-packages/cli-common/src/hook/hook-executor.ts:58</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,14 +140,14 @@
 					<a name="doexecutehooks" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> do<wbr>Execute<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">do<wbr>Execute<wbr>Hooks<span class="tsd-signature-symbol">(</span>modules<span class="tsd-signature-symbol">: </span><a href="cli_common.module.html" class="tsd-signature-type">Module</a><span class="tsd-signature-symbol">[]</span>, context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, hookName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Execute<wbr>Hooks<span class="tsd-signature-symbol">(</span>modules<span class="tsd-signature-symbol">: </span><a href="cli_common.module.html" class="tsd-signature-type">Module</a><span class="tsd-signature-symbol">[]</span>, context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, hookName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#doexecutehooks">doExecuteHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L87">dev-packages/cli-common/src/hook/hook-executor.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L78">dev-packages/cli-common/src/hook/hook-executor.ts:78</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -159,6 +161,9 @@
 								<li>
 									<h5>hookName: <span class="tsd-signature-type">string</span></h5>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -168,14 +173,14 @@
 					<a name="dorequire" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> do<wbr>Require</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">do<wbr>Require<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, <span class="tsd-signature-symbol">...</span>paths<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Require<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#dorequire">doRequire</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L66">dev-packages/cli-common/src/hook/hook-executor.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L71">dev-packages/cli-common/src/hook/hook-executor.ts:71</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -184,10 +189,59 @@
 									<h5>context: <a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>paths: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol"> = HookStage.on</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="executebeforeservehooks" class="tsd-anchor"></a>
+					<h3>execute<wbr>Before<wbr>Serve<wbr>Hooks</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Before<wbr>Serve<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_service.beforeservecontext.html" class="tsd-signature-type">BeforeServeContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-service/src/hooks/hook-executor.ts#L16">dev-packages/cli-service/src/hooks/hook-executor.ts:16</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>context: <a href="../interfaces/cli_service.beforeservecontext.html" class="tsd-signature-type">BeforeServeContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="executebeforewebpackhooks" class="tsd-anchor"></a>
+					<h3>execute<wbr>Before<wbr>Webpack<wbr>Hooks</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Before<wbr>Webpack<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_service.webpackcontext.html" class="tsd-signature-type">WebpackContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-service/src/hooks/hook-executor.ts#L26">dev-packages/cli-service/src/hooks/hook-executor.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>context: <a href="../interfaces/cli_service.webpackcontext.html" class="tsd-signature-type">WebpackContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -195,20 +249,23 @@
 					<a name="executebuildhooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Build<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Build<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.buildcontext.html" class="tsd-signature-type">BuildContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Build<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.buildcontext.html" class="tsd-signature-type">BuildContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executebuildhooks">executeBuildHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L18">dev-packages/cli-common/src/hook/hook-executor.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L23">dev-packages/cli-common/src/hook/hook-executor.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/cli_common.buildcontext.html" class="tsd-signature-type">BuildContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -219,20 +276,23 @@
 					<a name="executeclihooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Cli<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Cli<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Cli<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executeclihooks">executeCliHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L28">dev-packages/cli-common/src/hook/hook-executor.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L33">dev-packages/cli-common/src/hook/hook-executor.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -243,20 +303,23 @@
 					<a name="executeconfighooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Config<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Config<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.configcontext.html" class="tsd-signature-type">ConfigContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Config<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.configcontext.html" class="tsd-signature-type">ConfigContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executeconfighooks">executeConfigHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L38">dev-packages/cli-common/src/hook/hook-executor.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L43">dev-packages/cli-common/src/hook/hook-executor.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/cli_common.configcontext.html" class="tsd-signature-type">ConfigContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -267,20 +330,23 @@
 					<a name="executedeployhooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Deploy<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Deploy<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.deploycontext.html" class="tsd-signature-type">DeployContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Deploy<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.deploycontext.html" class="tsd-signature-type">DeployContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executedeployhooks">executeDeployHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L23">dev-packages/cli-common/src/hook/hook-executor.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L28">dev-packages/cli-common/src/hook/hook-executor.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/cli_common.deploycontext.html" class="tsd-signature-type">DeployContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -291,14 +357,14 @@
 					<a name="executehooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, hookName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../modules/cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, hookName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executehooks">executeHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L48">dev-packages/cli-common/src/hook/hook-executor.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L53">dev-packages/cli-common/src/hook/hook-executor.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -309,6 +375,9 @@
 								<li>
 									<h5>hookName: <span class="tsd-signature-type">string</span></h5>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -318,20 +387,23 @@
 					<a name="executeinfohooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Info<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Info<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.infocontext.html" class="tsd-signature-type">InfoContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Info<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.infocontext.html" class="tsd-signature-type">InfoContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executeinfohooks">executeInfoHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L43">dev-packages/cli-common/src/hook/hook-executor.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L48">dev-packages/cli-common/src/hook/hook-executor.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/cli_common.infocontext.html" class="tsd-signature-type">InfoContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -342,20 +414,23 @@
 					<a name="executeinithooks" class="tsd-anchor"></a>
 					<h3>execute<wbr>Init<wbr>Hooks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Init<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.initcontext.html" class="tsd-signature-type">InitContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Init<wbr>Hooks<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/cli_common.initcontext.html" class="tsd-signature-type">InitContext</a>, stage<span class="tsd-signature-symbol">?: </span><a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#executeinithooks">executeInitHooks</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L33">dev-packages/cli-common/src/hook/hook-executor.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L38">dev-packages/cli-common/src/hook/hook-executor.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>context: <a href="../interfaces/cli_common.initcontext.html" class="tsd-signature-type">InitContext</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> stage: <a href="../enums/cli_common.hookstage.html" class="tsd-signature-type">HookStage</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -372,7 +447,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-service/src/hooks/hook-executor.ts#L7">dev-packages/cli-service/src/hooks/hook-executor.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-service/src/hooks/hook-executor.ts#L7">dev-packages/cli-service/src/hooks/hook-executor.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -395,7 +470,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-service/src/hooks/hook-executor.ts#L16">dev-packages/cli-service/src/hooks/hook-executor.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-service/src/hooks/hook-executor.ts#L21">dev-packages/cli-service/src/hooks/hook-executor.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -419,7 +494,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="cli_common.hookexecutor.html">HookExecutor</a>.<a href="cli_common.hookexecutor.html#print">print</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/44d89ae6f/dev-packages/cli-common/src/hook/hook-executor.ts#L8">dev-packages/cli-common/src/hook/hook-executor.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/hook/hook-executor.ts#L13">dev-packages/cli-common/src/hook/hook-executor.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -471,6 +546,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="cli_service.hookexecutor.html#dorequire" class="tsd-kind-icon">do<wbr>Require</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="cli_service.hookexecutor.html#executebeforeservehooks" class="tsd-kind-icon">execute<wbr>Before<wbr>Serve<wbr>Hooks</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="cli_service.hookexecutor.html#executebeforewebpackhooks" class="tsd-kind-icon">execute<wbr>Before<wbr>Webpack<wbr>Hooks</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="cli_service.hookexecutor.html#executebuildhooks" class="tsd-kind-icon">execute<wbr>Build<wbr>Hooks</a>
