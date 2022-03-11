@@ -2,9 +2,10 @@ import { ServeContext } from '@malagu/cli-service/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
 
 export default async (context: ServeContext) => {
-    const { entryContextProvider, cfg } = context;
+    const { entryContextProvider, cfg, server } = context;
+    server.close();
     let { port, path } = ConfigUtil.getBackendMalaguConfig(cfg).server;
-    port = port || 9000;
+    port = context.port || port || 9000;
     process.env.SERVER_PATH = path;
     process.env.SERVER_PORT = port;
 
