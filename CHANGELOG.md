@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.14.1
+
+- fix(node-plugin) 修复端口问题冲突和不生效问题
+
 ## 2.14.0
 
 - feat(cli-*) Hook 机制支持 `before` 阶段，例如 Build Hook 的 `before` 阶段表示在构建之前执行，只需在 Hook 文件中导出 `before` 方法即可

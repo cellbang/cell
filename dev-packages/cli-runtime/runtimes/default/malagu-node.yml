@@ -8,7 +8,6 @@ malagu:
 backend:
   malagu:
     webpack:
-      innerPort: 10086
       filterWarningsPlugin:
         node:
           - "Module not found: Error: Can't resolve"
