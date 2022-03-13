@@ -3,7 +3,7 @@ export const frameworks = [
     {
         name: 'nextjs',
         useRuntime: 'default',
-        useMode: [ 'unpacakage', 'node', 'next' ],
+        useMode: [ 'unpackage', 'node', 'next' ],
         settings: {
             buildCommand: 'npx next build',
             serveCommand: 'npx next dev --port ${cliContext.port || malagu.server.port}'
