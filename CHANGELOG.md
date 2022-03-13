@@ -1,7 +1,7 @@
 # Change Log
 
 
-## 2.15.0
+## 2.15.1
 
 - feat(cli-*) Hook 机制支持 `after` 阶段
 - feat(cli) 添加 `nextjs` 模板

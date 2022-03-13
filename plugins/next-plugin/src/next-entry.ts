@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 const { parse } = require('url')
-const next = require('next')
+const next = require(require.resolve('next', { paths: [ process.cwd() ] }));
 const port = parseInt(process.env.SERVER_PORT || '') || 9000;
 const hostname = '0.0.0.0'
 const app = next({ dev: false, hostname, port });
