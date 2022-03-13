@@ -10,15 +10,11 @@ export interface ConfigurationContext extends CliContext {
 }
 
 export namespace ConfigurationContext {
-    export async function create(cliContext: CliContext, options: { [key: string]: any } = {} ): Promise<ConfigurationContext> {
+    export async function create(cliContext: CliContext): Promise<ConfigurationContext> {
         const { ConfigFactory } = require('../webpack');
         const configFactory = new ConfigFactory();
-        const configurations = await configFactory.create({ ...cliContext, ...options });
-        return {
-            ...options,
-            ...cliContext,
-            configurations: configurations
-        };
+        cliContext.configurations = await configFactory.create(cliContext);
+        return <ConfigurationContext>cliContext;
     }
 
     export function getConfiguration(target: string, configurations: WebpackChain[]): undefined | WebpackChain {
@@ -56,23 +52,12 @@ export namespace ConfigurationContext {
 
 export namespace ServiceContextUtils {
 
-    export async function createConfigurationContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<ConfigurationContext> {
-        return ConfigurationContext.create(cliContext, options);
+    export async function createConfigurationContext(cliContext: CliContext): Promise<ConfigurationContext> {
+        return ConfigurationContext.create(cliContext);
     }
 
-    export function createWebpackContext(cliContext: CliContext, options?: { [key: string]: any }): Promise<WebpackContext> {
-        return createConfigurationContext(cliContext, options);
-    }
-
-    export async function createServeContext(context: ConfigurationContext, server: http.Server | https.Server, app: any, compiler: webpack.Compiler,
-        entryContextProvider: () => Promise<any>): Promise<ServeContext> {
-        return {
-            ...context,
-            server,
-            app,
-            compiler,
-            entryContextProvider
-        };
+    export function createWebpackContext(cliContext: CliContext): Promise<WebpackContext> {
+        return createConfigurationContext(cliContext);
     }
 
 }

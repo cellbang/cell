@@ -3,9 +3,18 @@ const minimist = require('minimist');
 import * as ora from 'ora';
 import { Settings } from '../settings/settings-protocol';
 import { SettingsUtil } from '../settings/settings-util';
+import { ConfigUtil } from './config-util';
 import { ApplicationPackage } from '../package/application-package';
 import { CliContext } from '../context/context-protocol';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '../constants';
+import { spawnProcess } from '../packager/utils';
 
+export enum CommandType {
+    ServeCommand = 'serveCommand',
+    BuildCommand = 'buildCommand',
+    DeployCommand = 'deployCommand',
+    CompileCommand = 'compileCommand'
+}
 export namespace CommandUtil {
 
     export function getPkg(settings: Settings = SettingsUtil.getSettings(), projectPath = process.cwd()) {
@@ -18,9 +27,10 @@ export namespace CommandUtil {
         const options = minimist(process.argv.slice(2));
         const args: string[] = options._;
         const mode = getMode(options, settings);
+        const port = getPort(options);
         const targets = getTargets(options);
         const prod = options.p || options.prod;
-        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), spinner, runtime, framework, settings });
+        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), port, spinner, runtime, framework, settings });
     }
 
     function getArrayOptions(options: any, prop: string, shortProp: string): string[] {
@@ -68,6 +78,10 @@ export namespace CommandUtil {
         return getArrayOptions(options, 'targets', 't');
     }
 
+    function getPort(options: any) {
+        return getArrayOptions(options, 'port', 'p').pop();
+    }
+
     export function getCommandByName(ctx: CliContext, name: string) {
         const { program } = ctx;
         for (const command of program.commands) {
@@ -77,11 +91,45 @@ export namespace CommandUtil {
         }
     }
 
+    export function getBuildCommand(ctx: CliContext) {
+        return getCommandByName(ctx, 'build');
+
+    }
+
+    export function getDeployCommand(ctx: CliContext) {
+        return getCommandByName(ctx, 'deploy');
+    }
+
+    export function getServeCommand(ctx: CliContext) {
+        return getCommandByName(ctx, 'serve');
+    }
+
     export function getConfigCommand(ctx: CliContext) {
-        const { program } = ctx;
-        for (const command of program.commands) {
-            if (command.name() === 'config') {
-                return command;
+        return getCommandByName(ctx, 'config');
+    }
+
+    export async function executeCommand(ctx: CliContext, commandType: string, renderer = async (command: string, target: string) => command) {
+        const backendConfig = ConfigUtil.getBackendConfig(ctx.cfg);
+        const frontendConfig = ConfigUtil.getFrontendConfig(ctx.cfg);
+
+        const commands = [];
+
+        let frontendCommand = frontendConfig[commandType];
+        if (frontendCommand) {
+            frontendCommand = await renderer(frontendCommand, FRONTEND_TARGET);
+            commands.push(frontendCommand);
+        }
+
+        let backendCommand = backendConfig[commandType];
+        if (backendCommand && backendCommand !== frontendCommand) {
+            backendCommand = await renderer(backendCommand, BACKEND_TARGET);
+            commands.push(backendCommand);
+        }
+
+        for (const c of commands) {
+            if (c) {
+                const args = c.split(/\s+/);
+                await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
             }
         }
     }

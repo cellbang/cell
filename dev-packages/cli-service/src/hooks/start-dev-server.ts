@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
-import { ExecuteServeHooks } from './serve-manager';
+import { Callback } from './serve';
 import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
 import * as delay from 'delay';
 import { ConfigurationContext } from '../context/context-protocol';
@@ -54,7 +54,7 @@ function clearRuntimeModuleCaches() {
     moduleCaches = [];
 }
 
-function attachBackendServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
+async function attachBackendServer(ctx: ConfigurationContext, callback: Callback, configuration: webpack.Configuration, options: any, log: any, c?: webpack.Compiler) {
     const compiler = c || createCompiler(configuration, options, log);
     if (!c) {
         compiler.watch(options.watchOptions, err => {
@@ -74,11 +74,11 @@ function attachBackendServer(ctx: ConfigurationContext, executeServeHooks: Execu
             await delay(200);
         }
     };
-    executeServeHooks(server.server, server.app, compiler, entryContextProvider);
+    await callback(server.server, server.app, compiler, entryContextProvider);
 
 }
 
-async function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Configuration[], options: any, executeServeHooks: ExecuteServeHooks) {
+async function doStartDevServer(ctx: ConfigurationContext, configurations: webpack.Configuration[], options: any, callback: Callback) {
     let frontendConfiguration: webpack.Configuration | undefined;
     let backendConfiguration: webpack.Configuration | undefined;
     for (const c of configurations) {
@@ -99,9 +99,9 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
         server = new Server(options, compiler);
         await server.start();
         if (frontendConfiguration && backendConfiguration) {
-            attachBackendServer(ctx, executeServeHooks, backendConfiguration, options, console);
+           await attachBackendServer(ctx, callback, backendConfiguration, options, console);
         } else if (configuration.name === BACKEND_TARGET) {
-            attachBackendServer(ctx, executeServeHooks, configuration, options, console, compiler);
+            await attachBackendServer(ctx, callback, configuration, options, console, compiler);
         }
     } catch (err) {
         if (err.name === 'ValidationError') {
@@ -115,8 +115,8 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
     return compiler;
 }
 
-export function startDevServer(ctx: ConfigurationContext, executeServeHooks: ExecuteServeHooks) {
+export function startDevServer(ctx: ConfigurationContext, callback: Callback) {
     const cs = ctx.configurations.map(c => c.toConfig());
     const devServer = (cs[cs.length - 1] as any).devServer;
-    return doStartDevServer(ctx, cs, { ...devServer }, executeServeHooks);
+    return doStartDevServer(ctx, cs, { ...devServer }, callback);
 }

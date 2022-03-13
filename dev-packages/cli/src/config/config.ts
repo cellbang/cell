@@ -1,5 +1,5 @@
 
-import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
 
@@ -14,10 +14,9 @@ export interface ConfigOptions {
     show?: boolean;
 }
 
-export default async (cliContext: CliContext, options: ConfigOptions) => {
+export default async (ctx: CliContext, options: ConfigOptions) => {
     try {
-        cliContext.options = options;
-        const ctx = await ContextUtils.createConfigContext(cliContext);
+        ctx.options = options;
         const hookExecutor = new HookExecutor();
         await hookExecutor.executeConfigHooks(ctx, HookStage.before);
         if (options.defaultMode?.length) {
@@ -44,11 +43,11 @@ export default async (cliContext: CliContext, options: ConfigOptions) => {
             });
         }
         if (options.show) {
-            cliContext.output.settings = SettingsUtil.getSettings();
+            ctx.output.settings = SettingsUtil.getSettings();
         }
         await hookExecutor.executeConfigHooks(ctx);
         if (options.show) {
-            console.log(dump(cliContext.output));
+            console.log(dump(ctx.output));
         }
     } catch (error) {
         console.error(error);

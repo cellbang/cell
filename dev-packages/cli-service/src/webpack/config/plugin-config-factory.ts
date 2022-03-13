@@ -83,6 +83,25 @@ export class FilterWarningsPluginConfigFactory {
 
 export class CopyWebpackPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
+        const { cfg } = context;
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).copyPlugin || {};
+        if (Object.keys(pluginConfig).length === 0) {
+            return;
+        }
+
+        const CopyPlugin = require('copy-webpack-plugin');
+        config
+            .plugin('copy')
+                .use(CopyPlugin, [pluginConfig]);
+    }
+
+    support(context: CliContext, target: string): boolean {
+        return true;
+    }
+}
+
+export class AssetsPluginConfigFactory {
+    create(config: WebpackChain, context: CliContext, target: string) {
         const { pkg } = context;
         const assets = [];
         for (const assert of ConfigUtil.getAssets(pkg, target)) {
@@ -94,7 +113,7 @@ export class CopyWebpackPluginConfigFactory {
         }
         const CopyPlugin = require('copy-webpack-plugin');
         config
-            .plugin('copy')
+            .plugin('assets')
                 .use(CopyPlugin, [{
                     patterns: assets.map(assert => ({
                         from: assert,

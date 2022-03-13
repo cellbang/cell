@@ -1,0 +1,4 @@
+malagu:  
+  cloud:
+    function:
+      bootstrap: cd backend && /var/lang/node16/bin/node index.js

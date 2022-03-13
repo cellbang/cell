@@ -1,0 +1,46 @@
+{
+  "name": "@malagu/next-plugin",
+  "version": "2.14.1",
+  "description": "",
+  "dependencies": {
+    "@malagu/cli-service": "2.14.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component",
+    "malagu-plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-fc.yml",
+    "malagu-scf.yml"
+
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "2.14.1"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  },
+  "gitHead": "29768c7449248dd6d13afb783000a335719f90b9"
+}

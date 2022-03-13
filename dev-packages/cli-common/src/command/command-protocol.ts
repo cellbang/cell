@@ -1,1 +1,1 @@
-export { program, Command } from 'commander';
+export { program, Command, Argument } from 'commander';

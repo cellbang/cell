@@ -25,7 +25,7 @@ export class EntryConfigFactory {
             }
         }
 
-        config.entry('index').add(entry.path ? entry.path : entry);
+        config.entry('index').add(entry?.path ? entry.path : entry);
     }
 
     support(context: CliContext, target: string): boolean {

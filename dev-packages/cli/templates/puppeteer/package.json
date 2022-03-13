@@ -23,9 +23,9 @@
     "clean": "rimraf lib dist .malagu",
     "build": "malagu build",
     "start": "malagu serve",
-    "deploy": "malagu deploy -m test",
-    "deploy:test": "malagu deploy -m test",
-    "deploy:pre": "malagu deploy -m pre",
-    "deploy:prod": "malagu deploy -m prod"
+    "deploy": "malagu deploy -m fc -m test",
+    "deploy:test": "malagu deploy -m fc -m test",
+    "deploy:pre": "malagu deploy -m fc -m pre",
+    "deploy:prod": "malagu deploy -m fc -m prod"
   }
 }

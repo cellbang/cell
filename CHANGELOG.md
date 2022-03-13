@@ -1,5 +1,13 @@
 # Change Log
 
+
+## 2.15.0
+
+- feat(cli-*) Hook 机制支持 `after` 阶段
+- feat(cli) 添加 `nextjs` 模板
+- feat(next-plugin) 适配 `nextjs` 框架的开发部署
+- feat(cli) 优化框架适配机制
+
 ## 2.14.1
 
 - fix(node-plugin) 修复端口问题冲突和不生效问题

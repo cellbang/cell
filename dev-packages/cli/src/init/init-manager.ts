@@ -2,7 +2,7 @@ import { resolve, basename, relative, join } from 'path';
 import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
-import { ContextUtils, CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
@@ -60,7 +60,7 @@ export class InitManager {
 
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
-        const initContext = await ContextUtils.createInitContext(await this.getCliContext());
+        const initContext = await this.getCliContext();
         await new HookExecutor().executeHooks(initContext, 'initHooks');
         console.log(chalk`{bold.green Success!} Initialized "${ this.templateName }" example in {bold.blue ${outputDir}}.`);
         process.exit(0);
