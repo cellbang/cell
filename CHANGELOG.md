@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.15.2
+
+- fix(next-plugin) 修复 `next` 模块找不到错误
 
 ## 2.15.1
 

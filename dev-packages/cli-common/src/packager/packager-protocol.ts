@@ -5,6 +5,8 @@ export interface InstallOptions {
     networkConcurrency?: string;
     stdio?: string;
     ignoreOptional?: boolean;
+    noLockfile?: boolean;
+
 }
 
 export interface PruneOptions {
