@@ -8,8 +8,12 @@ export class Deferred {
         this.reject = reject;
     });
 }
-export default async (context: ServeContext) => {
+export async function after(context: ServeContext) {
     const { app, entryContextProvider } = context;
+
+    if (!entryContextProvider) {
+        return;
+    }
     let doDispatch: (req: any, res: any) => void;
     const compileDeferred = new Deferred();
 

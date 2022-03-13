@@ -102,6 +102,9 @@ export class NPM implements Packager {
     install(opts?: InstallOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'npm.cmd' : 'npm';
         const args = ['install'];
+        if (opts?.ignoreOptional) {
+            args.push('--no-optional');
+        }
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 

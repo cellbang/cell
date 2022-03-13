@@ -109,6 +109,9 @@ export class Yarn implements Packager {
         if (opts?.nonInteractive) {
             args.push('--non-interactive');
         }
+        if (opts?.ignoreOptional) {
+            args.push('--ignore-optional');
+        }
         if (opts?.networkConcurrency) {
             args.push(`--network-concurrency ${opts.networkConcurrency}`);
           }

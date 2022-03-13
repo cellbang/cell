@@ -1,6 +1,23 @@
 export const frameworks = [
     // frontend
     {
+        name: 'nextjs',
+        useRuntime: 'default',
+        useMode: [ 'unpacakage', 'node', 'next' ],
+        settings: {
+            buildCommand: 'npx next build',
+            serveCommand: 'npx next dev --port ${cliContext.port || malagu.server.port}'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"(dev)?(d|D)ependencies":\\s*{[^}]*"next":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'ionic-react',
         useRuntime: 'default',
         useMode: [ 'static' ],

@@ -211,7 +211,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const config = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
     const includes = config.includeModules;
-    const packagerOptions = { nonInteractive: true, ...config.packagerOptions };
+    const packagerOptions = { nonInteractive: true, ignoreOptional: true, ...config.packagerOptions };
     const scripts: any[] = packagerOptions.scripts || [];
 
     if (isEmpty(includes) && includes !== true || !configuration) {

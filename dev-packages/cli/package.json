@@ -6,6 +6,7 @@
     "access": "public"
   },
   "license": "MIT",
+  "eslintIgnore": ["templates"],
   "repository": {
     "type": "git",
     "url": "https://github.com/cellbang/malagu.git"

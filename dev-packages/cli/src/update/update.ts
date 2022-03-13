@@ -36,8 +36,9 @@ async function updatePackage(version: string, skipIntallingComponent?: boolean) 
     }
 }
 
-export default async (cliContext: CliContext, options: UpdateOptions) => {
+export default async (ctx: CliContext, options: UpdateOptions) => {
     try {
+        ctx.options = options;
         const version = options.version;
         if (version) {
             if (version !== pkg.version) {

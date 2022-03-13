@@ -4,6 +4,7 @@ export interface InstallOptions {
     nonInteractive?: boolean;
     networkConcurrency?: string;
     stdio?: string;
+    ignoreOptional?: boolean;
 }
 
 export interface PruneOptions {

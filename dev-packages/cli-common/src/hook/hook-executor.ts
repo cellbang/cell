@@ -1,11 +1,12 @@
-import { BuildContext, CliContext, ConfigContext, DeployContext, InfoContext, InitContext } from '../context/context-protocol';
+import { CliContext } from '../context/context-protocol';
 import { Module } from '../package/package-protocol';
 import { ConfigUtil } from '../utils/config-util';
 const chalk = require('chalk');
 
 export enum HookStage {
     on = 'default',
-    before = 'before'
+    before = 'before',
+    after = 'after'
 }
 
 export class HookExecutor {
@@ -20,12 +21,17 @@ export class HookExecutor {
         }
     }
 
-    executeBuildHooks(context: BuildContext, stage?: HookStage): Promise<any[]> {
+    executeBuildHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.buildHookModules;
         return this.doExecuteHooks(modules, context, 'buildHooks', stage);
     }
 
-    executeDeployHooks(context: DeployContext, stage?: HookStage): Promise<any[]> {
+    executeServeHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
+        const modules = context.pkg.serveHookModules;
+        return this.doExecuteHooks(modules, context, 'serveHooks', stage);
+    }
+
+    executeDeployHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.deployHookModules;
         return this.doExecuteHooks(modules, context, 'deployHooks', stage);
     }
@@ -35,17 +41,17 @@ export class HookExecutor {
         return this.doExecuteHooks(modules, context, 'cliHooks', stage);
     }
 
-    executeInitHooks(context: InitContext, stage?: HookStage): Promise<any[]> {
+    executeInitHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.initHookModules;
         return this.doExecuteHooks(modules, context, 'initHooks', stage);
     }
 
-    executeConfigHooks(context: ConfigContext, stage?: HookStage): Promise<any[]> {
+    executeConfigHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.configHookModules;
         return this.doExecuteHooks(modules, context, 'configHooks', stage);
     }
 
-    executeInfoHooks(context: InfoContext, stage?: HookStage): Promise<any[]> {
+    executeInfoHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.infoHookModules;
         return this.doExecuteHooks(modules, context, 'infoHooks', stage);
     }
@@ -65,7 +71,7 @@ export class HookExecutor {
             }
         }
 
-        return current !== false ? true : false;
+        return current === false ? false : true;
     }
 
     protected async doRequire(context: CliContext, path: string, stage: HookStage = HookStage.on) {

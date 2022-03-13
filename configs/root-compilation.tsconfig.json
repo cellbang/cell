@@ -150,6 +150,9 @@
     },
     {
       "path": "../plugins/node-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../plugins/next-plugin/compile.tsconfig.json"
     }
   ]
 }

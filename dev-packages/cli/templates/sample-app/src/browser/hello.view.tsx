@@ -32,7 +32,7 @@ export class Hello extends React.Component<Prop, State> {
                 <h1>{this.state.response}</h1>
                 <p>
                     For a guide and recipes on how to configure / customize this project,<br />
-                check out the <a href="https://www.yuque.com/cellbang/malagu" target="_blank" rel="noopener">malagu documentation</a>.
+                check out the <a href="https://malagu.cellbang.com/" target="_blank" rel="noopener">malagu documentation</a>.
                 </p>
             </div>
         </div>

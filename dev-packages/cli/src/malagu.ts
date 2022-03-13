@@ -4,6 +4,9 @@ import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-execut
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 import { program, Command } from '@malagu/cli-common/lib/command/command-protocol';
 import { BannerUtil } from './utils/banner-util';
+import build from './build/build';
+import serve from './serve/serve';
+import deploy from './deploy/deploy';
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const pkg = require('../package.json');
@@ -37,6 +40,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
             }
         });
     }
+
     program
         .version(version, '-V, --version', 'version for malagu')
         .option('-t, --targets [targets]', 'targets for malagu', value => value ? value.split(',') : [])
@@ -50,6 +54,30 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .action((template, options) => {
             require('./init/init').default({ template, ...options });
         });
+
+    program
+        .command('serve')
+        .option('-p, --port [port]', 'port used by the server')
+        .description('serve a applicaton')
+        .action((entry, options) => {
+            serve(context, { entry, ...options });
+        });
+
+    program
+        .command('build')
+        .description('build a application')
+        .action((entry, options) => {
+            build(context, { entry, ...options });
+        });
+
+    program
+        .command('deploy')
+        .option('-s, --skip-build [skipBuild]', 'skip the build process')
+        .description('deploy a applicaton')
+        .action((entry, options) => {
+            deploy(context, { entry, ...options });
+        });
+
     program
         .command('props')
         .description('display properties about application')

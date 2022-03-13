@@ -10,10 +10,9 @@ export interface PropsOptions {
     name?: string;
 }
 
-export default async (cliContext: CliContext, options: PropsOptions) => {
+export default async (ctx: CliContext, options: PropsOptions) => {
     try {
-        cliContext.options = options;
-        const ctx = cliContext;
+        ctx.options = options;
         let backendProps: any;
         let frontendProps: any;
 

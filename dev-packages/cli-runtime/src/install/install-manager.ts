@@ -3,7 +3,7 @@ import { existsSync, copy, readFile, writeFile } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
-import { ContextUtils, CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
@@ -79,7 +79,7 @@ export class InstallManager {
 
     async executeHooks(): Promise<void> {
         const outputDir = this.outputDir;
-        const initContext = await ContextUtils.createInitContext(await this.getCliContext());
+        const initContext = await this.getCliContext();
         await new HookExecutor().executeInitHooks(initContext);
         if (!this.opts.quiet) {
             console.log(chalk`{bold.green Success!} Installed "${ this.runtimeName }" runtime in {bold.blue ${outputDir}}.`);

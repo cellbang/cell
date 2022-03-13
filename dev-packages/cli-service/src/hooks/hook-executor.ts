@@ -23,6 +23,11 @@ export class HookExecutor extends BaseHookExecutor {
         return this.doExecuteHooks(modules, context, 'webpackHooks');
     }
 
+    executeAfterWebpackHooks(context: WebpackContext): Promise<any[]> {
+        const modules = context.pkg.webpackHookModules;
+        return this.doExecuteHooks(modules, context, 'webpackHooks', HookStage.after);
+    }
+
     executeBeforeWebpackHooks(context: WebpackContext): Promise<any[]> {
         const modules = context.pkg.webpackHookModules;
         return this.doExecuteHooks(modules, context, 'webpackHooks', HookStage.before);

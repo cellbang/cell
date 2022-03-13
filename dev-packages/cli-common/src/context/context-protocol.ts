@@ -21,6 +21,7 @@ export interface CliContext {
     framework?: Framework;
     settings?: Settings;
     output: Record<string, any>;
+    options?: Record<string, any>;
     [key: string]: any;
 }
 
@@ -32,6 +33,7 @@ export interface CreateCliContextOptions extends Record<string, any> {
     settings?: Settings;
     dev: boolean;
     runtime?: string;
+    port?: string;
     framework?: Framework;
 }
 
@@ -100,7 +102,7 @@ export namespace CliContext {
             const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
             jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, { ...config, ...otherConfig }));
 
-            await new HookExecutor().executeHooks({
+            const ctx = {
                 pkg,
                 cfg,
                 program,
@@ -109,20 +111,11 @@ export namespace CliContext {
                 expressionHandler,
                 output: {},
                 ...options
-            }, 'propsHooks', HookStage.before);
+            };
+
+            await new HookExecutor().executeHooks(ctx, 'propsHooks', HookStage.before);
 
             expressionHandler.handle(config);
-
-            await new HookExecutor().executeHooks({
-                pkg,
-                cfg,
-                program,
-                target,
-                props: config,
-                expressionHandler,
-                output: {},
-                ...options
-            }, 'propsHooks');
 
             delete config.pkg;
             delete config.cliContext;
@@ -138,6 +131,10 @@ export namespace CliContext {
                     delete config.env[key];
                 }
             }
+
+            await new HookExecutor().executeHooks(ctx, 'propsHooks');
+            await new HookExecutor().executeHooks(ctx, 'propsHooks', HookStage.after);
+
         }
     }
 
@@ -207,29 +204,11 @@ export namespace ContextUtils {
         return CliContext.create(options, projectPath);
     }
 
-    export function createInitContext(cliContext: CliContext): Promise<InitContext> {
-        return Promise.resolve(cliContext);
-    }
-
-    export async function createConfigContext(cliContext: CliContext): Promise<ConfigContext> {
+    export function mergeContext(cliContext: CliContext, options: Record<string, any> = {}) {
+        for (const key of Object.keys(options)) {
+            cliContext[key] = options[key];
+        }
         return cliContext;
-    }
-
-    export async function createInfoContext(cliContext: CliContext): Promise<ConfigContext> {
-        return cliContext;
-    }
-
-    export async function createDeployContext(cliContext: CliContext): Promise<DeployContext> {
-        return cliContext;
-    }
-
-    export async function createBuildContext(cliContext: CliContext): Promise<BuildContext> {
-        return cliContext;
-    }
-
-    export async function createPropsContext(
-        cliContext: CliContext, target: string, props: { [key: string]: any }, expressionHandler: ExpressionHandler): Promise<PropsContext> {
-        return { ...cliContext, target, props, expressionHandler };
     }
 
 }
@@ -244,6 +223,11 @@ export interface ConfigContext extends CliContext {
 
 export interface InfoContext extends CliContext {
 
+}
+
+export interface ServeContext extends CliContext {
+    dev?: boolean;
+    port?: string;
 }
 
 export interface PropsContext extends CliContext {

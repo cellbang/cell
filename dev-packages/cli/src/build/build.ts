@@ -3,15 +3,12 @@ import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context
 import { BuildManager } from './build-manager';
 
 export interface BuildOptions {
-    entry?: string;
 }
 
-export default async (cliContext: CliContext, options: BuildOptions) => {
+export default async (ctx: CliContext, options: BuildOptions) => {
     try {
-        const ctx = await ContextUtils.createBuildContext({
-            ...cliContext,
-            ...options
-        });
+        ctx.options = options;
+        ctx = ContextUtils.mergeContext(ctx, options);
         await new BuildManager(ctx).build();
     } catch (error) {
         console.error(error);

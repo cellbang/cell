@@ -8,7 +8,7 @@ import { EntryConfigFactory } from './entry-config-factory';
 import { OutputConfigFactory } from './output-config-factory';
 import { DevServerConfigFactory } from './dev-server-config-factory';
 import { DotenvPluginConfigFactory, CopyWebpackPluginConfigFactory, FilterWarningsPluginConfigFactory, FriendlyErrorsWebpackPluginConfigFactory,
-    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory,
+    HtmlWebpackTagsPluginConfigFactory, HtmlWebpackPluginConfigFactory, CleanWebpackPluginConfigFactory, AssetsPluginConfigFactory,
     ProgressPluginConfigFactory, DefinePluginConfigFactory, NormalModuleReplacementPluginConfigFactory, NodePolyfillPluginConfigFactory } from './plugin-config-factory';
 import { MalaguYamlConfigFactory } from './malagu-yaml-config-factory';
 import { ComponentConfigConfigFactory, ComponentConfigFactory } from './component-config-factory';
@@ -29,6 +29,7 @@ export class ConfigFactory {
             new OutputConfigFactory(),
             new DevServerConfigFactory(),
             new FriendlyErrorsWebpackPluginConfigFactory(),
+            new AssetsPluginConfigFactory(),
             new CopyWebpackPluginConfigFactory(),
             new ComponentConfigFactory(),
             new MalaguYamlConfigFactory(),
@@ -77,6 +78,11 @@ export class ConfigFactory {
         }
 
         await new HookExecutor().executeWebpackHooks({
+            ...ctx,
+            configurations
+        });
+
+        await new HookExecutor().executeAfterWebpackHooks({
             ...ctx,
             configurations
         });

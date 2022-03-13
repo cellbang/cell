@@ -2,6 +2,7 @@ const path = '{{ path }}';
 const port = parseInt('{{ port }}');
 process.env.SERVER_PATH = path;
 process.env.SERVER_PORT = port + '';
+process.env.PORT = port + '';
 const app = require('{{ entry }}');
 (async () => {
     let server;

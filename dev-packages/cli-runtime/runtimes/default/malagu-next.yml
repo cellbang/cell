@@ -1,0 +1,10 @@
+devComponents:
+  '@malagu/next-plugin': ${version}
+backend:
+  entry: '@malagu/next-plugin/lib/next-entry'
+  malagu:
+    cli-service:
+      serveHooks: false
+    webpack:
+      filterWarningsPlugin:
+        node: []

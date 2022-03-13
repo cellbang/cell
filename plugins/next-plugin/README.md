@@ -1,0 +1,1 @@
+# Malagu - Next Plugin Component
