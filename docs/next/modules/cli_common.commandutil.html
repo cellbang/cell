@@ -74,11 +74,16 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#executecommand" class="tsd-kind-icon">execute<wbr>Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported"><a href="cli_common.commandutil.html#getarrayoptions" class="tsd-kind-icon">get<wbr>Array<wbr>Options</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getbuildcommand" class="tsd-kind-icon">get<wbr>Build<wbr>Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getcommandbyname" class="tsd-kind-icon">get<wbr>Command<wbr>ByName</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getconfigcommand" class="tsd-kind-icon">get<wbr>Config<wbr>Command</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getdeploycommand" class="tsd-kind-icon">get<wbr>Deploy<wbr>Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported"><a href="cli_common.commandutil.html#getmode" class="tsd-kind-icon">get<wbr>Mode</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getpkg" class="tsd-kind-icon">get<wbr>Pkg</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported"><a href="cli_common.commandutil.html#getport" class="tsd-kind-icon">get<wbr>Port</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#getservecommand" class="tsd-kind-icon">get<wbr>Serve<wbr>Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported"><a href="cli_common.commandutil.html#gettargets" class="tsd-kind-icon">get<wbr>Targets</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace"><a href="cli_common.commandutil.html#includescommand" class="tsd-kind-icon">includes<wbr>Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported"><a href="cli_common.commandutil.html#isdev" class="tsd-kind-icon">is<wbr>Dev</a></li>
@@ -90,6 +95,35 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="executecommand" class="tsd-anchor"></a>
+					<h3>execute<wbr>Command</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Command<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a>, commandType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, renderer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L111">dev-packages/cli-common/src/utils/command-util.ts:111</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ctx: <a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+								<li>
+									<h5>commandType: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> renderer: <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = async (command: string, target: string) &#x3D;&gt; command</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
 					<a name="getarrayoptions" class="tsd-anchor"></a>
 					<h3>get<wbr>Array<wbr>Options</h3>
@@ -100,7 +134,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L26">dev-packages/cli-common/src/utils/command-util.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L36">dev-packages/cli-common/src/utils/command-util.ts:36</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -120,6 +154,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="getbuildcommand" class="tsd-anchor"></a>
+					<h3>get<wbr>Build<wbr>Command</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Build<wbr>Command<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L94">dev-packages/cli-common/src/utils/command-util.ts:94</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ctx: <a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
 					<a name="getcommandbyname" class="tsd-anchor"></a>
 					<h3>get<wbr>Command<wbr>ByName</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
@@ -129,7 +186,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L71">dev-packages/cli-common/src/utils/command-util.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L85">dev-packages/cli-common/src/utils/command-util.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -155,7 +212,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L80">dev-packages/cli-common/src/utils/command-util.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L107">dev-packages/cli-common/src/utils/command-util.ts:107</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ctx: <a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="getdeploycommand" class="tsd-anchor"></a>
+					<h3>get<wbr>Deploy<wbr>Command</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Deploy<wbr>Command<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L99">dev-packages/cli-common/src/utils/command-util.ts:99</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -178,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L36">dev-packages/cli-common/src/utils/command-util.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L46">dev-packages/cli-common/src/utils/command-util.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -204,7 +284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L11">dev-packages/cli-common/src/utils/command-util.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L20">dev-packages/cli-common/src/utils/command-util.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -221,6 +301,52 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
+					<a name="getport" class="tsd-anchor"></a>
+					<h3>get<wbr>Port</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Port<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L81">dev-packages/cli-common/src/utils/command-util.ts:81</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace">
+					<a name="getservecommand" class="tsd-anchor"></a>
+					<h3>get<wbr>Serve<wbr>Command</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Serve<wbr>Command<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L103">dev-packages/cli-common/src/utils/command-util.ts:103</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ctx: <a href="cli_common.clicontext.html" class="tsd-signature-type">CliContext</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Command</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
 					<a name="gettargets" class="tsd-anchor"></a>
 					<h3>get<wbr>Targets</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
@@ -230,7 +356,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L67">dev-packages/cli-common/src/utils/command-util.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L77">dev-packages/cli-common/src/utils/command-util.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -253,7 +379,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L51">dev-packages/cli-common/src/utils/command-util.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L61">dev-packages/cli-common/src/utils/command-util.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -279,7 +405,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L63">dev-packages/cli-common/src/utils/command-util.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L73">dev-packages/cli-common/src/utils/command-util.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -305,7 +431,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/5d0a2c5f0/dev-packages/cli-common/src/utils/command-util.ts#L17">dev-packages/cli-common/src/utils/command-util.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/dev-packages/cli-common/src/utils/command-util.ts#L26">dev-packages/cli-common/src/utils/command-util.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -386,8 +512,14 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="cli_common.commandutil.html#executecommand" class="tsd-kind-icon">execute<wbr>Command</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
 						<a href="cli_common.commandutil.html#getarrayoptions" class="tsd-kind-icon">get<wbr>Array<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="cli_common.commandutil.html#getbuildcommand" class="tsd-kind-icon">get<wbr>Build<wbr>Command</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="cli_common.commandutil.html#getcommandbyname" class="tsd-kind-icon">get<wbr>Command<wbr>ByName</a>
@@ -395,11 +527,20 @@
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="cli_common.commandutil.html#getconfigcommand" class="tsd-kind-icon">get<wbr>Config<wbr>Command</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="cli_common.commandutil.html#getdeploycommand" class="tsd-kind-icon">get<wbr>Deploy<wbr>Command</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
 						<a href="cli_common.commandutil.html#getmode" class="tsd-kind-icon">get<wbr>Mode</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace">
 						<a href="cli_common.commandutil.html#getpkg" class="tsd-kind-icon">get<wbr>Pkg</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
+						<a href="cli_common.commandutil.html#getport" class="tsd-kind-icon">get<wbr>Port</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-namespace">
+						<a href="cli_common.commandutil.html#getservecommand" class="tsd-kind-icon">get<wbr>Serve<wbr>Command</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-namespace tsd-is-not-exported">
 						<a href="cli_common.commandutil.html#gettargets" class="tsd-kind-icon">get<wbr>Targets</a>
