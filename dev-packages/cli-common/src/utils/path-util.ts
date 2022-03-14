@@ -54,8 +54,8 @@ export namespace PathUtil {
         return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.malagu');
     }
 
-    export function getGlobalMalaguConfigPath() {
-        return process.env.GLOBAL_MALAGU_CONFIG_PATH ? process.env.GLOBAL_MALAGU_CONFIG_PATH : path.resolve(getMalaguHomePath(), 'malagu.yml');
+    export function getGlobalMalaguPropsDirPath() {
+        return process.env.GLOBAL_MALAGU_PROPS_DIR_PATH ? process.env.GLOBAL_MALAGU_PROPS_DIR_PATH : getMalaguHomePath();
     }
 
     export function getRuntimePath(runtime?: string) {

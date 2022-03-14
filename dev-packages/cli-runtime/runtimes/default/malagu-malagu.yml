@@ -1,2 +1,4 @@
 targets: [ 'frontend', 'backend' ]
-mode: "${'fc' in currentMode ? 'fc-adapter' : 'lambda' in currentMode ? 'lambda-adapter' : 'server' in currentMode ? 'server-adapter' : 'vercel' in currentMode ? 'vercel-adapter' : 'scf' in currentMode ? 'scf-adapter' : '' }"
+mode: "${currentMode|toObjects[.item in [ 'fc', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adaper')}"
+devComponents:
+  '@malagu/cli-service': ${version}

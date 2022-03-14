@@ -1,4 +1,4 @@
-mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'api-gateway-basic' in currentMode ? 'api-gateway-basic-mode' : 'http-mode'}"
+mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'timer', 'api-gateway-basic', 'event']]|suffix('-mode') || 'http-mode'}"
 malagu:
   cloud:
     namespace:
