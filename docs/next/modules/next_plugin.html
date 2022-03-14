@@ -74,7 +74,9 @@
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#app" class="tsd-kind-icon">app</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#handle" class="tsd-kind-icon">handle</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#hostname" class="tsd-kind-icon">hostname</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#localrequire" class="tsd-kind-icon">local<wbr>Require</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#next" class="tsd-kind-icon">next</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#nextlibpath" class="tsd-kind-icon">next<wbr>Lib<wbr>Path</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#parse" class="tsd-kind-icon">parse</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="next_plugin.html#port" class="tsd-kind-icon">port</a></li>
 							</ul>
@@ -90,7 +92,7 @@
 					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = next({ dev: false, hostname, port })</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L6">plugins/next-plugin/src/next-entry.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L8">plugins/next-plugin/src/next-entry.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -100,7 +102,7 @@
 					<div class="tsd-signature tsd-kind-icon">handle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = app.getRequestHandler()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L7">plugins/next-plugin/src/next-entry.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L9">plugins/next-plugin/src/next-entry.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,17 +112,37 @@
 					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"0.0.0.0"</span><span class="tsd-signature-symbol"> = &quot;0.0.0.0&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L5">plugins/next-plugin/src/next-entry.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L7">plugins/next-plugin/src/next-entry.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="localrequire" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> local<wbr>Require</h3>
+					<div class="tsd-signature tsd-kind-icon">local<wbr>Require<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = eval(&#x27;require&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L3">plugins/next-plugin/src/next-entry.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="next" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> next</h3>
-					<div class="tsd-signature tsd-kind-icon">next<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = require(require.resolve(&#x27;next&#x27;, { paths: [ process.cwd() ] }))</span></div>
+					<div class="tsd-signature tsd-kind-icon">next<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = localRequire(nextLibPath)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L3">plugins/next-plugin/src/next-entry.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L5">plugins/next-plugin/src/next-entry.ts:5</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="nextlibpath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> next<wbr>Lib<wbr>Path</h3>
+					<div class="tsd-signature tsd-kind-icon">next<wbr>Lib<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = localRequire.resolve(&#x27;next&#x27;, { paths: [process.cwd()] })</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L4">plugins/next-plugin/src/next-entry.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -130,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L2">plugins/next-plugin/src/next-entry.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L2">plugins/next-plugin/src/next-entry.ts:2</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -140,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = parseInt(process.env.SERVER_PORT || &#x27;&#x27;) || 9000</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/4a1047b60/plugins/next-plugin/src/next-entry.ts#L4">plugins/next-plugin/src/next-entry.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/eb1f2db4b/plugins/next-plugin/src/next-entry.ts#L6">plugins/next-plugin/src/next-entry.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +191,13 @@
 						<a href="next_plugin.html#hostname" class="tsd-kind-icon">hostname</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="next_plugin.html#localrequire" class="tsd-kind-icon">local<wbr>Require</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="next_plugin.html#next" class="tsd-kind-icon">next</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="next_plugin.html#nextlibpath" class="tsd-kind-icon">next<wbr>Lib<wbr>Path</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="next_plugin.html#parse" class="tsd-kind-icon">parse</a>
