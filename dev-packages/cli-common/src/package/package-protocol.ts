@@ -18,6 +18,8 @@ export class ApplicationPackageOptions {
     readonly log?: ApplicationLog;
     readonly error?: ApplicationLog;
     readonly settings?: Settings;
+    readonly propsDir?: string;
+    readonly propsFile?: string;
     readonly framework?: Framework;
 }
 

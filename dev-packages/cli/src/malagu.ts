@@ -45,6 +45,8 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
         .version(version, '-V, --version', 'version for malagu')
         .option('-t, --targets [targets]', 'targets for malagu', value => value ? value.split(',') : [])
         .option('-m, --mode [mode]', 'mode for malagu', value => value ? value.split(',') : [])
+        .option('--props-dir [props-dir]', 'props directory for malagu')
+        .option('--props-file [props-file]', 'props file for malagu')
         .usage('<command> [options]');
 
     program

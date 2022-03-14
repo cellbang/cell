@@ -22,6 +22,8 @@ export interface CliContext {
     settings?: Settings;
     output: Record<string, any>;
     options?: Record<string, any>;
+    propsDir?: string;
+    propsFile?: string;
     [key: string]: any;
 }
 
@@ -34,6 +36,9 @@ export interface CreateCliContextOptions extends Record<string, any> {
     dev: boolean;
     runtime?: string;
     port?: string;
+    options?: Record<string, any>;
+    propsDir?: string;
+    propsFile?: string;
     framework?: Framework;
 }
 
@@ -158,7 +163,9 @@ export namespace CliContext {
             mode.push(...framework.useMode);
         }
         mode = Array.from(new Set<string>(mode));
-        const pkg = ApplicationPackage.create({ projectPath, runtime, mode, dev: options.dev, settings: options.settings, framework });
+        const pkg = ApplicationPackage.create({
+            projectPath, runtime, mode, dev: options.dev, propsDir: options.propsDir, propsFile: options.propsFile, settings: options.settings, framework
+        });
         await installComponents(pkg, options.spinner);
 
         const cfg = new ApplicationConfig({ targets, program }, pkg);

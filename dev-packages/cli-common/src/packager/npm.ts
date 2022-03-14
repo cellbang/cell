@@ -104,7 +104,7 @@ export class NPM implements Packager {
         const args = ['install'];
         if (opts?.ignoreOptional) {
             args.push('--no-optional');
-            args.push('--no-package-lock')
+            args.push('--no-package-lock');
         }
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }

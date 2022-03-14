@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.16.0
+
+- feat(cli) 支持根命令参数 `--props-dir` 和 `--props-file`，用于指定额外的自定义属性文件位置，优先级比项目级别的属性文件高，方便开发者透传属性配置
+- fix(cli) 把全局属性配置文件改为全局配置目录，基于环境变量 `GLOBAL_MALAGU_PROPS_DIR_PATH` 自定义，默认是 `~/.malagu`
+
 ## 2.15.2
 
 - fix(next-plugin) 修复 `next` 模块找不到错误

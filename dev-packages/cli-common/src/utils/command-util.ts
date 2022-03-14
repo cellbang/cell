@@ -30,11 +30,13 @@ export namespace CommandUtil {
         const port = getPort(options);
         const targets = getTargets(options);
         const prod = options.p || options.prod;
-        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), port, spinner, runtime, framework, settings });
+        const propsDir = getPropsDir(options);
+        const propsFile = getPropsFile(options);
+        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), port, spinner, runtime, framework, settings, propsFile, propsDir });
     }
 
-    function getArrayOptions(options: any, prop: string, shortProp: string): string[] {
-        const value = options[prop] || options[shortProp];
+    function getArrayOptions(options: any, prop: string, shortProp?: string): string[] {
+        const value = options[prop] || shortProp && options[shortProp];
         if (Array.isArray(value)) {
             return value.reduce((accumulator, currentValue) => [...accumulator, ...currentValue.split(',')], []);
         } else if (typeof value === 'string') {
@@ -80,6 +82,14 @@ export namespace CommandUtil {
 
     function getPort(options: any) {
         return getArrayOptions(options, 'port', 'p').pop();
+    }
+
+    function getPropsDir(options: any) {
+        return getArrayOptions(options, 'props-dir').pop();
+    }
+
+    function getPropsFile(options: any) {
+        return getArrayOptions(options, 'props-file').pop();
     }
 
     export function getCommandByName(ctx: CliContext, name: string) {

@@ -1,6 +1,7 @@
 targets:
   - backend
 devComponents:
+  '@malagu/cli-service': ${version}
   '@malagu/node-plugin': ${version}
 malagu:
   server:

@@ -9,9 +9,10 @@ import { ComponentPackageLoader } from './component-package-loader';
 import { Module } from './package-protocol';
 
 import { ComponentPackageResolver } from './component-package-resolver';
-import { existsSync } from 'fs-extra';
+import { existsSync, readFileSync } from 'fs-extra';
 import { PathUtil } from '../utils/path-util';
 import { ConfigUtil } from '../utils/config-util';
+import { load } from 'js-yaml';
 import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 
 // tslint:disable:no-implicit-dependencies
@@ -103,7 +104,7 @@ export class ApplicationPackage {
     protected _rootComponentPackage: ComponentPackage;
 
     createVirtualPkg(modulePath: string = process.cwd()) {
-        return { malaguComponent: { mode: [] }, modulePath: process.cwd() };
+        return { malaguComponent: { mode: [] }, modulePath };
     }
 
     get rootComponentPackage() {
@@ -118,9 +119,21 @@ export class ApplicationPackage {
             } else {
                 this.componentPackageLoader.load(this.pkg, this.options.mode);
             }
-            const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguConfigPath());
+            const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguPropsDirPath());
             this.componentPackageLoader.load(globalVirtualPkg, this.options.mode);
             this.pkg.malaguComponent = ConfigUtil.merge(globalVirtualPkg.malaguComponent, this.pkg.malaguComponent);
+
+            if (this.options.propsDir) {
+                const propsDirVirtualPkg = this.createVirtualPkg(this.options.propsDir);
+                this.componentPackageLoader.load(propsDirVirtualPkg, this.options.mode);
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, propsDirVirtualPkg.malaguComponent);
+            }
+
+            if (this.options.propsFile) {
+                const props = load(readFileSync(paths.resolve(process.cwd(), this.options.propsFile), { encoding: 'utf8' }));
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, props);
+            }
+
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
