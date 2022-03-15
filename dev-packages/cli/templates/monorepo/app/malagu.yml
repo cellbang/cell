@@ -1,7 +1,0 @@
-malagu:
-  webpack:
-    config:
-      devServer:
-        watchOptions: # 优化 monorepo 项目热替换体验
-          aggregateTimeout: 1500
-          ignored: [ '**/*.ts' ]

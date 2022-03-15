@@ -1,8 +1,9 @@
 # Change Log
 
-## 2.16.1
+## 2.16.2
 
 - fix(cli-service) 修复webpack插件错误
+- feat(ext-scripts) 优化代码
 
 ## 2.16.0
 

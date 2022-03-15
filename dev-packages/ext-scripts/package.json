@@ -30,7 +30,20 @@
     "rimraf": "^2.6.1",
     "temp": "^0.8.3",
     "tslint": "^5.12.0",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "@types/chai-string": "^1.4.0",
+    "@types/jsdom": "^11.0.4",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "12",
+    "@types/sinon": "^10.0.3",
+    "chai-string": "^1.4.0",
+    "mocha": "^9.0.3",
+    "jsdom": "^16.6.0",
+    "lerna": "^4.0.0",
+    "sinon": "^11.1.2",
+    "typedoc": "^0.17.7",
+    "typedoc-plugin-external-module-map": "~1.2.1",
+    "typedoc-plugin-remove-references": "^0.0.5"
   },
   "scripts": {
     "ext:clean": "malaguext compile:clean && malaguext lint:clean && malaguext test:clean",
@@ -41,8 +54,8 @@
     "ext:lint:clean": "rimraf .eslintcache",
     "ext:watch": "tsc -p compile.tsconfig.json -w",
     "ext:watch:slow": "tsc -b compile.tsconfig.json -w",
-    "ext:test": "nyc mocha --opts ../../configs/mocha.opts \"./lib/**/*.*spec.js\"",
-    "ext:test:watch": "mocha -w --opts ../../configs/mocha.opts \"./lib/**/*.*spec.js\"",
+    "ext:test": "nyc mocha --config ../../configs/mocharc.yml \"./lib/**/*.*spec.js\"",
+    "ext:test:watch": "mocha -w --config ../../configs/mocharc.yml \"./lib/**/*.*spec.js\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
