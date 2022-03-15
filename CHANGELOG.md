@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.16.1
+
+- fix(cli-service) 修复webpack插件错误
+
 ## 2.16.0
 
 - feat(cli) 支持根命令参数 `--props-dir` 和 `--props-file`，用于指定额外的自定义属性文件位置，优先级比项目级别的属性文件高，方便开发者透传属性配置
