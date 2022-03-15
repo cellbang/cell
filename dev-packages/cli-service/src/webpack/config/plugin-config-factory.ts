@@ -280,7 +280,7 @@ export class ProgressPluginConfigFactory {
 export class NodePolyfillPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
-        config.plugin('progressBar').use(NodePolyfillPlugin);
+        config.plugin('nodePolyfill').use(NodePolyfillPlugin);
     }
 
     support(context: CliContext, target: string): boolean {
