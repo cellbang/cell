@@ -12,6 +12,5 @@ export const templates: any = {
     'microservice': '{{ templatePath }}/microservice',
     'file-service': '{{ templatePath }}/file-service',
     'puppeteer': '{{ templatePath }}/puppeteer',
-    'monorepo': '{{ templatePath }}/monorepo',
     'mycli': '{{ templatePath }}/mycli'
 };

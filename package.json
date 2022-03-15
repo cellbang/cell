@@ -9,21 +9,7 @@
   "resolution": {
     "**/@types/node": "12"
   },
-  "devDependencies": {
-    "@types/chai-string": "^1.4.0",
-    "@types/jsdom": "^11.0.4",
-    "@types/mocha": "^8.2.0",
-    "@types/node": "12",
-    "@types/sinon": "^10.0.3",
-    "chai-string": "^1.4.0",
-    "electron-mocha": "^8.2.0",
-    "jsdom": "^16.6.0",
-    "lerna": "^4.0.0",
-    "sinon": "^11.1.2",
-    "typedoc": "^0.17.7",
-    "typedoc-plugin-external-module-map": "~1.2.1",
-    "typedoc-plugin-remove-references": "^0.0.5"
-  },
+  "devDependencies": {},
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "prepare": "yarn run prepare:references && yarn run prepare:build",
