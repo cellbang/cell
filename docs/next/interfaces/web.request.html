@@ -147,6 +147,8 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#rawheaders" class="tsd-kind-icon">raw<wbr>Headers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#rawtrailers" class="tsd-kind-icon">raw<wbr>Trailers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readable" class="tsd-kind-icon">readable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readableaborted" class="tsd-kind-icon">readable<wbr>Aborted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readabledidread" class="tsd-kind-icon">readable<wbr>Did<wbr>Read</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readableencoding" class="tsd-kind-icon">readable<wbr>Encoding</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readableended" class="tsd-kind-icon">readable<wbr>Ended</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#readableflowing" class="tsd-kind-icon">readable<wbr>Flowing</a></li>
@@ -165,16 +167,13 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#trailers" class="tsd-kind-icon">trailers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited"><a href="web.request.html#url" class="tsd-kind-icon">url</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#xhr" class="tsd-kind-icon">xhr</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#capturerejectionsymbol" class="tsd-kind-icon">capture<wbr>Rejection<wbr>Symbol</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#capturerejections" class="tsd-kind-icon">capture<wbr>Rejections</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#errormonitor" class="tsd-kind-icon">error<wbr>Monitor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#_construct" class="tsd-kind-icon">_construct</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#_destroy" class="tsd-kind-icon">_destroy</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#_read" class="tsd-kind-icon">_read</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#accepts" class="tsd-kind-icon">accepts</a></li>
@@ -214,9 +213,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#unshift" class="tsd-kind-icon">unshift</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#wrap" class="tsd-kind-icon">wrap</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#from" class="tsd-kind-icon">from</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#listenercount-1" class="tsd-kind-icon">listener<wbr>Count</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#on-1" class="tsd-kind-icon">on</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited tsd-is-static"><a href="web.request.html#once-1" class="tsd-kind-icon">once</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#isdisturbed" class="tsd-kind-icon">is<wbr>Disturbed</a></li>
 							</ul>
 						</section>
 					</div>
@@ -236,7 +233,7 @@
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#constructor">constructor</a></p>
 								<p>Overrides Readable.__constructor</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:344</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:785</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -259,9 +256,23 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#aborted">aborted</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:347</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:793</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The <code>message.aborted</code> property will be <code>true</code> if the request has
+							been aborted.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v10.1.0</p>
+							</dd>
+							<dt>deprecated</dt>
+							<dd><p>Since v17.0.0 - Check <code>message.destroyed</code> from <a href="https://nodejs.org/dist/latest-v17.x/docs/api/stream.html#class-streamreadable">stream.Readable</a>.</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="accepted" class="tsd-anchor"></a>
@@ -320,9 +331,34 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#complete">complete</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:351</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:828</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The <code>message.complete</code> property will be <code>true</code> if a complete HTTP message has
+							been received and successfully parsed.</p>
+						</div>
+						<p>This property is particularly useful as a means of determining if a client or
+						server fully transmitted a message before a connection was terminated:</p>
+						<pre><code class="language-js"><span class="hljs-keyword">const</span> req = http.request({
+  <span class="hljs-attr">host</span>: <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>,
+  <span class="hljs-attr">port</span>: <span class="hljs-number">8080</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>
+}, <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+  res.resume();
+  res.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!res.complete)
+      <span class="hljs-built_in">console</span>.error(
+        <span class="hljs-string">&#x27;The connection was terminated while the message was still being sent&#x27;</span>);
+  });
+});</code></pre>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.3.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="connection" class="tsd-anchor"></a>
@@ -331,9 +367,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#connection">connection</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:352</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:834</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Alias for <code>message.socket</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.1.90</p>
+							</dd>
+							<dt>deprecated</dt>
+							<dd><p>Since v16.0.0 - Use <code>socket</code>.</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="cookies" class="tsd-anchor"></a>
@@ -353,9 +402,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#destroyed">destroyed</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:33</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:115</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is <code>true</code> after <code>readable.destroy()</code> has been called.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v8.0.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="fresh" class="tsd-anchor"></a>
@@ -382,9 +441,35 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#headers">headers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:353</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:871</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The request/response headers object.</p>
+						</div>
+						<p>Key-value pairs of header names and values. Header names are lower-cased.</p>
+						<pre><code class="language-js"><span class="hljs-comment">// Prints something like:</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// { &#x27;user-agent&#x27;: &#x27;curl/7.22.0&#x27;,</span>
+<span class="hljs-comment">//   host: &#x27;127.0.0.1:8000&#x27;,</span>
+<span class="hljs-comment">//   accept: &#x27;*&#x27; }</span>
+<span class="hljs-built_in">console</span>.log(request.headers);</code></pre>
+						<p>Duplicates in raw headers are handled in the following ways, depending on the
+						header name:</p>
+						<ul>
+							<li>Duplicates of <code>age</code>, <code>authorization</code>, <code>content-length</code>, <code>content-type</code>,<code>etag</code>, <code>expires</code>, <code>from</code>, <code>host</code>, <code>if-modified-since</code>, <code>if-unmodified-since</code>,<code>last-modified</code>, <code>location</code>,
+							<code>max-forwards</code>, <code>proxy-authorization</code>, <code>referer</code>,<code>retry-after</code>, <code>server</code>, or <code>user-agent</code> are discarded.</li>
+							<li><code>set-cookie</code> is always an array. Duplicates are added to the array.</li>
+							<li>For duplicate <code>cookie</code> headers, the values are joined together with &#39;; &#39;.</li>
+							<li>For all other headers, the values are joined together with &#39;, &#39;.</li>
+						</ul>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.1.5</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="host" class="tsd-anchor"></a>
@@ -427,9 +512,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversion">httpVersion</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:348</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:802</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>In case of server request, the HTTP version sent by the client. In the case of
+								client response, the HTTP version of the connected-to server.
+							Probably either <code>&#39;1.1&#39;</code> or <code>&#39;1.0&#39;</code>.</p>
+						</div>
+						<p>Also <code>message.httpVersionMajor</code> is the first integer and<code>message.httpVersionMinor</code> is the second.</p>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.1.1</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="httpversionmajor" class="tsd-anchor"></a>
@@ -438,7 +536,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversionmajor">httpVersionMajor</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:349</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:803</li>
 						</ul>
 					</aside>
 				</section>
@@ -449,7 +547,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversionminor">httpVersionMinor</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:350</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:804</li>
 						</ul>
 					</aside>
 				</section>
@@ -591,9 +689,34 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawheaders">rawHeaders</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:354</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:896</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The raw request/response headers list exactly as they were received.</p>
+						</div>
+						<p>The keys and values are in the same list. It is <em>not</em> a
+							list of tuples. So, the even-numbered offsets are key values, and the
+						odd-numbered offsets are the associated values.</p>
+						<p>Header names are not lowercased, and duplicates are not merged.</p>
+						<pre><code class="language-js"><span class="hljs-comment">// Prints something like:</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// [ &#x27;user-agent&#x27;,</span>
+<span class="hljs-comment">//   &#x27;this is invalid because there can be only one&#x27;,</span>
+<span class="hljs-comment">//   &#x27;User-Agent&#x27;,</span>
+<span class="hljs-comment">//   &#x27;curl/7.22.0&#x27;,</span>
+<span class="hljs-comment">//   &#x27;Host&#x27;,</span>
+<span class="hljs-comment">//   &#x27;127.0.0.1:8000&#x27;,</span>
+<span class="hljs-comment">//   &#x27;ACCEPT&#x27;,</span>
+<span class="hljs-comment">//   &#x27;*&#x27; ]</span>
+<span class="hljs-built_in">console</span>.log(request.rawHeaders);</code></pre>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.11.6</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="rawtrailers" class="tsd-anchor"></a>
@@ -602,9 +725,20 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawtrailers">rawTrailers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:356</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:907</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The raw request/response trailer keys and values exactly as they were
+							received. Only populated at the <code>&#39;end&#39;</code> event.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.11.6</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readable" class="tsd-anchor"></a>
@@ -613,9 +747,66 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readable">readable</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:26</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:71</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is <code>true</code> if it is safe to call <code>readable.read()</code>, which means
+							the stream has not been destroyed or emitted <code>&#39;error&#39;</code> or <code>&#39;end&#39;</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v11.4.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="readableaborted" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> readable<wbr>Aborted</h3>
+					<div class="tsd-signature tsd-kind-icon">readable<wbr>Aborted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableaborted">readableAborted</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:65</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns whether the stream was destroyed or errored before emitting <code>&#39;end&#39;</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v16.8.0</p>
+							</dd>
+							<dt>experimental</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="readabledidread" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> readable<wbr>Did<wbr>Read</h3>
+					<div class="tsd-signature tsd-kind-icon">readable<wbr>Did<wbr>Read<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readabledidread">readableDidRead</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:77</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns whether <code>&#39;data&#39;</code> has been emitted.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v16.7.0, v14.18.0</p>
+							</dd>
+							<dt>experimental</dt>
+							<dd></dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readableencoding" class="tsd-anchor"></a>
@@ -624,9 +815,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableencoding">readableEncoding</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:27</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:82</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Getter for the property <code>encoding</code> of a given <code>Readable</code> stream. The <code>encoding</code>property can be set using the <code>readable.setEncoding()</code> method.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v12.7.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readableended" class="tsd-anchor"></a>
@@ -635,9 +836,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableended">readableEnded</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:28</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:87</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Becomes <code>true</code> when <code>&#39;end&#39;</code> event is emitted.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v12.9.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readableflowing" class="tsd-anchor"></a>
@@ -646,9 +857,20 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableflowing">readableFlowing</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:29</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:93</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This property reflects the current state of a <code>Readable</code> stream as described
+							in the <code>Three states</code> section.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v9.4.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readablehighwatermark" class="tsd-anchor"></a>
@@ -657,9 +879,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readablehighwatermark">readableHighWaterMark</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:30</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:98</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns the value of <code>highWaterMark</code> passed when creating this <code>Readable</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v9.3.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readablelength" class="tsd-anchor"></a>
@@ -668,9 +900,21 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readablelength">readableLength</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:31</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:105</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This property contains the number of bytes (or objects) in the queue
+								ready to be read. The value provides introspection data regarding
+							the status of the <code>highWaterMark</code>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v9.4.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="readableobjectmode" class="tsd-anchor"></a>
@@ -679,9 +923,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableobjectmode">readableObjectMode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:32</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:110</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Getter for the property <code>objectMode</code> of a given <code>Readable</code> stream.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v12.3.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="res" class="tsd-anchor"></a>
@@ -746,9 +1000,24 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#socket">socket</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:374</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:846</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The <code>net.Socket</code> object associated with the connection.</p>
+						</div>
+						<p>With HTTPS support, use <code>request.socket.getPeerCertificate()</code> to obtain the
+						client&#39;s authentication details.</p>
+						<p>This property is guaranteed to be an instance of the <code>net.Socket</code> class,
+							a subclass of <code>stream.Duplex</code>, unless the user specified a socket
+						type other than <code>net.Socket</code>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.3.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="stale" class="tsd-anchor"></a>
@@ -775,13 +1044,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#statuscode">statusCode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:369</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:966</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Only valid for response obtained from http.ClientRequest.</p>
+							<p><strong>Only valid for response obtained from {@link ClientRequest}.</strong></p>
 						</div>
+						<p>The 3-digit HTTP response status code. E.G. <code>404</code>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.1.1</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -791,13 +1066,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#statusmessage">statusMessage</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:373</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:973</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Only valid for response obtained from http.ClientRequest.</p>
+							<p><strong>Only valid for response obtained from {@link ClientRequest}.</strong></p>
 						</div>
+						<p>The HTTP response status message (reason phrase). E.G. <code>OK</code> or <code>Internal Server Error</code>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.11.10</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -825,20 +1106,22 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="trailers" class="tsd-anchor"></a>
 					<h3>trailers</h3>
-					<div class="tsd-signature tsd-kind-icon">trailers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<div class="tsd-signature tsd-kind-icon">trailers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Dict</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#trailers">trailers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:355</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:901</li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-							</li>
-						</ul>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The request/response trailers object. Only populated at the <code>&#39;end&#39;</code> event.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v0.3.0</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited">
@@ -869,65 +1152,6 @@
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="capturerejectionsymbol" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> capture<wbr>Rejection<wbr>Symbol</h3>
-					<div class="tsd-signature tsd-kind-icon">capture<wbr>Rejection<wbr>Symbol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">symbol</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#capturerejectionsymbol">captureRejectionSymbol</a></p>
-						<ul>
-							<li>Defined in node_modules/@types/node/events.d.ts:30</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="capturerejections" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> capture<wbr>Rejections</h3>
-					<div class="tsd-signature tsd-kind-icon">capture<wbr>Rejections<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#capturerejections">captureRejections</a></p>
-						<ul>
-							<li>Defined in node_modules/@types/node/events.d.ts:36</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Sets or gets the default captureRejection value for all emitters.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="defaultmaxlisteners" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> default<wbr>Max<wbr>Listeners</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Max<wbr>Listeners<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#defaultmaxlisteners">defaultMaxListeners</a></p>
-						<ul>
-							<li>Defined in node_modules/@types/node/events.d.ts:37</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="errormonitor" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> error<wbr>Monitor</h3>
-					<div class="tsd-signature tsd-kind-icon">error<wbr>Monitor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">symbol</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#errormonitor">errorMonitor</a></p>
-						<ul>
-							<li>Defined in node_modules/@types/node/events.d.ts:29</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>This symbol shall be used to install a listener for only monitoring <code>&#39;error&#39;</code>
-								events. Listeners installed using this symbol are called before the regular
-							<code>&#39;error&#39;</code> listeners are called.</p>
-						</div>
-						<p>Installing a listener using this symbol does not change the behavior once an
-							<code>&#39;error&#39;</code> event is emitted, therefore the process will still crash if no
-						regular <code>&#39;error&#39;</code> listener is installed.</p>
-					</div>
-				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
@@ -942,10 +1166,52 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_symbol_asynciterator_">[Symbol.asyncIterator]</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:106</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:479</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_construct" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _construct</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">_construct<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">?: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_construct">_construct</a></p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:117</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>callback: <span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">?: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">?: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagOptional">Optional</span> error: <a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -960,7 +1226,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_destroy">_destroy</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:45</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:399</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1005,7 +1271,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_read">_read</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:35</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:118</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1349,8 +1615,10 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -1359,7 +1627,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:57</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:423</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1370,8 +1638,10 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 										<li>close</li>
 										<li>data</li>
 										<li>end</li>
-										<li>readable</li>
 										<li>error</li>
+										<li>pause</li>
+										<li>readable</li>
+										<li>resume</li>
 									</ol>
 								</div>
 							</div>
@@ -1403,7 +1673,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:58</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:424</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1440,7 +1710,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:59</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:425</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1471,38 +1741,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:60</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
-								<p>Overrides EventEmitter.addListener</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:61</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:426</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1539,7 +1778,100 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:62</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:427</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
+								<p>Overrides EventEmitter.addListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:428</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
+								<p>Overrides EventEmitter.addListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:429</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
+								<p>Overrides EventEmitter.addListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:430</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1585,9 +1917,20 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#destroy">destroy</a></p>
 								<p>Overrides Readable.destroy</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:375</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:979</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calls <code>destroy()</code> on the socket that received the <code>IncomingMessage</code>. If <code>error</code>is provided, an <code>&#39;error&#39;</code> event is emitted on the socket and <code>error</code> is passed
+									as an argument to any listeners on the event.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.3.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1605,8 +1948,10 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -1615,7 +1960,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:64</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:431</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1631,7 +1976,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:65</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:432</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1650,7 +1995,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:66</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:433</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1666,23 +2011,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:67</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
-								<p>Overrides EventEmitter.emit</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:68</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:434</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1701,7 +2030,55 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:69</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:435</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
+								<p>Overrides EventEmitter.emit</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:436</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
+								<p>Overrides EventEmitter.emit</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:437</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
+								<p>Overrides EventEmitter.emit</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:438</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1728,9 +2105,30 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:655</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:642</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns an array listing the events for which the emitter has registered
+									listeners. The values in the array are strings or <code>Symbol</code>s.</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> EventEmitter = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;events&#x27;</span>);
+<span class="hljs-keyword">const</span> myEE = <span class="hljs-keyword">new</span> EventEmitter();
+myEE.on(<span class="hljs-string">&#x27;foo&#x27;</span>, <span class="hljs-function">() =&gt;</span> {});
+myEE.on(<span class="hljs-string">&#x27;bar&#x27;</span>, <span class="hljs-function">() =&gt;</span> {});
+
+<span class="hljs-keyword">const</span> sym = <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">&#x27;symbol&#x27;</span>);
+myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
+
+<span class="hljs-built_in">console</span>.log(myEE.eventNames());
+<span class="hljs-comment">// Prints: [ &#x27;foo&#x27;, &#x27;bar&#x27;, Symbol(symbol) ]</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v6.0.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -1802,9 +2200,20 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#getmaxlisteners">getMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:647</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:499</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the current max listener value for the <code>EventEmitter</code> which is either
+									set by <code>emitter.setMaxListeners(n)</code> or defaults to {@link defaultMaxListeners}.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v1.0.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -1905,9 +2314,28 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#ispaused">isPaused</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:40</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:278</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.isPaused()</code> method returns the current operating state of the<code>Readable</code>. This is used primarily by the mechanism that underlies the<code>readable.pipe()</code> method. In most
+										typical cases, there will be no reason to
+									use this method directly.</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> readable = <span class="hljs-keyword">new</span> stream.Readable();
+
+readable.isPaused(); <span class="hljs-comment">// === false</span>
+readable.pause();
+readable.isPaused(); <span class="hljs-comment">// === true</span>
+readable.resume();
+readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.11.14</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
@@ -1916,20 +2344,33 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="listenercount" class="tsd-anchor"></a>
 					<h3>listener<wbr>Count</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">listener<wbr>Count<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">listener<wbr>Count<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listenercount">listenerCount</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:651</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:589</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the number of listeners listening to the event named <code>eventName</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v3.2.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>type: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5>eventName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the event being listened for</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -1940,20 +2381,35 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="listeners" class="tsd-anchor"></a>
 					<h3>listeners</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listeners">listeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:648</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:512</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a copy of the array of listeners for the event named <code>eventName</code>.</p>
+								</div>
+								<pre><code class="language-js">server.on(<span class="hljs-string">&#x27;connection&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">stream</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;someone connected!&#x27;</span>);
+});
+<span class="hljs-built_in">console</span>.log(util.inspect(server.listeners(<span class="hljs-string">&#x27;connection&#x27;</span>)));
+<span class="hljs-comment">// Prints: [ [Function] ]</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.1.26</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5>eventName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -1964,20 +2420,30 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="off" class="tsd-anchor"></a>
 					<h3>off</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#off">off</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:644</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:472</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Alias for <code>emitter.removeListener()</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v10.0.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5>eventName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
 								</li>
 								<li>
 									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
@@ -2012,8 +2478,10 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -2022,7 +2490,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:71</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:439</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2053,7 +2521,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:72</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:440</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2090,7 +2558,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:73</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:441</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2121,38 +2589,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:74</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
-								<p>Overrides EventEmitter.on</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:75</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:442</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2189,7 +2626,100 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:76</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:443</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
+								<p>Overrides EventEmitter.on</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:444</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
+								<p>Overrides EventEmitter.on</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:445</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
+								<p>Overrides EventEmitter.on</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:446</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2230,8 +2760,10 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -2240,7 +2772,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:78</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:447</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2271,7 +2803,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:79</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:448</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2308,7 +2840,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:80</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:449</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2339,38 +2871,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:81</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
-								<p>Overrides EventEmitter.once</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:82</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:450</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2407,7 +2908,100 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:83</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:451</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
+								<p>Overrides EventEmitter.once</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:452</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
+								<p>Overrides EventEmitter.once</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:453</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
+								<p>Overrides EventEmitter.once</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:454</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2495,9 +3089,32 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#pause">pause</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:38</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:242</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.pause()</code> method will cause a stream in flowing mode to stop
+										emitting <code>&#39;data&#39;</code> events, switching out of flowing mode. Any data that
+									becomes available will remain in the internal buffer.</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> readable = getReadableStreamSomehow();
+readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Received <span class="hljs-subst">${chunk.length}</span> bytes of data.`</span>);
+  readable.pause();
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;There will be no additional data for 1 second.&#x27;</span>);
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Now data will start flowing again.&#x27;</span>);
+    readable.resume();
+  }, <span class="hljs-number">1000</span>);
+});</code></pre>
+								<p>The <code>readable.pause()</code> method has no effect if there is a <code>&#39;readable&#39;</code>event listener.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -2513,7 +3130,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#pipe">pipe</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:5</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:24</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2542,8 +3159,10 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -2552,7 +3171,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:85</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:455</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2583,7 +3202,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:86</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:456</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2620,7 +3239,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:87</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:457</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2651,38 +3270,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:88</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
-								<p>Overrides EventEmitter.prependListener</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:89</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:458</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2719,7 +3307,100 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:90</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:459</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
+								<p>Overrides EventEmitter.prependListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:460</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
+								<p>Overrides EventEmitter.prependListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:461</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
+								<p>Overrides EventEmitter.prependListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:462</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2760,8 +3441,10 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">prepend<wbr>Once<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -2770,7 +3453,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:92</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:463</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2801,7 +3484,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:93</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:464</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2838,7 +3521,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:94</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:465</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2869,38 +3552,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:95</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
-								<p>Overrides EventEmitter.prependOnceListener</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:96</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:466</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2937,7 +3589,100 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:97</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:467</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
+								<p>Overrides EventEmitter.prependOnceListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:468</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
+								<p>Overrides EventEmitter.prependOnceListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:469</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
+								<p>Overrides EventEmitter.prependOnceListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:470</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2975,14 +3720,14 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="push" class="tsd-anchor"></a>
 					<h3>push</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">push<span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, encoding<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">push<span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, encoding<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BufferEncoding</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#push">push</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:44</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:398</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2991,7 +3736,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 									<h5>chunk: <span class="tsd-signature-type">any</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> encoding: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> encoding: <span class="tsd-signature-type">BufferEncoding</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -3041,20 +3786,52 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="rawlisteners" class="tsd-anchor"></a>
 					<h3>raw<wbr>Listeners</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">raw<wbr>Listeners<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">raw<wbr>Listeners<span class="tsd-signature-symbol">(</span>eventName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawlisteners">rawListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:649</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:542</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a copy of the array of listeners for the event named <code>eventName</code>,
+									including any wrappers (such as those created by <code>.once()</code>).</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> emitter = <span class="hljs-keyword">new</span> EventEmitter();
+emitter.once(<span class="hljs-string">&#x27;log&#x27;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;log once&#x27;</span>));
+
+<span class="hljs-comment">// Returns a new Array with a function `onceWrapper` which has a property</span>
+<span class="hljs-comment">// `listener` which contains the original listener bound above</span>
+<span class="hljs-keyword">const</span> listeners = emitter.rawListeners(<span class="hljs-string">&#x27;log&#x27;</span>);
+<span class="hljs-keyword">const</span> logFnWrapper = listeners[<span class="hljs-number">0</span>];
+
+<span class="hljs-comment">// Logs &quot;log once&quot; to the console and does not unbind the `once` event</span>
+logFnWrapper.listener();
+
+<span class="hljs-comment">// Logs &quot;log once&quot; to the console and removes the listener</span>
+logFnWrapper();
+
+emitter.on(<span class="hljs-string">&#x27;log&#x27;</span>, <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;log persistently&#x27;</span>));
+<span class="hljs-comment">// Will return a new Array with a single function bound by `.on()` above</span>
+<span class="hljs-keyword">const</span> newListeners = emitter.rawListeners(<span class="hljs-string">&#x27;log&#x27;</span>);
+
+<span class="hljs-comment">// Logs &quot;log persistently&quot; twice</span>
+newListeners[<span class="hljs-number">0</span>]();
+emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v9.4.0</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5>eventName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -3072,13 +3849,82 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#read">read</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:36</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:195</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.read()</code> method pulls some data out of the internal buffer and
+										returns it. If no data available to be read, <code>null</code> is returned. By default,
+										the data will be returned as a <code>Buffer</code> object unless an encoding has been
+										specified using the <code>readable.setEncoding()</code> method or the stream is operating
+									in object mode.</p>
+								</div>
+								<p>The optional <code>size</code> argument specifies a specific number of bytes to read. If<code>size</code> bytes are not available to be read, <code>null</code> will be returned _unless_the stream has ended, in which
+									case all of the data remaining in the internal
+								buffer will be returned.</p>
+								<p>If the <code>size</code> argument is not specified, all of the data contained in the
+								internal buffer will be returned.</p>
+								<p>The <code>size</code> argument must be less than or equal to 1 GiB.</p>
+								<p>The <code>readable.read()</code> method should only be called on <code>Readable</code> streams
+									operating in paused mode. In flowing mode, <code>readable.read()</code> is called
+								automatically until the internal buffer is fully drained.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> readable = getReadableStreamSomehow();
+
+<span class="hljs-comment">// &#x27;readable&#x27; may be triggered multiple times as data is buffered in</span>
+readable.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> chunk;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Stream is readable (new data received in buffer)&#x27;</span>);
+  <span class="hljs-comment">// Use a loop to make sure we read all currently available data</span>
+  <span class="hljs-keyword">while</span> (<span class="hljs-literal">null</span> !== (chunk = readable.read())) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Read <span class="hljs-subst">${chunk.length}</span> bytes of data...`</span>);
+  }
+});
+
+<span class="hljs-comment">// &#x27;end&#x27; will be triggered once when there is no more data available</span>
+readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Reached end of stream.&#x27;</span>);
+});</code></pre>
+								<p>Each call to <code>readable.read()</code> returns a chunk of data, or <code>null</code>. The chunks
+									are not concatenated. A <code>while</code> loop is necessary to consume all data
+									currently in the buffer. When reading a large file <code>.read()</code> may return <code>null</code>,
+									having consumed all buffered content so far, but there is still more data to
+									come not yet buffered. In this case a new <code>&#39;readable&#39;</code> event will be emitted
+									when there is more data in the buffer. Finally the <code>&#39;end&#39;</code> event will be
+								emitted when there is no more data to come.</p>
+								<p>Therefore to read a file&#39;s whole contents from a <code>readable</code>, it is necessary
+								to collect chunks across multiple <code>&#39;readable&#39;</code> events:</p>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> chunks = [];
+
+readable.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">let</span> chunk;
+  <span class="hljs-keyword">while</span> (<span class="hljs-literal">null</span> !== (chunk = readable.read())) {
+    chunks.push(chunk);
+  }
+});
+
+readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> content = chunks.join(<span class="hljs-string">&#x27;&#x27;</span>);
+});</code></pre>
+								<p>A <code>Readable</code> stream in object mode will always return a single item from
+								a call to <code>readable.read(size)</code>, regardless of the value of the<code>size</code> argument.</p>
+								<p>If the <code>readable.read()</code> method returns a chunk of data, a <code>&#39;data&#39;</code> event will
+								also be emitted.</p>
+								<p>Calling <a href="web.request.html#read">read</a> after the <code>&#39;end&#39;</code> event has
+								been emitted will return <code>null</code>. No runtime error will be raised.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> size: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Optional argument to specify how much data to read.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -3096,9 +3942,23 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:645</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:483</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all listeners, or those of the specified <code>eventName</code>.</p>
+								</div>
+								<p>It is bad practice to remove listeners added elsewhere in the code,
+									particularly when the <code>EventEmitter</code> instance was created by some other
+								component or module (e.g. sockets or file streams).</p>
+								<p>Returns a reference to the <code>EventEmitter</code>, so that calls can be chained.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.1.26</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -3116,8 +3976,10 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"close"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"data"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>chunk<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"end"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"error"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"pause"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"readable"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"resume"</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
@@ -3126,7 +3988,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:99</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:471</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3157,7 +4019,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:100</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:472</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3194,7 +4056,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:101</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:473</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3225,38 +4087,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:102</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
-								</li>
-								<li>
-									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
-								<p>Overrides EventEmitter.removeListener</p>
-								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:103</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:474</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3293,7 +4124,100 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:104</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:475</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"pause"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
+								<p>Overrides EventEmitter.removeListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:476</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"readable"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
+								<p>Overrides EventEmitter.removeListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:477</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">"resume"</span></h5>
+								</li>
+								<li>
+									<h5>listener: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
+								<p>Overrides EventEmitter.removeListener</p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:478</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3338,9 +4262,28 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#resume">resume</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:39</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:261</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.resume()</code> method causes an explicitly paused <code>Readable</code> stream to
+									resume emitting <code>&#39;data&#39;</code> events, switching the stream into flowing mode.</p>
+								</div>
+								<p>The <code>readable.resume()</code> method can be used to fully consume the data from a
+								stream without actually processing any of that data:</p>
+								<pre><code class="language-js">getReadableStreamSomehow()
+  .resume()
+  .on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Reached the end, but did not read anything.&#x27;</span>);
+  });</code></pre>
+								<p>The <code>readable.resume()</code> method has no effect if there is a <code>&#39;readable&#39;</code>event listener.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -3349,20 +4292,47 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="setencoding" class="tsd-anchor"></a>
 					<h3>set<wbr>Encoding</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Encoding<span class="tsd-signature-symbol">(</span>encoding<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Encoding<span class="tsd-signature-symbol">(</span>encoding<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BufferEncoding</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#setencoding">setEncoding</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:37</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:220</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.setEncoding()</code> method sets the character encoding for
+									data read from the <code>Readable</code> stream.</p>
+								</div>
+								<p>By default, no encoding is assigned and stream data will be returned as<code>Buffer</code> objects. Setting an encoding causes the stream data
+									to be returned as strings of the specified encoding rather than as <code>Buffer</code>objects. For instance, calling <code>readable.setEncoding(&#39;utf8&#39;)</code> will cause the
+									output data to be interpreted as UTF-8 data, and passed as strings. Calling<code>readable.setEncoding(&#39;hex&#39;)</code> will cause the data to be encoded in hexadecimal
+								string format.</p>
+								<p>The <code>Readable</code> stream will properly handle multi-byte characters delivered
+									through the stream that would otherwise become improperly decoded if simply
+								pulled from the stream as <code>Buffer</code> objects.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> readable = getReadableStreamSomehow();
+readable.setEncoding(<span class="hljs-string">&#x27;utf8&#x27;</span>);
+readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">chunk</span>) =&gt;</span> {
+  assert.equal(<span class="hljs-keyword">typeof</span> chunk, <span class="hljs-string">&#x27;string&#x27;</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Got %d characters of string data:&#x27;</span>, chunk.length);
+});</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>encoding: <span class="tsd-signature-type">string</span></h5>
+									<h5>encoding: <span class="tsd-signature-type">BufferEncoding</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The encoding to use.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -3380,9 +4350,23 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#setmaxlisteners">setMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/globals.d.ts:646</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:493</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>By default <code>EventEmitter</code>s will print a warning if more than <code>10</code> listeners are
+										added for a particular event. This is a useful default that helps finding
+										memory leaks. The <code>emitter.setMaxListeners()</code> method allows the limit to be
+									modified for this specific <code>EventEmitter</code> instance. The value can be set to<code>Infinity</code> (or <code>0</code>) to indicate an unlimited number of listeners.</p>
+								</div>
+								<p>Returns a reference to the <code>EventEmitter</code>, so that calls can be chained.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.3.5</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -3404,9 +4388,19 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#settimeout">setTimeout</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:357</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:912</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calls <code>message.socket.setTimeout(msecs, callback)</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.5.9</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -3431,13 +4425,42 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#unpipe">unpipe</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:41</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:305</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The <code>readable.unpipe()</code> method detaches a <code>Writable</code> stream previously attached
+									using the <a href="web.request.html#pipe">pipe</a> method.</p>
+								</div>
+								<p>If the <code>destination</code> is not specified, then <em>all</em> pipes are detached.</p>
+								<p>If the <code>destination</code> is specified, but no pipe is set up for it, then
+								the method does nothing.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);
+<span class="hljs-keyword">const</span> readable = getReadableStreamSomehow();
+<span class="hljs-keyword">const</span> writable = fs.createWriteStream(<span class="hljs-string">&#x27;file.txt&#x27;</span>);
+<span class="hljs-comment">// All the data from readable goes into &#x27;file.txt&#x27;,</span>
+<span class="hljs-comment">// but only for the first second.</span>
+readable.pipe(writable);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Stop writing to file.txt.&#x27;</span>);
+  readable.unpipe(writable);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;Manually close the file stream.&#x27;</span>);
+  writable.end();
+}, <span class="hljs-number">1000</span>);</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> destination: <span class="tsd-signature-type">NodeJS.WritableStream</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Optional specific stream to unpipe</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -3455,16 +4478,84 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#unshift">unshift</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:42</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:371</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Passing <code>chunk</code> as <code>null</code> signals the end of the stream (EOF) and behaves the
+										same as <code>readable.push(null)</code>, after which no more data can be written. The EOF
+										signal is put at the end of the buffer and any buffered data will still be
+									flushed.</p>
+								</div>
+								<p>The <code>readable.unshift()</code> method pushes a chunk of data back into the internal
+									buffer. This is useful in certain situations where a stream is being consumed by
+									code that needs to &quot;un-consume&quot; some amount of data that it has optimistically
+								pulled out of the source, so that the data can be passed on to some other party.</p>
+								<p>The <code>stream.unshift(chunk)</code> method cannot be called after the <code>&#39;end&#39;</code> event
+								has been emitted or a runtime error will be thrown.</p>
+								<p>Developers using <code>stream.unshift()</code> often should consider switching to
+								use of a <code>Transform</code> stream instead. See the <code>API for stream implementers</code> section for more information.</p>
+								<pre><code class="language-js"><span class="hljs-comment">// Pull off a header delimited by \n\n.</span>
+<span class="hljs-comment">// Use unshift() if we get too much.</span>
+<span class="hljs-comment">// Call the callback with (error, header, stream).</span>
+<span class="hljs-keyword">const</span> { StringDecoder } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;string_decoder&#x27;</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseHeader</span>(<span class="hljs-params">stream, callback</span>) </span>{
+  stream.on(<span class="hljs-string">&#x27;error&#x27;</span>, callback);
+  stream.on(<span class="hljs-string">&#x27;readable&#x27;</span>, onReadable);
+  <span class="hljs-keyword">const</span> decoder = <span class="hljs-keyword">new</span> StringDecoder(<span class="hljs-string">&#x27;utf8&#x27;</span>);
+  <span class="hljs-keyword">let</span> header = <span class="hljs-string">&#x27;&#x27;</span>;
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onReadable</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> chunk;
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">null</span> !== (chunk = stream.read())) {
+      <span class="hljs-keyword">const</span> str = decoder.write(chunk);
+      <span class="hljs-keyword">if</span> (str.match(<span class="hljs-regexp">/\n\n/</span>)) {
+        <span class="hljs-comment">// Found the header boundary.</span>
+        <span class="hljs-keyword">const</span> split = str.split(<span class="hljs-regexp">/\n\n/</span>);
+        header += split.shift();
+        <span class="hljs-keyword">const</span> remaining = split.join(<span class="hljs-string">&#x27;\n\n&#x27;</span>);
+        <span class="hljs-keyword">const</span> buf = Buffer.from(remaining, <span class="hljs-string">&#x27;utf8&#x27;</span>);
+        stream.removeListener(<span class="hljs-string">&#x27;error&#x27;</span>, callback);
+        <span class="hljs-comment">// Remove the &#x27;readable&#x27; listener before unshifting.</span>
+        stream.removeListener(<span class="hljs-string">&#x27;readable&#x27;</span>, onReadable);
+        <span class="hljs-keyword">if</span> (buf.length)
+          stream.unshift(buf);
+        <span class="hljs-comment">// Now the body of the message can be read from the stream.</span>
+        callback(<span class="hljs-literal">null</span>, header, stream);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// Still reading the header.</span>
+        header += str;
+      }
+    }
+  }
+}</code></pre>
+								<p>Unlike <a href="web.request.html#push">push</a>, <code>stream.unshift(chunk)</code> will not
+									end the reading process by resetting the internal reading state of the stream.
+									This can cause unexpected results if <code>readable.unshift()</code> is called during a
+									read (i.e. from within a <a href="web.request.html#_read">_read</a> implementation on a
+									custom stream). Following the call to <code>readable.unshift()</code> with an immediate <a href="web.request.html#push">push</a> will reset the reading state appropriately,
+									however it is best to simply avoid calling <code>readable.unshift()</code> while in the
+								process of performing a read.</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.11</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chunk: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Chunk of data to unshift onto the read queue. For streams not operating in object mode, <code>chunk</code> must be a string, <code>Buffer</code>, <code>Uint8Array</code> or <code>null</code>. For object mode
+										streams, <code>chunk</code> may be any JavaScript value.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> encoding: <span class="tsd-signature-type">BufferEncoding</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Encoding of string chunks. Must be a valid <code>Buffer</code> encoding, such as <code>&#39;utf8&#39;</code> or <code>&#39;ascii&#39;</code>.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3475,20 +4566,48 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					<a name="wrap" class="tsd-anchor"></a>
 					<h3>wrap</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">wrap<span class="tsd-signature-symbol">(</span>oldStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">wrap<span class="tsd-signature-symbol">(</span>stream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#wrap">wrap</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:43</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:397</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Prior to Node.js 0.10, streams did not implement the entire <code>stream</code> module API
+									as it is currently defined. (See <code>Compatibility</code> for more information.)</p>
+								</div>
+								<p>When using an older Node.js library that emits <code>&#39;data&#39;</code> events and has a <a href="web.request.html#pause">pause</a> method that is advisory only, the<code>readable.wrap()</code> method can be used to create a <code>Readable</code>
+									stream that uses
+								the old stream as its data source.</p>
+								<p>It will rarely be necessary to use <code>readable.wrap()</code> but the method has been
+									provided as a convenience for interacting with older Node.js applications and
+								libraries.</p>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> { OldReader } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./old-api-module.js&#x27;</span>);
+<span class="hljs-keyword">const</span> { Readable } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;stream&#x27;</span>);
+<span class="hljs-keyword">const</span> oreader = <span class="hljs-keyword">new</span> OldReader();
+<span class="hljs-keyword">const</span> myReader = <span class="hljs-keyword">new</span> Readable().wrap(oreader);
+
+myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+  myReader.read(); <span class="hljs-comment">// etc.</span>
+});</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v0.9.4</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>oldStream: <span class="tsd-signature-type">ReadableStream</span></h5>
+									<h5>stream: <span class="tsd-signature-type">ReadableStream</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An &quot;old style&quot; readable stream</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -3506,7 +4625,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#from">from</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:24</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:54</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3528,91 +4647,36 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="listenercount-1" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> listener<wbr>Count</h3>
+					<a name="isdisturbed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Disturbed</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">listener<wbr>Count<span class="tsd-signature-symbol">(</span>emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Disturbed<span class="tsd-signature-symbol">(</span>stream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readable</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadableStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listenercount-1">listenerCount</a></p>
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#isdisturbed">isDisturbed</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:18</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:59</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns whether the stream has been read from or cancelled.</p>
+								</div>
 								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>since v4.0.0</p>
+									<dt>since</dt>
+									<dd><p>v16.8.0</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>emitter: <span class="tsd-signature-type">EventEmitter</span></h5>
-								</li>
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+									<h5>stream: <span class="tsd-signature-type">Readable</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadableStream</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-					<a name="on-1" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> on</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on-1">on</a></p>
-								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:15</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>emitter: <span class="tsd-signature-type">EventEmitter</span></h5>
-								</li>
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited tsd-is-static">
-					<a name="once-1" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> once</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NodeEventTarget</span>, event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once-1">once</a></p>
-								<p>Overrides <a href="web.request.html">Request</a>.<a href="web.request.html#once-1">once</a></p>
-								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:13</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>emitter: <span class="tsd-signature-type">NodeEventTarget</span></h5>
-								</li>
-								<li>
-									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -3732,6 +4796,12 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<a href="web.request.html#readable" class="tsd-kind-icon">readable</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.request.html#readableaborted" class="tsd-kind-icon">readable<wbr>Aborted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.request.html#readabledidread" class="tsd-kind-icon">readable<wbr>Did<wbr>Read</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#readableencoding" class="tsd-kind-icon">readable<wbr>Encoding</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -3785,20 +4855,11 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#xhr" class="tsd-kind-icon">xhr</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#capturerejectionsymbol" class="tsd-kind-icon">capture<wbr>Rejection<wbr>Symbol</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#capturerejections" class="tsd-kind-icon">capture<wbr>Rejections</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#errormonitor" class="tsd-kind-icon">error<wbr>Monitor</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#_symbol_asynciterator_" class="tsd-kind-icon">[<wbr>Symbol.async<wbr>Iterator]</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.request.html#_construct" class="tsd-kind-icon">_construct</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#_destroy" class="tsd-kind-icon">_destroy</a>
@@ -3918,13 +4979,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 								<a href="web.request.html#from" class="tsd-kind-icon">from</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#listenercount-1" class="tsd-kind-icon">listener<wbr>Count</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#on-1" class="tsd-kind-icon">on</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited tsd-is-static">
-								<a href="web.request.html#once-1" class="tsd-kind-icon">once</a>
+								<a href="web.request.html#isdisturbed" class="tsd-kind-icon">is<wbr>Disturbed</a>
 							</li>
 						</ul>
 					</li>
