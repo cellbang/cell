@@ -2,6 +2,10 @@
 
 ## 2.16.2
 
+- fix(puppeteer) 修复 `configurations is not iterable` 错误
+
+## 2.16.2
+
 - fix(cli-service) 修复webpack插件错误
 - feat(ext-scripts) 优化代码
 
