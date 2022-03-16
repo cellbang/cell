@@ -1,11 +1,11 @@
 {
   "name": "@malagu/s3",
-  "version": "2.16.2",
+  "version": "2.16.3",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.16.2",
+    "@malagu/cloud": "2.16.3",
     "aws-sdk": "^2.807.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.16.2",
+    "@malagu/ext-scripts": "2.16.3",
     "@types/ali-oss": "^6.0.5",
     "@types/puppeteer-core": "^2.0.0",
     "bufferutil": "^4.0.1",

@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.16.2
+## 2.16.3
 
 - fix(puppeteer) 修复 `configurations is not iterable` 错误
 - feat(cli-service) 本地开发时，devtool 默认使用 `source-map`，方便调试 
