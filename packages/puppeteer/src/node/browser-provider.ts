@@ -1,5 +1,5 @@
 import { Autowired, Component, Logger } from '@malagu/core';
-import { launch, Browser } from 'puppeteer-core';
+import * as puppeteer from 'puppeteer-core';
 import { BrowserInstaller, BrowserProvider } from './puppeteer-protocol';
 
 @Component(BrowserProvider)
@@ -11,7 +11,7 @@ export class BrowserProviderImpl implements BrowserProvider {
     @Autowired(BrowserInstaller)
     protected readonly browserInstaller: BrowserInstaller;
 
-    protected browser: Browser;
+    protected browser: puppeteer.Browser;
 
     protected async isBrowserAvailable() {
         try {
@@ -23,10 +23,10 @@ export class BrowserProviderImpl implements BrowserProvider {
         return true;
     };
 
-    async provide(): Promise<Browser> {
+    async provide(): Promise<puppeteer.Browser> {
         if (!this.browser || !await this.isBrowserAvailable()) {
             const launchOptions = await this.browserInstaller.install();
-            this.browser = await launch(launchOptions);
+            this.browser = await puppeteer.launch(launchOptions);
             this.logger.debug(`launch done: ${await this.browser.version()}`);
         }
         return this.browser;

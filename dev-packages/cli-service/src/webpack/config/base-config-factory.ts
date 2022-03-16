@@ -42,7 +42,7 @@ export class BaseConfigFactory {
                 infrastructureLogging: {
                     level: 'error',
                 },
-                devtool:  dev ? 'eval-cheap-module-source-map' : false
+                devtool:  dev ? 'source-map' : false
             })
             .resolve
                 .extensions
@@ -113,7 +113,7 @@ export class BaseConfigFactory {
                     })
                 .end()
                 .merge({
-                    devtool:  dev ? 'eval-cheap-module-source-map' : false,
+                    devtool:  dev ? 'source-map' : false,
                     externalsPresets: { node: true }
                 });
         } else {
