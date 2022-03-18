@@ -6990,10 +6990,10 @@ fresh@0.5.2, fresh@~0.5.2:
   resolved "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
 
-friendly-errors-webpack-malagu@^1.10.5:
-  version "1.10.5"
-  resolved "https://registry.npmmirror.com/friendly-errors-webpack-malagu/-/friendly-errors-webpack-malagu-1.10.5.tgz#4e7f0950b061c71cebabec624104aee575c8dce6"
-  integrity sha512-C14BmjBetJlCVAR5tcnQ0F37DkIpvpdHQOWH/EbwevzXcZcw4Fs9HEdI58B+SzFDxmK5AYnODurVxzPW1EVemw==
+friendly-errors-webpack-malagu@^1.10.9:
+  version "1.10.9"
+  resolved "https://registry.npmjs.org/friendly-errors-webpack-malagu/-/friendly-errors-webpack-malagu-1.10.9.tgz#a717ccaacdc6f97880e7513acdf3e9b52ce802b6"
+  integrity sha512-ksXIOPCGgnEZhTb+FyFQW+0y0wsnwn1lXq2YaFFHbiT2Ik3Kk6pKJSye+fuSXxnJ+r0xqSLRKymJPeNWF0EwLQ==
   dependencies:
     chalk "^3.0.0"
     error-stack-parser "^2.0.6"
