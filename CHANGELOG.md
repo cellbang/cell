@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.16.4
+- fix(cli-service) 修复日志输出错误
+
 ## 2.16.3
 
 - fix(puppeteer) 修复 `configurations is not iterable` 错误
