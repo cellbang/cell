@@ -61,18 +61,18 @@ function createVueRule(webpackConfig: any, vueLoaderConfig: any) {
 }
 
 export default async (context: WebpackContext) => {
-    const { configurations, cfg, pkg, dev } = context;
+    const { configurations, cfg, dev } = context;
     const webpackConfig = ConfigurationContext.getFrontendConfiguration(
         configurations
     );
     if (webpackConfig) {
-        const appRootDir = pkg.projectPath;
+        const appRootDir = process.cwd();
         const shadowMode = false;
         const rootVueOptions = ConfigUtil.getFrontendMalaguConfig(cfg)?.vue ?? {};
-        const rootvueLoaderConfig = rootVueOptions.vueLoader ?? {};
+        const rootVueLoaderConfig = rootVueOptions.vueLoader ?? {};
         let vueLoaderConfig = {};
-        if (Array.isArray(rootvueLoaderConfig)) {
-            rootvueLoaderConfig.forEach(item => {
+        if (Array.isArray(rootVueLoaderConfig)) {
+            rootVueLoaderConfig.forEach(item => {
                 vueLoaderConfig = { ...vueLoaderConfig, ...item };
               });
         }

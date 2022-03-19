@@ -3,6 +3,7 @@
 ## 2.16.5
 
 - fix(cli-runtime) 修复由于拼写错误导致适配器组件没有被正常加载
+- feat(react) react添加css预处理器和css module支持
 
 ## 2.16.4
 
