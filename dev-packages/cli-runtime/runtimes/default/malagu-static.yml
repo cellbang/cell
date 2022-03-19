@@ -1,6 +1,6 @@
 targets:
   - backend
-mode: "${currentMode|toObjects[.item in [ 'fc', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adaper')}"
+mode: "${currentMode|toObjects[.item in [ 'fc', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adapter')}"
 components:
   '@malagu/serve-static': ${version}
 devComponents:
