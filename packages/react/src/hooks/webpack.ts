@@ -21,12 +21,12 @@ const findExisting = (context: string, files: string[]) => {
 };
 
 export default async (context: WebpackContext) => {
-    const { configurations, cfg, pkg, dev } = context;
+    const { configurations, cfg, dev } = context;
     const webpackConfig = ConfigurationContext.getFrontendConfiguration(
         configurations
     );
     if (webpackConfig) {
-        const appRootDir = pkg.projectPath;
+        const appRootDir = process.cwd();
         const shadowMode = false;
         const rootReactOptions = ConfigUtil.getFrontendMalaguConfig(cfg)?.react ?? {};
         const defaultSassLoaderOptions = {
