@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Autorpc } from '@malagu/rpc/lib/common/annotation/detached';
 import { WelcomeServer } from '../common/welcome-protocol';
 import { View } from '@malagu/react';
+import styles from './style/hello.module.scss';
 
 interface Prop { }
 interface State {
@@ -26,7 +27,7 @@ export class Hello extends React.Component<Prop, State> {
     }
 
     render() {
-        return <div style={{textAlign:'center',marginTop: '40px'}}>
+        return <div className={ styles.hello }>
             <img alt="malagu logo" src="./assets/logo.png"></img>
             <div className="hello">
                 <h1>{this.state.response}</h1>
