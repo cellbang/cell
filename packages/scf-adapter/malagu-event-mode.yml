@@ -1,0 +1,3 @@
+backend: 
+  entry: lib/node/event-application-entry
+

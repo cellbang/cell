@@ -1,6 +1,7 @@
 import { container } from '@malagu/core/lib/common/container/dynamic-container';
 import { Application } from '@malagu/core/lib/common/application/application-protocol';
 import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
+import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
 import { Clock } from '@malagu/faas-adapter/lib/node/timer/timer-protocol';
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
 
@@ -21,6 +22,6 @@ export async function handler(event: string, context: any) {
     await startPromise;
     await Promise.all(listeners.map(l => l.onTrigger(event)));
     await clock.tick();
-    context.callbackWaitsForEmptyEventLoop = false;
+    context.callbackWaitsForEmptyEventLoop = FaaSUtils.getCallbackWaitsForEmptyEventLoop();
 }
 

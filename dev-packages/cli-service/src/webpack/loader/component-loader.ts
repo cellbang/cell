@@ -10,8 +10,8 @@ export interface ComponentLoaderOptions {
     staticModules: Module[]
 }
 
-const componentLoader: LoaderDefinition<{}> = function (source, sourceMap) {
-    const options = this.getOptions() as ComponentLoaderOptions;
+const componentLoader: LoaderDefinition<ComponentLoaderOptions> = function (source, sourceMap) {
+    const options = this.getOptions();
     const { target } = options;
     if (target === FRONTEND_TARGET) {
         this.callback(undefined, generateFrontendComponents(options), sourceMap);

@@ -1,1 +1,1 @@
-mode: "${'api-gateway' in currentMode ? 'api-gateway-mode' : 'timer' in currentMode ? 'timer-mode' : 'http-mode'}"
+mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'timer', 'api-gateway-basic', 'event']]|suffix('-mode') || 'http-mode'}"

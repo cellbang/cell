@@ -208,6 +208,12 @@
       ],
       "@malagu/example-nextjs-app/*": [
         "examples/nextjs-app/*"
+      ],
+      "@malagu/qq-guild-bot-adapter/lib/*": [
+        "packages/qq-guild-bot-adapter/src/*"
+      ],
+      "@malagu/example-qq-guild-bot-app/*": [
+        "examples/qq-guild-bot-app/*"
       ]
     }
   },

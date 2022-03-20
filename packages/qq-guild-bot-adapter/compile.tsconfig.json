@@ -10,13 +10,10 @@
   ],
   "references": [
     {
-      "path": "../cloud/compile.tsconfig.json"
-    },
-    {
-      "path": "../schedule/compile.tsconfig.json"
-    },
-    {
       "path": "../../dev-packages/cli-service/compile.tsconfig.json"
+    },
+    {
+      "path": "../faas-adapter/compile.tsconfig.json"
     }
   ]
 }

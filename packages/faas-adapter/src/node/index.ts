@@ -3,3 +3,4 @@ export * from './regin-provider';
 export * from './timer';
 export * from './event';
 export * from './factory';
+export * from './utils';

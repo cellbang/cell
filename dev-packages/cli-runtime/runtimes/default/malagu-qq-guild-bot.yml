@@ -1,0 +1,4 @@
+targets:
+  - backend
+components:
+  '@malagu/qq-guild-bot-adapter': ${version}

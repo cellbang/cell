@@ -1,0 +1,5 @@
+
+malagu:
+  cloud:
+    function:
+      callbackWaitsForEmptyEventLoop: true

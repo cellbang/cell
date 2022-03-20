@@ -153,6 +153,9 @@
     },
     {
       "path": "../plugins/next-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/qq-guild-bot-adapter/compile.tsconfig.json"
     }
   ]
 }
