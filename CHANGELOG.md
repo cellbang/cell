@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.17.1
+
+- fix(cli-common) 修复使用 `--props-file` 选项是报 mode 相关的错误
+
 ## 2.17.0
 
 - feat(react) react添加css预处理器和css module支持
