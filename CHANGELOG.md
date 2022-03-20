@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.17.2
+
+- fix(cli-common) 修复 mode 属性计算错误
+
 ## 2.17.1
 
 - fix(cli-common) 修复使用 `--props-file` 选项是报 mode 相关的错误

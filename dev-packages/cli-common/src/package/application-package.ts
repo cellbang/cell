@@ -112,8 +112,8 @@ export class ApplicationPackage {
             this.pkg.malaguComponent = this.pkg.malaguComponent || {};
             let mode = this.options.mode;
             const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguPropsDirPath());
+            this.componentPackageLoader.load(globalVirtualPkg, mode);
             mode = globalVirtualPkg.malaguComponent.mode || [];
-            this.componentPackageLoader.load(globalVirtualPkg, this.options.mode);
             this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, globalVirtualPkg.malaguComponent);
 
             if (this.options.propsDir) {
