@@ -109,31 +109,43 @@ export class ApplicationPackage {
 
     get rootComponentPackage() {
         if (!this._rootComponentPackage) {
-            this.pkg.malaguComponent = {};
-            this.pkg.modulePath = this.projectPath;
-            if (process.cwd() !== this.projectPath) {
-                const virtualPkg = this.createVirtualPkg();
-                this.componentPackageLoader.load(virtualPkg, this.options.mode);
-                this.componentPackageLoader.load(this.pkg, virtualPkg.malaguComponent.mode || []);
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, virtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode });
-            } else {
-                this.componentPackageLoader.load(this.pkg, this.options.mode);
-            }
+            this.pkg.malaguComponent = this.pkg.malaguComponent || {};
+            let mode = this.options.mode;
             const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguPropsDirPath());
+            mode = globalVirtualPkg.malaguComponent.mode || [];
             this.componentPackageLoader.load(globalVirtualPkg, this.options.mode);
-            this.pkg.malaguComponent = ConfigUtil.merge(globalVirtualPkg.malaguComponent, this.pkg.malaguComponent);
+            this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, globalVirtualPkg.malaguComponent);
 
             if (this.options.propsDir) {
                 const propsDirVirtualPkg = this.createVirtualPkg(this.options.propsDir);
-                this.componentPackageLoader.load(propsDirVirtualPkg, this.options.mode);
+                this.componentPackageLoader.load(propsDirVirtualPkg, mode);
+                mode = propsDirVirtualPkg.malaguComponent.mode || [];
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, propsDirVirtualPkg.malaguComponent);
             }
 
             if (this.options.propsFile) {
                 const props = load(readFileSync(paths.resolve(process.cwd(), this.options.propsFile), { encoding: 'utf8' }));
+                for (const m of props.malaguComponent.mode || []) {
+                    if (!mode.includes(m)) {
+                        mode.push(m);
+                    }
+                }
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, props);
             }
 
+            this.pkg.modulePath = this.projectPath;
+            const projectVirtualPkg = this.createVirtualPkg(this.projectPath);
+            this.componentPackageLoader.load(projectVirtualPkg, mode);
+            mode = projectVirtualPkg.malaguComponent.mode || [];
+            this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, projectVirtualPkg.malaguComponent);
+
+            if (process.cwd() !== this.projectPath) {
+                const pwdVirtualPkg = this.createVirtualPkg();
+                this.componentPackageLoader.load(pwdVirtualPkg, mode);
+                mode = pwdVirtualPkg.malaguComponent.mode || [];
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode });
+            }
+            this.pkg.malaguComponent.mode = mode;
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
