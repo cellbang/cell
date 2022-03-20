@@ -1,9 +1,9 @@
 {
   "name": "@malagu/node-plugin",
-  "version": "2.17.2",
+  "version": "2.18.0",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.17.2",
+    "@malagu/cli-common": "2.18.0",
     "@vendia/serverless-express": "^4.5.2",
     "aws-lambda-fastify": "^2.0.2"
   },
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.17.2"
+    "@malagu/ext-scripts": "2.18.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
