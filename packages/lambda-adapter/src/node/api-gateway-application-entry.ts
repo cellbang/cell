@@ -4,6 +4,7 @@ import { ContainerProvider } from '@malagu/core/lib/common/container/container-p
 import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
 import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
+import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
 import * as express from 'express';
 const createProxy = require('@vendia/serverless-express');
 
@@ -31,5 +32,6 @@ const startPromise = start();
 export async function handler(event: string, context: any) {
     await startPromise;
     await Promise.all(listeners.map(l => l.onTrigger(event)));
+    context.callbackWaitsForEmptyEventLoop = FaaSUtils.getCallbackWaitsForEmptyEventLoop();
     return proxy(event, context);
 }

@@ -1,0 +1,2 @@
+backend:
+  devEntry: lib/node/dev-event-application-entry

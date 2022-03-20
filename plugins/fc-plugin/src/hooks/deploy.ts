@@ -43,6 +43,7 @@ export default async (context: DeployContext) => {
     const codeLoader = new DefaultCodeLoader();
     const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
     delete functionMeta.codeUri;
+    delete functionMeta.callbackWaitsForEmptyEventLoop;
     await createOrUpdateFunction(functionMeta, zip, disableProjectId);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);

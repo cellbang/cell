@@ -35,7 +35,8 @@
     "malagu-sample-http-mode.yml",
     "malagu-api-gateway-mode.yml",
     "malagu-timer-mode.yml",
-    "malagu-mns-topic-mode.yml"
+    "malagu-mns-topic-mode.yml",
+    "malagu-event-mode.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",

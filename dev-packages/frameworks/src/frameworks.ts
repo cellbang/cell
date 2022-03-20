@@ -1,6 +1,20 @@
 export const frameworks = [
     // frontend
     {
+        name: 'qq-guild-bot',
+        useRuntime: 'default',
+        useMode: [ 'qq-guild-bot' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'bot-config.json',
+                    matchContent: '"appID":\\s*".+?"',
+                }
+            ]
+        }
+    },
+    {
         name: 'nextjs',
         useRuntime: 'default',
         useMode: [ 'unpackage', 'node', 'next' ],

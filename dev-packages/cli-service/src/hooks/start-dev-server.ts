@@ -26,8 +26,8 @@ function createCompiler(configuration: webpack.Configuration, options: any, log:
 }
 
 function getEntryPath(configuration: webpack.Configuration) {
-    const { path, filename } = configuration.output as any;
-    return resolve(path as string, filename);
+    const { path } = configuration.output as any;
+    return resolve(path as string, 'index.js');
 }
 
 function mountRuntimeModuleCaches() {

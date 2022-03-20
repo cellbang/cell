@@ -133,6 +133,13 @@ export class ApplicationPackage {
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, props);
             }
 
+            const pwdVirtualPkg = this.createVirtualPkg();
+            if (process.cwd() !== this.projectPath) {
+                this.componentPackageLoader.load(pwdVirtualPkg, mode);
+                mode = pwdVirtualPkg.malaguComponent.mode || [];
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent);
+            }
+
             this.pkg.modulePath = this.projectPath;
             const projectVirtualPkg = this.createVirtualPkg(this.projectPath);
             this.componentPackageLoader.load(projectVirtualPkg, mode);
@@ -140,11 +147,9 @@ export class ApplicationPackage {
             this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, projectVirtualPkg.malaguComponent);
 
             if (process.cwd() !== this.projectPath) {
-                const pwdVirtualPkg = this.createVirtualPkg();
-                this.componentPackageLoader.load(pwdVirtualPkg, mode);
-                mode = pwdVirtualPkg.malaguComponent.mode || [];
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent, { mode: this.pkg.malaguComponent.mode });
+                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent);
             }
+
             this.pkg.malaguComponent.mode = mode;
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
