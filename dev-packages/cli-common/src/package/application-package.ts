@@ -125,7 +125,7 @@ export class ApplicationPackage {
 
             if (this.options.propsFile) {
                 const props = load(readFileSync(paths.resolve(process.cwd(), this.options.propsFile), { encoding: 'utf8' }));
-                for (const m of props.malaguComponent.mode || []) {
+                for (const m of props.mode || []) {
                     if (!mode.includes(m)) {
                         mode.push(m);
                     }
