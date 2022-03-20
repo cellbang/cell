@@ -2,7 +2,7 @@
 
 ## 2.18.0
 
-- feat(qq-fuild-bot-adapter) 添加 QQ 机器人适配器组件
+- feat(qq-guild-bot-adapter) 添加 QQ 机器人适配器组件
 
 
 ## 2.17.2
