@@ -72,6 +72,7 @@
 							<h3>Namespaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter"><a href="faas_adapter.event.html" class="tsd-kind-icon">Event</a></li>
+								<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="faas_adapter.faasutils.html" class="tsd-kind-icon">FaaSUtils</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -79,6 +80,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class tsd-parent-kind-module tsd-is-not-exported"><a href="../classes/faas_adapter.callbacklist.html" class="tsd-kind-icon">Callback<wbr>List</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/faas_adapter.clockimpl.html" class="tsd-kind-icon">Clock<wbr>Impl</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/faas_adapter.deferred.html" class="tsd-kind-icon">Deferred</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter"><a href="../classes/faas_adapter.emitter.html" class="tsd-kind-icon">Emitter</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/faas_adapter.faascredentialsprovider.html" class="tsd-kind-icon">FaaSCredentials<wbr>Provider</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/faas_adapter.faascronjob.html" class="tsd-kind-icon">FaaSCron<wbr>Job</a></li>
@@ -99,6 +101,16 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="faas_adapter.html#clock-1" class="tsd-kind-icon">Clock</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="faas_adapter.html#faaseventlistener-1" class="tsd-kind-icon">FaaSEvent<wbr>Listener</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="faas_adapter.html#listeners" class="tsd-kind-icon">listeners</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="faas_adapter.html#startpromise" class="tsd-kind-icon">start<wbr>Promise</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="faas_adapter.html#after" class="tsd-kind-icon">after</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="faas_adapter.html#handler" class="tsd-kind-icon">handler</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="faas_adapter.html#start" class="tsd-kind-icon">start</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,7 +124,7 @@
 					<div class="tsd-signature tsd-kind-icon">Clock<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unique symbol</span><span class="tsd-signature-symbol"> = Symbol(&#x27;Clock&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/faas-adapter/src/node/timer/timer-protocol.ts#L3">packages/faas-adapter/src/node/timer/timer-protocol.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/timer/timer-protocol.ts#L3">packages/faas-adapter/src/node/timer/timer-protocol.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -122,9 +134,98 @@
 					<div class="tsd-signature tsd-kind-icon">FaaSEvent<wbr>Listener<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unique symbol</span><span class="tsd-signature-symbol"> = Symbol(&#x27;FaaSEventListener&#x27;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/faas-adapter/src/node/event/event-protocol.ts#L1">packages/faas-adapter/src/node/event/event-protocol.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/event/event-protocol.ts#L1">packages/faas-adapter/src/node/event/event-protocol.ts:1</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="listeners" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagLet">Let</span> listeners</h3>
+					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/dev-event-application-entry.ts#L6">packages/faas-adapter/src/node/dev-event-application-entry.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="startpromise" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Promise</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/dev-event-application-entry.ts#L15">packages/faas-adapter/src/node/dev-event-application-entry.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="after" class="tsd-anchor"></a>
+					<h3>after</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">after<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ServeContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/hooks/serve.ts#L12">packages/faas-adapter/src/hooks/serve.ts:12</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>context: <span class="tsd-signature-type">ServeContext</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="handler" class="tsd-anchor"></a>
+					<h3>handler</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/dev-event-application-entry.ts#L17">packages/faas-adapter/src/node/dev-event-application-entry.ts:17</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="start" class="tsd-anchor"></a>
+					<h3>start</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/f54771919/packages/faas-adapter/src/node/dev-event-application-entry.ts#L8">packages/faas-adapter/src/node/dev-event-application-entry.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -140,6 +241,9 @@
 							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
 								<a href="faas_adapter.event.html">Event</a>
 							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module">
+								<a href="faas_adapter.faasutils.html">FaaSUtils</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -151,6 +255,9 @@
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/faas_adapter.clockimpl.html" class="tsd-kind-icon">Clock<wbr>Impl</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/faas_adapter.deferred.html" class="tsd-kind-icon">Deferred</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../classes/faas_adapter.emitter.html" class="tsd-kind-icon">Emitter</a>
@@ -181,6 +288,21 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="faas_adapter.html#faaseventlistener-1" class="tsd-kind-icon">FaaSEvent<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="faas_adapter.html#listeners" class="tsd-kind-icon">listeners</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="faas_adapter.html#startpromise" class="tsd-kind-icon">start<wbr>Promise</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="faas_adapter.html#after" class="tsd-kind-icon">after</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="faas_adapter.html#handler" class="tsd-kind-icon">handler</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="faas_adapter.html#start" class="tsd-kind-icon">start</a>
 					</li>
 				</ul>
 			</nav>
