@@ -206,7 +206,10 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
 
             await checkStatus(functionMeta.name);
 
-            functionInfo = await lambdaClient.updateFunctionConfiguration(parseUpdateFunctionConfigurationRequest(functionMeta)).promise();
+            let updateConfig = parseUpdateFunctionConfigurationRequest(functionMeta);
+            delete updateConfig.Runtime;
+            
+            functionInfo = await lambdaClient.updateFunctionConfiguration(updateConfig).promise();
         });
     } else {
         functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
