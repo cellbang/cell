@@ -122,7 +122,7 @@
 					<div class="tsd-signature tsd-kind-icon">CURRENT_<wbr>ORM_<wbr>CONTEXT_<wbr>REQUEST_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"CurrentOrmContextRequest"</span><span class="tsd-signature-symbol"> = &quot;CurrentOrmContextRequest&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/node/context/context-protocol.ts#L5">packages/typeorm/src/node/context/context-protocol.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/node/context/context-protocol.ts#L5">packages/typeorm/src/node/context/context-protocol.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,7 +132,7 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CONNECTION_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> = &quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/common/constants.ts#L1">packages/typeorm/src/common/constants.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/common/constants.ts#L1">packages/typeorm/src/common/constants.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">Transactional<span class="tsd-signature-symbol">:</span> <a href="../interfaces/typeorm.transactionaldecorator.html" class="tsd-signature-type">TransactionalDecorator</a><span class="tsd-signature-symbol"> = &lt;TransactionalDecorator&gt;function (nameOrTransactionalOption?: string | TransactionalOption): MethodDecorator {const { name, isolation, propagation, readOnly } &#x3D; getTransactionalOption(nameOrTransactionalOption);return (target: Object, methodName: string, descriptor: PropertyDescriptor) &#x3D;&gt; {const originalMethod &#x3D; descriptor.value;descriptor.value &#x3D; async function (...args: any[]) {if (propagation &#x3D;&#x3D;&#x3D; Propagation.Required) {const em &#x3D; OrmContext.getEntityManager(name);if (em &amp;&amp; em.queryRunner &amp;&amp; (em.queryRunner.isTransactionActive || readOnly)) {return originalMethod.apply(this, args);}}const callback &#x3D; async (entityManager: EntityManager) &#x3D;&gt; {OrmContext.pushEntityManager(name!, entityManager);try {return await originalMethod.apply(this, args);} finally {OrmContext.popEntityManager(name!);}};const conn &#x3D; await getConnection(name);const manager &#x3D; conn.manager;if (readOnly) {return callback(manager);} else if (isolation) {return manager.transaction(isolation, callback);} else {return manager.transaction(callback);}};};}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/node/annotation/transactional.ts#L27">packages/typeorm/src/node/annotation/transactional.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/node/annotation/transactional.ts#L27">packages/typeorm/src/node/annotation/transactional.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">_entitiy<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Map&lt;string, Function[]&gt;()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/common/entity-provider.ts#L4">packages/typeorm/src/common/entity-provider.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/common/entity-provider.ts#L4">packages/typeorm/src/common/entity-provider.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +169,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/common/entity-provider.ts#L6">packages/typeorm/src/common/entity-provider.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/common/entity-provider.ts#L6">packages/typeorm/src/common/entity-provider.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -195,7 +195,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/node/utils.ts#L3">packages/typeorm/src/node/utils.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/node/utils.ts#L3">packages/typeorm/src/node/utils.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -218,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/ec4758c1d/packages/typeorm/src/node/annotation/transactional.ts#L61">packages/typeorm/src/node/annotation/transactional.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/e90c6802d/packages/typeorm/src/node/annotation/transactional.ts#L61">packages/typeorm/src/node/annotation/transactional.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
