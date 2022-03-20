@@ -258,6 +258,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
             updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
             updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
             await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
+            delete updateFunctionConfigurationRequest.Runtime;
             await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
         });
     } else {

@@ -336,6 +336,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
     }
 
     if (functionInfo) {
+        delete opts.runtime;
         await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
             await fcClient.updateFunction(serviceName, functionMeta.name, {
                 ...opts,
