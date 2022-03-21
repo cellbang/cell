@@ -4,7 +4,7 @@ import { join } from 'path';
 import { createOpenAPI, createWebsocket } from 'qq-guild-bot';
 // eslint-disable-next-line no-eval
 const localRequire = eval('require');
-const { appID, token, intents, eventMap } = localRequire(join(process.cwd(), 'bot-config.json'));
+const { appID, token, intents, eventMap } = localRequire(join(__dirname, 'bot-config.json'));
 
 @Component(FaaSEventListener)
 export class BotEventListener implements FaaSEventListener<{}> {

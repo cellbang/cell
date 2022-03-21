@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.18.1
+
+- fix(qq-guild-bot-adapter) 修复 bot-config.json 路径不正确
+
 ## 2.18.0
 
 - feat(qq-guild-bot-adapter) 添加 QQ 机器人适配器组件
