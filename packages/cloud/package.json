@@ -35,9 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.2",
-    "bufferutil": "^4.0.1",
-    "utf-8-validate": "^5.0.2"
+    "@malagu/ext-scripts": "2.18.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

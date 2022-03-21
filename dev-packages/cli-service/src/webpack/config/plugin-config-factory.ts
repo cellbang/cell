@@ -61,7 +61,12 @@ export class FilterWarningsPluginConfigFactory {
             }
         }
 
-        const defaultExclude = [/Critical dependency: /, /Cannot find source file/];
+        const defaultExclude = [
+            /Critical dependency: /,
+            /Cannot find source file/,
+            /Module not found: Error: Can't resolve 'bufferutil'/,
+            /Module not found: Error: Can't resolve 'utf-8-validate'/
+        ];
         if (defaultExclude.length || excludeSet.size) {
             const excludeReg = [...defaultExclude, ...excludeSet];
             const messageReg: any = [];
