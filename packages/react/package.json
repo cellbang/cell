@@ -1,11 +1,11 @@
 {
   "name": "@malagu/react",
-  "version": "2.18.1",
+  "version": "2.18.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/widget": "2.18.1",
+    "@malagu/widget": "2.18.2",
     "@types/history": "^4.7.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
@@ -57,7 +57,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.1"
+    "@malagu/ext-scripts": "2.18.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

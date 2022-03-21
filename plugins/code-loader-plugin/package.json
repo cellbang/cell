@@ -1,11 +1,11 @@
 {
   "name": "@malagu/code-loader-plugin",
-  "version": "2.18.1",
+  "version": "2.18.2",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.18.1",
+    "@malagu/cli-common": "2.18.2",
     "fs-extra": "^8.1.0",
     "jszip": "^3.7.1"
   },
@@ -38,7 +38,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.1"
+    "@malagu/ext-scripts": "2.18.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
