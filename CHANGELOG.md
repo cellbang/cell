@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.18.3
+
+- fix(cos) 修复腾讯云对象存储接口调用不工作问题
+
 ## 2.18.2
 
 - fix(qq-guild-bot-adapter) 修复 bot-config.json 路径不正确
@@ -19,8 +23,8 @@
 
 ## 2.17.0
 
-- feat(react) react添加css预处理器和css module支持
-- fix(*-plugin) 优化函数更新时runtime冲突 #140
+- feat(react) react 添加 css 预处理器和 css module 支持
+- fix(*-plugin) 优化函数更新时 runtime 冲突 #140
 - fix(cli-common) 修复根组件属性多维加载顺序问题
 
 ## 2.16.5

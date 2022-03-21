@@ -1,11 +1,11 @@
-import { Readable } from 'stream';
+import { Stream } from 'stream';
 import { AbstractCloudService, CloudService } from './cloud-protocol';
 
 export const ObjectStorageService = Symbol('ObjectStorageService');
 
 export const OBJECT_STORAGE_NAME = 'objectStorage';
 
-export type Body = Buffer|Uint8Array|Blob|string|Readable;
+export type Body = Buffer|string|Stream;
 
 export interface Owner {
     id?: string;
@@ -120,7 +120,7 @@ export interface ObjectStorageService<T> extends CloudService<T> {
     listBuckets(): Promise<ListAllMyBucketsResult>;
     listObjects(request: ListObjectsRequest): Promise<ListObjectsResult>;
     getObject(request: GetObjectRequest): Promise<Body>;
-    getStream(request: GetObjectRequest): Promise<Readable>;
+    getStream(request: GetObjectRequest): Promise<Stream>;
     putObject(request: PutObjectRequest): Promise<void>;
     copyObject(request: CopyObjectRequest): Promise<void>;
     deleteObject(request: DeleteObjectRequest): Promise<void>;
@@ -134,7 +134,7 @@ export abstract class AbstractObjectStorageService<T> extends AbstractCloudServi
     abstract listBuckets(): Promise<ListAllMyBucketsResult>;
     abstract listObjects(request: ListObjectsRequest): Promise<ListObjectsResult> ;
     abstract getObject(request: GetObjectRequest): Promise<Body>;
-    abstract getStream(request: GetObjectRequest): Promise<Readable>;
+    abstract getStream(request: GetObjectRequest): Promise<Stream>;
     abstract putObject(request: PutObjectRequest): Promise<void>;
     abstract copyObject(request: CopyObjectRequest): Promise<void>;
     abstract deleteObject(request: DeleteObjectRequest): Promise<void>;
