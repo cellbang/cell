@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cos",
-  "version": "2.18.1",
+  "version": "2.18.2",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.18.1",
+    "@malagu/cloud": "2.18.2",
     "cos-nodejs-sdk-v5": "^2.8.3"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.1",
+    "@malagu/ext-scripts": "2.18.2",
     "@types/ali-oss": "^6.0.5",
     "@types/puppeteer-core": "^2.0.0",
     "bufferutil": "^4.0.1",
