@@ -1,11 +1,11 @@
 {
   "name": "@malagu/material-ui",
-  "version": "2.18.1",
+  "version": "2.18.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/react": "2.18.1",
+    "@malagu/react": "2.18.2",
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/styles": "^4.5.2",
@@ -40,7 +40,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.1",
+    "@malagu/ext-scripts": "2.18.2",
     "@types/history": "^4.7.3",
     "@types/react-router-dom": "^5.1.3"
   },

@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.18.1
+## 2.18.2
 
 - fix(qq-guild-bot-adapter) 修复 bot-config.json 路径不正确
 
