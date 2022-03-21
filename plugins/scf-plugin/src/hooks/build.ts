@@ -16,10 +16,19 @@ export default async (context: BuildContext) => {
         await writeFile(destDir, `#!/bin/bash\n${bootstrap}`, { mode: 0o755 });
     } else {
         const destDir = join(codeRootDir, 'index.js');
-        await writeFile(destDir, `const code = require('./backend');
-    module.exports.handler = (event, context) => {
-        return code.handler(event, context);
-    }`, { mode: 0o755 });
+
+        if (cloudConfig.function?.callbackWaitsForEmptyEventLoop) {
+            await writeFile(destDir, `const code = require('./backend');
+            module.exports.handler = (event, context) => {
+                code.handler(event, context);
+            }`, { mode: 0o755 });
+        } else {
+            await writeFile(destDir, `const code = require('./backend');
+            module.exports.handler = (event, context) => {
+                return code.handler(event, context);
+            }`, { mode: 0o755 });
+        }
+        
 
     }
 
