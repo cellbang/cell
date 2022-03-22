@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.18.4
+
+- feat(qq-guild-bot-adapter) 支持在函数超时前主动结束返回，避免函数超时错误
+- feat(*-plugin) 添加新属性 `malagu.cloud.function.sync=onlyUpdateCode` 只更新函数代码，而不更新函数配置
+
 ## 2.18.3
 
 - fix(cos) 修复腾讯云对象存储接口调用不工作问题

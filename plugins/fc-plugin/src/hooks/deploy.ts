@@ -315,7 +315,9 @@ async function tryCreateProjectId(serviceName: string, functionName: string) {
 async function createOrUpdateFunction(functionMeta: any, code: JSZip, disableProjectId: boolean) {
     const opts = { ...functionMeta };
     const serviceName = opts.serviceName;
+    const sync = opts.sync;
     opts.EnvironmentVariables = opts.env;
+    delete opts.sync;
     delete opts.name;
     delete opts.env;
     delete opts.serviceName;
@@ -338,9 +340,9 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
 
     if (functionInfo) {
         delete opts.runtime;
-        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function${sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             await fcClient.updateFunction(serviceName, functionMeta.name, {
-                ...opts,
+                ...(sync === 'onlyUpdateCode' ? {} : opts),
                 code: {
                     zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
                 },

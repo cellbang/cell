@@ -25,7 +25,7 @@
   "files": [
     "lib",
     "src",
-    "malagu-remote.yml"
+    "malagu.yml"
   ],
   "scripts": {
     "lint": "malaguext lint",

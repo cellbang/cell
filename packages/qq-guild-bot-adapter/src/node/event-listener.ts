@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component, Value } from '@malagu/core';
 import { FaaSEventListener } from '@malagu/faas-adapter';
 import { join } from 'path';
 import { createOpenAPI, createWebsocket } from 'qq-guild-bot';
@@ -8,6 +8,9 @@ const { appID, token, intents, eventMap } = localRequire(join(__dirname, 'bot-co
 
 @Component(FaaSEventListener)
 export class BotEventListener implements FaaSEventListener<{}> {
+
+    @Value('malagu.cloud.function.timeout')
+    protected readonly functionTimeout?: number;
 
     protected clear() {
         try {
@@ -49,6 +52,13 @@ export class BotEventListener implements FaaSEventListener<{}> {
         this.clear();
         this.createAndBindClient();
         this.registerListeners();
+
+        if (this.functionTimeout) {
+            const delayTime = (this.functionTimeout - 3) * 1000;
+            return new Promise(resolve => {
+                setTimeout(() => resolve(), delayTime > 0 ? delayTime : 0);
+            });
+        }
     }
 
 }
