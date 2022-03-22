@@ -244,7 +244,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
     }
 
     if (functionInfo) {
-        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function${functionMeta.sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             const updateFunctionCodeRequest: any = {};
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
@@ -254,12 +254,15 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
 
             await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
 
-            const updateFunctionConfigurationRequest: any = {};
-            updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
-            updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
-            await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
-            delete updateFunctionConfigurationRequest.Runtime;
-            await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
+            if (functionMeta.sync !== 'onlyUpdateCode') {
+                const updateFunctionConfigurationRequest: any = {};
+                updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
+                updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
+                await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
+                delete updateFunctionConfigurationRequest.Runtime;
+                await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
+            }
+
         });
     } else {
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {

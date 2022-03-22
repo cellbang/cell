@@ -197,7 +197,7 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
     await createRoleIfNeed(functionMeta, accountId, region);
 
     if (functionInfo) {
-        await SpinnerUtil.start(`Update ${functionMeta.name} function`, async () => {
+        await SpinnerUtil.start(`Update ${functionMeta.name} function${functionMeta.sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             const updateFunctionCodeRequest: Lambda.Types.UpdateFunctionCodeRequest = {
                 FunctionName: functionMeta.name,
                 ZipFile: await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  })
@@ -206,10 +206,12 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
 
             await checkStatus(functionMeta.name);
 
-            let updateConfig = parseUpdateFunctionConfigurationRequest(functionMeta);
-            delete updateConfig.Runtime;
-            
-            functionInfo = await lambdaClient.updateFunctionConfiguration(updateConfig).promise();
+            if (functionMeta.sync !== 'onlyUpdateCode') {
+                let updateConfig = parseUpdateFunctionConfigurationRequest(functionMeta);
+                delete updateConfig.Runtime;
+                
+                functionInfo = await lambdaClient.updateFunctionConfiguration(updateConfig).promise();
+            }
         });
     } else {
         functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
