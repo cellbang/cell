@@ -1,12 +1,12 @@
 {
   "name": "@malagu/scf-adapter",
-  "version": "2.18.3",
+  "version": "2.18.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/faas-adapter": "2.18.3",
-    "@malagu/web": "2.18.3",
+    "@malagu/faas-adapter": "2.18.4",
+    "@malagu/web": "2.18.4",
     "express": "^4.17.1",
     "tencent-serverless-http": "^1.3.2"
   },
@@ -44,7 +44,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.18.3"
+    "@malagu/ext-scripts": "2.18.4"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
