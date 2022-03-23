@@ -44,7 +44,7 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.mergewith": "^4.6.2",
     "lru-cache": "^6.0.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "ora": "^4.0.2",
     "randomatic": "^3.1.1",
     "semver": "^7.3.5",
