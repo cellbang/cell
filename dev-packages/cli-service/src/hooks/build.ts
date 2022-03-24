@@ -11,8 +11,8 @@ export default async (ctx: CliContext) => {
     for (const configuration of context.configurations) {
         const compiler = webpack(configuration.toConfig());
         await new Promise<void>((resolve, reject) => compiler.run((err, stats) => {
-            if (err) {
-                reject(err);
+            if (err || stats?.hasErrors()) {
+                reject(err || '');
                 return;
             }
             if (configuration.get('name') === BACKEND_TARGET) {

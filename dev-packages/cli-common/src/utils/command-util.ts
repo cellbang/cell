@@ -34,7 +34,8 @@ export namespace CommandUtil {
         const prod = options.p || options.prod;
         const propsDir = getPropsDir(options);
         const propsFile = getPropsFile(options);
-        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), port, spinner, runtime, framework, settings, propsFile, propsDir });
+        const skipAutoInstall = getSkipAutoInstall(options);
+        return CliContext.create({ args, targets, mode, prod, dev: isDev(args, settings), port, spinner, runtime, framework, settings, propsFile, propsDir, skipAutoInstall });
     }
 
     function getArrayOptions(options: any, prop: string, shortProp?: string): string[] {
@@ -83,7 +84,7 @@ export namespace CommandUtil {
     }
 
     function getPort(options: any) {
-        return getArrayOptions(options, 'port', 'p').pop();
+        return options['port'] || options['p'];
     }
 
     function getPropsDir(options: any) {
@@ -92,6 +93,10 @@ export namespace CommandUtil {
 
     function getPropsFile(options: any) {
         return getArrayOptions(options, 'props-file').pop();
+    }
+
+    function getSkipAutoInstall(options: any) {
+        return options['skip-auto-install'];
     }
 
     export function getCommandByName(ctx: CliContext, name: string) {

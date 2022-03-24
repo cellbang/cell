@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.19.0
+
+- feat(cli) 支持 `malagu --skip-auto-install`：跳过自动按需安装运行时组件过程
+- feat(qq-guild-bot) 事件参数名从 data 改为 context
+- fix(cli-service) 修复编译报错却没有终止命令行，且输出的成功日志
+- feat node-forge version
+- feat(cli/cli-common/cli-runtime) update minimist version
+
 ## 2.18.4
 
 - feat(qq-guild-bot-adapter) 支持在函数超时前主动结束返回，避免函数超时错误
