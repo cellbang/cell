@@ -40,6 +40,7 @@ export interface CreateCliContextOptions extends Record<string, any> {
     propsDir?: string;
     propsFile?: string;
     framework?: Framework;
+    skipAutoInstall?: boolean;
 }
 
 export namespace CliContext {
@@ -166,7 +167,10 @@ export namespace CliContext {
         const pkg = ApplicationPackage.create({
             projectPath, runtime, mode, dev: options.dev, propsDir: options.propsDir, propsFile: options.propsFile, settings: options.settings, framework
         });
-        await installComponents(pkg, options.spinner);
+
+        if (options.skipAutoInstall !== true) {
+            await installComponents(pkg, options.spinner);
+        }
 
         const cfg = new ApplicationConfig({ targets, program }, pkg);
 
