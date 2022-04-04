@@ -148,3 +148,6 @@ export class UserController {
 ## 交流群
 
 ![群二维码.png](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+
+## 状态
+![Alt](https://repobeats.axiom.co/api/embed/59b39c98717cf1ae18b57f24d2efe91617e3a6f1.svg "Repobeats analytics image")
