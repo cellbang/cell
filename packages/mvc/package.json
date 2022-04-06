@@ -1,11 +1,11 @@
 {
   "name": "@malagu/mvc",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "2.19.0",
+    "@malagu/web": "2.20.0",
     "is-stream": "^2.0.0",
     "mustache": "^4.0.1"
   },
@@ -37,7 +37,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.19.0",
+    "@malagu/ext-scripts": "2.20.0",
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.1",
     "@types/url-join": "^4.0.0",
