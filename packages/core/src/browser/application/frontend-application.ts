@@ -134,4 +134,9 @@ export class FrontendApplication extends AbstractApplication {
         return result;
     }
 
+    async stop(): Promise<void> {
+        this.doStop();
+        this.stateService.state = 'stoped';
+    }
+
 }

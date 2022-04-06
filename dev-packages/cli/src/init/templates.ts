@@ -10,6 +10,7 @@ export const templates: any = {
     'schedule': '{{ templatePath }}/schedule',
     'admin-app': '{{ templatePath }}/admin-app',
     'microservice': '{{ templatePath }}/microservice',
+    'standalone-app': '{{ templatePath }}/standalone-app',
     'file-service': '{{ templatePath }}/file-service',
     'puppeteer': '{{ templatePath }}/puppeteer',
     'mycli': '{{ templatePath }}/mycli'

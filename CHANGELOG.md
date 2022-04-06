@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.20.0
+
+- feat(cli) 添加新模板 `standalone-app`，如何在不适用命令行工具的情况下，集成框架能力
+- feat(core) 添加应用工场，方便第三方项目集成框架核心能力
+- feat(core) 应用接口 `Application` 添加 `stop` 方法
+
 ## 2.19.0
 
 - feat(cli) 支持 `malagu --skip-auto-install`：跳过自动按需安装运行时组件过程

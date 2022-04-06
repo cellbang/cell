@@ -9,6 +9,11 @@ import { Autowired, Component } from '../annotation';
 export const ApplicationLifecycle = Symbol('ApplicationLifecycle');
 export const Application = Symbol('Application');
 export const ApplicationStateService = Symbol('ApplicationStateService');
+export const ApplicationProps = Symbol('ApplicationProps');
+
+export interface ApplicationProps extends Record<string, any> {
+
+}
 
 export interface ApplicationLifecycle<T extends Application> {
 
@@ -23,6 +28,7 @@ export interface ApplicationLifecycle<T extends Application> {
 export interface Application {
 
     start(): Promise<void>;
+    stop(): Promise<void>;
 
 }
 
@@ -42,6 +48,8 @@ export abstract class AbstractApplication implements Application {
     protected readonly lifecycles: ApplicationLifecycle<Application>[];
 
     abstract start(): Promise<void>;
+
+    abstract stop(): Promise<void>;
 
     @Autowired(Logger)
     protected readonly logger: Logger;
@@ -93,7 +101,8 @@ export abstract class AbstractApplication implements Application {
 export type ApplicationState =
     'init'
     | 'started'
-    | 'ready';
+    | 'ready'
+    | 'stoped';
 
 export interface ApplicationStateService<T extends string> {
     state: T;
