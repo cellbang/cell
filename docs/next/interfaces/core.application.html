@@ -80,6 +80,7 @@
 				<ul class="tsd-hierarchy">
 					<li><a href="../classes/core.abstractapplication.html" class="tsd-signature-type">AbstractApplication</a></li>
 					<li><a href="../classes/core.backendapplication.html" class="tsd-signature-type">BackendApplication</a></li>
+					<li><a href="../classes/core.commonapplication.html" class="tsd-signature-type">CommonApplication</a></li>
 					<li><a href="../classes/core.frontendapplication.html" class="tsd-signature-type">FrontendApplication</a></li>
 				</ul>
 			</section>
@@ -91,6 +92,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="core.application.html#start" class="tsd-kind-icon">start</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="core.application.html#stop" class="tsd-kind-icon">stop</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,7 +110,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L25">packages/core/src/common/application/application-protocol.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L30">packages/core/src/common/application/application-protocol.ts:30</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="stop" class="tsd-anchor"></a>
+					<h3>stop</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L31">packages/core/src/common/application/application-protocol.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -172,6 +191,9 @@
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
 								<a href="core.application.html#start" class="tsd-kind-icon">start</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="core.application.html#stop" class="tsd-kind-icon">stop</a>
 							</li>
 						</ul>
 					</li>

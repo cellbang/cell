@@ -77,6 +77,9 @@
 								<a href="core.frontendapplication.html" class="tsd-signature-type">FrontendApplication</a>
 							</li>
 							<li>
+								<a href="core.commonapplication.html" class="tsd-signature-type">CommonApplication</a>
+							</li>
+							<li>
 								<a href="core.backendapplication.html" class="tsd-signature-type">BackendApplication</a>
 							</li>
 						</ul>
@@ -106,6 +109,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="core.abstractapplication.html#dostart" class="tsd-kind-icon">do<wbr>Start</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="core.abstractapplication.html#dostop" class="tsd-kind-icon">do<wbr>Stop</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.abstractapplication.html#start" class="tsd-kind-icon">start</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.abstractapplication.html#stop" class="tsd-kind-icon">stop</a></li>
 							</ul>
 						</section>
 					</div>
@@ -119,7 +123,7 @@
 					<div class="tsd-signature tsd-kind-icon">lifecycles<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.applicationlifecycle.html" class="tsd-signature-type">ApplicationLifecycle</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/core.application.html" class="tsd-signature-type">Application</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L42">packages/core/src/common/application/application-protocol.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L48">packages/core/src/common/application/application-protocol.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -129,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.logger.html" class="tsd-signature-type">Logger</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L47">packages/core/src/common/application/application-protocol.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L55">packages/core/src/common/application/application-protocol.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -146,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L52">packages/core/src/common/application/application-protocol.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L60">packages/core/src/common/application/application-protocol.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,7 +172,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L79">packages/core/src/common/application/application-protocol.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L87">packages/core/src/common/application/application-protocol.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -191,7 +195,25 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/core.application.html">Application</a>.<a href="../interfaces/core.application.html#start">start</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/2199b2b2c/packages/core/src/common/application/application-protocol.ts#L44">packages/core/src/common/application/application-protocol.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L50">packages/core/src/common/application/application-protocol.ts:50</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="stop" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> stop</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/core.application.html">Application</a>.<a href="../interfaces/core.application.html#stop">stop</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/d3c631a5f/packages/core/src/common/application/application-protocol.ts#L52">packages/core/src/common/application/application-protocol.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -267,6 +289,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core.abstractapplication.html#start" class="tsd-kind-icon">start</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.abstractapplication.html#stop" class="tsd-kind-icon">stop</a>
 							</li>
 						</ul>
 					</li>
