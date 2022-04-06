@@ -1,11 +1,11 @@
 {
   "name": "@malagu/express-adapter",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/web": "2.19.0",
+    "@malagu/web": "2.20.0",
     "express": "^4.17.1"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.19.0"
+    "@malagu/ext-scripts": "2.20.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -1,6 +1,6 @@
 {
   "name": "@malagu/compression",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "",
   "dependencies": {
     "compression-webpack-plugin": "^8.0.0"
@@ -33,7 +33,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.19.0"
+    "@malagu/ext-scripts": "2.20.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
