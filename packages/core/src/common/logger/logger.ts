@@ -9,7 +9,7 @@ export class LoggerImpl implements Logger {
     constructor(
         @Value(LOGGER_CONFIG) protected readonly config: any
     ) {
-        if (config.level) {
+        if (config?.level) {
             log.setLevel(config.level);
         } else {
             log.setLevel('error');

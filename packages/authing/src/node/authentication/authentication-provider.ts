@@ -4,7 +4,7 @@ import { UserService, UserChecker, BadCredentialsError, AuthenticationProvider,
     Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY } from '@malagu/security/lib/node';
 import { User } from '@malagu/security';
 import axios from 'axios';
-import * as qs from 'querystring';
+import { URLSearchParams } from 'url';
 import { AuthingProvider } from './authing-provider';
 import { HttpMethod } from '@malagu/web';
 
@@ -71,13 +71,13 @@ export class AuthingSSOAuthenticationProvider implements AuthenticationProvider 
     protected async getAccessTokenByCode(code: string) {
         const { id, secret, redirectUri } = this.ssoOptions;
         const { data } = await axios.post('https://sso.authing.cn/oauth/oidc/token',
-            qs.stringify({
+            new URLSearchParams({
                 code,
                 client_id: id,
                 client_secret: secret,
                 grant_type: 'authorization_code',
                 redirect_uri: redirectUri
-            }),
+            }).toString(),
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

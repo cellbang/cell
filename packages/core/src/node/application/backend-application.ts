@@ -35,4 +35,9 @@ export class BackendApplication extends AbstractApplication {
         this.doStop();
         process.exit(0);
     }
+
+    async stop(): Promise<void> {
+        this.doStop();
+        this.stateService.state = 'stoped';
+    }
 }

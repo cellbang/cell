@@ -48,4 +48,10 @@ export class ApplicationLifecycleImpl implements ApplicationLifecycle<BackendApp
         }
     }
 
+    onStop() {
+        for (const [ name ] of this.schedulerRegistry.getAll()) {
+            this.schedulerRegistry.delete(name);
+        }
+    }
+
 }
