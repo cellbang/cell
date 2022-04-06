@@ -214,6 +214,9 @@
       ],
       "@malagu/example-qq-guild-bot-app/*": [
         "examples/qq-guild-bot-app/*"
+      ],
+      "@malagu/example-standalone-app/*": [
+        "examples/standalone-app/*"
       ]
     }
   },

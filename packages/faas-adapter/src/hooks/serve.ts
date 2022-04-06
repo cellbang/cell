@@ -19,7 +19,7 @@ export async function after(context: ServeContext) {
     if (!mode.includes('event')) {
         return;
     }
-    let handler: (event: any, context: any, callback: any) => void;
+    let handler: (event: any, context: any, callback: any) => Promise<void>;
     const compileDeferred = new Deferred();
 
     context.compiler.hooks.done.tap('WebServe', () => {
