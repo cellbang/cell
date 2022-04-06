@@ -1,10 +1,10 @@
 {
   "name": "@malagu/scf-plugin",
-  "version": "2.19.0",
+  "version": "2.20.0",
   "description": "",
   "dependencies": {
-    "@malagu/cloud-plugin": "2.19.0",
-    "@malagu/code-loader-plugin": "2.19.0",
+    "@malagu/cloud-plugin": "2.20.0",
+    "@malagu/code-loader-plugin": "2.20.0",
     "fs-extra": "^8.1.0",
     "jszip": "^3.7.1",
     "tencentcloud-sdk-nodejs": "4.0.185"
@@ -46,7 +46,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.19.0"
+    "@malagu/ext-scripts": "2.20.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
