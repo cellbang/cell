@@ -8,6 +8,6 @@ export namespace ConfigUtil {
     }
 
     export function getRaw() {
-        return (global as any).malaguProps || config;
+        return (globalThis as any).malaguProps || config;
     }
 }

@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.20.1
+
+- fix(core) global 改为 globalThis 兼容非 nodejs 场景
+
 ## 2.20.0
 
 - feat(cli) 添加新模板 `standalone-app`，如何在不适用命令行工具的情况下，集成框架能力
