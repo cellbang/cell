@@ -118,13 +118,15 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
     createTriggerRequest.TriggerName = trigger.name;
     createTriggerRequest.Type = trigger.type;
     createTriggerRequest.Enable = trigger.enable;
-    createTriggerRequest.TriggerDesc = JSON.stringify(trigger.triggerDesc);
+    createTriggerRequest.TriggerDesc = trigger.type === 'timer' ? trigger.triggerDesc : JSON.stringify(trigger.triggerDesc);
     await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
         const Result = await scfClient.CreateTrigger(createTriggerRequest);
         url = JSON.parse(Result.TriggerInfo.TriggerDesc)?.service?.subDomain;
     });
     
-    console.log(chalk`    - Url: {green.bold ${url}}`);
+    if (url) {
+        console.log(chalk`    - Url: {green.bold ${url}}`);
+    }
     console.log(`    - Type: ${trigger.type}`);
     console.log(`    - Enable: ${trigger.enable}`);
 }

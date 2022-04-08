@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.20.2
+
+- fix(scf-plugin) 修复定时触发器参数错误
+
 ## 2.20.1
 
 - fix(core) global 改为 globalThis 兼容非 nodejs 场景
