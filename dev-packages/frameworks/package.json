@@ -1,6 +1,6 @@
 {
   "name": "@malagu/frameworks",
-  "version": "2.20.3",
+  "version": "2.20.4",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -31,7 +31,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.20.3"
+    "@malagu/ext-scripts": "2.20.4"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
