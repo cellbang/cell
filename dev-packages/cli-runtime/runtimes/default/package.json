@@ -18,7 +18,9 @@
       "@malagu/fc-plugin": "{{ version }}",
       "@malagu/lambda-plugin": "{{ version }}",
       "@malagu/static-plugin": "{{ version }}",
-      "@malagu/node-plugin": "{{ version }}"
+      "@malagu/node-plugin": "{{ version }}",
+      "@malagu/qq-guild-bot-adapter": "{{ version }}",
+      "@malagu/next-plugin": "{{ version }}"
     }
   }
 }

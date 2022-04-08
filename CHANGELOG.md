@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.20.4
+
+- feat(cli-runtime) 默认运行时添加 `@malagu/qq-guild-bot-adapter` 和 `@malagu/next-plugin`
+
 ## 2.20.3
 
 - feat(faas-adapter) FaaSEventListener 接口支持返回参数
