@@ -5997,6 +5997,13 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+discord-interactions@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/discord-interactions/-/discord-interactions-3.1.0.tgz#ee9268bb5ca8e1b56e3dc1e13c93dafede1f6bd0"
+  integrity sha512-AslkLAwaiq7ulFcurMoDf+FXINZWiF7/i+7U3tcKJHq/2zpxYKortPhaisM2f4c3hIL8ioddSCwVbRR4ngPIwA==
+  dependencies:
+    tweetnacl "^1.0.3"
+
 dns-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/dns-equal/-/dns-equal-1.0.0.tgz#b39e7f1da6eb0a75ba9c17324b34753c47e0654d"
@@ -11876,12 +11883,14 @@ q@^1.1.2, q@^1.5.1:
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qq-guild-bot@^2.7.0:
-  version "2.9.1"
-  resolved "https://registry.npmjs.org/qq-guild-bot/-/qq-guild-bot-2.9.1.tgz#78f1533f9acc78f4972328d4661019bcde5f6494"
-  integrity sha512-+L9L1/wI8QgXtrlwrvHi54riobiH4nTB8mZ2NwQSUs+YK05sF1tcXRkXWKFer7tUpB2/Ph0coDUlXFUZxdzWWA==
+qq-guild-bot@^2.9.2-beta1:
+  version "2.9.2-beta1"
+  resolved "https://registry.npmjs.org/qq-guild-bot/-/qq-guild-bot-2.9.2-beta1.tgz#0f92d1057452642820dd3b891305349fbf684dc1"
+  integrity sha512-O1+EfiQ4CVNkpkJlub+pe19/P5NRKaGB6K2rG+xKSqLkuDtWdRdoHvZLAwEcUJyTgm2D2pw1y/9ovnhWvSUlFg==
   dependencies:
+    discord-interactions "^3.1.0"
     resty-client "0.0.5"
+    tweetnacl "^1.0.3"
     ws "^7.4.4"
 
 qs@6.9.7:
@@ -14388,6 +14397,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
+
+tweetnacl@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

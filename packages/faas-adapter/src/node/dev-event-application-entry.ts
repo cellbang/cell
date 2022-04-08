@@ -3,13 +3,13 @@ import { Application } from '@malagu/core/lib/common/application/application-pro
 import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
 import { FaaSEventListener } from './event/event-protocol';
 
-let listeners: FaaSEventListener<any>[];
+let listeners: FaaSEventListener<any, void>[];
 
 async function start() {
     const c = await container;
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
-    listeners = c.getAll<FaaSEventListener<any>>(FaaSEventListener);
+    listeners = c.getAll<FaaSEventListener<any, void>>(FaaSEventListener);
 }
 
 const startPromise = start();

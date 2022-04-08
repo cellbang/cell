@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.20.3
+
+- feat(faas-adapter) FaaSEventListener 接口支持返回参数
+- feat(qq-guild-bot-adapter) 支持 QQ 机器人更优雅地结束
+
 ## 2.20.2
 
 - fix(scf-plugin) 修复定时触发器参数错误
