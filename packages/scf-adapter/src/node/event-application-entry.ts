@@ -4,20 +4,22 @@ import { ContainerProvider } from '@malagu/core/lib/common/container/container-p
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
 import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
 
-let listeners: FaaSEventListener<any>[];
+let listeners: FaaSEventListener<any, any>[];
 
 async function start() {
     const c = await container;
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
-    listeners = c.getAll<FaaSEventListener<any>>(FaaSEventListener);
+    listeners = c.getAll<FaaSEventListener<any, any>>(FaaSEventListener);
 }
 
 const startPromise = start();
 
 export async function handler(event: string, context: any, callback: any) {
-    await startPromise;
-    await Promise.all(listeners.map(l => l.onTrigger(event)));
     context.callbackWaitsForEmptyEventLoop = FaaSUtils.getCallbackWaitsForEmptyEventLoop();
+    await startPromise;
+    let result = await Promise.all(listeners.map(l => l.onTrigger(event)));
+    result = result.filter(item => !!item);
+    return result.length === 1 ? result[0] : result;
 
 }

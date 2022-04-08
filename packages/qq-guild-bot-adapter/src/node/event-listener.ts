@@ -1,16 +1,13 @@
-import { Component, Value } from '@malagu/core';
+import { Component } from '@malagu/core';
 import { FaaSEventListener } from '@malagu/faas-adapter';
 import { join } from 'path';
-import { createOpenAPI, createWebsocket } from 'qq-guild-bot';
+import { createOpenAPI, createWebsocket, createShort } from 'qq-guild-bot';
 // eslint-disable-next-line no-eval
 const localRequire = eval('require');
 const { appID, token, intents, eventMap } = localRequire(join(__dirname, 'bot-config.json'));
 
 @Component(FaaSEventListener)
-export class BotEventListener implements FaaSEventListener<{}> {
-
-    @Value('malagu.cloud.function.timeout')
-    protected readonly functionTimeout?: number;
+export class BotEventListener implements FaaSEventListener<any, any> {
 
     protected clear() {
         try {
@@ -20,12 +17,16 @@ export class BotEventListener implements FaaSEventListener<{}> {
         }
     }
 
-    protected createAndBindClient() {
-        const config = {
+    protected getConfig() {
+        return {
             appID,
             token,
             intents
         };
+    }
+
+    protected createAndBindClient() {
+        const config = this.getConfig();
         const client = createOpenAPI(config);
         const ws = createWebsocket(config);
 
@@ -48,17 +49,18 @@ export class BotEventListener implements FaaSEventListener<{}> {
         }
     }
 
-    async onTrigger(event: {}): Promise<void> {
+    protected waitShort(event: any) {
+        const short = createShort(this.getConfig() as any);
+        short.on('EVENT_SHORT', data => console.log('【EVENT_SHORT】内部事件通知', data));
+
+        return short.callback(event);
+    }
+
+    async onTrigger(event: any): Promise<any> {
         this.clear();
         this.createAndBindClient();
         this.registerListeners();
-
-        if (this.functionTimeout) {
-            const delayTime = (this.functionTimeout - 3) * 1000;
-            return new Promise(resolve => {
-                setTimeout(() => resolve(), delayTime > 0 ? delayTime : 0);
-            });
-        }
+        return this.waitShort(event);
     }
 
 }

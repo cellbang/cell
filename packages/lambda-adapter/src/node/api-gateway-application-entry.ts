@@ -12,7 +12,7 @@ const app = express();
 
 const proxy = createProxy({ app });
 
-let listeners: FaaSEventListener<any>[];
+let listeners: FaaSEventListener<any, void>[];
 
 async function start() {
     const c = await container;
@@ -22,7 +22,7 @@ async function start() {
         const httpContext = new HttpContext(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
-    listeners = c.getAll<FaaSEventListener<any>>(FaaSEventListener);
+    listeners = c.getAll<FaaSEventListener<any, void>>(FaaSEventListener);
 
     return c.get<Application>(Application).start();
 }

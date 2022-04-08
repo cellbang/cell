@@ -6,14 +6,14 @@ import { Clock } from '@malagu/faas-adapter/lib/node/timer/timer-protocol';
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
 
 let clock: Clock;
-let listeners: FaaSEventListener<any>[];
+let listeners: FaaSEventListener<any, void>[];
 
 async function start() {
     const c = await container;
     ContainerProvider.set(c);
     await c.get<Application>(Application).start();
     clock = c.get<Clock>(Clock);
-    listeners = c.getAll<FaaSEventListener<any>>(FaaSEventListener);
+    listeners = c.getAll<FaaSEventListener<any, void>>(FaaSEventListener);
 }
 
 const startPromise = start();
