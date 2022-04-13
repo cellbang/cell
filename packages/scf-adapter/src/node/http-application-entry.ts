@@ -5,19 +5,33 @@ import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol'
 import { Context, HttpContext } from '@malagu/web/lib/node/context';
 import * as express from 'express';
 
-container.then(async c => {
-    ContainerProvider.set(c);
-    await c.get<Application>(Application).start();
+const app = express();
 
-    const app = express();
+const port = 9000;
 
-    app.all('*', async (req: any, res: any) => {
-        const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
-        const httpContext = new HttpContext(req, res);
-        Context.run(() => dispatcher.dispatch(httpContext));
-    });
-    const server = app.listen(9000);
-    server.timeout = 0;
-    server.keepAliveTimeout = 0;
-    console.log('serve 9000');
-});
+async function bootstrap() {
+    try {
+        const c = await container;
+        ContainerProvider.set(c);
+        await c.get<Application>(Application).start();
+        app.all('*', async (req: any, res: any) => {
+            const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
+            const httpContext = new HttpContext(req, res);
+            Context.run(() => dispatcher.dispatch(httpContext));
+        });
+        const server = app.listen(port, '0.0.0.0');
+        server.timeout = 0;
+        server.keepAliveTimeout = 0;
+        console.log(`serve ${port}`);
+    } catch (error) {
+        app.all('*', async (req: any, res: any) => {
+            res.status = 500;
+            res.send(error);
+        });
+        const server = app.listen(port, '0.0.0.0');
+        server.timeout = 0;
+        server.keepAliveTimeout = 0;
+    }
+}
+
+bootstrap();

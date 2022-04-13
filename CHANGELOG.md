@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.21.0
+
+- fix(core) 兼容 nodejs12 以下的版本
+- feat(fc-plugin) 支持自动生成随机域名，方便用户测试与预览
+- feat(scf-plugin) 支持函数 EnvId 等更多新属性的配置
+- feat(*-plugin) 支持通过对象存储上传代码
+- feat(cli) 支持最新版 Next.js 框架
+
 ## 2.20.5
 
 - feat(cli-runtime) 默认运行时添加 `@malagu/qq-guild-bot-adapter` 和 `@malagu/next-plugin`

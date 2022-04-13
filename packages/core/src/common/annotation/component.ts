@@ -2,14 +2,11 @@ import { decorate, injectable, interfaces, METADATA_KEY as inversify_METADATA_KE
 import { METADATA_KEY } from '../constants';
 import { ConfigUtil } from '../config/config-util';
 import { AnnotationUtil } from '../utils';
+import { Scope } from '../container/scope';
 
 export type ComponentId = interfaces.ServiceIdentifier<any>;
 
 export const COMPONENT_TAG = 'Component';
-
-export enum Scope {
-    Request, Singleton, Transient
-}
 
 export interface ComponentOption {
     id?: ComponentId | ComponentId[];

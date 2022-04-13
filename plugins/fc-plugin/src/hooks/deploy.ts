@@ -1,9 +1,11 @@
 import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
 import { readFile } from 'fs-extra';
-import  * as JSZip from 'jszip';
+import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
 import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger } from './utils';
+import * as api from './api';
+import { retry } from '@malagu/cli-common/lib/utils';
 const chalk = require('chalk');
 
 let fcClient: any;
@@ -40,11 +42,8 @@ export default async (context: DeployContext) => {
         delete service.sync;
     }
 
-    const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
-    delete functionMeta.codeUri;
     delete functionMeta.callbackWaitsForEmptyEventLoop;
-    await createOrUpdateFunction(functionMeta, zip, disableProjectId);
+    await createOrUpdateFunction(functionMeta, disableProjectId);
 
     const { data: { versionId } } = await fcClient.publishVersion(serviceName);
 
@@ -72,13 +71,20 @@ export default async (context: DeployContext) => {
         await createOrUpdateTrigger(trigger, serviceName, functionMeta.name);
     }
 
-    if (customDomain && customDomain.name) {
+    if (customDomain?.name) {
         for (const route of customDomain.routeConfig.routes) {
             route.serviceName = route.serviceName || serviceName;
             route.functionName = route.functionName || functionMeta.name;
             route.qualifier = route.qualifier || alias.name;
         }
-        await createOrUpdateCustomDomain(customDomain, alias.name);
+        await createOrUpdateCustomDomain(customDomain, alias.name, {
+            type: 'fc',
+            user: account.id,
+            region: region.replace(/_/g, '-').toLocaleLowerCase(),
+            service: serviceName.replace(/_/g, '-').toLocaleLowerCase(),
+            function: functionMeta.name.replace(/_/g, '-').toLocaleLowerCase()
+        });
+
     }
 
     console.log('Deploy finished');
@@ -294,7 +300,7 @@ async function createOrUpdateService(serviceName: string, option: any) {
     if (serviceInfo) {
         await SpinnerUtil.start(`Update ${serviceName} service`, async () => {
             await fcClient.updateService(serviceName, opt);
-        }); 
+        });
     } else {
         await SpinnerUtil.start(`Create ${serviceName} service`, async () => {
             await fcClient.createService(serviceName, opt);
@@ -310,9 +316,26 @@ async function tryCreateProjectId(serviceName: string, functionName: string) {
     }
 }
 
+async function parseFunctionCode(functionMeta: any) {
+    const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
+    let code: JSZip | undefined;
+    if (!s3Uri) {
+        const codeLoader = new DefaultCodeLoader();
+        code = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+    }
+    delete functionMeta.codeUri;
 
+    if (s3Uri) {
+        return {
+            ossBucketName: s3Uri.bucket,
+            ossObjectName: s3Uri.key
+        };
+    } else {
+        return { zipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
+    }
+}
 
-async function createOrUpdateFunction(functionMeta: any, code: JSZip, disableProjectId: boolean) {
+async function createOrUpdateFunction(functionMeta: any, disableProjectId: boolean) {
     const opts = { ...functionMeta };
     const serviceName = opts.serviceName;
     const sync = opts.sync;
@@ -328,14 +351,14 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
     if (disableProjectId) {
         functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
     } else {
-      if (!projectId) {
-          await tryCreateProjectId(serviceName, functionMeta.name);
-          await ProjectUtil.saveProjectId(projectId);
-          functionMeta.name = `${functionMeta.name}_${projectId}`;
-      } else {
-          functionMeta.name = `${functionMeta.name}_${projectId}`;
-          functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
-      }
+        if (!projectId) {
+            await tryCreateProjectId(serviceName, functionMeta.name);
+            await ProjectUtil.saveProjectId(projectId);
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+        } else {
+            functionMeta.name = `${functionMeta.name}_${projectId}`;
+            functionInfo = await getFunction(fcClient, serviceName, functionMeta.name);
+        }
     }
 
     if (functionInfo) {
@@ -343,9 +366,7 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
         await SpinnerUtil.start(`Update ${functionMeta.name} function${sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             await fcClient.updateFunction(serviceName, functionMeta.name, {
                 ...(sync === 'onlyUpdateCode' ? {} : opts),
-                code: {
-                    zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
-                },
+                code: await parseFunctionCode(functionMeta)
             });
         });
     } else {
@@ -353,19 +374,24 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             await fcClient.createFunction(serviceName, {
                 ...opts,
-                code: {
-                    zipFile: await code.generateAsync({type: 'base64', platform: 'UNIX', compression: 'DEFLATE' })
-                },
+                code: await parseFunctionCode(functionMeta)
             });
         });
     }
 }
 
-async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) {
+async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, params: api.Params) {
     const { name, protocol, certConfig, routeConfig } = customDomain;
+    let domainName = name;
     const opts: any = {
         protocol
     };
+
+    if (domainName === 'auto') {
+        await SpinnerUtil.start('Generated custom domain', async () => {
+            domainName = await genDomain(params);
+        });
+    }
 
     if (certConfig?.certName) {
         opts.certConfig = { ...certConfig };
@@ -383,7 +409,7 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) 
     if (routeConfig) {
         opts.routeConfig = routeConfig;
     }
-    const customDomainInfo = await getCustomDomain(fcClient, name);
+    const customDomainInfo = await getCustomDomain(fcClient, domainName);
     if (customDomainInfo) {
         const { data } = customDomainInfo;
         const routes: any[] = [];
@@ -397,15 +423,17 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) 
                     routes.push(route);
                 }
             }
-            opts.routeConfig.routes = [ ...opts.routeConfig.routes, ...routes ];
+            opts.routeConfig.routes = [...opts.routeConfig.routes, ...routes];
         }
-        await SpinnerUtil.start(`Update ${name} custom domain`, async () => {
-            await fcClient.updateCustomDomain(name, opts);
+        await SpinnerUtil.start(`Update ${domainName} custom domain`, async () => {
+            await fcClient.updateCustomDomain(domainName, opts);
         });
     } else {
-        opts.domainName = name;
-        await SpinnerUtil.start(`Create ${name} custom domain`, async () => {
-            await fcClient.createCustomDomain(name, opts);
+        opts.domainName = domainName;
+        await SpinnerUtil.start(`Create ${domainName} custom domain`, async () => {
+            retry(async () => {
+                await fcClient.createCustomDomain(domainName, opts);
+            }, 1000, 5)
         });
     }
     let path = '';
@@ -417,7 +445,7 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string) 
         }
     }
     console.log(chalk`    - Url: ${chalk.green.bold(
-        `${protocol.includes('HTTPS') ? 'https' : 'http'}://${name}${path}`)}`);
+        `${protocol.includes('HTTPS') ? 'https' : 'http'}://${domainName}${path}`)}`);
 }
 
 async function createOrUpdateAlias(alias: any, serviceName: string, versionId: string) {
@@ -451,7 +479,7 @@ async function createOrUpdateGroup(group: any) {
         subDomain = groupInfo.SubDomain;
         await SpinnerUtil.start(`Update ${name} group`, async () => {
             await apiClient.modifyApiGroup(parseGroupMeta(group, groupId), { timeout: 10000 });
-        }); 
+        });
     } else {
         await SpinnerUtil.start(`Create ${name} group`, async () => {
             const { GroupId, SubDomain } = await apiClient.createApiGroup(parseGroupMeta(group), { timeout: 10000 });
@@ -516,4 +544,66 @@ async function createRoleIfNeed() {
     }
 
     return role;
+}
+
+
+export async function genDomain(params: api.Params) {
+    const serviceName = 'serverless-devs-check';
+    const functionName = 'get-domain';
+    const triggerName = 'httpTrigger';
+
+    const { Body } = await api.token(params);
+    const token = Body.Token;
+
+    try {
+        await fcClient.createService(serviceName, {});
+    } catch (ex) {
+        if (ex.code !== 'ServiceAlreadyExists') {
+            throw ex;
+        }
+    }
+
+    const functionConfig: any = {
+        functionName,
+        handler: 'index.handler',
+        runtime: 'nodejs8',
+        environmentVariables: { token },
+    };
+
+    try {
+        await fcClient.updateFunction(serviceName, functionName, functionConfig);
+    } catch (ex) {
+        if (ex.code === 'FunctionNotFound') {
+            // function code is `exports.handler = (req, resp, context) => resp.send(process.env.token || '');`;
+            const zipFile = 'UEsDBAoAAAAIABULiFLOAhlFSQAAAE0AAAAIAAAAaW5kZXguanMdyMEJwCAMBdBVclNBskCxuxT9UGiJNgnFg8MX+o4Pc3R14/OQdkOpUFQ8mRQ2MtUujumJyv4PG6TFob3CjCEve78gtBaFkLYPUEsBAh4DCgAAAAgAFQuIUs4CGUVJAAAATQAAAAgAAAAAAAAAAAAAALSBAAAAAGluZGV4LmpzUEsFBgAAAAABAAEANgAAAG8AAAAAAA==';
+            functionConfig.code = { zipFile };
+            await fcClient.createFunction(serviceName, functionConfig);
+        } else {
+            throw ex;
+        }
+    }
+
+    try {
+        await fcClient.createTrigger(serviceName, functionName, {
+            triggerName,
+            triggerType: 'http',
+            triggerConfig: {
+                AuthType: 'anonymous',
+                Methods: ['POST', 'GET'],
+            },
+        });
+    } catch (ex) {
+        if (ex.code !== 'TriggerAlreadyExists') {
+            throw ex;
+        }
+    }
+
+    await api.domain({ ...params, token });
+
+    await fcClient.deleteTrigger(serviceName, functionName, triggerName);
+    await fcClient.deleteFunction(serviceName, functionName);
+    await fcClient.deleteService(serviceName);
+    return Body.Domain ||
+        `${params.function}.${params.service}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
+
 }

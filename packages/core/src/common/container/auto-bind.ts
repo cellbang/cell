@@ -1,10 +1,10 @@
 import { interfaces, ContainerModule } from 'inversify';
 import { METADATA_KEY } from '../constants';
-import { ConstantOption } from '../annotation/constant';
-import { ComponentMetadata, Scope } from '../annotation';
+import { ComponentMetadata, ConstantOption } from '../annotation';
 import { ConfigUtil } from '../config/config-util';
 import { AopProxyFactory, ClassFilter } from '../aop/aop-protocol';
 import { ContainerUtil } from './container-util';
+import { Scope } from './scope';
 
 export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
     return new ContainerModule((bind, unbind, isBound, rebind) => {
