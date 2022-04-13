@@ -91,29 +91,16 @@ export namespace CloudUtils {
 
     export function parseS3Uri(uri: string): { bucket: string, key: string, version?: string, region?: string } | undefined {
         if (typeof uri === 'string' && uri.toLowerCase().startsWith('s3://')) {
-            const parts = uri.substring(5).split('/').filter(Boolean);
-            if (parts.length === 2) {
-                const [ bucket, key ] = parts;
-                return {
-                    bucket,
-                    key
-                };
-            } else if (parts.length === 3) {
-                const [ bucket, key, version ] = parts;
-                return {
-                    bucket,
-                    key,
-                    version
-                };
-            } else if (parts.length > 3) {
-                const [ region, bucket, key, version ] = parts;
-                return {
-                    bucket,
-                    key,
-                    version,
-                    region
-                };
-            }
+            const parsedUri = new URL(uri);
+            const version = parsedUri.searchParams.get('version');
+            const region = parsedUri.searchParams.get('region');
+
+            return {
+                bucket: parsedUri.host,
+                key: parsedUri.pathname.substring(1),
+                version: version ? version : undefined,
+                region: region ? region : undefined
+            };
         }
     }
 }

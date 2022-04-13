@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.21.1
+
+- feat(fc-plugin) 支持 `malagu info` 命令打印随机域名
+- feat(cloud-plugin) 优化对象存储上传代码，协议如下：`s3://bucket/key?region=xxx&version=1`，其中 key 支持多级路径，region 和 version 可选
+
 ## 2.21.0
 
 - fix(core) 兼容 nodejs12 以下的版本

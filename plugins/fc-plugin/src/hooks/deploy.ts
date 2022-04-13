@@ -3,7 +3,7 @@ import { readFile } from 'fs-extra';
 import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger } from './utils';
+import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger, parseDomain } from './utils';
 import * as api from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
 const chalk = require('chalk');
@@ -603,7 +603,5 @@ export async function genDomain(params: api.Params) {
     await fcClient.deleteTrigger(serviceName, functionName, triggerName);
     await fcClient.deleteFunction(serviceName, functionName);
     await fcClient.deleteService(serviceName);
-    return Body.Domain ||
-        `${params.function}.${params.service}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
-
+    return Body.Domain || parseDomain(params);
 }
