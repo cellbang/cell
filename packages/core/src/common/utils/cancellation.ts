@@ -1,6 +1,13 @@
 import { Event } from './event';
 import { Emitter } from './emitter';
 
+export class CancellationError extends Error {
+    constructor() {
+        super('Canceled');
+        this.name = this.message;
+    }
+}
+
 export interface CancellationToken {
     readonly isCancellationRequested: boolean;
     /*

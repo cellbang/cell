@@ -14,7 +14,6 @@
     "@malagu/core": "2.20.5",
     "@malagu/react": "2.20.5",
     "@malagu/rpc": "2.20.5",
-    "@malagu/scf-adapter": "2.20.5",
     "@malagu/serve-static": "2.20.5",
     "react": "^16.12.0"
   },

@@ -10,3 +10,5 @@ export * from './annotation-util';
 export * from './cancellation';
 export * from './event';
 export * from './emitter';
+export * from './global-util';
+export * from './async';

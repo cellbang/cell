@@ -8,12 +8,12 @@ export async function before(context: PropsContext) {
         context.spinner?.stop();
         const cloudConfig = CloudUtils.getConfiguration(cfg);
         const profileProvider = new DefaultProfileProvider();
-        const profile = await profileProvider.provide(cloudConfig);
+        const profile = await profileProvider.provide(cloudConfig, true);
         if (!cloudConfig.account?.id) {
-            cloudConfig.account = profile.account;
+            cloudConfig.account = profile?.account;
         }
         if (!cloudConfig.region) {
-            cloudConfig.region = profile.region;
+            cloudConfig.region = profile?.region;
         }
     }
 };

@@ -1,5 +1,7 @@
 import 'reflect-metadata';
-import { autoBind, ConfigProvider, VALUE } from '.';
+import { VALUE } from './annotation/value';
+import { ConfigProvider } from './config/config-protocol';
+import { autoBind } from './container/auto-bind';
 export * from '.';
 
 export default autoBind(bind => {

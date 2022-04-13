@@ -37,21 +37,23 @@ export default async (context: DeployContext) => {
 
     console.log(chalk`{bold.cyan - SCF:}`);
 
-    if (namespace.sync) {
+    if (namespace?.sync) {
         await createOrUpdateNamespace(namespace);
         delete namespace.sync;
     }
+
+    functionMeta.namespace = functionMeta.namespace || namespace?.name;
+
+    const namespaceName = functionMeta.namespace;
    
-    const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
-    await createOrUpdateFunction(functionMeta, zip, disableProjectId);
+    await createOrUpdateFunction(functionMeta, disableProjectId);
 
-    const functionVersion = await publishVersion(namespace.name, functionMeta.name);
+    const functionVersion = await publishVersion(namespaceName, functionMeta.name);
 
-    await createOrUpdateAlias(alias, namespace.name, functionMeta.name, functionVersion);
+    await createOrUpdateAlias(alias, namespaceName, functionMeta.name, functionVersion);
 
     if (trigger) {
-        await createTrigger(trigger, namespace.name, functionMeta.name, functionVersion, alias);
+        await createTrigger(trigger, namespaceName, functionMeta.name, functionVersion, alias);
     }
 
     if (apiGateway) {
@@ -60,9 +62,9 @@ export default async (context: DeployContext) => {
         service.name = disableProjectId ? service.name : `${service.name}_${projectId}`;
         const { serviceId, subDomain } = await createOrUpdateService(service);
         api.serviceScfFunctionName = functionMeta.name;
-        api.serviceScfFunctionNamespace = namespace.name;
+        api.serviceScfFunctionNamespace = namespaceName;
         api.serviceWebsocketTransportFunctionName = functionMeta.name;
-        api.serviceWebsocketTransportFunctionNamespace = namespace.name;
+        api.serviceWebsocketTransportFunctionNamespace = namespaceName;
         const apiId = await createOrUpdateApi(serviceId, subDomain, service.protocol, release.environmentName, api);
         if (customDomain?.name) {
             await bindOrUpdateCustomDomain(serviceId, customDomain, subDomain, release.environmentName);
@@ -154,7 +156,7 @@ async function createOrUpdateNamespace(namespace: any) {
     }
 }
 
-async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
+async function parseFunctionMeta(req: any, functionMeta: any) {
     req.FunctionName = functionMeta.name;
     req.Description = functionMeta.description;
     req.MemorySize = functionMeta.memorySize;
@@ -163,9 +165,14 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
     req.Namespace = functionMeta.namespace;
     req.Role = functionMeta.role;
     req.ClsLogsetId = functionMeta.clsLogsetId;
-    req.ClsTopicId = functionMeta.ClsTopicId;
+    req.ClsTopicId = functionMeta.clsTopicId;
+    req.InitTimeout = functionMeta.initTimeout;
+    req.AsyncRunEnable = parseBoolean(functionMeta.asyncRunEnable);
+    req.TraceEnable = parseBoolean(functionMeta.traceEnable);
+    req.ProtocolType = functionMeta.protocolType
+    req.InstallDependency = parseBoolean(functionMeta.installDependency);
 
-    const { env, vpcConfig, layers, deadLetterConfig, publicNetConfig } = functionMeta;
+    const { env, vpcConfig, layers, deadLetterConfig, publicNetConfig, protocolParams } = functionMeta;
     if (env) {
         const variables: any[] = [];
         for (const key in env) {
@@ -213,9 +220,8 @@ async function parseFunctionMeta(req: any, functionMeta: any, code?: JSZip) {
         }
     }
 
-    if (code) {
-        req.Code = {} as any;
-        req.Code.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' });
+    if (protocolParams) {
+        req.ProtocolParams = { WSParams: { IdleTimeOut: protocolParams.wsParams.idleTimeOut }};
     }
     cleanObj(req);
 }
@@ -228,8 +234,34 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
     }
 }
 
+async function parseFunctionCode(req: any, functionMeta: any) {
+    const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
+    let code: JSZip | undefined;
+    if (!s3Uri) {
+        const codeLoader = new DefaultCodeLoader();
+        code = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+    }
 
-async function createOrUpdateFunction(functionMeta: any, code: JSZip, disableProjectId: boolean) {
+    if (s3Uri) {
+        req.CodeSource = 'Cos';
+        req.Code = {
+            CosBucketName: s3Uri.bucket,
+            CosObjectName: s3Uri.key,
+            CosBucketRegion: s3Uri.region
+        };
+    } else {
+        req.CodeSource = functionMeta.codeSource;
+        req.Code = { ZipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
+    }
+}
+
+function parseBoolean(value?: boolean) {
+    if (value) {
+        return value === true ? 'TRUE' : 'FALSE'
+    }
+}
+
+async function createOrUpdateFunction(functionMeta: any, disableProjectId: boolean) {
     let functionInfo: any;
     projectId = await ProjectUtil.getProjectId();
     if (disableProjectId) {
@@ -251,17 +283,19 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
             updateFunctionCodeRequest.FunctionName = functionMeta.name;
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
-            updateFunctionCodeRequest.ZipFile = await code.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' });
+            updateFunctionCodeRequest.EnvId = functionMeta.envId;
+            await parseFunctionCode(updateFunctionCodeRequest, functionMeta);
             await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
             await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
 
             if (functionMeta.sync !== 'onlyUpdateCode') {
                 const updateFunctionConfigurationRequest: any = {};
-                updateFunctionConfigurationRequest.Publish = functionMeta.publish === true ? 'TRUE' : 'FALSE';
-                updateFunctionConfigurationRequest.L5Enable = functionMeta.l5Enable === true ? 'TRUE' : 'FALSE';
+                updateFunctionConfigurationRequest.Publish = parseBoolean(functionMeta.publish);
+                updateFunctionConfigurationRequest.L5Enable = parseBoolean(functionMeta.l5Enable);
                 await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
                 delete updateFunctionConfigurationRequest.Runtime;
+                delete updateFunctionConfigurationRequest.ProtocolType;
                 await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
             }
 
@@ -269,7 +303,8 @@ async function createOrUpdateFunction(functionMeta: any, code: JSZip, disablePro
     } else {
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             const createFunctionRequest: any = {};
-            await parseFunctionMeta(createFunctionRequest, functionMeta, code);
+            await parseFunctionMeta(createFunctionRequest, functionMeta);
+            await parseFunctionCode(createFunctionRequest, functionMeta);
             createFunctionRequest.Handler = functionMeta.handler;
             createFunctionRequest.CodeSource = functionMeta.codeSource;
             createFunctionRequest.Type = functionMeta.type;

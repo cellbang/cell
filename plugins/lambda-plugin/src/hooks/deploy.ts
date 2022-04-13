@@ -39,9 +39,7 @@ export default async (context: CliContext) => {
 
     console.log(chalk`{bold.cyan - Lambda:}`);
 
-    const codeLoader = new DefaultCodeLoader();
-    const zip = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
-    await createOrUpdateFunction(functionMeta, accountId, region, zip, disableProjectId);
+    await createOrUpdateFunction(functionMeta, accountId, region, disableProjectId);
 
     const functionVersion = await publishVersion(functionMeta.name);
 
@@ -152,7 +150,7 @@ function parseUpdateFunctionConfigurationRequest(functionMeta: any) {
     return req;
 }
 
-function parseCreateFunctionRequest(functionMeta: any, code: ArrayBuffer) {
+async function parseCreateFunctionRequest(functionMeta: any) {
     const config = parseUpdateFunctionConfigurationRequest(functionMeta);
     delete config.RevisionId;
 
@@ -163,9 +161,7 @@ function parseCreateFunctionRequest(functionMeta: any, code: ArrayBuffer) {
         PackageType: functionMeta.packageType,
         Publish: functionMeta.publish,
         Tags: functionMeta.tags,
-        Code: {
-            ZipFile: code
-        }
+        Code: await parseFunctionCode(functionMeta)
     };
     return req;
 }
@@ -178,7 +174,26 @@ async function tryCreateProjectId(functionName: string) {
     }
 }
 
-async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, code: JSZip, disableProjectId: boolean) {
+async function parseFunctionCode(functionMeta: any) {
+    const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
+    let code: JSZip | undefined;
+    if (!s3Uri) {
+        const codeLoader = new DefaultCodeLoader();
+        code = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+    }
+
+    if (s3Uri) {
+        return {
+            S3Bucket: s3Uri.bucket,
+            S3Key: s3Uri.key,
+            S3ObjectVersion: s3Uri.version
+        };
+    } else {
+        return { ZipFile: await code!.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }) };
+    }
+}
+
+async function createOrUpdateFunction(functionMeta: any, accountId: string, region: string, disableProjectId: boolean) {
     projectId = await ProjectUtil.getProjectId();
     let functionInfo: any;
     if (disableProjectId) {
@@ -200,7 +215,7 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
         await SpinnerUtil.start(`Update ${functionMeta.name} function${functionMeta.sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             const updateFunctionCodeRequest: Lambda.Types.UpdateFunctionCodeRequest = {
                 FunctionName: functionMeta.name,
-                ZipFile: await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  })
+                ...await parseFunctionCode(functionMeta)
             };
             await lambdaClient.updateFunctionCode(updateFunctionCodeRequest).promise();
 
@@ -215,7 +230,7 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
         });
     } else {
         functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
-            return await createFunctionWithRetry(functionMeta, code);
+            return await createFunctionWithRetry(functionMeta);
         });
     }
 }
@@ -671,12 +686,11 @@ async function checkStatus(functionName: string) {
 /// This error happens when the role is invalid (which is not the case) or when you try to create the Lambda function just after the role creation.
 /// Amazon needs a few seconds to replicate your new role through all regions.
 /// view detail: `https://stackoverflow.com/questions/37503075/invalidparametervalueexception-the-role-defined-for-the-function-cannot-be-assu`
-async function createFunctionWithRetry(functionMeta: any, code: JSZip) {
+async function createFunctionWithRetry(functionMeta: any) {
     let times = 10;
     while (times > 0) {
         try {
-            return await lambdaClient.createFunction(parseCreateFunctionRequest(functionMeta,
-                await code.generateAsync({ type: 'arraybuffer', platform: 'UNIX', compression: 'DEFLATE'  }))).promise();
+            return await lambdaClient.createFunction(await parseCreateFunctionRequest(functionMeta)).promise();
         } catch (err) {
             if(err.code !== 'InvalidParameterValueException') {
                 throw err;
