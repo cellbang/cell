@@ -1,11 +1,15 @@
 import { Credentials, Account } from '@malagu/cloud-plugin';
+import { Params } from './api';
 const chalk = require('chalk');
 const FCClient = require('@alicloud/fc2');
 const CloudAPI = require('@alicloud/cloudapi');
 const Ram = require('@alicloud/ram');
 
-export async function getCustomDomain(client: any, customDomainName: string, print = false, qualifier?: string) {
+export async function getCustomDomain(client: any, customDomainName: string, print = false, qualifier?: string, params?: Params) {
     try {
+        if (customDomainName === 'auto') {
+            customDomainName = parseDomain(params!);
+        }
         const result = await client.getCustomDomain(customDomainName);
         if (print) {
             console.log(chalk`{bold.cyan - CustomDomain: }`);
@@ -236,4 +240,8 @@ export async function createClients(cloudConfig: any, region: string, credential
         endpoint: 'https://ram.aliyuncs.com'
     });
     return { fcClient, apiClient, ram }; 
+}
+
+export function parseDomain(params: Params) {
+    return `${params.function}.${params.service}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
 }

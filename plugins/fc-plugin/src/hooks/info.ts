@@ -65,6 +65,12 @@ export default async (context: InfoContext) => {
     }
 
     if (customDomain?.name) {
-        context.output.groupInfo = await getCustomDomain(fcClient, customDomain.name, true, alias.name);
+        context.output.groupInfo = await getCustomDomain(fcClient, customDomain.name, true, alias.name, {
+            type: 'fc',
+            user: account.id,
+            region: region.replace(/_/g, '-').toLocaleLowerCase(),
+            service: serviceName.replace(/_/g, '-').toLocaleLowerCase(),
+            function: functionMeta.name.replace(/_/g, '-').toLocaleLowerCase()
+        });
     }
 };
