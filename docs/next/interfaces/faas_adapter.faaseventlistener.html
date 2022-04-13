@@ -60,7 +60,7 @@
 					<a href="faas_adapter.faaseventlistener.html">FaaSEventListener</a>
 				</li>
 			</ul>
-			<h1>Interface FaaSEventListener&lt;T&gt;</h1>
+			<h1>Interface FaaSEventListener&lt;T, R&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,6 +72,9 @@
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>T</h4>
+					</li>
+					<li>
+						<h4>R</h4>
 					</li>
 				</ul>
 			</section>
@@ -108,13 +111,13 @@
 					<a name="ontrigger" class="tsd-anchor"></a>
 					<h3>on<wbr>Trigger</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">on<wbr>Trigger<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Trigger<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/faas-adapter/src/node/event/event-protocol.ts#L4">packages/faas-adapter/src/node/event/event-protocol.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/faas-adapter/src/node/event/event-protocol.ts#L4">packages/faas-adapter/src/node/event/event-protocol.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -123,7 +126,7 @@
 									<h5>event: <span class="tsd-signature-type">T</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>

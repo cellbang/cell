@@ -80,10 +80,13 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#app" class="tsd-kind-icon">app</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#app-1" class="tsd-kind-icon">app</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#clock" class="tsd-kind-icon">clock</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#createserver" class="tsd-kind-icon">create<wbr>Server</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#listeners" class="tsd-kind-icon">listeners</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#listeners-1" class="tsd-kind-icon">listeners</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#listeners-2" class="tsd-kind-icon">listeners</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#port" class="tsd-kind-icon">port</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#proxy" class="tsd-kind-icon">proxy</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#server" class="tsd-kind-icon">server</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#startpromise" class="tsd-kind-icon">start<wbr>Promise</a></li>
@@ -94,6 +97,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="scf_adapter.html#bootstrap" class="tsd-kind-icon">bootstrap</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="scf_adapter.html#handler" class="tsd-kind-icon">handler</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="scf_adapter.html#handler-1" class="tsd-kind-icon">handler</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="scf_adapter.html#handler-2" class="tsd-kind-icon">handler</a></li>
@@ -113,7 +117,17 @@
 					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Express</span><span class="tsd-signature-symbol"> = express()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L10">packages/scf-adapter/src/node/api-gateway-application-entry.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L11">packages/scf-adapter/src/node/api-gateway-application-entry.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="app-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> app</h3>
+					<div class="tsd-signature tsd-kind-icon">app<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Express</span><span class="tsd-signature-symbol"> = express()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/http-application-entry.ts#L8">packages/scf-adapter/src/node/http-application-entry.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -123,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">clock<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.clock.html" class="tsd-signature-type">Clock</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/timer-application-entry.ts#L8">packages/scf-adapter/src/node/timer-application-entry.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/timer-application-entry.ts#L8">packages/scf-adapter/src/node/timer-application-entry.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -133,27 +147,47 @@
 					<div class="tsd-signature tsd-kind-icon">create<wbr>Server<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L8">packages/scf-adapter/src/node/api-gateway-application-entry.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L9">packages/scf-adapter/src/node/api-gateway-application-entry.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="listeners" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagLet">Let</span> listeners</h3>
-					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/event-application-entry.ts#L7">packages/scf-adapter/src/node/event-application-entry.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L15">packages/scf-adapter/src/node/api-gateway-application-entry.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="listeners-1" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagLet">Let</span> listeners</h3>
-					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/timer-application-entry.ts#L9">packages/scf-adapter/src/node/timer-application-entry.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/event-application-entry.ts#L7">packages/scf-adapter/src/node/event-application-entry.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="listeners-2" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagLet">Let</span> listeners</h3>
+					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/faas_adapter.faaseventlistener.html" class="tsd-signature-type">FaaSEventListener</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/timer-application-entry.ts#L9">packages/scf-adapter/src/node/timer-application-entry.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+					<a name="port" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> port</h3>
+					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">9000</span><span class="tsd-signature-symbol"> = 9000</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/http-application-entry.ts#L10">packages/scf-adapter/src/node/http-application-entry.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -163,7 +197,7 @@
 					<div class="tsd-signature tsd-kind-icon">proxy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L8">packages/scf-adapter/src/node/api-gateway-application-entry.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L9">packages/scf-adapter/src/node/api-gateway-application-entry.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -173,54 +207,71 @@
 					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = createServer(app)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L12">packages/scf-adapter/src/node/api-gateway-application-entry.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L13">packages/scf-adapter/src/node/api-gateway-application-entry.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="startpromise" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Promise</h3>
-					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L26">packages/scf-adapter/src/node/api-gateway-application-entry.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L31">packages/scf-adapter/src/node/api-gateway-application-entry.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="startpromise-1" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Promise</h3>
-					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/event-application-entry.ts#L16">packages/scf-adapter/src/node/event-application-entry.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/event-application-entry.ts#L16">packages/scf-adapter/src/node/event-application-entry.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 					<a name="startpromise-2" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Promise</h3>
-					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Promise<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = start()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/timer-application-entry.ts#L19">packages/scf-adapter/src/node/timer-application-entry.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/timer-application-entry.ts#L19">packages/scf-adapter/src/node/timer-application-entry.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="handler" class="tsd-anchor"></a>
-					<h3>handler</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<a name="bootstrap" class="tsd-anchor"></a>
+					<h3>bootstrap</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">bootstrap<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L28">packages/scf-adapter/src/node/api-gateway-application-entry.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/http-application-entry.ts#L12">packages/scf-adapter/src/node/http-application-entry.ts:12</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="handler" class="tsd-anchor"></a>
+					<h3>handler</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L33">packages/scf-adapter/src/node/api-gateway-application-entry.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -232,7 +283,7 @@
 									<h5>context: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -240,13 +291,13 @@
 					<a name="handler-1" class="tsd-anchor"></a>
 					<h3>handler</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/event-application-entry.ts#L18">packages/scf-adapter/src/node/event-application-entry.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/event-application-entry.ts#L18">packages/scf-adapter/src/node/event-application-entry.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -261,7 +312,7 @@
 									<h5>callback: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -269,13 +320,13 @@
 					<a name="handler-2" class="tsd-anchor"></a>
 					<h3>handler</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/timer-application-entry.ts#L21">packages/scf-adapter/src/node/timer-application-entry.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/timer-application-entry.ts#L21">packages/scf-adapter/src/node/timer-application-entry.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -287,7 +338,7 @@
 									<h5>context: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -295,16 +346,16 @@
 					<a name="start" class="tsd-anchor"></a>
 					<h3>start</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L14">packages/scf-adapter/src/node/api-gateway-application-entry.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/api-gateway-application-entry.ts#L17">packages/scf-adapter/src/node/api-gateway-application-entry.ts:17</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -312,16 +363,16 @@
 					<a name="start-1" class="tsd-anchor"></a>
 					<h3>start</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/event-application-entry.ts#L9">packages/scf-adapter/src/node/event-application-entry.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/event-application-entry.ts#L9">packages/scf-adapter/src/node/event-application-entry.ts:9</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -329,16 +380,16 @@
 					<a name="start-2" class="tsd-anchor"></a>
 					<h3>start</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/0789f5e5d/packages/scf-adapter/src/node/timer-application-entry.ts#L11">packages/scf-adapter/src/node/timer-application-entry.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/56590ebb5/packages/scf-adapter/src/node/timer-application-entry.ts#L11">packages/scf-adapter/src/node/timer-application-entry.ts:11</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -370,6 +421,9 @@
 						<a href="scf_adapter.html#app" class="tsd-kind-icon">app</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="scf_adapter.html#app-1" class="tsd-kind-icon">app</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="scf_adapter.html#clock" class="tsd-kind-icon">clock</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
@@ -380,6 +434,12 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="scf_adapter.html#listeners-1" class="tsd-kind-icon">listeners</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="scf_adapter.html#listeners-2" class="tsd-kind-icon">listeners</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="scf_adapter.html#port" class="tsd-kind-icon">port</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="scf_adapter.html#proxy" class="tsd-kind-icon">proxy</a>
@@ -395,6 +455,9 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
 						<a href="scf_adapter.html#startpromise-2" class="tsd-kind-icon">start<wbr>Promise</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+						<a href="scf_adapter.html#bootstrap" class="tsd-kind-icon">bootstrap</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="scf_adapter.html#handler" class="tsd-kind-icon">handler</a>
