@@ -217,6 +217,9 @@
       ],
       "@malagu/example-standalone-app/*": [
         "examples/standalone-app/*"
+      ],
+      "@malagu/example-mycli/*": [
+        "examples/mycli/*"
       ]
     }
   },

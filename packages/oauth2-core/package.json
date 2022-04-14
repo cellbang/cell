@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-core",
-  "version": "2.21.1",
+  "version": "2.21.2",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/security": "2.21.1"
+    "@malagu/security": "2.21.2"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.21.1",
+    "@malagu/ext-scripts": "2.21.2",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },

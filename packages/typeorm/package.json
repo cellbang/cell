@@ -1,11 +1,11 @@
 {
   "name": "@malagu/typeorm",
-  "version": "2.21.1",
+  "version": "2.21.2",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "2.21.1",
+    "@malagu/web": "2.21.2",
     "mysql": "^2.18.1",
     "typeorm": "^0.2.37"
   },
@@ -37,8 +37,8 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.21.1",
-    "@malagu/ext-scripts": "2.21.1"
+    "@malagu/cli-service": "2.21.2",
+    "@malagu/ext-scripts": "2.21.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
