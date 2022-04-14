@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.21.2
+
+- feat(qq-guild-bot-adapter) 支持读取 `bot-config.json` 中的 `secret` 属性
+- feat(cli) 更新 `mycli` 模板
+
 ## 2.21.1
 
 - feat(fc-plugin) 支持 `malagu info` 命令打印随机域名
