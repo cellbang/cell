@@ -1,7 +1,7 @@
 {
   "name": "@malagu/example-mycli",
   "private": "true",
-  "version": "0.0.0",
+  "version": "2.21.2",
   "license": "MIT",
   "files": [
     "lib",
@@ -13,7 +13,7 @@
     "mycli": "./bin/mycli"
   },
   "dependencies": {
-    "@malagu/core": "2.21.1",
+    "@malagu/core": "2.21.2",
     "chalk": "^4.1.2",
     "commander": "^4.0.1",
     "fs-extra": "^8.1.0",
@@ -21,7 +21,7 @@
     "inquirer-autocomplete-prompt": "^1.0.1"
   },
   "devDependencies": {
-    "@malagu/cli": "2.21.1",
+    "@malagu/cli": "2.21.2",
     "@types/fs-extra": "^8.0.1",
     "rimraf": "^2.6.3",
     "typescript": "^3.7.2"
