@@ -220,6 +220,9 @@
       ],
       "@malagu/example-mycli/*": [
         "examples/mycli/*"
+      ],
+      "@malagu/node-runtime-plugin/lib/*": [
+        "plugins/node-runtime-plugin/src/*"
       ]
     }
   },
