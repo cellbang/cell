@@ -1,9 +1,9 @@
 {
   "name": "@malagu/node-runtime-plugin",
-  "version": "2.22.0",
+  "version": "2.22.1",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.22.0",
+    "@malagu/cli-common": "2.22.1",
     "progress": "^2.0.3",
     "tar-fs": "^2.1.1",
     "xz": "^2.0.2"
@@ -38,7 +38,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.22.0",
+    "@malagu/ext-scripts": "2.22.1",
     "@types/progress": "^2.0.5"
   },
   "nyc": {
