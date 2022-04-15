@@ -6,7 +6,7 @@ export interface EventLoaderOptions {
 
 const eventLoader: LoaderDefinition<EventLoaderOptions> = function (source, sourceMap) {
     const { event } = this.getOptions();
-    const newSource = `global.ws.on('${event}', async context => {
+    const newSource = `global.short.on('${event}', async context => {
         ${source}
     });`;
     this.callback(undefined, newSource, sourceMap);

@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.2
+
+- fix(qq-guild-bot-adapter) 修复遗留的 ws 问题
+
 ## 2.22.0
 
 - feat(qq-guild-bot-adapter) 移除 websocket 相关
