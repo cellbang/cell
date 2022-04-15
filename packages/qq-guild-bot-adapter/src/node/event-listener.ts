@@ -9,14 +9,6 @@ const { appID, token, intents, secret, eventMap } = localRequire(join(__dirname,
 @Component(FaaSEventListener)
 export class BotEventListener implements FaaSEventListener<any, any> {
 
-    protected clear() {
-        try {
-            (global as any).ws?.disconnect();
-        } catch (error) {
-            // NoOp
-        }
-    }
-
     protected getConfig() {
         return {
             appID,
@@ -30,22 +22,21 @@ export class BotEventListener implements FaaSEventListener<any, any> {
         const config = this.getConfig();
         const client = createOpenAPI(config);
         const short = createShort(config as any);
-
         (global as any).client = client;
         (global as any).short = short;
     }
 
     protected registerListeners() {
-        const { ws } = global as any;
+        const { short } = global as any;
 
-        ws.on('READY', (data: any) => {
+        short.on('READY', (data: any) => {
             console.log('[READY] 事件接收 :', data);
         });
-        ws.on('ERROR', (data: any) => {
+        short.on('ERROR', (data: any) => {
             console.log('[ERROR] 事件接收 :', data);
         });
 
-        ws.on('EVENT_SHORT', (data: any) => {
+        short.on('EVENT_SHORT', (data: any) => {
             console.log('【EVENT_SHORT】内部事件通知', data);
         });
 
@@ -55,7 +46,6 @@ export class BotEventListener implements FaaSEventListener<any, any> {
     }
 
     async onTrigger(event: any): Promise<any> {
-        this.clear();
         this.createAndBindClient();
         this.registerListeners();
         const { short } = global as any;
