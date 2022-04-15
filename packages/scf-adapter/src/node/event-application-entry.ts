@@ -16,8 +16,8 @@ async function start() {
 const startPromise = start();
 
 export async function handler(event: string, context: any, callback: any) {
-    context.callbackWaitsForEmptyEventLoop = FaaSUtils.getCallbackWaitsForEmptyEventLoop();
     await startPromise;
+    context.callbackWaitsForEmptyEventLoop = FaaSUtils.getCallbackWaitsForEmptyEventLoop();
     let result = await Promise.all(listeners.map(l => l.onTrigger(event)));
     result = result.filter(item => !!item);
     return result.length === 1 ? result[0] : result;
