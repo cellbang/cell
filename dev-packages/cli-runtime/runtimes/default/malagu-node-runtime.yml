@@ -1,0 +1,7 @@
+devComponents:
+  '@malagu/node-runtime-plugin': ${version}
+malagu:
+  cloud:
+    function:
+      env:
+        PATH: /code/backend/assets:$PATH

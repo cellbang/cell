@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.22.0
+
+- feat(qq-guild-bot-adapter) 移除 websocket 相关
+- feat(node-runtime-plugin) 升级函数计算 Custom Runtime 中 node 版本，从而支持新版 Next.js 项目
+
 ## 2.21.2
 
 - feat(qq-guild-bot-adapter) 支持读取 `bot-config.json` 中的 `secret` 属性

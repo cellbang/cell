@@ -20,7 +20,8 @@
       "@malagu/static-plugin": "{{ version }}",
       "@malagu/node-plugin": "{{ version }}",
       "@malagu/qq-guild-bot-adapter": "{{ version }}",
-      "@malagu/next-plugin": "{{ version }}"
+      "@malagu/next-plugin": "{{ version }}",
+      "@malagu/node-runtime-plugin": "{{ version }}"
     }
   }
 }

@@ -1,3 +1,4 @@
+mode: "${ 'fc' in currentMode ? 'node-runtime' : ''}"
 devComponents:
   '@malagu/next-plugin': ${version}
 backend:
