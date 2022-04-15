@@ -21,7 +21,7 @@ export class BotEventListener implements FaaSEventListener<any, any> {
     protected createAndBindClient() {
         const config = this.getConfig();
         const client = createOpenAPI(config);
-        const short = createShort(config as any);
+        const short = createShort(config);
         (global as any).client = client;
         (global as any).short = short;
     }

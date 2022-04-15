@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.4
+
+- fix(qq-guild-bot-adapter) 升级依赖修复 BUG
+
 ## 2.22.3
 
 - fix(scf-adapter) 修复事件类型函数入口问题

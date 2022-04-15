@@ -11900,10 +11900,10 @@ q@^1.1.2, q@^1.5.1:
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qq-guild-bot@^2.9.2-beta1:
-  version "2.9.2-beta1"
-  resolved "https://registry.npmjs.org/qq-guild-bot/-/qq-guild-bot-2.9.2-beta1.tgz#0f92d1057452642820dd3b891305349fbf684dc1"
-  integrity sha512-O1+EfiQ4CVNkpkJlub+pe19/P5NRKaGB6K2rG+xKSqLkuDtWdRdoHvZLAwEcUJyTgm2D2pw1y/9ovnhWvSUlFg==
+qq-guild-bot@^2.9.2-beta2:
+  version "2.9.2-beta2"
+  resolved "https://registry.npmjs.org/qq-guild-bot/-/qq-guild-bot-2.9.2-beta2.tgz#2cacf30bd7f428036e37e62a9d5cd83756addac4"
+  integrity sha512-5SJ5mHrEYbiUsMDm0FhX2iBLKiNAHSgeeAVj/tJGpTIKQeTOux5S8Tyi3HLTj/ORDxEGfRkxjSPViIK0HTjyfQ==
   dependencies:
     discord-interactions "^3.1.0"
     resty-client "0.0.5"
