@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.3
+
+- fix(scf-adapter) 修复事件类型函数入口问题
+
 ## 2.22.2
 
 - fix(qq-guild-bot-adapter) 修复遗留的 ws 问题
