@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.22.5
+## 2.22.6
 
 - fix security alerts
 

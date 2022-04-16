@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cloud",
-  "version": "2.22.4",
+  "version": "2.22.5",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.22.4"
+    "@malagu/core": "2.22.5"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.22.4"
+    "@malagu/ext-scripts": "2.22.5"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
