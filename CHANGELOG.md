@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.5
+
+- fix security alerts
+
 ## 2.22.4
 
 - fix(qq-guild-bot-adapter) 升级依赖修复 BUG

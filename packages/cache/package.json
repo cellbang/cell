@@ -6,8 +6,8 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.22.4",
-    "@types/cache-manager": "^2.10.3",
-    "cache-manager": "^3.4.0"
+    "@types/cache-manager": "^3.4.3",
+    "cache-manager": "^3.6.1"
   },
   "publishConfig": {
     "access": "public"
