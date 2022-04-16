@@ -1,6 +1,6 @@
 {
   "name": "@malagu/eslint",
-  "version": "2.22.4",
+  "version": "2.22.5",
   "description": "eslint component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.22.4"
+    "@malagu/ext-scripts": "2.22.5"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
