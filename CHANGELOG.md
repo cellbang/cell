@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.7
+
+- fix(qq-guild-bot-adapter) 修复第二次事件没有注册成功问题
+
 ## 2.22.6
 
 - fix security alerts

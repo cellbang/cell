@@ -6,9 +6,11 @@ export interface EventLoaderOptions {
 
 const eventLoader: LoaderDefinition<EventLoaderOptions> = function (source, sourceMap) {
     const { event } = this.getOptions();
-    const newSource = `global.short.on('${event}', async context => {
-        ${source}
-    });`;
+    const newSource = `module.exports = function() {
+        global.short.on('${event}', async context => {
+            ${source}
+        });
+    }`;
     this.callback(undefined, newSource, sourceMap);
 };
 

@@ -1,8 +1,9 @@
 {
-    "appID": "123456",
-    "token": "abcdefg",
-    "intents": ["GUILDS", "GUILD_MEMBERS", "AUDIO_ACTION", "AT_MESSAGES"],
-    "eventMap": {
-        "AT_MESSAGES": "./src/atMessage.js"
-    }
+	"appID": "12445",
+	"token": "aadfsdfa",
+	"intents": [],
+	"eventMap": {
+		"AT_MESSAGES": "./src/atMessage.js"
+	},
+	"secret": "asdfasf"
 }
