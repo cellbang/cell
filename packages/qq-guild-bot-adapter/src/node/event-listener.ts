@@ -41,7 +41,7 @@ export class BotEventListener implements FaaSEventListener<any, any> {
         });
 
         for (const event of Object.keys(eventMap)) {
-            localRequire(`./${event}`);
+            localRequire(`./${event}`)();
         }
     }
 
