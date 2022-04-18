@@ -2,7 +2,7 @@
   "lerna": "2.2.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "2.22.7",
+  "version": "2.22.8",
   "packages": [
     "packages/*",
     "dev-pacakges/*",
