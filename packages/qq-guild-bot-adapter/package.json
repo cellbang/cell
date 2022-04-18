@@ -5,7 +5,7 @@
   "dependencies": {
     "@malagu/cli-service": "2.22.7",
     "@malagu/faas-adapter": "2.22.7",
-    "qq-guild-bot": "^2.9.2-beta2"
+    "qq-guild-bot": "^2.9.2-beta3"
   },
   "publishConfig": {
     "access": "public"

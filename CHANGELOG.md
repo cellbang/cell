@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.8
+
+- feat(qq-guild-bot-adapter) 升级 qq-guild-bot 依赖
+
 ## 2.22.7
 
 - fix(qq-guild-bot-adapter) 修复第二次事件没有注册成功问题
