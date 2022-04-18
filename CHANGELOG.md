@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.9
+
+- feat(qq-guild-bot-adapter) 升级 qq-guild-bot 依赖
+
 ## 2.22.8
 
 - feat(qq-guild-bot-adapter) 升级 qq-guild-bot 依赖
