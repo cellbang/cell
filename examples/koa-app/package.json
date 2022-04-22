@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "@malagu/example-koa-app",
-  "version": "2.22.9",
+  "version": "2.22.10",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "@malagu/cli": "2.22.9",
+    "@malagu/cli": "2.22.10",
     "koa": "^2.13.4"
   }
 }
