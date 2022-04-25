@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.22.11
+
+- fix(core) EL 表达式没有正确处理 _ignoreEl 标准，导致表达式解析错误
+
 ## 2.22.10
 
 - feat(qq-guild-bot-adapter) 升级 qq-guild-bot 依赖

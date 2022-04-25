@@ -39,11 +39,9 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
             const self = this;
             traverse(textOrObj).forEach(function (value: any) {
                 if (typeof value === 'string') {
-                    if (typeof value === 'string') {
-                        this.update(self.handle(value, ctx));
-                    } else if (value && (value as any)._ignoreEl === true) {
-                        this.update(value, true);
-                    }
+                    this.update(self.handle(value, ctx));
+                } else if (value && (value as any)._ignoreEl === true) {
+                    this.update(value, true);
                 }
             });
             return textOrObj;
