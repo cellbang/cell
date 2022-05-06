@@ -1,10 +1,10 @@
 {
   "name": "@malagu/qq-guild-bot-adapter",
-  "version": "2.22.11",
+  "version": "2.22.12",
   "description": "",
   "dependencies": {
-    "@malagu/cli-service": "2.22.11",
-    "@malagu/faas-adapter": "2.22.11",
+    "@malagu/cli-service": "2.22.12",
+    "@malagu/faas-adapter": "2.22.12",
     "qq-guild-bot": "^2.9.2-beta6"
   },
   "publishConfig": {
@@ -35,7 +35,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.22.11"
+    "@malagu/ext-scripts": "2.22.12"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
