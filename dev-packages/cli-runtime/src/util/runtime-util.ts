@@ -18,6 +18,7 @@ export namespace RuntimeUtil {
     export async function initRuntime(projectPath: string = process.cwd()) {
         const settings = SettingsUtil.getSettings();
         let framework = await FrameworkUtil.detect({
+            projectPath,
             url: settings.frameworks?.url,
             upstreamUrl: settings.frameworks?.upstreamUrl
         });

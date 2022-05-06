@@ -4,13 +4,17 @@ import { frameworks as innerFrameworks } from '../frameworks';
 import axios from 'axios';
 
 export interface DetectOptions {
+    projectPath?: string;
     url?: string;
     upstreamUrl?: string;
     frameworks?: Framework[];
 }
 
 export namespace FrameworkUtil {
-    export async function detect(opts?: DetectOptions, fs: DetectorFilesystem = new DiskDetectorFilesystem()): Promise<Framework | undefined> {
+    export async function detect(opts?: DetectOptions, fs?: DetectorFilesystem): Promise<Framework | undefined> {
+        if (!fs) {
+            fs = new DiskDetectorFilesystem(opts?.projectPath);
+        }
         const frameworks = opts?.frameworks || [];
         if (opts?.url) {
             const { data } = await axios.get<Framework[]>(opts.url);

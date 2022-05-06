@@ -1,5 +1,6 @@
 import { DetectorFilesystem } from './detector-protocol';
 import { existsSync, statSync, readFile } from 'fs-extra';
+import { resolve } from 'path';
 
 export abstract class AbstractDetectorFilesystem implements DetectorFilesystem {
     protected abstract doHasPath(name: string): Promise<boolean>;
@@ -45,14 +46,18 @@ export abstract class AbstractDetectorFilesystem implements DetectorFilesystem {
 }
 
 export class DiskDetectorFilesystem extends AbstractDetectorFilesystem {
+    constructor(protected projectPath: string = process.cwd()) {
+        super();
+    }
+
     protected async doHasPath(name: string): Promise<boolean> {
-        return existsSync(name);
+        return existsSync(resolve(this.projectPath, name));
     }
     protected doReadFile(name: string): Promise<Buffer> {
-        return readFile(name);
+        return readFile(resolve(this.projectPath, name));
     }
     protected async doIsFile(name: string): Promise<boolean> {
-        const stat = statSync(name);
+        const stat = statSync(resolve(this.projectPath, name));
         if (stat.isFile()) {
             return true;
         }
