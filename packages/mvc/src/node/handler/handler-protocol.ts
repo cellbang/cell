@@ -24,8 +24,8 @@ export const RouteProvider = Symbol('RouteProvider');
 export const RouteMetadataMatcher = Symbol('RouteMetadataMatcher');
 
 export interface Route {
-    mapping: Map<string, Map<StrOrRegex, RouteMetadata>>;
-    errorMapping: Map<ErrorType, RouteMetadata>;
+    mapping: Map<string, PathRouteMetadata[]>;
+    errorMapping: Map<ErrorType, ErrorRouteMetadata>;
 }
 
 export interface RouteMetadata {
@@ -43,6 +43,14 @@ export interface RouteMetadata {
     requestSessionMetadata?: RequestSessionMetadata[];
     responseSessionMetadata?: ResponseSessionMetadata[];
     viewMetadata: ViewMetadata;
+}
+
+export interface PathRouteMetadata extends RouteMetadata {
+    path: StrOrRegex;
+}
+
+export interface ErrorRouteMetadata extends RouteMetadata {
+    errorType: ErrorType;
 }
 
 export interface RouteProvider {
