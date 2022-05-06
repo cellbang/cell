@@ -28,14 +28,13 @@ export class RouteMetadataMatcherImpl implements RouteMetadataMatcher {
             }
         } else {
             const request = Context.getRequest();
-            const pathMap = route.mapping.get(request.method!.toUpperCase());
-            if (pathMap) {
-                for (const entry of pathMap) {
-                    const [ p, metadata ] = entry;
-                    const pathParams = await this.requestMatcher.match(p);
+            const paths = route.mapping.get(request.method!.toUpperCase());
+            if (paths) {
+                for (const pathRouteMetadata of paths) {
+                    const pathParams = await this.requestMatcher.match(pathRouteMetadata.path);
                     if (pathParams) {
                         Context.setAttr(PATH_PARMAS_ATTR, pathParams);
-                        return metadata;
+                        return pathRouteMetadata;
                     }
                 }
             }

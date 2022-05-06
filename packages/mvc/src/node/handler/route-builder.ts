@@ -1,10 +1,10 @@
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
-import { getOwnMetadata, Component, Autowired, Optional, ErrorType } from '@malagu/core';
+import { getOwnMetadata, Component, Autowired, Optional, ErrorType, Prioritizeable } from '@malagu/core';
 import { PathResolver } from '@malagu/web';
 import { CatchMetadata } from '../annotation';
-import { RouteMetadata } from './handler-protocol';
+import { PathRouteMetadata, ErrorRouteMetadata } from './handler-protocol';
 import { getTargetClass } from '@malagu/core';
 
 @Component()
@@ -17,8 +17,8 @@ export class RouteBuilder {
     protected readonly pathResolver: PathResolver;
 
     async build() {
-        const mapping: Map<string, Map<StrOrRegex, RouteMetadata>> = new Map<string, Map<StrOrRegex, any>>();
-        const errorMapping: Map<ErrorType, any> = new Map<ErrorType, RouteMetadata>();
+        const mapping: Map<string, PathRouteMetadata[]> = new Map<string, PathRouteMetadata[]>();
+        const errorMapping: Map<ErrorType, any> = new Map<ErrorType, ErrorRouteMetadata>();
 
         for (const controller of this.controllers) {
             const targetConstructor = getTargetClass(controller);
@@ -34,8 +34,7 @@ export class RouteBuilder {
         };
     }
 
-    protected async doBuildRouteMap(mapping: Map<string, Map<StrOrRegex, RouteMetadata>>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
-
+    protected async doBuildRouteMap(mapping: Map<string, PathRouteMetadata[]>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
         const methodMetadata: MethodMetadata[] = getOwnMetadata(
             METADATA_KEY.controllerMethod,
             targetConstructor
@@ -45,10 +44,10 @@ export class RouteBuilder {
             const m = { ...metadata };
             const method = m.method;
             m.target = controller;
-            let pathMap = mapping.get(method);
-            if (!pathMap) {
-                pathMap = new Map<StrOrRegex, RouteMetadata>();
-                mapping.set(method, pathMap);
+            let paths = mapping.get(method);
+            if (!paths) {
+                paths = [];
+                mapping.set(method, paths);
             }
             let path: StrOrRegex = routeOptions.path;
             if (typeof path === 'string' ) {
@@ -58,15 +57,29 @@ export class RouteBuilder {
                     path = new RegExp(await this.pathResolver.resolve(controllerMetadata.path, path.source));
                 }
             }
-            pathMap.set(path, {
+            const routeMetadata = {
+                path,
                 controllerMetadata,
                 methodMetadata: m,
                 ...this.doRouteMetadata(targetConstructor, m.key.toString())
-            });
+            };
+            paths.push(routeMetadata);
+        }
+
+        for (const [method, paths] of mapping) {
+            const sorted = Prioritizeable.prioritizeAllSync(paths, value => {
+                if (value.path instanceof RegExp) {
+                    return Number.MIN_SAFE_INTEGER + value.path.toString().length;
+                } else if (value.path.includes('*')) {
+                    return value.path.replace('*', '').length;
+                }
+                return value.path.length + 1;
+            }).map(({ value }) => value);
+            mapping.set(method, sorted);
         }
     }
 
-    protected async doBuildErrorRouteMap(errorMapping: Map<ErrorType, RouteMetadata>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
+    protected async doBuildErrorRouteMap(errorMapping: Map<ErrorType, ErrorRouteMetadata>, targetConstructor: any, controller: any, controllerMetadata: ControllerMetadata) {
         const methodMetadata: CatchMetadata[] = getOwnMetadata(
             METADATA_KEY.controllerCatch,
             targetConstructor
@@ -76,6 +89,7 @@ export class RouteBuilder {
             m.target = controller;
             for (const errorType of metadata.errorTypes) {
                 errorMapping.set(errorType, {
+                    errorType,
                     controllerMetadata,
                     methodMetadata: m,
                     ...this.doRouteMetadata(targetConstructor, m.key.toString())
