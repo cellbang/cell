@@ -5,7 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "workbox-webpack-plugin": "^6.1.5"
+    "workbox-webpack-plugin": "^6.5.3"
   },
   "publishConfig": {
     "access": "public"
