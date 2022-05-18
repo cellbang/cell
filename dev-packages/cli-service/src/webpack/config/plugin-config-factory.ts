@@ -223,23 +223,39 @@ export class CleanWebpackPluginConfigFactory {
 
 export class NormalModuleReplacementPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
+        const { cfg } = context;
+        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).moduleReplacementPlugin || {};
+
+        const resources = [
+            '/node_modules/@malagu/',
+            ...(pluginConfig.resources ?? [])
+        ];
         const runtimePath = PathUtil.getRuntimePath(context.runtime);
         config
             .plugin('replace')
             .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), resource => {
                 if (resource.createData?.resource?.startsWith(runtimePath)) {
-                    let processPath = process.cwd();
-                    let newResource = resource.createData.resource.replace(runtimePath, processPath);
-                    while (!existsSync(newResource) && processPath !== path.parse(process.cwd()).root) {
-                        processPath = path.resolve(processPath, '..');
-                        newResource = resource.createData.resource.replace(runtimePath, processPath);
-                    }
-                    if (existsSync(newResource)) {
-                        if (resource.createData.request && resource.createData.userRequest) {
-                            resource.createData.request = resource.createData.request.replace(runtimePath, processPath);
-                            resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, processPath);
-                            resource.createData.resource = newResource;
-                            resource.createData.context = resource.createData.context.replace(runtimePath, processPath);
+                    const isExist = resources.some(r => {
+                        if (typeof r === 'string') {
+                            return resource.createData.resource.includes(r);
+                        } else if (r instanceof RegExp) {
+                            return r.test(resource.createData.resource);
+                        }
+                    });
+                    if (isExist) {
+                        let processPath = process.cwd();
+                        let newResource = resource.createData.resource.replace(runtimePath, processPath);
+                        while (!existsSync(newResource) && processPath !== path.parse(process.cwd()).root) {
+                            processPath = path.resolve(processPath, '..');
+                            newResource = resource.createData.resource.replace(runtimePath, processPath);
+                        }
+                        if (existsSync(newResource)) {
+                            if (resource.createData.request && resource.createData.userRequest) {
+                                resource.createData.request = resource.createData.request.replace(runtimePath, processPath);
+                                resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, processPath);
+                                resource.createData.resource = newResource;
+                                resource.createData.context = resource.createData.context.replace(runtimePath, processPath);
+                            }
                         }
                     }
                 }

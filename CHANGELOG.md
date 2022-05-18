@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.23.1
+
+- fix(cli-service) 修复模块替换导致当前目录模块下版本不一致
+
 ## 2.23.0
 
 - feat(mvc) 控制器路由支持 `@All` 装饰器
