@@ -17,19 +17,19 @@ export class RequestMatcherImpl implements RequestMatcher {
             return false;
         }
         pattern = pattern || '/';
-        let urlPathern: UrlPattern | undefined;
+        let urlPattern: UrlPattern | undefined;
         if (typeof pattern === 'string') {
-            urlPathern = this.caches.get(pattern);
-            if (!urlPathern) {
-                urlPathern = new UrlPattern(pattern);
+            urlPattern = this.caches.get(pattern);
+            if (!urlPattern) {
+                urlPattern = new UrlPattern(pattern);
                 if (this.caches.size < this.cacheSize) {
-                    this.caches.set(pattern, urlPathern);
+                    this.caches.set(pattern, urlPattern);
                 }
             }
         } else {
-            urlPathern = new UrlPattern(pattern);
+            urlPattern = new UrlPattern(pattern);
         }
-        return urlPathern.match(path);
+        return urlPattern.match(path);
     }
 
 }
