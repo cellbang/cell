@@ -1,5 +1,8 @@
 # Change Log
 
+## next
+- fix(core) 修改 `globalThis` 为 `currentThis`
+
 ## 2.23.1
 
 - fix(cli-service) 修复模块替换导致当前目录模块下版本不一致

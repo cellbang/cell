@@ -1,7 +1,7 @@
 import { ConfigProvider } from './config-protocol';
 import { ContainerUtil } from '../container';
 import { config } from './dynamic-config';
-import { globalThis } from '../utils';
+import { currentThis } from '../utils';
 
 export namespace ConfigUtil {
     export function get<T>(key: string, defaultValue?: T): T {
@@ -9,6 +9,6 @@ export namespace ConfigUtil {
     }
 
     export function getRaw() {
-        return globalThis.malaguProps || config;
+        return currentThis.malaguProps || config;
     }
 }
