@@ -1,5 +1,16 @@
 function getGlobalThis() {
-    return globalThis || global || window || self;
+    if (typeof globalThis !== 'undefined') {
+        return globalThis;
+    }
+    if (typeof global !== 'undefined') {
+        return global;
+    }
+    if (typeof window !== 'undefined') {
+        return window;
+    }
+    if (typeof self !== 'undefined') {
+        return self;
+    }
 }
 
-export const globalThis: any = getGlobalThis();
+export const currentThis: any = getGlobalThis();
