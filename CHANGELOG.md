@@ -1,7 +1,9 @@
 # Change Log
 
-## next
+## 2.23.2
+
 - fix(core) 修改 `globalThis` 为 `currentThis`
+- feat(oidc-provider) 升级依赖
 
 ## 2.23.1
 
