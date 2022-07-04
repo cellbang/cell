@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.23.3
+
+- fix(qq-guild-bot-adapter) 固定 qq-guild-bot 版本，避免错误自动升级
+
 ## 2.23.2
 
 - fix(core) 修改 `globalThis` 为 `currentThis`

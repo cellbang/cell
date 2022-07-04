@@ -11944,9 +11944,9 @@ q@^1.1.2, q@^1.5.1:
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qq-guild-bot@^2.9.2-beta6:
+qq-guild-bot@2.9.2-beta6:
   version "2.9.2-beta6"
-  resolved "https://registry.npmjs.org/qq-guild-bot/-/qq-guild-bot-2.9.2-beta6.tgz#86c9e6cfa381703e4ac451bd90c99c888a3acb41"
+  resolved "https://registry.yarnpkg.com/qq-guild-bot/-/qq-guild-bot-2.9.2-beta6.tgz#86c9e6cfa381703e4ac451bd90c99c888a3acb41"
   integrity sha512-UCEcGaiOcJD3aQ/BUKlsXibahxbHZ0JcOLl2/kBdfoWMfhSyIYWOPOGhKnvhJEldplnj2h/dDUifzwBbY3znhg==
   dependencies:
     discord-interactions "^3.1.0"
