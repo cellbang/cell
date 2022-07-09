@@ -1,1 +1,1 @@
-# Malagu - Cache Component with pino
+# Malagu - Cache Component with cache-manager

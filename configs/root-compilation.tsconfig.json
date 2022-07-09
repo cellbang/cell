@@ -159,6 +159,9 @@
     },
     {
       "path": "../plugins/node-runtime-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/config/compile.tsconfig.json"
     }
   ]
 }

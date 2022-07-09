@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.24.0
+
+- feat(config) 新增 @malagu/config 组件，用于提供运行时的配置属性方式。包含以下运行时配置属性策略：通过环境变量 MALAGU_PROPS_FILE 配置属性文件位置和尝试从 process.cwd() 和 __dirname 目录下加载 malagu.yml 和 malagu.yaml 配置文件
+
 ## 2.23.3
 
 - fix(qq-guild-bot-adapter) 固定 qq-guild-bot 版本，避免错误自动升级
