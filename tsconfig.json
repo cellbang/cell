@@ -223,6 +223,9 @@
       ],
       "@malagu/node-runtime-plugin/lib/*": [
         "plugins/node-runtime-plugin/src/*"
+      ],
+      "@malagu/config/lib/*": [
+        "packages/config/src/*"
       ]
     }
   },

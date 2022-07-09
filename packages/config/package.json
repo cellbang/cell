@@ -1,0 +1,48 @@
+{
+  "name": "@malagu/config",
+  "version": "2.23.3",
+  "description": "config component",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "2.23.3",
+    "@types/lodash.mergewith": "^4.6.6",
+    "@types/js-yaml": "^3.12.1",
+    "js-yaml": "^4.0.0",
+    "lodash.mergewith": "^4.6.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "lint": "malaguext lint",
+    "build": "malaguext build",
+    "watch": "malaguext watch",
+    "clean": "malaguext clean",
+    "test": "malaguext test"
+  },
+  "devDependencies": {
+    "@malagu/ext-scripts": "2.23.3"
+  },
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  },
+  "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
+}

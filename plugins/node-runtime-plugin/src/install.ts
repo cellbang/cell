@@ -2,8 +2,10 @@ import * as https from 'https';
 import * as ProgressBar from 'progress';
 const tar = require('tar-fs');
 import { Decompressor } from 'xz';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 
-const nodeRuntime = process.env.NODE_RUNTIME ?? 'node-v16.14.2-linux-x64.tar.xz' ;
+const nodeRuntime = process.env.NODE_RUNTIME ?? 'node-v16.14.2-linux-x64.tar.xz';
 const urlPrefix = process.env.NODE_RUNTIME_URL ?? 'https://nodejs.org/dist/v16.14.2';
 const url = `${urlPrefix}/${nodeRuntime}`;
 
@@ -73,7 +75,7 @@ function doDownload(url: string) {
 
 async function download() {
     try {
-        if (!process.env.NODE_RUNTIME_SKIP_DOWNLOAD) {
+        if (!process.env.NODE_RUNTIME_SKIP_DOWNLOAD && !existsSync(resolve(__dirname, nodeRuntime.replace('.tar.xz', '')))) {
             await doDownload(url);
         }
     } catch (error) {
