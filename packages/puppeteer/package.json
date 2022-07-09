@@ -1,11 +1,11 @@
 {
   "name": "@malagu/puppeteer",
-  "version": "2.23.3",
+  "version": "2.24.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.23.3",
+    "@malagu/cloud": "2.24.0",
     "puppeteer-core": "^5.5.0",
     "tar": "^4.4.4"
   },
@@ -38,7 +38,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.23.3",
+    "@malagu/ext-scripts": "2.24.0",
     "@types/puppeteer-core": "^2.0.0"
   },
   "nyc": {
