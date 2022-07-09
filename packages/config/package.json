@@ -1,13 +1,13 @@
 {
   "name": "@malagu/config",
-  "version": "2.23.3",
+  "version": "2.24.0",
   "description": "config component",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.23.3",
-    "@types/lodash.mergewith": "^4.6.6",
+    "@malagu/core": "2.24.0",
     "@types/js-yaml": "^3.12.1",
+    "@types/lodash.mergewith": "^4.6.6",
     "js-yaml": "^4.0.0",
     "lodash.mergewith": "^4.6.2"
   },
@@ -39,7 +39,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.23.3"
+    "@malagu/ext-scripts": "2.24.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
