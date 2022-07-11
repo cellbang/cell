@@ -3,6 +3,7 @@
 ## 2.24.1
 
 - feat(scf-plugin) Web 函数支持单实例多并发，默认最大并发度为 10
+- feat(fc-plugin) 支持属性 `withoutCodeLimit`，默认为 true，函数代码体积无限制
 
 ## 2.24.0
 

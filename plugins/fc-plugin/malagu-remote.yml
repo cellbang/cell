@@ -10,3 +10,4 @@ malagu:
     function:
       serviceName: ${malagu.cloud.service.name}
       instanceConcurrency: 10
+      withoutCodeLimit: true

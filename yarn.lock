@@ -9,10 +9,10 @@
   dependencies:
     "@alicloud/pop-core" "^1.4.0"
 
-"@alicloud/fc2@^2.1.1":
-  version "2.5.3"
-  resolved "https://registry.npmjs.org/@alicloud/fc2/-/fc2-2.5.3.tgz#16d68f8eb8b6a550bd0958146172c8ac5b5233d7"
-  integrity sha512-ZjvJB2lfy8ytBYjE/WF8PGr20me8D4tuwVVlXHbKCR4E/AbeR6w6f3xqDWcTopr9I5S7ulqxmT4Oqgg9MFqNqg==
+"@alicloud/fc2@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@alicloud/fc2/-/fc2-2.6.0.tgz#f119b86a4a488c7c2c683cd9f196bf42582c14a6"
+  integrity sha512-8JjuipCJww06zQTCzxhdvlhgUV7Y2q+fcctvwNz8gtRYddwpJLhCj9jhUrQQoFSAGgIBh9UvqrrNEespTsFhAg==
   dependencies:
     ali-oss "^6.16.0"
     axios "^0.24.0"
