@@ -3,6 +3,9 @@ malagu:
   cloud:
     function:
       type: HTTP
+      instanceConcurrencyConfig:
+        maxConcurrency: 10
+        dynamicEnabled: false
       bootstrap: /var/lang/node16/bin/node backend/index.js
     apiGateway:
       api:
