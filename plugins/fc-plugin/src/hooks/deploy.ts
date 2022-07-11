@@ -1,11 +1,14 @@
 import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
-import { readFile } from 'fs-extra';
+import { readFile, createWriteStream } from 'fs-extra';
+import { join } from 'path';
 import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
 import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger, parseDomain } from './utils';
 import * as api from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
+import { tmpdir } from 'os';
+import { v4 } from 'uuid';
 const chalk = require('chalk');
 
 let fcClient: any;
@@ -331,6 +334,23 @@ async function parseFunctionCode(functionMeta: any) {
             ossObjectName: s3Uri.key
         };
     } else {
+        const withoutCodeLimit = functionMeta.withoutCodeLimit;
+        if (withoutCodeLimit === true) {
+            const _tmpdir = tmpdir();
+            const zipFile = join(_tmpdir, v4());
+            return new Promise((resolve, reject) =>
+                code!.generateNodeStream({ type: 'nodebuffer', platform: 'UNIX', compression: 'DEFLATE', streamFiles: true })
+                    .pipe(createWriteStream(zipFile))
+                    .on('finish', () => {
+                        resolve({
+                            zipFile
+                        });
+                    })
+                    .on('error', error => {
+                        reject(error);
+                    })
+                );
+        }
         return { zipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
     }
 }
