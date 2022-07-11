@@ -1,9 +1,9 @@
 {
   "name": "@malagu/next-plugin",
-  "version": "2.24.0",
+  "version": "2.24.1",
   "description": "",
   "dependencies": {
-    "@malagu/cli-service": "2.24.0"
+    "@malagu/cli-service": "2.24.1"
   },
   "publishConfig": {
     "access": "public"
@@ -36,7 +36,7 @@
     "test": "malaguext test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.24.0"
+    "@malagu/ext-scripts": "2.24.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
