@@ -158,6 +158,13 @@ export async function getFunction(client: any, namespaceName: string, functionNa
             console.log(`    - PublicNetStatus: ${result.PublicNetConfig?.PublicNetStatus}`);
             console.log(`    - LastModifiedTime: ${result.ModTime}`);
 
+            const instanceConcurrencyConfig = result.InstanceConcurrencyConfig;
+            if (instanceConcurrencyConfig) {
+                console.log('    - InstanceConcurrencyConfig:');
+                console.log(`        - MaxConcurrency: ${instanceConcurrencyConfig.MaxConcurrency}`);
+                console.log(`        - DynamicEnabled: ${instanceConcurrencyConfig.DynamicEnabled}`);
+            }
+
             const vpcConfig = result.VpcConfig;
             if (vpcConfig?.SubnetId) {
                 console.log('    - VpcConfig:');

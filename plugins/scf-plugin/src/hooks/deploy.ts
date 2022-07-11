@@ -172,7 +172,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     req.ProtocolType = functionMeta.protocolType
     req.InstallDependency = parseBoolean(functionMeta.installDependency);
 
-    const { env, vpcConfig, layers, deadLetterConfig, publicNetConfig, protocolParams } = functionMeta;
+    const { env, vpcConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig } = functionMeta;
     if (env) {
         const variables: any[] = [];
         for (const key in env) {
@@ -186,6 +186,13 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
         const environment: any = {};
         environment.Variables = variables;
         req.Environment = environment;
+    }
+
+    if (instanceConcurrencyConfig) {
+        req.InstanceConcurrencyConfig = {
+            MaxConcurrency: instanceConcurrencyConfig.maxConcurrency,
+            DynamicEnabled: parseBoolean(instanceConcurrencyConfig.dynamicEnabled)
+        };
     }
 
     if (vpcConfig) {
@@ -256,7 +263,7 @@ async function parseFunctionCode(req: any, functionMeta: any) {
 }
 
 function parseBoolean(value?: boolean) {
-    if (value) {
+    if (value !== undefined) {
         return value === true ? 'TRUE' : 'FALSE'
     }
 }
