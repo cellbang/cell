@@ -25,12 +25,13 @@
   },
   "homepage": "https://github.com/cellbang/malagu",
   "files": [
+    "scripts",
     "lib/install.js",
     "src",
     "malagu.yml"
   ],
   "scripts": {
-    "postinstall": "node ./lib/install.js",
+    "postinstall": "node ./scripts/install.js",
     "lint": "malaguext lint",
     "build": "malaguext build",
     "watch": "malaguext watch",
