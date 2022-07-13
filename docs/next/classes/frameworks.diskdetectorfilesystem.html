@@ -90,10 +90,16 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="frameworks.diskdetectorfilesystem.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="frameworks.diskdetectorfilesystem.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private-protected">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="frameworks.diskdetectorfilesystem.html#projectpath" class="tsd-kind-icon">project<wbr>Path</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -110,25 +116,44 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Disk<wbr>Detector<wbr>Filesystem<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="frameworks.diskdetectorfilesystem.html" class="tsd-signature-type">DiskDetectorFilesystem</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Disk<wbr>Detector<wbr>Filesystem<span class="tsd-signature-symbol">(</span>projectPath<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="frameworks.diskdetectorfilesystem.html" class="tsd-signature-type">DiskDetectorFilesystem</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#constructor">constructor</a></p>
+								<p>Overrides <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L11">dev-packages/frameworks/src/detector/detector-filesystem.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L48">dev-packages/frameworks/src/detector/detector-filesystem.ts:48</a></li>
 								</ul>
 							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> projectPath: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = process.cwd()</span></h5>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="frameworks.diskdetectorfilesystem.html" class="tsd-signature-type">DiskDetectorFilesystem</a></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="projectpath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> project<wbr>Path</h3>
+					<div class="tsd-signature tsd-kind-icon">project<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L49">dev-packages/frameworks/src/detector/detector-filesystem.ts:49</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -144,7 +169,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#dohaspath">doHasPath</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L48">dev-packages/frameworks/src/detector/detector-filesystem.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L53">dev-packages/frameworks/src/detector/detector-filesystem.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -168,7 +193,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#doisfile">doIsFile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L54">dev-packages/frameworks/src/detector/detector-filesystem.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L59">dev-packages/frameworks/src/detector/detector-filesystem.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -192,7 +217,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#doreadfile">doReadFile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L51">dev-packages/frameworks/src/detector/detector-filesystem.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L56">dev-packages/frameworks/src/detector/detector-filesystem.ts:56</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -217,7 +242,7 @@
 								<p>Implementation of <a href="../interfaces/frameworks.detectorfilesystem.html">DetectorFilesystem</a>.<a href="../interfaces/frameworks.detectorfilesystem.html#haspath">hasPath</a></p>
 								<p>Inherited from <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#haspath">hasPath</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L19">dev-packages/frameworks/src/detector/detector-filesystem.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L20">dev-packages/frameworks/src/detector/detector-filesystem.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -242,7 +267,7 @@
 								<p>Implementation of <a href="../interfaces/frameworks.detectorfilesystem.html">DetectorFilesystem</a>.<a href="../interfaces/frameworks.detectorfilesystem.html#isfile">isFile</a></p>
 								<p>Inherited from <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#isfile">isFile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L28">dev-packages/frameworks/src/detector/detector-filesystem.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L29">dev-packages/frameworks/src/detector/detector-filesystem.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -267,7 +292,7 @@
 								<p>Implementation of <a href="../interfaces/frameworks.detectorfilesystem.html">DetectorFilesystem</a>.<a href="../interfaces/frameworks.detectorfilesystem.html#readfile">readFile</a></p>
 								<p>Inherited from <a href="frameworks.abstractdetectorfilesystem.html">AbstractDetectorFilesystem</a>.<a href="frameworks.abstractdetectorfilesystem.html#readfile">readFile</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/c0cc81cb0/dev-packages/frameworks/src/detector/detector-filesystem.ts#L37">dev-packages/frameworks/src/detector/detector-filesystem.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/8cdcc54d2/dev-packages/frameworks/src/detector/detector-filesystem.ts#L38">dev-packages/frameworks/src/detector/detector-filesystem.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -308,8 +333,11 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="frameworks.diskdetectorfilesystem.html" class="tsd-kind-icon">Disk<wbr>Detector<wbr>Filesystem</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="frameworks.diskdetectorfilesystem.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="frameworks.diskdetectorfilesystem.html#projectpath" class="tsd-kind-icon">project<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
 								<a href="frameworks.diskdetectorfilesystem.html#dohaspath" class="tsd-kind-icon">do<wbr>Has<wbr>Path</a>
@@ -367,22 +395,23 @@
 				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>
