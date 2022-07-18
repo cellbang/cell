@@ -35,17 +35,14 @@
     "malagu-timer-mode.yml"
   ],
   "scripts": {
-    "lint": "malaguext lint",
-    "build": "malaguext build",
-    "watch": "malaguext watch",
-    "clean": "malaguext clean",
-    "test": "malaguext test"
+    "lint": "malagu-component lint",
+    "build": "malagu-component build",
+    "watch": "malagu-component watch",
+    "clean": "malagu-component clean",
+    "test": "malagu-component test"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.24.1"
-  },
-  "nyc": {
-    "extends": "../../configs/nyc.json"
+    "@malagu/component": "2.24.1"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }

@@ -1,5 +1,5 @@
 {
-  "extends": "./configs/base.tsconfig",
+  "extends": "@malagu/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
     "noEmit": true,
@@ -226,6 +226,9 @@
       ],
       "@malagu/config/lib/*": [
         "packages/config/src/*"
+      ],
+      "@malagu/component/*": [
+        "dev-packages/component/*"
       ]
     }
   },

@@ -6,10 +6,11 @@ const cp = require('child_process');
 const extScriptsPck = require(path.resolve(__dirname, 'package.json'));
 
 function getExtScript() {
-    const commandIndex = process.argv.findIndex(arg => arg.endsWith('malaguext')) + 1;
+    const commandIndex = process.argv.findIndex(arg => arg.endsWith('malagu-component')) + 1;
     const args = process.argv.slice(commandIndex);
+
     if (!args[0]) {
-        throw new Error('Please specify the script that runs with malaguext command.');
+        throw new Error('Please specify the script that runs with malagu-component command.');
     }
     const script = 'ext:' + args[0];
     if (!(script in extScriptsPck.scripts)) {
@@ -25,8 +26,8 @@ function run(script) {
             env,
             cwd: process.cwd()
         });
-        scriptProcess.stdout.pipe(process.stdout);
-        scriptProcess.stderr.pipe(process.stderr);
+        scriptProcess.stdout?.pipe(process.stdout);
+        scriptProcess.stderr?.pipe(process.stderr);
         scriptProcess.on('error', reject);
         scriptProcess.on('close', resolve);
     });
@@ -36,13 +37,13 @@ function run(script) {
     let exitCode = 0;
     let extScript = undefined;
     try {
-        extScript = getExtScript();
+        extScript = getExtScript().replace(/{{ROOT}}/g, __dirname);
         exitCode = await run(extScript);
     } catch (err) {
         if (extScript) {
-            console.error(`Error occurred in malaguext when executing: '${extScript}'`, err);
+            console.error(`Error occurred in malagu-component when executing: '${extScript}'`, err);
         } else {
-            console.error('Error occurred in malaguext', err);
+            console.error('Error occurred in malagu-component', err);
         }
         console.log(`${err.name}: ${err.message}`);
         exitCode = 1;

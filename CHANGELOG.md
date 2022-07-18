@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.25.0
+
+- feat(component) 模块 `@malagu/ext-scripts` 改名为 `@malagu/component`
+
 ## 2.24.1
 
 - feat(scf-plugin) Web 函数支持单实例多并发，默认最大并发度为 10
