@@ -1,6 +1,6 @@
-# Shared NPM script for malagu packages.
+# CLI for malagu packages.
 
-`malaguext` is a command line tool to run shared npm scripts in malagu packages. 
+`malagu-component` is a command line tool to run shared npm scripts in malagu packages. 
 
 For instance, if you want add a new `hello` script that prints `Hello World`:
 
@@ -8,20 +8,20 @@ For instance, if you want add a new `hello` script that prints `Hello World`:
 
 ```json
 {
-    "name": "@malagu/ext-scripts",
+    "name": "@malagu/component",
     "scripts": {
         "ext:hello": "echo 'Hello World'"
     }
 }
 ```
 
-- install `malaguext` in your package (the actual version can be different)
+- install `malagu-component` in your package (the actual version can be different)
 
 ```json
 {
-    "name": "@malagu/myextension",
+    "name": "@malagu/mycomponent",
     "devDependencies": {
-        "@malagu/ext-scripts": "^0.1.1"
+        "@malagu/component": "^0.1.1"
     }
 }
 ```
@@ -29,16 +29,16 @@ For instance, if you want add a new `hello` script that prints `Hello World`:
 - you should be able to call `hello` script in the context of your package:
 
 ```shell
-    npx malaguext hello
+    npx malagu-component hello
 ````
 
 - and from npm scripts of your package:
 
 ```json
 {
-    "name": "@malagu/myextension",
+    "name": "@malagu/mycomponent",
     "scripts": {
-        "hello": "malaguext hello"
+        "hello": "malagu-component hello"
     }
 }
 ```

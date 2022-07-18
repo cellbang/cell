@@ -29,11 +29,11 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "lint": "malaguext lint",
-    "build": "malaguext build",
-    "watch": "malaguext watch",
-    "clean": "malaguext clean",
-    "test": "malaguext test"
+    "lint": "malagu-component lint",
+    "build": "malagu-component build",
+    "watch": "malagu-component watch",
+    "clean": "malagu-component clean",
+    "test": "malagu-component test"
   },
   "dependencies": {
     "@malagu/cli-common": "2.24.1",
@@ -47,7 +47,7 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@malagu/ext-scripts": "2.24.1",
+    "@malagu/component": "2.24.1",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
   },

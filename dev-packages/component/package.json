@@ -1,13 +1,14 @@
 {
-  "name": "@malagu/ext-scripts",
+  "name": "@malagu/component",
   "version": "2.24.1",
   "license": "MIT",
-  "description": "NPM scripts for malagu packages.",
+  "description": "CLI for malagu component.",
   "files": [
-    "malaguext"
+    "malagu-component",
+    "configs"
   ],
   "bin": {
-    "malaguext": "malaguext"
+    "malagu-component": "malagu-component"
   },
   "publishConfig": {
     "access": "public"
@@ -46,16 +47,16 @@
     "typescript": "^3.9.2"
   },
   "scripts": {
-    "ext:clean": "malaguext compile:clean && malaguext lint:clean && malaguext test:clean",
-    "ext:build": "concurrently -n compile,lint -c blue,green \"malaguext compile\" \"malaguext lint\"",
+    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:clean",
+    "ext:build": "concurrently -n compile,lint -c blue,green \"malagu-component compile\" \"malagu-component lint\"",
     "ext:compile": "tsc -b compile.tsconfig.json",
     "ext:compile:clean": "rimraf lib *.tsbuildinfo",
     "ext:lint": "if-env SKIP_LINT=true && echo 'skip lint check' || eslint --cache=true --fix --no-error-on-unmatched-pattern=true \"{src,test}/**/*.{ts,tsx}\"",
     "ext:lint:clean": "rimraf .eslintcache",
     "ext:watch": "tsc -p compile.tsconfig.json -w",
     "ext:watch:slow": "tsc -b compile.tsconfig.json -w",
-    "ext:test": "nyc mocha --config ../../configs/mocharc.yml \"./lib/**/*.*spec.js\"",
-    "ext:test:watch": "mocha -w --config ../../configs/mocharc.yml \"./lib/**/*.*spec.js\"",
+    "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
+    "ext:test:watch": "mocha -w --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"

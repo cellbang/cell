@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
     extends: [
-        '../../configs/build.eslintrc.json'
+        require.resolve('@malagu/component/configs/build.eslintrc.json')
     ],
     parserOptions: {
         tsconfigRootDir: __dirname,
