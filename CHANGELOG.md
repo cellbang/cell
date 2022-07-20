@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.25.1
+
+- fix(*) fix typo: ERROR_HANDlER_PRIORITY to ERROR_HANDLER_PRIORITY
+
 ## 2.25.0
 
 - feat(component) 模块 `@malagu/ext-scripts` 改名为 `@malagu/component`
