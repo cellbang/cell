@@ -1,4 +1,4 @@
-import { OAUTH2_AUTHORIZATION_ERROR_HANDlER_PRIORITY } from './error-protocol';
+import { OAUTH2_AUTHORIZATION_ERROR_HANDLER_PRIORITY } from './error-protocol';
 import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { Component, Autowired } from '@malagu/core';
 import { OAuth2AuthorizationError, AuthorizationRequest, OAuth2ParameterNames } from '@malagu/oauth2-core';
@@ -7,7 +7,7 @@ import { enc } from 'crypto-js';
 
 @Component([OAuth2AuthorizationErrorHandler, ErrorHandler])
 export class OAuth2AuthorizationErrorHandler implements ErrorHandler {
-    readonly priority: number = OAUTH2_AUTHORIZATION_ERROR_HANDlER_PRIORITY;
+    readonly priority: number = OAUTH2_AUTHORIZATION_ERROR_HANDLER_PRIORITY;
 
     @Autowired(RedirectStrategy)
     protected readonly redirectStrategy: RedirectStrategy;

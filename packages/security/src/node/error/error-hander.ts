@@ -1,4 +1,4 @@
-import { AUTHENTICATION_ERROR_HANDlER_PRIORITY, ACCESS_DENIED_ERROR_HANDlER_PRIORITY } from './error-protocol';
+import { AUTHENTICATION_ERROR_HANDLER_PRIORITY, ACCESS_DENIED_ERROR_HANDLER_PRIORITY } from './error-protocol';
 import { AuthenticationError, AccessDeniedError } from './error';
 import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
@@ -7,7 +7,7 @@ import { RequestCache } from '../cache';
 
 @Component([AuthenticationErrorHandler, ErrorHandler])
 export class AuthenticationErrorHandler implements ErrorHandler {
-    readonly priority: number = AUTHENTICATION_ERROR_HANDlER_PRIORITY;
+    readonly priority: number = AUTHENTICATION_ERROR_HANDLER_PRIORITY;
 
     @Value('malagu.security.basic.realm')
     protected realm: string;
@@ -45,7 +45,7 @@ export class AuthenticationErrorHandler implements ErrorHandler {
 
 @Component(ErrorHandler)
 export class AccessDeniedErrorHandler implements ErrorHandler {
-    readonly priority: number = ACCESS_DENIED_ERROR_HANDlER_PRIORITY;
+    readonly priority: number = ACCESS_DENIED_ERROR_HANDLER_PRIORITY;
 
     canHandle(ctx: Context, err: Error): Promise<boolean> {
         return Promise.resolve(err instanceof AccessDeniedError);
