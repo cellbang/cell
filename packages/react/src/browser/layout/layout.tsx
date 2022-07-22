@@ -3,9 +3,9 @@ import { DefaultLayout, View } from '../annotation';
 
 @DefaultLayout(EmptyLayout, false)
 @View({ priority: 100, isDefaultLayout: false })
-export class EmptyLayout extends React.Component<{}, {}> {
+export class EmptyLayout extends React.Component<React.PropsWithChildren, {}> {
 
     render() {
-        return <React.Fragment>{this.props.children}</React.Fragment>;
+        return <>{this.props.children}</>;
     }
 }

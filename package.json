@@ -9,7 +9,13 @@
   "resolution": {
     "**/@types/node": "12"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lerna": "^5.1.8",
+    "nx": "^14.4.3",
+    "typedoc": "^0.17.7",
+    "typedoc-plugin-external-module-map": "~1.2.1",
+    "typedoc-plugin-remove-references": "^0.0.5"
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "prepare": "yarn run prepare:references && yarn run prepare:build",

@@ -1,7 +1,6 @@
 import * as https from 'https';
 import * as ProgressBar from 'progress';
 const tar = require('tar-fs');
-import { Decompressor } from 'xz';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
 
@@ -60,7 +59,7 @@ function doDownload(url: string) {
 
         tarStream.on('finish', () => fulfill());
         tarStream.on('error', (error: any) => reject(error));
-        res.pipe(new Decompressor()).pipe(tarStream);
+        res.pipe(tarStream);
 
         totalBytes = parseInt(res.headers['content-length'] as string, 10);
         res.on('data', chunk => {
