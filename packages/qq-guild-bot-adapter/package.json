@@ -1,10 +1,10 @@
 {
   "name": "@malagu/qq-guild-bot-adapter",
-  "version": "2.25.1",
+  "version": "2.25.2",
   "description": "",
   "dependencies": {
-    "@malagu/cli-service": "2.25.1",
-    "@malagu/faas-adapter": "2.25.1",
+    "@malagu/cli-service": "2.25.2",
+    "@malagu/faas-adapter": "2.25.2",
     "qq-guild-bot": "2.9.2-beta6"
   },
   "publishConfig": {
@@ -35,7 +35,7 @@
     "test": "malagu-component test"
   },
   "devDependencies": {
-    "@malagu/component": "2.25.1"
+    "@malagu/component": "2.25.2"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }
