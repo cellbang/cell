@@ -3,8 +3,9 @@ import * as ProgressBar from 'progress';
 const tar = require('tar-fs');
 import { existsSync } from 'fs';
 import { resolve } from 'path';
+import { createUnzip } from 'zlib';
 
-const nodeRuntime = process.env.NODE_RUNTIME ?? 'node-v16.14.2-linux-x64.tar.xz';
+const nodeRuntime = process.env.NODE_RUNTIME ?? 'node-v16.14.2-linux-x64.tar.gz';
 const urlPrefix = process.env.NODE_RUNTIME_URL ?? 'https://nodejs.org/dist/v16.14.2';
 const url = `${urlPrefix}/${nodeRuntime}`;
 
@@ -59,7 +60,7 @@ function doDownload(url: string) {
 
         tarStream.on('finish', () => fulfill());
         tarStream.on('error', (error: any) => reject(error));
-        res.pipe(tarStream);
+        res.pipe(createUnzip()).pipe(tarStream);
 
         totalBytes = parseInt(res.headers['content-length'] as string, 10);
         res.on('data', chunk => {
