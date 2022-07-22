@@ -5,8 +5,7 @@
   "dependencies": {
     "@malagu/cli-common": "2.25.1",
     "progress": "^2.0.3",
-    "tar-fs": "^2.1.1",
-    "xz": "^2.0.2"
+    "tar-fs": "^2.1.1"
   },
   "publishConfig": {
     "access": "public"

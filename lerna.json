@@ -1,13 +1,7 @@
 {
-  "lerna": "2.2.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "2.25.1",
-  "packages": [
-    "packages/*",
-    "dev-pacakges/*",
-    "plugins/*"
-  ],
   "command": {
     "run": {
       "stream": true

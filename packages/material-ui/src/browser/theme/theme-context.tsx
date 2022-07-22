@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core';
 import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 
 @Context()
-export class ThemeContext extends React.Component {
+export class ThemeContext extends React.Component<React.PropsWithChildren> {
 
     static priority = THEME_REACT_CONTEXT_PRIORITY;
 

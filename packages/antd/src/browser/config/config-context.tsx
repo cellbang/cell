@@ -5,7 +5,7 @@ import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 import { ConfigProvider } from 'antd';
 
 @Context()
-export class ConfigContext extends React.Component {
+export class ConfigContext extends React.Component<React.PropsWithChildren> {
 
     static priority = CONFIG_REACT_CONTEXT_PRIORITY;
 
