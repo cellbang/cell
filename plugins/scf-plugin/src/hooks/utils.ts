@@ -123,6 +123,23 @@ export async function checkStatus(client: any, namespace: string, functionName: 
     }
 }
 
+export async function getLayer(client: any, searchKey?: string, print = false) {
+    if (!searchKey) {
+        return;
+    }
+    const result = await client.ListLayers({ SearchKey: searchKey, Limit: 1 });
+    const layer = result.Layers[0];
+    if (layer && print) {
+        console.log(chalk`{bold.cyan - Layer: }`);
+        console.log(`    - LayerName: ${layer.LayerName}`);
+        console.log(`    - Version: ${layer.LayerVersion}`);
+        console.log(`    - Description: ${layer.Description}`);
+        console.log(`    - CompatibleRuntime: ${layer.CompatibleRuntimes}`);
+        console.log(`    - CreateTime: ${layer.AddTime}`);
+    }
+    return layer;
+}
+
 function doGetFunction(client: any, namespace: string, functionName: string, qualifier?: string) {
     const getFunctionRequest: any = {};
     getFunctionRequest.FunctionName = functionName;

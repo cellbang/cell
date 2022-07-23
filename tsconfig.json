@@ -229,6 +229,9 @@
       ],
       "@malagu/component/*": [
         "dev-packages/component/*"
+      ],
+      "database-app/*": [
+        "examples/database-app/*"
       ]
     }
   },

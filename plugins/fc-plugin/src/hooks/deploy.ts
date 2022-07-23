@@ -1,15 +1,16 @@
 import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
-import { readFile, createWriteStream } from 'fs-extra';
+import { readFile, createWriteStream, remove } from 'fs-extra';
 import { join } from 'path';
 import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getService, getTrigger, parseDomain } from './utils';
+import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getLayer, getService, getTrigger, parseDomain } from './utils';
 import * as api from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
 import { v4 } from 'uuid';
 const chalk = require('chalk');
+import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
 
 let fcClient: any;
 let apiClient: any;
@@ -29,7 +30,7 @@ export default async (context: DeployContext) => {
     apiClient = clients.apiClient;
     ram = clients.ram;
 
-    const { service, trigger, apiGateway, customDomain, alias, disableProjectId } = cloudConfig;
+    const { service, layer, trigger, apiGateway, customDomain, alias, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
     const serviceName = service.name;
 
@@ -44,6 +45,8 @@ export default async (context: DeployContext) => {
         await createOrUpdateService(serviceName, service);
         delete service.sync;
     }
+
+    await publishLayerIfNeed(layer);
 
     delete functionMeta.callbackWaitsForEmptyEventLoop;
     await createOrUpdateFunction(functionMeta, disableProjectId);
@@ -319,14 +322,13 @@ async function tryCreateProjectId(serviceName: string, functionName: string) {
     }
 }
 
-async function parseFunctionCode(functionMeta: any) {
-    const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
+async function parseCode(codeUri: CodeUri | string, withoutCodeLimit: boolean) {
+    const s3Uri = CloudUtils.parseS3Uri(codeUri);
     let code: JSZip | undefined;
     if (!s3Uri) {
         const codeLoader = new DefaultCodeLoader();
-        code = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+        code = await codeLoader.load(PathUtil.getProjectDistPath(), codeUri);
     }
-    delete functionMeta.codeUri;
 
     if (s3Uri) {
         return {
@@ -334,7 +336,6 @@ async function parseFunctionCode(functionMeta: any) {
             ossObjectName: s3Uri.key
         };
     } else {
-        const withoutCodeLimit = functionMeta.withoutCodeLimit;
         if (withoutCodeLimit === true) {
             const _tmpdir = tmpdir();
             const zipFile = join(_tmpdir, v4());
@@ -349,9 +350,41 @@ async function parseFunctionCode(functionMeta: any) {
                     .on('error', error => {
                         reject(error);
                     })
-                );
+            );
         }
         return { zipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
+    }
+}
+
+async function publishLayerIfNeed(layer: any = {}) {
+    if (!layer.name || !layer.codeUri) {
+        return;
+    }
+    const layerInfo = await getLayer(fcClient, layer.name);
+    if (!layerInfo || layer.sync) {
+        const opts = { ...layer };
+        delete opts.codeUri;
+        delete opts.name;
+        delete layer.sync;
+
+        await SpinnerUtil.start(`Publish ${layer.name} layer`, async () => {
+            const code = await parseCode(layer.codeUri, layer.withoutCodeLimit);
+            if (layer.withoutCodeLimit && (code as any).zipFile) {
+                await fcClient.publishLayerVersion(layer.name, {
+                    ...opts,
+                    codeConfig: {
+                        zipFilePath: (code as any).zipFile
+                    }
+                });
+            } else {
+                await fcClient.publishLayerVersion(layer.name, {
+                    ...opts,
+                    code: await parseCode(layer.codeUri, layer.withoutCodeLimit)
+                });
+            }
+        });
+    } else {
+        await SpinnerUtil.start(`Skip ${layer.name} layer`, async () => { });
     }
 }
 
@@ -364,6 +397,22 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
     delete opts.name;
     delete opts.env;
     delete opts.serviceName;
+    delete opts.codeUri;
+
+    if (sync !== 'onlyUpdateCode' && opts.layers) {
+        const newLayers = [];
+        for (const layer of opts.layers) {
+            if (layer) {
+                if (layer.includes('#')) {
+                    newLayers.push(layer);
+                } else {
+                    const layerInfo = await getLayer(fcClient, layer);
+                    newLayers.push(layerInfo.arn);
+                }
+            }
+        }
+        opts.layers = newLayers;
+    }
 
     projectId = await ProjectUtil.getProjectId();
     let functionInfo: any;
@@ -381,12 +430,13 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
         }
     }
 
+    const code: any = await parseCode(functionMeta.codeUri, functionMeta.withoutCodeLimit);
     if (functionInfo) {
         delete opts.runtime;
         await SpinnerUtil.start(`Update ${functionMeta.name} function${sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
             await fcClient.updateFunction(serviceName, functionMeta.name, {
                 ...(sync === 'onlyUpdateCode' ? {} : opts),
-                code: await parseFunctionCode(functionMeta)
+                code
             });
         });
     } else {
@@ -394,9 +444,12 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             await fcClient.createFunction(serviceName, {
                 ...opts,
-                code: await parseFunctionCode(functionMeta)
+                code
             });
         });
+    }
+    if (functionMeta.withoutCodeLimit && code.zipFile) {
+        remove(code.zipFile).catch(() => {});
     }
 }
 

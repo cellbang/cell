@@ -1,7 +1,8 @@
-import { Component, ApplicationLifecycle, Application, Value } from '@malagu/core';
-import { createConnections, getConnectionManager } from 'typeorm';
+import { Component, ApplicationLifecycle, Application, Value, Autowired } from '@malagu/core';
 import { DEFAULT_CONNECTION_NAME } from './constants';
+import { DataSourceManager } from './data-source-manager';
 import { EntityProvider } from './entity-provider';
+import { createDataSources } from './utils';
 
 @Component(ApplicationLifecycle)
 export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Application> {
@@ -9,11 +10,14 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
     @Value('malagu.typeorm')
     protected readonly options: any;
 
+    @Autowired(DataSourceManager)
+    protected readonly dataSourceManager: DataSourceManager;
+
     async onStart(app: Application): Promise<void> {
-        const connections = getConnectionManager().connections;
-        for (const c of connections) {
-            if (c.isConnected) {
-                await c.close();
+        const dataSources = this.dataSourceManager.dataSources;
+        for (const dataSource of dataSources) {
+            if (dataSource.isInitialized) {
+                await dataSource.destroy();
             }
         }
         const { ormConfig } = this.options;
@@ -29,14 +33,14 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
             config.entities = EntityProvider.getEntities(config.name) || [];
         }
 
-        await createConnections(configs);
+        await createDataSources(configs);
     }
 
     onStop(app: Application): void {
-        const connections = getConnectionManager().connections;
-        for (const c of connections) {
-            if (c.isConnected) {
-                c.close();
+        const dataSources = this.dataSourceManager.dataSources;
+        for (const dataSource of dataSources) {
+            if (dataSource.isInitialized) {
+                dataSource.initialize();
             }
         }
     }

@@ -1,8 +1,7 @@
 import { IsolationLevel } from 'typeorm/driver/types/IsolationLevel';
-import { DEFAULT_CONNECTION_NAME } from '../../common';
+import { DEFAULT_CONNECTION_NAME, getDataSource } from '../../common';
 import { EntityManager } from 'typeorm';
 import { OrmContext } from '../context';
-import { getConnection } from '../utils';
 
 export enum Propagation {
     Required, RequiresNew
@@ -44,8 +43,8 @@ export const Transactional = <TransactionalDecorator>function (nameOrTransaction
                     OrmContext.popEntityManager(name!);
                 }
             };
-            const conn = await getConnection(name);
-            const manager = conn.manager;
+            const dataSource = await getDataSource(name);
+            const manager = dataSource.manager;
             if (readOnly) {
                 return callback(manager);
             } else if (isolation) {

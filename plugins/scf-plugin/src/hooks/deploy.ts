@@ -4,7 +4,7 @@ import * as traverse from 'traverse';
 import * as delay from 'delay';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { checkStatus, createClients, getAlias, getApi, getCustomDomain, getFunction, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
+import { checkStatus, createClients, getAlias, getApi, getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
 const chalk = require('chalk');
 
 let scfClient: any;
@@ -27,7 +27,7 @@ export default async (context: DeployContext) => {
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
 
-    const { namespace, apiGateway, alias, trigger, disableProjectId } = cloudConfig;
+    const { namespace, layer, apiGateway, alias, trigger, disableProjectId } = cloudConfig;
     const functionMeta = cloudConfig.function;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
@@ -41,6 +41,8 @@ export default async (context: DeployContext) => {
         await createOrUpdateNamespace(namespace);
         delete namespace.sync;
     }
+
+    await publishLayerIfNeed(layer);
 
     functionMeta.namespace = functionMeta.namespace || namespace?.name;
 
@@ -205,8 +207,16 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
         req.Layers = [];
         for (const l of layers) {
             const layer: any = {};
-            layer.LayerName = l.name;
-            layer.LayerVersion = l.version;
+            if (typeof l === 'string') {
+                const layerInfo = await getLayer(scfClient, l);
+                layer.LayerName = layerInfo.LayerName;
+                layer.LayerVersion = layerInfo.LayerVersion;
+            } else {
+                const layer: any = {};
+                layer.LayerName = l.name;
+                layer.LayerVersion = l.version;
+            }
+            
             req.Layers.push(layer);
         }
     }
@@ -241,7 +251,7 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
     }
 }
 
-async function parseFunctionCode(req: any, functionMeta: any) {
+async function parseCode(req: any, functionMeta: any) {
     const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
     let code: JSZip | undefined;
     if (!s3Uri) {
@@ -259,6 +269,30 @@ async function parseFunctionCode(req: any, functionMeta: any) {
     } else {
         req.CodeSource = functionMeta.codeSource;
         req.Code = { ZipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
+    }
+}
+
+async function publishLayerIfNeed(layer: any = {}) {
+    if (!layer.name || !layer.codeUri) {
+        return;
+    }
+    const layerInfo = await getLayer(scfClient, layer.name);
+    if (!layerInfo || layer.sync) {
+        await SpinnerUtil.start(`Publish ${layer.name} layer`, async () => {
+            const publishLayerVersionRequest: any = {
+                LayerName: layer.name,
+                CompatibleRuntimes: layer.compatibleRuntime,
+                Description: layer.description,
+                LicenseInfo: layer.licenseInfo
+            };
+            await parseCode(publishLayerVersionRequest, layer);
+            publishLayerVersionRequest.Content = publishLayerVersionRequest.Code;
+            delete publishLayerVersionRequest.CodeSource;
+
+            await scfClient.PublishLayerVersion(publishLayerVersionRequest);
+        });
+    } else {
+        await SpinnerUtil.start(`Skip ${layer.name} layer`, async () => { });
     }
 }
 
@@ -291,7 +325,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
             updateFunctionCodeRequest.EnvId = functionMeta.envId;
-            await parseFunctionCode(updateFunctionCodeRequest, functionMeta);
+            await parseCode(updateFunctionCodeRequest, functionMeta);
             await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
             await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
@@ -311,7 +345,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             const createFunctionRequest: any = {};
             await parseFunctionMeta(createFunctionRequest, functionMeta);
-            await parseFunctionCode(createFunctionRequest, functionMeta);
+            await parseCode(createFunctionRequest, functionMeta);
             createFunctionRequest.Handler = functionMeta.handler;
             createFunctionRequest.CodeSource = functionMeta.codeSource;
             createFunctionRequest.Type = functionMeta.type;

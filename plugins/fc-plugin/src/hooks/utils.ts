@@ -57,6 +57,24 @@ export async function getAlias(client: any, aliasName: string, serviceName: stri
     }
 }
 
+export async function getLayer(client: any, prefix?: string, print = false) {
+    if (!prefix) {
+        return;
+    }
+    const result = await client.listLayers({ prefix, startKey: prefix, limit: 1 });
+    const layer = result.data.layers[0];
+    if (layer && print) {
+        console.log(chalk`{bold.cyan - Layer: }`);
+        console.log(`    - LayerName: ${layer.layerName}`);
+        console.log(`    - Version: ${layer.version}`);
+        console.log(`    - Description: ${layer.description}`);
+        console.log(`    - CompatibleRuntime: ${layer.compatibleRuntime}`);
+        console.log(`    - Arn: ${layer.arn}`);
+        console.log(`    - CreateTime: ${layer.createTime}`);
+    }
+    return layer;
+}
+
 export async function getFunction(client: any, serviceName: string, functionName: string, print = false) {
     try {
         const result = await client.getFunction(serviceName, functionName);

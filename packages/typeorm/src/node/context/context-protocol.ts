@@ -29,10 +29,6 @@ export namespace OrmContext {
         return getEntityManager(name).getMongoRepository(target);
     }
 
-    export function getCustomRepository<T>(customRepository: ObjectType<T>, name?: string): T {
-        return getEntityManager(name).getCustomRepository(customRepository);
-    }
-
     export function pushEntityManager(name: string, entityManager: EntityManager): void {
         let entityManagerMap = Context.getAttr<Map<string, EntityManager[]>>(CURRENT_ORM_CONTEXT_REQUEST_KEY, AttributeScope.Request);
         if (!entityManagerMap) {

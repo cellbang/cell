@@ -1,0 +1,12 @@
+malagu:
+  cloud:
+    layer:
+      name: node-v16-14-2-linux-x64
+      compatibleRuntime:
+        - custom
+      codeUri: https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-x64.tar.gz
+    function:
+      env:
+        PATH: /opt/node-v16.14.2-linux-x64/bin:$PATH
+      layers:
+        - node-v16-14-2-linux-x64
