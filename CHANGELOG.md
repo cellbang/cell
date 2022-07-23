@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.25.3
+## 2.26.0
 
 - fix(node-runtime-plugin) 修复 node 二进制包解压错误
 - feat(typeorm) 升级 typeorm 版本到 0.3.7
