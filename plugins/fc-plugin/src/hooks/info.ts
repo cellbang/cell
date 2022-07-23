@@ -40,7 +40,7 @@ export default async (context: InfoContext) => {
         return;
     }
 
-    context.output.layerInfo = await getLayer(fcClient, layer.name, true);
+    context.output.layerInfo = await getLayer(fcClient, layer?.name, true);
     
     context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
     if (!context.output.serviceInfo) {

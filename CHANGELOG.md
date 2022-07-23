@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.26.1
+
+- fix(fc-plugin|scf-plugin) 修复 malagu info 报错
+
 ## 2.26.0
 
 - fix(node-runtime-plugin) 修复 node 二进制包解压错误
