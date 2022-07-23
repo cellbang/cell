@@ -1,6 +1,6 @@
 import { InfoContext, ProjectUtil } from '@malagu/cli-common';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
-import { createClients, getAlias, getService, getFunction, getApi, getCustomDomain, getTrigger, getGroup } from './utils';
+import { createClients, getAlias, getService, getFunction, getApi, getCustomDomain, getTrigger, getGroup, getLayer } from './utils';
 const chalk = require('chalk');
 
 let fcClient: any;
@@ -19,7 +19,7 @@ export default async (context: InfoContext) => {
     fcClient = clients.fcClient;
     apiClient = clients.apiClient;
 
-    const { service, trigger, apiGateway, alias, customDomain, disableProjectId } = cloudConfig;
+    const { service, layer, trigger, apiGateway, alias, customDomain, disableProjectId } = cloudConfig;
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -39,6 +39,8 @@ export default async (context: InfoContext) => {
     if (!context.output.functionInfo) {
         return;
     }
+
+    context.output.layerInfo = await getLayer(fcClient, layer.name, true);
     
     context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
     if (!context.output.serviceInfo) {

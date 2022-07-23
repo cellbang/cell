@@ -1,6 +1,6 @@
 import { InfoContext, ProjectUtil } from '@malagu/cli-common';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
-import { createClients, getAlias, getApi, getCustomDomain, getFunction, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
+import { createClients, getAlias, getApi, getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
 const chalk = require('chalk');
 
 let scfClient: any;
@@ -23,7 +23,7 @@ export default async (context: InfoContext) => {
     console.log(`    - AccountId: ${account?.id}`);
     console.log(`    - Region: ${region}`);
 
-    const { namespace, apiGateway, alias, disableProjectId } = cloudConfig;
+    const { namespace, layer, apiGateway, alias, disableProjectId } = cloudConfig;
     const projectId = await ProjectUtil.getProjectId();
     if (!projectId && !disableProjectId) {
         return;
@@ -37,7 +37,8 @@ export default async (context: InfoContext) => {
         return;
     }
 
-    const tasks: Promise<void>[] = []; 
+    const tasks: Promise<void>[] = [];
+    tasks.push(getLayer(scfClient, layer.name, true).then(data => context.output.layerInfo = data));
     tasks.push(getNamespace(scfClient, namespace.name, true).then(data => context.output.namespaceInfo = data));
     tasks.push(getAlias(scfClient, alias.name, namespace.name, functionName, undefined, true).then(data => context.output.aliasInfo = data));
     tasks.push(getTrigger(scfClient, namespace.name, functionName, undefined, alias.name, true).then(data => context.output.triggerInfo = data));

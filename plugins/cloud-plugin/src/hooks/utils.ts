@@ -4,6 +4,7 @@ import { resolve, sep } from 'path';
 import { CloudConfiguration, Profile } from './cloud-protocol';
 import { load, dump } from 'js-yaml';
 import { ApplicationConfig, BACKEND_TARGET, ConfigUtil, PathUtil } from '@malagu/cli-common';
+import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
 
 export namespace CloudUtils {
 
@@ -89,8 +90,9 @@ export namespace CloudUtils {
         await writeFile(path, dump(profile));
     }
 
-    export function parseS3Uri(uri: string): { bucket: string, key: string, version?: string, region?: string } | undefined {
-        if (typeof uri === 'string' && uri.toLowerCase().startsWith('s3://')) {
+    export function parseS3Uri(codeUri: string | CodeUri): { bucket: string, key: string, version?: string, region?: string } | undefined {
+        const uri = typeof codeUri === 'string' ? codeUri : codeUri.value
+        if (uri?.toLowerCase().startsWith('s3://')) {
             const parsedUri = new URL(uri);
             const version = parsedUri.searchParams.get('version');
             const region = parsedUri.searchParams.get('region');

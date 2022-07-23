@@ -3,6 +3,9 @@
 ## 2.25.3
 
 - fix(node-runtime-plugin) 修复 node 二进制包解压错误
+- feat(typeorm) 升级 typeorm 版本到 0.3.7
+- feat(fc-plugin|scf-plugin) 支持层的自动创建
+- feat(cli-runtime) 为函数计算提供 nodejs 不同版本的层的创建
 
 ## 2.25.1
 

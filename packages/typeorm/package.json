@@ -6,8 +6,8 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/web": "2.25.2",
-    "mysql": "^2.18.1",
-    "typeorm": "^0.2.37"
+    "mysql2": "^2.3.3",
+    "typeorm": "^0.3.7"
   },
   "publishConfig": {
     "access": "public"
