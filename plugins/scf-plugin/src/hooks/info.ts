@@ -38,7 +38,7 @@ export default async (context: InfoContext) => {
     }
 
     const tasks: Promise<void>[] = [];
-    tasks.push(getLayer(scfClient, layer.name, true).then(data => context.output.layerInfo = data));
+    tasks.push(getLayer(scfClient, layer?.name, true).then(data => context.output.layerInfo = data));
     tasks.push(getNamespace(scfClient, namespace.name, true).then(data => context.output.namespaceInfo = data));
     tasks.push(getAlias(scfClient, alias.name, namespace.name, functionName, undefined, true).then(data => context.output.aliasInfo = data));
     tasks.push(getTrigger(scfClient, namespace.name, functionName, undefined, alias.name, true).then(data => context.output.triggerInfo = data));
