@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "@malagu/example-casbin-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "2.26.2",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "2.26.2",
+    "@malagu/mvc": "2.26.2",
+    "@malagu/casbin": "2.26.2"
+  },
+  "devDependencies": {
+    "@malagu/cli": "2.26.2"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m scf -m test",
+    "deploy:test": "malagu deploy -m scf -m test",
+    "deploy:pre": "malagu deploy -m scf -m pre",
+    "deploy:prod": "malagu deploy -m scf -m prod"
+  }
+}

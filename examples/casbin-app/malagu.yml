@@ -1,0 +1,14 @@
+targets:
+  - backend
+
+backend:
+  malagu:
+    casbin:
+      config:
+        - type: "mysql"
+          host: "localhost"
+          port: 3306
+          username: "root"
+          password: "12345678"
+          database: "casbin"
+      confPath: "src/casbin.conf"
