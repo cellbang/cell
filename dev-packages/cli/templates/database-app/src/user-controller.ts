@@ -14,9 +14,9 @@ export class UserController {
 
     @Get(':id')
     @Transactional({ readOnly: true })
-    get(@Param('id') id: number): Promise<User | undefined> {
+    get(@Param('id') id: number): Promise<User | null> {
         const repo = OrmContext.getRepository(User);
-        return repo.findOne(id);
+        return repo.findOneBy({ id });
     }
 
     @Delete(':id')

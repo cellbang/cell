@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.26.2
+
+- feat(cli) 添加模板 `malagu-component`，方便开发者快速开发 Malagu 组件
+
 ## 2.26.1
 
 - fix(fc-plugin|scf-plugin) 修复 malagu info 报错

@@ -1,0 +1,29 @@
+{
+  "name": "malagu-component",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "latest"
+  },
+  "devDependencies": {
+    "@malagu/component": "latest"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "lint": "malagu-component lint",
+    "build": "malagu-component build",
+    "watch": "malagu-component watch",
+    "clean": "malagu-component clean",
+    "test": "malagu-component test"
+  }
+}
