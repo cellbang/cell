@@ -6,6 +6,7 @@
   "typings": "lib/hooks/index.d.ts",
   "dependencies": {
     "@malagu/cli-common": "2.26.1",
+    "@malagu/code-loader-plugin": "2.26.1",
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
