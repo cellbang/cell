@@ -88,7 +88,8 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="code_loader_plugin.defaultcodeloader.html#doload" class="tsd-kind-icon">do<wbr>Load</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="code_loader_plugin.defaultcodeloader.html#doloadforlocal" class="tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Local</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="code_loader_plugin.defaultcodeloader.html#doloadforremote" class="tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Remote</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="code_loader_plugin.defaultcodeloader.html#load" class="tsd-kind-icon">load</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="code_loader_plugin.defaultcodeloader.html#match" class="tsd-kind-icon">match</a></li>
 							</ul>
@@ -99,16 +100,16 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<a name="doload" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> do<wbr>Load</h3>
+					<a name="doloadforlocal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> do<wbr>Load<wbr>For<wbr>Local</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">do<wbr>Load<span class="tsd-signature-symbol">(</span>codeDir<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, zip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSZip</span>, codeUri<span class="tsd-signature-symbol">?: </span><a href="../interfaces/code_loader_plugin.codeuri.html" class="tsd-signature-type">CodeUri</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Local<span class="tsd-signature-symbol">(</span>codeDir<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, zip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSZip</span>, codeUri<span class="tsd-signature-symbol">?: </span><a href="../interfaces/code_loader_plugin.codeuri.html" class="tsd-signature-type">CodeUri</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/plugins/code-loader-plugin/src/code-loader.ts#L27">plugins/code-loader-plugin/src/code-loader.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/plugins/code-loader-plugin/src/code-loader.ts#L69">plugins/code-loader-plugin/src/code-loader.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -127,6 +128,32 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="doloadforremote" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> do<wbr>Load<wbr>For<wbr>Remote</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Remote<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, zip<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JSZip</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JSZip</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/plugins/code-loader-plugin/src/code-loader.ts#L36">plugins/code-loader-plugin/src/code-loader.ts:36</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>zip: <span class="tsd-signature-type">JSZip</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JSZip</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="load" class="tsd-anchor"></a>
 					<h3>load</h3>
@@ -138,7 +165,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/code_loader_plugin.codeloader.html">CodeLoader</a>.<a href="../interfaces/code_loader_plugin.codeloader.html#load">load</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/plugins/code-loader-plugin/src/code-loader.ts#L17">plugins/code-loader-plugin/src/code-loader.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/plugins/code-loader-plugin/src/code-loader.ts#L22">plugins/code-loader-plugin/src/code-loader.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -164,7 +191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/plugins/code-loader-plugin/src/code-loader.ts#L51">plugins/code-loader-plugin/src/code-loader.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/plugins/code-loader-plugin/src/code-loader.ts#L93">plugins/code-loader-plugin/src/code-loader.ts:93</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -201,7 +228,10 @@
 						<a href="code_loader_plugin.defaultcodeloader.html" class="tsd-kind-icon">Default<wbr>Code<wbr>Loader</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="code_loader_plugin.defaultcodeloader.html#doload" class="tsd-kind-icon">do<wbr>Load</a>
+								<a href="code_loader_plugin.defaultcodeloader.html#doloadforlocal" class="tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Local</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="code_loader_plugin.defaultcodeloader.html#doloadforremote" class="tsd-kind-icon">do<wbr>Load<wbr>For<wbr>Remote</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="code_loader_plugin.defaultcodeloader.html#load" class="tsd-kind-icon">load</a>
@@ -221,6 +251,9 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="../interfaces/code_loader_plugin.deployer.html" class="tsd-kind-icon">Deployer</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module tsd-is-not-exported">
+						<a href="../modules/code_loader_plugin.html#tar" class="tsd-kind-icon">tar</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="../modules/code_loader_plugin.html#getcoderootdir" class="tsd-kind-icon">get<wbr>Code<wbr>Root<wbr>Dir</a>

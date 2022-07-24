@@ -85,6 +85,9 @@
 						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/typeorm.alreadyhasactivedatasourceerror.html" class="tsd-kind-icon">Already<wbr>Has<wbr>Active<wbr>Data<wbr>Source<wbr>Error</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/typeorm.datasourcemanager.html" class="tsd-kind-icon">Data<wbr>Source<wbr>Manager</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/typeorm.datasourcenotfounderror.html" class="tsd-kind-icon">Data<wbr>Source<wbr>Not<wbr>Found<wbr>Error</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/typeorm.typeormapplicationlifecycle.html" class="tsd-kind-icon">Type<wbr>Orm<wbr>Application<wbr>Lifecycle</a></li>
 							</ul>
 						</section>
@@ -107,7 +110,8 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="typeorm.html#autobindentities" class="tsd-kind-icon">auto<wbr>Bind<wbr>Entities</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="typeorm.html#getconnection" class="tsd-kind-icon">get<wbr>Connection</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="typeorm.html#createdatasources" class="tsd-kind-icon">create<wbr>Data<wbr>Sources</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="typeorm.html#getdatasource" class="tsd-kind-icon">get<wbr>Data<wbr>Source</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="typeorm.html#gettransactionaloption" class="tsd-kind-icon">get<wbr>Transactional<wbr>Option</a></li>
 							</ul>
 						</section>
@@ -122,7 +126,7 @@
 					<div class="tsd-signature tsd-kind-icon">CURRENT_<wbr>ORM_<wbr>CONTEXT_<wbr>REQUEST_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"CurrentOrmContextRequest"</span><span class="tsd-signature-symbol"> = &quot;CurrentOrmContextRequest&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/node/context/context-protocol.ts#L5">packages/typeorm/src/node/context/context-protocol.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/node/context/context-protocol.ts#L5">packages/typeorm/src/node/context/context-protocol.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -132,17 +136,17 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>CONNECTION_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"default"</span><span class="tsd-signature-symbol"> = &quot;default&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/common/constants.ts#L1">packages/typeorm/src/common/constants.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/common/constants.ts#L1">packages/typeorm/src/common/constants.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="transactional" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> Transactional</h3>
-					<div class="tsd-signature tsd-kind-icon">Transactional<span class="tsd-signature-symbol">:</span> <a href="../interfaces/typeorm.transactionaldecorator.html" class="tsd-signature-type">TransactionalDecorator</a><span class="tsd-signature-symbol"> = &lt;TransactionalDecorator&gt;function (nameOrTransactionalOption?: string | TransactionalOption): MethodDecorator {const { name, isolation, propagation, readOnly } &#x3D; getTransactionalOption(nameOrTransactionalOption);return (target: Object, methodName: string, descriptor: PropertyDescriptor) &#x3D;&gt; {const originalMethod &#x3D; descriptor.value;descriptor.value &#x3D; async function (...args: any[]) {if (propagation &#x3D;&#x3D;&#x3D; Propagation.Required) {const em &#x3D; OrmContext.getEntityManager(name);if (em &amp;&amp; em.queryRunner &amp;&amp; (em.queryRunner.isTransactionActive || readOnly)) {return originalMethod.apply(this, args);}}const callback &#x3D; async (entityManager: EntityManager) &#x3D;&gt; {OrmContext.pushEntityManager(name!, entityManager);try {return await originalMethod.apply(this, args);} finally {OrmContext.popEntityManager(name!);}};const conn &#x3D; await getConnection(name);const manager &#x3D; conn.manager;if (readOnly) {return callback(manager);} else if (isolation) {return manager.transaction(isolation, callback);} else {return manager.transaction(callback);}};};}</span></div>
+					<div class="tsd-signature tsd-kind-icon">Transactional<span class="tsd-signature-symbol">:</span> <a href="../interfaces/typeorm.transactionaldecorator.html" class="tsd-signature-type">TransactionalDecorator</a><span class="tsd-signature-symbol"> = &lt;TransactionalDecorator&gt;function (nameOrTransactionalOption?: string | TransactionalOption): MethodDecorator {const { name, isolation, propagation, readOnly } &#x3D; getTransactionalOption(nameOrTransactionalOption);return (target: Object, methodName: string, descriptor: PropertyDescriptor) &#x3D;&gt; {const originalMethod &#x3D; descriptor.value;descriptor.value &#x3D; async function (...args: any[]) {if (propagation &#x3D;&#x3D;&#x3D; Propagation.Required) {const em &#x3D; OrmContext.getEntityManager(name);if (em &amp;&amp; em.queryRunner &amp;&amp; (em.queryRunner.isTransactionActive || readOnly)) {return originalMethod.apply(this, args);}}const callback &#x3D; async (entityManager: EntityManager) &#x3D;&gt; {OrmContext.pushEntityManager(name!, entityManager);try {return await originalMethod.apply(this, args);} finally {OrmContext.popEntityManager(name!);}};const dataSource &#x3D; await getDataSource(name);const manager &#x3D; dataSource.manager;if (readOnly) {return callback(manager);} else if (isolation) {return manager.transaction(isolation, callback);} else {return manager.transaction(callback);}};};}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/node/annotation/transactional.ts#L27">packages/typeorm/src/node/annotation/transactional.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/node/annotation/transactional.ts#L26">packages/typeorm/src/node/annotation/transactional.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">_entitiy<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/core.type.html#function" class="tsd-signature-type">Function</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = new Map&lt;string, Function[]&gt;()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/common/entity-provider.ts#L4">packages/typeorm/src/common/entity-provider.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/common/entity-provider.ts#L4">packages/typeorm/src/common/entity-provider.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +173,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/common/entity-provider.ts#L6">packages/typeorm/src/common/entity-provider.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/common/entity-provider.ts#L6">packages/typeorm/src/common/entity-provider.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -186,16 +190,39 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="getconnection" class="tsd-anchor"></a>
-					<h3>get<wbr>Connection</h3>
+					<a name="createdatasources" class="tsd-anchor"></a>
+					<h3>create<wbr>Data<wbr>Sources</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Connection<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Connection</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Data<wbr>Sources<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DataSourceOptions</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DataSource</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/node/utils.ts#L3">packages/typeorm/src/node/utils.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/common/utils.ts#L14">packages/typeorm/src/common/utils.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">DataSourceOptions</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DataSource</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getdatasource" class="tsd-anchor"></a>
+					<h3>get<wbr>Data<wbr>Source</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<wbr>Source<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DataSource</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/common/utils.ts#L5">packages/typeorm/src/common/utils.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -204,7 +231,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Connection</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.cancelablepromise.html#promise" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DataSource</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -218,7 +245,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/typeorm/src/node/annotation/transactional.ts#L61">packages/typeorm/src/node/annotation/transactional.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/typeorm/src/node/annotation/transactional.ts#L60">packages/typeorm/src/node/annotation/transactional.ts:60</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -261,6 +288,15 @@
 						<a href="../enums/typeorm.propagation.html" class="tsd-kind-icon">Propagation</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/typeorm.alreadyhasactivedatasourceerror.html" class="tsd-kind-icon">Already<wbr>Has<wbr>Active<wbr>Data<wbr>Source<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/typeorm.datasourcemanager.html" class="tsd-kind-icon">Data<wbr>Source<wbr>Manager</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/typeorm.datasourcenotfounderror.html" class="tsd-kind-icon">Data<wbr>Source<wbr>Not<wbr>Found<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/typeorm.typeormapplicationlifecycle.html" class="tsd-kind-icon">Type<wbr>Orm<wbr>Application<wbr>Lifecycle</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
@@ -282,7 +318,10 @@
 						<a href="typeorm.html#autobindentities" class="tsd-kind-icon">auto<wbr>Bind<wbr>Entities</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="typeorm.html#getconnection" class="tsd-kind-icon">get<wbr>Connection</a>
+						<a href="typeorm.html#createdatasources" class="tsd-kind-icon">create<wbr>Data<wbr>Sources</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="typeorm.html#getdatasource" class="tsd-kind-icon">get<wbr>Data<wbr>Source</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="typeorm.html#gettransactionaloption" class="tsd-kind-icon">get<wbr>Transactional<wbr>Option</a>

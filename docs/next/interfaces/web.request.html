@@ -124,10 +124,12 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#app" class="tsd-kind-icon">app</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#baseurl" class="tsd-kind-icon">base<wbr>Url</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#body" class="tsd-kind-icon">body</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#closed" class="tsd-kind-icon">closed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#complete" class="tsd-kind-icon">complete</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#connection" class="tsd-kind-icon">connection</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#cookies" class="tsd-kind-icon">cookies</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#destroyed" class="tsd-kind-icon">destroyed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#errored" class="tsd-kind-icon">errored</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#fresh" class="tsd-kind-icon">fresh</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#headers" class="tsd-kind-icon">headers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#host" class="tsd-kind-icon">host</a></li>
@@ -213,7 +215,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#unshift" class="tsd-kind-icon">unshift</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="web.request.html#wrap" class="tsd-kind-icon">wrap</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#from" class="tsd-kind-icon">from</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#fromweb" class="tsd-kind-icon">from<wbr>Web</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#isdisturbed" class="tsd-kind-icon">is<wbr>Disturbed</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static"><a href="web.request.html#toweb" class="tsd-kind-icon">to<wbr>Web</a></li>
 							</ul>
 						</section>
 					</div>
@@ -233,7 +237,7 @@
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#constructor">constructor</a></p>
 								<p>Overrides Readable.__constructor</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:785</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:839</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -256,7 +260,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#aborted">aborted</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:793</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:847</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +273,7 @@
 							<dd><p>v10.1.0</p>
 							</dd>
 							<dt>deprecated</dt>
-							<dd><p>Since v17.0.0 - Check <code>message.destroyed</code> from <a href="https://nodejs.org/dist/latest-v17.x/docs/api/stream.html#class-streamreadable">stream.Readable</a>.</p>
+							<dd><p>Since v17.0.0,v16.12.0 - Check <code>message.destroyed</code> from <a href="stream.html#class-streamreadable" class="type">stream.Readable</a>.</p>
 							</dd>
 						</dl>
 					</div>
@@ -325,13 +329,34 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="closed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> closed</h3>
+					<div class="tsd-signature tsd-kind-icon">closed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#closed">closed</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:133</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is true after &#39;close&#39; has been emitted.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v8.0.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="complete" class="tsd-anchor"></a>
 					<h3>complete</h3>
 					<div class="tsd-signature tsd-kind-icon">complete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#complete">complete</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:828</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:882</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -367,7 +392,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#connection">connection</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:834</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:888</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -402,7 +427,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#destroyed">destroyed</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:115</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:128</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -411,7 +436,28 @@
 						</div>
 						<dl class="tsd-comment-tags">
 							<dt>since</dt>
-							<dd><p>v8.0.0</p>
+							<dd><p>v18.0.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="errored" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> errored</h3>
+					<div class="tsd-signature tsd-kind-icon">errored<span class="tsd-signature-symbol">:</span> <a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#errored">errored</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:138</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns error if the stream has been destroyed with an error.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v18.0.0</p>
 							</dd>
 						</dl>
 					</div>
@@ -441,7 +487,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#headers">headers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:871</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:925</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -454,7 +500,7 @@
 <span class="hljs-comment">// { &#x27;user-agent&#x27;: &#x27;curl/7.22.0&#x27;,</span>
 <span class="hljs-comment">//   host: &#x27;127.0.0.1:8000&#x27;,</span>
 <span class="hljs-comment">//   accept: &#x27;*&#x27; }</span>
-<span class="hljs-built_in">console</span>.log(request.headers);</code></pre>
+<span class="hljs-built_in">console</span>.log(request.getHeaders());</code></pre>
 						<p>Duplicates in raw headers are handled in the following ways, depending on the
 						header name:</p>
 						<ul>
@@ -512,7 +558,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversion">httpVersion</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:802</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:856</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -536,7 +582,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversionmajor">httpVersionMajor</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:803</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:857</li>
 						</ul>
 					</aside>
 				</section>
@@ -547,7 +593,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#httpversionminor">httpVersionMinor</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:804</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:858</li>
 						</ul>
 					</aside>
 				</section>
@@ -689,7 +735,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawheaders">rawHeaders</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:896</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:950</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -725,7 +771,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawtrailers">rawTrailers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:907</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:961</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -747,7 +793,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readable">readable</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:71</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:84</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -769,7 +815,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableaborted">readableAborted</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:65</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:78</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -792,7 +838,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readabledidread">readableDidRead</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:77</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:90</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -815,7 +861,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableencoding">readableEncoding</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:82</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:95</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -836,7 +882,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableended">readableEnded</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:87</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:100</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -857,7 +903,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableflowing">readableFlowing</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:93</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:106</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -879,7 +925,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readablehighwatermark">readableHighWaterMark</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:98</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:111</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -900,7 +946,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readablelength">readableLength</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:105</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:118</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -923,7 +969,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#readableobjectmode">readableObjectMode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:110</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:123</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1000,7 +1046,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#socket">socket</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:846</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:900</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1011,7 +1057,7 @@
 						client&#39;s authentication details.</p>
 						<p>This property is guaranteed to be an instance of the <code>net.Socket</code> class,
 							a subclass of <code>stream.Duplex</code>, unless the user specified a socket
-						type other than <code>net.Socket</code>.</p>
+						type other than <code>net.Socket</code> or internally nulled.</p>
 						<dl class="tsd-comment-tags">
 							<dt>since</dt>
 							<dd><p>v0.3.0</p>
@@ -1044,7 +1090,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#statuscode">statusCode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:966</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:1020</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1066,7 +1112,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#statusmessage">statusMessage</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:973</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:1027</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1110,7 +1156,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#trailers">trailers</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:901</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:955</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1166,7 +1212,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_symbol_asynciterator_">[Symbol.asyncIterator]</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:479</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:502</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1184,7 +1230,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_construct">_construct</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:117</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:140</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1226,7 +1272,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_destroy">_destroy</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:399</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:422</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1271,7 +1317,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#_read">_read</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:118</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:141</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1627,7 +1673,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:423</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:446</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1673,7 +1719,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:424</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:447</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1710,7 +1756,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:425</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:448</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1741,7 +1787,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:426</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:449</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1778,7 +1824,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:427</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:450</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1809,7 +1855,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:428</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:451</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1840,7 +1886,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:429</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:452</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1871,7 +1917,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:430</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:453</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1917,7 +1963,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#destroy">destroy</a></p>
 								<p>Overrides Readable.destroy</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:979</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:1033</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1960,7 +2006,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:431</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:454</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1976,7 +2022,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:432</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:455</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1995,7 +2041,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:433</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:456</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2011,7 +2057,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:434</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:457</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2030,7 +2076,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:435</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:458</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2046,7 +2092,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:436</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:459</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2062,7 +2108,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:437</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:460</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2078,7 +2124,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:438</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:461</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2105,7 +2151,7 @@ req.accepts(<span class="hljs-string">&#x27;html, json&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:642</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:632</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2200,7 +2246,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#getmaxlisteners">getMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:499</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:489</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2314,7 +2360,7 @@ req.get(<span class="hljs-string">&#x27;Something&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#ispaused">isPaused</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:278</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:301</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2351,7 +2397,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listenercount">listenerCount</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:589</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:579</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2388,7 +2434,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listeners">listeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:512</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:502</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2427,7 +2473,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#off">off</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:472</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:462</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2490,7 +2536,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:439</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:462</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2521,7 +2567,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:440</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:463</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2558,7 +2604,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:441</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:464</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2589,7 +2635,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:442</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:465</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2626,7 +2672,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:443</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:466</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2657,7 +2703,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:444</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:467</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2688,7 +2734,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:445</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:468</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2719,7 +2765,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:446</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:469</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2772,7 +2818,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:447</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:470</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2803,7 +2849,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:448</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:471</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2840,7 +2886,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:449</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:472</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2871,7 +2917,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:450</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:473</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2908,7 +2954,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:451</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:474</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2939,7 +2985,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:452</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:475</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2970,7 +3016,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:453</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:476</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3001,7 +3047,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:454</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:477</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3089,7 +3135,7 @@ readable.isPaused(); <span class="hljs-comment">// === false</span></code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#pause">pause</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:242</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:265</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3130,7 +3176,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#pipe">pipe</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:24</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:25</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3171,7 +3217,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:455</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:478</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3202,7 +3248,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:456</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:479</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3239,7 +3285,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:457</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:480</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3270,7 +3316,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:458</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:481</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3307,7 +3353,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:459</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:482</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3338,7 +3384,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:460</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:483</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3369,7 +3415,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:461</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:484</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3400,7 +3446,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:462</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:485</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3453,7 +3499,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:463</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:486</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3484,7 +3530,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:464</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:487</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3521,7 +3567,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:465</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:488</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3552,7 +3598,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:466</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:489</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3589,7 +3635,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:467</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:490</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3620,7 +3666,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:468</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:491</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3651,7 +3697,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:469</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:492</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3682,7 +3728,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:470</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:493</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3727,7 +3773,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#push">push</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:398</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:421</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3793,7 +3839,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawlisteners">rawListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:542</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:532</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3849,14 +3895,14 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#read">read</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:195</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:218</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The <code>readable.read()</code> method pulls some data out of the internal buffer and
-										returns it. If no data available to be read, <code>null</code> is returned. By default,
-										the data will be returned as a <code>Buffer</code> object unless an encoding has been
+									<p>The <code>readable.read()</code> method reads data out of the internal buffer and
+										returns it. If no data is available to be read, <code>null</code> is returned. By default,
+										the data is returned as a <code>Buffer</code> object unless an encoding has been
 										specified using the <code>readable.setEncoding()</code> method or the stream is operating
 									in object mode.</p>
 								</div>
@@ -3942,7 +3988,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:483</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:473</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3988,7 +4034,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:471</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:494</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4019,7 +4065,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:472</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:495</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4056,7 +4102,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:473</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:496</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4087,7 +4133,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:474</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:497</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4124,7 +4170,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:475</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:498</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4155,7 +4201,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:476</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:499</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4186,7 +4232,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:477</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:500</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4217,7 +4263,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:478</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:501</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4262,7 +4308,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#resume">resume</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:261</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:284</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4299,7 +4345,7 @@ readable.on(<span class="hljs-string">&#x27;end&#x27;</span>, <span class="hljs-
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#setencoding">setEncoding</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:220</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:243</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4350,7 +4396,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#setmaxlisteners">setMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:493</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:483</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4388,7 +4434,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#settimeout">setTimeout</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:912</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:966</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4425,7 +4471,7 @@ readable.on(<span class="hljs-string">&#x27;data&#x27;</span>, <span class="hljs
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#unpipe">unpipe</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:305</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:328</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4478,7 +4524,7 @@ readable.pipe(writable);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#unshift">unshift</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:371</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:394</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4509,7 +4555,7 @@ readable.pipe(writable);
     <span class="hljs-keyword">let</span> chunk;
     <span class="hljs-keyword">while</span> (<span class="hljs-literal">null</span> !== (chunk = stream.read())) {
       <span class="hljs-keyword">const</span> str = decoder.write(chunk);
-      <span class="hljs-keyword">if</span> (str.match(<span class="hljs-regexp">/\n\n/</span>)) {
+      <span class="hljs-keyword">if</span> (str.includes(<span class="hljs-string">&#x27;\n\n&#x27;</span>)) {
         <span class="hljs-comment">// Found the header boundary.</span>
         <span class="hljs-keyword">const</span> split = str.split(<span class="hljs-regexp">/\n\n/</span>);
         header += split.shift();
@@ -4522,10 +4568,10 @@ readable.pipe(writable);
           stream.unshift(buf);
         <span class="hljs-comment">// Now the body of the message can be read from the stream.</span>
         callback(<span class="hljs-literal">null</span>, header, stream);
-      } <span class="hljs-keyword">else</span> {
-        <span class="hljs-comment">// Still reading the header.</span>
-        header += str;
+        <span class="hljs-keyword">return</span>;
       }
+      <span class="hljs-comment">// Still reading the header.</span>
+      header += str;
     }
   }
 }</code></pre>
@@ -4573,7 +4619,7 @@ readable.pipe(writable);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#wrap">wrap</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:397</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:420</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4625,7 +4671,7 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#from">from</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:54</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:55</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4647,6 +4693,45 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+					<a name="fromweb" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Web</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Web<span class="tsd-signature-symbol">(</span>readableStream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableStream</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ReadableOptions</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"encoding"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"highWaterMark"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"objectMode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"signal"</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readable</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#fromweb">fromWeb</a></p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:61</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A utility method for creating a <code>Readable</code> from a web <code>ReadableStream</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v17.0.0</p>
+									</dd>
+									<dt>experimental</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>readableStream: <span class="tsd-signature-type">ReadableStream</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ReadableOptions</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"encoding"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"highWaterMark"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"objectMode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"signal"</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readable</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
 					<a name="isdisturbed" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Disturbed</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
@@ -4657,7 +4742,7 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#isdisturbed">isDisturbed</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:59</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:66</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4677,6 +4762,42 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+					<a name="toweb" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> to<wbr>Web</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Web<span class="tsd-signature-symbol">(</span>streamReadable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableStream</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#toweb">toWeb</a></p>
+								<ul>
+									<li>Defined in node_modules/@types/node/stream.d.ts:72</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A utility method for creating a web <code>ReadableStream</code> from a <code>Readable</code>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>v17.0.0</p>
+									</dd>
+									<dt>experimental</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>streamReadable: <span class="tsd-signature-type">Readable</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadableStream</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -4727,6 +4848,9 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 								<a href="web.request.html#body" class="tsd-kind-icon">body</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.request.html#closed" class="tsd-kind-icon">closed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#complete" class="tsd-kind-icon">complete</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -4737,6 +4861,9 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#destroyed" class="tsd-kind-icon">destroyed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.request.html#errored" class="tsd-kind-icon">errored</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.request.html#fresh" class="tsd-kind-icon">fresh</a>
@@ -4979,7 +5106,13 @@ myReader.on(<span class="hljs-string">&#x27;readable&#x27;</span>, <span class="
 								<a href="web.request.html#from" class="tsd-kind-icon">from</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+								<a href="web.request.html#fromweb" class="tsd-kind-icon">from<wbr>Web</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
 								<a href="web.request.html#isdisturbed" class="tsd-kind-icon">is<wbr>Disturbed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited tsd-is-static">
+								<a href="web.request.html#toweb" class="tsd-kind-icon">to<wbr>Web</a>
 							</li>
 						</ul>
 					</li>

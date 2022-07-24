@@ -117,8 +117,10 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="web.response.html#body" class="tsd-kind-icon">body</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#charset" class="tsd-kind-icon">charset</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#chunkedencoding" class="tsd-kind-icon">chunked<wbr>Encoding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#closed" class="tsd-kind-icon">closed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#connection" class="tsd-kind-icon">connection</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#destroyed" class="tsd-kind-icon">destroyed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#errored" class="tsd-kind-icon">errored</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#finished" class="tsd-kind-icon">finished</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite tsd-is-inherited"><a href="web.response.html#headerssent" class="tsd-kind-icon">headers<wbr>Sent</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#json" class="tsd-kind-icon">json</a></li>
@@ -138,6 +140,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#writablefinished" class="tsd-kind-icon">writable<wbr>Finished</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#writablehighwatermark" class="tsd-kind-icon">writable<wbr>High<wbr>Water<wbr>Mark</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#writablelength" class="tsd-kind-icon">writable<wbr>Length</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#writableneeddrain" class="tsd-kind-icon">writable<wbr>Need<wbr>Drain</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="web.response.html#writableobjectmode" class="tsd-kind-icon">writable<wbr>Object<wbr>Mode</a></li>
 							</ul>
 						</section>
@@ -224,7 +227,7 @@
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#constructor">constructor</a></p>
 								<p>Overrides OutgoingMessage.__constructor</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:493</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:502</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -257,7 +260,7 @@
 					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/717feeb84/packages/web/src/node/http/http-protocol.ts#L10">packages/web/src/node/http/http-protocol.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/cellbang/malagu/blob/a7566f607/packages/web/src/node/http/http-protocol.ts#L10">packages/web/src/node/http/http-protocol.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -279,9 +282,30 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#chunkedencoding">chunkedEncoding</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:328</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:336</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="closed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> closed</h3>
+					<div class="tsd-signature tsd-kind-icon">closed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#closed">closed</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:571</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is true after &#39;close&#39; has been emitted.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v8.0.0</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="connection" class="tsd-anchor"></a>
@@ -290,7 +314,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#connection">connection</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:346</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:354</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -314,7 +338,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#destroyed">destroyed</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:543</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:566</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -329,13 +353,34 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="errored" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> errored</h3>
+					<div class="tsd-signature tsd-kind-icon">errored<span class="tsd-signature-symbol">:</span> <a href="../classes/cli_common.spawnerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#errored">errored</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:576</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns error if the stream has been destroyed with an error.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v18.0.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="finished" class="tsd-anchor"></a>
 					<h3>finished</h3>
 					<div class="tsd-signature tsd-kind-icon">finished<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#finished">finished</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:335</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:343</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -457,7 +502,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#senddate">sendDate</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:331</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:339</li>
 						</ul>
 					</aside>
 				</section>
@@ -468,7 +513,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#shouldkeepalive">shouldKeepAlive</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:329</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:337</li>
 						</ul>
 					</aside>
 				</section>
@@ -479,7 +524,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#socket">socket</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:354</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:362</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -502,7 +547,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#statuscode">statusCode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:478</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:487</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -528,7 +573,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#statusmessage">statusMessage</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:493</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:502</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -555,7 +600,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#usechunkedencodingbydefault">useChunkedEncodingByDefault</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/http.d.ts:330</li>
+							<li>Defined in node_modules/@types/node/http.d.ts:338</li>
 						</ul>
 					</aside>
 				</section>
@@ -566,7 +611,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writable">writable</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:504</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:527</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -588,7 +633,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writablecorked">writableCorked</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:538</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:561</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -610,7 +655,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writableended">writableEnded</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:510</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:533</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -632,7 +677,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writablefinished">writableFinished</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:515</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:538</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -653,7 +698,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writablehighwatermark">writableHighWaterMark</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:520</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:543</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -674,7 +719,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writablelength">writableLength</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:527</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:550</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -691,13 +736,34 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="writableneeddrain" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> writable<wbr>Need<wbr>Drain</h3>
+					<div class="tsd-signature tsd-kind-icon">writable<wbr>Need<wbr>Drain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writableneeddrain">writableNeedDrain</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/node/stream.d.ts:581</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is <code>true</code> if the stream&#39;s buffer has been full and stream will emit &#39;drain&#39;.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>since</dt>
+							<dd><p>v15.2.0, v14.17.0</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="writableobjectmode" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> writable<wbr>Object<wbr>Mode</h3>
 					<div class="tsd-signature tsd-kind-icon">writable<wbr>Object<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writableobjectmode">writableObjectMode</a></p>
 						<ul>
-							<li>Defined in node_modules/@types/node/stream.d.ts:532</li>
+							<li>Defined in node_modules/@types/node/stream.d.ts:555</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -725,7 +791,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#_construct">_construct</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:553</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:591</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -767,7 +833,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#_destroy">_destroy</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:554</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:592</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -812,7 +878,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#_final">_final</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:555</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:593</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -854,7 +920,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#_write">_write</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:545</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:583</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -902,7 +968,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#_writev">_writev</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:546</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:584</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -954,7 +1020,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:721</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:759</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -999,7 +1065,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:722</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:760</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1030,7 +1096,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:723</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:761</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1067,7 +1133,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:724</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:762</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1098,7 +1164,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:725</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:763</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1135,7 +1201,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:726</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:764</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1172,7 +1238,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addlistener">addListener</a></p>
 								<p>Overrides EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:727</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:765</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1217,7 +1283,7 @@ res.status(<span class="hljs-number">404</span>).<span class="hljs-built_in">sen
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#addtrailers">addTrailers</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:444</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:453</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1302,7 +1368,7 @@ message.end();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#assignsocket">assignSocket</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:495</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:504</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1510,7 +1576,7 @@ message.end();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#cork">cork</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:659</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:697</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1546,7 +1612,7 @@ message.end();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#destroy">destroy</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:710</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:748</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1592,7 +1658,7 @@ message.end();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#detachsocket">detachSocket</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:496</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:505</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1709,7 +1775,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:728</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:766</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1725,7 +1791,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:729</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:767</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1741,7 +1807,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:730</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:768</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1760,7 +1826,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:731</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:769</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1776,7 +1842,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:732</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:770</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1795,7 +1861,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:733</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:771</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1814,7 +1880,7 @@ message.end();</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#emit">emit</a></p>
 								<p>Overrides EventEmitter.emit</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:734</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:772</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1843,7 +1909,7 @@ message.end();</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#end">end</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:642</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:680</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1878,7 +1944,7 @@ file.end(<span class="hljs-string">&#x27;world!&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#end">end</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:643</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:681</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1896,7 +1962,7 @@ file.end(<span class="hljs-string">&#x27;world!&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#end">end</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:644</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:682</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1926,7 +1992,7 @@ file.end(<span class="hljs-string">&#x27;world!&#x27;</span>);
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#eventnames">eventNames</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:642</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:632</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1965,7 +2031,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#flushheaders">flushHeaders</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:457</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:466</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2060,7 +2126,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>field<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -2081,7 +2147,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 									<h5>field: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -2096,7 +2162,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#getheader">getHeader</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:375</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:383</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2134,7 +2200,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#getheadernames">getHeaderNames</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:403</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:411</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2144,7 +2210,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>since</dt>
-									<dd><p>v8.0.0</p>
+									<dd><p>v7.7.0</p>
 									</dd>
 								</dl>
 							</div>
@@ -2163,7 +2229,7 @@ myEE.on(sym, <span class="hljs-function">() =&gt;</span> {});
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#getheaders">getHeaders</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:397</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:405</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2185,7 +2251,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 <span class="hljs-comment">// headers === { foo: &#x27;bar&#x27;, &#x27;set-cookie&#x27;: [&#x27;foo=bar&#x27;, &#x27;bar=baz&#x27;] }</span></code></pre>
 								<dl class="tsd-comment-tags">
 									<dt>since</dt>
-									<dd><p>v8.0.0</p>
+									<dd><p>v7.7.0</p>
 									</dd>
 								</dl>
 							</div>
@@ -2204,7 +2270,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#getmaxlisteners">getMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:499</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:489</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2233,7 +2299,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#hasheader">hasHeader</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:413</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:421</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2244,7 +2310,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<pre><code class="language-js"><span class="hljs-keyword">const</span> hasContentType = outgoingMessage.hasHeader(<span class="hljs-string">&#x27;content-type&#x27;</span>);</code></pre>
 								<dl class="tsd-comment-tags">
 									<dt>since</dt>
-									<dd><p>v8.0.0</p>
+									<dd><p>v7.7.0</p>
 									</dd>
 								</dl>
 							</div>
@@ -2346,7 +2412,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listenercount">listenerCount</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:589</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:579</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2383,7 +2449,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#listeners">listeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:512</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:502</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2465,7 +2531,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#off">off</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:472</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:462</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2527,7 +2593,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:735</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:773</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2558,7 +2624,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:736</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:774</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2589,7 +2655,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:737</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:775</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2626,7 +2692,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:738</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:776</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2657,7 +2723,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:739</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:777</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2694,7 +2760,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:740</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:778</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2731,7 +2797,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#on">on</a></p>
 								<p>Overrides EventEmitter.on</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:741</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:779</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2783,7 +2849,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:742</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:780</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2814,7 +2880,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:743</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:781</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2845,7 +2911,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:744</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:782</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2882,7 +2948,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:745</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:783</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2913,7 +2979,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:746</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:784</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2950,7 +3016,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:747</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:785</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2987,7 +3053,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#once">once</a></p>
 								<p>Overrides EventEmitter.once</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:748</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:786</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3032,7 +3098,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#pipe">pipe</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:24</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:25</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3072,7 +3138,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:749</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:787</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3103,7 +3169,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:750</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:788</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3134,7 +3200,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:751</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:789</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3171,7 +3237,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:752</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:790</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3202,7 +3268,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:753</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:791</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3239,7 +3305,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:754</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:792</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3276,7 +3342,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependlistener">prependListener</a></p>
 								<p>Overrides EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:755</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:793</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3328,7 +3394,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:756</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:794</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3359,7 +3425,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:757</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:795</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3390,7 +3456,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:758</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:796</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3427,7 +3493,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:759</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:797</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3458,7 +3524,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:760</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:798</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3495,7 +3561,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:761</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:799</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3532,7 +3598,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#prependoncelistener">prependOnceListener</a></p>
 								<p>Overrides EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:762</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:800</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3577,7 +3643,7 @@ outgoingMessage.setHeader(<span class="hljs-string">&#x27;Set-Cookie&#x27;</span
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#rawlisteners">rawListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:542</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:532</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3710,7 +3776,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#removealllisteners">removeAllListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:483</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:473</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3748,7 +3814,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removeheader">removeHeader</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:422</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:431</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -3766,6 +3832,9 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Header name</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -3790,7 +3859,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:763</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:801</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3821,7 +3890,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:764</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:802</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3852,7 +3921,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:765</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:803</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3889,7 +3958,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:766</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:804</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3920,7 +3989,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:767</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:805</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3957,7 +4026,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:768</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:806</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3994,7 +4063,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#removelistener">removeListener</a></p>
 								<p>Overrides EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:769</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:807</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4394,7 +4463,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#setdefaultencoding">setDefaultEncoding</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:619</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:657</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4431,7 +4500,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#setheader">setHeader</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:368</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:376</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4474,7 +4543,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.request.html">Request</a>.<a href="web.request.html#setmaxlisteners">setMaxListeners</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/events.d.ts:493</li>
+									<li>Defined in node_modules/@types/node/events.d.ts:483</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4512,7 +4581,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#settimeout">setTimeout</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:361</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:369</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4617,7 +4686,7 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#uncork">uncork</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:693</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:731</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4625,8 +4694,8 @@ emitter.emit(<span class="hljs-string">&#x27;log&#x27;</span>);</code></pre>
 									<p>The <code>writable.uncork()</code> method flushes all data buffered since <a href="web.response.html#cork">cork</a> was called.</p>
 								</div>
 								<p>When using <code>writable.cork()</code> and <code>writable.uncork()</code> to manage the buffering
-									of writes to a stream, it is recommended that calls to <code>writable.uncork()</code> be
-								deferred using <code>process.nextTick()</code>. Doing so allows batching of all<code>writable.write()</code> calls that occur within a given Node.js event loop phase.</p>
+									of writes to a stream, defer calls to <code>writable.uncork()</code> using<code>process.nextTick()</code>. Doing so allows batching of all<code>writable.write()</code> calls that occur within a given Node.js event
+								loop phase.</p>
 								<pre><code class="language-js">stream.cork();
 stream.write(<span class="hljs-string">&#x27;some &#x27;</span>);
 stream.write(<span class="hljs-string">&#x27;data &#x27;</span>);
@@ -4697,7 +4766,7 @@ process.nextTick(<span class="hljs-function">() =&gt;</span> {
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#write">write</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:612</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:650</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4714,7 +4783,7 @@ process.nextTick(<span class="hljs-function">() =&gt;</span> {
 								<p>While a stream is not draining, calls to <code>write()</code> will buffer <code>chunk</code>, and
 									return false. Once all currently buffered chunks are drained (accepted for
 									delivery by the operating system), the <code>&#39;drain&#39;</code> event will be emitted.
-									It is recommended that once <code>write()</code> returns false, no more chunks be written
+									Once <code>write()</code> returns false, do not write more chunks
 									until the <code>&#39;drain&#39;</code> event is emitted. While calling <code>write()</code> on a stream that
 									is not draining is allowed, Node.js will buffer all written chunks until
 									maximum memory usage occurs, at which point it will abort unconditionally.
@@ -4772,7 +4841,7 @@ write(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-func
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#write">write</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/stream.d.ts:613</li>
+									<li>Defined in node_modules/@types/node/stream.d.ts:651</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4802,7 +4871,7 @@ write(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-func
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writecontinue">writeContinue</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:502</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:511</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4838,7 +4907,7 @@ write(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-func
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writehead">writeHead</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:560</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:569</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4908,7 +4977,7 @@ response
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writehead">writeHead</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:561</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:570</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -4935,7 +5004,7 @@ response
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="web.response.html">Response</a>.<a href="web.response.html#writeprocessing">writeProcessing</a></p>
 								<ul>
-									<li>Defined in node_modules/@types/node/http.d.ts:567</li>
+									<li>Defined in node_modules/@types/node/http.d.ts:576</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -4997,10 +5066,16 @@ response
 								<a href="web.response.html#chunkedencoding" class="tsd-kind-icon">chunked<wbr>Encoding</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.response.html#closed" class="tsd-kind-icon">closed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.response.html#connection" class="tsd-kind-icon">connection</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.response.html#destroyed" class="tsd-kind-icon">destroyed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.response.html#errored" class="tsd-kind-icon">errored</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.response.html#finished" class="tsd-kind-icon">finished</a>
@@ -5058,6 +5133,9 @@ response
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.response.html#writablelength" class="tsd-kind-icon">writable<wbr>Length</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="web.response.html#writableneeddrain" class="tsd-kind-icon">writable<wbr>Need<wbr>Drain</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="web.response.html#writableobjectmode" class="tsd-kind-icon">writable<wbr>Object<wbr>Mode</a>
