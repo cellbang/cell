@@ -41,12 +41,12 @@
   "scripts": {
     "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:clean",
     "ext:build": "concurrently -n compile,lint -c blue,green \"malagu-component compile\" \"malagu-component lint\"",
-    "ext:compile": "tsc -b compile.tsconfig.json",
+    "ext:compile": "tsc -b {{TSCONFIGFILE}}",
     "ext:compile:clean": "rimraf lib *.tsbuildinfo",
     "ext:lint": "if-env SKIP_LINT=true && echo 'skip lint check' || eslint --cache=true --fix --no-error-on-unmatched-pattern=true \"{src,test}/**/*.{ts,tsx}\"",
     "ext:lint:clean": "rimraf .eslintcache",
-    "ext:watch": "tsc -p compile.tsconfig.json -w",
-    "ext:watch:slow": "tsc -b compile.tsconfig.json -w",
+    "ext:watch": "tsc -p {{TSCONFIGFILE}} -w",
+    "ext:watch:slow": "tsc -b {{TSCONFIGFILE}} -w",
     "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
     "ext:test:watch": "mocha -w --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
     "ext:test:clean": "rimraf .nyc_output coverage"

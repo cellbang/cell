@@ -2,6 +2,7 @@
 // @ts-check
 const path = require('path');
 const cp = require('child_process');
+const fs = require('fs');
 
 const extScriptsPck = require(path.resolve(__dirname, 'package.json'));
 
@@ -37,7 +38,9 @@ function run(script) {
     let exitCode = 0;
     let extScript = undefined;
     try {
-        extScript = getExtScript().replace(/{{ROOT}}/g, __dirname);
+        extScript = getExtScript()
+            .replace(/{{ROOT}}/g, __dirname)
+            .replace(/{{TSCONFIGFILE}}/g, fs.existsSync('compile.tsconfig.json') ? 'compile.tsconfig.json' : 'tsconfig.json')
         exitCode = await run(extScript);
     } catch (err) {
         if (extScript) {

@@ -9,7 +9,7 @@ import { UserRepository } from './user-protocol';
 export class UserRepositoryImpl implements UserRepository {
 
     @Transactional({ readOnly: true })
-    getByConnectionAndIdentifier(connection: string, identifier: string): Promise<User | undefined> {
+    getByConnectionAndIdentifier(connection: string, identifier: string): Promise<User | null> {
         const repo = OrmContext.getRepository(User);
 
         const identityQb = OrmContext.getRepository(Identity).createQueryBuilder('identity')
@@ -23,7 +23,7 @@ export class UserRepositoryImpl implements UserRepository {
     }
 
     @Transactional({ readOnly: true })
-    getByEmail(email: string): Promise<User | undefined> {
+    getByEmail(email: string): Promise<User | null> {
         const repo = OrmContext.getRepository(User);
         return repo.createQueryBuilder('user')
             .where('user.email = :email', { email })
@@ -31,7 +31,7 @@ export class UserRepositoryImpl implements UserRepository {
     }
 
     @Transactional({ readOnly: true })
-    getByUsername(username: string): Promise<User | undefined> {
+    getByUsername(username: string): Promise<User | null> {
         const repo = OrmContext.getRepository(User);
         return repo.createQueryBuilder('user')
             .where('user.username = :email', { username })
@@ -41,7 +41,7 @@ export class UserRepositoryImpl implements UserRepository {
     @Transactional({ readOnly: true })
     async get(id: number): Promise<User> {
         const repo = OrmContext.getRepository(User);
-        const user = await repo.findOne(id);
+        const user = await repo.findOneBy({ id });
         if (user) {
             return user;
         }
@@ -51,7 +51,7 @@ export class UserRepositoryImpl implements UserRepository {
     @Transactional()
     async update(user: User): Promise<User> {
         const repo = OrmContext.getRepository(User);
-        const oldUser = await repo.findOne(user.id);
+        const oldUser = await repo.findOneBy({ id: user.id });
         if (oldUser) {
             const newUser = plainToClassFromExist(oldUser, classToPlain(user));
             return repo.save(newUser);
