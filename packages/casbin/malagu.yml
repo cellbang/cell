@@ -1,3 +1,5 @@
+targets:
+  - backend
 
 backend: 
   malagu:

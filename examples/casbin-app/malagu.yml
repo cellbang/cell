@@ -11,4 +11,4 @@ backend:
           username: "root"
           password: "12345678"
           database: "casbin"
-      confPath: "src/casbin.conf"
+      confPath: "src/utils/casbin.conf" # 云端建议使用 层 来存放此文件
