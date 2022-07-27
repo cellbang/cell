@@ -1,0 +1,16 @@
+targets:
+  - backend
+
+backend:
+  malagu:
+    casbin:
+      dataSource: "src/utils/casbin.conf" # 云端建议使用 层 来存放此文件
+    typeorm:
+      ormConfig:
+        - type: "mysql"
+          name: "Casbin"
+          host: "localhost"
+          port: 3306
+          username: "root"
+          password: "12345678"
+          database: "casbin"

@@ -232,6 +232,12 @@
       ],
       "database-app/*": [
         "examples/database-app/*"
+      ],
+      "@malagu/casbin/lib/*": [
+        "packages/casbin/src/*"
+      ],
+      "@malagu/example-casbin-app/*": [
+        "examples/casbin-app/*"
       ]
     }
   },

@@ -110,6 +110,9 @@
       "path": "../packages/typeorm/compile.tsconfig.json"
     },
     {
+      "path": "../packages/casbin/compile.tsconfig.json"
+    },
+    {
       "path": "../packages/vercel-adapter/compile.tsconfig.json"
     },
     {
