@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.26.3
+
+- fix(lambda-plugin) 修复属性 key 重复报错
+
 ## 2.26.2
 
 - feat(cli) 添加模板 `malagu-component`，方便开发者快速开发 Malagu 组件

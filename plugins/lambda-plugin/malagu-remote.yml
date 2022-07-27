@@ -1,5 +1,4 @@
 mode: "${currentMode|toObjects[.item in [ 'api-gateway', 'timer', 'event']]|suffix('-mode') || 'api-gateway-mode'}"
-mode: currentMode|toObjects[.item in [
 malagu:
   cloud:
     function:
