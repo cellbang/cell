@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.26.4
+
+- feat(cli-common) 优化组件版本检测机制
+
 ## 2.26.3
 
 - fix(lambda-plugin) 修复属性 key 重复报错
