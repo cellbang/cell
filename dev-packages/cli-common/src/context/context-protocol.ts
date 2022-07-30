@@ -147,7 +147,11 @@ export namespace CliContext {
     export async function create(options: CreateCliContextOptions, projectPath: string = process.cwd(), skipComponent = false): Promise<CliContext> {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
-            ComponentUtil.checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
+            try {
+                ComponentUtil.checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
+            } catch (error) {
+                // NoOp
+            }
         }
 
         let mode = options.mode || [];
