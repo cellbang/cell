@@ -1,11 +1,11 @@
 {
   "name": "@malagu/react",
-  "version": "2.26.4",
+  "version": "2.27.0",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/widget": "2.26.4",
+    "@malagu/widget": "2.27.0",
     "@types/history": "^4.7.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
@@ -57,7 +57,7 @@
     "test": "malagu-component test"
   },
   "devDependencies": {
-    "@malagu/component": "2.26.4"
+    "@malagu/component": "2.27.0"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }

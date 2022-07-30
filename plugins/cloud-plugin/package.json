@@ -1,12 +1,12 @@
 {
   "name": "@malagu/cloud-plugin",
-  "version": "2.26.4",
+  "version": "2.27.0",
   "description": "",
   "main": "lib/hooks/index.js",
   "typings": "lib/hooks/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.26.4",
-    "@malagu/code-loader-plugin": "2.26.4",
+    "@malagu/cli-common": "2.27.0",
+    "@malagu/code-loader-plugin": "2.27.0",
     "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
@@ -42,7 +42,7 @@
     "test": "malagu-component test"
   },
   "devDependencies": {
-    "@malagu/component": "2.26.4",
+    "@malagu/component": "2.27.0",
     "@types/inquirer": "^6.5.0"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
