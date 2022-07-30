@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.27.0
+
+- feat(elasticsearch) 添加新组件 `@malagu/elasticsearch`
+
 ## 2.26.4
 
 - feat(cli-common) 优化组件版本检测机制
