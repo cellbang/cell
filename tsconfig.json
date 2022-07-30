@@ -232,6 +232,9 @@
       ],
       "database-app/*": [
         "examples/database-app/*"
+      ],
+      "@malagu/elasticsearch/lib/*": [
+        "packages/elasticsearch/src/*"
       ]
     }
   },

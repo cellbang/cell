@@ -162,6 +162,9 @@
     },
     {
       "path": "../packages/config/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/elasticsearch/compile.tsconfig.json"
     }
   ]
 }
