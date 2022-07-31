@@ -1,6 +1,6 @@
 {
   "name": "@malagu/component",
-  "version": "2.27.0",
+  "version": "2.28.0",
   "license": "MIT",
   "description": "CLI for malagu component.",
   "files": [
@@ -34,9 +34,9 @@
     "rimraf": "^2.6.1",
     "sinon": "^11.1.2",
     "temp": "^0.8.3",
+    "ts-node": "^9.1.1",
     "tslint": "^5.12.0",
-    "typescript": "^3.9.2",
-    "ts-node": "^9.1.1"
+    "typescript": "^3.9.2"
   },
   "scripts": {
     "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:js:clean",
@@ -52,7 +52,6 @@
     "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
     "ext:test:watch": "mocha -w --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
-
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }
