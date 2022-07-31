@@ -165,6 +165,9 @@
     },
     {
       "path": "../packages/elasticsearch/compile.tsconfig.json"
+    },
+    {
+      "path": "../dev-packages/testing/compile.tsconfig.json"
     }
   ]
 }

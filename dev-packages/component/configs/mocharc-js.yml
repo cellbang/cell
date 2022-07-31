@@ -1,0 +1,6 @@
+require:
+  - ignore-styles
+  - reflect-metadata/Reflect
+reporter: spec
+watch-extensions: js
+exit: true

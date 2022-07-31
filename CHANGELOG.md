@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.28.0
+
+- feat(testing) 添加新组件 `@malagu/testing`, 方便实现 e2e 测试
+- feat(cli) 为 `backend-app` 模板添加集成测试代码示例
+
 ## 2.27.0
 
 - feat(elasticsearch) 添加新组件 `@malagu/elasticsearch`

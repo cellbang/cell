@@ -35,10 +35,11 @@
     "sinon": "^11.1.2",
     "temp": "^0.8.3",
     "tslint": "^5.12.0",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "ts-node": "^9.1.1"
   },
   "scripts": {
-    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:clean",
+    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:js:clean",
     "ext:build": "concurrently -n compile,lint -c blue,green \"malagu-component compile\" \"malagu-component lint\"",
     "ext:compile": "tsc -b {{TSCONFIGFILE}}",
     "ext:compile:clean": "rimraf lib *.tsbuildinfo",
@@ -46,9 +47,12 @@
     "ext:lint:clean": "rimraf .eslintcache",
     "ext:watch": "tsc -p {{TSCONFIGFILE}} -w",
     "ext:watch:slow": "tsc -b {{TSCONFIGFILE}} -w",
-    "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
-    "ext:test:watch": "mocha -w --config {{ROOT}}/configs/mocharc.yml \"./lib/**/*.*spec.js\"",
+    "ext:test:js": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --config {{ROOT}}/configs/mocharc-js.yml \"./lib/**/*.*spec.js\"",
+    "ext:test:js:watch": "mocha -w --config {{ROOT}}/configs/mocharc-js.yml \"./lib/**/*.*spec.js\"",
+    "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
+    "ext:test:watch": "mocha -w --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
+
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }

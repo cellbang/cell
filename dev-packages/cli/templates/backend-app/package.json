@@ -14,10 +14,15 @@
     "@malagu/mvc": "latest"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "latest",
+    "@malagu/component": "latest",
+    "@malagu/testing": "latest",
+    "@types/supertest": "^2.0.12",
+    "supertest": "^6.2.4"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
+    "test": "malagu-component test",
     "build": "malagu build",
     "start": "malagu serve",
     "deploy": "malagu deploy -m scf -m test",
