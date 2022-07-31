@@ -98,6 +98,10 @@ async function execute() {
             watchpack.on('aggregated', () => {
                 execute();
             });
+        } else if (messageEvent.type === 'address') {
+            if (process.send) {
+                process.send(messageEvent);
+            }
         }
     });
 }

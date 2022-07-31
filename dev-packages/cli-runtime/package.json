@@ -26,7 +26,7 @@
     "build": "malagu-component build",
     "watch": "malagu-component watch",
     "clean": "malagu-component clean",
-    "test": "malagu-component test"
+    "test": "malagu-component test:js"
   },
   "dependencies": {
     "@malagu/cli-common": "2.27.0",

@@ -47,7 +47,7 @@
     "build": "malagu-component build",
     "watch": "malagu-component watch",
     "clean": "malagu-component clean",
-    "test": "malagu-component test"
+    "test": "malagu-component test:js"
   },
   "devDependencies": {
     "@malagu/component": "2.27.0",

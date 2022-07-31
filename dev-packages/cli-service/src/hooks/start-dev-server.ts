@@ -103,6 +103,7 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
         } else if (configuration.name === BACKEND_TARGET) {
             await attachBackendServer(ctx, callback, configuration, options, console, compiler);
         }
+        process.send!({ type: 'address', data: server.server?.address() });
     } catch (err) {
         if (err.name === 'ValidationError') {
             console.error(err.message);

@@ -235,6 +235,9 @@
       ],
       "@malagu/elasticsearch/lib/*": [
         "packages/elasticsearch/src/*"
+      ],
+      "@malagu/testing/lib/*": [
+        "dev-packages/testing/src/*"
       ]
     }
   },
