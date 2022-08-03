@@ -4,8 +4,9 @@ import { Component, Module } from '@malagu/cli-common/lib/package/package-protoc
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 import { sep, join, delimiter, dirname, resolve } from 'path';
 import { RuntimeUtil } from '@malagu/cli-runtime/lib/util/runtime-util';
+import { config } from 'dotenv';
 const Watchpack = require('watchpack');
-
+config();
 const watchpack = new Watchpack({});
 
 const argv = [ ...process.argv ];
