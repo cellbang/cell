@@ -7,7 +7,6 @@
   "dependencies": {
     "@malagu/cli-common": "2.28.0",
     "@malagu/code-loader-plugin": "2.28.0",
-    "dotenv": "^8.2.0",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.5.1",
     "js-yaml": "^4.0.0"

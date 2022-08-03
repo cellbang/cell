@@ -26,25 +26,6 @@ export class DefinePluginConfigFactory {
     }
 }
 
-export class DotenvPluginConfigFactory {
-
-    create(config: WebpackChain, context: CliContext, target: string) {
-        const { cfg } = context;
-        const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).dotenvPlugin || { path: './.env' };
-        const realPath = path.join(process.cwd(), pluginConfig.path);
-        if (existsSync(realPath)) {
-            const Dotenv = require('dotenv-webpack');
-            config
-                .plugin('define')
-                    .use(Dotenv, [ pluginConfig ]);
-        }
-    }
-
-    support(context: CliContext, target: string): boolean {
-        return true;
-    }
-}
-
 export class FilterWarningsPluginConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { cfg } = context;

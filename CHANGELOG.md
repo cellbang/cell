@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.28.1
+
+- feat(*) 优化 `.env` 处理策略
+
+
 ## 2.28.0
 
 - feat(testing) 添加新组件 `@malagu/testing`, 方便实现 e2e 测试

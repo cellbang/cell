@@ -1,6 +1,5 @@
 import { CloudConfiguration, ProfileProvider, Profile } from './cloud-protocol';
 import { CloudUtils } from './utils';
-const dotenv = require('dotenv').config();
 
 export class DefaultProfileProvider implements ProfileProvider {
 
@@ -18,10 +17,6 @@ export class DefaultProfileProvider implements ProfileProvider {
         }
 
         if (!this.isAllRequiredExist(profile)) {
-            profile = await this.getProfileFromDotEnv();
-        }
-
-        if (!this.isAllRequiredExist(profile)) {
             profile = <Profile>await CloudUtils.getProfileFromFile(profilePath);
         }
 
@@ -34,25 +29,6 @@ export class DefaultProfileProvider implements ProfileProvider {
 
     protected isAllRequiredExist(profile: Profile) {
         return profile.region && profile.credentials?.accessKeyId && profile.credentials?.accessKeySecret && profile.account?.id;
-    }
-
-    protected async getProfileFromDotEnv() {
-        const profile: Profile = <Profile>{ credentials: {}, account: {} };
-        if (dotenv) {
-            if (dotenv.error) {
-                return profile;
-            }
-
-            const parsed = dotenv.parsed;
-
-            profile.region = parsed['MALAGU_REGION'];
-            profile.credentials.accessKeyId = parsed['MALAGU_ACCESS_KEY_ID'];
-            profile.credentials.accessKeySecret = parsed['MALAGU_ACCESS_KEY_SECRET'];
-            profile.account.id = parsed['MALAGU_ACCOUNT_ID'];
-
-        }
-
-        return profile;
     }
 
     protected async getProfileFromEnv(): Promise<Profile> {
