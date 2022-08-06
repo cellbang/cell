@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "2.28.2",
+  "version": "2.28.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -50,7 +50,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.28.2",
+    "@malagu/component": "2.28.3",
     "@types/traverse": "^0.6.32"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"

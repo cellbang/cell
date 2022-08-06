@@ -203,14 +203,17 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
         req.VpcConfig.SubnetId = vpcConfig.subnetId;
     }
 
-    if (cfsConfig){
-        req.CfsConfig = {} as any;
-        req.CfsConfig.UserId = cfsConfig.userId || 10000;
-        req.CfsConfig.UserGroupId = cfsConfig.userId || 10000;
-        req.CfsConfig.CfsId = cfsConfig.cfsId;
-        req.CfsConfig.MountInsId = cfsConfig.mountInsId;
-        req.CfsConfig.LocalMountDir = cfsConfig.localMountDir;
-        req.CfsConfig.RemoteMountDir = cfsConfig.remoteMountDir;
+    if (cfsConfig?.cfsInsList){
+        req.CfsConfig = {
+            CfsInsList: cfsConfig.cfsInsList.map((item: any) => ({
+                UserId: item.userId || 10000,
+                UserGroupId: item.userGroupId || 10000,
+                CfsId: item.cfsId,
+                MountInsId: item.mountInsId,
+                LocalMountDir: item.localMountDir,
+                RemoteMountDir: item.remoteMountDir
+            }))
+        }        
     }
 
     if (layers) {
