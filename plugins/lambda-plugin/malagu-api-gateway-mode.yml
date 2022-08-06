@@ -14,7 +14,7 @@ malagu:
         integrationMethod: POST
         integrationType: AWS_PROXY
         payloadFormatVersion: '2.0'
-        timeoutInMillis: 30000
+        timeoutInMillis: 65000
       customDomain:
         # name: abc.com
         # certificateArn: xxxx

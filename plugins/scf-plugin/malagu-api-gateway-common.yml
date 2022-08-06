@@ -9,7 +9,7 @@ malagu:
         protocol: http&https
       api:
         name: ${malagu.cloud.function.name}
-        serviceTimeout: 20 # 20s
+        serviceTimeout: 65 # 65s
         protocol: HTTP
         serviceScfIsIntegratedResponse: true
         serviceScfFunctionQualifier: ${malagu.cloud.alias.name}

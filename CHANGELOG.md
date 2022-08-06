@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.28.5
+
+- feat(faas) 将函数超时时间提升至 60 秒
+- fix(typeorm) 修复 `malagu-fc.yml` 文件不存在问题
+
 ## 2.28.3
 
 - feat(scf-plugin) 支持 CFS 配置

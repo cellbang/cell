@@ -8,6 +8,6 @@ malagu:
       codeUri:
         exclude: ${'malagu.*yml$'|regexp}
       memorySize: 512
-      timeout: 15
+      timeout: 60
     alias:
       name: ${stage}

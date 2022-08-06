@@ -27,7 +27,8 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "malagu.yml",
+    "malagu-fc.yml"
   ],
   "scripts": {
     "lint": "malagu-component lint",
