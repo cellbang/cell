@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.28.3
+
+- feat(scf-plugin) 支持 CFS 配置
+
 ## 2.28.2
 
 - fix(component) 修复 `malagu-component clean` 命令报错
