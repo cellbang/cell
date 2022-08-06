@@ -174,7 +174,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     req.ProtocolType = functionMeta.protocolType
     req.InstallDependency = parseBoolean(functionMeta.installDependency);
 
-    const { env, vpcConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig } = functionMeta;
+    const { env, vpcConfig, cfsConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig } = functionMeta;
     if (env) {
         const variables: any[] = [];
         for (const key in env) {
@@ -201,6 +201,16 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
         req.VpcConfig = {} as any;
         req.VpcConfig.VpcId = vpcConfig.vpcId;
         req.VpcConfig.SubnetId = vpcConfig.subnetId;
+    }
+
+    if (cfsConfig){
+        req.CfsConfig = {} as any;
+        req.CfsConfig.UserId = cfsConfig.userId || 10000;
+        req.CfsConfig.UserGroupId = cfsConfig.userId || 10000;
+        req.CfsConfig.CfsId = cfsConfig.cfsId;
+        req.CfsConfig.MountInsId = cfsConfig.mountInsId;
+        req.CfsConfig.LocalMountDir = cfsConfig.localMountDir;
+        req.CfsConfig.RemoteMountDir = cfsConfig.remoteMountDir;
     }
 
     if (layers) {
