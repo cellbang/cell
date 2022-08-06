@@ -39,7 +39,7 @@
     "typescript": "^3.9.2"
   },
   "scripts": {
-    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:js:clean",
+    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:clean",
     "ext:build": "concurrently -n compile,lint -c blue,green \"malagu-component compile\" \"malagu-component lint\"",
     "ext:compile": "tsc -b {{TSCONFIGFILE}}",
     "ext:compile:clean": "rimraf lib *.tsbuildinfo",

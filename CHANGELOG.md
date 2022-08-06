@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.28.2
+
+- fix(component) 修复 `malagu-component clean` 命令报错
+- feat(runtime) 支持 `better-sqlite3` 排除
+
 ## 2.28.1
 
 - feat(*) 优化 `.env` 处理策略
