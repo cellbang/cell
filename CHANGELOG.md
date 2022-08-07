@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.28.6
+
+- fix(serve-static) 修复部分请求卡住问题
+
 ## 2.28.5
 
 - feat(faas) 将函数超时时间提升至 60 秒
