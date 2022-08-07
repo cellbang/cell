@@ -53,6 +53,7 @@ export class ServeStaticMiddleware implements Middleware {
                 const url = ctx.request.url;
                 if (url !== '/index.html') {
                     if (!this.config.spa) {
+                        next().then(resolve).catch(reject);
                         return;
                     }
                     ctx.request.url = '/index.html';
