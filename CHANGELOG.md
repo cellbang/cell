@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.29.0
+
+- fix(cache) 修复 CacheManager 对象注入错误问题
+- feat(frameworks) 新建框架 blitzjs、gatsby、astro、eleventy、docusaurus-2 一键部署能力
+
 ## 2.28.6
 
 - fix(serve-static) 修复部分请求卡住问题

@@ -15,6 +15,24 @@ export const frameworks = [
         }
     },
     {
+        name: 'blitzjs',
+        useRuntime: 'default',
+        useMode: [ 'unpackage', 'node', 'next' ],
+        settings: {
+            buildCommand: 'npx blitz build',
+            serveCommand: 'npx blitz start --port ${cliContext.port || malagu.server.port}'
+        },
+        detectors: {
+          every: [
+            {
+              path: 'package.json',
+              matchContent:
+                '"(dev)?(d|D)ependencies":\\s*{[^}]*"blitz":\\s*".+?"[^}]*}',
+            }
+          ]
+        }
+    },
+    {
         name: 'nextjs',
         useRuntime: 'default',
         useMode: [ 'unpackage', 'node', 'next' ],
@@ -47,6 +65,44 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    {
+        name: 'gatsby',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'public',
+            buildCommand: 'npx gatsby build',
+            serveCommand: 'npx gatsby develop --port ${cliContext.port || malagu.server.port}',
+        },
+        detectors: {
+            every: [
+              {
+                path: 'package.json',
+                matchContent:
+                  '"(dev)?(d|D)ependencies":\\s*{[^}]*"gatsby":\\s*".+?"[^}]*}',
+              },
+            ],
+        }
+    },
+    {
+        name: 'astro',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'dist',
+            builddCommand: 'npx astro build',
+            serveCommand: 'npx astro dev --port ${cliContext.port || malagu.server.port}',
+        },
+        detectors: {
+            every: [
+              {
+                path: 'package.json',
+                matchContent:
+                  '"(dev)?(d|D)ependencies":\\s*{[^}]*"astro":\\s*".+?"[^}]*}',
+              }
+            ]
+          }
     },
     {
         name: 'ionic-angular',
@@ -218,6 +274,44 @@ export const frameworks = [
                 }
             ]
         }
+    },
+    {
+        name: 'eleventy',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: '_site',
+            buildCommand: 'npx @11ty/eleventy',
+            serveCommand: 'npx @11ty/eleventy --serve'
+        },
+        detectors: {
+            every: [
+              {
+                path: 'package.json',
+                matchContent:
+                  '"(dev)?(d|D)ependencies":\\s*{[^}]*"@11ty\\/eleventy":\\s*".+?"[^}]*}',
+              }
+            ]
+          }
+    },
+    {
+        name: 'docusaurus-2',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'build',
+            buildCommand: 'npx docusaurus build',
+            serveCommand: 'npx docusaurus start --port  ${cliContext.port || malagu.server.port}'
+        },
+        detectors: {
+            every: [
+              {
+                path: 'package.json',
+                matchContent:
+                  '"(dev)?(d|D)ependencies":\\s*{[^}]*"@docusaurus\\/core":\\s*".+?"[^}]*}',
+              }
+            ]
+          }
     },
     {
         name: 'umijs',
