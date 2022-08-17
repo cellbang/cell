@@ -15,11 +15,19 @@ export default async (context: WebpackContext) => {
     );
     if (config) {
         let distDir = '.next';
-        const nextConfigPath = join(process.cwd(), 'next.config.js');
+        let nextConfigPath = join(process.cwd(), 'next.config.js');
+        let nextConfig: { distDir?: string } = {};
         if (existsSync(nextConfigPath)) {
-            const nextConfig = require(nextConfigPath);
-            distDir = nextConfig.distDir ?? distDir;
+            nextConfig = require(nextConfigPath);
+        } else {
+            nextConfigPath = join(process.cwd(), 'next.config.mjs');
+            if (existsSync(nextConfigPath)) {
+                nextConfig = await eval(`import('${nextConfigPath}')`);
+            }
         }
+
+        distDir = nextConfig.distDir ?? distDir;
+
         const CopyPlugin = require('copy-webpack-plugin');
         const backendProjectDistPath = PathUtil.getBackendProjectDistPath();
         config
@@ -36,7 +44,7 @@ export default async (context: WebpackContext) => {
                     },
                     {
                         from: nextConfigPath,
-                        to: resolve(backendProjectDistPath, 'next.config.js')
+                        to: resolve(backendProjectDistPath, nextConfigPath.split('/').pop()!)
                     }
                 ]
             }]);
