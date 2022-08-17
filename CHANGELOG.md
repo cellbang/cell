@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.29.1
+
+- feat(next-plugin) 支持 `next.config.mjs` 配置文件
+
 ## 2.29.0
 
 - fix(cache) 修复 CacheManager 对象注入错误问题
