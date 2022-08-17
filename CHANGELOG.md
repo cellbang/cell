@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.29.2
+
+- feat(runtime) 优化运行时全量安装的体积
 ## 2.29.1
 
 - feat(next-plugin) 支持 `next.config.mjs` 配置文件
