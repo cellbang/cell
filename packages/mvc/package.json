@@ -1,11 +1,11 @@
 {
   "name": "@malagu/mvc",
-  "version": "2.29.2",
+  "version": "2.29.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/web": "2.29.2",
+    "@malagu/web": "2.29.3",
     "is-stream": "^2.0.0",
     "mustache": "^4.0.1"
   },
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.29.2",
+    "@malagu/component": "2.29.3",
     "@types/koa-session": "^5.10.1",
     "@types/mustache": "^4.0.1",
     "@types/url-join": "^4.0.0",
