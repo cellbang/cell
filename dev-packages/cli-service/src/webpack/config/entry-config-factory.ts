@@ -17,6 +17,9 @@ export class EntryConfigFactory {
         }
 
         entry = e || entry;
+        if (entry === 'EMPTY_ENTRY') {
+            entry = path.resolve(__dirname, 'empty-entry.js');
+        }
         if (e) {
             try {
                 entry = pkg.resolveModule((e as string).split(path.sep).join('/'));
