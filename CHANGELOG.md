@@ -3,6 +3,7 @@
 ## 2.29.1
 
 - feat(next-plugin) 支持 `next.config.mjs` 配置文件
+- feat(cli-service) 支持指定空 entry：`entry: EMPTY_ENTRY`，或者通过模式指定 `-m empty-entry`
 
 ## 2.29.0
 

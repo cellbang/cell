@@ -32,6 +32,19 @@ export async function before(ctx: CliContext) {
     if (!config.entry) {
         return;
     }
+
+    if (config.entry === 'EMPTY_ENTRY') {
+        return;
+    }
+
+    const [ entry, paramsStr ] = config.entry.split('?');
+    config.entry = entry;
+    if (paramsStr) {
+        const params = new URLSearchParams(paramsStr)
+        if (params.has('raw')) {
+            return;
+        }
+    }
     
     if (CommandUtil.includesCommand(ctx.args, [ 'build', 'deploy' ])) {
         const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
