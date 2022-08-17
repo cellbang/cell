@@ -1,6 +1,7 @@
 
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { EMPTY } from '@malagu/cli-common/lib/constants';
 import * as path from 'path';
 import * as WebpackChain from '@gem-mine/webpack-chain';
 
@@ -16,19 +17,21 @@ export class EntryConfigFactory {
             entry = devEntry || entry;
         }
 
-        entry = e || entry;
-        if (entry === 'EMPTY_ENTRY') {
-            entry = path.resolve(__dirname, 'empty-entry.js');
+        let entryPath = entry?.path ? entry.path : entry;
+
+        entryPath = e || entryPath;
+        if (entryPath === EMPTY) {
+            entryPath = path.resolve(__dirname, 'empty-entry.js');
         }
         if (e) {
             try {
-                entry = pkg.resolveModule((e as string).split(path.sep).join('/'));
+                entryPath = pkg.resolveModule((e as string).split(path.sep).join('/'));
             } catch (error) {
-                entry = path.resolve(pkg.projectPath, e as string);
+                entryPath = path.resolve(pkg.projectPath, e as string);
             }
         }
 
-        config.entry('index').add(entry?.path ? entry.path : entry);
+        config.entry('index').add(entryPath);
     }
 
     support(context: CliContext, target: string): boolean {

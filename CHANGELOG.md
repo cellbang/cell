@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.29.3
+
+- fix(node-plugin) 修复 nextjs 框架部署报错
+- feat(cli-service) 支持指定空 entry：`entry: EMPTY`，或者通过模式指定 `-m empty-entry`
+
 ## 2.29.2
 
 - feat(runtime) 优化运行时全量安装的体积
