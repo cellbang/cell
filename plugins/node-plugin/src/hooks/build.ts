@@ -1,6 +1,7 @@
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { EMPTY } from '@malagu/cli-common/lib/constants';
 import { existsSync, readFileSync, writeFileSync, ensureDir, remove } from 'fs-extra';
 import { join } from 'path';
 import { ApplicationConfig } from '@malagu/cli-common/lib/package/application-config';
@@ -33,17 +34,14 @@ export async function before(ctx: CliContext) {
         return;
     }
 
-    if (config.entry === 'EMPTY_ENTRY') {
+    let entryPath = config.entry.path ? config.entry.path : config.entry;
+
+    if (entryPath === EMPTY) {
         return;
     }
 
-    const [ entry, paramsStr ] = config.entry.split('?');
-    config.entry = entry;
-    if (paramsStr) {
-        const params = new URLSearchParams(paramsStr)
-        if (params.has('raw')) {
-            return;
-        }
+    if (config.entry.raw) {
+        return;
     }
     
     if (CommandUtil.includesCommand(ctx.args, [ 'build', 'deploy' ])) {
@@ -60,7 +58,7 @@ export async function before(ctx: CliContext) {
             }
         }
 
-        config.entry = await renderEntry(entryTemplate, cfg, typeof config.entry === 'string' ? config.entry : config.entry?.path);
+        config.entry = await renderEntry(entryTemplate, cfg, entryPath);
     }
 };
 

@@ -2,6 +2,7 @@ import { ApplicationPackage } from './application-package';
 import { ComponentPackage, Module } from './package-protocol';
 import { join, resolve, sep } from 'path';
 import { existsSync } from 'fs-extra';
+import { EMPTY } from '../constants';
 
 export class ModuleBuilder {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -52,7 +53,7 @@ export class ModuleBuilder {
     build(componentPackage: ComponentPackage, modulePath: string): Module {
         return {
             name: (modulePath.startsWith('@') ? modulePath : join(componentPackage.name, modulePath)).split(sep).join('/'),
-            path: this.buildPath(componentPackage, modulePath).split(sep).join('/'),
+            path: modulePath === EMPTY ?  EMPTY : this.buildPath(componentPackage, modulePath).split(sep).join('/'),
             componentName: componentPackage.name
         };
     }

@@ -1,12 +1,10 @@
 malagu:
   cloud:
     layer:
-      name: node-v16-14-2-linux-x64
+      name: "${malagu.cloud.function.runtime == 'custom' ? 'node-v16-14-2-linux-x64' : ''}"
       compatibleRuntime:
         - custom
       codeUri: https://nodejs.org/dist/v16.14.2/node-v16.14.2-linux-x64.tar.gz
     function:
-      env:
-        PATH: /opt/node-v16.14.2-linux-x64/bin:$PATH
-      layers:
-        - node-v16-14-2-linux-x64
+      env: "${malagu.cloud.function.runtime == 'custom' ? { PATH: '/opt/node-v16.14.2-linux-x64/bin:$PATH' } : {}}"
+      layers: "${malagu.cloud.function.runtime == 'custom' ? [ 'node-v16-14-2-linux-x64'] : []}"

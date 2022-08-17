@@ -1,12 +1,16 @@
 import { ApplicationPackage } from './application-package';
 import { existsSync } from 'fs';
 import { resolve, sep } from 'path';
+import { EMPTY } from '../constants';
 
 export class ModuleChecker {
     constructor(protected readonly pkg: ApplicationPackage) {
 
     }
     check(modulePath: string) {
+        if (modulePath === EMPTY) {
+            return true;
+        }
         try {
             this.pkg.resolveModule(modulePath);
             return true;
