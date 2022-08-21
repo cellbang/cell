@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ContainerUtil } from '@malagu/core';
 import { IconResolver } from './icon-protocol';
 
-const { useState, useEffect, Fragment } = React;
+const { useState, useEffect } = React;
 
 export function Icon<T>(iconProps: T) {
     const [iconNode, setIconNode] = useState<React.ReactNode>([]);
@@ -15,5 +15,5 @@ export function Icon<T>(iconProps: T) {
         resolve();
     }, [JSON.stringify(iconProps)]);
 
-    return (<Fragment>{iconNode}</Fragment>);
+    return (<>{iconNode}</>);
 }

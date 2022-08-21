@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.30.0
+
+- feat(react) 升级 react 版到 18
+- feat(next-plugin) 兼容 Nextjs 项目可能不存在 `public` 目录 
+
 ## 2.29.3
 
 - fix(node-plugin) 修复 nextjs 框架部署报错

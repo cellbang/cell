@@ -11,7 +11,8 @@
   ],
   "dependencies": {
     "@malagu/mvc": "latest",
-    "@malagu/typeorm": "latest"
+    "@malagu/typeorm": "latest",
+    "better-sqlite3": "^7.6.2"
   },
   "devDependencies": {
     "@malagu/cli": "latest"

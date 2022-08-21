@@ -14,9 +14,12 @@ export default async (context: WebpackContext) => {
         configurations
     );
     if (config) {
+        const backendProjectDistPath = PathUtil.getBackendProjectDistPath();
+        const publicDir = resolve(process.cwd(), 'public');
         let distDir = '.next';
         let nextConfigPath = join(process.cwd(), 'next.config.js');
         let nextConfig: { distDir?: string } = {};
+        const patterns = [];
         if (existsSync(nextConfigPath)) {
             nextConfig = require(nextConfigPath);
         } else {
@@ -26,27 +29,29 @@ export default async (context: WebpackContext) => {
             }
         }
 
+        if (existsSync(nextConfigPath)) {
+            patterns.push({
+                from: nextConfigPath,
+                to: resolve(backendProjectDistPath, nextConfigPath.split('/').pop()!)
+            });  
+        }
+
+        if (existsSync(publicDir)) {
+            patterns.push({
+                from: publicDir,
+                to: resolve(backendProjectDistPath, 'public')
+            });
+        }
+
         distDir = nextConfig.distDir ?? distDir;
+        patterns.push({
+            from: resolve(process.cwd(), distDir),
+            to: resolve(backendProjectDistPath, distDir)
+        });
 
         const CopyPlugin = require('copy-webpack-plugin');
-        const backendProjectDistPath = PathUtil.getBackendProjectDistPath();
         config
             .plugin('copyNext')
-            .use(CopyPlugin, [{
-                patterns: [
-                    {
-                        from: resolve(process.cwd(), distDir),
-                        to: resolve(backendProjectDistPath, distDir)
-                    },
-                    {
-                        from: resolve(process.cwd(), 'public'),
-                        to: resolve(backendProjectDistPath, 'public')
-                    },
-                    {
-                        from: nextConfigPath,
-                        to: resolve(backendProjectDistPath, nextConfigPath.split('/').pop()!)
-                    }
-                ]
-            }]);
+            .use(CopyPlugin, [{ patterns }]);
     }
 };

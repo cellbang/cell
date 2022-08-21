@@ -2,7 +2,7 @@ frontend:
   malagu:
     react:
       path: ${malagu.server.path}
-      history:
+      router:
         type: browser
       
   

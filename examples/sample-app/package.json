@@ -14,8 +14,7 @@
     "@malagu/core": "2.29.3",
     "@malagu/react": "2.29.3",
     "@malagu/rpc": "2.29.3",
-    "@malagu/serve-static": "2.29.3",
-    "react": "^16.12.0"
+    "@malagu/serve-static": "2.29.3"
   },
   "devDependencies": {
     "@malagu/cli": "2.29.3"

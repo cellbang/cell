@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Box, BoxProps, Text, ThemeContext } from 'grommet';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ColorType, BackgroundType } from 'grommet/utils';
 import { useIntl } from 'react-intl';
 
@@ -17,8 +17,8 @@ export interface NavItemProps extends BoxProps {
 
 }
 
-export function InnerNavItem(props: NavItemProps) {
-    const history = useHistory();
+export function NavItem(props: NavItemProps) {
+    const navigate = useNavigate();
     const intl = useIntl();
     const { origin, path, icon, label, size, color, hoverIndicator = true, activatable = true, className, ...rest } = props;
     return (
@@ -31,21 +31,11 @@ export function InnerNavItem(props: NavItemProps) {
                     if (origin && window.location.origin !== origin) {
                         window.open(`${origin}${path}`);
                     } else {
-                        history.push(path);
+                        navigate(path);
                     }
             }} {...rest}>
                 {icon} { label && <Text color={color} style={size ? undefined : { fontSize: '14px' }} size={size}>{ intl.formatMessage({ id: label})}</Text>}
             </Box>
         </ThemeContext.Extend>
     );
-}
-
-export function NavItem(props: NavItemProps) {
-    const { origin, path } = props;
-    if (!origin || window.location.origin === origin) {
-        return <NavLink to={path} component={p => (<InnerNavItem {...props} {...p}/>)}/>;
-    } else {
-        return <InnerNavItem {...props}/>;
-    }
-
 }

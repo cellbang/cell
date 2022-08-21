@@ -5,7 +5,7 @@ import { ContainerUtil, Logger } from '@malagu/core';
 import { LocaleManager } from '@malagu/widget';
 import { Context } from '../annotation';
 
-export function LocaleContext({ children }: React.PropsWithChildren<any>) {
+export function LocaleContext({ children }: React.PropsWithChildren) {
     const localeManager = ContainerUtil.get<LocaleManager>(LocaleManager);
     const [locale, setLocale] = React.useState(localeManager.currentSubject.value);
     React.useEffect(() => {

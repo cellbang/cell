@@ -1,7 +1,7 @@
 import { ContainerUtil } from '@malagu/core';
 import * as React from 'react';
 import { WidgetManager } from '@malagu/widget';
-const { useState, useEffect, Fragment } = React;
+const { useState, useEffect } = React;
 
 export function Slot({ area }: { area: string }) {
     const [nodes, setNodes] = useState<React.ReactNode[]>([]);
@@ -14,5 +14,5 @@ export function Slot({ area }: { area: string }) {
         load();
     }, [area]);
 
-    return (<Fragment>{nodes.map(n => n)}</Fragment>);
+    return (<>{nodes.map(n => n)}</>);
 }

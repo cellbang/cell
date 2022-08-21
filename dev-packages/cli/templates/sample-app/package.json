@@ -13,8 +13,7 @@
     "@malagu/core": "latest",
     "@malagu/rpc": "latest",
     "@malagu/react": "latest",
-    "@malagu/serve-static": "latest",
-    "react": "^16.12.0"
+    "@malagu/serve-static": "latest"
   },
   "devDependencies": {
     "@malagu/cli": "latest"

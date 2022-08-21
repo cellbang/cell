@@ -35,5 +35,6 @@ function Users() {
     );
 }
 
-@View({ component: Users})
+@View({ index: true, component: Users})
+@View({ path: 'users', component: Users})
 export default class {}

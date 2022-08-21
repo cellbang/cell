@@ -17,9 +17,7 @@
     "@malagu/typeorm": "latest",
     "@malagu/security": "latest",
     "@malagu/react": "latest",
-    "grommet": "^2.16.3",
-    "react": "^16.12.0",
-    "typeorm": "^0.2.32"
+    "better-sqlite3": "^7.6.2"
   },
   "devDependencies": {
     "@malagu/cli": "latest"
