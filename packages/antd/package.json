@@ -6,10 +6,8 @@
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/react": "2.29.3",
-    "antd": "^4.21.5",
-    "dayjs": "^1.8.22",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "antd": "^4.22.6",
+    "dayjs": "^1.8.22"
   },
   "publishConfig": {
     "access": "public"

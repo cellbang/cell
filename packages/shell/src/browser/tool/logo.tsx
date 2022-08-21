@@ -2,8 +2,7 @@ import * as React from 'react';
 import { ConfigUtil } from '@malagu/core';
 import { Widget } from '@malagu/widget';
 import { AreaType } from '../area';
-import { NavItemProps, NavItem } from '@malagu/grommet';
-import { Icon } from '@malagu/grommet';
+import { NavItemProps, NavItem, Icon } from '@malagu/grommet';
 
 export function Logo(props: NavItemProps) {
     const { label, icon, ...rest } = ConfigUtil.get('malagu.shell.logo');

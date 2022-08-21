@@ -1,6 +1,6 @@
 import { ThemeProvider, ThemeOptions } from './theme-protocol';
 import { Component, Value, Autowired, Optional } from '@malagu/core';
-import { createMuiTheme, Theme } from '@material-ui/core';
+import { createTheme, Theme } from '@material-ui/core';
 
 @Component(ThemeProvider)
 export class ThemeProviderImpl implements ThemeProvider {
@@ -12,7 +12,7 @@ export class ThemeProviderImpl implements ThemeProvider {
     protected readonly themeOptions2: ThemeOptions;
 
     provide(): Theme {
-        return createMuiTheme({ ...this.themeOptions2, ...this.themeOptions });
+        return createTheme({ ...this.themeOptions2, ...this.themeOptions });
     }
 
 }

@@ -1,0 +1,93 @@
+# 依赖的公共前端 UI 框从 CDN 上加载
+# mode: cdn
+mode: [ database ]
+malagu:
+  security:
+    loginRequired: false
+  shell:
+    categories:
+      appCenter:
+        name: 应用中心
+    apps:
+      authentication:
+        name: 云认证
+        icon: Shield
+        categoryId: appCenter
+      accessControl:
+        name: 云授权
+        icon: Validate
+        categoryId: appCenter
+      development:
+        name: 云开发
+        icon: Code
+        categoryId: appCenter
+      configuration:
+        name: 云配置
+        icon: SettingsOption
+        categoryId: appCenter
+      monitor:
+        name: 云监控
+        icon: Monitor
+        categoryId: appCenter
+  widget:
+    widgets:
+      test:
+        type: NavItem
+        area: Nav
+        props:
+          path: /users
+          icon: Group
+          label: 用户管理
+      test2:
+        type: NavItem
+        area: Nav
+        props:
+          path: /depts
+          icon: Organization
+          label: 部门管理
+      test3:
+        type: NavItem
+        area: Nav
+        props:
+          path: /dictionaries
+          icon: Catalog
+          label: 字典管理
+      test4:
+        type: NavItem
+        area: Nav
+        props:
+          path: /menus
+          icon: List
+          label: 菜单管理
+  themes:
+    default:
+      label: 黑色
+      props:
+        global:
+          colors:
+            brand: '#000000'
+    blue:
+      label: 蓝色
+      props:
+        global:
+            colors:
+              brand: '#7D4CDB'
+    green:
+      label: 绿色
+      props:
+        global:
+          colors:
+            brand: '#00C781'
+    yellow:
+      label: 黄色
+      props:
+        global:
+          colors:
+            brand: '#FFCA58'
+    red:
+      label: 红色
+      props:
+        global:
+          colors:
+            brand: '#FF4040'
+

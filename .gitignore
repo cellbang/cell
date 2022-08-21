@@ -22,3 +22,4 @@ gh-pages
 .vscode/ipch
 *.tsbuildinfo
 .eslintcache
+*.sql*

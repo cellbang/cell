@@ -4,29 +4,22 @@ import { Autowired } from '@malagu/core/lib/common/annotation/detached';
 import { App } from '../annotation';
 import { ContextProvider } from '../context';
 
-export interface AppProps { }
-
-export interface AppState {
-    child: JSX.Element
-}
-
 @App(AppImpl, false)
-export class AppImpl extends React.Component<AppProps, AppState> {
+export class AppImpl extends React.Component {
 
     @Autowired(ContextProvider)
     protected readonly contextProvider: ContextProvider;
 
     @Autowired(ROUTER)
-    protected readonly router: React.ComponentType<any>;
+    protected readonly router: React.ComponentType;
 
-    render(): React.ReactElement<{}> {
-        return <React.Fragment>{ this.createContextAndRouter() }</React.Fragment>;
+    render(): React.ReactNode {
+        return this.createContextAndRouter();
     }
 
     protected createContextAndRouter() {
-        const R = this.router;
-        let child = <R/>;
-        this.contextProvider.provide().forEach((C, index) => child = <C key={index}>{child}</C> );
+        let child = React.createElement(this.router);
+        this.contextProvider.provide().forEach((context, index) => child = React.createElement(context, { key: index }, child));
         return child;
     }
 }

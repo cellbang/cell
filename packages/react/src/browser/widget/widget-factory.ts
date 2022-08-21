@@ -6,8 +6,8 @@ import { AbstractWidgetFactory, WidgetFactory, WidgetModel } from '@malagu/widge
 export class DecoratorWidgetFactory extends AbstractWidgetFactory<React.ReactNode> {
 
     protected async doRender(widgetModel: WidgetModel): Promise<React.ReactNode> {
-        const C = widgetModel.matedata!.component;
-        return <C key={widgetModel.id} {...widgetModel.props}></C>;
+        const component = widgetModel.matedata!.component;
+        return React.createElement(component,  { key: widgetModel.id,  ...widgetModel.props });
     }
 
 }

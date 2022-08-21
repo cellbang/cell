@@ -1,6 +1,6 @@
 import { ApplicationShell } from '@malagu/core/lib/browser';
 import { Component, Autowired } from '@malagu/core';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import * as React from 'react';
 import { APP } from '../app';
 
@@ -8,9 +8,9 @@ import { APP } from '../app';
 export class Shell implements ApplicationShell {
 
     @Autowired(APP)
-    protected readonly app: React.ComponentType<any>;
+    protected readonly app: React.ComponentType;
 
     attach(host: HTMLElement): void {
-        ReactDOM.render(<this.app/>, host);
+        createRoot(host).render(React.createElement(this.app));
     }
 }

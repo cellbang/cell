@@ -12,7 +12,7 @@ export class ThemeContext extends React.Component<React.PropsWithChildren> {
     @Autowired(Provider)
     protected readonly provider: Provider;
 
-    render(): React.ReactElement {
+    render(): React.ReactNode {
         const { children } = this.props;
         return (
             <ThemeProvider theme={this.provider.provide()}>

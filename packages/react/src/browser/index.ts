@@ -2,7 +2,6 @@ export * from './annotation';
 export * from './app';
 export * from './layout';
 export * from './context';
-export * from './history';
 export * from './router';
 export * from './shell';
 export * from './resolver';

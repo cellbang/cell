@@ -1,48 +1,44 @@
 import * as React from 'react';
-import { RouteMetadataProvider, RedirectMetadata, RouteMetadata } from './router-protocol';
-import { Autowired, Value } from '@malagu/core/lib/common/annotation/detached';
-import { Router as ReactRouter, Redirect, Route, Switch, RedirectProps } from 'react-router-dom';
+import { RouteMetadataProvider } from './router-protocol';
+import { useRoutes, BrowserRouter, HashRouter, RouteObject } from 'react-router-dom';
 import { Router } from '../annotation';
-import { HistoryProvider } from '../history';
+import { ConfigUtil, ContainerUtil } from '@malagu/core';
 
-export interface RouterProps { }
+const routerMap = {
+    browser: BrowserRouter,
+    hash: HashRouter
+};
 
-export interface RouterState {
-    child: React.ReactElement[];
-}
+const RouteComponent = () => {
+    const element = useRoutes(buildRoutes());
+    return element;
+};
 
-@Router(RouterImpl, false)
-export class RouterImpl extends React.Component<RouterProps, RouterState> {
+const RouterComponent = () => {
+    const routerType = ConfigUtil.get<'browser' | 'hash'>('malagu.react.router.type');
+    return React.createElement(routerMap[routerType], {}, React.createElement(RouteComponent));
+};
 
-    @Autowired(RouteMetadataProvider)
-    protected readonly routeMetadataProvider: RouteMetadataProvider;
-
-    @Autowired(HistoryProvider)
-    protected readonly historyProvider: HistoryProvider;
-
-    @Value('malagu.react.path')
-    protected readonly path: string | string[];
-
-    render(): React.ReactElement<{}> {
-        return (
-            <ReactRouter history={this.historyProvider.provide()}>
-                <Switch>
-                    { this.buildRoutes(this.routeMetadataProvider.provide()) }
-                </Switch>
-            </ReactRouter>
-        );
-    }
-
-    protected buildRoutes(list: (RouteMetadata | RedirectMetadata)[]) {
-        return list.map((metadata, index) => {
-            const props = { ...metadata };
-            delete props.isDefaultLayout;
-            delete props.priority;
-            if (RedirectMetadata.is(metadata)) {
-                return <Redirect key={index} {...(props as RedirectProps)}/>;
+const buildRoutes = (): RouteObject[] => {
+    const routeMetadataProvider = ContainerUtil.get<RouteMetadataProvider>(RouteMetadataProvider);
+    return routeMetadataProvider.provide().map(metadata => {
+        // eslint-disable-next-line no-null/no-null
+        let element: React.ReactNode | null;
+        if (metadata.component) {
+            if (metadata.layout) {
+                element = React.createElement(metadata.layout, {}, React.createElement(metadata.component));
             } else {
-                return <Route key={index} {...props}/>;
+                element = React.createElement(metadata.component);
             }
-        });
-    }
-}
+        }
+        return {
+            path: metadata.path,
+            index: metadata.index,
+            caseSensitive: metadata.caseSensitive,
+            element
+        };
+    });
+};
+
+@Router(RouterComponent, false)
+export default class {}
