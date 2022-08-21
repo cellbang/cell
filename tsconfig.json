@@ -238,6 +238,9 @@
       ],
       "@malagu/testing/lib/*": [
         "dev-packages/testing/src/*"
+      ],
+      "admin-app/*": [
+        "examples/admin-app/*"
       ]
     }
   },
