@@ -104,10 +104,10 @@ export class BaseAuthenticationProvider implements AuthenticationProvider {
         const request = Context.getRequest();
         const header = request.get(HttpHeaders.AUTHORIZATION)!.trim();
 
-        if (header.toLowerCase() === (AUTHENTICATION_SCHEME_BASIC.toLowerCase())) {
+        const token = Buffer.from(header.substring(6), 'base64').toString('utf8');
+        if (!token) {
             throw new BadCredentialsError('Empty basic authentication token');
         }
-        const token = Buffer.from(header.substring(6), 'base64').toString('utf8');
         const delim = token.indexOf(':');
         if (delim === -1) {
             throw new BadCredentialsError('Invalid basic authentication token');

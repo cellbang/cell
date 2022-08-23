@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@malagu/example-jwt-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "2.30.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "2.30.0",
+    "@malagu/mvc": "2.30.0",
+    "@malagu/jwt": "2.30.0"
+  },
+  "devDependencies": {
+    "@malagu/cli": "2.30.0",
+    "@malagu/component": "2.30.0",
+    "@malagu/testing": "2.30.0",
+    "@types/supertest": "^2.0.12",
+    "supertest": "^6.2.4"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "test": "malagu-component test",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m scf -m test",
+    "deploy:test": "malagu deploy -m scf -m test",
+    "deploy:pre": "malagu deploy -m scf -m pre",
+    "deploy:prod": "malagu deploy -m scf -m prod"
+  }
+}

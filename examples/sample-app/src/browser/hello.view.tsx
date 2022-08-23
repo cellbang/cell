@@ -17,7 +17,6 @@ const Hello = () => {
     return <div className={ styles.hello }>
             <img alt="malagu logo" src="./assets/logo.png"></img>
             <div className="hello">
-                <DatePicker/>
                 <h1>{response}</h1>
                 <p>
                     For a guide and recipes on how to configure / customize this project,<br />

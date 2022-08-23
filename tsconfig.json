@@ -241,6 +241,9 @@
       ],
       "admin-app/*": [
         "examples/admin-app/*"
+      ],
+      "@malagu/jwt/lib/*": [
+        "packages/jwt/src/*"
       ]
     }
   },

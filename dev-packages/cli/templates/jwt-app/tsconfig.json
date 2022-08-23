@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "esModuleInterop": true,
     "declaration": true,
     "declarationMap": true,
     "noImplicitAny": true,

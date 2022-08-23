@@ -1,0 +1,5 @@
+targets:
+  - backend
+malagu:
+  jwt:
+    secret: abcdefg
