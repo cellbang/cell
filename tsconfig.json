@@ -244,6 +244,9 @@
       ],
       "@malagu/jwt/lib/*": [
         "packages/jwt/src/*"
+      ],
+      "@malagu/example-jwt-app/*": [
+        "examples/jwt-app/*"
       ]
     }
   },
