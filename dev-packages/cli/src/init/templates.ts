@@ -7,6 +7,7 @@ export const templates: any = {
     'koa-app': '{{ templatePath }}/koa-app',
     'vue-app': '{{ templatePath }}/vue-app',
     'database-app': '{{ templatePath }}/database-app',
+    'jwt-app': '{{ templatePath }}/jwt-app',
     'accounts': '{{ templatePath }}/accounts',
     'schedule': '{{ templatePath }}/schedule',
     'admin-app': '{{ templatePath }}/admin-app',

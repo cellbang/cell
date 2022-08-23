@@ -168,6 +168,9 @@
     },
     {
       "path": "../dev-packages/testing/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/jwt/compile.tsconfig.json"
     }
   ]
 }

@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.31.0
+
+- feat(cli) 添加新模板 `jwt-app`
+- feat(jwt) 添加新组件 `@malagu/jwt`
+- feat(cli) 优化模版 `sample-app`
+
 ## 2.30.0
 
 - feat(react) 升级 react 版到 18
