@@ -1,11 +1,15 @@
 import { AuthenticationError } from './error';
-import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
+import { ErrorHandler, Context, RedirectStrategy, DEFALUT_ERROR_HANDLER_PRIORITY } from '@malagu/web/lib/node';
 import { Component, Autowired } from '@malagu/core';
 import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/web';
 
 @Component(ErrorHandler)
 export class AuthenticationErrorHandler implements ErrorHandler {
-    readonly priority: number = 500;
+
+    /**
+     * 优先级的值一定要大于默认 Error Handler 的优先级：DEFALUT_ERROR_HANDLER_PRIORITY，否则将永远不会被执行.
+     */
+    readonly priority: number = DEFALUT_ERROR_HANDLER_PRIORITY + 100;
 
     @Autowired(RedirectStrategy)
     protected readonly redirectStrategy: RedirectStrategy;
