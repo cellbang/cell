@@ -42,14 +42,16 @@ Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意�
 npm install -g @malagu/cli
 
 # 初始化
-malagu init project-name
+malagu init -o project-name
 cd project-name            # 进入项目根目录
 
 # 运行
 malagu serve
 
 # 部署
-malagu deploy
+malagu deploy -m scf      # 部署到腾讯云云函数（SCF）
+malagu deploy -m fc       # 部署到阿里云函数计算（FC）
+malagu deploy -m lambda   # 部署到 AWS Lambda
 ```
 
 [![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104?speed=2.5&autoplay=1)

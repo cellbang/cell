@@ -39,14 +39,16 @@ The origin of Malagu's name: In my hometown, the homophonic "Ma Lagu" means smal
 npm install -g @malagu/cli
 
 # Initialization
-malagu init project-name
+malagu init -o project-name
 cd project-name # Enter the project root directory
 
 # Running
 malagu serve
 
 # Deployment
-malagu deploy
+malagu deploy -m scf      # Deploy to Tencent Cloud Function(SCF)
+malagu deploy -m fc       # Deploy to Alibaba Cloud Function Compute(FC)
+malagu deploy -m lambda   # Deploy to AWS Lambda
 ```
 [![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104?speed=2.5&autoplay=1)
 

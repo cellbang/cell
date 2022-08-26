@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.31.1
+
+- fix(jwt-app) 修复 `jwt-app` 模板的 ErrorHandler 不生效问题
+
 ## 2.31.0
 
 - feat(cli) 添加新模板 `jwt-app`
