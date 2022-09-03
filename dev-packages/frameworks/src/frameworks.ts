@@ -350,6 +350,20 @@ export const frameworks = [
 
     // backend
     {
+        name: 'nest',
+        useRuntime: 'default',
+        useMode: ['node', 'unpackage'],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"@nestjs\\/core":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'express',
         useRuntime: 'default',
         useMode: [ 'node' ],
@@ -387,20 +401,6 @@ export const frameworks = [
                 {
                     path: 'package.json',
                     matchContent: '"dependencies":\\s*{[^}]*"fastify":\\s*".+?"[^}]*}',
-                }
-            ]
-        }
-    },
-    {
-        name: 'nest',
-        useRuntime: 'default',
-        useMode: ['node', 'unpackage'],
-        settings: {},
-        detectors: {
-            every: [
-                {
-                    path: 'package.json',
-                    matchContent: '"dependencies":\\s*{[^}]*"@nestjs\\/core":\\s*".+?"[^}]*}',
                 }
             ]
         }
