@@ -64,7 +64,7 @@ Malagu 名字由来：在我的家乡，谐音“吗啦咕”是小石头的意�
 npm install -g @malagu/cli
 
 # 初始化
-malagu init project-name
+malagu init -o project-name
 cd project-name            # 进入项目根目录
 
 # 运行
