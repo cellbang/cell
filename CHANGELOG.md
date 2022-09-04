@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.31.2
+
+- fix(frameworks): change framework detect order (#152)
+- fix(cli): update tempate doc
+
 ## 2.31.1
 
 - fix(jwt-app) 修复 `jwt-app` 模板的 ErrorHandler 不生效问题
