@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.31.2
+## 2.31.3
 
 - fix(frameworks): change framework detect order (#152)
 - fix(cli): update tempate doc
