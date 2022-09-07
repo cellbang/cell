@@ -2,7 +2,7 @@ import { NPM } from './npm';
 import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
-import { hasProjectYarn, hasProjectNpm, hasYarn, hasProjectPnpm } from '../env/env';
+import { hasProjectYarn, hasProjectNpm, hasYarn, hasProjectPnpm, hasPnpm } from '../env/env';
 import { Packager } from '../packager/packager-protocol';
 import { Pnpm } from './pnpm';
 
@@ -47,19 +47,21 @@ export function spawnProcess(command: string, args: string[], options: any) {
     });
 }
 
-export function getPackager(packagerId?: 'npm' | 'yarn' | 'pnpm', cwd = process.cwd()): Packager {
+export function getPackager(packagerId?: 'pnpm' | 'yarn' | 'npm', cwd = process.cwd()): Packager {
     const registeredPackagers = {
         npm: new NPM(),
         yarn: new Yarn(),
         pnpm: new Pnpm(),
     };
     if (!packagerId) {
-        if (hasProjectYarn(cwd)) {
-            packagerId = 'yarn';
-        } else if (hasProjectPnpm(cwd)) {
+        if (hasProjectPnpm(cwd)) {
             packagerId = 'pnpm';
+        } else if (hasProjectYarn(cwd)) {
+            packagerId = 'yarn';
         } else if (hasProjectNpm(cwd)) {
             packagerId = 'npm';
+        } else if (hasPnpm()) {
+            packagerId = 'pnpm';
         } else if (hasYarn()) {
             packagerId = 'yarn';
         } else {

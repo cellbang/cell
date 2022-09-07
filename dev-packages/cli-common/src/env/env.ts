@@ -9,6 +9,19 @@ const _yarnProjects = new LRU({
     max: 10,
     maxAge: 1000
 });
+
+let _hasPnpm: boolean;
+let _pnpmVersion: string;
+const _pnpmProjects = new LRU({
+    max: 10,
+    maxAge: 1000
+});
+
+const _npmProjects = new LRU({
+    max: 10,
+    maxAge: 1000
+});
+
 let _hasGit = false;
 const _gitProjects = new LRU({
     max: 10,
@@ -78,13 +91,6 @@ export const hasProjectGit = (cwd: string) => {
     return result;
 };
 
-let _hasPnpm: boolean;
-let _pnpmVersion: string;
-const _pnpmProjects = new LRU({
-    max: 10,
-    maxAge: 1000
-});
-
 function getPnpmVersion() {
     if (_pnpmVersion !== undefined) {
         return _pnpmVersion;
@@ -105,6 +111,20 @@ export const hasPnpmVersionOrLater = (version: string) => semver.gte(getPnpmVers
 
 export const hasPnpm3OrLater = () => hasPnpmVersionOrLater('3.0.0');
 
+export const hasPnpm = () => {
+    if (_hasPnpm !== undefined) {
+        return _hasPnpm;
+    }
+    try {
+        execSync('pnpm --version', { stdio: 'ignore' });
+        _hasPnpm = true;
+        return _hasPnpm;
+    } catch (e) {
+        _hasPnpm = false;
+        return _hasPnpm = false;
+    }
+};
+
 export const hasProjectPnpm = (cwd: string) => {
     if (_pnpmProjects.has(cwd)) {
         return checkPnpm(_pnpmProjects.get(cwd));
@@ -123,10 +143,6 @@ function checkPnpm(result: boolean) {
     return result;
 }
 
-const _npmProjects = new LRU({
-    max: 10,
-    maxAge: 1000
-});
 export const hasProjectNpm = (cwd: string) => {
     if (_npmProjects.has(cwd)) {
         return _npmProjects.get(cwd);

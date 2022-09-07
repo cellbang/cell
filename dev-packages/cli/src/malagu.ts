@@ -53,6 +53,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
     program
         .command('init [template]')
         .option('-o, --output-dir [path]', 'output directory')
+        .option('--packager [packager]', 'package manager(pnpm, yarn, npm)')
         .description('init a application')
         .action((template, options) => {
             require('./init/init').default({ template, ...options });
