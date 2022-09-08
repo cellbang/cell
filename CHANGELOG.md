@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.32.0
+
+- feat(cli): add pnpm Packager
+- feat(code-loader-plugin): support zip symlink
+- feat(cli): support pnpm when init project
+- fix(init): add -p option shutcut
+
 ## 2.31.3
 
 - fix(frameworks): change framework detect order (#152)
