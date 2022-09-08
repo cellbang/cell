@@ -25,6 +25,7 @@ export interface Template {
 
 export interface InitOptions {
     template?: string;
+    packager?: 'pnpm' | 'yarn' | 'npm';
     outputDir: string;
 }
 
@@ -55,7 +56,9 @@ export class InitManager {
 
     async install(): Promise<void> {
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({}, this.outputDir);
+        const packager = this.opts.packager || pkg.rootComponentPackage.malaguComponent?.packager;
+
+        await getPackager(packager, this.outputDir).install({}, this.outputDir);
     }
 
     async executeHooks(): Promise<void> {

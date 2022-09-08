@@ -1,4 +1,4 @@
-import { readdirSync, statSync, readFileSync, remove } from 'fs-extra';
+import { readdirSync, statSync, readFileSync, remove, lstatSync, readlinkSync } from 'fs-extra';
 import * as JSZip from 'jszip';
 import { tmpdir } from 'os';
 import { join, resolve } from 'path';
@@ -78,6 +78,12 @@ export class DefaultCodeLoader implements CodeLoader {
 
             const file = statSync(fullPath);
             if (file.isDirectory()) {
+                // https://github.com/Stuk/jszip/issues/428
+                if (lstatSync(fullPath).isSymbolicLink()) {
+                    zip.file(fileName, readlinkSync(fullPath), { unixPermissions: parseInt('120755', 8) })
+                    continue;
+                }
+
                 const dir = zip.folder(fileName);
                 if (dir) {
                     await this.doLoadForLocal(fullPath, dir, codeUri);
