@@ -2,8 +2,9 @@ import { NPM } from './npm';
 import { Yarn } from './yarn';
 
 import { spawn, spawnSync } from 'child_process';
-import { hasProjectYarn, hasProjectNpm, hasYarn } from '../env/env';
+import { hasProjectYarn, hasProjectNpm, hasYarn, hasProjectPnpm, hasPnpm } from '../env/env';
 import { Packager } from '../packager/packager-protocol';
+import { Pnpm } from './pnpm';
 
 export class SpawnError extends Error {
     constructor(message: string, public stdout: any, public stderr: any) {
@@ -46,16 +47,21 @@ export function spawnProcess(command: string, args: string[], options: any) {
     });
 }
 
-export function getPackager(packagerId?: 'npm' | 'yarn', cwd = process.cwd()): Packager {
+export function getPackager(packagerId?: 'pnpm' | 'yarn' | 'npm', cwd = process.cwd()): Packager {
     const registeredPackagers = {
         npm: new NPM(),
-        yarn: new Yarn()
+        yarn: new Yarn(),
+        pnpm: new Pnpm(),
     };
     if (!packagerId) {
-        if (hasProjectYarn(cwd)) {
+        if (hasProjectPnpm(cwd)) {
+            packagerId = 'pnpm';
+        } else if (hasProjectYarn(cwd)) {
             packagerId = 'yarn';
         } else if (hasProjectNpm(cwd)) {
             packagerId = 'npm';
+        } else if (hasPnpm()) {
+            packagerId = 'pnpm';
         } else if (hasYarn()) {
             packagerId = 'yarn';
         } else {

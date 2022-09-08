@@ -298,7 +298,7 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         try {
             let packageLockFile = await packager.readLockfile(packageLockPath);
             packageLockFile = packager.rebaseLockfile(relPath, packageLockFile);
-            packager.writeLockfile(join(compositeModulePath, packager.lockfileName), packageLockFile);
+            await packager.writeLockfile(join(compositeModulePath, packager.lockfileName), packageLockFile);
         } catch (err) {
             console.warn(`Warning: Could not read lock file: ${err.message}`);
         }
