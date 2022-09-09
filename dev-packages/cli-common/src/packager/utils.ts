@@ -54,16 +54,16 @@ export function getPackager(packagerId?: 'pnpm' | 'yarn' | 'npm', cwd = process.
         pnpm: new Pnpm(),
     };
     if (!packagerId) {
-        if (hasProjectPnpm(cwd)) {
-            packagerId = 'pnpm';
-        } else if (hasProjectYarn(cwd)) {
+        if (hasProjectYarn(cwd)) {
             packagerId = 'yarn';
+        } else if (hasProjectPnpm(cwd)) {
+            packagerId = 'pnpm';
         } else if (hasProjectNpm(cwd)) {
             packagerId = 'npm';
-        } else if (hasPnpm()) {
-            packagerId = 'pnpm';
         } else if (hasYarn()) {
             packagerId = 'yarn';
+        } else if (hasPnpm()) {
+            packagerId = 'pnpm';
         } else {
             packagerId = 'npm';
         }
