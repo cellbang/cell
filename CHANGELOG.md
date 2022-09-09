@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.32.1
+
+- fix(cli): change packager detect order (#156)
+
 ## 2.32.0
 
 - feat(cli): add pnpm Packager
