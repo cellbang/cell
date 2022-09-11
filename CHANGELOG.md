@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.32.2
+
+- fix(web) 修复 `No context available. ns.run() or ns.bind() must be called first`
+
 ## 2.32.1
 
 - fix(cli): change packager detect order (#156)

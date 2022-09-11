@@ -30,7 +30,7 @@ export interface Context {
 export namespace Context {
 
     export function run(fn: (...args: any[]) => void) {
-        store.run(() => fn());
+        store.runPromise(async () => fn());
     }
 
     export function bind(fn: (...args: any[]) => void, context?: any) {
