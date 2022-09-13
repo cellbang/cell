@@ -16,8 +16,6 @@ export class ComponentPackageLoader {
         const configMap = new Map<string, any>();
         const configFiles: string[] = [];
         config = this.doLoad(nodePackage, [ ''/* load default config file */, ...mode ], configMap, config, configFiles);
-        configMap.delete('');
-        config.mode = Array.from(configMap.keys());
         config.configFiles = configFiles;
         nodePackage.malaguComponent = config;
     }
@@ -36,10 +34,11 @@ export class ComponentPackageLoader {
                 const modeForConfig = this.getMode(configForMode, mode);
                 const diffMode = this.diffMode(modeForConfig, configMap);
                 if (diffMode.length > 0) {
-                    return this.doLoad(nodePackage, this.mergeMode(diffMode, mode), configMap, config, configFiles);
+                    return this.doLoad(nodePackage, this.mergeMode(mode, diffMode), configMap, config, configFiles);
                 }
             }
         }
+        config.mode = mode.filter(m => !!m);
         return config;
     }
 
