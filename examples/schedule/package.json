@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "@malagu/core": "2.32.2",
-    "@malagu/scf-adapter": "2.32.2",
+    "@malagu/web": "2.32.2",
     "@malagu/schedule": "2.32.2"
   },
   "devDependencies": {

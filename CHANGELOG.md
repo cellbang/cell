@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.32.3
+
+- fix(template) 修复应用模板 `schedule`
+
 ## 2.32.2
 
 - fix(web) 修复 `No context available. ns.run() or ns.bind() must be called first`
