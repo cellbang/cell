@@ -35,7 +35,7 @@ export interface AfterThrowsAdvice extends AfterAdvice {
 }
 
 export interface AopProxy {
-    getPorxy(): any
+    getProxy(): any
 }
 
 export interface ProxyConfig {

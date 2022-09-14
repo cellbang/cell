@@ -52,7 +52,7 @@ export class AopProxyFactoryImpl implements AopProxyFactory {
             }
         });
         return {
-            getPorxy() {
+            getProxy() {
                 return proxy;
             }
         };
