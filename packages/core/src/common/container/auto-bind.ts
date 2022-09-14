@@ -33,7 +33,7 @@ function doProxyIfNeed(metadata: ComponentMetadata, target: any) {
             return aopProxyFactory.create({
                 target,
                 metadata
-            }).getPorxy();
+            }).getProxy();
         }
     }
 
