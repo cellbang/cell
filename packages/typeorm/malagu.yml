@@ -23,14 +23,12 @@ malagu:
         - ioredis
         - better-sqlite3
         - '@google-cloud/spanner'
-backend: 
-  malagu:
-    typeorm:
-      ormConfig:
-        - type: "${ env.DE_TYPE ?: 'mysql'}"
-          host: "${ env.DB_HOST ?: 'localhost'}"
-          port: "${ env.DB_PORT ?: 3306}"
-          synchronize: "${ env.DB_SYNC ?: true}"
-          username: "${ env.DB_USERNAME ?: 'root'}"
-          password: "${ env.DB_PASSWORD ?: 'root'}"
-          database: "${ env.DB_DATABASE ?: 'test'}"
+  typeorm:
+    ormConfig:
+      - type: "${ env.DE_TYPE ?: 'mysql'}"
+        host: "${ env.DB_HOST ?: 'localhost'}"
+        port: "${ env.DB_PORT ?: 3306}"
+        synchronize: "${ env.DB_SYNC ?: true}"
+        # username: "${ env.DB_USERNAME ?: 'root'}"
+        # password: "${ env.DB_PASSWORD ?: 'root'}"
+        database: "${ env.DB_DATABASE ?: 'test'}"

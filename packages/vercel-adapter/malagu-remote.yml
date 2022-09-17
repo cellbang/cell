@@ -2,25 +2,9 @@ malagu:
   vercel:
     config:
       version: 2
-        
-frontend:
-  malagu:
-    vercel:
-      config:
-        builds:
-          - src: 'frontend/**'
-            use: '@vercel/static'
-        routes:
-          - src: /(.*)
-            dest: frontend/$1
-
-backend:
-  malagu:
-    vercel:
-      config:
-        builds:
-          - src: 'backend/**'
-            use: '@now/node'
-        routes:
-          - src: /api
-            dest: backend/index.js
+      builds:
+        - src: ${ 'backend/**' | onTarget('backend') || 'frontend/**'  }
+          use: ${ '@now/node' | onTarget('backend') || '@vercel/static' }
+      routes:
+        - src: ${ '/api' | onTarget('backend') || '/(.*).js' }
+          dest: ${ 'backend/index.js' | onTarget('backend') || 'frontend/$1.js' }

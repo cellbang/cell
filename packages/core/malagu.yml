@@ -10,7 +10,4 @@ malagu:
     level: info
   tenant:
     enabled: false
-frontend:
-  entry: lib/common/application/application-entry
-backend:
-  entry: lib/common/application/application-entry
+entry: lib/common/application/application-entry

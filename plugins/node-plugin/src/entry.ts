@@ -14,6 +14,7 @@ const app = require('{{ entry }}');
         try {
             // view doc: https://cloud.tencent.com/document/product/583/56124
             server = target.listen(port, '0.0.0.0');
+            console.log(`serve ${port} success`);
             // view fastify issue: https://github.com/fastify/fastify/issues/1022
             server = target.server ?? server;
         } catch (error) {

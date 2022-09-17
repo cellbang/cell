@@ -12,11 +12,7 @@ export class ExpressionCompiler {
     private BRACKET_BEGIN = '{';
     private BRACKET_END = '}';
 
-    readonly jexlEngineProvider: JexlEngineProvider;
-
-    constructor() {
-        this.jexlEngineProvider = new JexlEngineProvider();
-    }
+    jexlEngineProvider: JexlEngineProvider;
 
     compileSections(text: string): any[] {
         if (!text || text.indexOf(this.SPECIAL_CHAR) < 0) {

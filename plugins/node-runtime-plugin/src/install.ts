@@ -75,7 +75,7 @@ function doDownload(url: string) {
 
 async function download() {
     try {
-        if (!process.env.NODE_RUNTIME_SKIP_DOWNLOAD && !existsSync(resolve(__dirname, nodeRuntime.replace('.tar.xz', '')))) {
+        if (!process.env.NODE_RUNTIME_SKIP_DOWNLOAD && !existsSync(resolve(__dirname, 'lib', nodeRuntime.replace('.tar.xz', '')))) {
             await doDownload(url);
         }
     } catch (error) {
