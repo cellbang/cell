@@ -2,9 +2,9 @@ import { ApplicationPackage } from './application-package';
 import { load } from 'js-yaml';
 import { readFileSync, existsSync } from 'fs';
 import { NodePackage } from './npm-registry';
-import { ExpressionHandler } from '../el/expression-handler';
 import { join } from 'path';
 import { ConfigUtil } from '../utils/config-util';
+import { ExpressionHandlerFactory } from '../el/expression-handler-factory';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -58,7 +58,7 @@ export class ComponentPackageLoader {
 
     protected getMode(config: any, mode: string[]) {
         const newMode: string[] = Array.isArray(config.mode) ? config.mode : config.mode ? [config.mode] : [];
-        const expressionHandler = new ExpressionHandler();
+        const expressionHandler = new ExpressionHandlerFactory().create(config);
         const ctx = { ...config, currentMode: mode };
         return newMode.map(m => expressionHandler.evalSync(m, ctx));
     }

@@ -4,11 +4,8 @@ import { ExpressionContext } from './expression-protocol';
 
 export class ExpressionHandler {
 
-    readonly expressionCompiler: ExpressionCompiler;
-
-    constructor() {
-        this.expressionCompiler = new ExpressionCompiler();
-    }
+    expressionCompiler: ExpressionCompiler;
+    ctx: ExpressionContext = {};
 
     handle(textOrObj: string | Object, ctx?: ExpressionContext) {
         const self = this;
@@ -17,7 +14,7 @@ export class ExpressionHandler {
         } else {
             traverse(textOrObj).forEach(function (value: any) {
                 if (typeof value === 'string') {
-                    this.update(self.evalSync(value, ctx || textOrObj));
+                    this.update(self.evalSync(value, ctx || self.ctx || textOrObj));
                 } else if (value && value._ignoreEl === true) {
                     this.update(value, true);
                 }

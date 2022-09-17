@@ -5,11 +5,8 @@ accounts:
     url: https://www.cellbang.com
   logo:
     icon: Cellbang
-frontend:
-  malagu:
-    security:
-      loginPage: /login
-backend:
-  malagu:
-    serve-static:
-      apiPath: "*oauth2/*"  # 确保 oauth2.0 相关的 url 不会被 server-static 组件识别为静态文件地址
+malagu:
+  security:
+    loginPage: ${ '/login' | onTarget('fontend') }
+  serve-static:
+    apiPath: "*oauth2/*"  # 确保 oauth2.0 相关的 url 不会被 server-static 组件识别为静态文件地址

@@ -5,7 +5,7 @@ malagu:
     openNewWindow: false
     usernameKey: username
     passwordKey: password
-    loginPage: /login
+    loginPage: ${ '/login' | onTarget('backend') || '/login?${malagu.security.targetUrlParameter}={redirect}'}
     loginUrl: /login
     loginMethod: POST
     loginSuccessUrl: /
@@ -15,6 +15,16 @@ malagu:
     alwaysUseDefaultTargetUrl: false
     useReferer: false
     targetUrlParameter: redirect
+    base64StringKeyLength: ${ 32 | onTarget('backend')}
+    contextKey: malagu:securityContext
+    username: ${ 'admin' | onTarget('backend')}
+    password: ${ 'MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk' | onTarget('backend')} # raw password 123456
+    passwordEncoder:
+      secret: ${ '123456' | onTarget('backend')}
+      encodeHashAsBase64: ${ true | onTarget('backend')}
+    basic:
+      enabled: false
+      realm: realm
     userInfoEndpoint:
       url: /userinfo
       method: POST
@@ -24,21 +34,4 @@ malagu:
         email: email
         login: login
         nickname: login
-frontend:
-  malagu:
-    security:
-      loginPage: /login?${malagu.security.targetUrlParameter}={redirect}
-backend:
-  malagu:
-    security:
-      base64StringKeyLength: 32
-      contextKey: malagu:securityContext
-      username: admin
-      password: MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk # raw password 123456
-      passwordEncoder:
-        secret: 123456
-        encodeHashAsBase64: true
-      basic:
-        enabled: false
-        realm: realm
 

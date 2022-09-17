@@ -6,9 +6,7 @@ devComponents:
 malagu:
   server:
     port: 9000
-backend:
-  malagu:
-    webpack:
+  webpack:
       filterWarningsPlugin:
-        node:
-          - "Module not found: Error: Can't resolve"
+        node: "${ ['Module not found: Error: Can\'t resolve'] | onTarget('backend') }"
+

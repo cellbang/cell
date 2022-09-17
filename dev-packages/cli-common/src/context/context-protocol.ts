@@ -12,6 +12,7 @@ import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 import { Settings } from '../settings/settings-protocol';
 import { getPackager } from '../packager/utils';
 import * as ora from 'ora';
+import { ExpressionHandlerFactory } from '../el';
 const chalk = require('chalk');
 
 export interface CliContext {
@@ -103,10 +104,8 @@ export namespace CliContext {
             config.backendProjectDistPath = otherConfig.backendProjectDistPath;
             config.projectDir = process.cwd();
             config.cliContext = otherConfig.cliContext;
-            const expressionHandler = new ExpressionHandler();
-
-            const jexlEngine = expressionHandler.expressionCompiler.jexlEngineProvider.provide();
-            jexlEngine.addTransform('eval',  (text: string) => expressionHandler.evalSync(text, { ...config, ...otherConfig }));
+            config.currentTarget = target;
+            const expressionHandler = new ExpressionHandlerFactory().create(config);
 
             const ctx = {
                 pkg,

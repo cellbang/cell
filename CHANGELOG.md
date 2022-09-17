@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.33.0
+
+- feat(cli) 编译期 EL 表达式转换器：`onTarget` 和 `onMode`，例如 `foo: ${ 'bar' | onTarget('backend') }` 表示当作为后端属性时，foo 属性的值才是 `bar`
+- fix(core) 修复 aop-protocol.ts 变量命名. (#157)
+
 ## 2.32.3
 
 - fix(template) 修复应用模板 `schedule`

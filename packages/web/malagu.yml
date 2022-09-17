@@ -4,6 +4,8 @@ malagu:
     maxAge: 86400000
     sessionIdKey: malagu:sessionId
     sessionKey: malagu:session
+  cookies:
+      keys: ${ ['abcdef'] | onTarget('backend')}
   server:
     path: /
     port: 3000
@@ -27,7 +29,3 @@ malagu:
         X-Requested-With: XMLHttpRequest
 backend:
   devEntry: lib/node/application/dev-application-entry
-  malagu:
-    cookies:
-      keys:
-        - abcdef

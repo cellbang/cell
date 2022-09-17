@@ -2,13 +2,7 @@ malagu:
   oauth2:
     client:
       registrations:
-        github:
+        github: # 仅仅提供测试使用，确保应用启动的地址为 http://localhost:3000，正式环境，请替换为自己的
           clientName: Github
-backend:
-  malagu:
-    oauth2:
-      client:
-        registrations:
-          github: # 仅仅提供测试使用，确保应用启动的地址为 http://localhost:3000，正式环境，请替换为自己的
-            clientId: 78c92fa811a8177acb42
-            clientSecret: e02ed015711aec29ecebfc4668e0b4c755212ef0
+          clientId: { '78c92fa811a8177acb42' | onTarget('backend') }
+          clientSecret: ${ 'e02ed015711aec29ecebfc4668e0b4c755212ef0' | onTarget('backend') }

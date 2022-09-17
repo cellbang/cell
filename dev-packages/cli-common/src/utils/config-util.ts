@@ -67,7 +67,7 @@ export namespace ConfigUtil {
     }
 
     export function support(cfg: ApplicationConfig, target: string) {
-        const targets = cfg.getConfig(target).targets || [FRONTEND_TARGET, BACKEND_TARGET];
+        const targets = cfg.getConfig(target).targets || [];
         return targets.includes(target);
     }
 
