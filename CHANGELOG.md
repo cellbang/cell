@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.33.1
+
+- fix(cli) 修复 yaml-js 模块的精灵依赖问题
+
 ## 2.33.0
 
 - feat(cli) 编译期 EL 表达式转换器：`onTarget` 和 `onMode`，例如 `foo: ${ 'bar' | onTarget('backend') }` 表示当作为后端属性时，foo 属性的值才是 `bar`
