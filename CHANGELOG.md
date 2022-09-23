@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.33.2
+
+- fix(runtime) 修复 yaml 配置文件格式问题
+
 ## 2.33.1
 
 - fix(cli) 修复 yaml-js 模块的精灵依赖问题
