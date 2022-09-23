@@ -38,6 +38,8 @@
   "dependencies": {
     "@malagu/cli-common": "2.33.0",
     "@malagu/cli-runtime": "2.33.0",
+    "@types/js-yaml": "^3.12.1",
+    "js-yaml": "^4.0.0",
     "commander": "^8.1.0",
     "dotenv": "^16.0.1",
     "leven": "^3.1.0",
