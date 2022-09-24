@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-  "version": "2.33.0",
+  "version": "2.33.2",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
@@ -36,10 +36,12 @@
     "test": "malagu-component test:js"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.33.0",
-    "@malagu/cli-runtime": "2.33.0",
+    "@malagu/cli-common": "2.33.2",
+    "@malagu/cli-runtime": "2.33.2",
+    "@types/js-yaml": "^3.12.1",
     "commander": "^8.1.0",
     "dotenv": "^16.0.1",
+    "js-yaml": "^4.0.0",
     "leven": "^3.1.0",
     "minimist": "^1.2.6",
     "rimraf": "^3.0.2",
@@ -48,7 +50,7 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@malagu/component": "2.33.0",
+    "@malagu/component": "2.33.2",
     "@types/chai": "^4.0.1",
     "@types/chai-string": "^1.4.0"
   },
