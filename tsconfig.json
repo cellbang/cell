@@ -250,6 +250,9 @@
       ],
       "@malagu/example-jwt-app/*": [
         "examples/jwt-app/*"
+      ],
+      "adonis-app/*": [
+        "examples/adonis-app/*"
       ]
     }
   },

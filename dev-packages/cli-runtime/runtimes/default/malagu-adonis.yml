@@ -1,3 +1,6 @@
+malagu:
+  node-plugin:
+    entryMode: module
 mode: "${ 'fc' in currentMode ? 'node16' : ''}"
 devComponents:
   "@malagu/adonis-plugin": ${version}

@@ -8,7 +8,7 @@ export default async (context: WebpackContext) => {
     const config = ConfigurationContext.getBackendConfiguration(
         configurations
     );
-    console.log(config)
+
     if (config) {
         const patterns = [];
         let distDir = 'build';

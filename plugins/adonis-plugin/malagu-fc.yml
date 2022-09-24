@@ -1,4 +1,7 @@
-malagu:  
+malagu:
   cloud:
     function:
-      bootstrap: 'cd backend && node index.js'
+      bootstrap: "cd backend && node index.js"
+      env:
+        HOST: "0.0.0.0"
+        PORT: "9000"
