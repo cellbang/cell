@@ -148,7 +148,13 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
 }
 
 function getExternalModuleName(module: ExternalModule): string {
-    return module.userRequest ;
+    const names = module.userRequest.split('/');
+
+    if (names[0].startsWith('@') && names[1]) {
+        return `${names[0]}/${names[1]}`;
+    } else {
+        return names[0];
+    }
 }
 
 function isExternalModule(module: Module): boolean {
