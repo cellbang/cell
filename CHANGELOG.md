@@ -3,6 +3,7 @@
 ## 2.34.0
 
 - fix(oidc-provider + jose) 升级依赖版本
+- feat(node-plugin) 支持 entryMode 属性，目前有 bundle 和 module 两种默认，bundle 模式则将 entry 进行 webpack 打包
 
 
 ## 2.33.2

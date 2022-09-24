@@ -9,13 +9,16 @@ import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 
 async function renderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: string) {
     ensureDir(PathUtil.getProjectHomePath());
-    const server = ConfigUtil.getBackendMalaguConfig(cfg).server;
+    const config = ConfigUtil.getBackendMalaguConfig(cfg);
+    const server = config.server;
+    const entryMode = config['node-plugin']?.entryMode;
     const port = server?.port ?? 9000;
     let path = server?.path ?? '';
     let entryContent = readFileSync(entryTemplate, { encoding: 'utf8' });
     entry = entry.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     path = path.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     entryContent = entryContent
+        .replace(/{{ entryMode }}/g, entryMode)
         .replace(/{{ entry }}/g, entry)
         .replace(/{{ port }}/g, port)
         .replace(/{{ path }}/g, path);
