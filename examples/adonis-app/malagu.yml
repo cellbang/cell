@@ -1,0 +1,16 @@
+malagu:
+  cloud:
+    disableProjectId: true
+    alias:
+      name: production
+    trigger:
+      name: v-production
+    service:
+      sync: false
+      name: fc-demosharer-web-prod-5be3055
+    function:
+      name: fc-demosharer-web-prod-5e70dbc
+      instanceConcurrency: 100
+      memorySize: 128
+      timeout: 60
+    customDomain: false
