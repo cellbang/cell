@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-jose",
-  "version": "2.33.2",
+  "version": "2.34.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-core": "2.33.2",
+    "@malagu/oauth2-core": "2.34.0",
     "jose": "^4.9.3"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.33.2",
+    "@malagu/component": "2.34.0",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },
