@@ -1,9 +1,21 @@
 const path = '{{ path }}';
+const entryMode: string = '{{ entryMode }}';
 const port = parseInt('{{ port }}');
 process.env.SERVER_PATH = path;
 process.env.SERVER_PORT = port + '';
 process.env.PORT = port + '';
-const app = require('{{ entry }}');
+let app: any;
+try {
+    if (entryMode === 'bundle') {
+        app = require('{{ entry }}');
+    } else {
+        app = eval(`require('{{ entry }}')`);
+    }
+} catch (e) {
+    if (entryMode === 'module') {
+        app = eval(`import('{{ entry }}')`);
+    }
+}
 (async () => {
     let server;
     let target = await app;
@@ -28,4 +40,3 @@ const app = require('{{ entry }}');
         server.keepAliveTimeout = 0;
     }
 })();
-
