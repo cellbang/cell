@@ -6,7 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/oauth2-core": "2.33.2",
-    "jose": "^1.28.0"
+    "jose": "^4.9.3"
   },
   "publishConfig": {
     "access": "public"
