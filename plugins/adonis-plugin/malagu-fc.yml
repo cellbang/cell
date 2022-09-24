@@ -1,0 +1,4 @@
+malagu:  
+  cloud:
+    function:
+      bootstrap: 'cd backend && node index.js'
