@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.34.0
+
+- fix(oidc-provider + jose) 升级依赖版本
+
+
 ## 2.33.2
 
 - fix(runtime) 修复 yaml 配置文件格式问题
