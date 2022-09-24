@@ -1,4 +1,4 @@
-describe('node plugin package', () => {
+describe('adonis plugin package', () => {
 
     it('support code coverage statistics', () => true);
 });
