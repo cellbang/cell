@@ -16,7 +16,7 @@ export default async (context: PropsContext) => {
                 props.entry = mainEntry;
             } else {
                 const entries = [ 'app.ts', 'src/app.ts', 'app.js', 'src/app.js', 'main.ts', 'src/main.ts', 'main.js',
-                'src/main.js', 'index.ts', 'src/index.ts', 'index.js', 'src/index.js', 'build/server.js' ];
+                'src/main.js', 'index.ts', 'src/index.ts', 'index.js', 'src/index.js'];
                 for (const entry of entries) {
                     const entryPath = join(cwd, entry)
                     if (existsSync(entryPath)) {
