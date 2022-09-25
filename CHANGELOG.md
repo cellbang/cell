@@ -1,5 +1,12 @@
 # Change Log
 
+## 2.35.0
+
+- feat(examples) add adonis-app example
+- feat(plugin) add adonis-plugin
+- feat(framework) add adonisjs support
+- fix(oauth2) fix some oauth2.0 bug
+
 ## 2.34.0
 
 - fix(oidc-provider + jose) 升级依赖版本
