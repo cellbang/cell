@@ -2,6 +2,7 @@
   "name": "adonis-app",
   "version": "2.35.0",
   "private": true,
+  "main": "build/server.js",
   "scripts": {
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
