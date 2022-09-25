@@ -2,8 +2,8 @@ import { JwtDecoderFactory, JwtDecoder, JwkSetManager, JwsAlgorithms } from '@ma
 import { ClientRegistration, JwsAlgorithmResolver, MISSING_SIGNATURE_VERIFIER_ERROR_CODE } from './registration-protocol';
 import { Component, Autowired } from '@malagu/core';
 import { ProviderDetailsManager, ProviderDetails } from '../provider';
-import { JWT, JWKS, JWK } from 'jose';
-import { OAuth2AuthenticationError, AuthorizationRequest, OidcParameterNames } from '@malagu/oauth2-core';
+import { jwtVerify, KeyLike, generateSecret } from 'jose';
+import { OAuth2AuthenticationError, AuthorizationRequest } from '@malagu/oauth2-core';
 import { AuthorizationRequestManager } from '../authorization';
 
 @Component()
@@ -16,7 +16,7 @@ export class IdTokenJwtDecoderFactory implements JwtDecoderFactory<ClientRegistr
     protected readonly authorizationRequestManager: AuthorizationRequestManager<AuthorizationRequest>;
 
     @Autowired(JwkSetManager)
-    protected readonly jwkSetManager: JwkSetManager<JWKS.KeyStore>;
+    protected readonly jwkSetManager: JwkSetManager<KeyLike | Uint8Array>;
 
     @Autowired(ProviderDetailsManager)
     protected readonly providerDetailsManager: ProviderDetailsManager;
@@ -30,7 +30,7 @@ export class IdTokenJwtDecoderFactory implements JwtDecoderFactory<ClientRegistr
             const jwsAlgorithm = await this.jwsAlgorithmResolver.reolve(clientRegistration);
             const { jwkSetUri, issuerUri } = <ProviderDetails> await this.providerDetailsManager.get(registrationId);
 
-            let keyOrStore: JWK.Key | JWKS.KeyStore;
+            let key: KeyLike | Uint8Array;
             if (jwsAlgorithm === JwsAlgorithms.RS256) {
                 if (!jwkSetUri) {
                     throw new OAuth2AuthenticationError({
@@ -38,7 +38,7 @@ export class IdTokenJwtDecoderFactory implements JwtDecoderFactory<ClientRegistr
                         description: `Failed to find a Signature Verifier for Client Registration: '${registrationId}'. Check to ensure you have configured the JwkSet URI.`
                     });
                 }
-                keyOrStore = await this.jwkSetManager.get(jwkSetUri);
+                key = await this.jwkSetManager.get(jwkSetUri);
             } else {
                 const { clientSecret } = clientRegistration;
                 if (!clientSecret) {
@@ -47,20 +47,21 @@ export class IdTokenJwtDecoderFactory implements JwtDecoderFactory<ClientRegistr
                         description: `Failed to find a Signature Verifier for Client Registration: '${registrationId}'. Check to ensure you have configured the client secret.`
                     });
                 }
-                keyOrStore = JWK.asKey(clientRegistration.clientSecret);
+                key = await generateSecret(clientRegistration.clientSecret);
             }
-            const authorizationRequest = await this.authorizationRequestManager.get();
             jwtDecoder = {
-                decode: async token => ({
-                            ...JWT.IdToken.verify(token, keyOrStore, {
-                            issuer: issuerUri,
-                            audience: clientRegistration.clientId,
-                            nonce: authorizationRequest!.attributes.get(OidcParameterNames.NONCE),
-                            complete: true,
-                            algorithms: [ jwsAlgorithm ]
-                        }),
+                decode: async token => {
+                    const { payload, protectedHeader } = await jwtVerify(token, key, {
+                        issuer: issuerUri,
+                        audience: clientRegistration.clientId,
+                        algorithms: [ jwsAlgorithm ]
+                    });
+                    return {
+                        header: protectedHeader,
+                        payload,
                         token
-                    })
+                    };
+                }
             };
             this.jwtDecoders.set(registrationId, jwtDecoder);
         }

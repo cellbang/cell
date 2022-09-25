@@ -6,7 +6,7 @@ accounts:
   logo:
     icon: Cellbang
 malagu:
-  security:
-    loginPage: ${ '/login' | onTarget('fontend') }
+  # security:
+  #   loginPage: ${ '/login' | onTarget('frontend') }
   serve-static:
     apiPath: "*oauth2/*"  # 确保 oauth2.0 相关的 url 不会被 server-static 组件识别为静态文件地址

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ConfigUtil, ContainerUtil } from '@malagu/core';
 import { UserManager } from '@malagu/security/lib/browser';
-import { View, Redirect } from '@malagu/react';
+import { View } from '@malagu/react';
 import { LocaleMenu, Icon } from '@malagu/grommet';
 import { useIntl } from 'react-intl';
 import { Box, Button, Heading, ResponsiveContext, Avatar, Text} from 'grommet';
@@ -82,5 +82,5 @@ export function Home() {
 
 }
 @View({ path: '/home', component: Home,  })
-@Redirect({ from: '/', to: '/home', exact: true })
+@View({ path: '/', component: Home,  })
 export default class {}
