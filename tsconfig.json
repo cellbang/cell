@@ -209,6 +209,9 @@
       "@malagu/example-nextjs-app/*": [
         "examples/nextjs-app/*"
       ],
+      "@malagu/adonis-plugin/lib/*": [
+        "plugins/adonis-plugin/src/*"
+      ],
       "@malagu/qq-guild-bot-adapter/lib/*": [
         "packages/qq-guild-bot-adapter/src/*"
       ],
@@ -247,6 +250,9 @@
       ],
       "@malagu/example-jwt-app/*": [
         "examples/jwt-app/*"
+      ],
+      "adonis-app/*": [
+        "examples/adonis-app/*"
       ]
     }
   },

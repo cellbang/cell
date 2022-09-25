@@ -91,7 +91,7 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            builddCommand: 'npx astro build',
+            buildCommand: 'npx astro build',
             serveCommand: 'npx astro dev --port ${cliContext.port || malagu.server.port}',
         },
         detectors: {
@@ -359,6 +359,23 @@ export const frameworks = [
                 {
                     path: 'package.json',
                     matchContent: '"dependencies":\\s*{[^}]*"@nestjs\\/core":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'adonis',
+        useRuntime: 'default',
+        useMode: ['unpackage', 'node', 'adonis'],
+        settings: {
+            buildCommand: 'node ace build --production',
+            serveCommand: 'node ace serve --watch'
+        },
+        detectors: {
+            every: [
+                {
+                    path: 'package.json',
+                    matchContent: '"dependencies":\\s*{[^}]*"@adonisjs\\/core":\\s*".+?"[^}]*}',
                 }
             ]
         }

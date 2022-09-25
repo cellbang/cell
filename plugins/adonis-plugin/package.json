@@ -1,0 +1,41 @@
+{
+  "name": "@malagu/adonis-plugin",
+  "version": "2.34.0",
+  "description": "",
+  "dependencies": {
+    "@malagu/cli-service": "2.34.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component",
+    "malagu-plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/malagu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cellbang/malagu/issues"
+  },
+  "homepage": "https://github.com/cellbang/malagu",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml",
+    "malagu-fc.yml",
+    "malagu-scf.yml"
+  ],
+  "scripts": {
+    "lint": "malagu-component lint",
+    "build": "malagu-component build",
+    "watch": "malagu-component watch",
+    "clean": "malagu-component clean",
+    "test": "malagu-component test:js"
+  },
+  "devDependencies": {
+    "@malagu/component": "2.34.0"
+  }
+}
