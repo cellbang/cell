@@ -368,7 +368,6 @@ export const frameworks = [
         useRuntime: 'default',
         useMode: ['unpackage', 'node', 'adonis'],
         settings: {
-            outputDir: 'build',
             buildCommand: 'node ace build --production',
             serveCommand: 'node ace serve --watch'
         },
