@@ -15,6 +15,12 @@ export enum CommandType {
     DeployCommand = 'deployCommand',
     CompileCommand = 'compileCommand'
 }
+
+export enum CommandStage {
+    on = 'on',
+    before = 'before',
+    after = 'after'
+}
 export namespace CommandUtil {
 
     export function getPkg(settings: Settings = SettingsUtil.getSettings(), projectPath = process.cwd()) {
@@ -125,19 +131,21 @@ export namespace CommandUtil {
         return getCommandByName(ctx, 'config');
     }
 
-    export async function executeCommand(ctx: CliContext, commandType: string, renderer = async (command: string, target: string) => command) {
+    export async function executeCommand(ctx: CliContext, commandType: string, commandStage: string = CommandStage.on,
+        renderer = async (command: string, target: string) => command) {
         const backendConfig = ConfigUtil.getBackendConfig(ctx.cfg);
         const frontendConfig = ConfigUtil.getFrontendConfig(ctx.cfg);
 
         const commands = [];
 
-        let frontendCommand = frontendConfig[commandType];
+        const cmd = commandStage === CommandStage.on ? commandType : `${commandType}:${commandStage}`;
+        let frontendCommand = frontendConfig[cmd];
         if (frontendCommand) {
             frontendCommand = await renderer(frontendCommand, FRONTEND_TARGET);
             commands.push(frontendCommand);
         }
 
-        let backendCommand = backendConfig[commandType];
+        let backendCommand = backendConfig[cmd];
         if (backendCommand && backendCommand !== frontendCommand) {
             backendCommand = await renderer(backendCommand, BACKEND_TARGET);
             commands.push(backendCommand);

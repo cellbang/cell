@@ -368,7 +368,7 @@ export const frameworks = [
         useRuntime: 'default',
         useMode: ['unpackage', 'node', 'adonis'],
         settings: {
-            buildCommand: 'node ace build --production',
+            compileCommand: '${ cliContext.dev ? "" : "node ace build --production" }',
             serveCommand: 'node ace serve --watch'
         },
         detectors: {

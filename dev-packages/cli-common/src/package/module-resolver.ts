@@ -82,6 +82,7 @@ export class ModuleResolver {
         const rawWebpackHooks = malaguComponent.webpackHooks || [];
         const rawInitHooks = malaguComponent.initHooks || [];
         const rawConfigHooks = malaguComponent.configHooks || [];
+        const rawCompileHooks = malaguComponent.compileHooks || [];
         const rawBuildHooks = malaguComponent.buildHooks || [];
         const rawDeployHooks = malaguComponent.deployHooks || [];
         const rawServeHooks = malaguComponent.serveHooks || [];
@@ -92,6 +93,7 @@ export class ModuleResolver {
         const webpackHooks: Module[] = malaguComponent.webpackHooks = [];
         const initHooks: Module[] = malaguComponent.initHooks = [];
         const configHooks: Module[] = malaguComponent.configHooks = [];
+        const compileHooks: Module[] = malaguComponent.compileHooks = [];
         const buildHooks: Module[] = malaguComponent.buildHooks = [];
         const deployHooks: Module[] = malaguComponent.deployHooks = [];
         const serveHooks: Module[] = malaguComponent.serveHooks = [];
@@ -104,6 +106,7 @@ export class ModuleResolver {
         this.addModule(componentPackage, webpackHooks, rawWebpackHooks);
         this.addModule(componentPackage, initHooks, rawInitHooks);
         this.addModule(componentPackage, configHooks, rawConfigHooks);
+        this.addModule(componentPackage, compileHooks, rawCompileHooks);
         this.addModule(componentPackage, buildHooks, rawBuildHooks);
         this.addModule(componentPackage, deployHooks, rawDeployHooks);
         this.addModule(componentPackage, serveHooks, rawServeHooks);
@@ -117,6 +120,8 @@ export class ModuleResolver {
         this.addModuleIfExists(componentPackage, initHooks, join(libOrSrc, 'init-hook'));
         this.addModuleIfExists(componentPackage, configHooks, join(libOrSrc, 'hooks', 'config'));
         this.addModuleIfExists(componentPackage, configHooks, join(libOrSrc, 'config-hook'));
+        this.addModuleIfExists(componentPackage, compileHooks, join(libOrSrc, 'hooks', 'compile'));
+        this.addModuleIfExists(componentPackage, compileHooks, join(libOrSrc, 'compile-hook'));
         this.addModuleIfExists(componentPackage, buildHooks, join(libOrSrc, 'hooks', 'build'));
         this.addModuleIfExists(componentPackage, buildHooks, join(libOrSrc, 'build-hook'));
         this.addModuleIfExists(componentPackage, deployHooks, join(libOrSrc, 'hooks', 'deploy'));
