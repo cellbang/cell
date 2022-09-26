@@ -92,6 +92,7 @@ export class ApplicationPackage {
     protected _frontendAssets: Module[] | undefined;
     protected _backendAssets: Module[] | undefined;
     protected _initHookModules: Module[] | undefined;
+    protected _compileHookModules: Module[] | undefined;
     protected _buildHookModules: Module[] | undefined;
     protected _serveHookModules: Module[] | undefined;
     protected _deployHookModules: Module[] | undefined;
@@ -278,6 +279,13 @@ export class ApplicationPackage {
             this._propsHookModules = this.computeModules('propsHooks');
         }
         return this._propsHookModules;
+    }
+
+    get compileHookModules() {
+        if (!this._compileHookModules) {
+            this._compileHookModules = this.computeModules('compileHooks');
+        }
+        return this._compileHookModules;
     }
 
     get buildHookModules() {

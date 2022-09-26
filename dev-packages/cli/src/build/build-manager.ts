@@ -1,5 +1,5 @@
 
-import { CommandUtil, CommandType } from '@malagu/cli-common/lib/utils/command-util';
+import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
 import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { BuildContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
@@ -28,13 +28,22 @@ export class BuildManager {
         this.cleanDistDir();
 
         const hookExecutor = new HookExecutor();
-        await hookExecutor.executeBuildHooks(this.ctx, HookStage.before);
+        await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand, CommandStage.before);
+        await hookExecutor.executeCompileHooks(this.ctx, HookStage.before);
 
         await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand);
+        await hookExecutor.executeCompileHooks(this.ctx);
+
+        await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand, CommandStage.after);
+        await hookExecutor.executeCompileHooks(this.ctx, HookStage.after);
+
+        await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand, CommandStage.before);
+        await hookExecutor.executeBuildHooks(this.ctx, HookStage.before);
 
         await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand);
-
         await hookExecutor.executeBuildHooks(this.ctx);
+
+        await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand, CommandStage.after);
         await hookExecutor.executeBuildHooks(this.ctx, HookStage.after);
     }
 

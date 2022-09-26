@@ -1,6 +1,9 @@
 mode: "${ 'fc' in currentMode ? 'node16' : ''}"
 malagu:
-  node-plugin:
-    entryMode: module
+  cli-service:
+    serveHooks: false
+  webpack:
+    filterWarningsPlugin:
+      node: []
 devComponents:
   "@malagu/adonis-plugin": ${version}
