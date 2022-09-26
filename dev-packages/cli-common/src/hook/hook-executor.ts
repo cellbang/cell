@@ -21,6 +21,11 @@ export class HookExecutor {
         }
     }
 
+    executeCompileHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
+        const modules = context.pkg.compileHookModules;
+        return this.doExecuteHooks(modules, context, 'compileHooks', stage);
+    }
+
     executeBuildHooks(context: CliContext, stage?: HookStage): Promise<any[]> {
         const modules = context.pkg.buildHookModules;
         return this.doExecuteHooks(modules, context, 'buildHooks', stage);

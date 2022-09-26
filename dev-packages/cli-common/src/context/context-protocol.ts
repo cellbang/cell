@@ -250,6 +250,10 @@ export interface PropsContext extends CliContext {
     expressionHandler: ExpressionHandler;
 }
 
+export interface CompileContext extends CliContext {
+
+}
+
 export interface BuildContext extends CliContext {
 
 }

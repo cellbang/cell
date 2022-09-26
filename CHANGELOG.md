@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.35.1
+
+- fix(adonis) 修复构建存在的一些问题
+
 ## 2.35.0
 
 - feat(examples) add adonis-app example

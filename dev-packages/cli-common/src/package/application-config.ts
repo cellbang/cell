@@ -72,6 +72,7 @@ export class ApplicationConfig {
         delete config.webpackHooks;
         delete config.initHooks;
         delete config.configHooks;
+        delete config.compileHooks;
         delete config.buildHooks;
         delete config.deployHooks;
         delete config.serveHooks;

@@ -16,7 +16,7 @@ export default async (context: WebpackContext) => {
         
         patterns.push({
             from: resolve(process.cwd(), distDir),
-            to: resolve(backendProjectDistPath, distDir)
+            to: resolve(backendProjectDistPath)
         });
 
         const CopyPlugin = require('copy-webpack-plugin');
