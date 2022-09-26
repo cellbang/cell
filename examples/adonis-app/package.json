@@ -1,6 +1,6 @@
 {
   "name": "adonis-app",
-  "version": "2.35.0",
+  "version": "2.35.1",
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch",
