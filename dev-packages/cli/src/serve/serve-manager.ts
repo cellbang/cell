@@ -5,6 +5,7 @@ import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
 import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
+import { ConfigUtil } from '@malagu/cli-common/lib/utils';
 
 export type ExecuteServeHooks = (server: http.Server | https.Server, app: Express.Application,
     compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => Promise<void>;
@@ -26,6 +27,14 @@ export class ServeManager {
 
         this.log();
 
+        const commandRender = async (command: string, target: string) => {
+            const { cfg, port } = this.context;
+            const realPort = ConfigUtil.getPort(cfg, target, port);
+            return command
+                .replace(/\$PATH/g, ConfigUtil.getMalaguConfig(cfg, target).server?.path)
+                .replace(/\$PORT/g, realPort);
+        };
+
         const hookExecutor = new HookExecutor();
         await CommandUtil.executeCommand(this.context, CommandType.CompileCommand, CommandStage.before);
         await hookExecutor.executeCompileHooks(this.context, HookStage.before);
@@ -36,13 +45,13 @@ export class ServeManager {
         await hookExecutor.executeCompileHooks(this.context, HookStage.after);
         await CommandUtil.executeCommand(this.context, CommandType.CompileCommand, CommandStage.after);
 
-        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.before);
+        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.before, commandRender);
         await hookExecutor.executeServeHooks(this.context, HookStage.before);
 
-        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.on, async (command, target) => command.replace(/\$PORT/g, this.context.port));
+        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.on, commandRender);
         await hookExecutor.executeServeHooks(this.context);
 
         await hookExecutor.executeServeHooks(this.context, HookStage.after);
-        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.after);
+        await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.after, commandRender);
     }
 }

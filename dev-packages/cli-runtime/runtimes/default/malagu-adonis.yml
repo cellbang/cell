@@ -1,7 +1,5 @@
 mode: "${ 'fc' in currentMode ? 'node16' : ''}"
 malagu:
-  cli-service:
-    serveHooks: false
   webpack:
     filterWarningsPlugin:
       node: []

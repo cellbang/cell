@@ -131,29 +131,32 @@ export namespace CommandUtil {
         return getCommandByName(ctx, 'config');
     }
 
-    export async function executeCommand(ctx: CliContext, commandType: string, commandStage: string = CommandStage.on,
-        renderer = async (command: string, target: string) => command) {
-        const backendConfig = ConfigUtil.getBackendConfig(ctx.cfg);
-        const frontendConfig = ConfigUtil.getFrontendConfig(ctx.cfg);
+    export async function hasCommand(ctx: CliContext, target: string, commandType: string, commandStage: string = CommandStage.on, ) {
+        const command = await getCommand(ctx, target, commandType, commandStage);
+        return !!command;
+    }
 
-        const commands = [];
+    export function getCommand(ctx: CliContext, target: string, commandType: string, commandStage: string = CommandStage.on,
+        renderer = async (command2: string, target2: string) => command2) {
+        const config = ConfigUtil.getConfig(ctx.cfg, target);
 
         const cmd = commandStage === CommandStage.on ? commandType : `${commandType}:${commandStage}`;
-        let frontendCommand = frontendConfig[cmd];
-        if (frontendCommand) {
-            frontendCommand = await renderer(frontendCommand, FRONTEND_TARGET);
-            commands.push(frontendCommand);
-        }
 
-        let backendCommand = backendConfig[cmd];
-        if (backendCommand && backendCommand !== frontendCommand) {
-            backendCommand = await renderer(backendCommand, BACKEND_TARGET);
-            commands.push(backendCommand);
+        const command = config[cmd];
+        if (command) {
+            return renderer(command, target);
         }
+    }
 
-        for (const c of commands) {
-            if (c) {
-                const args = c.split(/\s+/);
+    export async function executeCommand(ctx: CliContext, commandType: string, commandStage: string = CommandStage.on,
+        renderer = async (command2: string, target2: string) => command2) {
+
+        const commands: string[] = [];
+        for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
+            const command = await getCommand(ctx, target, commandType, commandStage, renderer);
+            if (command && !commands.includes(command)) {
+                commands.push(command);
+                const args = command.split(/\s+/);
                 await spawnProcess(args.shift()!, args, { stdio: 'inherit' });
             }
         }

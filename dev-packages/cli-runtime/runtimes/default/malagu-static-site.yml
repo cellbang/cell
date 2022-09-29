@@ -1,0 +1,3 @@
+mode: static
+serveCommand: npm run start
+buildCommand:before: npm run build
