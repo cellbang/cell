@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.36.0
+
+- feat(frameworks) 支持 react-static、vuepress 框架项目一键部署
+
 ## 2.35.1
 
 - fix(adonis) 修复构建存在的一些问题

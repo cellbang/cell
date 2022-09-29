@@ -19,8 +19,8 @@ export const frameworks = [
         useRuntime: 'default',
         useMode: [ 'unpackage', 'node', 'next' ],
         settings: {
-            buildCommand: 'npx blitz build',
-            serveCommand: 'npx blitz start --port ${cliContext.port || malagu.server.port}'
+            'buildCommand:before': 'npx blitz build',
+            serveCommand: 'npx blitz start --port $PORT'
         },
         detectors: {
           every: [
@@ -37,8 +37,8 @@ export const frameworks = [
         useRuntime: 'default',
         useMode: [ 'unpackage', 'node', 'next' ],
         settings: {
-            buildCommand: 'npx next build',
-            serveCommand: 'npx next dev --port ${cliContext.port || malagu.server.port}'
+            'buildCommand:before': 'npx next build',
+            serveCommand: 'npx next dev --port $PORT'
         },
         detectors: {
             every: [
@@ -55,7 +55,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            compileCommand: 'npx react-scripts build'
+            serveCommand: 'npx react-scripts start',
+            'buildCommand:before': 'npx react-scripts build'
+
         },
         detectors: {
             every: [
@@ -72,8 +74,8 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'public',
-            buildCommand: 'npx gatsby build',
-            serveCommand: 'npx gatsby develop --port ${cliContext.port || malagu.server.port}',
+            serveCommand: 'npx gatsby develop --port $PORT',
+            'buildCommand:before': 'npx gatsby build'
         },
         detectors: {
             every: [
@@ -91,8 +93,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            buildCommand: 'npx astro build',
-            serveCommand: 'npx astro dev --port ${cliContext.port || malagu.server.port}',
+            serveCommand: 'npx astro dev --port $PORT',
+            'buildCommand:before': 'npx astro build'
+
         },
         detectors: {
             every: [
@@ -110,7 +113,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'www',
-            compileCommand: 'npx ng build'
+            serveCommand: 'npx ng serve --disable-host-check --port $PORT',
+            'buildCommand:before': 'npx ng build'
+
         },
         detectors: {
             every: [
@@ -127,12 +132,8 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            compileCommand: 'npx react-scripts build',
-            frontend: {
-                env: {
-                    PUBLIC_URL: '${malagu.server.path}'
-                }
-            }
+            serveCommand: 'npx react-scripts start',
+            'buildCommand:before': 'npx react-scripts build'
         },
         detectors: {
             some: [
@@ -149,12 +150,53 @@ export const frameworks = [
         }
     },
     {
+        name: 'react-static',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'dist',
+            serveCommand: 'npx react-static start',
+            'buildCommand:before': 'npx react-static build --staging'
+
+        },
+        detectors: {
+            some: [
+                {
+                    path: 'package.json',
+                    matchContent:
+                        '"(dev)?(d|D)ependencies":\\s*{[^}]*"react-static":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
+        name: 'vuepress',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: '.vuepress/dist',
+            serveCommand: 'npx vuepress dev --port $PORT',
+            'buildCommand:before': 'npx vuepress build'
+
+        },
+        detectors: {
+            some: [
+                {
+                    path: 'package.json',
+                    matchContent:
+                        '"(dev)?(d|D)ependencies":\\s*{[^}]*"vuepress":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'vue',
         useRuntime: 'default',
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx vue-cli-service build'
+            serveCommand: 'npx vue-cli-service serve --port $PORT',
+            'buildCommand:before': 'npx vue-cli-service build'
         },
         detectors: {
             every: [
@@ -171,9 +213,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            frontend: {
-                compileCommand: 'npx vite build --base ${malagu.server.path}'
-            }
+            serveCommand: 'npx vite --port $PORT',
+            'buildCommand:before': 'npx vite build --base $PATH'
+
         },
         detectors: {
             every: [
@@ -190,9 +232,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist/${pkg.name}',
-            frontend: {
-                compileCommand: 'npx ng build --base-href ${malagu.server.path}'
-            }
+            serveCommand: 'npx ng serve --disable-host-check --port $PORT',
+            'buildCommand:before': 'npx ng build --base-href $PATH'
+
         },
         detectors: {
             every: [
@@ -209,7 +251,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'public',
-            compileCommand: 'npm run build'
+            serveCommand: 'npx rollup -c -w',
+            'buildCommand:before': 'npx rollup -c'
+
         },
         detectors: {
             every: [
@@ -230,7 +274,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            compileCommand: 'npx preact build'
+            serveCommand: 'npx preact watch --port $PORT',
+            'buildCommand:before': 'npx preact build'
+
         },
         detectors: {
             every: [
@@ -247,7 +293,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx ember build --environment=production'
+            serveCommand: 'npx ember serve --port $PORT',
+            'buildCommand:before': 'npx ember build --environment=production'
+
         },
         detectors: {
             every: [
@@ -264,7 +312,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'public',
-            compileCommand: 'npx hexo generate'
+            compileCommand: 'npx hexo server --port $PORT',
+            'buildCommand:before': 'npx hexo generate'
+
         },
         detectors: {
             every: [
@@ -281,8 +331,8 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: '_site',
-            buildCommand: 'npx @11ty/eleventy',
-            serveCommand: 'npx @11ty/eleventy --serve'
+            'buildCommand:before': 'npx @11ty/eleventy',
+            serveCommand: 'npx @11ty/eleventy --serve --watch --port $PORT'
         },
         detectors: {
             every: [
@@ -300,8 +350,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'build',
-            buildCommand: 'npx docusaurus build',
-            serveCommand: 'npx docusaurus start --port  ${cliContext.port || malagu.server.port}'
+            serveCommand: 'npx docusaurus start --port $PORT',
+            'buildCommand:before': 'npx docusaurus build'
+
         },
         detectors: {
             every: [
@@ -319,7 +370,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx umi build'
+            serveCommand: 'umi dev --port $PORT',
+            'buildCommand:before': 'npx umi build'
+
         },
         detectors: {
             every: [
@@ -336,7 +389,9 @@ export const frameworks = [
         useMode: [ 'static' ],
         settings: {
             outputDir: 'dist',
-            compileCommand: 'npx nuxt generate'
+            compileCommand: 'npx nuxt',
+            'buildCommand:before': 'npx nuxt generate'
+
         },
         detectors: {
             every: [
