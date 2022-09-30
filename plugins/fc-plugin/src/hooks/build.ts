@@ -12,9 +12,8 @@ export default async (context: BuildContext) => {
     if (config.function?.runtime === 'custom') {
         const destDir = join(codeRootDir, 'bootstrap');
         const bootstrap = config.function.bootstrap;
-        delete config.function.bootstrap;
-
         await writeFile(destDir, `#!/bin/bash\n${bootstrap}`, { mode: 0o755 });
     }
+    delete config.function.bootstrap;
 
 };

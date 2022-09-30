@@ -20,7 +20,7 @@ export function injectRequirements(options: PythonPluginOptions) {
             !externals.has(relativeFile.split(/([-\\/]|\.py$|\.pyc$)/, 1)[0])
         )
         .forEach(([file, relativeFile]) => {
-            const targetPath = join(PathUtil.getBackendProjectDistPath(), relativeFile);
+            const targetPath = join(PathUtil.getProjectDistPath(), relativeFile);
             ensureDirSync(dirname(targetPath));
             copyFileSync(file, targetPath);
         });

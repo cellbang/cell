@@ -24,6 +24,7 @@ export interface PythonPluginOptions {
     slimPatternsAppendDefaults: boolean;
     slimPatterns: string[];
     layer: boolean;
+    codePatterns: string[];
 }
 
 export const DEFAULT_PYTHON_PLUGIN_OPTIONS = {
@@ -38,5 +39,6 @@ export const DEFAULT_PYTHON_PLUGIN_OPTIONS = {
     pythonBin: process.platform === 'win32' ? 'python.exe' : 'python',
     useStaticCache: true,
     useDownloadCache: true,
-    staticCacheMaxVersions: 0
+    staticCacheMaxVersions: 0,
+    codePatterns: []
 };

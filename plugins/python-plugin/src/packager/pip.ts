@@ -19,7 +19,6 @@ export class Pip {
     async install(options: PythonPluginOptions) {
         options = { ...DEFAULT_PYTHON_PLUGIN_OPTIONS, ...options };
         const installedAt = await this.doInstall(options);
-        // Add symlinks into .serverless for so it's easier for injecting and for users to see where reqs are
         let symlinkPath = getRequirementsPath();
         // Only do if we didn't already do it
         if (installedAt && !existsSync(symlinkPath) && installedAt != symlinkPath) {
@@ -315,10 +314,7 @@ export class Pip {
                 break;
         }
 
-        let opts = { shell: true, stdio: 'pipe' };
-        if (process.env.MALAGU_DEBUG) {
-            opts.stdio = 'inherit';
-        }
+        let opts = { shell: true, stdio: 'inherit' };
         let mainCmds = [];
         if (dockerCmd.length) {
             dockerCmd.push(...mergeCommands(pipCmds));
