@@ -103,6 +103,7 @@ export namespace CliContext {
             config.frontendProjectDistPath = otherConfig.frontendProjectDistPath;
             config.backendProjectDistPath = otherConfig.backendProjectDistPath;
             config.projectDir = process.cwd();
+            config.projectHome = otherConfig.projectHomePath;
             config.cliContext = otherConfig.cliContext;
             config.currentTarget = target;
             const expressionHandler = new ExpressionHandlerFactory().create(config);
@@ -124,6 +125,7 @@ export namespace CliContext {
 
             delete config.pkg;
             delete config.cliContext;
+            delete config.projectHome;
             delete config.projectDir;
             delete config.currentRuntimePath;
             delete config.frontendProjectDistPath;
@@ -183,6 +185,7 @@ export namespace CliContext {
             currentRuntimePath: projectPath,
             frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(),
             backendProjectDistPath: PathUtil.getBackendProjectDistPath(),
+            projectHomePath: PathUtil.getProjectHomePath(),
             cliContext: { ...options, ...program, _ignoreEl: true},
         };
 

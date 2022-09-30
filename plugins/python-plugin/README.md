@@ -1,0 +1,1 @@
+# Malagu - Python Plugin Component

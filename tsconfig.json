@@ -253,6 +253,9 @@
       ],
       "adonis-app/*": [
         "examples/adonis-app/*"
+      ],
+      "@malagu/python-plugin/lib/*": [
+        "plugins/python-plugin/src/*"
       ]
     }
   },
