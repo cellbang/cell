@@ -9,5 +9,6 @@ malagu:
         exclude: ${'malagu.*yml$'|regexp}
       memorySize: 512
       timeout: 60
+      bootstrap: ${startCommand}
     alias:
       name: ${stage}

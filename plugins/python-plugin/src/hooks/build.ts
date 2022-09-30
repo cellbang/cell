@@ -1,6 +1,6 @@
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils';
-import { injectRequirements, Pip, pipfileToRequirements } from '../packager';
+import { buildCode, injectRequirements, Pip, pipfileToRequirements } from '../packager';
 import { PythonPluginOptions } from '../python-plugin-protocol';
 
 const parsePythonOptions = (options: PythonPluginOptions) => {
@@ -15,10 +15,10 @@ const parsePythonOptions = (options: PythonPluginOptions) => {
 
 export default async (ctx: CliContext) => {
     const { cfg } = ctx;
-    const pluginOptions = ConfigUtil.getBackendMalaguConfig(cfg)['python-plugin'];
+    const pluginOptions = ConfigUtil.getBackendMalaguConfig(cfg)['python-plugin'] || {};
     parsePythonOptions(pluginOptions);
     await pipfileToRequirements(pluginOptions);
     await new Pip().install(pluginOptions);
-    injectRequirements(pluginOptions)
-
+    injectRequirements(pluginOptions);
+    buildCode(pluginOptions);
 };

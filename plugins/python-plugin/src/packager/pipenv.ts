@@ -9,7 +9,7 @@ import { PathUtil } from '@malagu/cli-common/lib/utils';
  * pipenv install
  */
 export async function pipfileToRequirements(options: PythonPluginOptions) {
-    if (!options.usePipenv || existsSync(join(process.cwd(), 'Pipfile'))) {
+    if (!options.usePipenv || !existsSync(join(process.cwd(), 'Pipfile'))) {
         return;
     }
 

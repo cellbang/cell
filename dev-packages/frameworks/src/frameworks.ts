@@ -477,6 +477,25 @@ export const frameworks = [
             ]
         }
     },
+    {
+        name: 'python',
+        useRuntime: 'default',
+        useMode: [ 'python' ],
+        settings: {},
+        detectors: {
+            every: [
+                {
+                    path: 'requirements.txt',
+                },
+                {
+                    path: 'Pipfile',
+                },
+                {
+                    path: 'pyproject.toml',
+                }
+            ]
+        }
+    },
     // ranked last
     {
         name: 'malagu',

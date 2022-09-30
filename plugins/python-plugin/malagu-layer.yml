@@ -9,6 +9,7 @@ malagu:
         - ${malagu.cloud.function.runtime}
     function:
       env:
-        PYTHONPATH: /opt/${malagu.cloud.layer.name}:$PYTHONPATH
+        PATH: /opt/bin:$PATH
+        PYTHONPATH: /opt:$PYTHONPATH
       layers:
         - ${malagu.cloud.layer.name}

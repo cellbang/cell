@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.37.0
+## 2.37.1
 
 - feat(python-plugin) 支持 python 应用部署能力
 

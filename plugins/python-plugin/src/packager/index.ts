@@ -5,3 +5,4 @@ export * from './util';
 export * from './pip';
 export * from './poetry';
 export * from './inject';
+export * from './code';
