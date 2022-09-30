@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.37.0
+
+- feat(python-plugin) 支持 python 应用部署能力
+
 ## 2.36.0
 
 - feat(frameworks) 支持 react-static、vuepress 框架项目一键部署

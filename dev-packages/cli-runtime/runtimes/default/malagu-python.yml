@@ -1,0 +1,4 @@
+targets:
+  - backend
+devComponents:
+  '@malagu/python-plugin': ${version}
