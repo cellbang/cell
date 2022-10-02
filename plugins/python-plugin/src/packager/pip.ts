@@ -6,7 +6,7 @@ import { Poetry } from './poetry';
 import { deleteFiles, getStripMode, getStripCommand } from './slim';
 import { buildImage, getBindPath, getDockerUid } from './docker';
 import { sha256Path, getRequirementsWorkingPath, getUserCachePath, mergeCommands, getRequirementsPath } from './util';
-import { PythonPluginOptions, DEFAULT_PYTHON_PLUGIN_OPTIONS } from '../python-plugin-protocol';
+import { PythonPluginOptions } from '../python-plugin-protocol';
 import { spawnProcess } from '@malagu/cli-common/lib/packager';
 import { homedir } from 'os';
 const rimraf = require('rimraf');
@@ -17,7 +17,6 @@ export class Pip {
     protected poetry = new Poetry();
 
     async install(options: PythonPluginOptions) {
-        options = { ...DEFAULT_PYTHON_PLUGIN_OPTIONS, ...options };
         const installedAt = await this.doInstall(options);
         let symlinkPath = getRequirementsPath();
         // Only do if we didn't already do it
