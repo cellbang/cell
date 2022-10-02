@@ -1,11 +1,11 @@
 {
   "name": "@malagu/oauth2-client",
-  "version": "2.37.4",
+  "version": "2.37.5",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-jose": "2.37.4"
+    "@malagu/oauth2-jose": "2.37.5"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.37.4",
+    "@malagu/component": "2.37.5",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },
