@@ -7,7 +7,7 @@ const glob = require('glob-all');
 export function buildCode(options: PythonPluginOptions) {
     const codeDir = process.cwd();
 
-    const files: string[] = glob.sync([join(codeDir, '**'), ...options.codePatterns], { mark: true, dot: true });
+    const files: string[] = glob.sync([join(codeDir, '**'), `!${join(PathUtil.getProjectHomePath(), '**')}`, ...options.codePatterns], { mark: true, dot: true });
     files
         .map(file => [file, relative(codeDir, file)])
         .filter(([file]) => !file.endsWith('/'))
