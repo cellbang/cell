@@ -12,12 +12,13 @@ const parsePythonOptions = (options: PythonPluginOptions) => {
     if (options.dockerImage && options.dockerFile) {
         throw new Error('Python Requirements: you can provide a dockerImage or a dockerFile option, not both.');
     }
+    return options;
 };
 
 export default async (ctx: CliContext) => {
     const { cfg } = ctx;
-    const pluginOptions = ConfigUtil.getBackendMalaguConfig(cfg)['python-plugin'] || {};
-    parsePythonOptions(pluginOptions);
+    let pluginOptions = ConfigUtil.getBackendMalaguConfig(cfg)['python-plugin'] || {};
+    pluginOptions = parsePythonOptions(pluginOptions);
     await pipfileToRequirements(pluginOptions);
     await new Pip().install(pluginOptions);
     injectRequirements(pluginOptions);
