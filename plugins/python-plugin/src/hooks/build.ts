@@ -1,16 +1,17 @@
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils';
 import { buildCode, injectRequirements, Pip, pipfileToRequirements } from '../packager';
-import { PythonPluginOptions } from '../python-plugin-protocol';
+import { DEFAULT_PYTHON_PLUGIN_OPTIONS, PythonPluginOptions } from '../python-plugin-protocol';
 
 const parsePythonOptions = (options: PythonPluginOptions) => {
-   
-      if (options.dockerizePip && process.platform === 'win32') {
+    options = { ...DEFAULT_PYTHON_PLUGIN_OPTIONS, ...options };
+
+    if (options.dockerizePip && process.platform === 'win32') {
         options.pythonBin = 'python';
-      }
-      if (options.dockerImage && options.dockerFile) {
+    }
+    if (options.dockerImage && options.dockerFile) {
         throw new Error('Python Requirements: you can provide a dockerImage or a dockerFile option, not both.');
-      }
+    }
 };
 
 export default async (ctx: CliContext) => {

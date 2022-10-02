@@ -483,7 +483,7 @@ export const frameworks = [
         useMode: [ 'python' ],
         settings: {},
         detectors: {
-            every: [
+            some: [
                 {
                     path: 'requirements.txt',
                 },
