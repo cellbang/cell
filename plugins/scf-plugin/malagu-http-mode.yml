@@ -6,7 +6,7 @@ malagu:
       instanceConcurrencyConfig:
         maxConcurrency: 10
         dynamicEnabled: false
-      bootstrap: /var/lang/node16/bin/node backend/index.js
+      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"
     apiGateway:
       api:
         serviceScfFunctionType: HTTP

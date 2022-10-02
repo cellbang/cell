@@ -2,7 +2,7 @@ malagu:
   cloud:
     function:
       runtime: custom
-      bootstrap: 'node backend/index.js'
+      bootstrap: "${ startCommand ?: 'node backend/index.js'}"
     trigger:
       name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}
       qualifier: ${malagu.cloud.alias.name}
