@@ -3,4 +3,4 @@ malagu:
   cloud:
     function:
       type: HTTP
-      bootstrap: /var/lang/node16/bin/node backend/index.js
+      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"
