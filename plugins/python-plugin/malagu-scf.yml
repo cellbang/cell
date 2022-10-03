@@ -1,5 +1,0 @@
-malagu:
-  cloud:
-    function:
-      env:
-        PATH: $PWD/bin:$PATH

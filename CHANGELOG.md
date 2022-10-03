@@ -1,5 +1,10 @@
 # Change Log
 
+
+## 2.37.6
+
+- fix(python-plugin) 修复一些问题
+
 ## 2.37.5
 
 - feat(python-plugin) 支持 python 应用部署能力

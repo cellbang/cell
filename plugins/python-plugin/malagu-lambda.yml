@@ -1,5 +1,0 @@
-malagu:
-  cloud:
-    function:
-      env:
-        PATH: $LAMBDA_TASK_ROOT/bin:$PATH

@@ -32,10 +32,7 @@
     "lib",
     "src",
     "malagu.yml",
-    "malagu-layer.yml",
-    "malagu-fc.yml",
-    "malagu-scf.yml",
-    "malagu-lambda.yml"
+    "malagu-layer.yml"
   ],
   "scripts": {
     "lint": "malagu-component lint",
