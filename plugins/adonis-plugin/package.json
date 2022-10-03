@@ -1,9 +1,9 @@
 {
   "name": "@malagu/adonis-plugin",
-  "version": "2.37.6",
+  "version": "2.37.7",
   "description": "",
   "dependencies": {
-    "@malagu/cli-service": "2.37.6"
+    "@malagu/cli-service": "2.37.7"
   },
   "publishConfig": {
     "access": "public"
@@ -36,6 +36,6 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.37.6"
+    "@malagu/component": "2.37.7"
   }
 }
