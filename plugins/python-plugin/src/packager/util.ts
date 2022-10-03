@@ -2,7 +2,7 @@ const Appdir = require('appdirectory');
 import { PathUtil } from '@malagu/cli-common/lib/utils';
 import { statSync } from 'fs-extra';
 import { resolve, join } from 'path';
-import { PythonPluginOptions } from '../python-plugin-protocol';
+import { DEFAULT_PYTHON_PLUGIN_OPTIONS, PythonPluginOptions } from '../python-plugin-protocol';
 const glob = require('glob-all');
 const rimraf = require('rimraf');
 const sha256File = require('sha256-file');
@@ -110,3 +110,16 @@ export function getRequirementsPath() {
     const projectHomeDir = PathUtil.getProjectHomePath();
     return join(projectHomeDir, `requirements`);
 }
+
+
+export function parsePythonOptions(options: PythonPluginOptions) {
+    options = { ...DEFAULT_PYTHON_PLUGIN_OPTIONS, ...options };
+
+    if (options.dockerizePip && process.platform === 'win32') {
+        options.pythonBin = 'python';
+    }
+    if (options.dockerImage && options.dockerFile) {
+        throw new Error('Python Requirements: you can provide a dockerImage or a dockerFile option, not both.');
+    }
+    return options;
+};

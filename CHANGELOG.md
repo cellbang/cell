@@ -1,7 +1,7 @@
 # Change Log
 
 
-## 2.37.6
+## 2.37.7
 
 - fix(python-plugin) 修复一些问题
 
