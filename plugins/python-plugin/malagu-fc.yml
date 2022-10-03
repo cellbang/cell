@@ -1,5 +1,0 @@
-malagu:
-  cloud:
-    function:
-      env:
-        PATH: $FC_FUNC_CODE_PATH/bin:$PATH
