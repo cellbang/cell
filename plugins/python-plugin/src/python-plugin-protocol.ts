@@ -40,5 +40,8 @@ export const DEFAULT_PYTHON_PLUGIN_OPTIONS = {
     useStaticCache: true,
     useDownloadCache: true,
     staticCacheMaxVersions: 0,
-    codePatterns: []
+    codePatterns: [],
+    slim: false,
+    strip: false,
+    slimPatternsAppendDefaults: false
 };
