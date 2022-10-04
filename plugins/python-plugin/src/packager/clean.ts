@@ -1,9 +1,8 @@
 import { removeSync, existsSync } from 'fs-extra';
 import { PythonPluginOptions } from '../python-plugin-protocol';
-import { join } from 'path'
+import { join } from 'path';
+import { getUserCachePath } from './util';
 const glob = require('glob-all');
-const { getUserCachePath } = require('./shared');
-
 
 /**
  * Clean up static cache, remove all items in there
