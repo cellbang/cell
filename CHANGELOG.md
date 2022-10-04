@@ -1,5 +1,8 @@
 # Change Log
 
+## 2.37.8
+
+- fix(python-plugin) 修复模块找不到问题
 
 ## 2.37.7
 
