@@ -1,11 +1,11 @@
 {
   "name": "@malagu/cloud",
-  "version": "2.38.18",
+  "version": "2.38.19",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.38.18"
+    "@malagu/core": "^2.38.19"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.18"
+    "@malagu/component": "^2.38.19"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }
