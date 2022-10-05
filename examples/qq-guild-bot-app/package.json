@@ -1,13 +1,13 @@
 {
     "private": true,
     "name": "@malagu/example-qq-guild-bot-app",
-    "version": "2.38.8",
+    "version": "2.38.9",
     "description": "",
     "scripts": {
         "start": "malagu serve"
     },
     "license": "MIT",
     "devDependencies": {
-        "@malagu/cli": "2.38.8"
+        "@malagu/cli": "2.38.9"
     }
 }
