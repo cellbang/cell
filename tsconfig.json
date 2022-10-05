@@ -256,6 +256,12 @@
       ],
       "@malagu/python-plugin/lib/*": [
         "plugins/python-plugin/src/*"
+      ],
+      "@malagu/example-admin-app/*": [
+        "examples/admin-app/*"
+      ],
+      "@malagu/example-adonis-app/*": [
+        "examples/adonis-app/*"
       ]
     }
   },
