@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "2.38.16",
+  "version": "2.38.17",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -49,7 +49,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.16",
+    "@malagu/component": "2.38.17",
     "@types/jexl": "^2.2.0",
     "@types/traverse": "^0.6.32"
   },
