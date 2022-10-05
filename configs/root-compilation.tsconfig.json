@@ -161,9 +161,6 @@
       "path": "../packages/qq-guild-bot-adapter/compile.tsconfig.json"
     },
     {
-      "path": "../plugins/node-runtime-plugin/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/config/compile.tsconfig.json"
     },
     {
