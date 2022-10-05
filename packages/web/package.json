@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/core": "2.37.8",
     "@types/express": "^4.17.9",
-    "axios": "^0.24.0",
+    "axios": "^0.26.1",
     "body-parser": "^1.19.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.1",
@@ -16,9 +16,10 @@
     "cors": "^2.8.5",
     "crc": "^3.8.0",
     "node-gzip": "^1.1.2",
-    "qs": "^6.9.4",
     "url-pattern": "^1.0.3",
-    "uuid": "^8.0.0"
+    "uuid": "^8.3.2",
+    "url-join": "^4.0.1",
+    "reflect-metadata": "^0.1.13"
   },
   "publishConfig": {
     "access": "public"
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@malagu/component": "2.37.8",
+    "@malagu/cli-service": "2.37.8",
     "@types/cors": "^2.8.6"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"

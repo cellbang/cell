@@ -11,17 +11,27 @@
   ],
   "dependencies": {
     "@malagu/core": "latest",
-    "@malagu/typeorm": "latest",
-    "@malagu/react": "latest",
+    "@malagu/web": "latest",
     "@malagu/grommet": "latest",
-    "@malagu/security": "latest",
-    "@malagu/oauth2-core": "latest",
     "@malagu/oauth2-client": "latest",
+    "@malagu/oauth2-core": "latest",
+    "@malagu/react": "latest",
     "@malagu/rpc": "latest",
+    "@malagu/scf-adapter": "latest",
+    "@malagu/security": "latest",
     "@malagu/serve-static": "latest",
+    "@malagu/typeorm": "latest",
+    "better-sqlite3": "^7.6.2",
     "querystring": "^0.2.1",
     "request-ip": "^2.1.3",
-    "better-sqlite3": "^7.6.2"
+    "grommet-icons": "^4.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.1.2",
+    "styled-components": "^6.0.5",
+    "grommet": "^2.25.1",
+    "typeorm": "^0.3.7",
+    "class-transformer": "^0.5.1"
   },
   "devDependencies": {
     "@malagu/cli": "latest"

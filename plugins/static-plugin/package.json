@@ -5,8 +5,11 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
+    "@malagu/cli-common": "2.37.8",
     "@malagu/cli-service": "2.37.8",
-    "@malagu/frameworks": "2.37.8"
+    "rimraf": "^3.0.2",
+    "chalk": "^4.1.2",
+    "copy-webpack-plugin": "^9.0.0"
   },
   "publishConfig": {
     "access": "public"

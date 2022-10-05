@@ -17,7 +17,10 @@
     "@malagu/serve-static": "2.37.8",
     "@malagu/shell": "2.37.8",
     "@malagu/typeorm": "2.37.8",
-    "better-sqlite3": "^7.6.2"
+    "better-sqlite3": "^7.6.2",
+    "react": "^18.2.0",
+    "grommet": "^2.25.1",
+    "typeorm": "^0.3.7"
   },
   "devDependencies": {
     "@malagu/cli": "2.37.8"

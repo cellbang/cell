@@ -5,8 +5,15 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
+    "@malagu/widget": "2.37.8",
+    "@malagu/react": "2.37.8",
     "@malagu/grommet": "2.37.8",
-    "@malagu/security": "2.37.8"
+    "@malagu/security": "2.37.8",
+    "react": "^18.2.0",
+    "react-intl": "^6.0.5",
+    "grommet": "^2.25.1",
+    "styled-components": "^5.3.5"
   },
   "publishConfig": {
     "access": "public"

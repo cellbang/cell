@@ -30,14 +30,17 @@
   },
   "dependencies": {
     "@malagu/cli-common": "2.37.8",
+    "@malagu/frameworks": "2.37.8",
+    "fs-extra": "^9.0.13",
+    "inquirer": "^8.1.2",
+    "chalk": "^4.1.2",
     "leven": "^3.1.0",
+    "ora": "^5.4.1",
     "minimist": "^1.2.6",
     "rimraf": "^3.0.2"
   },
   "devDependencies": {
-    "@malagu/component": "2.37.8",
-    "@types/chai": "^4.0.1",
-    "@types/chai-string": "^1.4.0"
+    "@malagu/component": "2.37.8"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }

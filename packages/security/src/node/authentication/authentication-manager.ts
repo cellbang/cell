@@ -1,8 +1,7 @@
-import { Component, Autowired, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Prioritizeable, PostConstruct } from '@malagu/core';
 import { AuthenticationProvider, AuthenticationManager, Authentication, AuthenticationSuccessHandler } from './authentication-protocol';
 import { AccountStatusError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';
-import { postConstruct } from 'inversify';
 
 @Component(AuthenticationManager)
 export class AuthenticationManagerImpl implements AuthenticationManager {
@@ -15,7 +14,7 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
     @Autowired(AuthenticationSuccessHandler)
     protected readonly authenticationSuccessHandler: AuthenticationSuccessHandler;
 
-    @postConstruct()
+    @PostConstruct()
     async init() {
         this.prioritized = Prioritizeable.prioritizeAllSync(this.authenticationProviders).map(c => c.value);
     }

@@ -5,6 +5,7 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
     "@malagu/cloud": "2.37.8",
     "aws-sdk": "^2.807.0"
   },

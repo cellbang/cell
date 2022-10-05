@@ -1,5 +1,5 @@
 import { ApplicationPackage } from './application-package';
-import { existsSync } from 'fs';
+import { existsSync } from 'fs-extra';
 import { resolve, sep } from 'path';
 import { EMPTY } from '../constants';
 

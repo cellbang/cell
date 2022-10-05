@@ -3,9 +3,14 @@
   "version": "2.37.8",
   "description": "",
   "dependencies": {
+    "@malagu/core": "2.37.8",
+    "@malagu/cli-common": "2.37.8",
     "@malagu/cli-service": "2.37.8",
     "@malagu/faas-adapter": "2.37.8",
-    "qq-guild-bot": "2.9.2-beta6"
+    "qq-guild-bot": "2.9.2-beta6",
+    "fs-extra": "^9.0.13",
+    "webpack": "^5.52.0",
+    "copy-webpack-plugin": "^9.0.0"
   },
   "publishConfig": {
     "access": "public"

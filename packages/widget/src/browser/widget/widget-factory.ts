@@ -1,9 +1,8 @@
 import { WidgetModel, WidgetFactory, Widget } from './widget-protocol';
-import { injectable } from 'inversify';
 import { WidgetUtil } from './widget-util';
-import { Autowired, ExpressionHandler } from '@malagu/core';
+import { Autowired, ExpressionHandler, Injectable } from '@malagu/core';
 
-@injectable()
+@Injectable()
 export abstract class AbstractWidgetFactory<T> implements WidgetFactory<T> {
 
     @Autowired(ExpressionHandler)

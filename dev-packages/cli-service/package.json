@@ -44,7 +44,7 @@
     "clear-module": "^4.0.0",
     "copy-webpack-plugin": "^9.0.0",
     "css-loader": "^5.2.4",
-    "delay": "^4.3.0",
+    "delay": "^4.4.0",
     "friendly-errors-webpack-malagu": "^1.11.1",
     "html-webpack-plugin": "^5.5.0",
     "html-webpack-tags-plugin": "^3.0.1",

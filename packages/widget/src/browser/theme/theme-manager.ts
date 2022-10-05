@@ -1,7 +1,6 @@
 import { Theme, ThemeManager, DEFAULT_THEME } from './theme-protocol';
-import { Component, Value, Autowired, Optional, Prioritizeable } from '@malagu/core';
+import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@malagu/core';
 import { BehaviorSubject } from 'rxjs';
-import { postConstruct } from 'inversify';
 
 @Component(ThemeManager)
 export class ThemeManagerImpl<T> implements ThemeManager<T> {
@@ -18,7 +17,7 @@ export class ThemeManagerImpl<T> implements ThemeManager<T> {
 
     currentSubject = new BehaviorSubject<Theme<T> | undefined>(undefined);
 
-    @postConstruct()
+    @PostConstruct()
     init() {
         const themeStr = localStorage.getItem(this.themeStorageKey);
         if (themeStr) {

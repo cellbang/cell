@@ -1,6 +1,6 @@
 import { ApplicationPackage } from './application-package';
 import { load } from 'js-yaml';
-import { readFileSync, existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs-extra';
 import { NodePackage } from './npm-registry';
 import { join } from 'path';
 import { ConfigUtil } from '../utils/config-util';

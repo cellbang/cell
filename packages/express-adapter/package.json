@@ -5,6 +5,7 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
     "@malagu/web": "2.37.8",
     "express": "^4.17.1"
   },

@@ -5,7 +5,9 @@
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
     "@malagu/react": "2.37.8",
+    "react": "^18.2.0",
     "antd": "^4.22.6",
     "dayjs": "^1.8.22"
   },

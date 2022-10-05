@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.38.0
+
+- feat(*) 优化依赖，解决幽灵依赖问题，更好地支持 pnpm
+
 ## 2.37.8
 
 - fix(python-plugin) 修复模块找不到问题

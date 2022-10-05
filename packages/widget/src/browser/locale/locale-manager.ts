@@ -1,7 +1,6 @@
 import { LocaleManager, Locale } from './locale-protocol';
-import { Component, Value, Autowired, Optional, Prioritizeable } from '@malagu/core';
+import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@malagu/core';
 import { BehaviorSubject } from 'rxjs';
-import { postConstruct } from 'inversify';
 
 @Component(LocaleManager)
 export class LocaleManagerImpl implements LocaleManager {
@@ -18,7 +17,7 @@ export class LocaleManagerImpl implements LocaleManager {
 
     currentSubject = new BehaviorSubject<Locale | undefined>(undefined);
 
-    @postConstruct()
+    @PostConstruct()
     async init() {
         const locales = await this.get();
         const lang = localStorage.getItem(this.langStorageKey) || navigator.language;

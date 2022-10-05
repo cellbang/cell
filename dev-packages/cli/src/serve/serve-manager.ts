@@ -1,14 +1,8 @@
-import * as webpack from 'webpack';
-import * as https from 'https';
-import * as http from 'http';
 import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
 import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils';
-
-export type ExecuteServeHooks = (server: http.Server | https.Server, app: Express.Application,
-    compiler: webpack.Compiler, entryContextProvider: () => Promise<any>) => Promise<void>;
 
 export class ServeManager {
 

@@ -1,6 +1,6 @@
 import { Component, ContextInitializer, ExpressionContext } from '@malagu/core';
 import { ConfigUtil } from './config-util';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs-extra';
 import { load } from 'js-yaml';
 import { resolve } from 'path';
 

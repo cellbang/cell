@@ -5,6 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
     "@malagu/web": "2.37.8",
     "mysql2": "^2.3.3",
     "typeorm": "^0.3.7"
