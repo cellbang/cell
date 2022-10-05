@@ -1,8 +1,9 @@
 # Change Log
 
-## 2.38.2
+## 2.38.8
 
 - feat(*) 优化依赖，解决幽灵依赖问题，更好地支持 pnpm
+- feat(node-runtime-plugin) 移除组件 `@malagu/node-runtime-plugin`
 
 ## 2.37.8
 
