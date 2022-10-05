@@ -1,10 +1,10 @@
 {
   "name": "@malagu/adonis-plugin",
-  "version": "2.38.18",
+  "version": "2.38.19",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.38.18",
-    "@malagu/cli-service": "2.38.18",
+    "@malagu/cli-common": "^2.38.19",
+    "@malagu/cli-service": "^2.38.19",
     "copy-webpack-plugin": "^9.0.0"
   },
   "publishConfig": {
@@ -38,6 +38,6 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.18"
+    "@malagu/component": "^2.38.19"
   }
 }
