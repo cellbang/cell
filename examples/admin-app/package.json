@@ -3,27 +3,27 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.38.12",
+  "version": "2.38.13",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.38.12",
-    "@malagu/react": "2.38.12",
-    "@malagu/rpc": "2.38.12",
-    "@malagu/security": "2.38.12",
-    "@malagu/serve-static": "2.38.12",
-    "@malagu/shell": "2.38.12",
-    "@malagu/typeorm": "2.38.12",
+    "@malagu/core": "2.38.13",
+    "@malagu/react": "2.38.13",
+    "@malagu/rpc": "2.38.13",
+    "@malagu/security": "2.38.13",
+    "@malagu/serve-static": "2.38.13",
+    "@malagu/shell": "2.38.13",
+    "@malagu/typeorm": "2.38.13",
     "better-sqlite3": "^7.6.2",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@malagu/cli": "2.38.12"
+    "@malagu/cli": "2.38.13"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
@@ -34,5 +34,5 @@
     "deploy:pre": "malagu deploy -m scf -m pre",
     "deploy:prod": "malagu deploy -m scf -m prod"
   },
-  "gitHead": "8c068df7368c7c30e0f7f2c6874e6674fc3555b4"
+  "gitHead": "cd70f5350e9b1a30259d5645cd1246b9a45208d8"
 }

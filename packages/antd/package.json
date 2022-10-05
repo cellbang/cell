@@ -1,12 +1,12 @@
 {
   "name": "@malagu/antd",
-  "version": "2.38.12",
+  "version": "2.38.13",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.38.12",
-    "@malagu/react": "2.38.12",
+    "@malagu/core": "2.38.13",
+    "@malagu/react": "2.38.13",
     "antd": "^4.22.6",
     "dayjs": "^1.8.22",
     "react": "^18.2.0"
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.12"
+    "@malagu/component": "2.38.13"
   },
-  "gitHead": "8c068df7368c7c30e0f7f2c6874e6674fc3555b4"
+  "gitHead": "cd70f5350e9b1a30259d5645cd1246b9a45208d8"
 }

@@ -1,9 +1,9 @@
 {
   "name": "@malagu/compression",
-  "version": "2.38.12",
+  "version": "2.38.13",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.38.12",
+    "@malagu/cli-common": "2.38.13",
     "compression-webpack-plugin": "^8.0.0"
   },
   "publishConfig": {
@@ -34,8 +34,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.38.12",
-    "@malagu/component": "2.38.12"
+    "@malagu/cli-service": "2.38.13",
+    "@malagu/component": "2.38.13"
   },
-  "gitHead": "8c068df7368c7c30e0f7f2c6874e6674fc3555b4"
+  "gitHead": "cd70f5350e9b1a30259d5645cd1246b9a45208d8"
 }
