@@ -1,6 +1,6 @@
 {
   "name": "@malagu/component",
-  "version": "2.38.14",
+  "version": "2.38.15",
   "license": "MIT",
   "description": "CLI for malagu component.",
   "files": [
@@ -53,5 +53,5 @@
     "ext:test:watch": "mocha -w --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
   },
-  "gitHead": "64eeb95cb75ebbf174529864023cc1d5db91c1e1"
+  "gitHead": "375a3e51d28577a1d353da3e412acd858a305c39"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-common",
-  "version": "2.38.14",
+  "version": "2.38.15",
   "description": "Malagu CLI Common.",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "test": "malagu-component test:js"
   },
   "dependencies": {
-    "@malagu/frameworks": "2.38.14",
+    "@malagu/frameworks": "2.38.15",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^3.12.1",
     "@types/lodash.mergewith": "^4.6.6",
@@ -55,9 +55,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.14",
+    "@malagu/component": "2.38.15",
     "@types/jexl": "^2.2.0",
     "@types/randomatic": "^3.1.3"
   },
-  "gitHead": "64eeb95cb75ebbf174529864023cc1d5db91c1e1"
+  "gitHead": "375a3e51d28577a1d353da3e412acd858a305c39"
 }
