@@ -1,6 +1,6 @@
 {
   "name": "@malagu/component",
-  "version": "2.38.16",
+  "version": "2.38.17",
   "license": "MIT",
   "description": "CLI for malagu component.",
   "files": [
