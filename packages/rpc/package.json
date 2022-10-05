@@ -1,12 +1,12 @@
 {
   "name": "@malagu/rpc",
-  "version": "2.38.11",
+  "version": "2.38.16",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.38.11",
-    "@malagu/web": "2.38.11",
+    "@malagu/core": "2.38.16",
+    "@malagu/web": "2.38.16",
     "axios": "^0.26.1",
     "inversify": "5.1.1",
     "url-join": "^4.0.1",
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.11",
+    "@malagu/component": "2.38.16",
     "@types/url-join": "^4.0.0",
     "@types/uuid": "^8.3.0"
   },
