@@ -1,6 +1,6 @@
 {
   "name": "@malagu/example-adonis-app",
-  "version": "2.38.19",
+  "version": "2.38.20",
   "private": true,
   "main": "build/server.js",
   "scripts": {
