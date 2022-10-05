@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 
 // tslint:disable-next-line:no-any
 function readJsonFile(path: string): any {

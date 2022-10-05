@@ -5,6 +5,8 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
+    "@malagu/cli-common": "2.37.8",
+    "@malagu/core": "2.37.8",
     "@malagu/cloud": "2.37.8",
     "puppeteer-core": "^5.5.0",
     "tar": "^4.4.4"

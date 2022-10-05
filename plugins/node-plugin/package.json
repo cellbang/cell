@@ -4,8 +4,10 @@
   "description": "",
   "dependencies": {
     "@malagu/cli-common": "2.37.8",
+    "@malagu/cli-service": "2.37.8",
     "@vendia/serverless-express": "^4.5.2",
-    "aws-lambda-fastify": "^2.0.2"
+    "aws-lambda-fastify": "^2.0.2",
+    "fs-extra": "^9.0.13"
   },
   "publishConfig": {
     "access": "public"

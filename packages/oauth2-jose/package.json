@@ -5,7 +5,8 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/oauth2-core": "2.37.8",
+    "@malagu/core": "2.37.8",
+    "@malagu/web": "2.37.8",
     "jose": "^4.9.3"
   },
   "publishConfig": {
@@ -36,9 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.37.8",
-    "@types/crypto-js": "^3.1.47",
-    "@types/jexl": "^2.1.0"
+    "@malagu/component": "2.37.8"
   },
   "gitHead": "146560ff85dd2acfd7ed9e0b193ebc6280434953"
 }

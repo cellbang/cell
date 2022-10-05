@@ -1,7 +1,7 @@
 import * as https from 'https';
 import * as ProgressBar from 'progress';
 const tar = require('tar-fs');
-import { existsSync } from 'fs';
+import { existsSync } from 'fs-extra';
 import { resolve } from 'path';
 import { createUnzip } from 'zlib';
 

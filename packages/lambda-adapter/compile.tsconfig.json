@@ -1,5 +1,5 @@
 {
-  "extends":"@malagu/component/configs/base.tsconfig.json",
+  "extends": "@malagu/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "target": "es6",
     "composite": true,
@@ -15,6 +15,12 @@
     },
     {
       "path": "../faas-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../core/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/compile.tsconfig.json"
     }
   ]
 }

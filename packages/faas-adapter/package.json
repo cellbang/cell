@@ -5,9 +5,13 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
+    "@malagu/web": "2.37.8",
+    "@malagu/cli-common": "2.37.8",
     "@malagu/cli-service": "2.37.8",
     "@malagu/cloud": "2.37.8",
-    "@malagu/schedule": "2.37.8"
+    "@malagu/schedule": "2.37.8",
+    "cron": "^1.8.2"
   },
   "publishConfig": {
     "access": "public"

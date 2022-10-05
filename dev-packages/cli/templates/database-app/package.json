@@ -10,9 +10,11 @@
     "src"
   ],
   "dependencies": {
+    "@malagu/core": "latest",
     "@malagu/mvc": "latest",
     "@malagu/typeorm": "latest",
-    "better-sqlite3": "^7.6.2"
+    "better-sqlite3": "^7.6.2",
+    "typeorm": "^0.3.7"
   },
   "devDependencies": {
     "@malagu/cli": "latest"

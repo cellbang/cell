@@ -8,7 +8,8 @@
     "@malagu/core": "2.37.8",
     "@types/cron": "^1.7.2",
     "cron": "^1.8.2",
-    "uuid": "^8.0.0"
+    "uuid": "^8.3.2",
+    "reflect-metadata": "^0.1.13"
   },
   "publishConfig": {
     "access": "public"

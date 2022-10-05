@@ -5,7 +5,8 @@
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.37.8"
+    "@malagu/core": "2.37.8",
+    "rxjs": "^6.6.0"
   },
   "publishConfig": {
     "access": "public"

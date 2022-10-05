@@ -5,6 +5,8 @@
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
+    "@malagu/core": "2.37.8",
+    "@malagu/cloud": "2.37.8",
     "@malagu/faas-adapter": "2.37.8",
     "@malagu/web": "2.37.8",
     "@webserverless/fc-express": "^1.0.0",

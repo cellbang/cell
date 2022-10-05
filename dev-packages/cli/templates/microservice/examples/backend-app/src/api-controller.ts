@@ -1,7 +1,6 @@
 import { Controller, Get, Text } from '@malagu/mvc/lib/node';
 import { ServiceA, ServiceB } from '@microservice/api';
 import { Autorpc } from '@malagu/rpc';
-import { Value } from '@malagu/core';
 
 @Controller()
 export class APIController {

@@ -1,5 +1,5 @@
 {
-  "extends":"@malagu/component/configs/base.tsconfig.json",
+  "extends": "@malagu/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "rootDir": "src",
@@ -8,9 +8,5 @@
   "include": [
     "src"
   ],
-  "references": [
-    {
-      "path": "../../dev-packages/cli-common/compile.tsconfig.json"
-    }
-  ]
+  "references": []
 }

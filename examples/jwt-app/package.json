@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "@malagu/core": "2.37.8",
+    "@malagu/web": "2.37.8",
     "@malagu/jwt": "2.37.8",
     "@malagu/mvc": "2.37.8"
   },

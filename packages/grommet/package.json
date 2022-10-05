@@ -5,12 +5,20 @@
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
+    "@malagu/core": "2.37.8",
     "@malagu/react": "2.37.8",
+    "@malagu/widget": "2.37.8",
     "@types/styled-components": "^5.1.26",
+    "react": "^18.2.0",
+    "react-intl": "^6.0.5",
     "grommet": "^2.25.1",
     "grommet-icons": "^4.7.0",
     "react-is": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "react-router-dom": "^6.3.0"
   },
   "publishConfig": {
     "access": "public"

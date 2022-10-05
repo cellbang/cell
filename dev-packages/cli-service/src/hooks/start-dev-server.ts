@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');

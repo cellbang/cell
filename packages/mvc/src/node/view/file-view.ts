@@ -6,7 +6,7 @@ import * as isStream from 'is-stream';
 import { Stream } from 'stream';
 import { FILE_VIEW_NAME } from '../annotation/file';
 import { ViewMetadata } from '../annotation/view';
-import { createReadStream } from 'fs';
+import { createReadStream } from 'fs-extra';
 import { join } from 'path';
 
 @Component(View)

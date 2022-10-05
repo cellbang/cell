@@ -3,12 +3,16 @@
   "version": "2.37.8",
   "description": "",
   "dependencies": {
+    "@malagu/cli-common": "2.37.8",
     "@malagu/cloud-plugin": "2.37.8",
     "@malagu/code-loader-plugin": "2.37.8",
     "aws-sdk": "^2.807.0",
     "camelcase-keys": "^6.2.2",
-    "fs-extra": "^8.1.0",
-    "jszip": "^3.7.1"
+    "fs-extra": "^9.0.13",
+    "jszip": "^3.7.1",
+    "delay": "^4.4.0",
+    "uuid": "^8.3.2",
+    "chalk": "^4.1.2"
   },
   "publishConfig": {
     "access": "public"

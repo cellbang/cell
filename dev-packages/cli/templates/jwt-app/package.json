@@ -11,6 +11,7 @@
   ],
   "dependencies": {
     "@malagu/core": "latest",
+    "@malagu/web": "latest",
     "@malagu/mvc": "latest",
     "@malagu/jwt": "latest"
   },
