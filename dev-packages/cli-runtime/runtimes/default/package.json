@@ -21,7 +21,8 @@
       "@malagu/node-plugin": "{{ version }}",
       "@malagu/qq-guild-bot-adapter": "{{ version }}",
       "@malagu/next-plugin": "{{ version }}",
-      "@malagu/adonis-plugin": "{{ version }}"
+      "@malagu/adonis-plugin": "{{ version }}",
+      "@malagu/python-plugin": "{{ version }}"
     }
   }
 }
