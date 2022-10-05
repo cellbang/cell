@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.38.16
+
+- feat(node-plugin) 支持 layer 模式一键开启把 node_modules 发布到函数层上
+
 ## 2.38.8
 
 - feat(*) 优化依赖，解决幽灵依赖问题，更好地支持 pnpm
