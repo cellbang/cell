@@ -1,12 +1,12 @@
 {
   "name": "@malagu/security",
-  "version": "2.38.13",
+  "version": "2.38.14",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.38.13",
-    "@malagu/web": "2.38.13",
+    "@malagu/core": "2.38.14",
+    "@malagu/web": "2.38.14",
     "axios": "^0.26.1",
     "crypto-js": "^4.0.0",
     "jexl": "^2.2.0",
@@ -43,10 +43,10 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.13",
+    "@malagu/component": "2.38.14",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.2.0",
     "@types/micromatch": "^4.0.1"
   },
-  "gitHead": "cd70f5350e9b1a30259d5645cd1246b9a45208d8"
+  "gitHead": "64eeb95cb75ebbf174529864023cc1d5db91c1e1"
 }
