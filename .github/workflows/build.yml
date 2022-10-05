@@ -82,12 +82,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Pre-Publish
+#       - name: Pre-Publish
 #         run: |
 #           yarn --skip-integrity-check --network-timeout 100000
 #           yarn docs
-        env:
-          NODE_OPTIONS: --max_old_space_size=4096
+#         env:
+#           NODE_OPTIONS: --max_old_space_size=4096
 
       - name: Publish NPM
         run: |
