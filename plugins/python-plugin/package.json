@@ -1,10 +1,10 @@
 {
   "name": "@malagu/python-plugin",
-  "version": "2.38.20",
+  "version": "2.38.21",
   "description": "",
   "dependencies": {
     "@iarna/toml": "^2.2.3",
-    "@malagu/cli-common": "^2.38.20",
+    "@malagu/cli-common": "2.38.21",
     "appdirectory": "^0.1.0",
     "fs-extra": "^9.0.13",
     "glob-all": "^3.2.1",
@@ -43,7 +43,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "^2.38.20"
+    "@malagu/component": "2.38.21"
   },
   "gitHead": "2fed4bd527c5ab6a916775d96521a588bdbd3067"
 }

@@ -1,16 +1,16 @@
 {
   "name": "@malagu/faas-adapter",
-  "version": "2.38.20",
+  "version": "2.38.21",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "^2.38.20",
-    "@malagu/cli-service": "^2.38.20",
-    "@malagu/cloud": "^2.38.20",
-    "@malagu/core": "^2.38.20",
-    "@malagu/schedule": "^2.38.20",
-    "@malagu/web": "^2.38.20",
+    "@malagu/cli-common": "2.38.21",
+    "@malagu/cli-service": "2.38.21",
+    "@malagu/cloud": "2.38.21",
+    "@malagu/core": "2.38.21",
+    "@malagu/schedule": "2.38.21",
+    "@malagu/web": "2.38.21",
     "cron": "^1.8.2"
   },
   "publishConfig": {
@@ -42,7 +42,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "^2.38.20"
+    "@malagu/component": "2.38.21"
   },
   "gitHead": "2fed4bd527c5ab6a916775d96521a588bdbd3067"
 }
