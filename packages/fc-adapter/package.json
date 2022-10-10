@@ -1,14 +1,14 @@
 {
   "name": "@malagu/fc-adapter",
-  "version": "2.38.20",
+  "version": "2.38.21",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "^2.38.20",
-    "@malagu/core": "^2.38.20",
-    "@malagu/faas-adapter": "^2.38.20",
-    "@malagu/web": "^2.38.20",
+    "@malagu/cloud": "2.38.21",
+    "@malagu/core": "2.38.21",
+    "@malagu/faas-adapter": "2.38.21",
+    "@malagu/web": "2.38.21",
     "@webserverless/fc-express": "^1.0.0",
     "express": "^4.17.1",
     "raw-body": "^2.3.3"
@@ -48,7 +48,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "^2.38.20"
+    "@malagu/component": "2.38.21"
   },
   "gitHead": "2fed4bd527c5ab6a916775d96521a588bdbd3067"
 }
