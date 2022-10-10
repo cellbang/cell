@@ -53,5 +53,5 @@
     "ext:test:watch": "mocha -w --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
     "ext:test:clean": "rimraf .nyc_output coverage"
   },
-  "gitHead": "2fed4bd527c5ab6a916775d96521a588bdbd3067"
+  "gitHead": "7784a221e979a88ce034244541ddca374f6042f0"
 }
