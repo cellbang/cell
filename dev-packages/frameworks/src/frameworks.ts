@@ -483,6 +483,11 @@ export const frameworks = [
         useMode: [ 'python' ],
         settings: {},
         detectors: {
+            every: [
+                {
+                    path: 'malagu.yml',
+                }
+            ],
             some: [
                 {
                     path: 'requirements.txt',

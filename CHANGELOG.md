@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.38.21
+
+- feat(frameworks) 优化 python 框架检测规则
+
 ## 2.38.16
 
 - feat(node-plugin) 支持 layer 模式一键开启把 node_modules 发布到函数层上
