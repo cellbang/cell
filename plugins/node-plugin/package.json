@@ -1,10 +1,10 @@
 {
   "name": "@malagu/node-plugin",
-  "version": "2.38.21",
+  "version": "2.39.0",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.38.21",
-    "@malagu/cli-service": "2.38.21",
+    "@malagu/cli-common": "2.39.0",
+    "@malagu/cli-service": "2.39.0",
     "@vendia/serverless-express": "^4.5.2",
     "aws-lambda-fastify": "^2.0.2",
     "fs-extra": "^9.0.13"
@@ -38,7 +38,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.38.21"
+    "@malagu/component": "2.39.0"
   },
   "gitHead": "7784a221e979a88ce034244541ddca374f6042f0"
 }
