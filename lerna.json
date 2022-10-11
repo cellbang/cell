@@ -1,4 +1,5 @@
 {
+  "lerna": "2.2.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "version": "2.39.0",
@@ -7,6 +8,7 @@
       "stream": true
     },
     "publish": {
+      "graphType": "all",
       "forcePublish": true,
       "skipGit": true,
       "registry": "https://registry.npmjs.org/"
