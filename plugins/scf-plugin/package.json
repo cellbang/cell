@@ -1,11 +1,11 @@
 {
   "name": "@malagu/scf-plugin",
-  "version": "2.39.0",
+  "version": "2.39.1",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.39.0",
-    "@malagu/cloud-plugin": "2.39.0",
-    "@malagu/code-loader-plugin": "2.39.0",
+    "@malagu/cli-common": "2.39.1",
+    "@malagu/cloud-plugin": "2.39.1",
+    "@malagu/code-loader-plugin": "2.39.1",
     "chalk": "^4.1.2",
     "cos-nodejs-sdk-v5": "^2.8.3",
     "delay": "^4.4.0",
@@ -51,7 +51,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.39.0"
+    "@malagu/component": "2.39.1"
   },
   "gitHead": "1ddc30fb52d1b2e3618685c559973677bb523807"
 }

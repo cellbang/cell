@@ -1,11 +1,11 @@
 {
   "name": "@malagu/schedule",
-  "version": "2.39.0",
+  "version": "2.39.1",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.39.0",
+    "@malagu/core": "2.39.1",
     "@types/cron": "^1.7.2",
     "cron": "^1.8.2",
     "reflect-metadata": "^0.1.13",
@@ -39,7 +39,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.39.0"
+    "@malagu/component": "2.39.1"
   },
   "gitHead": "1ddc30fb52d1b2e3618685c559973677bb523807"
 }
