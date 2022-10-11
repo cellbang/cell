@@ -68,7 +68,7 @@ export namespace CloudUtils {
             }
         ];
 
-        const { accountId, accessKeyId, accessKeySecret, region } = await prompt(questions);
+        const { accountId, accessKeyId, accessKeySecret, region }: any = await prompt(questions);
         if (accountId !== markedAccountId) {
             profile.account.id = accountId;
         }
