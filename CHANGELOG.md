@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.39.0
+
+- feat(scf-plugin) 当通过 malagu config 指定了主账号账号对应 appId，则使用 cos 方式上传函数代码和层
+
 ## 2.38.21
 
 - feat(frameworks) 优化 python 框架检测规则

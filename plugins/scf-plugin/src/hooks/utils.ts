@@ -1,5 +1,6 @@
 import { Credentials } from '@malagu/cloud-plugin';
 import { scf, apigateway } from 'tencentcloud-sdk-nodejs';
+import * as COS from 'cos-nodejs-sdk-v5';
 const chalk = require('chalk');
 import * as delay from 'delay';
 
@@ -314,6 +315,11 @@ export async function createClients(region: string, credentials: Credentials) {
         region: region
     };
     return {
+        cosClient: new COS({
+            SecretId: credentials.accessKeyId,
+            SecretKey: credentials.accessKeySecret,
+            XCosSecurityToken: credentials.token
+        }),
         scfClient: new ScfClient(clientConfig),
         apiClient: new ApiClient(clientConfig),
         scfClientExt: new ScfClient({ ...clientConfig,
@@ -325,4 +331,57 @@ export async function createClients(region: string, credentials: Credentials) {
                 }
             }})
     }
+}
+
+export async function hasBucket(client: COS, bucket: string, region: string) {
+    try {
+        const { statusCode } = await client.headBucket({
+            Bucket: bucket,
+            Region: region,
+        });
+        return statusCode === 200;
+    } catch (e) {
+        return false;
+    }
+}
+
+export async function createBucketIfNeed(client: COS, bucket: string, region: string) {
+    const createParams = {
+        Bucket: bucket,
+        Region: region
+    };
+
+    try {
+        await client.putBucket(createParams);
+        await setLifecycle(client, bucket, region);
+    } catch (e) {
+        if (e.code === 'BucketAlreadyExists' || e.code === 'BucketAlreadyOwnedByYou') {
+            await setLifecycle(client, bucket, region);
+            return;
+        } else if (e.code === 'TooManyBuckets') {
+            if (await hasBucket(client, bucket, region)) {
+                return;
+            }
+        }
+        throw e;
+    }
+}
+
+async function setLifecycle(client: COS, bucket: string, region: string) {
+    const setLifecycleParams: COS.PutBucketLifecycleParams = {
+        Bucket: bucket,
+        Region: region,
+        Rules: [{
+            Status: 'Enabled',
+            ID: 'deleteObject',
+            Filter: {},
+            Expiration: {
+                Days: 10
+            },
+            AbortIncompleteMultipartUpload: {
+                DaysAfterInitiation: 10
+            }
+        }],
+    };
+    await client.putBucketLifecycle(setLifecycleParams);
 }

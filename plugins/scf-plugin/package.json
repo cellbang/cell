@@ -11,6 +11,7 @@
     "fs-extra": "^9.0.13",
     "jszip": "^3.7.1",
     "tencentcloud-sdk-nodejs": "4.0.378",
+    "cos-nodejs-sdk-v5": "^2.8.3",
     "traverse": "^0.6.6"
   },
   "publishConfig": {

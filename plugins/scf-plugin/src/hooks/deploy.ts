@@ -2,11 +2,13 @@ import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil, ProjectUtil } from '@
 import * as JSZip from 'jszip';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
+import { CloudUtils, DefaultProfileProvider, Profile } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { checkStatus, createClients, getAlias, getApi, getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
+import * as COS from 'cos-nodejs-sdk-v5';
+import { checkStatus, createBucketIfNeed, createClients, getAlias, getApi, getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
 const chalk = require('chalk');
 
+let cosClient: COS;
 let scfClient: any;
 let scfClientExt: any;
 let apiClient: any;
@@ -20,9 +22,10 @@ export default async (context: DeployContext) => {
     const cloudConfig = CloudUtils.getConfiguration(cfg);
 
     const profileProvider = new DefaultProfileProvider();
-    const { region, credentials, account } = await profileProvider.provide(cloudConfig);
+    const { region, credentials, account, appId } = await profileProvider.provide(cloudConfig) as (Profile & { appId?: string });
 
     const clients = await createClients(region, credentials);
+    cosClient = clients.cosClient;
     scfClient = clients.scfClient;
     scfClientExt = clients.scfClientExt;
     apiClient = clients.apiClient;
@@ -42,13 +45,13 @@ export default async (context: DeployContext) => {
         delete namespace.sync;
     }
 
-    await publishLayerIfNeed(layer);
+    await publishLayerIfNeed(layer, region, appId);
 
     functionMeta.namespace = functionMeta.namespace || namespace?.name;
 
     const namespaceName = functionMeta.namespace;
    
-    await createOrUpdateFunction(functionMeta, disableProjectId);
+    await createOrUpdateFunction(functionMeta, disableProjectId, region, appId);
 
     const functionVersion = await publishVersion(namespaceName, functionMeta.name);
 
@@ -264,12 +267,32 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
     }
 }
 
-async function parseCode(req: any, functionMeta: any) {
-    const s3Uri = CloudUtils.parseS3Uri(functionMeta.codeUri);
+
+async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string) {
+    const bucket = `malagu-scf-code-${appId}`;
+    const key = `${name}-${Math.floor(Date.now() / 1000)}.zip`;
+    try {
+        await createBucketIfNeed(cosClient, bucket, region);
+    } catch (e) {
+        if (e.code !== 'BucketAlreadyExists' || e.code !== 'BucketAlreadyOwnedByYou' || e.code !== 'TooManyBuckets') {
+            await createBucketIfNeed(cosClient, bucket, region);
+        } else {
+            throw e;
+        }
+    }
+    await cosClient.putObject({ Region: region, Bucket: bucket, Key: key, Body: await code.generateAsync({ type: 'nodebuffer' }) });
+    return { bucket, key, region };
+}
+
+async function parseCode(req: any, meta: any, region: string, appId?: string) {
+    let s3Uri = CloudUtils.parseS3Uri(meta.codeUri);
     let code: JSZip | undefined;
     if (!s3Uri) {
         const codeLoader = new DefaultCodeLoader();
-        code = await codeLoader.load(PathUtil.getProjectDistPath(), functionMeta.codeUri);
+        code = await codeLoader.load(PathUtil.getProjectDistPath(), meta.codeUri);
+        if (appId) {
+            s3Uri = await uploadCodeToCos(meta.name, code, region, appId);
+        }
     }
 
     if (s3Uri) {
@@ -280,12 +303,12 @@ async function parseCode(req: any, functionMeta: any) {
             CosBucketRegion: s3Uri.region
         };
     } else {
-        req.CodeSource = functionMeta.codeSource;
+        req.CodeSource = meta.codeSource;
         req.Code = { ZipFile: await code!.generateAsync({ type: 'base64', platform: 'UNIX', compression: 'DEFLATE' }) };
     }
 }
 
-async function publishLayerIfNeed(layer: any = {}) {
+async function publishLayerIfNeed(layer: any = {}, region: string, appId?: string) {
     if (!layer.name || !layer.codeUri) {
         return;
     }
@@ -298,7 +321,7 @@ async function publishLayerIfNeed(layer: any = {}) {
                 Description: layer.description,
                 LicenseInfo: layer.licenseInfo
             };
-            await parseCode(publishLayerVersionRequest, layer);
+            await parseCode(publishLayerVersionRequest, layer, region, appId);
             publishLayerVersionRequest.Content = publishLayerVersionRequest.Code;
             delete publishLayerVersionRequest.CodeSource;
 
@@ -315,7 +338,7 @@ function parseBoolean(value?: boolean) {
     }
 }
 
-async function createOrUpdateFunction(functionMeta: any, disableProjectId: boolean) {
+async function createOrUpdateFunction(functionMeta: any, disableProjectId: boolean, region: string, appId?: string) {
     let functionInfo: any;
     projectId = await ProjectUtil.getProjectId();
     if (disableProjectId) {
@@ -338,7 +361,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
             updateFunctionCodeRequest.Namespace = functionMeta.namespace;
             updateFunctionCodeRequest.Handler = functionMeta.handler;
             updateFunctionCodeRequest.EnvId = functionMeta.envId;
-            await parseCode(updateFunctionCodeRequest, functionMeta);
+            await parseCode(updateFunctionCodeRequest, functionMeta, region, appId);
             await scfClientExt.UpdateFunctionCode(updateFunctionCodeRequest);
 
             await checkStatus(scfClient, functionMeta.namespace, functionMeta.name);
@@ -358,7 +381,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
             const createFunctionRequest: any = {};
             await parseFunctionMeta(createFunctionRequest, functionMeta);
-            await parseCode(createFunctionRequest, functionMeta);
+            await parseCode(createFunctionRequest, functionMeta, region, appId);
             createFunctionRequest.Handler = functionMeta.handler;
             createFunctionRequest.CodeSource = functionMeta.codeSource;
             createFunctionRequest.Type = functionMeta.type;
