@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.39.1
+
+- feat(scf-plugin) 支持 websocket 模式配置
+- feat(scf-plugin) 默认的 python 运行时为 Python3.7
+- fix(scf-plugin) 修复权限丢失问题
+
 ## 2.39.0
 
 - feat(scf-plugin) 当通过 malagu config 指定了主账号账号对应 appId，则使用 cos 方式上传函数代码和层

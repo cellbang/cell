@@ -280,7 +280,7 @@ async function uploadCodeToCos(name: string, code: JSZip, region: string, appId:
             throw e;
         }
     }
-    await cosClient.putObject({ Region: region, Bucket: bucket, Key: key, Body: await code.generateAsync({ type: 'nodebuffer' }) });
+    await cosClient.putObject({ Region: region, Bucket: bucket, Key: key, Body: await code.generateAsync({ type: 'nodebuffer', platform: 'UNIX', compression: 'DEFLATE' }) });
     return { bucket, key, region };
 }
 
