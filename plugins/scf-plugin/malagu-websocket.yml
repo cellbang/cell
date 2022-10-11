@@ -1,0 +1,9 @@
+malagu:
+  cloud:
+    function:
+      protocolType: WS
+    apiGateway:
+      api:
+        protocol: WEBSOCKET
+        requestConfig:
+          method: GET

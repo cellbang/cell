@@ -1,5 +1,5 @@
 malagu:
   cloud:
     function:
-      bootstrap: /var/lang/python3/bin/python3 app.py
-      runtime: Python3.6
+      bootstrap: /var/lang/python37/bin/python3 app.py
+      runtime: Python3.7
