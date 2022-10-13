@@ -33,8 +33,8 @@
     "test:references": "node scripts/compile-references --dry-run",
     "test:malagu": "lerna run test --scope \"@malagu/!(example-)*\" --stream --concurrency=1",
     "publish": "yarn && yarn test && yarn publish:latest",
-    "publish:latest": "lerna publish --exact --yes --no-push && yarn -s publish:check",
-    "publish:next": "lerna publish preminor --exact --canary --preid next --dist-tag next --no-git-reset --no-git-tag-version --no-push --ignore-scripts --yes && yarn publish:check",
+    "publish:latest": "lerna publish --exact --ignore-scripts --yes --no-push && yarn -s publish:check",
+    "publish:next": "lerna publish preminor --exact --ignore-scripts --canary --preid next --dist-tag next --no-git-reset --no-git-tag-version --no-push --ignore-scripts --yes && yarn publish:check",
     "publish:check": "node scripts/check-publish.js"
   },
   "workspaces": [
