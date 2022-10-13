@@ -127,6 +127,25 @@ export const frameworks = [
         }
     },
     {
+        name: 'craco',
+        useRuntime: 'default',
+        useMode: [ 'static' ],
+        settings: {
+            outputDir: 'build',
+            serveCommand: 'npx craco start',
+            'buildCommand:before': 'npx craco build'
+        },
+        detectors: {
+            some: [
+                {
+                    path: 'package.json',
+                    matchContent:
+                        '"(dev)?(d|D)ependencies":\\s*{[^}]*"@craco/craco":\\s*".+?"[^}]*}',
+                }
+            ]
+        }
+    },
+    {
         name: 'create-react-app',
         useRuntime: 'default',
         useMode: [ 'static' ],

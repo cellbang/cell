@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.39.2
+
+- feat(frameworks) 支持 craco 框架一键部署
+
 ## 2.39.1
 
 - feat(scf-plugin) 支持 websocket 模式配置
