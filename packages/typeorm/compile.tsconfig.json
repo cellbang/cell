@@ -10,9 +10,6 @@
   ],
   "references": [
     {
-      "path": "../web/compile.tsconfig.json"
-    },
-    {
       "path": "../../dev-packages/cli-service/compile.tsconfig.json"
     },
     {

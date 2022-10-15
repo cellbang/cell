@@ -1,5 +1,13 @@
 # Change Log
 
+## 2.40.0
+
+- fix(core) 修复类作为 ID 注入报错问题
+- feat(core) 升级 inversify 依赖到 6.0.1
+- feat(core + web) 重构 Context 机制
+- feat(typeorm) 优化数据库事务管理机制
+- feat(cli) 优化模版，支持 package.json 文件支持版本占位符 {{ version }}，初始化模板的时候，框架会自动注入当前版本
+
 ## 2.39.2
 
 - feat(frameworks) 支持 craco 框架一键部署

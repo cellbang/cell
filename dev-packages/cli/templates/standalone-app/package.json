@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@malagu/core": "latest"
+    "@malagu/core": "{{ version }}"
   },
   "devDependencies": {
     "ts-node": "^10.7.0",

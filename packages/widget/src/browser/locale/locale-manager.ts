@@ -18,20 +18,22 @@ export class LocaleManagerImpl implements LocaleManager {
     currentSubject = new BehaviorSubject<Locale | undefined>(undefined);
 
     @PostConstruct()
-    async init() {
-        const locales = await this.get();
-        const lang = localStorage.getItem(this.langStorageKey) || navigator.language;
-        if (locales.length) {
-            this.currentSubject.next(locales.find(l => l.lang === lang) || locales[0]);
-        }
-
-        this.currentSubject.subscribe(locale => {
-            if (locale) {
-                localStorage.setItem(this.langStorageKey, locale.lang);
-            } else {
-                localStorage.removeItem(this.langStorageKey);
+    init() {
+        (async () => {
+            const locales = await this.get();
+            const lang = localStorage.getItem(this.langStorageKey) || navigator.language;
+            if (locales.length) {
+                this.currentSubject.next(locales.find(l => l.lang === lang) || locales[0]);
             }
-        });
+
+            this.currentSubject.subscribe(locale => {
+                if (locale) {
+                    localStorage.setItem(this.langStorageKey, locale.lang);
+                } else {
+                    localStorage.removeItem(this.langStorageKey);
+                }
+            });
+        })();
     }
 
     async get(): Promise<Locale[]> {

@@ -10,14 +10,14 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/mvc": "latest",
-    "@malagu/web": "latest",
-    "@malagu/puppeteer": "latest",
-    "@malagu/oss": "latest"
+    "@malagu/core": "{{ version }}",
+    "@malagu/mvc": "{{ version }}",
+    "@malagu/web": "{{ version }}",
+    "@malagu/puppeteer": "{{ version }}",
+    "@malagu/oss": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

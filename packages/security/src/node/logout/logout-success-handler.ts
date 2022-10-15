@@ -3,7 +3,7 @@ import { Component, Value, Autowired } from '@malagu/core';
 import { Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { XML_HTTP_REQUEST, HttpHeaders } from '@malagu/web';
 
-@Component([SimpleUrlLogoutSuccessHandler, LogoutSuccessHandler])
+@Component(LogoutSuccessHandler)
 export class SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Value('malagu.security.logoutSuccessUrl')

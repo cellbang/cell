@@ -2,7 +2,7 @@ import { StringKeyGenerator } from './keygen-protocol';
 import { enc, lib } from 'crypto-js';
 import { Value, Component } from '@malagu/core';
 
-@Component([Base64StringKeyGenerator, StringKeyGenerator])
+@Component(StringKeyGenerator)
 export class Base64StringKeyGenerator implements StringKeyGenerator {
 
     @Value('malagu.security.base64StringKeyLength')

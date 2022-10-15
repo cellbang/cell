@@ -6,7 +6,7 @@ import { Widget } from '@malagu/widget/lib/browser/widget/widget-protocol';
 import * as widgets from './widgets';
 import * as components from 'grommet';
 
-@Component([CustomWidgetFactory, WidgetFactory])
+@Component(WidgetFactory)
 export class CustomWidgetFactory extends AbstractWidgetFactory<React.ReactNode> {
 
     priority = 1000;
@@ -37,7 +37,7 @@ export class CustomWidgetFactory extends AbstractWidgetFactory<React.ReactNode> 
     }
 }
 
-@Component([GrommetWidgetFactory, WidgetFactory])
+@Component(WidgetFactory)
 export class GrommetWidgetFactory extends CustomWidgetFactory {
 
     priority = 900;

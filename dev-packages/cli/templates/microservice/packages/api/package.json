@@ -12,11 +12,11 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/rpc": "latest"
+    "@malagu/core": "{{ version }}",
+    "@malagu/rpc": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib",

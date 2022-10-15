@@ -14,9 +14,11 @@ export class RouteProviderImpl implements RouteProvider {
     protected readonly routeBuilder: RouteBuilder;
 
     @postConstruct()
-    protected async init() {
-        this.route = await this.routeBuilder.build();
-        this.routeDeferred.resolve(this.route);
+    protected init() {
+        this.routeBuilder.build().then(route => {
+            this.route = route;
+            this.routeDeferred.resolve(route);
+        });
     }
 
     provide(): Promise<Route> {

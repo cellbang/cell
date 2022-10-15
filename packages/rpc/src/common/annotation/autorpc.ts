@@ -1,5 +1,4 @@
-import { applyAutowiredDecorator, IdOrAutowiredOption, DoInject, parseAutowiredOption } from '@malagu/core';
-import { inject, tagged } from 'inversify';
+import { applyAutowiredDecorator, IdOrAutowiredOption, DoInject, parseAutowiredOption, Tagged, Inject } from '@malagu/core';
 
 export const RPC = Symbol('RPC');
 export const ID_KEY = Symbol('ID_KEY');
@@ -12,7 +11,7 @@ export const Autorpc = function (idOrOption?: IdOrAutowiredOption): PropertyDeco
 };
 
 export const doInjectForAutorpc: DoInject = (option, t, k, i) => {
-    inject(RPC)(t, k, i);
-    tagged(ID_KEY, option.id!)(t, k, i);
+    Inject(RPC)(t, k, i);
+    Tagged(ID_KEY, option.id!)(t, k, i);
 };
 

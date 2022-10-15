@@ -1,5 +1,5 @@
 import { resolve, basename, relative, join } from 'path';
-import { existsSync, copy, readJSON, writeJSON } from 'fs-extra';
+import { existsSync, copy, readFile, writeJSON } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './templates';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
@@ -11,6 +11,7 @@ const rimraf = require('rimraf');
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { RuntimeUtil } from '@malagu/cli-runtime';
+const version = require('../../package.json').version;
 
 inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
@@ -48,7 +49,9 @@ export class InitManager {
     async render(): Promise<void> {
         const packageJsonPath = resolve(this.outputDir, 'package.json');
         if (existsSync(packageJsonPath)) {
-            const packageJson = await readJSON(packageJsonPath, { encoding: 'utf8' });
+            let packageJsonStr = await readFile(packageJsonPath, { encoding: 'utf8' });
+            packageJsonStr = packageJsonStr.replace(/{{\s*version\s*}}/g, version);
+            const packageJson = JSON.parse(packageJsonStr);
             packageJson.name = basename(this.outputDir);
             await writeJSON(packageJsonPath, packageJson, { encoding: 'utf8', spaces: 2 });
         }

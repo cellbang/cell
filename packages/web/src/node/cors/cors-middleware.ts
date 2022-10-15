@@ -6,7 +6,7 @@ import { CORS, ENDPOINT, HttpHeaders } from '../../common';
 import { CORS_MIDDLEWARE_PRIORITY } from './cors-protocol';
 import { HandlerExecutionChain } from '../handler';
 
-@Component([CorsMiddleware, Middleware])
+@Component(Middleware)
 export class CorsMiddleware implements Middleware {
 
     @Value(CORS)

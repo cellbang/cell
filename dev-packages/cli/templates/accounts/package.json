@@ -10,17 +10,17 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/web": "latest",
-    "@malagu/grommet": "latest",
-    "@malagu/oauth2-client": "latest",
-    "@malagu/oauth2-core": "latest",
-    "@malagu/react": "latest",
-    "@malagu/rpc": "latest",
-    "@malagu/scf-adapter": "latest",
-    "@malagu/security": "latest",
-    "@malagu/serve-static": "latest",
-    "@malagu/typeorm": "latest",
+    "@malagu/core": "{{ version }}",
+    "@malagu/web": "{{ version }}",
+    "@malagu/grommet": "{{ version }}",
+    "@malagu/oauth2-client": "{{ version }}",
+    "@malagu/oauth2-core": "{{ version }}",
+    "@malagu/react": "{{ version }}",
+    "@malagu/rpc": "{{ version }}",
+    "@malagu/scf-adapter": "{{ version }}",
+    "@malagu/security": "{{ version }}",
+    "@malagu/serve-static": "{{ version }}",
+    "@malagu/typeorm": "{{ version }}",
     "better-sqlite3": "^7.6.2",
     "querystring": "^0.2.1",
     "request-ip": "^2.1.3",
@@ -34,7 +34,7 @@
     "class-transformer": "^0.5.1"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

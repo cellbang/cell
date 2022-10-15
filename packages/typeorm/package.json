@@ -6,7 +6,6 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.39.2",
-    "@malagu/web": "2.39.2",
     "mysql2": "^2.3.3",
     "typeorm": "^0.3.7"
   },

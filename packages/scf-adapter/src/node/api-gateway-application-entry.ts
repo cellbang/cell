@@ -3,7 +3,7 @@ import { Application } from '@malagu/core/lib/common/application/application-pro
 import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
 import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
 import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
-import { Context, HttpContext } from '@malagu/web/lib/node/context';
+import { Context } from '@malagu/web/lib/node/context';
 import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
 import * as express from 'express';
 const { createServer, proxy } = require('tencent-serverless-http');
@@ -18,8 +18,8 @@ async function start() {
     const c = await container;
     ContainerProvider.set(c);
     app.all('*', async (req: any, res: any) => {
-        const dispatcher = c.get<Dispatcher<HttpContext>>(Dispatcher);
-        const httpContext = new HttpContext(req, res);
+        const dispatcher = c.get<Dispatcher<Context>>(Dispatcher);
+        const httpContext = new Context(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
 

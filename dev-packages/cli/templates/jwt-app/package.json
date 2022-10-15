@@ -10,15 +10,15 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/web": "latest",
-    "@malagu/mvc": "latest",
-    "@malagu/jwt": "latest"
+    "@malagu/core": "{{ version }}",
+    "@malagu/web": "{{ version }}",
+    "@malagu/mvc": "{{ version }}",
+    "@malagu/jwt": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/component": "latest",
-    "@malagu/testing": "latest",
+    "@malagu/cli": "{{ version }}",
+    "@malagu/component": "{{ version }}",
+    "@malagu/testing": "{{ version }}",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },

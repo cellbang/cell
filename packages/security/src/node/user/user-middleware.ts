@@ -4,7 +4,7 @@ import { PathResolver, HttpHeaders, MediaType } from '@malagu/web';
 import { USER_MIDDLEWARE_PRIORITY } from './user-protocol';
 import { SecurityContext } from '../context/context-protocol';
 
-@Component([UserMiddleware, Middleware])
+@Component(Middleware)
 export class UserMiddleware implements Middleware {
 
     @Value('malagu.security.userInfoEndpoint')

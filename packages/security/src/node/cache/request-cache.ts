@@ -1,5 +1,5 @@
 import { RequestCache, SavedRequest, SAVED_REQUEST } from './cache-protocol';
-import { Context, AttributeScope } from '@malagu/web/lib/node';
+import { AttributeScope, Context } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
 import { ENDPOINT, PathResolver } from '@malagu/web';
 import * as qs from 'qs';

@@ -10,13 +10,13 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/mvc": "latest",
+    "@malagu/core": "{{ version }}",
+    "@malagu/mvc": "{{ version }}",
     "@microservice/api": "0.0.0"
 
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
+    "@malagu/cli": "{{ version }}",
     "@microservice/service-a": "0.0.0",
     "@microservice/service-b": "0.0.0"
   },

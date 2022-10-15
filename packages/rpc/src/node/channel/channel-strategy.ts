@@ -1,7 +1,7 @@
 import { Channel, HttpChannel } from '../../common/channal';
 import { ChannelStrategy, CURRENT_MESSAGE_COUNT_REQUEST_KEY, CURRENT_RESPONSE_MESSAGE_REQUEST_KEY } from './channel-protocol';
 import { Component } from '@malagu/core';
-import { Context, HttpContext } from '@malagu/web/lib/node';
+import { Context } from '@malagu/web/lib/node';
 
 @Component(ChannelStrategy)
 export class HttpChannelStrategy implements ChannelStrategy {
@@ -50,7 +50,7 @@ export class HttpChannelStrategy implements ChannelStrategy {
     }
 
     async support(): Promise<boolean> {
-        return Context.getCurrent() instanceof HttpContext;
+        return Context.getCurrent() instanceof Context;
     }
 
 }

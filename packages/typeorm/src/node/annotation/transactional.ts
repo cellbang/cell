@@ -2,6 +2,7 @@ import { IsolationLevel } from 'typeorm/driver/types/IsolationLevel';
 import { DEFAULT_CONNECTION_NAME, getDataSource } from '../../common';
 import { EntityManager } from 'typeorm';
 import { OrmContext } from '../context';
+import { Context } from '@malagu/core/lib/node';
 
 export enum Propagation {
     Required, RequiresNew
@@ -54,7 +55,28 @@ export const Transactional = <TransactionalDecorator>function (nameOrTransaction
             }
         };
 
+        const originalMethod2 = descriptor.value;
+
+        descriptor.value = async function (...args: any[]) {
+            if (!Context.getCurrent()) {
+                return new Promise<any>((resolve, reject) => {
+                    Context.run(async () => {
+                        Context.setCurrent(new Context());
+                        try {
+                            resolve(originalMethod2.apply(this, args));
+                        } catch (e) {
+                            reject(e);
+                            throw e;
+                        }
+                    });
+                });
+            } else {
+                return originalMethod2.apply(this, args);
+            }
+        };
+
     };
+
 };
 
 export function getTransactionalOption(nameOrTransactionalOption?: string | TransactionalOption) {

@@ -5,7 +5,7 @@ import { Component, Value, Autowired } from '@malagu/core';
 import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/web';
 import { RequestCache } from '../cache';
 
-@Component([AuthenticationErrorHandler, ErrorHandler])
+@Component(ErrorHandler)
 export class AuthenticationErrorHandler implements ErrorHandler {
     readonly priority: number = AUTHENTICATION_ERROR_HANDLER_PRIORITY;
 
