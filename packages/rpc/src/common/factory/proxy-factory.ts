@@ -151,6 +151,9 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
     }
 
     protected createProxyMethod(method: string) {
+        if (method === 'then') {
+            return undefined;
+        }
         const isNotify = this.isNotification(method);
         return async (...args: any[]) => {
             const capturedError = new Error(`Request '${method}' failed`);

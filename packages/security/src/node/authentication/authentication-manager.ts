@@ -15,7 +15,7 @@ export class AuthenticationManagerImpl implements AuthenticationManager {
     protected readonly authenticationSuccessHandler: AuthenticationSuccessHandler;
 
     @PostConstruct()
-    async init() {
+    init() {
         this.prioritized = Prioritizeable.prioritizeAllSync(this.authenticationProviders).map(c => c.value);
     }
 

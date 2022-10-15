@@ -10,6 +10,7 @@ export type AdviceOrAspectOption = ComponentId | AspectOption;
 
 export const Aspect = (adviceOrAspectOption: AdviceOrAspectOption): ClassDecorator => (target: any) => {
     const option = <AspectOption>parseComponentOption(target, adviceOrAspectOption);
+    option.id = Array.isArray(option.id) ? option.id[1] : option.id;
     option.pointcut = option.pointcut || COMPONENT_TAG;
     option.tag = { tag: AOP_TAG, value: option.pointcut };
     applyComponentDecorator({ proxy: false, ...option }, target);

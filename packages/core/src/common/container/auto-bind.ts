@@ -7,7 +7,7 @@ import { ContainerUtil } from './container-util';
 import { Scope } from './scope';
 
 export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
-    return new ContainerModule((bind, unbind, isBound, rebind) => {
+    return new ContainerModule((bind, unbind, isBound, rebind, ...rest) => {
         const metadatas: ComponentMetadata[] = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
         for (let index = metadatas.length - 1; index >= 0; index--) {
             const metadata = metadatas[index];
@@ -19,7 +19,7 @@ export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfa
         Reflect.defineMetadata(METADATA_KEY.constantValue, [], Reflect);
 
         if (registry) {
-            registry(bind, unbind, isBound, rebind);
+            registry(bind, unbind, isBound, rebind, ...rest);
         }
     });
 }
@@ -44,8 +44,12 @@ function resolve(metadata: ComponentMetadata, bind: interfaces.Bind, rebind: int
     let mid: any;
     const { ids, scope, name, tag, when, proxy, onActivation, target } = metadata;
     const id = ids.shift()!;
-    mid = metadata.rebind ? rebind(id).to(target) : bind(id).to(target);
-
+    if (metadata.rebind) {
+        const id2 = ids.shift();
+        mid = rebind(id2 || id).to(target);
+    } else {
+        mid = bind(id).to(target);
+    }
     if (scope === Scope.Singleton) {
         mid = mid.inSingletonScope();
     } else if (scope === Scope.Transient) {

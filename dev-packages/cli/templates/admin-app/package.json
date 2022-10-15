@@ -10,20 +10,20 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/react": "latest",
-    "@malagu/rpc": "latest",
-    "@malagu/security": "latest",
-    "@malagu/serve-static": "latest",
-    "@malagu/shell": "latest",
-    "@malagu/typeorm": "latest",
+    "@malagu/core": "{{ version }}",
+    "@malagu/react": "{{ version }}",
+    "@malagu/rpc": "{{ version }}",
+    "@malagu/security": "{{ version }}",
+    "@malagu/serve-static": "{{ version }}",
+    "@malagu/shell": "{{ version }}",
+    "@malagu/typeorm": "{{ version }}",
     "better-sqlite3": "^7.6.2",
     "react": "^18.2.0",
     "grommet": "^2.25.1",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

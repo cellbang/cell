@@ -19,13 +19,13 @@ export async function after(context: ServeContext) {
 
     context.compiler.hooks.done.tap('WebServe', () => {
         entryContextProvider().then(async (ctx: any) => {
-            const { Dispatcher, Context, HttpContext, ContainerProvider, Application, container } = ctx;
+            const { Dispatcher, Context, ContainerProvider, Application, container } = ctx;
             const c = await container;
             ContainerProvider.set(c);
             await c.get(Application).start();
             const dispatcher = c.get(Dispatcher);
             doDispatch = (req: any, res: any) => {
-                const httpContext = new HttpContext(req, res);
+                const httpContext = new Context(req, res);
                 Context.run(() => dispatcher.dispatch(httpContext));
             };
             compileDeferred.resolve();

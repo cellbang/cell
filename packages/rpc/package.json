@@ -8,7 +8,6 @@
     "@malagu/core": "2.39.2",
     "@malagu/web": "2.39.2",
     "axios": "^0.26.1",
-    "inversify": "5.1.1",
     "url-join": "^4.0.1",
     "vscode-jsonrpc": "^6.0.0"
   },

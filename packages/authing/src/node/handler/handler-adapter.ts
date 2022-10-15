@@ -5,7 +5,7 @@ import { PathResolver, HttpMethod, HttpHeaders, MediaType } from '@malagu/web';
 import { render } from 'mustache';
 import { SecurityContext } from '@malagu/security/lib/node';
 
-@Component([HandlerAdapter, LoginPageHandlerAdapter])
+@Component(HandlerAdapter)
 export class LoginPageHandlerAdapter implements HandlerAdapter {
 
     readonly priority = LOGIN_PAGE_HANDLER_ADAPTER_PRIORITY;
@@ -45,7 +45,7 @@ export class LoginPageHandlerAdapter implements HandlerAdapter {
 
 }
 
-@Component([LogoutPageHandlerAdapter, HandlerAdapter])
+@Component(HandlerAdapter)
 export class LogoutPageHandlerAdapter implements HandlerAdapter {
 
     readonly priority = LOGOUT_PAGE_HANDLER_ADAPTER_PRIORITY;

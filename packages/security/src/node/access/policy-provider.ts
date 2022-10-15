@@ -25,7 +25,7 @@ export class ResourcePolicyProvider implements PolicyProvider {
     };
 
     @PostConstruct()
-    protected async init(): Promise<void> {
+    protected init(): void {
         if (this.policyMap) {
             for (const pattarn of Object.keys(this.policyMap)) {
                 const temp = this.policyMap[pattarn];

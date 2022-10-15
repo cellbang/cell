@@ -69,9 +69,9 @@ export function parseComponentOption(target: any, idOrOption: any) {
     const parsed = { ...defaultComponentOption, ...option };
     let ids: ComponentId[];
     if (Array.isArray(parsed.id)) {
-        ids = parsed.id;
+        ids = Array.from(new Set<ComponentId>([ target, ...parsed.id ]));
     } else if (parsed.id && parsed.id !== target) {
-        ids = [ parsed.id, target ];
+        ids = [ target, parsed.id ];
     } else {
         ids = [ target ];
     }

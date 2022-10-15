@@ -10,15 +10,15 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/rpc": "latest",
-    "@malagu/vue": "latest",
-    "@malagu/serve-static": "latest",
+    "@malagu/core": "{{ version }}",
+    "@malagu/rpc": "{{ version }}",
+    "@malagu/vue": "{{ version }}",
+    "@malagu/serve-static": "{{ version }}",
     "vue-router": "^4.0.8",
     "vue": "^3.0.11"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

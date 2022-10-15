@@ -5,7 +5,7 @@ import { OAuth2AuthorizationError, AuthorizationRequest, OAuth2ParameterNames } 
 import { AuthorizationRequestManager } from '../authorization';
 import { enc } from 'crypto-js';
 
-@Component([OAuth2AuthorizationErrorHandler, ErrorHandler])
+@Component(ErrorHandler)
 export class OAuth2AuthorizationErrorHandler implements ErrorHandler {
     readonly priority: number = OAUTH2_AUTHORIZATION_ERROR_HANDLER_PRIORITY;
 

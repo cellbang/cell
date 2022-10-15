@@ -1,7 +1,6 @@
 import { Component, Autowired } from '../annotation';
 import { JexlEngineProvider, ExpressionHandler, ExpressionContextProvider, ExpressionCompiler, ExpressionContext } from './expression-protocol';
 import * as traverse from 'traverse';
-import { postConstruct } from 'inversify';
 
 @Component(ExpressionHandler)
 export class ExpressionHandlerImpl implements ExpressionHandler {
@@ -16,11 +15,6 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
     protected readonly expressionCompiler: ExpressionCompiler;
 
     protected _ctx: ExpressionContext;
-
-    @postConstruct()
-    protected init() {
-
-    }
 
     protected getContext(ctx?: ExpressionContext) {
         const c = ctx || this.expressionContextProvider.provide();

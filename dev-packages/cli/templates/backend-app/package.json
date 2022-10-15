@@ -10,13 +10,13 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/mvc": "latest"
+    "@malagu/core": "{{ version }}",
+    "@malagu/mvc": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "latest",
-    "@malagu/component": "latest",
-    "@malagu/testing": "latest",
+    "@malagu/cli": "{{ version }}",
+    "@malagu/component": "{{ version }}",
+    "@malagu/testing": "{{ version }}",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },

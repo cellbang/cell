@@ -1,5 +1,5 @@
-import { Context, AttributeScope } from '@malagu/web/lib/node';
-import { EntityManager, ObjectType, EntitySchema, Repository, TreeRepository, MongoRepository } from 'typeorm';
+import { Context, AttributeScope } from '@malagu/core/lib/node';
+import { EntityManager, ObjectType, EntitySchema, Repository, TreeRepository, MongoRepository, ObjectLiteral } from 'typeorm';
 import { DEFAULT_CONNECTION_NAME } from '../../common';
 
 export const CURRENT_ORM_CONTEXT_REQUEST_KEY = 'CurrentOrmContextRequest';
@@ -17,16 +17,16 @@ export namespace OrmContext {
         return <EntityManager><unknown>undefined;
     }
 
-    export function getRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): Repository<Entity>  {
-        return getEntityManager(name).getRepository(target);
+    export function getRepository<Entity extends ObjectLiteral>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): Repository<Entity> {
+        return getEntityManager(name).getRepository<Entity>(target);
     }
 
-    export function getTreeRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): TreeRepository<Entity>  {
-        return getEntityManager(name).getTreeRepository(target);
+    export function getTreeRepository<Entity extends ObjectLiteral>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): TreeRepository<Entity>  {
+        return getEntityManager(name).getTreeRepository<Entity>(target);
     }
 
-    export function getMongoRepository<Entity>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): MongoRepository<Entity>  {
-        return getEntityManager(name).getMongoRepository(target);
+    export function getMongoRepository<Entity extends ObjectLiteral>(target: ObjectType<Entity>|EntitySchema<Entity>|string, name?: string): MongoRepository<Entity>  {
+        return getEntityManager(name).getMongoRepository<Entity>(target);
     }
 
     export function pushEntityManager(name: string, entityManager: EntityManager): void {

@@ -25,7 +25,7 @@ export function parseRpcOption(target: any, idOrOption: any) {
 
 export function applyRpcDecorator(option: ComponentOption, target: any) {
     const { ids } = applyComponentDecorator(option, target);
-    const id = ids[0];
+    const id = ids[1] || ids[0];
     return applyComponentDecorator({ id: ConnectionHandler, onActivation: context => {
         const t = context.container.get(id);
         const pipeManager = context.container.get<PipeManager>(PipeManager);

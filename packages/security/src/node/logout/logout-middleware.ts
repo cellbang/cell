@@ -4,7 +4,7 @@ import { LogoutHandler, LOGOUT_MIDDLEWARE_PRIORITY } from './logout-protocol';
 import { LogoutSuccessHandlerProvider } from './logout-success-handler-provider';
 import { PathResolver } from '@malagu/web';
 
-@Component([LogoutMiddleware, Middleware])
+@Component(Middleware)
 export class LogoutMiddleware implements Middleware {
 
     @Autowired(LogoutHandler)

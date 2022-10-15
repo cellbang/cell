@@ -40,7 +40,7 @@ export class UserManagerImpl implements UserManager {
     userInfoSubject: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
 
     @PostConstruct()
-    protected async init() {
+    protected init() {
 
         this.restOperations.interceptors.response.use(response => response, error => {
             if (error.response) {
@@ -64,11 +64,11 @@ export class UserManagerImpl implements UserManager {
         if (userStr) {
             this.userInfoSubject.next(JSON.parse(userStr));
         } else {
-            if (!await this.getUserInfo()) {
+            this.getUserInfo().then(() => {
                 if (this.loginRequired) {
                     this.openLoginPage();
                 }
-            }
+            });
         }
     }
 

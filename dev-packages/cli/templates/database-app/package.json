@@ -10,14 +10,14 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "latest",
-    "@malagu/mvc": "latest",
-    "@malagu/typeorm": "latest",
+    "@malagu/core": "{{ version }}",
+    "@malagu/mvc": "{{ version }}",
+    "@malagu/typeorm": "{{ version }}",
     "better-sqlite3": "^7.6.2",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@malagu/cli": "latest"
+    "@malagu/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
