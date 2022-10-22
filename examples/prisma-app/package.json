@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "@malagu/prisma-backend-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "2.38.20",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/cli-service": "^2.40.0",
+    "@malagu/core": "^2.38.20",
+    "@malagu/mvc": "^2.38.20",
+    "@prisma/client": "^4.4.0",
+    "prisma": "^4.4.0"
+  },
+  "devDependencies": {
+    "@malagu/cli": "^2.38.20",
+    "@malagu/component": "^2.38.20",
+    "@malagu/testing": "^2.38.20",
+    "@types/supertest": "^2.0.12",
+    "supertest": "^6.2.4"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "test": "malagu-component test",
+    "build": "malagu build -m scf",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m scf -m test",
+    "deploy:test": "malagu deploy -m scf -m test",
+    "deploy:pre": "malagu deploy -m scf -m pre",
+    "deploy:prod": "malagu deploy -m scf -m prod"
+  }
+}
