@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.1
+
+- feat(examples) add prisma demo
+
 ## 2.40.0
 
 - fix(core) 修复类作为 ID 注入报错问题
