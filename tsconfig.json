@@ -262,6 +262,9 @@
       ],
       "@malagu/example-adonis-app/*": [
         "examples/adonis-app/*"
+      ],
+      "@malagu/example-prisma-app/*": [
+        "examples/prisma-app/*"
       ]
     }
   },
