@@ -5,7 +5,8 @@
   "main": "build/server.js",
   "scripts": {
     "dev": "node ace serve --watch",
-    "build": "node ace build --production",
+    "build": "malagu build -m fc",
+    "deploy": "./scripts/deploy.sh",
     "start": "node server.js"
   },
   "devDependencies": {
