@@ -8,7 +8,7 @@ export class Pnpm implements Packager {
     }
 
     get copyPackageSectionNames() {
-        return [];
+        return ['pnpm'];
     }
 
     get mustCopyModules() {
