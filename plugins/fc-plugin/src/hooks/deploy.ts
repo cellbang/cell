@@ -252,11 +252,17 @@ async function createOrUpdateApi(region: string, groupId: string, subDomain: str
 async function createOrUpdateHttpTrigger(trigger: any, serviceName: string, functionName: string, region: string, accountId: string) {
     const { triggerConfig } = trigger;
 
-    await createOrUpdateTrigger(trigger, serviceName, functionName);
+    const triggerInfo = await createOrUpdateTrigger(trigger, serviceName, functionName);
+    const urlApi = `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`;
+    const urlInternet: string = triggerInfo?.data?.urlInternet || ''
+    const urlIntranet: string = triggerInfo?.data?.urlIntranet || ''
+    const urlTest = urlInternet.replace('https://', 'http://').replace('fcapp.run', 'functioncompute.com')
 
     console.log(`    - Methods: ${triggerConfig.methods}`);
-    console.log(chalk`    - Url: ${chalk.green.bold(
-        `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`)}`);
+    console.log(chalk`    - Url[API]: ${chalk.green.bold(urlApi)}`);
+    console.log(chalk`    - Url[Internet]: ${chalk.green.bold(urlInternet)}`);
+    console.log(chalk`    - Url[Intranet]: ${chalk.green.bold(urlIntranet)}`);
+    console.log(chalk`    - Url[Test]: ${chalk.green.bold(urlTest)}`);
 }
 
 async function createOrUpdateTimerTrigger(trigger: any, serviceName: string, functionName: string) {
@@ -297,6 +303,7 @@ async function createOrUpdateTrigger(trigger: any, serviceName: string, function
         });
     }
 
+    return triggerInfo
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {
