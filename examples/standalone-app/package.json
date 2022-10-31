@@ -1,14 +1,14 @@
 {
   "private": true,
   "name": "@malagu/example-standalone-app",
-  "version": "2.40.1",
+  "version": "2.40.2",
   "description": "",
   "scripts": {
     "start": "ts-node src/main.ts",
     "build": "tsc"
   },
   "dependencies": {
-    "@malagu/core": "2.40.1"
+    "@malagu/core": "2.40.2"
   },
   "devDependencies": {
     "ts-node": "^10.7.0",

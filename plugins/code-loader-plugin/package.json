@@ -1,6 +1,6 @@
 {
   "name": "@malagu/code-loader-plugin",
-  "version": "2.40.1",
+  "version": "2.40.2",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -41,7 +41,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.40.1"
+    "@malagu/component": "2.40.2"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
