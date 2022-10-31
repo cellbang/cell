@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.40.2
+
+- feat(adonis-plugin) respect tsconfig outDir as distDir
+- feat(pnpm) add copyPackageSectionNames (#170)
+- feat(fc-plugin): add http trigger url (#171)
+
 ## 2.40.1
 
 - feat(examples) add prisma demo
