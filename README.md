@@ -15,7 +15,7 @@ Malagu is a Serverless First, componentized, platform-independent progressive ap
 
 ## Features
 
-- Convention is greater than configuration, zero configuration, ready to use out of the box
+- Convention over configuration, zero configuration, ready to use out of the box
 - Spring Boot for TypeScript
 - Serverless First
 - The platform is not locked
