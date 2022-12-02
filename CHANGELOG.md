@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.3
+
+- fix(web) 修复控制器方法参数的基础类型转换不正确问题
+
 ## 2.40.2
 
 - feat(adonis-plugin) respect tsconfig outDir as distDir

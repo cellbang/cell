@@ -65,12 +65,11 @@ export class ValidationPipe implements PipeTransform<any> {
 
     private toValidate(metadata: ArgumentMetadata): boolean {
         const { argType } = metadata;
-        const types = [String, Boolean, Number, Array, Object];
         // eslint-disable-next-line no-null/no-null
-        return !types.some(t => argType === t) && argType !== null;
+        return argType !== null;
     }
 
-    private toEmptyIfNil<T = any, R = any>(value: T): R | {} {
+    private toEmptyIfNil<T = any, R = any>(value: T): R | {} | undefined {
         // eslint-disable-next-line no-null/no-null
         return value === null ? {} : value;
     }
