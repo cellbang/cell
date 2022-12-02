@@ -1,11 +1,11 @@
 {
   "name": "@malagu/pwa",
-  "version": "2.40.2",
+  "version": "2.40.3",
   "description": "pwa component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.40.2",
+    "@malagu/cli-common": "2.40.3",
     "workbox-webpack-plugin": "^6.5.3"
   },
   "publishConfig": {
@@ -35,8 +35,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.40.2",
-    "@malagu/component": "2.40.2"
+    "@malagu/cli-service": "2.40.3",
+    "@malagu/component": "2.40.3"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
