@@ -1,13 +1,13 @@
 {
   "name": "@malagu/oauth2-core",
-  "version": "2.40.5",
+  "version": "2.40.6",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.40.5",
-    "@malagu/security": "2.40.5",
-    "@malagu/web": "2.40.5"
+    "@malagu/core": "2.40.6",
+    "@malagu/security": "2.40.6",
+    "@malagu/web": "2.40.6"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.40.5",
+    "@malagu/component": "2.40.6",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },

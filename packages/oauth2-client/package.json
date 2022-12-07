@@ -1,15 +1,15 @@
 {
   "name": "@malagu/oauth2-client",
-  "version": "2.40.5",
+  "version": "2.40.6",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.40.5",
-    "@malagu/oauth2-core": "2.40.5",
-    "@malagu/oauth2-jose": "2.40.5",
-    "@malagu/security": "2.40.5",
-    "@malagu/web": "2.40.5",
+    "@malagu/core": "2.40.6",
+    "@malagu/oauth2-core": "2.40.6",
+    "@malagu/oauth2-jose": "2.40.6",
+    "@malagu/security": "2.40.6",
+    "@malagu/web": "2.40.6",
     "axios": "^0.26.1",
     "crypto-js": "^3.1.47",
     "jose": "^4.9.3",
@@ -43,7 +43,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.40.5",
+    "@malagu/component": "2.40.6",
     "@types/crypto-js": "^3.1.47"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
