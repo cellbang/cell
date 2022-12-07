@@ -15,7 +15,7 @@ export class ValidationPipe implements PipeTransform<any> {
     public async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
         const opts = this.options || {};
         const { argType } = metadata;
-        if (!argType || !this.toValidate(metadata)) {
+        if ( value === undefined || !argType || !this.toValidate(metadata)) {
             return value;
         }
         const originalValue = value;
