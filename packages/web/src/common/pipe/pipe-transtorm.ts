@@ -15,8 +15,15 @@ export class ValidationPipe implements PipeTransform<any> {
     public async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
         const opts = this.options || {};
         const { argType } = metadata;
-        if ( value === undefined || !argType || !this.toValidate(metadata)) {
+        if (!argType) {
             return value;
+        }
+        if (!this.toValidate(metadata)) {
+            return plainToInstance(
+                argType,
+                value,
+                opts.transformOptions,
+            );
         }
         const originalValue = value;
         value = this.toEmptyIfNil(value);
@@ -65,8 +72,9 @@ export class ValidationPipe implements PipeTransform<any> {
 
     private toValidate(metadata: ArgumentMetadata): boolean {
         const { argType } = metadata;
+        const types = [String, Boolean, Number, Array, Object];
         // eslint-disable-next-line no-null/no-null
-        return argType !== null;
+        return argType !== null && !types.some(t => argType === t);
     }
 
     private toEmptyIfNil<T = any, R = any>(value: T): R | {} | undefined {
