@@ -1,21 +1,25 @@
 {
-  "ignoreCompilerErrors": true,
-  "mode": "modules",
-  "out": "gh-pages/docs/next",
-  "excludeExternals": true,
-  "includeDeclarations": true,
-  "readme": "README.md",
-  "module": "commonjs",
-  "target": "es6",
-  "hideGenerator": true,
-  "external-modulemap": ".*\/(?:packages|dev-packages|plugins)\/([\\w\\-_]+)\/",
-  "name": "Malagu TypeDoc",
+  "emit": "none",
+  "compilerOptions": {
+    "ignoreCompilerErrors": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "allowJs": true
+  },
   "exclude": [
-    "**/+(examples|typings)/**/*",
-    "**/*spec.ts",
-    "packages/*/lib",
+    "../+(dev-packages|examples|typings|scripts)/**",
+    "../packages/*/lib/**",
     "plugins/*/lib",
     "dev-packages/*/lib",
-    "**/node_modules"
-  ]
+    "**/node_modules/**",
+    "**/*.tsx",
+    "**/*spec.ts"
+  ],
+  "excludeExternals": true,
+  "external-modulemap": ".*\/(packages|plugins)\/([\\w\\-_]+)\/",
+  "hideGenerator": true,
+  "name": "Malagu TypeDoc",
+  "out": "../gh-pages/docs/next",
+  "readme": "../README.md",
+  "entryPointStrategy": "expand"
 }

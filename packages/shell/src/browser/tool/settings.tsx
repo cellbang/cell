@@ -16,18 +16,19 @@ const StyledSettings = styled.div`
     overflow: auto;
     right: 0;
 `;
-
+// @ts-ignore
 export function Settings(props: ButtonProps) {
     // eslint-disable-next-line no-null/no-null
     const targetRef = React.useRef(null);
     const [show, setShow] = React.useState(false);
-    const { icon, ...rest } = ConfigUtil.get('malagu.shell.settings');
+    const { icon, ...rest } = ConfigUtil.get<ButtonProps>('malagu.shell.settings');
     props = { ...rest, ...props };
     React.useEffect(() => {
         const themeManager = ContainerUtil.get<ThemeManager<ThemeType>>(ThemeManager);
         const subscription = themeManager.currentSubject.subscribe(t => setShow(false));
         return () => subscription.unsubscribe();
     }, []);
+    // @ts-ignore
     return (<Fragment>
         <Button ref={targetRef} hoverIndicator onClick={() => setShow(true)} {...props} icon={<Icon icon={icon}/>}/>
         {targetRef.current && show && (

@@ -12,9 +12,9 @@
   "devDependencies": {
     "lerna": "^5.6.2",
     "nx": "^14.4.3",
-    "typedoc": "^0.17.7",
-    "typedoc-plugin-external-module-map": "~1.2.1",
-    "typedoc-plugin-remove-references": "^0.0.5"
+    "typedoc": "^0.23.21",
+    "typedoc-plugin-external-module-map": "~1.3.2",
+    "typedoc-plugin-remove-references": "^0.0.6"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
@@ -28,7 +28,7 @@
     "lint": "lerna run lint",
     "lint:clean": "rimraf .eslintcache",
     "lint:oneshot": "node --max-old-space-size=4096 node_modules/eslint/bin/eslint.js --cache=true \"{dev-packages,packages,examples}/**/*.{ts,tsx}\"",
-    "docs": "rimraf gh-pages/docs/next && typedoc --tsconfig configs/typedoc-tsconfig.json --options configs/typedoc.json",
+    "docs": "rimraf gh-pages/docs/next && typedoc --tsconfig tsconfig.json --options configs/typedoc.json .",
     "test": "yarn test:references && yarn test:malagu",
     "test:references": "node scripts/compile-references --dry-run",
     "test:malagu": "lerna run test --scope \"@malagu/!(example-)*\" --stream --concurrency=1",
