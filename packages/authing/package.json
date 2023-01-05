@@ -10,7 +10,7 @@
     "@malagu/web": "2.40.7",
     "authing-js-sdk": "^4.22.24",
     "axios": "^0.26.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "minimatch": "^3.0.4",
     "mustache": "^4.0.0",
     "querystring": "^0.2.0",

@@ -7,7 +7,7 @@
   "dependencies": {
     "@malagu/core": "2.40.7",
     "@types/jsonwebtoken": "^8.5.8",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^9.0.0"
   },
   "publishConfig": {
     "access": "public"
