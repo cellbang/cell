@@ -157,7 +157,7 @@ export async function getApi(client: any, groupId: string, apiName: string, prin
         ApiName: apiName,
         GroupId: groupId,
         PageSize: 100
-    });
+    }, { timeout: 60000 });
     const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName): [];
     if (apis.length > 1) {
         throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
@@ -180,7 +180,7 @@ export async function getApi(client: any, groupId: string, apiName: string, prin
 export async function getGroup(client: any, groupName: string, print = false) {
     const res = await client.describeApiGroups({
         GroupName: groupName // filter out
-    }, { timeout: 10000 });
+    }, { timeout: 60000 });
 
     const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute: [];
     const list = groups.filter((item: any) => item.GroupName === groupName);

@@ -105,7 +105,7 @@ async function deployApi(groupId: string, apiId: string, stage: any) {
             ApiId: apiId,
             StageName: stage.name,
             Description: stage.description
-        });
+        }, { timeout: 60000 });
     });
 }
 
@@ -231,11 +231,11 @@ async function createOrUpdateApi(region: string, groupId: string, subDomain: str
     if (apiInfo) {
         await SpinnerUtil.start(`Update ${apiName} api`, async () => {
             apiId = apiInfo.ApiId;
-            apiClient.modifyApi(parseApiMeta(api, region, groupId, role, apiId));
+            apiClient.modifyApi(parseApiMeta(api, region, groupId, role, apiId), { timeout: 60000 });
         });
     } else {
         await SpinnerUtil.start(`Create ${apiName} api`, async () => {
-            const { ApiId } = await apiClient.createApi(parseApiMeta(api, region, groupId, role));
+            const { ApiId } = await apiClient.createApi(parseApiMeta(api, region, groupId, role), { timeout: 60000 });
             apiId = ApiId;
         });
     }
@@ -558,11 +558,11 @@ async function createOrUpdateGroup(group: any) {
         groupId = groupInfo.GroupId;
         subDomain = groupInfo.SubDomain;
         await SpinnerUtil.start(`Update ${name} group`, async () => {
-            await apiClient.modifyApiGroup(parseGroupMeta(group, groupId), { timeout: 10000 });
+            await apiClient.modifyApiGroup(parseGroupMeta(group, groupId), { timeout: 60000 });
         });
     } else {
         await SpinnerUtil.start(`Create ${name} group`, async () => {
-            const { GroupId, SubDomain } = await apiClient.createApiGroup(parseGroupMeta(group), { timeout: 10000 });
+            const { GroupId, SubDomain } = await apiClient.createApiGroup(parseGroupMeta(group), { timeout: 60000 });
             groupId = GroupId;
             subDomain = SubDomain;
         });
@@ -604,12 +604,12 @@ async function createRoleIfNeed() {
 
     if (!role) {
         await SpinnerUtil.start(`Create ${roleName} role`, async () => {
-            role = await ram.createRole(parseRoleMeta(roleName));
+            role = await ram.createRole(parseRoleMeta(roleName), { timeout: 60000 });
         });
     }
 
     const policyName = 'AliyunFCInvocationAccess';
-    const policies = await ram.listPoliciesForRole({ RoleName: roleName });
+    const policies = await ram.listPoliciesForRole({ RoleName: roleName }, { timeout: 60000 });
 
     const policy = policies.Policies.Policy.find((item: any) => item.PolicyName === policyName);
 
@@ -619,7 +619,7 @@ async function createRoleIfNeed() {
                 PolicyType: 'System',
                 PolicyName: policyName,
                 RoleName: roleName
-            });
+            }, { timeout: 60000 });
         });
     }
 

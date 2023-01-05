@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.7
+
+- feat(fc-plugin) 增加 API 网关 SDK 超时时间到 1 分钟
+
 ## 2.40.5
 
 - fix(web) 修复控制器方法参数的基础类型转换不正确问题
