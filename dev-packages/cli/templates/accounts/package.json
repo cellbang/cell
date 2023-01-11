@@ -28,7 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intl": "^6.1.2",
-    "styled-components": "^6.0.5",
+    "styled-components": "^5.3.5",
     "grommet": "^2.25.1",
     "typeorm": "^0.3.7",
     "class-transformer": "^0.5.1"

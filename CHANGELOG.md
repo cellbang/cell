@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.8
+
+- fix(cli) 修复 accounts 模板创建不了问题
+
 ## 2.40.7
 
 - feat(fc-plugin) 增加 API 网关 SDK 超时时间到 1 分钟
