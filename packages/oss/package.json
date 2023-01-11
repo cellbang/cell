@@ -1,12 +1,12 @@
 {
   "name": "@malagu/oss",
-  "version": "2.40.7",
+  "version": "2.40.8",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.40.7",
-    "@malagu/core": "2.40.7",
+    "@malagu/cloud": "2.40.8",
+    "@malagu/core": "2.40.8",
     "ali-oss": "^6.16.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.40.7",
+    "@malagu/component": "2.40.8",
     "@types/ali-oss": "^6.0.5"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"

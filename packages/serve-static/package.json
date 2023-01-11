@@ -1,12 +1,12 @@
 {
   "name": "@malagu/serve-static",
-  "version": "2.40.7",
+  "version": "2.40.8",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.40.7",
-    "@malagu/web": "2.40.7",
+    "@malagu/core": "2.40.8",
+    "@malagu/web": "2.40.8",
     "@types/send": "^0.17.0",
     "send": "^0.17.1"
   },
@@ -39,8 +39,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.40.7",
-    "@malagu/component": "2.40.7"
+    "@malagu/cli-service": "2.40.8",
+    "@malagu/component": "2.40.8"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
