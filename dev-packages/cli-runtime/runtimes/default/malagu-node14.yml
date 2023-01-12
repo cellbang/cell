@@ -7,6 +7,6 @@ malagu:
       codeUri: https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-x64.tar.gz
     function:
       env:
-        PATH: /opt/node-v14-17-3-linux-x64/bin:$PATH
+        PATH: /opt/node-v14.17.3-linux-x64/bin:$PATH
       layers:
         - node-v14-17-3-linux-x64

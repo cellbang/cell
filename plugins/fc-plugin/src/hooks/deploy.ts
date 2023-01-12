@@ -682,6 +682,5 @@ export async function genDomain(params: api.Params) {
 
     await fcClient.deleteTrigger(serviceName, functionName, triggerName);
     await fcClient.deleteFunction(serviceName, functionName);
-    await fcClient.deleteService(serviceName);
     return Body.Domain || parseDomain(params);
 }

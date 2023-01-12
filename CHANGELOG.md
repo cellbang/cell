@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.9
+
+- fix(runtime) 修复 node14 和 node12 配置
+
 ## 2.40.8
 
 - fix(cli) 修复 accounts 模板创建不了问题

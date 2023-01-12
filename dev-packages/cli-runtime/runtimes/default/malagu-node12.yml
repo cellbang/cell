@@ -7,6 +7,6 @@ malagu:
       codeUri: https://nodejs.org/dist/v12.22.1/node-v12.22.1-linux-x64.tar.gz
     function:
       env:
-        PATH: /opt/node-v12-22-1-linux-x64/bin:$PATH
+        PATH: /opt/node-v12.22.1-linux-x64/bin:$PATH
       layers:
         - node-v12-22-1-linux-x64
