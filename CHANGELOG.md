@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.10
+
+- feat(*) 优化 targets 默认配置，现在无需显示指定 backend
+
 ## 2.40.9
 
 - fix(runtime) 修复 node14 和 node12 配置

@@ -1,3 +1,5 @@
+targets:
+  - backend
 malagu:
   name: 'Malagu Framework'
   hostDomId: malagu-root

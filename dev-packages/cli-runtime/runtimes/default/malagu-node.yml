@@ -10,4 +10,3 @@ malagu:
     filterWarningsPlugin:
       node: >-
         ${ ["Module not found: Error: Can\'t resolve"] | onTarget('backend') }
-
