@@ -21,7 +21,7 @@ $ yarn start  # 或者执行 malagu serve 命令
 
 ## 构建部署
 
-模板默认提供了四套隔离环境：本地（local）、测试（test）、预发（pre）、线上（prod）。每个环境应着一个 malagu 配置文件（可选），类似 malagu-test.yml。而 malagu.yml 文件一般用于放所有环境的公共配置。第一次部署的时候可能会提示你填写相关云厂商 ak 信息。如果是 Vercel 云平台的模板，会提示你需要登录到 Vercel 平台。你也可以在项目通过 .env 提供云厂商的 ak 信息。
+模板默认提供了四套隔离环境：本地（local）、测试（test）、预发（pre）、线上（prod）。每个环境对应着一个 malagu 配置文件（可选），类似 malagu-test.yml。而 malagu.yml 文件一般用于放所有环境的公共配置。第一次部署的时候可能会提示你填写相关云厂商 ak 信息。如果是 Vercel 云平台的模板，会提示你需要登录到 Vercel 平台。你也可以在项目通过 .env 提供云厂商的 ak 信息。
 
 ```bash
 
