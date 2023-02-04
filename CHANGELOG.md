@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.40.11
+
+- feat(vue) 默认 vue 组件开启前后端一体化特性
+
 ## 2.40.10
 
 - feat(*) 优化 targets 默认配置，现在无需显示指定 backend
