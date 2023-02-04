@@ -4,24 +4,24 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.40.11",
+  "version": "2.40.12",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/cli-service": "2.40.11",
-    "@malagu/core": "2.40.11",
-    "@malagu/mvc": "2.40.11",
+    "@malagu/cli-service": "2.40.12",
+    "@malagu/core": "2.40.12",
+    "@malagu/mvc": "2.40.12",
     "@prisma/client": "^4.4.0",
     "prisma": "^4.4.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.40.11",
+    "@malagu/cli": "2.40.12",
     "@malagu/cli-service": "2.40.0",
-    "@malagu/component": "2.40.11",
-    "@malagu/testing": "2.40.11",
+    "@malagu/component": "2.40.12",
+    "@malagu/testing": "2.40.12",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },
