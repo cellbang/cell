@@ -1,13 +1,13 @@
 {
   "name": "@malagu/vercel-adapter",
-  "version": "2.40.10",
+  "version": "2.40.11",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.40.10",
-    "@malagu/core": "2.40.10",
-    "@malagu/web": "2.40.10",
+    "@malagu/cli-common": "2.40.11",
+    "@malagu/core": "2.40.11",
+    "@malagu/web": "2.40.11",
     "command-exists": "^1.2.9",
     "express": "^4.17.1",
     "fs-extra": "^9.0.13"
@@ -41,8 +41,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.40.10",
-    "@malagu/component": "2.40.10"
+    "@malagu/cli-service": "2.40.11",
+    "@malagu/component": "2.40.11"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
