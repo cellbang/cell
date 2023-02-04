@@ -7,7 +7,6 @@ import { RuntimeUtil } from '@malagu/cli-runtime/lib/util/runtime-util';
 import { config } from 'dotenv';
 const Watchpack = require('watchpack');
 config();
-const watchpack = new Watchpack({});
 
 const argv = [ ...process.argv ];
 argv.shift();
@@ -92,11 +91,14 @@ async function execute() {
                 ...(infoHookModules || []).map(m => m.path),
                 ...(components || []).reduce<string[]>((prev, curr) => prev.concat(curr.configFiles), [])
             ];
+            const watchpack = new Watchpack({
+                aggregateTimeout: 1500
+            });
             watchpack.watch({
-                files: files.map(f => f?.split('/').join(sep)),
-                aggregateTimeout: 1000
+                files: files.map(f => f?.split('/').join(sep))
             });
             watchpack.on('aggregated', () => {
+                watchpack.close();
                 execute();
             });
         } else if (messageEvent.type === 'address') {
@@ -111,7 +113,6 @@ function exit() {
     if (current?.killed === false) {
         current.kill();
     }
-    watchpack.close();
 }
 
 process.on('exit', exit);
