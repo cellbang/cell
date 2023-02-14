@@ -1,0 +1,31 @@
+{
+  "name": "docker-app",
+  "keywords": [
+    "malagu-component"
+  ],
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@malagu/core": "{{ version }}",
+    "@malagu/react": "{{ version }}",
+    "@malagu/rpc": "{{ version }}",
+    "@malagu/serve-static": "{{ version }}",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@malagu/cli": "{{ version }}"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .malagu",
+    "build": "malagu build",
+    "start": "malagu serve",
+    "deploy": "malagu deploy -m scf -m test",
+    "deploy:test": "malagu deploy -m scf -m test",
+    "deploy:pre": "malagu deploy -m scf -m pre",
+    "deploy:prod": "malagu deploy -m scf -m prod"
+  }
+}

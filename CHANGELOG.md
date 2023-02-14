@@ -3,6 +3,7 @@
 ## 2.40.13
 
 - fix(cli) 修复在 windows 系统下构建产物运行报找不到 Value 错误
+- feat(cli) 支持 docker 构建打包类型的模板：docker
 
 
 ## 2.40.12
