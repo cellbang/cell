@@ -208,6 +208,7 @@ export class NormalModuleReplacementPluginConfigFactory {
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).moduleReplacementPlugin || {};
 
         const resources = [
+            '\\node_modules\\@malagu\\',
             '/node_modules/@malagu/',
             ...(pluginConfig.resources ?? [])
         ];
