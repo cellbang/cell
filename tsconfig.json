@@ -265,6 +265,12 @@
       ],
       "@malagu/example-prisma-app/*": [
         "examples/prisma-app/*"
+      ],
+      "@malagu/example-docker/*": [
+        "examples/docker-app/*"
+      ],
+      "@malagu/example-docker-app/*": [
+        "examples/docker-app/*"
       ]
     }
   },
