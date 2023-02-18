@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.41.0
+
+- feat(web) 支持 Web 应用健康指标查询，`/health` 查看所有健康指标，`/health/xxx` 查看名称为 xxx 的健康指标，开发者也可以通过 HealthIndicator 接口注册自定义健康指标
+
+
 ## 2.40.13
 
 - fix(cli) 修复在 windows 系统下构建产物运行报找不到 Value 错误

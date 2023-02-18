@@ -13,6 +13,9 @@ malagu:
   trace:
     requestField: X-Malagu-Trace-ID
     responseField: X-Malagu-Trace-ID
+  health:
+    url: /health
+    method: GET
   web:
     route:
       cacheSize: 500
