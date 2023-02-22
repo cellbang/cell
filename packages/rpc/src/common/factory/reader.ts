@@ -39,7 +39,7 @@ export class ChannelMessageReader extends AbstractMessageReader {
         }
     }
 
-    protected fireError(error: any): void {
+    protected override fireError(error: any): void {
         if (this.state === 'initial') {
             this.events.splice(0, 0, { error });
         } else if (this.state === 'listening') {

@@ -1,5 +1,4 @@
-import { interfaces } from 'inversify';
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil, ComponentId } from '@malagu/core';
 import { ID_KEY, RPC } from '../annotation';
 import { HttpProxyCreator, HttpProxyCreatorOptions, MergeOptions } from '../proxy/http-proxy-creator';
 import urlJoin = require('url-join');
@@ -8,7 +7,7 @@ import { ProxyCreator } from '../proxy/proxy-protocol';
 let defaultProxyCreator: ProxyCreator | undefined;
 
 export namespace RpcUtil {
-    export function get<T extends object>(rpcServiceIdentifier: interfaces.ServiceIdentifier<T>): T {
+    export function get<T extends object>(rpcServiceIdentifier: ComponentId<T>): T {
         if (defaultProxyCreator) {
             return defaultProxyCreator.create<T>(toPath(rpcServiceIdentifier));
         }
@@ -31,7 +30,7 @@ export namespace RpcUtil {
         }});
     }
 
-    export function create<T extends object>(endpoint: string, rpcServiceIdentifier: interfaces.ServiceIdentifier<T>,
+    export function create<T extends object>(endpoint: string, rpcServiceIdentifier: ComponentId<T>,
         options?: Partial<HttpProxyCreatorOptions<Partial<MergeOptions>>>): T {
         return createProxyCreator(endpoint, options).create<T>(toPath(rpcServiceIdentifier));
     }

@@ -9,9 +9,9 @@ import * as components from 'grommet';
 @Component(WidgetFactory)
 export class CustomWidgetFactory extends AbstractWidgetFactory<React.ReactNode> {
 
-    priority = 1000;
+    override priority = 1000;
 
-    async support(widgetModel: WidgetModel): Promise<boolean> {
+    override async support(widgetModel: WidgetModel): Promise<boolean> {
         return widgetModel.type in widgets;
     }
 
@@ -40,13 +40,13 @@ export class CustomWidgetFactory extends AbstractWidgetFactory<React.ReactNode> 
 @Component(WidgetFactory)
 export class GrommetWidgetFactory extends CustomWidgetFactory {
 
-    priority = 900;
+    override priority = 900;
 
-    async support(widgetModel: WidgetModel): Promise<boolean> {
+    override async support(widgetModel: WidgetModel): Promise<boolean> {
         return widgetModel.type in components;
     }
 
-    protected doGetWidget(type: string) {
+    protected override doGetWidget(type: string) {
         return (components as any)[type];
     }
 

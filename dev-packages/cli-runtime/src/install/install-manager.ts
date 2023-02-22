@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { existsSync, copy, readFile, writeFile } from 'fs-extra';
 const inquirer = require('inquirer');
 import { templates } from './runtimes';
@@ -11,7 +10,7 @@ import {CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 
 import * as ora from 'ora';
 const chalk = require('chalk');
-import { basename, join } from 'path';
+import { basename, join, resolve } from 'path';
 import { RuntimeUtil } from '../util';
 const leven = require('leven');
 

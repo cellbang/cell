@@ -1,6 +1,5 @@
 import { ClientRegistration } from '../registration';
-import { AuthorizationExchange, AuthorizationGrantType, AccessToken, RefreshToken } from '@malagu/oauth2-core';
-import { AccessTokenResponse } from '@malagu/oauth2-core';
+import { AuthorizationExchange, AuthorizationGrantType, AccessToken, RefreshToken, AccessTokenResponse } from '@malagu/oauth2-core';
 
 export const UserResponseClient = Symbol('UserResponseClient');
 

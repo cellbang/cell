@@ -1,13 +1,11 @@
 import * as paths from 'path';
 import { readJsonFile } from './json-file';
 import { Dependencies, NodePackage, PublishedNodePackage, sortByKey } from './npm-registry';
-import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage } from './package-protocol';
+import { ComponentPackage, ApplicationLog, ApplicationPackageOptions, ApplicationModuleResolver, RawComponentPackage, Module } from './package-protocol';
 import { ComponentPackageCollector } from './component-package-collector';
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { Settings } from '../settings/settings-protocol';
 import { ComponentPackageLoader } from './component-package-loader';
-import { Module } from './package-protocol';
-
 import { ComponentPackageResolver } from './component-package-resolver';
 import { existsSync, readFileSync } from 'fs-extra';
 import { PathUtil } from '../utils/path-util';

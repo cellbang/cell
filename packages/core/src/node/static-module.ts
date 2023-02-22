@@ -1,4 +1,4 @@
 import { autoBind } from '../common';
-export * from '.';
+import './index';
 
 export default autoBind();

@@ -434,7 +434,7 @@ export class AutoOpenBarrier extends Barrier {
         this._timeout = setTimeout(() => this.open(), autoOpenTimeMs);
     }
 
-    open(): void {
+    override open(): void {
         clearTimeout(this._timeout);
         super.open();
     }
@@ -883,7 +883,7 @@ export class RunOnceWorker<T> extends RunOnceScheduler {
         }
     }
 
-    protected doRun(): void {
+    protected override doRun(): void {
         const units = this.units;
         this.units = [];
 
@@ -892,7 +892,7 @@ export class RunOnceWorker<T> extends RunOnceScheduler {
         }
     }
 
-    dispose(): void {
+    override dispose(): void {
         this.units = [];
 
         super.dispose();

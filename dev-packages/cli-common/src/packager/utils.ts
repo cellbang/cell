@@ -11,7 +11,7 @@ export class SpawnError extends Error {
         super(message);
     }
 
-    toString() {
+    override toString() {
         return `${this.message}\n${this.stderr}`;
     }
 }

@@ -1,4 +1,4 @@
 import { autoBind } from '@malagu/core';
-export * from '.';
+import './index';
 
 export default autoBind();

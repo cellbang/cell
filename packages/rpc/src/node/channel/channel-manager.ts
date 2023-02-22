@@ -1,7 +1,6 @@
 import { Context, NotFoundError } from '@malagu/web/lib/node';
-import { optional } from 'inversify';
 import { ConnectionHandler, ConnnectionFactory, Channel, ConsoleLogger } from '../../common';
-import { Component, Autowired, Deferred } from '@malagu/core';
+import { Component, Autowired, Deferred, Optional } from '@malagu/core';
 import { CURRENT_CHANNEL_STRATEGY_REQUEST_KEY, ChannelStrategy } from './channel-protocol';
 
 // tslint:disable:no-any
@@ -11,7 +10,7 @@ export class ChannelManager {
     protected _handlers = new Map<string, ConnectionHandler>();
 
     constructor(
-        @Autowired(ConnectionHandler) @optional()
+        @Autowired(ConnectionHandler) @Optional()
         protected readonly handlers: ConnectionHandler[],
         @Autowired(ConnnectionFactory) protected connnectionFactory: ConnnectionFactory<Channel>
     ) {

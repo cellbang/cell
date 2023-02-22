@@ -37,7 +37,8 @@
     "leven": "^3.1.0",
     "minimist": "^1.2.6",
     "ora": "^5.4.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "inquirer-autocomplete-prompt": "^1.0.1"
   },
   "devDependencies": {
     "@malagu/component": "2.41.0"

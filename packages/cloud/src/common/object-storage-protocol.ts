@@ -1,5 +1,5 @@
 import { Stream } from 'stream';
-import { AbstractCloudService, CloudService } from './cloud-protocol';
+import { AbstractCloudService, CloudService, RawCloudService } from './cloud-protocol';
 
 export const ObjectStorageService = Symbol('ObjectStorageService');
 
@@ -114,7 +114,7 @@ export interface HeadObjectResult {
     expires?: Date;
 }
 
-export interface ObjectStorageService<T> extends CloudService<T> {
+export interface ObjectStorageService<T extends RawCloudService> extends CloudService<T> {
     createBucket(request: CreateBucketRequest): Promise<CreateBucketResult>;
     deleteBucket(request: DeleteBucketRequest): Promise<void>;
     listBuckets(): Promise<ListAllMyBucketsResult>;
@@ -127,8 +127,8 @@ export interface ObjectStorageService<T> extends CloudService<T> {
     headObject(request: GetObjectRequest): Promise<HeadObjectResult>;
 }
 
-export abstract class AbstractObjectStorageService<T> extends AbstractCloudService<T> implements ObjectStorageService<T> {
-    name = OBJECT_STORAGE_NAME;
+export abstract class AbstractObjectStorageService<T extends RawCloudService> extends AbstractCloudService<T> implements ObjectStorageService<T> {
+    override name = OBJECT_STORAGE_NAME;
     abstract createBucket(request: CreateBucketRequest): Promise<CreateBucketResult>;
     abstract deleteBucket(request: DeleteBucketRequest): Promise<void>;
     abstract listBuckets(): Promise<ListAllMyBucketsResult>;

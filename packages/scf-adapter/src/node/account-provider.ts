@@ -5,7 +5,7 @@ import { AccountProvider, Account } from '@malagu/cloud';
 @Component({ id: AccountProvider, rebind: true })
 export class FaaSAccountProvider extends DefaultAccountProvider {
 
-    async provide(): Promise<Account | undefined> {
+    override async provide(): Promise<Account | undefined> {
         const account = await super.provide();
         if (account) {
             return account;

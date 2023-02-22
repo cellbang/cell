@@ -90,7 +90,7 @@ export class FrontendApplication extends AbstractApplication {
         }
     }
 
-    protected async doStart(): Promise<void> {
+    protected override async doStart(): Promise<void> {
         for (const lifecycle of this.lifecycles) {
             if (lifecycle.initialize) {
                 try {

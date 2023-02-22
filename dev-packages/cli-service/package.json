@@ -60,8 +60,9 @@
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.2",
     "ts-loader": "^9.1.2",
-    "typescript": "^4.2.4",
+    "typescript": "~4.5.5",
     "webpack": "^5.52.0",
+    "fs-extra": "^9.0.13",
     "webpack-dev-server": "^4.8.1",
     "webpack-node-externals": "^3.0.0",
     "worker-loader": "^3.0.8"

@@ -1,11 +1,10 @@
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
-import { getOwnMetadata, Component, Autowired, Optional, ErrorType, Prioritizeable } from '@malagu/core';
+import { getOwnMetadata, Component, Autowired, Optional, ErrorType, Prioritizeable, getTargetClass } from '@malagu/core';
 import { PathResolver } from '@malagu/web';
 import { CatchMetadata } from '../annotation';
 import { PathRouteMetadata, ErrorRouteMetadata } from './handler-protocol';
-import { getTargetClass } from '@malagu/core';
 
 @Component()
 export class RouteBuilder {

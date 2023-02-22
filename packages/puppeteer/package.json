@@ -9,7 +9,8 @@
     "@malagu/cloud": "2.41.0",
     "@malagu/core": "2.41.0",
     "puppeteer-core": "^5.5.0",
-    "tar": "^4.4.4"
+    "tar": "^4.4.4",
+    "ora": "^5.4.1"
   },
   "publishConfig": {
     "access": "public"

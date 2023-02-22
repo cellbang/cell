@@ -1,5 +1,5 @@
 import 'reflect-metadata';
 import { autoBind } from '@malagu/core';
-import '.';
+import './index';
 
 export default autoBind();

@@ -10,7 +10,8 @@
     "fs-extra": "^9.0.13",
     "is-stream": "^2.0.0",
     "mustache": "^4.0.1",
-    "url-join": "^4.0.1"
+    "url-join": "^4.0.1",
+    "reflect-metadata": "^0.1.13"
   },
   "publishConfig": {
     "access": "public"

@@ -38,6 +38,7 @@
   "dependencies": {
     "@malagu/cli-common": "2.41.0",
     "@malagu/cli-runtime": "2.41.0",
+    "@malagu/frameworks": "2.41.0",
     "@types/js-yaml": "^3.12.1",
     "chalk": "^4.1.2",
     "commander": "^8.1.0",
@@ -51,7 +52,9 @@
     "semver": "^7.3.5",
     "traverse": "^0.6.6",
     "update-notifier": "^5.0.1",
-    "watchpack": "^2.2.0"
+    "watchpack": "^2.2.0",
+    "inquirer": "^8.1.2",
+    "inquirer-autocomplete-prompt": "^1.0.1"
   },
   "devDependencies": {
     "@malagu/component": "2.41.0"

@@ -12,7 +12,7 @@ export class FaaSCronJobFactory extends DefaultCronJobFactory {
     @Value('mode')
     protected readonly mode: string[];
 
-    create(options: CronJobOptions): CronJob {
+    override create(options: CronJobOptions): CronJob {
         if (this.mode.includes('remote')) {
             return new FaaSCronJob(this.clock, {...this.defaultCronJobOptions, ...options });
         } else {

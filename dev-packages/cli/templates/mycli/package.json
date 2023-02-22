@@ -23,7 +23,7 @@
     "@malagu/cli": "{{ version }}",
     "@types/fs-extra": "^9.0.13",
     "rimraf": "^3.0.2",
-    "typescript": "^4.2.4"
+    "typescript": "~4.5.5"
   },
   "scripts": {
     "prepare": "yarn run clean & yarn run build",

@@ -3,7 +3,7 @@ import { CLIENT_AUTHORIZATION_REQUIRED_ERROR_CODE } from './error-protocol';
 
 export class ClientAuthorizationError extends OAuth2AuthorizationError {
 
-    constructor(public oauth2Error: OAuth2Error, public clientRegistrationId: string, error?: Error) {
+    constructor(public override oauth2Error: OAuth2Error, public clientRegistrationId: string, error?: Error) {
         super(oauth2Error, error);
     }
 

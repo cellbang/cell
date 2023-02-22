@@ -10,7 +10,7 @@ export class NoOpContext extends React.Component<ContextProps, ContextState> {
 
     static priority = 1000;
 
-    render(): React.ReactElement<{}> {
+    override render(): React.ReactElement<{}> {
         return <>{this.props.children}</>;
     }
 }

@@ -18,7 +18,7 @@ export class FaaSCronJob extends CronJob {
         await Promise.all(callbacks.map((callback: any) => callback.call(context, onComplete)));
     };
 
-    start() {
+    override start() {
         if (this.running) {
             return;
         }
@@ -34,7 +34,7 @@ export class FaaSCronJob extends CronJob {
         });
     }
 
-    stop() {
+    override stop() {
         this.tickDisposable?.dispose();
         this.running = false;
         const onComplete = (this as any).onComplete;

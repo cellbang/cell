@@ -1,4 +1,4 @@
-import { ComponentDecorator, applyComponentDecorator, ComponentOption, parseComponentOption, Logger } from '@malagu/core';
+import { ComponentDecorator, applyComponentDecorator, ComponentOption, parseComponentOption, Logger, Container } from '@malagu/core';
 import { AOP_POINTCUT, PipeManager } from '@malagu/web';
 import { ConnectionHandler } from '../handler';
 import { JsonRpcConnectionHandler } from '../factory';
@@ -30,8 +30,8 @@ export function applyRpcDecorator(option: ComponentOption, target: any) {
         const t = context.container.get(id);
         const pipeManager = context.container.get<PipeManager>(PipeManager);
         const logger = context.container.get<Logger>(Logger);
-        const errorConverters = ConverterUtil.getGlobalErrorConverters(context.container);
-        const errorConverter = ConverterUtil.getErrorConverters(id, context.container);
+        const errorConverters = ConverterUtil.getGlobalErrorConverters(context.container as Container);
+        const errorConverter = ConverterUtil.getErrorConverters(id, context.container as Container);
         if (errorConverter) {
             errorConverters.push(errorConverter);
         }

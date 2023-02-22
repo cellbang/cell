@@ -12,7 +12,7 @@ export class ConfigContext extends React.Component<React.PropsWithChildren> {
     @Autowired(Provider)
     protected readonly provider: Provider;
 
-    render(): React.ReactNode {
+    override render(): React.ReactNode {
         const { children } = this.props;
         return (
             <ConfigProvider {...this.provider.provide()}>

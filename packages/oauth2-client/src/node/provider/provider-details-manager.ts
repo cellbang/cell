@@ -1,6 +1,5 @@
-import { ProviderDetailsManager } from './provider-protocol';
+import { ProviderDetailsManager, ProviderDetails } from './provider-protocol';
 import { Value, Component } from '@malagu/core';
-import { ProviderDetails } from './provider-protocol';
 
 @Component(ProviderDetailsManager)
 export class InMemoryProviderDetailsManager implements ProviderDetailsManager {

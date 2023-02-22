@@ -13,7 +13,7 @@ export class AppImpl extends React.Component {
     @Autowired(ROUTER)
     protected readonly router: React.ComponentType;
 
-    render(): React.ReactNode {
+    override render(): React.ReactNode {
         return this.createContextAndRouter();
     }
 

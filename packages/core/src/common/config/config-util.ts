@@ -4,7 +4,7 @@ import { config } from './dynamic-config';
 import { currentThis } from '../utils';
 
 export namespace ConfigUtil {
-    export function get<T>(key: string, defaultValue?: T): T {
+    export function get<T = any>(key: string, defaultValue?: T): T {
         return ContainerUtil.get<ConfigProvider>(ConfigProvider).get(key, defaultValue);
     }
 

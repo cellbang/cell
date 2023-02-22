@@ -4,7 +4,7 @@ import { DefaultLayout } from '../annotation';
 @DefaultLayout(EmptyLayout, false)
 export class EmptyLayout extends React.Component<React.PropsWithChildren> {
 
-    render() {
+    override render() {
         return <>{this.props.children}</>;
     }
 }

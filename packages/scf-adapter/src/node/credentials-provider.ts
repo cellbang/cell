@@ -5,7 +5,7 @@ import { Credentials, CredentialsProvider } from '@malagu/cloud';
 @Component({ id: CredentialsProvider, rebind: true })
 export class FaaSCredentialsProvider extends DefaultCredentialsProvider {
 
-    async provide(): Promise<Credentials | undefined> {
+    override async provide(): Promise<Credentials | undefined> {
         const credentials = await super.provide();
         if (credentials) {
             return credentials;

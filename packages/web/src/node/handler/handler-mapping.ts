@@ -1,7 +1,6 @@
 import { Autowired, Component, Optional, Prioritizeable } from '@malagu/core';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
-import { NotFoundError } from '../error';
-import { NotFoundAndContinueError } from '../error';
+import { NotFoundError, NotFoundAndContinueError } from '../error';
 import { Context } from '../context';
 
 @Component(HandlerMapping)

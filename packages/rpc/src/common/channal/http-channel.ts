@@ -10,7 +10,7 @@ export class HttpChannel extends AbstractChannel {
         super(id, doSend);
     }
 
-    protected checkNotDisposed(): void {
+    protected override checkNotDisposed(): void {
         // noop
     }
 

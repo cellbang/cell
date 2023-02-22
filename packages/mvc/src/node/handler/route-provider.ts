@@ -1,7 +1,6 @@
-import { Component, Autowired, Deferred } from '@malagu/core';
+import { Component, Autowired, Deferred, PostConstruct } from '@malagu/core';
 import { Route, RouteProvider } from './handler-protocol';
 import { RouteBuilder } from './route-builder';
-import { postConstruct } from 'inversify';
 
 @Component(RouteProvider)
 export class RouteProviderImpl implements RouteProvider {
@@ -13,7 +12,7 @@ export class RouteProviderImpl implements RouteProvider {
     @Autowired(RouteBuilder)
     protected readonly routeBuilder: RouteBuilder;
 
-    @postConstruct()
+    @PostConstruct()
     protected init() {
         this.routeBuilder.build().then(route => {
             this.route = route;

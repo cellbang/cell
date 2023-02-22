@@ -1,6 +1,6 @@
 import { autoBind } from '@malagu/core';
 import { CacheManager, CacheManagerFactory } from './cache-protocol';
-import '.';
+import './index';
 
 const InnerCacheManager = Symbol('InnerCacheManager');
 

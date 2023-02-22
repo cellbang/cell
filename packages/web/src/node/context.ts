@@ -71,7 +71,7 @@ export class Context extends BaseContext {
         return !!Context.getAttr(CURRENT_SKIP_AUTO_END_REQUEST_KEY, AttributeScope.Request);
     }
 
-    static setAttr(key: string, value: any, scope: AttributeScope = AttributeScope.Request) {
+    static override setAttr(key: string, value: any, scope: AttributeScope = AttributeScope.Request) {
         if (scope === AttributeScope.Session) {
             Context.getSession()[key] = value;
         } else {
@@ -79,7 +79,7 @@ export class Context extends BaseContext {
         }
     }
 
-    static getAttr<T>(key: string, scope?: AttributeScope): T {
+    static override getAttr<T>(key: string, scope?: AttributeScope): T {
         if (scope) {
             if (scope === AttributeScope.Session) {
                 return Context.getSession()[key];

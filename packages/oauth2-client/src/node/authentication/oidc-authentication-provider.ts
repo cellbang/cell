@@ -16,11 +16,11 @@ export class OidcAuthenticationProvider extends OAuth2AuthenticationProvider {
     protected readonly idTokenJwtDecoderFactory: IdTokenJwtDecoderFactory;
 
     @Autowired(OidcUserService)
-    protected readonly userService: UserService<OidcUserRequest, User>;
+    protected override readonly userService: UserService<OidcUserRequest, User>;
 
-    priority = OIDC_AUTHENTICATION_PROVIDER_PRIORITY;
+    override priority = OIDC_AUTHENTICATION_PROVIDER_PRIORITY;
 
-    protected checkScopes(scopes: string[]) {
+    protected override checkScopes(scopes: string[]) {
         // Section 3.1.2.1 Authentication Request - https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
         // scope
         //         REQUIRED. OpenID Connect requests MUST contain the "openid" scope value.
@@ -32,7 +32,7 @@ export class OidcAuthenticationProvider extends OAuth2AuthenticationProvider {
         return true;
     }
 
-    protected async getUserinfo(clientRegistration: ClientRegistration, tokenResponse: AccessTokenResponse, additionalParameters: { [key: string]: string }) {
+    protected override async getUserinfo(clientRegistration: ClientRegistration, tokenResponse: AccessTokenResponse, additionalParameters: { [key: string]: string }) {
         const idToken = await this.createOidcToken(clientRegistration, tokenResponse);
 
         return this.userService.load({

@@ -1,8 +1,7 @@
-import { TraceIdResolver } from './trace-protocol';
 import { Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Autowired, Logger, Value } from '@malagu/core';
-import { TRACE_MIDDLEWARE_PRIORITY, TRACE_ID_RESPONSE_FIELD } from './trace-protocol';
+import { TRACE_MIDDLEWARE_PRIORITY, TRACE_ID_RESPONSE_FIELD, TraceIdResolver } from './trace-protocol';
 
 @Component(Middleware)
 export class TraceMiddleware implements Middleware {

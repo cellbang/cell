@@ -1,4 +1,9 @@
-# Change Log
+# Change 
+
+## 2.42.0
+
+- feat(*) 升级 typescript 版本和更新 eslint 规则
+
 
 ## 2.41.0
 

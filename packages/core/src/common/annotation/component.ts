@@ -4,7 +4,7 @@ import { ConfigUtil } from '../config/config-util';
 import { AnnotationUtil } from '../utils';
 import { Scope } from '../container/scope';
 
-export type ComponentId = interfaces.ServiceIdentifier<any>;
+export type ComponentId<T = any> = interfaces.ServiceIdentifier<T>;
 
 export const COMPONENT_TAG = 'Component';
 

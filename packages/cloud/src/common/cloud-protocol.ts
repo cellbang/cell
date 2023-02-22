@@ -14,7 +14,7 @@ export interface RawCloudService {
 
 }
 
-export abstract class AbstractCloudService<T> implements CloudService<T> {
+export abstract class AbstractCloudService<T extends RawCloudService> implements CloudService<T> {
 
     name: string;
 

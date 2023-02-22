@@ -19,7 +19,8 @@
     "reflect-metadata": "^0.1.13",
     "url-join": "^4.0.1",
     "url-pattern": "^1.0.3",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "express": "^4.17.1"
   },
   "publishConfig": {
     "access": "public"

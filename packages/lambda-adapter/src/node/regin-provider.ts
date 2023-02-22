@@ -5,7 +5,7 @@ import { RegionProvider } from '@malagu/cloud';
 @Component({ id: RegionProvider, rebind: true })
 export class FaaSRegionProvider extends DefaultRegionProvider {
 
-    async provide(): Promise<string | undefined> {
+    override async provide(): Promise<string | undefined> {
         const region = await super.provide();
         if (region) {
             return region;
