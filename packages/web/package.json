@@ -1,11 +1,11 @@
 {
   "name": "@malagu/web",
-  "version": "2.41.0",
+  "version": "2.42.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.41.0",
+    "@malagu/core": "2.42.0",
     "@types/express": "^4.17.9",
     "axios": "^0.26.1",
     "body-parser": "^1.19.0",
@@ -15,12 +15,12 @@
     "cookies": "^0.8.0",
     "cors": "^2.8.5",
     "crc": "^3.8.0",
+    "express": "^4.17.1",
     "node-gzip": "^1.1.2",
     "reflect-metadata": "^0.1.13",
     "url-join": "^4.0.1",
     "url-pattern": "^1.0.3",
-    "uuid": "^8.3.2",
-    "express": "^4.17.1"
+    "uuid": "^8.3.2"
   },
   "publishConfig": {
     "access": "public"
@@ -50,8 +50,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.41.0",
-    "@malagu/component": "2.41.0",
+    "@malagu/cli-service": "2.42.0",
+    "@malagu/component": "2.42.0",
     "@types/cors": "^2.8.6"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"

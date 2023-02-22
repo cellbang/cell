@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli",
-  "version": "2.41.0",
+  "version": "2.42.0",
   "description": "Malagu CLI.",
   "publishConfig": {
     "access": "public"
@@ -36,14 +36,16 @@
     "test": "malagu-component test:js"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.41.0",
-    "@malagu/cli-runtime": "2.41.0",
-    "@malagu/frameworks": "2.41.0",
+    "@malagu/cli-common": "2.42.0",
+    "@malagu/cli-runtime": "2.42.0",
+    "@malagu/frameworks": "2.42.0",
     "@types/js-yaml": "^3.12.1",
     "chalk": "^4.1.2",
     "commander": "^8.1.0",
     "dotenv": "^16.0.1",
     "fs-extra": "^9.0.13",
+    "inquirer": "^8.1.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
     "js-yaml": "^4.0.0",
     "leven": "^3.1.0",
     "minimist": "^1.2.6",
@@ -52,12 +54,10 @@
     "semver": "^7.3.5",
     "traverse": "^0.6.6",
     "update-notifier": "^5.0.1",
-    "watchpack": "^2.2.0",
-    "inquirer": "^8.1.2",
-    "inquirer-autocomplete-prompt": "^1.0.1"
+    "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@malagu/component": "2.41.0"
+    "@malagu/component": "2.42.0"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
