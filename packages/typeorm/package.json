@@ -1,11 +1,11 @@
 {
   "name": "@malagu/typeorm",
-  "version": "2.42.0",
+  "version": "2.42.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.42.0",
+    "@malagu/core": "2.42.1",
     "mysql2": "^2.3.3",
     "typeorm": "^0.3.7"
   },
@@ -38,8 +38,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.42.0",
-    "@malagu/component": "2.42.0"
+    "@malagu/cli-service": "2.42.1",
+    "@malagu/component": "2.42.1"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
