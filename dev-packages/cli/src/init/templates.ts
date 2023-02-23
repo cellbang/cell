@@ -3,6 +3,7 @@ export const templates: any = {
     'sample-app': '{{ templatePath }}/sample-app',
     'malagu-component': '{{ templatePath }}/malagu-component',
     'docker-app': '{{ templatePath }}/docker-app',
+    'monorepo': '{{ templatePath }}/monorepo',
     'nest-app': '{{ templatePath }}/nest-app',
     'nextjs-app': '{{ templatePath }}/nextjs-app',
     'koa-app': '{{ templatePath }}/koa-app',

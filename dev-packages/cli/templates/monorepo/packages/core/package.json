@@ -1,0 +1,40 @@
+{
+  "name": "@app/core",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
+  "dependencies": {
+    "@malagu/core": "2.42.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "malagu-component"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxx/app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xxx/app/issues"
+  },
+  "homepage": "https://github.com/xxx/app",
+  "files": [
+    "lib",
+    "src",
+    "malagu.yml"
+  ],
+  "scripts": {
+    "lint": "malagu-component lint",
+    "build": "malagu-component build",
+    "watch": "malagu-component watch",
+    "clean": "malagu-component clean",
+    "test": "malagu-component test:js"
+  },
+  "devDependencies": {
+    "@malagu/component": "2.42.0"
+  }
+}

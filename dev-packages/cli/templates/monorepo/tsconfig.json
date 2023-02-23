@@ -1,0 +1,20 @@
+{
+  "extends": "@malagu/component/configs/base.tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/core/lib/*": [
+        "packages/core/src/*"
+      ],
+      "@app/app-sample-app/*": [
+        "apps/sample-app/*"
+      ]
+    }
+  },
+  "include": [
+    "packages/*/src",
+    "apps/*/test",
+  ]
+}

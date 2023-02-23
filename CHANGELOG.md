@@ -1,5 +1,10 @@
 # Change 
 
+## 2.42.1
+
+- feat(cli) 支持 monorepo 应用模版，帮助用户快速搭建大型项目脚手架
+
+
 ## 2.42.0
 
 - feat(*) 升级 typescript 版本和更新 eslint 规则

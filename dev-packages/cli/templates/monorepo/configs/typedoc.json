@@ -1,0 +1,23 @@
+{
+  "emit": "none",
+  "compilerOptions": {
+    "ignoreCompilerErrors": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "allowJs": true
+  },
+  "exclude": [
+    "../+(apps|typings|scripts)/**",
+    "../packages/*/lib/**",
+    "**/node_modules/**",
+    "**/*.tsx",
+    "**/*spec.ts"
+  ],
+  "excludeExternals": true,
+  "external-modulemap": ".*\/(packages)\/([\\w\\-_]+)\/",
+  "hideGenerator": true,
+  "name": "App TypeDoc",
+  "out": "../gh-pages/docs/next",
+  "readme": "../README.md",
+  "entryPointStrategy": "expand"
+}
