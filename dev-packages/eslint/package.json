@@ -1,11 +1,11 @@
 {
   "name": "@malagu/eslint",
-  "version": "2.42.1",
+  "version": "2.42.2",
   "description": "eslint component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.42.1",
+    "@malagu/cli-common": "2.42.2",
     "eslint": "^7.27.0",
     "fork-ts-checker-notifier-webpack-plugin": "^4.0.0",
     "fork-ts-checker-webpack-plugin": "^6.2.10"
@@ -37,8 +37,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.42.1",
-    "@malagu/component": "2.42.1"
+    "@malagu/cli-service": "2.42.2",
+    "@malagu/component": "2.42.2"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
