@@ -1,5 +1,9 @@
 # Change 
 
+## 2.42.2
+
+- feat(cli) 修复 monorepo 应用模版 json 格式错误
+
 ## 2.42.1
 
 - feat(cli) 支持 monorepo 应用模版，帮助用户快速搭建大型项目脚手架
