@@ -3,11 +3,12 @@ import { View } from './view-protocol';
 import { Context } from '@malagu/web/lib/node';
 import { ViewMetadata } from '../annotation/view';
 import { TEXT_VIEW_NAME } from '../annotation/text';
+import { MediaType } from '@malagu/web';
 
 @Component(View)
 export class TextView implements View {
 
-    readonly contentType = 'text/plain';
+    readonly contentType = MediaType.TEXT_PLAIN;
 
     readonly priority = 600;
 

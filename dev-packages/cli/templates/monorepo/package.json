@@ -31,7 +31,7 @@
     "docs": "rimraf gh-pages/docs/next && typedoc --tsconfig tsconfig.json --options configs/typedoc.json .",
     "test": "yarn test:references && yarn test:app",
     "test:references": "node scripts/compile-references --dry-run",
-    "test:app": "lerna run test --scope \"@app/!(example-)*\" --stream --concurrency=1",
+    "test:app": "lerna run test --scope \"@app/*!(-app)\" --stream --concurrency=1",
     "publish": "yarn && yarn test && yarn publish:latest",
     "publish:latest": "lerna publish --exact --ignore-scripts --yes --no-push && yarn -s publish:check",
     "publish:next": "lerna publish preminor --exact --ignore-scripts --canary --preid next --dist-tag next --no-git-reset --no-git-tag-version --no-push --ignore-scripts --yes && yarn publish:check",

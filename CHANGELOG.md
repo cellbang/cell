@@ -1,8 +1,27 @@
 # Change 
 
+## 2.43.0
+
+- feat(mvc) 支持通过熟悉配置定义 JSON 视图格式，默认通过 json-wrapper 模式启用默认统一格式，默认配置如下：
+```yaml
+malagu: 
+  mvc: 
+    jsonView:
+      errorHandler: 
+        enabled: true
+        priority: 2000
+      template: |
+        {
+          "message": "{{error}}",
+          "success": {{success}},
+          "data": {{model}}
+        }
+```
+
+
 ## 2.42.2
 
-- feat(cli) 修复 monorepo 应用模版 json 格式错误
+- fix(cli) 修复 monorepo 应用模版 json 格式错误
 
 ## 2.42.1
 

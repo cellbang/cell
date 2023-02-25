@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { VALUE } from './annotation/value';
 import { ConfigProvider } from './config/config-protocol';
 import { autoBind } from './container/auto-bind';
-export * from './index';
+import './index';
 
 export default autoBind(bind => {
     bind(VALUE).toDynamicValue(ctx => {

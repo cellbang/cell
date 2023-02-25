@@ -6,11 +6,12 @@ import { join } from 'path';
 import { readFile } from 'fs-extra';
 import { ViewMetadata } from '../annotation/view';
 import { HTML_VIEW_NAME } from '../annotation/html';
+import { MediaType } from '@malagu/web';
 
 @Component(View)
 export class HtmlView implements View {
 
-    readonly contentType = 'text/html';
+    readonly contentType = MediaType.TEXT_HTML;
 
     readonly priority = 500;
 

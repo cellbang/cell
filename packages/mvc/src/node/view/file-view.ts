@@ -1,6 +1,6 @@
 import { Autowired, Component, Logger, Value } from '@malagu/core';
 import { View } from './view-protocol';
-import { HttpHeaders, HttpStatus } from '@malagu/web';
+import { HttpHeaders, HttpStatus, MediaType } from '@malagu/web';
 import { Context, Response } from '@malagu/web/lib/node';
 import * as isStream from 'is-stream';
 import { Stream } from 'stream';
@@ -12,7 +12,7 @@ import { join } from 'path';
 @Component(View)
 export class FileView implements View {
 
-    readonly contentType = 'application/octet-stream';
+    readonly contentType = MediaType.APPLICATION_OCTET_STREAM;
 
     readonly priority = 600;
 
