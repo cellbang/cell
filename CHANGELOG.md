@@ -1,4 +1,8 @@
-# Change 
+# Change
+
+## 2.43.1
+
+- feat(core) 支持动态配装饰器方法：decorate，例如 `decorate(Unmanaged(), Widget, 0)`
 
 ## 2.43.0
 

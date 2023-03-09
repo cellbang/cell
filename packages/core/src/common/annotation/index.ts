@@ -12,3 +12,4 @@ export * from './inject';
 export * from './aspect';
 export * from './service';
 export * from './unmanaged';
+export * from './decorate';

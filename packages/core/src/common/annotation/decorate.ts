@@ -1,0 +1,1 @@
+export { decorate } from 'inversify';
