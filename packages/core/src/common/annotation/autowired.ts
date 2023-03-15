@@ -11,6 +11,8 @@ export interface AutowiredOption {
 
 export type IdOrAutowiredOption = ComponentId | AutowiredOption;
 
+export type IdOrAutowiredOptionWithoutMulti = ComponentId | Omit<AutowiredOption, 'multi'>;
+
 export const Autowired = function (idOrOption?: IdOrAutowiredOption): PropertyDecorator & ParameterDecorator {
     return (target: any, targetKey: string, index?: number) => {
         const option = parseAutowiredOption(target, targetKey, index, idOrOption);

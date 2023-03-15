@@ -1,7 +1,7 @@
-import { applyAutowiredDecorator, ContainerUtil, DoGetValue, IdOrAutowiredOption, parseAutowiredOption } from '@malagu/core';
+import { applyAutowiredDecorator, ContainerUtil, DoGetValue, IdOrAutowiredOptionWithoutMulti, parseAutowiredOption } from '@malagu/core';
 import { RPC, ID_KEY, doInjectForAutorpc } from '../autorpc';
 
-export const Autorpc = function (idOrOption?: IdOrAutowiredOption): PropertyDecorator & ParameterDecorator {
+export const Autorpc = function (idOrOption?: IdOrAutowiredOptionWithoutMulti): PropertyDecorator & ParameterDecorator {
     return (target: any, targetKey: string, index?: number) => {
         const option = parseAutowiredOption(target, targetKey, index, idOrOption);
         option.detached = true;

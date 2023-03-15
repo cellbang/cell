@@ -1,9 +1,9 @@
-import { applyAutowiredDecorator, IdOrAutowiredOption, DoInject, parseAutowiredOption, Tagged, Inject } from '@malagu/core';
+import { applyAutowiredDecorator, IdOrAutowiredOptionWithoutMulti, DoInject, parseAutowiredOption, Tagged, Inject } from '@malagu/core';
 
 export const RPC = Symbol('RPC');
 export const ID_KEY = Symbol('ID_KEY');
 
-export const Autorpc = function (idOrOption?: IdOrAutowiredOption): PropertyDecorator & ParameterDecorator {
+export const Autorpc = function (idOrOption?: IdOrAutowiredOptionWithoutMulti): PropertyDecorator & ParameterDecorator {
     return (target: any, targetKey: string, index?: number) => {
         const option = parseAutowiredOption(target, targetKey, index, idOrOption);
         applyAutowiredDecorator(option, target, targetKey, index, doInjectForAutorpc);

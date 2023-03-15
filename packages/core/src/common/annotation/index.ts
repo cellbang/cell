@@ -13,3 +13,4 @@ export * from './aspect';
 export * from './service';
 export * from './unmanaged';
 export * from './decorate';
+export * from './autowired-provider';
