@@ -1,5 +1,10 @@
 # Change
 
+## 2.44.1
+
+- fix(cli-common) 修复配置 `packager: pnpm` 属性不生效
+
+
 ## 2.44.0
 
 - feat(core) 添加装饰器 @AutowaredProvider，可以按接口提供一类扩展实现对象，并提供了排序能力，通过这种方式，可以避免循环依赖注入问题，因为又是延迟加载，可以优化启动性能
