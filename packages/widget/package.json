@@ -1,11 +1,11 @@
 {
   "name": "@malagu/widget",
-  "version": "2.44.0",
+  "version": "2.44.1",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.44.0",
+    "@malagu/core": "2.44.1",
     "rxjs": "^6.6.0"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.44.0"
+    "@malagu/component": "2.44.1"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
