@@ -28,9 +28,10 @@ export function generateFrontendComponents(context: DynamicContainerContext) {
   require('reflect-metadata');
   require('setimmediate');
   const { Container } = require('inversify');
+  const { ContainerFactory } = require('@malagu/core/lib/common');
   const { FrontendApplication } = require('@malagu/core/lib/browser');
   
-  const container = new Container({ skipBaseClassChecks: true });
+  const container = ContainerFactory.create();
   
   ${loadStaticModuls(staticModules)}
   
@@ -62,10 +63,10 @@ export function generateBackendComponents(context: DynamicContainerContext) {
     const { modules, staticModules } = context;
     return `
   require('reflect-metadata');
-  const { Container } = require('inversify');
+  const { ContainerFactory } = require('@malagu/core/lib/common');
   require('source-map-support').install();
   
-  const container = new Container({ skipBaseClassChecks: true });
+  const container = ContainerFactory.create();
   
   ${loadStaticModuls(staticModules)}
   

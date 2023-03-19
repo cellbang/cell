@@ -1,5 +1,10 @@
 # Change
 
+## 2.44.2
+
+- feat(core) 添加 ContainerFactory 类，方便开发单元测试
+
+
 ## 2.44.1
 
 - fix(cli-common) 修复配置 `packager: pnpm` 属性不生效
