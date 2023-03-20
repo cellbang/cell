@@ -1,14 +1,14 @@
 {
   "name": "@malagu/fc-plugin",
-  "version": "2.44.3",
+  "version": "2.44.4",
   "description": "",
   "dependencies": {
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.6.0",
     "@alicloud/ram": "^1.0.0",
-    "@malagu/cli-common": "2.44.3",
-    "@malagu/cloud-plugin": "2.44.3",
-    "@malagu/code-loader-plugin": "2.44.3",
+    "@malagu/cli-common": "2.44.4",
+    "@malagu/cloud-plugin": "2.44.4",
+    "@malagu/code-loader-plugin": "2.44.4",
     "axios": "^0.26.1",
     "chalk": "^4.1.2",
     "fs-extra": "^9.0.13",
@@ -50,7 +50,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.44.3"
+    "@malagu/component": "2.44.4"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }

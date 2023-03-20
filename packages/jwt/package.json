@@ -1,11 +1,11 @@
 {
   "name": "@malagu/jwt",
-  "version": "2.44.3",
+  "version": "2.44.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.44.3",
+    "@malagu/core": "2.44.4",
     "@types/jsonwebtoken": "^8.5.8",
     "jsonwebtoken": "^9.0.0"
   },
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.44.3"
+    "@malagu/component": "2.44.4"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
