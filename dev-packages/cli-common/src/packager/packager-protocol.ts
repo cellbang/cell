@@ -5,6 +5,7 @@ export interface InstallOptions {
     networkConcurrency?: string;
     stdio?: string;
     ignoreOptional?: boolean;
+    ignoreWorkspace?: boolean;
     noLockfile?: boolean;
 
 }
