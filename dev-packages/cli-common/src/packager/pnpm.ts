@@ -74,6 +74,9 @@ export class Pnpm implements Packager {
         if (opts?.frozenLockfile) {
             args.push('--frozen-lockfile');
         }
+        if (opts?.ignoreWorkspace) {
+            args.push('--ignore-workspace');
+        }
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
