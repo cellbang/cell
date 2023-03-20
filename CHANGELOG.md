@@ -1,5 +1,16 @@
 # Change
 
+## 2.44.4
+
+- feat(core): autoBind 支持 name 参数，方便写单元测试，并提供了一个快捷方法 autoBindTesting
+
+
+
+## 2.44.3
+
+- feat(cli-common): pnpm Install support --ignore-workspace (#181)
+
+
 ## 2.44.2
 
 - feat(core) 添加 ContainerFactory 类，方便开发单元测试
