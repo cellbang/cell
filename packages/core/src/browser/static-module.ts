@@ -1,4 +1,4 @@
-import { autoBind } from '../common';
+import { autoBindNamed } from '../common';
 import './index';
 
-export default autoBind();
+export default autoBindNamed('core-browser');

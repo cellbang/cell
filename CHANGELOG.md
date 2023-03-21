@@ -1,5 +1,10 @@
 # Change
 
+## 2.44.5
+
+- fix(core): 修复命名 autoBind 误删其他 bind 的元信息
+
+
 ## 2.44.4
 
 - feat(core): autoBind 支持 name 参数，方便写单元测试，并提供了一个快捷方法 autoBindTesting
