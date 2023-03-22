@@ -5,7 +5,7 @@ export const SERVICE_TAG = 'Service';
 export const Service = <ComponentDecorator>function (...idOrOption: any): ClassDecorator {
     return (t: any) => {
         const option = parseComponentOption(t, idOrOption);
-        applyComponentDecorator(option, t);
+        applyServiceDecorator(option, t);
     };
 };
 
