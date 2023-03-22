@@ -17,6 +17,43 @@ export interface CancelablePromise<T> extends Promise<T> {
     cancel(): void;
 }
 
+/**
+ * A function to allow a promise resolution to be delayed by a number of milliseconds. Usage is as follows:
+ *
+ * `const stringValue = await myPromise.then(delay(600)).then(value => value.toString());`
+ *
+ * @param ms the number of millisecond to delay
+ * @returns a function that returns a promise that returns the given value, but delayed
+ */
+export function delay<T>(ms: number): (value: T) => Promise<T> {
+    return value => new Promise((resolve, reject) => { setTimeout(() => resolve(value), ms); });
+}
+
+/**
+ * Constructs a promise that will resolve after a given delay.
+ * @param ms the number of milliseconds to wait
+ */
+export async function wait(ms: number): Promise<void> {
+    await delay(ms)(undefined);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function waitForEvent<T>(event: Event<T>, ms: number, thisArg?: any, disposables?: Disposable[]): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+        const registration = setTimeout(() => {
+            listener.dispose();
+            reject(new CancellationError());
+        }, ms);
+
+        const listener = event((evt: T) => {
+            clearTimeout(registration);
+            listener.dispose();
+            resolve(evt);
+        }, thisArg, disposables);
+
+    });
+}
+
 export function createCancelablePromise<T>(callback: (token: CancellationToken) => Promise<T>): CancelablePromise<T> {
     const source = new CancellationTokenSource();
 

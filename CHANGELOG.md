@@ -1,5 +1,10 @@
 # Change
 
+## 2.44.6
+
+- feat(core): 添加一些异步工具函数
+
+
 ## 2.44.5
 
 - fix(core): 修复命名 autoBind 误删其他 bind 的元信息
