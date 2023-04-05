@@ -1,5 +1,9 @@
 # Change
 
+## 2.45.0
+
+- fix(vercel-adapter) 修复部署 Vercel 平台失败问题
+
 ## 2.44.6
 
 - feat(core): 添加一些异步工具函数

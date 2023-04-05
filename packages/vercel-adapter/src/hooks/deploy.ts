@@ -17,6 +17,6 @@ export default async (context: DeployContext) => {
     if (prod) {
         args.push('--prod');
     }
-    args.push(...['--local-config', join(PathUtil.getProjectDistPath(), 'vercel.json')]);
+    args.push(...['--local-config', join(PathUtil.getProjectHomePath(), 'vercel.json')]);
     spawnSync('vercel', { cwd: PathUtil.getProjectHomePath(), stdio: 'inherit' });
 };

@@ -3,8 +3,8 @@ malagu:
     config:
       version: 2
       builds:
-        - src: ${ 'backend/**' | onTarget('backend') || 'frontend/**'  }
-          use: ${ '@now/node' | onTarget('backend') || '@vercel/static' }
+        - src: ${ 'dist/backend/**' | onTarget('backend') || 'dist/frontend/**'  }
+          use: ${ '@vercel/node' | onTarget('backend') || '@vercel/static' }
       routes:
         - src: ${ '/api' | onTarget('backend') || '/(.*).js' }
-          dest: ${ 'backend/index.js' | onTarget('backend') || 'frontend/$1.js' }
+          dest: ${ 'dist/backend/index.js' | onTarget('backend') || 'dist/frontend/$1.js' }

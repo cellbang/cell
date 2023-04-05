@@ -1,6 +1,6 @@
 import { BuildContext, FRONTEND_TARGET, BACKEND_TARGET, ConfigUtil, PathUtil } from '@malagu/cli-common';
 import { resolve } from 'path';
-import { writeJSON } from 'fs-extra';
+import { writeJSON, ensureDir } from 'fs-extra';
 
 export default async (context: BuildContext) => {
     const { cfg } = context;
@@ -20,10 +20,10 @@ export default async (context: BuildContext) => {
     if (!ConfigUtil.support(cfg, FRONTEND_TARGET)) {
         vercelConfig.routes.push({
             src: '/.*',
-            dest: 'backend/index.js'
+            dest: 'dist/backend/index.js'
         });
     }
-
-    const configPath = resolve(PathUtil.getProjectDistPath(), 'vercel.json');
+    await ensureDir(PathUtil.getProjectHomePath());
+    const configPath = resolve(PathUtil.getProjectHomePath(), 'vercel.json');
     await writeJSON(configPath, vercelConfig, { spaces: 2 });
 };
