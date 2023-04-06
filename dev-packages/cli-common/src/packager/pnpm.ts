@@ -1,6 +1,7 @@
 import { spawnProcess, SpawnError } from './utils';
-import { readFile, writeFile } from 'fs-extra';
+import { moveSync, readFile, removeSync, writeFile } from 'fs-extra';
 import { Packager , InstallOptions, PruneOptions, AddOptions} from './packager-protocol';
+const path = require('path');
 
 export class Pnpm implements Packager {
     get lockfileName() {
@@ -63,9 +64,25 @@ export class Pnpm implements Packager {
         return lockfile;
     }
 
-    install(opts?: InstallOptions, cwd = process.cwd()) {
+    async install(opts?: InstallOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'pnpm.cmd' : 'pnpm';
-        const args = ['install'];
+        let args: string[];
+
+        // use --filter option to support pnpm workspace
+        if (this.isWorkspace(opts)) {
+            args = ['deploy'];
+
+            // options for workspace
+            args.push(`--filter=${opts.filter}`);
+            args.push('--prod');
+        } else {
+            args = ['install'];
+
+            // options for no-workspace
+            if (opts?.ignoreWorkspace) {
+                args.push('--ignore-workspace');
+            }
+        }
 
         // Convert supported packagerOptions
         if (opts?.ignoreScripts) {
@@ -74,10 +91,19 @@ export class Pnpm implements Packager {
         if (opts?.frozenLockfile) {
             args.push('--frozen-lockfile');
         }
-        if (opts?.ignoreWorkspace) {
-            args.push('--ignore-workspace');
+
+        if (opts?.filter) {
+            const tempDeployDir = '.temp-deploy';
+            args.push(tempDeployDir);
+
+            await spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
+
+            removeSync(path.join(cwd, 'node_modules'));
+            moveSync(path.join(cwd, tempDeployDir, 'node_modules'), path.join(cwd, 'node_modules'));
+            removeSync(path.join(cwd, tempDeployDir));
+        } else {
+            return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
         }
-        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
     add(packages: string[], opts?: AddOptions, cwd = process.cwd()) {
@@ -95,11 +121,13 @@ export class Pnpm implements Packager {
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
-    prune(opts?: PruneOptions, cwd = process.cwd()) {
+    async prune(opts?: PruneOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'pnpm.cmd' : 'pnpm';
         const args = ['prune'];
 
-        return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit'  });
+        if (!this.isWorkspace(opts)) {
+            return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit'  });
+        }
     }
 
     runScripts(scriptNames: string[], cwd = process.cwd()) {
@@ -109,5 +137,9 @@ export class Pnpm implements Packager {
             return spawnProcess(command, args, { cwd });
         });
         return Promise.all(promises);
+    }
+
+    isWorkspace(opts?: InstallOptions | PruneOptions): opts is { filter: string} {
+        return !!opts?.filter;
     }
 }

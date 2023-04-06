@@ -7,7 +7,7 @@ export interface InstallOptions {
     ignoreOptional?: boolean;
     ignoreWorkspace?: boolean;
     noLockfile?: boolean;
-
+    filter?: string;
 }
 
 export interface PruneOptions {
@@ -15,7 +15,7 @@ export interface PruneOptions {
     frozenLockfile?: boolean;
     nonInteractive?: boolean;
     stdio?: string;
-
+    filter?: string;
 }
 
 export interface AddOptions {
