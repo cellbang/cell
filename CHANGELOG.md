@@ -1,5 +1,9 @@
 # Change
 
+## 2.45.1
+
+- feat(cli-common): support pnpm workspace (#184)
+
 ## 2.45.0
 
 - fix(vercel-adapter) 修复部署 Vercel 平台失败问题
