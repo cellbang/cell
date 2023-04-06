@@ -42,7 +42,7 @@ export interface Packager {
 
     add(packages: string[], opts?: AddOptions, cwd?: string): Promise<any>;
 
-    prune(opts?: PruneOptions, cwd?: string): Promise<any> | void;
+    prune(opts?: PruneOptions, cwd?: string): Promise<any>;
 
     runScripts(scriptNames: string[], cwd?: string): Promise<any[]>;
 }

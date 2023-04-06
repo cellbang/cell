@@ -121,7 +121,7 @@ export class Pnpm implements Packager {
         return spawnProcess(command, args, { cwd, stdio: opts?.stdio || 'inherit' });
     }
 
-    prune(opts?: PruneOptions, cwd = process.cwd()) {
+    async prune(opts?: PruneOptions, cwd = process.cwd()) {
         const command = /^win/.test(process.platform) ? 'pnpm.cmd' : 'pnpm';
         const args = ['prune'];
 
