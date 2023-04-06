@@ -1,10 +1,10 @@
 {
   "name": "@malagu/next-plugin",
-  "version": "2.45.0",
+  "version": "2.45.1",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.45.0",
-    "@malagu/cli-service": "2.45.0",
+    "@malagu/cli-common": "2.45.1",
+    "@malagu/cli-service": "2.45.1",
     "copy-webpack-plugin": "^9.0.0",
     "fs-extra": "^9.0.13"
   },
@@ -39,7 +39,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.45.0"
+    "@malagu/component": "2.45.1"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
