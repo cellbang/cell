@@ -1,5 +1,10 @@
 # Change
 
+## 2.45.2
+
+- feat(scf-plugin) 修复 scf 代码上传 cos 的 bucket 命名规则
+
+
 ## 2.45.1
 
 - feat(cli-common): support pnpm workspace (#184)

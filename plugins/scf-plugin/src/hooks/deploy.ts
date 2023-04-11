@@ -269,7 +269,7 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
 
 
 async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string) {
-    const bucket = `malagu-scf-code-${appId}`;
+    const bucket = `malagu-scf-${region}-code-${appId}`;
     const key = `${name}-${Math.floor(Date.now() / 1000)}.zip`;
     try {
         await createBucketIfNeed(cosClient, bucket, region);
