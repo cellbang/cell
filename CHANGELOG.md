@@ -1,5 +1,10 @@
 # Change
 
+## 2.46.0
+
+- feat(rpc-core) 添加新组件 @malagu/rpc-core
+
+
 ## 2.45.2
 
 - feat(scf-plugin) 修复 scf 代码上传 cos 的 bucket 命名规则

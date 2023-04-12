@@ -271,6 +271,9 @@
       ],
       "@malagu/example-docker-app/*": [
         "examples/docker-app/*"
+      ],
+      "@malagu/rpc-core/lib/*": [
+        "packages/rpc-core/src/*"
       ]
     }
   },
