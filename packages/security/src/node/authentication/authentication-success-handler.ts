@@ -1,7 +1,7 @@
 import { AuthenticationSuccessHandler, Authentication } from './authentication-protocol';
 import { Component, Value, Autowired, Logger } from '@malagu/core';
 import { Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { HttpHeaders } from '@malagu/web';
+import { HttpHeaders, XML_HTTP_REQUEST } from '@malagu/web';
 import { RequestCache } from '../cache';
 
 @Component(AuthenticationSuccessHandler)
@@ -30,6 +30,12 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
 
     async onAuthenticationSuccess(authentication: Authentication): Promise<void> {
         const response = Context.getResponse();
+        if (Context.getRequest().get(HttpHeaders.X_REQUESTED_WITH) !== XML_HTTP_REQUEST) {
+            return;
+        }
+        if (!this.loginSuccessUrl) {
+            return;
+        }
         const targetUrl = await this.determineTargetUrl(authentication);
         if (response.writableEnded) {
             this.logger.debug(`Response has already been committed. Unable to redirect to ${targetUrl}`);

@@ -1,5 +1,10 @@
 # Change
 
+## 2.46.2
+
+- feat(security) 优化认证成功后重定向逻辑优化：异步请求 X_REQUESTED_WITH 和 malagu.security.loginSuccessUrl 值为空则不进行重定向逻辑
+
+
 ## 2.46.0
 
 - feat(rpc-core) 添加新组件 @malagu/rpc-core
