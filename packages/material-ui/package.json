@@ -1,12 +1,12 @@
 {
   "name": "@malagu/material-ui",
-  "version": "2.46.1",
+  "version": "2.46.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.46.1",
-    "@malagu/react": "2.46.1",
+    "@malagu/core": "2.46.2",
+    "@malagu/react": "2.46.2",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.46.1"
+    "@malagu/component": "2.46.2"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }

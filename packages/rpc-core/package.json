@@ -1,11 +1,11 @@
 {
   "name": "@malagu/rpc-core",
-  "version": "2.46.1",
+  "version": "2.46.2",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.46.1"
+    "@malagu/core": "2.46.2"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.46.1"
+    "@malagu/component": "2.46.2"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
