@@ -1,5 +1,9 @@
 # Change
 
+## 2.46.3
+
+- feat(cloud-plugin) 提升配置文件 malagu.cloud.region 属性优先级，可以覆盖全局配置文件
+
 ## 2.46.2
 
 - feat(security) 优化认证成功后重定向逻辑优化：异步请求 X_REQUESTED_WITH 和 malagu.security.loginSuccessUrl 值为空则不进行重定向逻辑
