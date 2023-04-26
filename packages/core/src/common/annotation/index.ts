@@ -6,6 +6,7 @@ export * from './constant';
 export * from './named';
 export * from './tagged';
 export * from './post-construct';
+export * from './pre-destroy';
 export * from './target-name';
 export * from './injectable';
 export * from './inject';

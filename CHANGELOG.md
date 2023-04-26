@@ -1,5 +1,9 @@
 # Change
 
+## 2.46.4
+
+- feat(core) 添加新装饰器 @PreDestroy()，用于简单 IoC 容器对象的销毁动作
+
 ## 2.46.3
 
 - feat(cloud-plugin) 提升配置文件 malagu.cloud.region 属性优先级，可以覆盖全局配置文件
