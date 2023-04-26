@@ -1,11 +1,11 @@
 {
   "name": "@malagu/config",
-  "version": "2.46.3",
+  "version": "2.46.4",
   "description": "config component",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.46.3",
+    "@malagu/core": "2.46.4",
     "@types/js-yaml": "^3.12.1",
     "@types/lodash.mergewith": "^4.6.6",
     "fs-extra": "^9.0.13",
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.46.3"
+    "@malagu/component": "2.46.4"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
