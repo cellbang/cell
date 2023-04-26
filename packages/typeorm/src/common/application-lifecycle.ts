@@ -34,7 +34,7 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
         const dataSources = this.dataSourceManager.dataSources;
         for (const dataSource of dataSources) {
             if (dataSource.isInitialized) {
-                dataSource.initialize();
+                dataSource.destroy();
             }
         }
     }
