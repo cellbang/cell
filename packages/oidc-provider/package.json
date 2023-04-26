@@ -1,12 +1,12 @@
 {
   "name": "@malagu/oidc-provider",
-  "version": "2.46.5",
+  "version": "2.46.6",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.46.5",
-    "@malagu/web": "2.46.5",
+    "@malagu/core": "2.46.6",
+    "@malagu/web": "2.46.6",
     "@types/oidc-provider": "^7.12.0",
     "oidc-provider": "^7.12.0"
   },
@@ -38,7 +38,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.46.5"
+    "@malagu/component": "2.46.6"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
