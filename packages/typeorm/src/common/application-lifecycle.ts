@@ -14,12 +14,6 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
     protected readonly dataSourceManager: DataSourceManager;
 
     async onStart(app: Application): Promise<void> {
-        const dataSources = this.dataSourceManager.dataSources;
-        for (const dataSource of dataSources) {
-            if (dataSource.isInitialized) {
-                await dataSource.destroy();
-            }
-        }
         const { ormConfig } = this.options;
         let configs: any[];
         if (Array.isArray(ormConfig)) {

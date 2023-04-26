@@ -1,5 +1,9 @@
 # Change
 
+## 2.46.5
+
+- fix(web) 修复在 HMR 模式重启应用之前没有执行应用 onStop 钩子问题
+
 ## 2.46.4
 
 - feat(core) 添加新装饰器 @PreDestroy()，用于简单 IoC 容器对象的销毁动作
