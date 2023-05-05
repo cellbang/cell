@@ -1,5 +1,9 @@
 # Change
 
+## 2.47.0
+
+- feat(configs) 添加 Malagu 属性配置文件对应的 JSON Schema 文件：configs/malagu.schema.json（目前只包含常用的配置项）
+
 ## 2.46.6
 
 - fix(typeorm) 修复数据源销毁逻辑调错方法问题

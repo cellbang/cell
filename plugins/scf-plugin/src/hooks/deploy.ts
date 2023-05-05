@@ -638,6 +638,7 @@ function parseCustomDomainMeta(req: any, customDomainMeta: any, serviceId: strin
     req.SubDomain = customDomainMeta.name;
     req.IsDefaultMapping = customDomainMeta.isDefaultMapping;
     req.CertificateId = customDomainMeta.certificateId;
+    req.IsForcedHttps = customDomainMeta.isForcedHttps;
     req.Protocol = customDomainMeta.protocol;
     req.NetType = customDomainMeta.netType;
     req.NetSubDomain = netSubDomain;
