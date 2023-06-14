@@ -24,7 +24,9 @@ export class DefaultProfileProvider implements ProfileProvider {
             return CloudUtils.promptForProfile(profilePath, regions);
         }
 
-        profile.region = region ?? profile.region;
+        if (profile) {
+            profile.region = region ?? profile.region;
+        }
 
         return profile;
     }

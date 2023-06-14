@@ -1,5 +1,9 @@
 # Change
 
+## 2.47.1
+
+- fix(cloud-plugin) 修复当 profile 不存在时的 undefined 报错
+
 ## 2.47.0
 
 - feat(configs) 添加 Malagu 属性配置文件对应的 JSON Schema 文件：configs/malagu.schema.json（目前只包含常用的配置项）
