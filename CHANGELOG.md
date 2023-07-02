@@ -1,5 +1,9 @@
 # Change
 
+## 2.48.0
+
+- perf(*) 升级依赖，并减少依赖项
+
 ## 2.47.1
 
 - fix(cloud-plugin) 修复当 profile 不存在时的 undefined 报错

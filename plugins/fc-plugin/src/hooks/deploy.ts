@@ -8,9 +8,9 @@ import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup
 import * as api from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
-import { v4 } from 'uuid';
 const chalk = require('chalk');
 import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
+import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
 
 let fcClient: any;
 let apiClient: any;
@@ -345,7 +345,7 @@ async function parseCode(codeUri: CodeUri | string, withoutCodeLimit: boolean) {
     } else {
         if (withoutCodeLimit === true) {
             const _tmpdir = tmpdir();
-            const zipFile = join(_tmpdir, v4());
+            const zipFile = join(_tmpdir, generateUUUID());
             return new Promise((resolve, reject) =>
                 code!.generateNodeStream({ type: 'nodebuffer', platform: 'UNIX', compression: 'DEFLATE', streamFiles: true })
                     .pipe(createWriteStream(zipFile))

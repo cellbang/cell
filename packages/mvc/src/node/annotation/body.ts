@@ -11,7 +11,10 @@ export function Body(name?: string): ParameterDecorator {
     };
 }
 
-export function applyBodyDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {
+export function applyBodyDecorator(target: any, targetKey: string | symbol | undefined , parameterIndex: number, name?: string): void {
+    if (!targetKey) {
+        return;
+    }
     const metadatas: BodyMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.controllerBody, target.constructor, targetKey) || [];
     metadatas.push({ name, parameterIndex });
     Reflect.defineMetadata(METADATA_KEY.controllerBody, metadatas, target.constructor, targetKey);

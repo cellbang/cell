@@ -274,6 +274,9 @@
       ],
       "@malagu/rpc-core/lib/*": [
         "packages/rpc-core/src/*"
+      ],
+      "nest-app/*": [
+        "examples/nest-app/*"
       ]
     }
   },

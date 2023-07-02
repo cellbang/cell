@@ -7,3 +7,4 @@ export * from './spinner-util';
 export * from './runtime-util';
 export * from './project-util';
 export * from './async';
+export * from './uuid';

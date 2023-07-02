@@ -1,6 +1,5 @@
 import { PathResolver } from './resolver-protocol';
-import { Value, Component } from '@malagu/core';
-import urlJoin = require('url-join');
+import { Value, Component, UrlUtil as CoreUrlUtil } from '@malagu/core';
 import { SERVER_PATH } from '../constants';
 import { UrlUtil } from '../utils';
 
@@ -15,10 +14,10 @@ export class PathResolverImpl implements PathResolver {
         if (!first) {
             return this.serverPath;
         } else if (UrlUtil.isAbsoluteUrl(first)) {
-            return urlJoin(first, ...rest);
+            return CoreUrlUtil.join(first, ...rest);
         } else if (first.startsWith(this.serverPath)) {
-            return urlJoin([ first, ...rest ]);
+            return CoreUrlUtil.join(first, ...rest);
         }
-        return urlJoin(this.serverPath, ...[ first, ...rest ]);
+        return CoreUrlUtil.join(this.serverPath, ...[ first, ...rest ]);
     }
 }

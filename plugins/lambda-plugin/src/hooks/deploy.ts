@@ -1,11 +1,11 @@
 import { CliContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
 import * as JSZip from 'jszip';
 import * as delay from 'delay';
-import { v4 } from 'uuid';
 import { Lambda, ApiGatewayV2, IAM } from 'aws-sdk';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
 import { createClients, getAlias, getApi, getApiMapping, getCustomDomain, getFunction, getIntegration, getRoute, getStage, getTrigger } from './utils';
+import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
 
 const chalk = require('chalk');
 const camelcaseKeys = require('camelcase-keys');
@@ -255,7 +255,7 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
                             }
                         })
                     }).promise();
-                    const policyName = `AWSLambdaBasicExecutionRole-${v4()}`;
+                    const policyName = `AWSLambdaBasicExecutionRole-${generateUUUID()}`;
                     const { Policy } = await iamClient.createPolicy({
                         PolicyName: policyName,
                         PolicyDocument: JSON.stringify({
@@ -444,7 +444,7 @@ async function createOrUpdateApi(api: any, functionName: string, aliasName: stri
         result = await SpinnerUtil.start(`Create ${apiName} api`, () => apiGatewayClient.createApi(parseCreateApiRequest(api)).promise());
         await lambdaClient.addPermission({
             FunctionName:  `arn:aws:lambda:${region}:${accountId}:function:${functionName}:${aliasName}`,
-            StatementId: v4(),
+            StatementId: generateUUUID(),
             Action: 'lambda:InvokeFunction',
             Principal: 'apigateway.amazonaws.com',
             SourceArn: `arn:aws:execute-api:${region}:${accountId}:${result.ApiId}/*/*/*`

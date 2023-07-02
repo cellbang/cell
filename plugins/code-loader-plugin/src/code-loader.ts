@@ -4,9 +4,9 @@ import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import { CodeLoader, CodeUri } from './code-protocol';
 import axios from 'axios';
-import { v4 } from 'uuid';
 var tar = require('tar-fs')
 import { createUnzip } from 'zlib';
+import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
 
 export function getCodeRootDir(codeDir: string, codeUri: string | CodeUri) {
     if (typeof codeUri === 'string') {
@@ -45,7 +45,7 @@ export class DefaultCodeLoader implements CodeLoader {
 
         if (url.endsWith('tar.gz')) {
             const _tmpdir = tmpdir();
-            const codeDir = join(_tmpdir, v4());
+            const codeDir = join(_tmpdir, generateUUUID());
             const tarStream = tar.extract(codeDir);
             stream.pipe(createUnzip()).pipe(tarStream);
             await new Promise<void>((resolve, reject) => 

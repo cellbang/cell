@@ -1,31 +1,26 @@
-import { caching, StoreConfig, CacheOptions } from 'cache-manager';
-import { CacheManager, CacheManagerFactory, CacheStoreFactory } from './cache-protocol';
+import { caching } from 'cache-manager';
+import { CacheManager, CacheManagerFactory, CacheStoreFactory, CacheStoreFactoryConfig } from './cache-protocol';
 import { Component, Value, Autowired } from '@malagu/core';
 
 @Component(CacheManagerFactory)
 export class DefaultCacheManagerFactory implements CacheManagerFactory {
 
     @Value('malagu.cache.config')
-    protected readonly cacheConfig: StoreConfig & CacheOptions | { [name: string]: StoreConfig & CacheOptions };
+    protected readonly cacheConfig: { [name: string]: CacheStoreFactoryConfig };
 
     @Autowired(CacheStoreFactory)
     protected readonly cacheStoreFactory: CacheStoreFactory;
 
-    create(name: string | undefined): CacheManager {
-        let config: StoreConfig & CacheOptions;
-        if (name) {
-            config = this.cacheConfig[name];
-        } else {
-            config = this.cacheConfig as StoreConfig & CacheOptions;
-        }
+    create(name: string = 'default'): CacheManager {
+        const config = this.cacheConfig[name];
 
         if (!config) {
             throw Error('Not found cache options.');
         }
 
-        config.store = this.cacheStoreFactory.create(config);
+        const store = this.cacheStoreFactory.create(config);
 
-        return caching(config);
+        return caching<any>(store);
     }
 
 }

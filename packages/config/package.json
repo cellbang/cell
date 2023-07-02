@@ -8,8 +8,8 @@
     "@malagu/core": "2.47.1",
     "@types/js-yaml": "^3.12.1",
     "@types/lodash.mergewith": "^4.6.6",
-    "fs-extra": "^9.0.13",
-    "js-yaml": "^4.0.0",
+    "fs-extra": "^11.1.1",
+    "js-yaml": "^4.1.0",
     "lodash.mergewith": "^4.6.2"
   },
   "publishConfig": {

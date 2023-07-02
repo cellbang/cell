@@ -8,11 +8,10 @@
     "@malagu/code-loader-plugin": "2.47.1",
     "aws-sdk": "^2.807.0",
     "camelcase-keys": "^6.2.2",
-    "chalk": "^4.1.2",
+    "chalk": "^4.1.0",
     "delay": "^4.4.0",
-    "fs-extra": "^9.0.13",
-    "jszip": "^3.7.1",
-    "uuid": "^8.3.2"
+    "fs-extra": "^11.1.1",
+    "jszip": "^3.7.1"
   },
   "publishConfig": {
     "access": "public"

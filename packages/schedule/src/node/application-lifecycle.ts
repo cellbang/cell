@@ -1,10 +1,9 @@
 import { CronMetadata, SCHEDULER, SchedulerMetadata } from './annotation';
 import { METADATA_KEY } from './constants';
-import { Component, Value, Autowired, Optional, ApplicationLifecycle, getTargetClass, getOwnMetadata, Logger } from '@malagu/core';
+import { Component, Value, Autowired, Optional, ApplicationLifecycle, getTargetClass, getOwnMetadata, Logger, generateUUUID } from '@malagu/core';
 
 import { BackendApplication } from '@malagu/core/lib/node';
 import { SchedulerRegistry } from './registry';
-import { v4 } from 'uuid';
 
 @Component(ApplicationLifecycle)
 export class ApplicationLifecycleImpl implements ApplicationLifecycle<BackendApplication> {
@@ -30,7 +29,7 @@ export class ApplicationLifecycleImpl implements ApplicationLifecycle<BackendApp
             const schedulerMetadata = <SchedulerMetadata>Reflect.getOwnMetadata(METADATA_KEY.scheduler, targetConstructor);
             const cronMetadatas = <CronMetadata[]>getOwnMetadata(METADATA_KEY.cron, targetConstructor);
             for (const cronMetadata of cronMetadatas) {
-                const name = cronMetadata.name || v4();
+                const name = cronMetadata.name || generateUUUID();
                 const method = cronMetadata.method;
                 this.schedulerRegistry.add(name, {
                     ...schedulerMetadata,

@@ -1,5 +1,5 @@
 import { ensureFile, existsSync, readFile, writeFile } from 'fs-extra';
-import { prompt } from 'inquirer';
+import { prompt } from 'prompts';
 import { resolve, sep } from 'path';
 import { CloudConfiguration, Profile } from './cloud-protocol';
 import { load, dump } from 'js-yaml';
@@ -25,12 +25,13 @@ export namespace CloudUtils {
         }
 
         const content = await readFile(path, 'utf8');
-        return load(content);
+        return load(content) as Profile;
     }
 
     export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
         const mark = (source?: string) => {
             if (source) {
+                source = source + '';
                 const subStr = source.slice(-4);
                 return `***********${subStr}`;
             }
@@ -42,29 +43,29 @@ export namespace CloudUtils {
         const markedAccessKeySecret = mark(profile.credentials.accessKeySecret);
         const questions = [
             {
-                type: 'input',
+                type: 'text',
                 name: 'accountId',
                 message: 'Account Id',
-                default: markedAccountId
+                initial: markedAccountId
             },
             {
-                type: 'input',
+                type: 'text',
                 name: 'accessKeyId',
                 message: 'Access Key Id',
-                default: markedaccessKeyId
+                initial: markedaccessKeyId
             },
             {
-                type: 'input',
+                type: 'password',
                 name: 'accessKeySecret',
                 message: 'Access Key Secret',
-                default: markedAccessKeySecret
+                initial: markedAccessKeySecret
             },
             {
-                type: 'list',
+                type: 'select',
                 name: 'region',
                 message: 'Default region name',
                 choices: regions,
-                default: profile.region
+                initial: profile.region
             }
         ];
 

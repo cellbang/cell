@@ -14,7 +14,7 @@ export namespace SettingsUtil {
         const settingsPath = getSettingsPath();
         if (existsSync(settingsPath)) {
             const content = readFileSync(settingsPath, { encoding: 'utf8' });
-            return load(content) || {};
+            return load(content) as any || {};
         }
         return {};
     }

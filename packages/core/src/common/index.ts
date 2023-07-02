@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 export * from './utils';
 export * from './annotation';
 export * from './application';

@@ -1,4 +1,3 @@
-import { remove, isEmpty, get, pick, uniq, defaults, now, unset, isNil } from 'lodash';
 import { join, dirname, relative } from 'path';
 import { ConfigurationContext } from '../context/context-protocol';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
@@ -8,10 +7,36 @@ import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 import { Stats, Module, ExternalModule } from 'webpack';
 const isBuiltinModule = require('is-builtin-module');
 
-function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string): string {
+function pick(obj: any, props: string[]): any {
+    const newObj: any = {};
+    props.forEach(prop => {
+        let objProp = obj;
+        let newObjProp = newObj;
+        const keys: string[] = prop.split('.');
+        keys.forEach((key, index) => {
+            if (objProp && objProp.hasOwnProperty(key)) {
+                objProp = objProp[key];
+                if (index === keys.length - 1) {
+                    newObjProp[key] = objProp;
+                } else {
+                    newObjProp[key] = newObjProp[key] || {};
+                    newObjProp = newObjProp[key];
+                }
+            }
+        });
+    });
+    return newObj;
+}
+
+function rebaseFileReferences(
+    pathToPackageRoot: string,
+    moduleVersion: string
+): string {
     if (/^(?:file:[^/]{2}|\.\/|\.\.\/)/.test(moduleVersion)) {
         const filePath = moduleVersion.replace(/^file:/, '');
-        return `${moduleVersion.startsWith('file:') ? 'file:' : ''}${pathToPackageRoot}/${filePath}`.replace(/\\/g, '/');
+        return `${
+            moduleVersion.startsWith('file:') ? 'file:' : ''
+        }${pathToPackageRoot}/${filePath}`.replace(/\\/g, '/');
     }
 
     return moduleVersion;
@@ -20,7 +45,11 @@ function rebaseFileReferences(pathToPackageRoot: string, moduleVersion: string):
 /**
  * Add the given modules to a package json's dependencies.
  */
-function addModulesToPackageJson(externalModules: string[], packageJson: any, pathToPackageRoot: string): void {
+function addModulesToPackageJson(
+    externalModules: string[],
+    packageJson: any,
+    pathToPackageRoot: string
+): void {
     externalModules.forEach(externalModule => {
         const splitModule = externalModule.split('@');
         // If we have a scoped module we have to re-add the @
@@ -40,8 +69,12 @@ function addModulesToPackageJson(externalModules: string[], packageJson: any, pa
  * Remove a given list of excluded modules from a module list
  * @this - The active plugin instance
  */
-function removeExcludedModules(modules: string[], packageForceExcludes: string[], log: boolean): void {
-    const excludedModules = remove(modules, externalModule => {
+function removeExcludedModules(
+    modules: string[],
+    packageForceExcludes: string[],
+    log: boolean
+): void {
+    const excludedModules = modules.filter(externalModule => {
         const splitModule = externalModule.split('@');
         // If we have a scoped module we have to re-add the @
         if (externalModule.startsWith('@')) {
@@ -49,11 +82,13 @@ function removeExcludedModules(modules: string[], packageForceExcludes: string[]
             splitModule[0] = '@' + splitModule[0];
         }
         const moduleName = splitModule[0];
-        return packageForceExcludes.indexOf((moduleName)) !== -1;
+        return packageForceExcludes.indexOf(moduleName) === -1;
     });
 
     if (log && excludedModules.length > 0) {
-        console.log(`Excluding external modules: ${excludedModules.join(', ')}`);
+        console.log(
+            `Excluding external modules: ${excludedModules.join(', ')}`
+        );
     }
 }
 
@@ -61,7 +96,13 @@ function removeExcludedModules(modules: string[], packageForceExcludes: string[]
  * Resolve the needed versions of production dependencies for external modules.
  * @this - The active plugin instance
  */
-function getProdModules(externalModules: any[], packagePath: string, dependencyGraph: any, forceExcludes: string[], runtime?: string): any[] {
+function getProdModules(
+    externalModules: any[],
+    packagePath: string,
+    dependencyGraph: any = {},
+    forceExcludes: string[],
+    runtime?: string
+): any[] {
     const packageJson = readJSONSync(packagePath);
     const prodModules: string[] = [];
 
@@ -84,44 +125,58 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
                     module.external,
                     'package.json'
                 );
-                const { peerDependencies, peerDependenciesMeta } = readJSONSync(modulePackagePath);
-                if (!isEmpty(peerDependencies)) {
+                const { peerDependencies = {}, peerDependenciesMeta = {} } =
+                    readJSONSync(modulePackagePath);
 
-                    if (!isEmpty(peerDependenciesMeta)) {
-                        for (const key of Object.keys(peerDependencies)) {
-                            if (peerDependenciesMeta[key]?.optional === true) {
-                                unset(peerDependencies, key);
-                            }
-                        }
-                    }
-                    if (!isEmpty(peerDependencies)) {
-                        const peerModules = getProdModules(Object.keys(peerDependencies).map(value => ({ external: value })),
-                            packagePath,
-                            dependencyGraph,
-                            forceExcludes,
-                            runtime
-                        );
-                        prodModules.push(...peerModules);
+                for (const key of Object.keys(peerDependencies)) {
+                    if (peerDependenciesMeta[key]?.optional === true) {
+                        delete peerDependencies[key];
                     }
                 }
+
+                const peerModules = getProdModules(
+                    Object.keys(peerDependencies).map(value => ({
+                        external: value,
+                    })),
+                    packagePath,
+                    dependencyGraph,
+                    forceExcludes,
+                    runtime
+                );
+                prodModules.push(...peerModules);
             } catch (e) {
-                console.log(`WARNING: Could not check for peer dependencies of ${module.external}`);
+                console.log(
+                    `WARNING: Could not check for peer dependencies of ${module.external}`
+                );
             }
         } else {
-            if (!packageJson.devDependencies || !packageJson.devDependencies[module.external]) {
+            if (
+                !packageJson.devDependencies ||
+                !packageJson.devDependencies[module.external]
+            ) {
                 // Add transient dependencies if they appear not in the service's dev dependencies
-                const originInfo = get(dependencyGraph, 'dependencies', {})[module.origin] || {};
-                moduleVersion = get(get(originInfo, 'dependencies', {})[module.external], 'version');
+                const originInfo =
+                    dependencyGraph.dependencies?.[module.origin] ?? {};
+                moduleVersion =
+                    originInfo.dependencies?.[module.external]?.version;
                 if (typeof moduleVersion === 'object') {
                     moduleVersion = moduleVersion.optional;
                 }
                 if (!moduleVersion) {
-                    moduleVersion = get(get(dependencyGraph, 'dependencies', {})[module.external], 'version');
+                    moduleVersion =
+                        dependencyGraph.dependencies?.[module.external]
+                            ?.version;
                     if (!moduleVersion) {
-                        console.log(`WARNING: Could not determine version of module ${module.external}`);
+                        console.log(
+                            `WARNING: Could not determine version of module ${module.external}`
+                        );
                     }
                 }
-                prodModules.push(moduleVersion ? `${module.external}@${moduleVersion}` : module.external);
+                prodModules.push(
+                    moduleVersion
+                        ? `${module.external}@${moduleVersion}`
+                        : module.external
+                );
             } else if (
                 packageJson.devDependencies &&
                 packageJson.devDependencies[module.external] &&
@@ -136,7 +191,9 @@ function getProdModules(externalModules: any[], packagePath: string, dependencyG
                     console.error(
                         `ERROR: Runtime dependency '${module.external}' found in devDependencies. Move it to dependencies or use forceExclude to explicitly exclude it.`
                     );
-                    throw new Error(`Serverless-webpack dependency error: ${module.external}.`);
+                    throw new Error(
+                        `Serverless-webpack dependency error: ${module.external}.`
+                    );
                 }
                 console.log(
                     `INFO: Runtime dependency '${module.external}' found in devDependencies. It has been excluded automatically.`
@@ -158,7 +215,10 @@ function getExternalModuleName(module: ExternalModule): string {
 }
 
 function isExternalModule(module: Module): boolean {
-    return module.identifier().startsWith('external ') && !isBuiltinModule(getExternalModuleName(module as ExternalModule));
+    return (
+        module.identifier().startsWith('external ') &&
+        !isBuiltinModule(getExternalModuleName(module as ExternalModule))
+    );
 }
 
 /**
@@ -168,8 +228,11 @@ function isExternalModule(module: Module): boolean {
  */
 // eslint-disable-next-line no-null/no-null
 function findExternalOrigin(stats: Stats, issuer: Module | null): any {
-    if (!isNil(issuer) && (issuer as any).rawRequest.startsWith('./')) {
-        return findExternalOrigin(stats, stats.compilation.moduleGraph.getIssuer(issuer));
+    if ((issuer as any)?.rawRequest.startsWith('./')) {
+        return findExternalOrigin(
+            stats,
+            stats.compilation.moduleGraph.getIssuer(issuer!)
+        );
     }
     return issuer;
 }
@@ -189,8 +252,11 @@ function getExternalModules(stats: Stats | undefined): any[] {
         for (const module of modules) {
             if (isExternalModule(module)) {
                 externals.add({
-                    origin: get(findExternalOrigin(stats, stats.compilation.moduleGraph.getIssuer(module)), 'rawRequest'),
-                    external: getExternalModuleName(module as ExternalModule)
+                    origin: findExternalOrigin(
+                        stats,
+                        stats.compilation.moduleGraph.getIssuer(module)
+                    )?.rawRequest,
+                    external: getExternalModuleName(module as ExternalModule),
                 });
             }
         }
@@ -211,16 +277,26 @@ function getExternalModules(stats: Stats | undefined): any[] {
  * This will utilize the npm cache at its best and give us the needed results
  * and performance.
  */
-export async function packExternalModules(context: ConfigurationContext, stats: Stats | undefined): Promise<void> {
+export async function packExternalModules(
+    context: ConfigurationContext,
+    stats: Stats | undefined
+): Promise<void> {
     const verbose = false;
     const { cfg, pkg, runtime } = context;
     const config = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET);
-    const configuration = ConfigurationContext.getConfiguration(BACKEND_TARGET, context.configurations);
+    const configuration = ConfigurationContext.getConfiguration(
+        BACKEND_TARGET,
+        context.configurations
+    );
     const includes = config.includeModules;
-    const packagerOptions = { nonInteractive: true, ignoreOptional: true, ...config.packagerOptions };
+    const packagerOptions = {
+        nonInteractive: true,
+        ignoreOptional: true,
+        ...config.packagerOptions,
+    };
     const scripts: any[] = packagerOptions.scripts || [];
 
-    if (isEmpty(includes) && includes !== true || !configuration) {
+    if (!includes || !configuration) {
         return;
     }
 
@@ -230,18 +306,21 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const packageForceIncludes = includes.forceInclude || [];
     const packageForceExcludes = includes.forceExclude || [];
     const packageForceIncludeAll = includes.forceIncludeAll;
-    const packagePath = includes.packagePath && join(process.cwd(), includes.packagePath) || join(process.cwd(), 'package.json');
+    const packagePath =
+        (includes.packagePath && join(process.cwd(), includes.packagePath)) ||
+        join(process.cwd(), 'package.json');
     const packageScripts = scripts.reduce((accumulator, script, index) => {
         accumulator[`script${index}`] = script;
         return accumulator;
-    },
-        {}
+    }, {});
+
+    const packager = getPackager(
+        context.cfg.rootConfig.packager,
+        process.cwd()
     );
 
-    const packager = getPackager(context.cfg.rootConfig.packager, process.cwd());
-
     const sectionNames = packager.copyPackageSectionNames;
-    const packageJson = await readJSON(packagePath);
+    const packageJson = (await readJSON(packagePath)) ?? {};
     if (packageForceIncludeAll) {
         for (const d of Object.keys(packageJson.dependencies)) {
             if (!packageForceIncludes.includes(d)) {
@@ -250,14 +329,18 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         }
     }
     const packageSections = pick(packageJson, sectionNames);
-    if (!isEmpty(packageSections)) {
-        console.log(`Using package.json sections ${Object.keys(packageSections).join(', ')}`);
+    if (Object.keys(packageSections).length) {
+        console.log(
+            `Using package.json sections ${Object.keys(packageSections).join(
+                ', '
+            )}`
+        );
     }
 
     const dependencyGraph = await packager.getProdDependencies(1);
 
     const problems = dependencyGraph.problems || [];
-    if (verbose && !isEmpty(problems)) {
+    if (verbose && problems.length > 0) {
         console.log(`Ignoring ${problems.length} NPM errors:`);
         problems.forEach((problem: any) => {
             console.log(`=> ${problem}`);
@@ -265,13 +348,23 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     }
 
     // (1) Generate dependency composition
-    const externalModules = getExternalModules(stats).concat(packageForceIncludes.map((whitelistedPackage: string) => ({
-        external: whitelistedPackage
-    })));
-    const compositeModules = uniq(getProdModules(uniq(externalModules), packagePath, dependencyGraph, packageForceExcludes, runtime));
-    removeExcludedModules(compositeModules, packageForceExcludes, true);
+    const externalModules = getExternalModules(stats).concat(
+        packageForceIncludes.map((whitelistedPackage: string) => ({
+            external: whitelistedPackage,
+        }))
+    );
+    const compositeModules = new Set(
+        getProdModules(
+            [...new Set(externalModules)],
+            packagePath,
+            dependencyGraph,
+            packageForceExcludes,
+            runtime
+        )
+    );
+    removeExcludedModules([...compositeModules], packageForceExcludes, true);
 
-    if (isEmpty(compositeModules)) {
+    if (compositeModules.size === 0) {
         // The compiled code does not reference any external modules at all
         console.log('No external modules needed');
         return;
@@ -282,18 +375,19 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
     const compositePackageJson = join(compositeModulePath, 'package.json');
 
     // (1.a.1) Create a package.json
-    const compositePackage = defaults(
-        {
+    const compositePackage = {
+        ...{
             name: pkg.pkg.name,
             version: pkg.pkg.version,
             description: `Packaged externals for ${pkg.pkg.name}`,
             private: true,
-            scripts: packageScripts
+            scripts: packageScripts,
         },
-        packageSections
-    );
+        ...packageSections,
+    };
+
     const relPath = relative(compositeModulePath, dirname(packagePath));
-    addModulesToPackageJson(compositeModules, compositePackage, relPath);
+    addModulesToPackageJson([...compositeModules], compositePackage, relPath);
     writeJSONSync(compositePackageJson, compositePackage, { spaces: 2 });
 
     // (1.a.2) Copy package-lock.json if it exists, to prevent unwanted upgrades
@@ -304,32 +398,41 @@ export async function packExternalModules(context: ConfigurationContext, stats: 
         try {
             let packageLockFile = await packager.readLockfile(packageLockPath);
             packageLockFile = packager.rebaseLockfile(relPath, packageLockFile);
-            await packager.writeLockfile(join(compositeModulePath, packager.lockfileName), packageLockFile);
+            await packager.writeLockfile(
+                join(compositeModulePath, packager.lockfileName),
+                packageLockFile
+            );
         } catch (err) {
             console.warn(`Warning: Could not read lock file: ${err.message}`);
         }
     }
 
-    const start = now();
+    const start = Date.now();
     for (const compositeModule of compositeModules) {
         console.log(`📦  malagu external modules - ${compositeModule}`);
     }
     await packager.install(packagerOptions, compositeModulePath);
     if (verbose) {
-        console.log(`Package took [${now() - start} ms]`);
+        console.log(`Package took [${Date.now() - start} ms]`);
     }
 
     // Prune extraneous packages - removes not needed ones
-    const startPrune = now();
+    const startPrune = Date.now();
     await packager.prune(packagerOptions, compositeModulePath);
     if (verbose) {
-        console.log(`Prune: ${compositeModulePath} [${now() - startPrune} ms]`);
+        console.log(
+            `Prune: ${compositeModulePath} [${Date.now() - startPrune} ms]`
+        );
     }
 
     // Prune extraneous packages - removes not needed ones
-    const startRunScripts = now();
+    const startRunScripts = Date.now();
     await packager.runScripts(Object.keys(packageScripts), compositeModulePath);
     if (verbose) {
-        console.log(`Run scripts: ${compositeModulePath} [${now() - startRunScripts} ms]`);
+        console.log(
+            `Run scripts: ${compositeModulePath} [${
+                Date.now() - startRunScripts
+            } ms]`
+        );
     }
 }

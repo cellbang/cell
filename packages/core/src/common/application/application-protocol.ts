@@ -2,9 +2,8 @@ import { MaybePromise } from '../utils/prioritizeable';
 import { Deferred } from '../utils/promise-util';
 import { Event } from '../utils/event';
 import { Emitter } from '../utils/emitter';
-import { injectable } from 'inversify';
-import { Logger } from '../logger';
-import { Autowired, Component } from '../annotation';
+import { Logger } from '../logger/logger-protocol';
+import { Autowired, Optional } from '../annotation';
 
 export const ApplicationLifecycle = Symbol('ApplicationLifecycle');
 export const Application = Symbol('Application');
@@ -32,19 +31,9 @@ export interface Application {
 
 }
 
-@Component(ApplicationLifecycle)
-export class EmptyApplicationLifecycle implements ApplicationLifecycle<Application> {
-
-    initialize(): void {
-        // NOOP
-    }
-
-}
-
-@injectable()
 export abstract class AbstractApplication implements Application {
 
-    @Autowired(ApplicationLifecycle)
+    @Autowired(ApplicationLifecycle) @Optional()
     protected readonly lifecycles: ApplicationLifecycle<Application>[];
 
     abstract start(): Promise<void>;
@@ -113,7 +102,6 @@ export interface ApplicationStateService<T extends string> {
     reachedAnyState(...states: T[]): Promise<void>;
 
 }
-@injectable()
 export abstract class AbstractApplicationStateService<T extends string> implements ApplicationStateService<T> {
 
     private _state = <T>'init';

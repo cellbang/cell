@@ -1,12 +1,10 @@
 import { resolve } from 'path';
 import { existsSync, copy } from 'fs-extra';
-const inquirer = require('inquirer');
+import { prompts } from 'prompts';
 import { templates } from './templates';
 import { Component, Autowired } from '@malagu/core';
 import { CONTEXT } from '../constants';
 import * as chalk from 'chalk';
-
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const PLACEHOLD = '{{ templatePath }}';
 
@@ -36,19 +34,22 @@ export class InitManager {
 
     protected async checkOutputDir() {
         if (existsSync(this.outputDir)) {
-            const answers = await inquirer.prompt([{
+            await prompts.confirm({
                 name: 'overwrite',
                 type: 'confirm',
-                message: 'Project already exists, overwrite the project'
-            }]);
-            if (!answers.overwrite) {
-                process.exit(-1);
-            }
+                message: 'Project already exists, overwrite the project',
+                onState: ({ value }) => {
+                    if (value !== true) {
+                        process.exit(-1);
+                    }
+                }
+            });
+            
         }
     }
 
     protected toTemplateMap(name: string, location: string) {
-        return { name: name, value: { location, name} };
+        return { title: name, value: { location, name} };
     }
 
     protected async selectTemplate(): Promise<void> {
@@ -57,19 +58,20 @@ export class InitManager {
         if (templateMap.length == 1) {
             answers = { item: templateMap[0].value };
         } else {
-            answers = await inquirer.prompt([{
+            answers = await prompts.autocomplete({
                 name: 'item',
                 type: 'autocomplete',
                 message: 'Select a template to init',
-                source: async (answersSoFar: any, input: string) => {
-                    return templateMap.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
+                choices: templateMap,
+                suggest: async input => {
+                    return templateMap.filter(item => !input || item.title.toLowerCase().includes(input.toLowerCase()));
                 }
-            }]);
+            });
         }
         
-        this.name = answers.item.name;
-        this.context.name = this.context.name || answers.item.name;
-        this.location = answers.item.location;
+        this.name = answers.name;
+        this.context.name = this.context.name || answers.name;
+        this.location = answers.location;
     }
 
     protected get realLocation() {

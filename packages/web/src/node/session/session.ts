@@ -1,9 +1,9 @@
+import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
 import { Session } from './session-protocol';
-import { v4 } from 'uuid';
-const crc = require('crc').crc32;
+const crc32 = require('crc/crc32');
 
 export class SessionImpl implements Session {
-    readonly id = v4();
+    readonly id = generateUUUID();
     isNew: boolean = true;
     expire: number;
     maxAge: number;
@@ -22,7 +22,7 @@ export class SessionImpl implements Session {
     }
 
     protected hash() {
-        return crc(JSON.stringify(this.toJSON()));
+        return crc32(JSON.stringify(this.toJSON()));
     }
 
     toJSON(): any {

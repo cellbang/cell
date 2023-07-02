@@ -215,28 +215,31 @@ export class NormalModuleReplacementPluginConfigFactory {
         const runtimePath = PathUtil.getRuntimePath(context.runtime);
         config
             .plugin('replace')
-            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), resource => {
-                if (resource.createData?.resource?.startsWith(runtimePath)) {
+            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), data => {
+                const createData = data.createData;
+                const resource = createData.resource;
+                if (resource?.startsWith(runtimePath)) {
                     const isExist = resources.some(r => {
                         if (typeof r === 'string') {
-                            return resource.createData.resource.includes(r);
+                            return resource.includes(r);
                         } else if (r instanceof RegExp) {
-                            return r.test(resource.createData.resource);
+                            return r.test(resource);
                         }
                     });
                     if (isExist) {
                         let processPath = process.cwd();
-                        let newResource = resource.createData.resource.replace(runtimePath, processPath);
+                        let newResource = resource.replace(runtimePath, processPath);
                         while (!existsSync(newResource) && processPath !== path.parse(process.cwd()).root) {
                             processPath = path.resolve(processPath, '..');
-                            newResource = resource.createData.resource.replace(runtimePath, processPath);
+                            newResource = resource.replace(runtimePath, processPath);
                         }
                         if (existsSync(newResource)) {
-                            if (resource.createData.request && resource.createData.userRequest) {
-                                resource.createData.request = resource.createData.request.replace(runtimePath, processPath);
-                                resource.createData.userRequest = resource.createData.userRequest.replace(runtimePath, processPath);
-                                resource.createData.resource = newResource;
-                                resource.createData.context = resource.createData.context.replace(runtimePath, processPath);
+
+                            if (createData.request && createData.userRequest) {
+                                createData.request = createData.request.replace(runtimePath, processPath);
+                                createData.userRequest = createData.userRequest.replace(runtimePath, processPath);
+                                createData.resource = newResource;
+                                createData.context = createData.context?.replace(runtimePath, processPath);
                             }
                         }
                     }

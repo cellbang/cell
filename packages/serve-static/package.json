@@ -7,7 +7,6 @@
   "dependencies": {
     "@malagu/core": "2.47.1",
     "@malagu/web": "2.47.1",
-    "@types/send": "^0.17.0",
     "send": "^0.17.1"
   },
   "publishConfig": {
@@ -40,7 +39,8 @@
   },
   "devDependencies": {
     "@malagu/cli-service": "2.47.1",
-    "@malagu/component": "2.47.1"
+    "@malagu/component": "2.47.1",
+    "@types/send": "^0.17.0"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }

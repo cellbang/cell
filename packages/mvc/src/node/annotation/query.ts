@@ -11,7 +11,10 @@ export function Query(name?: string): ParameterDecorator {
     };
 }
 
-export function applyQueryDecorator(target: any, targetKey: string | symbol, parameterIndex: number, name?: string): void {
+export function applyQueryDecorator(target: any, targetKey: string | symbol | undefined, parameterIndex: number, name?: string): void {
+    if (!targetKey) {
+        return;
+    }
     const metadatas: QueryMetadata[] = Reflect.getOwnMetadata(METADATA_KEY.controllerQuery, target.constructor, targetKey) || [];
     metadatas.push({ name, parameterIndex });
     Reflect.defineMetadata(METADATA_KEY.controllerQuery, metadatas, target.constructor, targetKey);

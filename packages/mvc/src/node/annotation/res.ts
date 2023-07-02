@@ -10,7 +10,10 @@ export function Res(): ParameterDecorator {
     };
 }
 
-export function applyResponseDecorator(target: any, targetKey: string | symbol, parameterIndex: number): void {
+export function applyResponseDecorator(target: any, targetKey: string | symbol | undefined, parameterIndex: number): void {
+    if (!targetKey) {
+        return;
+    }
     Reflect.defineMetadata(
         METADATA_KEY.controllerResponse,
         { parameterIndex } as ResponseMetadata,

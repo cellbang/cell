@@ -1,5 +1,5 @@
 import { existsSync, copy, readFile, writeFile } from 'fs-extra';
-const inquirer = require('inquirer');
+import { prompts } from 'prompts';
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
@@ -13,8 +13,6 @@ const chalk = require('chalk');
 import { basename, join, resolve } from 'path';
 import { RuntimeUtil } from '../util';
 const leven = require('leven');
-
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const PLACEHOLD = '{{ runtimePath }}';
 
@@ -100,25 +98,29 @@ export class InstallManager {
     protected async checkOutputDir(): Promise<void> {
         if (existsSync(this.outputDir)) {
             if (!this.opts.overwrite) {
-                const answers = await inquirer.prompt([{
+                // eslint-disable-next-line @typescript-eslint/await-thenable
+                await prompts.confirm({
                     name: 'overwrite',
                     type: 'confirm',
-                    message: 'Runtime already exists, overwrite the runtime'
-                }]);
-                if (!answers.overwrite) {
-                    process.exit(0);
-                }
+                    message: 'Runtime already exists, overwrite the runtime',
+                    onState: async ({ value }) => {
+                        if (value !== true) {
+                            process.exit(0);
+                        }
+                    }
+                });
+
             }
             await uninstall({ runtime: this.opts.alias || this.runtimeName });
         }
     }
 
     protected toOfficialRuntime(name: string, location: string): any {
-        return { name: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
+        return { title: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
     }
 
     protected toThirdPartyRuntime(item: any): any {
-        return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
+        return { title: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
     }
 
     protected async selectRuntime(): Promise<void> {
@@ -159,22 +161,19 @@ export class InstallManager {
             return;
         }
         const spinner = ora({ text: 'loading...', discardStdin: false }).start();
-        const answers = await inquirer.prompt([{
-            name: 'item',
-            type: 'autocomplete',
-            pageSize: 12,
-            message: 'Select a runtime to install',
-            source: async (answersSoFar: any, input: string) => {
-                if (!this.source) {
-                    const officialTemplates = Object.keys(templates).map(key => this.toOfficialRuntime(key, templates[key]));
-                    this.source = officialTemplates;
+        const officialTemplates = Object.keys(templates).map(key => this.toOfficialRuntime(key, templates[key]));
+        const choices = officialTemplates;
                     spinner.stop();
-                }
-                return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
-            }
-        }]);
-        this.runtimeName = answers.item.name;
-        this.location = answers.item.location;
+        const answer = await prompts.autocomplete({
+            name: 'runtime',
+            type: 'autocomplete',
+            limit: 12,
+            message: 'Select a runtime to install',
+            choices,
+            suggest: async (input: string) => choices.filter(item => !input || item.title.toLowerCase().includes(input.toLowerCase()))
+        });
+        this.runtimeName = answer.name;
+        this.location = answer.location;
     }
 
     protected get realLocation() {

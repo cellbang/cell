@@ -1,10 +1,10 @@
-import { StoreConfig, CacheStore, CacheStoreFactory } from './cache-protocol';
+import { CacheStoreFactoryConfig, CacheStore, CacheStoreFactory } from './cache-protocol';
 import { Component } from '@malagu/core';
 
 @Component(CacheStoreFactory)
 export class DefaultCacheStoreFactory implements CacheStoreFactory {
 
-    create(config: StoreConfig): CacheStore {
+    create(config: CacheStoreFactoryConfig): CacheStore {
 
         if (typeof config.store === 'string') {
             return this.load(config.store).create(config);

@@ -30,7 +30,7 @@ export class DefaultAuthenticationSuccessHandler implements AuthenticationSucces
 
     async onAuthenticationSuccess(authentication: Authentication): Promise<void> {
         const response = Context.getResponse();
-        if (Context.getRequest().get(HttpHeaders.X_REQUESTED_WITH) !== XML_HTTP_REQUEST) {
+        if (Context.getRequest().get(HttpHeaders.X_REQUESTED_WITH) === XML_HTTP_REQUEST) {
             return;
         }
         if (!this.loginSuccessUrl) {

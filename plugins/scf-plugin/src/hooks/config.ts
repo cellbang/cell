@@ -1,11 +1,12 @@
 import { CliContext } from '@malagu/cli-common';
 import { Profile } from '@malagu/cloud-plugin';
 import { CloudUtils } from '@malagu/cloud-plugin/lib/hooks/utils';
-import { prompt } from 'inquirer';
+import { prompt } from 'prompts';
 
 export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {
     const mark = (source?: string) => {
         if (source) {
+            source = source + '';
             const subStr = source.slice(-4);
             return `***********${subStr}`;
         }
@@ -15,10 +16,10 @@ export async function promptForProfile(profilePath: string, regions: string[]): 
     const markedAppId = mark(profile.appId);
     const questions = [
         {
-            type: 'input',
+            type: 'text',
             name: 'appId',
             message: 'App Id',
-            default: markedAppId
+            initial: markedAppId
         },
     ];
     const { appId }: any = await prompt(questions);

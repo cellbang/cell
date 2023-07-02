@@ -1,5 +1,4 @@
-import { v4 } from 'uuid';
-import { Component, Value } from '@malagu/core';
+import { Component, Value, generateUUUID } from '@malagu/core';
 import { TraceIdResolver, TRACE_ID_REQUEST_FIELD } from './trace-protocol';
 import { Context } from '../context';
 
@@ -15,6 +14,6 @@ export class TraceIdResolverImpl implements TraceIdResolver {
                 return Promise.resolve(traceId);
             }
         }
-        return Promise.resolve(v4());
+        return Promise.resolve(generateUUUID());
     }
 }

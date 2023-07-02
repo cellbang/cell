@@ -1,6 +1,5 @@
 import { PathResolver } from './resolver-protocol';
-import { Value, Component } from '@malagu/core';
-import urlJoin = require('url-join');
+import { Value, Component, UrlUtil } from '@malagu/core';
 
 @Component(PathResolver)
 export class PathResolverImpl implements PathResolver {
@@ -9,6 +8,6 @@ export class PathResolverImpl implements PathResolver {
     protected readonly path: string;
 
     resolve(...parts: string[]): string {
-        return urlJoin(this.path, ...parts.filter(v => !!v));
+        return UrlUtil.join(this.path, ...parts.filter(v => !!v));
     }
 }

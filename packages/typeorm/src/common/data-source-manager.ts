@@ -63,7 +63,7 @@ export class DataSourceManager {
         }
 
         // create a new dataSource
-        const dataSource = new DataSource(options);
+        const dataSource = new DataSource({ ...options, name});
         this.dataSourceMap.set(name, dataSource);
         return dataSource;
     }

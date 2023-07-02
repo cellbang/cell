@@ -1,31 +1,27 @@
 
 import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
-const inquirer = require('inquirer');
+import { prompts } from 'prompts';
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { Runtimes } from '../runtime-protocol';
 import { RuntimeUtil } from '../util/runtime-util';
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 export interface UseOptions {
     runtime?: string;
 }
 
 export async function selectRuntime(): Promise<string> {
-
-    const answers = await inquirer.prompt([{
-        name: 'item',
+    const runtimes = await RuntimeUtil.getInstalledRuntimes();
+    const choices = runtimes.map(r => ({ title: chalk`${r.name} {italic.gray runtime}`, value: r }));
+    const answer = await prompts.autocomplete({
+        name: 'runtime',
         type: 'autocomplete',
-        default: SettingsUtil.getSettings().defaultRuntime || Runtimes.empty,
-        pageSize: 12,
+        limit: 12,
         message: 'Select a runtime to use (as default)',
-        source: async (answersSoFar: any, input: string) => {
-            let runtimes = await RuntimeUtil.getInstalledRuntimes();
-            runtimes = [ { name: Runtimes.empty, version: '' }, ...runtimes ];
-            return runtimes.map(r => ({ name: chalk`${r.name} {italic.gray runtime}`, value: r }));
-        }
-    }]);
-    return answers.item.name;
+        choices,
+        suggest: async input => choices.filter(item => !input || item.title.toLowerCase().includes(input.toLowerCase()))
+    });
+    return answer.name;
 }
 
 export default async (options: UseOptions) => {

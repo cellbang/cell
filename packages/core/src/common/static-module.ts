@@ -1,11 +1,10 @@
-import 'reflect-metadata';
+import './index';
 import { VALUE } from './annotation/value';
 import { PROVIDER, ID_KEY } from './annotation/autowired-provider';
 import { ConfigProvider } from './config/config-protocol';
 import { autoBind } from './container/auto-bind';
 import { ProviderCreator } from './provider/provider-protocol';
 import { ComponentId } from './annotation/component';
-import './index';
 
 export default autoBind(bind => {
     bind(VALUE).toDynamicValue(ctx => {

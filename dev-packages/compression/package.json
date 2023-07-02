@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {
     "@malagu/cli-common": "2.47.1",
-    "compression-webpack-plugin": "^8.0.0"
+    "compression-webpack-plugin": "^10.0.0"
   },
   "publishConfig": {
     "access": "public"

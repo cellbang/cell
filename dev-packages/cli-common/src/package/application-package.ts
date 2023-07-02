@@ -123,7 +123,7 @@ export class ApplicationPackage {
             }
 
             if (this.options.propsFile) {
-                const props = load(readFileSync(paths.resolve(process.cwd(), this.options.propsFile), { encoding: 'utf8' }));
+                const props = load(readFileSync(paths.resolve(process.cwd(), this.options.propsFile), { encoding: 'utf8' })) as any;
                 for (const m of props.mode || []) {
                     if (!mode.includes(m)) {
                         mode.push(m);

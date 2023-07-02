@@ -50,7 +50,7 @@ export class ApplicationConfig {
             return this._rootConfig;
         }
         if (existsSync(this.pkg.path(process.cwd(), CONFIG_FILE))) {
-            this._rootConfig = load(readFileSync(this.pkg.path(process.cwd(), CONFIG_FILE), { encoding: 'utf8' }));
+            this._rootConfig = load(readFileSync(this.pkg.path(process.cwd(), CONFIG_FILE), { encoding: 'utf8' })) as any;
         }
         if (this._rootConfig && !this._rootConfig.malagu) {
             this._rootConfig.malagu = {};

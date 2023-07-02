@@ -6,10 +6,9 @@
   "typings": "lib/index.d.ts",
   "dependencies": {
     "axios": "^0.26.1",
-    "fs-extra": "^9.0.13",
+    "fs-extra": "^11.1.1",
     "jszip": "^3.7.1",
     "tar-fs": "^2.1.1",
-    "uuid": "^8.3.2",
     "zlib": "^1.0.5"
   },
   "publishConfig": {

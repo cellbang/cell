@@ -2,7 +2,6 @@ import { Autowired, Component, Logger, Value } from '@malagu/core';
 import { View } from './view-protocol';
 import { HttpHeaders, HttpStatus, MediaType } from '@malagu/web';
 import { Context, Response } from '@malagu/web/lib/node';
-import * as isStream from 'is-stream';
 import { Stream } from 'stream';
 import { FILE_VIEW_NAME } from '../annotation/file';
 import { ViewMetadata } from '../annotation/view';
@@ -22,12 +21,17 @@ export class FileView implements View {
     @Value('malagu.mvc.baseFileDir')
     protected readonly baseFileDir: any;
 
+    protected isStream(model: any) {
+        return typeof model === 'object'
+            && typeof model.pipe === 'function';
+    }
+
     async render(model: any, { metadata }: ViewMetadata): Promise<void> {
         if (metadata?.file) {
             model = createReadStream(join(__dirname, this.baseFileDir, metadata.file));
         }
         const response = Context.getCurrent().response;
-        if (isStream(model)) {
+        if (this.isStream(model)) {
             Context.setSkipAutoEnd(true);
             this.streamDownload(response, model);
         } else {

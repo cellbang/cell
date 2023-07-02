@@ -6,9 +6,9 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/cli-common": "2.47.1",
-    "eslint": "^7.27.0",
-    "fork-ts-checker-notifier-webpack-plugin": "^4.0.0",
-    "fork-ts-checker-webpack-plugin": "^6.2.10"
+    "eslint": "^8.44.0",
+    "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
+    "fork-ts-checker-webpack-plugin": "^8.0.0"
   },
   "publishConfig": {
     "access": "public"

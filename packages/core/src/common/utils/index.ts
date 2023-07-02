@@ -12,3 +12,5 @@ export * from './event';
 export * from './emitter';
 export * from './global-util';
 export * from './async';
+export * from './url-util';
+export * from './uuid';

@@ -1,31 +1,31 @@
 import { execSync } from 'child_process';
 import { existsSync } from 'fs-extra';
 const path = require('path');
-const LRU = require('lru-cache');
+import { LRUCache } from 'lru-cache';
 const semver = require('semver');
 
 let _hasYarn: boolean;
-const _yarnProjects = new LRU({
+const _yarnProjects = new LRUCache<string, boolean>({
     max: 10,
-    maxAge: 1000
+    ttl: 1000
 });
 
 let _hasPnpm: boolean;
 let _pnpmVersion: string;
-const _pnpmProjects = new LRU({
+const _pnpmProjects = new LRUCache<string, boolean>({
     max: 10,
-    maxAge: 1000
+    ttl: 1000
 });
 
-const _npmProjects = new LRU({
+const _npmProjects = new LRUCache<string, boolean>({
     max: 10,
-    maxAge: 1000
+    ttl: 1000
 });
 
 let _hasGit = false;
-const _gitProjects = new LRU({
+const _gitProjects = new LRUCache<string, boolean>({
     max: 10,
-    maxAge: 1000
+    ttl: 1000
 });
 
 // env detection
@@ -45,7 +45,7 @@ export const hasYarn = () => {
 
 export const hasProjectYarn = (cwd: string) => {
     if (_yarnProjects.has(cwd)) {
-        return checkYarn(_yarnProjects.get(cwd));
+        return checkYarn(_yarnProjects.get(cwd)!);
     }
 
     const lockFile = path.join(cwd, 'yarn.lock');
@@ -127,7 +127,7 @@ export const hasPnpm = () => {
 
 export const hasProjectPnpm = (cwd: string) => {
     if (_pnpmProjects.has(cwd)) {
-        return checkPnpm(_pnpmProjects.get(cwd));
+        return checkPnpm(_pnpmProjects.get(cwd)!);
     }
 
     const lockFile = path.join(cwd, 'pnpm-lock.yaml');

@@ -1,19 +1,17 @@
 import { resolve, basename, relative, join } from 'path';
 import { existsSync, copy, readFile, writeJSON } from 'fs-extra';
-const inquirer = require('inquirer');
 import { templates } from './templates';
 import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
 import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
 import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { prompts } from 'prompts';
 import * as ora from 'ora';
 const rimraf = require('rimraf');
 const chalk = require('chalk');
 import { ok } from 'assert';
 import { RuntimeUtil } from '@malagu/cli-runtime';
 const version = require('../../package.json').version;
-
-inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
 
 const PLACEHOLD = '{{ templatePath }}';
 
@@ -87,25 +85,28 @@ export class InitManager {
 
     protected async checkOutputDir(): Promise<void> {
         if (existsSync(this.outputDir)) {
-            const answers = await inquirer.prompt([{
+            // eslint-disable-next-line @typescript-eslint/await-thenable
+            await prompts.confirm({
                 name: 'remove',
                 type: 'confirm',
-                message: `App already exists, remove the app (dir: ${join(relative(process.cwd(), this.outputDir))})`
-            }]);
-            if (answers.remove) {
-                rimraf.sync(this.outputDir);
-            } else {
-                process.exit(0);
-            }
+                message: `App already exists, remove the app (dir: ${join(relative(process.cwd(), this.outputDir))})`,
+                onState: ({ value }) => {
+                    if (value === true) {
+                        rimraf.sync(this.outputDir);
+                    } else {
+                        process.exit(0);
+                    }
+                }
+            });
         }
     }
 
     protected toOfficialTemplate(name: string, location: string): any {
-        return { name: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
+        return { title: `${name} ${chalk.italic.gray('Official')}`, value: { location, name} };
     }
 
     protected toThirdPartyTemplate(item: any): any {
-        return { name: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
+        return { title: `${item.name} ${chalk.italic.gray(item.stargazers_count + '⭑')}`, value: { location: item.clone_url, name: item.name }};
     }
 
     protected async selectTemplate(): Promise<void> {
@@ -125,22 +126,19 @@ export class InitManager {
             return;
         }
         const spinner = ora({ text: 'loading...', discardStdin: false }).start();
-        const answers = await inquirer.prompt([{
-            name: 'item',
+        const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
+        const choices = officialTemplates;
+        spinner.stop();
+        const answer = await prompts.autocomplete({
             type: 'autocomplete',
-            pageSize: 12,
+            name: 'template',
+            limit: 12,
             message: 'Select a template to init',
-            source: async (answersSoFar: any, input: string) => {
-                if (!this.source) {
-                    const officialTemplates = Object.keys(templates).map(key => this.toOfficialTemplate(key, templates[key]));
-                    this.source = officialTemplates;
-                    spinner.stop();
-                }
-                return this.source.filter(item => !input || item.name.toLowerCase().includes(input.toLowerCase()));
-            }
-        }]);
-        this.templateName = answers.item.name;
-        this.location = answers.item.location;
+            choices,
+            suggest: async input => choices.filter(item => !input || item.title.toLowerCase().includes(input.toLowerCase()))
+        });
+        this.templateName = answer.name;
+        this.location = answer.location;
     }
 
     protected get realLocation() {

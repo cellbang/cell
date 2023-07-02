@@ -1,7 +1,6 @@
-import { ContainerUtil, ComponentId } from '@malagu/core';
+import { ContainerUtil, ComponentId, UrlUtil } from '@malagu/core';
 import { ID_KEY, RPC } from '../annotation';
 import { HttpProxyCreator, HttpProxyCreatorOptions, MergeOptions } from '../proxy/http-proxy-creator';
-import urlJoin = require('url-join');
 import { ProxyCreator } from '../proxy/proxy-protocol';
 
 let defaultProxyCreator: ProxyCreator | undefined;
@@ -25,7 +24,7 @@ export namespace RpcUtil {
     export function createProxyCreator(endpoint: string, options?: Partial<HttpProxyCreatorOptions<Partial<MergeOptions>>>) {
         return new HttpProxyCreator({ ...options, endpointResolver: {
             resolve(serviceIdentifier: string) {
-                return Promise.resolve(urlJoin(endpoint, serviceIdentifier));
+                return Promise.resolve(UrlUtil.join(endpoint, serviceIdentifier));
             }
         }});
     }
