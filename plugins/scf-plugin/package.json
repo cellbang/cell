@@ -1,19 +1,19 @@
 {
   "name": "@malagu/scf-plugin",
-  "version": "2.47.1",
+  "version": "2.48.0",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.47.1",
-    "@malagu/cloud-plugin": "2.47.1",
-    "@malagu/code-loader-plugin": "2.47.1",
+    "@malagu/cli-common": "2.48.0",
+    "@malagu/cloud-plugin": "2.48.0",
+    "@malagu/code-loader-plugin": "2.48.0",
     "chalk": "^4.1.0",
     "cos-nodejs-sdk-v5": "^2.8.3",
     "delay": "^4.4.0",
     "fs-extra": "^11.1.1",
     "jszip": "^3.7.1",
+    "prompts": "^2.4.2",
     "tencentcloud-sdk-nodejs": "4.0.378",
-    "traverse": "^0.6.7",
-    "prompts": "^2.4.2"
+    "traverse": "^0.6.7"
   },
   "publishConfig": {
     "access": "public"
@@ -52,7 +52,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.47.1"
+    "@malagu/component": "2.48.0"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }
