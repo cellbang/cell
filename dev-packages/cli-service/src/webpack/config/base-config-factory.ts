@@ -128,15 +128,6 @@ export class BaseConfigFactory {
                     })
                 .end()
                 .module
-                    .rule('workerMain')
-                        .test(/worker-main\.js$/)
-                        .use('worker-loader')
-                            .loader('worker-loader')
-                            .options({
-                                name: 'worker-ext.[fullhash].js'
-                            })
-                        .end()
-                    .end()
                     .rule('img')
                         .merge({
                             test: /\.(jpg|png|gif)$/,

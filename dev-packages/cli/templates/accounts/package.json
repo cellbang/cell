@@ -23,7 +23,7 @@
     "@malagu/typeorm": "{{ version }}",
     "better-sqlite3": "^7.6.2",
     "querystring": "^0.2.1",
-    "request-ip": "^2.1.3",
+    "request-ip": "^3.3.0",
     "grommet-icons": "^4.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
