@@ -178,12 +178,12 @@ export default async (context: WebpackContext) => {
                             publicPath: cssPublicPath,
                         });
                 } else {
-                    rule.use('vue-style-loader')
-                        .loader(require.resolve('vue-style-loader'))
-                        .options({
-                            sourceMap,
-                            shadowMode,
-                        });
+                    const styleLoaderOptions = {
+                        ...(loaderOptions.style || {})
+                    };
+                    rule.use('style-loader')
+                        .loader(require.resolve('style-loader'))
+                        .options(styleLoaderOptions);
                 }
 
                 const cssLoaderOptions = Object.assign(
