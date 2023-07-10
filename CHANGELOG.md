@@ -1,5 +1,9 @@
 # Change
 
+## 2.48.2
+
+- fix(cli-common) 修复 malagu 命令启动报 ts 错误
+
 ## 2.48.1
 
 - perf(*) 升级依赖，并减少依赖项

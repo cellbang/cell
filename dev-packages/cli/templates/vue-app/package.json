@@ -14,8 +14,8 @@
     "@malagu/rpc": "{{ version }}",
     "@malagu/vue": "{{ version }}",
     "@malagu/serve-static": "{{ version }}",
-    "vue-router": "^4.0.8",
-    "vue": "^3.0.11"
+    "vue-router": "^4.2.4",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@malagu/cli": "{{ version }}"

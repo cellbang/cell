@@ -90,7 +90,7 @@ export class HookExecutor {
         const { REGISTER_INSTANCE, register } = require('ts-node');
         // Avoid duplicate registrations
         if (!(process as any)[REGISTER_INSTANCE]) {
-            register({ transpileOnly: true });
+            register({ transpileOnly: true, compilerOptions: { module: 'es2020' } });
         }
 
         const result: any = [];
