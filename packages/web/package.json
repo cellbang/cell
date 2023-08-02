@@ -1,11 +1,11 @@
 {
   "name": "@malagu/web",
-  "version": "2.48.2",
+  "version": "2.48.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.48.2",
+    "@malagu/core": "2.48.3",
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
     "class-transformer": "^0.5.1",
@@ -46,8 +46,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.48.2",
-    "@malagu/component": "2.48.2",
+    "@malagu/cli-service": "2.48.3",
+    "@malagu/component": "2.48.3",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.9"
   },
