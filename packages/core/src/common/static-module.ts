@@ -20,4 +20,4 @@ export default autoBind(bind => {
 
         return providerCreator.create(id, ctx.container);
     });
-}, 'core-common');
+});

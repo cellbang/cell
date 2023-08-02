@@ -1,5 +1,9 @@
 # Change
 
+## 2.48.3
+
+- feat(core) 优化模块加载的幂等性
+
 ## 2.48.2
 
 - fix(cli-common) 修复 malagu 命令启动报 ts 错误

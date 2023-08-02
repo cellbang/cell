@@ -1,4 +1,4 @@
-import { autoBindNamed } from '../common';
+import { autoBind } from '../common';
 import './index';
 
-export default autoBindNamed('core-node');
+export default autoBind();

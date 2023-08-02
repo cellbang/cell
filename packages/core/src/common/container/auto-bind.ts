@@ -6,34 +6,12 @@ import { AopProxyFactory, ClassFilter } from '../aop/aop-protocol';
 import { ContainerUtil } from './container-util';
 import { Scope } from './scope';
 
-const componentMetadataMap = new Map<string, ComponentMetadata[]>();
-const constantMetadataMap = new Map<string, ConstantOption[]>();
-
-export function autoBindNamed(name: string = 'test'): interfaces.ContainerModule {
-    return autoBind(() => {}, name);
-}
-
-export function autoBind(registry?: interfaces.ContainerModuleCallBack, name?: string): interfaces.ContainerModule {
+export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
+    const metadatas: ComponentMetadata[] = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
+    const constantMetadata: ConstantOption[] = Reflect.getMetadata(METADATA_KEY.constantValue, Reflect) || [];
+    Reflect.defineMetadata(METADATA_KEY.component, [], Reflect);
+    Reflect.defineMetadata(METADATA_KEY.constantValue, [], Reflect);
     return new ContainerModule((bind, unbind, isBound, rebind, ...rest) => {
-        let metadatas: ComponentMetadata[] | undefined;
-        let constantMetadata: ConstantOption[] | undefined;
-        if (name) {
-            metadatas = componentMetadataMap.get(name);
-            constantMetadata = constantMetadataMap.get(name);
-            if (!metadatas) {
-                metadatas = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
-                componentMetadataMap.set(name, metadatas!);
-                constantMetadata = Reflect.getMetadata(METADATA_KEY.constantValue, Reflect) || [];
-                constantMetadataMap.set(name, constantMetadata!);
-                Reflect.defineMetadata(METADATA_KEY.component, [], Reflect);
-                Reflect.defineMetadata(METADATA_KEY.constantValue, [], Reflect);
-            }
-        } else {
-            metadatas = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
-            constantMetadata = Reflect.getMetadata(METADATA_KEY.constantValue, Reflect) || [];
-            Reflect.defineMetadata(METADATA_KEY.component, [], Reflect);
-            Reflect.defineMetadata(METADATA_KEY.constantValue, [], Reflect);
-        }
         for (let index = metadatas!.length - 1; index >= 0; index--) {
             const metadata = metadatas![index];
             resolve(metadata, bind, rebind);
