@@ -51,8 +51,8 @@ export default async (context: InfoContext) => {
             context.output.routeInfo = await getRoute(apiGatewayClient, apiId, true);
             context.output.stageInfo = await getStage(apiGatewayClient, apiId, stage.name, true);
             if (customDomain?.name) {
-                context.output.customDomainInfo = await getCustomDomain(apiGatewayClient, customDomain.name, true);  
-                context.output.apiMappingInfo = await getApiMapping(apiGatewayClient, customDomain.name, apiId, stage.name, true)              
+                context.output.customDomainInfo = await getCustomDomain(apiGatewayClient, customDomain.name, true);
+                context.output.apiMappingInfo = await getApiMapping(apiGatewayClient, customDomain.name, apiId, stage.name, true);
             }
         }
     }

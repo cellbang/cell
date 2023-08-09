@@ -5,7 +5,8 @@ import * as delay from 'delay';
 import { CloudUtils, DefaultProfileProvider, Profile } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
 import * as COS from 'cos-nodejs-sdk-v5';
-import { checkStatus, createBucketIfNeed, createClients, getAlias, getApi, getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
+import { checkStatus, createBucketIfNeed, createClients, getAlias, getApi,
+    getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
 const chalk = require('chalk');
 
 let cosClient: COS;
@@ -50,7 +51,7 @@ export default async (context: DeployContext) => {
     functionMeta.namespace = functionMeta.namespace || namespace?.name;
 
     const namespaceName = functionMeta.namespace;
-   
+
     await createOrUpdateFunction(functionMeta, disableProjectId, region, appId);
 
     const functionVersion = await publishVersion(namespaceName, functionMeta.name);
@@ -100,7 +101,7 @@ function cleanObj(obj: any) {
 
 async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
     const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, undefined, alias.name);
-    if(triggerInfo?.Type === 'apigw'){
+    if (triggerInfo?.Type === 'apigw') {
         const serviceId = JSON.parse(triggerInfo.TriggerDesc)?.service?.serviceId;
         trigger.triggerDesc.service.serviceId = serviceId;
     }
@@ -130,7 +131,7 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
         const Result = await scfClient.CreateTrigger(createTriggerRequest);
         url = JSON.parse(Result.TriggerInfo.TriggerDesc)?.service?.subDomain;
     });
-    
+
     if (url) {
         console.log(chalk`    - Url: {green.bold ${url}}`);
     }
@@ -174,7 +175,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     req.InitTimeout = functionMeta.initTimeout;
     req.AsyncRunEnable = parseBoolean(functionMeta.asyncRunEnable);
     req.TraceEnable = parseBoolean(functionMeta.traceEnable);
-    req.ProtocolType = functionMeta.protocolType
+    req.ProtocolType = functionMeta.protocolType;
     req.InstallDependency = parseBoolean(functionMeta.installDependency);
 
     const { env, vpcConfig, cfsConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig } = functionMeta;
@@ -206,7 +207,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
         req.VpcConfig.SubnetId = vpcConfig.subnetId;
     }
 
-    if (cfsConfig?.cfsInsList){
+    if (cfsConfig?.cfsInsList) {
         req.CfsConfig = {
             CfsInsList: cfsConfig.cfsInsList.map((item: any) => ({
                 UserId: item.userId || 10000,
@@ -216,7 +217,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
                 LocalMountDir: item.localMountDir,
                 RemoteMountDir: item.remoteMountDir
             }))
-        }        
+        };
     }
 
     if (layers) {
@@ -228,11 +229,10 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
                 layer.LayerName = layerInfo.LayerName;
                 layer.LayerVersion = layerInfo.LayerVersion;
             } else {
-                const layer: any = {};
                 layer.LayerName = l.name;
                 layer.LayerVersion = l.version;
             }
-            
+
             req.Layers.push(layer);
         }
     }
@@ -266,7 +266,6 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
         await tryCreateProjectId(namespaceName, functionName);
     }
 }
-
 
 async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string) {
     const bucket = `malagu-scf-${region}-code-${appId}`;
@@ -334,7 +333,7 @@ async function publishLayerIfNeed(layer: any = {}, region: string, appId?: strin
 
 function parseBoolean(value?: boolean) {
     if (value !== undefined) {
-        return value === true ? 'TRUE' : 'FALSE'
+        return value === true ? 'TRUE' : 'FALSE';
     }
 }
 

@@ -222,16 +222,14 @@ async function createOrUpdateFunction(functionMeta: any, accountId: string, regi
             await checkStatus(functionMeta.name);
 
             if (functionMeta.sync !== 'onlyUpdateCode') {
-                let updateConfig = parseUpdateFunctionConfigurationRequest(functionMeta);
+                const updateConfig = parseUpdateFunctionConfigurationRequest(functionMeta);
                 delete updateConfig.Runtime;
-                
+
                 functionInfo = await lambdaClient.updateFunctionConfiguration(updateConfig).promise();
             }
         });
     } else {
-        functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
-            return await createFunctionWithRetry(functionMeta);
-        });
+        functionInfo = await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => createFunctionWithRetry(functionMeta));
     }
 }
 
@@ -683,22 +681,22 @@ async function checkStatus(functionName: string) {
     }
 }
 
-/// This error happens when the role is invalid (which is not the case) or when you try to create the Lambda function just after the role creation.
-/// Amazon needs a few seconds to replicate your new role through all regions.
-/// view detail: `https://stackoverflow.com/questions/37503075/invalidparametervalueexception-the-role-defined-for-the-function-cannot-be-assu`
+// / This error happens when the role is invalid (which is not the case) or when you try to create the Lambda function just after the role creation.
+// / Amazon needs a few seconds to replicate your new role through all regions.
+// / view detail: `https://stackoverflow.com/questions/37503075/invalidparametervalueexception-the-role-defined-for-the-function-cannot-be-assu`
 async function createFunctionWithRetry(functionMeta: any) {
     let times = 10;
     while (times > 0) {
         try {
             return await lambdaClient.createFunction(await parseCreateFunctionRequest(functionMeta)).promise();
         } catch (err) {
-            if(err.code !== 'InvalidParameterValueException') {
+            if (err.code !== 'InvalidParameterValueException') {
                 throw err;
             }
         }
         await delay(1500);
         times = times - 1;
     }
-    throw new Error(`Please try again later`);
+    throw new Error('Please try again later');
 }
 

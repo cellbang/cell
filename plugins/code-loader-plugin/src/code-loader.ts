@@ -4,7 +4,7 @@ import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import { CodeLoader, CodeUri } from './code-protocol';
 import axios from 'axios';
-var tar = require('tar-fs')
+const tar = require('tar-fs');
 import { createUnzip } from 'zlib';
 import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
 
@@ -48,12 +48,12 @@ export class DefaultCodeLoader implements CodeLoader {
             const codeDir = join(_tmpdir, generateUUUID());
             const tarStream = tar.extract(codeDir);
             stream.pipe(createUnzip()).pipe(tarStream);
-            await new Promise<void>((resolve, reject) => 
+            await new Promise<void>((resolve2, reject) =>
                 tarStream
                     .on('finish', () => {
                         this.doLoadForLocal(codeDir, zip).then(() => {
                             remove(codeDir);
-                            resolve();
+                            resolve2();
                         }).catch(reject);
                     })
                     .on('error', (error: any) => {
@@ -80,7 +80,7 @@ export class DefaultCodeLoader implements CodeLoader {
             if (file.isDirectory()) {
                 // https://github.com/Stuk/jszip/issues/428
                 if (lstatSync(fullPath).isSymbolicLink()) {
-                    zip.file(fileName, readlinkSync(fullPath), { unixPermissions: parseInt('120755', 8) })
+                    zip.file(fileName, readlinkSync(fullPath), { unixPermissions: parseInt('120755', 8) });
                     continue;
                 }
 

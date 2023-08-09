@@ -19,20 +19,18 @@ export function checkForAndDeleteMaxCacheVersions(options: PythonPluginOptions) 
         // Check if we have too many
         if (files.length >= options.staticCacheMaxVersions) {
             // Sort by modified time
-            files.sort((a, b) => {
-                return (
+            files.sort((a, b) => (
                     statSync(a).mtime.getTime() - statSync(b).mtime.getTime()
-                );
-            });
+                ));
             // Remove the older files...
-            var items = 0;
+            let items = 0;
             for (
-                var i = 0; i < files.length - options.staticCacheMaxVersions + 1; i++) {
+                let i = 0; i < files.length - options.staticCacheMaxVersions + 1; i++) {
                 rimraf.sync(files[i]);
                 items++;
             }
 
-            console.info(`Removed ${items} items from cache because of staticCacheMaxVersions`)
+            console.info(`Removed ${items} items from cache because of staticCacheMaxVersions`);
         }
     }
 }
@@ -101,16 +99,14 @@ export function mergeCommands(commands: string[][]) {
     }
 }
 
-
 function filterCommands(commands: string[][]) {
     return commands.filter(cmd => Boolean(cmd) && cmd.length > 0);
 }
 
 export function getRequirementsPath() {
     const projectHomeDir = PathUtil.getProjectHomePath();
-    return join(projectHomeDir, `requirements`);
+    return join(projectHomeDir, 'requirements');
 }
-
 
 export function parsePythonOptions(options: PythonPluginOptions) {
     options = { ...DEFAULT_PYTHON_PLUGIN_OPTIONS, ...options };

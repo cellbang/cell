@@ -25,6 +25,7 @@ export default async (context: WebpackContext) => {
         } else {
             nextConfigPath = join(process.cwd(), 'next.config.mjs');
             if (existsSync(nextConfigPath)) {
+                /* eslint no-eval: 0 */
                 nextConfig = await eval(`import('${nextConfigPath}')`);
             }
         }
@@ -33,7 +34,7 @@ export default async (context: WebpackContext) => {
             patterns.push({
                 from: nextConfigPath,
                 to: resolve(backendProjectDistPath, nextConfigPath.split('/').pop()!)
-            });  
+            });
         }
 
         if (existsSync(publicDir)) {

@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
+    "@malagu/core": "^2.48.3", 
     "axios": "^0.26.1",
     "fs-extra": "^11.1.1",
     "jszip": "^3.7.1",

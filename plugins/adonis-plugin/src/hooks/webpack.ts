@@ -1,8 +1,7 @@
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { readJSON, existsSync } from 'fs-extra';
 import { ConfigurationContext, WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { resolve } from 'path';
 
 export default async (context: WebpackContext) => {
     const { configurations } = context;
@@ -15,17 +14,17 @@ export default async (context: WebpackContext) => {
         const patterns = [];
         let distDir = 'build';
 
-        const tsconfig = join(process.cwd(), 'tsconfig.json')
-        if (existsSync(tsconfig)) {
-            const config = await readJSON(tsconfig)
-            const outDir = config?.compilerOptions?.outDir
+        const tsconfigPath = join(process.cwd(), 'tsconfig.json');
+        if (existsSync(tsconfigPath)) {
+            const tsconfig = await readJSON(tsconfigPath);
+            const outDir = tsconfig?.compilerOptions?.outDir;
             if (outDir) {
-                distDir = outDir
+                distDir = outDir;
             }
         }
 
         const backendProjectDistPath = PathUtil.getBackendProjectDistPath();
-        
+
         patterns.push({
             from: resolve(process.cwd(), distDir),
             to: resolve(backendProjectDistPath)

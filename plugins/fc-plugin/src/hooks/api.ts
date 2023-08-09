@@ -30,7 +30,7 @@ function parseParams(params: Params) {
 }
 
 function getCommonHeaders() {
-    return  { 'Content-Type': 'application/x-www-form-urlencoded' }
+    return  { 'Content-Type': 'application/x-www-form-urlencoded' };
 }
 
 export async function token(params: Params) {

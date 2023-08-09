@@ -1,5 +1,9 @@
 # Change
 
+## 2.48.4
+
+- fix(cli-common) 修复命令行 Hook 执行报错问题
+
 ## 2.48.3
 
 - feat(core) 优化模块加载的幂等性

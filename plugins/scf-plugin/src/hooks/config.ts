@@ -37,10 +37,10 @@ export default async (context: CliContext) => {
 
     const { regions, profilePath } = config;
     const opts = options || {};
-    
+
     if (Object.keys(opts).length === 0) {
         await promptForProfile(profilePath, regions);
     }
-    
+
 };
 

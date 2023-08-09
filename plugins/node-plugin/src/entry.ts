@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 const path = '{{ path }}';
 const entryMode: string = '{{ entryMode }}';
 const port = parseInt('{{ port }}');
@@ -9,11 +10,11 @@ try {
     if (entryMode === 'bundle') {
         app = require('{{ entry }}');
     } else {
-        app = eval(`require('{{ entry }}')`);
+        app = eval('require(\'{{ entry }}\')');
     }
 } catch (e) {
     if (entryMode === 'module') {
-        app = eval(`import('{{ entry }}')`);
+        app = eval('import(\'{{ entry }}\')');
     }
 }
 (async () => {

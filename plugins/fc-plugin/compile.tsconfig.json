@@ -17,6 +17,9 @@
     },
     {
       "path": "../../dev-packages/cli-common/compile.tsconfig.json"
+    },
+    {
+      "path": "../../packages/core/compile.tsconfig.json"
     }
   ]
 }

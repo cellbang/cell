@@ -5,7 +5,9 @@
   "dependencies": {
     "@malagu/cli-common": "2.48.3",
     "@malagu/cli-service": "2.48.3",
-    "copy-webpack-plugin": "^9.0.0"
+    "copy-webpack-plugin": "^9.0.0",
+    "fs-extra": "^10.1.0"
+
   },
   "publishConfig": {
     "access": "public"

@@ -3,6 +3,7 @@
   "version": "2.48.3",
   "description": "",
   "dependencies": {
+    "@malagu/core": "2.48.3",
     "@malagu/cli-common": "2.48.3",
     "@malagu/cloud-plugin": "2.48.3",
     "@malagu/code-loader-plugin": "2.48.3",

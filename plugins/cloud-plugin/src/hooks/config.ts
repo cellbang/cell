@@ -38,8 +38,8 @@ export default async (context: CliContext) => {
         await CloudUtils.saveProfile(profilePath, profile);
     }
     if (Object.keys(opts).length === 0) {
-        console.log(`Config ${name} cloud account:`)
+        console.log(`Config ${name} cloud account:`);
         await CloudUtils.promptForProfile(profilePath, regions);
     }
-    
+
 };

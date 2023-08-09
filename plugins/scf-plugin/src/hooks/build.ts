@@ -28,7 +28,6 @@ export default async (context: BuildContext) => {
                 return code.handler(event, context);
             }`, { mode: 0o755 });
         }
-        
 
     }
 

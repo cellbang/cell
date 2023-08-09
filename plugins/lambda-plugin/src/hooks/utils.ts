@@ -19,7 +19,7 @@ export async function getTrigger(client: Lambda, functionName: string, eventSour
         }
         return result;
     }
-    
+
 }
 
 export async function getStage(client: ApiGatewayV2, apiId: string, stageName: string, print = false) {
@@ -75,7 +75,7 @@ export async function getApi(client: ApiGatewayV2, apiName: string, print = fals
 
 export async function getIntegration(client: ApiGatewayV2, apiId: string, print = false) {
     const { Items } = await client.getIntegrations({ ApiId: apiId, MaxResults: '500' }).promise();
-    const items = Items || []
+    const items = Items || [];
     if (items.length > 1) {
         throw new Error(`There are two or more integrations in the api [${apiId}]`);
     } else if (items.length === 1) {
@@ -103,7 +103,7 @@ export async function createClients(region: string, credentials: Credentials) {
         lambdaClient: new Lambda(clientConfig),
         apiGatewayClient: new ApiGatewayV2(clientConfig),
         iamClient: new IAM(clientConfig)
-    }
+    };
 }
 
 export async function getCustomDomain(client: ApiGatewayV2, customDomainName: string, print = false) {
@@ -125,7 +125,7 @@ export async function getApiMapping(client: ApiGatewayV2, domainName: string, ap
     const { Items } = await client.getApiMappings({ DomainName: domainName  }).promise();
     const result = (Items || []).find(item => item.ApiId === apiId && stageName === item.Stage);
 
-    if(result) {
+    if (result) {
         if (print) {
             console.log(chalk`{bold.cyan - ApiMapping: }`);
             console.log(`    - ApiMappingId: ${result.ApiMappingId}`);
@@ -187,7 +187,7 @@ export async function getFunction(client: Lambda, functionName: string, qualifie
             }
         }
         return result;
-        
+
     } catch (error) {
         if (error.statusCode !== 404) {
             throw error;
@@ -205,7 +205,7 @@ export async function getAlias(client: Lambda, functionName: string, aliasName: 
             console.log(`    - AliasName: ${result.Name}`);
             console.log(`    - FunctionVersion: ${result.FunctionVersion}`);
         }
-        return result
+        return result;
     } catch (error) {
         if (error.statusCode !== 404) {
             throw error;

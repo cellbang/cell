@@ -5,7 +5,7 @@ import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
 import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getLayer, getService, getTrigger, parseDomain } from './utils';
-import * as api from './api';
+import * as fcAPI from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
 const chalk = require('chalk');
@@ -254,9 +254,9 @@ async function createOrUpdateHttpTrigger(trigger: any, serviceName: string, func
 
     const triggerInfo = await createOrUpdateTrigger(trigger, serviceName, functionName);
     const urlApi = `https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${trigger.qualifier}/${functionName}/`;
-    const urlInternet: string = triggerInfo?.data?.urlInternet || ''
-    const urlIntranet: string = triggerInfo?.data?.urlIntranet || ''
-    const urlTest = urlInternet.replace('https://', 'http://').replace('fcapp.run', 'functioncompute.com')
+    const urlInternet: string = triggerInfo?.data?.urlInternet || '';
+    const urlIntranet: string = triggerInfo?.data?.urlIntranet || '';
+    const urlTest = urlInternet.replace('https://', 'http://').replace('fcapp.run', 'functioncompute.com');
 
     console.log(`    - Methods: ${triggerConfig.methods}`);
     console.log(chalk`    - Url[API]: ${chalk.green.bold(urlApi)}`);
@@ -303,7 +303,7 @@ async function createOrUpdateTrigger(trigger: any, serviceName: string, function
         });
     }
 
-    return triggerInfo
+    return triggerInfo;
 }
 
 async function createOrUpdateService(serviceName: string, option: any) {
@@ -460,7 +460,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
     }
 }
 
-async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, params: api.Params) {
+async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, params: fcAPI.Params) {
     const { name, protocol, certConfig, routeConfig } = customDomain;
     let domainName = name;
     const opts: any = {
@@ -513,7 +513,7 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, 
         await SpinnerUtil.start(`Create ${domainName} custom domain`, async () => {
             retry(async () => {
                 await fcClient.createCustomDomain(domainName, opts);
-            }, 1000, 5)
+            }, 1000, 5);
         });
     }
     let path = '';
@@ -626,13 +626,12 @@ async function createRoleIfNeed() {
     return role;
 }
 
-
-export async function genDomain(params: api.Params) {
+export async function genDomain(params: fcAPI.Params) {
     const serviceName = 'serverless-devs-check';
     const functionName = 'get-domain';
     const triggerName = 'httpTrigger';
 
-    const { Body } = await api.token(params);
+    const { Body } = await fcAPI.token(params);
     const token = Body.Token;
 
     try {
@@ -655,6 +654,7 @@ export async function genDomain(params: api.Params) {
     } catch (ex) {
         if (ex.code === 'FunctionNotFound') {
             // function code is `exports.handler = (req, resp, context) => resp.send(process.env.token || '');`;
+            // eslint-disable-next-line max-len
             const zipFile = 'UEsDBAoAAAAIABULiFLOAhlFSQAAAE0AAAAIAAAAaW5kZXguanMdyMEJwCAMBdBVclNBskCxuxT9UGiJNgnFg8MX+o4Pc3R14/OQdkOpUFQ8mRQ2MtUujumJyv4PG6TFob3CjCEve78gtBaFkLYPUEsBAh4DCgAAAAgAFQuIUs4CGUVJAAAATQAAAAgAAAAAAAAAAAAAALSBAAAAAGluZGV4LmpzUEsFBgAAAAABAAEANgAAAG8AAAAAAA==';
             functionConfig.code = { zipFile };
             await fcClient.createFunction(serviceName, functionConfig);
@@ -678,7 +678,7 @@ export async function genDomain(params: api.Params) {
         }
     }
 
-    await api.domain({ ...params, token });
+    await fcAPI.domain({ ...params, token });
 
     await fcClient.deleteTrigger(serviceName, functionName, triggerName);
     await fcClient.deleteFunction(serviceName, functionName);

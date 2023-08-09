@@ -18,7 +18,7 @@ export function cleanupCache(options: PythonPluginOptions) {
       .sync([join(cacheLocation, '*mlgpyc/')], { mark: true, dot: false })
       .forEach((file: string) => removeSync(file));
   } else {
-    console.info(`No static cache found`);
+    console.info('No static cache found');
   }
 }
 

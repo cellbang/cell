@@ -17,5 +17,5 @@ export default async (context: CliContext) => {
             .option('--show-profile [showProfile]', `show ${name} profile`);
 
     }
-    
+
 };

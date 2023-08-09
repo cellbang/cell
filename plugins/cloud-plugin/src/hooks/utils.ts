@@ -92,7 +92,7 @@ export namespace CloudUtils {
     }
 
     export function parseS3Uri(codeUri: string | CodeUri): { bucket: string, key: string, version?: string, region?: string } | undefined {
-        const uri = typeof codeUri === 'string' ? codeUri : codeUri.value
+        const uri = typeof codeUri === 'string' ? codeUri : codeUri.value;
         if (uri?.toLowerCase().startsWith('s3://')) {
             const parsedUri = new URL(uri);
             const version = parsedUri.searchParams.get('version');

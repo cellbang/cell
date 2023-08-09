@@ -74,7 +74,7 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                 console.log(`    - Type: ${result.Type}`);
                 console.log(`    - Enable: ${result.Enable}`);
                 console.log(`    - AvailableStatus: ${result.AvailableStatus}`);
-                if(result.Type === 'apigw'){
+                if (result.Type === 'apigw') {
                     const outerSubDomain = JSON.parse(result.TriggerDesc)?.service?.outerSubDomain;
                     const path = JSON.parse(result.TriggerDesc)?.api?.requestConfig?.path;
                     const protocol = JSON.parse(result.TriggerDesc)?.service?.protocol.includes('https') ? 'https' : 'http';
@@ -150,7 +150,6 @@ function doGetFunction(client: any, namespace: string, functionName: string, qua
     }
     return client.GetFunction(getFunctionRequest);
 }
-
 
 export async function getFunction(client: any, namespaceName: string, functionName: string, qualifier?: string, print = false) {
 
@@ -243,7 +242,6 @@ export async function getNamespace(client: any, namespaceName: string, print = f
     }
 }
 
-
 export async function getService(client: any, serviceName: string, print = false) {
     const describeServicesStatusRequest: any = {};
     const filter: any = {};
@@ -330,7 +328,7 @@ export async function createClients(region: string, credentials: Credentials) {
                    reqTimeout: 30
                 }
             }})
-    }
+    };
 }
 
 export async function hasBucket(client: COS, bucket: string, region: string) {

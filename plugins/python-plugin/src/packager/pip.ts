@@ -18,11 +18,11 @@ export class Pip {
 
     async install(options: PythonPluginOptions) {
         const installedAt = await this.doInstall(options);
-        let symlinkPath = getRequirementsPath();
+        const symlinkPath = getRequirementsPath();
         // Only do if we didn't already do it
-        if (installedAt && !existsSync(symlinkPath) && installedAt != symlinkPath) {
+        if (installedAt && !existsSync(symlinkPath) && installedAt !== symlinkPath) {
             // Windows can't symlink so we have to use junction on Windows
-            if (process.platform == 'win32') {
+            if (process.platform === 'win32') {
                 symlink(installedAt, symlinkPath, 'junction');
             } else {
                 symlink(installedAt, symlinkPath);
@@ -88,7 +88,7 @@ export class Pip {
         });
         filteredRequirements.sort(); // Sort remaining alphabetically
         // Then prepend any options from above in the same order
-        for (let item of prepend.reverse()) {
+        for (const item of prepend.reverse()) {
             if (item && item.length > 0) {
                 filteredRequirements.unshift(item);
             }
@@ -120,9 +120,9 @@ export class Pip {
         ensureDirSync(targetFolder);
         console.info(`Copying vendor libraries from ${vendorFolder} to ${targetFolder}`);
 
-        readdirSync(vendorFolder).map((file) => {
-            let source = join(vendorFolder, file);
-            let dest = join(targetFolder, file);
+        readdirSync(vendorFolder).map(file => {
+            const source = join(vendorFolder, file);
+            const dest = join(targetFolder, file);
             if (existsSync(dest)) {
                 rimraf.sync(dest);
             }
@@ -136,7 +136,7 @@ export class Pip {
         if (pipTestRes.stderr && pipTestRes.stderr.toString().includes('command not found')) {
             throw new Error(`${pythonBin} not found! Install it according to the poetry docs.`);
         }
-        return pipTestRes.stdout && pipTestRes.stdout.toString().indexOf('--system') >= 0
+        return pipTestRes.stdout && pipTestRes.stdout.toString().indexOf('--system') >= 0;
     }
 
     protected async installRequirements(targetFolder: string, options: PythonPluginOptions) {
@@ -148,7 +148,7 @@ export class Pip {
         const pipCmd = [options.pythonBin, '-m', 'pip', 'install'];
 
         if (Array.isArray(options.pipCmdExtraArgs) && options.pipCmdExtraArgs.length > 0) {
-            options.pipCmdExtraArgs.forEach((cmd) => {
+            options.pipCmdExtraArgs.forEach(cmd => {
                 const parts = cmd.split(/\s+/, 2);
                 pipCmd.push(...parts);
             });
@@ -278,7 +278,7 @@ export class Pip {
                 dockerCmd.push('-u', await getDockerUid(bindPath));
             }
 
-            for (let path of options.dockerExtraFiles) {
+            for (const path of options.dockerExtraFiles) {
                 pipCmds.push(['cp', path, '/var/task/']);
             }
 
@@ -313,7 +313,7 @@ export class Pip {
                 break;
         }
 
-        let opts = { shell: true, stdio: 'inherit' };
+        const opts = { shell: true, stdio: 'inherit' };
         let mainCmds = [];
         if (dockerCmd.length) {
             dockerCmd.push(...mergeCommands(pipCmds));
@@ -369,7 +369,7 @@ export class Pip {
         this.generateRequirementsFile(requirementsFilePath, projectHomeRequirementsFilePath, options);
 
         // If no requirements file or an empty requirements file, then do nothing
-        if (!existsSync(projectHomeRequirementsFilePath) || statSync(projectHomeRequirementsFilePath).size == 0) {
+        if (!existsSync(projectHomeRequirementsFilePath) || statSync(projectHomeRequirementsFilePath).size === 0) {
             console.info(`Skipping empty output requirements.txt file from ${projectHomeRequirementsFilePath}`);
             return;
         }
@@ -411,7 +411,6 @@ export class Pip {
             closeSync(openSync(join(requirementsWorkingPath, '.completed_requirements'), 'w'));
         }
         return requirementsWorkingPath;
-
 
     }
 }

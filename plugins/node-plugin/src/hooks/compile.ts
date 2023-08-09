@@ -1,23 +1,22 @@
 import { CliContext } from '@malagu/cli-common/lib/context';
 import { ConfigUtil } from '@malagu/cli-common/lib/utils';
-import { existsSync } from 'fs-extra';
 import { join, resolve } from 'path';
 import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
 import { EMPTY } from '@malagu/cli-common/lib/constants';
-import { readFileSync, writeFileSync, ensureDir } from 'fs-extra';
+import { readFileSync, writeFileSync, ensureDir, existsSync } from 'fs-extra';
 import { ApplicationConfig } from '@malagu/cli-common/lib/package/application-config';
 import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
 
 export async function renderEntry(ctx: CliContext) {
     const { pkg, cfg } = ctx;
 
-    const config = ConfigUtil.getBackendConfig(cfg)
+    const config = ConfigUtil.getBackendConfig(cfg);
 
     if (!config.entry) {
         return;
     }
 
-    let entryPath = config.entry.path ? config.entry.path : config.entry;
+    const entryPath = config.entry.path ? config.entry.path : config.entry;
 
     if (entryPath === EMPTY) {
         return;
@@ -26,18 +25,18 @@ export async function renderEntry(ctx: CliContext) {
     if (config.entry.raw) {
         return;
     }
-    
+
     if (CommandUtil.includesCommand(ctx.args, [ 'build', 'deploy' ])) {
         const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
         const isFastify = pkg.framework?.name === 'fastify';
-        let entryTemplate = join(__dirname, '..', 'entry.js'); 
+        let entryTemplate = join(__dirname, '..', 'entry.js');
         if (isLambda) {
             if (pkg.framework?.name === 'nest') {
                 console.warn('Next Fromework does not support deployment to AWS Lambda by default.');
             } else if (isFastify) {
-                entryTemplate = join(__dirname, '..', 'lambda-fastify-entry.js'); 
+                entryTemplate = join(__dirname, '..', 'lambda-fastify-entry.js');
             } else {
-                entryTemplate = join(__dirname, '..', 'lambda-entry.js'); 
+                entryTemplate = join(__dirname, '..', 'lambda-entry.js');
             }
         }
 
@@ -81,7 +80,7 @@ export default async (context: CliContext) => {
             const entries = [ 'app.ts', 'src/app.ts', 'app.js', 'src/app.js', 'main.ts', 'src/main.ts', 'main.js',
             'src/main.js', 'index.ts', 'src/index.ts', 'index.js', 'src/index.js', 'build/server.js' ];
             for (const entry of entries) {
-                const entryPath = join(cwd, entry)
+                const entryPath = join(cwd, entry);
                 if (existsSync(entryPath)) {
                     props.entry = entry;
                     break;

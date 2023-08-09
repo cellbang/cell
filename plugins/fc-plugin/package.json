@@ -6,6 +6,7 @@
     "@alicloud/cloudapi": "^1.1.0",
     "@alicloud/fc2": "^2.6.0",
     "@alicloud/ram": "^1.0.0",
+    "@malagu/core": "2.48.3",
     "@malagu/cli-common": "2.48.3",
     "@malagu/cloud-plugin": "2.48.3",
     "@malagu/code-loader-plugin": "2.48.3",

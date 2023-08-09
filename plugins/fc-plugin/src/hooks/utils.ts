@@ -29,7 +29,7 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
                     }
                 }
             }
-            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https': 'http'}://${customDomainName}${path}`);
+            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https' : 'http'}://${customDomainName}${path}`);
         }
         return result;
     } catch (ex) {
@@ -40,7 +40,7 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
 }
 
 export async function getAlias(client: any, aliasName: string, serviceName: string, print = false) {
-    
+
     try {
         const result = await client.getAlias(serviceName, aliasName);
         if (print) {
@@ -153,16 +153,16 @@ export async function getService(client: any, serviceName: string, qualifier?: s
 }
 
 export async function getApi(client: any, groupId: string, apiName: string, print = false, subDomain?: string, path?: string, protocol?: string) {
-    const result = await client.describeApis({
+    let result = await client.describeApis({
         ApiName: apiName,
         GroupId: groupId,
         PageSize: 100
     }, { timeout: 60000 });
-    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName): [];
+    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName) : [];
     if (apis.length > 1) {
         throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
     } else if (apis.length === 1) {
-        const result = apis[0];
+        result = apis[0];
         if (print) {
             console.log(chalk`{bold.cyan - API: }`);
             console.log(`    - ApiId: ${result.ApiId}`);
@@ -170,11 +170,11 @@ export async function getApi(client: any, groupId: string, apiName: string, prin
             console.log(`    - Visibility: ${result.Visibility}`);
             console.log(`    - ModifiedTime: ${result.ModifyTime}`);
             if (subDomain && path && protocol) {
-                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https': 'http'}://${subDomain!}${path.split('*')[0]}`);
+                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https' : 'http'}://${subDomain!}${path.split('*')[0]}`);
             }
         }
         return result;
-    } 
+    }
 }
 
 export async function getGroup(client: any, groupName: string, print = false) {
@@ -182,7 +182,7 @@ export async function getGroup(client: any, groupName: string, print = false) {
         GroupName: groupName // filter out
     }, { timeout: 60000 });
 
-    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute: [];
+    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute : [];
     const list = groups.filter((item: any) => item.GroupName === groupName);
     if (list.length > 1) {
         throw new Error(`There are two or more groups named [${groupName}] in the api gateway`);
@@ -214,7 +214,7 @@ export async function getTrigger(client: any, serviceName: string, functionName:
             console.log(`    - Qualifier: ${result.data.qualifier}`);
             console.log(`    - InvocationRole: ${result.data.invocationRole}`);
             console.log(`    - SourceArn: ${result.data.sourceArn}`);
-            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`)
+            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
             if (result.data.triggerType === 'http') {
                 console.log(`    - Methods: ${result.data.triggerConfig.methods}`);
                 if (region && accountId) {
@@ -257,7 +257,7 @@ export async function createClients(cloudConfig: any, region: string, credential
         accessKeySecret: credentials.accessKeySecret,
         endpoint: 'https://ram.aliyuncs.com'
     });
-    return { fcClient, apiClient, ram }; 
+    return { fcClient, apiClient, ram };
 }
 
 export function parseDomain(params: Params) {

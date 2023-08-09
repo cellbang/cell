@@ -8,8 +8,8 @@ module.exports = {
         require.resolve('@malagu/component/configs/xss.eslintrc.json')
     ],
     ignorePatterns: [
-        '**/{node_modules,lib}',
-        'plugins'
+        '**/{node_modules,lib,templates}',
+        'examples',
     ],
     parserOptions: {
         tsconfigRootDir: __dirname,

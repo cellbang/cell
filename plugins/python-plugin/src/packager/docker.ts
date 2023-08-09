@@ -7,7 +7,7 @@ const isWsl = require('is-wsl');
 
 export async function dockerCommand(options: string[], { stdio }: { stdio?: string } = {}) {
     const cmd = 'docker';
-    return await spawnProcess(cmd, options, { encoding: 'utf-8', stdio });
+    return spawnProcess(cmd, options, { encoding: 'utf-8', stdio });
 }
 
 export async function buildImage(dockerFile: string, extraArgs: string[], pluginOptions: PythonPluginOptions) {
@@ -59,10 +59,9 @@ async function tryBindPath(bindPath: string, testFile: string, pluginOptions: Py
     }
 }
 
-
 export async function getBindPath(servicePath: string, options: PythonPluginOptions) {
     // Determine bind path
-    let isWsl1 = isWsl && !release().includes('microsoft-standard');
+    const isWsl1 = isWsl && !release().includes('microsoft-standard');
     if (process.platform !== 'win32' && !isWsl1) {
         return servicePath;
     }
@@ -71,7 +70,7 @@ export async function getBindPath(servicePath: string, options: PythonPluginOpti
     await dockerCommand(['version']);
 
     // find good bind path for Windows
-    let bindPaths = [];
+    const bindPaths = [];
     let baseBindPath = servicePath.replace(/\\([^\s])/g, '/$1');
     let drive;
     let path;
@@ -81,11 +80,11 @@ export async function getBindPath(servicePath: string, options: PythonPluginOpti
         // cygwin "/mnt/C/users/..."
         baseBindPath = baseBindPath.replace(/^\/mnt\//, '/');
     }
-    if (baseBindPath[1] == ':') {
+    if (baseBindPath[1] === ':') {
         // normal windows "c:/users/..."
         drive = baseBindPath[0];
         path = baseBindPath.substring(3);
-    } else if (baseBindPath[0] == '/' && baseBindPath[2] == '/') {
+    } else if (baseBindPath[0] === '/' && baseBindPath[2] === '/') {
         // gitbash "/c/users/..."
         drive = baseBindPath[1];
         path = baseBindPath.substring(3);

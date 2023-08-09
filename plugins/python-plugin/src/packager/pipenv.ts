@@ -24,7 +24,7 @@ export async function pipfileToRequirements(options: PythonPluginOptions) {
     );
     if (stderr) {
         if (stderr.toString().includes('command not found')) {
-            throw new Error(`pipenv not found! Install it according to the poetry docs.`);
+            throw new Error('pipenv not found! Install it according to the poetry docs.');
         }
         throw new Error(stderr);
     }
