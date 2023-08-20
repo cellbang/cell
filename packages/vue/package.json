@@ -1,14 +1,14 @@
 {
   "name": "@malagu/vue",
-  "version": "2.49.1",
+  "version": "2.49.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "@malagu/cli-common": "2.49.1",
-    "@malagu/core": "2.49.1",
+    "@malagu/cli-common": "2.49.2",
+    "@malagu/core": "2.49.2",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.8.6",
@@ -57,8 +57,8 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.49.1",
-    "@malagu/component": "2.49.1"
+    "@malagu/cli-service": "2.49.2",
+    "@malagu/component": "2.49.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
