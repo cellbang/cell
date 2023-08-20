@@ -1,6 +1,1 @@
-malagu:
-  logger:
-    pinoConfig:
-      level: 'info'
-      browser:
-        asObject: true
+

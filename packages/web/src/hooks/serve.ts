@@ -20,22 +20,30 @@ export async function after(context: ServeContext) {
     context.compiler.hooks.done.tap('WebServe', () => {
         application?.stop();
         entryContextProvider().then(async (ctx: any) => {
-            const { Dispatcher, Context, ContainerProvider, Application, container } = ctx;
-            const c = await container;
-            ContainerProvider.set(c);
-            application = await c.get(Application);
-            await application.start();
-            const dispatcher = c.get(Dispatcher);
-            doDispatch = (req: any, res: any) => {
-                const httpContext = new Context(req, res);
-                Context.run(() => dispatcher.dispatch(httpContext));
-            };
-            compileDeferred.resolve();
+            try {
+                const { Dispatcher, Context, ContainerProvider, Application, container } = ctx;
+                const c = await container;
+                ContainerProvider.set(c);
+                application = await c.get(Application);
+                await application.start();
+                const dispatcher = c.get(Dispatcher);
+                doDispatch = (req: any, res: any) => {
+                    const httpContext = new Context(req, res);
+                    Context.run(() => dispatcher.dispatch(httpContext));
+                };
+                compileDeferred.resolve();
+            } catch (err) {
+                console.error(err);
+            }
         });
     });
 
     app.all('*', async (req: any, res: any) => {
-        await compileDeferred.promise;
+        try {
+            await compileDeferred.promise;
+        } catch (err) {
+            res.status(500).send(err);
+        }
         doDispatch(req, res);
     });
 

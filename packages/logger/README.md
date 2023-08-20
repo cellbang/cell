@@ -1,1 +1,1 @@
-# Malagu - Logger Component with pino
+# Malagu - Logger Component with winston

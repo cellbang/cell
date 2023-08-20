@@ -1,5 +1,11 @@
 # Change
 
+## 2.49.0
+
+- refactor(core) 重构了部分 Logger 接口，并移除了 loglevel 方式的实现，Logger 日志对象由单例，改为非单例
+- refactor(logger) 由基于 pino 实现日志组件改为基于 winston
+- build(web) 优化后端 HMR 机制，当修改代码过程中出现编译错误时，不会意外退出服务经常，导致需要频繁手动启动服务
+
 ## 2.48.4
 
 - fix(cli-common) 修复命令行 Hook 执行报错问题
