@@ -1,12 +1,12 @@
 {
   "name": "@malagu/qq-guild-bot-adapter",
-  "version": "2.48.4",
+  "version": "2.49.0",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.48.4",
-    "@malagu/cli-service": "2.48.4",
-    "@malagu/core": "2.48.4",
-    "@malagu/faas-adapter": "2.48.4",
+    "@malagu/cli-common": "2.49.0",
+    "@malagu/cli-service": "2.49.0",
+    "@malagu/core": "2.49.0",
+    "@malagu/faas-adapter": "2.49.0",
     "copy-webpack-plugin": "^9.0.0",
     "fs-extra": "^11.1.1",
     "qq-guild-bot": "2.9.2-beta6",
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.48.4"
+    "@malagu/component": "2.49.0"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }

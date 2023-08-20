@@ -1,12 +1,12 @@
 {
   "name": "@malagu/static-plugin",
-  "version": "2.48.4",
+  "version": "2.49.0",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.48.4",
-    "@malagu/cli-service": "2.48.4",
+    "@malagu/cli-common": "2.49.0",
+    "@malagu/cli-service": "2.49.0",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^9.0.0",
     "rimraf": "^3.0.2"
@@ -40,7 +40,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.48.4"
+    "@malagu/component": "2.49.0"
   },
   "gitHead": "cb667d51c4274bb8a449aae4f9f980cbfe44a65e"
 }

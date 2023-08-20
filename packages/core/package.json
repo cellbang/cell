@@ -1,6 +1,6 @@
 {
   "name": "@malagu/core",
-  "version": "2.48.4",
+  "version": "2.49.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -12,7 +12,6 @@
     "jexl": "^2.3.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "loglevel": "^1.8.1",
     "reflect-metadata": "^0.1.13",
     "setimmediate": "^1.0.5",
     "source-map-support": "^0.5.13",
@@ -48,7 +47,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.48.4",
+    "@malagu/component": "2.49.0",
     "@types/jexl": "^2.2.0",
     "@types/traverse": "^0.6.32"
   },
