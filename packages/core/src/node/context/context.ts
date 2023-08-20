@@ -42,15 +42,15 @@ export class Context {
     static getAttr<T>(key: string, scope?: AttributeScope): T {
         if (scope) {
             if (scope === AttributeScope.Request) {
-                return Context.getCurrent()[key];
+                return Context.getCurrent()?.[key];
             } else if (scope === AttributeScope.Session) {
-                return Context.getCurrent()[key];
+                return Context.getCurrent()?.[key];
             } else {
                 return appAttrs.get(key);
             }
         } else {
             let value = store.get(key);
-            value = value ? value : Context.getCurrent()[key];
+            value = value ? value : Context.getCurrent()?.[key];
             return value ? value : appAttrs.get(key);
         }
     }
