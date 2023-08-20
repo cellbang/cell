@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.1
+
+- fix(web) 修复类型错误问题
+
 ## 2.49.0
 
 - refactor(core) 重构了部分 Logger 接口，并移除了 loglevel 方式的实现，Logger 日志对象由单例，改为非单例

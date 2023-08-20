@@ -5,6 +5,7 @@
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
+    "@types/express": "^4.17.9",
     "@malagu/core": "2.49.0",
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
@@ -48,8 +49,7 @@
   "devDependencies": {
     "@malagu/cli-service": "2.49.0",
     "@malagu/component": "2.49.0",
-    "@types/cors": "^2.8.6",
-    "@types/express": "^4.17.9"
+    "@types/cors": "^2.8.6"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
