@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.4
+
+- fix(cli) 移除 monorepo 中的 nx 依赖，降低对 node 版本的要求
+
 ## 2.49.3
 
 - fix(nest) 修复 nestjs 框架部署后，访问报错
