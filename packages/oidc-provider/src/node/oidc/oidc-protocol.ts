@@ -1,4 +1,4 @@
-import { Provider } from 'oidc-provider';
+import Provider from 'oidc-provider';
 export const OidcProvider = Symbol('OidcProvider');
 
 export interface OidcProvider {

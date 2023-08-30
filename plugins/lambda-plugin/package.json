@@ -6,7 +6,6 @@
     "@malagu/cli-common": "2.49.2",
     "@malagu/cloud-plugin": "2.49.2",
     "@malagu/code-loader-plugin": "2.49.2",
-    "@malagu/core": "2.49.2",
     "aws-sdk": "^2.807.0",
     "camelcase-keys": "^6.2.2",
     "chalk": "^4.1.0",

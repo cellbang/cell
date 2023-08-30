@@ -7,8 +7,8 @@
   "dependencies": {
     "@malagu/core": "2.49.2",
     "@malagu/web": "2.49.2",
-    "@types/oidc-provider": "^7.12.0",
-    "oidc-provider": "^7.12.0"
+    "@types/oidc-provider": "^8.2.0",
+    "oidc-provider": "^8.3.1"
   },
   "publishConfig": {
     "access": "public"

@@ -10,7 +10,7 @@ import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
 const chalk = require('chalk');
 import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
-import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
+import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
 
 let fcClient: any;
 let apiClient: any;

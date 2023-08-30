@@ -15,7 +15,7 @@ export function generateImports(modules: Module[], fn: 'import' | 'require'): st
         }
         return `${fn}('${m.path}')`;
     });
-    return targetModules.map(m => `then(function () { return ${m}.then(load) })`).join('.\n');
+    return ['Promise.resolve()', ...targetModules.map(m => `then(function () { return ${m}.then(load) })`)].join('.\n');
 }
 
 export function loadStaticModuls(modules: Module[]): string {
@@ -39,8 +39,7 @@ export function generateFrontendComponents(context: DynamicContainerContext) {
     return Promise.resolve(raw.default).then(module => container.load(module));
   }
   
-  module.exports.container = Promise.resolve()
-    .${generateImports(modules, 'import')}
+  module.exports.container = ${generateImports(modules, 'import')}
     .then(() => container).catch(reason => {
       console.error('Failed to start the frontend application.');
       if (reason) {
@@ -74,8 +73,7 @@ export function generateBackendComponents(context: DynamicContainerContext) {
     return Promise.resolve(raw.default).then(module => container.load(module));
   }
   
-  module.exports.container = Promise.resolve()
-    .${generateImports(modules, 'require')}
+  module.exports.container = ${generateImports(modules, 'require')}
     .then(() => container).catch(reason => {
       console.error('Failed to start the backend application.');
       if (reason) {

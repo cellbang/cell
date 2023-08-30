@@ -1,5 +1,11 @@
 # Change
 
+## 2.49.3
+
+- fix(nest) 修复 nestjs 框架部署后，访问报错
+- fix(cli) 修复 monorepo 模版安装依赖失败
+- feat(oidc-provider) 升级 oidc-provider 第三方库版本 #175
+
 ## 2.49.2
 
 - fix(core) 修复在没有请求上下文的时候，日志报错
