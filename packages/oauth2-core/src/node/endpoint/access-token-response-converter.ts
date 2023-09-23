@@ -11,13 +11,17 @@ export class AccessTokenResponseConverter {
         const scopes = this.getScopes(tokenResponse);
         const refreshToken = tokenResponse[OAuth2ParameterNames.REFRESH_TOKEN];
 
+        const checkParameters = [
+            OAuth2ParameterNames.ACCESS_TOKEN,
+            OAuth2ParameterNames.EXPIRES_IN,
+            OAuth2ParameterNames.REFRESH_TOKEN,
+            OAuth2ParameterNames.SCOPE,
+            OAuth2ParameterNames.TOKEN_TYPE
+        ];
         const additionalParameters: { [key: string]: string } = {};
         for (const key in tokenResponse) {
-            if (Object.prototype.hasOwnProperty.call(tokenResponse, key)) {
-                if ([OAuth2ParameterNames.ACCESS_TOKEN, OAuth2ParameterNames.EXPIRES_IN,
-                    OAuth2ParameterNames.REFRESH_TOKEN, OAuth2ParameterNames.SCOPE, OAuth2ParameterNames.TOKEN_TYPE].indexOf(key) !== -1) {
-                    additionalParameters[key] = tokenResponse[key];
-                }
+            if (Object.prototype.hasOwnProperty.call(tokenResponse, key) && !checkParameters.includes(key)) {
+                additionalParameters[key] = tokenResponse[key];
             }
         }
 

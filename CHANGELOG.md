@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.5
+
+- fix(oauth2-core) 修复 tokenResponse 转换错误
+
 ## 2.49.4
 
 - fix(cli) 移除 monorepo 中的 nx 依赖，降低对 node 版本的要求
