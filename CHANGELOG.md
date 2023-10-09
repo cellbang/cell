@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.6
+
+- fix(cloud-plugin) 修复 region 设置失败问题
+
 ## 2.49.5
 
 - fix(oauth2-core) 修复 tokenResponse 转换错误

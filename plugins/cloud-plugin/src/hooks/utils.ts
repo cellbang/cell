@@ -41,6 +41,7 @@ export namespace CloudUtils {
         const markedAccountId = mark(profile.account.id);
         const markedaccessKeyId = mark(profile.credentials.accessKeyId);
         const markedAccessKeySecret = mark(profile.credentials.accessKeySecret);
+        const currentRegionIndex = regions.indexOf(profile.region);
         const questions = [
             {
                 type: 'text',
@@ -65,7 +66,7 @@ export namespace CloudUtils {
                 name: 'region',
                 message: 'Default region name',
                 choices: regions,
-                initial: profile.region
+                initial: currentRegionIndex === -1 ? 0 : currentRegionIndex
             }
         ];
 
@@ -80,7 +81,7 @@ export namespace CloudUtils {
             profile.credentials.accessKeySecret = accessKeySecret;
         }
 
-        profile.region = region;
+        profile.region = regions[region];
         await saveProfile(profilePath, profile);
         return profile;
     }
