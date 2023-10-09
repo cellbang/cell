@@ -1,13 +1,13 @@
 {
   "name": "@malagu/authing",
-  "version": "2.49.5",
+  "version": "2.49.6",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.49.5",
-    "@malagu/security": "2.49.5",
-    "@malagu/web": "2.49.5",
+    "@malagu/core": "2.49.6",
+    "@malagu/security": "2.49.6",
+    "@malagu/web": "2.49.6",
     "authing-js-sdk": "^4.22.24",
     "axios": "^0.26.1",
     "jsonwebtoken": "^9.0.0",
@@ -44,7 +44,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.49.5"
+    "@malagu/component": "2.49.6"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
