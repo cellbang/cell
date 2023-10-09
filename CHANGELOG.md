@@ -1,6 +1,6 @@
 # Change
 
-## 2.49.6
+## 2.49.7
 
 - fix(cloud-plugin) 修复 region 设置失败问题
 
