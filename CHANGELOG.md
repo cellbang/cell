@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.8
+
+- fix(lambda-plugin) 修复 lambda 插件部署失败问题：timeoutInMillis 参数超过最大值
+
 ## 2.49.7
 
 - fix(cloud-plugin) 修复 region 设置失败问题
