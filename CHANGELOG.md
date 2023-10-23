@@ -1,6 +1,6 @@
 # Change
 
-## 2.49.10
+## 2.49.9
 
 - fix(scf-plugin) 修复 scf 插件部署失败问题：PublicNetConfig 赋值不正确
 
