@@ -246,7 +246,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
 
     if (publicNetConfig) {
         req.PublicNetConfig = {} as any;
-        req.DeadLetterConfig.PublicNetStatus = publicNetConfig.PublicNetStatus;
+        req.PublicNetConfig.PublicNetStatus = publicNetConfig.publicNetStatus;
         if (publicNetConfig.eipConfig) {
             req.PublicNetConfig.EipConfig = {} as any;
             req.PublicNetConfig.EipConfig.EipStatus = publicNetConfig.eipConfig.eipStatus;

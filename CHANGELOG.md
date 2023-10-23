@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.10
+
+- fix(scf-plugin) 修复 scf 插件部署失败问题：PublicNetConfig 赋值不正确
+
 ## 2.49.8
 
 - fix(lambda-plugin) 修复 lambda 插件部署失败问题：timeoutInMillis 参数超过最大值
