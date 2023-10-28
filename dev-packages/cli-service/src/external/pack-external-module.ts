@@ -296,7 +296,7 @@ export async function packExternalModules(
     };
     const scripts: any[] = packagerOptions.scripts || [];
 
-    if (!includes || !configuration) {
+    if (!includes || Object.keys(includes).length === 0 || !configuration) {
         return;
     }
 
@@ -309,6 +309,9 @@ export async function packExternalModules(
     const packagePath =
         (includes.packagePath && join(process.cwd(), includes.packagePath)) ||
         join(process.cwd(), 'package.json');
+    if (!(await pathExists(packagePath))) {
+        return;
+    }
     const packageScripts = scripts.reduce((accumulator, script, index) => {
         accumulator[`script${index}`] = script;
         return accumulator;

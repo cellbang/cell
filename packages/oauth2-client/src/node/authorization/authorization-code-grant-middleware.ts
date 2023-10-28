@@ -1,4 +1,4 @@
-import { Middleware, Context, RedirectStrategy } from '@malagu/web/lib/node';
+import { Middleware, Context, RedirectStrategy, RequestMatcher } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_CODE_GRANT_MIDDLEWARE_PRIORITY,
     AuthorizedClientManager, AuthorizedClient, INVALID_STATE_PARAMETER_ERROR_CODE } from './authorization-protocol';
@@ -27,6 +27,9 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
     @Autowired(RedirectStrategy)
     protected readonly redirectStrategy: RedirectStrategy;
 
+    @Autowired(RequestMatcher)
+    protected readonly requestMatcher: RequestMatcher;
+
     @Autowired(PathResolver)
     protected readonly pathResolver: PathResolver;
 
@@ -38,6 +41,9 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
 
     @Value(ENDPOINT)
     protected readonly endpoint: string;
+
+    @Value('malagu.oauth2.client.redirectLoginPath')
+    protected readonly redirectLoginPath: string;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         if (await this.matchesAuthorizationResponse()) {
@@ -89,7 +95,7 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
         if (authorizationRequest) {
             return true;
         }
-        return false;
+        return !await this.requestMatcher.match(await this.pathResolver.resolve(this.redirectLoginPath));
     }
 
     readonly priority: number = AUTHORIZATION_CODE_GRANT_MIDDLEWARE_PRIORITY;
