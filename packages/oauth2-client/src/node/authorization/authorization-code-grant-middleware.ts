@@ -92,8 +92,8 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
             return false;
         }
         const authorizationRequest = await this.authorizationRequestManager.get();
-        if (authorizationRequest) {
-            return true;
+        if (!authorizationRequest) {
+            return false;
         }
         return !await this.requestMatcher.match(await this.pathResolver.resolve(this.redirectLoginPath));
     }

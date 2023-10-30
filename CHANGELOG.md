@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.11
+
+- fix(Oauth2-client) 修复 AuthorizationCodeGrantMiddleware 重复消费 OAuth2AuthenticationProvider 的 Code 和 State
+
 ## 2.49.10
 
 - fix(cli-service) 修复静态网站部署失败问题
