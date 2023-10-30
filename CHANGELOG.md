@@ -1,5 +1,9 @@
 # Change
 
+## next
+
+- fix(oauth2-client) 修复 AuthorizationCodeGrantMiddleware 中 AuthorizationResponse 判定逻辑
+
 ## 2.49.10
 
 - fix(cli-service) 修复静态网站部署失败问题
