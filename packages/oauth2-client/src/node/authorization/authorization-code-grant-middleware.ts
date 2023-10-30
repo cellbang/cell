@@ -92,10 +92,10 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
             return false;
         }
         const authorizationRequest = await this.authorizationRequestManager.get();
-        if (authorizationRequest) {
-            return true;
-        }
-        return !await this.requestMatcher.match(await this.pathResolver.resolve(this.redirectLoginPath));
+        const redirectMatch = !!await this.requestMatcher.match(
+            await this.pathResolver.resolve(this.redirectLoginPath)
+        );
+        return authorizationRequest && redirectMatch;
     }
 
     readonly priority: number = AUTHORIZATION_CODE_GRANT_MIDDLEWARE_PRIORITY;
