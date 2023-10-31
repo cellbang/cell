@@ -8,6 +8,7 @@ import { ClientRegistrationManager, ClientRegistration } from '../registration';
 import { ENDPOINT, PathResolver } from '@malagu/web';
 import { SecurityContext, RequestCache } from '@malagu/security/lib/node';
 import { AuthorizationCodeTokenResponseClient } from '../endpoint';
+import { AUTHORIZATION_CODE_GRANT_URI, REDIRECT_LOGIN_PATH } from '../constants';
 
 @Component(Middleware)
 export class AuthorizationCodeGrantMiddleware implements Middleware {
@@ -42,8 +43,11 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
     @Value(ENDPOINT)
     protected readonly endpoint: string;
 
-    @Value('malagu.oauth2.client.redirectLoginPath')
+    @Value(REDIRECT_LOGIN_PATH)
     protected readonly redirectLoginPath: string;
+
+    @Value(AUTHORIZATION_CODE_GRANT_URI)
+    protected readonly authorizationCodeGrantUri: string;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {
         if (await this.matchesAuthorizationResponse()) {
@@ -88,12 +92,15 @@ export class AuthorizationCodeGrantMiddleware implements Middleware {
     }
 
     protected async matchesAuthorizationResponse() {
-        if (!AuthorizationResponseUtil.isAuthorizationResponse()) {
+        const authorizationMatch = this.authorizationCodeGrantUri && await this.requestMatcher.match(
+            await this.pathResolver.resolve(this.authorizationCodeGrantUri)
+        );
+        if (!AuthorizationResponseUtil.isAuthorizationResponse() || !authorizationMatch) {
             return false;
         }
         const authorizationRequest = await this.authorizationRequestManager.get();
-        if (authorizationRequest) {
-            return true;
+        if (!authorizationRequest) {
+            return false;
         }
         return !await this.requestMatcher.match(await this.pathResolver.resolve(this.redirectLoginPath));
     }

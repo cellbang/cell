@@ -1,5 +1,9 @@
 # Change
 
+## next
+
+- fix(oauth2-client) 添加 authorizationCodeGrantUri 配置，更新 AuthorizationResponse 判定逻辑
+
 ## 2.49.10
 
 - fix(cli-service) 修复静态网站部署失败问题
