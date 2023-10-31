@@ -2,7 +2,7 @@
 
 ## next
 
-- fix(oauth2-client) 修复 AuthorizationCodeGrantMiddleware 中 AuthorizationResponse 判定逻辑
+- fix(oauth2-client) 添加 authorizationCodeGrantUri 配置，更新 AuthorizationResponse 判定逻辑
 
 ## 2.49.10
 
