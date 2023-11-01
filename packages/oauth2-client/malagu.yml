@@ -5,6 +5,7 @@ malagu:
       redirectLoginPath: /login/oauth2/code/*
       authorizationRequestBaseUri: /oauth2/authorization
       defaultRedirectUri: ${malagu.server.endpoint}${malagu.server.path}{action}/oauth2/code/{registrationId}
+      authorizationCodeGrantUri: /*
       registrationTemplates:
         google:
           scopes: [ openid, profile, email ]

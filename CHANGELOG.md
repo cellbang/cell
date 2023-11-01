@@ -1,5 +1,9 @@
 # Change
 
+## 2.49.12
+
+- fix(oauth2-client) 添加 authorizationCodeGrantUri 配置，更新 AuthorizationResponse 判定逻辑
+
 ## 2.49.11
 
 - fix(Oauth2-client) 修复 AuthorizationCodeGrantMiddleware 重复消费 OAuth2AuthenticationProvider 的 Code 和 State
