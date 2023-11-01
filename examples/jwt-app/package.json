@@ -4,22 +4,22 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.49.11",
+  "version": "2.49.12",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.49.11",
-    "@malagu/jwt": "2.49.11",
-    "@malagu/mvc": "2.49.11",
-    "@malagu/web": "2.49.11"
+    "@malagu/core": "2.49.12",
+    "@malagu/jwt": "2.49.12",
+    "@malagu/mvc": "2.49.12",
+    "@malagu/web": "2.49.12"
   },
   "devDependencies": {
-    "@malagu/cli": "2.49.11",
-    "@malagu/component": "2.49.11",
-    "@malagu/testing": "2.49.11",
+    "@malagu/cli": "2.49.12",
+    "@malagu/component": "2.49.12",
+    "@malagu/testing": "2.49.12",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },
