@@ -1,0 +1,13 @@
+malagu:
+  cloud:
+    function:
+      runtime: nodejs14
+    trigger:
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}-timer
+      qualifier: ${malagu.cloud.alias.name}
+      triggerType: timer
+      triggerConfig:
+        payload: malagu-timer
+        cronExpression: 0 */1 * * * *  # every minute
+        enable: true
+    

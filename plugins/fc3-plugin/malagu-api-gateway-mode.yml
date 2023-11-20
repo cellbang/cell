@@ -1,0 +1,34 @@
+malagu:
+  server:
+    path: /${malagu.cloud.function.name}/
+  cloud:
+    service:
+      name: malagu
+    function:
+      runtime: nodejs14
+    apiGateway:
+      stage:
+        name: "${stage|eval == 'prod' ? 'release' : stage }"
+        desc: 'Released By Malagu'
+      group:
+        name: ${malagu.cloud.function.name|replace('-', '_')}
+        description: 'Created By Malagu'
+      api:
+        name: ${malagu.cloud.function.name|replace('-', '_')}
+        forceNonceCheck: false
+        visibility: PUBLIC
+        description: 'Created By Malagu'
+        authType: ANONYMOUS
+        requestConfig:
+          method: ANY
+          protocol: HTTP,HTTPS
+          postBodyDescription: ''
+          mode: PASSTHROUGH
+          path: '${malagu.server.path}*'
+        serviceConfig:
+          serviceProtocol: FunctionCompute
+          serviceTimeout: 65000 # 65s
+          contentTypeValue: 'application/json; charset=UTF-8'
+          functionComputeConfig:
+            qualifier: ${malagu.cloud.alias.name}
+        resultType: PASSTHROUGH
