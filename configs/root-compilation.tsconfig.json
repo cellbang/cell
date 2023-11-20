@@ -177,6 +177,9 @@
     },
     {
       "path": "../packages/rpc-core/compile.tsconfig.json"
+    },
+    {
+      "path": "../plugins/fc3-plugin/compile.tsconfig.json"
     }
   ]
 }
