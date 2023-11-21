@@ -3,9 +3,9 @@
   "version": "2.49.12",
   "description": "",
   "dependencies": {
-    "@alicloud/cloudapi": "^1.1.0",
-    "@alicloud/fc2": "^2.6.0",
-    "@alicloud/ram": "^1.0.0",
+    "@alicloud/fc20230330": "^3.0.2",
+    "@alicloud/openapi-client": "^0.4.6",
+    "@alicloud/tea-util": "^1.4.7",
     "@malagu/cli-common": "2.49.12",
     "@malagu/cloud-plugin": "2.49.12",
     "@malagu/code-loader-plugin": "2.49.12",
@@ -37,7 +37,6 @@
     "malagu-remote.yml",
     "malagu-http-mode.yml",
     "malagu-sample-http-mode.yml",
-    "malagu-api-gateway-mode.yml",
     "malagu-timer-mode.yml",
     "malagu-mns-topic-mode.yml"
   ],

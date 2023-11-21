@@ -4,10 +4,6 @@ malagu:
     secure: true
     internal: false
     timeout: 600000
-    service:
-      name: ${malagu.cloud.function.name}
-      sync: true
     function:
-      serviceName: ${malagu.cloud.service.name}
       instanceConcurrency: 10
       withoutCodeLimit: true

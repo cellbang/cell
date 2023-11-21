@@ -1,11 +1,13 @@
 import { Credentials, Account } from '@malagu/cloud-plugin';
+import FC20230330, * as $fc from '@alicloud/fc20230330';
+import * as openapi from '@alicloud/openapi-client';
+import * as chalk from 'chalk';
 import { Params } from './api';
-const chalk = require('chalk');
-const FCClient = require('@alicloud/fc2');
-const CloudAPI = require('@alicloud/cloudapi');
-const Ram = require('@alicloud/ram');
 
-export async function getCustomDomain(client: any, customDomainName: string, print = false, qualifier?: string, params?: Params) {
+// TODO
+// parseDomain的问题
+// methods的问题 (控制台不支持methods)
+export async function getCustomDomain(client: FC20230330, customDomainName: string, print = false, qualifier?: string, params?: Params) {
     try {
         if (customDomainName === 'auto') {
             customDomainName = parseDomain(params!);
@@ -13,10 +15,10 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
         const result = await client.getCustomDomain(customDomainName);
         if (print) {
             console.log(chalk`{bold.cyan - CustomDomain: }`);
-            console.log(`    - DomainName: ${result.data.domainName}`);
-            console.log(`    - Protocol: ${result.data.protocol}`);
-            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
-            const routeConfig = result.data.routeConfig;
+            console.log(`    - DomainName: ${result.body.domainName}`);
+            console.log(`    - Protocol: ${result.body.protocol}`);
+            console.log(`    - LastModifiedTime: ${result.body.lastModifiedTime}`);
+            const routeConfig = result.body.routeConfig;
             let path = '';
             if (routeConfig?.routes?.length) {
                 console.log('    - RouteConfig: ');
@@ -29,7 +31,7 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
                     }
                 }
             }
-            console.log(`    - ApiUrl: ${result.data.protocol.includes('HTTPS') ? 'https' : 'http'}://${customDomainName}${path}`);
+            console.log(`    - ApiUrl: ${result.body.protocol?.includes('HTTPS') ? 'https' : 'http'}://${customDomainName}${path}`);
         }
         return result;
     } catch (ex) {
@@ -39,15 +41,16 @@ export async function getCustomDomain(client: any, customDomainName: string, pri
     }
 }
 
-export async function getAlias(client: any, aliasName: string, serviceName: string, print = false) {
+export async function getAlias(client: FC20230330, aliasName: string, functionName: string, print = false) {
 
     try {
-        const result = await client.getAlias(serviceName, aliasName);
+        const result = await client.getAlias(functionName, aliasName);
         if (print) {
             console.log(chalk`{bold.cyan - Alias: }`);
-            console.log(`    - AliasName: ${result.data.aliasName}`);
-            console.log(`    - serviceName: ${serviceName}`);
-            console.log(`    - VersionId: ${result.data.versionId}`);
+            console.log(`    - AliasName: ${result.body.aliasName}`);
+            console.log(`    - functionName: ${functionName}`);
+            console.log(`    - VersionId: ${result.body.versionId}`);
+            console.log(`    - LastModifiedTime: ${result.body.lastModifiedTime}`);
         }
         return result;
     } catch (ex) {
@@ -57,37 +60,40 @@ export async function getAlias(client: any, aliasName: string, serviceName: stri
     }
 }
 
-export async function getLayer(client: any, prefix?: string, print = false) {
+export async function getLayer(client: FC20230330, prefix?: string, print = false) {
     if (!prefix) {
         return;
     }
-    const result = await client.listLayers({ prefix, startKey: prefix, limit: 1 });
-    const layer = result.data.layers[0];
+    const result = await client.listLayers(new $fc.ListLayersRequest({ prefix, limit: 1 }));
+    const layer = result.body.layers?.[0];
     if (layer && print) {
         console.log(chalk`{bold.cyan - Layer: }`);
         console.log(`    - LayerName: ${layer.layerName}`);
         console.log(`    - Version: ${layer.version}`);
         console.log(`    - Description: ${layer.description}`);
         console.log(`    - CompatibleRuntime: ${layer.compatibleRuntime}`);
-        console.log(`    - Arn: ${layer.arn}`);
+        console.log(`    - Arn: ${layer.layerVersionArn}`);
         console.log(`    - CreateTime: ${layer.createTime}`);
     }
     return layer;
 }
 
-export async function getFunction(client: any, serviceName: string, functionName: string, print = false) {
+export async function getFunction(client: FC20230330, functionName: string, print = false): Promise<$fc.Function | undefined> {
     try {
-        const result = await client.getFunction(serviceName, functionName);
+        const result = await client.getFunction(functionName, new $fc.GetFunctionRequest({}));
         if (print) {
             console.log(chalk`{bold.cyan - Function: }`);
-            console.log(`    - FunctionName: ${result.data.functionName}`);
-            console.log(`    - Timeout: ${result.data.timeout}`);
-            console.log(`    - MemorySize: ${result.data.memorySize}`);
-            console.log(`    - Runtime: ${result.data.runtime}`);
-            console.log(`    - CAPort: ${result.data.caPort}`);
-            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
+            console.log(`    - FunctionName: ${result.body.functionName}`);
+            console.log(`    - Cpu: ${result.body.cpu}`);
+            console.log(`    - MemorySize: ${result.body.memorySize}`);
+            console.log(`    - DiskSize: ${result.body.diskSize}`);
+            console.log(`    - Runtime: ${result.body.runtime}`);
+            console.log(`    - Timeout: ${result.body.timeout}`);
+            console.log(`    - Concurrency: ${result.body.instanceConcurrency}`);
+            console.log(`    - CAPort: ${result.body.caPort}`);
+            console.log(`    - LastModifiedTime: ${result.body.lastModifiedTime}`);
         }
-        return result;
+        return result.body;
 
     } catch (ex) {
         if (ex.code !== 'FunctionNotFound') {
@@ -96,136 +102,35 @@ export async function getFunction(client: any, serviceName: string, functionName
     }
 }
 
-export async function getService(client: any, serviceName: string, qualifier?: string, print = false) {
-    try {
-        const result = await client.getService(serviceName, qualifier);
-        if (print) {
-            console.log(chalk`{bold.cyan - Service: }`);
-            console.log(`    - ServiceName: ${result.data.serviceName}`);
-            console.log(`    - Role: ${result.data.role}`);
-            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
-
-            const logConfig = result.data.logConfig;
-            if (logConfig?.project && logConfig?.logstore) {
-                console.log('    - LogConfig: ');
-                console.log(`        - Project: ${logConfig.project}`);
-                console.log(`        - Logstore: ${logConfig.logstore}`);
-                console.log(`        - EnableRequestMetrics: ${logConfig.enableRequestMetrics}`);
-                console.log(`        - LogBeginRule: ${logConfig.logBeginRule}`);
-            }
-
-            const nasConfig = result.data.nasConfig;
-            if (nasConfig?.groupId !== -1 && nasConfig?.userId !== -1) {
-                console.log('    - NASConfig: ');
-                console.log(`        - GroupId: ${nasConfig.groupId}`);
-                console.log(`        - UserId: ${nasConfig.userId}`);
-                if (nasConfig.mountPoints?.length > 0) {
-                    console.log('        - MountPoints: ');
-                    for (const mountpoint of nasConfig.mountPoints) {
-                        console.log(`            - MountDir: ${mountpoint.mountDir}`);
-                        console.log(`              ServerAddr: ${mountpoint.serverAddr}`);
-                    }
-                }
-            }
-
-            const vpcConfig = result.data.vpcConfig;
-            if (vpcConfig?.securityGroupId && vpcConfig?.vpcId) {
-                console.log('    - VpcConfig: ');
-                console.log(`        - VpcId: ${vpcConfig.vpcId}`);
-                console.log(`        - SecurityGroupId: ${vpcConfig.securityGroupId}`);
-                if (vpcConfig.vSwitchIds?.length > 0) {
-                    console.log(`        - VSwitchIds: ${vpcConfig.vSwitchIds}`);
-                }
-            }
-
-            const tracingConfig = result.data.tracingConfig;
-            if (tracingConfig?.type) {
-                console.log('    - TracingConfig: ');
-                console.log(`        - Type: ${logConfig.type}`);
-            }
-        }
-        return result;
-    } catch (ex) {
-        if (ex.code !== 'ServiceNotFound') {
-            throw ex;
-        }
-    }
-}
-
-export async function getApi(client: any, groupId: string, apiName: string, print = false, subDomain?: string, path?: string, protocol?: string) {
-    let result = await client.describeApis({
-        ApiName: apiName,
-        GroupId: groupId,
-        PageSize: 100
-    }, { timeout: 60000 });
-    const apis = result.ApiSummarys ? result.ApiSummarys.ApiSummary.filter((item: any) => item.ApiName === apiName) : [];
-    if (apis.length > 1) {
-        throw new Error(`There are two or more apis named [${apiName}] in the api gateway`);
-    } else if (apis.length === 1) {
-        result = apis[0];
-        if (print) {
-            console.log(chalk`{bold.cyan - API: }`);
-            console.log(`    - ApiId: ${result.ApiId}`);
-            console.log(`    - ApiName: ${result.ApiName}`);
-            console.log(`    - Visibility: ${result.Visibility}`);
-            console.log(`    - ModifiedTime: ${result.ModifyTime}`);
-            if (subDomain && path && protocol) {
-                console.log(`    - ApiUrl: ${protocol.includes('HTTPS') ? 'https' : 'http'}://${subDomain!}${path.split('*')[0]}`);
-            }
-        }
-        return result;
-    }
-}
-
-export async function getGroup(client: any, groupName: string, print = false) {
-    const res = await client.describeApiGroups({
-        GroupName: groupName // filter out
-    }, { timeout: 60000 });
-
-    const groups = res.ApiGroupAttributes ? res.ApiGroupAttributes.ApiGroupAttribute : [];
-    const list = groups.filter((item: any) => item.GroupName === groupName);
-    if (list.length > 1) {
-        throw new Error(`There are two or more groups named [${groupName}] in the api gateway`);
-    } else if (list.length === 1) {
-        const result = list[0];
-        if (print) {
-            console.log(chalk`{bold.cyan - Group: }`);
-            console.log(`    - GroupId: ${result.GroupId}`);
-            console.log(`    - GroupName: ${result.GroupName}`);
-            console.log(`    - ModifiedTime: ${result.ModifiedTime}`);
-            console.log(`    - SubDomain: ${result.SubDomain}`);
-            console.log(`    - IllegalStatus: ${result.IllegalStatus}`);
-            console.log(`    - BillingStatus: ${result.BillingStatus}`);
-            console.log(`    - InstanceType: ${result.InstanceType}`);
-
-        }
-        return result;
-    }
-}
-
-export async function getTrigger(client: any, serviceName: string, functionName: string, triggerName: string, region?: string, accountId?: string, print = false) {
+export async function getTrigger(client: FC20230330, functionName: string, triggerName: string, region?: string, accountId?: string, print = false) {
 
     try {
-        const result = await client.getTrigger(serviceName, functionName, triggerName);
+        const result = await client.getTrigger(functionName, triggerName);
         if (print) {
             console.log(chalk`{bold.cyan - Trigger: }`);
-            console.log(`    - TriggerName: ${result.data.triggerName}`);
-            console.log(`    - TriggerType: ${result.data.triggerType}`);
-            console.log(`    - Qualifier: ${result.data.qualifier}`);
-            console.log(`    - InvocationRole: ${result.data.invocationRole}`);
-            console.log(`    - SourceArn: ${result.data.sourceArn}`);
-            console.log(`    - LastModifiedTime: ${result.data.lastModifiedTime}`);
-            if (result.data.triggerType === 'http') {
-                console.log(`    - Methods: ${result.data.triggerConfig.methods}`);
-                if (region && accountId) {
-                    console.log(`    - ApiUrl: https://${accountId}.${region}.fc.aliyuncs.com/2016-08-15/proxy/${serviceName}.${result.data.qualifier}/${functionName}/`);
+            console.log(`    - TriggerName: ${result.body.triggerName}`);
+            console.log(`    - TriggerType: ${result.body.triggerType}`);
+            console.log(`    - Qualifier: ${result.body.qualifier}`);
+            console.log(`    - InvocationRole: ${result.body.invocationRole}`);
+            console.log(`    - SourceArn: ${result.body.sourceArn}`);
+            console.log(`    - LastModifiedTime: ${result.body.lastModifiedTime}`);
+            let triggerConfig: Record<string, any> = {};
+            try {
+                if (result.body.triggerConfig) {
+                    triggerConfig = JSON.parse(result.body.triggerConfig);
                 }
-            } else if (result.data.triggerType === 'timer') {
-                console.log(`    - Cron: ${result.data.triggerConfig.cronExpression}`);
-                console.log(`    - Enable: ${result.data.triggerConfig.enable}`);
+            } catch (_) {}
+            if (result.body.triggerType === 'http') {
+                console.log(`    - Methods: ${triggerConfig.methods}`);
+                if (region && accountId) {
+                    console.log(`    - Url[Internet]: ${result.body.httpTrigger?.urlInternet}`);
+                }
+            } else if (result.body.triggerType === 'timer') {
+                console.log(`    - Cron: ${triggerConfig.cronExpression}`);
+                console.log(`    - Enable: ${triggerConfig.enable}`);
             }
         }
-        return result;
+        return result.body;
 
     } catch (ex) {
         if (ex.code !== 'TriggerNotFound') {
@@ -235,31 +140,20 @@ export async function getTrigger(client: any, serviceName: string, functionName:
 
 }
 
-export async function createClients(cloudConfig: any, region: string, credentials: Credentials, account: Account) {
-    const fcClient = new FCClient(account.id, {
-        accessKeyID: credentials.accessKeyId,
+export async function createFcClient(cloudConfig: any, region: string, credentials: Credentials, account: Account) {
+    const fcClient = new FC20230330(new openapi.Config({
+        accessKeyId: credentials.accessKeyId,
         accessKeySecret: credentials.accessKeySecret,
         securityToken: credentials.token,
-        region,
+        regionId: region,
         timeout: cloudConfig.timeout,
-        secure: cloudConfig.secure,
-        internal: cloudConfig.internal
-    });
+        endpoint: `${account.id}.cn-zhangjiakou.fc.aliyuncs.com`
+    }));
 
-    const apiClient = new CloudAPI({
-        accessKeyId: credentials.accessKeyId,
-        accessKeySecret: credentials.accessKeySecret,
-        endpoint: `http://apigateway.${region}.aliyuncs.com`,
-    });
-
-    const ram = new Ram({
-        accessKeyId: credentials.accessKeyId,
-        accessKeySecret: credentials.accessKeySecret,
-        endpoint: 'https://ram.aliyuncs.com'
-    });
-    return { fcClient, apiClient, ram };
+    return fcClient;
 }
 
+// TODO
 export function parseDomain(params: Params) {
-    return `${params.function}.${params.service}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
+    return `${params.function}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
 }

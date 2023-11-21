@@ -1,25 +1,19 @@
 import { InfoContext, ProjectUtil } from '@malagu/cli-common';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
-import { createClients, getAlias, getService, getFunction, getApi, getCustomDomain, getTrigger, getGroup, getLayer } from './utils';
-const chalk = require('chalk');
+import { getAlias, getFunction, getCustomDomain, getTrigger, getLayer, createFcClient } from './utils';
+import * as chalk from 'chalk';
+import type FC20230330 from '@alicloud/fc20230330';
 
-let fcClient: any;
-let apiClient: any;
+let fcClient: FC20230330;
 
 export default async (context: InfoContext) => {
-
     const { cfg, pkg } = context;
-
     const cloudConfig = CloudUtils.getConfiguration(cfg);
+    const { layer, trigger, alias, customDomain, disableProjectId } = cloudConfig;
 
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
-
-    const clients = await createClients(cloudConfig, region, credentials, account);
-    fcClient = clients.fcClient;
-    apiClient = clients.apiClient;
-
-    const { service, layer, trigger, apiGateway, alias, customDomain, disableProjectId } = cloudConfig;
+    fcClient = await createFcClient(cloudConfig, region, credentials, account);
 
     console.log(`\nGetting ${chalk.bold.yellow(pkg.pkg.name)} from the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -32,38 +26,20 @@ export default async (context: InfoContext) => {
     }
     const functionMeta = cloudConfig.function;
     functionMeta.name = disableProjectId ? functionMeta.name : `${functionMeta.name}_${projectId}`;
-    const serviceName = service.name;
     const functionName = functionMeta.name;
 
-    context.output.functionInfo = await getFunction(fcClient, serviceName, functionName, true);
-    if (!context.output.functionInfo) {
+    const functionInfo = await getFunction(fcClient, functionName, true);
+    context.output.functionInfo = functionInfo;
+    if (!functionInfo) {
         return;
     }
 
     context.output.layerInfo = await getLayer(fcClient, layer?.name, true);
 
-    context.output.serviceInfo = await getService(fcClient, serviceName, alias.name, true);
-    if (!context.output.serviceInfo) {
-        return;
-    }
-
-    context.output.aliasInfo = await getAlias(fcClient, alias.name, serviceName, true);
+    context.output.aliasInfo = await getAlias(fcClient, alias.name, functionName, true);
 
     if (trigger?.name) {
-        context.output.triggerInfo = await getTrigger(fcClient, serviceName, functionName, trigger.name, region, account.id, true);
-    }
-
-    if (apiGateway) {
-        const { group, api } = apiGateway;
-        group.name = disableProjectId ? group.name : `${group.name}_${projectId}`;
-        context.output.groupInfo = await getGroup(apiClient, group.name, true);
-        if (context.output.groupInfo) {
-            const groupId = context.output.groupInfo.GroupId;
-            const subDomain = context.output.groupInfo.SubDomain;
-            const path = api.requestConfig.path;
-            const protocol = api.requestConfig.protocol;
-            context.output.apiInfo = await getApi(apiClient, groupId, api.name, true, subDomain, path, protocol);
-        }
+        context.output.triggerInfo = await getTrigger(fcClient, functionName, trigger.name, region, account.id, true);
     }
 
     if (customDomain?.name) {
@@ -71,7 +47,6 @@ export default async (context: InfoContext) => {
             type: 'fc',
             user: account.id,
             region: region.replace(/_/g, '-').toLocaleLowerCase(),
-            service: serviceName.replace(/_/g, '-').toLocaleLowerCase(),
             function: functionMeta.name.replace(/_/g, '-').toLocaleLowerCase()
         });
     }

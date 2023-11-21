@@ -5,7 +5,6 @@ export interface Params {
     type: string;
     user: string;
     region: string;
-    service: string;
     function: string;
     token?: string;
 }
@@ -20,7 +19,6 @@ function parseParams(params: Params) {
     const parsedParams = new URLSearchParams();
     parsedParams.append('type', params.type);
     parsedParams.append('region', params.region);
-    parsedParams.append('service', params.service);
     parsedParams.append('user', params.user);
     parsedParams.append('function', params.function);
     if (params.token) {
