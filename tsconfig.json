@@ -277,6 +277,9 @@
       ],
       "nest-app/*": [
         "examples/nest-app/*"
+      ],
+      "@malagu/fc3-plugin/lib/*": [
+        "plugins/fc3-plugin/src/*"
       ]
     }
   },

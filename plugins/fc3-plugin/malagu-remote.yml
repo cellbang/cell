@@ -1,0 +1,9 @@
+mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'sample-http', 'timer', 'mns-topic', 'event']]|suffix('-mode') || 'http-mode'}"
+malagu:
+  cloud:
+    secure: true
+    internal: false
+    timeout: 600000
+    function:
+      instanceConcurrency: 10
+      withoutCodeLimit: true
