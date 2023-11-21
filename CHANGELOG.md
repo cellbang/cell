@@ -1,5 +1,9 @@
 # Change
 
+## 2.50.0
+
+- feat(fc3-plugin) add fc3-plugin (#198)
+
 ## 2.49.12
 
 - fix(oauth2-client) 添加 authorizationCodeGrantUri 配置，更新 AuthorizationResponse 判定逻辑
