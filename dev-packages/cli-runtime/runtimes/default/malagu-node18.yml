@@ -1,7 +1,7 @@
 malagu:
   cloud:
     layer:
-      name: node-v18-18-2-linux-x64-${malagu.cloud.function.runtime|replace('custom.', 'custom-')}
+      name: node-v18-18-2-linux-x64-${malagu.cloud.function.runtime|replace('\\.', '-')}
       compatibleRuntime:
         - ${malagu.cloud.function.runtime}
       codeUri: https://nodejs.org/dist/v18.18.2/node-v18.18.2-linux-x64.tar.gz
@@ -9,4 +9,4 @@ malagu:
       env:
         PATH: /opt/node-v18.18.2-linux-x64/bin:$PATH
       layers:
-        - node-v18-18-2-linux-x64-${malagu.cloud.function.runtime|replace('custom.', 'custom-')}
+        - node-v18-18-2-linux-x64-${malagu.cloud.function.runtime|replace('\\.', '-')}
