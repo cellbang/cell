@@ -1,5 +1,9 @@
 # Change
 
+## 2.50.1
+
+- feat(cli-common) add node18, node20 and bun runtime (#200)
+
 ## 2.50.0
 
 - feat(fc3-plugin) add fc3-plugin (#198)

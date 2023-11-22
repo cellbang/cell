@@ -1,0 +1,12 @@
+malagu:
+  cloud:
+    layer:
+      name: node-v20-9-0-linux-x64-${malagu.cloud.function.runtime|replace('\\.', '-')}
+      compatibleRuntime:
+        - ${malagu.cloud.function.runtime}
+      codeUri: https://nodejs.org/dist/v20.9.0/node-v20.9.0-linux-x64.tar.gz
+    function:
+      env:
+        PATH: /opt/node-v20.9.0-linux-x64/bin:$PATH
+      layers:
+        - node-v20-9-0-linux-x64-${malagu.cloud.function.runtime|replace('\\.', '-')}
