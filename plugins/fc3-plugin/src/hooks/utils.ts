@@ -3,6 +3,7 @@ import FC20230330, * as $fc from '@alicloud/fc20230330';
 import * as openapi from '@alicloud/openapi-client';
 import * as chalk from 'chalk';
 import { Params } from './api';
+const FCClient = require('@alicloud/fc2');
 
 // TODO
 // parseDomain的问题
@@ -149,6 +150,20 @@ export async function createFcClient(cloudConfig: any, region: string, credentia
         timeout: cloudConfig.timeout,
         endpoint: `${account.id}.cn-zhangjiakou.fc.aliyuncs.com`
     }));
+
+    return fcClient;
+}
+
+export async function createFc2Client(cloudConfig: any, region: string, credentials: Credentials, account: Account) {
+    const fcClient = new FCClient(account.id, {
+        accessKeyID: credentials.accessKeyId,
+        accessKeySecret: credentials.accessKeySecret,
+        securityToken: credentials.token,
+        region,
+        timeout: cloudConfig.timeout,
+        secure: cloudConfig.secure,
+        internal: cloudConfig.internal
+    });
 
     return fcClient;
 }

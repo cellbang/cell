@@ -1,10 +1,10 @@
 import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
 import { readFile, createWriteStream, remove } from 'fs-extra';
-import { join } from 'path';
+import { join, normalize } from 'path';
 import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { createFcClient, getAlias, getCustomDomain, getFunction, getLayer, getTrigger, parseDomain } from './utils';
+import { createFc2Client, createFcClient, getAlias, getCustomDomain, getFunction, getLayer, getTrigger, parseDomain } from './utils';
 import * as fcAPI from './api';
 import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
@@ -12,10 +12,12 @@ import * as chalk from 'chalk';
 import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
 import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
 import FC20230330, * as $fc from '@alicloud/fc20230330';
-import { RuntimeOptions } from '@alicloud/tea-util';
+import OSS = require('ali-oss');
 
 let fcClient: FC20230330;
+let fc2Client: any;
 let projectId: string;
+let accountId: string;
 
 // TODO
 export default async (context: DeployContext) => {
@@ -27,6 +29,8 @@ export default async (context: DeployContext) => {
     const profileProvider = new DefaultProfileProvider();
     const { region, account, credentials } = await profileProvider.provide(cloudConfig);
     fcClient = await createFcClient(cloudConfig, region, credentials, account);
+    fc2Client = await createFc2Client(cloudConfig, region, credentials, account);
+    accountId = account.id;
 
     console.log(`\nDeploying ${chalk.bold.yellow(pkg.pkg.name)} to the ${chalk.bold.blue(region)} region of ${cloudConfig.name}...`);
     console.log(chalk`{bold.cyan - Profile: }`);
@@ -47,7 +51,7 @@ export default async (context: DeployContext) => {
     if (trigger?.triggerType === 'timer') {
         await createOrUpdateTimerTrigger(trigger, functionMeta.name);
     } else if (trigger?.triggerType === 'http') {
-        await createOrUpdateHttpTrigger(trigger, functionMeta.name, region, account.id);
+        await createOrUpdateHttpTrigger(trigger, functionMeta.name, region);
     } else if (trigger) {
         await createOrUpdateTrigger(trigger, functionMeta.name);
     }
@@ -71,7 +75,7 @@ export default async (context: DeployContext) => {
 
 };
 
-async function createOrUpdateHttpTrigger(trigger: any, functionName: string, region: string, accountId: string) {
+async function createOrUpdateHttpTrigger(trigger: any, functionName: string, region: string) {
     const { triggerConfig } = trigger;
 
     const triggerInfo = await createOrUpdateTrigger(trigger, functionName);
@@ -148,7 +152,6 @@ async function tryCreateProjectId(functionName: string) {
     }
 }
 
-// TODO
 async function parseCode(codeUri: CodeUri | string, withoutCodeLimit: boolean) {
     const s3Uri = CloudUtils.parseS3Uri(codeUri);
     let code: JSZip | undefined;
@@ -183,7 +186,6 @@ async function parseCode(codeUri: CodeUri | string, withoutCodeLimit: boolean) {
     }
 }
 
-// TODO
 async function publishLayerIfNeed(layer: any = {}) {
     if (!layer.name || !layer.codeUri) {
         return;
@@ -196,22 +198,16 @@ async function publishLayerIfNeed(layer: any = {}) {
         delete layer.sync;
 
         await SpinnerUtil.start(`Publish ${layer.name} layer`, async () => {
-            const code: any = await parseCode(layer.codeUri, layer.withoutCodeLimit);
-            if (layer.withoutCodeLimit && (code).zipFile) {
-                await fcClient.createLayerVersion(layer.name, {
-                    ...opts,
-                    codeConfig: {
-                        zipFilePath: (code).zipFile
-                    }
-                });
-            } else {
-                await fcClient.createLayerVersionWithOptions(layer.name, new $fc.CreateLayerVersionRequest({
-                    body: new $fc.CreateLayerVersionInput({
-                        ...opts,
-                        code: new $fc.InputCodeLocation(code)
-                    })
-                }), {}, new RuntimeOptions({ readTimeout: 600000 }));
+            let code: any = await parseCode(layer.codeUri, layer.withoutCodeLimit);
+            if (layer.withoutCodeLimit && code.zipFile) {
+                code = await uploadCodeToTempBucket(code.zipFile);
             }
+            await fcClient.createLayerVersion(layer.name, new $fc.CreateLayerVersionRequest({
+                body: new $fc.CreateLayerVersionInput({
+                    ...opts,
+                    code: new $fc.InputCodeLocation(code)
+                })
+            }));
         });
     } else {
         await SpinnerUtil.start(`Skip ${layer.name} layer`, async () => { });
@@ -258,7 +254,10 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
         }
     }
 
-    const code: any = await parseCode(functionMeta.codeUri, functionMeta.withoutCodeLimit);
+    let code: any = await parseCode(functionMeta.codeUri, functionMeta.withoutCodeLimit);
+    if (functionMeta.withoutCodeLimit && code.zipFile) {
+        code = await uploadCodeToTempBucket(code.zipFile);
+    }
     if (functionInfo) {
         delete opts.runtime;
         await SpinnerUtil.start(`Update ${functionMeta.name} function${sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
@@ -435,4 +434,23 @@ export async function genDomain(params: fcAPI.Params) {
     await fcClient.deleteTrigger(functionName, triggerName);
     await fcClient.deleteFunction(functionName);
     return Body.Domain || parseDomain(params);
+}
+
+async function uploadCodeToTempBucket(zipFilePath: string) {
+    const data = (await fc2Client.getTempBucketToken()).data;
+    const client = new OSS({
+        region: data.ossRegion,
+        accessKeyId: data.credentials.AccessKeyId,
+        accessKeySecret: data.credentials.AccessKeySecret,
+        stsToken: data.credentials.SecurityToken,
+        bucket: data.ossBucket,
+        timeout: '600000', // 10min
+      });
+      const ossObjectName = `${accountId}/${data.objectName}`;
+      await client.put(ossObjectName, normalize(zipFilePath));
+
+      return {
+        ossBucketName: data.ossBucket,
+        ossObjectName: ossObjectName
+      };
 }
