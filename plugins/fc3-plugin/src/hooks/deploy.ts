@@ -4,14 +4,14 @@ import { join, normalize } from 'path';
 import * as JSZip from 'jszip';
 import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
 import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
-import { createFc2Client, createFcClient, getAlias, getCustomDomain, getFunction, getLayer, getTrigger, parseDomain } from './utils';
-import * as fcAPI from './api';
+import { AutoDomainParams, createFc2Client, createFcClient, getAlias, getCustomDomain, getFunction, getLayer, getTrigger } from './utils';
 import { retry } from '@malagu/cli-common/lib/utils';
 import { tmpdir } from 'os';
 import * as chalk from 'chalk';
 import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
 import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
 import FC20230330, * as $fc from '@alicloud/fc20230330';
+import AutoDomainGenerator from '@serverless-cd/srm-aliyun-fc-domain';
 import OSS = require('ali-oss');
 
 let fcClient: FC20230330;
@@ -19,7 +19,6 @@ let fc2Client: any;
 let projectId: string;
 let accountId: string;
 
-// TODO
 export default async (context: DeployContext) => {
     const { cfg, pkg } = context;
     const cloudConfig = CloudUtils.getConfiguration(cfg);
@@ -66,7 +65,7 @@ export default async (context: DeployContext) => {
             user: account.id,
             region: region.replace(/_/g, '-').toLocaleLowerCase(),
             function: functionMeta.name.replace(/_/g, '-').toLocaleLowerCase()
-        });
+        }, credentials);
 
     }
 
@@ -286,19 +285,20 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
     return functionMeta.name;
 }
 
-// TODO
-async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, params: fcAPI.Params) {
+async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, params: AutoDomainParams, credentials: any) {
     const { name, protocol, certConfig, routeConfig } = customDomain;
-    const domainName = name;
+    let domainName = name;
     const opts: any = {
         protocol
     };
 
     if (domainName === 'auto') {
         await SpinnerUtil.start('Generated custom domain', async () => {
-            console.log('暂不支持domainName = auto');
-            // domainName = await genDomain(params);
-            return;
+            domainName = await AutoDomainGenerator.genDomain({ ...params, service: 'fcv3'}, {
+                AccountID: accountId,
+                AccessKeyID: credentials.accessKeyId,
+                AccessKeySecret: credentials.accessKeySecret,
+            });
         });
     }
 
@@ -335,7 +335,9 @@ async function createOrUpdateCustomDomain(customDomain: any, qualifier: string, 
             opts.routeConfig.routes = [...opts.routeConfig.routes, ...routes];
         }
         await SpinnerUtil.start(`Update ${domainName} custom domain`, async () => {
-            await fcClient.updateCustomDomain(domainName, opts);
+            await fcClient.updateCustomDomain(domainName, new $fc.UpdateCustomDomainRequest({
+                body: new $fc.UpdateCustomDomainInput(opts)
+            }));
         });
     } else {
         opts.domainName = domainName;
@@ -377,63 +379,6 @@ async function createOrUpdateAlias(alias: any, functionName: string, versionId: 
             }));
         });
     }
-}
-
-// TODO
-export async function genDomain(params: fcAPI.Params) {
-    const functionName = 'serverless-devs-domain';
-    const triggerName = 'httpTrigger';
-
-    const { Body } = await fcAPI.token(params);
-    const token = Body.Token;
-
-    const functionConfig: Omit<$fc.UpdateFunctionInput | $fc.CreateFunctionInput, 'toMap'> = {
-        functionName,
-        handler: 'index.handler',
-        runtime: 'nodejs8',
-        environmentVariables: { token },
-    };
-
-    try {
-        await fcClient.updateFunction(functionName, new $fc.UpdateFunctionRequest({
-            body: functionConfig
-        }));
-    } catch (ex) {
-        if (ex.code === 'FunctionNotFound') {
-            // function code is `exports.handler = (req, resp, context) => resp.send(process.env.token || '');`;
-            // eslint-disable-next-line max-len
-            const zipFile = 'UEsDBAoAAAAIABULiFLOAhlFSQAAAE0AAAAIAAAAaW5kZXguanMdyMEJwCAMBdBVclNBskCxuxT9UGiJNgnFg8MX+o4Pc3R14/OQdkOpUFQ8mRQ2MtUujumJyv4PG6TFob3CjCEve78gtBaFkLYPUEsBAh4DCgAAAAgAFQuIUs4CGUVJAAAATQAAAAgAAAAAAAAAAAAAALSBAAAAAGluZGV4LmpzUEsFBgAAAAABAAEANgAAAG8AAAAAAA==';
-            functionConfig.code = new $fc.InputCodeLocation({ zipFile });
-            await fcClient.createFunction(new $fc.CreateFunctionRequest({
-                body: functionConfig
-            }));
-        } else {
-            throw ex;
-        }
-    }
-
-    try {
-        await fcClient.createTrigger(functionName, new $fc.CreateTriggerRequest({
-            body: new $fc.CreateTriggerInput({
-                triggerName,
-                triggerType: 'http',
-                triggerConfig: {
-                    AuthType: 'anonymous',
-                    Methods: ['POST', 'GET'],
-                },
-            })
-        }));
-    } catch (ex) {
-        if (ex.code !== 'TriggerAlreadyExists') {
-            throw ex;
-        }
-    }
-
-    await fcAPI.domain({ ...params, token });
-
-    await fcClient.deleteTrigger(functionName, triggerName);
-    await fcClient.deleteFunction(functionName);
-    return Body.Domain || parseDomain(params);
 }
 
 async function uploadCodeToTempBucket(zipFilePath: string) {
