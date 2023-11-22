@@ -1,0 +1,2 @@
+devComponents:
+  "@malagu/fc3-plugin": ${version}
