@@ -1,0 +1,12 @@
+malagu:
+  cloud:
+    layer:
+      name: bun-v1-0-13-linux-x64-${malagu.cloud.function.runtime|replace('custom.', 'custom-')}
+      compatibleRuntime:
+        - ${malagu.cloud.function.runtime}
+      codeUri: https://github.com/oven-sh/bun/releases/download/bun-v1.0.13/bun-linux-x64-baseline.zip
+    function:
+      env:
+        PATH: /opt/bun-linux-x64-baseline:$PATH
+      layers:
+        - bun-v1-0-13-linux-x64-${malagu.cloud.function.runtime|replace('custom.', 'custom-')}
