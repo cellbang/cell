@@ -306,6 +306,19 @@
     kitx "^1.2.0"
     ws "^8.2.3"
 
+"@alicloud/fc2@^2.6.3", "@alicloud/fc2@^2.6.6":
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/@alicloud/fc2/-/fc2-2.6.6.tgz#7ac1061cde34cae270518a14ec575c9383d517a3"
+  integrity sha512-ZWSVHXtGsqP6nYOcZCrppt7vBxhVT9dEgWXCIPfaqM13GZkoNQC1tMwuFVgU4Qqx8zr62CBizLywReQo5KhY8g==
+  dependencies:
+    ali-oss "^6.16.0"
+    axios "^0.24.0"
+    babel-runtime "^6.23.0"
+    debug "^2.6.4"
+    httpx "^2.1.1"
+    kitx "^1.2.0"
+    ws "^8.2.3"
+
 "@alicloud/gateway-spi@^0.0.8":
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/@alicloud/gateway-spi/-/gateway-spi-0.0.8.tgz#1d251986ed40d8b98690dcac8128fec0c56f0f53"
@@ -3247,6 +3260,22 @@
     "@types/estree" "0.0.39"
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
+
+"@serverless-cd/srm-aliyun-fc-domain@^0.0.1-beta.1":
+  version "0.0.1-beta.1"
+  resolved "https://registry.yarnpkg.com/@serverless-cd/srm-aliyun-fc-domain/-/srm-aliyun-fc-domain-0.0.1-beta.1.tgz#732ead6c25bf3048c5c8dde3e33a49c9e9e0c1d0"
+  integrity sha512-+LdVM31+DHdvAZknzjOL8Wd2KTD7n+FESaB/VAGg0QpkLF8pzM2Pa99RA50tnta2ahx6j/JfNj4JaDNM8zZAQQ==
+  dependencies:
+    "@alicloud/fc2" "^2.6.3"
+    "@serverless-devs/component-interface" "0.0.3-beta.1"
+    form-data "^4.0.0"
+    lodash "^4.17.21"
+    node-fetch "^2.6.9"
+
+"@serverless-devs/component-interface@0.0.3-beta.1":
+  version "0.0.3-beta.1"
+  resolved "https://registry.yarnpkg.com/@serverless-devs/component-interface/-/component-interface-0.0.3-beta.1.tgz#b1f84d6538d5279c9f769e33b3ba87daf5d85de2"
+  integrity sha512-r2wzW/eGx2qBlM8cYIijxZBxtZPByEY4kzg7ict99iPheoThOmbawgympyHX/+IlURf+Vcpn4bLIij7I0ywn+g==
 
 "@sinclair/typebox@^0.24.1":
   version "0.24.43"
@@ -13184,6 +13213,13 @@ node-fetch@^2.2.0, node-fetch@^2.6.1, node-fetch@^2.6.7:
   version "2.6.7"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
+  dependencies:
+    whatwg-url "^5.0.0"
+
+node-fetch@^2.6.9:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
+  integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
 

@@ -2,12 +2,13 @@ import { Credentials, Account } from '@malagu/cloud-plugin';
 import FC20230330, * as $fc from '@alicloud/fc20230330';
 import * as openapi from '@alicloud/openapi-client';
 import * as chalk from 'chalk';
-import { Params } from './api';
+import { IFcToken } from '@serverless-cd/srm-aliyun-fc-domain/dist/impl/interface';
+const FCClient = require('@alicloud/fc2');
 
-// TODO
-// parseDomain的问题
-// methods的问题 (控制台不支持methods)
-export async function getCustomDomain(client: FC20230330, customDomainName: string, print = false, qualifier?: string, params?: Params) {
+export type AutoDomainParams = Omit<IFcToken, 'service'>;
+
+// TODO `methods`为`undefined`
+export async function getCustomDomain(client: FC20230330, customDomainName: string, print = false, qualifier?: string, params?: AutoDomainParams) {
     try {
         if (customDomainName === 'auto') {
             customDomainName = parseDomain(params!);
@@ -153,7 +154,20 @@ export async function createFcClient(cloudConfig: any, region: string, credentia
     return fcClient;
 }
 
-// TODO
-export function parseDomain(params: Params) {
-    return `${params.function}.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
+export async function createFc2Client(cloudConfig: any, region: string, credentials: Credentials, account: Account) {
+    const fcClient = new FCClient(account.id, {
+        accessKeyID: credentials.accessKeyId,
+        accessKeySecret: credentials.accessKeySecret,
+        securityToken: credentials.token,
+        region,
+        timeout: cloudConfig.timeout,
+        secure: cloudConfig.secure,
+        internal: cloudConfig.internal
+    });
+
+    return fcClient;
+}
+
+export function parseDomain(params: AutoDomainParams) {
+    return `${params.function}.fcv3.${params.user}.${params.region}.fc.devsapp.net`.toLocaleLowerCase();
 }
