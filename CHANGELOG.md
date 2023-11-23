@@ -1,5 +1,10 @@
 # Change
 
+## 2.51.0
+
+- feat(cli-runtime) 支持阿里云 fc 3.0 插件
+- feat(fc3-plugin) 支持自定义域名和大代码包上传
+
 ## 2.50.1
 
 - feat(cli-common) add node18, node20 and bun runtime (#200)
