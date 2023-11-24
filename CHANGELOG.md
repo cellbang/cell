@@ -1,6 +1,6 @@
 # Change
 
-## 2.51.1
+## 2.51.2
 
 - fix(fc3-plugin) createOrUpdateFunction 增加 timeout 时间
 
