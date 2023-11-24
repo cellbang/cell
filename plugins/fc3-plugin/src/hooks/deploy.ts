@@ -13,6 +13,7 @@ import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
 import FC20230330, * as $fc from '@alicloud/fc20230330';
 import AutoDomainGenerator from '@serverless-cd/srm-aliyun-fc-domain';
 import OSS = require('ali-oss');
+import { RuntimeOptions } from '@alicloud/tea-util';
 
 let fcClient: FC20230330;
 let fc2Client: any;
@@ -260,22 +261,22 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
     if (functionInfo) {
         delete opts.runtime;
         await SpinnerUtil.start(`Update ${functionMeta.name} function${sync === 'onlyUpdateCode' ? ' (only update code)' : ''}`, async () => {
-            await fcClient.updateFunction(functionMeta.name, new $fc.UpdateFunctionRequest({
+            await fcClient.updateFunctionWithOptions(functionMeta.name, new $fc.UpdateFunctionRequest({
                 body: new $fc.UpdateFunctionInput({
                     ...(sync === 'onlyUpdateCode' ? {} : opts),
                     code: new $fc.InputCodeLocation(code)
                 })
-            }));
+            }), {}, new RuntimeOptions({ readTimeout: 60000, connectTimeout: 60000 }));
         });
     } else {
         opts.functionName = functionMeta.name;
         await SpinnerUtil.start(`Create ${functionMeta.name} function`, async () => {
-            await fcClient.createFunction(new $fc.CreateFunctionRequest({
+            await fcClient.createFunctionWithOptions(new $fc.CreateFunctionRequest({
                 body: new $fc.CreateFunctionInput({
                     ...opts,
                     code: new $fc.InputCodeLocation(code)
                 })
-            }));
+            }), {}, new RuntimeOptions({ readTimeout: 60000, connectTimeout: 60000 }));
         });
     }
     if (functionMeta.withoutCodeLimit && code.zipFile) {
