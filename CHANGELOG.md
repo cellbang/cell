@@ -1,5 +1,9 @@
 # Change
 
+## 2.51.1
+
+- fix(fc3-plugin) createOrUpdateFunction 增加 timeout 时间
+
 ## 2.51.0
 
 - feat(cli-runtime) 支持阿里云 fc 3.0 插件
