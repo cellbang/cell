@@ -1,6 +1,7 @@
 import { caching } from 'cache-manager';
 import { CacheManager, CacheManagerFactory, CacheStoreFactory, CacheStoreFactoryConfig } from './cache-protocol';
 import { Component, Value, Autowired } from '@malagu/core';
+import { DelegatingCacheManager } from './delegating-cache-manager';
 
 @Component(CacheManagerFactory)
 export class DefaultCacheManagerFactory implements CacheManagerFactory {
@@ -20,7 +21,7 @@ export class DefaultCacheManagerFactory implements CacheManagerFactory {
 
         const store = this.cacheStoreFactory.create(config);
 
-        return caching<any>(store);
+        return new DelegatingCacheManager(caching<any>(store));
     }
 
 }

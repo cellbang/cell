@@ -288,5 +288,5 @@
     "packages/*/src",
     "examples/*/test",
     "plugins/*/src"
-  ]
+, "packages/cache/src/node/delegating-cache-manager.ts"  ]
 }

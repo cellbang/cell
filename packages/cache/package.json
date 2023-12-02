@@ -2,8 +2,8 @@
   "name": "@malagu/cache",
   "version": "2.51.3",
   "description": "cache component for cache-manager",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.51.3",
     "cache-manager": "^5.2.3"

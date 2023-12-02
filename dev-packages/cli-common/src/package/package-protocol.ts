@@ -3,6 +3,8 @@ import { Command } from 'commander';
 import { Settings } from '../settings/settings-protocol';
 import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
 
+export const MALAGU_COMPONENT_SUFFIX = '-component';
+
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 
 export class ApplicationConfigOptions {
@@ -107,6 +109,15 @@ export interface RawComponentPackage extends PublishedNodePackage {
 }
 export namespace RawComponentPackage {
     export function is(pck: NodePackage | undefined): pck is RawComponentPackage {
-        return PublishedNodePackage.is(pck) && !!pck.keywords && pck.keywords.indexOf('malagu-component') !== -1;
+        if (!PublishedNodePackage.is(pck)) {
+            return false;
+        }
+        if (!pck.keywords) {
+            return false;
+        }
+        if (!Array.isArray(pck.keywords)) {
+            return false;
+        }
+        return pck.keywords.some(k => k.endsWith(MALAGU_COMPONENT_SUFFIX));
     }
 }

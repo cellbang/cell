@@ -1,5 +1,10 @@
 # Change
 
+## 2.52.0
+
+- fix(cache) 修复 cache 组件报异步依赖注入错误问题
+- feat(cli-common) 支持通过组件 package.json 里面的 keywords 指定组件配置文件前置名称，例如：`"keywords": ["sample-component"]`，则组件配置文件名称可以为：`sample.yml`，模式配置文件为：`sample-[mode].yml`
+
 ## 2.51.3
 
 - feat(scf-plugin) 支持 MALAGU_APP_ID 环境变量

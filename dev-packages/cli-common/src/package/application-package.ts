@@ -140,7 +140,7 @@ export class ApplicationPackage {
             }
 
             this.pkg.modulePath = this.projectPath;
-            const projectVirtualPkg = this.createVirtualPkg(this.projectPath);
+            const projectVirtualPkg = { ...this.createVirtualPkg(this.projectPath), ...this.pkg };
             this.componentPackageLoader.load(projectVirtualPkg, mode);
             mode = projectVirtualPkg.malaguComponent.mode || [];
             this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, projectVirtualPkg.malaguComponent);

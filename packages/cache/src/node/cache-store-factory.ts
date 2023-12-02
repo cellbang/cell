@@ -25,7 +25,7 @@ export class DefaultCacheStoreFactory implements CacheStoreFactory {
         try {
             switch (store) {
                 case 'memory':
-                    return require('cache-manager/lib/stores/memory.js');
+                    return { create: require('cache-manager/dist/stores/memory.js').memoryStore };
                 case 'redis':
                     return require('cache-manager-redis');
                 case 'redis-store':
