@@ -1,5 +1,9 @@
 # Change
 
+## 2.52.1
+
+- fix(cli-common) 修复通过组件 package.json 里面的 keywords 指定组件配置文件前置名称的问题
+
 ## 2.52.0
 
 - fix(cache) 修复 cache 组件报异步依赖注入错误问题

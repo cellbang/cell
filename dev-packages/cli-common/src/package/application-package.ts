@@ -132,8 +132,12 @@ export class ApplicationPackage {
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, props);
             }
 
-            const pwdVirtualPkg = this.createVirtualPkg();
+            let pwdVirtualPkg = this.createVirtualPkg();
             if (process.cwd() !== this.projectPath) {
+                const packagePath = paths.join(process.cwd(), 'package.json');
+                if (existsSync(packagePath)) {
+                    pwdVirtualPkg = { ...readJsonFile(packagePath), ...pwdVirtualPkg };
+                }
                 this.componentPackageLoader.load(pwdVirtualPkg, mode);
                 mode = pwdVirtualPkg.malaguComponent.mode || [];
                 this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent);
