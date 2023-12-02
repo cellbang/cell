@@ -23,7 +23,7 @@ export default async (context: DeployContext) => {
     const cloudConfig = CloudUtils.getConfiguration(cfg);
 
     const profileProvider = new DefaultProfileProvider();
-    const { region, credentials, account, appId } = await profileProvider.provide(cloudConfig) as (Profile & { appId?: string });
+    const { region, credentials, account, appId = process.env.MALAGU_APP_ID } = await profileProvider.provide(cloudConfig) as (Profile & { appId?: string });
 
     const clients = await createClients(region, credentials);
     cosClient = clients.cosClient;
