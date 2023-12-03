@@ -46,8 +46,6 @@ export class DefaultCacheStoreFactory implements CacheStoreFactory {
                     return require('cache-manager-memcached-store');
                 case 'memory-store':
                     return require('cache-manager-memory-store');
-                case 'none':
-                    return require('cache-manager/lib/stores/none.js');
             }
         } catch (error) {
             throw error;

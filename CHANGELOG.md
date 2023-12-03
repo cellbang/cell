@@ -1,5 +1,9 @@
 # Change
 
+## 2.52.2
+
+- fix(cache) 修复编译警告问题
+
 ## 2.52.1
 
 - fix(cli-common) 修复通过组件 package.json 里面的 keywords 指定组件配置文件前置名称的问题
