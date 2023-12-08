@@ -4,7 +4,7 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.52.3",
+  "version": "2.52.4",
   "license": "MIT",
   "files": [
     "lib",
@@ -12,17 +12,17 @@
     "malagu.yml"
   ],
   "dependencies": {
-    "@malagu/core": "2.52.3",
-    "@malagu/grommet": "2.52.3",
-    "@malagu/oauth2-client": "2.52.3",
-    "@malagu/oauth2-core": "2.52.3",
-    "@malagu/react": "2.52.3",
-    "@malagu/rpc": "2.52.3",
-    "@malagu/scf-adapter": "2.52.3",
-    "@malagu/security": "2.52.3",
-    "@malagu/serve-static": "2.52.3",
-    "@malagu/typeorm": "2.52.3",
-    "@malagu/web": "2.52.3",
+    "@malagu/core": "2.52.4",
+    "@malagu/grommet": "2.52.4",
+    "@malagu/oauth2-client": "2.52.4",
+    "@malagu/oauth2-core": "2.52.4",
+    "@malagu/react": "2.52.4",
+    "@malagu/rpc": "2.52.4",
+    "@malagu/scf-adapter": "2.52.4",
+    "@malagu/security": "2.52.4",
+    "@malagu/serve-static": "2.52.4",
+    "@malagu/typeorm": "2.52.4",
+    "@malagu/web": "2.52.4",
     "better-sqlite3": "^7.6.2",
     "class-transformer": "^0.5.1",
     "grommet": "^2.25.1",
@@ -36,7 +36,7 @@
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@malagu/cli": "2.52.3"
+    "@malagu/cli": "2.52.4"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",

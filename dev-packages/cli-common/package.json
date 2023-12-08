@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-common",
-  "version": "2.52.3",
+  "version": "2.52.4",
   "description": "Malagu CLI Common.",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "test": "malagu-component test:js"
   },
   "dependencies": {
-    "@malagu/frameworks": "2.52.3",
+    "@malagu/frameworks": "2.52.4",
     "@yarnpkg/lockfile": "^1.1.0",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
@@ -49,7 +49,7 @@
     "typescript": "~4.5.5"
   },
   "devDependencies": {
-    "@malagu/component": "2.52.3",
+    "@malagu/component": "2.52.4",
     "@types/fs-extra": "^11.0.1",
     "@types/jexl": "^2.3.1",
     "@types/js-yaml": "^4.0.5",

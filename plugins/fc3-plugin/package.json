@@ -1,15 +1,15 @@
 {
   "name": "@malagu/fc3-plugin",
-  "version": "2.52.3",
+  "version": "2.52.4",
   "description": "",
   "dependencies": {
     "@alicloud/fc2": "^2.6.6",
     "@alicloud/fc20230330": "^3.0.2",
     "@alicloud/openapi-client": "^0.4.6",
     "@alicloud/tea-util": "^1.4.7",
-    "@malagu/cli-common": "2.52.3",
-    "@malagu/cloud-plugin": "2.52.3",
-    "@malagu/code-loader-plugin": "2.52.3",
+    "@malagu/cli-common": "2.52.4",
+    "@malagu/cloud-plugin": "2.52.4",
+    "@malagu/code-loader-plugin": "2.52.4",
     "@serverless-cd/srm-aliyun-fc-domain": "^0.0.1-beta.1",
     "ali-oss": "^6.16.0",
     "chalk": "^4.1.0",
@@ -50,7 +50,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.52.3",
+    "@malagu/component": "2.52.4",
     "@types/ali-oss": "^6.0.5"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
