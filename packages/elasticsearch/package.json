@@ -1,12 +1,12 @@
 {
   "name": "@malagu/elasticsearch",
-  "version": "2.52.2",
+  "version": "2.52.3",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
     "@elastic/elasticsearch": "^8.2.1",
-    "@malagu/core": "2.52.2"
+    "@malagu/core": "2.52.3"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.52.2"
+    "@malagu/component": "2.52.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
