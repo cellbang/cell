@@ -3,6 +3,7 @@ import { Application } from '@malagu/core/lib/common/application/application-pro
 import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
 import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
 import { Context } from '@malagu/web/lib/node/context';
+import { ServerAware } from '@malagu/web/lib/node/http';
 import { ConfigProvider } from '@malagu/core/lib/common/config/config-protocol';
 
 import * as express from 'express';
@@ -13,13 +14,16 @@ container.then(async c => {
     await c.get<Application>(Application).start();
     const configProvider = c.get<ConfigProvider>(ConfigProvider);
     const port = parseInt(process.env.SERVER_PORT || '') || configProvider.get<any>('malagu.server', DEFAULT_SERVER_OPTIONS).port;
-
     const app = express();
     app.all('*', async (req: any, res: any) => {
         const dispatcher = c.get<Dispatcher<Context>>(Dispatcher);
         const httpContext = new Context(req, res);
         Context.run(() => dispatcher.dispatch(httpContext));
     });
-    app.listen(port);
+    const server = app.listen(port);
+    const items = c.getAll<ServerAware>(ServerAware);
+    for (const serverAware of items) {
+        await serverAware.setServer(server);
+    }
     console.log(`serve ${port}`);
 });

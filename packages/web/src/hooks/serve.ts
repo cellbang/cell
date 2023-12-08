@@ -21,7 +21,7 @@ export async function after(context: ServeContext) {
         application?.stop();
         entryContextProvider().then(async (ctx: any) => {
             try {
-                const { Dispatcher, Context, ContainerProvider, Application, container } = ctx;
+                const { Dispatcher, Context, ContainerProvider, Application, container, ServerAware } = ctx;
                 const c = await container;
                 ContainerProvider.set(c);
                 application = await c.get(Application);
@@ -31,6 +31,10 @@ export async function after(context: ServeContext) {
                     const httpContext = new Context(req, res);
                     Context.run(() => dispatcher.dispatch(httpContext));
                 };
+                const items = c.getAll(ServerAware);
+                for (const serverAware of items) {
+                    await serverAware.setServer(context.server);
+                }
                 compileDeferred.resolve();
             } catch (err) {
                 console.error(err);

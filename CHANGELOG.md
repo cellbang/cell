@@ -1,5 +1,9 @@
 # Change
 
+## 2.52.3
+
+- feat(web) 支持 ServerAware 扩展接口，方便扩展 Web Socket 服务
+
 ## 2.52.2
 
 - fix(cache) 修复编译警告问题
