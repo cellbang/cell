@@ -1,5 +1,9 @@
 # Change
 
+## 2.52.4
+
+- fix(cli-service) 修复 ServeHook after 阶段未执行问题
+
 ## 2.52.3
 
 - feat(web) 支持 ServerAware 扩展接口，方便扩展 Web Socket 服务
