@@ -319,8 +319,7 @@ export async function createClients(cloudConfig: any, region: string, credential
             SecretId: credentials.accessKeyId,
             SecretKey: credentials.accessKeySecret,
             XCosSecurityToken: credentials.token,
-            Timeout: cloudConfig.timeout ?? 0,
-            Domain: internal ? 'cos-internal.{Region}.myqcloud.com' : undefined
+            Timeout: cloudConfig.timeout ?? 0
         }),
         scfClient: new ScfClient(ConfigUtil.merge(
             clientConfig,

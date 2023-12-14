@@ -1,5 +1,10 @@
 # Change
 
+## 2.52.6
+
+- fix(scf-plugin) 修复 COS 内网域名地址
+
+
 ## 2.52.5
 
 - feat(scf-plugin) 支持设置内网 API：malagu.cloud.internal: true
