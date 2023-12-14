@@ -1,6 +1,6 @@
 {
   "name": "@malagu/frameworks",
-  "version": "2.52.5",
+  "version": "2.52.6",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -32,7 +32,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.52.5"
+    "@malagu/component": "2.52.6"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
