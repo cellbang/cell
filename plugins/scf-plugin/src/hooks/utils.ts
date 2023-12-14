@@ -319,8 +319,7 @@ export async function createClients(cloudConfig: any, region: string, credential
             SecretId: credentials.accessKeyId,
             SecretKey: credentials.accessKeySecret,
             XCosSecurityToken: credentials.token,
-            Timeout: cloudConfig.timeout ?? 0,
-            Domain: internal ? 'cos-internal.{Region}.tencentcos.cn' : undefined
+            Timeout: cloudConfig.timeout ?? 0
         }),
         scfClient: new ScfClient(ConfigUtil.merge(
             clientConfig,
@@ -348,7 +347,7 @@ export async function createClients(cloudConfig: any, region: string, credential
                 profile: {
                     signMethod: 'TC3-HMAC-SHA256',
                     httpProfile: {
-                        endpoint: internal ? 'apigateway.internal.tencentcloudapi.com' : undefined
+                        endpoint: internal ? 'scf.internal.tencentcloudapi.com' : undefined
                     }
                 }
             }
