@@ -1,11 +1,11 @@
 {
   "name": "@malagu/testing",
-  "version": "2.52.6",
+  "version": "2.52.7",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/cli": "2.52.6",
+    "@malagu/cli": "2.52.7",
     "axios": "^0.26.1",
     "http-proxy": "^1.18.1"
   },
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.52.6"
+    "@malagu/component": "2.52.7"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
