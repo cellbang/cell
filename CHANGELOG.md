@@ -1,5 +1,9 @@
 # Change
 
+## 2.52.5
+
+- feat(scf-plugin) 支持设置内网 API：malagu.cloud.internal: true
+
 ## 2.52.4
 
 - fix(cli-service) 修复 ServeHook after 阶段未执行问题

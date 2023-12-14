@@ -1,3 +1,4 @@
+import { ConfigUtil } from '@malagu/cli-common';
 import { Credentials } from '@malagu/cloud-plugin';
 import { scf, apigateway } from 'tencentcloud-sdk-nodejs';
 import * as COS from 'cos-nodejs-sdk-v5';
@@ -296,7 +297,8 @@ export async function getApi(client: any, serviceId: string, apiName: string, pr
     }
 }
 
-export async function createClients(region: string, credentials: Credentials) {
+export async function createClients(cloudConfig: any, region: string, credentials: Credentials) {
+    const internal: boolean = cloudConfig.internal;
     const clientConfig: any = {
         credential: {
             secretId: credentials.accessKeyId,
@@ -307,7 +309,7 @@ export async function createClients(region: string, credentials: Credentials) {
             signMethod: 'HmacSHA256',
             httpProfile: {
                 reqMethod: 'POST',
-                reqTimeout: 30,
+                reqTimeout: cloudConfig.timeout ?? 60
             },
         },
         region: region
@@ -316,18 +318,41 @@ export async function createClients(region: string, credentials: Credentials) {
         cosClient: new COS({
             SecretId: credentials.accessKeyId,
             SecretKey: credentials.accessKeySecret,
-            XCosSecurityToken: credentials.token
+            XCosSecurityToken: credentials.token,
+            Timeout: cloudConfig.timeout ?? 0,
+            Domain: internal ? 'cos-internal.{Region}.myqcloud.com' : undefined
         }),
-        scfClient: new ScfClient(clientConfig),
-        apiClient: new ApiClient(clientConfig),
-        scfClientExt: new ScfClient({ ...clientConfig,
-            profile: {
-               signMethod: 'TC3-HMAC-SHA256',
-               httpProfile: {
-                   reqMethod: 'POST',
-                   reqTimeout: 30
+        scfClient: new ScfClient(ConfigUtil.merge(
+            clientConfig,
+            {
+                profile: {
+                    httpProfile: {
+                        endpoint: internal ? 'scf.internal.tencentcloudapi.com' : undefined
+                    }
                 }
-            }})
+            }
+        )),
+        apiClient: new ApiClient(ConfigUtil.merge(
+            clientConfig,
+            {
+                profile: {
+                    httpProfile: {
+                        endpoint: internal ? 'apigateway.internal.tencentcloudapi.com' : undefined
+                    }
+                }
+            }
+        )),
+        scfClientExt: new ScfClient(ConfigUtil.merge(
+            clientConfig,
+            {
+                profile: {
+                    signMethod: 'TC3-HMAC-SHA256',
+                    httpProfile: {
+                        endpoint: internal ? 'apigateway.internal.tencentcloudapi.com' : undefined
+                    }
+                }
+            }
+        ))
     };
 }
 

@@ -14,7 +14,7 @@ export default async (context: InfoContext) => {
     const profileProvider = new DefaultProfileProvider();
     const { region, credentials, account } = await profileProvider.provide(cloudConfig);
 
-    const clients = await createClients(region, credentials);
+    const clients = await createClients(cloudConfig, region, credentials);
     scfClient = clients.scfClient;
     apiClient = clients.apiClient;
 
