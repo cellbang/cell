@@ -1,1 +1,6 @@
-
+malagu:
+  cloud:
+    function:
+      tags:
+        test: xxxxx
+        test2: xxxx

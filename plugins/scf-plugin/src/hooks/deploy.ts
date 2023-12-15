@@ -178,7 +178,7 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     req.ProtocolType = functionMeta.protocolType;
     req.InstallDependency = parseBoolean(functionMeta.installDependency);
 
-    const { env, vpcConfig, cfsConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig } = functionMeta;
+    const { env, vpcConfig, cfsConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig, tags } = functionMeta;
     if (env) {
         const variables: any[] = [];
         for (const key in env) {
@@ -256,6 +256,13 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     if (protocolParams) {
         req.ProtocolParams = { WSParams: { IdleTimeOut: protocolParams.wsParams.idleTimeOut }};
     }
+
+    if (tags) {
+        req.Tags = [];
+        for (const key of Object.keys(tags)) {
+            req.Tags.push({ Key: key, Value: tags[key] });
+        }
+    }
     cleanObj(req);
 }
 
@@ -267,14 +274,14 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
     }
 }
 
-async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string) {
+async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string, tags?: any) {
     const bucket = `malagu-scf-${region}-code-${appId}`;
     const key = `${name}-${Math.floor(Date.now() / 1000)}.zip`;
     try {
-        await createBucketIfNeed(cosClient, bucket, region);
+        await createBucketIfNeed(cosClient, bucket, region, tags);
     } catch (e) {
         if (e.code !== 'BucketAlreadyExists' || e.code !== 'BucketAlreadyOwnedByYou' || e.code !== 'TooManyBuckets') {
-            await createBucketIfNeed(cosClient, bucket, region);
+            await createBucketIfNeed(cosClient, bucket, region, tags);
         } else {
             throw e;
         }
@@ -290,7 +297,7 @@ async function parseCode(req: any, meta: any, region: string, appId?: string) {
         const codeLoader = new DefaultCodeLoader();
         code = await codeLoader.load(PathUtil.getProjectDistPath(), meta.codeUri);
         if (appId) {
-            s3Uri = await uploadCodeToCos(meta.name, code, region, appId);
+            s3Uri = await uploadCodeToCos(meta.name, code, region, appId, meta.tags);
         }
     }
 
@@ -372,6 +379,7 @@ async function createOrUpdateFunction(functionMeta: any, disableProjectId: boole
                 await parseFunctionMeta(updateFunctionConfigurationRequest, functionMeta);
                 delete updateFunctionConfigurationRequest.Runtime;
                 delete updateFunctionConfigurationRequest.ProtocolType;
+                delete updateFunctionConfigurationRequest.Tags;
                 await scfClient.UpdateFunctionConfiguration(updateFunctionConfigurationRequest);
             }
 
@@ -468,6 +476,14 @@ function parseServiceMeta(req: any, serviceMeta: any) {
     req.IpVersion = serviceMeta.ipVersion;
     req.SetServerName = serviceMeta.setServerName;
     req.AppIdType = serviceMeta.appIdType;
+
+    const tags = serviceMeta.tags;
+    if (tags) {
+        req.Tags = [];
+        for (const key of Object.keys(tags)) {
+            req.Tags.push({ Key: key, Value: tags[key] });
+        }
+    }
     cleanObj(req);
 }
 

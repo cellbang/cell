@@ -319,7 +319,9 @@ export async function createClients(cloudConfig: any, region: string, credential
             SecretId: credentials.accessKeyId,
             SecretKey: credentials.accessKeySecret,
             XCosSecurityToken: credentials.token,
-            Timeout: cloudConfig.timeout ?? 0
+            Timeout: cloudConfig.timeout ?? 0,
+            ServiceDomain: internal ? 'cos-internal.{Region}.tencentcos.cn' : undefined,
+            Domain: internal ? '{Bucket}.cos-internal.{Region}.tencentcos.cn' : undefined
         }),
         scfClient: new ScfClient(ConfigUtil.merge(
             clientConfig,
@@ -355,6 +357,16 @@ export async function createClients(cloudConfig: any, region: string, credential
     };
 }
 
+export function parseTags(tags: any) {
+    if (tags) {
+        const result = [];
+        for (const key of Object.keys(tags)) {
+            result.push({ Key: key, Value: tags[key] });
+        }
+        return result;
+    }
+}
+
 export async function hasBucket(client: COS, bucket: string, region: string) {
     try {
         const { statusCode } = await client.headBucket({
@@ -367,7 +379,7 @@ export async function hasBucket(client: COS, bucket: string, region: string) {
     }
 }
 
-export async function createBucketIfNeed(client: COS, bucket: string, region: string) {
+export async function createBucketIfNeed(client: COS, bucket: string, region: string, tags?: any) {
     const createParams = {
         Bucket: bucket,
         Region: region
@@ -375,6 +387,7 @@ export async function createBucketIfNeed(client: COS, bucket: string, region: st
 
     try {
         await client.putBucket(createParams);
+        await setBucketTaggingIfNeed(client, bucket, region, tags);
         await setLifecycle(client, bucket, region);
     } catch (e) {
         if (e.code === 'BucketAlreadyExists' || e.code === 'BucketAlreadyOwnedByYou') {
@@ -387,6 +400,17 @@ export async function createBucketIfNeed(client: COS, bucket: string, region: st
         }
         throw e;
     }
+}
+
+async function setBucketTaggingIfNeed(client: COS, bucket: string, region: string, tags?: any) {
+    if (!tags) {
+        return;
+    }
+    return client.putBucketTagging({
+        Bucket: bucket,
+        Region: region,
+        Tags: parseTags(tags)!
+    });
 }
 
 async function setLifecycle(client: COS, bucket: string, region: string) {

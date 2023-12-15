@@ -1,5 +1,10 @@
 # Change
 
+## 2.53.0
+
+- feat(scf-plugin) 云资源支持自定义标签：malagu.cloud.function.tags: { key: value }
+
+
 ## 2.52.6
 
 - fix(scf-plugin) 修复 COS 内网域名地址
