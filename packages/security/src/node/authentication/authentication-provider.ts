@@ -75,7 +75,7 @@ export class UsernamePasswordAuthenticationProvider implements AuthenticationPro
 }
 
 @Component(AuthenticationProvider)
-export class BaseAuthenticationProvider implements AuthenticationProvider {
+export class BasicAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired(PasswordEncoder)
     protected readonly passwordEncoder: PasswordEncoder;
@@ -142,9 +142,9 @@ export class BaseAuthenticationProvider implements AuthenticationProvider {
         }
         header = header.trim();
         if (header.toLowerCase().startsWith(AUTHENTICATION_SCHEME_BASIC.toLowerCase())) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

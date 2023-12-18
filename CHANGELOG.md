@@ -1,5 +1,10 @@
 # Change
 
+## 2.53.1
+
+- fix(security): 修复 Basic 认证逻辑问题
+- feat(typeorm): 支持数据源初始化完成状态
+
 ## 2.53.0
 
 - feat(scf-plugin) 云资源支持自定义标签：malagu.cloud.function.tags: { key: value }

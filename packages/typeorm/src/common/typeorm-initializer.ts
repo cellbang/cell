@@ -1,11 +1,13 @@
-import { Component, ApplicationLifecycle, Application, Value, Autowired } from '@malagu/core';
+import { Component, ApplicationLifecycle, Application, Value, Autowired, Deferred } from '@malagu/core';
 import { DEFAULT_CONNECTION_NAME } from './constants';
 import { DataSourceManager } from './data-source-manager';
 import { EntityProvider } from './entity-provider';
 import { createDataSources } from './utils';
 
 @Component(ApplicationLifecycle)
-export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Application> {
+export class TypeOrmInitializer implements ApplicationLifecycle<Application> {
+
+    readonly initialized = new Deferred<void>();
 
     @Value('malagu.typeorm')
     protected readonly options: any;
@@ -28,6 +30,7 @@ export class TypeOrmApplicationLifecycle implements ApplicationLifecycle<Applica
         }
 
         await createDataSources(configs);
+        this.initialized.resolve();
     }
 
     onStop(app: Application): void {
