@@ -48,7 +48,8 @@ export class SessionManagerImpl implements SessionManager {
 
     async commit(): Promise<void> {
         const session = Context.getSession();
-        if (!session) {
+        const response = Context.getResponse();
+        if (!session || response.headersSent) {
             return;
         }
         if (await this.sessionStrategy.shouldSaveSession(session)) {

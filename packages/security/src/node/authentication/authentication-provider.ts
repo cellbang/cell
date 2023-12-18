@@ -48,10 +48,10 @@ export class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         if (!await this.passwordEncoder.matches(password, user.password)) {
             throw new BadCredentialsError('Bad credentials');
         }
-
+        await this.userMapper.map(user);
         return {
             name: user.username,
-            principal: this.userMapper.map(user),
+            principal: user,
             credentials: '',
             policies: user.policies,
             authenticated: true
@@ -123,9 +123,11 @@ export class BasicAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsError('Bad credentials');
         }
 
+        await this.userMapper.map(user);
+
         return {
             name: user.username,
-            principal: this.userMapper.map(user),
+            principal: user,
             credentials: '',
             policies: user.policies,
             authenticated: true,

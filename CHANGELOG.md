@@ -1,5 +1,9 @@
 # Change
 
+## 2.53.2
+
+- fix(security): 修复权限一些问题
+
 ## 2.53.1
 
 - fix(security): 修复 Basic 认证逻辑问题
