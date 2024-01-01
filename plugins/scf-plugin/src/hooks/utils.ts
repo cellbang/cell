@@ -59,14 +59,14 @@ export async function getCustomDomain(client: any, serviceId: string, customDoma
     }
 }
 
-export async function getTrigger(client: any, namespaceName: string, functionName: string, triggerName?: string, aliasName?: string, print = false) {
+export async function getTrigger(client: any, namespaceName: string, functionName: string, triggerType?: string, aliasName?: string, print = false) {
     const listTriggersRequest: any = {};
     listTriggersRequest.FunctionName = functionName;
     listTriggersRequest.Namespace = namespaceName;
     listTriggersRequest.Limit = 100;
     const triggers = (await client.ListTriggers(listTriggersRequest)).Triggers || [];
     for (const trigger of triggers) {
-        if (aliasName && trigger.Qualifier === aliasName || triggerName && triggerName === triggerName) {
+        if ((!aliasName || trigger.Qualifier === aliasName) && (!triggerType || triggerType === trigger.Type)) {
             const result = trigger;
             if (print) {
                 console.log(chalk`{bold.cyan - Trigger: }`);
@@ -81,6 +81,10 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                     const protocol = JSON.parse(result.TriggerDesc)?.service?.protocol.includes('https') ? 'https' : 'http';
                     console.log(
                         chalk`    - ApiUrl: {green.bold ${protocol}://${outerSubDomain!}${path}}`);
+                } else if (result.Type === 'http') {
+                    const intranetUrl = JSON.parse(result.TriggerDesc)?.NetConfig?.IntranetUrl;
+                    console.log(
+                        chalk`    - ApiUrl: {green.bold ${intranetUrl}`);
                 }
             }
             return result;

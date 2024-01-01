@@ -5,7 +5,7 @@ import { NodePackage } from './npm-registry';
 import { join } from 'path';
 import { ConfigUtil } from '../utils/config-util';
 import { ExpressionHandlerFactory } from '../el/expression-handler-factory';
-import { MALAGU_COMPONENT_SUFFIX } from './package-protocol';
+import { ComponentUtil } from '../utils';
 
 export class ComponentPackageLoader {
     constructor(protected readonly pkg: ApplicationPackage) {
@@ -65,11 +65,7 @@ export class ComponentPackageLoader {
     }
 
     protected parseConfigPaths(nodePackage: NodePackage, mode?: string): string[] {
-        const keywords = nodePackage.keywords ?? [];
-        const keywordsAlias = keywords
-            .filter(k => k.endsWith(MALAGU_COMPONENT_SUFFIX))
-            .map(k => k.substring(0, k.length - MALAGU_COMPONENT_SUFFIX.length));
-        const configFileAliases = [ 'malagu', ...keywordsAlias ];
+        const configFileAliases = ComponentUtil.getComponentAlias(nodePackage.keywords);
         const configFileAlias = process.env.MALAGU_CONFIG_FILE_ALIAS || this.pkg.settings?.configFileAlias;
         if (configFileAlias) {
             configFileAliases.push(configFileAlias);

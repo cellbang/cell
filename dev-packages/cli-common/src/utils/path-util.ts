@@ -1,7 +1,9 @@
 import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import * as path from 'path';
 import { homedir } from 'os';
+import { readJSONSync, existsSync } from 'fs-extra';
 import { RuntimeUtil } from './runtime-util';
+import { ComponentUtil } from './component-util';
 
 export namespace PathUtil {
     export function getProjectDistPathForTarget(target: string) {
@@ -39,7 +41,18 @@ export namespace PathUtil {
     }
 
     export function getProjectHomePath() {
-        return process.env.MALAGU_PROJECT_HOME_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH) : path.resolve(process.cwd(), '.malagu');
+        if (process.env.MALAGU_PROJECT_HOME_PATH) {
+            return path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH);
+        }
+        let keywords = [];
+        const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+        if (existsSync(packageJsonPath)) {
+            const packageJson = readJSONSync(packageJsonPath);
+            keywords = packageJson.keywords;
+        }
+        const alias = ComponentUtil.getComponentAlias(keywords)[0];
+
+        return path.resolve(process.cwd(), `.${alias}`);
     }
 
     export function getProjectConfigPath() {

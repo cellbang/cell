@@ -1,10 +1,12 @@
 import { Component, Props, ApplicationLog, ApplicationConfigOptions } from './package-protocol';
 import { FRONTEND_TARGET, BACKEND_TARGET, CONFIG_FILE } from '../constants';
-import { existsSync, readFileSync } from 'fs-extra';
+import { existsSync, readFileSync, readJSONSync } from 'fs-extra';
 import { load } from 'js-yaml';
 const cloneDeep = require('lodash.clonedeep');
 import { ApplicationPackage } from './application-package';
 import { ConfigUtil } from '../utils/config-util';
+import * as path from 'path';
+import { ComponentUtil } from '../utils/component-util';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -68,6 +70,15 @@ export class ApplicationConfig {
         delete config.backend;
         delete config.frontend;
         config = ConfigUtil.merge(config, this.props[target]);
+        const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+        if (existsSync(packageJsonPath)) {
+            const packageJson = readJSONSync(packageJsonPath);
+            const keywords = packageJson.keywords;
+            const alias = ComponentUtil.getComponentAlias(keywords)[0];
+            if (alias !== 'malagu') {
+                config.malagu = ConfigUtil.merge(config.malagu, config[alias]);
+            }
+        }
 
         delete config.webpackHooks;
         delete config.initHooks;

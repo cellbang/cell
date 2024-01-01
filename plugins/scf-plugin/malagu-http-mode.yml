@@ -1,4 +1,3 @@
-mode: [ api-gateway-common ]
 malagu:
   cloud:
     function:
@@ -7,6 +6,12 @@ malagu:
         maxConcurrency: 10
         dynamicEnabled: false
       bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"
-    apiGateway:
-      api:
-        serviceScfFunctionType: HTTP
+    trigger:
+      name: ${malagu.cloud.function.name}-${malagu.cloud.alias.name}
+      type: http
+      enable: OPEN
+      triggerDesc: 
+        authType: NONE
+        netConfig:
+          enableIntranet: true
+          enableExtranet:  true

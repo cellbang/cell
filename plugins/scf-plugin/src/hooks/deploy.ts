@@ -100,12 +100,45 @@ function cleanObj(obj: any) {
 }
 
 async function createTrigger(trigger: any, namespaceName: string, functionName: string, functionVersion: string, alias: any) {
-    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, undefined, alias.name);
+    const triggerInfo = await getTrigger(scfClient, namespaceName, functionName, trigger.type, alias.name);
     if (triggerInfo?.Type === 'apigw') {
         const serviceId = JSON.parse(triggerInfo.TriggerDesc)?.service?.serviceId;
         trigger.triggerDesc.service.serviceId = serviceId;
     }
+    const createTriggerRequest: any = {};
+    let url: string = '';
+    createTriggerRequest.Namespace = namespaceName;
+    createTriggerRequest.FunctionName = functionName;
+    createTriggerRequest.Qualifier = alias.name;
+    createTriggerRequest.TriggerName = trigger.name;
+    createTriggerRequest.Type = trigger.type;
+    createTriggerRequest.Enable = trigger.enable;
+    if (trigger.type === 'http') {
+        createTriggerRequest.TriggerDesc = {
+            AuthType: trigger.triggerDesc.authType,
+            NetConfig: {
+                EnableIntranet: trigger.triggerDesc.enableIntranet,
+                EnableExtranet:  trigger.triggerDesc.enableExtranet
+            }
+        };
+    }
+    createTriggerRequest.TriggerDesc = trigger.type === 'timer' ? trigger.triggerDesc : JSON.stringify(trigger.triggerDesc);
+    createTriggerRequest.Description = createTriggerRequest.TriggerDesc;
     if (triggerInfo) {
+        if (trigger.type === triggerInfo.Type &&
+            createTriggerRequest.TriggerDesc === triggerInfo.Description &&
+            (trigger.enable === 'OPEN' && triggerInfo.Enable || trigger.enable === 'CLOSE' && !triggerInfo.Enable)) {
+                await SpinnerUtil.start(`Skip ${trigger.name} Trigger`, async () => {
+                    const desc = JSON.parse(triggerInfo.TriggerDesc);
+                    url = desc?.service?.subDomain || desc?.NetConfig?.IntranetUrl;
+                });
+                if (url) {
+                    console.log(chalk`    - Url: {green.bold ${url}}`);
+                }
+                console.log(`    - Type: ${trigger.type}`);
+                console.log(`    - Enable: ${trigger.enable}`);
+                return;
+        }
         const deleteTriggerRequest: any = {};
         deleteTriggerRequest.Namespace = namespaceName;
         deleteTriggerRequest.FunctionName = functionName;
@@ -118,18 +151,10 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
         await scfClient.DeleteTrigger(deleteTriggerRequest);
 
     }
-    const createTriggerRequest: any = {};
-    let url: string = '';
-    createTriggerRequest.Namespace = namespaceName;
-    createTriggerRequest.FunctionName = functionName;
-    createTriggerRequest.Qualifier = alias.name;
-    createTriggerRequest.TriggerName = trigger.name;
-    createTriggerRequest.Type = trigger.type;
-    createTriggerRequest.Enable = trigger.enable;
-    createTriggerRequest.TriggerDesc = trigger.type === 'timer' ? trigger.triggerDesc : JSON.stringify(trigger.triggerDesc);
     await SpinnerUtil.start(`Set a ${trigger.name} Trigger`, async () => {
         const Result = await scfClient.CreateTrigger(createTriggerRequest);
-        url = JSON.parse(Result.TriggerInfo.TriggerDesc)?.service?.subDomain;
+        const desc = JSON.parse(Result.TriggerInfo.TriggerDesc);
+        url = desc?.service?.subDomain || desc?.NetConfig?.IntranetUrl;
     });
 
     if (url) {
@@ -427,7 +452,7 @@ function parseAliasMeta(req: any, aliasMeta: any, namespaceName: string, functio
             req.RoutingConfig.AdditionalVersionWeights = [];
             for (const w of additionalVersionWeights) {
                 const additionalVersionWeight: any = {};
-                additionalVersionWeight.Version = w.version;
+                additionalVersionWeight.Version = w.version ?? parseInt(functionVersion) - 1;
                 additionalVersionWeight.Weight = w.weight;
                 req.RoutingConfig.AdditionalVersionWeights.push(additionalVersionWeight);
             }

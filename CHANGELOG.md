@@ -1,5 +1,13 @@
 # Change
 
+## 2.54.0
+
+- feat(cli-common): 根据 keywords 中声明的组件名称决定 Malagu 项目 HOME 目录，默认为 `.malagu`
+- feat(cli-common): 组件别名的属性对象默认与 malagu 根属性对象进行合并
+- feat(scf-plugin): 更新支持的地域列表
+- feat(scf-plugin): 支持云函数 URL 特性，使用 `-m http` 模式激活
+- feat(scf-plugin): 优化灰度配置属性，并提供一个回滚命令 `malagu rollout`
+
 ## 2.53.2
 
 - fix(security): 修复权限一些问题

@@ -15,7 +15,7 @@ export interface Settings {
 export const DEFAULT_SETTINGS = {
     modeCommands: {
         local: [ 'serve' ],
-        remote: [ 'build', 'deploy', 'info' ],
+        remote: [ 'build', 'deploy', 'info', 'rollout' ],
     },
     serveCommand: 'serve',
     compileCommands: [ 'serve', 'build' ]

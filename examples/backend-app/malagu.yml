@@ -1,5 +1,9 @@
 malagu:
   cloud:
+    alias:
+      routingConfig:
+        additionalVersionWeights:
+          - weight: .4
     function:
       tags:
         test: xxxxx
