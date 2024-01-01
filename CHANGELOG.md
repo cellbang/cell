@@ -1,5 +1,9 @@
 # Change
 
+## 2.54.1
+
+- fix(scf-plugin): 修复函数 URL 显示问题
+
 ## 2.54.0
 
 - feat(cli-common): 根据 keywords 中声明的组件名称决定 Malagu 项目 HOME 目录，默认为 `.malagu`

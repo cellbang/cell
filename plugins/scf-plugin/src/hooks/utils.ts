@@ -82,7 +82,8 @@ export async function getTrigger(client: any, namespaceName: string, functionNam
                     console.log(
                         chalk`    - ApiUrl: {green.bold ${protocol}://${outerSubDomain!}${path}}`);
                 } else if (result.Type === 'http') {
-                    const intranetUrl = JSON.parse(result.TriggerDesc)?.NetConfig?.IntranetUrl;
+                    const desc = JSON.parse(result.TriggerDesc);
+                    const intranetUrl = desc?.NetConfig?.ExtranetUrl || desc?.NetConfig?.IntranetUrl;
                     console.log(
                         chalk`    - ApiUrl: {green.bold ${intranetUrl}`);
                 }
