@@ -1,8 +1,12 @@
 # Change
 
-## 2.54.1
+## 2.54.2
 
 - fix(fc3-plugin): client endpoint 支持多地域
+
+## 2.54.1
+
+- fix(scf-plugin): 修复函数 URL 显示问题
 
 ## 2.54.0
 

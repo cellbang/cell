@@ -130,7 +130,7 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
             (trigger.enable === 'OPEN' && triggerInfo.Enable || trigger.enable === 'CLOSE' && !triggerInfo.Enable)) {
                 await SpinnerUtil.start(`Skip ${trigger.name} Trigger`, async () => {
                     const desc = JSON.parse(triggerInfo.TriggerDesc);
-                    url = desc?.service?.subDomain || desc?.NetConfig?.IntranetUrl;
+                    url = desc?.service?.subDomain || desc?.NetConfig?.ExtranetUrl || desc?.NetConfig?.IntranetUrl;
                 });
                 if (url) {
                     console.log(chalk`    - Url: {green.bold ${url}}`);
