@@ -148,7 +148,7 @@ export async function createFcClient(cloudConfig: any, region: string, credentia
         securityToken: credentials.token,
         regionId: region,
         timeout: cloudConfig.timeout,
-        endpoint: `${account.id}.cn-zhangjiakou.fc.aliyuncs.com`
+        endpoint: `${account.id}.${region}.fc.aliyuncs.com`
     }));
 
     return fcClient;

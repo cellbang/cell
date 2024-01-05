@@ -1,5 +1,9 @@
 # Change
 
+## 2.54.1
+
+- fix(fc3-plugin): client endpoint 支持多地域
+
 ## 2.54.0
 
 - feat(cli-common): 根据 keywords 中声明的组件名称决定 Malagu 项目 HOME 目录，默认为 `.malagu`
