@@ -1,4 +1,4 @@
-import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
+import { FRONTEND_TARGET, BACKEND_TARGET, DEFAULT_COMPONENT_ALIAS } from '../constants';
 import * as path from 'path';
 import { homedir } from 'os';
 import { readJSONSync, existsSync } from 'fs-extra';
@@ -50,7 +50,7 @@ export namespace PathUtil {
             const packageJson = readJSONSync(packageJsonPath);
             keywords = packageJson.keywords;
         }
-        const alias = ComponentUtil.getComponentAlias(keywords)[0];
+        const alias = ComponentUtil.getComponentAlias(keywords)[0] || DEFAULT_COMPONENT_ALIAS;
 
         return path.resolve(process.cwd(), `.${alias}`);
     }

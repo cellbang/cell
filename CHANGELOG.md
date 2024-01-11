@@ -1,5 +1,9 @@
 # Change
 
+## next
+
+- fix(cli-common): 修复 keywords 为空时 Malagu 项目 HOME 目录默认值异常
+
 ## 2.54.2
 
 - fix(fc3-plugin): client endpoint 支持多地域
