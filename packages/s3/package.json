@@ -1,12 +1,12 @@
 {
   "name": "@malagu/s3",
-  "version": "2.54.3",
+  "version": "2.54.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cloud": "2.54.3",
-    "@malagu/core": "2.54.3",
+    "@malagu/cloud": "2.54.4",
+    "@malagu/core": "2.54.4",
     "aws-sdk": "^2.807.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.54.3"
+    "@malagu/component": "2.54.4"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
