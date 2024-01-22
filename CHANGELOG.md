@@ -1,8 +1,9 @@
 # Change
 
-## next
+## 2.54.3
 
 - fix(cli-common): 修复 keywords 为空时 Malagu 项目 HOME 目录默认值异常
+- fix(cache): 修复 redis 缓存新版依赖不兼容问题
 
 ## 2.54.2
 
