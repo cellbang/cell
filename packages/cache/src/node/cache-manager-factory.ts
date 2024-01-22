@@ -21,7 +21,7 @@ export class DefaultCacheManagerFactory implements CacheManagerFactory {
 
         const store = this.cacheStoreFactory.create(config);
 
-        return new DelegatingCacheManager(caching<any>(store));
+        return new DelegatingCacheManager(caching<any>(() => store));
     }
 
 }

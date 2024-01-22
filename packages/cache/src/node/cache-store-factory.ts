@@ -4,7 +4,7 @@ import { Component } from '@malagu/core';
 @Component(CacheStoreFactory)
 export class DefaultCacheStoreFactory implements CacheStoreFactory {
 
-    create(config: CacheStoreFactoryConfig): CacheStore {
+    async create(config: CacheStoreFactoryConfig): Promise<CacheStore> {
 
         if (typeof config.store === 'string') {
             return this.load(config.store).create(config);
