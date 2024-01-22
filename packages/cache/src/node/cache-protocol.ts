@@ -8,9 +8,7 @@ export type CachingConfig = InnerCachingConfig<any>;
 
 export const DEFAULT_CACHE_MANAGER = 'default';
 
-export interface CacheManager extends Omit<Cache, 'store'> {
-    store: Promise<Store>;
-}
+export interface CacheManager extends Omit<Cache, 'store'> {}
 
 export interface CacheManagerFactory {
     create(name?: string): CacheManager;

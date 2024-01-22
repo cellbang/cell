@@ -1,5 +1,10 @@
 # Change
 
+## 2.55.0
+
+- feat(cache): 添加 node-cache-manager-redis-yet (uses node_redis) 和 node-cache-manager-ioredis-yet (uses ioredis) 的支持
+- feat(cache): 支持数组方式配置多级缓存
+
 ## 2.54.4
 
 - fix(cache): 修复 redis 缓存新版依赖不兼容问题

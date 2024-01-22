@@ -1,13 +1,8 @@
-import { Store } from 'cache-manager';
 import { CacheManager } from './cache-protocol';
 
 export class DelegatingCacheManager implements CacheManager {
 
-    store: Promise<Store>;
-
-    constructor(protected readonly delegate: Promise<CacheManager>) {
-        this.store = (async () => (await this.delegate).store)();
-    }
+    constructor(protected readonly delegate: Promise<CacheManager>) {}
 
     async set(key: string, value: unknown, ttl?: number | undefined): Promise<void> {
         return (await this.delegate).set(key, value, ttl);

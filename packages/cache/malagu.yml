@@ -3,8 +3,10 @@ malagu:
     filterWarningsPlugin:
       cache:
         - cache-manager-redis
+        - cache-manager-redis-yet
         - cache-manager-redis-store
         - cache-manager-ioredis
+        - cache-manager-ioredis-yet
         - cache-manager-mongodb
         - cache-manager-mongoose
         - cache-manager-fs-binary

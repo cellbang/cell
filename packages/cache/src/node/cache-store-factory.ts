@@ -30,8 +30,12 @@ export class DefaultCacheStoreFactory implements CacheStoreFactory {
                     return require('cache-manager-redis');
                 case 'redis-store':
                     return { create: require('cache-manager-redis-store').redisStore };
+                case 'redis-yet':
+                    return { create: require('cache-manager-redis-yet').redisStore };
                 case 'ioredis':
                     return require('cache-manager-ioredis');
+                case 'ioredis-yet':
+                    return { create: require('cache-manager-ioredis-yet').redisStore };
                 case 'mongodb':
                     return require('cache-manager-mongodb');
                 case 'mongoose':
