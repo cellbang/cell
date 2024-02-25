@@ -58,7 +58,7 @@ export namespace ComponentUtil {
         const keywordsAlias = keywords
             .filter(k => k.endsWith(MALAGU_COMPONENT_SUFFIX))
             .map(k => k.substring(0, k.length - MALAGU_COMPONENT_SUFFIX.length));
-        return keywords.includes('malagu') ? [ ...keywordsAlias, 'malagu' ] : keywordsAlias;
+        return keywords.includes('malagu') ? keywordsAlias : [ ...keywordsAlias, 'malagu' ];
     }
 }
 

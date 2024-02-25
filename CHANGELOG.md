@@ -2,6 +2,10 @@
 
 ## 2.55.0
 
+- fix(cli-common) 修复 keywords 为空时，无法正常加载 malagu 组件配置文件
+
+## 2.55.0
+
 - feat(cache): 添加 node-cache-manager-redis-yet (uses node_redis) 和 node-cache-manager-ioredis-yet (uses ioredis) 的支持
 - feat(cache): 支持数组方式配置多级缓存
 
