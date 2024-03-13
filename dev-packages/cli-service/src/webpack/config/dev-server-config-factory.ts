@@ -24,7 +24,8 @@ export class DevServerConfigFactory {
                     .merge({
                         devMiddleware: {
                             writeToDisk: true
-                        }
+                        },
+                        hot: false
                     });
         }
     }

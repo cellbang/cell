@@ -8,47 +8,49 @@ export class Deferred {
         this.reject = reject;
     });
 }
+
+let application: any;
+let doDispatch: (req: any, res: any) => void;
+let initialized = false;
 export async function after(context: ServeContext) {
     const { app, entryContextProvider } = context;
 
     if (!entryContextProvider) {
         return;
     }
-    let doDispatch: (req: any, res: any) => void;
     const compileDeferred = new Deferred();
-    let application: any;
-    context.compiler.hooks.done.tap('WebServe', () => {
-        application?.stop();
-        entryContextProvider().then(async (ctx: any) => {
-            try {
-                const { Dispatcher, Context, ContainerProvider, Application, container, ServerAware } = ctx;
-                const c = await container;
-                ContainerProvider.set(c);
-                application = await c.get(Application);
-                await application.start();
-                const dispatcher = c.get(Dispatcher);
-                doDispatch = (req: any, res: any) => {
-                    const httpContext = new Context(req, res);
-                    Context.run(() => dispatcher.dispatch(httpContext));
-                };
-                const items = c.getAll(ServerAware);
-                for (const serverAware of items) {
-                    await serverAware.setServer(context.server);
-                }
-                compileDeferred.resolve();
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    });
-
-    app.all('*', async (req: any, res: any) => {
+    application?.stop();
+    entryContextProvider().then(async (ctx: any) => {
         try {
-            await compileDeferred.promise;
+            const { Dispatcher, Context, ContainerProvider, Application, container, ServerAware } = ctx;
+            const c = await container;
+            ContainerProvider.set(c);
+            application = await c.get(Application);
+            await application.start();
+            const dispatcher = c.get(Dispatcher);
+            doDispatch = (req: any, res: any) => {
+                const httpContext = new Context(req, res);
+                Context.run(() => dispatcher.dispatch(httpContext));
+            };
+            const items = c.getAll(ServerAware);
+            for (const serverAware of items) {
+                await serverAware.setServer(context.server);
+            }
+            compileDeferred.resolve();
         } catch (err) {
-            res.status(500).send(err);
+            console.error(err);
         }
-        doDispatch(req, res);
     });
+    if (!initialized) {
+        initialized = true;
+        app.all('*', async (req: any, res: any) => {
+            try {
+                await compileDeferred.promise;
+            } catch (err) {
+                res.status(500).send(err);
+            }
+            doDispatch(req, res);
+        });
+    }
 
 };

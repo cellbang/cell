@@ -1,5 +1,9 @@
 # Change
 
+## 2.55.2
+
+- fix(cli-service + web): 修复模块热更新报错问题
+
 ## 2.55.0
 
 - fix(cli-common) 修复 keywords 为空时，无法正常加载 malagu 组件配置文件
