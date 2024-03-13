@@ -1,10 +1,10 @@
 {
   "name": "@malagu/adonis-plugin",
-  "version": "2.55.1",
+  "version": "2.55.2",
   "description": "",
   "dependencies": {
-    "@malagu/cli-common": "2.55.1",
-    "@malagu/cli-service": "2.55.1",
+    "@malagu/cli-common": "2.55.2",
+    "@malagu/cli-service": "2.55.2",
     "copy-webpack-plugin": "^9.0.0",
     "fs-extra": "^10.1.0"
   },
@@ -39,7 +39,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.55.1"
+    "@malagu/component": "2.55.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

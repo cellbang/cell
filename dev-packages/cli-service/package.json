@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-service",
-  "version": "2.55.1",
+  "version": "2.55.2",
   "description": "Malagu CLI Service.",
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@gem-mine/webpack-chain": "^7.1.0",
-    "@malagu/cli-common": "2.55.1",
+    "@malagu/cli-common": "2.55.2",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "clear-module": "^4.0.0",
@@ -63,7 +63,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@malagu/component": "2.55.1",
+    "@malagu/component": "2.55.2",
     "@types/friendly-errors-webpack-plugin": "^0.1.4",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.7.2"
