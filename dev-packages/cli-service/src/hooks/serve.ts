@@ -27,8 +27,9 @@ export default async (ctx: CliContext) => {
                 context.app = app;
                 context.compiler = compiler;
                 context.entryContextProvider = entryContextProvider;
-                compiler.hooks.done.tap('ServeAfter', async () => {
+                compiler.hooks.done.tap('ServeAfter', async stats => {
                     new HookExecutor().executeServeHooks(context, HookStage.after);
+                    context.stats = stats;
                     await CommandUtil.executeCommand(context, CommandType.ServeCommand, CommandStage.after);
                 });
             });

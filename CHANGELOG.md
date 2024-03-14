@@ -1,5 +1,9 @@
 # Change
 
+## 2.55.3
+
+- fix(cli-service + web): 修复 @PostConstruct 方法在开发方式启动会执行两次问题
+
 ## 2.55.2
 
 - fix(cli-service + web): 修复模块热更新报错问题

@@ -13,9 +13,9 @@ let application: any;
 let doDispatch: (req: any, res: any) => void;
 let initialized = false;
 export async function after(context: ServeContext) {
-    const { app, entryContextProvider } = context;
+    const { app, entryContextProvider, stats } = context;
 
-    if (!entryContextProvider) {
+    if (!entryContextProvider || !stats) {
         return;
     }
     const compileDeferred = new Deferred();
