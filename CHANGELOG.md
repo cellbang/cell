@@ -1,5 +1,9 @@
 # Change
 
+## 2.55.4
+
+- fix(cli-service): 修复首次启动并访问出现 404 错误问题
+
 ## 2.55.3
 
 - fix(cli-service + web): 修复 @PostConstruct 方法在开发方式启动会执行两次问题
