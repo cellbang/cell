@@ -1,6 +1,6 @@
 {
   "name": "@malagu/cli-runtime",
-  "version": "2.55.3",
+  "version": "2.55.4",
   "description": "Malagu CLI Runtime.",
   "publishConfig": {
     "access": "public"
@@ -29,8 +29,8 @@
     "test": "malagu-component test:js"
   },
   "dependencies": {
-    "@malagu/cli-common": "2.55.3",
-    "@malagu/frameworks": "2.55.3",
+    "@malagu/cli-common": "2.55.4",
+    "@malagu/frameworks": "2.55.4",
     "chalk": "^4.1.0",
     "fs-extra": "^11.1.1",
     "leven": "^3.1.0",
@@ -40,7 +40,7 @@
     "rimraf": "^5.0.1"
   },
   "devDependencies": {
-    "@malagu/component": "2.55.3"
+    "@malagu/component": "2.55.4"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

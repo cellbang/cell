@@ -1,13 +1,13 @@
 {
   "name": "@malagu/puppeteer",
-  "version": "2.55.3",
+  "version": "2.55.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.55.3",
-    "@malagu/cloud": "2.55.3",
-    "@malagu/core": "2.55.3",
+    "@malagu/cli-common": "2.55.4",
+    "@malagu/cloud": "2.55.4",
+    "@malagu/core": "2.55.4",
     "ora": "^5.4.1",
     "puppeteer-core": "^5.5.0",
     "tar": "^4.4.4"
@@ -41,7 +41,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.55.3",
+    "@malagu/component": "2.55.4",
     "@types/puppeteer-core": "^2.0.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
