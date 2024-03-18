@@ -18,7 +18,7 @@ malagu:
     base64StringKeyLength: ${ 32 | onTarget('backend')}
     contextKey: malagu:securityContext
     username: ${ 'admin' | onTarget('backend')}
-    password: ${ 'MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk' | onTarget('backend')} # raw password 123456
+    password: ${ 'MzQ0NTg4ZTk2NzQyYWI1ODY0M2NjM2VjNWFkYjA0YzcwYWZiMzg3MTJhZjY5NGYw' | onTarget('backend')} # raw password 123456
     passwordEncoder:
       secret: ${ '123456' | onTarget('backend')}
       encodeHashAsBase64: ${ true | onTarget('backend')}
