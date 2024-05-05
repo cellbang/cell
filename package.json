@@ -47,6 +47,9 @@
     "dev-packages/*",
     "packages/*",
     "plugins/*",
+    "cloud/*",
+    "ui/*",
+    "ai/*",
     "examples/*"
   ],
   "dependencies": {}

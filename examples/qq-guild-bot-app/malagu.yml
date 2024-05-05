@@ -1,5 +1,0 @@
-malagu:
-  cloud:
-    function:
-      sync: onlyUpdateCode
-      timeout: 15

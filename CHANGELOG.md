@@ -1,5 +1,9 @@
 # Change
 
+## 2.56.0
+
+- chore: 移除 authing 和 qq-guild-bot-adapter 过时组件，并优化了组件目录结构，新增 ui 和 cloud 两个组件分类目录
+
 ## 2.55.4
 
 - fix(cli-service): 修复首次启动并访问出现 404 错误问题

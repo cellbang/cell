@@ -26,43 +26,16 @@
       "path": "../dev-packages/pwa/compile.tsconfig.json"
     },
     {
-      "path": "../packages/antd/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/authing/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/cache/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/cloud/compile.tsconfig.json"
     },
     {
       "path": "../packages/core/compile.tsconfig.json"
     },
     {
-      "path": "../packages/cos/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/express-adapter/compile.tsconfig.json"
     },
     {
-      "path": "../packages/faas-adapter/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/fc-adapter/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/grommet/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/lambda-adapter/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/logger/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/material-ui/compile.tsconfig.json"
     },
     {
       "path": "../packages/mvc/compile.tsconfig.json"
@@ -80,22 +53,10 @@
       "path": "../packages/oidc-provider/compile.tsconfig.json"
     },
     {
-      "path": "../packages/oss/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/puppeteer/compile.tsconfig.json"
     },
     {
-      "path": "../packages/react/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/rpc/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/s3/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/scf-adapter/compile.tsconfig.json"
     },
     {
       "path": "../packages/security/compile.tsconfig.json"
@@ -104,22 +65,10 @@
       "path": "../packages/serve-static/compile.tsconfig.json"
     },
     {
-      "path": "../packages/shell/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/typeorm/compile.tsconfig.json"
     },
     {
-      "path": "../packages/vercel-adapter/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/web/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/widget/compile.tsconfig.json"
-    },
-    {
-      "path": "../packages/vue/compile.tsconfig.json"
     },
     {
       "path": "../packages/schedule/compile.tsconfig.json"
@@ -158,9 +107,6 @@
       "path": "../plugins/adonis-plugin/compile.tsconfig.json"
     },
     {
-      "path": "../packages/qq-guild-bot-adapter/compile.tsconfig.json"
-    },
-    {
       "path": "../packages/config/compile.tsconfig.json"
     },
     {
@@ -180,6 +126,54 @@
     },
     {
       "path": "../plugins/fc3-plugin/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/cloud/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/cos/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/faas-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/fc-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/lambda-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/oss/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/s3/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/scf-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../cloud/vercel-adapter/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/antd/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/grommet/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/material-ui/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/react/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/shell/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/vue/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui/widget/compile.tsconfig.json"
     }
   ]
 }

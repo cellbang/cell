@@ -1,9 +1,0 @@
-{
-	"appID": "12445",
-	"token": "aadfsdfa",
-	"intents": [],
-	"eventMap": {
-		"AT_MESSAGES": "./src/atMessage.js"
-	},
-	"secret": "asdfasf"
-}
