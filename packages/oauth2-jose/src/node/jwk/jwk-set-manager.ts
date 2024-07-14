@@ -1,7 +1,7 @@
 import { createRemoteJWKSet, FlattenedJWSInput, KeyLike } from 'jose';
 import { JwkSetManager } from './jwk-protocol';
 import { Component, Autowired } from '@malagu/core';
-import { RestOperations } from '@malagu/web/lib/common/client/client-protocol';
+import { RestOperations } from '@malagu/http';
 
 @Component(JwkSetManager)
 export class DefaultJwkSetManager implements JwkSetManager<KeyLike | Uint8Array> {

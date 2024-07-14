@@ -1,7 +1,7 @@
 import { ErrorHandler, Context } from '@malagu/web/lib/node';
 import { Component, Autowired, Value } from '@malagu/core';
 import { JsonViewTemplateRenderer } from '../view/view-protocol';
-import { HttpHeaders, MediaType } from '@malagu/web';
+import { HttpHeaders, MediaType } from '@malagu/http';
 
 @Component(ErrorHandler)
 export class JsonViewErrorHandler implements ErrorHandler {

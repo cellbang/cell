@@ -1,6 +1,6 @@
 import { Autowired, Component, Logger, Value } from '@malagu/core';
 import { View } from './view-protocol';
-import { HttpHeaders, HttpStatus, MediaType } from '@malagu/web';
+import { HttpHeaders, HttpStatus, MediaType } from '@malagu/http';
 import { Context, Response } from '@malagu/web/lib/node';
 import { Stream } from 'stream';
 import { FILE_VIEW_NAME } from '../annotation/file';

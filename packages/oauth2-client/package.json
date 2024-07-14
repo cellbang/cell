@@ -6,6 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
+    "@malagu/http": "2.56.0",
     "@malagu/oauth2-core": "2.56.0",
     "@malagu/oauth2-jose": "2.56.0",
     "@malagu/security": "2.56.0",

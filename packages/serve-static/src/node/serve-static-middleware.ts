@@ -1,7 +1,8 @@
 import { Middleware, Context, RequestMatcher, HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
 import {serveStatic, mime} from './serve-static';
 import { Value, Component, Autowired } from '@malagu/core';
-import { SERVER_PATH, HttpMethod, MediaType, HttpHeaders } from '@malagu/web';
+import { HttpMethod, MediaType, HttpHeaders } from '@malagu/http';
+import { SERVER_PATH } from '@malagu/web';
 import { OutgoingMessage } from 'http';
 @Component(Middleware)
 export class ServeStaticMiddleware implements Middleware {

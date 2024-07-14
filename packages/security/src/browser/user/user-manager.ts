@@ -1,6 +1,7 @@
 import { UserManager } from './user-protocol';
 import { Autowired, Component, Value, PostConstruct } from '@malagu/core';
-import { RestOperations, HttpMethod, PathResolver, HttpStatus, HttpHeaders } from '@malagu/web';
+import { RestOperations, HttpMethod, HttpStatus, HttpHeaders } from '@malagu/http';
+import { PathResolver } from '@malagu/web';
 import { Method } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../common';

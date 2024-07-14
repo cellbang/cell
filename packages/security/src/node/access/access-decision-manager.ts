@@ -2,7 +2,7 @@ import { AccessDecisionManager, SecurityMetadata, AccessDecisionVoter, ACCESS_DE
 import { Component, Prioritizeable, Autowired } from '@malagu/core';
 import { AccessDeniedError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';
-import { HttpStatus } from '@malagu/web';
+import { HttpStatus } from '@malagu/http';
 
 @Component(AccessDecisionManager)
 export class AccessDecisionManagerImpl implements AccessDecisionManager {

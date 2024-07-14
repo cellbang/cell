@@ -23,6 +23,9 @@
     },
     {
       "path": "../oauth2-core/compile.tsconfig.json"
+    },
+    {
+      "path": "../http/compile.tsconfig.json"
     }
   ]
 }

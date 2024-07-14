@@ -3,7 +3,7 @@ import { Component, Autowired, Value } from '@malagu/core';
 import { ViewProvider } from '../view/view-provider';
 import { ViewMetadata } from '../annotation/view';
 import { Context } from '@malagu/web/lib/node';
-import { HttpHeaders } from '@malagu/web';
+import { HttpHeaders } from '@malagu/http';
 
 @Component(ViewResolver)
 export class ViewResolverImpl implements ViewResolver {

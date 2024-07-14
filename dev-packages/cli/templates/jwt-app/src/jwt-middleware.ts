@@ -1,5 +1,5 @@
 import { Autowired, Component } from '@malagu/core';
-import { HttpHeaders } from '@malagu/web';
+import { HttpHeaders } from '@malagu/http';
 import { Context, Middleware, HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
 import { AuthenticationError } from './error';
 import { JwtService } from '@malagu/jwt'

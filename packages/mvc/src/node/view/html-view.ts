@@ -6,7 +6,7 @@ import { join } from 'path';
 import { readFile } from 'fs-extra';
 import { ViewMetadata } from '../annotation/view';
 import { HTML_VIEW_NAME } from '../annotation/html';
-import { MediaType } from '@malagu/web';
+import { MediaType } from '@malagu/http';
 
 @Component(View)
 export class HtmlView implements View {

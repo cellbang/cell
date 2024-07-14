@@ -6,6 +6,7 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
+    "@malagu/http": "2.56.0",
     "@malagu/web": "2.56.0",
     "axios": "^0.26.1",
     "crypto-js": "^4.0.0",

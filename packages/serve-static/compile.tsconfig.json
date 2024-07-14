@@ -17,6 +17,9 @@
     },
     {
       "path": "../core/compile.tsconfig.json"
+    },
+    {
+      "path": "../http/compile.tsconfig.json"
     }
   ]
 }

@@ -6,6 +6,7 @@
   "typings": "lib/common/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
+    "@malagu/http": "2.56.0",
     "@malagu/web": "2.56.0",
     "fs-extra": "^11.1.1",
     "mustache": "^4.2.0",

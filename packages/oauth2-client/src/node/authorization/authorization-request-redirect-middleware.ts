@@ -3,7 +3,7 @@ import { Component, Value, Autowired, Logger } from '@malagu/core';
 import { AUTHORIZATION_REQUEST_BASE_URI } from '../constants';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_REQUEST_REDIRECT_MIDDLEWARE_PRIORITY } from './authorization-protocol';
 import { AuthorizationGrantType, AuthorizationRequest } from '@malagu/oauth2-core';
-import { HttpMethod, HttpStatus } from '@malagu/web';
+import { HttpMethod, HttpStatus } from '@malagu/http';
 import { ClientAuthorizationError } from '../error';
 import { RequestCache } from '@malagu/security/lib/node';
 

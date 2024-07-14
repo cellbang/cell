@@ -2,7 +2,7 @@ import { Context } from '../context';
 import { Component, Autowired, Prioritizeable, Injectable } from '@malagu/core';
 import { ErrorHandler, DEFALUT_ERROR_HANDLER_PRIORITY, HTTP_ERROR_HANDLER_PRIORITY, VALIDATION_ERRORS_ERROR_HANDLER_PRIORITY } from './error-protocol';
 import { HttpError } from './http-error';
-import { HttpStatus } from '../../common/http';
+import { HttpStatus } from '@malagu/http';
 import { ValidationErrors } from '../../common/pipe';
 
 @Injectable()

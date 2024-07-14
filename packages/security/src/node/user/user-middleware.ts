@@ -1,6 +1,7 @@
 import { RequestMatcher, Middleware, Context } from '@malagu/web/lib/node';
 import { Component, Autowired, Value } from '@malagu/core';
-import { PathResolver, HttpHeaders, MediaType } from '@malagu/web';
+import { HttpHeaders, MediaType } from '@malagu/http';
+import { PathResolver } from '@malagu/web';
 import { USER_MIDDLEWARE_PRIORITY } from './user-protocol';
 import { SecurityContext } from '../context/context-protocol';
 

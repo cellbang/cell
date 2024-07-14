@@ -6,6 +6,7 @@
   "typings": "lib/node/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
+    "@malagu/http": "2.56.0",
     "@malagu/web": "2.56.0",
     "jose": "^4.9.3"
   },

@@ -3,7 +3,7 @@ import { JsonViewTemplateRenderer, View } from './view-protocol';
 import { Context } from '@malagu/web/lib/node';
 import { ViewMetadata } from '../annotation/view';
 import { JSON_VIEW_NAME } from '../annotation/json';
-import { MediaType } from '@malagu/web';
+import { MediaType } from '@malagu/http';
 
 @Component(View)
 export class JsonView implements View {

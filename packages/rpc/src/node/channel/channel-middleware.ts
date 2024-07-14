@@ -1,7 +1,7 @@
 import { Middleware, Context } from '@malagu/web/lib/node';
 import { Component, Autowired } from '@malagu/core';
 import { ChannelStrategy, CHANNEL_MIDDLEWARE_PRIORITY, CURRENT_CHANNEL_STRATEGY_REQUEST_KEY } from './channel-protocol';
-import { HttpHeaders, MediaType } from '@malagu/web';
+import { HttpHeaders, MediaType } from '@malagu/http';
 
 @Component(Middleware)
 export class ChannelMiddleware implements Middleware {

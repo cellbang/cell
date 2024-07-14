@@ -1,5 +1,5 @@
 import { Component, Autowired, Value, PostConstruct } from '@malagu/core';
-import { RestOperations } from '@malagu/web';
+import { RestOperations } from '@malagu/http';
 import { ProxyCreator } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';
 import { ConnnectionFactory, JsonRpcProxy } from '../factory';

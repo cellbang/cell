@@ -2,7 +2,8 @@ import { convertExpressMiddleware, Middleware } from '../middleware';
 import { Context } from '../context';
 import { Component, Value, Autowired } from '@malagu/core';
 import * as cors from 'cors';
-import { CORS, ENDPOINT, HttpHeaders } from '../../common';
+import { HttpHeaders } from '@malagu/http';
+import { CORS, ENDPOINT } from '../../common';
 import { CORS_MIDDLEWARE_PRIORITY } from './cors-protocol';
 import { HandlerExecutionChain } from '../handler';
 

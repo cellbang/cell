@@ -1,5 +1,10 @@
 # Change
 
+## 2.57.0
+
+- feat(http): 独立 http 模块
+- feat(ai): 支持 AI 相关通用能力（开发中）
+
 ## 2.56.0
 
 - chore: 移除 authing 和 qq-guild-bot-adapter 过时组件，并优化了组件目录结构，新增 ui 和 cloud 两个组件分类目录

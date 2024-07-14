@@ -57,7 +57,7 @@
         "dev-packages/pwa/src/*"
       ],
       "@malagu/antd/lib/*": [
-        "ui/antd/src/*"
+        "ui-pacakges/antd/src/*"
       ],
       "@malagu/authing/lib/*": [
         "packages/authing/src/*"
@@ -66,31 +66,31 @@
         "packages/cache/src/*"
       ],
       "@malagu/cloud/lib/*": [
-        "cloud/cloud/src/*"
+        "cloud-packages/cloud/src/*"
       ],
       "@malagu/cos/lib/*": [
-        "cloud/cos/src/*"
+        "cloud-packages/cos/src/*"
       ],
       "@malagu/express-adapter/lib/*": [
         "packages/express-adapter/src/*"
       ],
       "@malagu/faas-adapter/lib/*": [
-        "cloud/faas-adapter/src/*"
+        "cloud-packages/faas-adapter/src/*"
       ],
       "@malagu/fc-adapter/lib/*": [
-        "cloud/fc-adapter/src/*"
+        "cloud-packages/fc-adapter/src/*"
       ],
       "@malagu/grommet/lib/*": [
-        "ui/grommet/src/*"
+        "ui-pacakges/grommet/src/*"
       ],
       "@malagu/lambda-adapter/lib/*": [
-        "cloud/lambda-adapter/src/*"
+        "cloud-packages/lambda-adapter/src/*"
       ],
       "@malagu/logger/lib/*": [
         "packages/logger/src/*"
       ],
       "@malagu/material-ui/lib/*": [
-        "ui/material-ui/src/*"
+        "ui-pacakges/material-ui/src/*"
       ],
       "@malagu/mvc/lib/*": [
         "packages/mvc/src/*"
@@ -108,22 +108,22 @@
         "packages/oidc-provider/src/*"
       ],
       "@malagu/oss/lib/*": [
-        "cloud/oss/src/*"
+        "cloud-packages/oss/src/*"
       ],
       "@malagu/puppeteer/lib/*": [
         "packages/puppeteer/src/*"
       ],
       "@malagu/react/lib/*": [
-        "ui/react/src/*"
+        "ui-pacakges/react/src/*"
       ],
       "@malagu/rpc/lib/*": [
         "packages/rpc/src/*"
       ],
       "@malagu/s3/lib/*": [
-        "cloud/s3/src/*"
+        "cloud-packages/s3/src/*"
       ],
       "@malagu/scf-adapter/lib/*": [
-        "cloud/scf-adapter/src/*"
+        "cloud-packages/scf-adapter/src/*"
       ],
       "@malagu/schedule/lib/*": [
         "packages/schedule/src/*"
@@ -135,19 +135,19 @@
         "packages/serve-static/src/*"
       ],
       "@malagu/shell/lib/*": [
-        "ui/shell/src/*"
+        "ui-pacakges/shell/src/*"
       ],
       "@malagu/typeorm/lib/*": [
         "packages/typeorm/src/*"
       ],
       "@malagu/vercel-adapter/lib/*": [
-        "cloud/vercel-adapter/src/*"
+        "cloud-packages/vercel-adapter/src/*"
       ],
       "@malagu/vue/lib/*": [
-        "ui/vue/src/*"
+        "ui-pacakges/vue/src/*"
       ],
       "@malagu/widget/lib/*": [
-        "ui/widget/src/*"
+        "ui-pacakges/widget/src/*"
       ],
       "@malagu/example-backend-app/*": [
         "examples/backend-app/*"
@@ -280,6 +280,12 @@
       ],
       "@malagu/fc3-plugin/lib/*": [
         "plugins/fc3-plugin/src/*"
+      ],
+      "@malagu/ai-core/lib/*": [
+        "ai-packages/ai-core/src/*"
+      ],
+      "@malagu/http/lib/*": [
+        "packages/http/src/*"
       ]
     }
   },

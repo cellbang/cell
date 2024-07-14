@@ -5,7 +5,9 @@ import { Context, RequestMatcher, RedirectStrategy } from '@malagu/web/lib/node'
 import { PasswordEncoder } from '../crypto';
 import { UserService, UserChecker, UserMapper } from '../user';
 import { BadCredentialsError } from '../error';
-import { HttpHeaders, PathResolver } from '@malagu/web';
+import { HttpHeaders } from '@malagu/http';
+import { PathResolver } from '@malagu/web';
+
 import { User } from '../../common';
 
 @Component(AuthenticationProvider)

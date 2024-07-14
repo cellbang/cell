@@ -1,5 +1,4 @@
-import { RestOperations } from '@malagu/web/lib/common/client/client-protocol';
-import { HttpHeaders, HttpMethod, MediaType, XML_HTTP_REQUEST } from '@malagu/web/lib/common/http';
+import { HttpHeaders, HttpMethod, MediaType, XML_HTTP_REQUEST, RestOperations, DefaultRestOperationsFactory } from '@malagu/http';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions, RequestTaskMeta } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';
@@ -9,7 +8,6 @@ import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
 import { AxiosRequestConfig } from 'axios';
 import { ClientConfigProcessor } from '../processor';
-import { DefaultRestOperationsFactory } from '@malagu/web/lib/common/client';
 import { ConsoleLogger } from '../utils';
 
 export interface MergeOptions {

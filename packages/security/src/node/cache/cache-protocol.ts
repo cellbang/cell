@@ -1,4 +1,4 @@
-import { HttpMethod } from '@malagu/web';
+import { HttpMethod } from '@malagu/http';
 
 export const RequestCache = Symbol('RequestCache');
 export const SAVED_REQUEST = 'MALAGU_SECURITY_SAVED_REQUEST';

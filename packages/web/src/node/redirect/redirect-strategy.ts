@@ -1,7 +1,7 @@
 import { RedirectStrategy } from './redirect-protocol';
 import { Autowired, Component } from '@malagu/core';
 import { Context } from '../context';
-import { HttpStatus, HttpHeaders } from '../../common/http';
+import { HttpStatus, HttpHeaders } from '@malagu/http';
 import { PathResolver } from '../../common/resolver';
 
 @Component(RedirectStrategy)

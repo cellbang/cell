@@ -1,5 +1,5 @@
 import { HttpError } from './http-error';
-import { HttpStatus } from '../../common/http';
+import { HttpStatus } from '@malagu/http';
 
 export class NotFoundError extends HttpError {
 

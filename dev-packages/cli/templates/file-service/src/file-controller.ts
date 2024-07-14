@@ -1,6 +1,6 @@
 import { Autowired, Value } from '@malagu/core';
 import { HttpError, Context } from '@malagu/web/lib/node';
-import { HttpHeaders, HttpStatus } from '@malagu/web';
+import { HttpHeaders, HttpStatus } from '@malagu/http';
 import { ObjectStorageService, RawCloudService } from '@malagu/cloud';
 import { Controller, Get, Query } from '@malagu/mvc/lib/node';
 import { contentType } from 'mime-types';

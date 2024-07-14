@@ -2,7 +2,7 @@ import { AUTHENTICATION_ERROR_HANDLER_PRIORITY, ACCESS_DENIED_ERROR_HANDLER_PRIO
 import { AuthenticationError, AccessDeniedError } from './error';
 import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
 import { Component, Value, Autowired } from '@malagu/core';
-import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/web';
+import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/http';
 import { RequestCache } from '../cache';
 
 @Component(ErrorHandler)

@@ -1,7 +1,7 @@
 import { UserResponseClient, OAuth2UserRequest, MISSING_USER_INFO_URI_ERROR_CODE,
     MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE, INVALID_USER_INFO_RESPONSE_ERROR_CODE, OAuth2UserResponse } from './endpoint-protocol';
 import { Component, Autowired } from '@malagu/core';
-import { RestOperations, HttpHeaders, MediaType, HttpMethod } from '@malagu/web';
+import { RestOperations, HttpHeaders, MediaType, HttpMethod } from '@malagu/http';
 import { ProviderDetailsManager } from '../provider';
 import { OAuth2ParameterNames, OAuth2Error, OAuth2AuthorizationError, OAuth2AuthenticationError, AuthenticationMethod } from '@malagu/oauth2-core';
 import * as qs from 'qs';

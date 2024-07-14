@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@malagu/cli": "2.56.0",
-    "@malagu/cli-service": "2.40.0",
+    "@malagu/cli-service": "2.56.0",
     "@malagu/component": "2.56.0",
     "@malagu/testing": "2.56.0",
     "@types/supertest": "^2.0.12",

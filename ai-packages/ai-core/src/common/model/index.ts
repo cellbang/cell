@@ -1,0 +1,2 @@
+
+export * from './model-protocol';

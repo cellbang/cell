@@ -5,7 +5,7 @@ import { HealthExecutor, HealthOptions, HEALTH_MIDDLEWARE_PRIORITY } from './hea
 import { NotFoundError } from '../error';
 import { RequestMatcher } from '../matcher';
 import { PathResolver } from '../../common/resolver';
-import { HttpHeaders, MediaType } from '../../common/http';
+import { HttpHeaders, MediaType } from '@malagu/http';
 
 @Component(Middleware)
 export class HealthMiddleware implements Middleware {

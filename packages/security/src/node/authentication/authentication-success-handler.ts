@@ -1,7 +1,7 @@
 import { AuthenticationSuccessHandler, Authentication } from './authentication-protocol';
 import { Component, Value, Autowired, Logger } from '@malagu/core';
 import { Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { HttpHeaders, XML_HTTP_REQUEST } from '@malagu/web';
+import { HttpHeaders, XML_HTTP_REQUEST } from '@malagu/http';
 import { RequestCache } from '../cache';
 
 @Component(AuthenticationSuccessHandler)
