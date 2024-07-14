@@ -4,19 +4,19 @@
   "keywords": [
     "malagu-component"
   ],
-  "version": "2.57.0",
+  "version": "2.58.0",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.57.0",
-    "@malagu/schedule": "2.57.0",
-    "@malagu/web": "2.57.0"
+    "@malagu/core": "2.58.0",
+    "@malagu/schedule": "2.58.0",
+    "@malagu/web": "2.58.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.57.0"
+    "@malagu/cli": "2.58.0"
   },
   "scripts": {
     "clean": "rimraf lib dist .malagu",
