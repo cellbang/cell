@@ -159,6 +159,9 @@
     },
     {
       "path": "../ai-packages/ai-core/compile.tsconfig.json"
+    },
+    {
+      "path": "../packages/retry/compile.tsconfig.json"
     }
   ]
 }

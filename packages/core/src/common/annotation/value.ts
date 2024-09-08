@@ -1,6 +1,7 @@
-import { inject, named } from 'inversify';
+import { inject, named, interfaces } from 'inversify';
 import { ConfigUtil } from '../config/config-util';
 import { AnnotationUtil } from '../utils';
+import { ConfigProvider } from '../config/config-protocol';
 
 export const VALUE = Symbol('Value');
 
@@ -50,5 +51,14 @@ export function createValueProperty(option: ValueOption, target: any, property: 
             const el = option.el!;
             return ConfigUtil.get(el);
         }
+    });
+}
+
+export function bindValue(bind: interfaces.Bind): any {
+    bind(VALUE).toDynamicValue(ctx => {
+        const namedMetadata = ctx.currentRequest.target.getNamedTag();
+        const el = namedMetadata!.value.toString();
+        const configProvider = ctx.container.get<ConfigProvider>(ConfigProvider);
+        return configProvider.get(el);
     });
 }

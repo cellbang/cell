@@ -286,6 +286,9 @@
       ],
       "@malagu/http/lib/*": [
         "packages/http/src/*"
+      ],
+      "@malagu/retry/lib/*": [
+        "packages/retry/src/*"
       ]
     }
   },

@@ -6,6 +6,14 @@ import { AopProxyFactory, ClassFilter } from '../aop/aop-protocol';
 import { ContainerUtil } from './container-util';
 import { Scope } from './scope';
 
+export function manualBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
+    return new ContainerModule((bind, unbind, isBound, rebind, ...rest) => {
+        if (registry) {
+            registry(bind, unbind, isBound, rebind, ...rest);
+        }
+    });
+}
+
 export function autoBind(registry?: interfaces.ContainerModuleCallBack): interfaces.ContainerModule {
     const metadatas: ComponentMetadata[] = Reflect.getMetadata(METADATA_KEY.component, Reflect) || [];
     const constantMetadata: ConstantOption[] = Reflect.getMetadata(METADATA_KEY.constantValue, Reflect) || [];

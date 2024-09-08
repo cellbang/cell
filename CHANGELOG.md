@@ -1,6 +1,11 @@
 # Change
 
-## 2.57.0
+## 2.60.1
+
+- feat(retry): 添加新组件 `@malagu/retry`，支持重试机制
+- feat(core): 优化 `@malagu/core` 模块对单元测试的支持 
+
+## 2.58.0
 
 - feat(http): 独立 http 模块
 - feat(ai): 支持 AI 相关通用能力（开发中）
