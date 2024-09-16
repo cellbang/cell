@@ -1,6 +1,6 @@
 {
   "name": "@malagu/vue",
-  "version": "2.56.0",
+  "version": "2.60.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",

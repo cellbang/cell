@@ -1,12 +1,12 @@
 {
   "name": "@malagu/material-ui",
-  "version": "2.56.0",
+  "version": "2.60.2",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
-    "@malagu/react": "2.56.0",
+    "@malagu/react": "2.60.2",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",

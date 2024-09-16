@@ -1,12 +1,12 @@
 {
   "name": "@malagu/ai-core",
-  "version": "2.60.1",
+  "version": "2.60.2",
   "description": "Core domain for AI programming",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.60.1",
-    "@malagu/http": "2.60.1",
+    "@malagu/core": "2.60.2",
+    "@malagu/http": "2.60.2",
     "rxjs": "^6.6.0"
   },
   "publishConfig": {
@@ -37,7 +37,7 @@
     "test": "malagu-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.1"
+    "@malagu/component": "2.60.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
