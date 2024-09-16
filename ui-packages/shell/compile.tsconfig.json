@@ -10,13 +10,13 @@
   ],
   "references": [
     {
-      "path": "../../dev-packages/cli-service/compile.tsconfig.json"
+      "path": "../grommet/compile.tsconfig.json"
     },
     {
-      "path": "../../dev-packages/cli-common/compile.tsconfig.json"
+      "path": "../widget/compile.tsconfig.json"
     },
     {
-      "path": "../../packages/core/compile.tsconfig.json"
+      "path": "../react/compile.tsconfig.json"
     }
   ]
 }

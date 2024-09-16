@@ -1,5 +1,9 @@
 # Change
 
+## 2.60.2
+
+- fix(ui-packages): 修复目录名称拼写错误导致前端相关包没有正常发布
+
 ## 2.60.1
 
 - feat(retry): 添加新组件 `@malagu/retry`，支持重试机制

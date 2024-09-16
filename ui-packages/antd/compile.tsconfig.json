@@ -11,12 +11,6 @@
   "references": [
     {
       "path": "../react/compile.tsconfig.json"
-    },
-    {
-      "path": "../widget/compile.tsconfig.json"
-    },
-    {
-      "path": "../../packages/core/compile.tsconfig.json"
     }
   ]
 }

@@ -57,7 +57,7 @@
         "dev-packages/pwa/src/*"
       ],
       "@malagu/antd/lib/*": [
-        "ui-pacakges/antd/src/*"
+        "ui-packages/antd/src/*"
       ],
       "@malagu/authing/lib/*": [
         "packages/authing/src/*"
@@ -81,7 +81,7 @@
         "cloud-packages/fc-adapter/src/*"
       ],
       "@malagu/grommet/lib/*": [
-        "ui-pacakges/grommet/src/*"
+        "ui-packages/grommet/src/*"
       ],
       "@malagu/lambda-adapter/lib/*": [
         "cloud-packages/lambda-adapter/src/*"
@@ -90,7 +90,7 @@
         "packages/logger/src/*"
       ],
       "@malagu/material-ui/lib/*": [
-        "ui-pacakges/material-ui/src/*"
+        "ui-packages/material-ui/src/*"
       ],
       "@malagu/mvc/lib/*": [
         "packages/mvc/src/*"
@@ -114,7 +114,7 @@
         "packages/puppeteer/src/*"
       ],
       "@malagu/react/lib/*": [
-        "ui-pacakges/react/src/*"
+        "ui-packages/react/src/*"
       ],
       "@malagu/rpc/lib/*": [
         "packages/rpc/src/*"
@@ -135,7 +135,7 @@
         "packages/serve-static/src/*"
       ],
       "@malagu/shell/lib/*": [
-        "ui-pacakges/shell/src/*"
+        "ui-packages/shell/src/*"
       ],
       "@malagu/typeorm/lib/*": [
         "packages/typeorm/src/*"
@@ -144,10 +144,10 @@
         "cloud-packages/vercel-adapter/src/*"
       ],
       "@malagu/vue/lib/*": [
-        "ui-pacakges/vue/src/*"
+        "ui-packages/vue/src/*"
       ],
       "@malagu/widget/lib/*": [
-        "ui-pacakges/widget/src/*"
+        "ui-packages/widget/src/*"
       ],
       "@malagu/example-backend-app/*": [
         "examples/backend-app/*"

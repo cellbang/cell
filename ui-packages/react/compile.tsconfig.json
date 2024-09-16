@@ -10,7 +10,7 @@
   ],
   "references": [
     {
-      "path": "../../packages/core/compile.tsconfig.json"
+      "path": "../widget/compile.tsconfig.json"
     }
   ]
 }

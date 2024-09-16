@@ -10,19 +10,7 @@
   ],
   "references": [
     {
-      "path": "../grommet/compile.tsconfig.json"
-    },
-    {
-      "path": "../widget/compile.tsconfig.json"
-    },
-    {
       "path": "../react/compile.tsconfig.json"
-    },
-    {
-      "path": "../../packages/core/compile.tsconfig.json"
-    },
-    {
-      "path": "../../packages/security/compile.tsconfig.json"
     }
   ]
 }

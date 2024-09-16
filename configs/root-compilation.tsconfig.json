@@ -162,6 +162,27 @@
     },
     {
       "path": "../packages/retry/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/antd/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/grommet/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/material-ui/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/react/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/shell/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/vue/compile.tsconfig.json"
+    },
+    {
+      "path": "../ui-packages/widget/compile.tsconfig.json"
     }
   ]
 }
