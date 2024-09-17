@@ -118,6 +118,12 @@ export namespace RawComponentPackage {
         if (!Array.isArray(pck.keywords)) {
             return false;
         }
+        if (pck.keywords.includes('malagu-component')) {
+            return true;
+        }
+        if (!pck.keywords.includes('malagu')) {
+            return false;
+        }
         return pck.keywords.some(k => k.endsWith(MALAGU_COMPONENT_SUFFIX));
     }
 }
