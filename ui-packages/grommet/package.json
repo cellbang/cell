@@ -1,13 +1,13 @@
 {
   "name": "@malagu/grommet",
-  "version": "2.60.2",
+  "version": "2.60.3",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@malagu/core": "2.56.0",
-    "@malagu/react": "2.60.2",
-    "@malagu/widget": "2.60.2",
+    "@malagu/react": "2.60.3",
+    "@malagu/widget": "2.60.3",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
