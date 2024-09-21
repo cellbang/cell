@@ -1,11 +1,11 @@
 {
   "name": "@celljs/http",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "2.60.3",
+    "@celljs/core": "3.0.0",
     "axios": "^0.26.1",
     "rxjs": "^6.6.0"
   },
@@ -37,7 +37,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "2.60.3"
+    "@celljs/component": "3.0.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

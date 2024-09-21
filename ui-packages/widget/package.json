@@ -1,11 +1,11 @@
 {
   "name": "@celljs/widget",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@celljs/core": "2.60.3",
+    "@celljs/core": "3.0.0",
     "rxjs": "^6.6.0"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "2.60.3"
+    "@celljs/component": "3.0.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

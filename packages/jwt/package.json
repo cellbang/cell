@@ -1,11 +1,11 @@
 {
   "name": "@celljs/jwt",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "2.60.3",
+    "@celljs/core": "3.0.0",
     "jsonwebtoken": "^9.0.0"
   },
   "publishConfig": {
@@ -36,7 +36,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "2.60.3",
+    "@celljs/component": "3.0.0",
     "@types/jsonwebtoken": "^8.5.8"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

@@ -1,13 +1,13 @@
 {
   "name": "@celljs/serve-static",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "2.60.3",
-    "@celljs/http": "2.60.3",
-    "@celljs/web": "2.60.3",
+    "@celljs/core": "3.0.0",
+    "@celljs/http": "3.0.0",
+    "@celljs/web": "3.0.0",
     "send": "^0.17.1"
   },
   "publishConfig": {
@@ -39,8 +39,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "2.60.3",
-    "@celljs/component": "2.60.3",
+    "@celljs/cli-service": "3.0.0",
+    "@celljs/component": "3.0.0",
     "@types/send": "^0.17.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

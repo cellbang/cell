@@ -1,9 +1,9 @@
 {
   "name": "@celljs/compression",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "dependencies": {
-    "@celljs/cli-common": "2.60.3",
+    "@celljs/cli-common": "3.0.0",
     "compression-webpack-plugin": "^10.0.0"
   },
   "publishConfig": {
@@ -34,8 +34,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "2.60.3",
-    "@celljs/component": "2.60.3"
+    "@celljs/cli-service": "3.0.0",
+    "@celljs/component": "3.0.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

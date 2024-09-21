@@ -1,12 +1,12 @@
 {
   "name": "@celljs/elasticsearch",
-  "version": "2.60.3",
+  "version": "3.0.0",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@elastic/elasticsearch": "^8.2.1",
-    "@celljs/core": "2.60.3"
+    "@celljs/core": "3.0.0",
+    "@elastic/elasticsearch": "^8.2.1"
   },
   "publishConfig": {
     "access": "public"
@@ -35,7 +35,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "2.60.3"
+    "@celljs/component": "3.0.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
