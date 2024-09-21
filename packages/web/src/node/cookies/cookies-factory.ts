@@ -1,15 +1,15 @@
 import { Context } from '../context';
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import * as _Cookies from 'cookies';
 import { Cookies } from './cookies-protocol';
 
 @Component()
 export class CookiesFactory {
 
-    @Value('malagu.cookies.keys')
+    @Value('cell.cookies.keys')
     protected keys?: string[];
 
-    @Value('malagu.cookies.secure')
+    @Value('cell.cookies.secure')
     protected secure?: boolean;
 
     async create(): Promise<Cookies> {

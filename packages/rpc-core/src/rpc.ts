@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { DisposableCollection, Disposable } from '@malagu/core/lib/common/utils/disposable';
-import { Deferred } from '@malagu/core/lib/common/utils/promise-util';
-import { CancellationToken, CancellationTokenSource } from '@malagu/core/lib/common/utils/cancellation';
+import { DisposableCollection, Disposable } from '@celljs/core/lib/common/utils/disposable';
+import { Deferred } from '@celljs/core/lib/common/utils/promise-util';
+import { CancellationToken, CancellationTokenSource } from '@celljs/core/lib/common/utils/cancellation';
 import { CancelMessage, ConnectionClosedError, MessageConnection, MessageType, ObjectsTransferrer, OpenMessage,
     ProxyIdentifier, RPC, RPCMessage, ReadyMessage, ReplyErrMessage, ReplyMessage, RequestMessage, SerializedError } from './rpc-protocol';
 import { RPCMultiplexer } from './rpc-multiplexer';

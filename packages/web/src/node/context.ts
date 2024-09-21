@@ -1,9 +1,9 @@
-import { AttributeScope, Context as BaseContext } from '@malagu/core/lib/node';
+import { AttributeScope, Context as BaseContext } from '@celljs/core/lib/node';
 import { Session } from './session/session-protocol';
 import { Cookies } from './cookies';
 import { Request, Response } from './http/http-protocol';
 
-export { AttributeScope } from '@malagu/core/lib/node';
+export { AttributeScope } from '@celljs/core/lib/node';
 export const CURRENT_COOKIES_REQUEST_KEY = 'CurrentCookiesRequest';
 export const CURRENT_SESSION_REQUEST_KEY = 'CurrentSessionRequest';
 export const CURRENT_TRACE_ID_REQUEST_KEY = 'CurrentTraceIdRequest';

@@ -1,15 +1,15 @@
 import { AuthorizationRequestResolver } from './authorization-protocol';
 import { AuthorizationRequest, OAuth2ParameterNames,
-    AuthorizationGrantType, OidcScopes, PkceParameterNames, ClientAuthenticationMethod, OidcParameterNames, AuthorizationResponseType } from '@malagu/oauth2-core';
-import { Component, Autowired, Value, IllegalArgumentError } from '@malagu/core';
+    AuthorizationGrantType, OidcScopes, PkceParameterNames, ClientAuthenticationMethod, OidcParameterNames, AuthorizationResponseType } from '@celljs/oauth2-core';
+import { Component, Autowired, Value, IllegalArgumentError } from '@celljs/core';
 import { ClientRegistrationManager, ClientRegistration } from '../registration';
-import { RequestMatcher, Context } from '@malagu/web/lib/node';
+import { RequestMatcher, Context } from '@celljs/web/lib/node';
 import { AUTHORIZATION_REQUEST_BASE_URI, DEFAULT_REDIRECT_URI } from '../constants';
-import { Base64StringKeyGenerator } from '@malagu/security/lib/node';
+import { Base64StringKeyGenerator } from '@celljs/security/lib/node';
 import { SHA256, enc } from 'crypto-js';
 import { ProviderDetailsManager } from '../provider';
 import * as qs from 'qs';
-import { PathResolver, ENDPOINT, UrlUtil } from '@malagu/web';
+import { PathResolver, ENDPOINT, UrlUtil } from '@celljs/web';
 
 export const REGISTRATION_ID_URI_VARIABLE_NAME = 'registrationId';
 

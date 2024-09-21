@@ -1,1 +1,1 @@
-export const MVC_PATH = 'malagu.mvc.path';
+export const MVC_PATH = 'cell.mvc.path';

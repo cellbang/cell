@@ -1,6 +1,6 @@
 import { ResponseResolver } from './resolver-protocol';
-import { Context } from '@malagu/web/lib/node';
-import { Component } from '@malagu/core';
+import { Context } from '@celljs/web/lib/node';
+import { Component } from '@celljs/core';
 import { ResponseHeaderMetadata, ResponseCookieMetadata, ResponseSessionMetadata } from '../annotation';
 
 @Component(ResponseResolver)

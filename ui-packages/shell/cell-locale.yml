@@ -1,0 +1,13 @@
+frontend:
+  cell:
+    locales:
+      zh-CN:
+        label: 中文
+        messages:
+          cell.shell.login.label: 登录
+          cell.shell.logo.label: 细胞矩阵
+      en-US:
+        label: English
+        messages:
+          cell.shell.login.label: Login
+          cell.shell.logo.label: Cellbang

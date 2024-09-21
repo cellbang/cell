@@ -1,8 +1,8 @@
 import { AccessDecisionManager, SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED } from './access-protocol';
-import { Component, Prioritizeable, Autowired } from '@malagu/core';
+import { Component, Prioritizeable, Autowired } from '@celljs/core';
 import { AccessDeniedError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';
-import { HttpStatus } from '@malagu/http';
+import { HttpStatus } from '@celljs/http';
 
 @Component(AccessDecisionManager)
 export class AccessDecisionManagerImpl implements AccessDecisionManager {

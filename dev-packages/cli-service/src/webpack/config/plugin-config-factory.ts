@@ -1,8 +1,8 @@
 import * as path from 'path';
-import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 import { existsSync } from 'fs-extra';
 import { getDevSuccessInfo } from '../utils';
 const chalk = require('chalk');
@@ -123,13 +123,13 @@ export class HtmlWebpackPluginConfigFactory {
         const HtmlWebpackPlugin = require('html-webpack-plugin');
         const templatePathBase = path.join(__dirname, '..', '..', '..', 'templates');
 
-        const c = ConfigUtil.getFrontendMalaguConfig(cfg);
+        const c = ConfigUtil.getFrontendCellConfig(cfg);
         const baseHref = c.server?.path;
 
         config
             .plugin('html')
                 .use(HtmlWebpackPlugin, [{
-                    title: 'Malagu App',
+                    title: 'Cell App',
                     template: templateExists ? undefined : path.join(templatePathBase, 'index.html'),
                     favicon: faviconExists ? undefined : path.join(templatePathBase, 'favicon.ico'),
                     templateParameters: ConfigUtil.getConfig(cfg, FRONTEND_TARGET),
@@ -208,8 +208,8 @@ export class NormalModuleReplacementPluginConfigFactory {
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).moduleReplacementPlugin || {};
 
         const resources = [
-            '\\node_modules\\@malagu\\',
-            '/node_modules/@malagu/',
+            '\\node_modules\\@celljs\\',
+            '/node_modules/@celljs/',
             ...(pluginConfig.resources ?? [])
         ];
         const runtimePath = PathUtil.getRuntimePath(context.runtime);

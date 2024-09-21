@@ -1,4 +1,4 @@
-import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
+import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
 const minimist = require('minimist');
 import * as ora from 'ora';
 import { Settings } from '../settings/settings-protocol';

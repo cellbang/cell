@@ -1,1 +1,1 @@
-# Malagu CLI Service
+# Cell CLI Service

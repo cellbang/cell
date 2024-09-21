@@ -1,4 +1,4 @@
-import { Controller, Get, Text } from '@malagu/mvc/lib/node';
+import { Controller, Get, Text } from '@celljs/mvc/lib/node';
 
 @Controller('/')
 export class HomeController {
@@ -6,6 +6,6 @@ export class HomeController {
     @Get()
     @Text()
     home(): string {
-        return 'Welcome to Malagu';
+        return 'Welcome to Cell';
     }
 }

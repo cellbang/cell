@@ -1,7 +1,7 @@
 {
   "name": "jwt-app",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "0.0.0",
   "license": "MIT",
@@ -10,27 +10,27 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "{{ version }}",
-    "@malagu/http": "{{ version }}",
-    "@malagu/web": "{{ version }}",
-    "@malagu/mvc": "{{ version }}",
-    "@malagu/jwt": "{{ version }}"
+    "@celljs/core": "{{ version }}",
+    "@celljs/http": "{{ version }}",
+    "@celljs/web": "{{ version }}",
+    "@celljs/mvc": "{{ version }}",
+    "@celljs/jwt": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "{{ version }}",
-    "@malagu/component": "{{ version }}",
-    "@malagu/testing": "{{ version }}",
+    "@celljs/cli": "{{ version }}",
+    "@celljs/component": "{{ version }}",
+    "@celljs/testing": "{{ version }}",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "test": "malagu-component test",
-    "build": "malagu build",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "test": "cell-component test",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

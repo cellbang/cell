@@ -1,6 +1,6 @@
-import { Event } from '@malagu/core/lib/common/utils/event';
-import { Emitter } from '@malagu/core/lib/common/utils/emitter';
-import { DisposableCollection, Disposable } from '@malagu/core/lib/common/utils/disposable';
+import { Event } from '@celljs/core/lib/common/utils/event';
+import { Emitter } from '@celljs/core/lib/common/utils/emitter';
+import { DisposableCollection, Disposable } from '@celljs/core/lib/common/utils/disposable';
 import { ConnectionClosedError, MessageConnection } from './rpc-protocol';
 
 /**

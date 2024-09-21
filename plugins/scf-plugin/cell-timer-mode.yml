@@ -1,0 +1,8 @@
+cell:
+  cloud:
+    trigger:
+      name: ${cell.cloud.function.name}-${cell.cloud.alias.name}-timer
+      qualifier: ${cell.cloud.alias.name}
+      type: timer
+      triggerDesc: 0 */1 * * * * * # every minute
+      enable: OPEN

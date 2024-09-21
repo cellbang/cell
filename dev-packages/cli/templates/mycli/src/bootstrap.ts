@@ -1,4 +1,4 @@
-import { ApplicationFactory } from '@malagu/core/lib/common/application/application-factory';
+import { ApplicationFactory } from '@celljs/core/lib/common/application/application-factory';
 import { MycliModule } from './module';
 
 export async function bootstrap() {

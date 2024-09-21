@@ -1,6 +1,6 @@
-import { Controller, Get, Text } from '@malagu/mvc/lib/node';
+import { Controller, Get, Text } from '@celljs/mvc/lib/node';
 import { ServiceA, ServiceB } from '@microservice/api';
-import { Autorpc } from '@malagu/rpc';
+import { Autorpc } from '@celljs/rpc';
 
 @Controller()
 export class APIController {

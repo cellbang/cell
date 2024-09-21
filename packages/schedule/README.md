@@ -1,1 +1,1 @@
-# Malagu - Schedule Component
+# Cell - Schedule Component

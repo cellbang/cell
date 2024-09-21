@@ -1,1 +1,1 @@
-# Malagu - React Component
+# Cell - React Component

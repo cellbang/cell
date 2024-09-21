@@ -1,4 +1,4 @@
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 import { RestOperations, RestOperationsFactory } from './client';
 
 export default autoBind(bind => {

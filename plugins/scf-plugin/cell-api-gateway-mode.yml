@@ -1,0 +1,12 @@
+mode: [ api-gateway-common ]
+cell:
+  cloud:
+    function:
+      type: HTTP
+      instanceConcurrencyConfig:
+        maxConcurrency: 10
+        dynamicEnabled: false
+      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"
+    apiGateway:
+      api:
+        serviceScfFunctionType: HTTP

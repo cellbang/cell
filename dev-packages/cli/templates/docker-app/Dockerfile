@@ -11,7 +11,7 @@ RUN yarn
 
 ENV NODE_ENV production
 
-RUN npx malagu build -m server -m prod
+RUN npx cell build -m server -m prod
 
 USER node
 
@@ -20,7 +20,7 @@ USER node
 ###################
 FROM node:18-alpine As production
 
-COPY --chown=node:node --from=build /usr/src/app/.malagu/dist /dist
+COPY --chown=node:node --from=build /usr/src/app/.cell/dist /dist
 
 WORKDIR /dist
 

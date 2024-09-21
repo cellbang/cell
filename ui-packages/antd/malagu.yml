@@ -1,6 +1,0 @@
-frontend:
-    malagu:
-      webpack:
-        htmlWebpackTagsPlugin:
-          antd-css: https://cdn.jsdelivr.net/npm/antd@^4.0.2/dist/antd.min.css
-

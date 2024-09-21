@@ -1,6 +1,6 @@
 export const METADATA_KEY = {
-    constantValue: 'malagu:constant-value',
-    component: 'malagu:component'
+    constantValue: 'cell:constant-value',
+    component: 'cell:component'
 };
 
-export const TENANT_ENABLED = 'malagu.tenant.enabled';
+export const TENANT_ENABLED = 'cell.tenant.enabled';

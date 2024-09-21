@@ -1,8 +1,8 @@
-import { BuildContext, PathUtil } from '@malagu/cli-common';
+import { BuildContext, PathUtil } from '@celljs/cli-common';
 import { join } from 'path';
 import { writeFile, ensureDir } from 'fs-extra';
-import { CloudUtils } from '@malagu/cloud-plugin';
-import { getCodeRootDir } from '@malagu/code-loader-plugin';
+import { CloudUtils } from '@celljs/cloud-plugin';
+import { getCodeRootDir } from '@celljs/code-loader-plugin';
 
 export default async (context: BuildContext) => {
     const { cfg } = context;

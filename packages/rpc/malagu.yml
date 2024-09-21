@@ -1,8 +1,0 @@
-malagu: 
-  rpc: 
-    path: api
-    merge:
-      enabled: false
-      timerDelay: 35 # 35ms
-      maxLength: 5242880 # 5MB
-      maxCount: 100

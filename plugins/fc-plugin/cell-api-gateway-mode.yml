@@ -1,0 +1,34 @@
+cell:
+  server:
+    path: /${cell.cloud.function.name}/
+  cloud:
+    service:
+      name: cell
+    function:
+      runtime: nodejs14
+    apiGateway:
+      stage:
+        name: "${stage|eval == 'prod' ? 'release' : stage }"
+        desc: 'Released By Cell'
+      group:
+        name: ${cell.cloud.function.name|replace('-', '_')}
+        description: 'Created By Cell'
+      api:
+        name: ${cell.cloud.function.name|replace('-', '_')}
+        forceNonceCheck: false
+        visibility: PUBLIC
+        description: 'Created By Cell'
+        authType: ANONYMOUS
+        requestConfig:
+          method: ANY
+          protocol: HTTP,HTTPS
+          postBodyDescription: ''
+          mode: PASSTHROUGH
+          path: '${cell.server.path}*'
+        serviceConfig:
+          serviceProtocol: FunctionCompute
+          serviceTimeout: 65000 # 65s
+          contentTypeValue: 'application/json; charset=UTF-8'
+          functionComputeConfig:
+            qualifier: ${cell.cloud.alias.name}
+        resultType: PASSTHROUGH

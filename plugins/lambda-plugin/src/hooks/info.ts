@@ -1,6 +1,6 @@
-import { InfoContext, ProjectUtil } from '@malagu/cli-common';
+import { InfoContext, ProjectUtil } from '@celljs/cli-common';
 import { Lambda, ApiGatewayV2 } from 'aws-sdk';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
 import { createClients, getAlias, getApi, getApiMapping, getCustomDomain, getFunction, getIntegration, getRoute, getStage, getTrigger } from './utils';
 const chalk = require('chalk');
 

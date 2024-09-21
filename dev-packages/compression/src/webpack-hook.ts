@@ -1,6 +1,6 @@
-import { WebpackContext, ConfigurationContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { WebpackContext, ConfigurationContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 
 export default async (context: WebpackContext) => {
     const { configurations, dev, cfg } = context;

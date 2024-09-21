@@ -1,15 +1,15 @@
-import { Value, Component, Autowired } from '@malagu/core';
-import { UserService } from '@malagu/security/lib/node';
-import { User } from '@malagu/security';
+import { Value, Component, Autowired } from '@celljs/core';
+import { UserService } from '@celljs/security/lib/node';
+import { User } from '@celljs/security';
 import { OidcUserRequest } from './user-protocol';
 import { OAuth2UserRequest, UserResponseClient, INVALID_USER_INFO_RESPONSE_ERROR_CODE } from '../endpoint';
 import { ProviderDetailsManager } from '../provider';
-import { AuthorizationGrantType, StandardClaimNames, OAuth2AuthenticationError, IdTokenClaimNames } from '@malagu/oauth2-core';
+import { AuthorizationGrantType, StandardClaimNames, OAuth2AuthenticationError, IdTokenClaimNames } from '@celljs/oauth2-core';
 
 @Component()
 export class OidcUserService implements UserService<OidcUserRequest, User> {
 
-    @Value('malagu.oauth2.client.accessibleScopes')
+    @Value('cell.oauth2.client.accessibleScopes')
     protected readonly accessibleScopes: string[];
 
     @Autowired(ProviderDetailsManager)

@@ -6,7 +6,7 @@ import mergeWith = require('lodash.mergewith');
 
 export namespace ConfigUtil {
     export function getWebpackConfig(cfg: ApplicationConfig, target: string) {
-        return getMalaguConfig(cfg, target).webpack || {};
+        return getCellConfig(cfg, target).webpack || {};
 
     }
 
@@ -18,16 +18,16 @@ export namespace ConfigUtil {
         return getWebpackConfig(cfg, BACKEND_TARGET);
     }
 
-    export function getMalaguConfig(cfg: ApplicationConfig, target: string) {
-        return getConfig(cfg, target).malagu || {};
+    export function getCellConfig(cfg: ApplicationConfig, target: string) {
+        return getConfig(cfg, target).cell || {};
     }
 
-    export function getFrontendMalaguConfig(cfg: ApplicationConfig) {
-        return getMalaguConfig(cfg, FRONTEND_TARGET);
+    export function getFrontendCellConfig(cfg: ApplicationConfig) {
+        return getCellConfig(cfg, FRONTEND_TARGET);
     }
 
-    export function getBackendMalaguConfig(cfg: ApplicationConfig) {
-        return getMalaguConfig(cfg, BACKEND_TARGET);
+    export function getBackendCellConfig(cfg: ApplicationConfig) {
+        return getCellConfig(cfg, BACKEND_TARGET);
     }
 
     export function getConfig(cfg: ApplicationConfig, target: string) {
@@ -83,7 +83,7 @@ export namespace ConfigUtil {
         if (port !== undefined) {
             return port;
         }
-        const server = getMalaguConfig(cfg, target).server || { port: 3000 };
+        const server = getCellConfig(cfg, target).server || { port: 3000 };
         return server.port;
     }
 

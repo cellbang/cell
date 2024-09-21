@@ -1,0 +1,9 @@
+cell: 
+  mvc: 
+    path: /*
+    defaultViewName: json
+    baseFileDir: assets
+  mustache:
+    cache: false
+    baseViewDir: assets/views
+    

@@ -1,0 +1,8 @@
+cell: 
+  serve-static: 
+    spa: true
+    root: ${frontendProjectDistPath}
+    options:
+      maxAge: 31536000000
+      # htmlMaxAge: 31536000000
+      immutable: true

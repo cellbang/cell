@@ -1,6 +1,6 @@
 
-import { autoBind } from '@malagu/core';
-import { autoBindEntities } from '@malagu/typeorm';
+import { autoBind } from '@celljs/core';
+import { autoBindEntities } from '@celljs/typeorm';
 import * as entities from './entity';
 import './index';
 

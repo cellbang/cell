@@ -1,0 +1,36 @@
+cell:
+  security:
+    enabled: true
+    loginRequired: true
+    openNewWindow: false
+    usernameKey: username
+    passwordKey: password
+    loginPage: ${ '/login' | onTarget('backend') || '/login?${cell.security.targetUrlParameter}={redirect}'}
+    loginUrl: /login
+    loginMethod: POST
+    loginSuccessUrl: /
+    logoutUrl: /logout
+    logoutMethod: POST
+    logoutSuccessUrl: ${cell.security.loginPage}
+    alwaysUseDefaultTargetUrl: false
+    useReferer: false
+    targetUrlParameter: redirect
+    base64StringKeyLength: ${ 32 | onTarget('backend')}
+    contextKey: cell:securityContext
+    username: ${ 'admin' | onTarget('backend')}
+    password: ${ 'MzQ0NTg4ZTk2NzQyYWI1ODA1MDFlNDBjMzZhZDY4OWQ1Zjc5ZDYxYzc2MjQ1NWZk' | onTarget('backend')} # raw password 123456
+    passwordEncoder:
+      encodeHashAsBase64: ${ true | onTarget('backend')}
+    basic:
+      enabled: false
+      realm: realm
+    userInfoEndpoint:
+      url: /userinfo
+      method: POST
+    userMapperRule:
+      github:
+        avatar: avatar_url
+        email: email
+        login: login
+        nickname: login
+

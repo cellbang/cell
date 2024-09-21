@@ -8,7 +8,7 @@ import { FRONTEND_TARGET, BACKEND_TARGET } from '../constants';
 import { ExpressionHandler } from '../el/expression-handler';
 import { HookExecutor, HookStage } from '../hook/hook-executor';
 import { ApplicationConfig } from '../package/application-config';
-import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
+import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
 import { Settings } from '../settings/settings-protocol';
 import { getPackager } from '../packager/utils';
 import * as ora from 'ora';
@@ -64,8 +64,8 @@ export namespace CliContext {
     }
 
     async function installComponents(pkg: ApplicationPackage, spinner?: ora.Ora) {
-        const components = pkg.rootComponentPackage.malaguComponent!.components;
-        const devComponents = pkg.rootComponentPackage.malaguComponent!.devComponents;
+        const components = pkg.rootComponentPackage.cellComponent!.components;
+        const devComponents = pkg.rootComponentPackage.cellComponent!.devComponents;
         if (components) {
             for (const component in components) {
                 if (Object.prototype.hasOwnProperty.call(components, component)) {
@@ -149,7 +149,7 @@ export namespace CliContext {
         // at this point, we will check the core package version in the *.lock file firstly
         if (!skipComponent) {
             try {
-                ComponentUtil.checkPkgVersionConsistency(/^@malagu\/\w+/, projectPath);
+                ComponentUtil.checkPkgVersionConsistency(/^@celljs\/\w+/, projectPath);
             } catch (error) {
                 // NoOp
             }

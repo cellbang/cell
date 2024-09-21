@@ -1,12 +1,12 @@
 import { LogoutSuccessHandler, LOGOUT_SUCCESS_HANDLER_PRIORITY } from './logout-protocol';
-import { Component, Value, Autowired } from '@malagu/core';
-import { Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { XML_HTTP_REQUEST, HttpHeaders } from '@malagu/http';
+import { Component, Value, Autowired } from '@celljs/core';
+import { Context, RedirectStrategy } from '@celljs/web/lib/node';
+import { XML_HTTP_REQUEST, HttpHeaders } from '@celljs/http';
 
 @Component(LogoutSuccessHandler)
 export class SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
-    @Value('malagu.security.logoutSuccessUrl')
+    @Value('cell.security.logoutSuccessUrl')
     protected readonly logoutSuccessUrl: string;
 
     @Autowired(RedirectStrategy)

@@ -1,6 +1,6 @@
 import { METADATA_KEY } from '../constants';
-import { AnnotationUtil, Component, ComponentId, ComponentOption, parseComponentOption } from '@malagu/core';
-import { AOP_POINTCUT } from '@malagu/web';
+import { AnnotationUtil, Component, ComponentId, ComponentOption, parseComponentOption } from '@celljs/core';
+import { AOP_POINTCUT } from '@celljs/web';
 
 export const CONTROLLER = Symbol('Controller');
 

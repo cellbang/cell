@@ -1,0 +1,13 @@
+cell:
+  cloud:
+    function:
+      runtime: nodejs14
+    trigger:
+      name: ${cell.cloud.function.name}-${cell.cloud.alias.name}-timer
+      qualifier: ${cell.cloud.alias.name}
+      triggerType: timer
+      triggerConfig:
+        payload: cell-timer
+        cronExpression: 0 */1 * * * *  # every minute
+        enable: true
+    

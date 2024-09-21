@@ -1,11 +1,11 @@
 {
-  "name": "@malagu/eslint",
+  "name": "@celljs/eslint",
   "version": "2.60.3",
   "description": "eslint component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.60.3",
+    "@celljs/cli-common": "2.60.3",
     "eslint": "^8.44.0",
     "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0"
@@ -14,31 +14,31 @@
     "access": "public"
   },
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/cli-service": "2.60.3",
-    "@malagu/component": "2.60.3"
+    "@celljs/cli-service": "2.60.3",
+    "@celljs/component": "2.60.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

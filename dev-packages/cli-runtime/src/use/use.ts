@@ -1,5 +1,5 @@
 
-import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+import { SettingsUtil } from '@celljs/cli-common/lib/settings/settings-util';
 import { prompts } from 'prompts';
 const chalk = require('chalk');
 import { ok } from 'assert';

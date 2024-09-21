@@ -1,8 +1,8 @@
 import { MethodSecurityMetadataContext, ResourceNameResolver } from './access-protocol';
-import { Component, Value, TENANT_ENABLED, getOwnMetadata } from '@malagu/core';
+import { Component, Value, TENANT_ENABLED, getOwnMetadata } from '@celljs/core';
 import { METADATA_KEY } from '../constants';
 import { evalSync } from 'jexl';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 
 @Component(ResourceNameResolver)
 export class DefaultResourceNameResolver implements ResourceNameResolver {

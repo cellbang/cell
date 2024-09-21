@@ -1,4 +1,4 @@
-import { Test } from '@malagu/testing';
+import { Test } from '@celljs/testing';
 import * as request from 'supertest';
 
 describe('HomeController (e2e)', function () {
@@ -12,5 +12,5 @@ describe('HomeController (e2e)', function () {
     it('/ (GET)', () => request(server)
         .get('/')
         .expect(200)
-        .expect('Welcome to Malagu'));
+        .expect('Welcome to Cell'));
 });

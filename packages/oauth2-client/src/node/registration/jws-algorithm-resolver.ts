@@ -1,6 +1,6 @@
-import { JwsAlgorithms } from '@malagu/oauth2-jose';
+import { JwsAlgorithms } from '@celljs/oauth2-jose';
 import { ClientRegistration, JwsAlgorithmResolver } from './registration-protocol';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component(JwsAlgorithmResolver)
 export class DefaultJwsAlgorithmResolver implements JwsAlgorithmResolver {

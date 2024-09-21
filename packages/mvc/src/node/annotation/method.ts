@@ -1,5 +1,5 @@
 import { METADATA_KEY } from '../constants';
-import { HttpMethod } from '@malagu/http';
+import { HttpMethod } from '@celljs/http';
 
 export type StrOrRegex = string | RegExp;
 export type RouteOptions = StrOrRegex | { path: StrOrRegex } | { options: Object, path: StrOrRegex } & Object;

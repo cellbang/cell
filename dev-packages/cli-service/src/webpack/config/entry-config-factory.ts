@@ -1,7 +1,7 @@
 
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { EMPTY } from '@malagu/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { EMPTY } from '@celljs/cli-common/lib/constants';
 import * as path from 'path';
 import * as WebpackChain from '@gem-mine/webpack-chain';
 

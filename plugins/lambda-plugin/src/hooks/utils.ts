@@ -1,4 +1,4 @@
-import { Credentials } from '@malagu/cloud-plugin';
+import { Credentials } from '@celljs/cloud-plugin';
 import { Lambda, ApiGatewayV2, IAM } from 'aws-sdk';
 const chalk = require('chalk');
 

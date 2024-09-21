@@ -1,5 +1,5 @@
 import { AuthorizedClient, AuthorizedClientManager } from './authorization-protocol';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import { ClientRegistrationManager } from '../registration';
 
 @Component(AuthorizedClientManager)

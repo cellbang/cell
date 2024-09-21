@@ -1,10 +1,10 @@
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import { JsonViewTemplateRenderer } from './view-protocol';
 
 @Component(JsonViewTemplateRenderer)
 export class JsonViewTemplateRendererImpl implements JsonViewTemplateRenderer {
 
-    @Value('malagu.mvc.jsonView.template')
+    @Value('cell.mvc.jsonView.template')
     protected readonly jsonViewTemplate?: string;
 
     async render(model?: any, error?: Error): Promise<string> {

@@ -1,0 +1,4 @@
+targets:
+  - backend
+devComponents:
+  '@celljs/python-plugin': ${version}

@@ -1,14 +1,14 @@
 {
-  "name": "@malagu/component",
+  "name": "@celljs/component",
   "version": "2.60.3",
   "license": "MIT",
-  "description": "CLI for malagu component.",
+  "description": "CLI for cell component.",
   "files": [
-    "malagu-component",
+    "cell-component",
     "configs"
   ],
   "bin": {
-    "malagu-component": "malagu-component"
+    "cell-component": "cell-component"
   },
   "publishConfig": {
     "access": "public"
@@ -42,8 +42,8 @@
     "typescript": "~4.5.5"
   },
   "scripts": {
-    "ext:clean": "malagu-component compile:clean && malagu-component lint:clean && malagu-component test:clean",
-    "ext:build": "concurrently -n compile,lint -c blue,green \"malagu-component compile\" \"malagu-component lint\"",
+    "ext:clean": "cell-component compile:clean && cell-component lint:clean && cell-component test:clean",
+    "ext:build": "concurrently -n compile,lint -c blue,green \"cell-component compile\" \"cell-component lint\"",
     "ext:compile": "tsc -b {{TSCONFIGFILE}}",
     "ext:compile:clean": "rimraf lib *.tsbuildinfo",
     "ext:lint": "if-env SKIP_LINT=true && echo 'skip lint check' || eslint --cache=true --fix --no-error-on-unmatched-pattern=true \"{src,test}/**/*.{ts,tsx}\"",

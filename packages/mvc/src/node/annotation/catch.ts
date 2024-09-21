@@ -1,5 +1,5 @@
 import { METADATA_KEY } from '../constants';
-import { ErrorType } from '@malagu/core';
+import { ErrorType } from '@celljs/core';
 
 export interface CatchMetadata {
     errorTypes: ErrorType[];

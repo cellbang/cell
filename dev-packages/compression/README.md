@@ -1,1 +1,1 @@
-# Malagu - Compression Component
+# Cell - Compression Component

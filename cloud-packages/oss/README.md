@@ -1,1 +1,1 @@
-# Malagu - OSS Component
+# Cell - OSS Component

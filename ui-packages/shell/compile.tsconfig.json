@@ -1,5 +1,5 @@
 {
-  "extends": "@malagu/component/configs/base.tsconfig.json",
+  "extends": "@celljs/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "rootDir": "src",
@@ -17,6 +17,12 @@
     },
     {
       "path": "../react/compile.tsconfig.json"
+    },
+    {
+      "path": "../../packages/core/compile.tsconfig.json"
+    },
+    {
+      "path": "../../packages/security/compile.tsconfig.json"
     }
   ]
 }

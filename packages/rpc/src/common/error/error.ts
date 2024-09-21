@@ -1,4 +1,4 @@
-import { CustomError } from '@malagu/core';
+import { CustomError } from '@celljs/core';
 
 export class EndpointNotFoundError extends CustomError {
     constructor(public serviceId: string) {

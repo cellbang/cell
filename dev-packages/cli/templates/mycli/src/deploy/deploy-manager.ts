@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import * as chalk from 'chalk';
 
 

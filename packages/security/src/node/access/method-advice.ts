@@ -1,11 +1,11 @@
-import { MethodBeforeAdvice, Autowired, Aspect, AfterReturningAdvice, Value, ConfigUtil, Injectable } from '@malagu/core';
+import { MethodBeforeAdvice, Autowired, Aspect, AfterReturningAdvice, Value, ConfigUtil, Injectable } from '@celljs/core';
 import { AccessDecisionManager, MethodSecurityMetadataContext, ResourceNameResolver, SecurityMetadataSource, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
-import { AOP_POINTCUT } from '@malagu/web';
+import { AOP_POINTCUT } from '@celljs/web';
 import { SecurityContext } from '../context';
 import { AuthorizeType } from '../../common';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 
-const pointcut = ConfigUtil.getRaw().malagu.security.aop?.pointcut || AOP_POINTCUT;
+const pointcut = ConfigUtil.getRaw().cell.security.aop?.pointcut || AOP_POINTCUT;
 
 @Injectable()
 export abstract class AbstractSecurityMethodAdivice {
@@ -19,7 +19,7 @@ export abstract class AbstractSecurityMethodAdivice {
     @Autowired(ResourceNameResolver)
     protected readonly resourceNameResolver: ResourceNameResolver;
 
-    @Value('malagu.security.enabled')
+    @Value('cell.security.enabled')
     protected readonly enabled: boolean;
 
     protected needAccessDecision(method: string | number | symbol) {

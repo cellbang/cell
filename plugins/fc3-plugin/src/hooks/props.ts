@@ -1,6 +1,6 @@
-import { PropsContext } from '@malagu/cli-common';
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
+import { PropsContext } from '@celljs/cli-common';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
 
 export async function before(context: PropsContext) {
     const { props, cfg, target } = context;

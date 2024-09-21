@@ -1,5 +1,5 @@
-import { ApplicationShell } from '@malagu/core/lib/browser';
-import { Component, Autowired } from '@malagu/core';
+import { ApplicationShell } from '@celljs/core/lib/browser';
+import { Component, Autowired } from '@celljs/core';
 import { createRoot } from 'react-dom/client';
 import * as React from 'react';
 import { APP } from '../app';

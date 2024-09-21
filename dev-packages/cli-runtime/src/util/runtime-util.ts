@@ -1,10 +1,10 @@
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
-import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import { CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
+import { SettingsUtil } from '@celljs/cli-common/lib/settings/settings-util';
 
 import { existsSync, readdir, readJSON } from 'fs-extra';
 import { join } from 'path';
-import { FrameworkUtil } from '@malagu/frameworks/lib/utils/framework-util';
+import { FrameworkUtil } from '@celljs/frameworks/lib/utils/framework-util';
 import installRuntime from '../install/install';
 import { Runtimes } from '../runtime-protocol';
 
@@ -23,7 +23,7 @@ export namespace RuntimeUtil {
             upstreamUrl: settings.frameworks?.upstreamUrl
         });
         const pkg = CommandUtil.getPkg(settings, projectPath);
-        const config = pkg.rootComponentPackage.malaguComponent;
+        const config = pkg.rootComponentPackage.cellComponent;
         let runtime = config?.runtime;
         runtime = runtime || settings.defaultRuntime;
         if (runtime) {

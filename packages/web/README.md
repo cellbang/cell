@@ -1,1 +1,1 @@
-# Malagu - Web Component
+# Cell - Web Component

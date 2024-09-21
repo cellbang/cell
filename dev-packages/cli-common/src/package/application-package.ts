@@ -11,7 +11,7 @@ import { existsSync, readFileSync } from 'fs-extra';
 import { PathUtil } from '../utils/path-util';
 import { ConfigUtil } from '../utils/config-util';
 import { load } from 'js-yaml';
-import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
+import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
 
 // tslint:disable:no-implicit-dependencies
 
@@ -44,9 +44,9 @@ export class ApplicationPackage {
     static create(options: ApplicationPackageOptions) {
         let pkg = new ApplicationPackage(options);
         if (!RawComponentPackage.is(pkg.pkg)) {
-            const { malagu } = pkg.pkg;
-            if (malagu && malagu.rootComponent) {
-                pkg = new ApplicationPackage({ ...options, projectPath: paths.join(options.projectPath, malagu.rootComponent) });
+            const { cell } = pkg.pkg;
+            if (cell && cell.rootComponent) {
+                pkg = new ApplicationPackage({ ...options, projectPath: paths.join(options.projectPath, cell.rootComponent) });
             }
         }
         return pkg;
@@ -103,23 +103,23 @@ export class ApplicationPackage {
     protected _rootComponentPackage: ComponentPackage;
 
     createVirtualPkg(modulePath: string = process.cwd()) {
-        return { malaguComponent: { mode: [] }, modulePath };
+        return { cellComponent: { mode: [] }, modulePath };
     }
 
     get rootComponentPackage() {
         if (!this._rootComponentPackage) {
-            this.pkg.malaguComponent = this.pkg.malaguComponent || {};
+            this.pkg.cellComponent = this.pkg.cellComponent || {};
             let mode = this.options.mode;
-            const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalMalaguPropsDirPath());
+            const globalVirtualPkg = this.createVirtualPkg(PathUtil.getGlobalCellPropsDirPath());
             this.componentPackageLoader.load(globalVirtualPkg, mode);
-            mode = globalVirtualPkg.malaguComponent.mode || [];
-            this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, globalVirtualPkg.malaguComponent);
+            mode = globalVirtualPkg.cellComponent.mode || [];
+            this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, globalVirtualPkg.cellComponent);
 
             if (this.options.propsDir) {
                 const propsDirVirtualPkg = this.createVirtualPkg(this.options.propsDir);
                 this.componentPackageLoader.load(propsDirVirtualPkg, mode);
-                mode = propsDirVirtualPkg.malaguComponent.mode || [];
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, propsDirVirtualPkg.malaguComponent);
+                mode = propsDirVirtualPkg.cellComponent.mode || [];
+                this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, propsDirVirtualPkg.cellComponent);
             }
 
             if (this.options.propsFile) {
@@ -129,7 +129,7 @@ export class ApplicationPackage {
                         mode.push(m);
                     }
                 }
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, props);
+                this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, props);
             }
 
             let pwdVirtualPkg = this.createVirtualPkg();
@@ -139,21 +139,21 @@ export class ApplicationPackage {
                     pwdVirtualPkg = { ...readJsonFile(packagePath), ...pwdVirtualPkg };
                 }
                 this.componentPackageLoader.load(pwdVirtualPkg, mode);
-                mode = pwdVirtualPkg.malaguComponent.mode || [];
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent);
+                mode = pwdVirtualPkg.cellComponent.mode || [];
+                this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, pwdVirtualPkg.cellComponent);
             }
 
             this.pkg.modulePath = this.projectPath;
             const projectVirtualPkg = { ...this.createVirtualPkg(this.projectPath), ...this.pkg };
             this.componentPackageLoader.load(projectVirtualPkg, mode);
-            mode = projectVirtualPkg.malaguComponent.mode || [];
-            this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, projectVirtualPkg.malaguComponent);
+            mode = projectVirtualPkg.cellComponent.mode || [];
+            this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, projectVirtualPkg.cellComponent);
 
             if (process.cwd() !== this.projectPath) {
-                this.pkg.malaguComponent = ConfigUtil.merge(this.pkg.malaguComponent, pwdVirtualPkg.malaguComponent);
+                this.pkg.cellComponent = ConfigUtil.merge(this.pkg.cellComponent, pwdVirtualPkg.cellComponent);
             }
 
-            this.pkg.malaguComponent.mode = mode;
+            this.pkg.cellComponent.mode = mode;
             this._rootComponentPackage = this.newComponentPackage(this.pkg);
         }
         return this._rootComponentPackage;
@@ -164,9 +164,9 @@ export class ApplicationPackage {
      */
     get componentPackages(): ReadonlyArray<ComponentPackage> {
         if (!this._componentPackages) {
-            const mode = this.rootComponentPackage.malaguComponent!.mode!;
-            const components = this.rootComponentPackage.malaguComponent!.components;
-            const devComponents = this.rootComponentPackage.malaguComponent!.devComponents;
+            const mode = this.rootComponentPackage.cellComponent!.mode!;
+            const components = this.rootComponentPackage.cellComponent!.components;
+            const devComponents = this.rootComponentPackage.cellComponent!.devComponents;
 
             const collector = new ComponentPackageCollector(this, mode);
             if (components || devComponents) {
@@ -199,10 +199,10 @@ export class ApplicationPackage {
     }
 
     newComponentPackage(raw: PublishedNodePackage): ComponentPackage {
-        raw.malaguComponent = raw.malaguComponent || {};
-        raw.malaguComponent.frontend = raw.malaguComponent.frontend || {};
-        raw.malaguComponent.backend = raw.malaguComponent.backend || {};
-        raw.malaguComponent.configFiles = raw.malaguComponent.configFiles || [];
+        raw.cellComponent = raw.cellComponent || {};
+        raw.cellComponent.frontend = raw.cellComponent.frontend || {};
+        raw.cellComponent.backend = raw.cellComponent.backend || {};
+        raw.cellComponent.configFiles = raw.cellComponent.configFiles || [];
         return new ComponentPackage(raw);
     }
 
@@ -329,7 +329,7 @@ export class ApplicationPackage {
         const result: Module[] = [];
         const moduleMap = new Map<string, boolean>();
         for (const componentPackage of this.componentPackages) {
-            const component = componentPackage.malaguComponent;
+            const component = componentPackage.cellComponent;
             if (component) {
                 const modules: Module[] = (target ? component[target][type] : component[type]) || [];
                 for (const m of modules) {

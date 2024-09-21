@@ -1,5 +1,5 @@
 import { LogoutHandler } from './logout-protocol';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { SecurityContext } from '../context';
 
 @Component(LogoutHandler)

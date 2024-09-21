@@ -1,1 +1,1 @@
-# Malagu - Logger Component with winston
+# Cell - Logger Component with winston

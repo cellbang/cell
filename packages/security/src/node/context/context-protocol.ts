@@ -1,7 +1,7 @@
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 import { Authentication } from '../authentication';
-import { SESSION_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node/session/session-protocol';
-import { AttributeScope } from '@malagu/core/lib/node';
+import { SESSION_MIDDLEWARE_PRIORITY } from '@celljs/web/lib/node/session/session-protocol';
+import { AttributeScope } from '@celljs/core/lib/node';
 
 export const SECURITY_CONTEXT_MIDDLEWARE_PRIORITY = SESSION_MIDDLEWARE_PRIORITY - 100;
 export const CURRENT_SECURITY_CONTEXT_REQUEST_KEY = 'CurrentSecurityContextRequest';

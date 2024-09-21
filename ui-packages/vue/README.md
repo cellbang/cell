@@ -1,1 +1,1 @@
-# Malagu - Vue Component
+# Cell - Vue Component

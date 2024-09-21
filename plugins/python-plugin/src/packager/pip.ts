@@ -1,5 +1,5 @@
 
-import { PathUtil } from '@malagu/cli-common/lib/utils';
+import { PathUtil } from '@celljs/cli-common/lib/utils';
 import { existsSync, ensureDirSync, readFileSync, writeFileSync, statSync, utimesSync, copySync, closeSync, openSync, readdirSync, symlink } from 'fs-extra';
 import { resolve, join, dirname } from 'path';
 import { Poetry } from './poetry';
@@ -7,7 +7,7 @@ import { deleteFiles, getStripMode, getStripCommand } from './slim';
 import { buildImage, getBindPath, getDockerUid } from './docker';
 import { sha256Path, getRequirementsWorkingPath, getUserCachePath, mergeCommands, getRequirementsPath } from './util';
 import { PythonPluginOptions } from '../python-plugin-protocol';
-import { spawnProcess } from '@malagu/cli-common/lib/packager';
+import { spawnProcess } from '@celljs/cli-common/lib/packager';
 import { homedir } from 'os';
 const rimraf = require('rimraf');
 const { quote } = require('shell-quote');

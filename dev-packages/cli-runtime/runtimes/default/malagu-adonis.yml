@@ -1,7 +1,0 @@
-mode: "${ 'fc' in currentMode ? 'node16' : ''}"
-malagu:
-  webpack:
-    filterWarningsPlugin:
-      node: []
-devComponents:
-  "@malagu/adonis-plugin": ${version}

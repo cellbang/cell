@@ -1,5 +1,5 @@
-import { ObjectStorageService, RawCloudService } from '@malagu/cloud';
-import { Autowired, Component, Value } from '@malagu/core';
+import { ObjectStorageService, RawCloudService } from '@celljs/cloud';
+import { Autowired, Component, Value } from '@celljs/core';
 import { LaunchOptions } from 'puppeteer-core';
 import { BrowserInstaller, PuppeteerConfig } from './puppeteer-protocol';
 const tar = require('tar');
@@ -7,7 +7,7 @@ const tar = require('tar');
 @Component(BrowserInstaller)
 export class DefaultBrowserInstaller implements BrowserInstaller {
 
-    @Value('malagu.puppeteer')
+    @Value('cell.puppeteer')
     protected readonly config: PuppeteerConfig;
 
     @Autowired(ObjectStorageService)

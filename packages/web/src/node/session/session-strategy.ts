@@ -1,11 +1,11 @@
 import { SessionStrategy, Session } from './session-protocol';
 import { SessionImpl } from './session';
-import { Value, Component } from '@malagu/core';
+import { Value, Component } from '@celljs/core';
 
 @Component(SessionStrategy)
 export class SessionStrategyImpl implements SessionStrategy {
 
-    @Value('malagu.session')
+    @Value('cell.session')
     protected readonly sessionOptions: any;
 
     async valid(session: Session): Promise<boolean> {

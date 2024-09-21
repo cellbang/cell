@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RouteMetadataProvider } from './router-protocol';
 import { useRoutes, BrowserRouter, HashRouter, RouteObject } from 'react-router-dom';
 import { Router } from '../annotation';
-import { ConfigUtil, ContainerUtil } from '@malagu/core';
+import { ConfigUtil, ContainerUtil } from '@celljs/core';
 
 const routerMap = {
     browser: BrowserRouter,
@@ -15,7 +15,7 @@ const RouteComponent = () => {
 };
 
 const RouterComponent = () => {
-    const routerType = ConfigUtil.get<'browser' | 'hash'>('malagu.react.router.type');
+    const routerType = ConfigUtil.get<'browser' | 'hash'>('cell.react.router.type');
     return React.createElement(routerMap[routerType], {}, React.createElement(RouteComponent));
 };
 

@@ -1,0 +1,14 @@
+cell:
+  python-plugin: 
+    layer: true
+  cloud:
+    layer:
+      name: ${cell.cloud.function.name}-${stage}-python-requirements
+      codeUri: ${projectHome}/requirements
+      compatibleRuntime:
+        - ${cell.cloud.function.runtime}
+    function:
+      env:
+        PYTHONPATH: /opt
+      layers:
+        - ${cell.cloud.layer.name}

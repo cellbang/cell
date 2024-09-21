@@ -1,0 +1,18 @@
+mode: locale
+cell:
+  shell:
+    categories: []
+    apps: []
+    logo:
+      label: cell.shell.logo.label
+      icon: Cellbang
+      path: /
+    account:
+      src: //s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80
+      login:
+        path: ${cell.security.loginPage}
+        label: cell.shell.login.label
+    appSet:
+      icon: Apps
+    settings:
+      icon: Performance

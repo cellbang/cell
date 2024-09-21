@@ -1,0 +1,17 @@
+cell:
+  cloud:
+    function:
+      type: HTTP
+      instanceConcurrencyConfig:
+        maxConcurrency: 10
+        dynamicEnabled: false
+      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"
+    trigger:
+      name: ${cell.cloud.function.name}-${cell.cloud.alias.name}
+      type: http
+      enable: OPEN
+      triggerDesc: 
+        authType: NONE
+        netConfig:
+          enableIntranet: true
+          enableExtranet:  true

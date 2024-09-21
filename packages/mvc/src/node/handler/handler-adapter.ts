@@ -1,6 +1,6 @@
-import { Component, Autowired, Value } from '@malagu/core';
-import { PathResolver, PipeManager } from '@malagu/web';
-import { Context, RequestMatcher, HandlerAdapter, NotFoundAndContinueError } from '@malagu/web/lib/node';
+import { Component, Autowired, Value } from '@celljs/core';
+import { PathResolver, PipeManager } from '@celljs/web';
+import { Context, RequestMatcher, HandlerAdapter, NotFoundAndContinueError } from '@celljs/web/lib/node';
 import { ViewResolver, ResponseResolverProvider, MethodArgsResolverProvider } from '../resolver';
 import { MVC_HANDLER_ADAPTER_PRIORITY, RouteMetadataMatcher } from './handler-protocol';
 import { MVC_PATH } from '../../common';

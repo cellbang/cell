@@ -1,13 +1,13 @@
 import { Theme, ThemeManager, DEFAULT_THEME } from './theme-protocol';
-import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@malagu/core';
+import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@celljs/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component(ThemeManager)
 export class ThemeManagerImpl<T> implements ThemeManager<T> {
 
-    protected readonly themeStorageKey = 'malagu:theme';
+    protected readonly themeStorageKey = 'cell:theme';
 
-    @Value('malagu.themes')
+    @Value('cell.themes')
     protected readonly themesForConfig: { [id: string]: Theme<T> };
 
     @Autowired(Theme) @Optional()

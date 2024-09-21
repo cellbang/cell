@@ -1,1 +1,1 @@
-export const RPC_PATH = 'malagu.rpc.path';
+export const RPC_PATH = 'cell.rpc.path';

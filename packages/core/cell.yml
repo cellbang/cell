@@ -1,0 +1,15 @@
+targets:
+  - backend
+cell:
+  name: 'Cell Framework'
+  hostDomId: cell-root
+  annotation:
+    Component:
+      proxy: false
+  aop:
+    enabled: true
+  logger:
+    level: info
+  tenant:
+    enabled: false
+entry: lib/common/application/application-entry

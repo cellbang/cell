@@ -1,19 +1,19 @@
-import { Component, Autowired, Value } from '@malagu/core';
+import { Component, Autowired, Value } from '@celljs/core';
 import { AuthenticationProvider, Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY,
     BASE_AUTHENTICATION_PROVIDER_PRIORITY, AUTHENTICATION_SCHEME_BASIC } from './authentication-protocol';
-import { Context, RequestMatcher, RedirectStrategy } from '@malagu/web/lib/node';
+import { Context, RequestMatcher, RedirectStrategy } from '@celljs/web/lib/node';
 import { PasswordEncoder } from '../crypto';
 import { UserService, UserChecker, UserMapper } from '../user';
 import { BadCredentialsError } from '../error';
-import { HttpHeaders } from '@malagu/http';
-import { PathResolver } from '@malagu/web';
+import { HttpHeaders } from '@celljs/http';
+import { PathResolver } from '@celljs/web';
 
 import { User } from '../../common';
 
 @Component(AuthenticationProvider)
 export class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
-    @Value('malagu.security')
+    @Value('cell.security')
     protected readonly options: any;
 
     @Autowired(PasswordEncoder)

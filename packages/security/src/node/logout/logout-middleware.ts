@@ -1,8 +1,8 @@
-import { RequestMatcher, Middleware, Context } from '@malagu/web/lib/node';
-import { Component, Autowired, Value } from '@malagu/core';
+import { RequestMatcher, Middleware, Context } from '@celljs/web/lib/node';
+import { Component, Autowired, Value } from '@celljs/core';
 import { LogoutHandler, LOGOUT_MIDDLEWARE_PRIORITY } from './logout-protocol';
 import { LogoutSuccessHandlerProvider } from './logout-success-handler-provider';
-import { PathResolver } from '@malagu/web';
+import { PathResolver } from '@celljs/web';
 
 @Component(Middleware)
 export class LogoutMiddleware implements Middleware {
@@ -13,10 +13,10 @@ export class LogoutMiddleware implements Middleware {
     @Autowired(LogoutSuccessHandlerProvider)
     protected readonly logoutSuccessHandlerProvider: LogoutSuccessHandlerProvider;
 
-    @Value('malagu.security.logoutUrl')
+    @Value('cell.security.logoutUrl')
     protected readonly logoutUrl: string;
 
-    @Value('malagu.security.logoutMethod')
+    @Value('cell.security.logoutMethod')
     protected readonly logoutMethod: string;
 
     @Autowired(PathResolver)

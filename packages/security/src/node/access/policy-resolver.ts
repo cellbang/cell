@@ -1,6 +1,6 @@
 import { ACCESS_ABSTAIN, ACCESS_DENIED, ACCESS_GRANTED, JexlEngineProvider, PolicyResolver, SecurityMetadata, SECURITY_EXPRESSION_CONTEXT_KEY } from './access-protocol';
-import { Autowired, Component } from '@malagu/core';
-import { Context } from '@malagu/web/lib/node';
+import { Autowired, Component } from '@celljs/core';
+import { Context } from '@celljs/web/lib/node';
 import { AclPolicy, Effect, ElPolicy, Policy, PolicyType, Statement } from '../../common';
 import { contains } from 'micromatch';
 

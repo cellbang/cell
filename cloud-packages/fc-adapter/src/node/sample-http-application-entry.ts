@@ -1,8 +1,8 @@
-import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { Application } from '@malagu/core/lib/common/application/application-protocol';
-import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
-import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
-import { Context } from '@malagu/web/lib/node/context';
+import { container } from '@celljs/core/lib/common/container/dynamic-container';
+import { Application } from '@celljs/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@celljs/core/lib/common/container/container-provider';
+import { Dispatcher } from '@celljs/web/lib/node/dispatcher/dispatcher-protocol';
+import { Context } from '@celljs/web/lib/node/context';
 import * as express from 'express';
 import * as proxy from '@webserverless/fc-express';
 const getRawBody = require('raw-body');

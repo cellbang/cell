@@ -1,4 +1,4 @@
-import { Prioritizeable, Component, Autowired } from '@malagu/core';
+import { Prioritizeable, Component, Autowired } from '@celljs/core';
 import { ErrorConverter } from '../converter';
 import { JsonRpcProxy } from '../factory';
 import { ProxyProvider, ProxyCreator } from './proxy-protocol';

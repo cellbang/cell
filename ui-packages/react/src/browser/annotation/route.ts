@@ -1,4 +1,4 @@
-import { Constant } from '@malagu/core';
+import { Constant } from '@celljs/core';
 import { RouteMetadata, ROUTE_METADATA } from '../router/router-protocol';
 import { ReactComponent } from './react-component';
 

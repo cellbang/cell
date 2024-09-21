@@ -1,4 +1,4 @@
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { DataSourceManager } from '../common';
 

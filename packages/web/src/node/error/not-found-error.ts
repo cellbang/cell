@@ -1,5 +1,5 @@
 import { HttpError } from './http-error';
-import { HttpStatus } from '@malagu/http';
+import { HttpStatus } from '@celljs/http';
 
 export class NotFoundError extends HttpError {
 

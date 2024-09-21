@@ -11,7 +11,7 @@ import { ContainerFactory } from '../container/container-factory';
 
 export class ApplicationFactory {
     static async create(applicationProps: ApplicationProps, ...modules: ContainerModule[]): Promise<Application> {
-        currentThis.malaguProps = applicationProps;
+        currentThis.cellProps = applicationProps;
         const container = ContainerFactory.create(commonModule, autoBind(), ...modules);
         ContainerProvider.set(container);
         const application = container.get<Application>(Application);

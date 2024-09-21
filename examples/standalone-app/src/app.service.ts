@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component()
 export class AppService {

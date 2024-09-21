@@ -1,1 +1,1 @@
-# Malagu - FaaS Adapter Component
+# Cell - FaaS Adapter Component

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, Nav, BoxProps } from 'grommet';
-import { ConfigUtil } from '@malagu/core';
+import { ConfigUtil } from '@celljs/core';
 import { AreaType } from '../area-protocol';
-import { Slot } from '@malagu/react';
-import { Widget } from '@malagu/widget';
+import { Slot } from '@celljs/react';
+import { Widget } from '@celljs/widget';
 
 export function TopArea(props: BoxProps) {
-    props = { ...ConfigUtil.get('malagu.shell.topArea'), ...props };
+    props = { ...ConfigUtil.get('cell.shell.topArea'), ...props };
 
     return (
         <Nav direction="row" pad={{ vertical: 'small', horizontal: 'medium' }} elevation="xsmall" justify="between" {...props}>

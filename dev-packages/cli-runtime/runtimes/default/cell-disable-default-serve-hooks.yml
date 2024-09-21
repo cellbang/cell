@@ -1,0 +1,3 @@
+cell:
+  cli-service:
+    serveHooks: false

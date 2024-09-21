@@ -1,0 +1,25 @@
+cell:
+  cloud:
+    apiGateway:
+      stage:
+        name: ${stage}
+        Description: 'Created By Cell'
+      api:
+        name: ${cell.cloud.function.name}
+        protocolType: HTTP
+      route:
+        routeKey: ANY /{proxy+}
+      integration:
+        connectionType: INTERNET
+        integrationMethod: POST
+        integrationType: AWS_PROXY
+        payloadFormatVersion: '2.0'
+        timeoutInMillis: 25000
+      customDomain:
+        # name: abc.com
+        # certificateArn: xxxx
+        hostedZoneId: REGIONAL
+        apiMapping:
+          apiMappingKey: '${stage}/*'
+  server:
+    path: /${stage}/

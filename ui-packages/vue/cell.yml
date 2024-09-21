@@ -1,0 +1,9 @@
+targets:
+  - frontend
+  - backend
+frontend:
+  cell:
+    vue:
+      path: ${cell.server.path}
+      
+  

@@ -1,5 +1,5 @@
 import { Context } from '../context';
-import { Component, Autowired, Optional, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Optional, Prioritizeable } from '@celljs/core';
 
 export const Middleware = Symbol('Middleware');
 

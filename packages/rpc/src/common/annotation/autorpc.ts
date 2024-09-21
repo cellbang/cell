@@ -1,4 +1,4 @@
-import { applyAutowiredDecorator, IdOrAutowiredOptionWithoutMulti, DoInject, parseAutowiredOption, Tagged, Inject } from '@malagu/core';
+import { applyAutowiredDecorator, IdOrAutowiredOptionWithoutMulti, DoInject, parseAutowiredOption, Tagged, Inject } from '@celljs/core';
 
 export const RPC = Symbol('RPC');
 export const ID_KEY = Symbol('ID_KEY');

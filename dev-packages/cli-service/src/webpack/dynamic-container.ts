@@ -1,4 +1,4 @@
-import { Module } from '@malagu/cli-common/lib/package/package-protocol';
+import { Module } from '@celljs/cli-common/lib/package/package-protocol';
 
 export interface DynamicContainerContext {
     registed?: boolean;
@@ -28,8 +28,8 @@ export function generateFrontendComponents(context: DynamicContainerContext) {
   require('reflect-metadata');
   require('setimmediate');
   const { Container } = require('inversify');
-  const { ContainerFactory } = require('@malagu/core/lib/common');
-  const { FrontendApplication } = require('@malagu/core/lib/browser');
+  const { ContainerFactory } = require('@celljs/core/lib/common');
+  const { FrontendApplication } = require('@celljs/core/lib/browser');
   
   const container = ContainerFactory.create();
   
@@ -62,7 +62,7 @@ export function generateBackendComponents(context: DynamicContainerContext) {
     const { modules, staticModules } = context;
     return `
   require('reflect-metadata');
-  const { ContainerFactory } = require('@malagu/core/lib/common');
+  const { ContainerFactory } = require('@celljs/core/lib/common');
   require('source-map-support').install();
   
   const container = ContainerFactory.create();

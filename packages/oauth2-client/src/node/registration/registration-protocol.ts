@@ -1,4 +1,4 @@
-import { ClientAuthenticationMethod, AuthorizationGrantType } from '@malagu/oauth2-core';
+import { ClientAuthenticationMethod, AuthorizationGrantType } from '@celljs/oauth2-core';
 
 export const ClientRegistrationManager = Symbol('ClientRegistrationManager');
 export const JwsAlgorithmResolver = Symbol('JwsAlgorithmResolver');

@@ -1,7 +1,7 @@
 import { RequestCache, SavedRequest, SAVED_REQUEST } from './cache-protocol';
-import { AttributeScope, Context } from '@malagu/web/lib/node';
-import { Component, Value, Autowired } from '@malagu/core';
-import { ENDPOINT, PathResolver } from '@malagu/web';
+import { AttributeScope, Context } from '@celljs/web/lib/node';
+import { Component, Value, Autowired } from '@celljs/core';
+import { ENDPOINT, PathResolver } from '@celljs/web';
 import * as qs from 'qs';
 
 @Component(RequestCache)

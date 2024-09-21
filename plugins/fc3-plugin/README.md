@@ -1,1 +1,1 @@
-# Malagu - FC3 Plugin Component
+# Cell - FC3 Plugin Component

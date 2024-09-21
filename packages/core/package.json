@@ -1,5 +1,5 @@
 {
-  "name": "@malagu/core",
+  "name": "@celljs/core",
   "version": "2.60.3",
   "description": "",
   "main": "lib/common/index.js",
@@ -22,32 +22,32 @@
     "access": "public"
   },
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src",
-    "malagu.yml",
-    "malagu-remote.yml"
+    "cell.yml",
+    "cell-remote.yml"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3",
+    "@celljs/component": "2.60.3",
     "@types/jexl": "^2.2.0",
     "@types/traverse": "^0.6.32"
   },

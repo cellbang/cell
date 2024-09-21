@@ -1,6 +1,6 @@
-import { Autowired } from '@malagu/core';
-import { JwtService } from '@malagu/jwt';
-import { Controller, Get, Text } from '@malagu/mvc/lib/node';
+import { Autowired } from '@celljs/core';
+import { JwtService } from '@celljs/jwt';
+import { Controller, Get, Text } from '@celljs/mvc/lib/node';
 
 @Controller()
 export class HomeController {
@@ -11,13 +11,13 @@ export class HomeController {
     @Get()
     @Text()
     home(): string {
-        return 'Welcome to Malagu';
+        return 'Welcome to Cell';
     }
 
     @Get('/login')
     @Text()
     login(): Promise<string> {
-        const token = this.jwtService.sign({ name: 'malagu' });
+        const token = this.jwtService.sign({ name: 'cell' });
         return token;
     }
 }

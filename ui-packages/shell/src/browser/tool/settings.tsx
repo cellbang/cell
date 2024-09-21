@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Button, ButtonProps, Drop, ThemeType, Box } from 'grommet';
-import { ConfigUtil, ContainerUtil } from '@malagu/core';
-import { Icon, ThemeBox, LocaleMenu } from '@malagu/grommet';
-import { Widget, ThemeManager } from '@malagu/widget';
+import { ConfigUtil, ContainerUtil } from '@celljs/core';
+import { Icon, ThemeBox, LocaleMenu } from '@celljs/grommet';
+import { Widget, ThemeManager } from '@celljs/widget';
 import { AreaType } from '../area';
 import styled from 'styled-components';
-import { Slot } from '@malagu/react';
+import { Slot } from '@celljs/react';
 
 const { Fragment } = React;
 
@@ -21,7 +21,7 @@ export function Settings(props: ButtonProps) {
     // eslint-disable-next-line no-null/no-null
     const targetRef = React.useRef(null);
     const [show, setShow] = React.useState(false);
-    const { icon, ...rest } = ConfigUtil.get<any>('malagu.shell.settings');
+    const { icon, ...rest } = ConfigUtil.get<any>('cell.shell.settings');
     props = { ...rest, ...props };
     React.useEffect(() => {
         const themeManager = ContainerUtil.get<ThemeManager<ThemeType>>(ThemeManager);

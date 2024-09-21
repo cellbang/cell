@@ -1,8 +1,8 @@
 import {
     ConfigurationContext,
     WebpackContext,
-} from '@malagu/cli-service/lib/context/context-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+} from '@celljs/cli-service/lib/context/context-protocol';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 export default async (context: WebpackContext) => {
     const { configurations } = context;
     const config = ConfigurationContext.getBackendConfiguration(configurations);

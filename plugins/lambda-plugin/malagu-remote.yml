@@ -1,5 +1,0 @@
-mode: "${currentMode|toObjects[.item in [ 'api-gateway', 'timer', 'event']]|suffix('-mode') || 'api-gateway-mode'}"
-malagu:
-  cloud:
-    function:
-      runtime: nodejs14.x

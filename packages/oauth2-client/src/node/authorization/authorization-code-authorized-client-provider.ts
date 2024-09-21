@@ -1,7 +1,7 @@
 import { AuthorizedClientProvider, AuthorizationContext, AuthorizedClient } from './authorization-protocol';
-import { AuthorizationGrantType } from '@malagu/oauth2-core';
+import { AuthorizationGrantType } from '@celljs/oauth2-core';
 import { ClientAuthorizationRequiredError } from '../error';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component(AuthorizedClientProvider)
 export class AuthorizationCodeAuthorizedClientProvider implements AuthorizedClientProvider {

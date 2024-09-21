@@ -1,1 +1,1 @@
-# Malagu - ESLint Component
+# Cell - ESLint Component

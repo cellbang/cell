@@ -1,17 +1,17 @@
 import { ClientRegistrationManager, ClientRegistration } from './registration-protocol';
-import { Value, Component } from '@malagu/core';
-import { AuthorizationGrantType, ClientAuthenticationMethod } from '@malagu/oauth2-core';
+import { Value, Component } from '@celljs/core';
+import { AuthorizationGrantType, ClientAuthenticationMethod } from '@celljs/oauth2-core';
 
 @Component(ClientRegistrationManager)
 export class InMemoryClientRegistrationManager implements ClientRegistrationManager {
 
-    @Value('malagu.oauth2.client.registrations')
+    @Value('cell.oauth2.client.registrations')
     protected readonly registrations: { [id: string]: ClientRegistration } = {};
 
-    @Value('malagu.oauth2.client.registrationTemplates')
+    @Value('cell.oauth2.client.registrationTemplates')
     protected readonly registrationTemplates: { [id: string]: ClientRegistration } = {};
 
-    @Value('malagu.oauth2.client.defaultRedirectUri')
+    @Value('cell.oauth2.client.defaultRedirectUri')
     protected readonly defaultRedirectUri: string;
 
     protected initialized = false;

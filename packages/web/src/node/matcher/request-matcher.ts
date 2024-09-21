@@ -1,13 +1,13 @@
 import { RequestMatcher } from './matcher-protocol';
 import { Context } from '../context';
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import * as UrlPattern from 'url-pattern';
 
 @Component(RequestMatcher)
 export class RequestMatcherImpl implements RequestMatcher {
     protected caches: Map<string, UrlPattern> = new Map<string, UrlPattern>();
 
-    @Value('malagu.web.route.cacheSize')
+    @Value('cell.web.route.cacheSize')
     protected readonly cacheSize: number;
 
     async match(pattern: any, method?: string): Promise<any> {

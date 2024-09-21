@@ -1,1 +1,1 @@
-# Malagu - Python Plugin Component
+# Cell - Python Plugin Component

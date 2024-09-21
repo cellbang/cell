@@ -1,4 +1,4 @@
-import { Autowired, Component, Logger } from '@malagu/core';
+import { Autowired, Component, Logger } from '@celljs/core';
 import { RecoveryCallback, RetryCallback, RetryContext, RetryOperations, RetryOptions } from './retry-protocol';
 import { RetryError } from '../error';
 import { BackOffPolicy } from '../back-off/back-off-protocol';

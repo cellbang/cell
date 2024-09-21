@@ -1,5 +1,5 @@
-import { Context } from '@malagu/web/lib/node';
-import { OAuth2ParameterNames, AuthorizationResponse } from '@malagu/oauth2-core';
+import { Context } from '@celljs/web/lib/node';
+import { OAuth2ParameterNames, AuthorizationResponse } from '@celljs/oauth2-core';
 
 export namespace AuthorizationResponseUtil {
 

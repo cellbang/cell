@@ -1,6 +1,6 @@
-import { Runtimes } from '@malagu/cli-runtime/lib/runtime-protocol';
-import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
-import { Settings } from '@malagu/cli-common/lib/settings/settings-protocol';
+import { Runtimes } from '@celljs/cli-runtime/lib/runtime-protocol';
+import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
+import { Settings } from '@celljs/cli-common/lib/settings/settings-protocol';
 
 const chalk = require('chalk');
 
@@ -15,26 +15,26 @@ export namespace BannerUtil {
             }
             runtimeStr = `Runtime<${runtimeStr}>`;
             runtimeStrLine = '\n│';
-            runtimeStrLine += chalk.yellow.bold(runtimeStr.padStart(25 + Math.floor(runtimeStr.length / 2)).padEnd(50)) + '│';
+            runtimeStrLine += chalk.yellow.bold(runtimeStr.padStart(20 + Math.floor(runtimeStr.length / 2)).padEnd(40)) + '│';
         }
         const banner = process.env.MALAGU_BANNER || settings.banner;
         if (banner) {
             console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStr));
         } else {
+            const versionStr = `@celljs/cli@${version}`;
+            const versionStrLine = `\n│${chalk.yellow.bold(versionStr.padStart(20 + Math.floor(versionStr.length / 2)).padEnd(40))}│`;
             console.log(`
-                   ___
- /'\\_/\`\\          /\\_ \\
-/\\      \\     __  \\//\\ \\      __       __   __  __
-\\ \\ \\__\\ \\  /'__\`\\  \\ \\ \\   /'__\`\\   /'_ \`\\/\\ \\/\\ \\
- \\ \\ \\_/\\ \\/\\ \\L\\.\\_ \\_\\ \\_/\\ \\L\\.\\_/\\ \\L\\ \\ \\ \\_\\ \\
-  \\ \\_\\\\ \\_\\ \\__/.\\_\\/\\____\\ \\__/.\\_\\ \\____ \\ \\____/
-   \\/_/ \\/_/\\/__/\\/_/\\/____/\\/__/\\/_/\\/___L\\ \\/___/
-                                       /\\____/
-${chalk.italic((('@malagu/cli@' + version) as any).padStart(37))}  \\_/__/
-
-╭──────────────────────────────────────────────────╮
-│      Serverless First Development Framework      │${runtimeStrLine}
-╰──────────────────────────────────────────────────╯
+ ____            ___    ___
+/\\  _\`\\         /\\_ \\  /\\_ \\
+\\ \\ \\/\\_\\     __\\//\\ \\ \\//\\ \\
+ \\ \\ \\/_/_  /'__\`\\\\ \\ \\  \\ \\ \\
+  \\ \\ \\L\\ \\/\\  __/ \\_\\ \\_ \\_\\ \\_
+   \\ \\____/\\ \\____\\/\\____\\/\\____\\
+    \\/___/  \\/____/\\/____/\\/____/
+                                                             
+╭────────────────────────────────────────╮
+│       Cell Development Framework       │${versionStrLine}${runtimeStrLine}
+╰────────────────────────────────────────╯
 `);
         }
     }

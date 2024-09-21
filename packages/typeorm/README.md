@@ -1,1 +1,1 @@
-# Malagu - typeorm Component
+# Cell - typeorm Component

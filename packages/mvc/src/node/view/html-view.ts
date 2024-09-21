@@ -1,12 +1,12 @@
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import { View } from './view-protocol';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 import { parse, render } from 'mustache';
 import { join } from 'path';
 import { readFile } from 'fs-extra';
 import { ViewMetadata } from '../annotation/view';
 import { HTML_VIEW_NAME } from '../annotation/html';
-import { MediaType } from '@malagu/http';
+import { MediaType } from '@celljs/http';
 
 @Component(View)
 export class HtmlView implements View {
@@ -15,7 +15,7 @@ export class HtmlView implements View {
 
     readonly priority = 500;
 
-    @Value('malagu.mustache')
+    @Value('cell.mustache')
     protected readonly options: any;
 
     async render(model: any, { metadata }: ViewMetadata): Promise<void> {

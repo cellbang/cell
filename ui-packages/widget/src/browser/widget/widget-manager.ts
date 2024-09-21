@@ -1,4 +1,4 @@
-import { Component, Autowired, Prioritizeable, Value, Optional } from '@malagu/core';
+import { Component, Autowired, Prioritizeable, Value, Optional } from '@celljs/core';
 import { WidgetManager, WidgetModel, Widget } from './widget-protocol';
 import { WidgetUtil } from './widget-util';
 
@@ -10,7 +10,7 @@ export class WidgetManagerImpl<T> implements WidgetManager<T> {
     constructor(
         @Autowired(Widget) @Optional() protected readonly widgets: Widget<T>[],
         @Autowired(WidgetModel) @Optional() protected readonly widgetModels: WidgetModel[],
-        @Value('malagu.widget.widgets') protected readonly widgetModelsForConfig: { [id: string]: WidgetModel }
+        @Value('cell.widget.widgets') protected readonly widgetModelsForConfig: { [id: string]: WidgetModel }
     ) {}
 
     async render(area: string): Promise<T[]> {

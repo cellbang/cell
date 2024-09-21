@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ConfigUtil } from '@malagu/core';
-import { Widget } from '@malagu/widget';
+import { ConfigUtil } from '@celljs/core';
+import { Widget } from '@celljs/widget';
 import { AreaType } from '../area';
-import { NavItemProps, NavItem, Icon } from '@malagu/grommet';
+import { NavItemProps, NavItem, Icon } from '@celljs/grommet';
 
 export function Logo(props: NavItemProps) {
-    const { label, icon, ...rest } = ConfigUtil.get('malagu.shell.logo');
+    const { label, icon, ...rest } = ConfigUtil.get('cell.shell.logo');
     props = { ...rest, ...props };
     return (<NavItem size="medium" gap="xsmall" label={label} icon={<Icon icon={icon}/>} hoverIndicator={false} activatable={false} {...props}/>);
 }

@@ -1,6 +1,6 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
-import { Autowired, Component, Logger } from '@malagu/core';
+import { Autowired, Component, Logger } from '@celljs/core';
 import { HTTP_MIDDLEWARE_PRIORITY } from './http-protocol';
 
 @Component(Middleware)

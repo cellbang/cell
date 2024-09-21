@@ -1,12 +1,12 @@
 import { caching, multiCaching } from 'cache-manager';
 import { CacheManager, CacheManagerFactory, CacheStoreFactory, CacheStoreFactoryConfig } from './cache-protocol';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Component, Value, Autowired } from '@celljs/core';
 import { DelegatingCacheManager } from './delegating-cache-manager';
 
 @Component(CacheManagerFactory)
 export class DefaultCacheManagerFactory implements CacheManagerFactory {
 
-    @Value('malagu.cache.config')
+    @Value('cell.cache.config')
     protected readonly cacheConfig: { [name: string]: CacheStoreFactoryConfig };
 
     @Autowired(CacheStoreFactory)

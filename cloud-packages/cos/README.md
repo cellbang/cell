@@ -1,1 +1,1 @@
-# Malagu - COS Component
+# Cell - COS Component

@@ -1,0 +1,4 @@
+cell:
+  webpack:
+    workboxWebpackPlugin:
+      generateInDevMode: false

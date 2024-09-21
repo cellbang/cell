@@ -1,4 +1,4 @@
-import { HttpMethod } from '@malagu/http';
+import { HttpMethod } from '@celljs/http';
 
 export const RequestCache = Symbol('RequestCache');
 export const SAVED_REQUEST = 'MALAGU_SECURITY_SAVED_REQUEST';

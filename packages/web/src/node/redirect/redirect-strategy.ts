@@ -1,7 +1,7 @@
 import { RedirectStrategy } from './redirect-protocol';
-import { Autowired, Component } from '@malagu/core';
+import { Autowired, Component } from '@celljs/core';
 import { Context } from '../context';
-import { HttpStatus, HttpHeaders } from '@malagu/http';
+import { HttpStatus, HttpHeaders } from '@celljs/http';
 import { PathResolver } from '../../common/resolver';
 
 @Component(RedirectStrategy)

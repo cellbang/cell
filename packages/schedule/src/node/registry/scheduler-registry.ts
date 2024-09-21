@@ -1,4 +1,4 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { CronJob } from 'cron';
 import { SchedulerRegistry, CronJobOptions } from './registry-protocol';
 import { DuplicateSchedulerError, NoSchedulerFoundError } from '../error';
@@ -7,7 +7,7 @@ import { CronJobFactory } from '../factory';
 @Component(SchedulerRegistry)
 export class DefaultSchedulerRegistry implements SchedulerRegistry {
 
-    @Value('malagu.schedule.defaultCronJobOptions')
+    @Value('cell.schedule.defaultCronJobOptions')
     protected readonly defaultCronJobOptions: Partial<CronJobOptions>;
 
     @Autowired(CronJobFactory)

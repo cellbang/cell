@@ -1,11 +1,11 @@
 import { ThemeProvider, ThemeOptions } from './theme-protocol';
-import { Component, Value, Autowired, Optional } from '@malagu/core';
+import { Component, Value, Autowired, Optional } from '@celljs/core';
 import { createTheme, Theme } from '@material-ui/core';
 
 @Component(ThemeProvider)
 export class ThemeProviderImpl implements ThemeProvider {
 
-    @Value('malagu["material-ui"].themeOptions')
+    @Value('cell["material-ui"].themeOptions')
     protected readonly themeOptions: ThemeOptions;
 
     @Autowired(ThemeOptions) @Optional()

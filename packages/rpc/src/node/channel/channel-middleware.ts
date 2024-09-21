@@ -1,7 +1,7 @@
-import { Middleware, Context } from '@malagu/web/lib/node';
-import { Component, Autowired } from '@malagu/core';
+import { Middleware, Context } from '@celljs/web/lib/node';
+import { Component, Autowired } from '@celljs/core';
 import { ChannelStrategy, CHANNEL_MIDDLEWARE_PRIORITY, CURRENT_CHANNEL_STRATEGY_REQUEST_KEY } from './channel-protocol';
-import { HttpHeaders, MediaType } from '@malagu/http';
+import { HttpHeaders, MediaType } from '@celljs/http';
 
 @Component(Middleware)
 export class ChannelMiddleware implements Middleware {

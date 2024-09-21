@@ -1,11 +1,11 @@
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import { PrivateKeyNotFoundError, PublicKeyNotFoundError } from './errors';
 import { JwtOptions, JwtSecretService, Secret } from './jwt-protocol';
 
 @Component(JwtSecretService)
 export class jwtSecretService implements JwtSecretService {
 
-    @Value('malagu.jwt')
+    @Value('cell.jwt')
     protected readonly jwtOptions?: JwtOptions;
 
     async getPublicKey(): Promise<string | Buffer> {

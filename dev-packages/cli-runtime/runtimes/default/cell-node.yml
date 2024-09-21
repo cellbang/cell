@@ -1,0 +1,12 @@
+targets:
+  - backend
+devComponents:
+  '@celljs/cli-service': ${version}
+  '@celljs/node-plugin': ${version}
+cell:
+  server:
+    port: 9000
+  webpack:
+    filterWarningsPlugin:
+      node: >-
+        ${ ["Module not found: Error: Can\'t resolve"] | onTarget('backend') }

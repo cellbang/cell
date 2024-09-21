@@ -1,4 +1,4 @@
-import { Constant, ComponentId } from '@malagu/core';
+import { Constant, ComponentId } from '@celljs/core';
 import * as React from 'react';
 
 export const ReactComponent =

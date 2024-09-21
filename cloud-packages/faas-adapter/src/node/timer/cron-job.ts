@@ -1,6 +1,6 @@
-import { Disposable } from '@malagu/core';
+import { Disposable } from '@celljs/core';
 import { CronJob, CronTime } from 'cron';
-import { CronJobOptions } from '@malagu/schedule';
+import { CronJobOptions } from '@celljs/schedule';
 import { Clock } from './timer-protocol';
 
 export class FaaSCronJob extends CronJob {

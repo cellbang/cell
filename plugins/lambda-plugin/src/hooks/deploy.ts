@@ -1,11 +1,11 @@
-import { CliContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
+import { CliContext, PathUtil, ProjectUtil, SpinnerUtil } from '@celljs/cli-common';
 import * as JSZip from 'jszip';
 import * as delay from 'delay';
 import { Lambda, ApiGatewayV2, IAM } from 'aws-sdk';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
-import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
+import { DefaultCodeLoader } from '@celljs/code-loader-plugin';
 import { createClients, getAlias, getApi, getApiMapping, getCustomDomain, getFunction, getIntegration, getRoute, getStage, getTrigger } from './utils';
-import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
+import { generateUUUID } from '@celljs/cli-common/lib/utils/uuid';
 
 const chalk = require('chalk');
 const camelcaseKeys = require('camelcase-keys');

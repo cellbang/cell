@@ -9,6 +9,6 @@ export namespace ConfigUtil {
     }
 
     export function getRaw() {
-        return currentThis.malaguProps || config;
+        return currentThis.cellProps || config;
     }
 }

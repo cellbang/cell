@@ -1,7 +1,0 @@
-malagu:
-  includeModules: ${ true | onTarget('backend') }
-  webpack:
-    config:
-      externals:
-        vm2: vm2
-        better-sqlite3: better-sqlite3

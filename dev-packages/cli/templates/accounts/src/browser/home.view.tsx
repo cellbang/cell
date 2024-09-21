@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { ConfigUtil, ContainerUtil } from '@malagu/core';
-import { UserManager } from '@malagu/security/lib/browser';
-import { View } from '@malagu/react';
-import { LocaleMenu, Icon } from '@malagu/grommet';
+import { ConfigUtil, ContainerUtil } from '@celljs/core';
+import { UserManager } from '@celljs/security/lib/browser';
+import { View } from '@celljs/react';
+import { LocaleMenu, Icon } from '@celljs/grommet';
 import { useIntl } from 'react-intl';
 import { Box, Button, Heading, ResponsiveContext, Avatar, Text} from 'grommet';
 import { Logout } from 'grommet-icons';
 import styled from 'styled-components';
-import { User } from '@malagu/security';
+import { User } from '@celljs/security';
 const { useContext } = React;
 
 const StyledWraper = styled.div`

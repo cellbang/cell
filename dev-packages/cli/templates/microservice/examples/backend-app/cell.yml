@@ -1,0 +1,3 @@
+cell:
+  rpc:
+    defaultEndpoint: ${cell.server.endpoint}{rpcPath}/{serviceIdentifier}

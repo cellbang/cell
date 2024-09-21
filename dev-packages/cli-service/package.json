@@ -1,41 +1,41 @@
 {
-  "name": "@malagu/cli-service",
+  "name": "@celljs/cli-service",
   "version": "2.60.3",
-  "description": "Malagu CLI Service.",
+  "description": "Cell CLI Service.",
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
-    "malagu-component",
-    "malagu-plugin"
+    "cell-component",
+    "cell-plugin"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src",
     "templates",
-    "malagu-unpackage.yml"
+    "cell-unpackage.yml"
   ],
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "dependencies": {
     "@gem-mine/webpack-chain": "^7.1.0",
-    "@malagu/cli-common": "2.60.3",
+    "@celljs/cli-common": "2.60.3",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "clear-module": "^4.0.0",
@@ -63,7 +63,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3",
+    "@celljs/component": "2.60.3",
     "@types/friendly-errors-webpack-plugin": "^0.1.4",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.7.2"

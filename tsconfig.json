@@ -1,293 +1,293 @@
 {
-  "extends": "@malagu/component/configs/base.tsconfig.json",
+  "extends": "@celljs/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@malagu/core": [
+      "@celljs/core": [
         "packages/core/src/common"
       ],
-      "@malagu/core/lib/*": [
+      "@celljs/core/lib/*": [
         "packages/core/src/*"
       ],
-      "@malagu/web": [
+      "@celljs/web": [
         "packages/web/src/common"
       ],
-      "@malagu/web/lib/*": [
+      "@celljs/web/lib/*": [
         "packages/web/src/*"
       ],
-      "@malagu/securtiy": [
+      "@celljs/securtiy": [
         "packages/securtiy/src/common"
       ],
-      "@malagu/securtiy/lib/*": [
+      "@celljs/securtiy/lib/*": [
         "packages/securtiy/src/*"
       ],
-      "@malagu/widget": [
+      "@celljs/widget": [
         "packages/widget/src/browser"
       ],
-      "@malagu/react": [
+      "@celljs/react": [
         "packages/react/src/browser"
       ],
-      "@malagu/cloud": [
+      "@celljs/cloud": [
         "packages/cloud/src/common"
       ],
-      "@malagu/faas-adapter/lib/hooks": [
+      "@celljs/faas-adapter/lib/hooks": [
         "packages/faas-adapter/src/hooks"
       ],
-      "@malagu/cli-common/lib/*": [
+      "@celljs/cli-common/lib/*": [
         "dev-packages/cli-common/src/*"
       ],
-      "@malagu/cli-service/lib/*": [
+      "@celljs/cli-service/lib/*": [
         "dev-packages/cli-service/src/*"
       ],
-      "@malagu/cli/lib/*": [
+      "@celljs/cli/lib/*": [
         "dev-packages/cli/src/*"
       ],
-      "@malagu/compression/lib/*": [
+      "@celljs/compression/lib/*": [
         "dev-packages/compression/src/*"
       ],
-      "@malagu/eslint/lib/*": [
+      "@celljs/eslint/lib/*": [
         "dev-packages/eslint/src/*"
       ],
-      "@malagu/ext-scripts/*": [
+      "@celljs/ext-scripts/*": [
         "dev-packages/ext-scripts/*"
       ],
-      "@malagu/pwa/lib/*": [
+      "@celljs/pwa/lib/*": [
         "dev-packages/pwa/src/*"
       ],
-      "@malagu/antd/lib/*": [
+      "@celljs/antd/lib/*": [
         "ui-packages/antd/src/*"
       ],
-      "@malagu/authing/lib/*": [
+      "@celljs/authing/lib/*": [
         "packages/authing/src/*"
       ],
-      "@malagu/cache/lib/*": [
+      "@celljs/cache/lib/*": [
         "packages/cache/src/*"
       ],
-      "@malagu/cloud/lib/*": [
+      "@celljs/cloud/lib/*": [
         "cloud-packages/cloud/src/*"
       ],
-      "@malagu/cos/lib/*": [
+      "@celljs/cos/lib/*": [
         "cloud-packages/cos/src/*"
       ],
-      "@malagu/express-adapter/lib/*": [
+      "@celljs/express-adapter/lib/*": [
         "packages/express-adapter/src/*"
       ],
-      "@malagu/faas-adapter/lib/*": [
+      "@celljs/faas-adapter/lib/*": [
         "cloud-packages/faas-adapter/src/*"
       ],
-      "@malagu/fc-adapter/lib/*": [
+      "@celljs/fc-adapter/lib/*": [
         "cloud-packages/fc-adapter/src/*"
       ],
-      "@malagu/grommet/lib/*": [
+      "@celljs/grommet/lib/*": [
         "ui-packages/grommet/src/*"
       ],
-      "@malagu/lambda-adapter/lib/*": [
+      "@celljs/lambda-adapter/lib/*": [
         "cloud-packages/lambda-adapter/src/*"
       ],
-      "@malagu/logger/lib/*": [
+      "@celljs/logger/lib/*": [
         "packages/logger/src/*"
       ],
-      "@malagu/material-ui/lib/*": [
+      "@celljs/material-ui/lib/*": [
         "ui-packages/material-ui/src/*"
       ],
-      "@malagu/mvc/lib/*": [
+      "@celljs/mvc/lib/*": [
         "packages/mvc/src/*"
       ],
-      "@malagu/oauth2-client/lib/*": [
+      "@celljs/oauth2-client/lib/*": [
         "packages/oauth2-client/src/*"
       ],
-      "@malagu/oauth2-core/lib/*": [
+      "@celljs/oauth2-core/lib/*": [
         "packages/oauth2-core/src/*"
       ],
-      "@malagu/oauth2-jose/lib/*": [
+      "@celljs/oauth2-jose/lib/*": [
         "packages/oauth2-jose/src/*"
       ],
-      "@malagu/oidc-provider/lib/*": [
+      "@celljs/oidc-provider/lib/*": [
         "packages/oidc-provider/src/*"
       ],
-      "@malagu/oss/lib/*": [
+      "@celljs/oss/lib/*": [
         "cloud-packages/oss/src/*"
       ],
-      "@malagu/puppeteer/lib/*": [
+      "@celljs/puppeteer/lib/*": [
         "packages/puppeteer/src/*"
       ],
-      "@malagu/react/lib/*": [
+      "@celljs/react/lib/*": [
         "ui-packages/react/src/*"
       ],
-      "@malagu/rpc/lib/*": [
+      "@celljs/rpc/lib/*": [
         "packages/rpc/src/*"
       ],
-      "@malagu/s3/lib/*": [
+      "@celljs/s3/lib/*": [
         "cloud-packages/s3/src/*"
       ],
-      "@malagu/scf-adapter/lib/*": [
+      "@celljs/scf-adapter/lib/*": [
         "cloud-packages/scf-adapter/src/*"
       ],
-      "@malagu/schedule/lib/*": [
+      "@celljs/schedule/lib/*": [
         "packages/schedule/src/*"
       ],
-      "@malagu/security/lib/*": [
+      "@celljs/security/lib/*": [
         "packages/security/src/*"
       ],
-      "@malagu/serve-static/lib/*": [
+      "@celljs/serve-static/lib/*": [
         "packages/serve-static/src/*"
       ],
-      "@malagu/shell/lib/*": [
+      "@celljs/shell/lib/*": [
         "ui-packages/shell/src/*"
       ],
-      "@malagu/typeorm/lib/*": [
+      "@celljs/typeorm/lib/*": [
         "packages/typeorm/src/*"
       ],
-      "@malagu/vercel-adapter/lib/*": [
+      "@celljs/vercel-adapter/lib/*": [
         "cloud-packages/vercel-adapter/src/*"
       ],
-      "@malagu/vue/lib/*": [
+      "@celljs/vue/lib/*": [
         "ui-packages/vue/src/*"
       ],
-      "@malagu/widget/lib/*": [
+      "@celljs/widget/lib/*": [
         "ui-packages/widget/src/*"
       ],
-      "@malagu/example-backend-app/*": [
+      "@celljs/example-backend-app/*": [
         "examples/backend-app/*"
       ],
-      "@malagu/example-sample-app/*": [
+      "@celljs/example-sample-app/*": [
         "examples/sample-app/*"
       ],
-      "@malagu/cli-runtime/lib/*": [
+      "@celljs/cli-runtime/lib/*": [
         "dev-packages/cli-runtime/src/*"
       ],
-      "@malagu/example-schedule/*": [
+      "@celljs/example-schedule/*": [
         "examples/schedule/*"
       ],
-      "@malagu/example-accounts/*": [
+      "@celljs/example-accounts/*": [
         "examples/accounts/*"
       ],
-      "@malagu/cloud-plugin/lib/*": [
+      "@celljs/cloud-plugin/lib/*": [
         "plugins/cloud-plugin/src/*"
       ],
-      "@malagu/code-loader-plugin/lib/*": [
+      "@celljs/code-loader-plugin/lib/*": [
         "plugins/code-loader-plugin/src/*"
       ],
-      "@malagu/fc-plugin/lib/*": [
+      "@celljs/fc-plugin/lib/*": [
         "plugins/fc-plugin/src/*"
       ],
-      "@malagu/lambda-plugin/lib/*": [
+      "@celljs/lambda-plugin/lib/*": [
         "plugins/lambda-plugin/src/*"
       ],
-      "@malagu/scf-plugin/lib/*": [
+      "@celljs/scf-plugin/lib/*": [
         "plugins/scf-plugin/src/*"
       ],
-      "@malagu/frameworks/lib/*": [
+      "@celljs/frameworks/lib/*": [
         "dev-packages/frameworks/src/*"
       ],
-      "@malagu/static-plugin/lib/*": [
+      "@celljs/static-plugin/lib/*": [
         "plugins/static-plugin/src/*"
       ],
-      "@malagu/static-plugin/*": [
+      "@celljs/static-plugin/*": [
         "dev-packages/static-plugin/*"
       ],
-      "@malagu/node-plugin/lib/*": [
+      "@celljs/node-plugin/lib/*": [
         "plugins/node-plugin/src/*"
       ],
-      "@malagu/example-backend-app1/*": [
+      "@celljs/example-backend-app1/*": [
         "examples/backend-app/*"
       ],
-      "@malagu/example-backend-app2/*": [
+      "@celljs/example-backend-app2/*": [
         "examples/backend-app/*"
       ],
-      "@malagu/example-koa-app/*": [
+      "@celljs/example-koa-app/*": [
         "examples/koa-app/*"
       ],
-      "@malagu/example-security-app/*": [
+      "@celljs/example-security-app/*": [
         "examples/security-app/*"
       ],
-      "@malagu/next-plugin/lib/*": [
+      "@celljs/next-plugin/lib/*": [
         "plugins/next-plugin/src/*"
       ],
-      "@malagu/example-nextjs-app/*": [
+      "@celljs/example-nextjs-app/*": [
         "examples/nextjs-app/*"
       ],
-      "@malagu/adonis-plugin/lib/*": [
+      "@celljs/adonis-plugin/lib/*": [
         "plugins/adonis-plugin/src/*"
       ],
-      "@malagu/qq-guild-bot-adapter/lib/*": [
+      "@celljs/qq-guild-bot-adapter/lib/*": [
         "packages/qq-guild-bot-adapter/src/*"
       ],
-      "@malagu/example-qq-guild-bot-app/*": [
+      "@celljs/example-qq-guild-bot-app/*": [
         "examples/qq-guild-bot-app/*"
       ],
-      "@malagu/example-standalone-app/*": [
+      "@celljs/example-standalone-app/*": [
         "examples/standalone-app/*"
       ],
-      "@malagu/example-mycli/*": [
+      "@celljs/example-mycli/*": [
         "examples/mycli/*"
       ],
-      "@malagu/node-runtime-plugin/lib/*": [
+      "@celljs/node-runtime-plugin/lib/*": [
         "plugins/node-runtime-plugin/src/*"
       ],
-      "@malagu/config/lib/*": [
+      "@celljs/config/lib/*": [
         "packages/config/src/*"
       ],
-      "@malagu/component/*": [
+      "@celljs/component/*": [
         "dev-packages/component/*"
       ],
       "database-app/*": [
         "examples/database-app/*"
       ],
-      "@malagu/elasticsearch/lib/*": [
+      "@celljs/elasticsearch/lib/*": [
         "packages/elasticsearch/src/*"
       ],
-      "@malagu/testing/lib/*": [
+      "@celljs/testing/lib/*": [
         "dev-packages/testing/src/*"
       ],
       "admin-app/*": [
         "examples/admin-app/*"
       ],
-      "@malagu/jwt/lib/*": [
+      "@celljs/jwt/lib/*": [
         "packages/jwt/src/*"
       ],
-      "@malagu/example-jwt-app/*": [
+      "@celljs/example-jwt-app/*": [
         "examples/jwt-app/*"
       ],
       "adonis-app/*": [
         "examples/adonis-app/*"
       ],
-      "@malagu/python-plugin/lib/*": [
+      "@celljs/python-plugin/lib/*": [
         "plugins/python-plugin/src/*"
       ],
-      "@malagu/example-admin-app/*": [
+      "@celljs/example-admin-app/*": [
         "examples/admin-app/*"
       ],
-      "@malagu/example-adonis-app/*": [
+      "@celljs/example-adonis-app/*": [
         "examples/adonis-app/*"
       ],
-      "@malagu/example-prisma-app/*": [
+      "@celljs/example-prisma-app/*": [
         "examples/prisma-app/*"
       ],
-      "@malagu/example-docker/*": [
+      "@celljs/example-docker/*": [
         "examples/docker-app/*"
       ],
-      "@malagu/example-docker-app/*": [
+      "@celljs/example-docker-app/*": [
         "examples/docker-app/*"
       ],
-      "@malagu/rpc-core/lib/*": [
+      "@celljs/rpc-core/lib/*": [
         "packages/rpc-core/src/*"
       ],
       "nest-app/*": [
         "examples/nest-app/*"
       ],
-      "@malagu/fc3-plugin/lib/*": [
+      "@celljs/fc3-plugin/lib/*": [
         "plugins/fc3-plugin/src/*"
       ],
-      "@malagu/ai-core/lib/*": [
+      "@celljs/ai-core/lib/*": [
         "ai-packages/ai-core/src/*"
       ],
-      "@malagu/http/lib/*": [
+      "@celljs/http/lib/*": [
         "packages/http/src/*"
       ],
-      "@malagu/retry/lib/*": [
+      "@celljs/retry/lib/*": [
         "packages/retry/src/*"
       ]
     }

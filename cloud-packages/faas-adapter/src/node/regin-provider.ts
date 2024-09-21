@@ -1,6 +1,6 @@
-import { DefaultRegionProvider } from '@malagu/cloud/lib/node';
-import { Component } from '@malagu/core';
-import { RegionProvider } from '@malagu/cloud';
+import { DefaultRegionProvider } from '@celljs/cloud/lib/node';
+import { Component } from '@celljs/core';
+import { RegionProvider } from '@celljs/cloud';
 
 @Component({ id: RegionProvider, rebind: true })
 export class FaaSRegionProvider extends DefaultRegionProvider {

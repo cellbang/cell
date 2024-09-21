@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Context } from '@malagu/react';
+import { Context } from '@celljs/react';
 import { ConfigProvider as Provider, CONFIG_REACT_CONTEXT_PRIORITY } from './config-protocol';
-import { Autowired } from '@malagu/core/lib/common/annotation/detached';
+import { Autowired } from '@celljs/core/lib/common/annotation/detached';
 import { ConfigProvider } from 'antd';
 
 @Context()

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/mvc/lib/node';
+import { Controller, Get, Param, Delete, Put, Post, Body } from '@celljs/mvc/lib/node';
 
 export interface User {
     name: string;

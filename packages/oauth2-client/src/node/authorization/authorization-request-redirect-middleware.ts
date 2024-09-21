@@ -1,11 +1,11 @@
-import { Middleware, Context, RequestMatcher, HttpError, RedirectStrategy } from '@malagu/web/lib/node';
-import { Component, Value, Autowired, Logger } from '@malagu/core';
+import { Middleware, Context, RequestMatcher, HttpError, RedirectStrategy } from '@celljs/web/lib/node';
+import { Component, Value, Autowired, Logger } from '@celljs/core';
 import { AUTHORIZATION_REQUEST_BASE_URI } from '../constants';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_REQUEST_REDIRECT_MIDDLEWARE_PRIORITY } from './authorization-protocol';
-import { AuthorizationGrantType, AuthorizationRequest } from '@malagu/oauth2-core';
-import { HttpMethod, HttpStatus } from '@malagu/http';
+import { AuthorizationGrantType, AuthorizationRequest } from '@celljs/oauth2-core';
+import { HttpMethod, HttpStatus } from '@celljs/http';
 import { ClientAuthorizationError } from '../error';
-import { RequestCache } from '@malagu/security/lib/node';
+import { RequestCache } from '@celljs/security/lib/node';
 
 @Component(Middleware)
 export class AuthorizationRequestRedirectMiddleware implements Middleware {
@@ -28,7 +28,7 @@ export class AuthorizationRequestRedirectMiddleware implements Middleware {
     @Autowired(RequestCache)
     protected readonly requestCache: RequestCache;
 
-    @Value('malagu.security.targetUrlParameter')
+    @Value('cell.security.targetUrlParameter')
     protected readonly targetUrlParameter: string;
 
     @Autowired(Logger)

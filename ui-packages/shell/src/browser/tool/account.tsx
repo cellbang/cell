@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Avatar, AvatarProps, Drop, Box } from 'grommet';
-import { ConfigUtil, ContainerUtil } from '@malagu/core';
-import { Widget } from '@malagu/widget';
+import { ConfigUtil, ContainerUtil } from '@celljs/core';
+import { Widget } from '@celljs/widget';
 import { AreaType } from '../area';
 import styled from 'styled-components';
-import { Slot } from '@malagu/react';
-import { UserManager } from '@malagu/security/lib/browser';
-import { User } from '@malagu/security';
-import { NavItem, Icon } from '@malagu/grommet';
+import { Slot } from '@celljs/react';
+import { UserManager } from '@celljs/security/lib/browser';
+import { User } from '@celljs/security';
+import { NavItem, Icon } from '@celljs/grommet';
 
 const StyledAccount = styled.div`
     width: 200px;
@@ -27,7 +27,7 @@ export function Account(props: AvatarProps) {
         const subscription = loginUserManager.userInfoSubject.subscribe(u => setUser(u));
         return () => subscription.unsubscribe();
     }, []);
-    const { icon, login, ...rest } = ConfigUtil.get('malagu.shell.account');
+    const { icon, login, ...rest } = ConfigUtil.get('cell.shell.account');
     props = { ...rest, ...props };
     if (!user) {
         const { label, ...loginRest } = login;

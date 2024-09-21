@@ -1,13 +1,13 @@
 import { LocaleManager, Locale } from './locale-protocol';
-import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@malagu/core';
+import { Component, Value, Autowired, Optional, Prioritizeable, PostConstruct } from '@celljs/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component(LocaleManager)
 export class LocaleManagerImpl implements LocaleManager {
 
-    protected readonly langStorageKey = 'malagu:lang';
+    protected readonly langStorageKey = 'cell:lang';
 
-    @Value('malagu.locales')
+    @Value('cell.locales')
     protected readonly localesForConfig: { [lang: string]: Locale };
 
     @Autowired(Locale) @Optional()

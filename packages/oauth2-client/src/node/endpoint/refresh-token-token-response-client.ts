@@ -1,8 +1,8 @@
 import { AccessTokenResponseClient, INVALID_TOKEN_RESPONSE_ERROR_CODE, RefreshTokenGrantRequest } from './endpoint-protocol';
-import { Component, Autowired } from '@malagu/core';
-import { RestOperations } from '@malagu/http';
+import { Component, Autowired } from '@celljs/core';
+import { RestOperations } from '@celljs/http';
 import { ProviderDetailsManager } from '../provider';
-import { AccessTokenResponse, OAuth2ParameterNames, ClientAuthenticationMethod, OAuth2Error, OAuth2AuthorizationError, AccessTokenResponseConverter } from '@malagu/oauth2-core';
+import { AccessTokenResponse, OAuth2ParameterNames, ClientAuthenticationMethod, OAuth2Error, OAuth2AuthorizationError, AccessTokenResponseConverter } from '@celljs/oauth2-core';
 import { AuthorizationGrantRequestEntityUtil } from '../utils';
 import * as qs from 'qs';
 

@@ -1,8 +1,8 @@
 import './user-controller';
 import './home-controller';
-import { autoBindEntities } from '@malagu/typeorm';
+import { autoBindEntities } from '@celljs/typeorm';
 import * as entities from './entity';
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 
 autoBindEntities(entities);
 export default autoBind();

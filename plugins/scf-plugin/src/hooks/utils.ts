@@ -1,5 +1,5 @@
-import { ConfigUtil } from '@malagu/cli-common';
-import { Credentials } from '@malagu/cloud-plugin';
+import { ConfigUtil } from '@celljs/cli-common';
+import { Credentials } from '@celljs/cloud-plugin';
 import { scf, apigateway } from 'tencentcloud-sdk-nodejs';
 import * as COS from 'cos-nodejs-sdk-v5';
 const chalk = require('chalk');

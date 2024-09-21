@@ -1,9 +1,9 @@
-name: Malagu Deploy
+name: Cell Deploy
 
 on: push
 
 jobs:
-  malagu-deploy:
+  cell-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,12 +17,12 @@ jobs:
       - if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
         env: ${{ secrets }}
         working-directory: examples/backend-app
-        run: npx malagu deploy -m prod
+        run: npx cell deploy -m prod
       - if: ${{ github.ref == 'refs/heads/pre' }}
         env: ${{ secrets }}
         working-directory: examples/backend-app
-        run: npx malagu deploy -m pre
+        run: npx cell deploy -m pre
       - if: ${{ github.ref != 'refs/heads/master' && github.ref == 'refs/heads/main' && github.ref != 'refs/heads/pre' }}
         env: ${{ secrets }}
         working-directory: examples/backend-app
-        run: npx malagu deploy -m test
+        run: npx cell deploy -m test

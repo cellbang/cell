@@ -1,7 +1,7 @@
 
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 import * as WebpackChain from '@gem-mine/webpack-chain';
 
 export class DevServerConfigFactory {

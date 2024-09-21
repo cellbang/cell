@@ -13,7 +13,7 @@ export namespace LoggerUtil {
                 continue;
             }
 
-            console.log(chalk`🎯  malagu {yellow.bold target} - {bold ${target}}`);
+            console.log(chalk`🎯  cell {yellow.bold target} - {bold ${target}}`);
         }
     }
 
@@ -27,18 +27,18 @@ export namespace LoggerUtil {
             'pre': '⛰ ',
             'prod': '🌋'
         };
-        console.log(chalk`${(stageMap as any)[stage] || '🏕 '}  malagu {bold.red stage} - {bold ${stage}}`);
+        console.log(chalk`${(stageMap as any)[stage] || '🏕 '}  cell {bold.red stage} - {bold ${stage}}`);
     }
 
     export function printMode(ctx: CliContext) {
-        for (const m of ctx.pkg.rootComponentPackage.malaguComponent!.mode!) {
-            console.log(chalk`🏷   malagu {bold.blue mode} - {bold ${m}}`);
+        for (const m of ctx.pkg.rootComponentPackage.cellComponent!.mode!) {
+            console.log(chalk`🏷   cell {bold.blue mode} - {bold ${m}}`);
         }
     }
 
     export function printComponents(ctx: CliContext) {
         for (const component of ctx.pkg.componentPackages) {
-            console.log(chalk`🧱  malagu {green.bold component} - ${ component.name }@${ component.version }`);
+            console.log(chalk`🧱  cell {green.bold component} - ${ component.name }@${ component.version }`);
         }
     }
 }

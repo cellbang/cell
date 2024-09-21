@@ -1,5 +1,5 @@
-import { Middleware, Context } from '@malagu/web/lib/node';
-import { Component, Autowired } from '@malagu/core';
+import { Middleware, Context } from '@celljs/web/lib/node';
+import { Component, Autowired } from '@celljs/core';
 import { AuthenticationManager, AUTHENTICATION_MIDDLE_PRIORITY } from './authentication-protocol';
 
 @Component(Middleware)

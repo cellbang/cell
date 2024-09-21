@@ -1,7 +1,7 @@
 import { Channel, HttpChannel } from '../../common/channal';
 import { ChannelStrategy, CURRENT_MESSAGE_COUNT_REQUEST_KEY, CURRENT_RESPONSE_MESSAGE_REQUEST_KEY } from './channel-protocol';
-import { Component } from '@malagu/core';
-import { Context } from '@malagu/web/lib/node';
+import { Component } from '@celljs/core';
+import { Context } from '@celljs/web/lib/node';
 
 @Component(ChannelStrategy)
 export class HttpChannelStrategy implements ChannelStrategy {

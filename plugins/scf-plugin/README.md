@@ -1,1 +1,1 @@
-# Malagu - SCF Plugin Component
+# Cell - SCF Plugin Component

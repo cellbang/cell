@@ -1,4 +1,4 @@
-import { Autowired, Component, Optional, Prioritizeable } from '@malagu/core';
+import { Autowired, Component, Optional, Prioritizeable } from '@celljs/core';
 import { HandlerMapping, HandlerAdapter } from './handler-protocol';
 import { NotFoundError, NotFoundAndContinueError } from '../error';
 import { Context } from '../context';

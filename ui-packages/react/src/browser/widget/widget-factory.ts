@@ -1,6 +1,6 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import * as React from 'react';
-import { AbstractWidgetFactory, WidgetFactory, WidgetModel } from '@malagu/widget';
+import { AbstractWidgetFactory, WidgetFactory, WidgetModel } from '@celljs/widget';
 
 @Component(WidgetFactory)
 export class DecoratorWidgetFactory extends AbstractWidgetFactory<React.ReactNode> {

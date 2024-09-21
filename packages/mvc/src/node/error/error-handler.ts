@@ -1,15 +1,15 @@
-import { ErrorHandler, Context } from '@malagu/web/lib/node';
-import { Component, Autowired, Value } from '@malagu/core';
+import { ErrorHandler, Context } from '@celljs/web/lib/node';
+import { Component, Autowired, Value } from '@celljs/core';
 import { JsonViewTemplateRenderer } from '../view/view-protocol';
-import { HttpHeaders, MediaType } from '@malagu/http';
+import { HttpHeaders, MediaType } from '@celljs/http';
 
 @Component(ErrorHandler)
 export class JsonViewErrorHandler implements ErrorHandler {
 
-    @Value('malagu.mvc.jsonView.errorHandler.priority?:2000')
+    @Value('cell.mvc.jsonView.errorHandler.priority?:2000')
     readonly priority: number;
 
-    @Value('malagu.mvc.jsonView.errorHandler.enabled?:true')
+    @Value('cell.mvc.jsonView.errorHandler.enabled?:true')
     protected readonly enabled: boolean;
 
     @Autowired(JsonViewTemplateRenderer)

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="malagu logo" :src="logoImage" />
+    <img alt="cell logo" :src="logoImage" />
     <HelloWorld :msg="message" />
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script lang="ts">
 import HelloWorld from '../components/HelloWorld.vue';
 import { defineComponent } from 'vue';
-import { RpcUtil } from '@malagu/rpc';
+import { RpcUtil } from '@celljs/rpc';
 import { WelcomeServer } from '../../common/welcome-protocol';
 import * as logoImage from '../images/logo.png';
 

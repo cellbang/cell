@@ -1,0 +1,14 @@
+cell:
+  cloud:
+    trigger:
+      name: ${cell.cloud.function.name}-${cell.cloud.alias.name}
+      type: "apigw"
+      enable: "OPEN"
+      triggerDesc: 
+        service: 
+          serviceType: "BASIC"
+        api: 
+          requestConfig:
+            path: '/'
+        release:
+          environmentName: "release"

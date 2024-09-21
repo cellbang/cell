@@ -1,8 +1,8 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { OidcProvider } from './oidc-protocol';
 import Provider from 'oidc-provider';
 import { ConfigurationProvider } from '../configuration';
-import { ENDPOINT } from '@malagu/web';
+import { ENDPOINT } from '@celljs/web';
 
 @Component(OidcProvider)
 export class OidcProviderImpl implements OidcProvider {

@@ -1,8 +1,8 @@
 import { AuthorizationRequestManager } from './authorization-protocol';
-import { AuthorizationRequest, OAuth2ParameterNames } from '@malagu/oauth2-core';
-import { Context } from '@malagu/web/lib/node';
+import { AuthorizationRequest, OAuth2ParameterNames } from '@celljs/oauth2-core';
+import { Context } from '@celljs/web/lib/node';
 import { ok } from 'assert';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component(AuthorizationRequestManager)
 export class HttpSessionAuthorizationRequestManager implements AuthorizationRequestManager<AuthorizationRequest> {

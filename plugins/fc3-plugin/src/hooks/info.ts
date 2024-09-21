@@ -1,5 +1,5 @@
-import { InfoContext, ProjectUtil } from '@malagu/cli-common';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
+import { InfoContext, ProjectUtil } from '@celljs/cli-common';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
 import { getAlias, getFunction, getCustomDomain, getTrigger, getLayer, createFcClient } from './utils';
 import * as chalk from 'chalk';
 import type FC20230330 from '@alicloud/fc20230330';

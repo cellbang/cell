@@ -1,11 +1,11 @@
-import { CliContext } from '@malagu/cli-common/lib/context';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils';
+import { CliContext } from '@celljs/cli-common/lib/context';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils';
 import { join, resolve } from 'path';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { EMPTY } from '@malagu/cli-common/lib/constants';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import { EMPTY } from '@celljs/cli-common/lib/constants';
 import { readFileSync, writeFileSync, ensureDir, existsSync } from 'fs-extra';
-import { ApplicationConfig } from '@malagu/cli-common/lib/package/application-config';
-import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { ApplicationConfig } from '@celljs/cli-common/lib/package/application-config';
+import { CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
 
 export async function renderEntry(ctx: CliContext) {
     const { pkg, cfg } = ctx;
@@ -27,7 +27,7 @@ export async function renderEntry(ctx: CliContext) {
     }
 
     if (CommandUtil.includesCommand(ctx.args, [ 'build', 'deploy' ])) {
-        const isLambda = pkg.componentPackages.some(c => c.name === '@malagu/lambda-plugin');
+        const isLambda = pkg.componentPackages.some(c => c.name === '@celljs/lambda-plugin');
         const isFastify = pkg.framework?.name === 'fastify';
         let entryTemplate = join(__dirname, '..', 'entry.js');
         if (isLambda) {
@@ -46,7 +46,7 @@ export async function renderEntry(ctx: CliContext) {
 
 async function doRenderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: string) {
     ensureDir(PathUtil.getProjectHomePath());
-    const config = ConfigUtil.getBackendMalaguConfig(cfg);
+    const config = ConfigUtil.getBackendCellConfig(cfg);
     const server = config.server;
     const entryMode = config['node-plugin']?.entryMode;
     const port = server?.port ?? 9000;
@@ -70,7 +70,7 @@ export default async (context: CliContext) => {
     const { pkg, cfg, } = context;
     const props = ConfigUtil.getBackendConfig(cfg);
     if (!props.entry) {
-        const config = ConfigUtil.getBackendMalaguConfig(cfg);
+        const config = ConfigUtil.getBackendCellConfig(cfg);
         const entryMode = config['node-plugin']?.entryMode;
         const cwd = process.cwd();
         const mainEntry = pkg.pkg.main;

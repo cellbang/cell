@@ -1,4 +1,4 @@
-import { isOSX } from '@malagu/core';
+import { isOSX } from '@celljs/core';
 
 export type KeySequence = KeyCode[];
 export namespace KeySequence {

@@ -1,43 +1,43 @@
 {
-  "name": "@malagu/oauth2-core",
+  "name": "@celljs/oauth2-core",
   "version": "2.60.3",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.60.3",
-    "@malagu/security": "2.60.3",
-    "@malagu/web": "2.60.3"
+    "@celljs/core": "2.60.3",
+    "@celljs/security": "2.60.3",
+    "@celljs/web": "2.60.3"
   },
   "publishConfig": {
     "access": "public"
   },
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "cell.yml"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3",
+    "@celljs/component": "2.60.3",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },

@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import webpack = require('webpack');
 const Server = require('webpack-dev-server/lib/Server');
 import { Callback } from './serve';
-import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
 import * as delay from 'delay';
 import { ConfigurationContext } from '../context/context-protocol';
 const clearModule = require('clear-module');

@@ -1,7 +1,7 @@
-import { Autowired } from '@malagu/core';
-import { Context } from '@malagu/web/lib/node';
-import { Controller, Get, Query, File } from '@malagu/mvc/lib/node';
-import { BrowserProvider } from '@malagu/puppeteer';
+import { Autowired } from '@celljs/core';
+import { Context } from '@celljs/web/lib/node';
+import { Controller, Get, Query, File } from '@celljs/mvc/lib/node';
+import { BrowserProvider } from '@celljs/puppeteer';
 
 @Controller()
 export class PuppeteerController {

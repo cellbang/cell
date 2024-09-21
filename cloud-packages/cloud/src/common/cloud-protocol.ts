@@ -1,4 +1,4 @@
-import { Autowired, ConfigUtil } from '@malagu/core';
+import { Autowired, ConfigUtil } from '@celljs/core';
 import { Account, AccountProvider } from './account-protocol';
 import { ClientOptions, ClientOptionsProvider } from './client-protocol';
 import { Credentials, CredentialsProvider } from './credentials-protocol';
@@ -34,20 +34,20 @@ export abstract class AbstractCloudService<T extends RawCloudService> implements
 
     async getRawCloudService(): Promise<T> {
         if (!this._rawCloudService) {
-            const accountProp = `malagu.cloud.${this.name}.account`;
-            const clientProp = `malagu.cloud.${this.name}.client`;
-            const regionProp = `malagu.cloud.${this.name}.region`;
-            const credentialsProp = `malagu.cloud.${this.name}.credentials`;
+            const accountProp = `cell.cloud.${this.name}.account`;
+            const clientProp = `cell.cloud.${this.name}.client`;
+            const regionProp = `cell.cloud.${this.name}.region`;
+            const credentialsProp = `cell.cloud.${this.name}.credentials`;
 
             const account = ConfigUtil.get<Account>(accountProp) || await this.accountProvider.provide();
             const clientOptions = ConfigUtil.get<ClientOptions>(clientProp) || await this.clientOptionsProvider.provide() || { internal: true };
             const region = ConfigUtil.get<string>(regionProp) || await this.regionProvider.provide();
             if (!region) {
-                throw Error(`Please configure region through the properties "malagu.cloud.region" or "${regionProp}"`);
+                throw Error(`Please configure region through the properties "cell.cloud.region" or "${regionProp}"`);
             }
             const credentials = ConfigUtil.get<Credentials>(credentialsProp) || await this.credentialsProvider.provide();
             if (!credentials) {
-                throw Error(`Please configure credentials through the properties "malagu.cloud.credentials" or "${credentialsProp}"`);
+                throw Error(`Please configure credentials through the properties "cell.cloud.credentials" or "${credentialsProp}"`);
             }
 
             this._rawCloudService = await this.doCreateRawCloudService(credentials, region, clientOptions, account);

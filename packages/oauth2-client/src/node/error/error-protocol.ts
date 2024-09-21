@@ -1,4 +1,4 @@
-import { HTTP_ERROR_HANDLER_PRIORITY } from '@malagu/web/lib/node';
+import { HTTP_ERROR_HANDLER_PRIORITY } from '@celljs/web/lib/node';
 
 export const OAUTH2_AUTHORIZATION_ERROR_HANDLER_PRIORITY = HTTP_ERROR_HANDLER_PRIORITY + 100;
 

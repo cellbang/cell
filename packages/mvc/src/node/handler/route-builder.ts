@@ -1,8 +1,8 @@
 import { CONTROLLER, ControllerMetadata } from '../annotation/controller';
 import { METADATA_KEY } from '../constants';
 import { StrOrRegex, MethodMetadata } from '../annotation/method';
-import { getOwnMetadata, Component, Autowired, Optional, ErrorType, Prioritizeable, getTargetClass } from '@malagu/core';
-import { PathResolver } from '@malagu/web';
+import { getOwnMetadata, Component, Autowired, Optional, ErrorType, Prioritizeable, getTargetClass } from '@celljs/core';
+import { PathResolver } from '@celljs/web';
 import { CatchMetadata } from '../annotation';
 import { PathRouteMetadata, ErrorRouteMetadata } from './handler-protocol';
 

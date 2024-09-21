@@ -1,5 +1,5 @@
-import { WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { WebpackContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 
 import { existsSync } from 'fs';
 import { join } from 'path';

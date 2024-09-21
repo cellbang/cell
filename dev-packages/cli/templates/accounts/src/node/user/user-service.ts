@@ -1,12 +1,12 @@
-import { UserService, UsernameNotFoundError } from '@malagu/security/lib/node';
-import { Value, Component, Autowired } from '@malagu/core';
-import { User, UserType } from '@malagu/security';
+import { UserService, UsernameNotFoundError } from '@celljs/security/lib/node';
+import { Value, Component, Autowired } from '@celljs/core';
+import { User, UserType } from '@celljs/security';
 import { UserRepository } from './user-protocol';
 
 @Component({ id: UserService, rebind: true })
 export class DatabaseUserService implements UserService<string, User> {
 
-    @Value('malagu.security')
+    @Value('cell.security')
     protected readonly options: any;
 
     @Autowired(UserRepository)

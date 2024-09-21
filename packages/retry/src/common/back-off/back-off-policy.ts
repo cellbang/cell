@@ -1,4 +1,4 @@
-import { Component, timeout } from '@malagu/core';
+import { Component, timeout } from '@celljs/core';
 import { BackOffContext, BackOffPolicy } from './back-off-protocol';
 import { RetryContext } from '../retry';
 

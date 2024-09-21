@@ -23,5 +23,5 @@ gh-pages
 *.tsbuildinfo
 .eslintcache
 *.sql*
-.malagu
+.cell
 

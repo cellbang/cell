@@ -1,13 +1,13 @@
 {
-  "name": "@malagu/mvc",
+  "name": "@celljs/mvc",
   "version": "2.60.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.60.3",
-    "@malagu/http": "2.60.3",
-    "@malagu/web": "2.60.3",
+    "@celljs/core": "2.60.3",
+    "@celljs/http": "2.60.3",
+    "@celljs/web": "2.60.3",
     "fs-extra": "^11.1.1",
     "mustache": "^4.2.0",
     "reflect-metadata": "^0.1.13"
@@ -16,31 +16,31 @@
     "access": "public"
   },
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "cell.yml"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3",
+    "@celljs/component": "2.60.3",
     "@types/mustache": "^4.2.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

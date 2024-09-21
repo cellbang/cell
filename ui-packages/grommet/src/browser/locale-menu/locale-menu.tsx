@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Menu, MenuProps, ButtonType, Text } from 'grommet';
-import { ContainerUtil } from '@malagu/core';
-import { LocaleManager, Locale } from '@malagu/widget';
+import { ContainerUtil } from '@celljs/core';
+import { LocaleManager, Locale } from '@celljs/widget';
 import { useIntl, IntlShape } from 'react-intl';
 import { Down } from 'grommet-icons';
 

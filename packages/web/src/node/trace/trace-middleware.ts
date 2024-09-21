@@ -1,6 +1,6 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
-import { Component, Autowired, Value } from '@malagu/core';
+import { Component, Autowired, Value } from '@celljs/core';
 import { TRACE_MIDDLEWARE_PRIORITY, TRACE_ID_RESPONSE_FIELD, TraceIdResolver } from './trace-protocol';
 
 @Component(Middleware)

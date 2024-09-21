@@ -1,4 +1,4 @@
-import { Type } from '@malagu/core';
+import { Type } from '@celljs/core';
 
 export const PipeTransform = Symbol('PipeTransform');
 export const PipeProvider = Symbol('PipeProvider');

@@ -1,14 +1,14 @@
-import { RequestMatcher, Middleware, Context } from '@malagu/web/lib/node';
-import { Component, Autowired, Value } from '@malagu/core';
-import { HttpHeaders, MediaType } from '@malagu/http';
-import { PathResolver } from '@malagu/web';
+import { RequestMatcher, Middleware, Context } from '@celljs/web/lib/node';
+import { Component, Autowired, Value } from '@celljs/core';
+import { HttpHeaders, MediaType } from '@celljs/http';
+import { PathResolver } from '@celljs/web';
 import { USER_MIDDLEWARE_PRIORITY } from './user-protocol';
 import { SecurityContext } from '../context/context-protocol';
 
 @Component(Middleware)
 export class UserMiddleware implements Middleware {
 
-    @Value('malagu.security.userInfoEndpoint')
+    @Value('cell.security.userInfoEndpoint')
     protected readonly userInfoEndpoint: any;
 
     @Autowired(PathResolver)

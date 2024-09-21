@@ -1,12 +1,12 @@
 import { UserService } from './user-protocol';
-import { Value, Component } from '@malagu/core';
+import { Value, Component } from '@celljs/core';
 import { UsernameNotFoundError } from '../error';
 import { User, UserType } from '../../common';
 
 @Component(UserService)
 export class UserServiceImpl implements UserService<string, User> {
 
-    @Value('malagu.security')
+    @Value('cell.security')
     protected readonly options: any;
 
     async load(username: string): Promise<User> {

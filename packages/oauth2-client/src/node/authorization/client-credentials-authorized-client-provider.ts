@@ -1,6 +1,6 @@
 import { AuthorizedClientProvider, AuthorizationContext, AuthorizedClient } from './authorization-protocol';
-import { AuthorizationGrantType, OAuth2AuthorizationError, AccessToken } from '@malagu/oauth2-core';
-import { Component, Autowired, Value } from '@malagu/core';
+import { AuthorizationGrantType, OAuth2AuthorizationError, AccessToken } from '@celljs/oauth2-core';
+import { Component, Autowired, Value } from '@celljs/core';
 import { ClientCredentialsTokenResponseClient } from '../endpoint';
 import { ClientRegistration } from '../registration';
 import { ClientAuthorizationError } from '../error';
@@ -8,7 +8,7 @@ import { ClientAuthorizationError } from '../error';
 @Component(AuthorizedClientProvider)
 export class ClientCredentialsAuthorizedClientProvider implements AuthorizedClientProvider {
 
-    @Value('malagu.oauth2.client.clockSkew')
+    @Value('cell.oauth2.client.clockSkew')
     protected readonly clockSkew: number;
 
     @Autowired(ClientCredentialsTokenResponseClient)

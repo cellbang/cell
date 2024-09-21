@@ -3,17 +3,17 @@ import { prompt } from 'prompts';
 import { resolve, sep } from 'path';
 import { CloudConfiguration, Profile } from './cloud-protocol';
 import { load, dump } from 'js-yaml';
-import { ApplicationConfig, BACKEND_TARGET, ConfigUtil, PathUtil } from '@malagu/cli-common';
-import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
+import { ApplicationConfig, BACKEND_TARGET, ConfigUtil, PathUtil } from '@celljs/cli-common';
+import { CodeUri } from '@celljs/code-loader-plugin/lib/code-protocol';
 
 export namespace CloudUtils {
 
     export function getConfiguration(cfg: ApplicationConfig): CloudConfiguration {
-        return ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET).cloud || {};
+        return ConfigUtil.getCellConfig(cfg, BACKEND_TARGET).cloud || {};
     }
 
     export function getProfilePath(profilePath: string) {
-        return resolve(PathUtil.getMalaguHomePath(), profilePath.split('/').join(sep));
+        return resolve(PathUtil.getCellHomePath(), profilePath.split('/').join(sep));
     }
 
     export async function getProfileFromFile(profilePath: string): Promise<Profile | undefined> {

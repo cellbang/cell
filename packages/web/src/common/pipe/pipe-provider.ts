@@ -1,4 +1,4 @@
-import { Component, Autowired, Optional, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Optional, Prioritizeable } from '@celljs/core';
 import { PipeTransform, PipeProvider } from './pipe-protocol';
 
 @Component(PipeProvider)

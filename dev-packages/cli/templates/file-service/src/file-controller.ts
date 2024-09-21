@@ -1,8 +1,8 @@
-import { Autowired, Value } from '@malagu/core';
-import { HttpError, Context } from '@malagu/web/lib/node';
-import { HttpHeaders, HttpStatus } from '@malagu/http';
-import { ObjectStorageService, RawCloudService } from '@malagu/cloud';
-import { Controller, Get, Query } from '@malagu/mvc/lib/node';
+import { Autowired, Value } from '@celljs/core';
+import { HttpError, Context } from '@celljs/web/lib/node';
+import { HttpHeaders, HttpStatus } from '@celljs/http';
+import { ObjectStorageService, RawCloudService } from '@celljs/cloud';
+import { Controller, Get, Query } from '@celljs/mvc/lib/node';
 import { contentType } from 'mime-types';
 
 @Controller('files')

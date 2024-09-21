@@ -2,7 +2,7 @@ import { IsolationLevel } from 'typeorm/driver/types/IsolationLevel';
 import { DEFAULT_CONNECTION_NAME, getDataSource } from '../../common';
 import { EntityManager } from 'typeorm';
 import { OrmContext } from '../context';
-import { Context } from '@malagu/core/lib/node';
+import { Context } from '@celljs/core/lib/node';
 
 export enum Propagation {
     Required, RequiresNew

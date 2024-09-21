@@ -1,5 +1,5 @@
-import { ServeContext } from '@malagu/cli-service';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { ServeContext } from '@celljs/cli-service';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 export class Deferred {
     resolve: () => void;
     reject: (err?: any) => void; // tslint:disable-line

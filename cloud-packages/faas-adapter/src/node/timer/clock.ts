@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { Emitter, Event } from './events';
 import { Clock } from './timer-protocol';
 

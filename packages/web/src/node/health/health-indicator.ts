@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { Health, HealthIndicator, HealthStatus } from './health-protocol';
 
 /**

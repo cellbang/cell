@@ -1,4 +1,4 @@
-import { Component, Autowired, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Prioritizeable } from '@celljs/core';
 import { ContextProvider, CONTEXT } from './context-protocol';
 
 @Component(ContextProvider)

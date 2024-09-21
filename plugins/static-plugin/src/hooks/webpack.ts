@@ -1,6 +1,6 @@
-import { ConfigurationContext, WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { ConfigurationContext, WebpackContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 
 import { resolve } from 'path';
 const rimraf = require('rimraf');

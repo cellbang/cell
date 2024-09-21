@@ -1,4 +1,4 @@
-import { WebpackContext, ConfigurationContext } from '@malagu/cli-service';
+import { WebpackContext, ConfigurationContext } from '@celljs/cli-service';
 
 export default async (context: WebpackContext) => {
     const { dev, configurations } = context;

@@ -1,5 +1,5 @@
 import { Session, SessionStrategy, SessionStore, COOKIE_EXP_DATE } from './session-protocol';
-import { Autowired, Value, Component, Logger } from '@malagu/core';
+import { Autowired, Value, Component, Logger } from '@celljs/core';
 import { Context } from '../context';
 const { gzip, ungzip } = require('node-gzip');
 
@@ -8,7 +8,7 @@ export class CookieSessionStore implements SessionStore {
 
     protected session: Session | undefined;
 
-    @Value('malagu.session')
+    @Value('cell.session')
     protected readonly sessionOptions: any;
 
     @Autowired(SessionStrategy)

@@ -1,6 +1,6 @@
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import { RouteProvider, RouteMetadata, RouteMetadataMatcher } from './handler-protocol';
-import { Context, RequestMatcher } from '@malagu/web/lib/node';
+import { Context, RequestMatcher } from '@celljs/web/lib/node';
 
 export const PATH_PARMAS_ATTR = 'pathParams';
 

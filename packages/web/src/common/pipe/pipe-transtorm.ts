@@ -1,4 +1,4 @@
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import { PipeTransform, ArgumentMetadata } from './pipe-protocol';
 import { ValidationErrors } from './validation-errors';
 import { validate } from 'class-validator';
@@ -7,7 +7,7 @@ import { instanceToPlain, plainToInstance } from 'class-transformer';
 @Component(PipeTransform)
 export class ValidationPipe implements PipeTransform<any> {
 
-    @Value('malagu.web.validationPipeOptions')
+    @Value('cell.web.validationPipeOptions')
     protected options: any;
 
     readonly priority = 1000;

@@ -1,6 +1,6 @@
 import { AuthorizationSuccessHandler, AuthorizedClient, AuthorizedClientManager } from './authorization-protocol';
-import { Authentication } from '@malagu/security/lib/node';
-import { Component, Autowired } from '@malagu/core';
+import { Authentication } from '@celljs/security/lib/node';
+import { Component, Autowired } from '@celljs/core';
 
 @Component(AuthorizationSuccessHandler)
 export class DefaultAuthorizationSuccessHandler implements AuthorizationSuccessHandler {

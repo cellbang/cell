@@ -1,9 +1,9 @@
 import * as webpack from 'webpack';
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
 import { packExternalModules } from '../external/pack-external-module';
 import { ServiceContextUtils } from '../context/context-protocol';
-import { CommandType, CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { CommandType, CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
 
 export default async (ctx: CliContext) => {
 

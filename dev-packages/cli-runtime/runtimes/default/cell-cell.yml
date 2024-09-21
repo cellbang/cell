@@ -1,0 +1,3 @@
+mode: "${currentMode|toObjects[.item in [ 'fc', 'fc3', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adapter')}"
+devComponents:
+  "@celljs/cli-service": ${version}

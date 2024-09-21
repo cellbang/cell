@@ -1,6 +1,6 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Component, Value, Autowired } from '@celljs/core';
 import { SessionManager, SESSION_MIDDLEWARE_PRIORITY } from './session-protocol';
 
 @Component(Middleware)
@@ -9,7 +9,7 @@ export class SessionMiddleware implements Middleware {
     @Autowired(SessionManager)
     protected readonly sessionManager: SessionManager;
 
-    @Value('malagu.session')
+    @Value('cell.session')
     protected readonly sessionOptions: any;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {

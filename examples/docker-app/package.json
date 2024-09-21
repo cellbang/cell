@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@malagu/example-docker-app",
+  "name": "@celljs/example-docker-app",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "2.60.3",
   "license": "MIT",
@@ -11,22 +11,22 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "2.60.3",
-    "@malagu/react": "2.60.3",
-    "@malagu/rpc": "2.60.3",
-    "@malagu/serve-static": "2.60.3",
+    "@celljs/core": "2.60.3",
+    "@celljs/react": "2.60.3",
+    "@celljs/rpc": "2.60.3",
+    "@celljs/serve-static": "2.60.3",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.60.3"
+    "@celljs/cli": "2.60.3"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "build": "malagu build",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

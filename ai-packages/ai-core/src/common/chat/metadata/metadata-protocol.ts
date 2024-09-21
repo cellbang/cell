@@ -1,4 +1,4 @@
-import { IllegalArgumentError } from '@malagu/core';
+import { IllegalArgumentError } from '@celljs/core';
 import { ResponseMetadata } from '../../model/model-protocol';
 
 /**

@@ -1,9 +1,9 @@
-import { Component, Autowired } from '@malagu/core';
-import { UserService } from '@malagu/security/lib/node';
-import { User } from '@malagu/security';
+import { Component, Autowired } from '@celljs/core';
+import { UserService } from '@celljs/security/lib/node';
+import { User } from '@celljs/security';
 import { OAuth2UserRequest, UserResponseClient, MISSING_USER_INFO_URI_ERROR_CODE, MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE } from '../endpoint';
 import { ProviderDetailsManager } from '../provider';
-import { OAuth2AuthenticationError } from '@malagu/oauth2-core';
+import { OAuth2AuthenticationError } from '@celljs/oauth2-core';
 
 @Component()
 export class OAuth2UserService implements UserService<OAuth2UserRequest, User> {

@@ -1,4 +1,4 @@
-import { MediaType } from '@malagu/http';
+import { MediaType } from '@celljs/http';
 import { Content } from '../../model/model-protocol';
 
 /**

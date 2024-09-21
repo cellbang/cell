@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Delete, Put, Post, Body } from '@malagu/mvc/lib/node';
-import { Authenticated } from '@malagu/security/lib/node';
+import { Controller, Get, Param, Delete, Put, Post, Body } from '@celljs/mvc/lib/node';
+import { Authenticated } from '@celljs/security/lib/node';
 
 export interface User {
     name: string;

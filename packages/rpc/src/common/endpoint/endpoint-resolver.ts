@@ -1,16 +1,16 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { RPC_PATH } from '../constants';
-import { PathResolver } from '@malagu/web';
+import { PathResolver } from '@celljs/web';
 import { EndpointNotFoundError } from '../error';
 import { EndpointResolver } from './endpoint-protocol';
 
 @Component(EndpointResolver)
 export class EndpointResolverImpl implements EndpointResolver {
 
-    @Value('malagu.rpc.endpoint')
+    @Value('cell.rpc.endpoint')
     protected readonly endpoint?: { [id: string]: string };
 
-    @Value('malagu.rpc.defaultEndpoint')
+    @Value('cell.rpc.defaultEndpoint')
     protected readonly defaultEndpoint?: string;
 
     @Value(RPC_PATH)

@@ -1,0 +1,10 @@
+cell:
+  cloud:
+    alias:
+      routingConfig:
+        additionalVersionWeights:
+          - weight: .4
+    function:
+      tags:
+        test: xxxxx
+        test2: xxxx

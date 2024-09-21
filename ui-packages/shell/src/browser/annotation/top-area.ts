@@ -1,4 +1,4 @@
-import { ReactComponent } from '@malagu/react';
+import { ReactComponent } from '@celljs/react';
 import { TOP_AREA } from '../area/area-protocol';
 
 export const TopArea =

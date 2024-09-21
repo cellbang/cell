@@ -1,1 +1,1 @@
-# Malagu CLI Runtime
+# Cell CLI Runtime

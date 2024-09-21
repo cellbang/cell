@@ -53,7 +53,7 @@ const defaultComponentOption: ComponentOption = {
     scope: Scope.Singleton,
     rebind: false,
     proxy: false,
-    ...ConfigUtil.getRaw().malagu?.annotation?.Component
+    ...ConfigUtil.getRaw().cell?.annotation?.Component
 };
 
 export function parseComponentOption(target: any, idOrOption: any) {

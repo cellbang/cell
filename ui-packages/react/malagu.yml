@@ -1,8 +1,0 @@
-frontend:
-  malagu:
-    react:
-      path: ${malagu.server.path}
-      router:
-        type: browser
-      
-  

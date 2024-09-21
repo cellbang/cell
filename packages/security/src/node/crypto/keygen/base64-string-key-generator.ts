@@ -1,11 +1,11 @@
 import { StringKeyGenerator } from './keygen-protocol';
 import { enc, lib } from 'crypto-js';
-import { Value, Component } from '@malagu/core';
+import { Value, Component } from '@celljs/core';
 
 @Component(StringKeyGenerator)
 export class Base64StringKeyGenerator implements StringKeyGenerator {
 
-    @Value('malagu.security.base64StringKeyLength')
+    @Value('cell.security.base64StringKeyLength')
     protected readonly keyLength: number;
 
     async generateKey(keyLength?: number) {

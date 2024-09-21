@@ -1,6 +1,6 @@
 
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import { SettingsUtil } from '@celljs/cli-common/lib/settings/settings-util';
 
 const rimraf = require('rimraf');
 import { existsSync } from 'fs-extra';

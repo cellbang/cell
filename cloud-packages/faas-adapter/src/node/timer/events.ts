@@ -1,4 +1,4 @@
-import { Disposable } from '@malagu/core';
+import { Disposable } from '@celljs/core';
 
 export interface Event<T> {
 

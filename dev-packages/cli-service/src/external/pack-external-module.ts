@@ -1,8 +1,8 @@
 import { join, dirname, relative } from 'path';
 import { ConfigurationContext } from '../context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { getPackager } from '@malagu/cli-common/lib/packager/utils';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { getPackager } from '@celljs/cli-common/lib/packager/utils';
 import { writeJSONSync, pathExists, readJSON, readJSONSync } from 'fs-extra';
 import { Stats, Module, ExternalModule } from 'webpack';
 const isBuiltinModule = require('is-builtin-module');
@@ -283,7 +283,7 @@ export async function packExternalModules(
 ): Promise<void> {
     const verbose = false;
     const { cfg, pkg, runtime } = context;
-    const config = ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET);
+    const config = ConfigUtil.getCellConfig(cfg, BACKEND_TARGET);
     const configuration = ConfigurationContext.getConfiguration(
         BACKEND_TARGET,
         context.configurations
@@ -397,7 +397,7 @@ export async function packExternalModules(
     const packageLockPath = join(dirname(packagePath), packager.lockfileName);
     const hasPackageLock = await pathExists(packageLockPath);
     if (hasPackageLock) {
-        console.log('🔒  malagu package lock found - Using locked versions');
+        console.log('🔒  cell package lock found - Using locked versions');
         try {
             let packageLockFile = await packager.readLockfile(packageLockPath);
             packageLockFile = packager.rebaseLockfile(relPath, packageLockFile);
@@ -412,7 +412,7 @@ export async function packExternalModules(
 
     const start = Date.now();
     for (const compositeModule of compositeModules) {
-        console.log(`📦  malagu external modules - ${compositeModule}`);
+        console.log(`📦  cell external modules - ${compositeModule}`);
     }
     await packager.install(packagerOptions, compositeModulePath);
     if (verbose) {

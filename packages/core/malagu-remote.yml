@@ -1,3 +1,0 @@
-malagu:
-  logger:
-    level: ${ 'info' | onTarget('backend') || 'error' }

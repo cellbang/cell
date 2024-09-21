@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@malagu/example-standalone-app",
+  "name": "@celljs/example-standalone-app",
   "version": "2.60.3",
   "description": "",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@malagu/core": "2.60.3"
+    "@celljs/core": "2.60.3"
   },
   "devDependencies": {
     "ts-node": "^10.9.0",

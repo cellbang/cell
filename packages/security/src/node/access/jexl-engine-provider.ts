@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { JexlEngineProvider } from './access-protocol';
 import { Jexl } from 'jexl';
 

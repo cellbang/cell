@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Grid, Box, Text, ResponsiveContext } from 'grommet';
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import { AppService, Category, AppInfo } from '../../common';
-import { Icon } from '@malagu/grommet';
+import { Icon } from '@celljs/grommet';
 import { useIntl } from 'react-intl';
 const { useState, useEffect, useContext } = React;
 

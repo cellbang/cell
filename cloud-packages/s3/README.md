@@ -1,1 +1,1 @@
-# Malagu - S3 Component
+# Cell - S3 Component

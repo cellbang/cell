@@ -1,4 +1,4 @@
-import { ReactComponent } from '@malagu/react';
+import { ReactComponent } from '@celljs/react';
 import { LEFT_AREA } from '../area/area-protocol';
 
 export const LeftArea =

@@ -1,4 +1,4 @@
-import { CustomError } from '@malagu/core';
+import { CustomError } from '@celljs/core';
 
 export class HealthNotFoundError extends CustomError {
     constructor(public indicatorName: string, message: string) {

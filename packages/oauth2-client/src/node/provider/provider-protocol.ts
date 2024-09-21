@@ -1,4 +1,4 @@
-import { AuthenticationMethod } from '@malagu/oauth2-core';
+import { AuthenticationMethod } from '@celljs/oauth2-core';
 
 export const ProviderDetailsManager = Symbol('ProviderDetailsManager');
 

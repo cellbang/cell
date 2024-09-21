@@ -1,5 +1,5 @@
 import { compose, Middleware } from '../middleware';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { Context } from '../context';
 import { HandlerExecutionChain } from './handler-protocol';
 

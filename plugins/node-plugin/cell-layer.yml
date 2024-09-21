@@ -1,0 +1,14 @@
+cell:
+  cloud:
+    layer:
+      name: ${cell.cloud.function.name}-${stage}-nodejs-node-modules
+      codeUri: ${projectHome}/dist/backend/node_modules
+      compatibleRuntime:
+        - ${cell.cloud.function.runtime}
+    function:
+      codeUri:
+        exclude: ${ '^cell.*yml|node_modules$' | regexp}
+      env:
+        NODE_PATH: /opt
+      layers:
+        - ${cell.cloud.layer.name}

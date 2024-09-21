@@ -1,1 +1,1 @@
-# Malagu - Node Plugin Component
+# Cell - Node Plugin Component

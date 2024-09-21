@@ -1,8 +1,8 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import * as React from 'react';
-import { WidgetFactory, WidgetModel, AbstractWidgetFactory } from '@malagu/widget';
+import { WidgetFactory, WidgetModel, AbstractWidgetFactory } from '@celljs/widget';
 import { Icon } from '../icon';
-import { Widget } from '@malagu/widget/lib/browser/widget/widget-protocol';
+import { Widget } from '@celljs/widget/lib/browser/widget/widget-protocol';
 import * as widgets from './widgets';
 import * as components from 'grommet';
 

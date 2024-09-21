@@ -1,0 +1,2 @@
+devComponents:
+  '@celljs/fc-plugin': ${version}

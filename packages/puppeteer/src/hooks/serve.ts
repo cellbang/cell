@@ -1,14 +1,14 @@
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
 import { LaunchOptions } from 'puppeteer-core';
 import { BrowserFetcher } from 'puppeteer-core/lib/cjs/puppeteer/node/BrowserFetcher';
 import { PUPPETEER_REVISIONS } from 'puppeteer-core/lib/cjs/puppeteer/revisions';
 import * as ora from 'ora';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
 
 export async function before(ctx: CliContext) {
     const { cfg } = ctx;
-    const launchOptions = <LaunchOptions>ConfigUtil.getMalaguConfig(cfg, BACKEND_TARGET).puppeteer.launchOptions;
+    const launchOptions = <LaunchOptions>ConfigUtil.getCellConfig(cfg, BACKEND_TARGET).puppeteer.launchOptions;
     if (!launchOptions.executablePath) {
         const browserFetcher = new BrowserFetcher(process.cwd());
         const product = launchOptions.product || 'chromium';

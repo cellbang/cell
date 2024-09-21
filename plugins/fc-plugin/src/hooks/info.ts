@@ -1,5 +1,5 @@
-import { InfoContext, ProjectUtil } from '@malagu/cli-common';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
+import { InfoContext, ProjectUtil } from '@celljs/cli-common';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
 import { createClients, getAlias, getService, getFunction, getApi, getCustomDomain, getTrigger, getGroup, getLayer } from './utils';
 const chalk = require('chalk');
 

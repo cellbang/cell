@@ -1,11 +1,11 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { DecodeOptions, JwtOptions, JwtPayload, JwtSecretService, JwtService, Secret, SignOptions, VerifyOptions } from './jwt-protocol';
 import * as jwt from 'jsonwebtoken';
 
 @Component(JwtService)
 export class JwtServiceImpl implements JwtService {
 
-    @Value('malagu.jwt')
+    @Value('cell.jwt')
     protected readonly jwtOptions?: JwtOptions;
 
     @Autowired(JwtSecretService)

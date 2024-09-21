@@ -1,1 +1,1 @@
-# Malagu - Cloud Plugin Component
+# Cell - Cloud Plugin Component

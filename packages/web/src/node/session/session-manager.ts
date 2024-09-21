@@ -1,14 +1,14 @@
 import { SessionManager, Session, SessionStrategy, SessionStore, COOKIE_EXP_DATE } from './session-protocol';
-import { Autowired, Value, Component } from '@malagu/core';
+import { Autowired, Value, Component } from '@celljs/core';
 import { Context } from '../context';
 
 @Component(SessionManager)
 export class SessionManagerImpl implements SessionManager {
 
-    @Value('malagu.session.sessionIdKey')
+    @Value('cell.session.sessionIdKey')
     protected readonly sessionIdKey: string;
 
-    @Value('malagu.session')
+    @Value('cell.session')
     protected readonly sessionOptions: any;
 
     @Autowired(SessionStrategy)

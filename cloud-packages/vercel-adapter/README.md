@@ -1,1 +1,1 @@
-# Malagu - Vercel Adapter Component
+# Cell - Vercel Adapter Component

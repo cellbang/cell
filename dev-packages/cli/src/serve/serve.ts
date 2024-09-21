@@ -1,6 +1,6 @@
 
 import { ServeManager } from './serve-manager';
-import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
+import { CliContext, ContextUtils } from '@celljs/cli-common/lib/context/context-protocol';
 
 export interface ServeOptions {
     port?: string;

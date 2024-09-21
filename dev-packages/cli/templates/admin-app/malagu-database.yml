@@ -1,7 +1,0 @@
-malagu: 
-  typeorm:
-    ormConfig:
-      - type: better-sqlite3
-        database: mydb.sql
-        synchronize: true
-        logging: true

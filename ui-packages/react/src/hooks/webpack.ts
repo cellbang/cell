@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { WebpackContext, ConfigurationContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { WebpackContext, ConfigurationContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 
 interface LoaderOptions {
     css: any,
@@ -28,7 +28,7 @@ export default async (context: WebpackContext) => {
     if (webpackConfig) {
         const appRootDir = process.cwd();
         const shadowMode = false;
-        const rootReactOptions = ConfigUtil.getFrontendMalaguConfig(cfg)?.react ?? {};
+        const rootReactOptions = ConfigUtil.getFrontendCellConfig(cfg)?.react ?? {};
         const defaultSassLoaderOptions = {
             implementation: require('sass')
         };

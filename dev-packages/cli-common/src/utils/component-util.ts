@@ -13,7 +13,7 @@ export namespace ComponentUtil {
             const file = readFileSync(yarnLockFile, 'utf8');
             const json = lockfile.parse(file);
             if (json.type !== 'success') {
-                console.log(chalk`malagu {red.bold error} - yarn.lock file is in conflict status, pls solve the conflict then run the command again`);
+                console.log(chalk`cell {red.bold error} - yarn.lock file is in conflict status, pls solve the conflict then run the command again`);
                 process.exit(-1);
             }
             if (json.object) {
@@ -28,7 +28,7 @@ export namespace ComponentUtil {
                         }
                         if (pkgVersion !== newPkgVersion) {
                             // eslint-disable-next-line max-len
-                            console.log(chalk`\nmalagu {red.bold error} - malagu component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
+                            console.log(chalk`\ncell {red.bold error} - cell component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
                             process.exit(-1);
                         }
                     }
@@ -46,7 +46,7 @@ export namespace ComponentUtil {
                     }
                     if (pkgVersion !== newPkgVersion) {
                         // eslint-disable-next-line max-len
-                        console.log(chalk`\nmalagu {red.bold error} - malagu component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
+                        console.log(chalk`\ncell {red.bold error} - cell component has existed two different versions[${chalk.yellow(pkgVersion)} vs ${chalk.yellow(newPkgVersion)}], thus will cause some unexpected problem, so pls check`);
                         process.exit(-1);
                     }
                 }
@@ -58,7 +58,7 @@ export namespace ComponentUtil {
         const keywordsAlias = keywords
             .filter(k => k.endsWith(MALAGU_COMPONENT_SUFFIX))
             .map(k => k.substring(0, k.length - MALAGU_COMPONENT_SUFFIX.length));
-        return keywordsAlias.includes('malagu') ? keywordsAlias : [ ...keywordsAlias, 'malagu' ];
+        return keywordsAlias.includes('cell') ? keywordsAlias : [ ...keywordsAlias, 'cell' ];
     }
 }
 

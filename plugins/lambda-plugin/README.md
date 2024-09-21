@@ -1,1 +1,1 @@
-# Malagu - Lambda Plugin Component
+# Cell - Lambda Plugin Component

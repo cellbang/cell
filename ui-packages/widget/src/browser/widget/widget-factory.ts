@@ -1,6 +1,6 @@
 import { WidgetModel, WidgetFactory, Widget } from './widget-protocol';
 import { WidgetUtil } from './widget-util';
-import { Autowired, ExpressionHandler, Injectable } from '@malagu/core';
+import { Autowired, ExpressionHandler, Injectable } from '@celljs/core';
 
 @Injectable()
 export abstract class AbstractWidgetFactory<T> implements WidgetFactory<T> {

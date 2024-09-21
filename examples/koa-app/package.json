@@ -1,11 +1,11 @@
 {
   "private": true,
-  "name": "@malagu/example-koa-app",
+  "name": "@celljs/example-koa-app",
   "version": "2.60.3",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "@malagu/cli": "2.60.3",
+    "@celljs/cli": "2.60.3",
     "koa": "^2.13.4"
   }
 }

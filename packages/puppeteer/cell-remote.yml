@@ -1,0 +1,10 @@
+cell:
+  puppeteer:
+    debug: false
+    launchOptions:
+      headless: true
+      executablePath: ${cell.puppeteer.setupPath}/headless-chromium
+    bucket: headless-lib
+    key: headless-lib.tar.gz
+    setupPath: /tmp
+    libPath: ${cell.puppeteer.setupPath}/lib/usr/lib/x86_64-linux-gnu/

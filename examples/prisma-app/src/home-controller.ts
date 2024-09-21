@@ -1,4 +1,4 @@
-import { Controller, Get } from '@malagu/mvc/lib/node';
+import { Controller, Get } from '@celljs/mvc/lib/node';
 import { PrismaClient } from '../prisma-client';
 @Controller()
 export class HomeController {

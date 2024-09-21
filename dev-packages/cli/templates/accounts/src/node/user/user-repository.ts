@@ -1,5 +1,5 @@
-import { Component } from '@malagu/core';
-import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
+import { Component } from '@celljs/core';
+import { Transactional, OrmContext } from '@celljs/typeorm/lib/node';
 import { Identity, User } from '../entity';
 import { UserNotFoundError } from '../error';
 import { plainToClassFromExist, classToPlain } from 'class-transformer';

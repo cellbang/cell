@@ -21,7 +21,7 @@ for (const [packageName, yarnWorkspace] of Object.entries(YARN_WORKSPACES)) {
 
 /** @type {YarnWorkspace} */
 const MALAGU_MONOREPO = {
-    name: '@malagu/monorepo',
+    name: '@celljs/monorepo',
     workspaceDependencies: Object.keys(YARN_WORKSPACES),
     location: ROOT,
 };

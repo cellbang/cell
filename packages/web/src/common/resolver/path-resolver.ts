@@ -1,5 +1,5 @@
 import { PathResolver } from './resolver-protocol';
-import { Value, Component, UrlUtil as CoreUrlUtil } from '@malagu/core';
+import { Value, Component, UrlUtil as CoreUrlUtil } from '@celljs/core';
 import { SERVER_PATH } from '../constants';
 import { UrlUtil } from '../utils';
 

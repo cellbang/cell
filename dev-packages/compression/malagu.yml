@@ -1,8 +1,0 @@
-malagu:
-  webpack:
-    compressionWebpackPlugin:
-      disable: false
-  serve-static:
-    options:
-      headers:
-        Content-Encoding: '${malagu.webpack.compressionWebpackPlugin.disable || cliContext.dev ? undefined : "gzip"}'

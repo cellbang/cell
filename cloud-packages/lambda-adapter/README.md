@@ -1,1 +1,1 @@
-# Malagu - Lambda Adapter Component
+# Cell - Lambda Adapter Component

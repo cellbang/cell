@@ -1,6 +1,6 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import * as _Cookies from 'cookies';
 import { CookiesFactory } from './cookies-factory';
 import { COOKIES_MIDDLEWARE_PRIORITY } from './cookies-protocol';

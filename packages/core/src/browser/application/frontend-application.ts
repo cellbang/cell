@@ -13,7 +13,7 @@ export class FrontendApplication extends AbstractApplication {
     @Autowired(ApplicationStateService)
     protected readonly stateService: FrontendApplicationStateService;
 
-    @Value('malagu.hostDomId')
+    @Value('cell.hostDomId')
     protected readonly hostDomId: string;
 
     get shell(): ApplicationShell {
@@ -50,7 +50,7 @@ export class FrontendApplication extends AbstractApplication {
      * Return an HTML element that indicates the startup phase, e.g. with an animation or a splash screen.
      */
     protected getStartupIndicator(host: HTMLElement): HTMLElement | undefined {
-        const startupElements = host.getElementsByClassName('malagu-preload');
+        const startupElements = host.getElementsByClassName('cell-preload');
         return startupElements.length === 0 ? undefined : startupElements[0] as HTMLElement;
     }
 
@@ -65,7 +65,7 @@ export class FrontendApplication extends AbstractApplication {
     }
 
     /**
-     * If a startup indicator is present, it is first hidden with the `malagu-hidden` CSS class and then
+     * If a startup indicator is present, it is first hidden with the `cell-hidden` CSS class and then
      * removed after a while. The delay until removal is taken from the CSS transition duration.
      */
     protected revealShell(host: HTMLElement): Promise<void> {
@@ -73,7 +73,7 @@ export class FrontendApplication extends AbstractApplication {
         if (startupElem) {
             return new Promise(resolve => {
                 window.requestAnimationFrame(() => {
-                    startupElem.classList.add('malagu-hidden');
+                    startupElem.classList.add('cell-hidden');
                     const preloadStyle = window.getComputedStyle(startupElem);
                     const transitionDuration = parseCssTime(preloadStyle.transitionDuration, 0);
                     window.setTimeout(() => {

@@ -1,4 +1,4 @@
-import { spawnProcess } from '@malagu/cli-common/lib/packager';
+import { spawnProcess } from '@celljs/cli-common/lib/packager';
 import { pathExistsSync } from 'fs-extra';
 import { PythonPluginOptions } from '../python-plugin-protocol';
 import { join } from 'path';

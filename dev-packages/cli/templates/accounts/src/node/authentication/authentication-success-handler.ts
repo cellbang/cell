@@ -1,8 +1,8 @@
-import { Component, Autowired } from '@malagu/core';
-import { User, UserType } from '@malagu/security';
-import { Context } from '@malagu/web/lib/node';
-import { AuthenticationSuccessHandler, Authentication, DefaultAuthenticationSuccessHandler } from '@malagu/security/lib/node';
-import { ClientRegistrationManager } from '@malagu/oauth2-client/lib/node';
+import { Component, Autowired } from '@celljs/core';
+import { User, UserType } from '@celljs/security';
+import { Context } from '@celljs/web/lib/node';
+import { AuthenticationSuccessHandler, Authentication, DefaultAuthenticationSuccessHandler } from '@celljs/security/lib/node';
+import { ClientRegistrationManager } from '@celljs/oauth2-client/lib/node';
 import { User as UserEntity, Identity  } from '../entity';
 import { UserRepository } from '../user';
 const requestIp = require('request-ip');

@@ -1,0 +1,9 @@
+mode: "${ 'fc' in currentMode ? 'node16' : ''}"
+devComponents:
+  '@celljs/next-plugin': ${version}
+backend:
+  entry: '@celljs/next-plugin/lib/next-entry'
+cell:
+  webpack:
+    filterWarningsPlugin:
+      node: []

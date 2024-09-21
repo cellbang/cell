@@ -1,4 +1,4 @@
-import { Component, Autowired, Prioritizeable, PostConstruct } from '@malagu/core';
+import { Component, Autowired, Prioritizeable, PostConstruct } from '@celljs/core';
 import { AuthenticationProvider, AuthenticationManager, Authentication, AuthenticationSuccessHandler } from './authentication-protocol';
 import { AccountStatusError, AuthenticationError } from '../error';
 import { SecurityContext } from '../context';

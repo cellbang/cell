@@ -1,5 +1,5 @@
-import { Component, Autowired, Value, PostConstruct } from '@malagu/core';
-import { RestOperations } from '@malagu/http';
+import { Component, Autowired, Value, PostConstruct } from '@celljs/core';
+import { RestOperations } from '@celljs/http';
 import { ProxyCreator } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';
 import { ConnnectionFactory, JsonRpcProxy } from '../factory';
@@ -24,19 +24,19 @@ export class DelegatingHttpProxyCreator implements ProxyCreator {
     @Autowired(ClientConfigProcessor)
     protected clientConfigProcessor: ClientConfigProcessor;
 
-    @Value('malagu.rpc.client.config')
+    @Value('cell.rpc.client.config')
     protected readonly clientConfig: AxiosRequestConfig;
 
-    @Value('malagu.rpc.merge.maxCount')
+    @Value('cell.rpc.merge.maxCount')
     protected readonly maxCount: number;
 
-    @Value('malagu.rpc.merge.maxLength')
+    @Value('cell.rpc.merge.maxLength')
     protected readonly maxLength: number;
 
-    @Value('malagu.rpc.merge.timerDelay')
+    @Value('cell.rpc.merge.timerDelay')
     protected readonly timerDelay: number;
 
-    @Value('malagu.rpc.merge.enabled')
+    @Value('cell.rpc.merge.enabled')
     protected readonly enabled: boolean;
 
     protected delegate: ProxyCreator;

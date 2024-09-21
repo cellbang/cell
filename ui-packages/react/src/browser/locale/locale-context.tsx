@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { LOCALE_REACT_CONTEXT_PRIORITY } from './locale-protocol';
 import { IntlProvider } from 'react-intl';
-import { ContainerUtil, Logger } from '@malagu/core';
-import { LocaleManager } from '@malagu/widget';
+import { ContainerUtil, Logger } from '@celljs/core';
+import { LocaleManager } from '@celljs/widget';
 import { Context } from '../annotation';
 
 export function LocaleContext({ children }: React.PropsWithChildren) {

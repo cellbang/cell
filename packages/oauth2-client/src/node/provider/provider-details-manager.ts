@@ -1,13 +1,13 @@
 import { ProviderDetailsManager, ProviderDetails } from './provider-protocol';
-import { Value, Component } from '@malagu/core';
+import { Value, Component } from '@celljs/core';
 
 @Component(ProviderDetailsManager)
 export class InMemoryProviderDetailsManager implements ProviderDetailsManager {
 
-    @Value('malagu.oauth2.client.providers')
+    @Value('cell.oauth2.client.providers')
     protected providers: { [id: string]: ProviderDetails } = {};
 
-    @Value('malagu.oauth2.client.providerTemplates')
+    @Value('cell.oauth2.client.providerTemplates')
     protected readonly providerTemplates: { [id: string]: ProviderDetails } = {};
 
     protected initialized = false;

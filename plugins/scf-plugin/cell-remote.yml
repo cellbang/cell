@@ -1,0 +1,10 @@
+mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'timer', 'api-gateway-basic', 'event']]|suffix('-mode') || 'api-gateway-mode'}"
+cell:
+  cloud:
+    namespace:
+      name: default
+      sync: true
+    function:
+      handler: index.handler
+      namespace: ${cell.cloud.namespace.name}
+      runtime: Nodejs16.13

@@ -1,7 +1,7 @@
 import * as https from 'https';
 import * as http from 'http';
-import { BACKEND_TARGET, FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { BACKEND_TARGET, FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
 import * as webpack from 'webpack';
 import * as WebpackChain from '@gem-mine/webpack-chain';
 

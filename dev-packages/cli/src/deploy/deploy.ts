@@ -1,8 +1,8 @@
 
 import build from '../build/build';
-import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
-import { CliContext, ContextUtils } from '@malagu/cli-common/lib/context/context-protocol';
-import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
+import { HookExecutor, HookStage } from '@celljs/cli-common/lib/hook/hook-executor';
+import { CliContext, ContextUtils } from '@celljs/cli-common/lib/context/context-protocol';
+import { CommandUtil, CommandType, CommandStage } from '@celljs/cli-common/lib/utils/command-util';
 
 export interface DeplyOptions {
     skipBuild?: boolean;

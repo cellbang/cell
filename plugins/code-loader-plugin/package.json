@@ -1,11 +1,11 @@
 {
-  "name": "@malagu/code-loader-plugin",
+  "name": "@celljs/code-loader-plugin",
   "version": "2.60.3",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@malagu/cli-common": "2.60.3",
+    "@celljs/cli-common": "2.60.3",
     "axios": "^0.26.1",
     "fs-extra": "^11.1.1",
     "jszip": "^3.7.1",
@@ -16,32 +16,32 @@
     "access": "public"
   },
   "keywords": [
-    "malagu-component",
-    "malagu-plugin"
+    "cell-component",
+    "cell-plugin"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src",
-    "malagu.yml"
+    "cell.yml"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3"
+    "@celljs/component": "2.60.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

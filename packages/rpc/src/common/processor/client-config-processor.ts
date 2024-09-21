@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { ClientConfigProcessor } from './processor-protocol';
 import { AxiosRequestConfig } from 'axios';
 

@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpMethod, MediaType, XML_HTTP_REQUEST, RestOperations, DefaultRestOperationsFactory } from '@malagu/http';
+import { HttpHeaders, HttpMethod, MediaType, XML_HTTP_REQUEST, RestOperations, DefaultRestOperationsFactory } from '@celljs/http';
 import { Logger } from 'vscode-jsonrpc';
 import { ProxyCreator, ConnectionOptions, RequestTaskMeta } from './proxy-protocol';
 import { EndpointResolver } from '../endpoint';

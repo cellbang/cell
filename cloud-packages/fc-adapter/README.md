@@ -1,1 +1,1 @@
-# Malagu - FC Adapter Component
+# Cell - FC Adapter Component

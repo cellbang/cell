@@ -1,4 +1,4 @@
-import { IllegalArgumentError } from '@malagu/core';
+import { IllegalArgumentError } from '@celljs/core';
 import { ModelOptions } from '../../model/model-protocol';
 import { Message, MessageType, UserMessage } from '../message';
 import { ChatOptions, Prompt } from './prompt-protocol';

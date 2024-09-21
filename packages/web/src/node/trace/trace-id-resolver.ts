@@ -1,4 +1,4 @@
-import { Component, Value, generateUUUID } from '@malagu/core';
+import { Component, Value, generateUUUID } from '@celljs/core';
 import { TraceIdResolver, TRACE_ID_REQUEST_FIELD } from './trace-protocol';
 import { Context } from '../context';
 

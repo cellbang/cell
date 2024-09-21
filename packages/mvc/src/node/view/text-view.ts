@@ -1,9 +1,9 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { View } from './view-protocol';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 import { ViewMetadata } from '../annotation/view';
 import { TEXT_VIEW_NAME } from '../annotation/text';
-import { MediaType } from '@malagu/http';
+import { MediaType } from '@celljs/http';
 
 @Component(View)
 export class TextView implements View {

@@ -1,4 +1,4 @@
-import { Credentials, Account } from '@malagu/cloud-plugin';
+import { Credentials, Account } from '@celljs/cloud-plugin';
 import { Params } from './api';
 const chalk = require('chalk');
 const FCClient = require('@alicloud/fc2');

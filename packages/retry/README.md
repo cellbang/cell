@@ -1,21 +1,21 @@
-# Malagu - Retry Component
+# Cell - Retry Component
 
-这个项目为 Malagu 应用程序提供了重试支持。
-它在 Malagu AI 和其他应用中使用。
+这个项目为 Cell 应用程序提供了重试支持。
+它在 Cell AI 和其他应用中使用。
 
 这个库的NPM包是：
 
 ```bash
-@malagu/retry
+@celljs/retry
 ```
 
 ## 快速入门
 
-本节提供了有关如何开始使用 Malagu Retry 的快速介绍。
+本节提供了有关如何开始使用 Cell Retry 的快速介绍。
 
 ### 示例
 
-以下示例展示了如何使用 Malagu Retry：
+以下示例展示了如何使用 Cell Retry：
 
 ```typescript
 
@@ -44,17 +44,17 @@ export class Service {
 ## 安装
 
 ```bash
-yarn add @malagu/retry # npm install @malagu/retry
+yarn add @celljs/retry # npm install @celljs/retry
 ```
 
 ## 功能和 API
 
-本节讨论了 Malagu Retry 的功能，并展示了如何使用其 API。
+本节讨论了 Cell Retry 的功能，并展示了如何使用其 API。
 
 ### 使用`RetryOperations`
 
 为了使处理更加健壮且不容易失败，有时候自动重试失败的操作可能会在后续尝试中成功。
-适合这种处理的错误通常是短暂的。例如，由于网络故障或数据库更新中的`DeadLockLoserError`，导致远程调用 Web 服务或 RMI 服务失败，可能会在短时间内解决。为了自动重试这种操作，Malagu Retry 提供了`RetryOperations`策略。`RetryOperations`接口定义如下：
+适合这种处理的错误通常是短暂的。例如，由于网络故障或数据库更新中的`DeadLockLoserError`，导致远程调用 Web 服务或 RMI 服务失败，可能会在短时间内解决。为了自动重试这种操作，Cell Retry 提供了`RetryOperations`策略。`RetryOperations`接口定义如下：
 
 ```typescript
 /**
@@ -175,7 +175,7 @@ export class Service {
 > *提示：*
 失败本质上是可重试或不可重试的 - 如果相同的异常总是从业务逻辑中抛出，重试它是没有帮助的。因此，您不应该在所有异常类型上重试。相反，尝试只关注您期望可重试的异常。对于业务逻辑来说，更积极地重试通常不会有害，但是这是浪费的，因为如果失败是确定性的，则会浪费时间重试您事先知道是致命的事情。
 
-Malagu Retry 提供了一个通用的`RetryPolicy`实现。这个实现提供了重试最大次数、超时、异常类型等选项，以控制重试行为。
+Cell Retry 提供了一个通用的`RetryPolicy`实现。这个实现提供了重试最大次数、超时、异常类型等选项，以控制重试行为。
 
 ## 退避策略
 
@@ -188,5 +188,5 @@ export interface BackOffPolicy {
 }
 ```
 
-`BackoffPolicy`可以以任何方式自由实现退避。Malagu Retry 提供的策略都使用`timeout`。常见的用例是指数递增的等待周期进行退避，以避免两次重试进入锁步并且都失败（从以太网中学到的教训）。Malagu Retry还提供了具有随机化的延迟策略的版本，这对于避免复杂系统中相关故障之间的共振非常有用。
+`BackoffPolicy`可以以任何方式自由实现退避。Cell Retry 提供的策略都使用`timeout`。常见的用例是指数递增的等待周期进行退避，以避免两次重试进入锁步并且都失败（从以太网中学到的教训）。Cell Retry还提供了具有随机化的延迟策略的版本，这对于避免复杂系统中相关故障之间的共振非常有用。
 

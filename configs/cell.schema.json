@@ -1,0 +1,3750 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "Cell 框架的组件属性配置文件的 JSON Schema",
+    "type": "object",
+    "properties": {
+        "packager": {
+            "$ref": "#/$defs/packager"
+        },
+        "includeModules": {
+            "$ref": "#/$defs/includeModules"
+        },
+        "mode": {
+            "$ref": "#/$defs/mode"
+        },
+        "modules": {
+            "$ref": "#/$defs/modules"
+        },
+        "staticModules": {
+            "$ref": "#/$defs/staticModules"
+        },
+        "targets": {
+            "$ref": "#/$defs/targets"
+        },
+        "entry": {
+            "$ref": "#/$defs/entry"
+        },
+        "devEntry": {
+            "$ref": "#/$defs/devEntry"
+        },
+        "assets": {
+            "$ref": "#/$defs/assets"
+        },
+        "cell": {
+            "$ref": "#/$defs/cell"
+        },
+        "webpackHooks": {
+            "$ref": "#/$defs/webpackHooks"
+        },
+        "initHooks": {
+            "$ref": "#/$defs/initHooks"
+        },
+        "serveHooks": {
+            "$ref": "#/$defs/serveHooks"
+        },
+        "buildHooks": {
+            "$ref": "#/$defs/buildHooks"
+        },
+        "deployHooks": {
+            "$ref": "#/$defs/deployHooks"
+        },
+        "infoHooks": {
+            "$ref": "#/$defs/infoHooks"
+        },
+        "propsHooks": {
+            "$ref": "#/$defs/propsHooks"
+        },
+        "webpack": {
+            "$ref": "#/$defs/webpack"
+        },
+        "cloud": {
+            "$ref": "#/$defs/cloud"
+        },
+        "serveCommand": {
+            "type": "string",
+            "description": "本地项目运行命令。在 Serve Hook 的 before 阶段之后，on 阶段之前执行"
+        },
+        "serveCommand:before": {
+            "type": "string",
+            "description": "本地项目运行命令之前执行的命令。在 Serve Hook 的 before 阶段之前执行"
+        },
+        "serveCommand:after": {
+            "type": "string",
+            "description": "本地项目运行命令之后执行的命令。在 Serve Hook 的 after 阶段之后执行"
+        },
+        "buildCommand": {
+            "type": "string",
+            "description": "构建项目命令。在 Build Hook 的 before 阶段之后，on 阶段之前执行"
+        },
+        "buildCommand:before": {
+            "type": "string",
+            "description": "构建项目命令之前执行的命令。在 Build Hook 的 before 阶段之前执行"
+        },
+        "buildCommand:after": {
+            "type": "string",
+            "description": "构建项目命令之后执行的命令。在 Build Hook 的 after 阶段之后执行"
+        },
+        "deployCommand": {
+            "type": "string",
+            "description": "部署项目命令。在 Deploy Hook 的 before 阶段之后，on 阶段之前执行"
+        },
+        "deployCommand:before": {
+            "type": "string",
+            "description": "部署项目命令之前执行的命令。在 Deploy Hook 的 before 阶段之前执行"
+        },
+        "deployCommand:after": {
+            "type": "string",
+            "description": "部署项目命令之后执行的命令。在 Deploy Hook 的 after 阶段之后执行"
+        },
+        "compileCommand": {
+            "type": "string",
+            "description": "编译项目命令。在 Compile Hook 的 before 阶段之后，on 阶段之前执行"
+        },
+        "compileCommand:before": {
+            "type": "string",
+            "description": "编译项目命令之前执行的命令。在 Compile Hook 的 before 阶段之前执行"
+        },
+        "compileCommand:after": {
+            "type": "string",
+            "description": "编译项目命令之后执行的命令。在 Compile Hook 的 after 阶段之后执行"
+        },
+        "outputDir": {
+            "type": "string",
+            "description": "前端项目构建输出目录。例如 dist"
+        },
+        "runtime": {
+            "type": "string",
+            "description": "框架运行时。默认为 default 运行时"
+        }
+    },
+    "$defs": {
+        "mode": {
+            "type": [
+                "string",
+                "array"
+            ],
+            "description": "需要激活的模式，不同模式激活不同配置文件，不同配置文件可以激活不同的功能，例如 static 模式激活静态网站相关功能",
+            "items": {
+                "type": "string"
+            }
+        },
+        "stage": {
+            "type": "string",
+            "description": "构建阶段。不同阶段激活不同的配置文件，例如 test 阶段激活测试环境相关配置文件"
+        },
+        "packager": {
+            "type": "string",
+            "description": "第三方包管理工具。默认无需配置，框架根据上下文自动配置",
+            "enum": [
+                "yarn",
+                "npm",
+                "pnpm"
+            ]
+        },
+        "modules": {
+            "type": "array",
+            "description": "组件动态模块入口文件，例如 src/xxx-module。默认无需配置，框架部署提供了一些模块默认加载位置：src/module、src/node/module、src/browser/module 等等"
+        },
+        "staticModules": {
+            "type": "array",
+            "description": "组件静态模块入口文件，例如 src/xxx-module。默认无需配置，框架部署提供了一些模块默认加载位置：src/static-module、src/node/static-module、src/browser/static-module 等等"
+        },
+        "targets": {
+            "type": "array",
+            "description": "构建输出的目标产物。",
+            "enum": [
+                "frontend",
+                "backend"
+            ],
+            "items": {
+                "type": "string"
+            }
+        },
+        "entry": {
+            "type": "string",
+            "description": "应用入口文件。目前只支持 ts|js 代码文件。默认无需配置，框架根据上下文自动配置"
+        },
+        "devEntry": {
+            "type": "string",
+            "description": "本地运行可能需要用到的应用入口文件。目前只支持 ts|js 代码文件。默认无需配置，框架根据上下文自动配置"
+        },
+        "assets": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "资源文件目录。自定义资源文件目录，该目录下的文件在打包构建的时候，自动拷贝构建输出目录的 assets 目录下。目前只支持 Node.js 类型的应用。有如下默认资源文件目录自动加载：assets、src/assets、src/node/assets、src/browser/assets"
+        },
+        "webpackHooks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Webpack 插件。在 Webpack 进行编译构建之前，执行该插件，在插件中可以通过插件上下文获取应用配置信息、Webpack 配置信息等等。通过该插件，您可以扩展 Webpack 配置对象。大部分情况下，不需要配置 webpackHooks 属性，因为框架提供了默认加载机制，只要插件文件在约定的位置就会自动加载执行，默认位置如下：src/webpack-hook.ts、src/hooks/webpack-hook、lib/webpack-hook.ts、lib/hooks/webpack.js。如果您的插件文件需要放置到特殊的位置，此时需要配置 webpackHooks 属性，例如：src/xx-webpack-hook"
+        },
+        "initHooks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell init 命令插件。在 cell init 命令执行完成后，执行该插件，在插件中可以通过插件上下文获取应用配置信息等等。"
+        },
+        "serveHooks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell serve 命令插件。该属性不区分前后端。在 cell serve 命令执行中 Webpack 构建完成后，执行该插件，在插件中可以通过插件上下文获取应用配置信息、Webpack 编译对象、HTTP 服务对象等等"
+        },
+        "buildHooks": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell build 命令插件，该属性不区分前后端。在 cell build 命令执行中 Webpack 构建完成后，执行该插件，在插件中可以通过插件上下文获取应用配置信息、Webpack 配置信息等等"
+        },
+        "deployHooks": {
+            "type": "string",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell deploy 命令插件，该属性不区分前后端。在 cell deploy 命令执行中，可能会自动执行 cell build 命令，如果执行 cell build 命令，则在 cell build 命令执行完后，执行该插件，否则，直接执行该插件，在插件中可以通过插件上下文获取应用配置信息、Webpack 配置信息等等"
+        },
+        "infoHooks": {
+            "type": "string",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell info 命令插件，该属性不区分前后端。在 cell info 命令执行中，执行该插件，在插件中扩展更多应用信息"
+        },
+        "propsHooks": {
+            "type": "string",
+            "items": {
+                "type": "string"
+            },
+            "description": "cell props 命令插件，该属性不区分前后端。在 cell props 命令执行中，执行该插件"
+        },
+        "cell": {
+            "type": "object",
+            "description": "官方组件顶级配置对象",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "应用名称"
+                },
+                "hostDomId": {
+                    "type": "string",
+                    "description": "前端根组件挂载的 DOM ID"
+                },
+                "logger": {
+                    "$ref": "#/$defs/logger"
+                },
+                "aop": {
+                    "$ref": "#/$defs/aop"
+                },
+                "tenant": {
+                    "$ref": "#/$defs/tenant"
+                },
+                "annotation": {
+                    "$ref": "#/$defs/annotation"
+                },
+                "webpack": {
+                    "$ref": "#/$defs/webpack"
+                },
+                "includeModules": {
+                    "$ref": "#/$defs/includeModules"
+                },
+                "packagerOptions": {
+                    "$ref": "#/$defs/packagerOptions"
+                },
+                "cache": {
+                    "$ref": "#/$defs/cache"
+                },
+                "cloud": {
+                    "$ref": "#/$defs/cloud"
+                },
+                "session": {
+                    "$ref": "#/$defs/session"
+                },
+                "web": {
+                    "$ref": "#/$defs/web"
+                },
+                "client": {
+                    "$ref": "#/$defs/client"
+                },
+                "trace": {
+                    "$ref": "#/$defs/trace"
+                },
+                "health": {
+                    "$ref": "#/$defs/health"
+                },
+                "server": {
+                    "$ref": "#/$defs/server"
+                },
+                "security": {
+                    "$ref": "#/$defs/security"
+                },
+                "typeorm": {
+                    "$ref": "#/$defs/typeorm"
+                }
+            }
+        },
+        "includeModules": {
+            "oneOf": [
+                {
+                    "type": "boolean",
+                    "description": "是否在打包的时候，安装所有的被 Webpack 排查掉的模块"
+                },
+                {
+                    "type": "object",
+                    "description": "在打包的时候，配置哪些被 Webpack 排查掉的模块需要被安装",
+                    "properties": {
+                        "forceInclude": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "除配置的模块外，其他模块都不会在打包的时候安装（被 Webpack 排查掉的模块的名称，支持模糊匹配）"
+                        },
+                        "forceExclude": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "description": "除配置的模块外，其他模块都会在打包的时候安装（被 Webpack 排查掉的模块的名称，支持模糊匹配）。"
+                        },
+                        "forceIncludeAll": {
+                            "type": "boolean",
+                            "description": "是否在打包的时候，安装所有的被 Webpack 排查掉的模块"
+                        },
+                        "packagePath": {
+                            "type": "string",
+                            "description": "当前项目 package.json 文件路径"
+                        }
+                    }
+                }
+            ]
+        },
+        "packagerOptions": {
+            "type": "object",
+            "description": "包管理工具配置对象",
+            "properties": {
+                "ignoreScripts": {
+                    "type": "boolean",
+                    "description": "是否忽略安装脚本"
+                },
+                "frozenLockfile": {
+                    "type": "boolean",
+                    "description": "是否锁定 lockfile 文件"
+                },
+                "nonInteractive": {
+                    "type": "boolean",
+                    "description": "是否非交互式"
+                },
+                "networkConcurrency": {
+                    "type": "number",
+                    "description": "网络并发数"
+                },
+                "stdio": {
+                    "type": "string",
+                    "description": "标准输入输出"
+                },
+                "ignoreOptional": {
+                    "type": "boolean",
+                    "description": "是否忽略可选依赖"
+                },
+                "ignoreWorkspace": {
+                    "type": "boolean",
+                    "description": "是否忽略工作区"
+                },
+                "noLockfile": {
+                    "type": "boolean",
+                    "description": "是否不生成 lockfile 文件"
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "过滤器"
+                }
+            }
+        },
+        "logger": {
+            "type": "object",
+            "description": "日志配置对象",
+            "properties": {
+                "level": {
+                    "type": "string",
+                    "description": "日志级别"
+                }
+            }
+        },
+        "aop": {
+            "type": "object",
+            "description": "AOP 配置对象",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用 AOP 功能"
+                }
+            }
+        },
+        "tenant": {
+            "type": "object",
+            "description": "租户配置对象",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用多租户功能"
+                }
+            }
+        },
+        "annotation": {
+            "type": "object",
+            "description": "注解配置对象",
+            "properties": {
+                "Component": {
+                    "type": "object",
+                    "description": "Component 注解配置对象",
+                    "properties": {
+                        "proxy": {
+                            "type": "boolean",
+                            "description": "是否启用 AOP 代理"
+                        }
+                    }
+                }
+            }
+        },
+        "session": {
+            "type": "object",
+            "description": "HTTP Session 配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "autoCommit": {
+                    "type": "boolean",
+                    "description": "是否自动提交"
+                },
+                "maxAge": {
+                    "type": "number",
+                    "description": "最大有效期，单位毫秒，默认为 86400000"
+                },
+                "renew": {
+                    "type": "boolean",
+                    "description": "是否自动续期"
+                },
+                "sessionIdKey": {
+                    "type": "string",
+                    "description": "Session ID 的键名"
+                },
+                "sessionKey": {
+                    "type": "string",
+                    "description": "Session 的键名"
+                }
+            }
+        },
+        "typeorm": {
+            "type": "object",
+            "description": "TypeORM 配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "ormConfig": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/dataSource"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/dataSource"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
+        "dataSource": {
+            "description": "TypeORM 数据源配置项",
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/baseDataSource"
+                },
+                {
+                    "$ref": "#/$defs/mysqlDataSource"
+                },
+                {
+                    "$ref": "#/$defs/sqliteDataSource"
+                },
+                {
+                    "$ref": "#/$defs/betterSqlite3DataSource"
+                },
+                {
+                    "$ref": "#/$defs/mongodbDataSource"
+                },
+                {
+                    "$ref": "#/$defs/postgresDataSource"
+                }
+            ]
+        },
+        "baseDataSource": {
+            "type": "object",
+            "description": "所有数据库类型共用的 DataSource 集合。",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "mysql",
+                        "postgres",
+                        "cockroachdb",
+                        "sap",
+                        "mariadb",
+                        "sqlite",
+                        "cordova",
+                        "react-native",
+                        "nativescript",
+                        "sqljs",
+                        "oracle",
+                        "mssql",
+                        "mongodb",
+                        "aurora-mysql",
+                        "aurora-postgres",
+                        "expo",
+                        "better-sqlite3",
+                        "capacitor",
+                        "spanner"
+                    ],
+                    "description": "表示数据库类型的字符串。可能的值包括：\n\n- mysql\n- postgres\n- cockroachdb\n- sap\n- mariadb\n- sqlite\n- cordova\n- react-native\n- nativescript\n- sqljs\n- oracle\n- mssql\n- mongodb\n- aurora-mysql\n- aurora-postgres\n- expo\n- better-sqlite3\n- capacitor\n- spanner"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "连接名称。如果未给出连接名称，则称之为“default”。不同的连接必须具有不同的名称。"
+                },
+                "entities": {
+                    "description": "要为此连接加载的实体。接受实体类或需要从中加载实体的目录。目录支持通配符。",
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "object"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "object"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "subscribers": {
+                    "description": "要为此连接加载的订阅者。接受订阅者类或需要从中加载订阅者的目录。目录支持通配符。",
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "migrations": {
+                    "description": "要为此连接加载的迁移。接受迁移类和表示迁移文件的glob模式。",
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "type": "object",
+                            "additionalProperties": {
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "type": "function"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "migrationsTableName": {
+                    "type": "string",
+                    "description": "迁移表名称，如果与“迁移”不同，则为不同名称。接受单个字符串名称。"
+                },
+                "migrationsTransactionMode": {
+                    "type": "string",
+                    "enum": [
+                        "all",
+                        "none",
+                        "each"
+                    ],
+                    "description": "迁移运行的事务模式"
+                },
+                "metadataTableName": {
+                    "type": "string",
+                    "description": "Typeorm元数据表名称，如果与“typeorm_metadata”不同，则为不同名称。接受单个字符串名称"
+                },
+                "namingStrategy": {
+                    "description": "用于命名数据库中的表和列的命名策略。",
+                    "type": "object"
+                },
+                "logging": {
+                    "description": "日志记录选项。",
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "enum": [
+                                "all"
+                            ]
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "enum": [
+                                    "query",
+                                    "schema",
+                                    "error",
+                                    "warn",
+                                    "info",
+                                    "log",
+                                    "migration"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "logger": {
+                    "description": "用于记录ORM中的查询和事件的记录器实例。",
+                    "enum": [
+                        "advanced-console",
+                        "simple-console",
+                        "file",
+                        "debug"
+                    ],
+                    "type": "string"
+                },
+                "maxQueryExecutionTime": {
+                    "type": "number",
+                    "description": "在记录器记录警告之前应执行查询的最大毫秒数。"
+                },
+                "synchronize": {
+                    "type": "boolean",
+                    "description": "指示是否应该在每次应用程序启动时自动创建数据库模式。"
+                },
+                "migrationsRun": {
+                    "type": "boolean",
+                    "description": "指示是否应该在每次应用程序启动时自动运行迁移。"
+                },
+                "dropSchema": {
+                    "type": "boolean",
+                    "description": "使架构每次建立连接时都会下降。"
+                },
+                "entityPrefix": {
+                    "type": "string",
+                    "description": "在数据库中使用所有表（集合）上的前缀。"
+                },
+                "entitySkipConstructor": {
+                    "type": "boolean",
+                    "description": "在创建新Entity实例时，如果为true，则跳过所有构造函数。"
+                },
+                "extra": {
+                    "type": "any",
+                    "description": "传递给底层驱动程序的额外连接选项。"
+                },
+                "relationLoadStrategy": {
+                    "type": "string",
+                    "enum": [
+                        "join",
+                        "query"
+                    ],
+                    "description": "指定如何加载关系 - 使用“ join”或单独的查询。"
+                },
+                "typename": {
+                    "type": "string",
+                    "description": "可选地应用于模型的“ typename”。如果设置，则每个水化的模型将具有此属性，其中包含目标模型/实体名称。"
+                },
+                "cache": {
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "database",
+                                        "redis",
+                                        "ioredis",
+                                        "ioredis/cluster"
+                                    ],
+                                    "description": "缓存类型。- “数据库”表示缓存值将存储在数据库中的单独表中。这是默认值。- “redis”表示缓存值将存储在redis内部。您必须提供redis连接选项。"
+                                },
+                                "provider": {
+                                    "type": "function",
+                                    "description": "用于自定义缓存提供程序的工厂函数，该提供程序实现QueryResultCache。"
+                                },
+                                "tableName": {
+                                    "type": "string",
+                                    "description": "可配置的“数据库”类型缓存表名称。默认值是“query-result-cache”"
+                                },
+                                "options": {
+                                    "type": "any",
+                                    "description": "用于提供redis连接选项。"
+                                },
+                                "alwaysEnabled": {
+                                    "type": "boolean",
+                                    "description": "如果将其设置为true，则查询（使用查找方法和QueryBuilder的方法）始终会被缓存。"
+                                },
+                                "duration": {
+                                    "type": "number",
+                                    "description": "以毫秒为单位，缓存将过期的时间。这可以根据查询设置。默认值为1000，相当于1秒。"
+                                },
+                                "ignoreErrors": {
+                                    "type": "boolean",
+                                    "description": "用于指定是否应忽略缓存错误，并将调用传递到Database。"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": true
+        },
+        "postgresDataSource": {
+            "type": "object",
+            "description": "Postgres 数据源配置。",
+            "properties": {
+                "schema": {
+                    "type": "string",
+                    "description": "模式名称。"
+                },
+                "driver": {
+                    "description": "驱动对象。",
+                    "default": "require(\"pg\")"
+                },
+                "nativeDriver": {
+                    "description": "原生驱动对象。",
+                    "default": "require(\"pg-native\")"
+                },
+                "useUTC": {
+                    "type": "boolean",
+                    "description": "boolean 值，用于决定是否以 UTC 或当地时间传递时间值。(默认值: true)。"
+                },
+                "replication": {
+                    "type": "object",
+                    "properties": {
+                        "master": {
+                            "$ref": "#/$defs/postgresConnectionCredentialsOptions",
+                            "description": "用于执行写操作的 orm 主服务器。"
+                        },
+                        "slaves": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/postgresConnectionCredentialsOptions"
+                            },
+                            "description": "从服务器（slave）列表。"
+                        }
+                    },
+                    "description": "复制设置。"
+                },
+                "connectTimeoutMS": {
+                    "type": "number",
+                    "description": "在连接到 Postgres 服务器时发生超时之前的毫秒数。如果未定义或设置为 0，则没有超时。默认为 undefined。"
+                },
+                "uuidExtension": {
+                    "type": "string",
+                    "enum": [
+                        "pgcrypto",
+                        "uuid-ossp"
+                    ],
+                    "description": "用于生成 UUID 列的 Postgres 扩展名。默认为 uuid-ossp。\n如果选择了 pgcrypto，则 TypeORM 将使用此扩展名中的 gen_random_uuid() 函数。\n如果选择了 uuid-ossp ，TypeORM 将使用此扩展名中的 uuid_generate_v4 () 函数。"
+                },
+                "poolErrorHandler": {
+                    "type": "function",
+                    "description": "连接池错误处理程序。"
+                },
+                "logNotifications": {
+                    "type": "boolean",
+                    "description": "在客户端日志中包含来自 Postgres 服务器的通知消息。"
+                },
+                "installExtensions": {
+                    "type": "boolean",
+                    "description": "自动安装 postgres 扩展。"
+                },
+                "applicationName": {
+                    "type": "string",
+                    "description": "设置 application_name 变量以帮助 db 管理员识别使用此连接的服务。默认值是 'undefined'。"
+                }
+            }
+        },
+        "postgresConnectionCredentialsOptions": {
+            "description": "PostgreSQL 特定连接凭据选项。",
+            "properties": {
+                "url": {
+                    "description": "要连接到的连接 URL。",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "数据库主机。",
+                    "type": "string"
+                },
+                "port": {
+                    "description": "数据库主机端口。",
+                    "type": "number"
+                },
+                "username": {
+                    "description": "数据库用户名。",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "数据库密码。",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "function"
+                        }
+                    ]
+                },
+                "database": {
+                    "description": "要连接的数据库名称。",
+                    "type": "string"
+                },
+                "ssl": {
+                    "description": "包含 SSL 参数的对象。",
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "object"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "mysqlConnectionCredentialsOptions": {
+            "type": "object",
+            "description": "用于创建MySQL连接的选项。",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "连接 MySQL 数据库的 URL。"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "数据库主机名。"
+                },
+                "port": {
+                    "type": "number",
+                    "description": "数据库主机端口号。"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "连接数据库的用户名。"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "连接数据库的密码。"
+                },
+                "database": {
+                    "type": "string",
+                    "description": "需要连接的数据库名称。"
+                },
+                "ssl": {
+                    "type": "any",
+                    "description": "包含 SSL 参数的对象或者 SSL 配置文件的名称。"
+                },
+                "socketPath": {
+                    "type": "string",
+                    "description": "连接数据库的 Unix 套接字路径。"
+                }
+            }
+        },
+        "mysqlDataSource": {
+            "description": "MySQL 数据源选项。",
+            "type": "object",
+            "required": [
+                "type"
+            ],
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/mysqlConnectionCredentialsOptions"
+                }
+            ],
+            "properties": {
+                "driver": {
+                    "type": "any",
+                    "description": "驱动程序对象。这默认为 require('mysql')。如果失败，则回退到 require('mysql2')。"
+                },
+                "charset": {
+                    "type": "string",
+                    "default": "UTF8_GENERAL_CI",
+                    "description": "连接的字符集。在 MySQL 的 SQL 级别中称为“排序规则”（例如 utf8_general_ci）。如果指定了 SQL 级字符集（如 utf8mb4），则使用该字符集的默认排序规则。默认值为'UTF8_GENERAL_CI'。"
+                },
+                "timezone": {
+                    "type": "string",
+                    "default": "local",
+                    "description": "配置在 MySQL 服务器上的时区。这用于将服务器日期/时间值强制转换为 JavaScript Date 对象及其反之。它可以是 'local'、'Z' 或形式为 +HH:MM 或 -HH:MM 的偏移量。（默认值：'local'）"
+                },
+                "connectTimeout": {
+                    "type": "number",
+                    "default": 10000,
+                    "description": "在初始连接到 MySQL 服务器时发生超时之前的毫秒数。（默认值：10000）"
+                },
+                "acquireTimeout": {
+                    "type": "number",
+                    "default": 10000,
+                    "description": "在初始连接到 MySQL 服务器时发生超时之前的毫秒数。（默认值：10000）connectTimeout 和 acquireTimeout 之间的差异是微妙的，并在 mysqljs/mysql 文档中有描述。https://github.com/mysqljs/mysql/tree/master#pool-options"
+                },
+                "insecureAuth": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "允许连接到请求使用旧（不安全）认证方法的 MySQL 实例。（默认值：false）"
+                },
+                "supportBigNumbers": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "处理数据库中的大数字（BIGINT 和 DECIMAL 列）时，应启用此选项。（默认值：false）"
+                },
+                "bigNumberStrings": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "启用支持大数字（BIGINT 和 DECIMAL 列）始终作为 JavaScript 字符串对象返回（默认值：false）。启用 supportBigNumbers 但禁用 bigNumberStrings 将仅在不能准确表示时将大数字作为字符串对象返回与 [JavaScript Number 对象](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) （当它们超出 [-2^53，+2^53] 范围时发生）; 否则，它们将作为数字对象返回。如果禁用了 supportBigNumbers，则忽略此选项。"
+                },
+                "dateStrings": {
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "default": false,
+                    "description": "强制日期类型（TIMESTAMP、DATETIME、DATE）以字符串形式返回，而不是膨胀为 JavaScript Date 对象。可以是 true/false 或保留为字符串的类型名称的数组。"
+                },
+                "debug": {
+                    "oneOf": [
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "default": false,
+                    "description": "将协议详细信息打印到 stdout。可以是 true/false 或应打印的数据包类型名称的数组。（默认值：false）"
+                },
+                "trace": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "在错误上生成堆栈跟踪，以包括库入口点的调用站点（“长堆栈跟踪”）。对大多数调用来说，具有轻微的性能惩罚。（默认值：true）"
+                },
+                "multipleStatements": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "允许每个查询使用多个 mysql 语句。谨慎使用此功能，因为它可能增加 SQL 注入攻击的范围。（默认值：false）"
+                },
+                "legacySpatialSupport": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "使用类似于 GeomFromText 和 AsText 的空间函数。这些函数已在 MySQL 8 中删除。（默认值：true）"
+                },
+                "flags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "除默认标志以外要使用的连接标志列表。也可以将默认标志列入黑名单。有关更多信息，请参见 https://github.com/mysqljs/mysql#connection-flags。"
+                },
+                "connectorPackage": {
+                    "type": "string",
+                    "enum": [
+                        "mysql",
+                        "mysql2"
+                    ],
+                    "description": "TypeORM 将自动使用找到的包，优先考虑 mysql 而非 mysql2，但您也可以手动指定它。"
+                },
+                "replication": {
+                    "type": "object",
+                    "properties": {
+                        "master": {
+                            "$ref": "#/$defs/mysqlConnectionCredentialsOptions"
+                        },
+                        "slaves": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/mysqlConnectionCredentialsOptions"
+                            }
+                        },
+                        "canRetry": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "如果失败，PoolCluster 将尝试重新连接。（默认值：true）"
+                        },
+                        "removeNodeErrorCount": {
+                            "type": "number",
+                            "default": 5,
+                            "description": "如果连接失败，则节点的错误计数会增加。当 errorCount 大于 removeNodeErrorCount 时，删除 PoolCluster 中的节点。（默认值：5）"
+                        },
+                        "restoreNodeTimeout": {
+                            "type": "number",
+                            "default": 0,
+                            "description": "如果连接失败，则在另一次连接尝试之前等待的毫秒数。如果设置为 0，则会更改节点并永不重复使用。（默认值：0）"
+                        },
+                        "selector": {
+                            "type": "string",
+                            "enum": [
+                                "RR",
+                                "RANDOM",
+                                "ORDER"
+                            ],
+                            "description": "确定如何选择从服务器：RR：轮流选择一个（循环）。RANDOM：通过随机函数选择节点。ORDER：无条件选择第一个可用节点。"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "description": "复制设置。"
+                }
+            }
+        },
+        "cookies": {
+            "type": "object",
+            "description": "Cookies 配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "签名密钥。默认是 ['abcdef']"
+                },
+                "secure": {
+                    "type": "boolean",
+                    "description": "是否只在 HTTPS 连接中使用。默认为 false"
+                }
+            }
+        },
+        "trace": {
+            "type": "object",
+            "description": "链路追踪配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "requestField": {
+                    "type": "string",
+                    "description": "请求头中的字段名。默认为 'X-Cell-Trace-ID'"
+                },
+                "responseField": {
+                    "type": "string",
+                    "description": "响应头中的字段名。默认为 'X-Cell-Trace-ID'"
+                }
+            }
+        },
+        "server": {
+            "type": "object",
+            "description": "服务器配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "port": {
+                    "type": "number",
+                    "description": "端口号。默认为 3000"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "全局路由前缀。默认为 '/'"
+                },
+                "endpoint": {
+                    "type": "string",
+                    "description": "服务端点。默认为 'http://localhost:${cell.server.port}'。默认无需配置"
+                }
+            }
+        },
+        "health": {
+            "type": "object",
+            "description": "健康检查配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "健康检查 URL。默认为 '/health'"
+                },
+                "method": {
+                    "type": "string",
+                    "description": "健康检查方法。默认为 'GET'"
+                }
+            }
+        },
+        "client": {
+            "description": "用于 Axios 的请求配置。 D 是可选要发送的数据类型。",
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "请求的 URL。"
+                },
+                "method": {
+                    "type": "string",
+                    "description": "请求方法。"
+                },
+                "baseURL": {
+                    "type": "string",
+                    "description": "将自动添加到 `url` 前面的基础 URL。"
+                },
+                "transformRequest": {
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "function"
+                            }
+                        },
+                        {
+                            "type": "function"
+                        }
+                    ],
+                    "description": "在请求之前对数据进行转换的函数数组。只能用在 'PUT', 'POST' 和 'PATCH' 这几个请求方法。数组中的最后一个函数必须返回一个字符串或 ArrayBuffer、FormData、ArrayBufferView 或者 Stream"
+                },
+                "transformResponse": {
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "function"
+                            }
+                        },
+                        {
+                            "type": "function"
+                        }
+                    ],
+                    "description": "响应结果将传入这些函数数组中的每一个，以便进行转换，然后它们会被合并起来形成新的响应结果。"
+                },
+                "headers": {
+                    "type": "object",
+                    "description": "自定义请求头。"
+                },
+                "params": {
+                    "type": "object",
+                    "description": "请求参数。"
+                },
+                "paramsSerializer": {
+                    "type": "function",
+                    "description": "用于序列化 `params` 的函数。"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "要作为请求主体发送的数据。"
+                },
+                "timeout": {
+                    "type": "number",
+                    "description": "指定请求超时的毫秒数(0 表示无超时时间)。"
+                },
+                "timeoutErrorMessage": {
+                    "type": "string",
+                    "description": "定义请求超时后的错误信息。"
+                },
+                "withCredentials": {
+                    "type": "boolean",
+                    "description": "是否携带 Cookie。"
+                },
+                "adapter": {
+                    "type": "function",
+                    "description": "HTTP适配器。"
+                },
+                "auth": {
+                    "type": "object",
+                    "description": "授权信息。"
+                },
+                "responseType": {
+                    "type": "string",
+                    "description": "响应的数据类型。"
+                },
+                "responseEncoding": {
+                    "type": "string",
+                    "description": "指定响应编码。"
+                },
+                "xsrfCookieName": {
+                    "type": "string",
+                    "description": "用作 xsrf 令牌值的cookie的名称。"
+                },
+                "xsrfHeaderName": {
+                    "type": "string",
+                    "description": "用作 xsrf 标头值的标头名称。"
+                },
+                "onUploadProgress": {
+                    "type": "function",
+                    "description": "上传进度回调函数。"
+                },
+                "onDownloadProgress": {
+                    "type": "function",
+                    "description": "下载进度回调函数。"
+                },
+                "maxContentLength": {
+                    "type": "number",
+                    "description": "定义允许的响应内容的最大尺寸（以字节为单位）。"
+                },
+                "validateStatus": {
+                    "oneOf": [
+                        {
+                            "type": "function"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "定义对于给定的 HTTP 响应状态码是 resolve 还是 reject 状态。"
+                },
+                "maxBodyLength": {
+                    "type": "number",
+                    "description": "定义允许传输的请求数据的最大值（以字节为单位）。"
+                },
+                "maxRedirects": {
+                    "type": "number",
+                    "description": "定义在 node.js 中 follow 的最大重定向数。如果设置为0，将不会 follow 任何重定向。"
+                },
+                "socketPath": {
+                    "type": "string",
+                    "description": "用于支持node.js中基于 Unix 的socket。http://nodejs.org/api/http.html#http_class_http_agent"
+                },
+                "httpAgent": {
+                    "type": "any",
+                    "description": "控制在 node.js 中使用的 http.Agent 类。如果设为 false，则不使用 http.Agent；如果未指定，则使用默认值（即 http.globalAgent）"
+                },
+                "httpsAgent": {
+                    "type": "any",
+                    "description": "控制在 node.js 中使用的 https.Agent 类。如果设为 false，则不使用 https.Agent；如果未指定，则使用默认值（即 https.globalAgent）"
+                },
+                "proxy": {
+                    "oneOf": [
+                        {
+                            "type": "object"
+                        },
+                        {
+                            "type": "boolean"
+                        }
+                    ],
+                    "description": "定义代理服务器的主机名称和端口。"
+                },
+                "cancelToken": {
+                    "type": "object",
+                    "description": "取消令牌。"
+                },
+                "decompress": {
+                    "type": "boolean",
+                    "description": "是否支持自动解压。"
+                },
+                "transitional": {
+                    "type": "object",
+                    "description": "用于兼容旧版代码。"
+                },
+                "signal": {
+                    "type": "object",
+                    "description": "是一个用于请求的 AbortSignal 实例，允许你在请求未完成之前发起中止。"
+                },
+                "insecureHTTPParser": {
+                    "type": "boolean",
+                    "description": "透明地启用不安全的http解析器。"
+                }
+            }
+        },
+        "sqliteDataSource": {
+            "description": "Sqlite 数据源选项。",
+            "properties": {
+                "database": {
+                    "description": "存储类型或存储路径。",
+                    "type": "string"
+                },
+                "driver": {
+                    "description": "驱动程序对象。默认为 require(\"sqlite3\")。",
+                    "type": "object"
+                },
+                "key": {
+                    "description": "SQLCipher 的加密键。",
+                    "type": "string"
+                },
+                "busyErrorRetry": {
+                    "description": "在锁定的数据库上执行查询时等待的毫秒数，然后重试请求的写操作，直到接收到 SQLITE_BUSY 错误。",
+                    "type": "number"
+                },
+                "enableWAL": {
+                    "description": "启用 WAL 模式。默认情况下禁用。",
+                    "type": "boolean"
+                }
+            },
+            "additionalProperties": false
+        },
+        "betterSqlite3DataSource": {
+            "description": "BetterSqlite 数据源选项。",
+            "properties": {
+                "database": {
+                    "description": "存储类型或存储路径。",
+                    "type": "string"
+                },
+                "driver": {
+                    "description": "驱动程序对象。默认为 require(\"better-sqlite3\")。",
+                    "type": "object"
+                },
+                "key": {
+                    "description": "SQLCipher 的加密键。",
+                    "type": "string"
+                },
+                "statementCacheSize": {
+                    "description": "sqlite 语句的缓存大小以加快查询速度。默认值：100。",
+                    "type": "number",
+                    "default": 100
+                },
+                "prepareDatabase": {
+                    "description": "在 typeorm 中使用数据库之前运行的函数。您可以在此函数中设置 pragma、注册插件或注册函数或聚合函数。",
+                    "type": "function"
+                },
+                "readonly": {
+                    "description": "以只读模式打开数据库连接。默认值：false。",
+                    "type": "boolean",
+                    "default": false
+                },
+                "fileMustExist": {
+                    "description": "如果数据库不存在，则会抛出错误，而不是创建一个新文件。此选项不影响内存或只读数据库连接。默认值：false。",
+                    "type": "boolean",
+                    "default": false
+                },
+                "timeout": {
+                    "description": "在锁定的数据库上执行查询时等待的毫秒数，然后抛出 SQLITE_BUSY 错误。默认值：5000。",
+                    "type": "number",
+                    "default": 5000
+                },
+                "verbose": {
+                    "description": "提供一个函数，该函数会在数据库连接执行每个 SQL 字符串时调用。",
+                    "type": "function"
+                },
+                "nativeBinding": {
+                    "description": "本机插件（better_sqlite3.node）的相对或绝对路径。",
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "mongodbDataSource": {
+            "description": "MongoDB 数据源选项。",
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "连接数据库的 URL。"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "数据库主机地址。"
+                },
+                "hostReplicaSet": {
+                    "type": "string",
+                    "description": "数据库副本集的主机地址。"
+                },
+                "port": {
+                    "type": "number",
+                    "description": "数据库端口号。"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "数据库用户名。"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "数据库密码。"
+                },
+                "database": {
+                    "type": "string",
+                    "description": "要连接的数据库名称。"
+                },
+                "driver": {
+                    "description": "驱动对象，默认值为 require(\"mongodb\")。",
+                    "type": "any"
+                },
+                "poolSize": {
+                    "description": "为每个单独的服务器或代理连接设置最大池大小。",
+                    "type": "number"
+                },
+                "ssl": {
+                    "description": "使用 SSL 连接 (需要支持 SSL 的 mongod 服务器)。默认：false",
+                    "type": "boolean"
+                },
+                "sslValidate": {
+                    "description": "根据 ca 验证 mongod 服务器证书 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。默认：true",
+                    "type": "boolean"
+                },
+                "sslCA": {
+                    "description": "有效证书数组，可以是缓冲区或字符串 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。",
+                    "type": [
+                        "string",
+                        "object"
+                    ]
+                },
+                "sslCert": {
+                    "description": "包含要呈现的证书的字符串或缓冲区 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。",
+                    "type": [
+                        "string",
+                        "object"
+                    ]
+                },
+                "sslKey": {
+                    "description": "包含证书私钥的字符串或缓冲区 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。",
+                    "type": "string"
+                },
+                "sslPass": {
+                    "description": "包含证书密码的字符串或缓冲区 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。",
+                    "type": [
+                        "string",
+                        "object"
+                    ]
+                },
+                "sslCRL": {
+                    "description": "SSL 证书销毁列表二进制缓冲区 (需要支持 SSL 的 mongod 服务器，版本需为 2.4 或更高)。",
+                    "type": [
+                        "string",
+                        "object"
+                    ]
+                },
+                "autoReconnect": {
+                    "description": "出现错误时自动重连。默认：true",
+                    "type": "boolean"
+                },
+                "noDelay": {
+                    "description": "TCP 套接字 NoDelay 选项。默认：true",
+                    "type": "boolean"
+                },
+                "keepAlive": {
+                    "description": "在 TCP 套接字上发起 keepAlive 前要等待的毫秒数。默认：30000",
+                    "type": "number"
+                },
+                "connectTimeoutMS": {
+                    "description": "TCP 连接超时时间，单位为毫秒。默认：30000",
+                    "type": "number"
+                },
+                "family": {
+                    "description": "IP 栈版本号。可以是 4、6。如果未定义，则尝试使用 IPv6 进行连接，如果失败则回退到 IPv4。",
+                    "type": "number"
+                },
+                "socketTimeoutMS": {
+                    "description": "TCP 套接字超时时间，单位为毫秒。默认：360000",
+                    "type": "number"
+                },
+                "reconnectTries": {
+                    "description": "服务器重连次数。默认：30",
+                    "type": "number"
+                },
+                "reconnectInterval": {
+                    "description": "服务器重连间隔时间，单位为毫秒。默认：1000",
+                    "type": "number"
+                },
+                "ha": {
+                    "description": "是否对 Replicaset 或 Mongos 代理运行高可用性监视。默认：true",
+                    "type": "boolean"
+                },
+                "haInterval": {
+                    "description": "Replicaset 查询的高可用性周期时间，单位为毫秒。默认：10000",
+                    "type": "number"
+                },
+                "replicaSet": {
+                    "description": "要连接的副本集的名称。",
+                    "type": "string"
+                },
+                "acceptableLatencyMS": {
+                    "description": "在使用 NEAREST 时选择服务器的范围 (最低 ping 毫秒数 + 延迟栅栏，例如：1 到 1 + 15 毫秒的范围)。默认：15",
+                    "type": "number"
+                },
+                "secondaryAcceptableLatencyMS": {
+                    "description": "在使用 NEAREST 时选择服务器的范围 (最低 ping 毫秒数 + 延迟栅栏，例如：1 到 1 + 15 毫秒的范围)。默认：15",
+                    "type": "number"
+                },
+                "connectWithNoPrimary": {
+                    "description": "是否在没有可用的主服务器的情况下建立连接。默认：false",
+                    "type": "boolean"
+                },
+                "authSource": {
+                    "description": "如果数据库身份验证依赖于其他数据库名。",
+                    "type": "string"
+                },
+                "w": {
+                    "description": "写入关注点。",
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ]
+                },
+                "wtimeout": {
+                    "type": "number",
+                    "description": "写入关注超时值"
+                },
+                "j": {
+                    "type": "boolean",
+                    "description": "指定日志写入关注。默认值：false"
+                },
+                "forceServerObjectId": {
+                    "type": "boolean",
+                    "description": "强制服务器分配 _id 值，而不是驱动程序。默认值：false"
+                },
+                "serializeFunctions": {
+                    "type": "boolean",
+                    "description": "序列化任何对象上的函数。默认值：false"
+                },
+                "ignoreUndefined": {
+                    "type": "boolean",
+                    "description": "指定 BSON 序列化器是否应忽略未定义的字段。默认值：false"
+                },
+                "raw": {
+                    "type": "boolean",
+                    "description": "将文档结果作为原始 BSON 缓冲区返回。默认值：false"
+                },
+                "promoteLongs": {
+                    "type": "boolean",
+                    "description": "如果长值适合 53 比特分辨率，则将其升级为数字。默认值：true"
+                },
+                "promoteBuffers": {
+                    "type": "boolean",
+                    "description": "将二进制 BSON 值提升为本机 Node 缓冲区。默认值：false"
+                },
+                "promoteValues": {
+                    "type": "boolean",
+                    "description": "在可能的情况下将 BSON 值提升为本地类型，设置为 false 以仅接收包装器类型。默认值：true"
+                },
+                "domainsEnabled": {
+                    "type": "boolean",
+                    "description": "启用将回调包装在当前域中，默认情况下禁用以避免性能损失。默认值：false"
+                },
+                "bufferMaxEntries": {
+                    "type": "number",
+                    "description": "将驱动程序缓冲的操作数设定上限，直到放弃获取工作连接，-1 表示无限制。"
+                },
+                "readPreference": {
+                    "description": "首选读取偏好（ReadPreference.PRIMARY、ReadPreference.PRIMARY_PREFERRED、ReadPreference.SECONDARY、ReadPreference.SECONDARY_PREFERRED、ReadPreference.NEAREST）。",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "primary",
+                                "primaryPreferred",
+                                "secondary",
+                                "secondaryPreferred",
+                                "nearest"
+                            ],
+                            "description": "字符串类型的首选项"
+                        },
+                        {
+                            "type": "object",
+                            "description": "ReadPreference 类型的首选项"
+                        }
+                    ]
+                },
+                "pkFactory": {
+                    "description": "用于生成自定义 _id 键的主键工厂对象。",
+                    "additionalProperties": true
+                },
+                "promiseLibrary": {
+                    "description": "应用程序希望使用的 Promise 库类，如 Bluebird，必须兼容 ES6。",
+                    "additionalProperties": true
+                },
+                "readConcern": {
+                    "description": "指定集合的读取关注点。（仅支持 MongoDB 3.2 或更高版本）。",
+                    "additionalProperties": true
+                },
+                "maxStalenessSeconds": {
+                    "type": "number",
+                    "description": "指定次要读取的 maxStalenessSeconds 值，最小值为 90 秒"
+                },
+                "loggerLevel": {
+                    "type": "string",
+                    "enum": [
+                        "error",
+                        "warn",
+                        "info",
+                        "debug"
+                    ],
+                    "description": "指定驱动程序记录器使用的日志级别（错误/警告/信息/调试）。"
+                },
+                "checkServerIdentity": {
+                    "oneOf": [
+                        {
+                            "type": "boolean",
+                            "description": "确保 SSL 过程中检查服务器标识，默认情况下禁用检查。只适用于 Node 0.12.x 或更高版本。"
+                        },
+                        {
+                            "type": "function",
+                            "description": "自定义的 checkServerIdentity 函数"
+                        }
+                    ],
+                    "description": "此连接在身份验证过程中将使用的身份验证机制设置。"
+                },
+                "validateOptions": {
+                    "oneOf": [
+                        {
+                            "type": "boolean",
+                            "description": "验证通过 MongoClient 传递的选项是否正确。默认值：false。"
+                        },
+                        {
+                            "additionalProperties": true,
+                            "description": " 其他配置选项"
+                        }
+                    ],
+                    "description": "验证通过 MongoClient 传递的选项是否正确。默认值：false。"
+                },
+                "appname": {
+                    "type": "string",
+                    "description": "指定创建此 MongoClient 实例的应用程序名称。MongoDB 3.4 及更高版本在建立每个连接时都会在服务器日志中打印该值。它也记录在慢查询日志和 profile 集合中。"
+                },
+                "authMechanism": {
+                    "type": "string",
+                    "description": "设置 MongoDB 用于身份验证连接的身份验证机制"
+                },
+                "compression": {
+                    "additionalProperties": true,
+                    "description": "要使用的压缩类型：snappy or zlib"
+                },
+                "fsync": {
+                    "type": "boolean",
+                    "description": "指定文件同步写入关注。默认值：false"
+                },
+                "readPreferenceTags": {
+                    "type": "array",
+                    "items": {},
+                    "description": "读取偏好标记"
+                },
+                "numberOfRetries": {
+                    "type": "number",
+                    "description": "可重试游标的重试次数。默认值：5"
+                },
+                "auto_reconnect": {
+                    "type": "boolean",
+                    "description": "启用单服务器实例的自动重新连接。默认值：true"
+                },
+                "monitorCommands": {
+                    "type": "boolean",
+                    "description": "启用此客户端的命令监视。默认值：false"
+                },
+                "minSize": {
+                    "type": "number",
+                    "description": "如果存在，则连接池将使用 minSize 连接进行初始化，并且永远不会低于 minSize 连接。"
+                },
+                "useNewUrlParser": {
+                    "type": "boolean",
+                    "description": "确定是否使用新的 URL 解析器。默认值：false"
+                },
+                "useUnifiedTopology": {
+                    "type": "boolean",
+                    "description": "确定是否使用新的服务器发现和监控引擎。默认值：false。https://github.com/mongodb/node-mongodb-native/releases/tag/v3.2.1"
+                },
+                "autoEncryption": {
+                    "additionalProperties": true,
+                    "description": "自动客户端端字段级加密配置。"
+                },
+                "retryWrites": {
+                    "type": "boolean",
+                    "description": "启用或禁用在遇到瞬态网络错误时重试写入的能力。"
+                }
+            }
+        },
+        "security": {
+            "type": "object",
+            "description": "安全配置",
+            "additionalProperties": true,
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "是否启用方法权限拦截功能。"
+                },
+                "loginRequired": {
+                    "type": "boolean",
+                    "description": "是否启用强制登录验证。"
+                },
+                "openNewWindow": {
+                    "type": "boolean",
+                    "description": "是否在新窗口中打开登录页面。"
+                },
+                "usernameKey": {
+                    "type": "string",
+                    "description": "登录用户名字段名。"
+                },
+                "passwordKey": {
+                    "type": "string",
+                    "description": "登录用户密码字段名。"
+                },
+                "loginPage": {
+                    "type": "string",
+                    "description": "登录页面 URL。"
+                },
+                "loginUrl": {
+                    "type": "string",
+                    "description": "处理登录URL。"
+                },
+                "loginMethod": {
+                    "type": "string",
+                    "description": "处理登录的请求方法。"
+                },
+                "loginSuccessUrl": {
+                    "type": "string",
+                    "description": "登录成功后重定向的 URL。"
+                },
+                "logoutUrl": {
+                    "type": "string",
+                    "description": "登出 URL。"
+                },
+                "logoutMethod": {
+                    "type": "string",
+                    "description": "登出请求方法。"
+                },
+                "logoutSuccessUrl": {
+                    "type": "string",
+                    "description": "登出成功后重定向的 URL。"
+                },
+                "alwaysUseDefaultTargetUrl": {
+                    "type": "boolean",
+                    "description": "是否总是使用默认的目标 URL。"
+                },
+                "useReferer": {
+                    "type": "boolean",
+                    "description": "是否使用引用页作为目标 URL。"
+                },
+                "targetUrlParameter": {
+                    "type": "string",
+                    "description": "目标URL参数名称。"
+                },
+                "base64StringKeyLength": {
+                    "type": "number",
+                    "description": "BASE64编码密钥长度。"
+                },
+                "contextKey": {
+                    "type": "string",
+                    "description": "SecurityContext属性在请求中的键名。"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名。"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "经过哈希处理的密码。"
+                },
+                "passwordEncoder": {
+                    "type": "object",
+                    "properties": {
+                        "secret": {
+                            "type": "string",
+                            "description": "加密密码时使用的密钥。"
+                        },
+                        "encodeHashAsBase64": {
+                            "type": "boolean",
+                            "description": "是否将哈希值转换为BASE64字符串。"
+                        }
+                    }
+                },
+                "basic": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "是否启用基本认证。"
+                        },
+                        "realm": {
+                            "type": "string",
+                            "description": "基本认证域。"
+                        }
+                    }
+                },
+                "userInfoEndpoint": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "description": "获取用户信息 URL。"
+                        },
+                        "method": {
+                            "type": "string",
+                            "description": "获取用户信息请求方法。"
+                        }
+                    }
+                },
+                "userMapperRule": {
+                    "type": "object",
+                    "description": "用户属性映射规则。",
+                    "properties": {
+                        "github": {
+                            "type": "object",
+                            "properties": {
+                                "avatar": {
+                                    "type": "string",
+                                    "description": "用户头像对应的字段名"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "description": "用户邮箱对应的字段名"
+                                },
+                                "login": {
+                                    "type": "string",
+                                    "description": "用户名对应的字段名"
+                                },
+                                "nickname": {
+                                    "type": "string",
+                                    "description": "昵称对应的字段名"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "web": {
+            "type": "object",
+            "description": "Web 配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "body": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "description": "Web Body 配置对象",
+                    "properties": {
+                        "inflate": {
+                            "type": "boolean",
+                            "description": "如果设置为 true，则会解压缩已压缩请求体；如果设置为 false，则拒绝已压缩的请求体。默认值为 true。"
+                        },
+                        "limit": {
+                            "type": [
+                                "number",
+                                "string"
+                            ],
+                            "description": "控制最大请求体大小。如果这是一个数字，则该值指定字节数；如果它是一个字符串，则该值将传递给字节库进行解析。默认为 '100kb'。"
+                        },
+                        "type": {
+                            "oneOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "function",
+                                    "description": "用于确定中间件将解析哪种媒体类型的函数."
+                                }
+                            ],
+                            "description": "type 选项用于确定中间件将解析哪种媒体类型。"
+                        },
+                        "verify": {
+                            "type": "function",
+                            "description": "如果提供了 verify 选项，则在调用它时，verify(req, res, buf, encoding) 被调用，其中 buf 是原始请求体的 Buffer，encoding 是请求的编码。"
+                        }
+                    }
+                },
+                "validationPipeOptions": {
+                    "type": "object",
+                    "description": "验证管道配置对象",
+                    "additionalProperties": true,
+                    "properties": {
+                        "transformOptions": {
+                            "description": "在转换期间传递的选项",
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {
+                                "strategy": {
+                                    "type": "string",
+                                    "description": "排除策略。默认情况下使用 exposeAll，这意味着默认情况下会暴露所有属性并进行转换。",
+                                    "enum": [
+                                        "excludeAll",
+                                        "exposeAll"
+                                    ]
+                                },
+                                "excludeExtraneousValues": {
+                                    "type": "boolean",
+                                    "description": "指示在将普通值转换为类时是否应该排除多余的属性。\n\n此选项要求目标类上的每个属性都至少有一个来自此库的 @Expose 或 @Exclude 装饰器分配。"
+                                },
+                                "groups": {
+                                    "type": "array",
+                                    "description": "只有具有给定组的属性才会被转换。",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "version": {
+                                    "type": "number",
+                                    "description": "只有版本 'since' > 版本 < 'until' 的属性才会被转换。"
+                                },
+                                "excludePrefixes": {
+                                    "type": "array",
+                                    "description": "排除具有给定前缀的属性。例如，如果您用“_”和“__”标记私有属性，则可以将此选项的值设置为 [\"_\", \"__\"]，然后所有私有属性都将被跳过。这只适用于 \"exposeAll\" 策略。",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "ignoreDecorators": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则类转换器将忽略所有 @Expose 和 @Exclude 装饰器的效果。如果您想要克隆对象但不应用装饰器影响，这个选项很有用。"
+                                },
+                                "enableCircularCheck": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则类转换器将执行循环检查。（默认情况下关闭循环检查）当您确定您的类型可能具有循环依赖关系时，此选项非常有用。"
+                                },
+                                "enableImplicitConversion": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则类转换器将尝试根据它们的类型信息将属性隐式转换为目标类型。默认值：false"
+                                },
+                                "exposeDefaultValues": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则类转换器将使用未提供字段的默认值。当您将普通对象转换为类并且具有具有默认值的可选字段时，这非常有用。"
+                                },
+                                "exposeUnsetFields": {
+                                    "type": "boolean",
+                                    "description": "当设置为 true 时，值为 undefined 的字段将包含在类到 plain 的转换中。否则，这些字段将从结果中省略。默认值：true"
+                                }
+                            }
+                        },
+                        "validatorOptions": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "description": "在验证过程中传递给验证器的选项",
+                            "properties": {
+                                "enableDebugMessages": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则当出现问题时，class-validator 将在控制台上打印额外的警告消息。"
+                                },
+                                "skipUndefinedProperties": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则验证器将跳过验证对象中未定义的所有属性。"
+                                },
+                                "skipNullProperties": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则验证器将跳过验证对象中为 null 的所有属性。"
+                                },
+                                "skipMissingProperties": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则验证器将跳过验证对象中为 null 或未定义的所有属性。"
+                                },
+                                "whitelist": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则验证器将剥离未装饰的任何属性的已验证对象。提示：如果您的属性没有任何其他装饰器适用，请使用@Allow 装饰器。"
+                                },
+                                "forbidNonWhitelisted": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，验证器将抛出错误，而不是剥离非白名单属性的对象。"
+                                },
+                                "groups": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "用于验证对象的分组。"
+                                },
+                                "always": {
+                                    "type": "boolean",
+                                    "description": "设置装饰器的 always 选项的默认值。可以在装饰器选项中覆盖默认值。"
+                                },
+                                "strictGroups": {
+                                    "type": "boolean",
+                                    "description": "如果未提供 [groups] 或为空，则忽略至少包含一个组的装饰器。"
+                                },
+                                "dismissDefaultMessages": {
+                                    "type": "boolean",
+                                    "description": "如果设置为 true，则验证将不使用默认消息。如果未明确设置，则错误消息始终未定义。"
+                                },
+                                "validationError": {
+                                    "type": "object",
+                                    "properties": {
+                                        "target": {
+                                            "type": "boolean",
+                                            "description": "指示在 ValidationError 中是否应公开目标。"
+                                        },
+                                        "value": {
+                                            "type": "boolean",
+                                            "description": "指示在 ValidationError 中是否应公开已验证的值。"
+                                        }
+                                    },
+                                    "description": "ValidationError 的特殊选项。"
+                                },
+                                "forbidUnknownValues": {
+                                    "type": "boolean",
+                                    "description": "将其设置为 true 将导致未知对象验证失败。"
+                                },
+                                "stopAtFirstError": {
+                                    "type": "boolean",
+                                    "description": "当设置为 true 时，在遇到第一个错误后，给定属性的验证将停止。默认为 false。"
+                                }
+                            }
+                        },
+                        "detailedOutputDisabled": {
+                            "type": "boolean",
+                            "description": "是否禁用详细输出。默认为 false"
+                        },
+                        "transformEnabled": {
+                            "type": "boolean",
+                            "description": "是否启用转换。默认为 true"
+                        }
+                    }
+                }
+            }
+        },
+        "cloud": {
+            "type": "object",
+            "description": "@celljs/cloud 云基础组件属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "account": {
+                    "type": "object",
+                    "description": "云账号配置对象",
+                    "additionalProperties": true,
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "云账号 ID"
+                        }
+                    }
+                },
+                "region": {
+                    "type": "string",
+                    "description": "云地域"
+                },
+                "credentials": {
+                    "type": "object",
+                    "description": "云账号凭证配置对象",
+                    "additionalProperties": true,
+                    "properties": {
+                        "accessKeyId": {
+                            "type": "string",
+                            "description": "云账号访问密钥 ID"
+                        },
+                        "accessKeySecret": {
+                            "type": "string",
+                            "description": "云账号访问密钥"
+                        },
+                        "token": {
+                            "type": "string",
+                            "description": "云账号访问令牌"
+                        }
+                    },
+                    "required": [
+                        "accessKeyId",
+                        "accessKeySecret"
+                    ]
+                },
+                "client": {
+                    "type": "object",
+                    "description": "云 API 客户端配置对象",
+                    "additionalProperties": true,
+                    "properties": {
+                        "timeout": {
+                            "type": "number",
+                            "description": "请求超时时间"
+                        },
+                        "internal": {
+                            "type": "boolean",
+                            "description": "是否使用内网请求"
+                        },
+                        "apiVersion": {
+                            "type": "string",
+                            "description": "云 API 版本"
+                        }
+                    }
+                },
+                "disableProjectId": {
+                    "type": "boolean",
+                    "description": "是否禁用项目 ID。默认值为 false"
+                },
+                "layer": {
+                    "$ref": "#/$defs/layer"
+                },
+                "function": {
+                    "$ref": "#/$defs/function"
+                },
+                "alias": {
+                    "$ref": "#/$defs/alias"
+                },
+                "trigger": {
+                    "$ref": "#/$defs/trigger"
+                },
+                "customDomain": {
+                    "$ref": "#/$defs/fcCustomDomain"
+                },
+                "apiGateway": {
+                    "$ref": "#/$defs/apiGateway"
+                }
+            }
+        },
+        "codeUri": {
+            "type": "object",
+            "description": "代码路径",
+            "additionalProperties": true,
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "代码路径"
+                },
+                "exclude": {
+                    "type": "string",
+                    "description": "排除文件"
+                },
+                "include": {
+                    "type": "string",
+                    "description": "包含文件"
+                }
+            }
+        },
+        "layer": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/fcLayer"
+                },
+                {
+                    "$ref": "#/$defs/scfLayer"
+                }
+            ]
+        },
+        "alias": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/baseAlias"
+                },
+                {
+                    "$ref": "#/$defs/fcAlias"
+                },
+                {
+                    "$ref": "#/$defs/scfAlias"
+                }
+            ]
+        },
+        "function": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/baseFunction"
+                },
+                {
+                    "$ref": "#/$defs/fcFunction"
+                },
+                {
+                    "$ref": "#/$defs/scfFunction"
+                }
+            ]
+        },
+        "trigger": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/fcTrigger"
+                },
+                {
+                    "$ref": "#/$defs/scfTrigger"
+                }
+            ]
+        },
+        "apiGateway": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/fcAPIGateway"
+                },
+                {
+                    "$ref": "#/$defs/scfAPIGateway"
+                }
+            ]
+        },
+        "baseFunction": {
+            "type": "object",
+            "description": "@celljs/cloud-plugin 云基础插件函数属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "sync": {
+                    "type": "string",
+                    "description": "函数部署同步策略",
+                    "enum": [
+                        "onlyUpdateCode"
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "函数名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "函数描述"
+                },
+                "runtime": {
+                    "type": "string",
+                    "description": "运行环境"
+                },
+                "handler": {
+                    "type": "string",
+                    "description": "函数入口"
+                },
+                "codeUri": {
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "代码路径"
+                        },
+                        {
+                            "$ref": "#/$defs/codeUri"
+                        }
+                    ]
+                },
+                "memorySize": {
+                    "type": "number",
+                    "description": "内存大小"
+                },
+                "timeout": {
+                    "type": "number",
+                    "description": "超时时间"
+                },
+                "env": {
+                    "type": "object",
+                    "description": "环境变量，例如 \nenv: \n  foo: bar",
+                    "additionalProperties": true
+                },
+                "bootstrap": {
+                    "type": "string",
+                    "description": "启动命令"
+                }
+            }
+        },
+        "baseAlias": {
+            "type": "object",
+            "description": "@celljs/cloud-plugin 云基础插件别名属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "别名名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "别名描述"
+                }
+            }
+        },
+        "fcLayer": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算层属性配置，详细文档：https://help.aliyun.com/document_detail/415668.html",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "层名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "层描述"
+                },
+                "codeUri": {
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "代码路径"
+                        },
+                        {
+                            "$ref": "#/$defs/codeUri"
+                        }
+                    ]
+                },
+                "compatibleRuntime": {
+                    "type": "array",
+                    "description": "兼容运行环境",
+                    "items": {
+                        "type": "string",
+                        "description": "运行时名称。当前支持nodejs16、nodejs14、nodejs12、nodejs10、nodejs8、nodejs6、python3.10、python3.9、python3、python2.7、java11、java8、php7.2、go1、dotnetcore3.1、dotnetcore2.1、custom.debian10和custom"
+                    }
+                }
+            }
+        },
+        "fcAlias": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算别名属性配置，详细文档：https://help.aliyun.com/document_detail/415668.html",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "别名名称"
+                },
+                "additionalVersionWeight": {
+                    "type": "object",
+                    "description": "别名指向的灰度版本以及灰度权重。灰度版本只在调用函数时生效。由版本号和对应的权重组成，例如，2:0.05表明调用函数时，版本2为灰度版本，切5%的流量到灰度版本，95%的流量默认到主版本。流量权重，取值范围[0,1]",
+                    "additionalProperties": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "别名描述"
+                },
+                "resolvePolicy": {
+                    "type": "string",
+                    "description": "灰度方式。取值如下：Random：随机灰度，为默认值。Content：规则灰度",
+                    "enum": [
+                        "Random",
+                        "Content"
+                    ]
+                },
+                "routePolicy": {
+                    "type": "object",
+                    "description": "灰度规则。满足灰度规则条件的流量，会被路由至灰度实例。",
+                    "additionalProperties": true,
+                    "properties": {
+                        "condition": {
+                            "type": "string",
+                            "description": "条件模式：灰度规则项的逻辑运算。默认值为 AND。 取值如下：AND: 全部灰度规则项满足则命中。OR: 任意一个灰度规则项满足则命中。"
+                        },
+                        "policyItems": {
+                            "type": "array",
+                            "description": "灰度规则项列表",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "operator": {
+                                        "type": "string",
+                                        "description": "operator指定运算符。 将请求中由参数key指定的字段的实际值和参数value指定的值，按指定的运算符进行比较。取值如下：>、<、>=、<=、=和!=：大小比较规则遵循字典序。in：字符串包含关系。percent：百分比值，取值范围为 (0,100] 的整数。表示根据请求中指定字段key对应的实际值分布，按百分比灰度。其中字段由参数key指定，百分比值由参数value指定 。 例如，一条{ type=Header, key=uid, value=20, operator=percent }的规则，表示根据请求header中字段uid的值的分布，其中20%的请求路由到灰度版本上。"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "参数类型。可以取HTTP请求中的有关值"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "description": "key指定控制流量灰度的字段名。 例如key为x-test-uid，则请求中x-test-uid字段的值将决定请求是否被路由到灰度版本上"
+                                    },
+                                    "value": {
+                                        "type": "number",
+                                        "description": "value指定控制流量灰度的字段值。 请求中由参数key指定的字段实际值会和参数value字段值，按指定的运算符进行比较，决定请求是否被路由到灰度版本上"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "fcService": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算服务属性配置，详细文档：https://help.aliyun.com/document_detail/415668.html",
+            "additionalProperties": true,
+            "properties": {
+                "sync": {
+                    "type": "boolean",
+                    "description": "是否同步部署函数计算服务"
+                },
+                "logConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算日志配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "logStore": {
+                            "type": "string",
+                            "description": "阿里云函数计算日志存储"
+                        },
+                        "project": {
+                            "type": "string",
+                            "description": "阿里云函数计算日志项目"
+                        },
+                        "enableRequestMetrics": {
+                            "type": "boolean",
+                            "description": "是否开启函数计算请求日志"
+                        },
+                        "enableInstanceMetrics": {
+                            "type": "boolean",
+                            "description": "是否开启函数计算实例日志"
+                        },
+                        "logBeginRule": {
+                            "type": "string",
+                            "description": "函数计算日志开始规则"
+                        }
+                    }
+                },
+                "internetAccess": {
+                    "type": "boolean",
+                    "description": "是否允许函数计算访问公网"
+                },
+                "vpcConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算 VPC 配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "vpcId": {
+                            "type": "string",
+                            "description": "阿里云函数计算 VPC ID"
+                        },
+                        "vSwitchIds": {
+                            "type": "array",
+                            "description": "阿里云函数计算 VSwitch ID 列表",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "securityGroupId": {
+                            "type": "string",
+                            "description": "阿里云函数计算安全组 ID"
+                        },
+                        "role": {
+                            "type": "string",
+                            "description": "授予服务下函数访问的资源权限"
+                        }
+                    }
+                },
+                "nasConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算 NAS 配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "userId": {
+                            "type": "number",
+                            "description": "阿里云函数计算 NAS 用户 ID"
+                        },
+                        "groupId": {
+                            "type": "number",
+                            "description": "阿里云函数计算 NAS 用户组 ID"
+                        },
+                        "mountPoints": {
+                            "type": "array",
+                            "description": "阿里云函数计算 NAS 挂载点列表",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "serverAddr": {
+                                        "type": "string",
+                                        "description": "阿里云函数计算 NAS 服务地址"
+                                    },
+                                    "mountDir": {
+                                        "type": "string",
+                                        "description": "阿里云函数计算 NAS 挂载目录"
+                                    },
+                                    "enableTLS": {
+                                        "type": "boolean",
+                                        "description": "使用传输加密方式挂载。 说明：仅通用型NAS支持传输加密"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tracingConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算链路追踪配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "阿里云函数计算链路追踪类型。目前只支持Jaeger。"
+                        },
+                        "params": {
+                            "type": "object",
+                            "description": "阿里云函数计算链路追踪参数。当协议类型为Jaeger时，参数为map[string]string，其中key为\"endpoint\"，value为您的链路追踪内网接入点。 例如 endpoint: http://tracing-analysis-dc-hz.aliyuncs.com/adapt_xxx/api/otlp/traces",
+                            "additionalProperties": true
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "description": "阿里云函数计算服务名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "阿里云函数计算服务描述"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "阿里云函数计算角色"
+                },
+                "ossMountConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算 OSS 挂载配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "ossBucketName": {
+                            "type": "string",
+                            "description": "阿里云函数计算 OSS 挂载 Bucket 名称"
+                        },
+                        "ossBucketDomain": {
+                            "type": "string",
+                            "description": "阿里云函数计算 OSS 挂载 Bucket 域名"
+                        },
+                        "ossMountPoint": {
+                            "type": "string",
+                            "description": "阿里云函数计算 OSS 挂载目录"
+                        }
+                    }
+                }
+            }
+        },
+        "fcTrigger": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算触发器配置，详细文档：https://cloud.tencent.com/document/api/583/17237",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "触发器的名称。要求只能包含字母、数字、下划线(_)和短划线(-)。不能以数字、短划线(-)开头，长度限制为1~128个字符"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "触发器的描述"
+                },
+                "triggerType": {
+                    "type": "string",
+                    "description": "触发器的类型",
+                    "enum": [
+                        {
+                            "value": "timer",
+                            "description": "定时触发器"
+                        },
+                        {
+                            "value": "http",
+                            "description": "HTTP触发器"
+                        },
+                        {
+                            "value": "oss",
+                            "description": "对象存储触发器"
+                        },
+                        {
+                            "value": "log",
+                            "description": "日志服务触发器"
+                        },
+                        {
+                            "value": "mns_topic",
+                            "description": "消息服务触发器"
+                        },
+                        {
+                            "value": "cdn_events",
+                            "description": "CDN触发器"
+                        },
+                        {
+                            "value": "tablestore",
+                            "description": "表格存储触发器"
+                        }
+                    ]
+                },
+                "sourceArn": {
+                    "type": "string",
+                    "description": "触发器事件源的Aliyun Resource Name。例如 acs:oss:cn-shanghai:12345:mybucket"
+                },
+                "invocationRole": {
+                    "type": "string",
+                    "description": "事件源（如OSS）调用函数所需的角色。例如 acs:ram::1234567890:role/fc-test"
+                },
+                "qualifier": {
+                    "type": "string",
+                    "description": "触发器版本描述"
+                },
+                "triggerConfig": {
+                    "type": "string",
+                    "description": "触发器配置。触发器配置，针对不同类型的触发器，配置有所不同"
+                }
+            }
+        },
+        "fcFunction": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算属性配置，详细文档：https://help.aliyun.com/document_detail/415668.html",
+            "additionalProperties": true,
+            "properties": {
+                "initializationTimeout": {
+                    "type": "number",
+                    "description": "阿里云函数计算初始化超时时间"
+                },
+                "initializer": {
+                    "type": "string",
+                    "description": "阿里云函数计算初始化方法"
+                },
+                "serviceName": {
+                    "type": "string",
+                    "description": "阿里云函数计算服务名称"
+                },
+                "runtime": {
+                    "type": "string",
+                    "description": "阿里云函数计算函数运行的语言环境。目前支持nodejs16、nodejs14、nodejs12、nodejs10、nodejs8、nodejs6、nodejs4.4、python3.10、python3.9、python3、python2.7、java11、java8、go1、php7.2、dotnetcore3.1、dotnetcore2.1、custom.debian10、custom和custom-container。详细文档：https://help.aliyun.com/document_detail/73338.htm"
+                },
+                "customContainerConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算自定义容器配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "image": {
+                            "type": "string",
+                            "description": "阿里云函数计算自定义容器镜像地址。例如 registry-vpc.cn-hangzhou.aliyuncs.com/fc-demo/helloworld:v1beta1"
+                        },
+                        "command": {
+                            "type": "string",
+                            "description": "阿里云函数计算自定义容器命令"
+                        },
+                        "args": {
+                            "type": "string",
+                            "description": "阿里云函数计算自定义容器启动参数"
+                        },
+                        "instanceID": {
+                            "type": "string",
+                            "description": "阿里云函数计算ACR企业版镜像仓库ID，使用ACR企业版镜像时须传入，例如 cri-xxxxxxxxxx"
+                        },
+                        "accelerationType": {
+                            "type": "string",
+                            "description": "阿里云函数计算自定义容器加速类型。Default 为默认值，表示开启镜像加速",
+                            "enum": [
+                                "Default",
+                                "None"
+                            ]
+                        },
+                        "webServerMode": {
+                            "type": "boolean",
+                            "description": "阿里云函数计算自定义容器 Web 服务器模式。默认值 true。取值为true表示需要在容器镜像中实现 Web Server 来监听端口并处理请求。取值为 false 表示需要容器运行后主动退出进程，并且 ExitCode 需要为0"
+                        }
+                    }
+                },
+                "caPort": {
+                    "type": "number",
+                    "description": "阿里云函数计算自定义容器运行时HTTP Server的监听端口。默认值为 9000"
+                },
+                "instanceConcurrency": {
+                    "type": "number",
+                    "description": "阿里云函数计算实例并发数。默认值 10"
+                },
+                "instanceType": {
+                    "type": "string",
+                    "description": "阿里云函数计算实例类型。取值如下：e1：弹性实例、c1：性能实例、fc.gpu.tesla.1：GPU实例Tesla系列T4卡型、fc.gpu.ampere.1：GPU实例Ampere系列A10卡型、g1：同fc.gpu.tesla.1"
+                },
+                "instanceSoftConcurrency": {
+                    "type": "number",
+                    "description": "阿里云函数计算实例并发数软限制。默认值 5。实例软并发度，用于优雅扩容。当实例上的并发数超过软并发度时，会触发实例扩容。例如，您的实例启动较慢，可以通过设置合适的软实例并发度，提前启动实例。取值小于或等于 instanceConcurrency"
+                },
+                "customRuntimeConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算自定义运行时配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "command": {
+                            "type": "array",
+                            "description": "阿里云函数计算自定义运行时命令",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "args": {
+                            "type": "array",
+                            "description": "阿里云函数计算自定义运行时启动参数",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "layers": {
+                    "type": "array",
+                    "description": "阿里云函数计算层。说明多个层会按照数组下标从大到小的顺序进行合并，下标小的层的内容会覆盖下标大的层的同名文件",
+                    "items": {
+                        "type": "string",
+                        "description": "阿里云函数计算层资源名称"
+                    }
+                },
+                "instanceLifecycleConfig": {
+                    "type": "object",
+                    "description": "阿里云函数计算实例生命周期配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "preFreeze": {
+                            "type": "object",
+                            "description": "预热配置",
+                            "additionalProperties": true,
+                            "properties": {
+                                "handler": {
+                                    "type": "string",
+                                    "description": "预热函数的入口函数名称"
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "description": "预热函数的超时时间，单位秒"
+                                }
+                            }
+                        },
+                        "preStop": {
+                            "type": "object",
+                            "description": "停止配置",
+                            "additionalProperties": true,
+                            "properties": {
+                                "handler": {
+                                    "type": "string",
+                                    "description": "停止函数的入口函数名称"
+                                },
+                                "timeout": {
+                                    "type": "number",
+                                    "description": "停止函数的超时时间，单位秒"
+                                }
+                            }
+                        }
+                    }
+                },
+                "customDNS": {
+                    "type": "object",
+                    "description": "自定义DNS配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "nameServers": {
+                            "type": "array",
+                            "description": "自定义DNS服务器地址",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "searches": {
+                            "type": "array",
+                            "description": "自定义DNS搜索域名",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "dnsOptions": {
+                            "type": "array",
+                            "description": "自定义DNS选项",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "自定义DNS选项名称"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "自定义DNS选项值"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "customHealthCheckConfig": {
+                    "type": "object",
+                    "description": "自定义健康检查配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "httpGetUrl": {
+                            "type": "string",
+                            "description": "容器自定义健康检查URL地址。长度不超过2048个字符。示例 /ready"
+                        },
+                        "initialDelaySeconds": {
+                            "type": "number",
+                            "description": "容器启动到发起健康检查的延迟。取值范围 0~120。默认值为 0"
+                        },
+                        "periodSeconds": {
+                            "type": "number",
+                            "description": "健康检查周期。取值范围 1~120。默认值为 3"
+                        },
+                        "timeoutSeconds": {
+                            "type": "number",
+                            "description": "健康检查超时时间。取值范围 1~3。默认值为 1"
+                        },
+                        "successThreshold": {
+                            "type": "number",
+                            "description": "健康检查失败次数阈值，达到该值后系统认为检查成功。取值范围 1~120。默认值为 1"
+                        },
+                        "failureThreshold": {
+                            "type": "number",
+                            "description": "健康检查失败次数阈值，达到该值后系统认为检查失败。取值范围 1~120。默认值为 3"
+                        }
+                    }
+                },
+                "cpu": {
+                    "type": "number",
+                    "description": "函数的 CPU 规格，单位为 vCPU，为 0.05vCPU 的倍数。例如 1.5"
+                },
+                "diskSize": {
+                    "type": "number",
+                    "description": "函数的磁盘规格，单位为 MB，可选值为 512MB 或 10240MB。例如 512"
+                },
+                "gpuMemorySize": {
+                    "type": "number",
+                    "description": "函数的 GPU 显存规格，单位为MB，为 1024MB 的倍数。例如 2048"
+                }
+            }
+        },
+        "fcCustomDomain": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云函数计算自定义域名属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "自定义域名名称，例如：www.example.com"
+                },
+                "protocol": {
+                    "type": "string",
+                    "description": "自定义域名协议",
+                    "enum": [
+                        "HTTP",
+                        "HTTP,HTTPS"
+                    ]
+                },
+                "routeConfig": {
+                    "type": "object",
+                    "description": "自定义域名路由配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "routes": {
+                            "type": "array",
+                            "description": "自定义域名路由配置",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "description": "自定义域名路由路径"
+                                    },
+                                    "serviceName": {
+                                        "type": "string",
+                                        "description": "自定义域名路由服务名称"
+                                    },
+                                    "functionName": {
+                                        "type": "string",
+                                        "description": "自定义域名路由函数名称"
+                                    },
+                                    "qualifier": {
+                                        "type": "string",
+                                        "description": "自定义域名路由函数版本"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "certConfig": {
+                    "type": "object",
+                    "description": "自定义域名证书配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "certName": {
+                            "type": "string",
+                            "description": "自定义域名证书名称"
+                        },
+                        "privateKey": {
+                            "type": "string",
+                            "description": "自定义域名证书私钥"
+                        },
+                        "certificate": {
+                            "type": "string",
+                            "description": "自定义域名证书公钥"
+                        }
+                    }
+                }
+            }
+        },
+        "fcAPIGateway": {
+            "type": "object",
+            "description": "@celljs/fc-plugin 阿里云 API 网关属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "group": {
+                    "type": "object",
+                    "description": "API 网关分组配置",
+                    "additionalProperties": true
+                },
+                "api": {
+                    "type": "object",
+                    "description": "API 网关 API 配置",
+                    "additionalProperties": true
+                },
+                "stage": {
+                    "type": "object",
+                    "description": "API 网关部署配置",
+                    "additionalProperties": true
+                }
+            }
+        },
+        "scfTrigger": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云云函数触发器",
+            "additionalProperties": true,
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "触发器类型",
+                    "enum": [
+                        "apigw",
+                        "cmq",
+                        "ckafka",
+                        "cos",
+                        "timer",
+                        "cls"
+                    ]
+                },
+                "name": {
+                    "type": "string",
+                    "description": "触发器名称"
+                },
+                "enable": {
+                    "type": "boolean",
+                    "description": "是否启用触发器"
+                },
+                "triggerDesc": {
+                    "type": "string",
+                    "description": "触发器描述"
+                }
+            }
+        },
+        "scfNamespace": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云云函数命名空间",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "命名空间名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "命名空间描述"
+                }
+            }
+        },
+        "scfAlias": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云云函数别名属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "routingConfig": {
+                    "type": "object",
+                    "description": "别名路由配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "additionalVersionWeights": {
+                            "type": "object",
+                            "description": "配置额外版本权重",
+                            "additionalProperties": true,
+                            "properties": {
+                                "AdditionalVersionWeights": {
+                                    "type": "array",
+                                    "description": "配置额外版本权重",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "properties": {
+                                            "version": {
+                                                "type": "string",
+                                                "description": "配置额外版本权重版本"
+                                            },
+                                            "weight": {
+                                                "type": "number",
+                                                "description": "配置额外版本权重权重"
+                                            }
+                                        }
+                                    }
+                                },
+                                "AddtionVersionMatchs": {
+                                    "type": "array",
+                                    "description": "配置额外版本权重匹配",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "description": "匹配规则的key，调用时通过传key来匹配规则路由到指定版本header方式：key填写\"invoke.headers.User\"，并在 invoke 调用函数时传参 RoutingKey：{\"User\":\"value\"}规则匹配调用"
+                                            },
+                                            "version": {
+                                                "type": "string",
+                                                "description": "函数版本名称"
+                                            },
+                                            "method": {
+                                                "type": "string",
+                                                "description": "匹配方式。取值范围：range：范围匹配。exact：字符串精确匹配"
+                                            },
+                                            "expression": {
+                                                "type": "string",
+                                                "description": "range 匹配规则要求：需要为开区间或闭区间描述 (a,b) [a,b]，其中 a、b 均为整数。exact 匹配规则要求：字符串精确匹配"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "scfLayer": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云云函数层属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "层名称"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "层描述"
+                },
+                "compatibleRuntimes": {
+                    "type": "array",
+                    "description": "层兼容运行时",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "licenseInfo": {
+                    "type": "string",
+                    "description": "层授权信息"
+                }
+            }
+        },
+        "scfFunction": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云云函数属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "namespace": {
+                    "type": "string",
+                    "description": "腾讯云云函数命名空间"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "腾讯云云函数角色"
+                },
+                "clsLogsetId": {
+                    "type": "string",
+                    "description": "腾讯云云函数日志集ID"
+                },
+                "clsTopicId": {
+                    "type": "string",
+                    "description": "腾讯云云函数日志主题ID"
+                },
+                "initTimeout": {
+                    "type": "number",
+                    "description": "腾讯云云函数初始化超时时间"
+                },
+                "asyncRunEnable": {
+                    "type": "boolean",
+                    "description": "腾讯云云函数异步运行开关"
+                },
+                "traceEnable": {
+                    "type": "boolean",
+                    "description": "腾讯云云函数追踪开关"
+                },
+                "protocolType": {
+                    "type": "string",
+                    "description": "腾讯云云函数协议类型"
+                },
+                "installDependency": {
+                    "type": "boolean",
+                    "description": "腾讯云云函数安装依赖开关"
+                },
+                "env": {
+                    "type": "object",
+                    "description": "腾讯云云函数环境变量",
+                    "additionalProperties": true
+                },
+                "vpcConfig": {
+                    "type": "object",
+                    "description": "腾讯云云函数VPC配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "vpcId": {
+                            "type": "string",
+                            "description": "腾讯云云函数VPC ID"
+                        },
+                        "subnetId": {
+                            "type": "string",
+                            "description": "腾讯云云函数子网 ID"
+                        }
+                    }
+                },
+                "cfsConfig": {
+                    "type": "object",
+                    "description": "腾讯云云函数CFS配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "cfsInsList": {
+                            "type": "array",
+                            "description": "腾讯云云函数CFS实例列表",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "userId": {
+                                        "type": "number",
+                                        "description": "腾讯云云函数CFS实例用户ID"
+                                    },
+                                    "userGroupId": {
+                                        "type": "number",
+                                        "description": "腾讯云云函数CFS实例用户组ID"
+                                    },
+                                    "cfsId": {
+                                        "type": "string",
+                                        "description": "腾讯云云函数CFS实例ID"
+                                    },
+                                    "mountInsId": {
+                                        "type": "string",
+                                        "description": "腾讯云云函数CFS挂载实例ID"
+                                    },
+                                    "localMountDir": {
+                                        "type": "string",
+                                        "description": "腾讯云云函数CFS本地挂载目录"
+                                    },
+                                    "remoteMountDir": {
+                                        "type": "string",
+                                        "description": "腾讯云云函数CFS远程挂载目录"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "layers": {
+                    "type": "array",
+                    "description": "腾讯云云函数层配置",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {
+                            "layerName": {
+                                "type": "string",
+                                "description": "腾讯云云函数层名称"
+                            },
+                            "layerVersion": {
+                                "type": "number",
+                                "description": "腾讯云云函数层版本"
+                            }
+                        }
+                    }
+                },
+                "deadLetterConfig": {
+                    "type": "object",
+                    "description": "腾讯云云函数死信队列配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "腾讯云云函数死信队列类型"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "腾讯云云函数死信队列名称"
+                        },
+                        "filterType": {
+                            "type": "string",
+                            "description": "腾讯云云函数死信队列过滤类型"
+                        },
+                        "filterKey": {
+                            "type": "string",
+                            "description": "腾讯云云函数死信队列过滤键值"
+                        }
+                    }
+                },
+                "publicNetConfig": {
+                    "type": "object",
+                    "description": "腾讯云云函数公网访问配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "publicNetStatus": {
+                            "type": "string",
+                            "description": "腾讯云云函数公网访问状态"
+                        },
+                        "eipConfig": {
+                            "type": "object",
+                            "description": "腾讯云云函数公网访问EIP配置",
+                            "additionalProperties": true,
+                            "properties": {
+                                "eipStatus": {
+                                    "type": "string",
+                                    "description": "腾讯云云函数公网访问EIP状态"
+                                },
+                                "eipAddress": {
+                                    "type": "string",
+                                    "description": "腾讯云云函数公网访问EIP地址"
+                                }
+                            }
+                        }
+                    }
+                },
+                "protocolParams": {
+                    "type": "object",
+                    "description": "腾讯云云函数协议参数配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "wsParams": {
+                            "type": "object",
+                            "description": "腾讯云云函数WebSocket参数配置",
+                            "additionalProperties": true,
+                            "properties": {
+                                "idleTimeOut": {
+                                    "type": "number",
+                                    "description": "腾讯云云函数WebSocket空闲超时时间"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "scfAPIGateway": {
+            "type": "object",
+            "description": "@celljs/scf-plugin 腾讯云 API 网关属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "customDomain": {
+                    "type": "object",
+                    "description": "自定义域名",
+                    "additionalProperties": true,
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "自定义域名名称，如：www.example.com"
+                        },
+                        "certificateId": {
+                            "type": "string",
+                            "description": "自定义域名证书 ID"
+                        },
+                        "isDefaultMapping": {
+                            "type": "boolean",
+                            "description": "是否使用默认路径映射"
+                        },
+                        "protocol": {
+                            "type": "string",
+                            "description": "自定义域名协议类型"
+                        },
+                        "netType": {
+                            "type": "string",
+                            "description": "自定义域名网络类型"
+                        },
+                        "isForcedHttps": {
+                            "type": "boolean",
+                            "description": "是否强制使用 HTTPS"
+                        },
+                        "pathMapping": {
+                            "type": "array",
+                            "description": "自定义域名路径映射",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "description": "自定义域名路径"
+                                    },
+                                    "environment": {
+                                        "type": "string",
+                                        "description": "自定义域名路径所属环境"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "usagePlan": {
+                    "type": "object",
+                    "description": "使用计划",
+                    "additionalProperties": true,
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "使用计划名称"
+                        },
+                        "desc": {
+                            "type": "string",
+                            "description": "使用计划描述"
+                        },
+                        "maxRequestNum": {
+                            "type": "number",
+                            "description": "使用计划最大请求次数"
+                        },
+                        "maxRequestNumPreSec": {
+                            "type": "number",
+                            "description": "使用计划每秒最大请求次数"
+                        }
+                    }
+                },
+                "strategy": {
+                    "type": "object",
+                    "description": "API 限流策略",
+                    "additionalProperties": true,
+                    "properties": {
+                        "environmentName": {
+                            "type": "string",
+                            "description": "API 限流策略所属环境"
+                        },
+                        "strategy": {
+                            "type": "number",
+                            "description": "API 限流策略"
+                        }
+                    }
+                },
+                "service": {
+                    "type": "object",
+                    "description": "服务",
+                    "additionalProperties": true,
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "服务名称"
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "服务描述"
+                        },
+                        "protocol": {
+                            "type": "string",
+                            "description": "服务协议"
+                        },
+                        "exclusiveSetName": {
+                            "type": "string",
+                            "description": "服务独立集群名称"
+                        },
+                        "netTypes": {
+                            "type": "array",
+                            "description": "服务网络类型",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ipVersion": {
+                            "type": "string",
+                            "description": "服务 IP 版本"
+                        },
+                        "setServerName": {
+                            "type": "string",
+                            "description": "服务集群名称"
+                        },
+                        "appIdType": {
+                            "type": "string",
+                            "description": "服务 AppId 类型"
+                        }
+                    }
+                },
+                "release": {
+                    "type": "object",
+                    "description": "发布",
+                    "additionalProperties": true,
+                    "properties": {
+                        "environmentName": {
+                            "type": "string",
+                            "description": "发布环境名称"
+                        },
+                        "desc": {
+                            "type": "string",
+                            "description": "发布描述"
+                        }
+                    }
+                },
+                "api": {
+                    "type": "object",
+                    "description": "API 配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "serviceTimeout": {
+                            "description": "API 超时时间，单位：毫秒",
+                            "type": "number"
+                        },
+                        "protocol": {
+                            "description": "API 使用的协议，如 HTTP、HTTPS、WebSocket 等",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "API 名称",
+                            "type": "string"
+                        },
+                        "desc": {
+                            "description": "API 描述",
+                            "type": "string"
+                        },
+                        "authType": {
+                            "description": "API 认证方式，如无认证、OAuth、API Key 等",
+                            "type": "string"
+                        },
+                        "enableCORS": {
+                            "description": "是否允许跨域请求",
+                            "type": "boolean"
+                        },
+                        "businessType": {
+                            "description": "业务类型，如电商、社交、金融等",
+                            "type": "string"
+                        },
+                        "serviceScfFunctionName": {
+                            "description": "API 对应的 SCF 函数名称",
+                            "type": "string"
+                        },
+                        "serviceScfFunctionType": {
+                            "description": "API 对应的 SCF 函数类型，如 Event、HTTP 等",
+                            "type": "string"
+                        },
+                        "serviceWebsocketTransportFunctionName": {
+                            "description": "API 对应的 WebSocket 转发函数名称",
+                            "type": "string"
+                        },
+                        "serviceScfFunctionNamespace": {
+                            "description": "API 对应的 SCF 函数所在命名空间",
+                            "type": "string"
+                        },
+                        "serviceScfFunctionQualifier": {
+                            "description": "API 对应的 SCF 函数版本或别名",
+                            "type": "string"
+                        },
+                        "serviceWebsocketTransportFunctionNamespace": {
+                            "description": "API 对应的 WebSocket 转发函数所在命名空间",
+                            "type": "string"
+                        },
+                        "serviceWebsocketTransportFunctionQualifier": {
+                            "description": "API 对应的 WebSocket 转发函数版本或别名",
+                            "type": "string"
+                        },
+                        "serviceScfIsIntegratedResponse": {
+                            "description": "是否自动把 SCF 函数的输出转换成 API 响应格式",
+                            "type": "boolean"
+                        },
+                        "isDebugAfterCharge": {
+                            "description": "是否在扣费后仍然允许调试",
+                            "type": "boolean"
+                        },
+                        "isDeleteResponseErrorCodes": {
+                            "description": "是否删除默认的错误码",
+                            "type": "boolean"
+                        },
+                        "responseType": {
+                            "description": "API 响应数据类型，如 JSON、XML 等",
+                            "type": "string"
+                        },
+                        "responseSuccessExample": {
+                            "description": "API 响应数据成功示例",
+                            "type": "string"
+                        },
+                        "responseFailExample": {
+                            "description": "API 响应数据失败示例",
+                            "type": "string"
+                        },
+                        "authRelationApiId": {
+                            "description": "该 API 对应的授权关系 ID，仅在绑定 OAuth 时需要",
+                            "type": "string"
+                        },
+                        "userType": {
+                            "description": "用户类型，如普通用户、管理员等",
+                            "type": "string"
+                        },
+                        "oauthConfig": {
+                            "description": "OAuth 配置信息",
+                            "type": "object",
+                            "properties": {
+                                "publicKey": {
+                                    "description": "OAuth 的公钥",
+                                    "type": "string"
+                                },
+                                "tokenLocation": {
+                                    "description": "OAuth Token 的存储位置，如 Headers、Cookies 等",
+                                    "type": "string"
+                                },
+                                "loginRedirectUrl": {
+                                    "description": "用户登录后回调的 URL",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "responseErrorCodes": {
+                            "description": "API 响应的错误码及其描述信息",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "description": "错误码",
+                                        "type": "string"
+                                    },
+                                    "msg": {
+                                        "description": "错误消息",
+                                        "type": "string"
+                                    },
+                                    "desc": {
+                                        "description": "错误描述",
+                                        "type": "string"
+                                    },
+                                    "convertedCode": {
+                                        "description": "转换后的错误码",
+                                        "type": "string"
+                                    },
+                                    "needConvert": {
+                                        "description": "是否需要进行错误码转换",
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        },
+                        "requestConfig": {
+                            "description": "API 请求配置项",
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    "description": "API 的请求路径",
+                                    "type": "string"
+                                },
+                                "method": {
+                                    "description": "API 的请求方法，如 GET、POST 等",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "requestParameters": {
+                            "description": "API 请求参数列表",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {
+                                    "name": {
+                                        "description": "参数名称",
+                                        "type": "string"
+                                    },
+                                    "desc": {
+                                        "description": "参数描述",
+                                        "type": "string"
+                                    },
+                                    "postion": {
+                                        "description": "参数位置，如 Header、Query 等",
+                                        "type": "number"
+                                    },
+                                    "type": {
+                                        "description": "参数类型，如 String、Number 等",
+                                        "type": "string"
+                                    },
+                                    "defaultValue": {
+                                        "description": "参数默认值",
+                                        "type": "any"
+                                    },
+                                    "required": {
+                                        "description": "是否必需",
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "cache": {
+            "type": "object",
+            "description": "@celljs/cache 缓存组件属性配置",
+            "additionalProperties": true,
+            "properties": {
+                "config": {
+                    "type": "object",
+                    "description": "缓存通用配置对象，不同的缓存存储引擎，有各自的特殊属性，需自行查文档在当前配置对象中配置",
+                    "additionalProperties": true,
+                    "properties": {
+                        "store": {
+                            "type": "string",
+                            "description": "缓存存储引擎",
+                            "enum": [
+                                "memory",
+                                "redis",
+                                "redis-store",
+                                "ioredis",
+                                "mongodb",
+                                "mongoose",
+                                "fs-binary",
+                                "fs-hash",
+                                "hazelcast",
+                                "memcached-store",
+                                "memory-store",
+                                "none"
+                            ]
+                        },
+                        "ttl": {
+                            "type": "number",
+                            "description": "缓存过期时间"
+                        },
+                        "max": {
+                            "type": "number",
+                            "description": "缓存最大值"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "缓存名称。再注入缓存管理器的时候，可以通过 @Named + 缓存名称指定"
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "缓存类型"
+                },
+                "options": {
+                    "type": "object",
+                    "description": "缓存配置对象",
+                    "additionalProperties": true
+                }
+            }
+        },
+        "webpack": {
+            "type": "object",
+            "description": "Webpack 配置对象",
+            "additionalProperties": true,
+            "properties": {
+                "definePlugin": {
+                    "type": "object",
+                    "description": "Webpack DefinePlugin 插件配置对象",
+                    "additionalProperties": true
+                },
+                "filterWarningsPlugin": {
+                    "type": "object",
+                    "description": "Webpack FilterWarningsPlugin 插件配置对象",
+                    "additionalProperties": true
+                },
+                "htmlWebpackTagsPlugin": {
+                    "type": "object",
+                    "description": "Webpack HtmlWebpackTagsPlugin 插件配置对象",
+                    "additionalProperties": true
+                },
+                "copyPlugin": {
+                    "type": "object",
+                    "description": "Webpack CopyPlugin 插件配置对象",
+                    "properties": {
+                        "patterns": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "from": {
+                                        "type": "string",
+                                        "description": "源文件路径"
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "description": "目标文件路径"
+                                    },
+                                    "context": {
+                                        "type": "string",
+                                        "description": "上下文路径"
+                                    },
+                                    "globOptions": {
+                                        "type": "object",
+                                        "description": "glob 配置对象",
+                                        "properties": {
+                                            "dot": {
+                                                "type": "boolean",
+                                                "description": "是否匹配以 . 开头的文件"
+                                            },
+                                            "gitignore": {
+                                                "type": "boolean",
+                                                "description": "是否匹配 .gitignore 文件中的文件"
+                                            },
+                                            "ignore": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "description": "忽略的文件"
+                                            },
+                                            "matchBase": {
+                                                "type": "boolean",
+                                                "description": "是否匹配基础路径"
+                                            },
+                                            "nobrace": {
+                                                "type": "boolean",
+                                                "description": "是否禁用大括号扩展"
+                                            },
+                                            "nocase": {
+                                                "type": "boolean",
+                                                "description": "是否忽略大小写"
+                                            },
+                                            "nodir": {
+                                                "type": "boolean",
+                                                "description": "是否忽略目录"
+                                            },
+                                            "noext": {
+                                                "type": "boolean",
+                                                "description": "是否忽略扩展名"
+                                            },
+                                            "noglobstar": {
+                                                "type": "boolean",
+                                                "description": "是否禁用 globstar"
+                                            },
+                                            "nonull": {
+                                                "type": "boolean",
+                                                "description": "是否返回 null"
+                                            }
+                                        }
+                                    },
+                                    "noErrorOnMissing": {
+                                        "type": "boolean",
+                                        "description": "是否忽略文件不存在错误"
+                                    },
+                                    "force": {
+                                        "type": "boolean",
+                                        "description": "是否强制覆盖"
+                                    },
+                                    "transform": {
+                                        "type": "function",
+                                        "description": "文件转换函数"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "config": {
+                    "$ref": "https://raw.githubusercontent.com/webpack/webpack/v5.52.0/schemas/WebpackOptions.json"
+                }
+            }
+        }
+    }
+}

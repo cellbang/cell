@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { RpcUtil } from '@malagu/rpc/lib/common';
+import { RpcUtil } from '@celljs/rpc/lib/common';
 import { WelcomeServer } from '../common/welcome-protocol';
-import { View } from '@malagu/react';
+import { View } from '@celljs/react';
 import styles from './style/hello.module.scss';
 
 const Hello = () => {
@@ -15,12 +15,12 @@ const Hello = () => {
     }, []);
 
     return <div className={ styles.hello }>
-            <img alt="malagu logo" src="./assets/logo.png"></img>
+            <img alt="cell logo" src="./assets/logo.png"></img>
             <div className="hello">
                 <h1>{response}</h1>
                 <p>
                     For a guide and recipes on how to configure / customize this project,<br />
-                check out the <a href="https://malagu.cellbang.com/" target="_blank" rel="noopener">malagu documentation</a>.
+                check out the <a href="https://cell.cellbang.com/" target="_blank" rel="noopener">cell documentation</a>.
                 </p>
             </div>
         </div>

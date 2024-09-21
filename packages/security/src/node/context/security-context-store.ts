@@ -1,11 +1,11 @@
-import { Component, Value, Autowired } from '@malagu/core';
+import { Component, Value, Autowired } from '@celljs/core';
 import { SecurityContextStore, SecurityContext, SecurityContextStrategy } from './context-protocol';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 
 @Component(SecurityContextStore)
 export class SessionSecurityContextStore implements SecurityContextStore {
 
-    @Value('malagu.security')
+    @Value('cell.security')
     protected readonly options: any;
 
     @Autowired(SecurityContextStrategy)

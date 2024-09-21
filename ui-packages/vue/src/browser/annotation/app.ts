@@ -1,5 +1,5 @@
 import { App as VueApp } from 'vue';
-import { Constant } from '@malagu/core';
+import { Constant } from '@celljs/core';
 
 export const APP = Symbol('APP');
 

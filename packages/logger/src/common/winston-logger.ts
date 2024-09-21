@@ -1,4 +1,4 @@
-import { Logger, LOGGER_CONFIG, Value, Component, Autowired, Optional, AbstractLogger, PostConstruct, Scope } from '@malagu/core';
+import { Logger, LOGGER_CONFIG, Value, Component, Autowired, Optional, AbstractLogger, PostConstruct, Scope } from '@celljs/core';
 import { WinstonConfig, RawWinstonLogger } from './winston-logger-protocol';
 import { createLogger, transports, format } from 'winston';
 

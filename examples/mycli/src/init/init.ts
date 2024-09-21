@@ -2,10 +2,10 @@ import { bootstrap } from '../bootstrap';
 import * as program from 'commander';
 import { InitManager } from './init-manager';
 import { CONTEXT } from '../constants';
-import { ContainerProvider } from '@malagu/core';
+import { ContainerProvider } from '@celljs/core';
 
 program
-    .name('malagu init')
+    .name('cell init')
     .usage('[options] [name]')
     .option('-o, --output-dir [path]', 'output directory', '.')
     .description('init a application')

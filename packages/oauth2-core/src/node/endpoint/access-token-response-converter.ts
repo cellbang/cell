@@ -1,6 +1,6 @@
 import { TokenType } from '../token';
 import { AccessTokenResponse, OAuth2ParameterNames } from './endpoint-protocol';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component(AccessTokenResponseConverter)
 export class AccessTokenResponseConverter {

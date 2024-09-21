@@ -63,24 +63,24 @@ export namespace PathUtil {
         process.env.MALAGU_PROJECT_HOME_PATH = projectHomePath;
     }
 
-    export function getMalaguHomePath() {
-        return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.malagu');
+    export function getCellHomePath() {
+        return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.cell');
     }
 
-    export function getGlobalMalaguPropsDirPath() {
-        return process.env.GLOBAL_MALAGU_PROPS_DIR_PATH ? process.env.GLOBAL_MALAGU_PROPS_DIR_PATH : getMalaguHomePath();
+    export function getGlobalCellPropsDirPath() {
+        return process.env.GLOBAL_MALAGU_PROPS_DIR_PATH ? process.env.GLOBAL_MALAGU_PROPS_DIR_PATH : getCellHomePath();
     }
 
     export function getRuntimePath(runtime?: string) {
         if (runtime) {
-            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getMalaguHomePath(), 'runtimes');
+            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
             return path.resolve(basePath, RuntimeUtil.getVersion(), runtime);
         }
         return process.cwd();
     }
 
     export function getRuntimeRootPath(version?: string) {
-        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getMalaguHomePath(), 'runtimes');
+        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
         return version ? path.resolve(basePath, RuntimeUtil.getVersion()) : basePath;
     }
 

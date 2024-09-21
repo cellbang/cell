@@ -1,10 +1,10 @@
-import { CliContext, ConfigUtil } from '@malagu/cli-common';
+import { CliContext, ConfigUtil } from '@celljs/cli-common';
 import { cleanupCache } from '../packager/clean';
 import { parsePythonOptions } from '../packager/util';
 
 export default async (ctx: CliContext) => {
     const { cfg, program } = ctx;
-    let pluginOptions = ConfigUtil.getBackendMalaguConfig(cfg)['python-plugin'] || {};
+    let pluginOptions = ConfigUtil.getBackendCellConfig(cfg)['python-plugin'] || {};
     pluginOptions = parsePythonOptions(pluginOptions);
 
     program

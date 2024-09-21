@@ -1,0 +1,7 @@
+mode: "${ 'fc' in currentMode ? 'node16' : ''}"
+cell:
+  webpack:
+    filterWarningsPlugin:
+      node: []
+devComponents:
+  "@celljs/adonis-plugin": ${version}

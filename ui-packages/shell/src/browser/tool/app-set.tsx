@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Button, ButtonProps, Drop } from 'grommet';
-import { ConfigUtil } from '@malagu/core';
-import { Icon } from '@malagu/grommet';
-import { Widget } from '@malagu/widget';
+import { ConfigUtil } from '@celljs/core';
+import { Icon } from '@celljs/grommet';
+import { Widget } from '@celljs/widget';
 import { AreaType } from '../area';
 import { Apps } from '../apps';
 import styled from 'styled-components';
@@ -20,7 +20,7 @@ export function AppSet(props: ButtonProps) {
     // eslint-disable-next-line no-null/no-null
     const targetRef = React.useRef(null);
     const [show, setShow] = React.useState(false);
-    const { icon, ...rest } = ConfigUtil.get('malagu.shell.appSet');
+    const { icon, ...rest } = ConfigUtil.get('cell.shell.appSet');
     props = { ...rest, ...props };
     return (
         <Fragment>

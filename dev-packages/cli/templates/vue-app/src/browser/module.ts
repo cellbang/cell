@@ -1,3 +1,3 @@
 import './app';
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 export default autoBind();

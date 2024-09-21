@@ -1,0 +1,8 @@
+targets:
+  - backend
+mode: "${currentMode|toObjects[.item in [ 'fc', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adapter')}"
+components:
+  '@celljs/serve-static': ${version}
+devComponents:
+  '@celljs/cli-service': ${version}
+  '@celljs/static-plugin': ${version}

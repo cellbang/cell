@@ -1,5 +1,5 @@
-import { ServeContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { ServeContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 
 export async function after(context: ServeContext) {
     const { entryContextProvider, cfg, server } = context;
@@ -7,7 +7,7 @@ export async function after(context: ServeContext) {
         return;
     }
     server.close();
-    let { port, path } = ConfigUtil.getBackendMalaguConfig(cfg).server;
+    let { port, path } = ConfigUtil.getBackendCellConfig(cfg).server;
     port = context.port || port || 9000;
     process.env.SERVER_PATH = path;
     process.env.SERVER_PORT = port;

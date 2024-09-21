@@ -1,6 +1,6 @@
-import { ClientAuthenticationMethod } from '@malagu/oauth2-core';
+import { ClientAuthenticationMethod } from '@celljs/oauth2-core';
 import { ClientRegistration } from '../registration';
-import { MediaType, HttpHeaders } from '@malagu/http';
+import { MediaType, HttpHeaders } from '@celljs/http';
 import { enc } from 'crypto-js';
 
 export namespace AuthorizationGrantRequestEntityUtil {

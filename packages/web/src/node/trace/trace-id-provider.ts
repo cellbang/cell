@@ -1,4 +1,4 @@
-import { Component, TraceIdProvider } from '@malagu/core';
+import { Component, TraceIdProvider } from '@celljs/core';
 import { Context } from '../context';
 
 @Component(TraceIdProvider)

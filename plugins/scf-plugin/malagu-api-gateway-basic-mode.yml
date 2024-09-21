@@ -1,6 +1,0 @@
-mode: [ api-gateway-basic ]
-malagu:
-  cloud:
-    function:
-      type: HTTP
-      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"

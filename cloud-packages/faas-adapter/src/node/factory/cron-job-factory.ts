@@ -1,6 +1,6 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { CronJob } from 'cron';
-import { CronJobFactory, CronJobOptions, DefaultCronJobFactory } from '@malagu/schedule';
+import { CronJobFactory, CronJobOptions, DefaultCronJobFactory } from '@celljs/schedule';
 import { Clock, FaaSCronJob } from '../timer';
 
 @Component({ id: CronJobFactory, rebind: true })

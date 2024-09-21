@@ -18,7 +18,7 @@
   "excludeExternals": true,
   "external-modulemap": ".*\/(packages|plugins)\/([\\w\\-_]+)\/",
   "hideGenerator": true,
-  "name": "Malagu TypeDoc",
+  "name": "Cell TypeDoc",
   "out": "../gh-pages/docs/next",
   "readme": "../README.md",
   "entryPointStrategy": "expand"

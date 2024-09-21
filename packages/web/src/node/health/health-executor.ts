@@ -1,4 +1,4 @@
-import { Autowired, Component, getTargetClass } from '@malagu/core';
+import { Autowired, Component, getTargetClass } from '@celljs/core';
 import { HealthNotFoundError } from './health-errors';
 import { CompositeHealth, HealthComponent, HealthExecutor, HealthIndicator, HealthStatusAggregator } from './health-protocol';
 

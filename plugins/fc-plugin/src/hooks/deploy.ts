@@ -1,16 +1,16 @@
-import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@malagu/cli-common';
+import { DeployContext, PathUtil, ProjectUtil, SpinnerUtil } from '@celljs/cli-common';
 import { readFile, createWriteStream, remove } from 'fs-extra';
 import { join } from 'path';
 import * as JSZip from 'jszip';
-import { CloudUtils, DefaultProfileProvider } from '@malagu/cloud-plugin';
-import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
+import { CloudUtils, DefaultProfileProvider } from '@celljs/cloud-plugin';
+import { DefaultCodeLoader } from '@celljs/code-loader-plugin';
 import { createClients, getAlias, getApi, getCustomDomain, getFunction, getGroup, getLayer, getService, getTrigger, parseDomain } from './utils';
 import * as fcAPI from './api';
-import { retry } from '@malagu/cli-common/lib/utils';
+import { retry } from '@celljs/cli-common/lib/utils';
 import { tmpdir } from 'os';
 const chalk = require('chalk');
-import { CodeUri } from '@malagu/code-loader-plugin/lib/code-protocol';
-import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
+import { CodeUri } from '@celljs/code-loader-plugin/lib/code-protocol';
+import { generateUUUID } from '@celljs/cli-common/lib/utils/uuid';
 
 let fcClient: any;
 let apiClient: any;

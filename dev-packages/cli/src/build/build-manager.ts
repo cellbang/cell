@@ -1,9 +1,9 @@
 
-import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
-import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
-import { BuildContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
+import { CommandUtil, CommandType, CommandStage } from '@celljs/cli-common/lib/utils/command-util';
+import { HookExecutor, HookStage } from '@celljs/cli-common/lib/hook/hook-executor';
+import { BuildContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import { LoggerUtil } from '@celljs/cli-common/lib/utils/logger-util';
 const rimraf = require('rimraf');
 
 export class BuildManager {

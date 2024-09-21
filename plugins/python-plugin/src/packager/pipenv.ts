@@ -1,9 +1,9 @@
 import { writeFileSync, ensureDirSync, existsSync } from 'fs-extra';
 import { join } from 'path';
-import { spawnProcess } from '@malagu/cli-common/lib/packager';
+import { spawnProcess } from '@celljs/cli-common/lib/packager';
 import { EOL } from 'os';
 import { PythonPluginOptions } from '../python-plugin-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils';
+import { PathUtil } from '@celljs/cli-common/lib/utils';
 
 /**
  * pipenv install

@@ -1,4 +1,4 @@
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import { AuthorizeType, Policy } from '../../common';
 import { SecurityContext } from '../context';
 import { AccessDecisionManager } from './access-protocol';

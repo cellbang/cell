@@ -1,6 +1,6 @@
 import { convertExpressMiddleware, Middleware } from '../middleware';
 import { Context } from '../context';
-import { Component, Autowired, Value } from '@malagu/core';
+import { Component, Autowired, Value } from '@celljs/core';
 import { json, text, raw, urlencoded, Options } from 'body-parser';
 import { BODY_MIDDLEWARE_PRIORITY } from './body-protocol';
 import { HandlerExecutionChain } from '../handler';
@@ -11,7 +11,7 @@ export class BodyMiddleware implements Middleware {
     @Autowired(HandlerExecutionChain)
     protected handlerExecutionChain: HandlerExecutionChain;
 
-    @Value('malagu.web.body')
+    @Value('cell.web.body')
     protected readonly options: Options;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {

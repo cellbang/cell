@@ -1,4 +1,4 @@
-import { Component, Autowired, getTarget } from '@malagu/core';
+import { Component, Autowired, getTarget } from '@celljs/core';
 import { PipeManager, PipeProvider, MethodMetadata } from './pipe-protocol';
 
 @Component(PipeManager)

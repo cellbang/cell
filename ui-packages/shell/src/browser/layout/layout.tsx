@@ -1,4 +1,4 @@
-import { DefaultLayout, Slot } from '@malagu/react';
+import { DefaultLayout, Slot } from '@celljs/react';
 import * as React from 'react';
 import { AreaType } from '../area';
 import styled from 'styled-components';

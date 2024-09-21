@@ -1,9 +1,9 @@
-import { coreTestModule } from '@malagu/core/lib/common/test/test-module';
+import { coreTestModule } from '@celljs/core/lib/common/test/test-module';
 import { RetryOperationsImpl } from './retry-operations';
 import { RetryOptions, RetryContext, RetryOperations } from './retry-protocol';
 import { RetryError } from '../error';
 import { expect } from 'chai';
-import { autoBind, ContainerFactory, ContainerProvider, ContainerUtil } from '@malagu/core';
+import { autoBind, ContainerFactory, ContainerProvider, ContainerUtil } from '@celljs/core';
 import '../index';
 
 describe('RetryOperationsImpl', () => {

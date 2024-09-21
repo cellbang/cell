@@ -1,6 +1,6 @@
-import { CustomError } from '@malagu/core';
+import { CustomError } from '@celljs/core';
 import { OAuth2Error } from '../endpoint';
-import { AuthenticationError } from '@malagu/security/lib/node';
+import { AuthenticationError } from '@celljs/security/lib/node';
 
 export class OAuth2AuthorizationError extends CustomError {
 

@@ -2,11 +2,11 @@ import { existsSync, copy, readFile, writeFile } from 'fs-extra';
 import { prompts } from 'prompts';
 import { templates } from './runtimes';
 import uninstall from '../uninstall/uninstall';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
-import {CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { getPackager, spawnProcess } from '@celljs/cli-common/lib/packager/utils';
+import { HookExecutor } from '@celljs/cli-common/lib/hook/hook-executor';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
+import {CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
 
 import * as ora from 'ora';
 const chalk = require('chalk');
@@ -54,8 +54,8 @@ export class InstallManager {
         packageContent = packageContent.replace(/{{\s*version\s*}}/g, pkg.version);
         if (this.opts.forceInstallingComponent) {
             const runtimePkg = JSON.parse(packageContent);
-            if (runtimePkg.malagu?.components || runtimePkg.malagu?.devComponents) {
-                const { components, devComponents } = runtimePkg.malagu;
+            if (runtimePkg.cell?.components || runtimePkg.cell?.devComponents) {
+                const { components, devComponents } = runtimePkg.cell;
                 runtimePkg.dependencies = { ...runtimePkg.dependencies, ...components };
                 runtimePkg.devDependencies = { ...runtimePkg.devDependencies, ...devComponents };
                 packageContent = JSON.stringify(runtimePkg, undefined, 2);
@@ -70,7 +70,7 @@ export class InstallManager {
                 console.log(chalk`The {yellow.bold ${this.runtimeName}} runtime is being installed...`);
             }
             const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-            await getPackager(pkg.rootComponentPackage.malaguComponent?.packager, this.outputDir).install({ stdio: this.opts.quiet ? 'pipe' : undefined }, this.outputDir);
+            await getPackager(pkg.rootComponentPackage.cellComponent?.packager, this.outputDir).install({ stdio: this.opts.quiet ? 'pipe' : undefined }, this.outputDir);
         }
     }
 
@@ -154,7 +154,7 @@ export class InstallManager {
                 if (suggestion) {
                     console.log(`  "${runtime}" runtime not found. ${chalk.yellow(`Did you mean ${chalk.green(suggestion)}?`)}`);
                 } else {
-                    console.error(`malagu error - "${runtime}" runtime not found`);
+                    console.error(`cell error - "${runtime}" runtime not found`);
                 }
                 process.exit(-1);
             }

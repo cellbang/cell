@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Blank, IconProps } from 'grommet-icons';
-import { Icon } from '@malagu/react';
+import { Icon } from '@celljs/react';
 
 export function Cellbang(props: IconProps) {
     return (

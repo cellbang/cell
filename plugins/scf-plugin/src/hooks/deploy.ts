@@ -1,9 +1,9 @@
-import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil, ProjectUtil } from '@malagu/cli-common';
+import { DeployContext, ConfigUtil, PathUtil, SpinnerUtil, ProjectUtil } from '@celljs/cli-common';
 import * as JSZip from 'jszip';
 import * as traverse from 'traverse';
 import * as delay from 'delay';
-import { CloudUtils, DefaultProfileProvider, Profile } from '@malagu/cloud-plugin';
-import { DefaultCodeLoader } from '@malagu/code-loader-plugin';
+import { CloudUtils, DefaultProfileProvider, Profile } from '@celljs/cloud-plugin';
+import { DefaultCodeLoader } from '@celljs/code-loader-plugin';
 import * as COS from 'cos-nodejs-sdk-v5';
 import { checkStatus, createBucketIfNeed, createClients, getAlias, getApi,
     getCustomDomain, getFunction, getLayer, getNamespace, getService, getTrigger, getUsagePlan } from './utils';
@@ -300,7 +300,7 @@ async function tryCreateProjectId(namespaceName: string, functionName: string) {
 }
 
 async function uploadCodeToCos(name: string, code: JSZip, region: string, appId: string, tags?: any) {
-    const bucket = `malagu-scf-${region}-code-${appId}`;
+    const bucket = `cell-scf-${region}-code-${appId}`;
     const key = `${name}-${Math.floor(Date.now() / 1000)}.zip`;
     try {
         await createBucketIfNeed(cosClient, bucket, region, tags);

@@ -1,4 +1,4 @@
-import { applyAutowiredDecorator, ContainerUtil, DoGetValue, IdOrAutowiredOptionWithoutMulti, parseAutowiredOption } from '@malagu/core';
+import { applyAutowiredDecorator, ContainerUtil, DoGetValue, IdOrAutowiredOptionWithoutMulti, parseAutowiredOption } from '@celljs/core';
 import { RPC, ID_KEY, doInjectForAutorpc } from '../autorpc';
 
 export const Autorpc = function (idOrOption?: IdOrAutowiredOptionWithoutMulti): PropertyDecorator & ParameterDecorator {

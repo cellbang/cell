@@ -1,5 +1,5 @@
 import { PolicyContext, PolicyProvider } from './access-protocol';
-import { Component, Value, PostConstruct } from '@malagu/core';
+import { Component, Value, PostConstruct } from '@celljs/core';
 import { AuthorizeType, Policy } from '../../common';
 import { contains } from 'micromatch';
 
@@ -16,7 +16,7 @@ export class PrincipalPolicyProvider implements PolicyProvider {
 @Component(PolicyProvider)
 export class ResourcePolicyProvider implements PolicyProvider {
 
-    @Value('malagu.security.policy')
+    @Value('cell.security.policy')
     protected readonly policyMap?: { [resource: string]: (Policy[] | Policy) };
 
     protected readonly metadata = {

@@ -15,9 +15,9 @@ export class HookExecutor {
         if (modules.length === 0) {
             return;
         }
-        console.log(chalk`\nmalagu {yellow.bold hook} - {bold ${hookName}}`);
+        console.log(chalk`\ncell {yellow.bold hook} - {bold ${hookName}}`);
         for (const module of modules) {
-            console.log(chalk`malagu {cyan.bold hook} - ${ module.name }`);
+            console.log(chalk`cell {cyan.bold hook} - ${ module.name }`);
         }
     }
 

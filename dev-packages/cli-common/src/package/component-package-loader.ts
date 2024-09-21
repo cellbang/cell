@@ -18,7 +18,7 @@ export class ComponentPackageLoader {
         const configFiles: string[] = [];
         config = this.doLoad(nodePackage, [ ''/* load default config file */, ...mode ], configMap, config, configFiles);
         config.configFiles = configFiles;
-        nodePackage.malaguComponent = config;
+        nodePackage.cellComponent = config;
     }
 
     doLoad(nodePackage: NodePackage, mode: string[], configMap: Map<string, any>,  config: any, configFiles: string[]): any {

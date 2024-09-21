@@ -1,8 +1,8 @@
-import { Autowired, Component } from '@malagu/core';
-import { HttpHeaders } from '@malagu/web';
-import { Context, Middleware, HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
+import { Autowired, Component } from '@celljs/core';
+import { HttpHeaders } from '@celljs/web';
+import { Context, Middleware, HTTP_MIDDLEWARE_PRIORITY } from '@celljs/web/lib/node';
 import { AuthenticationError } from './error';
-import { JwtService } from '@malagu/jwt'
+import { JwtService } from '@celljs/jwt'
 import { SecurityContext } from './context';
 
 export const AUTHENTICATION_SCHEME_BEARER = 'Bearer';

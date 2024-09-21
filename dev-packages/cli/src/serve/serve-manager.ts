@@ -1,8 +1,8 @@
-import { LoggerUtil } from '@malagu/cli-common/lib/utils/logger-util';
-import { CommandUtil, CommandType, CommandStage } from '@malagu/cli-common/lib/utils/command-util';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils';
+import { LoggerUtil } from '@celljs/cli-common/lib/utils/logger-util';
+import { CommandUtil, CommandType, CommandStage } from '@celljs/cli-common/lib/utils/command-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { HookExecutor, HookStage } from '@celljs/cli-common/lib/hook/hook-executor';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils';
 
 export class ServeManager {
 
@@ -25,7 +25,7 @@ export class ServeManager {
             const { cfg, port } = this.context;
             const realPort = ConfigUtil.getPort(cfg, target, port);
             return command
-                .replace(/\$PATH/g, ConfigUtil.getMalaguConfig(cfg, target).server?.path)
+                .replace(/\$PATH/g, ConfigUtil.getCellConfig(cfg, target).server?.path)
                 .replace(/\$PORT/g, realPort);
         };
 

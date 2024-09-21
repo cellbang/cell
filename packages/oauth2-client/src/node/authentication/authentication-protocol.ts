@@ -1,6 +1,6 @@
-import { Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY } from '@malagu/security/lib/node';
+import { Authentication, USERNAME_PASSWORD_AUTHENTICATION_PROVIDER_PRIORITY } from '@celljs/security/lib/node';
 import { ClientRegistration } from '../registration';
-import { AuthorizationExchange, AccessToken, RefreshToken } from '@malagu/oauth2-core';
+import { AuthorizationExchange, AccessToken, RefreshToken } from '@celljs/oauth2-core';
 
 export const INVALID_ID_TOKEN_ERROR_CODE = 'invalid_id_token';
 export const INVALID_NONCE_ERROR_CODE = 'invalid_nonce';

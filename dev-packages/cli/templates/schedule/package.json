@@ -1,7 +1,7 @@
 {
   "name": "schedule",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "0.0.0",
   "license": "MIT",
@@ -10,20 +10,20 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "{{ version }}",
-    "@malagu/web": "{{ version }}",
-    "@malagu/schedule": "{{ version }}"
+    "@celljs/core": "{{ version }}",
+    "@celljs/web": "{{ version }}",
+    "@celljs/schedule": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "{{ version }}"
+    "@celljs/cli": "{{ version }}"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "build": "malagu build",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

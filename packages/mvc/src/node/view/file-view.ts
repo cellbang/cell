@@ -1,7 +1,7 @@
-import { Autowired, Component, Logger, Value } from '@malagu/core';
+import { Autowired, Component, Logger, Value } from '@celljs/core';
 import { View } from './view-protocol';
-import { HttpHeaders, HttpStatus, MediaType } from '@malagu/http';
-import { Context, Response } from '@malagu/web/lib/node';
+import { HttpHeaders, HttpStatus, MediaType } from '@celljs/http';
+import { Context, Response } from '@celljs/web/lib/node';
 import { Stream } from 'stream';
 import { FILE_VIEW_NAME } from '../annotation/file';
 import { ViewMetadata } from '../annotation/view';
@@ -18,7 +18,7 @@ export class FileView implements View {
     @Autowired(Logger)
     protected readonly logger: Logger;
 
-    @Value('malagu.mvc.baseFileDir')
+    @Value('cell.mvc.baseFileDir')
     protected readonly baseFileDir: any;
 
     protected isStream(model: any) {

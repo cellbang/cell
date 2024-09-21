@@ -1,1 +1,1 @@
-# Malagu - Static Plugin Component
+# Cell - Static Plugin Component

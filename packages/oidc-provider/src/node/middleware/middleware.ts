@@ -1,7 +1,7 @@
-import { Autowired, Component, Value } from '@malagu/core';
-import { Context, Middleware, RequestMatcher } from '@malagu/web/lib/node';
+import { Autowired, Component, Value } from '@celljs/core';
+import { Context, Middleware, RequestMatcher } from '@celljs/web/lib/node';
 import { OIDC_MIDDLEWARE_PRIORITY } from './middleware-protocol';
-import { PathResolver } from '@malagu/web';
+import { PathResolver } from '@celljs/web';
 import { OidcProvider } from '../oidc';
 import { IncomingMessage, ServerResponse } from 'http';
 import { Http2ServerRequest, Http2ServerResponse } from 'http2';
@@ -9,7 +9,7 @@ import { Http2ServerRequest, Http2ServerResponse } from 'http2';
 @Component(Middleware)
 export class OidcMiddleware implements Middleware {
 
-    @Value('malagu["odic-provider"].path')
+    @Value('cell["odic-provider"].path')
     protected readonly path: string;
 
     @Autowired(RequestMatcher)

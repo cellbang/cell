@@ -1,7 +1,7 @@
 {
   "name": "accounts",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "0.0.0",
   "license": "MIT",
@@ -10,17 +10,17 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "{{ version }}",
-    "@malagu/web": "{{ version }}",
-    "@malagu/grommet": "{{ version }}",
-    "@malagu/oauth2-client": "{{ version }}",
-    "@malagu/oauth2-core": "{{ version }}",
-    "@malagu/react": "{{ version }}",
-    "@malagu/rpc": "{{ version }}",
-    "@malagu/scf-adapter": "{{ version }}",
-    "@malagu/security": "{{ version }}",
-    "@malagu/serve-static": "{{ version }}",
-    "@malagu/typeorm": "{{ version }}",
+    "@celljs/core": "{{ version }}",
+    "@celljs/web": "{{ version }}",
+    "@celljs/grommet": "{{ version }}",
+    "@celljs/oauth2-client": "{{ version }}",
+    "@celljs/oauth2-core": "{{ version }}",
+    "@celljs/react": "{{ version }}",
+    "@celljs/rpc": "{{ version }}",
+    "@celljs/scf-adapter": "{{ version }}",
+    "@celljs/security": "{{ version }}",
+    "@celljs/serve-static": "{{ version }}",
+    "@celljs/typeorm": "{{ version }}",
     "better-sqlite3": "^7.6.2",
     "querystring": "^0.2.1",
     "request-ip": "^3.3.0",
@@ -34,15 +34,15 @@
     "class-transformer": "^0.5.1"
   },
   "devDependencies": {
-    "@malagu/cli": "{{ version }}"
+    "@celljs/cli": "{{ version }}"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "build": "malagu build",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

@@ -1,4 +1,4 @@
-import { PathUtil } from '@malagu/cli-common/lib/utils';
+import { PathUtil } from '@celljs/cli-common/lib/utils';
 import { ensureDirSync, copyFileSync } from 'fs-extra';
 import { join, relative, dirname } from 'path';
 import { PythonPluginOptions } from '../python-plugin-protocol';

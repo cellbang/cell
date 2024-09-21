@@ -1,4 +1,4 @@
-import { ContainerUtil, ComponentId, UrlUtil } from '@malagu/core';
+import { ContainerUtil, ComponentId, UrlUtil } from '@celljs/core';
 import { ID_KEY, RPC } from '../annotation';
 import { HttpProxyCreator, HttpProxyCreatorOptions, MergeOptions } from '../proxy/http-proxy-creator';
 import { ProxyCreator } from '../proxy/proxy-protocol';

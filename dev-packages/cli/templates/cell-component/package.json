@@ -1,0 +1,29 @@
+{
+  "name": "cell-component",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "dependencies": {
+    "@celljs/core": "{{ version }}"
+  },
+  "devDependencies": {
+    "@celljs/component": "{{ version }}"
+  },
+  "keywords": [
+    "cell-component"
+  ],
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src",
+    "cell.yml"
+  ],
+  "scripts": {
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test"
+  }
+}

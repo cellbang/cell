@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { DataSourceNotFoundError, AlreadyHasActiveDataSourceError } from './errors';
 

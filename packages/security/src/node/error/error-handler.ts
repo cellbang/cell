@@ -1,21 +1,21 @@
 import { AUTHENTICATION_ERROR_HANDLER_PRIORITY, ACCESS_DENIED_ERROR_HANDLER_PRIORITY } from './error-protocol';
 import { AuthenticationError, AccessDeniedError } from './error';
-import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { Component, Value, Autowired } from '@malagu/core';
-import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/http';
+import { ErrorHandler, Context, RedirectStrategy } from '@celljs/web/lib/node';
+import { Component, Value, Autowired } from '@celljs/core';
+import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@celljs/http';
 import { RequestCache } from '../cache';
 
 @Component(ErrorHandler)
 export class AuthenticationErrorHandler implements ErrorHandler {
     readonly priority: number = AUTHENTICATION_ERROR_HANDLER_PRIORITY;
 
-    @Value('malagu.security.basic.realm')
+    @Value('cell.security.basic.realm')
     protected realm: string;
 
-    @Value('malagu.security.basic.enabled')
+    @Value('cell.security.basic.enabled')
     protected readonly baseEnabled: boolean;
 
-    @Value('malagu.security.loginPage')
+    @Value('cell.security.loginPage')
     protected loginPage: string;
 
     @Autowired(RedirectStrategy)

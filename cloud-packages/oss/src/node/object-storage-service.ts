@@ -1,7 +1,7 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { ClientOptions, Credentials, Body, CreateBucketResult, CreateBucketRequest, DeleteBucketRequest, DeleteObjectRequest, GetObjectRequest, CopyObjectRequest,
     HeadObjectResult, ListAllMyBucketsResult, ListObjectsRequest, ListObjectsResult, ObjectStorageService,
-    PutObjectRequest, AbstractObjectStorageService, Account } from '@malagu/cloud';
+    PutObjectRequest, AbstractObjectStorageService, Account } from '@celljs/cloud';
 import * as OSS from 'ali-oss';
 import { Readable } from 'stream';
 

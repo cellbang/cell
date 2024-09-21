@@ -1,10 +1,10 @@
 import { PathResolver } from './resolver-protocol';
-import { Value, Component, UrlUtil } from '@malagu/core';
+import { Value, Component, UrlUtil } from '@celljs/core';
 
 @Component(PathResolver)
 export class PathResolverImpl implements PathResolver {
 
-    @Value('malagu.vue.path')
+    @Value('cell.vue.path')
     protected readonly path: string;
 
     resolve(...parts: string[]): string {

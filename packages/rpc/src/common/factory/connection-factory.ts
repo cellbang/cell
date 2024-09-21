@@ -2,7 +2,7 @@ import { MessageConnection, createMessageConnection, Logger } from 'vscode-jsonr
 import { Channel } from '../channal/channel-protocol';
 import { ChannelMessageReader } from './reader';
 import { ChannelMessageWriter } from './writer';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 export const ConnnectionFactory = Symbol('ConnnectionFactory');
 

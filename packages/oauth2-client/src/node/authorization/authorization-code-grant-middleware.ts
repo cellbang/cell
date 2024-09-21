@@ -1,12 +1,12 @@
-import { Middleware, Context, RedirectStrategy, RequestMatcher } from '@malagu/web/lib/node';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Middleware, Context, RedirectStrategy, RequestMatcher } from '@celljs/web/lib/node';
+import { Component, Value, Autowired } from '@celljs/core';
 import { AuthorizationRequestResolver, AuthorizationRequestManager, AUTHORIZATION_CODE_GRANT_MIDDLEWARE_PRIORITY,
     AuthorizedClientManager, AuthorizedClient, INVALID_STATE_PARAMETER_ERROR_CODE } from './authorization-protocol';
-import { AuthorizationRequest, OAuth2ParameterNames, OAuth2AuthorizationError, OAuth2Error } from '@malagu/oauth2-core';
+import { AuthorizationRequest, OAuth2ParameterNames, OAuth2AuthorizationError, OAuth2Error } from '@celljs/oauth2-core';
 import { AuthorizationResponseUtil } from '../utils';
 import { ClientRegistrationManager, ClientRegistration } from '../registration';
-import { ENDPOINT, PathResolver } from '@malagu/web';
-import { SecurityContext, RequestCache } from '@malagu/security/lib/node';
+import { ENDPOINT, PathResolver } from '@celljs/web';
+import { SecurityContext, RequestCache } from '@celljs/security/lib/node';
 import { AuthorizationCodeTokenResponseClient } from '../endpoint';
 import { AUTHORIZATION_CODE_GRANT_URI, REDIRECT_LOGIN_PATH } from '../constants';
 

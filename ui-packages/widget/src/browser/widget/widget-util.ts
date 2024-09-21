@@ -1,4 +1,4 @@
-import { ContainerUtil, Prioritizeable } from '@malagu/core';
+import { ContainerUtil, Prioritizeable } from '@celljs/core';
 import { WidgetModel, WidgetFactory, Widget } from './widget-protocol';
 
 let widgetFactories: WidgetFactory<any>[];

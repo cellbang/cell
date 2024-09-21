@@ -1,8 +1,8 @@
 
-import { BACKEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { BACKEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 const TerserPlugin = require('terser-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 import * as path from 'path';
@@ -13,7 +13,7 @@ export class BaseConfigFactory {
     create(config: WebpackChain, context: CliContext, target: string) {
         const { dev, pkg, cfg, runtime } = context;
         const stage = ConfigUtil.getBackendConfig(cfg).stage;
-        const includeModules = ConfigUtil.getBackendMalaguConfig(cfg).includeModules;
+        const includeModules = ConfigUtil.getBackendCellConfig(cfg).includeModules;
         const sourceMapLoader = ConfigUtil.getWebpackConfig(cfg, target).sourceMapLoader || {};
         let sourceMapLoaderExclude = sourceMapLoader.exclude || {};
         sourceMapLoaderExclude = Object.keys(sourceMapLoaderExclude).map(key => sourceMapLoaderExclude[key]);

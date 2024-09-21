@@ -1,6 +1,6 @@
 import { MethodArgsResolver } from './resolver-protocol';
-import { Context } from '@malagu/web/lib/node';
-import { Component } from '@malagu/core';
+import { Context } from '@celljs/web/lib/node';
+import { Component } from '@celljs/core';
 import {
     RequestHeaderMetadata,
     ParamMetadata,

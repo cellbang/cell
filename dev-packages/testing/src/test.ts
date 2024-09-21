@@ -4,8 +4,8 @@ import { awaitUrl } from './await-url';
 export abstract class Test {
 
     static async createHttpServer() {
-        const malaguMainPath = require.resolve('@malagu/cli/lib/malagu-main');
-        const subprocess = fork(malaguMainPath, ['serve', '-p', '0', '-m', 'spec'], { stdio: 'ignore' });
+        const cellMainPath = require.resolve('@celljs/cli/lib/cell-main');
+        const subprocess = fork(cellMainPath, ['serve', '-p', '0', '-m', 'spec'], { stdio: 'ignore' });
         process.on('exit', () => {
             subprocess.kill('SIGINT');
         });

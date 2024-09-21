@@ -1,0 +1,3 @@
+# cell:
+#   jwt:
+#     secret: your secret

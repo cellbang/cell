@@ -1,6 +1,6 @@
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import * as React from 'react';
-import { WidgetManager } from '@malagu/widget';
+import { WidgetManager } from '@celljs/widget';
 const { useState, useEffect } = React;
 
 export function Slot({ area }: { area: string }) {

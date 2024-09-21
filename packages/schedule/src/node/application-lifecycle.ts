@@ -1,8 +1,8 @@
 import { CronMetadata, SCHEDULER, SchedulerMetadata } from './annotation';
 import { METADATA_KEY } from './constants';
-import { Component, Value, Autowired, Optional, ApplicationLifecycle, getTargetClass, getOwnMetadata, Logger, generateUUUID } from '@malagu/core';
+import { Component, Value, Autowired, Optional, ApplicationLifecycle, getTargetClass, getOwnMetadata, Logger, generateUUUID } from '@celljs/core';
 
-import { BackendApplication } from '@malagu/core/lib/node';
+import { BackendApplication } from '@celljs/core/lib/node';
 import { SchedulerRegistry } from './registry';
 
 @Component(ApplicationLifecycle)
@@ -11,7 +11,7 @@ export class ApplicationLifecycleImpl implements ApplicationLifecycle<BackendApp
     @Autowired(SCHEDULER) @Optional()
     protected readonly shedulers: any[] = [];
 
-    @Value('malagu.schedule.disabled')
+    @Value('cell.schedule.disabled')
     protected readonly scheduleDisabled = false;
 
     @Autowired(SchedulerRegistry)

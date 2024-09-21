@@ -1,4 +1,4 @@
-import { BuildContext, FRONTEND_TARGET, BACKEND_TARGET, ConfigUtil, PathUtil } from '@malagu/cli-common';
+import { BuildContext, FRONTEND_TARGET, BACKEND_TARGET, ConfigUtil, PathUtil } from '@celljs/cli-common';
 import { resolve } from 'path';
 import { writeJSON, ensureDir } from 'fs-extra';
 
@@ -8,7 +8,7 @@ export default async (context: BuildContext) => {
 
     for (const target of [ BACKEND_TARGET, FRONTEND_TARGET ]) {
         if (ConfigUtil.support(cfg, target)) {
-            const config = ConfigUtil.getMalaguConfig(cfg, target).vercel.config;
+            const config = ConfigUtil.getCellConfig(cfg, target).vercel.config;
             if (target === BACKEND_TARGET) {
                 vercelConfig = ConfigUtil.merge(config, vercelConfig);
             } else {

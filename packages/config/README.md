@@ -1,1 +1,1 @@
-# Malagu - Config Component
+# Cell - Config Component

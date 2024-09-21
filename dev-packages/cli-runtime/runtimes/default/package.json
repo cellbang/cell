@@ -1,28 +1,28 @@
 {
   "name": "default",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {},
-  "malagu": {
+  "cell": {
     "components": {
-      "@malagu/scf-adapter": "{{ version }}",
-      "@malagu/fc-adapter": "{{ version }}",
-      "@malagu/lambda-adapter": "{{ version }}",
-      "@malagu/serve-static": "{{ version }}",
-      "@malagu/cli": "{{ version }}",
-      "@malagu/cli-service": "{{ version }}",
-      "@malagu/scf-plugin": "{{ version }}",
-      "@malagu/fc-plugin": "{{ version }}",
-      "@malagu/lambda-plugin": "{{ version }}",
-      "@malagu/static-plugin": "{{ version }}",
-      "@malagu/node-plugin": "{{ version }}",
-      "@malagu/qq-guild-bot-adapter": "{{ version }}",
-      "@malagu/next-plugin": "{{ version }}",
-      "@malagu/adonis-plugin": "{{ version }}",
-      "@malagu/python-plugin": "{{ version }}"
+      "@celljs/scf-adapter": "{{ version }}",
+      "@celljs/fc-adapter": "{{ version }}",
+      "@celljs/lambda-adapter": "{{ version }}",
+      "@celljs/serve-static": "{{ version }}",
+      "@celljs/cli": "{{ version }}",
+      "@celljs/cli-service": "{{ version }}",
+      "@celljs/scf-plugin": "{{ version }}",
+      "@celljs/fc-plugin": "{{ version }}",
+      "@celljs/lambda-plugin": "{{ version }}",
+      "@celljs/static-plugin": "{{ version }}",
+      "@celljs/node-plugin": "{{ version }}",
+      "@celljs/qq-guild-bot-adapter": "{{ version }}",
+      "@celljs/next-plugin": "{{ version }}",
+      "@celljs/adonis-plugin": "{{ version }}",
+      "@celljs/python-plugin": "{{ version }}"
     }
   }
 }

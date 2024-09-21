@@ -1,6 +1,6 @@
-import { DefaultCredentialsProvider } from '@malagu/cloud/lib/node';
-import { Component } from '@malagu/core';
-import { Credentials, CredentialsProvider } from '@malagu/cloud';
+import { DefaultCredentialsProvider } from '@celljs/cloud/lib/node';
+import { Component } from '@celljs/core';
+import { Credentials, CredentialsProvider } from '@celljs/cloud';
 
 @Component({ id: CredentialsProvider, rebind: true })
 export class FaaSCredentialsProvider extends DefaultCredentialsProvider {

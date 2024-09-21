@@ -1,7 +1,7 @@
 import { ContextAttributesMapper, AuthorizeRequest, AuthorizationContext } from './authorization-protocol';
-import { Component } from '@malagu/core';
-import { Context, AttributeScope } from '@malagu/web/lib/node';
-import { OAuth2ParameterNames } from '@malagu/oauth2-core';
+import { Component } from '@celljs/core';
+import { Context, AttributeScope } from '@celljs/web/lib/node';
+import { OAuth2ParameterNames } from '@celljs/oauth2-core';
 
 @Component(ContextAttributesMapper)
 export class DefaultContextAttributesMapper implements ContextAttributesMapper {

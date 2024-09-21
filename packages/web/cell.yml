@@ -1,0 +1,29 @@
+cell:
+  session:
+    autoCommit: true
+    maxAge: 86400000
+    sessionIdKey: cell:sessionId
+    sessionKey: cell:session
+  cookies:
+      keys: ${ ['abcdef'] | onTarget('backend')}
+  server:
+    path: /
+    port: 3000
+    endpoint: http://localhost:${cell.server.port}
+  trace:
+    requestField: X-Cell-Trace-ID
+    responseField: X-Cell-Trace-ID
+  health:
+    url: /health
+    method: GET
+  web:
+    route:
+      cacheSize: 500
+    validationPipeOptions:
+        detailedOutputDisabled: false
+        transformEnabled: true
+    # default as 100kb
+    # body:
+    #   limit: 5mb
+backend:
+  devEntry: lib/node/application/dev-application-entry

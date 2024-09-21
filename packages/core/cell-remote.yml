@@ -1,0 +1,3 @@
+cell:
+  logger:
+    level: ${ 'info' | onTarget('backend') || 'error' }

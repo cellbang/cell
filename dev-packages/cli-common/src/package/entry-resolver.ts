@@ -10,12 +10,12 @@ export class EntryResolver {
     }
 
     resolve(componentPackage: ComponentPackage) {
-        const { malaguComponent } = componentPackage;
-        if (malaguComponent) {
-            malaguComponent.frontend.entry = this.doResolveEntry(componentPackage, malaguComponent.frontend.entry || malaguComponent.entry);
-            malaguComponent.backend.entry = this.doResolveEntry(componentPackage, malaguComponent.backend.entry || malaguComponent.entry);
-            malaguComponent.frontend.devEntry = this.doResolveEntry(componentPackage, malaguComponent.frontend.devEntry || malaguComponent.devEntry);
-            malaguComponent.backend.devEntry = this.doResolveEntry(componentPackage, malaguComponent.backend.devEntry || malaguComponent.devEntry);
+        const { cellComponent } = componentPackage;
+        if (cellComponent) {
+            cellComponent.frontend.entry = this.doResolveEntry(componentPackage, cellComponent.frontend.entry || cellComponent.entry);
+            cellComponent.backend.entry = this.doResolveEntry(componentPackage, cellComponent.backend.entry || cellComponent.entry);
+            cellComponent.frontend.devEntry = this.doResolveEntry(componentPackage, cellComponent.frontend.devEntry || cellComponent.devEntry);
+            cellComponent.backend.devEntry = this.doResolveEntry(componentPackage, cellComponent.backend.devEntry || cellComponent.devEntry);
         }
     }
 

@@ -1,5 +1,5 @@
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
 import { dump } from 'js-yaml';
 import * as traverse from 'traverse';
 const chalk = require('chalk');

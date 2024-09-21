@@ -1,1 +1,1 @@
-# Malagu - RPC Core Component
+# Cell - RPC Core Component

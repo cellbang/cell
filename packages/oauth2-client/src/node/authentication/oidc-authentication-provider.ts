@@ -1,11 +1,11 @@
-import { Component, Autowired } from '@malagu/core';
-import { OAuth2AuthenticationError, OidcScopes, AccessTokenResponse, OidcParameterNames} from '@malagu/oauth2-core';
+import { Component, Autowired } from '@celljs/core';
+import { OAuth2AuthenticationError, OidcScopes, AccessTokenResponse, OidcParameterNames} from '@celljs/oauth2-core';
 import { IdTokenJwtDecoderFactory, ClientRegistration } from '../registration';
-import { Jwt } from '@malagu/oauth2-jose';
+import { Jwt } from '@celljs/oauth2-jose';
 import { errors } from 'jose';
 import { OidcUserRequest, OidcUserService } from '../user';
-import { UserService, AuthenticationProvider } from '@malagu/security/lib/node';
-import { User } from '@malagu/security';
+import { UserService, AuthenticationProvider } from '@celljs/security/lib/node';
+import { User } from '@celljs/security';
 import { OIDC_AUTHENTICATION_PROVIDER_PRIORITY, INVALID_ID_TOKEN_ERROR_CODE } from './authentication-protocol';
 import { OAuth2AuthenticationProvider } from './oauth2-authentication-provider';
 

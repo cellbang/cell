@@ -1,1 +1,1 @@
-# Malagu - AI Core Component
+# Cell - AI Core Component

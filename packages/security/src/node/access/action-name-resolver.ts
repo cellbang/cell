@@ -1,5 +1,5 @@
 import { MethodSecurityMetadataContext, ActionNameResolver } from './access-protocol';
-import { Component, getOwnMetadata } from '@malagu/core';
+import { Component, getOwnMetadata } from '@celljs/core';
 import { METADATA_KEY } from '../constants';
 
 @Component(ActionNameResolver)

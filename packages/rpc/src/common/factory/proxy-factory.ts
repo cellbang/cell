@@ -1,8 +1,8 @@
 import { MessageConnection, ResponseError, Emitter, Event } from 'vscode-jsonrpc';
-import { ApplicationError, Disposable, Logger, getTargetClass, getPropertyNames } from '@malagu/core';
+import { ApplicationError, Disposable, Logger, getTargetClass, getPropertyNames } from '@celljs/core';
 import { ErrorConverter } from '../converter';
 import { ConnectionHandler } from '../handler';
-import { PipeManager } from '@malagu/web';
+import { PipeManager } from '@celljs/web';
 
 export type JsonRpcServer<Client> = Disposable & {
     /**

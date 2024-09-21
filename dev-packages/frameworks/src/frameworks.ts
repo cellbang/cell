@@ -504,7 +504,7 @@ export const frameworks = [
         detectors: {
             every: [
                 {
-                    path: 'malagu.yml',
+                    path: 'cell.yml',
                 }
             ],
             some: [
@@ -522,19 +522,19 @@ export const frameworks = [
     },
     // ranked last
     {
-        name: 'malagu',
+        name: 'cell',
         useRuntime: 'default',
-        useMode: [ 'malagu' ],
+        useMode: [ 'cell' ],
         settings: {},
         detectors: {
             some: [
                 {
                     path: 'package.json',
-                    matchContent: '"devDependencies":\\s*{[^}]*"@malagu\\/cli":\\s*".+?"[^}]*}',
+                    matchContent: '"devDependencies":\\s*{[^}]*"@celljs\\/cli":\\s*".+?"[^}]*}',
                 },
                 {
                     path: 'package.json',
-                    matchContent: '"dependencies":\\s*{[^}]*"@malagu\\/cli":\\s*".+?"[^}]*}',
+                    matchContent: '"dependencies":\\s*{[^}]*"@celljs\\/cli":\\s*".+?"[^}]*}',
                 }
             ]
         }

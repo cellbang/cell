@@ -1,5 +1,5 @@
 import { UserChecker } from './user-protocol';
-import { Component, Autowired, Logger } from '@malagu/core';
+import { Component, Autowired, Logger } from '@celljs/core';
 import { LockedError, AccountExpiredError, DisabledError, CredentialsExpiredError } from '../error';
 import { User } from '../../common';
 

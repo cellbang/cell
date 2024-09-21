@@ -1,7 +1,7 @@
 import { join, resolve } from 'path';
 import { readJSON, existsSync } from 'fs-extra';
-import { ConfigurationContext, WebpackContext } from '@malagu/cli-service/lib/context/context-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { ConfigurationContext, WebpackContext } from '@celljs/cli-service/lib/context/context-protocol';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 
 export default async (context: WebpackContext) => {
     const { configurations } = context;

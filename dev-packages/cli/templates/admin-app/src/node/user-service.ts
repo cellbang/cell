@@ -1,6 +1,6 @@
-import { Transactional, OrmContext } from '@malagu/typeorm/lib/node';
-import { Rpc } from '@malagu/rpc';
-import { Anonymous } from '@malagu/security/lib/node'
+import { Transactional, OrmContext } from '@celljs/typeorm/lib/node';
+import { Rpc } from '@celljs/rpc';
+import { Anonymous } from '@celljs/security/lib/node'
 import { User } from './entity';
 import { UserService } from '../common';
 

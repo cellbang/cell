@@ -1,4 +1,4 @@
-export const LOGGER_CONFIG = 'malagu.logger';
+export const LOGGER_CONFIG = 'cell.logger';
 export const LOGGER_LEVEL = `${LOGGER_CONFIG}.level`;
 
 export const Logger = Symbol('Logger');

@@ -1,4 +1,4 @@
-import { Credentials, Account } from '@malagu/cloud-plugin';
+import { Credentials, Account } from '@celljs/cloud-plugin';
 import FC20230330, * as $fc from '@alicloud/fc20230330';
 import * as openapi from '@alicloud/openapi-client';
 import * as chalk from 'chalk';

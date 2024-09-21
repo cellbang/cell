@@ -1,5 +1,5 @@
 const Appdir = require('appdirectory');
-import { PathUtil } from '@malagu/cli-common/lib/utils';
+import { PathUtil } from '@celljs/cli-common/lib/utils';
 import { statSync } from 'fs-extra';
 import { resolve, join } from 'path';
 import { DEFAULT_PYTHON_PLUGIN_OPTIONS, PythonPluginOptions } from '../python-plugin-protocol';
@@ -71,7 +71,7 @@ export function getUserCachePath(options?: PythonPluginOptions) {
 
     // Otherwise, find/use the python-ey appdirs cache location
     const dirs = new Appdir({
-        appName: 'malagu-python-plugin-requirements',
+        appName: 'cell-python-plugin-requirements',
         appAuthor: 'UnitedIncome',
     });
     return dirs.userCache();

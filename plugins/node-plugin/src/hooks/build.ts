@@ -1,5 +1,5 @@
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 import { existsSync, remove } from 'fs-extra';
 import { join } from 'path';
 

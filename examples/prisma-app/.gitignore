@@ -2,7 +2,7 @@
 node_modules
 dist
 lib
-.malagu
+.cell
 .env
 *.log
 .idea

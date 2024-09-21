@@ -1,11 +1,11 @@
-import { Middleware, Context } from '@malagu/web/lib/node';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Middleware, Context } from '@celljs/web/lib/node';
+import { Component, Value, Autowired } from '@celljs/core';
 import { SecurityContextStore, SecurityContext, SECURITY_CONTEXT_MIDDLEWARE_PRIORITY } from './context-protocol';
 
 @Component(Middleware)
 export class SecurityContextMiddleWare implements Middleware {
 
-    @Value('malagu.security')
+    @Value('cell.security')
     protected readonly options: any;
 
     @Autowired(SecurityContextStore)

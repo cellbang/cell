@@ -1,4 +1,4 @@
-import { Context, AttributeScope } from '@malagu/web/lib/node';
+import { Context, AttributeScope } from '@celljs/web/lib/node';
 export const CURRENT_SECURITY_CONTEXT_REQUEST_KEY = 'CurrentSecurityContextRequest';
 
 export interface Authentication {}

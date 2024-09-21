@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@malagu/example-prisma-app",
+  "name": "@celljs/example-prisma-app",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "2.60.3",
   "license": "MIT",
@@ -11,28 +11,28 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/cli-service": "2.60.3",
-    "@malagu/core": "2.60.3",
-    "@malagu/mvc": "2.60.3",
+    "@celljs/cli-service": "2.60.3",
+    "@celljs/core": "2.60.3",
+    "@celljs/mvc": "2.60.3",
     "@prisma/client": "^4.4.0",
     "prisma": "^4.4.0"
   },
   "devDependencies": {
-    "@malagu/cli": "2.60.3",
-    "@malagu/cli-service": "2.56.0",
-    "@malagu/component": "2.60.3",
-    "@malagu/testing": "2.60.3",
+    "@celljs/cli": "2.60.3",
+    "@celljs/cli-service": "2.60.3",
+    "@celljs/component": "2.60.3",
+    "@celljs/testing": "2.60.3",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "test": "malagu-component test",
-    "build": "malagu build -m scf",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "test": "cell-component test",
+    "build": "cell build -m scf",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

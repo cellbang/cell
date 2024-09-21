@@ -1,7 +1,7 @@
 import { PublishedNodePackage, NodePackage } from './npm-registry';
 import { Command } from 'commander';
 import { Settings } from '../settings/settings-protocol';
-import { Framework } from '@malagu/frameworks/lib/detector/detector-protocol';
+import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
 
 export const MALAGU_COMPONENT_SUFFIX = '-component';
 
@@ -31,7 +31,7 @@ export interface Props {
 
     [key: string]: any;
 
-    malagu: any;
+    cell: any;
 
 }
 
@@ -79,8 +79,8 @@ export class ComponentPackage {
         return this.raw.description || '';
     }
 
-    get malaguComponent(): Component | undefined {
-        return this.raw.malaguComponent;
+    get cellComponent(): Component | undefined {
+        return this.raw.cellComponent;
     }
 
     get modulePath(): string {
@@ -105,7 +105,7 @@ export class ComponentPackage {
 }
 
 export interface RawComponentPackage extends PublishedNodePackage {
-    malaguComponent: Component;
+    cellComponent: Component;
 }
 export namespace RawComponentPackage {
     export function is(pck: NodePackage | undefined): pck is RawComponentPackage {
@@ -118,10 +118,10 @@ export namespace RawComponentPackage {
         if (!Array.isArray(pck.keywords)) {
             return false;
         }
-        if (pck.keywords.includes('malagu-component')) {
+        if (pck.keywords.includes('cell-component')) {
             return true;
         }
-        if (!pck.keywords.includes('malagu')) {
+        if (!pck.keywords.includes('cell')) {
             return false;
         }
         return pck.keywords.some(k => k.endsWith(MALAGU_COMPONENT_SUFFIX));

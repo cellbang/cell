@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View } from '@malagu/react';
-import { RpcUtil } from '@malagu/rpc';
+import { View } from '@celljs/react';
+import { RpcUtil } from '@celljs/rpc';
 import { DataTable } from 'grommet';
 import { UserService, User } from '../common';
 

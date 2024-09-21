@@ -1,3 +1,0 @@
-mode: "${currentMode|toObjects[.item in [ 'fc', 'fc3', 'lambda', 'server', 'vercel', 'scf' ]]|suffix('-adapter')}"
-devComponents:
-  "@malagu/cli-service": ${version}

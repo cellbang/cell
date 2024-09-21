@@ -1,5 +1,5 @@
 import { ServiceB } from '@microservice/api';
-import { Rpc } from '@malagu/rpc';
+import { Rpc } from '@celljs/rpc';
 
 @Rpc(ServiceB)
 export class ServiceBImpl implements ServiceB {

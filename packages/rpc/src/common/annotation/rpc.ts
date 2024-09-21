@@ -1,5 +1,5 @@
-import { ComponentDecorator, applyComponentDecorator, ComponentOption, parseComponentOption, Logger, Container } from '@malagu/core';
-import { AOP_POINTCUT, PipeManager } from '@malagu/web';
+import { ComponentDecorator, applyComponentDecorator, ComponentOption, parseComponentOption, Logger, Container } from '@celljs/core';
+import { AOP_POINTCUT, PipeManager } from '@celljs/web';
 import { ConnectionHandler } from '../handler';
 import { JsonRpcConnectionHandler } from '../factory';
 import { RpcUtil, ConverterUtil } from '../utils';

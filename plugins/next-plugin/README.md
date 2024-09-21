@@ -1,1 +1,1 @@
-# Malagu - Next Plugin Component
+# Cell - Next Plugin Component

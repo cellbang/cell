@@ -1,4 +1,4 @@
-import { Component, ApplicationLifecycle, Application, Value, Autowired, Deferred } from '@malagu/core';
+import { Component, ApplicationLifecycle, Application, Value, Autowired, Deferred } from '@celljs/core';
 import { DEFAULT_CONNECTION_NAME } from './constants';
 import { DataSourceManager } from './data-source-manager';
 import { EntityProvider } from './entity-provider';
@@ -9,7 +9,7 @@ export class TypeOrmInitializer implements ApplicationLifecycle<Application> {
 
     readonly initialized = new Deferred<void>();
 
-    @Value('malagu.typeorm')
+    @Value('cell.typeorm')
     protected readonly options: any;
 
     @Autowired(DataSourceManager)

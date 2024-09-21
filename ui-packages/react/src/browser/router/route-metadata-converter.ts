@@ -1,4 +1,4 @@
-import { Autowired, Component, Value } from '@malagu/core';
+import { Autowired, Component, Value } from '@celljs/core';
 import { DEFAULT_LAYOUT } from '../layout';
 import { PathResolver } from '../resolver';
 import { RouteMetadata, RouteMetadataConverter } from './router-protocol';
@@ -13,7 +13,7 @@ export class DefaultRouteMetadataConverter implements RouteMetadataConverter {
     @Autowired(DEFAULT_LAYOUT)
     protected readonly defaultLayout: React.ComponentType;
 
-    @Value('malagu.react.router.routes')
+    @Value('cell.react.router.routes')
     protected readonly routes: any;
 
     convert(metadata: RouteMetadata): RouteMetadata {

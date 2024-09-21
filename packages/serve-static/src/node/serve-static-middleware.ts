@@ -1,13 +1,13 @@
-import { Middleware, Context, RequestMatcher, HTTP_MIDDLEWARE_PRIORITY } from '@malagu/web/lib/node';
+import { Middleware, Context, RequestMatcher, HTTP_MIDDLEWARE_PRIORITY } from '@celljs/web/lib/node';
 import {serveStatic, mime} from './serve-static';
-import { Value, Component, Autowired } from '@malagu/core';
-import { HttpMethod, MediaType, HttpHeaders } from '@malagu/http';
-import { SERVER_PATH } from '@malagu/web';
+import { Value, Component, Autowired } from '@celljs/core';
+import { HttpMethod, MediaType, HttpHeaders } from '@celljs/http';
+import { SERVER_PATH } from '@celljs/web';
 import { OutgoingMessage } from 'http';
 @Component(Middleware)
 export class ServeStaticMiddleware implements Middleware {
 
-    @Value('malagu["serve-static"]')
+    @Value('cell["serve-static"]')
     protected config: { spa: boolean, root: string, path: string, apiPath: string, options: any};
 
     @Value(SERVER_PATH)

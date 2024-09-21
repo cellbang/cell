@@ -16,7 +16,7 @@ import {
     BodyMetadata,
     ResponseMetadata,
 } from '../annotation';
-import { ErrorType } from '@malagu/core';
+import { ErrorType } from '@celljs/core';
 
 export const MVC_HANDLER_ADAPTER_PRIORITY = 2000;
 

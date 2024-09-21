@@ -1,4 +1,4 @@
-import { Component, Autowired, Prioritizeable, Optional } from '@malagu/core';
+import { Component, Autowired, Prioritizeable, Optional } from '@celljs/core';
 import { RouteMetadataConverterProvider, RouteMetadataConverter } from './router-protocol';
 
 @Component(RouteMetadataConverterProvider)

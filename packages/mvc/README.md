@@ -1,1 +1,1 @@
-# Malagu - MVC Component
+# Cell - MVC Component

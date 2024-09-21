@@ -1,1 +1,1 @@
-# Malagu - Oauth2 Jose Component
+# Cell - Oauth2 Jose Component

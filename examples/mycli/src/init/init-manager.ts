@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { existsSync, copy } from 'fs-extra';
 import { prompts } from 'prompts';
 import { templates } from './templates';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import { CONTEXT } from '../constants';
 import * as chalk from 'chalk';
 

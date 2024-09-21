@@ -1,4 +1,4 @@
-import { DeployContext, PathUtil } from '@malagu/cli-common';
+import { DeployContext, PathUtil } from '@celljs/cli-common';
 import { join } from 'path';
 const chalk = require('chalk');
 import { spawnSync } from 'child_process';

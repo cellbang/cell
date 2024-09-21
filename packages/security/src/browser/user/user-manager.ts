@@ -1,7 +1,7 @@
 import { UserManager } from './user-protocol';
-import { Autowired, Component, Value, PostConstruct } from '@malagu/core';
-import { RestOperations, HttpMethod, HttpStatus, HttpHeaders } from '@malagu/http';
-import { PathResolver } from '@malagu/web';
+import { Autowired, Component, Value, PostConstruct } from '@celljs/core';
+import { RestOperations, HttpMethod, HttpStatus, HttpHeaders } from '@celljs/http';
+import { PathResolver } from '@celljs/web';
 import { Method } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../../common';
@@ -9,27 +9,27 @@ import { User } from '../../common';
 @Component(UserManager)
 export class UserManagerImpl implements UserManager {
 
-    protected readonly loginUserInfoStorageKey = 'malagu:loginUserInfo';
+    protected readonly loginUserInfoStorageKey = 'cell:loginUserInfo';
 
-    @Value('malagu.security.loginPage')
+    @Value('cell.security.loginPage')
     protected readonly loginPage: string;
 
-    @Value('malagu.security.openNewWindow')
+    @Value('cell.security.openNewWindow')
     protected readonly openNewWindow: boolean;
 
-    @Value('malagu.security.logoutUrl')
+    @Value('cell.security.logoutUrl')
     protected readonly logoutUrl: string;
 
-    @Value('malagu.security.logoutSuccessUrl')
+    @Value('cell.security.logoutSuccessUrl')
     protected readonly logoutSuccessUrl: string;
 
-    @Value('malagu.security.logoutMethod')
+    @Value('cell.security.logoutMethod')
     protected readonly logoutMethod: HttpMethod;
 
-    @Value('malagu.security.userInfoEndpoint')
+    @Value('cell.security.userInfoEndpoint')
     protected readonly userInfoEndpoint: any;
 
-    @Value('malagu.security.loginRequired')
+    @Value('cell.security.loginRequired')
     protected readonly loginRequired: boolean;
 
     @Autowired(RestOperations)

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, BoxProps, ThemeType } from 'grommet';
-import { ContainerUtil } from '@malagu/core';
-import { ThemeManager, Theme } from '@malagu/widget';
+import { ContainerUtil } from '@celljs/core';
+import { ThemeManager, Theme } from '@celljs/widget';
 import { Checkmark, Paint } from 'grommet-icons';
 
 export function ThemeBox(props: BoxProps) {

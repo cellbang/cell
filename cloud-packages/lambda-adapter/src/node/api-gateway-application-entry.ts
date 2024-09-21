@@ -1,10 +1,10 @@
-import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { Application } from '@malagu/core/lib/common/application/application-protocol';
-import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
-import { Dispatcher } from '@malagu/web/lib/node/dispatcher/dispatcher-protocol';
-import { Context } from '@malagu/web/lib/node/context';
-import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
-import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
+import { container } from '@celljs/core/lib/common/container/dynamic-container';
+import { Application } from '@celljs/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@celljs/core/lib/common/container/container-provider';
+import { Dispatcher } from '@celljs/web/lib/node/dispatcher/dispatcher-protocol';
+import { Context } from '@celljs/web/lib/node/context';
+import { FaaSEventListener } from '@celljs/faas-adapter/lib/node/event/event-protocol';
+import { FaaSUtils } from '@celljs/faas-adapter/lib/node/utils';
 import * as express from 'express';
 const createProxy = require('@vendia/serverless-express');
 

@@ -1,10 +1,10 @@
 import { ConfigProvider, AntdConfig } from './config-protocol';
-import { Component, Value, Autowired, Optional } from '@malagu/core';
+import { Component, Value, Autowired, Optional } from '@celljs/core';
 
 @Component(ConfigProvider)
 export class ConfigProviderImpl implements ConfigProvider {
 
-    @Value('malagu.antd.config')
+    @Value('cell.antd.config')
     protected readonly antdConfig: AntdConfig;
 
     @Autowired(AntdConfig) @Optional()

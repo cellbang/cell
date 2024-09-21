@@ -1,0 +1,12 @@
+mode: [ database, oauth2.0, locale, theme ]
+
+accounts:
+  home:
+    url: https://www.cellbang.com
+  logo:
+    icon: Cellbang
+cell:
+  # security:
+  #   loginPage: ${ '/login' | onTarget('frontend') }
+  serve-static:
+    apiPath: "*oauth2/*"  # 确保 oauth2.0 相关的 url 不会被 server-static 组件识别为静态文件地址

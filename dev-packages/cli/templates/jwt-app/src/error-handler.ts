@@ -1,7 +1,7 @@
 import { AuthenticationError } from './error';
-import { ErrorHandler, Context, RedirectStrategy, DEFALUT_ERROR_HANDLER_PRIORITY } from '@malagu/web/lib/node';
-import { Component, Autowired } from '@malagu/core';
-import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@malagu/http';
+import { ErrorHandler, Context, RedirectStrategy, DEFALUT_ERROR_HANDLER_PRIORITY } from '@celljs/web/lib/node';
+import { Component, Autowired } from '@celljs/core';
+import { HttpStatus, HttpHeaders, XML_HTTP_REQUEST } from '@celljs/http';
 
 @Component(ErrorHandler)
 export class AuthenticationErrorHandler implements ErrorHandler {

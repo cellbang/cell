@@ -1,4 +1,4 @@
-import { Autowired, Component, Logger } from '@malagu/core';
+import { Autowired, Component, Logger } from '@celljs/core';
 import * as puppeteer from 'puppeteer-core';
 import { BrowserInstaller, BrowserProvider } from './puppeteer-protocol';
 

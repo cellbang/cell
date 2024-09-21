@@ -1,3 +1,0 @@
-malagu:
-  rpc:
-    defaultEndpoint: ${malagu.server.endpoint}{rpcPath}/{serviceIdentifier}

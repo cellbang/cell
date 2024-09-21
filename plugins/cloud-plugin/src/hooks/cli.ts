@@ -1,4 +1,4 @@
-import { CliContext, CommandUtil } from '@malagu/cli-common';
+import { CliContext, CommandUtil } from '@celljs/cli-common';
 import { CloudUtils } from './utils';
 
 export default async (context: CliContext) => {

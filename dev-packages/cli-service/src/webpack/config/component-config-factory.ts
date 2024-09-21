@@ -1,8 +1,8 @@
 
-import { FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { ConfigUtil } from '@malagu/cli-common/lib/utils/config-util';
-import { PathUtil } from '@malagu/cli-common/lib/utils/path-util';
+import { FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+import { PathUtil } from '@celljs/cli-common/lib/utils/path-util';
 import * as path from 'path';
 import * as WebpackChain from '@gem-mine/webpack-chain';
 
@@ -24,7 +24,7 @@ export class ComponentConfigFactory {
             .resolveLoader
                 .modules
                     .merge([
-                        path.join(__dirname, '..', 'loader'), // The loaders Malagu provides
+                        path.join(__dirname, '..', 'loader'), // The loaders Cell provides
                         path.join(__dirname, '..', '..', '..', 'node_modules'),
                         path.join(__dirname, '..', '..', '..', '..', '..', '..', 'node_modules'),
                         path.join(PathUtil.getRuntimePath(runtime), 'node_modules'),

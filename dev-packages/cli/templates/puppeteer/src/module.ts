@@ -1,5 +1,5 @@
 import './home-controller';
 import './puppeteer-controller';
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 
 export default autoBind();

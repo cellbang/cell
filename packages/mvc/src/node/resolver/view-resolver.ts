@@ -1,14 +1,14 @@
 import { ViewResolver } from './resolver-protocol';
-import { Component, Autowired, Value } from '@malagu/core';
+import { Component, Autowired, Value } from '@celljs/core';
 import { ViewProvider } from '../view/view-provider';
 import { ViewMetadata } from '../annotation/view';
-import { Context } from '@malagu/web/lib/node';
-import { HttpHeaders } from '@malagu/http';
+import { Context } from '@celljs/web/lib/node';
+import { HttpHeaders } from '@celljs/http';
 
 @Component(ViewResolver)
 export class ViewResolverImpl implements ViewResolver {
 
-    @Value('malagu.mvc.defaultViewName')
+    @Value('cell.mvc.defaultViewName')
     protected readonly defaultViewName: string;
 
     @Autowired(ViewProvider)

@@ -1,0 +1,2 @@
+components:
+  '@celljs/express-adapter': ${version}

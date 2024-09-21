@@ -26,7 +26,7 @@ export class ComponentPackageCollector {
 
     protected isPlugin(pck: NodePackage): boolean {
 
-        if (pck.keywords?.includes('malagu-plugin')) {
+        if (pck.keywords?.includes('cell-plugin')) {
             return true;
         }
         return false;
@@ -56,7 +56,7 @@ export class ComponentPackageCollector {
     protected collectPackagesWithParent(pck: NodePackage, parent: ComponentPackage): void {
         const current = this.parent;
         this.parent = parent;
-        this.collectPackages(pck, parent.malaguComponent?.mode || []);
+        this.collectPackages(pck, parent.cellComponent?.mode || []);
         this.parent = current;
     }
 
@@ -80,11 +80,11 @@ export class ComponentPackageCollector {
         const pck: NodePackage = readJsonFile(packagePath);
         if (RawComponentPackage.is(pck) && (this.pkg.dev || (!dev || this.isPlugin(pck)))) {
             pck.version = versionRange;
-            pck.malaguComponent = {} as any;
+            pck.cellComponent = {} as any;
             this.componentPackageLoader.load(pck, mode);
             const componentPackage = this.pkg.newComponentPackage(pck);
             this.collectPackagesWithParent(pck, componentPackage);
-            delete componentPackage.malaguComponent?.mode;
+            delete componentPackage.cellComponent?.mode;
             this.sorted.push(componentPackage);
         }
     }

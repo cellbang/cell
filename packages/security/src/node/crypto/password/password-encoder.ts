@@ -1,11 +1,11 @@
 import { PasswordEncoder } from './password-protocol';
 import { PBKDF2, lib, enc} from 'crypto-js';
-import { Value, Component } from '@malagu/core';
+import { Value, Component } from '@celljs/core';
 
 @Component(PasswordEncoder)
 export class Pbkdf2PasswordEncoder implements PasswordEncoder {
 
-    @Value('malagu.security.passwordEncoder')
+    @Value('cell.security.passwordEncoder')
     protected readonly options: any;
 
     async encode(rawPassword: string): Promise<string> {

@@ -1,6 +1,6 @@
-import { CliContext } from '@malagu/cli-common';
-import { Profile } from '@malagu/cloud-plugin';
-import { CloudUtils } from '@malagu/cloud-plugin/lib/hooks/utils';
+import { CliContext } from '@celljs/cli-common';
+import { Profile } from '@celljs/cloud-plugin';
+import { CloudUtils } from '@celljs/cloud-plugin/lib/hooks/utils';
 import { prompt } from 'prompts';
 
 export async function promptForProfile(profilePath: string, regions: string[]): Promise<Profile> {

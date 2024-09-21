@@ -1,4 +1,4 @@
-import { CustomError } from '@malagu/core';
+import { CustomError } from '@celljs/core';
 
 export class UserNotFoundError extends CustomError {
     constructor(public userIdOrEmail: number | string) {

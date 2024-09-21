@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Context } from '@malagu/react';
+import { Context } from '@celljs/react';
 import { ThemeProvider as Provider, THEME_REACT_CONTEXT_PRIORITY } from './theme-protocol';
 import { ThemeProvider } from '@material-ui/core';
-import { Autowired } from '@malagu/core/lib/common/annotation/detached';
+import { Autowired } from '@celljs/core/lib/common/annotation/detached';
 
 @Context()
 export class ThemeContext extends React.Component<React.PropsWithChildren> {

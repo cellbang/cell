@@ -1,4 +1,4 @@
-import { OAuth2AuthorizationError, OAuth2Error } from '@malagu/oauth2-core';
+import { OAuth2AuthorizationError, OAuth2Error } from '@celljs/oauth2-core';
 import { CLIENT_AUTHORIZATION_REQUIRED_ERROR_CODE } from './error-protocol';
 
 export class ClientAuthorizationError extends OAuth2AuthorizationError {

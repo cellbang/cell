@@ -5,10 +5,10 @@
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
       <a
-        href="https://malagu.cellbang.com/"
+        href="https://cell.cellbang.com/"
         target="_blank"
         rel="noopener"
-        >malagu documentation</a
+        >cell documentation</a
       >.
     </p>
   </div>

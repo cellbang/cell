@@ -1,7 +1,7 @@
 
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { HookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
-import { SettingsUtil } from '@malagu/cli-common/lib/settings/settings-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { HookExecutor, HookStage } from '@celljs/cli-common/lib/hook/hook-executor';
+import { SettingsUtil } from '@celljs/cli-common/lib/settings/settings-util';
 
 import { dump } from 'js-yaml';
 

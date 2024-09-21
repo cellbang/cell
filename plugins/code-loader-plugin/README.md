@@ -1,1 +1,1 @@
-# Malagu - Code Loader Plugin Component
+# Cell - Code Loader Plugin Component

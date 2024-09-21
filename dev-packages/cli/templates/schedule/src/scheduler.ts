@@ -1,4 +1,4 @@
-import { Scheduler, Cron, CronExpression } from '@malagu/schedule';
+import { Scheduler, Cron, CronExpression } from '@celljs/schedule';
 
 @Scheduler()
 export class SampleScheduler {

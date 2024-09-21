@@ -1,4 +1,4 @@
-import { Component, ContextInitializer, ExpressionContext } from '@malagu/core';
+import { Component, ContextInitializer, ExpressionContext } from '@celljs/core';
 import { ConfigUtil } from './config-util';
 import { existsSync, readFileSync } from 'fs-extra';
 import { load } from 'js-yaml';
@@ -21,11 +21,11 @@ export class RuntimeContextInitializer implements ContextInitializer {
 
     protected doInitializeForDefault(ctx: ExpressionContext) {
         const propsFiles = [];
-        propsFiles.push(resolve(process.cwd(), 'malagu.yml'));
-        propsFiles.push(resolve(process.cwd(), 'malagu.yaml'));
+        propsFiles.push(resolve(process.cwd(), 'cell.yml'));
+        propsFiles.push(resolve(process.cwd(), 'cell.yaml'));
         if (process.cwd() !== __dirname) {
-            propsFiles.push(resolve(__dirname, 'malagu.yml'));
-            propsFiles.push(resolve(__dirname, 'malagu.yaml'));
+            propsFiles.push(resolve(__dirname, 'cell.yml'));
+            propsFiles.push(resolve(__dirname, 'cell.yaml'));
         }
 
         for (const propsFile of propsFiles) {

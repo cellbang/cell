@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { SecurityContext, SecurityContextStrategy } from './context-protocol';
 import { Authentication } from '../authentication';
 

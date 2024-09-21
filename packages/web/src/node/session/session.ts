@@ -1,4 +1,4 @@
-import { generateUUUID } from '@malagu/core/lib/common/utils/uuid';
+import { generateUUUID } from '@celljs/core/lib/common/utils/uuid';
 import { Session } from './session-protocol';
 const crc32 = require('crc/crc32');
 

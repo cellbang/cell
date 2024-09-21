@@ -1,6 +1,6 @@
-import { Component } from '@malagu/core';
-import { DefaultAccountProvider } from '@malagu/cloud/lib/node';
-import { AccountProvider, Account } from '@malagu/cloud';
+import { Component } from '@celljs/core';
+import { DefaultAccountProvider } from '@celljs/cloud/lib/node';
+import { AccountProvider, Account } from '@celljs/cloud';
 
 @Component({ id: AccountProvider, rebind: true })
 export class FaaSAccountProvider extends DefaultAccountProvider {

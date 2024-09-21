@@ -43,14 +43,14 @@ export class ModuleResolver {
     resolveComponentModule(componentPackage: ComponentPackage, target: string, suffix?: string): void {
         const prop = `${target}s`;
         suffix = suffix || target;
-        const malaguComponent = componentPackage.malaguComponent!;
-        malaguComponent.frontend = malaguComponent.frontend || {};
-        malaguComponent.backend = malaguComponent.backend || {};
+        const cellComponent = componentPackage.cellComponent!;
+        cellComponent.frontend = cellComponent.frontend || {};
+        cellComponent.backend = cellComponent.backend || {};
 
-        const rawFrontendModules = [ ...malaguComponent[prop] || [],  ...malaguComponent.frontend[prop] || [] ];
-        const rawBackendModules  = [ ...malaguComponent[prop] || [],  ...malaguComponent.backend[prop] || [] ];
-        const frontendModules: Module[] = malaguComponent.frontend[prop] = [];
-        const backendModules: Module[] = malaguComponent.backend[prop] = [];
+        const rawFrontendModules = [ ...cellComponent[prop] || [],  ...cellComponent.frontend[prop] || [] ];
+        const rawBackendModules  = [ ...cellComponent[prop] || [],  ...cellComponent.backend[prop] || [] ];
+        const frontendModules: Module[] = cellComponent.frontend[prop] = [];
+        const backendModules: Module[] = cellComponent.backend[prop] = [];
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
 
         this.addModule(componentPackage, frontendModules, rawFrontendModules);
@@ -77,29 +77,29 @@ export class ModuleResolver {
     }
 
     resolveHookModule(componentPackage: ComponentPackage): void {
-        const malaguComponent = componentPackage.malaguComponent!;
+        const cellComponent = componentPackage.cellComponent!;
 
-        const rawWebpackHooks = malaguComponent.webpackHooks || [];
-        const rawInitHooks = malaguComponent.initHooks || [];
-        const rawConfigHooks = malaguComponent.configHooks || [];
-        const rawCompileHooks = malaguComponent.compileHooks || [];
-        const rawBuildHooks = malaguComponent.buildHooks || [];
-        const rawDeployHooks = malaguComponent.deployHooks || [];
-        const rawServeHooks = malaguComponent.serveHooks || [];
-        const rawCliHooks = malaguComponent.cliHooks || [];
-        const rawPropsHooks = malaguComponent.propsHooks || [];
-        const rawInfoHooks = malaguComponent.infoHooks || [];
+        const rawWebpackHooks = cellComponent.webpackHooks || [];
+        const rawInitHooks = cellComponent.initHooks || [];
+        const rawConfigHooks = cellComponent.configHooks || [];
+        const rawCompileHooks = cellComponent.compileHooks || [];
+        const rawBuildHooks = cellComponent.buildHooks || [];
+        const rawDeployHooks = cellComponent.deployHooks || [];
+        const rawServeHooks = cellComponent.serveHooks || [];
+        const rawCliHooks = cellComponent.cliHooks || [];
+        const rawPropsHooks = cellComponent.propsHooks || [];
+        const rawInfoHooks = cellComponent.infoHooks || [];
 
-        const webpackHooks: Module[] = malaguComponent.webpackHooks = [];
-        const initHooks: Module[] = malaguComponent.initHooks = [];
-        const configHooks: Module[] = malaguComponent.configHooks = [];
-        const compileHooks: Module[] = malaguComponent.compileHooks = [];
-        const buildHooks: Module[] = malaguComponent.buildHooks = [];
-        const deployHooks: Module[] = malaguComponent.deployHooks = [];
-        const serveHooks: Module[] = malaguComponent.serveHooks = [];
-        const cliHooks: Module[] = malaguComponent.cliHooks = [];
-        const propsHooks: Module[] = malaguComponent.propsHooks = [];
-        const infoHooks: Module[] = malaguComponent.infoHooks = [];
+        const webpackHooks: Module[] = cellComponent.webpackHooks = [];
+        const initHooks: Module[] = cellComponent.initHooks = [];
+        const configHooks: Module[] = cellComponent.configHooks = [];
+        const compileHooks: Module[] = cellComponent.compileHooks = [];
+        const buildHooks: Module[] = cellComponent.buildHooks = [];
+        const deployHooks: Module[] = cellComponent.deployHooks = [];
+        const serveHooks: Module[] = cellComponent.serveHooks = [];
+        const cliHooks: Module[] = cellComponent.cliHooks = [];
+        const propsHooks: Module[] = cellComponent.propsHooks = [];
+        const infoHooks: Module[] = cellComponent.infoHooks = [];
 
         const libOrSrc = this.pkg.isRoot(componentPackage) ? 'src' : 'lib';
 
@@ -137,12 +137,12 @@ export class ModuleResolver {
     }
 
     resolveAssetModule(componentPackage: ComponentPackage): void {
-        const malaguComponent = componentPackage.malaguComponent!;
+        const cellComponent = componentPackage.cellComponent!;
 
-        const rawFrontendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.frontend.assets || [] ];
-        const rawBackendAssets = [ ...malaguComponent.assets || [],  ...malaguComponent.backend.assets || [] ];
-        const frontendAssets: Module[] = malaguComponent.frontend.assets = [];
-        const backendAssets: Module[] = malaguComponent.backend.assets = [];
+        const rawFrontendAssets = [ ...cellComponent.assets || [],  ...cellComponent.frontend.assets || [] ];
+        const rawBackendAssets = [ ...cellComponent.assets || [],  ...cellComponent.backend.assets || [] ];
+        const frontendAssets: Module[] = cellComponent.frontend.assets = [];
+        const backendAssets: Module[] = cellComponent.backend.assets = [];
 
         this.addModule(componentPackage, frontendAssets, rawFrontendAssets);
         this.addModule(componentPackage, backendAssets, rawBackendAssets);

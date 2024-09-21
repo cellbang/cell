@@ -1,1 +1,1 @@
-# Malagu - JWT Component
+# Cell - JWT Component

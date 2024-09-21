@@ -1,1 +1,1 @@
-# Malagu - Elasticsearch Component
+# Cell - Elasticsearch Component

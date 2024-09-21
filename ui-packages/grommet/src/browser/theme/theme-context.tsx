@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Context } from '@malagu/react';
+import { Context } from '@celljs/react';
 import { THEME_REACT_CONTEXT_PRIORITY } from './theme-protocol';
 import { Grommet, grommet, ThemeType } from 'grommet';
-import { ThemeManager } from '@malagu/widget';
-import { ContainerUtil } from '@malagu/core';
+import { ThemeManager } from '@celljs/widget';
+import { ContainerUtil } from '@celljs/core';
 
 export function ThemeContext({ children }: React.PropsWithChildren<any>) {
     const themeManager = ContainerUtil.get<ThemeManager<ThemeType>>(ThemeManager);

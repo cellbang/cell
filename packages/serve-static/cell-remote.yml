@@ -1,0 +1,3 @@
+cell: 
+  serve-static: 
+    root: frontend

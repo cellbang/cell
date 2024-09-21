@@ -7,7 +7,7 @@ import { DEFAULT_SETTINGS, Settings } from './settings-protocol';
 
 export namespace SettingsUtil {
     export function getSettingsPath() {
-        return process.env.MALAGU_SETTINGS_PATH ? process.env.MALAGU_SETTINGS_PATH : path.join(PathUtil.getMalaguHomePath(), 'settings.yml');
+        return process.env.MALAGU_SETTINGS_PATH ? process.env.MALAGU_SETTINGS_PATH : path.join(PathUtil.getCellHomePath(), 'settings.yml');
     }
 
     function doGetSettings(): Settings {

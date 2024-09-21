@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import { IconResolver } from './icon-protocol';
 
 const { useState, useEffect } = React;

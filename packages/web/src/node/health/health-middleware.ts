@@ -1,11 +1,11 @@
 import { Middleware } from '../middleware';
 import { Context } from '../context';
-import { Component, Value, Autowired } from '@malagu/core';
+import { Component, Value, Autowired } from '@celljs/core';
 import { HealthExecutor, HealthOptions, HEALTH_MIDDLEWARE_PRIORITY } from './health-protocol';
 import { NotFoundError } from '../error';
 import { RequestMatcher } from '../matcher';
 import { PathResolver } from '../../common/resolver';
-import { HttpHeaders, MediaType } from '@malagu/http';
+import { HttpHeaders, MediaType } from '@celljs/http';
 
 @Component(Middleware)
 export class HealthMiddleware implements Middleware {
@@ -19,7 +19,7 @@ export class HealthMiddleware implements Middleware {
     @Autowired(PathResolver)
     protected readonly pathResolver: PathResolver;
 
-    @Value('malagu.health')
+    @Value('cell.health')
     protected readonly healthOptions: HealthOptions;
 
     async handle(ctx: Context, next: () => Promise<void>): Promise<void> {

@@ -1,0 +1,5 @@
+targets:
+  - backend
+mode: "${currentMode|toObjects[.item in [ 'fc', 'lambda', 'scf' ]]|suffix('-adapter')}"
+components:
+  '@celljs/qq-guild-bot-adapter': ${version}

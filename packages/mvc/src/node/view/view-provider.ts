@@ -1,4 +1,4 @@
-import { Component, Autowired, Prioritizeable } from '@malagu/core';
+import { Component, Autowired, Prioritizeable } from '@celljs/core';
 import { View } from './view-protocol';
 
 @Component()

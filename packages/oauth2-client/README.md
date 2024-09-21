@@ -1,1 +1,1 @@
-# Malagu - Oauth2 Client Component
+# Cell - Oauth2 Client Component

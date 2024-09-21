@@ -1,1 +1,1 @@
-# Malagu - Widget Component
+# Cell - Widget Component

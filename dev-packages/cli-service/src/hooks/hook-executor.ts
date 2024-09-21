@@ -1,5 +1,5 @@
 import { BeforeServeContext, ServeContext, WebpackContext } from '../context';
-import { HookExecutor as BaseHookExecutor, HookStage } from '@malagu/cli-common/lib/hook/hook-executor';
+import { HookExecutor as BaseHookExecutor, HookStage } from '@celljs/cli-common/lib/hook/hook-executor';
 const chalk = require('chalk');
 
 export class HookExecutor extends BaseHookExecutor {

@@ -1,4 +1,4 @@
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 import { CacheManager, CacheManagerFactory } from './cache-protocol';
 import './index';
 

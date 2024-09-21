@@ -1,1 +1,1 @@
-# Malagu - Puppeteer Component
+# Cell - Puppeteer Component

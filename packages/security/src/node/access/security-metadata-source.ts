@@ -1,10 +1,10 @@
-import { Component, Autowired, Optional, getOwnMetadata } from '@malagu/core';
+import { Component, Autowired, Optional, getOwnMetadata } from '@celljs/core';
 import {
     SecurityMetadataSource, SecurityMetadata, MethodSecurityMetadataContext,
     SecurityExpressionContextHandler, SECURITY_EXPRESSION_CONTEXT_KEY, ActionNameResolver } from './access-protocol';
 import { SecurityContext } from '../context';
 import { METADATA_KEY } from '../constants';
-import { Context } from '@malagu/web/lib/node';
+import { Context } from '@celljs/web/lib/node';
 import { Policy } from '../../common';
 
 @Component(SecurityMetadataSource)

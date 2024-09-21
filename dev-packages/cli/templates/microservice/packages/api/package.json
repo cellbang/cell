@@ -1,7 +1,7 @@
 {
   "name": "@microservice/api",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -12,11 +12,11 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "{{ version }}",
-    "@malagu/rpc": "{{ version }}"
+    "@celljs/core": "{{ version }}",
+    "@celljs/rpc": "{{ version }}"
   },
   "devDependencies": {
-    "@malagu/cli": "{{ version }}"
+    "@celljs/cli": "{{ version }}"
   },
   "scripts": {
     "clean": "rimraf lib",

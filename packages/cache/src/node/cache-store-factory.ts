@@ -1,5 +1,5 @@
 import { CacheStoreFactoryConfig, CacheStore, CacheStoreFactory } from './cache-protocol';
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 
 @Component(CacheStoreFactory)
 export class DefaultCacheStoreFactory implements CacheStoreFactory {

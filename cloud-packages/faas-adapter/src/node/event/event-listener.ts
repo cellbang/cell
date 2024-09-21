@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { FaaSEventListener } from './event-protocol';
 
 @Component(FaaSEventListener)

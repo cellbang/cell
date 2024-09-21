@@ -1,7 +1,7 @@
 {
   "name": "file-service",
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "version": "0.0.0",
   "license": "MIT",
@@ -10,25 +10,25 @@
     "src"
   ],
   "dependencies": {
-    "@malagu/core": "{{ version }}",
-    "@malagu/http": "{{ version }}",
-    "@malagu/web": "{{ version }}",
-    "@malagu/mvc": "{{ version }}",
-    "@malagu/oss": "{{ version }}",
-    "@malagu/cloud": "{{ version }}",
+    "@celljs/core": "{{ version }}",
+    "@celljs/http": "{{ version }}",
+    "@celljs/web": "{{ version }}",
+    "@celljs/mvc": "{{ version }}",
+    "@celljs/oss": "{{ version }}",
+    "@celljs/cloud": "{{ version }}",
     "mime-types": "2.1.35"
   },
   "devDependencies": {
-    "@malagu/cli": "{{ version }}",
+    "@celljs/cli": "{{ version }}",
     "@types/mime-types": "^2.1.1"
   },
   "scripts": {
-    "clean": "rimraf lib dist .malagu",
-    "build": "malagu build",
-    "start": "malagu serve",
-    "deploy": "malagu deploy -m scf -m test",
-    "deploy:test": "malagu deploy -m scf -m test",
-    "deploy:pre": "malagu deploy -m scf -m pre",
-    "deploy:prod": "malagu deploy -m scf -m prod"
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

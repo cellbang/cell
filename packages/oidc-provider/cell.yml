@@ -1,0 +1,3 @@
+cell:
+  oidc-provider:
+    path: /odic/*

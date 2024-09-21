@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { RetryContext } from '../retry/retry-protocol';
 import { RetryPolicy } from './policy-protocol';
 

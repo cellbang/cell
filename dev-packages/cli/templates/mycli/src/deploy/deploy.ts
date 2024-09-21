@@ -1,11 +1,11 @@
 
 import { bootstrap } from '../bootstrap';
-import { ContainerUtil } from '@malagu/core';
+import { ContainerUtil } from '@celljs/core';
 import * as program from 'commander';
 import { DeployManager } from './deploy-manager';
 
 program
-    .name('malagu deploy')
+    .name('cell deploy')
     .description('init a application')
     .parse(process.argv);
 

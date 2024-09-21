@@ -1,8 +1,8 @@
-import { Disposable } from '@malagu/core/lib/common/utils/disposable';
-import { CustomError } from '@malagu/core/lib/common/error';
+import { Disposable } from '@celljs/core/lib/common/utils/disposable';
+import { CustomError } from '@celljs/core/lib/common/error';
 
-import { Event } from '@malagu/core/lib/common/utils/event';
-export { CancellationTokenSource } from '@malagu/core/lib/common/utils/cancellation';
+import { Event } from '@celljs/core/lib/common/utils/event';
+export { CancellationTokenSource } from '@celljs/core/lib/common/utils/cancellation';
 
 export class ProxyIdentifier<T> {
     public readonly id: string;

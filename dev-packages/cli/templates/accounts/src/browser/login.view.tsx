@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useLocation } from 'react-router';
 import { parse, stringify } from 'querystring';
-import { ConfigUtil } from '@malagu/core';
-import { View } from '@malagu/react';
-import { LocaleMenu, Icon } from '@malagu/grommet';
+import { ConfigUtil } from '@celljs/core';
+import { View } from '@celljs/react';
+import { LocaleMenu, Icon } from '@celljs/grommet';
 import { useIntl } from 'react-intl';
 import { Box, Button, Heading, ResponsiveContext, Nav } from 'grommet';
 import styled from 'styled-components';
@@ -38,8 +38,8 @@ export function Login() {
     const location = useLocation();
     const size = useContext(ResponsiveContext);
     const intl = useIntl();
-    const targetUrlParameter = ConfigUtil.get<string>('malagu.security.targetUrlParameter');
-    const registrations = ConfigUtil.get<{[key: string]: { icon?: string, clientName: string } }>('malagu.oauth2.client.registrations');
+    const targetUrlParameter = ConfigUtil.get<string>('cell.security.targetUrlParameter');
+    const registrations = ConfigUtil.get<{[key: string]: { icon?: string, clientName: string } }>('cell.oauth2.client.registrations');
     const redirect = parse(location.search && location.search.substring(1))[targetUrlParameter];
     const queryStr = redirect ? `?${stringify({ [targetUrlParameter]: redirect})}` : '';
     return (

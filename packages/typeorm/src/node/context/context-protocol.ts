@@ -1,4 +1,4 @@
-import { Context, AttributeScope } from '@malagu/core/lib/node';
+import { Context, AttributeScope } from '@celljs/core/lib/node';
 import { EntityManager, ObjectType, EntitySchema, Repository, TreeRepository, MongoRepository, ObjectLiteral } from 'typeorm';
 import { DEFAULT_CONNECTION_NAME } from '../../common';
 

@@ -1,9 +1,9 @@
-import { container } from '@malagu/core/lib/common/container/dynamic-container';
-import { Application } from '@malagu/core/lib/common/application/application-protocol';
-import { ContainerProvider } from '@malagu/core/lib/common/container/container-provider';
-import { FaaSUtils } from '@malagu/faas-adapter/lib/node/utils';
-import { Clock } from '@malagu/faas-adapter/lib/node/timer/timer-protocol';
-import { FaaSEventListener } from '@malagu/faas-adapter/lib/node/event/event-protocol';
+import { container } from '@celljs/core/lib/common/container/dynamic-container';
+import { Application } from '@celljs/core/lib/common/application/application-protocol';
+import { ContainerProvider } from '@celljs/core/lib/common/container/container-provider';
+import { FaaSUtils } from '@celljs/faas-adapter/lib/node/utils';
+import { Clock } from '@celljs/faas-adapter/lib/node/timer/timer-protocol';
+import { FaaSEventListener } from '@celljs/faas-adapter/lib/node/event/event-protocol';
 
 let clock: Clock;
 let listeners: FaaSEventListener<any, void>[];

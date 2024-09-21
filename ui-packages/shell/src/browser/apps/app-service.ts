@@ -1,13 +1,13 @@
 import { AppService, Category, AppInfo } from '../../common';
-import { Component, Prioritizeable, Value } from '@malagu/core';
+import { Component, Prioritizeable, Value } from '@celljs/core';
 
 @Component(AppService)
 export class AppServiceImpl implements AppService {
 
-    @Value('malagu.shell.apps')
+    @Value('cell.shell.apps')
     protected readonly apps: { [id: string]: AppInfo };
 
-    @Value('malagu.shell.categories')
+    @Value('cell.shell.categories')
     protected readonly categories: { [id: string]: Category };
 
     async load(): Promise<Category[]> {

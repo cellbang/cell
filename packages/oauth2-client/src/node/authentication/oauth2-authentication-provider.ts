@@ -1,14 +1,14 @@
-import { Component, Autowired, Value } from '@malagu/core';
-import { Context, RequestMatcher } from '@malagu/web/lib/node';
-import { PathResolver, ENDPOINT } from '@malagu/web';
+import { Component, Autowired, Value } from '@celljs/core';
+import { Context, RequestMatcher } from '@celljs/web/lib/node';
+import { PathResolver, ENDPOINT } from '@celljs/web';
 import { AuthorizationResponseUtil } from '../utils';
 import { OAuth2AuthenticationError, AuthorizationRequest, OAuth2ParameterNames, OAuth2AuthorizationError,
-    OAuth2ErrorCodes, OidcScopes, AccessTokenResponse } from '@malagu/oauth2-core';
+    OAuth2ErrorCodes, OidcScopes, AccessTokenResponse } from '@celljs/oauth2-core';
 import { AuthorizationRequestManager, AuthorizedClientManager, AuthorizedClient, INVALID_STATE_PARAMETER_ERROR_CODE } from '../authorization';
 import { ClientRegistration, ClientRegistrationManager } from '../registration';
 import { AuthorizationCodeTokenResponseClient, OAuth2UserRequest } from '../endpoint';
-import { AuthenticationProvider, UserChecker, UserService, UserMapper } from '@malagu/security/lib/node';
-import { User } from '@malagu/security';
+import { AuthenticationProvider, UserChecker, UserService, UserMapper } from '@celljs/security/lib/node';
+import { User } from '@celljs/security';
 
 import { OAUTH2_AUTHENTICATION_PROVIDER_PRIORITY, AUTHORIZATION_REQUEST_NOT_FOUND_ERROR_CODE,
     CLIENT_REGISTRATION_NOT_FOUND_ERROR_CODE, OAuth2LoginAuthentication } from './authentication-protocol';
@@ -17,7 +17,7 @@ import { OAuth2UserService } from '../user';
 @Component(AuthenticationProvider)
 export class OAuth2AuthenticationProvider implements AuthenticationProvider {
 
-    @Value('malagu.oauth2.client')
+    @Value('cell.oauth2.client')
     protected readonly options: any;
 
     @Autowired(AuthorizationRequestManager)

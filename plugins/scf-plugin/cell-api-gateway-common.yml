@@ -1,0 +1,34 @@
+cell:
+  cloud:
+    apiGateway:
+      release:
+        environmentName: release
+        desc: 'Released By Cell'
+      service:
+        name: ${cell.cloud.function.name|replace('-', '_')}_${stage|eval}
+        protocol: http&https
+      api:
+        name: ${cell.cloud.function.name}
+        serviceTimeout: 65 # 65s
+        protocol: HTTP
+        serviceScfIsIntegratedResponse: true
+        serviceScfFunctionQualifier: ${cell.cloud.alias.name}
+        serviceWebsocketTransportFunctionQualifier: ${cell.cloud.alias.name}
+        requestConfig:
+          path: /
+          method: ANY
+      usagePlan:
+        name: ${cell.cloud.function.name}
+        environment: ${cell.cloud.apiGateway.release.environmentName}
+      strategy:
+        # strategy: 5000
+        environmentName: ${cell.cloud.apiGateway.release.environmentName}
+      customDomain:
+        # name: abc.com
+        # certificateId: xxxx
+        protocol: http
+        netType: OUTER
+        isDefaultMapping: false
+        pathMapping:
+          path: /
+          environment: ${cell.cloud.apiGateway.release.environmentName}

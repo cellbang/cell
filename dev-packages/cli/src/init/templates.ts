@@ -1,7 +1,7 @@
 export const templates: any = {
     'backend-app': '{{ templatePath }}/backend-app',
     'sample-app': '{{ templatePath }}/sample-app',
-    'malagu-component': '{{ templatePath }}/malagu-component',
+    'cell-component': '{{ templatePath }}/cell-component',
     'docker-app': '{{ templatePath }}/docker-app',
     'monorepo': '{{ templatePath }}/monorepo',
     'nest-app': '{{ templatePath }}/nest-app',

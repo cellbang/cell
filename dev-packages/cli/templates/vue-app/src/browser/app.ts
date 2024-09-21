@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { App } from '@malagu/vue';
+import { App } from '@celljs/vue';
 import { router } from './router';
 import Root from './App.vue';
 

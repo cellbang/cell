@@ -1,7 +1,7 @@
 import { SecurityMetadata, AccessDecisionVoter, ACCESS_DENIED, ACCESS_GRANTED, ACCESS_ABSTAIN,
     POLICY_BASED_VOTER_PRIORITY, PolicyResolver, PolicyProvider, TENANT_VOTER_PRIORITY } from './access-protocol';
-import { Component, Autowired } from '@malagu/core';
-import { Context } from '@malagu/web/lib/node';
+import { Component, Autowired } from '@celljs/core';
+import { Context } from '@celljs/web/lib/node';
 import { SecurityContext } from '../context';
 
 @Component(AccessDecisionVoter)

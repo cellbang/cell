@@ -1,7 +1,7 @@
 import { OAUTH2_AUTHORIZATION_ERROR_HANDLER_PRIORITY } from './error-protocol';
-import { ErrorHandler, Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { Component, Autowired } from '@malagu/core';
-import { OAuth2AuthorizationError, AuthorizationRequest, OAuth2ParameterNames } from '@malagu/oauth2-core';
+import { ErrorHandler, Context, RedirectStrategy } from '@celljs/web/lib/node';
+import { Component, Autowired } from '@celljs/core';
+import { OAuth2AuthorizationError, AuthorizationRequest, OAuth2ParameterNames } from '@celljs/oauth2-core';
 import { AuthorizationRequestManager } from '../authorization';
 import { enc } from 'crypto-js';
 

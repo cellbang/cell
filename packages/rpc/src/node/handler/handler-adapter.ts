@@ -1,8 +1,8 @@
-import { Component, Autowired, Value, Deferred } from '@malagu/core';
+import { Component, Autowired, Value, Deferred } from '@celljs/core';
 import { ChannelManager } from '../channel';
 import { RPC_HANDLER_ADAPTER_PRIORITY } from './handler-protocol';
-import { RequestMatcher, HandlerAdapter, Context } from '@malagu/web/lib/node';
-import { PathResolver } from '@malagu/web';
+import { RequestMatcher, HandlerAdapter, Context } from '@celljs/web/lib/node';
+import { PathResolver } from '@celljs/web';
 import { RPC_PATH } from '../../common';
 
 export const PATH_PARMAS_ATTR = 'pathParams';

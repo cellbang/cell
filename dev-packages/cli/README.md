@@ -1,1 +1,1 @@
-# Malagu CLI
+# Cell CLI

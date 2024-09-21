@@ -1,4 +1,4 @@
-import { CliContext } from '@malagu/cli-common';
+import { CliContext } from '@celljs/cli-common';
 import { ConfigOptions, Profile } from './cloud-protocol';
 import { CloudUtils } from './utils';
 import { DefaultProfileProvider } from './profile-provider';

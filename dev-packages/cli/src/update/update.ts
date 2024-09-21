@@ -1,5 +1,5 @@
-import { getPackager } from '@malagu/cli-common/lib/packager/utils';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
+import { getPackager } from '@celljs/cli-common/lib/packager/utils';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
 import { join } from 'path';
 import { readJSON, existsSync, writeJSON } from 'fs-extra';
 const updateNotifier = require('update-notifier');
@@ -19,13 +19,13 @@ async function updatePackage(version: string, skipIntallingComponent?: boolean) 
         const dependencies = projectPkg.dependencies ?? {};
         const devDependencies = projectPkg.devDependencies ?? {};
         for (const name of Object.keys(dependencies)) {
-            if (name.startsWith('@malagu/')) {
+            if (name.startsWith('@celljs/')) {
                 dependencies[name] = version;
             }
         }
 
         for (const name of Object.keys(devDependencies)) {
-            if (name.startsWith('@malagu/')) {
+            if (name.startsWith('@celljs/')) {
                 devDependencies[name] = version;
             }
         }

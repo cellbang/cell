@@ -1,1 +1,1 @@
-# Malagu - PWA Component
+# Cell - PWA Component

@@ -1,0 +1,3 @@
+cell:
+  node-plugin:
+    entryMode: bundle

@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { HealthStatus, HealthStatusAggregator } from './health-protocol';
 
 const defaultOrder: HealthStatus[] = [

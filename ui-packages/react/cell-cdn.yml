@@ -1,0 +1,11 @@
+frontend:
+  cell:
+    webpack:
+      config:
+        externals:
+          react: React
+          react-dom: ReactDOM
+      htmlWebpackTagsPlugin:
+        react: "https://cdn.jsdelivr.net/npm/react@^18.2.0/umd/react.${cliContext.dev ? 'development' : 'production.min'}.js"
+        react-dom: "https://cdn.jsdelivr.net/npm/react-dom@^18.2.0/umd/react-dom.${cliContext.dev ? 'development' : 'production.min'}.js"
+  

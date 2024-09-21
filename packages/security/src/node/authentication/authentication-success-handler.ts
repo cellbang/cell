@@ -1,22 +1,22 @@
 import { AuthenticationSuccessHandler, Authentication } from './authentication-protocol';
-import { Component, Value, Autowired, Logger } from '@malagu/core';
-import { Context, RedirectStrategy } from '@malagu/web/lib/node';
-import { HttpHeaders, XML_HTTP_REQUEST } from '@malagu/http';
+import { Component, Value, Autowired, Logger } from '@celljs/core';
+import { Context, RedirectStrategy } from '@celljs/web/lib/node';
+import { HttpHeaders, XML_HTTP_REQUEST } from '@celljs/http';
 import { RequestCache } from '../cache';
 
 @Component(AuthenticationSuccessHandler)
 export class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Value('malagu.security.targetUrlParameter')
+    @Value('cell.security.targetUrlParameter')
     protected readonly targetUrlParameter: string;
 
-    @Value('malagu.security.loginSuccessUrl')
+    @Value('cell.security.loginSuccessUrl')
     protected readonly loginSuccessUrl: string;
 
-    @Value('malagu.security.alwaysUseLoginSuccessUrl')
+    @Value('cell.security.alwaysUseLoginSuccessUrl')
     protected readonly alwaysUseLoginSuccessUrl: boolean;
 
-    @Value('malagu.security.useReferer')
+    @Value('cell.security.useReferer')
     protected readonly useReferer: boolean;
 
     @Autowired(Logger)

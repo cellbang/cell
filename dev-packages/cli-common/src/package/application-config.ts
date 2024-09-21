@@ -30,9 +30,9 @@ export class ApplicationConfig {
         if (this._props) {
             return this._props;
         }
-        let props = <Component>{ malagu: {} };
+        let props = <Component>{ cell: {} };
         for (const componentPackage of this.pkg.componentPackages) {
-            const component = componentPackage.malaguComponent;
+            const component = componentPackage.cellComponent;
             if (component) {
                 props = ConfigUtil.merge(props, component);
             }
@@ -54,10 +54,10 @@ export class ApplicationConfig {
         if (existsSync(this.pkg.path(process.cwd(), CONFIG_FILE))) {
             this._rootConfig = load(readFileSync(this.pkg.path(process.cwd(), CONFIG_FILE), { encoding: 'utf8' })) as any;
         }
-        if (this._rootConfig && !this._rootConfig.malagu) {
-            this._rootConfig.malagu = {};
+        if (this._rootConfig && !this._rootConfig.cell) {
+            this._rootConfig.cell = {};
         }
-        return this._rootConfig || { malagu: {} };
+        return this._rootConfig || { cell: {} };
     }
 
     getConfig(target: string): Props {
@@ -75,8 +75,8 @@ export class ApplicationConfig {
             const packageJson = readJSONSync(packageJsonPath);
             const keywords = packageJson.keywords;
             const alias = ComponentUtil.getComponentAlias(keywords)[0];
-            if (alias !== 'malagu') {
-                config.malagu = ConfigUtil.merge(config.malagu, config[alias]);
+            if (alias !== 'cell') {
+                config.cell = ConfigUtil.merge(config.cell, config[alias]);
             }
         }
 

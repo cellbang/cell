@@ -1,4 +1,4 @@
-import { ContainerUtil, Container } from '@malagu/core';
+import { ContainerUtil, Container } from '@celljs/core';
 import { ErrorConverter, GlobalConverter } from '../converter';
 import { RpcUtil } from './rpc-util';
 

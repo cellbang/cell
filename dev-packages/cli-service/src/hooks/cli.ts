@@ -1,6 +1,6 @@
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
-import { Argument } from '@malagu/cli-common/lib/command';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
+import { Argument } from '@celljs/cli-common/lib/command';
 
 export default async (context: CliContext) => {
 

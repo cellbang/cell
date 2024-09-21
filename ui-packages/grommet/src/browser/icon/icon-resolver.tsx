@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Component, Autowired, PostConstruct } from '@malagu/core';
+import { Component, Autowired, PostConstruct } from '@celljs/core';
 import * as icons from 'grommet-icons';
 import { IconProps } from './icon-protocol';
-import { ICON, IconResolver } from '@malagu/react';
+import { ICON, IconResolver } from '@celljs/react';
 
 @Component(IconResolver)
 export class IconResolverImpl implements IconResolver<IconProps> {

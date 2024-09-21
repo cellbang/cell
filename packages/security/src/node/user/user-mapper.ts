@@ -1,11 +1,11 @@
 import { UserMapper } from './user-protocol';
-import { Component, Value } from '@malagu/core';
+import { Component, Value } from '@celljs/core';
 import { User, UserMapperRule } from '../../common';
 
 @Component(UserMapper)
 export class UserMapperImpl implements UserMapper {
 
-    @Value('malagu.security.userMapperRule')
+    @Value('cell.security.userMapperRule')
     protected rules: { [id: string]: UserMapperRule };
 
     async map(user: User): Promise<void> {

@@ -6,7 +6,7 @@ import { CodeLoader, CodeUri } from './code-protocol';
 import axios from 'axios';
 const tar = require('tar-fs');
 import { createUnzip } from 'zlib';
-import { generateUUUID } from '@malagu/cli-common/lib/utils/uuid';
+import { generateUUUID } from '@celljs/cli-common/lib/utils/uuid';
 
 export function getCodeRootDir(codeDir: string, codeUri: string | CodeUri) {
     if (typeof codeUri === 'string') {

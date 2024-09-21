@@ -1,0 +1,14 @@
+stage: "${'test' in mode ? 'test' : 'pre' in mode ? 'pre' : 'prod' in mode ? 'prod' : cliContext.prod ? 'prod' : 'test'}" # test, pre, prod
+cell:
+  cloud:
+    disableProjectId: false
+    function:
+      name: ${pkg.name|replace('@', '')|replace('/', '-')}
+      handler: backend/index.handler
+      codeUri:
+        exclude: ${'cell.*yml$'|regexp}
+      memorySize: 512
+      timeout: 60
+      bootstrap: ${startCommand}
+    alias:
+      name: ${stage}

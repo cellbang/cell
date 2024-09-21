@@ -1,5 +1,5 @@
 {
-  "extends": "@malagu/component/configs/base.tsconfig.json",
+  "extends": "@celljs/component/configs/base.tsconfig.json",
   "compilerOptions": {
     "target": "es6",
     "composite": true,

@@ -1,4 +1,4 @@
-import { ConfigUtil, ContainerUtil } from '@malagu/core';
+import { ConfigUtil, ContainerUtil } from '@celljs/core';
 import { ENDPOINT } from '../constants';
 import { PathResolver } from '../resolver';
 

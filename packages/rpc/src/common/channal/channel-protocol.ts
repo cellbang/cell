@@ -1,5 +1,5 @@
 import { Disposable } from 'vscode-jsonrpc';
-import { DisposableCollection } from '@malagu/core';
+import { DisposableCollection } from '@celljs/core';
 
 export interface Channel {
     handleMessage(message: Channel.Message): void;

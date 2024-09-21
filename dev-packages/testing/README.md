@@ -1,1 +1,1 @@
-# Malagu - Testing Component
+# Cell - Testing Component

@@ -1,4 +1,4 @@
-import { ComponentId, Constant } from '@malagu/core';
+import { ComponentId, Constant } from '@celljs/core';
 import { WidgetModel, WidgetType } from '../widget';
 
 export interface WidgetOption {

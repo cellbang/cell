@@ -1,19 +1,19 @@
 {
-  "name": "@malagu/cli-common",
+  "name": "@celljs/cli-common",
   "version": "2.60.3",
-  "description": "Malagu CLI Common.",
+  "description": "Cell CLI Common.",
   "publishConfig": {
     "access": "public"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cellbang/malagu.git"
+    "url": "https://github.com/cellbang/cell.git"
   },
   "bugs": {
-    "url": "https://github.com/cellbang/malagu/issues"
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "homepage": "https://github.com/cellbang/malagu",
+  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "lib",
     "src"
@@ -21,14 +21,14 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "dependencies": {
-    "@malagu/frameworks": "2.60.3",
+    "@celljs/frameworks": "2.60.3",
     "@yarnpkg/lockfile": "^1.1.0",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
@@ -49,7 +49,7 @@
     "typescript": "~4.5.5"
   },
   "devDependencies": {
-    "@malagu/component": "2.60.3",
+    "@celljs/component": "2.60.3",
     "@types/fs-extra": "^11.0.1",
     "@types/jexl": "^2.3.1",
     "@types/js-yaml": "^4.0.5",

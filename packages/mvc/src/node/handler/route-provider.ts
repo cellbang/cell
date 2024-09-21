@@ -1,4 +1,4 @@
-import { Component, Autowired, Deferred, PostConstruct } from '@malagu/core';
+import { Component, Autowired, Deferred, PostConstruct } from '@celljs/core';
 import { Route, RouteProvider } from './handler-protocol';
 import { RouteBuilder } from './route-builder';
 

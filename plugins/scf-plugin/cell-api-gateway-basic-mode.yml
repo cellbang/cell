@@ -1,0 +1,6 @@
+mode: [ api-gateway-basic ]
+cell:
+  cloud:
+    function:
+      type: HTTP
+      bootstrap: "${ startCommand ?: '/var/lang/node16/bin/node backend/index.js'}"

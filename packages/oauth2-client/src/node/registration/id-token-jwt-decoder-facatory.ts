@@ -1,9 +1,9 @@
-import { JwtDecoderFactory, JwtDecoder, JwkSetManager, JwsAlgorithms } from '@malagu/oauth2-jose';
+import { JwtDecoderFactory, JwtDecoder, JwkSetManager, JwsAlgorithms } from '@celljs/oauth2-jose';
 import { ClientRegistration, JwsAlgorithmResolver, MISSING_SIGNATURE_VERIFIER_ERROR_CODE } from './registration-protocol';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import { ProviderDetailsManager, ProviderDetails } from '../provider';
 import { jwtVerify, KeyLike, generateSecret } from 'jose';
-import { OAuth2AuthenticationError, AuthorizationRequest } from '@malagu/oauth2-core';
+import { OAuth2AuthenticationError, AuthorizationRequest } from '@celljs/oauth2-core';
 import { AuthorizationRequestManager } from '../authorization';
 
 @Component()

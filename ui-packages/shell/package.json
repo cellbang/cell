@@ -1,15 +1,15 @@
 {
-  "name": "@malagu/shell",
+  "name": "@celljs/shell",
   "version": "2.60.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@malagu/core": "2.56.0",
-    "@malagu/grommet": "2.60.3",
-    "@malagu/react": "2.60.3",
-    "@malagu/security": "2.56.0",
-    "@malagu/widget": "2.60.3",
+    "@celljs/core": "2.60.3",
+    "@celljs/grommet": "2.60.3",
+    "@celljs/react": "2.60.3",
+    "@celljs/security": "2.60.3",
+    "@celljs/widget": "2.60.3",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "react-intl": "^6.0.5",
@@ -19,7 +19,7 @@
     "access": "public"
   },
   "keywords": [
-    "malagu-component"
+    "cell-component"
   ],
   "license": "MIT",
   "repository": {
@@ -33,18 +33,18 @@
   "files": [
     "lib",
     "src",
-    "malagu.yml",
-    "malagu-locale.yml"
+    "cell.yml",
+    "cell-locale.yml"
   ],
   "scripts": {
-    "lint": "malagu-component lint",
-    "build": "malagu-component build",
-    "watch": "malagu-component watch",
-    "clean": "malagu-component clean",
-    "test": "malagu-component test:js"
+    "lint": "cell-component lint",
+    "build": "cell-component build",
+    "watch": "cell-component watch",
+    "clean": "cell-component clean",
+    "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@malagu/component": "2.56.0"
+    "@celljs/component": "2.60.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

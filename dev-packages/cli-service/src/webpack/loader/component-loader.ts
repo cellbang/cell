@@ -1,6 +1,6 @@
 import { LoaderDefinition } from 'webpack';
-import { FRONTEND_TARGET } from '@malagu/cli-common/lib/constants';
-import { Module } from '@malagu/cli-common/lib/package/package-protocol';
+import { FRONTEND_TARGET } from '@celljs/cli-common/lib/constants';
+import { Module } from '@celljs/cli-common/lib/package/package-protocol';
 import { generateBackendComponents, generateFrontendComponents } from '../dynamic-container';
 
 export interface ComponentLoaderOptions {

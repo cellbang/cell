@@ -1,1 +1,1 @@
-# Malagu - Grommet Component
+# Cell - Grommet Component

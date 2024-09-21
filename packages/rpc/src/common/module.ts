@@ -1,4 +1,4 @@
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 import { ProxyProvider } from './proxy';
 import { ID_KEY, RPC } from './annotation';
 import { RpcUtil, ConverterUtil } from './utils';

@@ -1,1 +1,1 @@
-# Malagu - Core Component
+# Cell - Core Component

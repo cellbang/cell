@@ -1,16 +1,16 @@
 import { resolve, basename, relative, join } from 'path';
 import { existsSync, copy, readFile, writeJSON } from 'fs-extra';
 import { templates } from './templates';
-import { CliContext } from '@malagu/cli-common/lib/context/context-protocol';
-import { getPackager, spawnProcess } from '@malagu/cli-common/lib/packager/utils';
-import { HookExecutor } from '@malagu/cli-common/lib/hook/hook-executor';
-import { CommandUtil } from '@malagu/cli-common/lib/utils/command-util';
+import { CliContext } from '@celljs/cli-common/lib/context/context-protocol';
+import { getPackager, spawnProcess } from '@celljs/cli-common/lib/packager/utils';
+import { HookExecutor } from '@celljs/cli-common/lib/hook/hook-executor';
+import { CommandUtil } from '@celljs/cli-common/lib/utils/command-util';
 import { prompts } from 'prompts';
 import * as ora from 'ora';
 const rimraf = require('rimraf');
 const chalk = require('chalk');
 import { ok } from 'assert';
-import { RuntimeUtil } from '@malagu/cli-runtime';
+import { RuntimeUtil } from '@celljs/cli-runtime';
 const version = require('../../package.json').version;
 
 const PLACEHOLD = '{{ templatePath }}';
@@ -57,7 +57,7 @@ export class InitManager {
 
     async install(): Promise<void> {
         const pkg = CommandUtil.getPkg(undefined, this.outputDir);
-        const packager = this.opts.packager || pkg.rootComponentPackage.malaguComponent?.packager;
+        const packager = this.opts.packager || pkg.rootComponentPackage.cellComponent?.packager;
 
         await getPackager(packager, this.outputDir).install({}, this.outputDir);
     }

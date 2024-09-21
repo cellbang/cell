@@ -1,4 +1,4 @@
-import { Component } from '@malagu/core';
+import { Component } from '@celljs/core';
 import { ServerAware } from './http-protocol';
 import { Server } from 'http';
 

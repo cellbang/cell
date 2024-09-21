@@ -1,8 +1,8 @@
 import { PythonPluginOptions } from '../python-plugin-protocol';
 import { writeFileSync, readFileSync, ensureDirSync, moveSync, existsSync } from 'fs-extra';
 import { join } from 'path';
-import { spawnProcess } from '@malagu/cli-common/lib/packager';
-import { PathUtil } from '@malagu/cli-common/lib/utils';
+import { spawnProcess } from '@celljs/cli-common/lib/packager';
+import { PathUtil } from '@celljs/cli-common/lib/utils';
 const tomlParse = require('@iarna/toml/parse-string');
 
 export class Poetry {

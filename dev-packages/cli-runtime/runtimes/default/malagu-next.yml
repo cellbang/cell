@@ -1,9 +1,0 @@
-mode: "${ 'fc' in currentMode ? 'node16' : ''}"
-devComponents:
-  '@malagu/next-plugin': ${version}
-backend:
-  entry: '@malagu/next-plugin/lib/next-entry'
-malagu:
-  webpack:
-    filterWarningsPlugin:
-      node: []

@@ -1,0 +1,12 @@
+cell: 
+  mvc: 
+    jsonView:
+      errorHandler: 
+        enabled: true
+        priority: 2000
+      template: |
+        {
+          "message": "{{error}}",
+          "success": {{success}},
+          "data": {{model}}
+        }

@@ -1,0 +1,7 @@
+devComponents:
+  '@celljs/node-runtime-plugin': ${version}
+cell:
+  cloud:
+    function:
+      env:
+        PATH: /code/backend/assets:$PATH

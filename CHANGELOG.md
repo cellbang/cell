@@ -10,15 +10,15 @@
 
 ## 2.60.1
 
-- feat(retry): 添加新组件 `@malagu/retry`，支持重试机制
-- feat(core): 优化 `@malagu/core` 模块对单元测试的支持 
+- feat(retry): 添加新组件 `@celljs/retry`，支持重试机制
+- feat(core): 优化 `@celljs/core` 模块对单元测试的支持 
 
 ## 2.58.0
 
 - feat(http): 独立 http 模块
 - feat(ai): 支持 AI 相关通用能力（开发中）
 
-## 2.56.0
+## 2.60.3
 
 - chore: 移除 authing 和 qq-guild-bot-adapter 过时组件，并优化了组件目录结构，新增 ui 和 cloud 两个组件分类目录
 
@@ -36,7 +36,7 @@
 
 ## 2.55.0
 
-- fix(cli-common) 修复 keywords 为空时，无法正常加载 malagu 组件配置文件
+- fix(cli-common) 修复 keywords 为空时，无法正常加载 cell 组件配置文件
 
 ## 2.55.0
 
@@ -49,7 +49,7 @@
 
 ## 2.54.3
 
-- fix(cli-common): 修复 keywords 为空时 Malagu 项目 HOME 目录默认值异常
+- fix(cli-common): 修复 keywords 为空时 Cell 项目 HOME 目录默认值异常
 - fix(cache): 修复 redis 缓存新版依赖不兼容问题
 
 ## 2.54.2
@@ -62,11 +62,11 @@
 
 ## 2.54.0
 
-- feat(cli-common): 根据 keywords 中声明的组件名称决定 Malagu 项目 HOME 目录，默认为 `.malagu`
-- feat(cli-common): 组件别名的属性对象默认与 malagu 根属性对象进行合并
+- feat(cli-common): 根据 keywords 中声明的组件名称决定 Cell 项目 HOME 目录，默认为 `.cell`
+- feat(cli-common): 组件别名的属性对象默认与 cell 根属性对象进行合并
 - feat(scf-plugin): 更新支持的地域列表
 - feat(scf-plugin): 支持云函数 URL 特性，使用 `-m http` 模式激活
-- feat(scf-plugin): 优化灰度配置属性，并提供一个回滚命令 `malagu rollout`
+- feat(scf-plugin): 优化灰度配置属性，并提供一个回滚命令 `cell rollout`
 
 ## 2.53.2
 
@@ -79,7 +79,7 @@
 
 ## 2.53.0
 
-- feat(scf-plugin) 云资源支持自定义标签：malagu.cloud.function.tags: { key: value }
+- feat(scf-plugin) 云资源支持自定义标签：cell.cloud.function.tags: { key: value }
 
 
 ## 2.52.6
@@ -89,7 +89,7 @@
 
 ## 2.52.5
 
-- feat(scf-plugin) 支持设置内网 API：malagu.cloud.internal: true
+- feat(scf-plugin) 支持设置内网 API：cell.cloud.internal: true
 
 ## 2.52.4
 
@@ -197,7 +197,7 @@
 
 ## 2.48.2
 
-- fix(cli-common) 修复 malagu 命令启动报 ts 错误
+- fix(cli-common) 修复 cell 命令启动报 ts 错误
 
 ## 2.48.1
 
@@ -213,7 +213,7 @@
 
 ## 2.47.0
 
-- feat(configs) 添加 Malagu 属性配置文件对应的 JSON Schema 文件：configs/malagu.schema.json（目前只包含常用的配置项）
+- feat(configs) 添加 Cell 属性配置文件对应的 JSON Schema 文件：configs/cell.schema.json（目前只包含常用的配置项）
 
 ## 2.46.6
 
@@ -229,16 +229,16 @@
 
 ## 2.46.3
 
-- feat(cloud-plugin) 提升配置文件 malagu.cloud.region 属性优先级，可以覆盖全局配置文件
+- feat(cloud-plugin) 提升配置文件 cell.cloud.region 属性优先级，可以覆盖全局配置文件
 
 ## 2.46.2
 
-- feat(security) 优化认证成功后重定向逻辑优化：异步请求 X_REQUESTED_WITH 和 malagu.security.loginSuccessUrl 值为空则不进行重定向逻辑
+- feat(security) 优化认证成功后重定向逻辑优化：异步请求 X_REQUESTED_WITH 和 cell.security.loginSuccessUrl 值为空则不进行重定向逻辑
 
 
 ## 2.46.0
 
-- feat(rpc-core) 添加新组件 @malagu/rpc-core
+- feat(rpc-core) 添加新组件 @celljs/rpc-core
 
 
 ## 2.45.2
@@ -298,7 +298,7 @@
 
 - feat(mvc) 支持通过熟悉配置定义 JSON 视图格式，默认通过 json-wrapper 模式启用默认统一格式，默认配置如下：
 ```yaml
-malagu: 
+cell: 
   mvc: 
     jsonView:
       errorHandler: 
@@ -397,7 +397,7 @@ malagu:
 
 ## 2.39.0
 
-- feat(scf-plugin) 当通过 malagu config 指定了主账号账号对应 appId，则使用 cos 方式上传函数代码和层
+- feat(scf-plugin) 当通过 cell config 指定了主账号账号对应 appId，则使用 cos 方式上传函数代码和层
 
 ## 2.38.21
 
@@ -410,7 +410,7 @@ malagu:
 ## 2.38.8
 
 - feat(*) 优化依赖，解决幽灵依赖问题，更好地支持 pnpm
-- feat(node-runtime-plugin) 移除组件 `@malagu/node-runtime-plugin`
+- feat(node-runtime-plugin) 移除组件 `@celljs/node-runtime-plugin`
 
 ## 2.37.8
 
@@ -489,7 +489,7 @@ malagu:
 ## 2.31.0
 
 - feat(cli) 添加新模板 `jwt-app`
-- feat(jwt) 添加新组件 `@malagu/jwt`
+- feat(jwt) 添加新组件 `@celljs/jwt`
 - feat(cli) 优化模版 `sample-app`
 
 ## 2.30.0
@@ -522,7 +522,7 @@ malagu:
 ## 2.28.5
 
 - feat(faas) 将函数超时时间提升至 60 秒
-- fix(typeorm) 修复 `malagu-fc.yml` 文件不存在问题
+- fix(typeorm) 修复 `cell-fc.yml` 文件不存在问题
 
 ## 2.28.3
 
@@ -530,7 +530,7 @@ malagu:
 
 ## 2.28.2
 
-- fix(component) 修复 `malagu-component clean` 命令报错
+- fix(component) 修复 `cell-component clean` 命令报错
 - feat(runtime) 支持 `better-sqlite3` 排除
 
 ## 2.28.1
@@ -540,12 +540,12 @@ malagu:
 
 ## 2.28.0
 
-- feat(testing) 添加新组件 `@malagu/testing`, 方便实现 e2e 测试
+- feat(testing) 添加新组件 `@celljs/testing`, 方便实现 e2e 测试
 - feat(cli) 为 `backend-app` 模板添加集成测试代码示例
 
 ## 2.27.0
 
-- feat(elasticsearch) 添加新组件 `@malagu/elasticsearch`
+- feat(elasticsearch) 添加新组件 `@celljs/elasticsearch`
 
 ## 2.26.4
 
@@ -557,11 +557,11 @@ malagu:
 
 ## 2.26.2
 
-- feat(cli) 添加模板 `malagu-component`，方便开发者快速开发 Malagu 组件
+- feat(cli) 添加模板 `cell-component`，方便开发者快速开发 Cell 组件
 
 ## 2.26.1
 
-- fix(fc-plugin|scf-plugin) 修复 malagu info 报错
+- fix(fc-plugin|scf-plugin) 修复 cell info 报错
 
 ## 2.26.0
 
@@ -576,7 +576,7 @@ malagu:
 
 ## 2.25.0
 
-- feat(component) 模块 `@malagu/ext-scripts` 改名为 `@malagu/component`
+- feat(component) 模块 `@celljs/ext-scripts` 改名为 `@celljs/component`
 
 ## 2.24.1
 
@@ -585,7 +585,7 @@ malagu:
 
 ## 2.24.0
 
-- feat(config) 新增 @malagu/config 组件，用于提供运行时的配置属性方式。包含以下运行时配置属性策略：通过环境变量 MALAGU_PROPS_FILE 配置属性文件位置和尝试从 process.cwd() 和 __dirname 目录下加载 malagu.yml 和 malagu.yaml 配置文件
+- feat(config) 新增 @celljs/config 组件，用于提供运行时的配置属性方式。包含以下运行时配置属性策略：通过环境变量 MALAGU_PROPS_FILE 配置属性文件位置和尝试从 process.cwd() 和 __dirname 目录下加载 cell.yml 和 cell.yaml 配置文件
 
 ## 2.23.3
 
@@ -657,7 +657,7 @@ malagu:
 
 ## 2.21.1
 
-- feat(fc-plugin) 支持 `malagu info` 命令打印随机域名
+- feat(fc-plugin) 支持 `cell info` 命令打印随机域名
 - feat(cloud-plugin) 优化对象存储上传代码，协议如下：`s3://bucket/key?region=xxx&version=1`，其中 key 支持多级路径，region 和 version 可选
 
 ## 2.21.0
@@ -670,7 +670,7 @@ malagu:
 
 ## 2.20.5
 
-- feat(cli-runtime) 默认运行时添加 `@malagu/qq-guild-bot-adapter` 和 `@malagu/next-plugin`
+- feat(cli-runtime) 默认运行时添加 `@celljs/qq-guild-bot-adapter` 和 `@celljs/next-plugin`
 
 ## 2.20.3
 
@@ -693,7 +693,7 @@ malagu:
 
 ## 2.19.0
 
-- feat(cli) 支持 `malagu --skip-auto-install`：跳过自动按需安装运行时组件过程
+- feat(cli) 支持 `cell --skip-auto-install`：跳过自动按需安装运行时组件过程
 - feat(qq-guild-bot) 事件参数名从 data 改为 context
 - fix(cli-service) 修复编译报错却没有终止命令行，且输出的成功日志
 - feat node-forge version
@@ -702,7 +702,7 @@ malagu:
 ## 2.18.4
 
 - feat(qq-guild-bot-adapter) 支持在函数超时前主动结束返回，避免函数超时错误
-- feat(*-plugin) 添加新属性 `malagu.cloud.function.sync=onlyUpdateCode` 只更新函数代码，而不更新函数配置
+- feat(*-plugin) 添加新属性 `cell.cloud.function.sync=onlyUpdateCode` 只更新函数代码，而不更新函数配置
 
 ## 2.18.3
 
@@ -752,7 +752,7 @@ malagu:
 ## 2.16.0
 
 - feat(cli) 支持根命令参数 `--props-dir` 和 `--props-file`，用于指定额外的自定义属性文件位置，优先级比项目级别的属性文件高，方便开发者透传属性配置
-- fix(cli) 把全局属性配置文件改为全局配置目录，基于环境变量 `GLOBAL_MALAGU_PROPS_DIR_PATH` 自定义，默认是 `~/.malagu`
+- fix(cli) 把全局属性配置文件改为全局配置目录，基于环境变量 `GLOBAL_MALAGU_PROPS_DIR_PATH` 自定义，默认是 `~/.cell`
 
 ## 2.15.2
 
@@ -781,7 +781,7 @@ malagu:
 
 ## 2.13.5
 
-- fix(cli) 修复 `malagu update` 命令不生效
+- fix(cli) 修复 `cell update` 命令不生效
 
 ## 2.13.4
 
@@ -797,14 +797,14 @@ malagu:
 
 ## 2.13.0
 
-- feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.malagu/malagu.yml`，可以通过环境变量自定义：`GLOBAL_MALAGU_CONFIG_PATH`
+- feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.cell/cell.yml`，可以通过环境变量自定义：`GLOBAL_MALAGU_CONFIG_PATH`
 - feat(cli + cli-common) 支持配置属性 `projectPath`，可以在配置文件中指定项目的真正工作目录，该配置项只在命令行的工作目录的配置文件有效
 
 ## 2.12.0
 
 - feat(frameworks) 支持纯静态网站部署 `static-site`
-- feat(cli + cli-common) 支持命令 `malagu update`，一键升级命令行和组件
-- feat(cli) 简化命令 `malagu init`，移除 `name` 选项，`--output-dir` 选项的行为与 `git clone` 的 `dir` 参数保持一致
+- feat(cli + cli-common) 支持命令 `cell update`，一键升级命令行和组件
+- feat(cli) 简化命令 `cell init`，移除 `name` 选项，`--output-dir` 选项的行为与 `git clone` 的 `dir` 参数保持一致
 
 ## 2.11.6
 
@@ -877,8 +877,8 @@ malagu:
 
 ## 2.8.9
 
-- feat(*-plugin) 支持随机后缀 ID 关闭开关，通过属性控制：`malagu.cloud.disableProjectId` (#93)
-- feat(cli+cli-runtimes) 支持新命令行选项：`malagu runtime install --overwrite`
+- feat(*-plugin) 支持随机后缀 ID 关闭开关，通过属性控制：`cell.cloud.disableProjectId` (#93)
+- feat(cli+cli-runtimes) 支持新命令行选项：`cell runtime install --overwrite`
 
 ## 2.8.8
 
@@ -892,15 +892,15 @@ malagu:
 
 ## 2.8.6
 
-- feat(scf-plugin) 优化 `malagu info` 执行效率
-- fix(scf-plugin) 修复 `malagu info` 报函数别名找不到
+- feat(scf-plugin) 优化 `cell info` 执行效率
+- fix(scf-plugin) 修复 `cell info` 报函数别名找不到
 - feat(examples) 添加认证与授权相关的示例模板
 
 ## 2.8.5
 
 - fix(lambda-plugin): 修复 lambda 创建新函数有机率因为新角色未同步导致报错的问题 (#88)
 - fix(static-plugin) fix typo
-- feat(cli) 支持 `malagu config --default-runtime` 选项
+- feat(cli) 支持 `cell config --default-runtime` 选项
 
 ## 2.8.4
 
@@ -916,8 +916,8 @@ malagu:
 ## 2.8.2
 
 - fix(cli-service) Fix problems introduced by webpack upgrade (#84)
-- fix(cli-runtime) 添加传统服务构建模式 `malagu build -m server` 和 vercel 部署模式 `malagu deploy -m vercel`
-- fix(cli-runtime) 添加新模式 `externals`，该模式内置了需要排除的包，比如 vm2 等等，使用方式：`malagu deploy -m externals`
+- fix(cli-runtime) 添加传统服务构建模式 `cell build -m server` 和 vercel 部署模式 `cell deploy -m vercel`
+- fix(cli-runtime) 添加新模式 `externals`，该模式内置了需要排除的包，比如 vm2 等等，使用方式：`cell deploy -m externals`
 
 ## 2.7.6
 
@@ -956,7 +956,7 @@ malagu:
 ## 2.6.0
 
 - feat(*) 支持项目 link 能力，确保不同项目之间不会出现覆盖部署
-- feat(cli-service) 移除合并后输出的配置文件，改用 `malagu props`
+- feat(cli-service) 移除合并后输出的配置文件，改用 `cell props`
 - fix(fc-plugin) 修复其他环境没有部署的情况下仍然可以 info 出信息问题
 - fix(cli) fix typo
 - fix(cli-runtime) 修复运行时组件顺序问题
@@ -970,7 +970,7 @@ malagu:
 
 ## 2.5.10
 
-- feat(cli) 添加 `malagu props` 命令，用户显示当前应用完整属性配置信息
+- feat(cli) 添加 `cell props` 命令，用户显示当前应用完整属性配置信息
 - feat(cloud-plugin) 云厂商 profile 文件添加 `stage` 属性表示当前环境，优先级低于应用根组件属性的 `stage`，高于其他
 - fix(cli-common) 修复部署报错
 - refactor(cli-common) 重构 framework 在属性配置文件中的格式
@@ -987,41 +987,41 @@ malagu:
 
 ## 2.5.7
 
-- fix(scf-plugin) 修复 `malagu info` 切环境信息不对
-- fix(cli-service) 修复 malagu 框架在运行时背景下构建问题
+- fix(scf-plugin) 修复 `cell info` 切环境信息不对
+- fix(cli-service) 修复 cell 框架在运行时背景下构建问题
 
 ## 2.5.6
 
 - feat(frameworks + cli-service) 支持 compileCommand、serveCommand、buildCommand、deployCommand 命令配置
-- feat(cli-service) 支持 webpack 属性配置，与 malagu.webpack 等效
-- feat(cli-service) 支持 includeModules 属性配置，与 malagu.includeModules 等效
+- feat(cli-service) 支持 webpack 属性配置，与 cell.webpack 等效
+- feat(cli-service) 支持 includeModules 属性配置，与 cell.includeModules 等效
 - feat(cli) 支持 framework 属性配置
-- feat(cloud-plugin) 支持 cloud 属性配置，与 malagu.webpack 等效
+- feat(cloud-plugin) 支持 cloud 属性配置，与 cell.webpack 等效
 
 
 ## 2.5.5
 
 - feat(node-plugin) 添加 `serve hook` 插件，支持 HMR
 - fix(serve-static) 修复静态文件 root 路径
-- feat(cli-common) 提供 `malagu config --default-mode` 配置属性，用于配置默认 mode
+- feat(cli-common) 提供 `cell config --default-mode` 配置属性，用于配置默认 mode
 - feat(cli) 添加 nest-app 和 koa-app 应用模板
 
 ## 2.5.4
 
-- feat(framework) 优化 `malagu` 框架的默认构建目录
-- fix(cli) 优化 `malagu init` 命令初始化模板后没有正确安装依赖包
+- feat(framework) 优化 `cell` 框架的默认构建目录
+- fix(cli) 优化 `cell init` 命令初始化模板后没有正确安装依赖包
 - fix(cli-common) 提供环境变量 `MALAGU_PROJECT_DIST_PATH` 配置项目构建目录
 
 ## 2.5.2
 
-- fix(*) 修复 `malagu` 框架运行报错
+- fix(*) 修复 `cell` 框架运行报错
 
 ## 2.5.1
 
-- feat(framework) 适配 `malagu` 框架
-- feat(cli) 当发现当前目录下存在 `@malagu/cli` 包，优先使用本地的命令
+- feat(framework) 适配 `cell` 框架
+- feat(cli) 当发现当前目录下存在 `@celljs/cli` 包，优先使用本地的命令
 - feat(cli-runtime) 安装运行时的时候，提供 `quiet` 参数用于控制不输出日志信息
-- feat(cli-runtime) 分别提供 `malagu`、`compression`、`eslint` 模式配置文件，方便开发者一键开启响应功能
+- feat(cli-runtime) 分别提供 `cell`、`compression`、`eslint` 模式配置文件，方便开发者一键开启响应功能
 
 ## 2.5.0
 
@@ -1056,18 +1056,18 @@ malagu:
 
 ## 2.2.1
 
-- feat(cli-common) 支持 info 插件，优化 `malagu info` 命令
+- feat(cli-common) 支持 info 插件，优化 `cell info` 命令
 - feat(lambda-plugin) 添加 info 插件
-- feat(cloud-plugin) 支持 `malagu config --show-profile` 显示账号配置信息
+- feat(cloud-plugin) 支持 `cell config --show-profile` 显示账号配置信息
 - feat(cli-common) 美好日志输出，并支持 banner 自定义设置
-- fix(cli) 修复`malagu config --config-file-alias deploy` 命令不生效问题
+- fix(cli) 修复`cell config --config-file-alias deploy` 命令不生效问题
 
 
 ## 2.1.2
 
-- feat(cli+cloud-plugin) 支持 `malagu config --show` 显示完整配置信息
-- feat(cli-common) 组件配置配置文件支持 yml 和 yaml 两种后缀；模式文件也支持两种格式：`malagu.[mode].yml` 和 `malagu-[mode].yml`
-- feat(cli-common) 支持配置文件别名配置 `malagu config --config-file-alias deploy`，默认总会加载 malagu 别名的配置文件，如 malagu.yml，现在可以额外指定其他别名
+- feat(cli+cloud-plugin) 支持 `cell config --show` 显示完整配置信息
+- feat(cli-common) 组件配置配置文件支持 yml 和 yaml 两种后缀；模式文件也支持两种格式：`cell.[mode].yml` 和 `cell-[mode].yml`
+- feat(cli-common) 支持配置文件别名配置 `cell config --config-file-alias deploy`，默认总会加载 cell 别名的配置文件，如 cell.yml，现在可以额外指定其他别名
 
 ## 2.1.1
 
@@ -1082,7 +1082,7 @@ malagu:
 - fix(scf-plugin) fix InvalidParameter.FormatError
 
 ## 2.0.8
-- feat(node-plugin) add `@malagu/node-plugin` compnent
+- feat(node-plugin) add `@celljs/node-plugin` compnent
 - feat(scf-plugin) 优化 API 网关路由
 - feat(scf-plugin) optimize API gateway routing
 
@@ -1101,27 +1101,27 @@ malagu:
 - feat(cli) 支持属性文件定义运行时
 - feat(parent) 升级 lerna 版本到 4.0.0
 - feat(parent) 升级 axios 版本到 0.24.0
-- feat(static-plugin) 添加插件 `@malagu/static-plugin`
-- feat(frameworks) 添加组件 `@malagu/frameworks`
+- feat(static-plugin) 添加插件 `@celljs/static-plugin`
+- feat(frameworks) 添加组件 `@celljs/frameworks`
 - feat(static-plugin) 优化代码
 - fix(all) fix Dependabot alerts
 - feat(cli) 支持智能适配运行时和模式
 - feat(cloud-plugin) 支持命令行参数输入账号配置信息 (#72)
 - feat(cli + cli-common) 优化模式命令
-- feat(cli) 支持 `malagu config` 命令
+- feat(cli) 支持 `cell config` 命令
 
 - feat(*-adapter) abstracts the logic of construction and deployment into independent components *-plugin to facilitate reuse
 - feat(code-loader-plugin) abstracts code loading and packaging logic into independent components
 - feat(cli-runtime) add `scf` runtime
 - feat(cli) supports property file definition runtime
-- feat(static-plugin) add plugin `@malagu/static-plugin`
-- feat(frameworks) add component `@malagu/frameworks`
+- feat(static-plugin) add plugin `@celljs/static-plugin`
+- feat(frameworks) add component `@celljs/frameworks`
 - feat(static-plugin) optimized code
 - fix(all) fix Dependabot alerts
 - feat(cli) supports smart adaptation of runtime and mode
 - feat(cloud-plugin) supports command line parameters to input account configuration information (#72)
 - feat(cli + cli-common) optimization mode command
-- feat(cli) Support `malagu config` command
+- feat(cli) Support `cell config` command
 
 ## 1.40.1
 
@@ -1144,7 +1144,7 @@ malagu:
 - fix(cos) 修复下载对象错误
 
 ## 1.39.0
-- feat(fc-adapter+scf-adapter) add 'malagu info' command for tencent-scf and aliyun-fc
+- feat(fc-adapter+scf-adapter) add 'cell info' command for tencent-scf and aliyun-fc
 
 ## 1.38.0
 - feat(cli) 优化微服务模板 `microservice`
@@ -1162,14 +1162,14 @@ malagu:
 
 - feat(core) 升级 inversifyjs 版本为 v5.1.1
 - feat(core) 修改 core 模块为静态模块，移除 `auto` 属性配置
-- feat(core+web) 将 pipe 功能移动到 `@malagu/web` 组件
+- feat(core+web) 将 pipe 功能移动到 `@celljs/web` 组件
 - feat(core) `ContainerProvider` 提供一个异步获取容器方法：`asyncProvide`
 - feat(typeorm) 升级 typeorm 版本为 v0.2.37
 - feat(typeorm) 升级 mysql 版本为 v2.18.1
 
 - feat(core) upgrade inversifyjs version to v5.1.1
 - feat(core) modify the core module as a static module, remove the `auto` attribute configuration
-- feat(core+web) moves the pipe function to the `@malagu/web` component
+- feat(core+web) moves the pipe function to the `@celljs/web` component
 - feat(core) `ContainerProvider` provides an asynchronous method to obtain the container: `asyncProvide`
 - feat(typeorm) upgrade typeorm version to v0.2.37
 - feat(mysql) upgrade typeorm version to v2.18.1
@@ -1186,15 +1186,15 @@ malagu:
 ## 1.35.0
 
 - feat(cli-service) 优化 sourcemap 生成策略
-- feat(all) 将 malagu 编译为 ES2017
+- feat(all) 将 cell 编译为 ES2017
 - feat(cli-service) optimize sourcemap generation strategy
-- feat(all) Transpile malagu to ES2017
+- feat(all) Transpile cell to ES2017
 
 
 ## 1.34.1
 
-- fix(serve-static) Fixes that when using the `@malagu/serve-static` component, the front-end build product is forced to be output to the non-memory file system during the local runtime.
-- fix(serve-static) 修复在使用 `@malagu/serve-static` 组件时，本地运行时强制前端构建产物输出到非内存文件系统中。
+- fix(serve-static) Fixes that when using the `@celljs/serve-static` component, the front-end build product is forced to be output to the non-memory file system during the local runtime.
+- fix(serve-static) 修复在使用 `@celljs/serve-static` 组件时，本地运行时强制前端构建产物输出到非内存文件系统中。
 
 ## 1.34.0
 
@@ -1229,10 +1229,10 @@ malagu:
 
 ## v1.30.0
 
-- feat(cli-runtime) Support runtime mode: `malagu runtime install`
-- feat(web) supports the configuration of request body related attributes: `malagu.web.body.limit: 5mb`
-- feat(cli-runtime) 支持请求体相关属性配置：`malagu.web.body.limit: 5mb`
-- feat(cli-runtime) 支持运行时模式: `malagu runtime install`
+- feat(cli-runtime) Support runtime mode: `cell runtime install`
+- feat(web) supports the configuration of request body related attributes: `cell.web.body.limit: 5mb`
+- feat(cli-runtime) 支持请求体相关属性配置：`cell.web.body.limit: 5mb`
+- feat(cli-runtime) 支持运行时模式: `cell runtime install`
 
 ## v1.29.0
 
@@ -1253,15 +1253,15 @@ malagu:
 ## v1.28.0
 
 - feat(cli) supports automatically restarting the application after modifying the property file and the code of various plug-ins. (#44)
-- feat(cli-service) supports `dotenv` file, the `.env` file under the project root is automatically loaded by default, or you can customize the file path through the property `malagu.webpack.dotenvPlugin.path`, the relative path is relative to the project root content. (#46)
-- feat(cli-service) supports `Webpack.DefinePlugin` plug-in, which can be configured through the attribute `malagu.webpack.definePlugin` (#46)
+- feat(cli-service) supports `dotenv` file, the `.env` file under the project root is automatically loaded by default, or you can customize the file path through the property `cell.webpack.dotenvPlugin.path`, the relative path is relative to the project root content. (#46)
+- feat(cli-service) supports `Webpack.DefinePlugin` plug-in, which can be configured through the attribute `cell.webpack.definePlugin` (#46)
 - feat(cli) optimize log output, magic board and code
 - chore: Optimize the build, release and local testing process
 - feat(mvc): add `@Req`, `@Res` Decorator (#45)
 
 - feat(cli) 支持修改属性文件、以及各种插件的代码后自动重启应用。(#44)
-- feat(cli-service) 支持 `dotenv` 文件，默认自动加载项目根下的 `.env` 文件，也可以通过属性 `malagu.webpack.dotenvPlugin.path` 自定义文件路径，相对路径是相对项目根目录。(#46)
-- feat(cli-service) 支持 `Webpack.DefinePlugin` 插件，可以通过属性 `malagu.webpack.definePlugin` 配置 (#46)
+- feat(cli-service) 支持 `dotenv` 文件，默认自动加载项目根下的 `.env` 文件，也可以通过属性 `cell.webpack.dotenvPlugin.path` 自定义文件路径，相对路径是相对项目根目录。(#46)
+- feat(cli-service) 支持 `Webpack.DefinePlugin` 插件，可以通过属性 `cell.webpack.definePlugin` 配置 (#46)
 - feat(cli) 优化日志输出、魔板和代码
 - chore: 优化构建、发布和本地测试流程
 - feat(mvc): 添加 `@Req`, `@Res` 装饰器 (#45)
@@ -1301,7 +1301,7 @@ malagu:
 - feat(faas-adapter+fc-adapter) supports mns topic message queue trigger, which is enabled by the mode attribute `mode: [mns-topic] `. The sample configuration is as follows:
 ```yaml
 mode: [ mns-topic ]
-malagu:
+cell:
   faas-adapter:
     trigger:
       invocationRole: acs:ram::123456:role/app-mns-role
@@ -1316,7 +1316,7 @@ malagu:
 - feat(faas-adapter+fc-adapter) 支持 mns topic 消息队列触发器，通过模式属性 `mode: [ mns-topic ] ` 开启。示例配置如下：
 ```yaml
 mode: [ mns-topic ]
-malagu:
+cell:
   faas-adapter:
     trigger:
       invocationRole: acs:ram::123456:role/app-mns-role
@@ -1373,7 +1373,7 @@ malagu:
 
 ## v1.23.0
 
-- feat(schedule) add `@malagu/shedule` component.
+- feat(schedule) add `@celljs/shedule` component.
 
 ## v1.22.2
 
@@ -1402,7 +1402,7 @@ malagu:
 ## v1.20.6
 
 - fix(cli-common) fix npm peer error
-- feat(cli-service) `malagu.includeModules` defaults to `undefined`
+- feat(cli-service) `cell.includeModules` defaults to `undefined`
 
 ## v1.20.5
 
@@ -1471,17 +1471,17 @@ malagu:
 
 ## v1.18.0
 
-- feat(cli) splits the original `@malagu/cli` command line tool into three parts: `@malagu/cli-common`, `@malagu/cli` and `@malagu/cli-service`. Among them, `@malagu/cli` will no longer rely on a series of heavy dependencies such as webpack, typescript, etc., and move related dependencies to `@malagu/cli-service`. In addition, the webpack plugin supports chain configuration.
+- feat(cli) splits the original `@celljs/cli` command line tool into three parts: `@celljs/cli-common`, `@celljs/cli` and `@celljs/cli-service`. Among them, `@celljs/cli` will no longer rely on a series of heavy dependencies such as webpack, typescript, etc., and move related dependencies to `@celljs/cli-service`. In addition, the webpack plugin supports chain configuration.
 - feat(oss) upgrade oss sdk
-- feat (cli) `malagu.includeModules` default changed to `true`
-- feat (cli) specifies package management tools through `malagu.packager`, currently supports npm and yarn tools, and if no display is specified, the framework will select the appropriate package management tools for the current project environment, giving preference to yarn tools.
-- feat(cli) The consistency of command behavior is maintained whether the global malagu command is executed or local.
+- feat (cli) `cell.includeModules` default changed to `true`
+- feat (cli) specifies package management tools through `cell.packager`, currently supports npm and yarn tools, and if no display is specified, the framework will select the appropriate package management tools for the current project environment, giving preference to yarn tools.
+- feat(cli) The consistency of command behavior is maintained whether the global cell command is executed or local.
 
-- feat(cli) 将原先的 `@malagu/cli` 命令行工具拆分成三部分：`@malagu/cli-common`、`@malagu/cli` 和 `@malagu/cli-service`。其中，`@malagu/cli` 将不再依赖 webpack、typescript 等等一些列重型依赖，将相关的依赖移动到 `@malagu/cli-service` 中。另外，webpack 插件支持链式配置。
+- feat(cli) 将原先的 `@celljs/cli` 命令行工具拆分成三部分：`@celljs/cli-common`、`@celljs/cli` 和 `@celljs/cli-service`。其中，`@celljs/cli` 将不再依赖 webpack、typescript 等等一些列重型依赖，将相关的依赖移动到 `@celljs/cli-service` 中。另外，webpack 插件支持链式配置。
 - feat(oss) 升级 oss sdk
-- feat(cli) `malagu.includeModules` 默认值改为 `true`
-- feat(cli) 通过 `malagu.packager` 指定包管理工具，目前支持 npm 和 yarn 工具，如果没有指定显示指定，框架会更具当前项目环境选择合适包管理工具，优先选择 yarn 工具。
-- feat(cli) 无论是执行全局 malagu 命令，还是局部，都将保持命令行为的一致性。
+- feat(cli) `cell.includeModules` 默认值改为 `true`
+- feat(cli) 通过 `cell.packager` 指定包管理工具，目前支持 npm 和 yarn 工具，如果没有指定显示指定，框架会更具当前项目环境选择合适包管理工具，优先选择 yarn 工具。
+- feat(cli) 无论是执行全局 cell 命令，还是局部，都将保持命令行为的一致性。
 
 ## v1.17.0
 
@@ -1583,10 +1583,10 @@ malagu:
 
 ## v1.15.0
 - feat(cli) add vue related application templates
-- feat(vue) Added `@malagu/vue` component, integrated vue capability
+- feat(vue) Added `@celljs/vue` component, integrated vue capability
 
 - feat(cli) 添加 vue 相关应用模板
-- feat(vue) 添加 `@malagu/vue` 组件，集成 vue 能力
+- feat(vue) 添加 `@celljs/vue` 组件，集成 vue 能力
 
 ## v1.14.0
 - feat(shell) Optimize the display of login status
@@ -1648,13 +1648,13 @@ malagu:
 - feat(core) adds support for multi-tenant, provides `TenantProvider` interface
 - feat(security) provides an implementation of the `TenantProvider` interface
 - feat(cloud) object storage service supports the `copyObject` method
-- feat(cache) adds the `@malagu/cache` component, which integrates `cache-manager`, and provides memory-based storage strategies by default
+- feat(cache) adds the `@celljs/cache` component, which integrates `cache-manager`, and provides memory-based storage strategies by default
 - fix(oss) Fix the problem of incorrect transfer of token when using temporary AKSK
 
 - feat(core) 添加对多租户的支持，提供了 `TenantProvider` 接口
 - feat(security) 提供了 `TenantProvider` 接口的实现
 - feat(cloud) 对象存储服务支持 `copyObject` 方法
-- feat(cache) 添加 `@malagu/cache` 组件，该组件集成了 `cache-manager`，默认提供基于内存的存储策略
+- feat(cache) 添加 `@celljs/cache` 组件，该组件集成了 `cache-manager`，默认提供基于内存的存储策略
 - fix(oss) 修复使用临时 AKSK 时，没有正确传递 Token 问题
 
 ## v1.9.4
@@ -1684,28 +1684,28 @@ malagu:
 - fix(cloud) misspelling
 - fix(faas-adapter) fix the problem that the `include` behavior of the function code configuration `codeUri` does not meet expectations
 - feat(cli) add templates related to file operations based on object storage
-- feat(cli) delete unwanted attributes in the `malagu.yml` file output by the component merge
+- feat(cli) delete unwanted attributes in the `cell.yml` file output by the component merge
 
 - fix(cloud) 拼写错误
 - fix(faas-adapter) 修复函数代码配置 `codeUri` 的 `include` 行为不符合预期问题
 - feat(cli) 添加基于对象存储实现的文件操作相关的模板
-- feat(cli) 删除组件合并输出的 `malagu.yml` 文件中不需要的属性
+- feat(cli) 删除组件合并输出的 `cell.yml` 文件中不需要的属性
 
 ## v1.9.0
 
-- feat(cloud) abstracts a basic cloud computing component `@malagu/cloud`, abstracts unified interfaces and configurations for cloud products of different cloud vendors, developers can use unified interfaces to operate cloud service resources that do not require cloud vendors
-- feat(oss + cos + s3) adds three new components: `@malagu/oss`, `@malagu/cos`, `@malagu/s3`, respectively for the object storage resources of Alibaba Cloud, Tencent Cloud and Amazon Cloud Implementation of the operation interface
-- feat(faas-adapter) adds a new component: `@malagu/faas-adapter`, this component is an adapter summary for FaaS scenarios, and does not need to be implemented by cloud vendors’ Faa adapter extension `@malagu/faas-adapter`
-- feat(faas-adapter) extends the new command: `malagu config`, through which the account is manually configured, and AKSK related information
-- feat(lambda-adapter) add a new component: `@malagu/lambda-adapter`, use Amazon cloud Apigateway + lambda to implement application deployment
-- feat(faas-adapter) deployment related configuration is unified to the configuration of `malagu.faas-adapter` property
+- feat(cloud) abstracts a basic cloud computing component `@celljs/cloud`, abstracts unified interfaces and configurations for cloud products of different cloud vendors, developers can use unified interfaces to operate cloud service resources that do not require cloud vendors
+- feat(oss + cos + s3) adds three new components: `@celljs/oss`, `@celljs/cos`, `@celljs/s3`, respectively for the object storage resources of Alibaba Cloud, Tencent Cloud and Amazon Cloud Implementation of the operation interface
+- feat(faas-adapter) adds a new component: `@celljs/faas-adapter`, this component is an adapter summary for FaaS scenarios, and does not need to be implemented by cloud vendors’ Faa adapter extension `@celljs/faas-adapter`
+- feat(faas-adapter) extends the new command: `cell config`, through which the account is manually configured, and AKSK related information
+- feat(lambda-adapter) add a new component: `@celljs/lambda-adapter`, use Amazon cloud Apigateway + lambda to implement application deployment
+- feat(faas-adapter) deployment related configuration is unified to the configuration of `cell.faas-adapter` property
 
-- feat(cloud) 抽象了一个云计算基础组件 `@malagu/cloud`，对不同的云厂商的云产品抽象统一的接口和配置，开发者可以使用统一的接口操作不用云厂商的云服务资源
-- feat(oss + cos + s3) 添加三个新组件：`@malagu/oss`、`@malagu/cos`、`@malagu/s3`，分别对阿里云、腾讯云和亚马逊云的对象存储资源操作接口的实现
-- feat(faas-adapter) 添加新组件：`@malagu/faas-adapter`，该组件是对 FaaS 场景的适配器抽象，不用云厂商的 FaaS 适配器扩展 `@malagu/faas-adapter` 组件实现
-- feat(faas-adapter) 扩展新的命令：`malagu config`，通过该命令手动配置账号、AKSK 相关的信息
-- feat(lambda-adapter) 添加新组件：`@malagu/lambda-adapter`，使用亚马逊云的 Apigateway + lambda 实现应用部署
-- feat(faas-adapter) 部署相关的配置全部统一到 `malagu.faas-adapter` 属性上配置
+- feat(cloud) 抽象了一个云计算基础组件 `@celljs/cloud`，对不同的云厂商的云产品抽象统一的接口和配置，开发者可以使用统一的接口操作不用云厂商的云服务资源
+- feat(oss + cos + s3) 添加三个新组件：`@celljs/oss`、`@celljs/cos`、`@celljs/s3`，分别对阿里云、腾讯云和亚马逊云的对象存储资源操作接口的实现
+- feat(faas-adapter) 添加新组件：`@celljs/faas-adapter`，该组件是对 FaaS 场景的适配器抽象，不用云厂商的 FaaS 适配器扩展 `@celljs/faas-adapter` 组件实现
+- feat(faas-adapter) 扩展新的命令：`cell config`，通过该命令手动配置账号、AKSK 相关的信息
+- feat(lambda-adapter) 添加新组件：`@celljs/lambda-adapter`，使用亚马逊云的 Apigateway + lambda 实现应用部署
+- feat(faas-adapter) 部署相关的配置全部统一到 `cell.faas-adapter` 属性上配置
 
 ## v1.8.1
 
@@ -1714,19 +1714,19 @@ malagu:
 
 ## v1.8.0
 
-- feat(cli) add the `malagu.webpack.sourceMaploaderExclude` property to ignore the warning message that the source map cannot be loaded
-- feat(cli) build and release code also generates the `malagu.yml` file to the `.malagu` directory, which can be ignored by the `codeUri` property of the function. The default is to ignore the upload of the `malagu.yml` file to prevent some private information Give way
-- feat(fc-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `malagu.yml` file
-- feat(scf-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `malagu.yml` file
-- feat(puppeteer) add @malagu/puppeteer component
+- feat(cli) add the `cell.webpack.sourceMaploaderExclude` property to ignore the warning message that the source map cannot be loaded
+- feat(cli) build and release code also generates the `cell.yml` file to the `.cell` directory, which can be ignored by the `codeUri` property of the function. The default is to ignore the upload of the `cell.yml` file to prevent some private information Give way
+- feat(fc-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `cell.yml` file
+- feat(scf-adapter) adds the `codeUri` property configuration to the function, and the default value is to ignore the upload of the `cell.yml` file
+- feat(puppeteer) add @celljs/puppeteer component
 - feat(cli) add `puppeteer` application template
 - feat(mvc) adds the file view `FileView` to facilitate the implementation of file download related APIs. It also provides a simplified decorator `@File()`, and also provides `@Text()`, `@Json()` , `@Html()` decorator simplifies the ability to use different types of views
 
-- feat(cli) 添加 `malagu.webpack.sourceMaploaderExclude` 属性，用于忽略 source map 加载不到警告信息
-- feat(cli) 构建发布代码也生成 `malagu.yml` 文件到 `.malagu` 目录，可以通过函数的 `codeUri` 属性进行忽略，默认是忽略 `malagu.yml` 文件上传的，防止一些私密信息泄露
-- feat(fc-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `malagu.yml` 文件的上传
-- feat(scf-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `malagu.yml` 文件的上传
-- feat(puppeteer) 添加 @malagu/puppeteer 组件
+- feat(cli) 添加 `cell.webpack.sourceMaploaderExclude` 属性，用于忽略 source map 加载不到警告信息
+- feat(cli) 构建发布代码也生成 `cell.yml` 文件到 `.cell` 目录，可以通过函数的 `codeUri` 属性进行忽略，默认是忽略 `cell.yml` 文件上传的，防止一些私密信息泄露
+- feat(fc-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `cell.yml` 文件的上传
+- feat(scf-adapter) 为函数添加 `codeUri` 属性配置，且默认值为忽略掉 `cell.yml` 文件的上传
+- feat(puppeteer) 添加 @celljs/puppeteer 组件
 - feat(cli) 添加 `puppeteer` 应用模板
 - feat(mvc) 添加文件视图 `FileView`，方便实现文件下载相关 API，同时也提供简化的装饰器 `@File()`，另外也提供了 `@Text()`、`@Json()`、`@Html()` 装饰器简化使用不同类型视图能力
 
@@ -1734,9 +1734,9 @@ malagu:
 
 - feat(core) optimizes the AOP user interface and provides the decorator `@Aspect()`
 - feat(core) `@Component()` Add `sysTags` for classifying object labels injected into the container to facilitate AOP control of the intercept scope based on `sysTags`
-- feat(core) `@Component() ` Add default values for configuration properties: `malagu.annotation.
-- feat(core) Adds AOP global switch control: `malagu.aop.enabled`, enabled by default
-- feat(security) Adds secure intercept access control: `malagu.security.aop.pointcut`, which defaults to `Endpoint`, which means intercept all external endpoint processors
+- feat(core) `@Component() ` Add default values for configuration properties: `cell.annotation.
+- feat(core) Adds AOP global switch control: `cell.aop.enabled`, enabled by default
+- feat(security) Adds secure intercept access control: `cell.security.aop.pointcut`, which defaults to `Endpoint`, which means intercept all external endpoint processors
 - feat(security) adds front-end abstraction for easy integration with SPA.
 - feat(security) Adds a user info fetch endpoint, defaults to `/userinfo`.
 - fix(oauth2-client) Fix the problem of not being able to get user information based on OAuth2.0 authentication.
@@ -1746,9 +1746,9 @@ malagu:
 
 - feat(core) 优化 AOP 用户接口，提供装饰器`@Aspect()`
 - feat(core) `@Component()` 添加 `sysTags`，用于给注入到容器的对象标签分类，方便 AOP 基于 `sysTags` 控制拦截范围
-- feat(core) `@Component()` 添加默认值配置属性：`malagu.annotation.Component`
-- feat(core) 添加 AOP 全局开关控制：`malagu.aop.enabled`，默认开启
-- feat(security) 添加安全拦截访问控制：`malagu.security.aop.pointcut`，默认值为 `Endpoint`，表示拦截所有的对外端点处理器 
+- feat(core) `@Component()` 添加默认值配置属性：`cell.annotation.Component`
+- feat(core) 添加 AOP 全局开关控制：`cell.aop.enabled`，默认开启
+- feat(security) 添加安全拦截访问控制：`cell.security.aop.pointcut`，默认值为 `Endpoint`，表示拦截所有的对外端点处理器 
 - feat(security) 添加前端抽象，方便与 SPA 集成使用
 - feat(security) 添加获取用户信息端点，默认为 `/userinfo`
 - fix(oauth2-client) 修复基于 OAuth2.0 认证无法获取用户信息问题
@@ -1817,13 +1817,13 @@ malagu:
 - feat(core) Decorator `@Component()` supports name, tag, default, when attributes
 - feat(core) Add new decorators `@Named()`, `@Tagged()`, `@TargetName()`, `@PostConstruct()`
 - feat(rpc) Supports error converter ʻErrorConverter`
-- feat(cli) `.malagu/backend/malagu.yml` and `.malagu/backend/malagu.yml` obtained by merging all components will only be generated during the local development process
+- feat(cli) `.cell/backend/cell.yml` and `.cell/backend/cell.yml` obtained by merging all components will only be generated during the local development process
 
 - feat(core) 升级 vscode-ws-jsonrpc 版本
 - feat(core) 装饰器 `@Component()` 支持 name、tag、default、when 属性
 - feat(core) 添加新的装饰器 `@Named()`、`@Tagged()`、`@TargetName()`、`@PostConstruct()`
 - feat(rpc) 支持错误转换器 `ErrorConverter`
-- feat(cli) 合并所有组件得到的 `.malagu/backend/malagu.yml` 和 `.malagu/backend/malagu.yml` 只会在本地开发过程才会生成
+- feat(cli) 合并所有组件得到的 `.cell/backend/cell.yml` 和 `.cell/backend/cell.yml` 只会在本地开发过程才会生成
 
 **Breaking Changes:**
 - feat(core) 装饰器 `@Optional()` 必须得带小括号
@@ -1902,13 +1902,13 @@ malagu:
 
 ## v0.0.43
 
-- feat(cli) `malagu init` command supports specifying template options, you can specify the built-in template name and remote GitHub address, such as: `malagu init demo fc-backend-app` or `malagu init demo git@github.com:cellbang/cellbang-site.git`
-- feat(widget+shell) component property change: `malagu.widget.locales` changed to `malagu.locales`
-- feat(widget) component property change: `malagu.widget.themes` changed to `malagu.themes`
+- feat(cli) `cell init` command supports specifying template options, you can specify the built-in template name and remote GitHub address, such as: `cell init demo fc-backend-app` or `cell init demo git@github.com:cellbang/cellbang-site.git`
+- feat(widget+shell) component property change: `cell.widget.locales` changed to `cell.locales`
+- feat(widget) component property change: `cell.widget.themes` changed to `cell.themes`
 
-- feat(cli) `malagu init` 命令支持指定模板选项，可以指定内置模板名称和远端 GitHub 地址，如：`malagu init demo fc-backend-app` 或者 `malagu init demo git@github.com:cellbang/cellbang-site.git`
-- feat(widget+shell) 组件属性变更：`malagu.widget.locales` 变更为 `malagu.locales`
-- feat(widget) 组件属性变更：`malagu.widget.themes` 变更为 `malagu.themes` 
+- feat(cli) `cell init` 命令支持指定模板选项，可以指定内置模板名称和远端 GitHub 地址，如：`cell init demo fc-backend-app` 或者 `cell init demo git@github.com:cellbang/cellbang-site.git`
+- feat(widget+shell) 组件属性变更：`cell.widget.locales` 变更为 `cell.locales`
+- feat(widget) 组件属性变更：`cell.widget.themes` 变更为 `cell.themes` 
 
 ## v0.0.42
 
@@ -1989,7 +1989,7 @@ malagu:
 
 ## v0.0.32
 - The feat(cli) compilation process supports progress display
-- The local operation of feat(cli) disables the PWA function by default, which can be manually turned on through malagu.webpack.workboxWebpackPlugin.generateInDevMode configuration, and the PWA function will be automatically turned on when publishing
+- The local operation of feat(cli) disables the PWA function by default, which can be manually turned on through cell.webpack.workboxWebpackPlugin.generateInDevMode configuration, and the PWA function will be automatically turned on when publishing
 - feat(cli) admin-app template update
 - feat(core) optimize online and local log levels
 - feat(widget) completes the design and implementation of the first version of the widget. The widget provides the ability to dynamically assemble, configure and expand the front-end page, and it is also the basic ability of the future micro-front-end and visualization
@@ -1999,7 +1999,7 @@ malagu:
 - feat (cli) template supports github actions configuration
 
 - feat(cli) 编译构建过程支持进度显示
-- feat(cli) 本地运行默认关闭 PWA 功能，可以通过 malagu.webpack.workboxWebpackPlugin.generateInDevMode 配置手动开启，发布的时候会自动开启 PWA 功能
+- feat(cli) 本地运行默认关闭 PWA 功能，可以通过 cell.webpack.workboxWebpackPlugin.generateInDevMode 配置手动开启，发布的时候会自动开启 PWA 功能
 - feat(cli) admin-app 模板更新
 - feat(core) 优化线上和本地日志级别
 - feat(widget) 完成 widget 第一版设计与实现，通过 widget 提供前端页面的动态组装、配置和扩展的能力，同时也是未来微前端和可视化的基础能力
@@ -2033,8 +2033,8 @@ malagu:
 
 ## v0.0.27
 
-- fix(cli) Fix malagu init command execution failure
-- fix(cli) 修复 malagu init 命令执行失败
+- fix(cli) Fix cell init command execution failure
+- fix(cli) 修复 cell init 命令执行失败
 
 ## v0.0.26
 
@@ -2042,19 +2042,19 @@ malagu:
 
 ## v0.0.25
 - feat(cli) optimizes command line execution speed by loading modules on demand
-- feat(core) front-end application is no longer directly in the body, and provides a div container with an id of malagu.hostDomId
+- feat(core) front-end application is no longer directly in the body, and provides a div container with an id of cell.hostDomId
 - feat(cli) provides a default html template, if the index.html file exists in the project root directory, it will overwrite the default provided template
 - feat(serve-static) defines two component attributes: path and apiPath, path matches the front-end route, and apiPath matches the back-end route
 - feat(cli) adds the base tag to the default html template to allow the resources in html to be loaded by absolute routing
-- feat(cli) serve, build and deploy add parameter entry and options -t, --targets uniformly, support non-malagu framework operation, build and deployment
+- feat(cli) serve, build and deploy add parameter entry and options -t, --targets uniformly, support non-cell framework operation, build and deployment
 - feat(cli) build command adds options -o, --output, custom code output location
 
 - feat(cli) 通过按需加载模块优化命令行执行速度
-- feat(core) 前端应用不再直接 body 里面，提供了一个 id 为 malagu.hostDomId 的 div 容器
+- feat(core) 前端应用不再直接 body 里面，提供了一个 id 为 cell.hostDomId 的 div 容器
 - feat(cli) 提供一个默认的 html 模板，如果项目根目录存在 index.html 文件，会覆盖默认提供的模板
 - feat(serve-static) 定义了两个组件属性：path 和 apiPath，path 匹配的前端路由，而 apiPath 匹配的是后端路由
 - feat(cli) 默认 html 模板中添加 base 标签，让 html 中的资源以绝对路由的方式加载
-- feat(cli) serve、build 和 deploy 统一添加参数 entry 和选项 -t, --targets，支持非 malagu 框架运行、构建和部署
+- feat(cli) serve、build 和 deploy 统一添加参数 entry 和选项 -t, --targets，支持非 cell 框架运行、构建和部署
 - feat(cli) build 命令添加选项 -o, --output，自定义代码输出位置
 
 
@@ -2090,13 +2090,13 @@ malagu:
 
 ## v0.0.22
 
-- feat(fc-adpater) Optimized the default value of malagu.server.endpoint
+- feat(fc-adpater) Optimized the default value of cell.server.endpoint
 - feat(cli) The sample-app template adds serve-static dependencies
 - feat(fc-adpater) Optimized configHooks logic
 
 ## v0.0.21
 
-- fix(fc-adapter) Fix malagu.server.path default value
+- fix(fc-adapter) Fix cell.server.path default value
 - fix(fc-adapter) Delete function initialization function entry
 - fix(fc-adapter) Fix function handler path
 

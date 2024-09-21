@@ -1,6 +1,6 @@
 import { METADATA_KEY } from '../constants';
 import { CronJobOptions } from '../registry/registry-protocol';
-import { Component, ComponentId, ComponentOption, parseComponentOption } from '@malagu/core';
+import { Component, ComponentId, ComponentOption, parseComponentOption } from '@celljs/core';
 
 export const SCHEDULER = Symbol('Scheduler');
 

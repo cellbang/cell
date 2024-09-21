@@ -1,3 +1,3 @@
 import './index';
-import { autoBind } from '@malagu/core';
+import { autoBind } from '@celljs/core';
 export const MycliModule = autoBind();

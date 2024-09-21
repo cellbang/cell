@@ -1,9 +1,9 @@
 import { AuthorizedClientService, AuthorizeRequest, AuthorizedClient, AuthorizedClientProvider, AuthorizationContext, AuthorizedClientManager,
     ContextAttributesMapper, AuthorizationSuccessHandler, AuthorizationFailureHandler } from './authorization-protocol';
-import { Component, Autowired } from '@malagu/core';
+import { Component, Autowired } from '@celljs/core';
 import { ClientRegistrationManager } from '../registration';
 import { ok } from 'assert';
-import { OAuth2AuthorizationError } from '@malagu/oauth2-core';
+import { OAuth2AuthorizationError } from '@celljs/oauth2-core';
 
 @Component(AuthorizedClientService)
 export class DefaultAuthorizedClientService implements AuthorizedClientService {

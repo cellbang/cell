@@ -1,0 +1,8 @@
+cell:
+  webpack:
+    compressionWebpackPlugin:
+      disable: false
+  serve-static:
+    options:
+      headers:
+        Content-Encoding: '${cell.webpack.compressionWebpackPlugin.disable || cliContext.dev ? undefined : "gzip"}'

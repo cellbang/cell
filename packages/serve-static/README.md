@@ -1,1 +1,1 @@
-# Malagu - Serve Static Component
+# Cell - Serve Static Component
