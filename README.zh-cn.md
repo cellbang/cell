@@ -3,14 +3,12 @@
 
 ![Cell Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Cell%20Logo%20Green.svg) 
 
-# [Cell](https://cell.cellbang.com/) 
+# [Cell](https://malagu.cellbang.com/) 
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/cell)
-[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/cell)
-[![star](https://gitee.com/cellbang/cell/badge/star.svg?theme=dark)](https://gitee.com/cellbang/cell)
-
-[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://cloudstudio.net/templates/1vrwujau96o)
+[![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![star](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
 
 Cell 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐进式应用框架。
 

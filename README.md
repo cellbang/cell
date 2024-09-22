@@ -1,12 +1,12 @@
 English | [简体中文](./README.zh-cn.md)
 
 ![Cell Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Cell%20Logo%20Green.svg) 
-# [Cell](https://cell.cellbang.com/) 
+# [Cell](https://malagu.cellbang.com/) 
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/cell)
-[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/cell)
-[![star](https://gitee.com/cellbang/cell/badge/star.svg?theme=dark)](https://gitee.com/cellbang/cell)
+[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![star](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
 
 Cell is a Serverless First, componentized, platform-independent progressive application framework based on TypeScript.
 
