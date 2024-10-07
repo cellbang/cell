@@ -4,7 +4,7 @@ import { MimeTypeUtils } from './mime-type-util';
 export class MimeType {
     private static readonly WILDCARD_TYPE = '*';
     private static readonly PARAM_CHARSET = 'charset';
-    private static TOKEN: Set<number>;
+    private static TOKEN: Set<number> = new Set();
 
     private readonly type: string;
     private readonly subtype: string;
