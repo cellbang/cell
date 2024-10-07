@@ -61,9 +61,9 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name != 'schedule' # We still publish the manually dispatched workflows: 'workflow_dispatch'.
     runs-on: ubuntu-18.04
 
-    The current approach is silly. We should be smarter and use `actions/upload-artifact` and `actions/download-artifact` instead of rebuilding
-    everything from scratch again. (git checkout, Node.js install, yarn, etc.) It was not possible to share artifacts on Travis CI without an
-    external storage (such as S3), so we did rebuild everything before the npm publish. We should overcome this limitation with GH Actions.
+    # The current approach is silly. We should be smarter and use `actions/upload-artifact` and `actions/download-artifact` instead of rebuilding
+    # everything from scratch again. (git checkout, Node.js install, yarn, etc.) It was not possible to share artifacts on Travis CI without an
+    # external storage (such as S3), so we did rebuild everything before the npm publish. We should overcome this limitation with GH Actions.
 
     steps:
       - name: Checkout

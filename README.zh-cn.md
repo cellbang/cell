@@ -8,6 +8,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
 [![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![Build Status](https://github.com/cellbang/cell/workflows/Build/badge.svg?branch=master)](https://github.com/cellbang/cell/actions?query=branch%3Amaster+event%3Apush+event%3Aschedule)
 [![star](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
 
 Cell 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐进式应用框架。
