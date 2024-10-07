@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
@@ -25,5 +26,43 @@
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../../cloud-packages/scf-adapter"
+    },
+    {
+      "path": "../../dev-packages/cli"
+    },
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/oauth2-client"
+    },
+    {
+      "path": "../../packages/oauth2-core"
+    },
+    {
+      "path": "../../packages/rpc"
+    },
+    {
+      "path": "../../packages/security"
+    },
+    {
+      "path": "../../packages/serve-static"
+    },
+    {
+      "path": "../../packages/typeorm"
+    },
+    {
+      "path": "../../packages/web"
+    },
+    {
+      "path": "../../ui-packages/grommet"
+    },
+    {
+      "path": "../../ui-packages/react"
+    }
   ]
 }

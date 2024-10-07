@@ -1,0 +1,26 @@
+{
+  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "compilerOptions": {
+    "target": "es6",
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/web"
+    },
+    {
+      "path": "../cloud"
+    },
+    {
+      "path": "../faas-adapter"
+    }
+  ]
+}

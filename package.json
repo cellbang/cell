@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "engines": {
     "yarn": ">=1.7.0 <2",
-    "node": ">=16"
+    "node": ">=18"
   },
   "resolutions": {
     "**/@types/node": "18"
@@ -18,7 +18,7 @@
     "chai-string": "^1.4.0",
     "lerna": "^5.6.2",
     "nx": "^14.4.3",
-    "typedoc": "^0.24.8",
+    "typedoc": "^0.26.8",
     "typedoc-plugin-external-module-map": "~1.3.2",
     "typedoc-plugin-remove-references": "^0.0.6"
   },
@@ -27,8 +27,8 @@
     "prepare": "yarn run prepare:references && yarn run prepare:build",
     "prepare:references": "node scripts/compile-references.js",
     "prepare:build": "yarn build && yarn run lint",
-    "build": "tsc -b configs/root-compilation.tsconfig.json",
-    "watch": "tsc -b configs/root-compilation.tsconfig.json -w",
+    "build": "tsc -b",
+    "watch": "tsc -b -w --preserveWatchOutput",
     "clean": "yarn lint:clean && lerna run clean",
     "build:clean": "lerna run prepare",
     "lint": "lerna run lint",

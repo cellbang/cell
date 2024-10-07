@@ -1,0 +1,31 @@
+{
+  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../http"
+    },
+    {
+      "path": "../oauth2-core"
+    },
+    {
+      "path": "../oauth2-jose"
+    },
+    {
+      "path": "../security"
+    },
+    {
+      "path": "../web"
+    }
+  ]
+}

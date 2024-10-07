@@ -1,0 +1,28 @@
+{
+  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/security"
+    },
+    {
+      "path": "../grommet"
+    },
+    {
+      "path": "../react"
+    },
+    {
+      "path": "../widget"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import { Autowired, Component } from '@celljs/core';
-import { HttpHeaders } from '@celljs/web';
+import { HttpHeaders } from '@celljs/http';
 import { Context, Middleware, HTTP_MIDDLEWARE_PRIORITY } from '@celljs/web/lib/node';
 import { AuthenticationError } from './error';
 import { JwtService } from '@celljs/jwt'

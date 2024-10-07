@@ -11,6 +11,9 @@
 import { Media } from '../chat';
 import { Observable } from 'rxjs';
 
+export const Model = Symbol('Model');
+export const StreamingModel = Symbol('StreamingModel');
+
 /**
  * Interface representing the customizable options for AI model interactions. This marker
  * interface allows for the specification of various settings and parameters that can

@@ -21,7 +21,7 @@
     "@celljs/security": "{{ version }}",
     "@celljs/serve-static": "{{ version }}",
     "@celljs/typeorm": "{{ version }}",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "^11.3.0",
     "querystring": "^0.2.1",
     "request-ip": "^3.3.0",
     "grommet-icons": "^4.7.0",

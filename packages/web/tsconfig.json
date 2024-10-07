@@ -1,0 +1,22 @@
+{
+  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../dev-packages/cli-service"
+    },
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../http"
+    }
+  ]
+}

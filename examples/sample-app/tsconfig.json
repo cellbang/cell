@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": true,
@@ -26,5 +27,25 @@
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../../dev-packages/cli"
+    },
+    {
+      "path": "../../dev-packages/cli-service"
+    },
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/rpc"
+    },
+    {
+      "path": "../../packages/serve-static"
+    },
+    {
+      "path": "../../ui-packages/react"
+    }
   ]
 }

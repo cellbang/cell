@@ -13,7 +13,7 @@
     "@celljs/core": "{{ version }}",
     "@celljs/mvc": "{{ version }}",
     "@celljs/typeorm": "{{ version }}",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "^11.3.0",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {

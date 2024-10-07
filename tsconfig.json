@@ -1,302 +1,226 @@
 {
   "extends": "@celljs/component/configs/base.tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@celljs/core": [
-        "packages/core/src/common"
-      ],
-      "@celljs/core/lib/*": [
-        "packages/core/src/*"
-      ],
-      "@celljs/web": [
-        "packages/web/src/common"
-      ],
-      "@celljs/web/lib/*": [
-        "packages/web/src/*"
-      ],
-      "@celljs/securtiy": [
-        "packages/securtiy/src/common"
-      ],
-      "@celljs/securtiy/lib/*": [
-        "packages/securtiy/src/*"
-      ],
-      "@celljs/widget": [
-        "packages/widget/src/browser"
-      ],
-      "@celljs/react": [
-        "packages/react/src/browser"
-      ],
-      "@celljs/cloud": [
-        "packages/cloud/src/common"
-      ],
-      "@celljs/faas-adapter/lib/hooks": [
-        "packages/faas-adapter/src/hooks"
-      ],
-      "@celljs/cli-common/lib/*": [
-        "dev-packages/cli-common/src/*"
-      ],
-      "@celljs/cli-service/lib/*": [
-        "dev-packages/cli-service/src/*"
-      ],
-      "@celljs/cli/lib/*": [
-        "dev-packages/cli/src/*"
-      ],
-      "@celljs/compression/lib/*": [
-        "dev-packages/compression/src/*"
-      ],
-      "@celljs/eslint/lib/*": [
-        "dev-packages/eslint/src/*"
-      ],
-      "@celljs/ext-scripts/*": [
-        "dev-packages/ext-scripts/*"
-      ],
-      "@celljs/pwa/lib/*": [
-        "dev-packages/pwa/src/*"
-      ],
-      "@celljs/antd/lib/*": [
-        "ui-packages/antd/src/*"
-      ],
-      "@celljs/authing/lib/*": [
-        "packages/authing/src/*"
-      ],
-      "@celljs/cache/lib/*": [
-        "packages/cache/src/*"
-      ],
-      "@celljs/cloud/lib/*": [
-        "cloud-packages/cloud/src/*"
-      ],
-      "@celljs/cos/lib/*": [
-        "cloud-packages/cos/src/*"
-      ],
-      "@celljs/express-adapter/lib/*": [
-        "packages/express-adapter/src/*"
-      ],
-      "@celljs/faas-adapter/lib/*": [
-        "cloud-packages/faas-adapter/src/*"
-      ],
-      "@celljs/fc-adapter/lib/*": [
-        "cloud-packages/fc-adapter/src/*"
-      ],
-      "@celljs/grommet/lib/*": [
-        "ui-packages/grommet/src/*"
-      ],
-      "@celljs/lambda-adapter/lib/*": [
-        "cloud-packages/lambda-adapter/src/*"
-      ],
-      "@celljs/logger/lib/*": [
-        "packages/logger/src/*"
-      ],
-      "@celljs/material-ui/lib/*": [
-        "ui-packages/material-ui/src/*"
-      ],
-      "@celljs/mvc/lib/*": [
-        "packages/mvc/src/*"
-      ],
-      "@celljs/oauth2-client/lib/*": [
-        "packages/oauth2-client/src/*"
-      ],
-      "@celljs/oauth2-core/lib/*": [
-        "packages/oauth2-core/src/*"
-      ],
-      "@celljs/oauth2-jose/lib/*": [
-        "packages/oauth2-jose/src/*"
-      ],
-      "@celljs/oidc-provider/lib/*": [
-        "packages/oidc-provider/src/*"
-      ],
-      "@celljs/oss/lib/*": [
-        "cloud-packages/oss/src/*"
-      ],
-      "@celljs/puppeteer/lib/*": [
-        "packages/puppeteer/src/*"
-      ],
-      "@celljs/react/lib/*": [
-        "ui-packages/react/src/*"
-      ],
-      "@celljs/rpc/lib/*": [
-        "packages/rpc/src/*"
-      ],
-      "@celljs/s3/lib/*": [
-        "cloud-packages/s3/src/*"
-      ],
-      "@celljs/scf-adapter/lib/*": [
-        "cloud-packages/scf-adapter/src/*"
-      ],
-      "@celljs/schedule/lib/*": [
-        "packages/schedule/src/*"
-      ],
-      "@celljs/security/lib/*": [
-        "packages/security/src/*"
-      ],
-      "@celljs/serve-static/lib/*": [
-        "packages/serve-static/src/*"
-      ],
-      "@celljs/shell/lib/*": [
-        "ui-packages/shell/src/*"
-      ],
-      "@celljs/typeorm/lib/*": [
-        "packages/typeorm/src/*"
-      ],
-      "@celljs/vercel-adapter/lib/*": [
-        "cloud-packages/vercel-adapter/src/*"
-      ],
-      "@celljs/vue/lib/*": [
-        "ui-packages/vue/src/*"
-      ],
-      "@celljs/widget/lib/*": [
-        "ui-packages/widget/src/*"
-      ],
-      "@celljs/example-backend-app/*": [
-        "examples/backend-app/*"
-      ],
-      "@celljs/example-sample-app/*": [
-        "examples/sample-app/*"
-      ],
-      "@celljs/cli-runtime/lib/*": [
-        "dev-packages/cli-runtime/src/*"
-      ],
-      "@celljs/example-schedule/*": [
-        "examples/schedule/*"
-      ],
-      "@celljs/example-accounts/*": [
-        "examples/accounts/*"
-      ],
-      "@celljs/cloud-plugin/lib/*": [
-        "plugins/cloud-plugin/src/*"
-      ],
-      "@celljs/code-loader-plugin/lib/*": [
-        "plugins/code-loader-plugin/src/*"
-      ],
-      "@celljs/fc-plugin/lib/*": [
-        "plugins/fc-plugin/src/*"
-      ],
-      "@celljs/lambda-plugin/lib/*": [
-        "plugins/lambda-plugin/src/*"
-      ],
-      "@celljs/scf-plugin/lib/*": [
-        "plugins/scf-plugin/src/*"
-      ],
-      "@celljs/frameworks/lib/*": [
-        "dev-packages/frameworks/src/*"
-      ],
-      "@celljs/static-plugin/lib/*": [
-        "plugins/static-plugin/src/*"
-      ],
-      "@celljs/static-plugin/*": [
-        "dev-packages/static-plugin/*"
-      ],
-      "@celljs/node-plugin/lib/*": [
-        "plugins/node-plugin/src/*"
-      ],
-      "@celljs/example-backend-app1/*": [
-        "examples/backend-app/*"
-      ],
-      "@celljs/example-backend-app2/*": [
-        "examples/backend-app/*"
-      ],
-      "@celljs/example-koa-app/*": [
-        "examples/koa-app/*"
-      ],
-      "@celljs/example-security-app/*": [
-        "examples/security-app/*"
-      ],
-      "@celljs/next-plugin/lib/*": [
-        "plugins/next-plugin/src/*"
-      ],
-      "@celljs/example-nextjs-app/*": [
-        "examples/nextjs-app/*"
-      ],
-      "@celljs/adonis-plugin/lib/*": [
-        "plugins/adonis-plugin/src/*"
-      ],
-      "@celljs/qq-guild-bot-adapter/lib/*": [
-        "packages/qq-guild-bot-adapter/src/*"
-      ],
-      "@celljs/example-qq-guild-bot-app/*": [
-        "examples/qq-guild-bot-app/*"
-      ],
-      "@celljs/example-standalone-app/*": [
-        "examples/standalone-app/*"
-      ],
-      "@celljs/example-mycli/*": [
-        "examples/mycli/*"
-      ],
-      "@celljs/node-runtime-plugin/lib/*": [
-        "plugins/node-runtime-plugin/src/*"
-      ],
-      "@celljs/config/lib/*": [
-        "packages/config/src/*"
-      ],
-      "@celljs/component/*": [
-        "dev-packages/component/*"
-      ],
-      "database-app/*": [
-        "examples/database-app/*"
-      ],
-      "@celljs/elasticsearch/lib/*": [
-        "packages/elasticsearch/src/*"
-      ],
-      "@celljs/testing/lib/*": [
-        "dev-packages/testing/src/*"
-      ],
-      "admin-app/*": [
-        "examples/admin-app/*"
-      ],
-      "@celljs/jwt/lib/*": [
-        "packages/jwt/src/*"
-      ],
-      "@celljs/example-jwt-app/*": [
-        "examples/jwt-app/*"
-      ],
-      "adonis-app/*": [
-        "examples/adonis-app/*"
-      ],
-      "@celljs/python-plugin/lib/*": [
-        "plugins/python-plugin/src/*"
-      ],
-      "@celljs/example-admin-app/*": [
-        "examples/admin-app/*"
-      ],
-      "@celljs/example-adonis-app/*": [
-        "examples/adonis-app/*"
-      ],
-      "@celljs/example-prisma-app/*": [
-        "examples/prisma-app/*"
-      ],
-      "@celljs/example-docker/*": [
-        "examples/docker-app/*"
-      ],
-      "@celljs/example-docker-app/*": [
-        "examples/docker-app/*"
-      ],
-      "@celljs/rpc-core/lib/*": [
-        "packages/rpc-core/src/*"
-      ],
-      "nest-app/*": [
-        "examples/nest-app/*"
-      ],
-      "@celljs/fc3-plugin/lib/*": [
-        "plugins/fc3-plugin/src/*"
-      ],
-      "@celljs/ai-core/lib/*": [
-        "ai-packages/ai-core/src/*"
-      ],
-      "@celljs/http/lib/*": [
-        "packages/http/src/*"
-      ],
-      "@celljs/retry/lib/*": [
-        "packages/retry/src/*"
-      ]
-    }
+    "composite": true,
+    "allowJs": true
   },
-  "include": [
-    "dev-packages/*/src",
-    "packages/*/src",
-    "examples/*/test",
-    "plugins/*/src",
-    "packages/cache/src/node/delegating-cache-manager.ts"
+  "include": [],
+  "references": [
+    {
+      "path": "ai-packages/ai-core"
+    },
+    {
+      "path": "ai-packages/ai-ollama"
+    },
+    {
+      "path": "cloud-packages/cloud"
+    },
+    {
+      "path": "cloud-packages/cos"
+    },
+    {
+      "path": "cloud-packages/faas-adapter"
+    },
+    {
+      "path": "cloud-packages/fc-adapter"
+    },
+    {
+      "path": "cloud-packages/lambda-adapter"
+    },
+    {
+      "path": "cloud-packages/oss"
+    },
+    {
+      "path": "cloud-packages/s3"
+    },
+    {
+      "path": "cloud-packages/scf-adapter"
+    },
+    {
+      "path": "cloud-packages/vercel-adapter"
+    },
+    {
+      "path": "dev-packages/cli"
+    },
+    {
+      "path": "dev-packages/cli-common"
+    },
+    {
+      "path": "dev-packages/cli-runtime"
+    },
+    {
+      "path": "dev-packages/cli-service"
+    },
+    {
+      "path": "dev-packages/compression"
+    },
+    {
+      "path": "dev-packages/eslint"
+    },
+    {
+      "path": "dev-packages/frameworks"
+    },
+    {
+      "path": "dev-packages/pwa"
+    },
+    {
+      "path": "dev-packages/testing"
+    },
+    {
+      "path": "examples/accounts"
+    },
+    {
+      "path": "examples/admin-app"
+    },
+    {
+      "path": "examples/adonis-app"
+    },
+    {
+      "path": "examples/backend-app"
+    },
+    {
+      "path": "examples/docker-app"
+    },
+    {
+      "path": "examples/jwt-app"
+    },
+    {
+      "path": "examples/mycli"
+    },
+    {
+      "path": "examples/prisma-app"
+    },
+    {
+      "path": "examples/sample-app"
+    },
+    {
+      "path": "examples/schedule"
+    },
+    {
+      "path": "examples/security-app"
+    },
+    {
+      "path": "examples/standalone-app"
+    },
+    {
+      "path": "packages/cache"
+    },
+    {
+      "path": "packages/config"
+    },
+    {
+      "path": "packages/core"
+    },
+    {
+      "path": "packages/elasticsearch"
+    },
+    {
+      "path": "packages/express-adapter"
+    },
+    {
+      "path": "packages/http"
+    },
+    {
+      "path": "packages/jwt"
+    },
+    {
+      "path": "packages/logger"
+    },
+    {
+      "path": "packages/mvc"
+    },
+    {
+      "path": "packages/oauth2-client"
+    },
+    {
+      "path": "packages/oauth2-core"
+    },
+    {
+      "path": "packages/oauth2-jose"
+    },
+    {
+      "path": "packages/oidc-provider"
+    },
+    {
+      "path": "packages/puppeteer"
+    },
+    {
+      "path": "packages/retry"
+    },
+    {
+      "path": "packages/rpc"
+    },
+    {
+      "path": "packages/rpc-core"
+    },
+    {
+      "path": "packages/schedule"
+    },
+    {
+      "path": "packages/security"
+    },
+    {
+      "path": "packages/serve-static"
+    },
+    {
+      "path": "packages/typeorm"
+    },
+    {
+      "path": "packages/web"
+    },
+    {
+      "path": "plugins/adonis-plugin"
+    },
+    {
+      "path": "plugins/cloud-plugin"
+    },
+    {
+      "path": "plugins/code-loader-plugin"
+    },
+    {
+      "path": "plugins/fc-plugin"
+    },
+    {
+      "path": "plugins/fc3-plugin"
+    },
+    {
+      "path": "plugins/lambda-plugin"
+    },
+    {
+      "path": "plugins/next-plugin"
+    },
+    {
+      "path": "plugins/node-plugin"
+    },
+    {
+      "path": "plugins/python-plugin"
+    },
+    {
+      "path": "plugins/scf-plugin"
+    },
+    {
+      "path": "plugins/static-plugin"
+    },
+    {
+      "path": "ui-packages/antd"
+    },
+    {
+      "path": "ui-packages/grommet"
+    },
+    {
+      "path": "ui-packages/material-ui"
+    },
+    {
+      "path": "ui-packages/react"
+    },
+    {
+      "path": "ui-packages/shell"
+    },
+    {
+      "path": "ui-packages/vue"
+    },
+    {
+      "path": "ui-packages/widget"
+    }
   ]
 }

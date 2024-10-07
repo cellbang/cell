@@ -2,6 +2,9 @@ import { Model, ModelResponse, ModelResult, StreamingModel } from '../../model/m
 import { AssistantMessage } from '../message';
 import { Prompt } from '../prompt/prompt-protocol';
 
+export const StreamingChatModel = Symbol('StreamingChatModel');
+export const ChatModel = Symbol('ChatModel');
+
 /**
  * Represents a response returned by the AI.
  */

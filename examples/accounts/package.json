@@ -23,7 +23,7 @@
     "@celljs/serve-static": "3.0.0",
     "@celljs/typeorm": "3.0.0",
     "@celljs/web": "3.0.0",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "^11.3.0",
     "class-transformer": "^0.5.1",
     "grommet": "^2.25.1",
     "grommet-icons": "^4.7.0",

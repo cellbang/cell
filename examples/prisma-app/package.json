@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@celljs/cli": "3.0.0",
-    "@celljs/cli-service": "2.60.3",
+    "@celljs/cli-service": "3.0.0",
     "@celljs/component": "3.0.0",
     "@celljs/testing": "3.0.0",
     "@types/supertest": "^2.0.12",

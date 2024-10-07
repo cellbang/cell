@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
@@ -23,5 +24,10 @@
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../../packages/core"
+    }
   ]
 }

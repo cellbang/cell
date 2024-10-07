@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
@@ -25,5 +26,19 @@
   },
   "include": [
     "src"
+  ],
+  "references": [
+    {
+      "path": "../../dev-packages/cli"
+    },
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/schedule"
+    },
+    {
+      "path": "../../packages/web"
+    }
   ]
 }

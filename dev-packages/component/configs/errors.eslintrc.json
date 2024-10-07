@@ -4,18 +4,8 @@
     "@typescript-eslint/consistent-type-definitions": "error",
     "@typescript-eslint/indent": "off",
     // "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true
-      }
-    ],
-    "@typescript-eslint/semi": [
-      "error",
-      "always"
-    ],
-    "@typescript-eslint/type-annotation-spacing": "error",
+    "quotes": [ "error", "single" ],
+    "semi": [ "error", "always" ],
     "arrow-body-style": [
       "error",
       "as-needed"

@@ -33,8 +33,8 @@ export namespace OS {
     }
 
     /**
-     * Returns with the type of the operating system. If it is neither [Windows](isWindows) nor [OS X](isOSX), then
-     * it always return with the `Linux` OS type.
+     * Returns with the type of the operating system. If it is neither Windows nor OS X, then
+     * it always returns with the `Linux` OS type.
      */
     export function type(): OS.Type {
         if (isWindows) {

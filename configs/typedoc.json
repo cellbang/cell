@@ -1,25 +1,23 @@
 {
-  "emit": "none",
-  "compilerOptions": {
-    "ignoreCompilerErrors": true,
-    "skipLibCheck": true,
-    "noEmitOnError": true,
-    "allowJs": true
-  },
-  "exclude": [
-    "../+(dev-packages|examples|typings|scripts)/**",
-    "../packages/*/lib/**",
-    "plugins/*/lib",
-    "dev-packages/*/lib",
-    "**/node_modules/**",
-    "**/*.tsx",
-    "**/*spec.ts"
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "packages/*",
+    "dev-packages/*",
+    "ai-packages/*",
+    "cloud-packages/*",
+    "ui-packages/*",
+    "plugins/*"
   ],
-  "excludeExternals": true,
-  "external-modulemap": ".*\/(packages|plugins)\/([\\w\\-_]+)\/",
+  "exclude": [
+    "**/node_modules/**",
+    "**/*.test.ts",
+    "**/examples/**",
+    "**/deprecated/**"
+  ],
+  "name": "CellJS TypeDoc",
+  "entryPointStrategy": "packages",
+  "includeVersion": false,
   "hideGenerator": true,
-  "name": "Cell TypeDoc",
-  "out": "../gh-pages/docs/next",
-  "readme": "../README.md",
-  "entryPointStrategy": "expand"
+  "excludeNotDocumented": false,
+  "out": "../gh-pages/docs/next"
 }

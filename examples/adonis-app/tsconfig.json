@@ -8,6 +8,8 @@
     "build"
   ],
   "compilerOptions": {
+    "composite": true,
+    "declaration": true,
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
@@ -30,5 +32,6 @@
       "@adonisjs/repl",
       "@japa/preset-adonis/build/adonis-typings"
     ]
-  }
+  },
+  "references": []
 }

@@ -97,17 +97,17 @@ export namespace OAuth2ParameterNames {
 export namespace PkceParameterNames {
 
     /**
-     * {@code code_challenge} - used in Authorization Request.
+     * `code_challenge`- used in Authorization Request.
      */
     export const CODE_CHALLENGE = 'code_challenge';
 
     /**
-     * {@code code_challenge_method} - used in Authorization Request.
+     * `code_challenge_method`- used in Authorization Request.
      */
     export const CODE_CHALLENGE_METHOD = 'code_challenge_method';
 
     /**
-     * {@code code_verifier} - used in Token Request.
+     * `code_verifier`- used in Token Request.
      */
     export const CODE_VERIFIER = 'code_verifier';
 }
