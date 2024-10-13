@@ -11,8 +11,8 @@ export namespace PathUtil {
     }
 
     export function getProjectDistPath() {
-        if (process.env.MALAGU_PROJECT_DIST_PATH) {
-            return path.resolve(process.cwd(), process.env.MALAGU_PROJECT_DIST_PATH);
+        if (process.env.CELL_PROJECT_DIST_PATH) {
+            return path.resolve(process.cwd(), process.env.CELL_PROJECT_DIST_PATH);
         }
         return path.resolve(getProjectHomePath(), 'dist');
     }
@@ -41,8 +41,8 @@ export namespace PathUtil {
     }
 
     export function getProjectHomePath() {
-        if (process.env.MALAGU_PROJECT_HOME_PATH) {
-            return path.resolve(process.cwd(), process.env.MALAGU_PROJECT_HOME_PATH);
+        if (process.env.CELL_PROJECT_HOME_PATH) {
+            return path.resolve(process.cwd(), process.env.CELL_PROJECT_HOME_PATH);
         }
         let keywords = [];
         const packageJsonPath = path.resolve(process.cwd(), 'package.json');
@@ -56,31 +56,31 @@ export namespace PathUtil {
     }
 
     export function getProjectConfigPath() {
-        return process.env.MALAGU_PROJECT_CONFIG_PATH ? path.resolve(process.cwd(), process.env.MALAGU_PROJECT_CONFIG_PATH) : path.resolve(getProjectHomePath(), 'project.json');
+        return process.env.CELL_PROJECT_CONFIG_PATH ? path.resolve(process.cwd(), process.env.CELL_PROJECT_CONFIG_PATH) : path.resolve(getProjectHomePath(), 'project.json');
     }
 
     export function setProjectHomePath(projectHomePath: string) {
-        process.env.MALAGU_PROJECT_HOME_PATH = projectHomePath;
+        process.env.CELL_PROJECT_HOME_PATH = projectHomePath;
     }
 
     export function getCellHomePath() {
-        return process.env.MALAGU_HOME_PATH ? process.env.MALAGU_HOME_PATH : path.join(homedir(), '.cell');
+        return process.env.CELL_HOME_PATH ? process.env.CELL_HOME_PATH : path.join(homedir(), '.cell');
     }
 
     export function getGlobalCellPropsDirPath() {
-        return process.env.GLOBAL_MALAGU_PROPS_DIR_PATH ? process.env.GLOBAL_MALAGU_PROPS_DIR_PATH : getCellHomePath();
+        return process.env.GLOBAL_CELL_PROPS_DIR_PATH ? process.env.GLOBAL_CELL_PROPS_DIR_PATH : getCellHomePath();
     }
 
     export function getRuntimePath(runtime?: string) {
         if (runtime) {
-            const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
+            const basePath = process.env.CELL_RUNTIME_PATH ? process.env.CELL_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
             return path.resolve(basePath, RuntimeUtil.getVersion(), runtime);
         }
         return process.cwd();
     }
 
     export function getRuntimeRootPath(version?: string) {
-        const basePath = process.env.MALAGU_RUNTIME_PATH ? process.env.MALAGU_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
+        const basePath = process.env.CELL_RUNTIME_PATH ? process.env.CELL_RUNTIME_PATH : path.resolve(getCellHomePath(), 'runtimes');
         return version ? path.resolve(basePath, RuntimeUtil.getVersion()) : basePath;
     }
 

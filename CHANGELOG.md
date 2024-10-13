@@ -125,7 +125,7 @@
 
 ## 2.51.3
 
-- feat(scf-plugin) 支持 MALAGU_APP_ID 环境变量
+- feat(scf-plugin) 支持 CELL_APP_ID 环境变量
 
 ## 2.51.2
 
@@ -596,7 +596,7 @@ cell:
 
 ## 2.24.0
 
-- feat(config) 新增 @celljs/config 组件，用于提供运行时的配置属性方式。包含以下运行时配置属性策略：通过环境变量 MALAGU_PROPS_FILE 配置属性文件位置和尝试从 process.cwd() 和 __dirname 目录下加载 cell.yml 和 cell.yaml 配置文件
+- feat(config) 新增 @celljs/config 组件，用于提供运行时的配置属性方式。包含以下运行时配置属性策略：通过环境变量 CELL_PROPS_FILE 配置属性文件位置和尝试从 process.cwd() 和 __dirname 目录下加载 cell.yml 和 cell.yaml 配置文件
 
 ## 2.23.3
 
@@ -763,7 +763,7 @@ cell:
 ## 2.16.0
 
 - feat(cli) 支持根命令参数 `--props-dir` 和 `--props-file`，用于指定额外的自定义属性文件位置，优先级比项目级别的属性文件高，方便开发者透传属性配置
-- fix(cli) 把全局属性配置文件改为全局配置目录，基于环境变量 `GLOBAL_MALAGU_PROPS_DIR_PATH` 自定义，默认是 `~/.cell`
+- fix(cli) 把全局属性配置文件改为全局配置目录，基于环境变量 `GLOBAL_CELL_PROPS_DIR_PATH` 自定义，默认是 `~/.cell`
 
 ## 2.15.2
 
@@ -808,7 +808,7 @@ cell:
 
 ## 2.13.0
 
-- feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.cell/cell.yml`，可以通过环境变量自定义：`GLOBAL_MALAGU_CONFIG_PATH`
+- feat(cli + cli-common) 支持全局配置文件，默认全局配置文件路径为： `~/.cell/cell.yml`，可以通过环境变量自定义：`GLOBAL_CELL_CONFIG_PATH`
 - feat(cli + cli-common) 支持配置属性 `projectPath`，可以在配置文件中指定项目的真正工作目录，该配置项只在命令行的工作目录的配置文件有效
 
 ## 2.12.0
@@ -1021,7 +1021,7 @@ cell:
 
 - feat(framework) 优化 `cell` 框架的默认构建目录
 - fix(cli) 优化 `cell init` 命令初始化模板后没有正确安装依赖包
-- fix(cli-common) 提供环境变量 `MALAGU_PROJECT_DIST_PATH` 配置项目构建目录
+- fix(cli-common) 提供环境变量 `CELL_PROJECT_DIST_PATH` 配置项目构建目录
 
 ## 2.5.2
 
@@ -1044,8 +1044,8 @@ cell:
 
 ## 2.4.4
 
-- feat(cli-common) 提供 `MALAGU_CONFIG_FILE_ALIAS` 环境变量方式配置，优先级比配置文件高
-- feat(cli) 提供 `MALAGU_BANNER` 环境变量方式配置，优先级比配置文件高
+- feat(cli-common) 提供 `CELL_CONFIG_FILE_ALIAS` 环境变量方式配置，优先级比配置文件高
+- feat(cli) 提供 `CELL_BANNER` 环境变量方式配置，优先级比配置文件高
 - fix(cloud-plugin) 修复 `profile.credentials.token` 赋值
 - fix(*-plugin) 优化日志输出和自定义域名配置
 
@@ -1454,7 +1454,7 @@ cell:
 
 ## v1.18.6
 
-- feat(fc-adapter) support `MALAGU_DOMAIN` environment variables
+- feat(fc-adapter) support `CELL_DOMAIN` environment variables
 
 ## v1.18.5
 

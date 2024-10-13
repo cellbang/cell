@@ -17,7 +17,7 @@ export namespace BannerUtil {
             runtimeStrLine = '\n│';
             runtimeStrLine += chalk.yellow.bold(runtimeStr.padStart(20 + Math.floor(runtimeStr.length / 2)).padEnd(40)) + '│';
         }
-        const banner = process.env.MALAGU_BANNER || settings.banner;
+        const banner = process.env.CELL_BANNER || settings.banner;
         if (banner) {
             console.log(banner.replace('{ version }', version).replace('{ runtime }', runtimeStr));
         } else {

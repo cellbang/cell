@@ -17,7 +17,7 @@ updateNotifier({ pkg }).notify();
 const spinner = ora({ text: chalk.italic.gray('loading command line context...\n'), discardStdin: false });
 
 (async () => {
-    const { runtime, framework, settings } = JSON.parse(process.env.MALAGU_RFS!);
+    const { runtime, framework, settings } = JSON.parse(process.env.CELL_RFS!);
     BannerUtil.print(version, settings, runtime, framework);
 
     spinner.start();

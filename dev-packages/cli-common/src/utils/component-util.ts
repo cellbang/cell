@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'fs-extra';
 import * as lockfile from '@yarnpkg/lockfile';
 import * as path from 'path';
-import { MALAGU_COMPONENT_SUFFIX } from '../package/package-protocol';
+import { CELL_COMPONENT_SUFFIX } from '../package/package-protocol';
 const chalk = require('chalk');
 
 export namespace ComponentUtil {
@@ -56,8 +56,8 @@ export namespace ComponentUtil {
 
     export function getComponentAlias(keywords: string[] = []): string[] {
         const keywordsAlias = keywords
-            .filter(k => k.endsWith(MALAGU_COMPONENT_SUFFIX))
-            .map(k => k.substring(0, k.length - MALAGU_COMPONENT_SUFFIX.length));
+            .filter(k => k.endsWith(CELL_COMPONENT_SUFFIX))
+            .map(k => k.substring(0, k.length - CELL_COMPONENT_SUFFIX.length));
         return keywordsAlias.includes('cell') ? keywordsAlias : [ ...keywordsAlias, 'cell' ];
     }
 }

@@ -11,9 +11,9 @@ export class FaaSCredentialsProvider extends DefaultCredentialsProvider {
             return credentials;
         }
         return {
-            accessKeyId: process.env.MALAGU_ACCESS_KEY_ID!,
-            accessKeySecret: process.env.MALAGU_ACCESS_KEY_SECRET!,
-            token: process.env.MALAGU_TOKEN
+            accessKeyId: process.env.CELL_ACCESS_KEY_ID!,
+            accessKeySecret: process.env.CELL_ACCESS_KEY_SECRET!,
+            token: process.env.CELL_TOKEN
         };
     }
 

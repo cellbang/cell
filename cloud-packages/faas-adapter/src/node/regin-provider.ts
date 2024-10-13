@@ -10,6 +10,6 @@ export class FaaSRegionProvider extends DefaultRegionProvider {
         if (region) {
             return region;
         }
-        return process.env.MALAGU_REGION;
+        return process.env.CELL_REGION;
     }
 }

@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import { Settings } from '../settings/settings-protocol';
 import { Framework } from '@celljs/frameworks/lib/detector/detector-protocol';
 
-export const MALAGU_COMPONENT_SUFFIX = '-component';
+export const CELL_COMPONENT_SUFFIX = '-component';
 
 export type ApplicationLog = (message?: any, ...optionalParams: any[]) => void;
 
@@ -124,6 +124,6 @@ export namespace RawComponentPackage {
         if (!pck.keywords.includes('cell')) {
             return false;
         }
-        return pck.keywords.some(k => k.endsWith(MALAGU_COMPONENT_SUFFIX));
+        return pck.keywords.some(k => k.endsWith(CELL_COMPONENT_SUFFIX));
     }
 }

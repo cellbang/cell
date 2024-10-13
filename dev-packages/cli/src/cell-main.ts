@@ -66,7 +66,7 @@ async function execute() {
         join(projectPath, '..', '..', '..', 'node_modules')
     ]));
 
-    process.env.MALAGU_RFS = JSON.stringify({ runtime, settings, framework });
+    process.env.CELL_RFS = JSON.stringify({ runtime, settings, framework });
     const runtimePath = PathUtil.getRuntimePath(runtime);
     if (runtimePath !== projectPath) {
         nodePaths.push(join(runtimePath, 'node_modules'));

@@ -66,7 +66,7 @@ export class ComponentPackageLoader {
 
     protected parseConfigPaths(nodePackage: NodePackage, mode?: string): string[] {
         const configFileAliases = ComponentUtil.getComponentAlias(nodePackage.keywords);
-        const configFileAlias = process.env.MALAGU_CONFIG_FILE_ALIAS || this.pkg.settings?.configFileAlias;
+        const configFileAlias = process.env.CELL_CONFIG_FILE_ALIAS || this.pkg.settings?.configFileAlias;
         if (configFileAlias) {
             configFileAliases.push(configFileAlias);
         }

@@ -8,8 +8,8 @@ import { resolve } from 'path';
 export class RuntimeContextInitializer implements ContextInitializer {
 
     protected doInitializeForEnv(ctx: ExpressionContext) {
-        if (process.env.MALAGU_PROPS_FILE) {
-            const propsFile = resolve(process.cwd(), process.env.MALAGU_PROPS_FILE);
+        if (process.env.CELL_PROPS_FILE) {
+            const propsFile = resolve(process.cwd(), process.env.CELL_PROPS_FILE);
             if (existsSync(propsFile)) {
                 const props = load(readFileSync(propsFile, 'utf-8'));
                 ConfigUtil.merge(ctx, props);

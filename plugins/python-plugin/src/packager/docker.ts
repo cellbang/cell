@@ -34,7 +34,7 @@ export function findTestFile(servicePath: string, options: PythonPluginOptions) 
 }
 
 async function tryBindPath(bindPath: string, testFile: string, pluginOptions: PythonPluginOptions) {
-    const debug = process.env.MALAGU_DEBUG;
+    const debug = process.env.CELL_DEBUG;
     const options = [
         'run',
         '--rm',

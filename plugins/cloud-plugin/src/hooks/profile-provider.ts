@@ -37,13 +37,13 @@ export class DefaultProfileProvider implements ProfileProvider {
 
     protected async getProfileFromEnv(): Promise<Profile> {
         return <Profile>{
-            region: process.env.MALAGU_REGION,
+            region: process.env.CELL_REGION,
             credentials: {
-                accessKeyId: process.env.MALAGU_ACCESS_KEY_ID,
-                accessKeySecret: process.env.MALAGU_ACCESS_KEY_SECRET
+                accessKeyId: process.env.CELL_ACCESS_KEY_ID,
+                accessKeySecret: process.env.CELL_ACCESS_KEY_SECRET
             },
             account: {
-                id: process.env.MALAGU_ACCOUNT_ID
+                id: process.env.CELL_ACCOUNT_ID
             }
 
         };
