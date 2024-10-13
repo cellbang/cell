@@ -1,0 +1,60 @@
+{
+  "name": "@celljs/component",
+  "version": "3.0.0",
+  "license": "MIT",
+  "description": "CLI for cell component.",
+  "files": [
+    "cell-component",
+    "configs"
+  ],
+  "bin": {
+    "cell-component": "cell-component"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@types/chai": "4.3.5",
+    "@types/chai-spies": "1.0.3",
+    "@types/chai-string": "^1.4.2",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16",
+    "@types/sinon": "^10.0.15",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^7.0.2",
+    "@typescript-eslint/parser": "^8.8.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^9.12.0",
+    "eslint-plugin-deprecation": "^3.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-no-null": "latest",
+    "eslint-plugin-no-unsanitized": "latest",
+    "eslint-plugin-react": "^7.37.1",
+    "if-env": "^1.0.4",
+    "ignore-styles": "^5.0.1",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "rimraf": "^5.0.1",
+    "sinon": "^15.2.0",
+    "temp": "^0.9.4",
+    "ts-node": "^10.9.1",
+    "tslint": "^6.1.3",
+    "typescript": "~5.4.5"
+  },
+  "scripts": {
+    "ext:clean": "cell-component compile:clean && cell-component lint:clean && cell-component test:clean",
+    "ext:build": "concurrently -n compile,lint -c blue,green \"cell-component compile\" \"cell-component lint\"",
+    "ext:compile": "tsc -b {{TSCONFIGFILE}}",
+    "ext:compile:clean": "rimraf lib *.tsbuildinfo",
+    "ext:lint": "if-env SKIP_LINT=true && echo 'skip lint check' || eslint --cache=true --fix --no-error-on-unmatched-pattern=true \"{src,test}/**/*.{ts,tsx}\"",
+    "ext:lint:clean": "rimraf .eslintcache",
+    "ext:watch": "tsc -p {{TSCONFIGFILE}} -w",
+    "ext:watch:slow": "tsc -b {{TSCONFIGFILE}} -w",
+    "ext:test:js": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --config {{ROOT}}/configs/mocharc-js.yml \"./lib/**/*.*spec.js\"",
+    "ext:test:js:watch": "mocha -w --config {{ROOT}}/configs/mocharc-js.yml \"./lib/**/*.*spec.js\"",
+    "ext:test": "nyc -nycrc-path={{ROOT}}/configs/nyc.json mocha --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
+    "ext:test:watch": "mocha -w --require ts-node/register --config {{ROOT}}/configs/mocharc.yml \"./+(src|test)/**/*.*spec.ts\"",
+    "ext:test:clean": "rimraf .nyc_output coverage"
+  },
+  "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
+}
