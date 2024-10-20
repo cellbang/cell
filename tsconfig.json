@@ -103,6 +103,9 @@
       "path": "examples/standalone-app"
     },
     {
+      "path": "examples/vitesse-app"
+    },
+    {
       "path": "packages/cache"
     },
     {

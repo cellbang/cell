@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": [
+      "ES2017",
+      "dom"
+    ],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "declarationMap": true,
+    "downlevelIteration": true,
+    "noEmitOnError": false,
+    "outDir": "lib",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../dev-packages/cli"
+    },
+    {
+      "path": "../../packages/core"
+    },
+    {
+      "path": "../../packages/rpc"
+    },
+    {
+      "path": "../../packages/serve-static"
+    },
+    {
+      "path": "../../ui-packages/vue"
+    }
+  ]
+}
