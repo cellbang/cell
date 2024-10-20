@@ -86,7 +86,9 @@ export class HookExecutor {
             return obj.default;
         } else if (typeof obj === 'object' && typeof obj.default === 'function') {
             return obj;
-        } else return obj;
+        } else {
+            return obj;
+        }
     }
 
     protected async doRequire(context: CliContext, path: string, stage: HookStage = HookStage.on) {

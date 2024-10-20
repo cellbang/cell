@@ -34,9 +34,6 @@
       "path": "../../dev-packages/cli"
     },
     {
-      "path": "../../dev-packages/cli-service"
-    },
-    {
       "path": "../../packages/core"
     },
     {
