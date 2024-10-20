@@ -79,20 +79,25 @@ export class HookExecutor {
         return current === false ? false : true;
     }
 
+    getModule(obj: any): any {
+        if (typeof obj === 'function') {
+            return obj;
+        } else if (typeof obj === 'object' && typeof obj.default === 'object' && typeof obj.default.default === 'function') {
+            return obj.default;
+        } else if (typeof obj === 'object' && typeof obj.default === 'function') {
+            return obj;
+        } else {return obj; }
+    }
+
     protected async doRequire(context: CliContext, path: string, stage: HookStage = HookStage.on) {
-        const obj = require(path);
-        if (stage in obj) {
-            return obj[stage](context);
+        const obj = await import('importx-tsup').then(x => x.import(path, __filename));
+        const mod = this.getModule(obj);
+        if (mod[stage] && typeof mod[stage] === 'function') {
+            return mod[stage](context);
         }
     }
 
     protected async doExecuteHooks(modules: Module[], context: CliContext, hookName: string, stage?: HookStage): Promise<any[]> {
-        const { REGISTER_INSTANCE, register } = require('ts-node');
-        // Avoid duplicate registrations
-        if (!(process as any)[REGISTER_INSTANCE]) {
-            register({ transpileOnly: true, compilerOptions: { module: 'commonjs'} });
-        }
-
         const result: any = [];
 
         for (const m of modules) {
