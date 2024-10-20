@@ -1,12 +1,12 @@
 {
   "name": "@celljs/oidc-provider",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.0.0",
-    "@celljs/web": "3.0.0",
+    "@celljs/core": "3.1.0",
+    "@celljs/web": "3.1.0",
     "@types/oidc-provider": "^8.2.0",
     "oidc-provider": "^8.3.1"
   },
@@ -38,7 +38,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.0.0"
+    "@celljs/component": "3.1.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

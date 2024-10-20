@@ -1,11 +1,11 @@
 {
   "name": "@celljs/lambda-plugin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "",
   "dependencies": {
-    "@celljs/cli-common": "3.0.0",
-    "@celljs/cloud-plugin": "3.0.0",
-    "@celljs/code-loader-plugin": "3.0.0",
+    "@celljs/cli-common": "3.1.0",
+    "@celljs/cloud-plugin": "3.1.0",
+    "@celljs/code-loader-plugin": "3.1.0",
     "aws-sdk": "^2.807.0",
     "camelcase-keys": "^6.2.2",
     "chalk": "^4.1.0",
@@ -45,7 +45,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.0.0"
+    "@celljs/component": "3.1.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

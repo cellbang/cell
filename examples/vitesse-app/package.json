@@ -4,33 +4,33 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.0.0",
+  "version": "3.1.0",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@celljs/core": "3.0.0",
-    "@celljs/vue": "3.0.0",
-    "@celljs/rpc": "3.0.0",
-    "@celljs/serve-static": "3.0.0",
-    "vue": "^3.3.4",
+    "@celljs/core": "3.1.0",
+    "@celljs/rpc": "3.1.0",
+    "@celljs/serve-static": "3.1.0",
+    "@celljs/vue": "3.1.0",
     "unocss": "^0.63.4",
+    "vue": "^3.3.4",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@celljs/cli": "3.0.0",
-    "unplugin-auto-import": "^0.18.3",
-    "@unhead/vue": "^1.11.10",
-    "unplugin-vue-router": "^0.10.8",
-    "@unocss/webpack": "^0.63.4",
-    "unplugin-vue-components": "^0.27.4",
-    "unplugin-vue-markdown": "^0.26.2",
-    "markdown-it-link-attributes": "^4.0.1",
+    "@celljs/cli": "3.1.0",
+    "@intlify/unplugin-vue-i18n": "^5.2.0",
     "@shikijs/markdown-it": "^1.22.0",
     "@types/markdown-it-link-attributes": "^3.0.5",
-    "@intlify/unplugin-vue-i18n": "^5.2.0"
+    "@unhead/vue": "^1.11.10",
+    "@unocss/webpack": "^0.63.4",
+    "markdown-it-link-attributes": "^4.0.1",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-vue-components": "^0.27.4",
+    "unplugin-vue-markdown": "^0.26.2",
+    "unplugin-vue-router": "^0.10.8"
   },
   "scripts": {
     "clean": "rimraf lib dist .cell",

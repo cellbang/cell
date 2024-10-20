@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cli",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Cell CLI.",
   "publishConfig": {
     "access": "public"
@@ -36,9 +36,9 @@
     "test": "cell-component test:js"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.0.0",
-    "@celljs/cli-runtime": "3.0.0",
-    "@celljs/frameworks": "3.0.0",
+    "@celljs/cli-common": "3.1.0",
+    "@celljs/cli-runtime": "3.1.0",
+    "@celljs/frameworks": "3.1.0",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
     "dotenv": "^16.3.1",
@@ -55,7 +55,7 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.0.0",
+    "@celljs/component": "3.1.0",
     "@types/js-yaml": "^3.12.1",
     "@types/prompts": "^2.4.4"
   },

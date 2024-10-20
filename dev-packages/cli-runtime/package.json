@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cli-runtime",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Cell CLI Runtime.",
   "publishConfig": {
     "access": "public"
@@ -29,8 +29,8 @@
     "test": "cell-component test:js"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.0.0",
-    "@celljs/frameworks": "3.0.0",
+    "@celljs/cli-common": "3.1.0",
+    "@celljs/frameworks": "3.1.0",
     "chalk": "^4.1.0",
     "fs-extra": "^11.1.1",
     "leven": "^3.1.0",
@@ -40,7 +40,7 @@
     "rimraf": "^5.0.1"
   },
   "devDependencies": {
-    "@celljs/component": "3.0.0"
+    "@celljs/component": "3.1.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

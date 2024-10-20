@@ -1,11 +1,11 @@
 {
   "name": "@celljs/config",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "config component",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.0.0",
+    "@celljs/core": "3.1.0",
     "@types/js-yaml": "^3.12.1",
     "@types/lodash.mergewith": "^4.6.6",
     "fs-extra": "^11.1.1",
@@ -40,7 +40,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.0.0"
+    "@celljs/component": "3.1.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
