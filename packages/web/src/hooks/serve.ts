@@ -11,7 +11,6 @@ export class Deferred {
 
 let application: any;
 let doDispatch: (req: any, res: any) => void;
-let initialized = false;
 export async function after(context: ServeContext) {
     const { app, entryContextProvider, stats } = context;
 
@@ -41,16 +40,13 @@ export async function after(context: ServeContext) {
             console.error(err);
         }
     });
-    if (!initialized) {
-        initialized = true;
-        app.all('*', async (req: any, res: any) => {
-            try {
-                await compileDeferred.promise;
-            } catch (err) {
-                res.status(500).send(err);
-            }
-            doDispatch(req, res);
-        });
-    }
+    app.all('*', async (req: any, res: any) => {
+        try {
+            await compileDeferred.promise;
+        } catch (err) {
+            res.status(500).send(err);
+        }
+        doDispatch(req, res);
+    });
 
 };

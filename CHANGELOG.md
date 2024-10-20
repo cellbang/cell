@@ -1,11 +1,15 @@
 # Change
 
-## 3.1.0 (待发布)
+## 3.2.0 (待发布)
 
-- chore: 升级 typescript 等基础构建工具依赖
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
+
+## 3.1.0
+
 - chore: 升级并修复 TypeDoc 文档
 - feat(core): 添加 Assert 工具类和 MimeType 相关的工具类
+- chore: 升级 typescript 等基础构建工具依赖
+- fix(web): 修复 web 服务 HMR 不生效问题
 
 ## 3.0.0
 
