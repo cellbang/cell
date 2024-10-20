@@ -10,6 +10,7 @@
 - feat(core): 添加 Assert 工具类和 MimeType 相关的工具类
 - chore: 升级 typescript 等基础构建工具依赖
 - fix(web): 修复 web 服务 HMR 不生效问题
+- refactor: 将 @celljs/cli-common中使用了`ts-node`的地方，改为使用 importx-tsup 包进行动态 require #211
 
 ## 3.0.0
 
