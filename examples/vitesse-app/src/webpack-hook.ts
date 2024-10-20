@@ -8,7 +8,7 @@ import LinkAttributes from 'markdown-it-link-attributes'
 import Shiki from '@shikijs/markdown-it'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 
-// @ts-expect-error 这里的类型定义有问题 unocss使用的是export = UnocssWebpackPlugin，所以直接expect-error
+// @ts-ignore 这里的类型定义有问题 unocss使用的是export = UnocssWebpackPlugin，所以直接expect-error
 import UnoCSS from 'unocss/webpack'
 
 export default async (ctx: WebpackContext) => {
