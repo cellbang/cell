@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "name": "@celljs/example-vitesse-app",
+  "keywords": [
+    "cell-component"
+  ],
+  "version": "3.0.0",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@celljs/core": "3.0.0",
+    "@celljs/vue": "3.0.0",
+    "@celljs/rpc": "3.0.0",
+    "@celljs/serve-static": "3.0.0",
+    "vue": "^3.3.4",
+    "unocss": "^0.63.4",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@celljs/cli": "3.0.0",
+    "@celljs/cli-service": "3.0.0",
+    "unplugin-auto-import": "^0.18.3",
+    "@unhead/vue": "^1.11.10",
+    "unplugin-vue-router": "^0.10.8",
+    "@unocss/webpack": "^0.63.4",
+    "unplugin-vue-components": "^0.27.4",
+    "unplugin-vue-markdown": "^0.26.2",
+    "markdown-it-link-attributes": "^4.0.1",
+    "@shikijs/markdown-it": "^1.22.0",
+    "@types/markdown-it-link-attributes": "^3.0.5",
+    "@intlify/unplugin-vue-i18n": "^5.2.0"
+  },
+  "scripts": {
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod"
+  }
+}
