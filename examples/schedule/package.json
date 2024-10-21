@@ -13,8 +13,7 @@
   "dependencies": {
     "@celljs/core": "3.1.0",
     "@celljs/schedule": "3.1.0",
-    "@celljs/web": "3.1.0",
-    "tslib": "^2.8.0"
+    "@celljs/web": "3.1.0"
   },
   "devDependencies": {
     "@celljs/cli": "3.1.0"

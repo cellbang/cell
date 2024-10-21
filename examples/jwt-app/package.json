@@ -14,8 +14,7 @@
     "@celljs/core": "3.1.0",
     "@celljs/jwt": "3.1.0",
     "@celljs/mvc": "3.1.0",
-    "@celljs/web": "3.1.0",
-    "tslib": "^2.8.0"
+    "@celljs/web": "3.1.0"
   },
   "devDependencies": {
     "@celljs/cli": "3.1.0",

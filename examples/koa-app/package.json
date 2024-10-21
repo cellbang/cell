@@ -6,7 +6,6 @@
   "main": "app.js",
   "dependencies": {
     "@celljs/cli": "3.1.0",
-    "koa": "^2.13.4",
-    "tslib": "^2.8.0"
+    "koa": "^2.13.4"
   }
 }

@@ -27,7 +27,6 @@
     "@celljs/rpc": "3.1.0",
     "@celljs/serve-static": "3.1.0",
     "@celljs/vue": "3.1.0",
-    "tslib": "^2.8.0",
     "unocss": "^0.63.4",
     "vue": "^3.3.4",
     "vue-router": "^4.4.5"
