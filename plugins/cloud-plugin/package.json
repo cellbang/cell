@@ -9,7 +9,8 @@
     "@celljs/code-loader-plugin": "3.1.0",
     "fs-extra": "^11.1.1",
     "js-yaml": "^4.1.0",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

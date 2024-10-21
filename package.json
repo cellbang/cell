@@ -52,5 +52,7 @@
     "ai-packages/*",
     "examples/*"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "tslib": "^2.8.0"
+  }
 }

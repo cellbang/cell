@@ -9,7 +9,8 @@
     "@celljs/http": "3.1.0",
     "@celljs/web": "3.1.0",
     "axios": "^0.26.1",
-    "vscode-jsonrpc": "^6.0.0"
+    "vscode-jsonrpc": "^6.0.0",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

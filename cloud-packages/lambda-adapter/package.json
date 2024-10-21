@@ -10,7 +10,8 @@
     "@celljs/faas-adapter": "3.1.0",
     "@celljs/web": "3.1.0",
     "@vendia/serverless-express": "^4.5.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"
