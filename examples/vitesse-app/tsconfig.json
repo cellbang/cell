@@ -34,6 +34,9 @@
       "path": "../../dev-packages/cli"
     },
     {
+      "path": "../../dev-packages/eslint"
+    },
+    {
       "path": "../../packages/core"
     },
     {

@@ -5,7 +5,9 @@ const router = useRouter()
 <template>
   <div>
     Index Page
-    <button @click="router.push('/')">跳转到首页</button>
+    <button @click="router.push('/')">
+      跳转到首页
+    </button>
     <HelloWorld />
   </div>
 </template>
