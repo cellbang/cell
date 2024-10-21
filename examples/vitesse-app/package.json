@@ -4,6 +4,7 @@
   "keywords": [
     "cell-component"
   ],
+  "type": "module",
   "version": "3.0.0",
   "license": "MIT",
   "files": [

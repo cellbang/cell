@@ -69,7 +69,7 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
         while (true) {
             if (fs.existsSync(entryPath)) {
                 mountRuntimeModuleCaches();
-                return require(entryPath);
+                return await import('importx-tsup').then(x => x.importx(entryPath, __dirname));
             }
             await delay(200);
         }
