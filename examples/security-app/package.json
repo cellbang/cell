@@ -4,19 +4,19 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.1.0",
+  "version": "3.1.1",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@celljs/core": "3.1.0",
-    "@celljs/mvc": "3.1.0",
-    "@celljs/security": "3.1.0"
+    "@celljs/core": "3.1.1",
+    "@celljs/mvc": "3.1.1",
+    "@celljs/security": "3.1.1"
   },
   "devDependencies": {
-    "@celljs/cli": "3.1.0"
+    "@celljs/cli": "3.1.1"
   },
   "scripts": {
     "clean": "rimraf lib dist .cell",

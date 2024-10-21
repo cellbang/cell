@@ -1,14 +1,14 @@
 {
   "name": "@celljs/vue",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "@celljs/cli-common": "3.1.0",
-    "@celljs/core": "3.1.0",
+    "@celljs/cli-common": "3.1.1",
+    "@celljs/core": "3.1.1",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.8.6",
@@ -25,9 +25,9 @@
     "style-loader": "^3.3.1",
     "stylus": "^0.54.8",
     "stylus-loader": "^6.0.0",
+    "tslib": "^2.8.0",
     "vue": "^3.3.4",
-    "vue-loader": "^17.2.2",
-    "tslib": "^2.8.0"
+    "vue-loader": "^17.2.2"
   },
   "publishConfig": {
     "access": "public"
@@ -58,8 +58,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.1.0",
-    "@celljs/component": "3.1.0"
+    "@celljs/cli-service": "3.1.1",
+    "@celljs/component": "3.1.1"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
