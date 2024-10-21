@@ -1,9 +1,9 @@
-import { WelcomeServer } from '../common/welcome-protocol';
-import { Rpc } from '@celljs/rpc';
+import { Rpc } from '@celljs/rpc'
+import { WelcomeServer } from '../common/welcome-protocol'
 
 @Rpc(WelcomeServer)
 export class WelcomeServerImpl implements WelcomeServer {
-    say(): Promise<string> {
-        return Promise.resolve('Welcome to Cell');
-    }
+  async say(): Promise<string> {
+    return 'Welcome to Cell'
+  }
 }

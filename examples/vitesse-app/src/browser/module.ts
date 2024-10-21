@@ -1,4 +1,4 @@
-import './main';
-import { autoBind } from '@celljs/core';
+import './main'
+import { autoBind } from '@celljs/core'
 
-export default autoBind();
+export default autoBind()

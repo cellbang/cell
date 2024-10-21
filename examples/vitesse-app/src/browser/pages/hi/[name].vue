@@ -1,4 +1,6 @@
 <script setup lang="ts">
 </script>
 
-<template></template>
+<template>
+  <div>Hello name</div>
+</template>

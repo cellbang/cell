@@ -1,4 +1,4 @@
-import './welcome-server';
-import { autoBind } from '@celljs/core';
+import './welcome-server'
+import { autoBind } from '@celljs/core'
 
-export default autoBind();
+export default autoBind()

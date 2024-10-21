@@ -1,17 +1,28 @@
 {
-  "private": true,
   "name": "@celljs/example-vitesse-app",
+  "type": "module",
+  "version": "3.1.0",
+  "private": true,
+  "license": "MIT",
   "keywords": [
     "cell-component"
   ],
-  "type": "module",
-  "version": "3.1.0",
-  "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
+  "scripts": {
+    "clean": "rimraf lib dist .cell",
+    "build": "cell build",
+    "start": "cell serve",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:test": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod",
+    "lint": "eslint"
+  },
   "dependencies": {
+    "@antfu/eslint-config": "^3.8.0",
     "@celljs/core": "3.1.0",
     "@celljs/rpc": "3.1.0",
     "@celljs/serve-static": "3.1.0",
@@ -22,6 +33,7 @@
   },
   "devDependencies": {
     "@celljs/cli": "3.1.0",
+    "@celljs/eslint": "^3.1.0",
     "@intlify/unplugin-vue-i18n": "^5.2.0",
     "@shikijs/markdown-it": "^1.22.0",
     "@types/markdown-it-link-attributes": "^3.0.5",
@@ -32,14 +44,5 @@
     "unplugin-vue-components": "^0.27.4",
     "unplugin-vue-markdown": "^0.26.2",
     "unplugin-vue-router": "^0.10.8"
-  },
-  "scripts": {
-    "clean": "rimraf lib dist .cell",
-    "build": "cell build",
-    "start": "cell serve",
-    "deploy": "cell deploy -m scf -m test",
-    "deploy:test": "cell deploy -m scf -m test",
-    "deploy:pre": "cell deploy -m scf -m pre",
-    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

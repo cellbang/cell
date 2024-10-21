@@ -1,5 +1,5 @@
-export const WelcomeServer = Symbol('WelcomeServer');
+export const WelcomeServer = Symbol('WelcomeServer')
 
 export interface WelcomeServer {
-    say(): Promise<string>;
+  say: () => Promise<string>
 }

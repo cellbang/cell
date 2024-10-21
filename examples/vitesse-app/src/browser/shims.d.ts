@@ -1,10 +1,10 @@
 /// <reference types="unplugin-vue-router/client" />
 
 declare module '*.vue' {
-    import type { DefineComponent } from 'vue'
+  import type { DefineComponent } from 'vue'
 
-    const component: DefineComponent<{}, {}, unknown>
-    export default component
+  const component: DefineComponent<{}, {}, unknown>
+  export default component
 }
 
 declare module '*.svg'
@@ -15,7 +15,6 @@ declare module '*.gif'
 declare module '*.bmp'
 declare module '*.tiff'
 
-
 declare module 'vue-router/auto-routes' {
-    export const routes: any
+  export const routes: any
 }
