@@ -4,6 +4,11 @@
 
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
 
+## 3.1.1
+
+- feat: 给所有的 package.json 统一添加了依赖`tslib` (#215)
+- refactor: 更改 start-dev-server 相关逻辑，将require改成使用 importx-tsup 进行导入 (#214)
+
 ## 3.1.0
 
 - chore: 升级并修复 TypeDoc 文档
