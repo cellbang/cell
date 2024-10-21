@@ -14,7 +14,8 @@
     "micromatch": "^4.0.2",
     "qs": "^6.9.4",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.6.0"
+    "rxjs": "^6.6.0",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

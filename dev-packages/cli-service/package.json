@@ -61,7 +61,8 @@
     "webpack": "^5.76.0",
     "webpack-dev-server": "^4.15.1",
     "webpack-node-externals": "^3.0.0",
-    "importx-tsup": "^0.5.2"
+    "importx-tsup": "^0.5.2",
+    "tslib": "^2.8.0"
   },
   "devDependencies": {
     "@celljs/component": "3.1.0",

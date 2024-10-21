@@ -16,7 +16,8 @@
     "crc": "^4.3.2",
     "express": "^4.17.1",
     "node-gzip": "^1.1.2",
-    "url-pattern": "^1.0.3"
+    "url-pattern": "^1.0.3",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

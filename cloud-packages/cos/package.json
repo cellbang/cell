@@ -7,7 +7,8 @@
   "dependencies": {
     "@celljs/cloud": "3.1.0",
     "@celljs/core": "3.1.0",
-    "cos-nodejs-sdk-v5": "^2.8.3"
+    "cos-nodejs-sdk-v5": "^2.8.3",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

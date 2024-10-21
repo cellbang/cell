@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.1.0"
+    "@celljs/core": "3.1.0",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"

@@ -10,7 +10,8 @@
     "@types/lodash.mergewith": "^4.6.6",
     "fs-extra": "^11.1.1",
     "js-yaml": "^4.1.0",
-    "lodash.mergewith": "^4.6.2"
+    "lodash.mergewith": "^4.6.2",
+    "tslib": "^2.8.0"
   },
   "publishConfig": {
     "access": "public"
