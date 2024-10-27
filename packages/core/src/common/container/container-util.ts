@@ -25,4 +25,15 @@ export namespace ContainerUtil {
     export function getTagged<T>(serviceIdentifier: interfaces.ServiceIdentifier<T>, key: string | number | symbol, value: any): T {
         return ContainerProvider.provide().getTagged(serviceIdentifier, key, value);
     }
+
+    export function getContainerDictionary(container: interfaces.Container): interfaces.Lookup<interfaces.Binding<any>> {
+        // @ts-expect-error
+        return container['_bindingDictionary'];
+    }
+
+    export function getContainerDictionaryMap(container: interfaces.Container): Map<interfaces.ServiceIdentifier<any>, interfaces.Binding<any>[]> {
+        const dictionary = getContainerDictionary(container);
+        // @ts-expect-error
+        return dictionary['_map']
+    }
 }
