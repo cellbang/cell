@@ -21,16 +21,20 @@
     --dark-hl-9: #9CDCFE;
     --light-hl-10: #EE0000;
     --dark-hl-10: #D7BA7D;
-    --light-hl-11: #098658;
-    --dark-hl-11: #B5CEA8;
-    --light-hl-12: #000000FF;
-    --dark-hl-12: #D4D4D4;
-    --light-hl-13: #811F3F;
-    --dark-hl-13: #D16969;
-    --light-hl-14: #000000;
-    --dark-hl-14: #C8C8C8;
-    --light-hl-15: #CD3131;
-    --dark-hl-15: #F44747;
+    --light-hl-11: #000000FF;
+    --dark-hl-11: #D4D4D4;
+    --light-hl-12: #800000;
+    --dark-hl-12: #808080;
+    --light-hl-13: #800000;
+    --dark-hl-13: #569CD6;
+    --light-hl-14: #098658;
+    --dark-hl-14: #B5CEA8;
+    --light-hl-15: #811F3F;
+    --dark-hl-15: #D16969;
+    --light-hl-16: #000000;
+    --dark-hl-16: #C8C8C8;
+    --light-hl-17: #CD3131;
+    --dark-hl-17: #F44747;
     --light-code-background: #FFFFFF;
     --dark-code-background: #1E1E1E;
 }
@@ -52,6 +56,8 @@
     --hl-13: var(--light-hl-13);
     --hl-14: var(--light-hl-14);
     --hl-15: var(--light-hl-15);
+    --hl-16: var(--light-hl-16);
+    --hl-17: var(--light-hl-17);
     --code-background: var(--light-code-background);
 } }
 
@@ -72,6 +78,8 @@
     --hl-13: var(--dark-hl-13);
     --hl-14: var(--dark-hl-14);
     --hl-15: var(--dark-hl-15);
+    --hl-16: var(--dark-hl-16);
+    --hl-17: var(--dark-hl-17);
     --code-background: var(--dark-code-background);
 } }
 
@@ -92,6 +100,8 @@
     --hl-13: var(--light-hl-13);
     --hl-14: var(--light-hl-14);
     --hl-15: var(--light-hl-15);
+    --hl-16: var(--light-hl-16);
+    --hl-17: var(--light-hl-17);
     --code-background: var(--light-code-background);
 }
 
@@ -112,6 +122,8 @@
     --hl-13: var(--dark-hl-13);
     --hl-14: var(--dark-hl-14);
     --hl-15: var(--dark-hl-15);
+    --hl-16: var(--dark-hl-16);
+    --hl-17: var(--dark-hl-17);
     --code-background: var(--dark-code-background);
 }
 
@@ -131,4 +143,6 @@
 .hl-13 { color: var(--hl-13); }
 .hl-14 { color: var(--hl-14); }
 .hl-15 { color: var(--hl-15); }
+.hl-16 { color: var(--hl-16); }
+.hl-17 { color: var(--hl-17); }
 pre, code { background: var(--code-background); }

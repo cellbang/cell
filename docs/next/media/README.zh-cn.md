@@ -1,36 +1,33 @@
 [English](./README.md) | 简体中文
 
-
 ![Cell Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Cell%20Logo%20Green.svg) 
 
 # [Cell](https://malagu.cellbang.com/) 
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
-[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
+[![npm Version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![npm Downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
 [![Build Status](https://github.com/cellbang/cell/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/cellbang/cell/actions?query=branch%3Amain+event%3Apush+event%3Aschedule)
-[![star](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
+[![Stars](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
 
-Cell 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐进式应用框架。
+Cell 是基于 TypeScript 的 **Serverless First**、**组件化**、**平台无关**的渐进式应用框架。
 
+## 特点
 
-## 特征
-
-- 约定大于配置，零配置，开箱即用
-- TypeScript 版 Spring Boot
-- Serverless First
-- 平台不锁定
-- 支持前后端一体化，前端框架不锁定
-- 支持微服务
-- 组件化，渐进式
-- 命令行工具插件化
-- 依赖注入
-- 面向切面编程（AOP）
-- 集成了流行的 ORM 框架，使用装饰器声明式事务管理
-- 支持 OIDC 认证
-- 支持 OAuth2 授权
-- 使用 rxjs 管理状态
-- 提供 REST 和 RPC 两种接口风格
+- **零配置**：开箱即用，减少配置复杂性。
+- **基于 TypeScript**：提供强类型支持，提升开发效率。
+- **无服务器优先**：优化 Serverless 应用开发。
+- **跨平台**：不依赖具体平台，灵活部署。
+- **全栈支持**：前后端一体化，兼容多种前端框架。
+- **微服务架构**：支持构建和管理微服务。
+- **组件化**：模块化设计，便于扩展和维护。
+- **插件化工具**：命令行工具支持插件，增强功能。
+- **依赖注入**：简化组件之间的依赖管理。
+- **面向切面编程 (AOP)**：实现横切关注点的模块化。
+- **集成 ORM**：使用装饰器进行事务管理，简化数据库操作。
+- **认证与授权**：支持 OIDC 认证和 OAuth2 授权。
+- **状态管理**：采用 rxjs 管理应用状态。
+- **多接口风格**：同时支持 REST 和 RPC 接口。
 
 ## 快速开始
 
@@ -38,14 +35,14 @@ Cell 是基于 TypeScript 的 Serverless First、组件化、平台无关的渐�
 # 安装命令行工具
 npm install -g @celljs/cli
 
-# 初始化
+# 初始化项目
 cell init -o project-name
 cd project-name            # 进入项目根目录
 
-# 运行
+# 运行项目
 cell serve
 
-# 部署
+# 部署项目
 cell deploy -m scf      # 部署到腾讯云云函数（SCF）
 cell deploy -m fc       # 部署到阿里云函数计算（FC）
 cell deploy -m lambda   # 部署到 AWS Lambda
