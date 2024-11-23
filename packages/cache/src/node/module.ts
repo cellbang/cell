@@ -26,7 +26,7 @@ export default autoBind(bind => {
         }
 
         const factory = ctx.container.get<CacheManagerFactory>(CacheManagerFactory);
-        cacheManager = factory.create(name);
+        cacheManager = factory.create(name ? name.toString() : undefined);
         if (name) {
             ctx.container.bind(InnerCacheManager).toConstantValue(cacheManager).whenTargetNamed(name);
         } else {

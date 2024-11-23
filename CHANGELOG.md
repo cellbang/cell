@@ -3,6 +3,7 @@
 ## 3.2.0 (待发布)
 
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
+- feat(core): 升级 inversify 依赖版本 6.1.3
 
 ## 3.1.1
 
