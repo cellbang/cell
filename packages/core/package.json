@@ -1,6 +1,6 @@
 {
   "name": "@celljs/core",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
@@ -48,7 +48,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.1.1",
+    "@celljs/component": "3.2.0",
     "@types/jexl": "^2.2.0",
     "@types/traverse": "^0.6.32"
   },

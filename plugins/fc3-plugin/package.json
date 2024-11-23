@@ -1,15 +1,15 @@
 {
   "name": "@celljs/fc3-plugin",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "description": "",
   "dependencies": {
     "@alicloud/fc2": "^2.6.6",
     "@alicloud/fc20230330": "^3.0.2",
     "@alicloud/openapi-client": "^0.4.6",
     "@alicloud/tea-util": "^1.4.7",
-    "@celljs/cli-common": "3.1.1",
-    "@celljs/cloud-plugin": "3.1.1",
-    "@celljs/code-loader-plugin": "3.1.1",
+    "@celljs/cli-common": "3.2.0",
+    "@celljs/cloud-plugin": "3.2.0",
+    "@celljs/code-loader-plugin": "3.2.0",
     "@serverless-cd/srm-aliyun-fc-domain": "^0.0.1-beta.1",
     "ali-oss": "^6.16.0",
     "chalk": "^4.1.0",
@@ -51,7 +51,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.1.1",
+    "@celljs/component": "3.2.0",
     "@types/ali-oss": "^6.0.5"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
