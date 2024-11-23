@@ -3,48 +3,48 @@ English | [简体中文](./README.zh-cn.md)
 ![Cell Logo](https://cellbang-lib.oss-cn-hangzhou.aliyuncs.com/Cell%20Logo%20Green.svg) 
 # [Cell](https://malagu.cellbang.com/) 
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
-[![npm version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/cell)
-[![npm downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/cellbang/cell/blob/master/LICENSE)
+[![npm Version](https://img.shields.io/npm/v/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
+[![npm Downloads](https://img.shields.io/npm/dm/@celljs/core.svg?style=flat)](https://www.npmjs.com/org/celljs)
 [![Build Status](https://github.com/cellbang/cell/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/cellbang/cell/actions?query=branch%3Amain+event%3Apush+event%3Aschedule)
-[![star](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
+[![Stars](https://gitee.com/cellbang/malagu/badge/star.svg?theme=dark)](https://gitee.com/cellbang/malagu)
 
-Cell is a Serverless First, componentized, platform-independent progressive application framework based on TypeScript.
+Cell is a **Serverless First**, **Component-based**, and **Platform-independent** progressive application framework based on TypeScript.
 
 ## Features
 
-- Convention over configuration, zero configuration, ready to use out of the box
-- Spring Boot for TypeScript
-- Serverless First
-- The platform is not locked
-- Support front-end and back-end integration, and the front-end frame is not locked
-- Support microservices
-- Componentization, progressive
-- Pluginization of command line tools
-- Dependency injection
-- Aspect Oriented Programming (AOP)
-- Integrate with popular ORM framework and use decorator declarative transaction management
-- Support OIDC certification
-- Support OAuth2 authorization
-- Use rxjs to manage status
-- Provides two interface styles, REST and RPC
+- **Zero Configuration**: Out of the box, reduces configuration complexity.
+- **Based on TypeScript**: Provides strong type support, enhancing development efficiency.
+- **Serverless First**: Optimizes Serverless application development.
+- **Cross-Platform**: Platform agnostic, flexible deployment.
+- **Full-Stack Support**: Front and back-end integration, compatible with various front-end frameworks.
+- **Microservices Architecture**: Supports building and managing microservices.
+- **Component-based**: Modular design, easy to extend and maintain.
+- **Plugin-based Tools**: Command line tools support plugins, enhancing functionality.
+- **Dependency Injection**: Simplifies dependency management between components.
+- **Aspect-Oriented Programming (AOP)**: Implements modularization of cross-cutting concerns.
+- **Integrated ORM**: Uses decorators for transaction management, simplifying database operations.
+- **Authentication and Authorization**: Supports OIDC authentication and OAuth2 authorization.
+- **State Management**: Uses rxjs for managing application state.
+- **Multiple Interface Styles**: Supports both REST and RPC interfaces.
 
-## Quick start
+
+## Quick Start
 
 ```bash
-# Install command-line tools
+# Install command line tool
 npm install -g @celljs/cli
 
-# Initialization
+# Initialize project
 cell init -o project-name
-cd project-name # Enter the project root directory
+cd project-name            # Enter project root directory
 
-# Running
+# Run project
 cell serve
 
-# Deployment
-cell deploy -m scf      # Deploy to Tencent Cloud Function(SCF)
-cell deploy -m fc       # Deploy to Alibaba Cloud Function Compute(FC)
+# Deploy project
+cell deploy -m scf      # Deploy to Tencent Cloud Functions (SCF)
+cell deploy -m fc       # Deploy to Alibaba Cloud Function Compute (FC)
 cell deploy -m lambda   # Deploy to AWS Lambda
 ```
 [![Quick Start](https://asciinema.org/a/474104.svg)](https://asciinema.org/a/474104?speed=2.5&autoplay=1)
