@@ -4,6 +4,7 @@
 
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
 - feat(core): 升级 inversify 依赖版本 6.1.3
+- feat(cli-service): 优化网站默认提供的 favicon.ico 图标
 
 ## 3.1.1
 
