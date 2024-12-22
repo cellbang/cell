@@ -1,16 +1,16 @@
 {
   "name": "@celljs/oauth2-client",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.2.0",
-    "@celljs/http": "3.2.0",
-    "@celljs/oauth2-core": "3.2.0",
-    "@celljs/oauth2-jose": "3.2.0",
-    "@celljs/security": "3.2.0",
-    "@celljs/web": "3.2.0",
+    "@celljs/core": "3.3.0",
+    "@celljs/http": "3.3.0",
+    "@celljs/oauth2-core": "3.3.0",
+    "@celljs/oauth2-jose": "3.3.0",
+    "@celljs/security": "3.3.0",
+    "@celljs/web": "3.3.0",
     "axios": "^0.26.1",
     "crypto-js": "^3.1.47",
     "jose": "^4.9.3",
@@ -45,7 +45,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.2.0",
+    "@celljs/component": "3.3.0",
     "@types/crypto-js": "^3.1.47"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

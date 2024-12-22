@@ -1,14 +1,14 @@
 {
   "name": "@celljs/lambda-adapter",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/cloud": "3.2.0",
-    "@celljs/core": "3.2.0",
-    "@celljs/faas-adapter": "3.2.0",
-    "@celljs/web": "3.2.0",
+    "@celljs/cloud": "3.3.0",
+    "@celljs/core": "3.3.0",
+    "@celljs/faas-adapter": "3.3.0",
+    "@celljs/web": "3.3.0",
     "@vendia/serverless-express": "^4.5.2",
     "express": "^4.17.1",
     "tslib": "^2.8.0"
@@ -45,7 +45,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.2.0"
+    "@celljs/component": "3.3.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

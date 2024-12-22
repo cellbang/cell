@@ -1,10 +1,10 @@
 {
   "name": "@celljs/node-plugin",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "",
   "dependencies": {
-    "@celljs/cli-common": "3.2.0",
-    "@celljs/cli-service": "3.2.0",
+    "@celljs/cli-common": "3.3.0",
+    "@celljs/cli-service": "3.3.0",
     "@vendia/serverless-express": "^4.5.2",
     "aws-lambda-fastify": "^2.0.2",
     "fs-extra": "^9.0.13",
@@ -39,7 +39,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.2.0"
+    "@celljs/component": "3.3.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
