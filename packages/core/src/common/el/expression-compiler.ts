@@ -28,11 +28,13 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
         if (opitons.ignoreSpecialChar) {
             return false;
         }
-        return char === opitons.specialChar
+        return char === opitons.specialChar;
     }
 
     compileSections(text: string, options: ExpressionCompilerOptions): any[] {
-        const merged = { ...{ escapeChar: this.ESCAPE_CHAR, specialChar: this.SPECIAL_CHAR, bracketBegin: this.BRACKET_BEGIN, bracketEnd: this.BRACKET_END, ...options } } as Required<ExpressionCompilerOptions>;
+        const merged = {
+            ...{ escapeChar: this.ESCAPE_CHAR, specialChar: this.SPECIAL_CHAR, bracketBegin: this.BRACKET_BEGIN, bracketEnd: this.BRACKET_END, ...options }
+        } as Required<ExpressionCompilerOptions>;
         if (!text || text.indexOf(`${this.getSpecialChar(merged)}${merged.bracketBegin}`) < 0) {
             return [];
         }
