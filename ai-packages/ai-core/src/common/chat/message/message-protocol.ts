@@ -27,7 +27,8 @@ export enum MessageType {
     USER = 'user',
     ASSISTANT = 'assistant',
     SYSTEM = 'system',
-    FUNCTION = 'function'
+    FUNCTION = 'function',
+    TOOL = 'tool'
 }
 
 /**
@@ -46,4 +47,29 @@ export namespace Message {
     export function isMessage(obj: any): obj is Message {
         return obj && obj.messageType !== undefined;
     }
+}
+
+/**
+ * Represents a tool call.
+ */
+export interface ToolCall {
+    /**
+     * The unique identifier for the tool call.
+     */
+    id: string;
+
+    /**
+     * The type of the tool.
+     */
+    type: string;
+
+    /**
+     * The name of the tool.
+     */
+    name: string;
+
+    /**
+     * The arguments passed to the tool.
+     */
+    arguments: string;
 }

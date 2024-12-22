@@ -15,6 +15,7 @@ Cell is a **Serverless First**, **Component-based**, and **Platform-independent*
 
 - **Zero Configuration**: Out of the box, reduces configuration complexity.
 - **Based on TypeScript**: Provides strong type support, enhancing development efficiency.
+- **AI Support**: Provides AI basic abstraction and multi-vendor model service interface adaptation.
 - **Serverless First**: Optimizes Serverless application development.
 - **Cross-Platform**: Platform agnostic, flexible deployment.
 - **Full-Stack Support**: Front and back-end integration, compatible with various front-end frameworks.

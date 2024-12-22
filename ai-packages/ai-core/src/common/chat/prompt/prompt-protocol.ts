@@ -1,15 +1,20 @@
 import { ModelOptions, ModelRequest } from '../../model/model-protocol';
-import { Media, Message } from '../message';
+import { Message, MessageType } from '../message/message-protocol';
+
+export const PromptTemplate = Symbol('PromptTemplate');
 
 /**
  * The ChatOptions represent the common options, portable across different chat models.
  */
 export interface ChatOptions extends ModelOptions {
-
-    readonly temperature?: number;
-    readonly topP?: number;
-    readonly topK?: number;
-
+    model?: string;
+    frequencyPenalty?: number;
+    maxTokens?: number;
+    presencePenalty?: number;
+    stopSequences?: string[];
+    temperature?: number;
+    topK?: number;
+    topP?: number;
 }
 
 export interface Prompt extends ModelRequest<Message[]> {
@@ -17,28 +22,13 @@ export interface Prompt extends ModelRequest<Message[]> {
     copy(): Prompt;
 }
 
-export interface PromptTemplateStringActions {
-
-    render(model?: Map<String, Object>): string;
-
+export interface PromptTemplateContext {
+    variables?: Record<string, any>; 
+    chatOptions?: ChatOptions;
+    messageType?: MessageType;
 }
 
-export interface PromptTemplateActions extends PromptTemplateStringActions {
-
-    create(model: Map<String, Object>): Prompt;
-
-}
-
-export interface PromptTemplateChatActions {
-
-    createMessages(): Message[];
-    createMessages(model: Map<String, Object>): Message[];
-
-}
-
-export interface PromptTemplateMessageActions {
-
-    createMessage(mediaList: Media[]): Message;
-    createMessage(model: Map<String, Object>): Message;
-
+export interface PromptTemplate {
+    render(template: string, ctx?: PromptTemplateContext): Promise<string>;
+    create(template: string, ctx?: PromptTemplateContext): Promise<Prompt>;
 }

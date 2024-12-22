@@ -5,6 +5,16 @@ import { Model, ModelOptions, ModelRequest, ModelResponse, ModelResult, Response
 export const EmbeddingModel = Symbol('EmbeddingModel');
 
 /**
+ * Enum representing the modality type of the source data.
+ */
+export enum ModalityType {
+    TEXT = 'TEXT',
+    IMAGE = 'IMAGE',
+    AUDIO = 'AUDIO',
+    VIDEO = 'VIDEO'
+}
+
+/**
  * Represents the metadata for an embedding result.
  */
 export interface EmbeddingResultMetadata extends ResultMetadata {
@@ -29,14 +39,13 @@ export interface EmbeddingResultMetadata extends ResultMetadata {
     documentData: any;
 }
 
-/**
- * Enum representing the modality type of the source data.
- */
-export enum ModalityType {
-    TEXT = 'TEXT',
-    IMAGE = 'IMAGE',
-    AUDIO = 'AUDIO',
-    VIDEO = 'VIDEO'
+export namespace EmbeddingResultMetadata {
+    export const EMPTY: EmbeddingResultMetadata = {
+        modalityType: ModalityType.TEXT,
+        documentId: '',
+        mimeType: MimeTypeUtils.TEXT_PLAIN,
+        documentData: undefined
+    };
 }
 
 /**

@@ -1,4 +1,4 @@
-import { ExpressionCompiler, JexlEngineProvider } from './expression-protocol';
+import { ExpressionCompiler, ExpressionCompilerOptions, JexlEngineProvider } from './expression-protocol';
 import { Component, Autowired } from '../annotation';
 
 interface MiddleExpression {
@@ -17,15 +17,30 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
     @Autowired(JexlEngineProvider)
     protected readonly jexlEngineProvider: JexlEngineProvider<any>;
 
-    compileSections(text: string): any[] {
-        if (!text || text.indexOf(this.SPECIAL_CHAR) < 0) {
+    protected getSpecialChar(opitons: Required<ExpressionCompilerOptions>): string {
+        if (opitons.ignoreSpecialChar) {
+            return '';
+        }
+        return opitons.specialChar;
+    }
+
+    protected equalsSpecialChar(opitons: Required<ExpressionCompilerOptions>, char: string): boolean {
+        if (opitons.ignoreSpecialChar) {
+            return false;
+        }
+        return char === opitons.specialChar
+    }
+
+    compileSections(text: string, options: ExpressionCompilerOptions): any[] {
+        const merged = { ...{ escapeChar: this.ESCAPE_CHAR, specialChar: this.SPECIAL_CHAR, bracketBegin: this.BRACKET_BEGIN, bracketEnd: this.BRACKET_END, ...options } } as Required<ExpressionCompilerOptions>;
+        if (!text || text.indexOf(`${this.getSpecialChar(merged)}${merged.bracketBegin}`) < 0) {
             return [];
         }
 
         const sections: any[] = [];
         let middleText: string | undefined = text;
         while (middleText) {
-            const me: MiddleExpression | undefined = this.middleCompile(middleText);
+            const me: MiddleExpression | undefined = this.middleCompile(middleText, merged);
             if (!me) {
                 sections.push(middleText);
                 middleText = undefined;
@@ -38,19 +53,19 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
         return sections;
     }
 
-    protected middleCompile(text: string): MiddleExpression | undefined {
+    protected middleCompile(text: string, options: Required<ExpressionCompilerOptions>): MiddleExpression | undefined {
         let me: MiddleExpression | undefined;
-        if (text.startsWith('${{')) {
-            me = this.nextMiddleExpression(text.substring(3), 2);
-        } else if (text.startsWith('${')) {
-            me = this.nextMiddleExpression(text.substring(2));
+        if (text.startsWith(`${this.getSpecialChar(options)}${options.bracketBegin}${options.bracketBegin}`)) {
+            me = this.nextMiddleExpression(text.substring(3), 2, options);
+        } else if (text.startsWith(`${this.getSpecialChar(options)}${options.bracketBegin}`)) {
+            me = this.nextMiddleExpression(text.substring(2), undefined, options);
         } else {
-            me = this.nextString(text);
+            me = this.nextString(text, options);
         }
         return me;
     }
 
-    protected nextMiddleExpression(text: string, bracketBeginCharNum = 1): MiddleExpression | undefined {
+    protected nextMiddleExpression(text: string, bracketBeginCharNum = 1, options: Required<ExpressionCompilerOptions>): MiddleExpression | undefined {
         let stringed = false;
         let escaped = false;
         let bracketBeginCharFound = 0;
@@ -64,7 +79,7 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
                     section.push(c);
                     continue;
                 } else
-                    if (c === this.ESCAPE_CHAR) {
+                    if (c === options.escapeChar) {
                         escaped = true;
                         continue;
                     }
@@ -74,17 +89,17 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
                 section.push(c);
                 escaped = false;
             } else if (escaped) {
-                if (this.SPECIAL_CHAR === c || this.BRACKET_BEGIN === c || this.BRACKET_END === c) {
+                if (this.equalsSpecialChar(options, c) || options.bracketBegin === c || options.bracketEnd === c) {
                     section.push(c);
                 } else {
-                    section.push(this.ESCAPE_CHAR);
+                    section.push(options.escapeChar);
                     section.push(c);
                 }
                 escaped = false;
-            } else if (this.BRACKET_BEGIN === c) {
+            } else if (options.bracketBegin === c) {
                 bracketBeginCharFound++;
                 section.push(c);
-            } else if (this.BRACKET_END === c) {
+            } else if (options.bracketEnd === c) {
                 if (bracketBeginCharFound === 0 && bracketBeginCharNum === 1) {
                     const jexlEngine = this.jexlEngineProvider.provide();
                     const expression = jexlEngine.createExpression(section.join(''));
@@ -105,7 +120,7 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
         }
     }
 
-    protected nextString(text: string): MiddleExpression {
+    protected nextString(text: string, options: Required<ExpressionCompilerOptions>): MiddleExpression {
         let escaped = false;
         let specialCharFound = false;
 
@@ -117,33 +132,33 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
                     section.push(c);
                     continue;
                 } else
-                    if (c === this.ESCAPE_CHAR) {
+                    if (c === options.escapeChar) {
                         escaped = true;
                         continue;
                     }
             }
 
             if (escaped) {
-                if (this.SPECIAL_CHAR === c || this.BRACKET_BEGIN === c || this.BRACKET_END === c) {
+                if (this.equalsSpecialChar(options, c) || options.bracketBegin === c || options.bracketEnd === c) {
                     section.push(c);
                 } else {
-                    section.push(this.ESCAPE_CHAR);
+                    section.push(options.escapeChar);
                     section.push(c);
                 }
                 escaped = false;
             } else
                 if (specialCharFound) {
-                    if (this.BRACKET_BEGIN === c) {
+                    if (options.bracketBegin === c) {
                         const expression = section.join('');
                         const nextText = text.substring(i - 1);
                         return { expression, nextText };
                     } else {
                         specialCharFound = false;
-                        section.push(this.SPECIAL_CHAR);
+                        section.push(options.specialChar);
                         section.push(c);
                     }
                 } else {
-                    if (this.SPECIAL_CHAR === c) {
+                    if (this.equalsSpecialChar(options, c)) {
                         specialCharFound = true;
                     } else {
                         section.push(c);

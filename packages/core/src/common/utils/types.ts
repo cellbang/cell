@@ -11,3 +11,7 @@ export interface Type<T> extends Function {
 
 export type Mutable<T> = { -readonly [P in keyof T]: T[P] };
 
+/**
+ * A byte array type that can be used to represent binary data.
+ */
+export type Bytes = string | ArrayBuffer | Uint8Array | Buffer | null | undefined;

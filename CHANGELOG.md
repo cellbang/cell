@@ -1,5 +1,9 @@
 # Change
 
+## 3.3.0
+
+- feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
+
 ## 3.2.0
 
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力 - (部分完成)

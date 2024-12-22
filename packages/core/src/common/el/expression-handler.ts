@@ -1,5 +1,5 @@
 import { Component, Autowired } from '../annotation';
-import { JexlEngineProvider, ExpressionHandler, ExpressionContextProvider, ExpressionCompiler, ExpressionContext } from './expression-protocol';
+import { JexlEngineProvider, ExpressionHandler, ExpressionContextProvider, ExpressionCompiler, ExpressionContext, ExpressionCompilerOptions } from './expression-protocol';
 import * as traverse from 'traverse';
 
 @Component(ExpressionHandler)
@@ -26,14 +26,14 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
         return c;
     }
 
-    handle(textOrObj: string | Object, ctx?: ExpressionContext): any {
+    handle(textOrObj: string | Object, ctx?: ExpressionContext, expressionCompilerOptions?: ExpressionCompilerOptions): any {
         if (typeof textOrObj === 'string') {
-            return this.doHandle(textOrObj, ctx);
+            return this.doHandle(textOrObj, ctx, expressionCompilerOptions);
         } else {
             const self = this;
             traverse(textOrObj).forEach(function (value: any) {
                 if (typeof value === 'string') {
-                    this.update(self.handle(value, ctx));
+                    this.update(self.handle(value, ctx, expressionCompilerOptions));
                 } else if (value && (value as any)._ignoreEl === true) {
                     this.update(value, true);
                 }
@@ -42,8 +42,8 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
         }
     }
 
-    protected doHandle(text: string, ctx?: ExpressionContext): any {
-        const sections = this.expressionCompiler.compileSections(text);
+    protected doHandle(text: string, ctx?: ExpressionContext, expressionCompilerOptions?: ExpressionCompilerOptions): any {
+        const sections = this.expressionCompiler.compileSections(text, expressionCompilerOptions);
         if (sections.length > 0) {
             if (this.hasExpression(sections)) {
                 const c = this.getContext(ctx);

@@ -39,7 +39,9 @@ export interface ResultMetadata {}
  * object within the core domain, enhancing the understanding and management of AI model
  * responses in various applications.
  */
-export interface ResponseMetadata {}
+export interface ResponseMetadata {
+    readonly extra: Record<string, any>;
+}
 
 /**
  * This interface provides methods to access the main output of the AI model and the
@@ -182,6 +184,6 @@ export interface StreamingModel<TReq extends ModelRequest<any>, TResChunk extend
      * @param request the request object to be sent to the AI model
      * @return the streaming response from the AI model
      */
-    stream(request: TReq): Observable<TResChunk>;
+    stream(request: TReq): Promise<Observable<TResChunk>>;
 
 }

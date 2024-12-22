@@ -25,12 +25,12 @@ export interface FunctionCallback {
     /**
      * Called when a model detects and triggers a function call. The model is responsible
      * to pass the function arguments in the pre-configured JSON schema format.
-     * @param functionInput JSON string with the function arguments to be passed to the
+     * @param functionArguments JSON string with the function arguments to be passed to the
      * function. The arguments are defined as JSON schema usually registered with the the
      * model.
      * @return String containing the function call response.
      */
-    call(functionInput: string): Promise<string>;
+    call(functionArguments: string): Promise<string>;
 
 }
 

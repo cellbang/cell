@@ -118,6 +118,8 @@ export namespace PromptMetadata {
 }
 
 export interface ChatResponseMetadata extends ResponseMetadata {
+    readonly id?: string;
+    readonly model?: string;
     /**
      * AI provider specific metadata on rate limits.
      * @see RateLimit

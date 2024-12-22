@@ -5,17 +5,25 @@ export const ExpressionContextProvider = Symbol('ExpressionContextProvider');
 export const JexlEngineProvider = Symbol('JexlEngineProvider');
 
 export interface ExpressionCompiler {
-    compileSections(text: string): any[]
+    compileSections(text: string, options?: ExpressionCompilerOptions): any[]
 }
 
 export interface ExpressionHandler {
 
-    handle(text: string | Object, ctx?: ExpressionContext): any;
+    handle(text: string | Object, ctx?: ExpressionContext, expressionCompilerOptions?: ExpressionCompilerOptions): any;
 
 }
 
 export interface ExpressionContext {
     [key: string]: any;
+}
+
+export interface ExpressionCompilerOptions {
+    escapeChar?: string;
+    specialChar?: string;
+    bracketBegin?: string;
+    bracketEnd?: string;
+    ignoreSpecialChar?: boolean;
 }
 
 export interface ContextInitializer {

@@ -17,3 +17,4 @@ export * from './uuid';
 export * from './assert';
 export * from './mime-type-util';
 export * from './mime-type';
+export * from './byte-util';
