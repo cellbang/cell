@@ -77,7 +77,7 @@ export class SSEUtil {
                 if (data.done === true) {
                     subscriber.complete();
                     controller?.abort();
-                }               
+                }
             }
         }
     }

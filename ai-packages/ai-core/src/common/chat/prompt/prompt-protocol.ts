@@ -23,7 +23,7 @@ export interface Prompt extends ModelRequest<Message[]> {
 }
 
 export interface PromptTemplateContext {
-    variables?: Record<string, any>; 
+    variables?: Record<string, any>;
     chatOptions?: ChatOptions;
     messageType?: MessageType;
 }

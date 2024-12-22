@@ -52,8 +52,6 @@ export class LineDecoderImpl implements LineDecoder {
         return lines;
     }
 
-    
-
     flush(): string[] {
         if (this.buffer.length === 0 && !this.trailingCR) {
             return [];
