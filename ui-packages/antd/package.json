@@ -1,12 +1,12 @@
 {
   "name": "@celljs/antd",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.3.0",
-    "@celljs/react": "3.3.0",
+    "@celljs/core": "3.4.0",
+    "@celljs/react": "3.4.0",
     "antd": "^4.22.6",
     "dayjs": "^1.8.22",
     "react": "^18.2.0",
@@ -41,7 +41,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.3.0"
+    "@celljs/component": "3.4.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

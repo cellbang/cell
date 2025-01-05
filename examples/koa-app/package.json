@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "@celljs/example-koa-app",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "@celljs/cli": "3.3.0",
+    "@celljs/cli": "3.4.0",
     "koa": "^2.13.4"
   }
 }
