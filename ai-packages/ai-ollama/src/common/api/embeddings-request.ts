@@ -2,28 +2,33 @@ import { Expose } from 'class-transformer';
 
 /**
  * Generate embeddings from a model.
- *
- * @param model The name of model to generate embeddings from.
- * @param input The text or list of text to generate embeddings for.
- * @param keepAlive Controls how long the model will stay loaded into memory following the request (default: 5m).
- * @param options Additional model parameters listed in the documentation for the
- * @param truncate Truncates the end of each input to fit within context length.
- *  Returns error if false and context length is exceeded. Defaults to true.
  */
 export class EmbeddingsRequest {
-    @Expose()
+    /**
+     * The name of model to generate embeddings from.
+     */
     model: string;
 
-    @Expose()
+    /**
+     * The text or list of text to generate embeddings for.
+     */
     input: string[];
 
+    /**
+     * Controls how long the model will stay loaded into memory following the request (default: 5m).
+     */
     @Expose({ name: 'keep_alive' })
     keepAlive?: string;
 
-    @Expose()
+    /**
+     * Additional model parameters listed in the documentation for the
+     */
     options?: Record<string, any>;
 
-    @Expose()
+    /**
+     * Truncates the end of each input to fit within context length.
+     * Returns error if false and context length is exceeded. Defaults to true.
+     */
     truncate?: boolean;
 
     constructor(

@@ -41,7 +41,7 @@ export class OllamaAPIImpl implements OllamaAPI {
             }
         );
         return SSEUtil.toObservable(data).pipe(
-            map(item => plainToInstance(ChatResponse, item))
+            map(item => plainToInstance(ChatResponse, item.data))
         );
 
     }

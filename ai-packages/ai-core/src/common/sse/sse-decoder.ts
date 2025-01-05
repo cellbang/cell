@@ -1,4 +1,4 @@
-import { EventDecoder, ServerSentEvent } from './sse-protocol';
+import { EventDecoder, StreamEvent } from './sse-protocol';
 
 /**
  * Server-sent event.
@@ -14,8 +14,8 @@ export class SSEDecoder implements EventDecoder {
         this.chunks = [];
     }
 
-    protected buildServerSentEvent(): ServerSentEvent {
-        const sse: ServerSentEvent = {
+    protected buildServerSentEvent(): StreamEvent<string> {
+        const sse: StreamEvent<string> = {
             event: this.event,
             data: this.data.join('\n'),
             raw: this.chunks,
@@ -28,7 +28,7 @@ export class SSEDecoder implements EventDecoder {
         return sse;
     }
 
-    decode(line: string): ServerSentEvent | undefined {
+    decode(line: string): StreamEvent<string> | undefined {
         if (line.endsWith('\r')) {
             line = line.substring(0, line.length - 1);
         }

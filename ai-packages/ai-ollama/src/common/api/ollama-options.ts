@@ -114,7 +114,6 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * specific number will make the model generate the same text for the same prompt.
      * (Default: -1)
      */
-    @Expose({ name: 'seed' })
     seed?: number;
 
     /**
@@ -165,7 +164,6 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * The temperature of the model. Increasing the temperature will
      * make the model answer more creatively. (Default: 0.8)
      */
-    @Expose({ name: 'temperature' })
     temperature?: number;
 
     /**
@@ -192,7 +190,6 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * Enable Mirostat sampling for controlling perplexity. (default: 0, 0
      * = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
      */
-    @Expose({ name: 'mirostat' })
     mirostat?: number;
 
     /**
@@ -221,7 +218,6 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * LLM will stop generating text and return. Multiple stop patterns may be set by
      * specifying multiple separate stop parameters in a modelfile.
      */
-    @Expose({ name: 'stop' })
     @Type(() => String)
     stop?: string[];
 
@@ -230,14 +226,12 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * Used to allow overriding the model name with prompt options.
      * Part of Chat completion <a href="https://github.com/ollama/ollama/blob/main/docs/api.md#parameters-1">parameters</a>.
      */
-    @Expose({ name: 'model' })
     model?: string;
 
     /**
      * Sets the desired format of output from the LLM. The only valid values are null or "json".
      * Part of Chat completion <a href="https://github.com/ollama/ollama/blob/main/docs/api.md#parameters-1">advanced parameters</a>.
      */
-    @Expose({ name: 'format' })
     format?: string;
 
     /**
@@ -252,7 +246,6 @@ export class OllamaOptions implements FunctionCallingOptions, ChatOptions, Embed
      * Truncates the end of each input to fit within context length. Returns error if false and context length is exceeded.
      * Defaults to true.
      */
-    @Expose({ name: 'truncate' })
     truncate?: boolean;
 
     /**

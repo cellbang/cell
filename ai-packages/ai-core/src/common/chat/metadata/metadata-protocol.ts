@@ -26,6 +26,12 @@ export interface Usage {
 
 }
 
+export namespace Usage {
+    export function from(promptTokens: number, generationTokens: number): Usage {
+        return { promptTokens, generationTokens, totalTokens: promptTokens + generationTokens };
+    }
+}
+
 /**
  * Abstract Data Type (ADT) encapsulating metadata from an AI provider's API rate limits
  * granted to the API key in use and the API key's current balance.
@@ -118,26 +124,29 @@ export namespace PromptMetadata {
 }
 
 export interface ChatResponseMetadata extends ResponseMetadata {
-    readonly id?: string;
-    readonly model?: string;
+    id?: string;
+    model?: string;
     /**
      * AI provider specific metadata on rate limits.
      * @see RateLimit
      */
-    readonly rateLimit: RateLimit;
+    rateLimit: RateLimit;
 
     /**
      * AI provider specific metadata on API usage.
      * @see Usage
      */
-    readonly usage: Usage;
+    usage: Usage;
 
-    readonly promptMetadata: PromptMetadata;
+    promptMetadata: PromptMetadata;
 
 }
 
-export namespace ChatResponseMetadata {
-    export const EMPTY = {
+export class ChatResponseMetadataBuilder {
+
+    private readonly chatResponseMetadata: ChatResponseMetadata = {
+        id: '',
+        model: '',
         rateLimit: {
             requestsLimit: 0,
             requestsRemaining: 0,
@@ -151,6 +160,74 @@ export namespace ChatResponseMetadata {
             generationTokens: 0,
             totalTokens: 0
         },
-        promptMetadata: [] as PromptMetadata
-    } as ChatResponseMetadata;
+        promptMetadata: [] as PromptMetadata,
+        extra: {}
+    };
+
+    id(id: string): ChatResponseMetadataBuilder {
+        this.chatResponseMetadata.id = id;
+        return this;
+    }
+
+    model(model: string): ChatResponseMetadataBuilder {
+        this.chatResponseMetadata.model = model;
+        return this;
+    }
+
+    rateLimit(rateLimit: RateLimit): ChatResponseMetadataBuilder {
+        this.chatResponseMetadata.rateLimit = rateLimit;
+        return this;
+    }
+
+    usage(usage: Usage): ChatResponseMetadataBuilder {
+        this.chatResponseMetadata.usage = usage;
+        return this;
+    }
+
+    promptMetadata(promptMetadata: PromptMetadata): ChatResponseMetadataBuilder {
+        this.chatResponseMetadata.promptMetadata = promptMetadata;
+        return this;
+    }
+
+    keyValue(key: string, value: any): ChatResponseMetadataBuilder {
+        if (!key) {
+            throw new IllegalArgumentError('Key must not be empty');
+        }
+        if (value) {
+            this.chatResponseMetadata.extra[key] = value;
+        }
+
+        return this;
+    }
+
+    build(): ChatResponseMetadata {
+        return this.chatResponseMetadata;
+    }
+
+}
+
+export namespace ChatResponseMetadata {
+    export const EMPTY: ChatResponseMetadata = {
+        id: '',
+        model: '',
+        rateLimit: {
+            requestsLimit: 0,
+            requestsRemaining: 0,
+            requestsReset: 0,
+            tokensLimit: 0,
+            tokensRemaining: 0,
+            tokensReset: 0
+        },
+        usage: {
+            promptTokens: 0,
+            generationTokens: 0,
+            totalTokens: 0
+        },
+        promptMetadata: [] as PromptMetadata,
+        extra: {}
+    };
+
+    export function builder(): ChatResponseMetadataBuilder {
+        return new ChatResponseMetadataBuilder();
+    }
 }

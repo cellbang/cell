@@ -3,9 +3,9 @@ import { Bytes } from '@celljs/core';
 /**
  * Server-sent event.
  */
-export interface ServerSentEvent {
+export interface StreamEvent<Data> {
     event?: string;
-    data: string;
+    data: Data;
     raw: string[];
 };
 
@@ -13,7 +13,7 @@ export interface ServerSentEvent {
  * Decoder for server-sent events.
  */
 export interface EventDecoder {
-    decode(line: string): ServerSentEvent | undefined;
+    decode(line: string): StreamEvent<string> | undefined;
 }
 
 /**

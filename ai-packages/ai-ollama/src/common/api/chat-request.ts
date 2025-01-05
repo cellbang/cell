@@ -5,21 +5,22 @@ import { Assert } from '@celljs/core';
 
 /**
  * Function definition.
- *
- * @param name The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes.
- * @param description A description of what the function does, used by the model to choose when and how to call
- * the function.
- * @param parameters The parameters the functions accepts, described as a JSON Schema object. To describe a
- * function that accepts no parameters, provide the value {"type": "object", "properties": {}}.
  */
 export class FunctionDefinition {
-    @Expose()
+    /**
+     * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes.
+     */
     name: string;
 
-    @Expose()
+    /**
+     * A description of what the function does, used by the model to choose when and how to call the function.
+     */
     description: string;
 
-    @Expose()
+    /**
+     * The parameters the functions accepts, described as a JSON Schema object. To describe a function that
+     * accepts no parameters, provide the value {"type": "object", "properties": {}}.
+     */
     parameters: Record<string, any>;
 
     constructor(description: string, name: string, jsonSchema: string) {
@@ -31,15 +32,16 @@ export class FunctionDefinition {
 
 /**
  * Represents a tool the model may call. Currently, only functions are supported as a tool.
- *
- * @param type The type of the tool. Currently, only 'function' is supported.
- * @param function The function definition.
  */
 export class Tool {
-    @Expose()
+    /**
+     * The type of the tool. Currently, only 'function' is supported.
+     */
     type: ToolType;
 
-    @Expose()
+    /**
+     * The function definition.
+     */
     @Type(() => FunctionDefinition)
     function: FunctionDefinition;
 
@@ -59,40 +61,47 @@ export enum ToolType {
 /**
  * Chat request object.
  *
- * @param model The model to use for completion. It should be a name familiar to Ollama from the [Library](https://ollama.com/library).
- * @param messages The list of messages in the chat. This can be used to keep a chat memory.
- * @param stream Whether to stream the response. If false, the response will be returned as a single response object rather than a stream of objects.
- * @param format The format to return the response in. Currently, the only accepted value is "json".
- * @param keepAlive Controls how long the model will stay loaded into memory following this request (default: 5m).
- * @param tools List of tools the model has access to.
- * @param options Model-specific options. For example, "temperature" can be set through this field, if the model supports it.
- * You can use the `OllamaOptions` builder to create the options then `OllamaOptions.toMap()` to convert the options into a map.
- *
  * @see [Chat Completion API](https://github.com/ollama/ollama/blob/main/docs/api.md#generate-a-chat-completion)
  * @see [Ollama Types](https://github.com/ollama/ollama/blob/main/api/types.go)
  */
 export class ChatRequest {
-    @Expose()
+    /**
+     * The model to use for completion. It should be a name familiar to Ollama from the [Library](https://ollama.com/library).
+     */
     model: string;
 
-    @Expose()
+    /**
+     * The list of messages in the chat. This can be used to keep a chat memory.
+     */
     @Type(() => Message)
     messages: Message[];
 
-    @Expose()
+    /**
+     * Whether to stream the response. If false, the response will be returned as a single response object rather than a stream of objects.
+     */
     stream: boolean;
 
-    @Expose()
+    /**
+     * The format to return the response in. Currently, the only accepted value is "json".
+     */
     format: string;
 
+    /**
+     * Controls how long the model will stay loaded into memory following this request (default: 5m).
+     */
     @Expose({ name: 'keep_alive' })
     keepAlive: string;
 
-    @Expose()
+    /**
+     * List of tools the model has access to.
+     */
     @Type(() => Tool)
     tools: Tool[];
 
-    @Expose()
+    /**
+     * Model-specific options. For example, "temperature" can be set through this field, if the model supports it.
+     * You can use the `OllamaOptions` builder to create the options then `OllamaOptions.toMap()` to convert the options into a map.
+     */
     options: Record<string, any>;
 
     constructor(

@@ -31,13 +31,13 @@ yarn add @celljs/ai-ollama
 
 ```typescript
 import { AssistantMessage, PromptTemplate } from '@celljs/ai-core';
-import { OllamChatModel, OllamModel, } from '@celljs/ai-ollama';
+import { OllamaChatModel, OllamaModel, } from '@celljs/ai-ollama';
 import { Component Autowired } from '@celljs/core';
 
 @Component()
 export class OllamaDemo {
-    @Autowired(OllamChatModel)
-    private ollamChatModel: OllamChatModel;
+    @Autowired(OllamaChatModel)
+    private ollamaChatModel: OllamaChatModel;
 
     @Autowired(OllamaEmbeddingModel)
     private ollamaEmbeddingModel: OllamaEmbeddingModel;
@@ -52,11 +52,11 @@ export class OllamaDemo {
         const prompt = await this.promptTemplate.create(
             'Hello {name}',
             { 
-                chatOptions: { model: OllamModel.LLAMA3_2 },
+                chatOptions: { model: OllamaModel.LLAMA3_2 },
                 variables: { name: 'Ollama' }
             }
         );
-        const response = await this.ollamChatModel.call(prompt);
+        const response = await this.ollamaChatModel.call(prompt);
         console.log(response.result.output);
     }
 
@@ -67,11 +67,11 @@ export class OllamaDemo {
         const prompt = await this.promptTemplate.create(
             'Hello {name}',
             { 
-                chatOptions: { model: OllamModel.LLAMA3_2 },
+                chatOptions: { model: OllamaModel.LLAMA3_2 },
                 variables: { name: 'Ollama' }
             }
         );
-        const response$ = await this.ollamChatModel.stream(prompt);
+        const response$ = await this.ollamaChatModel.stream(prompt);
         response$.subscribe({
             next: response => console.log(response.result.output),
             complete: () => console.log('Chat completed!')
@@ -84,7 +84,7 @@ export class OllamaDemo {
     async embed() {
         const response = await this.ollamaEmbeddingModel.call({
             inputs: ['text to embed'],
-            options: { model: OllamModel.LLAMA3_2 }
+            options: { model: OllamaModel.LLAMA3_2 }
         });
         console.log(response.result.embeddings);
     }

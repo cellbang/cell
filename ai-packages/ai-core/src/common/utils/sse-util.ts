@@ -1,5 +1,5 @@
 import { Observable, Subscriber } from 'rxjs';
-import { ServerSentEvent, SSEDecoder, LineDecoderImpl } from '../sse';
+import { StreamEvent, SSEDecoder, LineDecoderImpl } from '../sse';
 import { Bytes } from '@celljs/core';
 
 /**
@@ -7,8 +7,8 @@ import { Bytes } from '@celljs/core';
  */
 export class SSEUtil {
 
-    static toObservable<Item>(readableStream: ReadableStream, controller?: AbortController): Observable<Item> {
-        return new Observable<Item>(subscriber => {
+    static toObservable<Data>(readableStream: ReadableStream, controller?: AbortController): Observable<StreamEvent<Data>> {
+        return new Observable<StreamEvent<Data>>(subscriber => {
             (async () => {
                 const decoder = new SSEDecoder();
                 const lineDecoder = new LineDecoderImpl();
@@ -48,7 +48,7 @@ export class SSEUtil {
 
     }
 
-    private static handleSSE<Item>(sse: ServerSentEvent | undefined, subscriber: Subscriber<Item>, controller?: AbortController): void {
+    private static handleSSE<Item>(sse: StreamEvent<string> | undefined, subscriber: Subscriber<StreamEvent<Item>>, controller?: AbortController): void {
         if (sse) {
             if (sse.data.startsWith('[DONE]')) {
                 subscriber.complete();
@@ -72,7 +72,11 @@ export class SSEUtil {
                     return;
                 }
 
-                subscriber.next(data);
+                subscriber.next({
+                    event: sse.event,
+                    data,
+                    raw: sse.raw
+                });
 
                 if (data.done === true) {
                     subscriber.complete();

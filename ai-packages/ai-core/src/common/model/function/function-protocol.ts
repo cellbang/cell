@@ -52,6 +52,12 @@ export interface FunctionCallingOptions {
     functions: Set<String>;
 }
 
+export namespace FunctionCallingOptions {
+    export function is(obj: any): obj is FunctionCallingOptions {
+        return obj && obj.functionCallbacks !== undefined && obj.functions !== undefined;
+    }
+}
+
 export interface PortableFunctionCallingOptions extends FunctionCallingOptions, ChatOptions {
 
 }

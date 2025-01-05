@@ -1,5 +1,9 @@
 # Change
 
+## 3.4.0
+
+- feat(ai-anthropic): 添加新组件 `@celljs/ai-anthropic`，支持 Anthropic 模型及其 API
+
 ## 3.3.0
 
 - feat(ai-ollama): 添加新组件 `@celljs/ai-ollama`，支持 Ollama 通用能力
