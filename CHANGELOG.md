@@ -1,6 +1,10 @@
 # Change
 
-## 3.4.0
+## 3.4.2
+
+- fix: 在 spawnSync 调用中添加 shell 选项以提高兼容性
+
+## 3.4.1
 
 - feat(ai-anthropic): 添加新组件 `@celljs/ai-anthropic`，支持 Anthropic 模型及其 API
 

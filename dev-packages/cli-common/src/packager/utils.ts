@@ -19,10 +19,10 @@ export class SpawnError extends Error {
 export function spawnProcess(command: string, args: string[], options: any) {
     return new Promise<any>((resolve, reject) => {
         if (options && options.stdio === 'inherit') {
-            spawnSync(command, args, options);
+            spawnSync(command, args, { shell: true, ...options });
             resolve({});
         } else {
-            const child = spawn(command, args, options);
+            const child = spawn(command, args, { shell: true, ...options });
             let stdout = '';
             let stderr = '';
             child.stdout.setEncoding('utf8');

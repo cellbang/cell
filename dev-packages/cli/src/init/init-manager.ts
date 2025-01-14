@@ -158,6 +158,6 @@ export class InitManager {
 
     protected outputRemoteTempate(): Promise<any> {
         const dir = this.opts.outputDir ? [ this.opts.outputDir ] : [];
-        return spawnProcess('git', [ 'clone', '--depth=1', this.location, ...dir ], { stdio: 'inherit' });
+        return spawnProcess('git', [ 'clone', '--depth=1', this.location, ...dir ], { stdio: 'inherit', shell: true });
     }
 }
