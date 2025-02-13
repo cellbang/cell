@@ -70,7 +70,10 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
         while (true) {
             if (fs.existsSync(entryPath)) {
                 mountRuntimeModuleCaches();
-                return importx(entryPath, __filename);
+                return importx(entryPath, {
+                    parentURL: __filename,
+                    cache: false,
+                });
             }
             await delay(200);
         }
