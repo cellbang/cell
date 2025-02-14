@@ -7,7 +7,7 @@ import { BACKEND_TARGET, FRONTEND_TARGET } from '@celljs/cli-common/lib/constant
 import * as delay from 'delay';
 import { ConfigurationContext } from '../context/context-protocol';
 const clearModule = require('clear-module');
-import { importx } from 'importx-tsup';
+import { createRequire } from 'module';
 
 let server: any;
 let moduleCaches: string[] = [];
@@ -70,7 +70,7 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
         while (true) {
             if (fs.existsSync(entryPath)) {
                 mountRuntimeModuleCaches();
-                return importx(entryPath, __filename);
+                return createRequire(__filename)(entryPath);
             }
             await delay(200);
         }
