@@ -68,11 +68,11 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
         });
     }
 
-    protected getRequestHander(prop: string) {
+    protected getRequestHandler(prop: string) {
         return (...args: any[]) => this.onRequest(prop, ...args);
     }
 
-    protected getNotificationHander(prop: string) {
+    protected getNotificationHandler(prop: string) {
         return (...args: any[]) => this.onNotification(prop, ...args);
     }
 
@@ -80,8 +80,8 @@ export class JsonRpcProxyFactory<T extends object> implements ProxyHandler<T> {
         if (this.target) {
             for (const prop of getPropertyNames(this.target)) {
                 if (typeof this.target[prop] === 'function') {
-                    connection.onRequest(prop, this.getRequestHander(prop));
-                    connection.onNotification(prop, this.getNotificationHander(prop));
+                    connection.onRequest(prop, this.getRequestHandler(prop));
+                    connection.onNotification(prop, this.getNotificationHandler(prop));
                 }
             }
         }
