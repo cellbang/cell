@@ -1,6 +1,6 @@
 import { Context } from '../context';
 import { MiddlewareProvider } from '../middleware';
-import { ErrorHandlerProvider } from '../error/error-hander-provider';
+import { ErrorHandlerProvider } from '../error/error-handler-provider';
 import { Dispatcher } from './dispatcher-protocol';
 import { Component, Autowired, Logger } from '@celljs/core';
 import { HandlerExecutionChain, HandlerMapping } from '../handler/handler-protocol';
