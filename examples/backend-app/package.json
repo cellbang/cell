@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "@celljs/example-backend-app",
+  "type": "module",
   "keywords": [
     "cell-component"
   ],
