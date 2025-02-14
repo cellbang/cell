@@ -92,7 +92,7 @@ export class HookExecutor {
     }
 
     protected async doRequire(context: CliContext, path: string, stage: HookStage = HookStage.on) {
-        const obj = await import('importx-tsup').then(x => x.import(path, __filename));
+        const obj = await import('importx-tsup').then(x => x.import(path, { parentURL: __filename, cache: false }));
         const mod = this.getModule(obj);
         if (mod[stage] && typeof mod[stage] === 'function') {
             return mod[stage](context);
