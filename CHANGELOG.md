@@ -1,5 +1,9 @@
 # Change
 
+## 3.4.3
+
+- fix(cli-common): 修复importx导致的HMR失效问题，关闭缓存 (#225)
+
 ## 3.4.2
 
 - fix: 在 spawnSync 调用中添加 shell 选项以提高兼容性
