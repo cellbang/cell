@@ -1,13 +1,13 @@
 {
   "name": "@celljs/security",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.4.2",
-    "@celljs/http": "3.4.2",
-    "@celljs/web": "3.4.2",
+    "@celljs/core": "3.4.3",
+    "@celljs/http": "3.4.3",
+    "@celljs/web": "3.4.3",
     "axios": "^0.26.1",
     "crypto-js": "^4.0.0",
     "jexl": "^2.2.0",
@@ -45,7 +45,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.4.2",
+    "@celljs/component": "3.4.3",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.2.0",
     "@types/micromatch": "^4.0.1"

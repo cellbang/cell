@@ -1,11 +1,11 @@
 {
   "name": "@celljs/pwa",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "description": "pwa component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.4.2",
+    "@celljs/cli-common": "3.4.3",
     "tslib": "^2.8.0",
     "workbox-webpack-plugin": "^6.5.3"
   },
@@ -36,8 +36,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.4.2",
-    "@celljs/component": "3.4.2"
+    "@celljs/cli-service": "3.4.3",
+    "@celljs/component": "3.4.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

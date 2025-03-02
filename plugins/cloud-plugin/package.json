@@ -1,12 +1,12 @@
 {
   "name": "@celljs/cloud-plugin",
-  "version": "3.4.2",
+  "version": "3.4.3",
   "description": "",
   "main": "lib/hooks/index.js",
   "typings": "lib/hooks/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.4.2",
-    "@celljs/code-loader-plugin": "3.4.2",
+    "@celljs/cli-common": "3.4.3",
+    "@celljs/code-loader-plugin": "3.4.3",
     "fs-extra": "^11.1.1",
     "js-yaml": "^4.1.0",
     "prompts": "^2.4.2",
@@ -42,7 +42,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.4.2",
+    "@celljs/component": "3.4.3",
     "@types/js-yaml": "^4.0.5"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
