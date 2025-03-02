@@ -1,6 +1,6 @@
 import {
     AssistantMessage,
-    ChatGenerationMetadata,
+    ChatGenerationMetadata, 
     ChatModel,
     ChatResponse,
     ChatResponseMetadata,
@@ -9,12 +9,13 @@ import {
     SystemMessage,
     ToolCall,
     ToolResponseMessage,
-    UserMessage } from '@celljs/ai-core';
+    UserMessage
+} from '@celljs/ai-core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
     ChatRequest as OllamaChatRequest,
-    ChatResponse as OllamaChatResponse,
+    ChatResponse as OllamaChatResponse, 
     Message as OllamaMessage,
     Role,
     ToolCall as OllamaToolCall,
@@ -25,27 +26,49 @@ import {
 } from '../api';
 import { Autowired, ByteUtil, Component, IllegalArgumentError } from '@celljs/core';
 
+/**
+ * {@link ChatModel} implementation for {@literal Ollama}
+ * backed by {@link OllamaAPI}.
+ * 
+ * @author Yang Subo
+ * @see ChatModel
+ * @see OllamaAPI
+ */
 @Component(ChatModel)
 export class OllamaChatModel implements ChatModel {
 
+    /**
+     * The default options used for the chat completion requests.
+     */
     @Autowired(OllamaOptions)
     protected readonly defaultOptions: OllamaOptions;
 
-    @Autowired(OllamaAPI)
+    /**
+     * Low-level access to the Ollama API.
+     */
+    @Autowired(OllamaAPI) 
     protected readonly chatApi: OllamaAPI;
 
+    /**
+     * Creates a model response for the given chat conversation.
+     * @param prompt - The chat completion request.
+     * @returns A promise that resolves to the chat completion response.
+     */
     public async call(prompt: Prompt): Promise<ChatResponse> {
         const request: OllamaChatRequest = this.parseOllamaChatRequest(prompt, false);
-        const { body: ollamaResponse } = await this.chatApi.chat(request);
+
+        const ollamaResponse: OllamaChatResponse = await this.chatApi.chat(request);
 
         const toolCalls: ToolCall[] = [];
-        for (const toolCall of ollamaResponse.message.toolCalls ?? []) {
-            toolCalls.push({
-                id: '',
-                type: 'function',
-                name: toolCall.function.name,
-                arguments: JSON.stringify(toolCall.function.arguments)
-            });
+        if (ollamaResponse.message.toolCalls) {
+            for (const toolCall of ollamaResponse.message.toolCalls) {
+                toolCalls.push({
+                    id: '',
+                    type: 'function',
+                    name: toolCall.function.name,
+                    arguments: JSON.stringify(toolCall.function.arguments)
+                });
+            }
         }
 
         const assistantMessage: AssistantMessage = new AssistantMessage(
@@ -63,19 +86,25 @@ export class OllamaChatModel implements ChatModel {
             output: assistantMessage,
             metadata: generationMetadata
         };
-        const chatResponse: ChatResponse = {
+
+        return {
             result: generator,
-            results: [generator],
+            results: [generator], 
             metadata: this.parseChatResponseMetadata(ollamaResponse)
         };
-
-        return chatResponse;
     }
+
+    /**
+     * Creates a streaming chat response for the given chat conversation.
+     * @param prompt - The chat completion request.
+     * @returns A promise that resolves to an observable of chat completion responses.
+     */
     async stream(prompt: Prompt): Promise<Observable<ChatResponse>> {
         const request: OllamaChatRequest = this.parseOllamaChatRequest(prompt, true);
         const ollamaResponse = await this.chatApi.streamingChat(request);
-        const chatResponse = ollamaResponse.pipe(
-            map(({ body: chunk }) => {
+
+        return ollamaResponse.pipe(
+            map(chunk => {
                 const content = chunk.message.content ?? '';
                 const toolCalls = chunk.message.toolCalls?.map(toolCall => ({
                     id: '',
@@ -83,15 +112,18 @@ export class OllamaChatModel implements ChatModel {
                     name: toolCall.function.name,
                     arguments: JSON.stringify(toolCall.function.arguments)
                 })) ?? [];
+
                 const assistantMessage: AssistantMessage = new AssistantMessage(
                     content,
                     [],
                     toolCalls
                 );
+
                 let generationMetadata = ChatGenerationMetadata.EMPTY;
                 if (chunk.promptEvalCount && chunk.evalCount) {
                     generationMetadata = ChatGenerationMetadata.from(chunk.doneReason);
                 }
+
                 const generator = {
                     output: assistantMessage,
                     metadata: generationMetadata
@@ -104,15 +136,18 @@ export class OllamaChatModel implements ChatModel {
                 };
             })
         );
-        return chatResponse;
-
     }
 
+    /**
+     * Parse Ollama chat response into ChatResponseMetadata.
+     * @param response - The Ollama chat response
+     * @returns ChatResponseMetadata containing usage and other metadata 
+     */
     protected parseChatResponseMetadata(response: OllamaChatResponse): ChatResponseMetadata {
-
         const promptTokens = response.promptEvalCount ?? 0;
         const generationTokens = response.evalCount ?? 0;
         const totalTokens = promptTokens + generationTokens;
+
         return {
             id: '',
             model: response.model,
@@ -136,10 +171,9 @@ export class OllamaChatModel implements ChatModel {
 
     /**
      * Generates an Ollama chat request from a given prompt.
-     *
-     * @param prompt The prompt containing instructions and messages.
-     * @param stream Indicates whether the response should be streamed.
-     * @returns An instance of OllamaApi.ChatRequest.
+     * @param prompt - The prompt containing instructions and messages.
+     * @param stream - Indicates whether the response should be streamed.
+     * @returns An instance of OllamaApi.ChatRequest. 
      * @throws Will throw an error if the model is not set.
      */
     protected parseOllamaChatRequest(prompt: Prompt, stream: boolean): OllamaChatRequest {
@@ -178,7 +212,7 @@ export class OllamaChatModel implements ChatModel {
 
         const functionsForThisRequest: Set<string> = new Set();
 
-        // Runtime options
+        // Runtime options 
         let runtimeOptions: OllamaOptions | undefined = undefined;
         if (prompt.options) {
             runtimeOptions = Object.assign(OllamaOptions.builder().build(), prompt.options);
@@ -209,20 +243,19 @@ export class OllamaChatModel implements ChatModel {
             requestBuilder.withKeepAlive(ollamaOptions.keepAlive);
         }
 
-        // Add the enabled functions definitions to the request's tools parameter.
-        // if (functionsForThisRequest.size > 0) {
-        //     requestBuilder.withTools(this.getFunctionTools([...functionsForThisRequest]));
-        // }
-
         return requestBuilder.build();
     }
 
+    /**
+     * Helper method to convert media data to Base64 string format.
+     * @param mediaData - The media data to convert
+     * @returns Base64 encoded string
+     */
     private fromMediaData(mediaData?: Buffer): string {
         if (typeof mediaData === 'string') {
             return mediaData;
-        } else {
-            return ByteUtil.encodeBase64(mediaData);
         }
+        return ByteUtil.encodeBase64(mediaData);
     }
 
 }

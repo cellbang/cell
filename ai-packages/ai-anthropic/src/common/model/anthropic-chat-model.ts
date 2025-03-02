@@ -32,12 +32,12 @@ export class AnthropicChatModel implements ChatModel {
     protected readonly logger: Logger;
 
     protected getContentBlockTypeByMedia(media: Media): ContentBlockType {
-        if (media.mediaType.startsWith('image')) {
+        if (media.mimeType.toString().startsWith('image')) {
             return ContentBlockType.IMAGE;
-        } else if (media.mediaType.startsWith('pdf')) {
+        } else if (media.mimeType.toString().startsWith('pdf')) {
             return ContentBlockType.DOCUMENT;
         }
-        throw new IllegalArgumentError(`Unsupported media type: ${media.mediaType}. Supported types are: images (image/*) and PDF documents (application/pdf)`);
+        throw new IllegalArgumentError(`Unsupported media type: ${media.mimeType.toString()}. Supported types are: images (image/*) and PDF documents (application/pdf)`);
     }
 
     protected fromMediaData(mediaData: any): string {
@@ -68,7 +68,7 @@ export class AnthropicChatModel implements ChatModel {
                         if (message.media.length > 0) {
                             const mediaContent = message.media.map(media => {
                                 const contentBlockType = this.getContentBlockTypeByMedia(media);
-                                const source = new Source('base64', media.mediaType, this.fromMediaData(media.data));
+                                const source = new Source('base64', media.mimeType.toString(), this.fromMediaData(media.data));
                                 return new ContentBlock(contentBlockType, source);
                             });
                             contents.push(...mediaContent);
@@ -175,13 +175,13 @@ export class AnthropicChatModel implements ChatModel {
     async call(prompt: Prompt): Promise<ChatResponse> {
         const request = this.createRequest(prompt, false);
         const chatResponse = await this.chatApi.chat(request);
-        return this.toChatResponse(chatResponse);
+        return this.toChatResponse(chatResponse.body);
     }
 
     async stream(prompt: Prompt): Promise<Observable<ChatResponse>> {
         const request = this.createRequest(prompt, true);
         const chatResponse = await this.chatApi.streamingChat(request);
-        return chatResponse.pipe(map(chunk => this.toChatResponse(chunk)));
+        return chatResponse.pipe(map(chunk => this.toChatResponse(chunk.body)));
     }
 
 }

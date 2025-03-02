@@ -1,7 +1,7 @@
 import { Assert, Autowired, Component, Optional, Value } from '@celljs/core';
 import { Observable } from 'rxjs';
 import { map, filter, groupBy, concatMap, reduce  } from 'rxjs/operators';
-import { RestOperations } from '@celljs/http';
+import { ResponseEntity, RestOperations } from '@celljs/http';
 import { ChatRequest } from './chat-request';
 import { ChatResponse } from './chat-response';
 import { AnthropicAPI, AnthropicAPIOptions } from './api-protocol';
@@ -35,16 +35,20 @@ export class AnthropicAPIImpl implements AnthropicAPI {
         return this.options?.anthropicVersion ?? this.defaultOptions?.anthropicVersion ?? '2023-06-01';
     }
 
-    async chat(chatRequest: ChatRequest): Promise<ChatResponse> {
+    async chat(chatRequest: ChatRequest): Promise<ResponseEntity<ChatResponse>> {
         Assert.isTrue(!chatRequest.stream, 'Request must set the stream property to false.');
-        const { data } = await this.restOperations
+        const { data, status, headers } = await this.restOperations
             .post('/v1/messages', instanceToPlain(chatRequest), { baseURL: this.baseUrl });
 
-        return plainToInstance(ChatResponse, data);
+        return {
+            status,
+            headers,
+            body: plainToInstance(ChatResponse, data)
+        };
     }
-    async streamingChat(chatRequest: ChatRequest): Promise<Observable<ChatResponse>> {
+    async streamingChat(chatRequest: ChatRequest): Promise<Observable<ResponseEntity<ChatResponse>>> {
         Assert.isTrue(chatRequest.stream, 'Request must set the stream property to true.');
-        const { data } = await this.restOperations
+        const { data, status, headers } = await this.restOperations
         .post<ReadableStream>(
             '/v1/messages',
             instanceToPlain(chatRequest),
@@ -82,8 +86,12 @@ export class AnthropicAPIImpl implements AnthropicAPI {
                         )
                     )
                 ),
-                map(event => StreamUtil.eventToChatResponse(event)),
-                filter(response => !!response.type)
+                map(event => ({
+                    status,
+                    headers,
+                    body: StreamUtil.eventToChatResponse(event)
+                })),
+                filter(response => !!response.body.type)
             );
 
     }

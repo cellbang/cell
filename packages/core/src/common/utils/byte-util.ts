@@ -77,4 +77,27 @@ export class ByteUtil {
             'Neither Buffer nor TextEncoder are available.'
         );
     }
+
+    static decodeBase64(base64: string): Bytes {
+        if (!base64) {
+            return new Uint8Array();
+        }
+
+        if (this.isNode()) {
+            return Buffer.from(base64, 'base64');
+        }
+
+        if (this.isBrowser()) {
+            const binary = atob(base64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes;
+        }
+
+        throw new IllegalArgumentError(
+            'Neither Buffer nor TextEncoder are available.'
+        );
+    }
 }

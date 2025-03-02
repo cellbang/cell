@@ -15,6 +15,8 @@ export interface ChatGenerationMetadata extends ResultMetadata {
      * The reason this choice completed for the generation.
      */
     readonly finishReason?: string;
+
+    readonly metadata: Record<string, any>;
 }
 
 export class ChatGenerationMetadata {
@@ -29,9 +31,9 @@ export class ChatGenerationMetadata {
      * @param contentFilterMetadata The content filter metadata.
      * @returns A new instance of {@link ChatGenerationMetadata}.
      */
-    static from(finishReason?: string, contentFilterMetadata?: any): ChatGenerationMetadata {
+    static from(finishReason?: string, metadata: Record<string, any> = {}, contentFilterMetadata?: any): ChatGenerationMetadata {
         return {
-            finishReason, contentFilterMetadata
+            finishReason, contentFilterMetadata, metadata
         };
     }
 }

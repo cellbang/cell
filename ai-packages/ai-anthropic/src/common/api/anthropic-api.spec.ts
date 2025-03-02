@@ -17,56 +17,46 @@ describe('AnthropicAPIImpl', () => {
     beforeEach(() => {
         container.rebind(RestOperations).toConstantValue({
             post: async (url: string, data: any, config: any) => {
-                if (data.stream) {
-                    const chatResponse = {
-                        id: 'msg_123',
-                        type: 'message',
-                        role: Role.ASSISTANT,
-                        content: [
-                            {
-                                type: ContentBlockType.TEXT,
-                                text: 'How can I assist you today?'
-                            }
-                        ],
-                        model: data.model,
-                        stop_reason: 'end_turn',
-                        stop_sequence: undefined,
-                        usage: {
-                            input_tokens: 10,
-                            output_tokens: 20
+                const responseBody = {
+                    id: 'msg_123',
+                    type: 'message',
+                    role: Role.ASSISTANT,
+                    content: [
+                        {
+                            type: ContentBlockType.TEXT,
+                            text: 'How can I assist you today?'
                         }
-                    };
+                    ],
+                    model: data.model,
+                    stop_reason: 'end_turn',
+                    stop_sequence: undefined,
+                    usage: {
+                        input_tokens: 10,
+                        output_tokens: 20
+                    }
+                };
+
+                if (data.stream) {
                     const steam = new ReadableStream({
                         start(controller) {
                             controller.enqueue('data: ' + JSON.stringify({
                                 type: 'message_start',
-                                data: chatResponse
+                                data: responseBody
                             }) + '\n\n');
                             controller.close();
                         }
                     });
-                    return { data: steam };
+                    return { 
+                        data: steam,
+                        status: 200,
+                        headers: { 'content-type': 'text/event-stream' }
+                    };
                 }
 
                 return {
-                    data: {
-                        id: 'msg_123',
-                        type: 'message',
-                        role: Role.ASSISTANT,
-                        content: [
-                            {
-                                type: ContentBlockType.TEXT,
-                                text: 'How can I assist you today?'
-                            }
-                        ],
-                        model: data.model,
-                        stop_reason: 'end_turn',
-                        stop_sequence: undefined,
-                        usage: {
-                            input_tokens: 10,
-                            output_tokens: 20
-                        }
-                    }
+                    data: responseBody,
+                    status: 200,
+                    headers: { 'content-type': 'application/json' }
                 };
             }
         });
@@ -74,7 +64,7 @@ describe('AnthropicAPIImpl', () => {
     });
 
     describe('chat', () => {
-        it('should return a ChatResponse', async () => {
+        it('should return a ResponseEntity with ChatResponse', async () => {
             const messages = [
                 new AnthropicMessage(
                     [new ContentBlock(ContentBlockType.TEXT, undefined, 'Hello')],
@@ -89,8 +79,10 @@ describe('AnthropicAPIImpl', () => {
                 .build();
 
             const response = await anthropicAPI.chat(chatRequest);
-            expect(response).to.be.instanceOf(ChatResponse);
-            expect(response.model).to.equal(AnthropicModel.CLAUDE_3_HAIKU);
+            expect(response.status).to.equal(200);
+            expect(response.headers).to.deep.include({ 'content-type': 'application/json' });
+            expect(response.body).to.be.instanceOf(ChatResponse);
+            expect(response.body.model).to.equal(AnthropicModel.CLAUDE_3_HAIKU);
         });
 
         it('should throw an error if stream mode is enabled', async () => {
@@ -117,7 +109,7 @@ describe('AnthropicAPIImpl', () => {
     });
 
     describe('streamingChat', () => {
-        it('should return an Observable of ChatResponse', async () => {
+        it('should return an Observable of ResponseEntity with ChatResponse', async () => {
             const messages = [
                 new AnthropicMessage(
                     [new ContentBlock(ContentBlockType.TEXT, undefined, 'Hello')],
@@ -134,8 +126,10 @@ describe('AnthropicAPIImpl', () => {
             const response$ = await anthropicAPI.streamingChat(chatRequest);
             response$.subscribe({
                 next: response => {
-                    expect(response).to.be.instanceOf(ChatResponse);
-                    expect(response.model).to.equal(AnthropicModel.CLAUDE_3_HAIKU);
+                    expect(response.status).to.equal(200);
+                    expect(response.headers).to.deep.include({ 'content-type': 'text/event-stream' });
+                    expect(response.body).to.be.instanceOf(ChatResponse);
+                    expect(response.body.model).to.equal(AnthropicModel.CLAUDE_3_HAIKU);
                 }
             });
         });

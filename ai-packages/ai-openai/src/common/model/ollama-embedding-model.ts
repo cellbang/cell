@@ -10,6 +10,7 @@ import {
 } from '@celljs/ai-core';
 import {
     EmbeddingsRequest as OllamaEmbeddingsRequest,
+    EmbeddingsResponse as OllamaEmbeddingsResponse,
     OllamaOptions,
     OllamaAPI
 } from '../api';
@@ -27,7 +28,7 @@ export class OllamaEmbeddingModel implements EmbeddingModel {
     public async call(request: EmbeddingRequest): Promise<EmbeddingResponse> {
         Assert.notEmpty(request.instructions, 'At least one text is required!');
         const ollamaRequest: OllamaEmbeddingsRequest = this.parseOllamaEmbeddingsRequest(request.instructions, request.options);
-        const { body: ollamaResponse } = await this.chatApi.embed(ollamaRequest);
+        const ollamaResponse: OllamaEmbeddingsResponse = await this.chatApi.embed(ollamaRequest);
 
         const embeddings: Embedding[] = ollamaResponse.embeddings.map((embedding, index) => ({
             embedding: embedding,

@@ -1,7 +1,7 @@
 import { Assert, Autowired, Component, Value } from '@celljs/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RestOperations } from '@celljs/http';
+import { ResponseEntity, RestOperations } from '@celljs/http';
 import { ChatRequest } from './chat-request';
 import { EmbeddingsRequest } from './embeddings-request';
 import { EmbeddingsResponse } from './embeddings-response';
@@ -19,16 +19,20 @@ export class OllamaAPIImpl implements OllamaAPI {
     @Value('cell.ai.ollama.api.baseUrl ?: "http://localhost:11434"')
     protected readonly baseUrl: string;
 
-    async chat(chatRequest: ChatRequest): Promise<ChatResponse> {
+    async chat(chatRequest: ChatRequest): Promise<ResponseEntity<ChatResponse>> {
         Assert.isTrue(!chatRequest.stream, 'Stream mode must be disabled.');
-        const { data } = await this.restOperations
+        const { data, status, headers } = await this.restOperations
             .post('/api/chat', instanceToPlain(chatRequest), { baseURL: this.baseUrl });
 
-        return plainToInstance(ChatResponse, data);
+        return {
+            status,
+            body: plainToInstance(ChatResponse, data),
+            headers
+        };
     }
-    async streamingChat(chatRequest: ChatRequest): Promise<Observable<ChatResponse>> {
+    async streamingChat(chatRequest: ChatRequest): Promise<Observable<ResponseEntity<ChatResponse>>> {
         Assert.isTrue(chatRequest.stream, 'Stream mode must be enabled.');
-        const { data } = await this.restOperations
+        const { data, status, headers } = await this.restOperations
         .post<ReadableStream>(
             '/api/chat',
             instanceToPlain(chatRequest),
@@ -40,15 +44,22 @@ export class OllamaAPIImpl implements OllamaAPI {
                 responseType: 'stream'
             }
         );
-        return SSEUtil.toObservable(data).pipe(
-            map(item => plainToInstance(ChatResponse, item.data))
-        );
+        return SSEUtil.toObservable(data).pipe(map(item => 
+            ({
+                status,
+                headers,
+                body: plainToInstance(ChatResponse, item.data)
+            })));
 
     }
-    async embed(embeddingsRequest: EmbeddingsRequest): Promise<EmbeddingsResponse> {
-        const { data } = await this.restOperations
+    async embed(embeddingsRequest: EmbeddingsRequest): Promise<ResponseEntity<EmbeddingsResponse>> {
+        const { data, status, headers } = await this.restOperations
             .post<EmbeddingsResponse>('/api/embed', instanceToPlain(embeddingsRequest), { baseURL: this.baseUrl });
-        return plainToInstance(EmbeddingsResponse, data);
+        return {
+            status,
+            body: plainToInstance(EmbeddingsResponse, data),
+            headers
+        };
     }
 
 }

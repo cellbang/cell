@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { ChatRequest } from './chat-request';
 import { ChatResponse } from './chat-response';
+import { ResponseEntity } from '@celljs/http';
 
 export const AnthropicAPI = Symbol('AnthropicAPI');
 export const AnthropicAPIOptions = Symbol('AnthropicAPIOptions');
@@ -34,12 +35,12 @@ export interface AnthropicAPI {
      * @param chatRequest Chat request.
      * @return Chat response.
      */
-    chat(chatRequest: ChatRequest): Promise<ChatResponse>;
+    chat(chatRequest: ChatRequest): Promise<ResponseEntity<ChatResponse>>;
     /**
      * Streaming response for the chat completion request.
      * @param chatRequest Chat request. The request must set the stream property to true.
      * @return Chat response as a {@link Flux} stream.
      */
-    streamingChat(chatRequest: ChatRequest): Promise<Observable<ChatResponse>>;
+    streamingChat(chatRequest: ChatRequest): Promise<Observable<ResponseEntity<ChatResponse>>>;
 
 }

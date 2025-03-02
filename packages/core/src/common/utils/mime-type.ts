@@ -11,6 +11,7 @@ export class MimeType {
     private readonly parameters: Map<string, string>;
 
     private charset?: string;
+    private toStringValue?: string;
 
     static {
         const ctl = new Set<number>();
@@ -272,5 +273,34 @@ export class MimeType {
 
     static valueOf(value: string): MimeType {
         return MimeTypeUtils.parseMimeType(value);
+    }
+
+    toString(): string {
+        let value = this.toStringValue;
+        if (!value) {
+            value = this.buildString();
+            this.toStringValue = value;
+        }
+        return value ?? '';
+    }
+    
+    protected buildString(): string {
+        let result = '';
+        result += this.type;
+        result += '/';
+        result += this.subtype;
+        result += this.buildParameters(this.parameters);
+        return result;
+    }
+    
+    private buildParameters(params: Map<string, string>): string {
+        let result = '';
+        params.forEach((val, key) => {
+            result += ';';
+            result += key;
+            result += '=';
+            result += val;
+        });
+        return result;
     }
 }

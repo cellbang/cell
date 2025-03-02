@@ -10,19 +10,19 @@ export interface Usage {
     /**
      * The number of tokens used in the prompt of the AI request.
      */
-    readonly promptTokens: number;
+    readonly promptTokens?: number;
 
     /**
      * The number of tokens returned in the generation (aka completion)
      * of the AI's response.
      */
-    readonly generationTokens: number;
+    readonly generationTokens?: number;
 
     /**
      * The total number of tokens from both the prompt of an AI request
      * and generation of the AI's response.
      */
-    readonly totalTokens: number;
+    readonly totalTokens?: number;
 
 }
 
@@ -42,37 +42,37 @@ export interface RateLimit {
      * The maximum number of requests that are permitted before exhausting the
      * rate limit.
      */
-    readonly requestsLimit: number;
+    readonly requestsLimit?: number;
 
     /**
      * The remaining number of requests that are permitted before exhausting the
      * requestsLimit rate limit.
      */
-    readonly requestsRemaining: number;
+    readonly requestsRemaining?: number;
 
     /**
      * The duration time until the rate limit (based on requests) resets
      * to its requestsLimit initial state.
      */
-    readonly requestsReset: number;
+    readonly requestsReset?: number;
 
     /**
      * The maximum number of tokens that are permitted before exhausting the rate
      * limit.
      */
-    readonly tokensLimit: number;
+    readonly tokensLimit?: number;
 
     /**
      * The remaining number of tokens that are permitted before exhausting the
      * tokensLimit rate limit.
      */
-    readonly tokensRemaining: number;
+    readonly tokensRemaining?: number;
 
     /**
      * The duration time until the rate limit (based on tokens) resets to
      * its tokensLimit initial state.
      */
-    readonly tokensReset: number;
+    readonly tokensReset?: number;
 
 }
 

@@ -15,8 +15,16 @@ describe('OllamaAPIImpl', () => {
     beforeEach(() => {
         container.rebind(RestOperations).toConstantValue({
             post: async (url: string, data: any, config: any) => {
+                const mockResponse = {
+                    status: 200,
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                };
+
                 if (url === '/api/embed') {
                     return {
+                        ...mockResponse,
                         data: {
                             model: data.model,
                             embeddings: [
@@ -44,19 +52,28 @@ describe('OllamaAPIImpl', () => {
                     evalCount: 8,
                     evalDuration: 132000000,
                 };
-                const steam = new ReadableStream();
-                const reader = steam.getReader();
-                const chatResponse$ = new ReadableStream({
-                    start(controller) {
-                        controller.enqueue(JSON.stringify(chatResponse));
-                    },
-                    cancel() {
-                        reader.cancel();
-                    }
-                });
+                
+                if (data.stream) {
+                    const steam = new ReadableStream();
+                    const reader = steam.getReader();
+                    const chatResponse$ = new ReadableStream({
+                        start(controller) {
+                            controller.enqueue(JSON.stringify(chatResponse));
+                        },
+                        cancel() {
+                            reader.cancel();
+                        }
+                    });
+
+                    return {
+                        ...mockResponse,
+                        data: chatResponse$
+                    };
+                }
 
                 return {
-                    data: data.stream ? chatResponse$ : chatResponse
+                    ...mockResponse,
+                    data: chatResponse
                 };
             }
         });
@@ -64,10 +81,13 @@ describe('OllamaAPIImpl', () => {
     });
 
     describe('chat', () => {
-        it('should return a ChatResponse', async () => {
+        it('should return a ResponseEntity with ChatResponse', async () => {
             const chatRequest = ChatRequest.builder(OllamaModel.LLAMA3_2).build();
             const response = await ollamaAPI.chat(chatRequest);
-            expect(response).to.have.property('model', OllamaModel.LLAMA3_2);
+            
+            expect(response.status).to.equal(200);
+            expect(response.headers).to.have.property('content-type', 'application/json');
+            expect(response.body).to.have.property('model', OllamaModel.LLAMA3_2);
         });
 
         it('should throw an error if stream mode is enabled', async () => {
@@ -81,12 +101,14 @@ describe('OllamaAPIImpl', () => {
     });
 
     describe('streamingChat', () => {
-        it('should return an Observable of ChatResponse', async () => {
+        it('should return an Observable of ResponseEntity with ChatResponse', async () => {
             const chatRequest = ChatRequest.builder(OllamaModel.LLAMA3_2).withStream(true).build();
             const response$ = await ollamaAPI.streamingChat(chatRequest);
             response$.subscribe({
                 next: response => {
-                    expect(response).to.have.property('model', OllamaModel.LLAMA3_2);
+                    expect(response.status).to.equal(200);
+                    expect(response.headers).to.have.property('content-type', 'application/json');
+                    expect(response.body).to.have.property('model', OllamaModel.LLAMA3_2);
                 }
             });
         });
@@ -102,11 +124,14 @@ describe('OllamaAPIImpl', () => {
     });
 
     describe('embed', () => {
-        it('should return an EmbeddingsResponse', async () => {
+        it('should return a ResponseEntity with EmbeddingsResponse', async () => {
             const embeddingsRequest = new EmbeddingsRequest(OllamaModel.LLAMA3_2, ['input']);
             const response = await ollamaAPI.embed(embeddingsRequest);
-            expect(response).to.have.property('model', OllamaModel.LLAMA3_2);
-            expect(response).to.have.property('embeddings').to.have.length(2);
+            
+            expect(response.status).to.equal(200);
+            expect(response.headers).to.have.property('content-type', 'application/json');
+            expect(response.body).to.have.property('model', OllamaModel.LLAMA3_2);
+            expect(response.body).to.have.property('embeddings').to.have.length(2);
         });
     });
 });

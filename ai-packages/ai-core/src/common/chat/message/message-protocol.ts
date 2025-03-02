@@ -1,5 +1,5 @@
-import { MediaType } from '@celljs/http';
 import { Content } from '../../model/model-protocol';
+import { MimeType } from '@celljs/core';
 
 /**
  * The Media class represents the data and metadata of a media attachment in a message. It
@@ -10,12 +10,39 @@ import { Content } from '../../model/model-protocol';
  */
 export interface Media {
 
-    readonly mediaType: MediaType;
+    /**
+     * The unique identifier of the media attachment.
+     */
+    id?: string;
 
     /**
-     * Get the media data object
+     * The MIME type of the media attachment.
      */
-    readonly data: any;
+    mimeType: MimeType;
+
+    /**
+     * The raw data of the media attachment.
+     */
+    data: any;
+
+    /**
+     * The name of the media object that can be referenced by the AI model.
+     * <p>
+     * Important security note: This field is vulnerable to prompt injections, as the
+     * model might inadvertently interpret it as instructions. It is recommended to
+     * specify neutral names.
+     *
+     * <p>
+     * The name must only contain:
+     * <ul>
+     * <li>Alphanumeric characters
+     * <li>Whitespace characters (no more than one in a row)
+     * <li>Hyphens
+     * <li>Parentheses
+     * <li>Square brackets
+     * </ul>
+     */
+    name?: string;
 
 }
 
