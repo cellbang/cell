@@ -52,7 +52,7 @@ describe('OllamaAPIImpl', () => {
                     evalCount: 8,
                     evalDuration: 132000000,
                 };
-                
+
                 if (data.stream) {
                     const steam = new ReadableStream();
                     const reader = steam.getReader();
@@ -84,7 +84,7 @@ describe('OllamaAPIImpl', () => {
         it('should return a ResponseEntity with ChatResponse', async () => {
             const chatRequest = ChatRequest.builder(OllamaModel.LLAMA3_2).build();
             const response = await ollamaAPI.chat(chatRequest);
-            
+
             expect(response.status).to.equal(200);
             expect(response.headers).to.have.property('content-type', 'application/json');
             expect(response.body).to.have.property('model', OllamaModel.LLAMA3_2);
@@ -127,7 +127,7 @@ describe('OllamaAPIImpl', () => {
         it('should return a ResponseEntity with EmbeddingsResponse', async () => {
             const embeddingsRequest = new EmbeddingsRequest(OllamaModel.LLAMA3_2, ['input']);
             const response = await ollamaAPI.embed(embeddingsRequest);
-            
+
             expect(response.status).to.equal(200);
             expect(response.headers).to.have.property('content-type', 'application/json');
             expect(response.body).to.have.property('model', OllamaModel.LLAMA3_2);

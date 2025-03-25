@@ -46,7 +46,7 @@ describe('AnthropicAPIImpl', () => {
                             controller.close();
                         }
                     });
-                    return { 
+                    return {
                         data: steam,
                         status: 200,
                         headers: { 'content-type': 'text/event-stream' }

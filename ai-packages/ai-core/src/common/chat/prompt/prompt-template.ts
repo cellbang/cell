@@ -17,7 +17,7 @@ export class PromptTemplateImpl implements PromptTemplate {
     }
     async create(template: string | Message[], ctx?: PromptTemplateContext): Promise<Prompt> {
         if (Array.isArray(template)
-            && template.some((message) => Message.isMessage(message))
+            && template.some(message => Message.isMessage(message))
         ) {
             return new PromptImpl(template, ctx?.chatOptions);
         } else if (typeof template === 'string') {

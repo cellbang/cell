@@ -7,9 +7,9 @@ import { AssistantMessage, Message, ToolResponse, ToolResponseMessage } from '..
 
 @Component(ToolHandler)
 export class ToolHanderImpl implements ToolHandler {
-    
+
     @Autowired(FunctionCallbackRegister)
-    protected readonly functionCallbackRegister: FunctionCallbackRegister
+    protected readonly functionCallbackRegister: FunctionCallbackRegister;
 
     protected async executeFunctions(assistantMessage: AssistantMessage, toolContext: ToolContext): Promise<ToolResponseMessage> {
         const toolResponses: ToolResponse[] = [];
@@ -30,7 +30,6 @@ export class ToolHanderImpl implements ToolHandler {
         messages.push(toolResponseMessage);
         return messages;
     }
-
 
     async handle(prompt: Prompt, chatResponse: ChatResponse): Promise<Message[]> {
         const toolCallGeneration = chatResponse.results.find(result => result.output.toolCalls?.length > 0);

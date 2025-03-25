@@ -44,7 +44,7 @@ export class OllamaAPIImpl implements OllamaAPI {
                 responseType: 'stream'
             }
         );
-        return SSEUtil.toObservable(data).pipe(map(item => 
+        return SSEUtil.toObservable(data).pipe(map(item =>
             ({
                 status,
                 headers,

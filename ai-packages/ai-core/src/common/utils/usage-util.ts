@@ -17,8 +17,7 @@ export abstract class UsageUtil {
         let usageFromPreviousChatResponse: Usage | undefined = undefined;
         if (previousChatResponse?.metadata?.usage) {
             usageFromPreviousChatResponse = previousChatResponse.metadata.usage;
-        }
-        else {
+        } else {
             return currentUsage;
         }
         // For a valid usage from previous chat response, accumulate it to the current
@@ -55,7 +54,7 @@ export abstract class UsageUtil {
         if (!usage) {
             return true;
         }
-        
+
         return false;
     }
 }

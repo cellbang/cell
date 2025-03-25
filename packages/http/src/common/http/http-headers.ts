@@ -1,304 +1,366 @@
 export class HttpHeaders {
-    /** The HTTP `Accept` header field name.
+    /**
+     * The HTTP `Accept` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.3.2 Section 5.3.2 of RFC 7231}
      */
     public static ACCEPT = 'Accept';
 
-    /** The HTTP `Accept-Charset` header field name.
+    /**
+     * The HTTP `Accept-Charset` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.3.3 Section 5.3.3 of RFC 7231}
      */
     public static ACCEPT_CHARSET = 'Accept-Charset';
 
-    /** The HTTP `Accept-Encoding` header field name.
+    /**
+     * The HTTP `Accept-Encoding` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.3.4 Section 5.3.4 of RFC 7231}
      */
     public static ACCEPT_ENCODING = 'Accept-Encoding';
 
-    /** The HTTP `Accept-Language` header field name.
+    /**
+     * The HTTP `Accept-Language` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.3.5 Section 5.3.5 of RFC 7231}
      */
     public static ACCEPT_LANGUAGE = 'Accept-Language';
 
-    /** The HTTP `Accept-Ranges` header field name.
+    /**
+     * The HTTP `Accept-Ranges` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7233#section-2.3 Section 5.3.5 of RFC 7233}
      */
     public static ACCEPT_RANGES = 'Accept-Ranges';
 
-    /** The CORS `Access-Control-Allow-Credentials` response header field name.
+    /**
+     * The CORS `Access-Control-Allow-Credentials` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_ALLOW_CREDENTIALS = 'Access-Control-Allow-Credentials';
 
-    /** The CORS `Access-Control-Allow-Headers` response header field name.
+    /**
+     * The CORS `Access-Control-Allow-Headers` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_ALLOW_HEADERS = 'Access-Control-Allow-Headers';
 
-    /** The CORS `Access-Control-Allow-Methods` response header field name.
+    /**
+     * The CORS `Access-Control-Allow-Methods` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_ALLOW_METHODS = 'Access-Control-Allow-Methods';
 
-    /** The CORS `Access-Control-Allow-Origin` response header field name.
+    /**
+     * The CORS `Access-Control-Allow-Origin` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_ALLOW_ORIGIN = 'Access-Control-Allow-Origin';
 
-    /** The CORS `Access-Control-Expose-Headers` response header field name.
+    /**
+     * The CORS `Access-Control-Expose-Headers` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_EXPOSE_HEADERS = 'Access-Control-Expose-Headers';
 
-    /** The CORS `Access-Control-Max-Age` response header field name.
+    /**
+     * The CORS `Access-Control-Max-Age` response header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_MAX_AGE = 'Access-Control-Max-Age';
 
-    /** The CORS `Access-Control-Request-Headers` request header field name.
+    /**
+     * The CORS `Access-Control-Request-Headers` request header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_REQUEST_HEADERS = 'Access-Control-Request-Headers';
 
-    /** The CORS `Access-Control-Request-Method` request header field name.
+    /**
+     * The CORS `Access-Control-Request-Method` request header field name.
      * @see {@link http://www.w3.org/TR/cors/ CORS W3C recommendation}
      */
     public static ACCESS_CONTROL_REQUEST_METHOD = 'Access-Control-Request-Method';
 
-    /** The HTTP `Age` header field name.
+    /**
+     * The HTTP `Age` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7234#section-5.1 Section 5.1 of RFC 7234}
      */
     public static AGE = 'Age';
 
-    /** The HTTP `Allow` header field name.
+    /**
+     * The HTTP `Allow` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.4.1 Section 7.4.1 of RFC 7231}
      */
     public static ALLOW = 'Allow';
 
-    /** The HTTP `Authorization` header field name.
+    /**
+     * The HTTP `Authorization` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7235#section-4.2 Section 4.2 of RFC 7235}
      */
     public static AUTHORIZATION = 'Authorization';
 
-    /** The HTTP `Cache-Control` header field name.
+    /**
+     * The HTTP `Cache-Control` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7234#section-5.2 Section 5.2 of RFC 7234}
      */
     public static CACHE_CONTROL = 'Cache-Control';
 
-    /** The HTTP `Connection` header field name.
+    /**
+     * The HTTP `Connection` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-6.1 Section 6.1 of RFC 7230}
      */
     public static CONNECTION = 'Connection';
 
-    /** The HTTP `Content-Encoding` header field name.
+    /**
+     * The HTTP `Content-Encoding` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-3.1.2.2 Section 3.1.2.2 of RFC 7231}
      */
     public static CONTENT_ENCODING = 'Content-Encoding';
 
-    /** The HTTP `Content-Disposition` header field name.
+    /**
+     * The HTTP `Content-Disposition` header field name.
      * @see {@link https://tools.ietf.org/html/rfc6266 RFC 6266}
      */
     public static CONTENT_DISPOSITION = 'Content-Disposition';
 
-    /** The HTTP `Content-Language` header field name.
+    /**
+     * The HTTP `Content-Language` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-3.1.3.2 Section 3.1.3.2 of RFC 7231}
      */
     public static CONTENT_LANGUAGE = 'Content-Language';
 
-    /** The HTTP `Content-Length` header field name.
+    /**
+     * The HTTP `Content-Length` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-3.3.2 Section 3.3.2 of RFC 7230}
      */
     public static CONTENT_LENGTH = 'Content-Length';
 
-    /** The HTTP `Content-Location` header field name.
+    /**
+     * The HTTP `Content-Location` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-3.1.4.2 Section 3.1.4.2 of RFC 7231}
      */
     public static CONTENT_LOCATION = 'Content-Location';
 
-    /** The HTTP `Content-Range` header field name.
+    /**
+     * The HTTP `Content-Range` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7233#section-4.2 Section 4.2 of RFC 7233}
      */
     public static CONTENT_RANGE = 'Content-Range';
 
-    /** The HTTP `Content-Type` header field name.
+    /**
+     * The HTTP `Content-Type` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-3.1.1.5 Section 3.1.1.5 of RFC 7231}
      */
     public static CONTENT_TYPE = 'Content-Type';
 
-    /** The HTTP `Cookie` header field name.
+    /**
+     * The HTTP `Cookie` header field name.
      * @see {@link https://tools.ietf.org/html/rfc2109#section-4.3.4 Section 4.3.4 of RFC 2109}
      */
     public static COOKIE = 'Cookie';
 
-    /** The HTTP `Date` header field name.
+    /**
+     * The HTTP `Date` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.1.1.2 Section 7.1.1.2 of RFC 7231}
      */
     public static DATE = 'Date';
 
-    /** The HTTP `ETag` header field name.
+    /**
+     * The HTTP `ETag` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-2.3 Section 2.3 of RFC 7232}
      */
     public static ETAG = 'ETag';
 
-    /** The HTTP `Expect` header field name.
+    /**
+     * The HTTP `Expect` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.1.1 Section 5.1.1 of RFC 7231}
      */
     public static EXPECT = 'Expect';
 
-    /** The HTTP `Expires` header field name.
+    /**
+     * The HTTP `Expires` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7234#section-5.3 Section 5.3 of RFC 7234}
      */
     public static EXPIRES = 'Expires';
 
-    /** The HTTP `From` header field name.
+    /**
+     * The HTTP `From` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.5.1 Section 5.5.1 of RFC 7231}
      */
     public static FROM = 'From';
 
-    /** The HTTP `Host` header field name.
+    /**
+     * The HTTP `Host` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-5.4 Section 5.4 of RFC 7230}
      */
     public static HOST = 'Host';
 
-    /** The HTTP `If-Match` header field name.
+    /**
+     * The HTTP `If-Match` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-3.1 Section 3.1 of RFC 7232}
      */
     public static IF_MATCH = 'If-Match';
 
-    /** The HTTP `If-Modified-Since` header field name.
+    /**
+     * The HTTP `If-Modified-Since` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-3.3 Section 3.3 of RFC 7232}
      */
     public static IF_MODIFIED_SINCE = 'If-Modified-Since';
 
-    /** The HTTP `If-None-Match` header field name.
+    /**
+     * The HTTP `If-None-Match` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-3.2 Section 3.2 of RFC 7232}
      */
     public static IF_NONE_MATCH = 'If-None-Match';
 
-    /** The HTTP `If-Range` header field name.
+    /**
+     * The HTTP `If-Range` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7233#section-3.2 Section 3.2 of RFC 7233}
      */
     public static IF_RANGE = 'If-Range';
 
-    /** The HTTP `If-Unmodified-Since` header field name.
+    /**
+     * The HTTP `If-Unmodified-Since` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-3.4 Section 3.4 of RFC 7232}
      */
     public static IF_UNMODIFIED_SINCE = 'If-Unmodified-Since';
 
-    /** The HTTP `Last-Modified` header field name.
+    /**
+     * The HTTP `Last-Modified` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7232#section-2.2 Section 2.2 of RFC 7232}
      */
     public static LAST_MODIFIED = 'Last-Modified';
 
-    /** The HTTP `Link` header field name.
+    /**
+     * The HTTP `Link` header field name.
      * @see {@link https://tools.ietf.org/html/rfc5988 RFC 5988}
      */
     public static LINK = 'Link';
 
-    /** The HTTP `Location` header field name.
+    /**
+     * The HTTP `Location` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.1.2 Section 7.1.2 of RFC 7231}
      */
     public static LOCATION = 'Location';
 
-    /** The HTTP `Max-Forwards` header field name.
+    /**
+     * The HTTP `Max-Forwards` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.1.2 Section 5.1.2 of RFC 7231}
      */
     public static MAX_FORWARDS = 'Max-Forwards';
 
-    /** The HTTP `Origin` header field name.
+    /**
+     * The HTTP `Origin` header field name.
      * @see {@link https://tools.ietf.org/html/rfc6454 RFC 6454}
      */
     public static ORIGIN = 'Origin';
 
-    /** The HTTP `Pragma` header field name.
+    /**
+     * The HTTP `Pragma` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7234#section-5.4 Section 5.4 of RFC 7234}
      */
     public static PRAGMA = 'Pragma';
 
-    /** The HTTP `Proxy-Authenticate` header field name.
+    /**
+     * The HTTP `Proxy-Authenticate` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7235#section-4.3 Section 4.3 of RFC 7235}
      */
     public static PROXY_AUTHENTICATE = 'Proxy-Authenticate';
 
-    /** The HTTP `Proxy-Authorization` header field name.
+    /**
+     * The HTTP `Proxy-Authorization` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7235#section-4.4 Section 4.4 of RFC 7235}
      */
     public static PROXY_AUTHORIZATION = 'Proxy-Authorization';
 
-    /** The HTTP `Range` header field name.
+    /**
+     * The HTTP `Range` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7233#section-3.1 Section 3.1 of RFC 7233}
      */
     public static RANGE = 'Range';
 
-    /** The HTTP `Referer` header field name.
+    /**
+     * The HTTP `Referer` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.5.2 Section 5.5.2 of RFC 7231}
      */
     public static REFERER = 'Referer';
 
-    /** The HTTP `Retry-After` header field name.
+    /**
+     * The HTTP `Retry-After` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.1.3 Section 7.1.3 of RFC 7231}
      */
     public static RETRY_AFTER = 'Retry-After';
 
-    /** The HTTP `Server` header field name.
+    /**
+     * The HTTP `Server` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.4.2 Section 7.4.2 of RFC 7231}
      */
     public static SERVER = 'Server';
 
-    /** The HTTP `Set-Cookie` header field name.
+    /**
+     * The HTTP `Set-Cookie` header field name.
      * @see {@link https://tools.ietf.org/html/rfc2109#section-4.2.2 Section 4.2.2 of RFC 2109}
      */
     public static SET_COOKIE = 'Set-Cookie';
 
-    /** The HTTP `Set-Cookie2` header field name.
+    /**
+     * The HTTP `Set-Cookie2` header field name.
      * @see {@link https://tools.ietf.org/html/rfc2965 RFC 2965}
      */
     public static SET_COOKIE2 = 'Set-Cookie2';
 
-    /** The HTTP `TE` header field name.
+    /**
+     * The HTTP `TE` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-4.3 Section 4.3 of RFC 7230}
      */
     public static TE = 'TE';
 
-    /** The HTTP `Trailer` header field name.
+    /**
+     * The HTTP `Trailer` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-4.4 Section 4.4 of RFC 7230}
      */
     public static TRAILER = 'Trailer';
 
-    /** The HTTP `Transfer-Encoding` header field name.
+    /**
+     * The HTTP `Transfer-Encoding` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-3.3.1 Section 3.3.1 of RFC 7230}
      */
     public static TRANSFER_ENCODING = 'Transfer-Encoding';
 
-    /** The HTTP `Upgrade` header field name.
+    /**
+     * The HTTP `Upgrade` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-6.7 Section 6.7 of RFC 7230}
      */
     public static UPGRADE = 'Upgrade';
 
-    /** The HTTP `User-Agent` header field name.
+    /**
+     * The HTTP `User-Agent` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-5.5.3 Section 5.5.3 of RFC 7231}
      */
     public static USER_AGENT = 'User-Agent';
 
-    /** The HTTP `Vary` header field name.
+    /**
+     * The HTTP `Vary` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7231#section-7.1.4 Section 7.1.4 of RFC 7231}
      */
     public static VARY = 'Vary';
 
-    /** The HTTP `Via` header field name.
+    /**
+     * The HTTP `Via` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7230#section-5.7.1 Section 5.7.1 of RFC 7230}
      */
     public static VIA = 'Via';
 
-    /** The HTTP `Warning` header field name.
+    /**
+     * The HTTP `Warning` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7234#section-5.5 Section 5.5 of RFC 7234}
      */
     public static WARNING = 'Warning';
 
-    /** The HTTP `WWW-Authenticate` header field name.
+    /**
+     * The HTTP `WWW-Authenticate` header field name.
      * @see {@link https://tools.ietf.org/html/rfc7235#section-4.1 Section 4.1 of RFC 7235}
      */
     public static WWW_AUTHENTICATE = 'WWW-Authenticate';
 
-    /** The HTTP `X-Requested-With` header field name. */
+    /**
+     * The HTTP `X-Requested-With` header field name.
+     */
     public static X_REQUESTED_WITH = 'X-Requested-With';
 }

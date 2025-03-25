@@ -211,8 +211,6 @@ export namespace ChatResponseMetadata {
         };
     }
 
-
-
     export function builder(): ChatResponseMetadataBuilder {
         return new ChatResponseMetadataBuilder();
     }

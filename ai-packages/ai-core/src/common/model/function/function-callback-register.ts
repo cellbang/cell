@@ -4,7 +4,7 @@ import { NotFoundError } from '../../error';
 
 @Component(FunctionCallbackRegister)
 export class FunctionCallbackRegisterImpl implements FunctionCallbackRegister {
-    
+
     private functionCallbacks: Map<string, FunctionCallback> = new Map<string, FunctionCallback>();
 
     register(functionCallback: FunctionCallback): void {
@@ -25,7 +25,7 @@ export class FunctionCallbackRegisterImpl implements FunctionCallbackRegister {
 
     resolve(functionNames: string[]): FunctionCallback[] {
         const functionCallbacks: FunctionCallback[] = [];
-        new Set(functionNames).forEach((functionName) => {
+        new Set(functionNames).forEach(functionName => {
             const functionCallback = this.functionCallbacks.get(functionName);
             if (functionCallback) {
                 functionCallbacks.push(functionCallback);
@@ -33,6 +33,6 @@ export class FunctionCallbackRegisterImpl implements FunctionCallbackRegister {
                 throw new NotFoundError(`No function callback found for name: ${functionName}`);
             }
         });
-        return functionCallbacks;   
+        return functionCallbacks;
     }
 }

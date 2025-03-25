@@ -75,13 +75,13 @@ export namespace FunctionCallingOptions {
         if (runtimeFunctionOptions) {
             // Add the explicitly enabled functions.
             if (runtimeFunctionOptions.functions) {
-                runtimeFunctionOptions.functions.forEach((fn) => {
+                runtimeFunctionOptions.functions.forEach(fn => {
                     enabledFunctionsToCall.add(fn);
                 });
             }
 
             if (runtimeFunctionOptions.functionCallbacks) {
-                runtimeFunctionOptions.functionCallbacks.forEach((functionCallback) => {
+                runtimeFunctionOptions.functionCallbacks.forEach(functionCallback => {
                     // Automatically enable the function, usually from prompt callback.
                     enabledFunctionsToCall.add(functionCallback.name);
                 });
