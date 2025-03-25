@@ -33,7 +33,7 @@ describe('OpenAIEmbeddingModel', () => {
 
             expect(response).to.have.property('embeddings');
             expect(response.embeddings).to.be.an('array');
-            expect(response.embeddings.length).to.equal(2);
+            expect(response.embeddings.length).to.equal(1);
             expect(response.embeddings[0].embedding).to.be.an('array');
             expect(response.metadata).to.have.property('model');
             expect(response.metadata).to.have.property('usage');

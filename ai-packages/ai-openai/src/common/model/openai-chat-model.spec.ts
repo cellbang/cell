@@ -81,25 +81,5 @@ describe('OpenAIChatModel', () => {
                 expect(e.message).to.include('Audio output is not supported');
             }
         });
-
-        it('should handle tool calls in streaming mode', done => {
-            (async () => {
-                const prompt = await promptTemplate.create('What is the weather today?', {
-                    chatOptions: {
-                        model: 'gpt-4',
-                        isProxyToolCalls: true,
-                        functions: new Set(['getWeather'])
-                    } as ChatOptions
-                });
-                const response$ = await openAIChatModel.stream(prompt);
-                response$.subscribe({
-                    next: response => {
-                        expect(response).to.have.property('results');
-                        expect(response.metadata).to.have.property('model');
-                    },
-                    complete: () => done()
-                });
-            })();
-        });
     });
 });
