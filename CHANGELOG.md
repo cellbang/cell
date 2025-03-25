@@ -1,5 +1,9 @@
 # Change
 
+## 3.4.4
+
+- fix(*): 修复依赖问题
+
 ## 3.4.3
 
 - fix(cli-common): 修复importx导致的HMR失效问题，关闭缓存 (#225)
