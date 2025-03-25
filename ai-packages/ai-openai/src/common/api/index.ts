@@ -5,6 +5,5 @@ export * from './embeddings-request';
 export * from './embeddings-response';
 export * from './openai-api';
 export * from './message';
-export * from './ollama-options';
 export * from './openai-model';
 export * from './response-format';

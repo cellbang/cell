@@ -2,7 +2,6 @@ import { Expose, Type } from 'class-transformer';
 import { ChatCompletionMessage } from './message';
 import { ResponseFormat } from './response-format';
 
-
 export class StreamOptions {
     static INCLUDE_USAGE = new StreamOptions(true);
 
@@ -19,7 +18,6 @@ export class StreamOptions {
     }
 }
 
-
 /**
  * Function definition.
  */
@@ -27,7 +25,16 @@ export class Function {
     description: string;
     name: string;
     parameters: Record<string, any>;
-    strict: boolean;
+    strict?: boolean;
+
+    static create(description: string, name: string, parameters: Record<string, any>, strict?: boolean): Function {
+        const func = new Function();
+        func.description = description;
+        func.name = name;
+        func.parameters = parameters;
+        func.strict = strict;
+        return func;
+    }
 }
 
 export enum ToolType {
@@ -47,6 +54,13 @@ export class FunctionTool {
      * The function definition.
      */
     function: Function;
+
+    static create(func: Function): FunctionTool {
+        const tool = new FunctionTool();
+        tool.type = ToolType.FUNCTION;
+        tool.function = func;
+        return tool;
+    }
 }
 
 /**
@@ -85,7 +99,6 @@ export class AudioParameters {
     format?: AudioResponseFormat;
 }
 
-
 /**
  * Creates a model response for the given chat conversation.
  */
@@ -110,13 +123,15 @@ export class ChatCompletionRequest {
     metadata?: Record<string, any>;
 
     /**
-     * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
+     * Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far,
+     * decreasing the model's likelihood to repeat the same line verbatim.
      */
     @Expose({ name: 'frequency_penalty' })
     frequencyPenalty?: number;
 
     /**
-     * Modify the likelihood of specified tokens appearing in the completion. Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100.
+     * Modify the likelihood of specified tokens appearing in the completion.
+     * Accepts a JSON object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100.
      */
     @Expose({ name: 'logit_bias' })
     logitBias?: Record<string, number>;
@@ -162,7 +177,8 @@ export class ChatCompletionRequest {
     audioParameters?: AudioParameters;
 
     /**
-     * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+     * Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far,
+     * increasing the model's likelihood to talk about new topics.
      */
     @Expose({ name: 'presence_penalty' })
     presencePenalty?: number;
@@ -175,7 +191,8 @@ export class ChatCompletionRequest {
     responseFormat?: ResponseFormat;
 
     /**
-     * If specified, our system will make a best effort to sample deterministically, such that repeated requests with the same seed and parameters should return the same result.
+     * If specified, our system will make a best effort to sample deterministically,
+     * such that repeated requests with the same seed and parameters should return the same result.
      */
     seed?: number;
 
@@ -203,12 +220,14 @@ export class ChatCompletionRequest {
     streamOptions?: StreamOptions;
 
     /**
-     * What sampling temperature to use, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+     * What sampling temperature to use, between 0 and 1. Higher values like 0.8 will make the output more random,
+     * while lower values like 0.2 will make it more focused and deterministic.
      */
     temperature?: number;
 
     /**
-     * An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass.
+     * An alternative to sampling with temperature, called nucleus sampling,
+     * where the model considers the results of the tokens with top_p probability mass.
      */
     @Expose({ name: 'top_p' })
     topP?: number;
@@ -226,7 +245,8 @@ export class ChatCompletionRequest {
     toolChoice?: Record<string, any>;
 
     /**
-     * If set to true, the model will call all functions in the tools list in parallel. Otherwise, the model will call the functions in the tools list in the order they are provided.
+     * If set to true, the model will call all functions in the tools list in parallel. Otherwise,
+     * the model will call the functions in the tools list in the order they are provided.
      */
     @Expose({ name: 'parallel_tool_calls' })
     parallelToolCalls?: boolean;

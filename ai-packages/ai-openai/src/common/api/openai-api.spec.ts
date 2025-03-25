@@ -10,7 +10,7 @@ import '../index';
 describe('OpenAIAPI', () => {
     const container = createContainer();
     let openaiAPI: OpenAIAPI;
-    
+
     // Mock response data
     const mockResponses = {
         chat: {
@@ -81,9 +81,9 @@ describe('OpenAIAPI', () => {
             const request = new ChatCompletionRequest();
             request.model = 'gpt-3.5-turbo';
             request.messages = [{ role: Role.USER, content: 'Hello' }];
-            
+
             const response = await openaiAPI.chat(request);
-            
+
             expect(response.body.id).to.equal('chatcmpl-123');
             expect(response.body.choices[0].message.content).to.equal('Hello! How can I help you today?');
             expect(response.body.usage.totalTokens).to.equal(21);
@@ -94,13 +94,32 @@ describe('OpenAIAPI', () => {
             request.model = 'gpt-3.5-turbo';
             request.messages = [{ role: Role.USER, content: 'Hello' }];
             request.stream = true;
-            await expect(openaiAPI.chat(request))
-                .to.be.throw('Request must set the stream property to false.');
+            try {
+                await openaiAPI.chat(request);
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.include('Request must set the stream property to false.');
+            }
+        });
+    });
+
+    describe('chat', () => {
+        it('should throw error when stream is disabled', async () => {
+            const request = new ChatCompletionRequest();
+            request.model = 'gpt-3.5-turbo';
+            request.messages = [{ role: Role.USER, content: 'Hello' }];
+            request.stream = false;
+            try {
+                await openaiAPI.chat(request);
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.include('Request must set the stream property to true.');
+            }
         });
     });
 
     describe('streamingChat', () => {
-        it('should handle streaming response correctly', (done) => {
+        it('should handle streaming response correctly', done => {
             const request = new ChatCompletionRequest();
             request.model = 'gpt-3.5-turbo';
             request.messages = [{ role: Role.USER, content: 'Hello' }];
@@ -123,8 +142,12 @@ describe('OpenAIAPI', () => {
             request.messages = [{ role: Role.USER, content: 'Hello' }];
             request.stream = false;
 
-            await expect(openaiAPI.streamingChat(request))
-                .to.be.throw('Request must set the stream property to true.');
+            try {
+                await openaiAPI.streamingChat(request);
+            } catch (e) {
+                expect(e).to.be.instanceOf(Error);
+                expect(e.message).to.include('Request must set the stream property to true.');
+            }
         });
     });
 
@@ -132,7 +155,7 @@ describe('OpenAIAPI', () => {
         it('should return correct embedding vectors', async () => {
             const request = EmbeddingRequest.fromInput('Hello world');
             const response = await openaiAPI.embed(request);
-            
+
             expect(response.body.object).to.equal('list');
             expect(response.body.data[0].embedding).to.deep.equal([0.1, 0.2, 0.3]);
             expect(response.body.model).to.equal('text-embedding-3-small');
@@ -140,10 +163,10 @@ describe('OpenAIAPI', () => {
 
         it('should support batch inputs', async () => {
             const request = EmbeddingRequest.fromInputAndModel(
-                ['Hello', 'World'], 
+                ['Hello', 'World'],
                 'text-embedding-3-small'
             );
-            
+
             const response = await openaiAPI.embed(request);
             expect(response.body.data[0].embedding).to.deep.equal([0.1, 0.2, 0.3]);
             expect(response.body.usage.totalTokens).to.equal(8);

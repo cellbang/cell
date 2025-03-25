@@ -78,7 +78,7 @@ export class ByteUtil {
         );
     }
 
-    static decodeBase64(base64: string): Bytes {
+    static decodeBase64(base64?: string): Bytes {
         if (!base64) {
             return new Uint8Array();
         }

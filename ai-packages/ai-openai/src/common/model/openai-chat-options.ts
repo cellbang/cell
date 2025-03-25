@@ -184,7 +184,7 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
     }
 
     static builder(): OpenAIOptionsBuilder {
-        return new OpenAIOptionsBuilder();  
+        return new OpenAIOptionsBuilder();
     }
 }
 
@@ -222,7 +222,7 @@ export class OpenAIOptionsBuilder {
     }
 
     withN(n: number): OpenAIOptionsBuilder {
-        this.options.n = n; 
+        this.options.n = n;
         return this;
     }
 

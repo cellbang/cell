@@ -6,6 +6,7 @@ import {
     ChatResponseMetadata,
     Generation,
     Prompt,
+    RateLimit,
     SystemMessage,
     ToolCall,
     ToolResponseMessage,
@@ -54,7 +55,7 @@ export class OllamaChatModel implements ChatModel {
             toolCalls
         );
 
-        let generationMetadata: ChatGenerationMetadata = ChatGenerationMetadata.EMPTY;
+        let generationMetadata: ChatGenerationMetadata = ChatGenerationMetadata.from();
         if (ollamaResponse.promptEvalCount !== undefined && ollamaResponse.evalCount !== undefined) {
             generationMetadata = ChatGenerationMetadata.from(ollamaResponse.doneReason, undefined);
         }
@@ -88,7 +89,7 @@ export class OllamaChatModel implements ChatModel {
                     [],
                     toolCalls
                 );
-                let generationMetadata = ChatGenerationMetadata.EMPTY;
+                let generationMetadata = ChatGenerationMetadata.from();
                 if (chunk.promptEvalCount && chunk.evalCount) {
                     generationMetadata = ChatGenerationMetadata.from(chunk.doneReason);
                 }
@@ -114,15 +115,14 @@ export class OllamaChatModel implements ChatModel {
         const generationTokens = response.evalCount ?? 0;
         const totalTokens = promptTokens + generationTokens;
         return {
-            id: '',
+            ...ChatResponseMetadata.createEmpty(),
             model: response.model,
-            rateLimit: ChatResponseMetadata.EMPTY.rateLimit,
+            rateLimit: RateLimit.createEmpty(),
             usage: {
                 promptTokens,
                 generationTokens,
                 totalTokens
             },
-            promptMetadata: ChatResponseMetadata.EMPTY.promptMetadata,
             extra: {
                 'eval-count': response.evalCount,
                 'load-duration': response.loadDuration,

@@ -1,12 +1,12 @@
 import {
-    ChatResponseMetadata,
     Embedding,
     EmbeddingModel,
     EmbeddingOptions,
     EmbeddingRequest,
     EmbeddingResponse,
     EmbeddingResponseMetadata,
-    EmbeddingResultMetadata
+    EmbeddingResultMetadata,
+    Usage
 } from '@celljs/ai-core';
 import {
     EmbeddingsRequest as OllamaEmbeddingsRequest,
@@ -38,8 +38,8 @@ export class OllamaEmbeddingModel implements EmbeddingModel {
 
         const embeddingResponseMetadata = <EmbeddingResponseMetadata>{
             model: ollamaResponse.model,
-            usage: ChatResponseMetadata.EMPTY.usage,
-            extra: ChatResponseMetadata.EMPTY.extra
+            usage: Usage.createEmpty(),
+            extra: {}
         };
         Assert.notEmpty(embeddings, 'No embedding data available.');
         return {

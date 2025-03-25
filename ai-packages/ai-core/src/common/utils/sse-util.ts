@@ -5,7 +5,7 @@ import { Bytes } from '@celljs/core';
 /**
  * SSE utility class.
  */
-export class SSEUtil {
+export abstract class SSEUtil {
 
     static toObservable<Data>(readableStream: ReadableStream, controller?: AbortController): Observable<StreamEvent<Data>> {
         return new Observable<StreamEvent<Data>>(subscriber => {

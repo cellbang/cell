@@ -2,7 +2,6 @@ import { Expose, Type } from 'class-transformer';
 import { ChatCompletionFinishReason, ChatCompletionMessage } from './message';
 import { Usage } from './usage';
 
-
 /**
  * The most likely tokens and their log probability, at this token position.
  */
@@ -25,7 +24,6 @@ export class TopLogProbs {
     @Expose({ name: 'bytes' })
     probBytes: number[];
 }
-
 
 /**
  * Message content tokens with log probability information.
@@ -72,7 +70,6 @@ export class LogProbs {
     @Type(() => Content)
     refusal: Content[];
 }
-
 
 /**
  * Chat completion choice.

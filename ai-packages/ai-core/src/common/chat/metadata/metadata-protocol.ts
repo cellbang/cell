@@ -27,8 +27,12 @@ export interface Usage {
 }
 
 export namespace Usage {
-    export function from(promptTokens: number, generationTokens: number): Usage {
-        return { promptTokens, generationTokens, totalTokens: promptTokens + generationTokens };
+    export function createEmpty(): Usage {
+        return { promptTokens: 0, generationTokens: 0, totalTokens: 0 };
+    }
+
+    export function from(promptTokens = 0, generationTokens = 0, totalTokens = 0): Usage {
+        return { promptTokens, generationTokens, totalTokens: totalTokens ? totalTokens : promptTokens + generationTokens };
     }
 }
 
@@ -123,6 +127,12 @@ export namespace PromptMetadata {
     }
 }
 
+export namespace RateLimit {
+    export function createEmpty(): RateLimit {
+        return { requestsLimit: 0, requestsRemaining: 0, requestsReset: 0, tokensLimit: 0, tokensRemaining: 0, tokensReset: 0 };
+    }
+}
+
 export interface ChatResponseMetadata extends ResponseMetadata {
     id?: string;
     model?: string;
@@ -144,25 +154,7 @@ export interface ChatResponseMetadata extends ResponseMetadata {
 
 export class ChatResponseMetadataBuilder {
 
-    private readonly chatResponseMetadata: ChatResponseMetadata = {
-        id: '',
-        model: '',
-        rateLimit: {
-            requestsLimit: 0,
-            requestsRemaining: 0,
-            requestsReset: 0,
-            tokensLimit: 0,
-            tokensRemaining: 0,
-            tokensReset: 0
-        },
-        usage: {
-            promptTokens: 0,
-            generationTokens: 0,
-            totalTokens: 0
-        },
-        promptMetadata: [] as PromptMetadata,
-        extra: {}
-    };
+    private readonly chatResponseMetadata: ChatResponseMetadata = ChatResponseMetadata.createEmpty();
 
     id(id: string): ChatResponseMetadataBuilder {
         this.chatResponseMetadata.id = id;
@@ -207,25 +199,19 @@ export class ChatResponseMetadataBuilder {
 }
 
 export namespace ChatResponseMetadata {
-    export const EMPTY: ChatResponseMetadata = {
-        id: '',
-        model: '',
-        rateLimit: {
-            requestsLimit: 0,
-            requestsRemaining: 0,
-            requestsReset: 0,
-            tokensLimit: 0,
-            tokensRemaining: 0,
-            tokensReset: 0
-        },
-        usage: {
-            promptTokens: 0,
-            generationTokens: 0,
-            totalTokens: 0
-        },
-        promptMetadata: [] as PromptMetadata,
-        extra: {}
-    };
+
+    export function createEmpty(): ChatResponseMetadata {
+        return {
+            id: '',
+            model: '',
+            rateLimit: RateLimit.createEmpty(),
+            usage: Usage.createEmpty(),
+            promptMetadata: [] as PromptMetadata,
+            extra: {}
+        };
+    }
+
+
 
     export function builder(): ChatResponseMetadataBuilder {
         return new ChatResponseMetadataBuilder();

@@ -5,3 +5,9 @@ export class AIError extends CustomError {
         super(message);
     }
 }
+
+export class NotFoundError extends AIError {
+    constructor(message: string) {
+        super(message);
+    }
+}

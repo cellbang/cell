@@ -30,5 +30,5 @@ export interface PromptTemplateContext {
 
 export interface PromptTemplate {
     render(template: string, ctx?: PromptTemplateContext): Promise<string>;
-    create(template: string, ctx?: PromptTemplateContext): Promise<Prompt>;
+    create(template: string | Message[], ctx?: PromptTemplateContext): Promise<Prompt>;
 }

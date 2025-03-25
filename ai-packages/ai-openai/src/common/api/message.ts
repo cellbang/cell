@@ -67,7 +67,7 @@ export class ToolCall {
      * The index of the tool call in the list of tool calls. Required in
      * case of streaming.
      */
-    index: number;
+    index?: number;
     /**
      * The ID of the tool call. This ID must be referenced when you submit
      * the tool outputs in using the Submit tool outputs to run endpoint.
@@ -91,20 +91,29 @@ export class AudioOutput {
     /**
      * Unique identifier for the audio response from the model.
      */
-    id: string;
+    id?: string;
     /**
      * Audio output from the model.
      */
-    data: string;
+    data?: string;
     /**
      * When the audio content will no longer be available on the server.
      */
     @Expose({ name: 'expires_at' })
-    expiresAt: number;
+    expiresAt?: number;
     /**
      * Transcript of the audio output from the model.
      */
-    transcript: string;
+    transcript?: string;
+
+    static create(id?: string, data?: string, expiresAt?: number, transcript?: string): AudioOutput {
+        const audio = new AudioOutput();
+        audio.id = id;
+        audio.data = data;
+        audio.expiresAt = expiresAt;
+        audio.transcript = transcript;
+        return audio;
+    }
 }
 
 /**
@@ -246,4 +255,19 @@ export class ChatCompletionMessage {
     @Expose({ name: 'audio' })
     @Type(() => AudioOutput)
     audioOutput?: AudioOutput;
+
+    /**
+     * 创建一个新的聊天消息实例。
+     *
+     * @param text - 消息内容。
+     * @param role - 消息角色，表示发送者的身份。
+     * @returns 返回一个包含指定内容和角色的 ChatCompletionMessage 实例。
+     */
+    static create(text: any, role: Role): ChatCompletionMessage {
+        const message = new ChatCompletionMessage();
+        message.content = text;
+        message.role = role;
+        return message;
+    }
+
 }

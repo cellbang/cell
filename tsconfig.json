@@ -16,6 +16,9 @@
       "path": "ai-packages/ai-ollama"
     },
     {
+      "path": "ai-packages/ai-openai"
+    },
+    {
       "path": "cloud-packages/cloud"
     },
     {

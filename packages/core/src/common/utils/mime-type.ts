@@ -283,7 +283,7 @@ export class MimeType {
         }
         return value ?? '';
     }
-    
+
     protected buildString(): string {
         let result = '';
         result += this.type;
@@ -292,7 +292,7 @@ export class MimeType {
         result += this.buildParameters(this.parameters);
         return result;
     }
-    
+
     private buildParameters(params: Map<string, string>): string {
         let result = '';
         params.forEach((val, key) => {

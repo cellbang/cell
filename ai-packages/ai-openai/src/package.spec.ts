@@ -1,4 +1,4 @@
-describe('ai-ollama package', () => {
+describe('ai-openai package', () => {
 
-    it('support ai-ollama coverage statistics', () => {});
+    it('support ai-openai coverage statistics', () => {});
 });

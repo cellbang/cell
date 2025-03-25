@@ -21,8 +21,6 @@ export interface ChatGenerationMetadata extends ResultMetadata {
 
 export class ChatGenerationMetadata {
 
-    static EMPTY: ChatGenerationMetadata = ChatGenerationMetadata.from();
-
     /**
      * Factory method used to construct a new {@link ChatGenerationMetadata} from the
      * given finish reason and content filter metadata.

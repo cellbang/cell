@@ -27,7 +27,9 @@ function run(script) {
             env,
             cwd: process.cwd()
         });
+        // @ts-ignore
         scriptProcess.stdout?.pipe(process.stdout);
+        // @ts-ignore
         scriptProcess.stderr?.pipe(process.stderr);
         scriptProcess.on('error', reject);
         scriptProcess.on('close', resolve);

@@ -1,4 +1,4 @@
-import { Assert, Autowired, Component, PostConstruct, Value } from '@celljs/core';
+import { Assert, Autowired, Component, Optional, PostConstruct, Value } from '@celljs/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders, MediaType, ResponseEntity, RestOperations } from '@celljs/http';
@@ -20,10 +20,10 @@ export class OpenAIAPIImpl implements OpenAIAPI {
     protected readonly apiOptions: OpenAIAPIOptions;
 
     @Autowired(OpenAIAPIOptions)
+    @Optional()
     protected readonly apiOptions2: OpenAIAPIOptions;
 
     protected finalApiOptions: Required<OpenAIAPIOptions>;
-
 
     @PostConstruct()
     protected init() {
@@ -71,7 +71,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
                 responseType: 'stream'
             }
         );
-        return SSEUtil.toObservable(data).pipe(map(item => 
+        return SSEUtil.toObservable(data).pipe(map(item =>
             ({
                 status,
                 headers,
