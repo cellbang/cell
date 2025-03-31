@@ -1,13 +1,13 @@
 {
   "name": "@celljs/mvc",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.0",
-    "@celljs/http": "3.5.0",
-    "@celljs/web": "3.5.0",
+    "@celljs/core": "3.5.1",
+    "@celljs/http": "3.5.1",
+    "@celljs/web": "3.5.1",
     "fs-extra": "^11.1.1",
     "mustache": "^4.2.0",
     "reflect-metadata": "^0.1.13",
@@ -41,7 +41,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.0",
+    "@celljs/component": "3.5.1",
     "@types/mustache": "^4.2.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

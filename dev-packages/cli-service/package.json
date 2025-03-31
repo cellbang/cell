@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cli-service",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "Cell CLI Service.",
   "publishConfig": {
     "access": "public"
@@ -34,7 +34,7 @@
     "test": "cell-component test:js"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.5.0",
+    "@celljs/cli-common": "3.5.1",
     "@gem-mine/webpack-chain": "^7.1.0",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^4.0.0",
@@ -65,7 +65,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.0",
+    "@celljs/component": "3.5.1",
     "@types/friendly-errors-webpack-plugin": "^0.1.4",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.7.2"

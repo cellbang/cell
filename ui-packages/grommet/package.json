@@ -1,13 +1,13 @@
 {
   "name": "@celljs/grommet",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.0",
-    "@celljs/react": "3.5.0",
-    "@celljs/widget": "3.5.0",
+    "@celljs/core": "3.5.1",
+    "@celljs/react": "3.5.1",
+    "@celljs/widget": "3.5.1",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
@@ -49,7 +49,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.0"
+    "@celljs/component": "3.5.1"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
