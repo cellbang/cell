@@ -1,6 +1,6 @@
 # Change
 
-## 3.5.0
+## 3.5.1
 
 - feat(ai-deepseek): 添加新组件 `@celljs/ai-deepseek`，支持 DeepSeek 模型及其 API
 - feat(ai-core): 添加 `ProxyChatModel` 类，用于代理调用多个 ChatModel 实例
