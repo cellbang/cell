@@ -1,9 +1,9 @@
 {
   "name": "@celljs/python-plugin",
-  "version": "3.4.4",
+  "version": "3.5.0",
   "description": "",
   "dependencies": {
-    "@celljs/cli-common": "3.4.4",
+    "@celljs/cli-common": "3.5.0",
     "@iarna/toml": "^2.2.3",
     "appdirectory": "^0.1.0",
     "fs-extra": "^11.1.1",
@@ -44,7 +44,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.4.4"
+    "@celljs/component": "3.5.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

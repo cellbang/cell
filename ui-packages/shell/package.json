@@ -1,15 +1,15 @@
 {
   "name": "@celljs/shell",
-  "version": "3.4.4",
+  "version": "3.5.0",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.4.4",
-    "@celljs/grommet": "3.4.4",
-    "@celljs/react": "3.4.4",
-    "@celljs/security": "3.4.4",
-    "@celljs/widget": "3.4.4",
+    "@celljs/core": "3.5.0",
+    "@celljs/grommet": "3.5.0",
+    "@celljs/react": "3.5.0",
+    "@celljs/security": "3.5.0",
+    "@celljs/widget": "3.5.0",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "react-intl": "^6.0.5",
@@ -45,7 +45,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.4.4"
+    "@celljs/component": "3.5.0"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
