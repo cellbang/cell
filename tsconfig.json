@@ -13,6 +13,9 @@
       "path": "ai-packages/ai-core"
     },
     {
+      "path": "ai-packages/ai-deepseek"
+    },
+    {
       "path": "ai-packages/ai-ollama"
     },
     {

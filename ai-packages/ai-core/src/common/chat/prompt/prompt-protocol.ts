@@ -19,6 +19,7 @@ export interface ChatOptions extends ModelOptions {
 
 export interface Prompt extends ModelRequest<Message[]> {
     readonly contents: string;
+    readonly options: ChatOptions;
     copy(): Prompt;
 }
 

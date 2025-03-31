@@ -52,7 +52,7 @@ export class OpenAIDemo {
         const prompt = await this.promptTemplate.create(
             'Hello {name}',
             { 
-                chatOptions: { model: OpenAIModel.LLAMA3_2 },
+                chatOptions: { model: OpenAIModel.O1_MINI },
                 variables: { name: 'OpenAI' }
             }
         );
@@ -67,7 +67,7 @@ export class OpenAIDemo {
         const prompt = await this.promptTemplate.create(
             'Hello {name}',
             { 
-                chatOptions: { model: OpenAIModel.LLAMA3_2 },
+                chatOptions: { model: OpenAIModel.O1_MINI },
                 variables: { name: 'OpenAI' }
             }
         );
@@ -84,7 +84,7 @@ export class OpenAIDemo {
     async embed() {
         const response = await this.openAIEmbeddingModel.call({
             inputs: ['text to embed'],
-            options: { model: OpenAIModel.LLAMA3_2 }
+            options: { model: OpenAIModel.TEXT_EMBEDDING_3_LARGE }
         });
         console.log(response.result.embeddings);
     }

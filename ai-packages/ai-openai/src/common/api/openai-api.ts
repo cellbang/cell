@@ -25,15 +25,23 @@ export class OpenAIAPIImpl implements OpenAIAPI {
 
     protected finalApiOptions: Required<OpenAIAPIOptions>;
 
+    protected readonly finalHeaders: Record<string, string> = {};
+
     @PostConstruct()
     protected init() {
         this.finalApiOptions = {
             baseUrl: 'https://api.openai.com',
+            apiKey: '',
             completionsPath: '/v1/chat/completions',
             embeddingsPath: '/v1/embeddings',
             ...this.apiOptions,
             ...this.apiOptions2
         };
+
+        this.finalHeaders[HttpHeaders.CONTENT_TYPE] = MediaType.APPLICATION_JSON;
+        if (this.finalApiOptions.apiKey) {
+            this.finalHeaders[HttpHeaders.AUTHORIZATION] = `Bearer ${this.finalApiOptions.apiKey}`;
+        }
     }
 
     async chat(chatRequest: ChatCompletionRequest, additionalHttpHeader?: Record<string, string>): Promise<ResponseEntity<ChatCompletion>> {
@@ -44,7 +52,10 @@ export class OpenAIAPIImpl implements OpenAIAPI {
                 instanceToPlain(chatRequest),
                 {
                     baseURL: this.finalApiOptions.baseUrl,
-                    headers: additionalHttpHeader
+                    headers: {
+                        ...this.finalHeaders,
+                        ...additionalHttpHeader
+                    }
                 }
             );
 
@@ -64,6 +75,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
             {
                 baseURL: this.finalApiOptions.baseUrl,
                 headers: {
+                    ...this.finalHeaders,
                     [HttpHeaders.ACCEPT]: MediaType.TEXT_EVENT_STREAM,
                     ...additionalHttpHeader
 

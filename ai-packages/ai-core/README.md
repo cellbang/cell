@@ -44,7 +44,7 @@ yarn add @celljs/ai-ollama
 
 ```typescript
 import { AssistantMessage, PromptTemplate } from '@celljs/ai-core';
-import { Component Autowired } from '@celljs/core';
+import { Component, Autowired } from '@celljs/core';
 
 @Component()
 export class OllamaDemo {
@@ -100,6 +100,31 @@ export class OllamaDemo {
         });
         console.log(response.result.embeddings);
     }
+}
+```
+
+另外也可以使用 `ProxyChatModel` 类统一调用所有的模型服务商的模型：
+
+```typescript
+import { ProxyChatModel } from '@celljs/ai-core';
+import { Component Autowired } from '@celljs/core';
+
+@Component()
+export class OllamaDemo {
+    @Autowired(ProxyChatModel)
+    private chatModel: ChatModel;
+    
+    /**
+     * Chat with Ollama
+     */
+    async chat() {
+        const response = await this.chatModel.call({
+            prompt: 'Hello {name}',
+            variables: { name: 'Ollama' },
+            chatOptions: { model: 'ollama:llama3.2' }
+        });
+        console.log(response.result.output);
+        }
 }
 ```
 

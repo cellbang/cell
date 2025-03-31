@@ -10,7 +10,7 @@ export const OpenAIAPI = Symbol('OpenAIAPI');
 
 export interface OpenAIAPIOptions {
     baseUrl?: string;
-    apiKey: string;
+    apiKey?: string;
     completionsPath?: string;
     embeddingsPath?: string;
 }
