@@ -1,6 +1,6 @@
 import { OpenAIAPIOptions } from '@celljs/ai-openai';
 
-export const DeepSeekPIOptions = Symbol('DeepSeekPIOptions');
+export const DeepSeekAPIOptions = Symbol('DeepSeekAPIOptions');
 
-export interface DeepSeekPIOptions extends OpenAIAPIOptions {
+export interface DeepSeekAPIOptions extends OpenAIAPIOptions {
 }
