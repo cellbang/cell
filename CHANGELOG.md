@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.3
+
+- refactor(ai-deepseek): rename DeepSeekPIOptions to DeepSeekAPIOptions for consistency
+
 ## 3.5.2
 
 fix: update message protocol and content properties for consistency
