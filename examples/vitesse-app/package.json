@@ -1,7 +1,7 @@
 {
   "name": "@celljs/example-vitesse-app",
   "type": "module",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "private": true,
   "license": "MIT",
   "keywords": [
@@ -23,17 +23,17 @@
   },
   "dependencies": {
     "@antfu/eslint-config": "^3.8.0",
-    "@celljs/core": "3.5.1",
-    "@celljs/rpc": "3.5.1",
-    "@celljs/serve-static": "3.5.1",
-    "@celljs/vue": "3.5.1",
+    "@celljs/core": "3.5.2",
+    "@celljs/rpc": "3.5.2",
+    "@celljs/serve-static": "3.5.2",
+    "@celljs/vue": "3.5.2",
     "unocss": "^0.63.4",
     "vue": "^3.3.4",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.1",
-    "@celljs/eslint": "3.5.1",
+    "@celljs/cli": "3.5.2",
+    "@celljs/eslint": "3.5.2",
     "@intlify/unplugin-vue-i18n": "^5.2.0",
     "@shikijs/markdown-it": "^1.22.0",
     "@types/markdown-it-link-attributes": "^3.0.5",

@@ -1,11 +1,11 @@
 {
   "name": "@celljs/eslint",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "eslint component",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.5.1",
+    "@celljs/cli-common": "3.5.2",
     "eslint": "^8.44.0",
     "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
@@ -38,8 +38,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.5.1",
-    "@celljs/component": "3.5.1"
+    "@celljs/cli-service": "3.5.2",
+    "@celljs/component": "3.5.2"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
