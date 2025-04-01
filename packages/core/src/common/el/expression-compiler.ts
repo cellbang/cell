@@ -57,15 +57,13 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 
     protected middleCompile(text: string, options: Required<ExpressionCompilerOptions>): MiddleExpression | undefined {
         let me: MiddleExpression | undefined;
-        const prefix = `${this.getSpecialChar(options)}${options.bracketBegin}`
-        const prefix2 = `${prefix}${options.bracketBegin}`
+        const prefix = `${this.getSpecialChar(options)}${options.bracketBegin}`;
+        const prefix2 = `${prefix}${options.bracketBegin}`;
         if (text.startsWith(prefix2)) {
             me = this.nextMiddleExpression(text.substring(prefix2.length), 2, options);
-        }
-        else if (text.startsWith(prefix)) {
+        } else if (text.startsWith(prefix)) {
             me = this.nextMiddleExpression(text.substring(prefix.length), undefined, options);
-        }
-        else {
+        } else {
             me = this.nextString(text, options);
         }
         return me;
