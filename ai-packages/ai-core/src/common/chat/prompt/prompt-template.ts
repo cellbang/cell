@@ -11,7 +11,7 @@ export class PromptTemplateImpl implements PromptTemplate {
 
     async render(template: string, ctx?: PromptTemplateContext): Promise<string> {
         if (ctx?.variables) {
-            return this.expressionHandler.handle(template, ctx, { ignoreSpecialChar: true, bracketBegin: '{', bracketEnd: '}' });
+            return this.expressionHandler.handle(template, ctx.variables, { ignoreSpecialChar: true, bracketBegin: '{', bracketEnd: '}' });
         }
         return template;
     }
@@ -19,6 +19,9 @@ export class PromptTemplateImpl implements PromptTemplate {
         if (Array.isArray(template)
             && template.some(message => Message.isMessage(message))
         ) {
+            for (const message of template) {
+                message.content = await this.render(message.content, ctx);
+            }
             return new PromptImpl(template, ctx?.chatOptions);
         } else if (typeof template === 'string') {
             if (!ctx?.messageType || ctx?.messageType === MessageType.USER) {

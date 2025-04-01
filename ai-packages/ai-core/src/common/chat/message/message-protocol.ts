@@ -67,7 +67,7 @@ export enum MessageType {
  * @see MessageType
  */
 export interface Message extends Content {
-    readonly messageType: MessageType;
+    messageType: MessageType;
 }
 
 export namespace Message {

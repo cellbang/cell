@@ -150,19 +150,19 @@ export interface Model<TReq extends ModelRequest<any>, TRes extends ModelRespons
 export interface Content {
 
     /**
-     * Get the content of the message.
+     * The content of the message.
      */
-    readonly content: string; // TODO consider getText
+    content: string; // TODO consider getText
 
     /**
-     * Get the media associated with the content.
+     * The media associated with the content.
      */
-    readonly media: Media[];
+    media: Media[];
 
     /**
-     * return Get the metadata associated with the content.
+     * The metadata associated with the content.
      */
-    readonly metadata: Record<string, any>;
+     metadata: Record<string, any>;
 
 }
 

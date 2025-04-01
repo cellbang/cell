@@ -57,11 +57,15 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
 
     protected middleCompile(text: string, options: Required<ExpressionCompilerOptions>): MiddleExpression | undefined {
         let me: MiddleExpression | undefined;
-        if (text.startsWith(`${this.getSpecialChar(options)}${options.bracketBegin}${options.bracketBegin}`)) {
-            me = this.nextMiddleExpression(text.substring(3), 2, options);
-        } else if (text.startsWith(`${this.getSpecialChar(options)}${options.bracketBegin}`)) {
-            me = this.nextMiddleExpression(text.substring(2), undefined, options);
-        } else {
+        const prefix = `${this.getSpecialChar(options)}${options.bracketBegin}`
+        const prefix2 = `${prefix}${options.bracketBegin}`
+        if (text.startsWith(prefix2)) {
+            me = this.nextMiddleExpression(text.substring(prefix2.length), 2, options);
+        }
+        else if (text.startsWith(prefix)) {
+            me = this.nextMiddleExpression(text.substring(prefix.length), undefined, options);
+        }
+        else {
             me = this.nextString(text, options);
         }
         return me;
@@ -149,14 +153,16 @@ export class ExpressionCompilerImpl implements ExpressionCompiler {
                 }
                 escaped = false;
             } else
-                if (specialCharFound) {
+                if (specialCharFound || options.ignoreSpecialChar) {
                     if (options.bracketBegin === c) {
                         const expression = section.join('');
-                        const nextText = text.substring(i - 1);
+                        const nextText = options.ignoreSpecialChar ? text.substring(i) : text.substring(i - 1);
                         return { expression, nextText };
                     } else {
-                        specialCharFound = false;
-                        section.push(options.specialChar);
+                        if (!options.ignoreSpecialChar) {
+                            specialCharFound = false;
+                            section.push(options.specialChar);
+                        }
                         section.push(c);
                     }
                 } else {

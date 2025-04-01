@@ -1,4 +1,4 @@
-import { Autowired, Component, IllegalArgumentError } from '@celljs/core';
+import { Autowired, Component, IllegalArgumentError, PostConstruct } from '@celljs/core';
 import { ChatModel, ChatResponse } from './chat-protocol';
 import { Observable } from 'rxjs';
 import { Prompt } from '../prompt';
@@ -11,6 +11,7 @@ export class ProxyChatModel implements ChatModel {
 
     protected readonly chatModelMap: Map<string, ChatModel> = new Map();
 
+    @PostConstruct()
     protected init() {
         for (const chatModel of this.chatModels) {
             if ('provider' in chatModel) {
@@ -31,13 +32,13 @@ export class ProxyChatModel implements ChatModel {
         if (!model.includes(':')) {
             throw new IllegalArgumentError('Invalid model name format. Expected "<provider>:<model-name>".');
         }
-        const [provider, modelName] = model.split(':');
+        const [provider, ...modelName] = model.split(':');
         const chatModel = this.chatModelMap.get(provider);
         if (!chatModel) {
             throw new IllegalArgumentError(`Chat model provider "${provider}" not found.`);
         }
         const newPrompt = prompt.copy();
-        newPrompt.options.model = modelName;
+        newPrompt.options.model = modelName.join(':');
         return [chatModel, newPrompt];
     }
 
