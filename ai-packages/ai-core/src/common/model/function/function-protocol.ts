@@ -43,7 +43,7 @@ export interface FunctionCallback {
 
 }
 
-export interface FunctionCallingOptions {
+export interface FunctionCallingOptions extends ChatOptions {
 
     /**
      * Function Callbacks to be registered with the ChatClient. For Prompt Options the

@@ -1,4 +1,4 @@
-import { ChatOptions, EmbeddingOptions, FunctionCallback, FunctionCallingOptions } from '@celljs/ai-core';
+import { EmbeddingOptions, FunctionCallback, FunctionCallingOptions } from '@celljs/ai-core';
 import { Expose, Exclude, Type } from 'class-transformer';
 import { OllamaModel } from './ollama-model';
 import { Assert, Constant } from '@celljs/core';
@@ -6,7 +6,7 @@ import { Assert, Constant } from '@celljs/core';
  * Helper class for creating strongly-typed Ollama options.
  */
 @Constant(OllamaOptions, new OllamaOptions())
-export class OllamaOptions implements FunctionCallingOptions, ChatOptions, EmbeddingOptions {
+export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
 
     static readonly DEFAULT_MODEL = OllamaModel.MISTRAL;
 

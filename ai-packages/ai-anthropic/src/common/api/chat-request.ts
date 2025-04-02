@@ -1,4 +1,4 @@
-import { Type, Expose } from 'class-transformer';
+import { Type, Expose, Exclude } from 'class-transformer';
 import { AnthropicMessage } from './message';
 
 /**
@@ -138,6 +138,12 @@ export class ChatRequest {
     @Type(() => Tool)
     tools?: Tool[];
 
+    /**
+     * An optional signal to abort the request.
+     */
+    @Exclude()
+    signal?: AbortSignal;
+
     constructor(
         model: string,
         messages: AnthropicMessage[],
@@ -150,6 +156,7 @@ export class ChatRequest {
         topP?: number,
         topK?: number,
         tools?: Tool[],
+        signal?: AbortSignal
     ) {
         this.model = model;
         this.messages = messages;
@@ -162,6 +169,7 @@ export class ChatRequest {
         this.topP = topP;
         this.topK = topK;
         this.tools = tools;
+        this.signal = signal;
     }
 
     /**
@@ -191,6 +199,7 @@ export class ChatRequestBuilder {
     private topP?: number;
     private topK?: number;
     private tools?: Tool[];
+    private signal?: AbortSignal;
 
     constructor(request?: ChatRequest) {
         if (request) {
@@ -204,6 +213,8 @@ export class ChatRequestBuilder {
             this.temperature = request.temperature;
             this.topP = request.topP;
             this.topK = request.topK;
+            this.tools = request.tools;
+            this.signal = request.signal;
         }
     }
 
@@ -262,6 +273,11 @@ export class ChatRequestBuilder {
         return this;
     }
 
+    withSignal(signal: AbortSignal): ChatRequestBuilder {
+        this.signal = signal;
+        return this;
+    }
+
     build(): ChatRequest {
         return new ChatRequest(
             this.model,
@@ -274,7 +290,8 @@ export class ChatRequestBuilder {
             this.stopSequences,
             this.topP,
             this.topK,
-            this.tools
+            this.tools,
+            this.signal
         );
     }
 }

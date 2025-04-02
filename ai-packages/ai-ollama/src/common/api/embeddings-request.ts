@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 /**
  * Generate embeddings from a model.
@@ -30,6 +30,12 @@ export class EmbeddingsRequest {
      * Returns error if false and context length is exceeded. Defaults to true.
      */
     truncate?: boolean;
+
+    /**
+     * Optional abort signal to cancel the request.
+     */
+    @Exclude()
+    signal?: AbortSignal;
 
     constructor(
         model: string,

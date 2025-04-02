@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.4
+
+- feat(ai): add optional abort signal to various request interfaces and implementations
+
 ## 3.5.3
 
 - refactor(ai-deepseek): rename DeepSeekPIOptions to DeepSeekAPIOptions for consistency

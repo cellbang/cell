@@ -1,4 +1,4 @@
-import { Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import { ChatCompletionMessage } from './message';
 import { ResponseFormat } from './response-format';
 
@@ -255,4 +255,10 @@ export class ChatCompletionRequest {
      * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
      */
     user?: string;
+
+    /**
+     * An optional signal to abort the request.
+     */
+    @Exclude()
+    signal?: AbortSignal;
 }

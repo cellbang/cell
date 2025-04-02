@@ -21,7 +21,9 @@ export const StreamingModel = Symbol('StreamingModel');
  * and adaptability in different AI scenarios, ensuring that the AI models can be
  * fine-tuned according to specific requirements.
  */
-export interface ModelOptions {}
+export interface ModelOptions {
+    signal?: AbortSignal;
+}
 
 /**
  * Interface representing metadata associated with the results of an AI model. This

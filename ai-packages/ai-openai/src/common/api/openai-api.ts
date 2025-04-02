@@ -55,8 +55,9 @@ export class OpenAIAPIImpl implements OpenAIAPI {
                     headers: {
                         ...this.finalHeaders,
                         ...additionalHttpHeader
-                    }
-                }
+                    },
+                    signal: chatRequest.signal,
+                },
             );
 
         return {
@@ -80,6 +81,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
                     ...additionalHttpHeader
 
                 },
+                signal: chatRequest.signal,
                 responseType: 'stream'
             }
         );
@@ -112,7 +114,10 @@ export class OpenAIAPIImpl implements OpenAIAPI {
                     'The input must be either a String, or a List of Strings or list of list of integers.');
         }
         const { data, status, headers } = await this.restOperations
-            .post<EmbeddingResponse>(this.finalApiOptions.embeddingsPath, instanceToPlain(embeddingRequest), { baseURL: this.finalApiOptions.baseUrl });
+            .post<EmbeddingResponse>(
+                this.finalApiOptions.embeddingsPath,
+                instanceToPlain(embeddingRequest),
+                { baseURL: this.finalApiOptions.baseUrl, signal: embeddingRequest.signal });
         return {
             status,
             headers,

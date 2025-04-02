@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 
 /**
  * Represents an embedding vector returned by embedding endpoint.
@@ -59,18 +59,26 @@ export class EmbeddingRequest<T> {
      */
     user?: string;
 
+    /**
+     * An optional signal to abort the request.
+     */
+    @Exclude()
+    signal?: AbortSignal;
+
     constructor(
         input: T,
         model: string,
         encodingFormat: string = 'float',
         dimensions?: number,
-        user?: string
+        user?: string,
+        signal?: AbortSignal
     ) {
         this.input = input;
         this.model = model;
         this.encodingFormat = encodingFormat;
         this.dimensions = dimensions;
         this.user = user;
+        this.signal = signal;
     }
 
     /**

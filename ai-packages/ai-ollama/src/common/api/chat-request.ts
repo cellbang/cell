@@ -1,4 +1,4 @@
-import { Type, Expose, instanceToPlain } from 'class-transformer';
+import { Type, Expose, instanceToPlain, Exclude } from 'class-transformer';
 import { Message } from './message';
 import { OllamaOptions } from './ollama-options';
 import { Assert } from '@celljs/core';
@@ -104,6 +104,12 @@ export class ChatRequest {
      */
     options: Record<string, any>;
 
+    /**
+     * Optional abort signal to cancel the request.
+     */
+    @Exclude()
+    signal?: AbortSignal;
+
     constructor(
         model: string,
         messages: Message[],
@@ -111,7 +117,8 @@ export class ChatRequest {
         format: string,
         keepAlive: string,
         tools: Tool[],
-        options: Record<string, any>
+        options: Record<string, any>,
+        signal?: AbortSignal
     ) {
         this.model = model;
         this.messages = messages;
@@ -120,6 +127,7 @@ export class ChatRequest {
         this.keepAlive = keepAlive;
         this.tools = tools;
         this.options = options;
+        this.signal = signal;
     }
 
     /**
@@ -141,6 +149,7 @@ export class ChatRequestBuilder {
     private keepAlive?: string;
     private tools: Tool[] = [];
     private options: Record<string, any> = {};
+    private signal?: AbortSignal;
 
     constructor(model: string) {
         Assert.notNull(model, 'The model can not be null.');
@@ -186,6 +195,11 @@ export class ChatRequestBuilder {
         return this;
     }
 
+    withSignal(signal: AbortSignal): ChatRequestBuilder {
+        this.signal = signal;
+        return this;
+    }
+
     build(): ChatRequest {
         return new ChatRequest(
             this.model,
@@ -194,7 +208,8 @@ export class ChatRequestBuilder {
             this.format!,
             this.keepAlive!,
             this.tools,
-            this.options
+            this.options,
+            this.signal
         );
     }
 }
