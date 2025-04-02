@@ -1,11 +1,11 @@
 {
   "name": "@celljs/schedule",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.3",
+    "@celljs/core": "3.5.4",
     "@types/cron": "^1.7.2",
     "cron": "^1.8.2",
     "reflect-metadata": "^0.1.13",
@@ -39,7 +39,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.3"
+    "@celljs/component": "3.5.4"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

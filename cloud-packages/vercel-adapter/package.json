@@ -1,13 +1,13 @@
 {
   "name": "@celljs/vercel-adapter",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.5.3",
-    "@celljs/core": "3.5.3",
-    "@celljs/web": "3.5.3",
+    "@celljs/cli-common": "3.5.4",
+    "@celljs/core": "3.5.4",
+    "@celljs/web": "3.5.4",
     "chalk": "^4.1.0",
     "command-exists": "^1.2.9",
     "express": "^4.17.1",
@@ -43,8 +43,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.5.3",
-    "@celljs/component": "3.5.3"
+    "@celljs/cli-service": "3.5.4",
+    "@celljs/component": "3.5.4"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
