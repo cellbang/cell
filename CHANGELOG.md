@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.6
+
+- feat: add ignoreContextExpression option to expressionHandler in render method
+
 ## 3.5.5
 
 - feat(core): enhance getContext method to accept expressionCompilerOptions for improved context handling

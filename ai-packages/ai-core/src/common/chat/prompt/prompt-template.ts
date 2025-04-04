@@ -11,7 +11,7 @@ export class PromptTemplateImpl implements PromptTemplate {
 
     async render(template: string, ctx?: PromptTemplateContext): Promise<string> {
         if (ctx?.variables) {
-            return this.expressionHandler.handle(template, ctx.variables, { ignoreSpecialChar: true, bracketBegin: '{', bracketEnd: '}' });
+            return this.expressionHandler.handle(template, ctx.variables, { ignoreSpecialChar: true, bracketBegin: '{', bracketEnd: '}', ignoreContextExpression: true });
         }
         return template;
     }
