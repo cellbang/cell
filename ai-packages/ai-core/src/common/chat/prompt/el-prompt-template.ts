@@ -1,19 +1,19 @@
-import { Component, IllegalArgumentError } from '@celljs/core';
+import { Autowired, Component, ExpressionHandler, IllegalArgumentError } from '@celljs/core';
 import { Prompt, PromptTemplate, PromptTemplateContext } from './prompt-protocol';
 import { PromptImpl } from './prompt';
 import { Message, MessageType, SystemMessage } from '../message';
 
-@Component(PromptTemplate)
-export class SamplePromptTemplate implements PromptTemplate {
+@Component(ELPromptTemplate)
+export class ELPromptTemplate implements PromptTemplate {
+
+    @Autowired(ExpressionHandler)
+    protected readonly expressionHandler: ExpressionHandler;
 
     async render(template: string, ctx?: PromptTemplateContext): Promise<string> {
-        let newTemplate = template;
         if (ctx?.variables) {
-            for (const key of Object.keys(ctx.variables)) {
-                newTemplate = newTemplate.replace(new RegExp(`{${key}}`, 'g'), ctx.variables[key]);
-            }
+            return this.expressionHandler.handle(template, ctx.variables, { ignoreSpecialChar: true, bracketBegin: '{', bracketEnd: '}', ignoreContextExpression: true });
         }
-        return newTemplate;
+        return template;
     }
     async create(template: string | Message[], ctx?: PromptTemplateContext): Promise<Prompt> {
         if (Array.isArray(template)

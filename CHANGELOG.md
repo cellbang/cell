@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.7
+
+- feat(ai-core): implement ELPromptTemplate for enhanced prompt rendering and context handling
+
 ## 3.5.6
 
 - feat: add ignoreContextExpression option to expressionHandler in render method
