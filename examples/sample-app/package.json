@@ -4,22 +4,22 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.6",
+  "version": "3.5.7",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@celljs/core": "3.5.6",
-    "@celljs/react": "3.5.6",
-    "@celljs/rpc": "3.5.6",
-    "@celljs/serve-static": "3.5.6",
+    "@celljs/core": "3.5.7",
+    "@celljs/react": "3.5.7",
+    "@celljs/rpc": "3.5.7",
+    "@celljs/serve-static": "3.5.7",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.6",
-    "@celljs/cli-service": "3.5.6"
+    "@celljs/cli": "3.5.7",
+    "@celljs/cli-service": "3.5.7"
   },
   "scripts": {
     "clean": "rimraf lib dist .cell",

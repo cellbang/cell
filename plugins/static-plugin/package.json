@@ -1,12 +1,12 @@
 {
   "name": "@celljs/static-plugin",
-  "version": "3.5.6",
+  "version": "3.5.7",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.5.6",
-    "@celljs/cli-service": "3.5.6",
+    "@celljs/cli-common": "3.5.7",
+    "@celljs/cli-service": "3.5.7",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^9.0.0",
     "rimraf": "^3.0.2",
@@ -41,7 +41,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.6"
+    "@celljs/component": "3.5.7"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

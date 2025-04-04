@@ -4,24 +4,24 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.6",
+  "version": "3.5.7",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@celljs/cli-service": "3.5.6",
-    "@celljs/core": "3.5.6",
-    "@celljs/mvc": "3.5.6",
+    "@celljs/cli-service": "3.5.7",
+    "@celljs/core": "3.5.7",
+    "@celljs/mvc": "3.5.7",
     "@prisma/client": "^4.4.0",
     "prisma": "^4.4.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.6",
+    "@celljs/cli": "3.5.7",
     "@celljs/cli-service": "3.0.0",
-    "@celljs/component": "3.5.6",
-    "@celljs/testing": "3.5.6",
+    "@celljs/component": "3.5.7",
+    "@celljs/testing": "3.5.7",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },
