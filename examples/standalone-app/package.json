@@ -1,14 +1,14 @@
 {
   "private": true,
   "name": "@celljs/example-standalone-app",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "",
   "scripts": {
     "start": "ts-node src/main.ts",
     "build": "tsc"
   },
   "dependencies": {
-    "@celljs/core": "3.5.4"
+    "@celljs/core": "3.5.5"
   },
   "devDependencies": {
     "ts-node": "^10.9.0",
