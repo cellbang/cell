@@ -24,6 +24,7 @@ export interface ExpressionCompilerOptions {
     bracketBegin?: string;
     bracketEnd?: string;
     ignoreSpecialChar?: boolean;
+    ignoreContextExpression?: boolean;
 }
 
 export interface ContextInitializer {

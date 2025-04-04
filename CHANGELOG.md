@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.5
+
+- feat(core): enhance getContext method to accept expressionCompilerOptions for improved context handling
+
 ## 3.5.4
 
 - feat(ai): add optional abort signal to various request interfaces and implementations

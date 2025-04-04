@@ -16,10 +16,10 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
 
     protected _ctx: ExpressionContext;
 
-    protected getContext(ctx?: ExpressionContext) {
+    protected getContext(ctx?: ExpressionContext, expressionCompilerOptions?: ExpressionCompilerOptions): ExpressionContext {
         const c = ctx || this.expressionContextProvider.provide();
 
-        if (!ctx && c !== this._ctx) {
+        if (!ctx && c !== this._ctx && !expressionCompilerOptions?.ignoreContextExpression) {
             this._ctx = c;
             this.handle(c, c);
         }
@@ -46,7 +46,7 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
         const sections = this.expressionCompiler.compileSections(text, expressionCompilerOptions);
         if (sections.length > 0) {
             if (this.hasExpression(sections)) {
-                const c = this.getContext(ctx);
+                const c = this.getContext(ctx, expressionCompilerOptions);
                 if (sections.length === 1) {
                     let value = sections[0].evalSync(c);
                     if (typeof value === 'string') {
