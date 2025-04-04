@@ -4,22 +4,22 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.5",
+  "version": "3.5.6",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
   "dependencies": {
-    "@celljs/core": "3.5.5",
-    "@celljs/jwt": "3.5.5",
-    "@celljs/mvc": "3.5.5",
-    "@celljs/web": "3.5.5"
+    "@celljs/core": "3.5.6",
+    "@celljs/jwt": "3.5.6",
+    "@celljs/mvc": "3.5.6",
+    "@celljs/web": "3.5.6"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.5",
-    "@celljs/component": "3.5.5",
-    "@celljs/testing": "3.5.5",
+    "@celljs/cli": "3.5.6",
+    "@celljs/component": "3.5.6",
+    "@celljs/testing": "3.5.6",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   },

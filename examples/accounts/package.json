@@ -4,7 +4,7 @@
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.5",
+  "version": "3.5.6",
   "license": "MIT",
   "files": [
     "lib",
@@ -12,17 +12,17 @@
     "cell.yml"
   ],
   "dependencies": {
-    "@celljs/core": "3.5.5",
-    "@celljs/grommet": "3.5.5",
-    "@celljs/oauth2-client": "3.5.5",
-    "@celljs/oauth2-core": "3.5.5",
-    "@celljs/react": "3.5.5",
-    "@celljs/rpc": "3.5.5",
-    "@celljs/scf-adapter": "3.5.5",
-    "@celljs/security": "3.5.5",
-    "@celljs/serve-static": "3.5.5",
-    "@celljs/typeorm": "3.5.5",
-    "@celljs/web": "3.5.5",
+    "@celljs/core": "3.5.6",
+    "@celljs/grommet": "3.5.6",
+    "@celljs/oauth2-client": "3.5.6",
+    "@celljs/oauth2-core": "3.5.6",
+    "@celljs/react": "3.5.6",
+    "@celljs/rpc": "3.5.6",
+    "@celljs/scf-adapter": "3.5.6",
+    "@celljs/security": "3.5.6",
+    "@celljs/serve-static": "3.5.6",
+    "@celljs/typeorm": "3.5.6",
+    "@celljs/web": "3.5.6",
     "better-sqlite3": "^11.3.0",
     "class-transformer": "^0.5.1",
     "grommet": "^2.25.1",
@@ -36,7 +36,7 @@
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.5"
+    "@celljs/cli": "3.5.6"
   },
   "scripts": {
     "clean": "rimraf lib dist .cell",
