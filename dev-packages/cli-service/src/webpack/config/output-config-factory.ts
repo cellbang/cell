@@ -12,10 +12,10 @@ export class OutputConfigFactory {
             PathUtil.setProjectHomePath(path.join(process.cwd(), outputDir));
         }
         const outputPath = path.join(PathUtil.getProjectDistPathForTarget(target));
-
-        config.output.path(outputPath);
-
-        if (BACKEND_TARGET === target) {
+        if (!config.output.get('path')) {
+            config.output.path(outputPath);
+        }
+        if (BACKEND_TARGET === target) {    // for backend
             config
                 .output
                     .filename('[name].js')

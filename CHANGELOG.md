@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.8
+
+- feat(cli-service): 新增配置工厂类并优化路径设置
+
 ## 3.5.7
 
 - feat(ai-core): implement ELPromptTemplate for enhanced prompt rendering and context handling

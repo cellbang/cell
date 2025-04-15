@@ -22,6 +22,7 @@ export class ConfigFactory {
         const configurations: WebpackChain[] = [];
 
         const configFactories = [
+            new CellYamlConfigFactory(),
             new BaseConfigFactory(),
             new DefinePluginConfigFactory(),
             new FilterWarningsPluginConfigFactory(),

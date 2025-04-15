@@ -25,9 +25,10 @@ export function getUri(options: WebpackChain.DevServer) {
 export function getDevSuccessInfo(options: WebpackChain.DevServer, name: string): string[] {
     const uri = getUri(options);
     const infos = [];
-
     if (options.has('socket')) {
         infos.push(`Listening to socket at ${chalk.green(options.get('socket'))}`);
+    } else if (options.get('ipc') === true) {
+        infos.push(`The ${chalk.yellow.bold(name)} is watching 🎉`);
     } else {
         infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.bold.green(uri)} 🎉`);
     }
