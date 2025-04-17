@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.10
+
+- fix(cli-service): 修复集成测试阻塞问题
+
 ## 3.5.9
 
 - feat: enhance settings and testing utilities with new configurations and functions

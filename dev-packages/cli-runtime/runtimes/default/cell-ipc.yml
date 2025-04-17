@@ -1,4 +1,4 @@
 webpack:
   config:
     devServer:
-      ipc: true
+      ipc: ${uuid}.sock

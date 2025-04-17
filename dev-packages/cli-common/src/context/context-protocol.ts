@@ -13,6 +13,7 @@ import { Settings } from '../settings/settings-protocol';
 import { getPackager } from '../packager/utils';
 import * as ora from 'ora';
 import { ExpressionHandlerFactory } from '../el';
+import { generateUUUID } from '../utils';
 const chalk = require('chalk');
 
 export interface CliContext {
@@ -106,6 +107,7 @@ export namespace CliContext {
             config.projectHome = otherConfig.projectHomePath;
             config.cliContext = otherConfig.cliContext;
             config.currentTarget = target;
+            config.uuid = generateUUUID()
             const expressionHandler = new ExpressionHandlerFactory().create(config);
 
             const ctx = {
@@ -186,7 +188,7 @@ export namespace CliContext {
             frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(),
             backendProjectDistPath: PathUtil.getBackendProjectDistPath(),
             projectHomePath: PathUtil.getProjectHomePath(),
-            cliContext: { ...options, ...program, _ignoreEl: true},
+            cliContext: { ...options, ...program, _ignoreEl: true}
         };
 
         if (!skipComponent) {

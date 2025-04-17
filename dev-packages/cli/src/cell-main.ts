@@ -101,7 +101,7 @@ async function execute() {
                 watchpack.close();
                 execute();
             });
-        } else if (messageEvent.type === 'address') {
+        } else if (messageEvent.type === 'address' || messageEvent.type === 'entry') {
             if (process.send) {
                 process.send(messageEvent);
             }

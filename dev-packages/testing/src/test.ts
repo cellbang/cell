@@ -5,18 +5,25 @@ import { awaitEntry } from './await-entry';
 
 export abstract class Test {
 
+    static entry?: string;
+    static url?: string;
+
     static async createHttpServer() {
-        const subprocess = this.runCommand(['serve', '-p', '0', '-m', 'test']);
-        const url = await this.waitForServeAddress(subprocess);
-        await awaitUrl(url);
-        return url;
+        if (!this.url) {
+            const subprocess = this.runCommand(['serve', '-p', '0', '-m', 'test']);
+            this.url = await this.waitForServeAddress(subprocess);
+        }
+        await awaitUrl(this.url);
+        return this.url;
     }
 
     static async createContainer<T>(): Promise<T> {
-        const subprocess = this.runCommand(['serve', '-m', 'test,ipc']);
-        const entry = await this.waitForServeEntry(subprocess);
-        await awaitEntry(entry);
-        const { container } = createRequire(__filename)(entry);
+        if (!this.entry) {
+            const subprocess = this.runCommand(['serve', '-p', '0', '-m', 'test']);
+            this.entry = await this.waitForServeEntry(subprocess);
+        }
+        await awaitEntry(this.entry);
+        const { container } = createRequire(__filename)(this.entry);
         return container;
     }
 
@@ -35,7 +42,7 @@ export abstract class Test {
 
     static async waitForServeAddress(subprocess: ChildProcess) {
         return new Promise<string>(resolve => {
-            subprocess.on('message', async (messageEvent: MessageEvent<any>) => {
+            subprocess.on('message', (messageEvent: MessageEvent<any>) => {
                 if (messageEvent.type === 'address') {
                     if (messageEvent.data?.port) {
                         resolve(`http://127.0.0.1:${messageEvent.data.port}`);
@@ -49,9 +56,9 @@ export abstract class Test {
 
     static async waitForServeEntry(subprocess: ChildProcess) {
         return new Promise<string>(resolve => {
-            subprocess.on('message', async (messageEvent: MessageEvent<any>) => {
+            subprocess.on('message', (messageEvent: MessageEvent<any>) => {
                 if (messageEvent.type === 'entry') {
-                    resolve(messageEvent.data?.entry);
+                    resolve(messageEvent.data);
                 }
             });
         });

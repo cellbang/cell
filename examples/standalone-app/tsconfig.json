@@ -19,13 +19,20 @@
       "ES2017"
     ],
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "dist"
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "references": [
+    {
+      "path": "../../dev-packages/cli"
+    },
+    {
+      "path": "../../dev-packages/testing"
+    },
     {
       "path": "../../packages/core"
     }
