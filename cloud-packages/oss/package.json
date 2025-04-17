@@ -1,12 +1,12 @@
 {
   "name": "@celljs/oss",
-  "version": "3.5.8",
+  "version": "3.5.9",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/cloud": "3.5.8",
-    "@celljs/core": "3.5.8",
+    "@celljs/cloud": "3.5.9",
+    "@celljs/core": "3.5.9",
     "ali-oss": "^6.16.0",
     "tslib": "^2.8.0"
   },
@@ -38,7 +38,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.8",
+    "@celljs/component": "3.5.9",
     "@types/ali-oss": "^6.0.5"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

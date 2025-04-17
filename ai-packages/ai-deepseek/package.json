@@ -1,13 +1,13 @@
 {
   "name": "@celljs/ai-deepseek",
-  "version": "3.5.8",
+  "version": "3.5.9",
   "description": "DeepSeek models support",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/ai-core": "3.5.8",
-    "@celljs/ai-openai": "3.5.8",
-    "@celljs/core": "3.5.8",
+    "@celljs/ai-core": "3.5.9",
+    "@celljs/ai-openai": "3.5.9",
+    "@celljs/core": "3.5.9",
     "tslib": "^2.8.0"
   },
   "publishConfig": {
@@ -38,7 +38,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.8"
+    "@celljs/component": "3.5.9"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
