@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@celljs/example-standalone-app",
-  "version": "3.5.9",
+  "version": "3.5.10",
   "description": "",
   "scripts": {
     "start": "ts-node src/main.ts",
@@ -9,12 +9,12 @@
     "test": "cell-component test"
   },
   "dependencies": {
-    "@celljs/core": "3.5.9"
+    "@celljs/core": "3.5.10"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.9",
-    "@celljs/cli": "3.5.9",
-    "@celljs/testing": "3.5.9",
+    "@celljs/cli": "3.5.10",
+    "@celljs/component": "3.5.10",
+    "@celljs/testing": "3.5.10",
     "ts-node": "^10.9.0",
     "typescript": "~5.4.5"
   }
