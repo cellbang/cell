@@ -21,11 +21,12 @@
       "dom"
     ],
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "outDir": "lib"
   },
   "include": [
-    "src"
+    "src",
+    "test"
   ],
   "references": [
     {

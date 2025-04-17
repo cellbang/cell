@@ -75,6 +75,7 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
             await delay(200);
         }
     };
+    process.send!({ type: 'entry', data: compiler.outputPath });
     await callback(server.server, server.app, compiler, entryContextProvider);
 
 }

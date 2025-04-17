@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.9
+
+- feat: enhance settings and testing utilities with new configurations and functions
+
 ## 3.5.8
 
 - feat(cli-service): 新增配置工厂类并优化路径设置

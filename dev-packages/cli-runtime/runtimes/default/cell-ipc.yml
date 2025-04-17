@@ -1,0 +1,4 @@
+webpack:
+  config:
+    devServer:
+      ipc: true

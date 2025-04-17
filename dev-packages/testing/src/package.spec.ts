@@ -1,4 +1,4 @@
 describe('testing package', () => {
 
-    it('support code coverage statistics', () => {});
+    it('support testing coverage statistics', () => {});
 });

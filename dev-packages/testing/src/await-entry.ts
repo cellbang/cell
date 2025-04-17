@@ -1,21 +1,18 @@
-import axios from 'axios';
-export function awaitUrl(url: string, tries = 150, interval = 500) {
+import { existsSync } from 'fs';
+export function awaitEntry(entry: string, tries = 150, interval = 500) {
 
     return new Promise<void>((resolve, reject) => {
         const attempt = async (count: number) => {
             try {
-                await axios.head(url, {
-                    timeout: 10000
-                });
-                resolve();
-            } catch (error) {
-                if (error.code !== 'ECONNREFUSED') {
+                if (existsSync(entry)) {
                     resolve();
                 } else if (count > 1) {
                     setTimeout(attempt, interval, count - 1);
                 } else {
-                    reject(error);
+                    reject(new Error('Entry does not exist'));
                 }
+            } catch (error) {
+                reject(error);
             }
         };
         attempt(tries).catch(reject);

@@ -5,3 +5,4 @@ cell:
       externals:
         vm2: vm2
         better-sqlite3: better-sqlite3
+        vscode: vscode

@@ -7,7 +7,7 @@ describe('HomeController (e2e)', function () {
     before(async function () {
         this.timeout(20000);
         server = await Test.createHttpServer();
-    });
+    }); 
 
     it('/ (GET)', () => request(server)
         .get('/')
