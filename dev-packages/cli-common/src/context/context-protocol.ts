@@ -107,7 +107,7 @@ export namespace CliContext {
             config.projectHome = otherConfig.projectHomePath;
             config.cliContext = otherConfig.cliContext;
             config.currentTarget = target;
-            config.uuid = generateUUUID()
+            config.uuid = generateUUUID();
             const expressionHandler = new ExpressionHandlerFactory().create(config);
 
             const ctx = {
