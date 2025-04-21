@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.11
+
+- refactor: 优化 IPC 模式判断与 cell-remote.yml 默认模式
+
 ## 3.5.10
 
 - fix(cli-service): 修复集成测试阻塞问题

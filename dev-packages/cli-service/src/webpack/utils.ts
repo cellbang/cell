@@ -27,7 +27,7 @@ export function getDevSuccessInfo(options: WebpackChain.DevServer, name: string)
     const infos = [];
     if (options.has('socket')) {
         infos.push(`Listening to socket at ${chalk.green(options.get('socket'))}`);
-    } else if (options.get('ipc') === true) {
+    } else if (options.get('ipc')) {
         infos.push(`The ${chalk.yellow.bold(name)} is watching 🎉`);
     } else {
         infos.push(`The ${chalk.yellow.bold(name)} is running at ${chalk.bold.green(uri)} 🎉`);

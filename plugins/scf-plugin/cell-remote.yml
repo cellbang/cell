@@ -1,4 +1,4 @@
-mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'timer', 'api-gateway-basic', 'event']]|suffix('-mode') || 'api-gateway-mode'}"
+mode: "${currentMode|toObjects[.item in [ 'http', 'api-gateway', 'timer', 'api-gateway-basic', 'event']]|suffix('-mode') || 'http-mode'}"
 cell:
   cloud:
     namespace:
