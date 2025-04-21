@@ -1,11 +1,11 @@
 {
   "name": "@celljs/cache",
-  "version": "3.5.10",
+  "version": "3.5.11",
   "description": "cache component for cache-manager",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.10",
+    "@celljs/core": "3.5.11",
     "cache-manager": "^5.2.3",
     "tslib": "^2.8.0"
   },
@@ -37,7 +37,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.10",
+    "@celljs/component": "3.5.11",
     "@types/cache-manager": "^3.4.3"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

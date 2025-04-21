@@ -1,11 +1,11 @@
 {
   "name": "@celljs/typeorm",
-  "version": "3.5.10",
+  "version": "3.5.11",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.10",
+    "@celljs/core": "3.5.11",
     "mysql2": "^2.3.3",
     "tslib": "^2.8.0",
     "typeorm": "^0.3.7"
@@ -39,8 +39,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.5.10",
-    "@celljs/component": "3.5.10"
+    "@celljs/cli-service": "3.5.11",
+    "@celljs/component": "3.5.11"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
