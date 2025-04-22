@@ -74,6 +74,7 @@ export class BaseConfigFactory {
                     .end();
 
         if (target === BACKEND_TARGET) {
+            const mode = pkg.rootComponentPackage.cellComponent?.mode ?? [];
             const allowlist = pkg.componentPackages.map(cp => new RegExp(cp.name));
             const externals = [nodeExternals({
                 allowlist,
@@ -105,7 +106,13 @@ export class BaseConfigFactory {
                 .optimization
                     .minimize(!dev && stage === 'prod')
                 .end()
-                .externals(dev ? externals : includeModules?.forceIncludeAll ? externals : [])
+                .externals(dev ? (mode.includes('test-container') ? ((ctx, cb) => {
+                    if (ctx.request?.includes('dynamic-container') || ctx.request?.includes('application-entry')) {
+                        cb();
+                    } else {
+                        cb(undefined, 'commonjs ' + ctx.request);
+                    }
+                }) : externals) : includeModules?.forceIncludeAll ? externals : [])
                 .node
                     .merge({
                         __dirname: false,

@@ -19,10 +19,11 @@ export abstract class Test {
 
     static async createContainer<T>(): Promise<T> {
         if (!this.entry) {
-            const subprocess = this.runCommand(['serve', '-p', '0', '-m', 'test']);
+            const startCompileTime = Date.now();
+            const subprocess = this.runCommand(['serve', '-p', '0', '-m', 'test,test-container']);
             this.entry = await this.waitForServeEntry(subprocess);
+            await awaitEntry(this.entry, startCompileTime);
         }
-        await awaitEntry(this.entry);
         const { container } = createRequire(__filename)(this.entry);
         return container;
     }

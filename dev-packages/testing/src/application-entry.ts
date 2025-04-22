@@ -1,8 +1,6 @@
-import { container } from '../container/dynamic-container';
-import { Application } from './application-protocol';
-import { ContainerProvider } from '../container';
-export { container } from '../container/dynamic-container';
-
+import { container } from '@celljs/core/lib/common/container/dynamic-container';
+import { Application, ContainerProvider } from '@celljs/core';
+export { container } from '@celljs/core/lib/common/container/dynamic-container';
 (async () => {
     const c = await container;
     try {

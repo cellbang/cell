@@ -14,6 +14,7 @@ import { getPackager } from '../packager/utils';
 import * as ora from 'ora';
 import { ExpressionHandlerFactory } from '../el';
 import { generateUUUID } from '../utils';
+import { tmpdir } from 'os';
 const chalk = require('chalk');
 
 export interface CliContext {
@@ -108,6 +109,7 @@ export namespace CliContext {
             config.cliContext = otherConfig.cliContext;
             config.currentTarget = target;
             config.uuid = generateUUUID();
+            config.tmpDir = tmpdir();
             const expressionHandler = new ExpressionHandlerFactory().create(config);
 
             const ctx = {

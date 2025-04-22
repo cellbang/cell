@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.12
+
+- fix(testing): 修复容器加载问题
+
 ## 3.5.11
 
 - refactor: 优化 IPC 模式判断与 cell-remote.yml 默认模式
