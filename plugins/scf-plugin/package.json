@@ -1,11 +1,11 @@
 {
   "name": "@celljs/scf-plugin",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "description": "",
   "dependencies": {
-    "@celljs/cli-common": "3.5.11",
-    "@celljs/cloud-plugin": "3.5.11",
-    "@celljs/code-loader-plugin": "3.5.11",
+    "@celljs/cli-common": "3.5.12",
+    "@celljs/cloud-plugin": "3.5.12",
+    "@celljs/code-loader-plugin": "3.5.12",
     "chalk": "^4.1.0",
     "cos-nodejs-sdk-v5": "^2.8.3",
     "delay": "^4.4.0",
@@ -53,7 +53,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.11"
+    "@celljs/component": "3.5.12"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

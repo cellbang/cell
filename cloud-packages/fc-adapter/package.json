@@ -1,14 +1,14 @@
 {
   "name": "@celljs/fc-adapter",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/cloud": "3.5.11",
-    "@celljs/core": "3.5.11",
-    "@celljs/faas-adapter": "3.5.11",
-    "@celljs/web": "3.5.11",
+    "@celljs/cloud": "3.5.12",
+    "@celljs/core": "3.5.12",
+    "@celljs/faas-adapter": "3.5.12",
+    "@celljs/web": "3.5.12",
     "@webserverless/fc-express": "^1.0.0",
     "express": "^4.17.1",
     "raw-body": "^2.3.3",
@@ -49,7 +49,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.11"
+    "@celljs/component": "3.5.12"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

@@ -1,12 +1,12 @@
 {
   "name": "@celljs/web",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "description": "",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.11",
-    "@celljs/http": "3.5.11",
+    "@celljs/core": "3.5.12",
+    "@celljs/http": "3.5.12",
     "@types/express": "^4.17.9",
     "body-parser": "^1.20.0",
     "class-transformer": "^0.5.1",
@@ -47,8 +47,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.5.11",
-    "@celljs/component": "3.5.11",
+    "@celljs/cli-service": "3.5.12",
+    "@celljs/component": "3.5.12",
     "@types/cors": "^2.8.6"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"

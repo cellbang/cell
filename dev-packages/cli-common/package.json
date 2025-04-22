@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cli-common",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "description": "Cell CLI Common.",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "test": "cell-component test:js"
   },
   "dependencies": {
-    "@celljs/frameworks": "3.5.11",
+    "@celljs/frameworks": "3.5.12",
     "@yarnpkg/lockfile": "^1.1.0",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
@@ -51,7 +51,7 @@
     "typescript": "~5.4.5"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.11",
+    "@celljs/component": "3.5.12",
     "@types/fs-extra": "^11.0.1",
     "@types/jexl": "^2.3.1",
     "@types/js-yaml": "^4.0.5",
