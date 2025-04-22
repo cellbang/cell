@@ -1,12 +1,12 @@
 {
   "name": "@celljs/material-ui",
-  "version": "3.5.11",
+  "version": "3.5.12",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.11",
-    "@celljs/react": "3.5.11",
+    "@celljs/core": "3.5.12",
+    "@celljs/react": "3.5.12",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
@@ -41,7 +41,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.11"
+    "@celljs/component": "3.5.12"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
