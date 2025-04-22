@@ -1,13 +1,13 @@
 {
   "name": "@celljs/oauth2-jose",
-  "version": "3.5.12",
+  "version": "3.5.13",
   "description": "",
   "main": "lib/node/index.js",
   "typings": "lib/node/index.d.ts",
   "dependencies": {
-    "@celljs/core": "3.5.12",
-    "@celljs/http": "3.5.12",
-    "@celljs/web": "3.5.12",
+    "@celljs/core": "3.5.13",
+    "@celljs/http": "3.5.13",
+    "@celljs/web": "3.5.13",
     "jose": "^4.9.3",
     "tslib": "^2.8.0"
   },
@@ -39,7 +39,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.12"
+    "@celljs/component": "3.5.13"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

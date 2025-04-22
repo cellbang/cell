@@ -1,13 +1,13 @@
 {
   "name": "@celljs/react",
-  "version": "3.5.12",
+  "version": "3.5.13",
   "description": "",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.5.12",
-    "@celljs/core": "3.5.12",
-    "@celljs/widget": "3.5.12",
+    "@celljs/cli-common": "3.5.13",
+    "@celljs/core": "3.5.13",
+    "@celljs/widget": "3.5.13",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
@@ -59,8 +59,8 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.5.12",
-    "@celljs/component": "3.5.12"
+    "@celljs/cli-service": "3.5.13",
+    "@celljs/component": "3.5.13"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
