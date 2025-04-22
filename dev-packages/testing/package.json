@@ -29,7 +29,8 @@
   "files": [
     "lib",
     "src",
-    "cell.yml"
+    "cell.yml",
+    "cell-test-container.yml"
   ],
   "scripts": {
     "lint": "cell-component lint",

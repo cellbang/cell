@@ -1,5 +1,9 @@
 # Change
 
+## 3.5.13
+
+- fix(testing): 修复缺少配置文件问题
+
 ## 3.5.12
 
 - fix(testing): 修复容器加载问题
