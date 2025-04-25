@@ -34,14 +34,14 @@ export class BuildManager {
         await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand);
         await hookExecutor.executeCompileHooks(this.ctx);
 
-        await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand, CommandStage.after);
-        await hookExecutor.executeCompileHooks(this.ctx, HookStage.after);
-
         await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand, CommandStage.before);
         await hookExecutor.executeBuildHooks(this.ctx, HookStage.before);
 
         await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand);
         await hookExecutor.executeBuildHooks(this.ctx);
+
+        await CommandUtil.executeCommand(this.ctx, CommandType.CompileCommand, CommandStage.after);
+        await hookExecutor.executeCompileHooks(this.ctx, HookStage.after);
 
         await CommandUtil.executeCommand(this.ctx, CommandType.BuildCommand, CommandStage.after);
         await hookExecutor.executeBuildHooks(this.ctx, HookStage.after);

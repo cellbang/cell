@@ -36,14 +36,14 @@ export class ServeManager {
         await CommandUtil.executeCommand(this.context, CommandType.CompileCommand);
         await hookExecutor.executeCompileHooks(this.context);
 
-        await hookExecutor.executeCompileHooks(this.context, HookStage.after);
-        await CommandUtil.executeCommand(this.context, CommandType.CompileCommand, CommandStage.after);
-
         await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.before, commandRender);
         await hookExecutor.executeServeHooks(this.context, HookStage.before);
 
         await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.on, commandRender);
         await hookExecutor.executeServeHooks(this.context);
+
+        await hookExecutor.executeCompileHooks(this.context, HookStage.after);
+        await CommandUtil.executeCommand(this.context, CommandType.CompileCommand, CommandStage.after);
 
         await hookExecutor.executeServeHooks(this.context, HookStage.after);
         await CommandUtil.executeCommand(this.context, CommandType.ServeCommand, CommandStage.after, commandRender);
