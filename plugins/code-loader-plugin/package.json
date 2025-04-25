@@ -1,11 +1,11 @@
 {
   "name": "@celljs/code-loader-plugin",
-  "version": "3.5.13",
+  "version": "3.5.14",
   "description": "",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "dependencies": {
-    "@celljs/cli-common": "3.5.13",
+    "@celljs/cli-common": "3.5.14",
     "axios": "^0.26.1",
     "fs-extra": "^11.1.1",
     "jszip": "^3.7.1",
@@ -42,7 +42,7 @@
     "test": "cell-component test:js"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.13"
+    "@celljs/component": "3.5.14"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
