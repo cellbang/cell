@@ -1,44 +1,41 @@
 {
   "name": "@celljs/cli",
-  "version": "3.5.14",
+  "version": "3.6.0",
   "description": "Cell CLI.",
-  "publishConfig": {
-    "access": "public"
+  "homepage": "https://github.com/cellbang/cell",
+  "bugs": {
+    "url": "https://github.com/cellbang/cell/issues"
   },
-  "license": "MIT",
-  "eslintIgnore": [
-    "templates"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/cellbang/cell.git"
   },
-  "bugs": {
-    "url": "https://github.com/cellbang/cell/issues"
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "bin": {
+    "cell": "./bin/cell"
   },
-  "homepage": "https://github.com/cellbang/cell",
   "files": [
     "bin",
     "lib",
     "src",
     "templates"
   ],
-  "bin": {
-    "cell": "./bin/cell"
-  },
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "scripts": {
-    "lint": "cell-component lint",
     "build": "cell-component build",
-    "watch": "cell-component watch",
     "clean": "cell-component clean",
-    "test": "cell-component test:js"
+    "lint": "cell-component lint",
+    "test": "cell-component test:js",
+    "watch": "cell-component watch"
   },
+  "eslintIgnore": [
+    "templates"
+  ],
   "dependencies": {
-    "@celljs/cli-common": "3.5.14",
-    "@celljs/cli-runtime": "3.5.14",
-    "@celljs/frameworks": "3.5.14",
+    "@celljs/cli-common": "3.6.0",
+    "@celljs/cli-runtime": "3.6.0",
+    "@celljs/frameworks": "3.6.0",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
     "dotenv": "^16.3.1",
@@ -56,9 +53,12 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.14",
+    "@celljs/component": "3.6.0",
     "@types/js-yaml": "^3.12.1",
     "@types/prompts": "^2.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

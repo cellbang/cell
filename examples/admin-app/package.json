@@ -1,38 +1,38 @@
 {
-  "private": true,
   "name": "@celljs/example-admin-app",
+  "version": "3.6.0",
+  "private": true,
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.14",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
+  "scripts": {
+    "build": "cell build",
+    "clean": "rimraf lib dist .cell",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod",
+    "deploy:test": "cell deploy -m scf -m test",
+    "start": "cell serve"
+  },
   "dependencies": {
-    "@celljs/core": "3.5.14",
-    "@celljs/react": "3.5.14",
-    "@celljs/rpc": "3.5.14",
-    "@celljs/security": "3.5.14",
-    "@celljs/serve-static": "3.5.14",
-    "@celljs/shell": "3.5.14",
-    "@celljs/typeorm": "3.5.14",
+    "@celljs/core": "3.6.0",
+    "@celljs/react": "3.6.0",
+    "@celljs/rpc": "3.6.0",
+    "@celljs/security": "3.6.0",
+    "@celljs/serve-static": "3.6.0",
+    "@celljs/shell": "3.6.0",
+    "@celljs/typeorm": "3.6.0",
     "better-sqlite3": "^11.3.0",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.14"
-  },
-  "scripts": {
-    "clean": "rimraf lib dist .cell",
-    "build": "cell build",
-    "start": "cell serve",
-    "deploy": "cell deploy -m scf -m test",
-    "deploy:test": "cell deploy -m scf -m test",
-    "deploy:pre": "cell deploy -m scf -m pre",
-    "deploy:prod": "cell deploy -m scf -m prod"
+    "@celljs/cli": "3.6.0"
   }
 }

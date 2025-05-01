@@ -1,40 +1,37 @@
 {
   "name": "@celljs/cli-service",
-  "version": "3.5.14",
+  "version": "3.6.0",
   "description": "Cell CLI Service.",
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "cell-component",
     "cell-plugin"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/cellbang/cell",
+  "bugs": {
+    "url": "https://github.com/cellbang/cell/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cellbang/cell.git"
   },
-  "bugs": {
-    "url": "https://github.com/cellbang/cell/issues"
-  },
-  "homepage": "https://github.com/cellbang/cell",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
     "lib",
     "src",
     "templates",
     "cell-unpackage.yml"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
   "scripts": {
-    "lint": "cell-component lint",
     "build": "cell-component build",
-    "watch": "cell-component watch",
     "clean": "cell-component clean",
-    "test": "cell-component test:js"
+    "lint": "cell-component lint",
+    "test": "cell-component test:js",
+    "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.5.14",
+    "@celljs/cli-common": "3.6.0",
     "@gem-mine/webpack-chain": "^7.1.0",
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^4.0.0",
@@ -65,10 +62,13 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.14",
+    "@celljs/component": "3.6.0",
     "@types/friendly-errors-webpack-plugin": "^0.1.4",
     "@types/memory-fs": "^0.3.3",
     "@types/webpack-dev-server": "^4.7.2"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

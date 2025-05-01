@@ -1,25 +1,25 @@
 {
   "name": "@celljs/style-guide",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "3.6.0",
   "description": "Cell's engineering style guide",
+  "license": "MIT",
   "type": "commonjs",
   "files": [
     "eslint",
     "prettier",
     "typescript.json"
   ],
-  "prettier": "./prettier/compact",
   "scripts": {
     "lint": "eslint && prettier -c **/*.js -w",
     "test": "yarn -s run lint"
   },
+  "prettier": "./prettier/compact",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "eslint-plugin-jsdoc": "^46.5.1",
     "eslint-plugin-deprecation": "~1.4.1",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsdoc": "^46.5.1",
     "eslint-plugin-no-null": "latest",
     "eslint-plugin-no-unsanitized": "latest",
     "eslint-plugin-react": "^7.32.2",

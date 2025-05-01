@@ -1,12 +1,36 @@
 {
   "name": "@celljs/web",
-  "version": "3.5.14",
+  "version": "3.6.0",
   "description": "",
+  "keywords": [
+    "cell-component"
+  ],
+  "homepage": "https://github.com/cellbang/cell",
+  "bugs": {
+    "url": "https://github.com/cellbang/cell/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/cell.git"
+  },
+  "license": "MIT",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
+  "files": [
+    "lib",
+    "src",
+    "cell.yml"
+  ],
+  "scripts": {
+    "build": "cell-component build",
+    "clean": "cell-component clean",
+    "lint": "cell-component lint",
+    "test": "cell-component test:js",
+    "watch": "cell-component watch"
+  },
   "dependencies": {
-    "@celljs/core": "3.5.14",
-    "@celljs/http": "3.5.14",
+    "@celljs/core": "3.6.0",
+    "@celljs/http": "3.6.0",
     "@types/express": "^4.17.9",
     "body-parser": "^1.20.0",
     "class-transformer": "^0.5.1",
@@ -19,37 +43,13 @@
     "tslib": "^2.8.0",
     "url-pattern": "^1.0.3"
   },
+  "devDependencies": {
+    "@celljs/cli-service": "3.6.0",
+    "@celljs/component": "3.6.0",
+    "@types/cors": "^2.8.6"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "keywords": [
-    "cell-component"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cellbang/cell.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cellbang/cell/issues"
-  },
-  "homepage": "https://github.com/cellbang/cell",
-  "files": [
-    "lib",
-    "src",
-    "cell.yml"
-  ],
-  "scripts": {
-    "lint": "cell-component lint",
-    "build": "cell-component build",
-    "watch": "cell-component watch",
-    "clean": "cell-component clean",
-    "test": "cell-component test:js"
-  },
-  "devDependencies": {
-    "@celljs/cli-service": "3.5.14",
-    "@celljs/component": "3.5.14",
-    "@types/cors": "^2.8.6"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

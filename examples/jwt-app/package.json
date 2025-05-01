@@ -1,36 +1,36 @@
 {
-  "private": true,
   "name": "@celljs/example-jwt-app",
+  "version": "3.6.0",
+  "private": true,
   "keywords": [
     "cell-component"
   ],
-  "version": "3.5.14",
   "license": "MIT",
   "files": [
     "lib",
     "src"
   ],
+  "scripts": {
+    "build": "cell build",
+    "clean": "rimraf lib dist .cell",
+    "deploy": "cell deploy -m scf -m test",
+    "deploy:pre": "cell deploy -m scf -m pre",
+    "deploy:prod": "cell deploy -m scf -m prod",
+    "deploy:test": "cell deploy -m scf -m test",
+    "start": "cell serve",
+    "test": "cell-component test"
+  },
   "dependencies": {
-    "@celljs/core": "3.5.14",
-    "@celljs/jwt": "3.5.14",
-    "@celljs/mvc": "3.5.14",
-    "@celljs/web": "3.5.14"
+    "@celljs/core": "3.6.0",
+    "@celljs/jwt": "3.6.0",
+    "@celljs/mvc": "3.6.0",
+    "@celljs/web": "3.6.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.5.14",
-    "@celljs/component": "3.5.14",
-    "@celljs/testing": "3.5.14",
+    "@celljs/cli": "3.6.0",
+    "@celljs/component": "3.6.0",
+    "@celljs/testing": "3.6.0",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
-  },
-  "scripts": {
-    "clean": "rimraf lib dist .cell",
-    "test": "cell-component test",
-    "build": "cell build",
-    "start": "cell serve",
-    "deploy": "cell deploy -m scf -m test",
-    "deploy:test": "cell deploy -m scf -m test",
-    "deploy:pre": "cell deploy -m scf -m pre",
-    "deploy:prod": "cell deploy -m scf -m prod"
   }
 }

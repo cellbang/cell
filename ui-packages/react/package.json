@@ -1,13 +1,38 @@
 {
   "name": "@celljs/react",
-  "version": "3.5.14",
+  "version": "3.6.0",
   "description": "",
+  "keywords": [
+    "cell-component"
+  ],
+  "homepage": "https://github.com/cellbang/cell",
+  "bugs": {
+    "url": "https://github.com/cellbang/cell/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cellbang/cell.git"
+  },
+  "license": "MIT",
   "main": "lib/browser/index.js",
   "typings": "lib/browser/index.d.ts",
+  "files": [
+    "lib",
+    "src",
+    "cell.yml",
+    "cell-cdn.yml"
+  ],
+  "scripts": {
+    "build": "cell-component build",
+    "clean": "cell-component clean",
+    "lint": "cell-component lint",
+    "test": "cell-component test:js",
+    "watch": "cell-component watch"
+  },
   "dependencies": {
-    "@celljs/cli-common": "3.5.14",
-    "@celljs/core": "3.5.14",
-    "@celljs/widget": "3.5.14",
+    "@celljs/cli-common": "3.6.0",
+    "@celljs/core": "3.6.0",
+    "@celljs/widget": "3.6.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
@@ -30,37 +55,12 @@
     "stylus-loader": "^6.0.0",
     "tslib": "^2.8.0"
   },
+  "devDependencies": {
+    "@celljs/cli-service": "3.6.0",
+    "@celljs/component": "3.6.0"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "keywords": [
-    "cell-component"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cellbang/cell.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cellbang/cell/issues"
-  },
-  "homepage": "https://github.com/cellbang/cell",
-  "files": [
-    "lib",
-    "src",
-    "cell.yml",
-    "cell-cdn.yml"
-  ],
-  "scripts": {
-    "lint": "cell-component lint",
-    "build": "cell-component build",
-    "watch": "cell-component watch",
-    "clean": "cell-component clean",
-    "test": "cell-component test:js"
-  },
-  "devDependencies": {
-    "@celljs/cli-service": "3.5.14",
-    "@celljs/component": "3.5.14"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }

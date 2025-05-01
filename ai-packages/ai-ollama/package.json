@@ -1,46 +1,46 @@
 {
   "name": "@celljs/ai-ollama",
-  "version": "3.5.14",
+  "version": "3.6.0",
   "description": "Ollama models support",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
-  "dependencies": {
-    "@celljs/ai-core": "3.5.14",
-    "@celljs/core": "3.5.14",
-    "@celljs/http": "3.5.14",
-    "class-transformer": "^0.5.1",
-    "rxjs": "^6.6.0",
-    "tslib": "^2.8.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
   "keywords": [
     "cell-component"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/cellbang/cell",
+  "bugs": {
+    "url": "https://github.com/cellbang/cell/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cellbang/cell.git"
   },
-  "bugs": {
-    "url": "https://github.com/cellbang/cell/issues"
-  },
-  "homepage": "https://github.com/cellbang/cell",
+  "license": "MIT",
+  "main": "lib/common/index.js",
+  "typings": "lib/common/index.d.ts",
   "files": [
     "lib",
     "src",
     "cell.yml"
   ],
   "scripts": {
-    "lint": "cell-component lint",
     "build": "cell-component build",
-    "watch": "cell-component watch",
     "clean": "cell-component clean",
-    "test": "cell-component test:js"
+    "lint": "cell-component lint",
+    "test": "cell-component test:js",
+    "watch": "cell-component watch"
+  },
+  "dependencies": {
+    "@celljs/ai-core": "3.6.0",
+    "@celljs/core": "3.6.0",
+    "@celljs/http": "3.6.0",
+    "class-transformer": "^0.5.1",
+    "rxjs": "^6.6.0",
+    "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.5.14"
+    "@celljs/component": "3.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "gitHead": "bbf636b21ea1a347affcc05a5f6f58b35bedef6d"
 }
