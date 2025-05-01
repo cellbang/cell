@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.0
+
+- feat: add CellJS style guide with ESLint and Prettier configurations
+
 ## 3.5.14
 
 - chore: 调整编译命令及钩子执行顺序

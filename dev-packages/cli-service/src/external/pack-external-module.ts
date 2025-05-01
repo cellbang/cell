@@ -14,7 +14,7 @@ function pick(obj: any, props: string[]): any {
         let newObjProp = newObj;
         const keys: string[] = prop.split('.');
         keys.forEach((key, index) => {
-            if (objProp && objProp.hasOwnProperty(key)) {
+            if (objProp) {
                 objProp = objProp[key];
                 if (index === keys.length - 1) {
                     newObjProp[key] = objProp;

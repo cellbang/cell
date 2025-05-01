@@ -12,9 +12,9 @@ export const MethodMatcher = Symbol('MethodMatcher');
 
 export interface Advice { }
 
-export interface BeforeAdvice extends Advice { }
+export type BeforeAdvice = Advice;
 
-export interface AfterAdvice extends Advice { }
+export type AfterAdvice = Advice;
 
 export interface MethodBeforeAdvice extends BeforeAdvice {
 

@@ -23,4 +23,4 @@ export async function before(ctx: CliContext) {
             spinner.fail(error);
         }
     }
-};
+}

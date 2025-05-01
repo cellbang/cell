@@ -4,7 +4,7 @@ const crc32 = require('crc/crc32');
 
 export class SessionImpl implements Session {
     readonly id = generateUUUID();
-    isNew: boolean = true;
+    isNew = true;
     expire: number;
     maxAge: number;
     protected _preHash: string;

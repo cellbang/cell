@@ -56,7 +56,7 @@ export class ExpressionCompiler {
         for (let i = 0; i < text.length; i++) {
             const c = text[i];
             if (!escaped) {
-                if ('\'' === c || '\"' === c) {
+                if ('\'' === c || '"' === c) {
                     stringed = !stringed;
                     section.push(c);
                     continue;
@@ -108,7 +108,7 @@ export class ExpressionCompiler {
         for (let i = 0; i < text.length; i++) {
             const c = text[i];
             if (!escaped) {
-                if ('\'' === c || '\"' === c) {
+                if ('\'' === c || '"' === c) {
                     section.push(c);
                     continue;
                 } else

@@ -194,7 +194,7 @@ export class ChatRequestBuilder {
     private maxTokens: number;
     private metadata?: Metadata;
     private stopSequences?: string[];
-    private stream: boolean = false;
+    private stream = false;
     private temperature?: number;
     private topP?: number;
     private topK?: number;

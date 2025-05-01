@@ -144,7 +144,7 @@ export class ChatRequest {
 export class ChatRequestBuilder {
     private model: string;
     private messages: Message[] = [];
-    private stream: boolean = false;
+    private stream = false;
     private format?: string;
     private keepAlive?: string;
     private tools: Tool[] = [];

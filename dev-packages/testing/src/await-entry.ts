@@ -17,4 +17,4 @@ export function awaitEntry(entry: string, startCompileTime: number, tries = 150,
         };
         attempt(tries).catch(reject);
     });
-};
+}

@@ -8,7 +8,7 @@ export abstract class AbstractWidgetFactory<T> implements WidgetFactory<T> {
     @Autowired(ExpressionHandler)
     protected readonly expressionHandler: ExpressionHandler;
 
-    priority: number = 500;
+    priority = 500;
 
     async create(widgetModel: WidgetModel): Promise<Widget<T>> {
         const { children = [] } = widgetModel;

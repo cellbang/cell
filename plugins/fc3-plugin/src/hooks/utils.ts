@@ -120,7 +120,9 @@ export async function getTrigger(client: FC20230330, functionName: string, trigg
                 if (result.body.triggerConfig) {
                     triggerConfig = JSON.parse(result.body.triggerConfig);
                 }
-            } catch (_) {}
+            } catch (_) {
+                // NoOp
+            }
             if (result.body.triggerType === 'http') {
                 console.log(`    - Methods: ${triggerConfig.methods}`);
                 if (region && accountId) {

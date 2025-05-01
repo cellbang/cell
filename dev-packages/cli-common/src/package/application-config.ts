@@ -61,6 +61,7 @@ export class ApplicationConfig {
     }
 
     getConfig(target: string): Props {
+        /* eslint-disable-next-line @typescript-eslint/no-this-alias */
         const self: any = this;
         const configProperty = `_${target}Config`;
         if (self[configProperty]) {

@@ -1,7 +1,7 @@
 
 /* eslint no-eval: 0 */
 const path = '{{ path }}';
-const entryMode: string = '{{ entryMode }}';
+const entryMode = '{{ entryMode }}';
 const port = parseInt('{{ port }}');
 process.env.SERVER_PATH = path;
 process.env.SERVER_PORT = port + '';

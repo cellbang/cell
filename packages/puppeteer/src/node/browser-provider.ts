@@ -21,7 +21,7 @@ export class BrowserProviderImpl implements BrowserProvider {
             return false;
         }
         return true;
-    };
+    }
 
     async provide(): Promise<puppeteer.Browser> {
         if (!this.browser || !await this.isBrowserAvailable()) {

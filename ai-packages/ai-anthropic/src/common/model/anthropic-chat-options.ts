@@ -52,7 +52,7 @@ export class AnthropicChatOptions implements FunctionCallingOptions {
     @Exclude()
     functions: Set<string> = new Set<string>();
     @Exclude()
-    proxyToolCalls: boolean = false;
+    proxyToolCalls = false;
 
     @Exclude()
     toolContext: Record<string, any> = {};

@@ -7,7 +7,7 @@ export interface StreamEvent<Data> {
     event?: string;
     data: Data;
     raw: string[];
-};
+}
 
 /**
  * Decoder for server-sent events.

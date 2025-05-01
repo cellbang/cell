@@ -21,6 +21,7 @@ export default async (context: WebpackContext) => {
         let nextConfig: { distDir?: string } = {};
         const patterns = [];
         if (existsSync(nextConfigPath)) {
+            /* eslint-disable-next-line import/no-dynamic-require */
             nextConfig = require(nextConfigPath);
         } else {
             nextConfigPath = join(process.cwd(), 'next.config.mjs');

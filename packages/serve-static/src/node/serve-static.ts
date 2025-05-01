@@ -1,8 +1,7 @@
-// types
 import type { ServeStaticOption } from './type';
-// utilities
 import * as send from 'send';
 import { resolve } from 'path';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 export const serveStatic = (root: string, opts: ServeStaticOption) => {
 

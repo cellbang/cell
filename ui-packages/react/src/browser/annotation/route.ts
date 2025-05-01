@@ -2,7 +2,7 @@ import { Constant } from '@celljs/core';
 import { RouteMetadata, ROUTE_METADATA } from '../router/router-protocol';
 import { ReactComponent } from './react-component';
 
-export function Route(pathOrRouteMetadata?: string | RouteMetadata, rebind: boolean = false): ClassDecorator {
+export function Route(pathOrRouteMetadata?: string | RouteMetadata, rebind = false): ClassDecorator {
     return function (target: any) {
         let routeMetadata: RouteMetadata;
         if (typeof pathOrRouteMetadata === 'string') {

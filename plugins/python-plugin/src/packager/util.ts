@@ -118,4 +118,4 @@ export function parsePythonOptions(options: PythonPluginOptions) {
         throw new Error('Python Requirements: you can provide a dockerImage or a dockerFile option, not both.');
     }
     return options;
-};
+}

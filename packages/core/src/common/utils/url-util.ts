@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 export namespace UrlUtil {
     export function join(...paths: string[]) {
         const resultArray = [];

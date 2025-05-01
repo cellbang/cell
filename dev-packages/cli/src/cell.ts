@@ -198,7 +198,7 @@ const spinner = ora({ text: chalk.italic.gray('loading command line context...\n
 function suggestCommands(unknownCommand: string, main: Command) {
     const availableCommands = main.commands.map((cmd: Command) => cmd.name());
 
-    let suggestion: string = '';
+    let suggestion = '';
 
     availableCommands.forEach((cmd: string) => {
         const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion, unknownCommand);

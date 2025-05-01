@@ -26,7 +26,9 @@ export interface CancelablePromise<T> extends Promise<T> {
  * @returns a function that returns a promise that returns the given value, but delayed
  */
 export function delay<T>(ms: number): (value: T) => Promise<T> {
-    return value => new Promise((resolve, reject) => { setTimeout(() => resolve(value), ms); });
+    return value => new Promise((resolve, reject) => {
+ setTimeout(() => resolve(value), ms);
+});
 }
 
 /**
@@ -118,7 +120,9 @@ export function raceCancellationError<T>(promise: Promise<T>, token: Cancellatio
 
 export async function raceCancellablePromises<T>(cancellablePromises: CancelablePromise<T>[]): Promise<T> {
     let resolvedPromiseIndex = -1;
-    const promises = cancellablePromises.map((promise, index) => promise.then(result => { resolvedPromiseIndex = index; return result; }));
+    const promises = cancellablePromises.map((promise, index) => promise.then(result => {
+ resolvedPromiseIndex = index; return result;
+}));
     const result = await Promise.race(promises);
     cancellablePromises.forEach((cancellablePromise, index) => {
         if (index !== resolvedPromiseIndex) {
@@ -291,7 +295,9 @@ const microtaskDeferred = (fn: () => void): IScheduledLater => {
 
     return {
         isTriggered: () => scheduled,
-        dispose: () => { scheduled = false; },
+        dispose: () => {
+ scheduled = false;
+},
     };
 };
 

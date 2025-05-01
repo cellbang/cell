@@ -42,7 +42,7 @@ export async function renderEntry(ctx: CliContext) {
 
         config.entry = await doRenderEntry(entryTemplate, cfg, entryPath);
     }
-};
+}
 
 async function doRenderEntry(entryTemplate: string, cfg: ApplicationConfig, entry: string) {
     ensureDir(PathUtil.getProjectHomePath());
@@ -52,8 +52,8 @@ async function doRenderEntry(entryTemplate: string, cfg: ApplicationConfig, entr
     const port = server?.port ?? 9000;
     let path = server?.path ?? '';
     let entryContent = readFileSync(entryTemplate, { encoding: 'utf8' });
-    entry = entry.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-    path = path.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    entry = entry.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+    path = path.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
     entryContent = entryContent
         .replace(/{{ entryMode }}/g, entryMode)
         .replace(/{{ entry }}/g, entry)

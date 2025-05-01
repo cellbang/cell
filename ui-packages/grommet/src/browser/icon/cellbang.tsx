@@ -19,4 +19,4 @@ export function Cellbang(props: IconProps) {
 }
 
 @Icon(Cellbang)
-export default class {};
+export default class {}

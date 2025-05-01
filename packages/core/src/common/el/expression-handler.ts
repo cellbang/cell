@@ -30,6 +30,7 @@ export class ExpressionHandlerImpl implements ExpressionHandler {
         if (typeof textOrObj === 'string') {
             return this.doHandle(textOrObj, ctx, expressionCompilerOptions);
         } else {
+            /* eslint-disable-next-line @typescript-eslint/no-this-alias */
             const self = this;
             traverse(textOrObj).forEach(function (value: any) {
                 if (typeof value === 'string') {

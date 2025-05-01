@@ -67,13 +67,15 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
     const entryContextProvider = async () => {
         const entryPath = getEntryPath(configuration);
         clearRuntimeModuleCaches();
-        while (true) {
+        let retryCount = 30;
+        while (retryCount-- > 0) {
             if (fs.existsSync(entryPath)) {
                 mountRuntimeModuleCaches();
                 return createRequire(__filename)(entryPath);
             }
             await delay(200);
         }
+        throw new Error('Entry path not found after multiple retries.');
     };
     process.send!({ type: 'entry', data: compiler.outputPath });
     await callback(server.server, server.app, compiler, entryContextProvider);

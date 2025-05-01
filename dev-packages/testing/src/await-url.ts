@@ -20,4 +20,4 @@ export function awaitUrl(url: string, tries = 150, interval = 500) {
         };
         attempt(tries).catch(reject);
     });
-};
+}

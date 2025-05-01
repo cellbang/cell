@@ -18,7 +18,7 @@ export class DefaultCacheManagerFactory implements CacheManagerFactory {
         return new DelegatingCacheManager(Promise.resolve(multiCaching(caches)));
     }
 
-    create(name: string = 'default'): CacheManager {
+    create(name = 'default'): CacheManager {
         const config = this.cacheConfig[name];
 
         if (!config) {

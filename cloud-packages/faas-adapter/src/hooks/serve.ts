@@ -43,4 +43,4 @@ export async function after(context: ServeContext) {
 
     });
 
-};
+}

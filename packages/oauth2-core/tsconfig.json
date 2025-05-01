@@ -1,5 +1,5 @@
 {
-  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "extends": "@celljs/style-guide/typescript",
   "compilerOptions": {
     "composite": true,
     "rootDir": "src",

@@ -2,6 +2,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { WebpackContext, ConfigurationContext } from '@celljs/cli-service/lib/context/context-protocol';
 import { ConfigUtil } from '@celljs/cli-common/lib/utils/config-util';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
 interface LoaderOptions {
     css: any,
@@ -53,6 +54,7 @@ function createVueRule(webpackConfig: any, vueLoaderConfig: any) {
                 .options({
                     experimentalWatchApi: true,
                     transpileOnly: true,
+                    /* eslint-disable-next-line no-useless-escape */
                     appendTsxSuffixTo: ['\.vue$']
                 }).after('babel-loader');
 

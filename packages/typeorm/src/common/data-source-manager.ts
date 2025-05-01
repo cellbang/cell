@@ -37,7 +37,7 @@ export class DataSourceManager {
      * If dataSource name is not given then it will get a default dataSource.
      * Throws error if dataSource with the given name was not found.
      */
-    get(name: string = 'default'): DataSource {
+    get(name = 'default'): DataSource {
         const dataSource = this.dataSourceMap.get(name);
         if (!dataSource) {
             throw new DataSourceNotFoundError(name);

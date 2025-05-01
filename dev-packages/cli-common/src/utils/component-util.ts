@@ -35,6 +35,7 @@ export namespace ComponentUtil {
                 });
             }
         } else if (existsSync(npmLockFile)) {
+            /* eslint-disable-next-line import/no-dynamic-require */
             const json: { dependencies: { [key: string]: any } } = require(npmLockFile);
             let pkgVersion = '';
             let newPkgVersion = '';

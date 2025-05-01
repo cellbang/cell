@@ -13,8 +13,8 @@ export default async (options: ListOptions) => {
         let runtimes = await RuntimeUtil.getInstalledRuntimes();
         runtimes = [ { name: Runtimes.empty, version: '' }, ...runtimes ];
         for (const runtime of runtimes) {
-            console.log(chalk
-                `${ defaultRuntime === runtime.name || !defaultRuntime && runtime.name === Runtimes.empty ? chalk.green('*') : ' ' } ${runtime.name} {italic.gray runtime}`);
+            console.log(
+                chalk`${ defaultRuntime === runtime.name || !defaultRuntime && runtime.name === Runtimes.empty ? chalk.green('*') : ' ' } ${runtime.name} {italic.gray runtime}`);
         }
         console.log();
     } catch (error) {

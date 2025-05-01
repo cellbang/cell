@@ -16,7 +16,7 @@ export class FaaSCronJob extends CronJob {
         const context = (this as any).context;
         const onComplete = (this as any).onComplete;
         await Promise.all(callbacks.map((callback: any) => callback.call(context, onComplete)));
-    };
+    }
 
     override start() {
         if (this.running) {

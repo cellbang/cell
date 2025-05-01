@@ -10,9 +10,7 @@ export const Application = Symbol('Application');
 export const ApplicationStateService = Symbol('ApplicationStateService');
 export const ApplicationProps = Symbol('ApplicationProps');
 
-export interface ApplicationProps extends Record<string, any> {
-
-}
+export type ApplicationProps = Record<string, any>;
 
 export interface ApplicationLifecycle<T extends Application> {
 

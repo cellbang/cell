@@ -44,7 +44,7 @@ export interface ConnectionClosedError extends CustomError {
 }
 export namespace ConnectionClosedError {
     const code: ConnectionClosedError['code'] = 'RPC_PROTOCOL_CLOSED';
-    export function create(message: string = 'connection is closed'): ConnectionClosedError {
+    export function create(message = 'connection is closed'): ConnectionClosedError {
         return Object.assign(new Error(message), { code });
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

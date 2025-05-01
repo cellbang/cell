@@ -11,9 +11,6 @@ export function autoBindEntities(entities: any, name = DEFAULT_CONNECTION_NAME) 
             _entities.push(entities[key]);
         }
     }
-    if (!_entitiyMap.get(name)) {
-
-    }
     const current = _entitiyMap.get(name) || [];
 
     _entitiyMap.set(name, [ ...current, ..._entities ]);

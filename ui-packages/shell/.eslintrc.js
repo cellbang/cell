@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
     extends: [
-        require.resolve('@celljs/component/configs/build.eslintrc.json')
+        require.resolve('@celljs/style-guide/eslint/build')
     ],
     parserOptions: {
         tsconfigRootDir: __dirname,

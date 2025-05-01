@@ -1,5 +1,5 @@
 {
-  "extends": "@celljs/component/configs/base.tsconfig.json",
+  "extends": "@celljs/style-guide/typescript",
   "compilerOptions": {
     "composite": true,
     "allowJs": true
@@ -110,9 +110,6 @@
     },
     {
       "path": "examples/standalone-app"
-    },
-    {
-      "path": "examples/vitesse-app"
     },
     {
       "path": "packages/cache"

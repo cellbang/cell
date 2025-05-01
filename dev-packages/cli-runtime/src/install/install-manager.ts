@@ -143,7 +143,7 @@ export class InstallManager {
             }
 
             if (!this.location) {
-                let suggestion: string = '';
+                let suggestion = '';
                 Object.keys(templates).forEach(key => {
                     const isBestMatch = leven(key, runtime) < leven(suggestion, runtime);
                     if (isBestMatch) {

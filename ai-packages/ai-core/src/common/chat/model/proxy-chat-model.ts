@@ -15,7 +15,6 @@ export class ProxyChatModel implements ChatModel {
     protected init() {
         for (const chatModel of this.chatModels) {
             if ('provider' in chatModel) {
-                // @ts-ignore
                 this.chatModelMap.set(chatModel.provider as string, chatModel);
             } else {
                 const provider = chatModel.constructor.name.split('ChatModel')[0].toLowerCase();

@@ -9,6 +9,7 @@ export class LineDecoderImpl implements LineDecoder {
     private trailingCR: boolean;
 
     static readonly NEWLINE_CHARS = new Set(['\n', '\r', '\x0b', '\x0c', '\x1c', '\x1d', '\x1e', '\x85', '\u2028', '\u2029']);
+    /* eslint-disable-next-line no-control-regex */
     static readonly NEWLINE_REGEXP = /\r\n|[\n\r\x0b\x0c\x1c\x1d\x1e\x85\u2028\u2029]/g;
 
     constructor() {

@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "./eslint/javascript"
+  ],
+  "ignorePatterns": ["!.*", "node_modules"]
+
+}

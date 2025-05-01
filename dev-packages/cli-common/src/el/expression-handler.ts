@@ -8,6 +8,7 @@ export class ExpressionHandler {
     ctx: ExpressionContext = {};
 
     handle(textOrObj: string | Object, ctx?: ExpressionContext) {
+        /* eslint-disable-next-line @typescript-eslint/no-this-alias */
         const self = this;
         if (typeof textOrObj === 'string') {
             return this.evalSync(textOrObj, ctx || {});

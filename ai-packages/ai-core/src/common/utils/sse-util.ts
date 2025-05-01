@@ -87,14 +87,18 @@ export abstract class SSEUtil {
     }
 
     private static readableStreamAsyncIterable<T>(stream: any): AsyncIterableIterator<T> {
-        if (stream[Symbol.asyncIterator]) {return stream; }
+        if (stream[Symbol.asyncIterator]) {
+return stream;
+}
 
         const reader = stream.getReader();
         return {
             async next() {
                 try {
                     const result = await reader.read();
-                    if (result?.done) {reader.releaseLock(); }
+                    if (result?.done) {
+reader.releaseLock();
+}
                     return result;
                 } catch (e) {
                     reader.releaseLock();

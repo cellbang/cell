@@ -103,7 +103,9 @@ function getPnpmVersion() {
         // https://github.com/pnpm/pnpm/issues/1678#issuecomment-469981972
         // so we only support pnpm >= 3.0.0
         _hasPnpm = true;
-    } catch (e) { }
+    } catch (e) {
+        // NoOp
+    }
     return _pnpmVersion || '0.0.0';
 }
 

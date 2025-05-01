@@ -16,4 +16,4 @@ export async function before(context: PropsContext) {
             cloudConfig.region = profile?.region;
         }
     }
-};
+}

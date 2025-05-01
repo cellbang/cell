@@ -16,7 +16,7 @@ export class ElPolicyResolver implements PolicyResolver {
         const result = await expression.eval(policy.context || Context.getAttr(SECURITY_EXPRESSION_CONTEXT_KEY));
         if (result === true) {
             return ACCESS_GRANTED;
-        };
+        }
         return ACCESS_DENIED;
     }
 

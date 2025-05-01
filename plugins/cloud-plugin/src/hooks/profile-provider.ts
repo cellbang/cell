@@ -5,7 +5,7 @@ export class DefaultProfileProvider implements ProfileProvider {
 
     protected config: CloudConfiguration;
 
-    async provide(config: CloudConfiguration, quiet: boolean = false): Promise<Profile> {
+    async provide(config: CloudConfiguration, quiet = false): Promise<Profile> {
         this.config = config;
         const { region, account, credentials, regions, profilePath } = this.config;
         let profile: Profile = {

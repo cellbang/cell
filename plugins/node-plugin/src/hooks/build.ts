@@ -9,4 +9,4 @@ export async function after(ctx: CliContext) {
     if (existsSync(genEntry)) {
         remove(genEntry);
     }
-};
+}

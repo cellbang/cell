@@ -23,5 +23,5 @@ export type CacheStoreFactoryConfig = CachingConfig & {
 };
 
 export interface CacheStoreFactory {
-    create<T>(config: CacheStoreFactoryConfig): Promise<CacheStore>;
+    create(config: CacheStoreFactoryConfig): Promise<CacheStore>;
 }

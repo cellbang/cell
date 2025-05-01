@@ -49,4 +49,4 @@ export async function after(context: ServeContext) {
         doDispatch(req, res);
     });
 
-};
+}

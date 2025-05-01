@@ -19,7 +19,7 @@ export class Embedding {
      */
     object: string;
 
-    constructor(index: number, embedding: number[], object: string = 'embedding') {
+    constructor(index: number, embedding: number[], object = 'embedding') {
         this.index = index;
         this.embedding = embedding;
         this.object = object;
@@ -68,7 +68,7 @@ export class EmbeddingRequest<T> {
     constructor(
         input: T,
         model: string,
-        encodingFormat: string = 'float',
+        encodingFormat = 'float',
         dimensions?: number,
         user?: string,
         signal?: AbortSignal

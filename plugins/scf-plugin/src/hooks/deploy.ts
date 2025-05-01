@@ -106,7 +106,7 @@ async function createTrigger(trigger: any, namespaceName: string, functionName: 
         trigger.triggerDesc.service.serviceId = serviceId;
     }
     const createTriggerRequest: any = {};
-    let url: string = '';
+    let url = '';
     createTriggerRequest.Namespace = namespaceName;
     createTriggerRequest.FunctionName = functionName;
     createTriggerRequest.Qualifier = alias.name;
@@ -206,13 +206,11 @@ async function parseFunctionMeta(req: any, functionMeta: any) {
     const { env, vpcConfig, cfsConfig, layers, deadLetterConfig, publicNetConfig, protocolParams, instanceConcurrencyConfig, tags } = functionMeta;
     if (env) {
         const variables: any[] = [];
-        for (const key in env) {
-            if (env.hasOwnProperty(key)) {
-                const variable: any = {};
-                variable.Key = key;
-                variable.Value = env[key];
-                variables.push(variable);
-            }
+        for (const [key, value] of Object.entries(env)) {
+            const variable: any = {};
+            variable.Key = key;
+            variable.Value = value;
+            variables.push(variable);
         }
         const environment: any = {};
         environment.Variables = variables;

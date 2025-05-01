@@ -149,7 +149,7 @@ export class ToolUseAggregationEvent extends AnthropicEvent {
     /*
      * The partial JSON content.
      */
-    partialJson: string = '';
+    partialJson = '';
 
     /*
      * The tool content blocks.

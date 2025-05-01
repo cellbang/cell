@@ -7,7 +7,9 @@ export interface Event<T> {
 
 export namespace Event {
     const disposable = { dispose() { } };
-    export const None: Event<any> = function () { return disposable; };
+    export const None: Event<any> = function () {
+ return disposable;
+};
 }
 
 class CallbackList {

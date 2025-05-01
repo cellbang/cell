@@ -234,17 +234,11 @@ export namespace ContextUtils {
 
 }
 
-export interface InitContext extends CliContext {
+export type InitContext = CliContext;
 
-}
+export type ConfigContext = CliContext;
 
-export interface ConfigContext extends CliContext {
-
-}
-
-export interface InfoContext extends CliContext {
-
-}
+export type InfoContext = CliContext;
 
 export interface ServeContext extends CliContext {
     dev?: boolean;
@@ -257,14 +251,8 @@ export interface PropsContext extends CliContext {
     expressionHandler: ExpressionHandler;
 }
 
-export interface CompileContext extends CliContext {
+export type CompileContext = CliContext;
 
-}
+export type BuildContext = CliContext;
 
-export interface BuildContext extends CliContext {
-
-}
-
-export interface DeployContext extends CliContext {
-
-}
+export type DeployContext = CliContext;

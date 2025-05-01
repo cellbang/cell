@@ -31,13 +31,10 @@ export class FilterWarningsPluginConfigFactory {
         const { cfg } = context;
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, target).filterWarningsPlugin || {};
         const excludeSet = new Set();
-        for (const key in pluginConfig) {
-            if (pluginConfig.hasOwnProperty(key)) {
-                const exclude = pluginConfig[key];
-                if (Array.isArray(exclude)) {
-                    for (const item of exclude) {
-                        excludeSet.add(new RegExp(item));
-                    }
+        for (const [, exclude] of Object.entries(pluginConfig)) {
+            if (Array.isArray(exclude)) {
+                for (const item of exclude) {
+                    excludeSet.add(new RegExp(item));
                 }
             }
         }
@@ -152,23 +149,21 @@ export class HtmlWebpackTagsPluginConfigFactory {
         const pluginConfig = ConfigUtil.getWebpackConfig(cfg, FRONTEND_TARGET).htmlWebpackTagsPlugin || {};
         const before = [];
         const after = [];
-        for (const key in pluginConfig) {
-            if (pluginConfig.hasOwnProperty(key)) {
-                let c = pluginConfig[key];
-                if (typeof c === 'string') {
-                    c = {
-                        tags: {
-                            path: c,
-                            attributes: { crossorigin: true }
-                        },
-                        append: false
-                    };
-                }
-                if (c.append) {
-                    after.push(c);
-                } else {
-                    before.push(c);
-                }
+        for (const [, item] of Object.entries<any>(pluginConfig)) {
+            let c = item;
+            if (typeof c === 'string') {
+                c = {
+                    tags: {
+                        path: c,
+                        attributes: { crossorigin: true }
+                    },
+                    append: false
+                };
+            }
+            if (c.append) {
+                after.push(c);
+            } else {
+                before.push(c);
             }
         }
 
@@ -215,7 +210,7 @@ export class NormalModuleReplacementPluginConfigFactory {
         const runtimePath = PathUtil.getRuntimePath(context.runtime);
         config
             .plugin('replace')
-            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')), data => {
+            .use(Webpack.NormalModuleReplacementPlugin, [ new RegExp(runtimePath.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')), data => {
                 const createData = data.createData;
                 const resource = createData.resource;
                 if (resource?.startsWith(runtimePath)) {

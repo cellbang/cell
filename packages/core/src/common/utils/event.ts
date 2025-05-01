@@ -25,8 +25,12 @@ export interface Event<T> {
 
 export namespace Event {
     const _disposable = { dispose(): void { } };
-    export const None: Event<any> = Object.assign(function (): { dispose(): void } { return _disposable; }, {
-        get maxListeners(): number { return 0; },
+    export const None: Event<any> = Object.assign(function (): { dispose(): void } {
+ return _disposable;
+}, {
+        get maxListeners(): number {
+ return 0;
+},
         set maxListeners(maxListeners: number) { }
     });
 

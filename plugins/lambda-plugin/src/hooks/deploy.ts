@@ -277,7 +277,7 @@ async function createRoleIfNeed(functionMeta: any, accountId: string, region: st
                             ]
                         }
                     )}).promise();
-                    await iamClient.attachRolePolicy({ RoleName: roleName, PolicyArn: Policy?.Arn! }).promise();
+                    await iamClient.attachRolePolicy({ RoleName: roleName, PolicyArn: Policy?.Arn ?? '' }).promise();
                     await new Promise<void>(r =>  {
                         setTimeout(() => {
                             r();
@@ -672,7 +672,7 @@ async function checkStatus(functionName: string) {
     let times = 200;
     while ((state !== 'Active') && times > 0) {
         const tempFunc = await getFunction(lambdaClient, functionName);
-        state = tempFunc?.Configuration?.State!;
+        state = tempFunc?.Configuration?.State ?? '';
         await delay(500);
         times = times - 1;
     }

@@ -30,7 +30,7 @@ export class DefaultUserResponseClient implements UserResponseClient<OAuth2UserR
         if (!userNameAttributeName) {
             throw new OAuth2AuthenticationError({
                 errorCode: MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE,
-                description: `Missing required \"user name\" attribute name in UserInfoEndpoint for Client Registration: ${clientRegistration.registrationId}`
+                description: `Missing required "user name" attribute name in UserInfoEndpoint for Client Registration: ${clientRegistration.registrationId}`
             });
         }
 
