@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.1
+
+- chore: 添加 VSCode 设置文件，配置编辑器格式化和排除项
+
 ## 3.6.0
 
 - feat: add CellJS style guide with ESLint and Prettier configurations

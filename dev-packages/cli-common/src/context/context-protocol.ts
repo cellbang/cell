@@ -15,6 +15,7 @@ import * as ora from 'ora';
 import { ExpressionHandlerFactory } from '../el';
 import { generateUUUID } from '../utils';
 import { tmpdir } from 'os';
+import { join } from 'path';
 const chalk = require('chalk');
 
 export interface CliContext {
@@ -50,7 +51,7 @@ export namespace CliContext {
 
     async function installComponent(pkg: ApplicationPackage, component: string, version: string, spinner?: ora.Ora, dev = false) {
         try {
-             pkg.resolveModule(component + '/package.json');
+            pkg.resolveModule(component + '/package.json');
         } catch (error) {
             if (error.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
                 // NoOp
@@ -58,8 +59,8 @@ export namespace CliContext {
             if (error.code === 'MODULE_NOT_FOUND') {
                 spinner?.stop();
                 const packager = getPackager(undefined, PathUtil.getRuntimePath(pkg.runtime));
-                await SpinnerUtil.start({ text: chalk`Installing {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime...`}, async () => {
-                    await packager.add([ `${component}@${version}` ], { exact: true, dev, stdio: 'pipe' }, PathUtil.getRuntimePath(pkg.runtime));
+                await SpinnerUtil.start({ text: chalk`Installing {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime...` }, async () => {
+                    await packager.add([`${component}@${version}`], { exact: true, dev, stdio: 'pipe' }, PathUtil.getRuntimePath(pkg.runtime));
                 }, chalk`Installed {bold ${component}@${version}} in {yellow.bold ${pkg.runtime}} runtime`);
             }
         }
@@ -96,7 +97,7 @@ export namespace CliContext {
     }
 
     async function renderConfig(pkg: ApplicationPackage, cfg: ApplicationConfig, options: CreateCliContextOptions, otherConfig: any) {
-        for (const target of [ FRONTEND_TARGET, BACKEND_TARGET ]) {
+        for (const target of [FRONTEND_TARGET, BACKEND_TARGET]) {
             const config = cfg.getConfig(target);
             const envForConfig = config.env || {};
             config.env = { ...otherConfig.env, ...envForConfig };
@@ -110,6 +111,7 @@ export namespace CliContext {
             config.currentTarget = target;
             config.uuid = generateUUUID();
             config.tmpDir = tmpdir();
+            config.tmpSockFile = join(config.tmpDir, `tmp-sock-${config.uuid}.sock`);
             const expressionHandler = new ExpressionHandlerFactory().create(config);
 
             const ctx = {
@@ -190,14 +192,14 @@ export namespace CliContext {
             frontendProjectDistPath: PathUtil.getFrontendProjectDistPath(),
             backendProjectDistPath: PathUtil.getBackendProjectDistPath(),
             projectHomePath: PathUtil.getProjectHomePath(),
-            cliContext: { ...options, ...program, _ignoreEl: true}
+            cliContext: { ...options, ...program, _ignoreEl: true }
         };
 
         if (!skipComponent) {
             await renderConfig(pkg, cfg, options, otherConfig);
         }
 
-        return <CliContext> {
+        return <CliContext>{
             ...options,
             framework,
             pkg,
