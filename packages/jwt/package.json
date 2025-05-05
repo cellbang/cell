@@ -1,6 +1,6 @@
 {
   "name": "@celljs/jwt",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,12 +29,12 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.0",
+    "@celljs/core": "3.6.1",
     "jsonwebtoken": "^9.0.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.0",
+    "@celljs/component": "3.6.1",
     "@types/jsonwebtoken": "^8.5.8"
   },
   "publishConfig": {

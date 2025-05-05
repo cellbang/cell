@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cloud-plugin",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "",
   "keywords": [
     "cell-component",
@@ -31,15 +31,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.0",
-    "@celljs/code-loader-plugin": "3.6.0",
+    "@celljs/cli-common": "3.6.1",
+    "@celljs/code-loader-plugin": "3.6.1",
     "fs-extra": "^11.1.1",
     "js-yaml": "^4.1.0",
     "prompts": "^2.4.2",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.0",
+    "@celljs/component": "3.6.1",
     "@types/js-yaml": "^4.0.5"
   },
   "publishConfig": {

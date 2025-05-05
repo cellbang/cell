@@ -1,6 +1,6 @@
 {
   "name": "@celljs/oidc-provider",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,14 +29,14 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.0",
-    "@celljs/web": "3.6.0",
+    "@celljs/core": "3.6.1",
+    "@celljs/web": "3.6.1",
     "@types/oidc-provider": "^8.2.0",
     "oidc-provider": "^8.3.1",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.0"
+    "@celljs/component": "3.6.1"
   },
   "publishConfig": {
     "access": "public"
