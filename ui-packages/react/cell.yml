@@ -1,6 +1,6 @@
 frontend:
   cell:
     react:
-      path: "${cell.server.path ?: '/'}""
+      path: "${cell.server.path ?: '/'}"
       router:
         type: browser
