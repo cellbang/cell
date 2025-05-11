@@ -1,6 +1,6 @@
 {
   "name": "@celljs/faas-adapter",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "description": "",
   "keywords": [
     "cell-component"
@@ -30,17 +30,17 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.2",
-    "@celljs/cli-service": "3.6.2",
-    "@celljs/cloud": "3.6.2",
-    "@celljs/core": "3.6.2",
-    "@celljs/schedule": "3.6.2",
-    "@celljs/web": "3.6.2",
+    "@celljs/cli-common": "3.6.3",
+    "@celljs/cli-service": "3.6.3",
+    "@celljs/cloud": "3.6.3",
+    "@celljs/core": "3.6.3",
+    "@celljs/schedule": "3.6.3",
+    "@celljs/web": "3.6.3",
     "cron": "^1.8.2",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.2"
+    "@celljs/component": "3.6.3"
   },
   "publishConfig": {
     "access": "public"

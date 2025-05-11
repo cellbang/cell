@@ -1,6 +1,6 @@
 {
   "name": "@celljs/logger",
-  "version": "3.6.2",
+  "version": "3.6.3",
   "description": "logger component for pino",
   "keywords": [
     "cell-component"
@@ -30,13 +30,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.2",
-    "@celljs/web": "3.6.2",
+    "@celljs/core": "3.6.3",
+    "@celljs/web": "3.6.3",
     "tslib": "^2.8.0",
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.2"
+    "@celljs/component": "3.6.3"
   },
   "publishConfig": {
     "access": "public"
