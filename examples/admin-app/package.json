@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-admin-app",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "private": true,
   "keywords": [
     "cell-component"
@@ -20,19 +20,19 @@
     "start": "cell serve"
   },
   "dependencies": {
-    "@celljs/core": "3.6.1",
-    "@celljs/react": "3.6.1",
-    "@celljs/rpc": "3.6.1",
-    "@celljs/security": "3.6.1",
-    "@celljs/serve-static": "3.6.1",
-    "@celljs/shell": "3.6.1",
-    "@celljs/typeorm": "3.6.1",
+    "@celljs/core": "3.6.2",
+    "@celljs/react": "3.6.2",
+    "@celljs/rpc": "3.6.2",
+    "@celljs/security": "3.6.2",
+    "@celljs/serve-static": "3.6.2",
+    "@celljs/shell": "3.6.2",
+    "@celljs/typeorm": "3.6.2",
     "better-sqlite3": "^11.3.0",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.1"
+    "@celljs/cli": "3.6.2"
   }
 }

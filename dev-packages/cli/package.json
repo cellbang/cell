@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cli",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "Cell CLI.",
   "homepage": "https://github.com/cellbang/cell",
   "bugs": {
@@ -33,9 +33,9 @@
     "templates"
   ],
   "dependencies": {
-    "@celljs/cli-common": "3.6.1",
-    "@celljs/cli-runtime": "3.6.1",
-    "@celljs/frameworks": "3.6.1",
+    "@celljs/cli-common": "3.6.2",
+    "@celljs/cli-runtime": "3.6.2",
+    "@celljs/frameworks": "3.6.2",
     "chalk": "^4.1.0",
     "commander": "^11.0.0",
     "dotenv": "^16.3.1",
@@ -53,7 +53,7 @@
     "watchpack": "^2.2.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.1",
+    "@celljs/component": "3.6.2",
     "@types/js-yaml": "^3.12.1",
     "@types/prompts": "^2.4.4"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/shell",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "",
   "keywords": [
     "cell-component"
@@ -30,11 +30,11 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.1",
-    "@celljs/grommet": "3.6.1",
-    "@celljs/react": "3.6.1",
-    "@celljs/security": "3.6.1",
-    "@celljs/widget": "3.6.1",
+    "@celljs/core": "3.6.2",
+    "@celljs/grommet": "3.6.2",
+    "@celljs/react": "3.6.2",
+    "@celljs/security": "3.6.2",
+    "@celljs/widget": "3.6.2",
     "grommet": "^2.25.1",
     "react": "^18.2.0",
     "react-intl": "^6.0.5",
@@ -42,7 +42,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.1"
+    "@celljs/component": "3.6.2"
   },
   "publishConfig": {
     "access": "public"

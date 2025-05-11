@@ -1,6 +1,6 @@
 {
   "name": "@celljs/http",
-  "version": "3.6.1",
+  "version": "3.6.2",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.1",
+    "@celljs/core": "3.6.2",
     "axios": "^0.26.1",
     "rxjs": "^6.6.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.1"
+    "@celljs/component": "3.6.2"
   },
   "publishConfig": {
     "access": "public"
