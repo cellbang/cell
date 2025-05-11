@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.2
+
+- fix: 修复 cell.yml 中的路径格式，并更新 router.tsx 以支持内存路由
+
 ## 3.6.1
 
 - chore: 添加 VSCode 设置文件，配置编辑器格式化和排除项

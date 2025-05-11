@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { RouteMetadataProvider } from './router-protocol';
-import { useRoutes, BrowserRouter, HashRouter, RouteObject } from 'react-router-dom';
+import { useRoutes, BrowserRouter, HashRouter, RouteObject, MemoryRouter } from 'react-router-dom';
 import { Router } from '../annotation';
 import { ConfigUtil, ContainerUtil } from '@celljs/core';
 
 const routerMap = {
     browser: BrowserRouter,
-    hash: HashRouter
+    hash: HashRouter,
+    memory: MemoryRouter
 };
 
 const RouteComponent = () => {
