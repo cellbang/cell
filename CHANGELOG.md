@@ -1,6 +1,6 @@
 # Change
 
-## 3.6.3
+## 3.6.4
 
 - feat(ai-*): 为 Anthropic、Ollama 和 OpenAI 的 API 请求类添加 @Expose 注解以控制序列化行为，并优化消息处理逻辑
 
