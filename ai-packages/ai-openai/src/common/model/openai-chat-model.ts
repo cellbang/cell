@@ -153,7 +153,7 @@ export class OpenAIChatModel implements ChatModel {
                         throw new IllegalArgumentError('ToolResponseMessage must have an id');
                     }
                 });
-                return  message.responses.map(tr => {
+                return message.responses.map(tr => {
                     const chatCompletionMessage = ChatCompletionMessage.create(tr.responseData, Role.TOOL);
                     chatCompletionMessage.name = tr.name;
                     chatCompletionMessage.toolCallId = tr.id;

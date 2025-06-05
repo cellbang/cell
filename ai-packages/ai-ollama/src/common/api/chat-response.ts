@@ -11,6 +11,7 @@ export class ChatResponse {
     /**
      * The model used for generating the response.
      */
+    @Expose()
     model: string;
 
     /**
@@ -24,6 +25,7 @@ export class ChatResponse {
      * The response {@link Message} with {@link Message.Role#ASSISTANT}.
      */
     @Type(() => Message)
+    @Expose()
     message: Message;
 
     /**
@@ -37,6 +39,7 @@ export class ChatResponse {
      * If true, this response may be followed by another response with the following,
      * additional fields: context, prompt_eval_count, prompt_eval_duration, eval_count, eval_duration.
      */
+    @Expose()
     done: boolean;
 
     /**

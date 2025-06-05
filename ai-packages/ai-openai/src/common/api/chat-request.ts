@@ -5,16 +5,18 @@ import { ResponseFormat } from './response-format';
 export class StreamOptions {
     static INCLUDE_USAGE = new StreamOptions(true);
 
-    constructor(
-        /**
-         * includeUsage If set, an additional chunk will be streamed
-         * before the data: [DONE] message. The usage field on this chunk
-         * shows the token usage statistics for the entire request, and
-         * the choices field will always be an empty array. All other chunks
-         * will also include a usage field, but with a null value.
-         */
-        public includeUsage: boolean
-    ) {
+    /**
+     * includeUsage If set, an additional chunk will be streamed
+     * before the data: [DONE] message. The usage field on this chunk
+     * shows the token usage statistics for the entire request, and
+     * the choices field will always be an empty array. All other chunks
+     * will also include a usage field, but with a null value.
+     */
+    @Expose({ name: 'include_usage' })
+    includeUsage: boolean;
+
+    constructor(includeUsage: boolean) {
+        this.includeUsage = includeUsage;
     }
 }
 
@@ -22,9 +24,13 @@ export class StreamOptions {
  * Function definition.
  */
 export class Function {
+    @Expose()
     description: string;
+    @Expose()
     name: string;
+    @Expose()
     parameters: Record<string, any>;
+    @Expose()
     strict?: boolean;
 
     static create(description: string, name: string, parameters: Record<string, any>, strict?: boolean): Function {
@@ -48,11 +54,14 @@ export class FunctionTool {
     /**
      * The type of the tool. Currently, only 'function' is supported.
      */
+    @Expose()
     type: ToolType;
 
     /**
      * The function definition.
      */
+    @Type(() => Function)
+    @Expose()
     function: Function;
 
     static create(func: Function): FunctionTool {
@@ -92,10 +101,12 @@ export class AudioParameters {
     /**
      * Specifies the voice type.
      */
+    @Expose()
     voice?: Voice;
     /**
      * Specifies the output audio format.
      */
+    @Expose({ name: 'response_format' })
     format?: AudioResponseFormat;
 }
 
@@ -106,20 +117,25 @@ export class ChatCompletionRequest {
     /**
      * A list of messages comprising the conversation so far.
      */
+    @Type(() => ChatCompletionMessage)
+    @Expose()
     messages: ChatCompletionMessage[];
 
     /**
      * ID of the model to use.
      */
+    @Expose()
     model: string;
     /**
      * Whether to store the output of this chat completion request for use in OpenAI's model distillation or evals products.
      */
+    @Expose()
     store?: boolean;
 
     /**
      * Developer-defined tags and values used for filtering completions in the OpenAI's dashboard.
      */
+    @Expose()
     metadata?: Record<string, any>;
 
     /**
@@ -139,6 +155,7 @@ export class ChatCompletionRequest {
     /**
      * Whether to return log probabilities of the output tokens or not.
      */
+    @Expose()
     logprobs?: boolean;
 
     /**
@@ -150,6 +167,7 @@ export class ChatCompletionRequest {
     /**
      * @deprecated The maximum number of tokens that can be generated in the chat completion. This value can be used to control costs for text generated via API.
      */
+    @Expose({ name: 'max_tokens' })
     maxTokens?: number;
 
     /**
@@ -161,6 +179,7 @@ export class ChatCompletionRequest {
     /**
      * How many chat completion choices to generate for each input message.
      */
+    @Expose()
     n?: number;
 
     /**
@@ -194,6 +213,7 @@ export class ChatCompletionRequest {
      * If specified, our system will make a best effort to sample deterministically,
      * such that repeated requests with the same seed and parameters should return the same result.
      */
+    @Expose()
     seed?: number;
 
     /**
@@ -205,11 +225,13 @@ export class ChatCompletionRequest {
     /**
      * Up to 4 sequences where the API will stop generating further tokens.
      */
+    @Expose()
     stop?: string[];
 
     /**
      * Options for streaming response.
      */
+    @Expose()
     stream?: boolean;
 
     /**
@@ -223,6 +245,7 @@ export class ChatCompletionRequest {
      * What sampling temperature to use, between 0 and 1. Higher values like 0.8 will make the output more random,
      * while lower values like 0.2 will make it more focused and deterministic.
      */
+    @Expose()
     temperature?: number;
 
     /**
@@ -254,6 +277,7 @@ export class ChatCompletionRequest {
     /**
      * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
      */
+    @Expose()
     user?: string;
 
     /**

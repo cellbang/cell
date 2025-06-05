@@ -114,6 +114,7 @@ export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
      * specific number will make the model generate the same text for the same prompt.
      * (Default: -1)
      */
+    @Expose()
     seed?: number;
 
     /**
@@ -164,6 +165,7 @@ export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
      * The temperature of the model. Increasing the temperature will
      * make the model answer more creatively. (Default: 0.8)
      */
+    @Expose()
     temperature?: number;
 
     /**
@@ -190,6 +192,7 @@ export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
      * Enable Mirostat sampling for controlling perplexity. (default: 0, 0
      * = disabled, 1 = Mirostat, 2 = Mirostat 2.0)
      */
+    @Expose()
     mirostat?: number;
 
     /**
@@ -226,12 +229,14 @@ export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
      * Used to allow overriding the model name with prompt options.
      * Part of Chat completion <a href="https://github.com/ollama/ollama/blob/main/docs/api.md#parameters-1">parameters</a>.
      */
+    @Expose()
     model?: string;
 
     /**
      * Sets the desired format of output from the LLM. The only valid values are null or "json".
      * Part of Chat completion <a href="https://github.com/ollama/ollama/blob/main/docs/api.md#parameters-1">advanced parameters</a>.
      */
+    @Expose()
     format?: string;
 
     /**
@@ -246,6 +251,7 @@ export class OllamaOptions implements FunctionCallingOptions, EmbeddingOptions {
      * Truncates the end of each input to fit within context length. Returns error if false and context length is exceeded.
      * Defaults to true.
      */
+    @Expose()
     truncate?: boolean;
 
     /**

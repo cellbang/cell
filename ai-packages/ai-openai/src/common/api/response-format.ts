@@ -1,3 +1,5 @@
+import { Expose, Type } from 'class-transformer';
+
 export enum ResponseFormatType {
     TEXT = 'text',
     JSON_OBJECT = 'json_object',
@@ -5,8 +7,11 @@ export enum ResponseFormatType {
 }
 
 export class JsonSchema {
+    @Expose()
     name: string;
+    @Expose()
     schema: Map<string, any>;
+    @Expose()
     strict: boolean;
     constructor(name: string, schema: Map<string, any>, strict: boolean) {
         this.name = name;
@@ -59,18 +64,22 @@ export class ResponseFormat {
     /**
      * Type Must be one of 'text', 'json_object' or 'json_schema'.
      */
+    @Expose()
     type: ResponseFormatType;
 
     /**
      * JSON schema object that describes the format of the JSON object. Only applicable
      * when type is 'json_schema'.
      */
+    @Type(() => JsonSchema)
+    @Expose()
     schema?: JsonSchema;
 
     /**
      * Whether the model must strictly adhere to the schema. Only applicable when type is
      * 'json_schema'.
      */
+    @Expose()
     strict?: boolean;
 
     constructor(type: ResponseFormatType, schema?: JsonSchema, strict?: boolean) {

@@ -7,16 +7,19 @@ export class Embedding {
     /**
      * The index of the embedding in the list of embeddings.
      */
+    @Expose()
     index: number;
 
     /**
      * The embedding vector, which is a list of floats. The length of vector depends on the model.
      */
+    @Expose()
     embedding: number[];
 
     /**
      * The object type, which is always 'embedding'.
      */
+    @Expose()
     object: string;
 
     constructor(index: number, embedding: number[], object = 'embedding') {
@@ -36,11 +39,13 @@ export class EmbeddingRequest<T> {
      * The input must not exceed the max input tokens for the model (8192 tokens for text-embedding-ada-002),
      * cannot be an empty string, and any array must be 2048 dimensions or less.
      */
+    @Expose()
     input: T;
 
     /**
      * ID of the model to use.
      */
+    @Expose()
     model: string;
 
     /**
@@ -52,11 +57,13 @@ export class EmbeddingRequest<T> {
     /**
      * The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models.
      */
+    @Expose()
     dimensions?: number;
 
     /**
      * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
      */
+    @Expose()
     user?: string;
 
     /**

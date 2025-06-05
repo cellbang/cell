@@ -7,11 +7,13 @@ export class EmbeddingsRequest {
     /**
      * The name of model to generate embeddings from.
      */
+    @Expose()
     model: string;
 
     /**
      * The text or list of text to generate embeddings for.
      */
+    @Expose()
     input: string[];
 
     /**
@@ -23,12 +25,14 @@ export class EmbeddingsRequest {
     /**
      * Additional model parameters listed in the documentation for the
      */
+    @Expose()
     options?: Record<string, any>;
 
     /**
      * Truncates the end of each input to fit within context length.
      * Returns error if false and context length is exceeded. Defaults to true.
      */
+    @Expose()
     truncate?: boolean;
 
     /**

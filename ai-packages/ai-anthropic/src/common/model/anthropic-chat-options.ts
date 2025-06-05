@@ -9,11 +9,13 @@ import { Constant } from '@celljs/core';
 @Constant(AnthropicChatOptions, new AnthropicChatOptions())
 export class AnthropicChatOptions implements FunctionCallingOptions {
 
+    @Expose()
     model: string;
 
     @Expose({ name: 'max_tokens' })
     maxTokens: number;
 
+    @Expose()
     metadata: Metadata;
 
     @Expose({ name: 'stop_sequences' })

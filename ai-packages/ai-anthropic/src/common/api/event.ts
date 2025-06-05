@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { ChatResponse } from './chat-response';
 import { StreamEvent } from '@celljs/ai-core';
 import { ContentBlockType } from './content-block';
@@ -58,6 +58,7 @@ export enum EventType {
  * Anthropic event.
  */
 export class AnthropicEvent {
+    @Expose()
     type: EventType;
 }
 
@@ -68,6 +69,7 @@ export class ContentBlockBody {
     /**
      * The type of the content block. e.g. "text", "tool_use".
      */
+    @Expose()
     type: string;
 }
 
@@ -79,6 +81,7 @@ export class ContentBlockText extends ContentBlockBody {
     /*
      * The text of the message. Applicable for "text" types only.
      */
+    @Expose()
     text: string;
 }
 
@@ -89,16 +92,19 @@ export class ContentBlockToolUse extends ContentBlockBody {
     /*
      * The id of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     id: string;
 
     /*
      * The name of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     name: string;
 
     /*
      * The input of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     input: Record<string, any>;
 
     constructor(type: ContentBlockType, id: string, name: string, input: Record<string, any>) {
@@ -123,6 +129,7 @@ export class AnthropicEventWithContentBlock extends AnthropicEvent {
             ]
         }
     })
+    @Expose()
     contentBlock: ContentBlockBody;
 }
 
@@ -134,26 +141,32 @@ export class ToolUseAggregationEvent extends AnthropicEvent {
     /*
      * The index of the content block. Applicable only for streaming responses.
      */
+    @Expose()
     index?: number;
 
     /*
      * The id of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     id?: string;
 
     /*
      * The name of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     name?: string;
 
     /*
      * The partial JSON content.
      */
+    @Expose()
     partialJson = '';
 
     /*
      * The tool content blocks.
      */
+    @Type(() => ContentBlockToolUse)
+    @Expose()
     toolContentBlocks: ContentBlockToolUse[] = [];
 
     isEmpty(): boolean {
@@ -182,6 +195,7 @@ export class ContentBlockDeltaBody {
     /*
      * The type of the content block. e.g. "text", "input_json".
      */
+    @Expose()
     type: string;
 }
 
@@ -192,6 +206,7 @@ export class ContentBlockDeltaText extends ContentBlockDeltaBody {
     /*
      * The text of the message. Applicable for "text" types only.
      */
+    @Expose()
     text: string;
 }
 
@@ -202,6 +217,7 @@ export class ContentBlockDeltaJson extends ContentBlockDeltaBody {
     /*
      * The partial JSON content.
      */
+    @Expose()
     partialJson: string;
 }
 
@@ -212,6 +228,7 @@ export class ContentBlockStopEvent extends AnthropicEvent {
     /*
      * The index of the content block. Applicable only for streaming responses.
      */
+    @Expose()
     index: number;
 }
 
@@ -223,6 +240,7 @@ export class ContentBlockStartEvent extends AnthropicEventWithContentBlock {
     /*
      * The index of the content block. Applicable only for streaming responses.
      */
+    @Expose()
     index: number;
 }
 
@@ -234,6 +252,7 @@ export class ContentBlockDeltaEvent extends AnthropicEvent {
     /*
      * The index of the content block. Applicable only for streaming responses.
      */
+    @Expose()
     index: number;
 
     /*
@@ -248,6 +267,7 @@ export class ContentBlockDeltaEvent extends AnthropicEvent {
             ]
         }
     })
+    @Expose()
     delta: ContentBlockDeltaBody;
 
 }
@@ -259,11 +279,14 @@ export class MessageStartEvent  {
     /*
      * The event type.
      */
+    @Expose()
     type: EventType;
 
     /*
      * The message body.
      */
+    @Type(() => ChatResponse)
+    @Expose()
     message: ChatResponse;
 
     constructor(type: EventType, message: ChatResponse) {
@@ -273,34 +296,19 @@ export class MessageStartEvent  {
 }
 
 /**
- * Message delta event.
- */
-export class MessageDeltaEvent extends AnthropicEvent {
-
-    /*
-     * The message delta body.
-     */
-    delta: MessageDelta;
-
-    /*
-     * The message delta usage.
-     */
-    usage: MessageDeltaUsage;
-
-}
-
-/**
  * Message delta.
  */
 export class MessageDelta {
     /*
      * The stop reason.
      */
+    @Expose({ name: 'stop_reason' })
     stopReason: string;
 
     /*
      * The stop sequence.
      */
+    @Expose({ name: 'stop_sequence' })
     stopSequence: string;
 }
 
@@ -311,7 +319,29 @@ export class MessageDeltaUsage {
     /*
      * The output tokens.
      */
+    @Expose({ name: 'output_tokens' })
     outputTokens: number;
+}
+
+/**
+ * Message delta event.
+ */
+export class MessageDeltaEvent extends AnthropicEvent {
+
+    /*
+     * The message delta body.
+     */
+    @Type(() => MessageDelta)
+    @Expose()
+    delta: MessageDelta;
+
+    /*
+     * The message delta usage.
+     */
+    @Type(() => MessageDeltaUsage)
+    @Expose()
+    usage: MessageDeltaUsage;
+
 }
 
 /**
@@ -339,11 +369,13 @@ export class Error {
     /*
      * The error type.
      */
+    @Expose()
     type: string;
 
     /*
      * The error message.
      */
+    @Expose()
     message: string;
 }
 

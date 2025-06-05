@@ -1,6 +1,6 @@
 import { IllegalArgumentError } from '@celljs/core';
 import { ModelOptions } from '../../model/model-protocol';
-import { Message, MessageType, UserMessage } from '../message';
+import { AssistantMessage, FunctionMessage, Message, MessageType, SystemMessage, UserMessage } from '../message';
 import { ChatOptions, Prompt } from './prompt-protocol';
 
 export class PromptImpl implements Prompt {
@@ -24,11 +24,11 @@ export class PromptImpl implements Prompt {
             if (message.messageType === MessageType.USER) {
                 return new UserMessage(message.content);
             } else if (message.messageType === MessageType.ASSISTANT) {
-                return new UserMessage(message.content);
+                return new AssistantMessage(message.content);
             } else if (message.messageType === MessageType.SYSTEM) {
-                return new UserMessage(message.content);
+                return new SystemMessage(message.content);
             } else if (message.messageType === MessageType.FUNCTION) {
-                return new UserMessage(message.content);
+                return new FunctionMessage(message.content);
             } else {
                 throw new IllegalArgumentError(`Unsupported message type: ${message.messageType}`);
             }

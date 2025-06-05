@@ -106,9 +106,12 @@ export class AnthropicChatModel implements ChatModel {
 
         let request = new ChatRequest(this.defaultOptions.model, userMessages, systemPrompt, this.defaultOptions.maxTokens, this.defaultOptions.temperature, stream);
 
+        // Runtime options
+        let runtimeOptions: AnthropicChatOptions = AnthropicChatOptions.builder().build();
         if (prompt.options) {
-            request = Object.assign(request, prompt.options);
+            runtimeOptions = Object.assign(runtimeOptions, prompt.options);
         }
+        request = Object.assign(request, runtimeOptions);
 
         const functionsForThisRequest: Set<string> = new Set();
 
@@ -147,13 +150,13 @@ export class AnthropicChatModel implements ChatModel {
 
         const allGenerations = [...generations];
 
-       if (response.stopReason && generations.length === 0) {
-           const generation = Generation.from(new AssistantMessage(), ChatGenerationMetadata.from(response.stopReason));
-           allGenerations.push(generation);
-       }
+        if (response.stopReason && generations.length === 0) {
+            const generation = Generation.from(new AssistantMessage(), ChatGenerationMetadata.from(response.stopReason));
+            allGenerations.push(generation);
+        }
 
-       const toolToUseList = response.content.filter(c => c.type === ContentBlockType.TOOL_USE);
-       if (toolToUseList.length > 0) {
+        const toolToUseList = response.content.filter(c => c.type === ContentBlockType.TOOL_USE);
+        if (toolToUseList.length > 0) {
             const toolCalls: ToolCall[] = [];
             for (const toolToUse of toolToUseList) {
                 toolCalls.push({

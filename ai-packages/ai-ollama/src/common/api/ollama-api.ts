@@ -22,7 +22,7 @@ export class OllamaAPIImpl implements OllamaAPI {
     async chat(chatRequest: ChatRequest): Promise<ResponseEntity<ChatResponse>> {
         Assert.isTrue(!chatRequest.stream, 'Stream mode must be disabled.');
         const { data, status, headers } = await this.restOperations
-            .post('/api/chat', instanceToPlain(chatRequest), { baseURL: this.baseUrl, signal: chatRequest.signal });
+            .post('/api/chat', instanceToPlain(chatRequest, { excludeExtraneousValues: true }), { baseURL: this.baseUrl, signal: chatRequest.signal });
 
         return {
             status,
@@ -35,7 +35,7 @@ export class OllamaAPIImpl implements OllamaAPI {
         const { data, status, headers } = await this.restOperations
         .post<ReadableStream>(
             '/api/chat',
-            instanceToPlain(chatRequest),
+            instanceToPlain(chatRequest, { excludeExtraneousValues: true }),
             {
                 baseURL: this.baseUrl,
                 headers: {
@@ -55,7 +55,7 @@ export class OllamaAPIImpl implements OllamaAPI {
     }
     async embed(embeddingsRequest: EmbeddingsRequest): Promise<ResponseEntity<EmbeddingsResponse>> {
         const { data, status, headers } = await this.restOperations
-            .post<EmbeddingsResponse>('/api/embed', instanceToPlain(embeddingsRequest), { baseURL: this.baseUrl, signal: embeddingsRequest.signal });
+            .post<EmbeddingsResponse>('/api/embed', instanceToPlain(embeddingsRequest, { excludeExtraneousValues: true }), { baseURL: this.baseUrl, signal: embeddingsRequest.signal });
         return {
             status,
             body: plainToInstance(EmbeddingsResponse, data),

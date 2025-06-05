@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Type, Expose } from 'class-transformer';
 import { Embedding } from './embeddings-request';
 import { Usage } from './usage';
 
@@ -11,23 +11,27 @@ export class EmbeddingResponse {
     /**
      * Must have value "list".
      */
+    @Expose()
     object: string;
 
     /**
      * List of entities.
      */
     @Type(() => Embedding)
+    @Expose()
     data: Embedding[];
 
     /**
      * ID of the model to use.
      */
+    @Expose()
     model: string;
 
     /**
      * Usage statistics for the completion request.
      */
     @Type(() => Usage)
+    @Expose()
     usage: Usage;
 
     constructor(

@@ -55,12 +55,14 @@ export class ChatRequest {
      * <a href="https://docs.anthropic.com/claude/docs/models-overview">models</a> for
      * additional details and options.
      */
+    @Expose()
     model: string;
 
     /**
      * Input messages.
      */
     @Type(() => AnthropicMessage)
+    @Expose()
     messages: AnthropicMessage[];
 
     /**
@@ -69,6 +71,7 @@ export class ChatRequest {
      * <a href="https://docs.anthropic.com/claude/docs/system-prompts">guide</a> to system
      * prompts.
      */
+    @Expose()
     system?: string;
 
     /**
@@ -83,6 +86,7 @@ export class ChatRequest {
     /**
      * An object describing metadata about the request.
      */
+    @Expose()
     metadata?: Metadata;
 
     /**
@@ -101,6 +105,7 @@ export class ChatRequest {
      * Whether to incrementally stream the response using server-sent
      * events.
      */
+    @Expose()
     stream: boolean;
 
     /**
@@ -109,6 +114,7 @@ export class ChatRequest {
      * choice, and closer to 1.0 for creative and generative tasks. Note that even with
      * temperature of 0.0, the results will not be fully deterministic.
      */
+    @Expose()
     temperature?: number;
 
     /**

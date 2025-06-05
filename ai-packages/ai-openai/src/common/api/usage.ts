@@ -1,5 +1,5 @@
 import { Usage as IUsage } from '@celljs/ai-core';
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
 /**
  * Breakdown of tokens used in the prompt.
@@ -71,12 +71,14 @@ export class EmbeddingsResponse {
     /**
      * The model used for generating the embeddings.
      */
+    @Expose()
     model: string;
 
     /**
      * The list of embeddings generated from the model.
      * Each embedding (list of doubles) corresponds to a single input text.
      */
+    @Expose()
     embeddings: number[][];
 
     constructor(model: string, embeddings: number[][]) {
@@ -110,12 +112,14 @@ export class Usage implements IUsage {
     /**
      * Breakdown of tokens used in the prompt.
      */
+    @Type(() => PromptTokensDetails)
     @Expose({ name: 'prompt_tokens_details' })
     promptTokensDetails?: PromptTokensDetails;
 
     /**
      * Breakdown of tokens used in a completion.
      */
+    @Type(() => CompletionTokenDetails)
     @Expose({ name: 'completion_tokens_details' })
     completionTokenDetails?: CompletionTokenDetails;
 

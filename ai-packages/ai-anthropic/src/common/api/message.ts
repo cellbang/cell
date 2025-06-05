@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 import { ContentBlock } from './content-block';
 
 /**
@@ -34,12 +34,14 @@ export class AnthropicMessage {
      * types.
      */
     @Type(() => ContentBlock)
+    @Expose()
     content: ContentBlock[];
 
     /**
      * The role of the messages author. Could be one of the {@link Role}
      * types.
      */
+    @Expose()
     role: Role;
 
     constructor(content: ContentBlock[], role: Role) {

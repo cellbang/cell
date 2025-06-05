@@ -25,6 +25,7 @@ import {
     OllamaAPI
 } from '../api';
 import { Autowired, ByteUtil, Component, IllegalArgumentError } from '@celljs/core';
+import { instanceToPlain } from 'class-transformer';
 
 @Component(ChatModel)
 export class OllamaChatModel implements ChatModel {
@@ -199,7 +200,7 @@ export class OllamaChatModel implements ChatModel {
         const requestBuilder: OllamaChatRequestBuilder = OllamaChatRequest.builder(model)
             .withStream(stream)
             .withMessages(ollamaMessages)
-            .withOptions(ollamaOptions);
+            .withOptions(instanceToPlain(ollamaOptions));
 
         if (ollamaOptions.format) {
             requestBuilder.withFormat(ollamaOptions.format);

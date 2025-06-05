@@ -10,17 +10,20 @@ export class FunctionDefinition {
     /**
      * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes.
      */
+    @Expose()
     name: string;
 
     /**
      * A description of what the function does, used by the model to choose when and how to call the function.
      */
+    @Expose()
     description: string;
 
     /**
      * The parameters the functions accepts, described as a JSON Schema object. To describe a function that
      * accepts no parameters, provide the value {"type": "object", "properties": {}}.
      */
+    @Expose()
     parameters: Record<string, any>;
 
     constructor(description: string, name: string, jsonSchema: string) {
@@ -37,12 +40,14 @@ export class Tool {
     /**
      * The type of the tool. Currently, only 'function' is supported.
      */
+    @Expose()
     type: ToolType;
 
     /**
      * The function definition.
      */
     @Type(() => FunctionDefinition)
+    @Expose()
     function: FunctionDefinition;
 
     constructor(type: ToolType, func: FunctionDefinition) {
@@ -68,22 +73,26 @@ export class ChatRequest {
     /**
      * The model to use for completion. It should be a name familiar to Ollama from the [Library](https://ollama.com/library).
      */
+    @Expose()
     model: string;
 
     /**
      * The list of messages in the chat. This can be used to keep a chat memory.
      */
     @Type(() => Message)
+    @Expose()
     messages: Message[];
 
     /**
      * Whether to stream the response. If false, the response will be returned as a single response object rather than a stream of objects.
      */
+    @Expose()
     stream: boolean;
 
     /**
      * The format to return the response in. Currently, the only accepted value is "json".
      */
+    @Expose()
     format: string;
 
     /**
@@ -96,12 +105,14 @@ export class ChatRequest {
      * List of tools the model has access to.
      */
     @Type(() => Tool)
+    @Expose()
     tools: Tool[];
 
     /**
      * Model-specific options. For example, "temperature" can be set through this field, if the model supports it.
      * You can use the `OllamaOptions` builder to create the options then `OllamaOptions.toMap()` to convert the options into a map.
      */
+    @Expose()
     options: Record<string, any>;
 
     /**

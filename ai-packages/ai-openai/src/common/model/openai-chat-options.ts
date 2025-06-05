@@ -1,5 +1,5 @@
 import { FunctionCallback, FunctionCallingOptions } from '@celljs/ai-core';
-import { Expose, Exclude } from 'class-transformer';
+import { Expose, Exclude, Type } from 'class-transformer';
 import { OpenAIModel } from '../api/openai-model';
 import { Constant } from '@celljs/core';
 import { AudioParameters, FunctionTool, ResponseFormat, StreamOptions } from '../api';
@@ -96,12 +96,14 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
      * An object specifying the format that the model must output. Setting to { "type":
      * "json_object" } enables JSON mode, which guarantees the message the model generates is valid JSON.
      */
+    @Type(() => ResponseFormat)
     @Expose({ name: 'response_format' })
     responseFormat?: ResponseFormat;
 
     /**
      * Options for streaming response. Included in the API only if streaming-mode completion is requested.
      */
+    @Type(() => StreamOptions)
     @Expose({ name: 'stream_options' })
     streamOptions?: StreamOptions;
 
@@ -109,17 +111,21 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
      * This feature is in Beta. If specified, our system will make a best effort to sample
      * deterministically, such that repeated requests with the same seed and parameters should return the same result.
      */
+    @Expose()
     seed?: number;
 
     /**
      * Up to 4 sequences where the API will stop generating further tokens.
      */
+    @Expose()
     stop?: string[];
 
     /**
      * A list of tools the model may call. Currently, only functions are supported as a tool. Use this to
      * provide a list of functions the model may generate JSON inputs for.
      */
+    @Type(() => FunctionTool)
+    @Expose()
     tools?: FunctionTool[];
 
     /**
@@ -131,6 +137,7 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
     /**
      * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
      */
+    @Expose()
     user?: string;
 
     /**

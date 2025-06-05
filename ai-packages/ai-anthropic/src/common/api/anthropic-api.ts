@@ -38,7 +38,7 @@ export class AnthropicAPIImpl implements AnthropicAPI {
     async chat(chatRequest: ChatRequest): Promise<ResponseEntity<ChatResponse>> {
         Assert.isTrue(!chatRequest.stream, 'Request must set the stream property to false.');
         const { data, status, headers } = await this.restOperations
-            .post('/v1/messages', instanceToPlain(chatRequest), { baseURL: this.baseUrl, signal: chatRequest.signal });
+            .post('/v1/messages', instanceToPlain(chatRequest, { excludeExtraneousValues: true }), { baseURL: this.baseUrl, signal: chatRequest.signal });
 
         return {
             status,
@@ -51,7 +51,7 @@ export class AnthropicAPIImpl implements AnthropicAPI {
         const { data, status, headers } = await this.restOperations
         .post<ReadableStream>(
             '/v1/messages',
-            instanceToPlain(chatRequest),
+            instanceToPlain(chatRequest, { excludeExtraneousValues: true }),
             {
                 baseURL: this.baseUrl,
                 headers: {

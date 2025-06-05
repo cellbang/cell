@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.3
+
+- feat(ai-*): 为 Anthropic、Ollama 和 OpenAI 的 API 请求类添加 @Expose 注解以控制序列化行为，并优化消息处理逻辑
+
 ## 3.6.2
 
 - fix: 修复 cell.yml 中的路径格式，并更新 router.tsx 以支持内存路由

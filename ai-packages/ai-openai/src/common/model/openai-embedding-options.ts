@@ -10,6 +10,7 @@ export class OpenAIEmbeddingOptions implements EmbeddingOptions {
     /**
      * ID of the model to use.
      */
+    @Expose()
     model?: string;
 
     /**
@@ -22,11 +23,13 @@ export class OpenAIEmbeddingOptions implements EmbeddingOptions {
      * The number of dimensions the resulting output embeddings should have.
      * Only supported in text-embedding-3 and later models.
      */
+    @Expose()
     dimensions?: number;
 
     /**
      * A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse.
      */
+    @Expose()
     user?: string;
 
     copy(): OpenAIEmbeddingOptions {

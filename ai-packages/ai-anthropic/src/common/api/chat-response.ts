@@ -13,17 +13,20 @@ export class ChatResponse {
      * Unique object identifier. The format and length of IDs may change over
      * time.
      */
+    @Expose()
     id: string;
 
     /**
      * Object type. For Messages, this is always "message".
      */
+    @Expose()
     type: string;
 
     /**
      * Conversational role of the generated message. This will always be
      * "assistant".
      */
+    @Expose()
     role: Role;
 
     /**
@@ -35,6 +38,7 @@ export class ChatResponse {
     /**
      * The model that handled the request.
      */
+    @Expose()
     model: string;
 
     /**
@@ -53,6 +57,7 @@ export class ChatResponse {
     /**
      * Input and output token usage.
      */
+    @Expose()
     usage: Usage;
 
     constructor(

@@ -49,7 +49,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
         const { data, status, headers } = await this.restOperations
             .post(
                 this.finalApiOptions.completionsPath,
-                instanceToPlain(chatRequest),
+                instanceToPlain(chatRequest, { excludeExtraneousValues: true }),
                 {
                     baseURL: this.finalApiOptions.baseUrl,
                     headers: {
@@ -72,7 +72,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
         const { data, status, headers } = await this.restOperations
         .post<ReadableStream>(
             this.finalApiOptions.completionsPath,
-            instanceToPlain(chatRequest),
+            instanceToPlain(chatRequest, { excludeExtraneousValues: true }),
             {
                 baseURL: this.finalApiOptions.baseUrl,
                 headers: {
@@ -116,7 +116,7 @@ export class OpenAIAPIImpl implements OpenAIAPI {
         const { data, status, headers } = await this.restOperations
             .post<EmbeddingResponse>(
                 this.finalApiOptions.embeddingsPath,
-                instanceToPlain(embeddingRequest),
+                instanceToPlain(embeddingRequest, { excludeExtraneousValues: true }),
                 { baseURL: this.finalApiOptions.baseUrl, signal: embeddingRequest.signal });
         return {
             status,

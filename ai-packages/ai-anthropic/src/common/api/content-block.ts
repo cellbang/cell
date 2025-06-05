@@ -49,6 +49,7 @@ export class Source {
     /**
      * The type of the media content. Only "base64" is supported at the moment.
      */
+    @Expose()
     type: string;
 
     /**
@@ -60,6 +61,7 @@ export class Source {
     /**
      * The base64-encoded data of the content.
      */
+    @Expose()
     data: string;
 
     constructor(type: string, mediaType: string, data: string) {
@@ -87,36 +89,43 @@ export class ContentBlock {
     /**
      * The content type can be "text", "image", "tool_use", "tool_result" or "text_delta".
      */
+    @Expose()
     type: ContentBlockType;
 
     /**
      * The source of the media content. Applicable for "image" types only.
      */
+    @Expose()
     source?: Source;
 
     /**
      * The text of the message. Applicable for "text" types only.
      */
+    @Expose()
     text?: string;
 
     /**
      * The index of the content block. Applicable only for streaming responses.
      */
+    @Expose()
     index?: number;
 
     /**
      * The id of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     id?: string;
 
     /**
      * The name of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     name?: string;
 
     /**
      * The input of the tool use. Applicable only for tool_use response.
      */
+    @Expose()
     input?: Record<string, any>;
 
     /**
@@ -128,6 +137,7 @@ export class ContentBlock {
     /**
      * The content of the tool result. Applicable only for tool_result response.
      */
+    @Expose()
     content?: string;
 
     constructor(

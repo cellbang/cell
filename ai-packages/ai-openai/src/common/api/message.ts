@@ -52,10 +52,12 @@ export class ChatCompletionFunction {
     /**
      * The name of the function.
      */
+    @Expose()
     name: string;
     /**
      * The arguments that the model expects you to pass to the function.
      */
+    @Expose()
     arguments: string;
 }
 
@@ -67,20 +69,25 @@ export class ToolCall {
      * The index of the tool call in the list of tool calls. Required in
      * case of streaming.
      */
+    @Expose()
     index?: number;
     /**
      * The ID of the tool call. This ID must be referenced when you submit
      * the tool outputs in using the Submit tool outputs to run endpoint.
      */
+    @Expose()
     id: string;
     /**
      * The type of tool call the output is required for. For now, this is
      * always function.
      */
+    @Expose()
     type: string;
     /**
      * The function definition.
      */
+    @Type(() => ChatCompletionFunction)
+    @Expose()
     function: ChatCompletionFunction;
 }
 
@@ -91,10 +98,12 @@ export class AudioOutput {
     /**
      * Unique identifier for the audio response from the model.
      */
+    @Expose()
     id?: string;
     /**
      * Audio output from the model.
      */
+    @Expose()
     data?: string;
     /**
      * When the audio content will no longer be available on the server.
@@ -104,6 +113,7 @@ export class AudioOutput {
     /**
      * Transcript of the audio output from the model.
      */
+    @Expose()
     transcript?: string;
 
     static create(id?: string, data?: string, expiresAt?: number, transcript?: string): AudioOutput {
@@ -137,10 +147,12 @@ export class InputAudio {
     /**
      * Base64 encoded audio data.
      */
+    @Expose()
     data: string;
     /**
      * The format of the encoded audio data. Currently supports "wav" and "mp3".
      */
+    @Expose()
     format: Format;
 }
 
@@ -153,10 +165,12 @@ export class ImageUrl {
      * base64 encoded image data must have a special prefix in the following
      * format: "data:{mimetype};base64,{base64-encoded-image-data}".
      */
+    @Expose()
     url: string;
     /**
      * Specifies the detail level of the image.
      */
+    @Expose()
     detail?: string;
 }
 
@@ -168,10 +182,12 @@ export class MediaContent {
     /**
      * Content type, each can be of type text or image_url.
      */
+    @Expose()
     type: string;
     /**
      * The text content of the message.
      */
+    @Expose()
     text: string;
     /**
      * The image content of the message. You can pass multiple images
@@ -225,12 +241,14 @@ export class ChatCompletionMessage {
      * The role of the messages author. Could be one of the {@link Role}
      * types.
      */
+    @Expose()
     role: Role;
     /**
      * An optional name for the participant. Provides the model information to
      * differentiate between participants of the same role. In case of Function calling,
      * the name is the function name that the message is responding to.
      */
+    @Expose()
     name?: string;
     /**
      * Tool call that this message is responding to. Only applicable for
@@ -248,6 +266,7 @@ export class ChatCompletionMessage {
      * The refusal message by the assistant. Applicable only for
      * {@link Role#ASSISTANT} role and null otherwise.
      */
+    @Expose()
     refusal?: string;
     /**
      * Audio response from the model.
