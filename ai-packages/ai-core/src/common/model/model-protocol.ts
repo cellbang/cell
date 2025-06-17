@@ -23,6 +23,7 @@ export const StreamingModel = Symbol('StreamingModel');
  */
 export interface ModelOptions {
     signal?: AbortSignal;
+    httpHeaders?: Record<string, string>;
 }
 
 /**
@@ -32,7 +33,7 @@ export interface ModelOptions {
  * version, or other relevant details that enhance understanding and management of AI
  * model outputs in various applications.
  */
-export interface ResultMetadata {}
+export interface ResultMetadata { }
 
 /**
  * Interface representing metadata associated with an AI model's response. This interface
@@ -164,7 +165,7 @@ export interface Content {
     /**
      * The metadata associated with the content.
      */
-     metadata: Record<string, any>;
+    metadata: Record<string, any>;
 
 }
 

@@ -258,7 +258,8 @@ export class OpenAIChatModel implements ChatModel {
 
     protected async internalCall(prompt: Prompt, previousChatResponse?: ChatResponse): Promise<ChatResponse> {
         const request = this.createRequest(prompt, false);
-        const completionEntity = await this.chatApi.chat(request);
+        const httpHeaders = prompt.options?.httpHeaders;
+        const completionEntity = await this.chatApi.chat(request, httpHeaders);
         const chatCompletion = completionEntity.body;
         if (!chatCompletion) {
             this.logger.warn(`No chat completion returned for prompt: ${prompt}`);
@@ -322,8 +323,8 @@ export class OpenAIChatModel implements ChatModel {
             this.logger.warn('Audio parameters are not supported for streaming requests. Removing audio parameters.');
             throw new IllegalArgumentError('Audio parameters are not supported for streaming requests.');
         }
-
-        const response = await this.chatApi.streamingChat(request);
+        const httpHeaders = prompt.options?.httpHeaders;
+        const response = await this.chatApi.streamingChat(request, httpHeaders);
 
         // For chunked responses, only the first chunk contains the choice role.
         // Subsequent chunks contain the choices.

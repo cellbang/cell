@@ -83,6 +83,7 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
      * Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities
      * of each output token returned in the 'content' of 'message'.
      */
+    @Expose()
     logprobs?: boolean;
 
     /**
