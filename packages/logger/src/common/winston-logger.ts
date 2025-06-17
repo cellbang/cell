@@ -37,26 +37,22 @@ export class WinstonLogger extends AbstractLogger {
     }
 
     error(message: string, context?: string) {
-        this.call(this.logger.error.bind(this.logger), message, context);
+        this.log(message, context, this.logger.error.bind(this.logger));
     }
 
     warn(message: string, context?: string) {
-        this.call(this.logger.warn.bind(this.logger), message, context);
+        this.log(message, context, this.logger.warn.bind(this.logger));
     }
 
     info(message: string, context?: string) {
-        this.call(this.logger.info.bind(this.logger), message, context);
+        this.log(message, context, this.logger.info.bind(this.logger));
     }
 
     debug(message: string, context?: string) {
-        this.call(this.logger.debug.bind(this.logger), message, context);
+        this.log(message, context, this.logger.debug.bind(this.logger));
     }
 
-    protected override call(logFn: (...args: any[]) => void, message: any, context?: string): void {
-        context = context ?? this.context;
-        const traceId = this.traceIdProvider?.provide();
-        const traceStr = traceId ? ` [trace: ${traceId}]` : '';
-        const contextStr = this.context ? ` [${this.context}]` : '';
-        logFn(`${traceStr}${contextStr} ${message}`);
+    protected override log(message: any, context?: string, logFn?: (...args: any[]) => void): void {
+        super.log(message, context, logFn ?? this.logger.info.bind(this.logger));
     }
 }

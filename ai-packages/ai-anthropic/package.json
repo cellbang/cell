@@ -1,6 +1,6 @@
 {
   "name": "@celljs/ai-anthropic",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "Authropic models support",
   "keywords": [
     "cell-component"
@@ -29,15 +29,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/ai-core": "3.6.4",
-    "@celljs/core": "3.6.4",
-    "@celljs/http": "3.6.4",
+    "@celljs/ai-core": "3.6.5",
+    "@celljs/core": "3.6.5",
+    "@celljs/http": "3.6.5",
     "class-transformer": "^0.5.1",
     "rxjs": "^6.6.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.4"
+    "@celljs/component": "3.6.5"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/s3",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cloud": "3.6.4",
-    "@celljs/core": "3.6.4",
+    "@celljs/cloud": "3.6.5",
+    "@celljs/core": "3.6.5",
     "aws-sdk": "^2.807.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.4"
+    "@celljs/component": "3.6.5"
   },
   "publishConfig": {
     "access": "public"

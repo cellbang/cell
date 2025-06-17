@@ -55,7 +55,8 @@ export class OllamaAPIImpl implements OllamaAPI {
     }
     async embed(embeddingsRequest: EmbeddingsRequest): Promise<ResponseEntity<EmbeddingsResponse>> {
         const { data, status, headers } = await this.restOperations
-            .post<EmbeddingsResponse>('/api/embed', instanceToPlain(embeddingsRequest, { excludeExtraneousValues: true }), { baseURL: this.baseUrl, signal: embeddingsRequest.signal });
+            .post<EmbeddingsResponse>('/api/embed',
+                instanceToPlain(embeddingsRequest, { excludeExtraneousValues: true }), { baseURL: this.baseUrl, signal: embeddingsRequest.signal });
         return {
             status,
             body: plainToInstance(EmbeddingsResponse, data),

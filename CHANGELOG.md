@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.6
+
+- feat(logger): 重构日志系统，添加时间记录功能并优化错误处理
+
 ## 3.6.5
 
 - feat(openai): 添加 httpHeaders 支持到模型请求，优化 API 调用

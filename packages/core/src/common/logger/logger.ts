@@ -7,24 +7,24 @@ import { Logger } from './logger-protocol';
 export class LoggerImpl extends AbstractLogger {
 
     error(message: any, context?: string): void {
-        this.call(console.error.bind(console), message, context);
+        this.log(message, context, console.error.bind(console));
     }
 
     info(message: any, context?: string): void {
         if (['info', 'debug'].includes(this.level)) {
-            this.call(console.info.bind(console), message, context);
+            this.log(message, context);
         }
     }
 
     warn(message: any, context?: string): void {
         if (['info', 'debug', 'warn'].includes(this.level)) {
-            this.call(console.warn.bind(console), message, context);
+            this.log(message, context, console.warn.bind(console));
         }
     }
 
     debug(message: any, context?: string): void {
         if (this.level === 'debug') {
-            this.call(console.debug.bind(console), message, context);
+            this.log(message, context, console.debug.bind(console));
         }
     }
 

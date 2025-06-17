@@ -1,6 +1,6 @@
 {
   "name": "@celljs/elasticsearch",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "",
   "keywords": [
     "cell-component"
@@ -28,12 +28,12 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.4",
+    "@celljs/core": "3.6.5",
     "@elastic/elasticsearch": "^8.2.1",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.4"
+    "@celljs/component": "3.6.5"
   },
   "publishConfig": {
     "access": "public"

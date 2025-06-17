@@ -1,6 +1,6 @@
 {
   "name": "@celljs/express-adapter",
-  "version": "3.6.4",
+  "version": "3.6.5",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.4",
-    "@celljs/web": "3.6.4",
+    "@celljs/core": "3.6.5",
+    "@celljs/web": "3.6.5",
     "express": "^4.17.1",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.4"
+    "@celljs/component": "3.6.5"
   },
   "publishConfig": {
     "access": "public"
