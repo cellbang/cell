@@ -1,6 +1,6 @@
 {
   "name": "@celljs/mvc",
-  "version": "3.6.11",
+  "version": "3.6.12",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,16 +29,16 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.11",
-    "@celljs/http": "3.6.11",
-    "@celljs/web": "3.6.11",
+    "@celljs/core": "3.6.12",
+    "@celljs/http": "3.6.12",
+    "@celljs/web": "3.6.12",
     "fs-extra": "^11.1.1",
     "mustache": "^4.2.0",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.11",
+    "@celljs/component": "3.6.12",
     "@types/mustache": "^4.2.2"
   },
   "publishConfig": {
