@@ -1,6 +1,6 @@
 {
   "name": "@celljs/rpc",
-  "version": "3.6.7",
+  "version": "3.6.8",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,15 +29,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.7",
-    "@celljs/http": "3.6.7",
-    "@celljs/web": "3.6.7",
+    "@celljs/core": "3.6.8",
+    "@celljs/http": "3.6.8",
+    "@celljs/web": "3.6.8",
     "axios": "^0.26.1",
     "tslib": "^2.8.0",
     "vscode-jsonrpc": "^6.0.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.7"
+    "@celljs/component": "3.6.8"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/oauth2-core",
-  "version": "3.6.7",
+  "version": "3.6.8",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.7",
-    "@celljs/security": "3.6.7",
-    "@celljs/web": "3.6.7",
+    "@celljs/core": "3.6.8",
+    "@celljs/security": "3.6.8",
+    "@celljs/web": "3.6.8",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.7",
+    "@celljs/component": "3.6.8",
     "@types/crypto-js": "^3.1.47",
     "@types/jexl": "^2.1.0"
   },

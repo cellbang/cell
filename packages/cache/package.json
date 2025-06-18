@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cache",
-  "version": "3.6.7",
+  "version": "3.6.8",
   "description": "cache component for cache-manager",
   "keywords": [
     "cell-component"
@@ -29,12 +29,12 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.7",
+    "@celljs/core": "3.6.8",
     "cache-manager": "^5.2.3",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.7",
+    "@celljs/component": "3.6.8",
     "@types/cache-manager": "^3.4.3"
   },
   "publishConfig": {
