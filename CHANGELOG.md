@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.10
+
+- feat(logger): 优化日志前缀和上下文字符串的解析逻辑
+
 ## 3.6.9
 
 - feat(logger): 优化 WinstonLogger 初始化逻辑，避免重复创建 logger 实例

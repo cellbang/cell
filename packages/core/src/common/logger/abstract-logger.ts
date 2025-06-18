@@ -17,13 +17,24 @@ export abstract class AbstractLogger implements Logger {
         this.context = context;
     }
 
+    protected resolveContextString(context?: string): string {
+        if (this.context) {
+            return context ? `[${this.context}] [${context}] ` : `[${this.context}] `;
+        }
+        return context ? `[${context}] ` : '';
+    }
+
+    protected resolvePrefix(context?: string): string {
+        const time = new Date().toISOString();
+        return `${time} [${this.level}]`;
+    }
+
     protected log(message: any, context?: string, logFn: (...args: any[]) => void = console.info): void {
         context = context ?? this.context;
-        const time = new Date().toISOString();
         const traceId = this.traceIdProvider?.provide();
         const traceStr = traceId ? ` [trace: ${traceId}]` : '';
-        const contextStr = this.context ? ` [${this.context}]` : '';
-        logFn(`${time} [${this.level}]${traceStr}${contextStr} ${message}`);
+        const contextStr = this.resolveContextString(context);
+        logFn(`${this.resolvePrefix(context)}${traceStr}${contextStr} ${message}`);
         onLogEmitter.fire({
             level: this.level,
             traceId,
@@ -41,7 +52,7 @@ export abstract class AbstractLogger implements Logger {
         if (start !== undefined) {
             const duration = Date.now() - start;
             this.timeRecords.delete(label);
-            this.log(`${label}: ${duration}ms`, context);
+            this.log(`${label} [${duration}ms]`, context);
             return duration;
         } else {
             this.log(`No such label: ${label} for timeEnd`, context);

@@ -58,6 +58,10 @@ export class WinstonLogger extends AbstractLogger {
         this.log(message, context, this.logger.debug.bind(this.logger));
     }
 
+    protected override resolvePrefix(context?: string): string {
+        return '';
+    }
+
     protected override log(message: any, context?: string, logFn?: (...args: any[]) => void): void {
         super.log(message, context, logFn ?? this.logger.info.bind(this.logger));
     }
