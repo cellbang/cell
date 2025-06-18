@@ -38,6 +38,7 @@ export abstract class AbstractLogger implements Logger {
         onLogEmitter.fire({
             level: this.level,
             traceId,
+            rootContext: this.context,
             context,
             message
         });

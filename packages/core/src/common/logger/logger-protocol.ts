@@ -10,6 +10,7 @@ export type LogLevel = 'verbose' | 'debug' | 'info' | 'warn' | 'error';
 export interface LogMessage {
     level: LogLevel;
     traceId?: string;
+    rootContext?: string;
     context?: string;
     message: any;
 }

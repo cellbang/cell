@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.11
+
+- feat(logger): 添加 rootContext 字段到日志消息以增强上下文信息
+
 ## 3.6.10
 
 - feat(logger): 优化日志前缀和上下文字符串的解析逻辑
