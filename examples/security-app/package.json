@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-security-app",
-  "version": "3.6.12",
+  "version": "3.6.13",
   "private": true,
   "keywords": [
     "cell-component"
@@ -20,11 +20,11 @@
     "start": "cell serve"
   },
   "dependencies": {
-    "@celljs/core": "3.6.12",
-    "@celljs/mvc": "3.6.12",
-    "@celljs/security": "3.6.12"
+    "@celljs/core": "3.6.13",
+    "@celljs/mvc": "3.6.13",
+    "@celljs/security": "3.6.13"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.12"
+    "@celljs/cli": "3.6.13"
   }
 }

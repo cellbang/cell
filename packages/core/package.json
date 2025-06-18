@@ -1,6 +1,6 @@
 {
   "name": "@celljs/core",
-  "version": "3.6.12",
+  "version": "3.6.13",
   "description": "",
   "keywords": [
     "cell-component"
@@ -44,7 +44,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.12",
+    "@celljs/component": "3.6.13",
     "@types/jexl": "^2.2.0",
     "@types/traverse": "^0.6.32"
   },

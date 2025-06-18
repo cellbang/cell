@@ -1,6 +1,6 @@
 {
   "name": "@celljs/adonis-plugin",
-  "version": "3.6.12",
+  "version": "3.6.13",
   "description": "",
   "keywords": [
     "cell-component",
@@ -30,14 +30,14 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.12",
-    "@celljs/cli-service": "3.6.12",
+    "@celljs/cli-common": "3.6.13",
+    "@celljs/cli-service": "3.6.13",
     "copy-webpack-plugin": "^9.0.0",
     "fs-extra": "^10.1.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.12"
+    "@celljs/component": "3.6.13"
   },
   "publishConfig": {
     "access": "public"
