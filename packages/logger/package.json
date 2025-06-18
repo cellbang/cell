@@ -14,13 +14,12 @@
     "url": "https://github.com/cellbang/cell.git"
   },
   "license": "MIT",
-  "main": "lib/common/index.js",
-  "typings": "lib/common/index.d.ts",
+  "main": "lib/node/index.js",
+  "typings": "lib/node/index.d.ts",
   "files": [
     "lib",
     "src",
-    "cell.yml",
-    "cell-local.yml"
+    "cell.yml"
   ],
   "scripts": {
     "build": "cell-component build",
