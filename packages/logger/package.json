@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "@celljs/core": "3.6.7",
-    "@celljs/web": "3.6.7",
     "tslib": "^2.8.0",
     "winston": "^3.10.0"
   },

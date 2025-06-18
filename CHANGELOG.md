@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.8
+
+- feat(logger): 移除不必要的 @celljs/web 依赖
+
 ## 3.6.7
 
 - feat(logger): 引入 LoggerService 实现并更新日志协议，优化日志事件处理
