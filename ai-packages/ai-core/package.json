@@ -1,6 +1,6 @@
 {
   "name": "@celljs/ai-core",
-  "version": "3.6.5",
+  "version": "3.6.6",
   "description": "Core domain for AI programming",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.5",
-    "@celljs/http": "3.6.5",
+    "@celljs/core": "3.6.6",
+    "@celljs/http": "3.6.6",
     "rxjs": "^6.6.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.5"
+    "@celljs/component": "3.6.6"
   },
   "publishConfig": {
     "access": "public"
