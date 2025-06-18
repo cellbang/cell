@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.9
+
+- feat(logger): 优化 WinstonLogger 初始化逻辑，避免重复创建 logger 实例
+
 ## 3.6.8
 
 - feat(logger): 移除不必要的 @celljs/web 依赖

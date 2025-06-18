@@ -2,6 +2,8 @@ import { Logger, LOGGER_CONFIG, Value, Component, Autowired, Optional, AbstractL
 import { WinstonConfig, RawWinstonLogger } from './winston-logger-protocol';
 import { createLogger, transports, format } from 'winston';
 
+let _logger: RawWinstonLogger;
+
 @Component({ id: Logger, rebind: true, scope: Scope.Transient })
 export class WinstonLogger extends AbstractLogger {
 
@@ -19,7 +21,11 @@ export class WinstonLogger extends AbstractLogger {
     @PostConstruct()
     protected init() {
         if (!this.logger) {
-            this.logger = createLogger({
+            if (_logger) {
+                this.logger = _logger;
+                return;
+            }
+            _logger = createLogger({
                 level: this.level,
                 format: format.combine(
                     format.timestamp(),
