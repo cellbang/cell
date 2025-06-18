@@ -1,6 +1,6 @@
 {
   "name": "@celljs/oss",
-  "version": "3.6.8",
+  "version": "3.6.9",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cloud": "3.6.8",
-    "@celljs/core": "3.6.8",
+    "@celljs/cloud": "3.6.9",
+    "@celljs/core": "3.6.9",
     "ali-oss": "^6.16.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.8",
+    "@celljs/component": "3.6.9",
     "@types/ali-oss": "^6.0.5"
   },
   "publishConfig": {

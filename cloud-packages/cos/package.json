@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cos",
-  "version": "3.6.8",
+  "version": "3.6.9",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,13 +29,13 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cloud": "3.6.8",
-    "@celljs/core": "3.6.8",
+    "@celljs/cloud": "3.6.9",
+    "@celljs/core": "3.6.9",
     "cos-nodejs-sdk-v5": "^2.8.3",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.8"
+    "@celljs/component": "3.6.9"
   },
   "publishConfig": {
     "access": "public"
