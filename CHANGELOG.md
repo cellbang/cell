@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.14
+
+- refactor(logger): 重构日志模块，移除旧的实现并重新组织代码结构
+
 ## 3.6.11
 
 - feat(logger): 添加 rootContext 字段到日志消息以增强上下文信息
