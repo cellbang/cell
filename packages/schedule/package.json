@@ -1,6 +1,6 @@
 {
   "name": "@celljs/schedule",
-  "version": "3.6.15",
+  "version": "3.6.16",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,14 +29,14 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.15",
+    "@celljs/core": "3.6.16",
     "@types/cron": "^1.7.2",
     "cron": "^1.8.2",
     "reflect-metadata": "^0.1.13",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.15"
+    "@celljs/component": "3.6.16"
   },
   "publishConfig": {
     "access": "public"

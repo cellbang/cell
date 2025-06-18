@@ -1,6 +1,6 @@
 {
   "name": "@celljs/eslint",
-  "version": "3.6.15",
+  "version": "3.6.16",
   "description": "eslint component",
   "keywords": [
     "cell-component"
@@ -28,15 +28,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.15",
+    "@celljs/cli-common": "3.6.16",
     "eslint": "^8.44.0",
     "fork-ts-checker-notifier-webpack-plugin": "^7.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.6.15",
-    "@celljs/component": "3.6.15"
+    "@celljs/cli-service": "3.6.16",
+    "@celljs/component": "3.6.16"
   },
   "publishConfig": {
     "access": "public"

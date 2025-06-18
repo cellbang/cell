@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-jwt-app",
-  "version": "3.6.15",
+  "version": "3.6.16",
   "private": true,
   "keywords": [
     "cell-component"
@@ -21,15 +21,15 @@
     "test": "cell-component test"
   },
   "dependencies": {
-    "@celljs/core": "3.6.15",
-    "@celljs/jwt": "3.6.15",
-    "@celljs/mvc": "3.6.15",
-    "@celljs/web": "3.6.15"
+    "@celljs/core": "3.6.16",
+    "@celljs/jwt": "3.6.16",
+    "@celljs/mvc": "3.6.16",
+    "@celljs/web": "3.6.16"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.15",
-    "@celljs/component": "3.6.15",
-    "@celljs/testing": "3.6.15",
+    "@celljs/cli": "3.6.16",
+    "@celljs/component": "3.6.16",
+    "@celljs/testing": "3.6.16",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   }
