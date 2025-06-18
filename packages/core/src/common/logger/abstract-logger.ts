@@ -1,10 +1,7 @@
 import { Autowired, Optional, Value } from '../annotation';
-import { Emitter } from '../utils';
-import { Logger, LOGGER_LEVEL, LogLevel, LogMessage, TraceIdProvider } from './logger-protocol';
+import { Logger, LOGGER_LEVEL, LogLevel, onLogEmitter, TraceIdProvider } from './logger-protocol';
 
 export abstract class AbstractLogger implements Logger {
-    protected readonly onLogEmitter = new Emitter<LogMessage>();
-    readonly onLog = this.onLogEmitter.event;
     protected instance: Logger;
     protected context?: string;
 
@@ -27,7 +24,7 @@ export abstract class AbstractLogger implements Logger {
         const traceStr = traceId ? ` [trace: ${traceId}]` : '';
         const contextStr = this.context ? ` [${this.context}]` : '';
         logFn(`${time} [${this.level}]${traceStr}${contextStr} ${message}`);
-        this.onLogEmitter.fire({
+        onLogEmitter.fire({
             level: this.level,
             traceId,
             context,

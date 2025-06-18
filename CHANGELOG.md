@@ -1,5 +1,9 @@
 # Change
 
+## 3.6.7
+
+- feat(logger): 引入 LoggerService 实现并更新日志协议，优化日志事件处理
+
 ## 3.6.6
 
 - feat(logger): 重构日志系统，添加时间记录功能并优化错误处理
