@@ -1,6 +1,6 @@
 {
   "name": "@celljs/static-plugin",
-  "version": "3.6.9",
+  "version": "3.6.10",
   "description": "",
   "keywords": [
     "cell-component",
@@ -30,15 +30,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.9",
-    "@celljs/cli-service": "3.6.9",
+    "@celljs/cli-common": "3.6.10",
+    "@celljs/cli-service": "3.6.10",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^9.0.0",
     "rimraf": "^3.0.2",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.9"
+    "@celljs/component": "3.6.10"
   },
   "publishConfig": {
     "access": "public"
