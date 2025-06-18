@@ -24,7 +24,7 @@ export abstract class AbstractLogger implements Logger {
         return context ? `[${context}] ` : '';
     }
 
-    protected resolvePrefix(context?: string): string {
+    protected resolvePrefix(): string {
         const time = new Date().toISOString();
         return `${time} [${this.level}]`;
     }
@@ -34,7 +34,7 @@ export abstract class AbstractLogger implements Logger {
         const traceId = this.traceIdProvider?.provide();
         const traceStr = traceId ? ` [trace: ${traceId}]` : '';
         const contextStr = this.resolveContextString(context);
-        logFn(`${this.resolvePrefix(context)}${traceStr}${contextStr} ${message}`);
+        logFn(`${this.resolvePrefix()}${traceStr}${contextStr} ${message}`);
         onLogEmitter.fire({
             level: this.level,
             traceId,
