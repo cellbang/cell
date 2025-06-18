@@ -1,6 +1,6 @@
 {
   "name": "@celljs/oauth2-client",
-  "version": "3.6.13",
+  "version": "3.6.14",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,12 +29,12 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.13",
-    "@celljs/http": "3.6.13",
-    "@celljs/oauth2-core": "3.6.13",
-    "@celljs/oauth2-jose": "3.6.13",
-    "@celljs/security": "3.6.13",
-    "@celljs/web": "3.6.13",
+    "@celljs/core": "3.6.14",
+    "@celljs/http": "3.6.14",
+    "@celljs/oauth2-core": "3.6.14",
+    "@celljs/oauth2-jose": "3.6.14",
+    "@celljs/security": "3.6.14",
+    "@celljs/web": "3.6.14",
     "axios": "^0.26.1",
     "crypto-js": "^3.1.47",
     "jose": "^4.9.3",
@@ -42,7 +42,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.13",
+    "@celljs/component": "3.6.14",
     "@types/crypto-js": "^3.1.47"
   },
   "publishConfig": {
