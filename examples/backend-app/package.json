@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-backend-app",
-  "version": "3.6.6",
+  "version": "3.6.7",
   "private": true,
   "keywords": [
     "cell-component"
@@ -21,13 +21,13 @@
     "test": "cell-component test"
   },
   "dependencies": {
-    "@celljs/core": "3.6.6",
-    "@celljs/mvc": "3.6.6"
+    "@celljs/core": "3.6.7",
+    "@celljs/mvc": "3.6.7"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.6",
-    "@celljs/component": "3.6.6",
-    "@celljs/testing": "3.6.6",
+    "@celljs/cli": "3.6.7",
+    "@celljs/component": "3.6.7",
+    "@celljs/testing": "3.6.7",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   }
