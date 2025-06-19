@@ -30,7 +30,6 @@ export abstract class AbstractLogger implements Logger {
     }
 
     protected log(message: any, context?: string, logFn: (...args: any[]) => void = console.info): void {
-        context = context ?? this.context;
         const traceId = this.traceIdProvider?.provide();
         const traceStr = traceId ? ` [trace: ${traceId}]` : '';
         const contextStr = this.resolveContextString(context);
