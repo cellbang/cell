@@ -1,6 +1,6 @@
 {
   "name": "@celljs/grommet",
-  "version": "3.6.16",
+  "version": "3.6.17",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,9 +29,9 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.16",
-    "@celljs/react": "3.6.16",
-    "@celljs/widget": "3.6.16",
+    "@celljs/core": "3.6.17",
+    "@celljs/react": "3.6.17",
+    "@celljs/widget": "3.6.17",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
@@ -46,7 +46,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.16"
+    "@celljs/component": "3.6.17"
   },
   "publishConfig": {
     "access": "public"

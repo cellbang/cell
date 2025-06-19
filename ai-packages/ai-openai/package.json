@@ -1,6 +1,6 @@
 {
   "name": "@celljs/ai-openai",
-  "version": "3.6.16",
+  "version": "3.6.17",
   "description": "OpenAI models support",
   "keywords": [
     "cell-component"
@@ -29,15 +29,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/ai-core": "3.6.16",
-    "@celljs/core": "3.6.16",
-    "@celljs/http": "3.6.16",
+    "@celljs/ai-core": "3.6.17",
+    "@celljs/core": "3.6.17",
+    "@celljs/http": "3.6.17",
     "class-transformer": "^0.5.1",
     "rxjs": "^6.6.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.16"
+    "@celljs/component": "3.6.17"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/style-guide",
-  "version": "3.6.16",
+  "version": "3.6.17",
   "description": "Cell's engineering style guide",
   "license": "MIT",
   "type": "commonjs",

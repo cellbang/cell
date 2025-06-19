@@ -1,6 +1,6 @@
 {
   "name": "@celljs/material-ui",
-  "version": "3.6.16",
+  "version": "3.6.17",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,8 +29,8 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.16",
-    "@celljs/react": "3.6.16",
+    "@celljs/core": "3.6.17",
+    "@celljs/react": "3.6.17",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
@@ -38,7 +38,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.16"
+    "@celljs/component": "3.6.17"
   },
   "publishConfig": {
     "access": "public"
