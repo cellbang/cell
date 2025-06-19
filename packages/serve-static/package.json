@@ -1,6 +1,6 @@
 {
   "name": "@celljs/serve-static",
-  "version": "3.6.17",
+  "version": "3.6.18",
   "description": "",
   "keywords": [
     "cell-component"
@@ -30,15 +30,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.17",
-    "@celljs/http": "3.6.17",
-    "@celljs/web": "3.6.17",
+    "@celljs/core": "3.6.18",
+    "@celljs/http": "3.6.18",
+    "@celljs/web": "3.6.18",
     "send": "^0.17.1",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.6.17",
-    "@celljs/component": "3.6.17",
+    "@celljs/cli-service": "3.6.18",
+    "@celljs/component": "3.6.18",
     "@types/send": "^0.17.0"
   },
   "publishConfig": {

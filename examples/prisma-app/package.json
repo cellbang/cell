@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-prisma-app",
-  "version": "3.6.17",
+  "version": "3.6.18",
   "private": true,
   "keywords": [
     "cell-component"
@@ -21,16 +21,16 @@
     "test": "cell-component test"
   },
   "dependencies": {
-    "@celljs/core": "3.6.17",
-    "@celljs/mvc": "3.6.17",
+    "@celljs/core": "3.6.18",
+    "@celljs/mvc": "3.6.18",
     "@prisma/client": "^4.4.0",
     "prisma": "^4.4.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.17",
-    "@celljs/cli-service": "3.6.17",
-    "@celljs/component": "3.6.17",
-    "@celljs/testing": "3.6.17",
+    "@celljs/cli": "3.6.18",
+    "@celljs/cli-service": "3.6.18",
+    "@celljs/component": "3.6.18",
+    "@celljs/testing": "3.6.18",
     "@types/supertest": "^2.0.12",
     "supertest": "^6.2.4"
   }
