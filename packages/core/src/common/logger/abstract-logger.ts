@@ -33,7 +33,7 @@ export abstract class AbstractLogger implements Logger {
         const traceId = this.traceIdProvider?.provide();
         const traceStr = traceId ? ` [trace: ${traceId}]` : '';
         const contextStr = this.resolveContextString(context);
-        logFn(`${this.resolvePrefix()}${traceStr}${contextStr} ${message}`);
+        logFn(`${this.resolvePrefix()}${traceStr}${contextStr}${message}`);
         onLogEmitter.fire({
             level: this.level,
             traceId,
