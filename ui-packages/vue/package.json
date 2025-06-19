@@ -1,6 +1,6 @@
 {
   "name": "@celljs/vue",
-  "version": "3.6.18",
+  "version": "3.6.19",
   "description": "",
   "keywords": [
     "cell-component"
@@ -32,8 +32,8 @@
   "dependencies": {
     "@babel/core": "^7.14.6",
     "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "@celljs/cli-common": "3.6.18",
-    "@celljs/core": "3.6.18",
+    "@celljs/cli-common": "3.6.19",
+    "@celljs/core": "3.6.19",
     "@vue/babel-plugin-jsx": "^1.0.6",
     "@vue/compiler-sfc": "^3.0.11",
     "autoprefixer": "^9.8.6",
@@ -55,8 +55,8 @@
     "vue-loader": "^17.2.2"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.6.18",
-    "@celljs/component": "3.6.18"
+    "@celljs/cli-service": "3.6.19",
+    "@celljs/component": "3.6.19"
   },
   "publishConfig": {
     "access": "public"

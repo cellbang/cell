@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-schedule",
-  "version": "3.6.18",
+  "version": "3.6.19",
   "private": true,
   "keywords": [
     "cell-component"
@@ -20,11 +20,11 @@
     "start": "cell serve"
   },
   "dependencies": {
-    "@celljs/core": "3.6.18",
-    "@celljs/schedule": "3.6.18",
-    "@celljs/web": "3.6.18"
+    "@celljs/core": "3.6.19",
+    "@celljs/schedule": "3.6.19",
+    "@celljs/web": "3.6.19"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.18"
+    "@celljs/cli": "3.6.19"
   }
 }
