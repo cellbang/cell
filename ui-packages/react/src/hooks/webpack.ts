@@ -49,7 +49,7 @@ export default async (context: WebpackContext) => {
         const { filenameHashing = true, productionSourceMap = true } = rootReactOptions;
         const shouldExtract = extract !== false && !shadowMode;
         const filename = `css/[name]${filenameHashing ? '.[contenthash:8]' : ''}.css`;
-        const cssPublicPath = './';
+        const cssPublicPath = '../';
 
         const extractOptions = Object.assign(
             {
