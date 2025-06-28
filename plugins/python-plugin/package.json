@@ -1,6 +1,6 @@
 {
   "name": "@celljs/python-plugin",
-  "version": "3.6.19",
+  "version": "3.6.20",
   "description": "",
   "keywords": [
     "cell-component",
@@ -29,7 +29,7 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.19",
+    "@celljs/cli-common": "3.6.20",
     "@iarna/toml": "^2.2.3",
     "appdirectory": "^0.1.0",
     "fs-extra": "^11.1.1",
@@ -41,7 +41,7 @@
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.19"
+    "@celljs/component": "3.6.20"
   },
   "publishConfig": {
     "access": "public"

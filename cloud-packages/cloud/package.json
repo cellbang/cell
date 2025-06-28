@@ -1,6 +1,6 @@
 {
   "name": "@celljs/cloud",
-  "version": "3.6.19",
+  "version": "3.6.20",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,11 +29,11 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.19",
+    "@celljs/core": "3.6.20",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.19"
+    "@celljs/component": "3.6.20"
   },
   "publishConfig": {
     "access": "public"

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-docker-app",
-  "version": "3.6.19",
+  "version": "3.6.20",
   "private": true,
   "keywords": [
     "cell-component"
@@ -20,13 +20,13 @@
     "start": "cell serve"
   },
   "dependencies": {
-    "@celljs/core": "3.6.19",
-    "@celljs/react": "3.6.19",
-    "@celljs/rpc": "3.6.19",
-    "@celljs/serve-static": "3.6.19",
+    "@celljs/core": "3.6.20",
+    "@celljs/react": "3.6.20",
+    "@celljs/rpc": "3.6.20",
+    "@celljs/serve-static": "3.6.20",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.19"
+    "@celljs/cli": "3.6.20"
   }
 }
