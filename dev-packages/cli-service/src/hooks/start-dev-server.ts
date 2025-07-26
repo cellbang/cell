@@ -27,8 +27,8 @@ function createCompiler(configuration: webpack.Configuration, options: any, log:
 }
 
 function getEntryPath(configuration: webpack.Configuration) {
-    const { path } = configuration.output as any;
-    return resolve(path as string, 'index.js');
+    const { path, filename } = configuration.output as any;
+    return resolve(path as string, filename ?? 'index.js');
 }
 
 function mountRuntimeModuleCaches() {
@@ -64,8 +64,8 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
             }
         });
     }
+    const entryPath = getEntryPath(configuration);
     const entryContextProvider = async () => {
-        const entryPath = getEntryPath(configuration);
         clearRuntimeModuleCaches();
         let retryCount = 30;
         while (retryCount-- > 0) {
@@ -77,7 +77,7 @@ async function attachBackendServer(ctx: ConfigurationContext, callback: Callback
         }
         throw new Error('Entry path not found after multiple retries.');
     };
-    process.send!({ type: 'entry', data: compiler.outputPath });
+    process.send!({ type: 'entry', data: entryPath });
     await callback(server.server, server.app, compiler, entryContextProvider);
 
 }
@@ -103,7 +103,7 @@ async function doStartDevServer(ctx: ConfigurationContext, configurations: webpa
         server = new Server(options, compiler);
         await server.start();
         if (frontendConfiguration && backendConfiguration) {
-           await attachBackendServer(ctx, callback, backendConfiguration, options, console);
+            await attachBackendServer(ctx, callback, backendConfiguration, options, console);
         } else if (configuration.name === BACKEND_TARGET) {
             await attachBackendServer(ctx, callback, configuration, options, console, compiler);
         }

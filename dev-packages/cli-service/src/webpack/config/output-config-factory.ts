@@ -18,7 +18,7 @@ export class OutputConfigFactory {
         if (BACKEND_TARGET === target) {    // for backend
             config
                 .output
-                    .filename('[name].js')
+                    .filename('index.js')
                     .libraryTarget('umd')
                     .devtoolModuleFilenameTemplate(dev ? '[absolute-resource-path]' : '');
         } else {

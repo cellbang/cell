@@ -1,5 +1,9 @@
 # Change
 
+## 3.7.1
+
+- fix(dev-server): 修正后端入口文件路径处理，统一使用 index.js 作为输出文件名
+
 ## 3.7.0
 
 - feat(dev-server): 新增开发服务器组件并集成到所有示例项目中
