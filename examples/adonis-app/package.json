@@ -1,6 +1,6 @@
 {
   "name": "@celljs/example-adonis-app",
-  "version": "3.6.21",
+  "version": "3.7.0",
   "private": true,
   "main": "build/server.js",
   "scripts": {

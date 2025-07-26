@@ -1,6 +1,6 @@
 {
   "name": "@celljs/component",
-  "version": "3.6.21",
+  "version": "3.7.0",
   "description": "CLI for cell component.",
   "license": "MIT",
   "bin": {
@@ -26,7 +26,7 @@
     "ext:watch:slow": "tsc -b {{TSCONFIGFILE}} -w"
   },
   "dependencies": {
-    "@celljs/style-guide": "3.6.21",
+    "@celljs/style-guide": "3.7.0",
     "@types/chai": "4.3.5",
     "@types/chai-spies": "1.0.3",
     "@types/chai-string": "^1.4.2",

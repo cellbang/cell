@@ -1,6 +1,6 @@
 {
   "name": "@celljs/puppeteer",
-  "version": "3.6.21",
+  "version": "3.7.0",
   "description": "",
   "keywords": [
     "cell-component"
@@ -30,16 +30,16 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/cli-common": "3.6.21",
-    "@celljs/cloud": "3.6.21",
-    "@celljs/core": "3.6.21",
+    "@celljs/cli-common": "3.7.0",
+    "@celljs/cloud": "3.7.0",
+    "@celljs/core": "3.7.0",
     "ora": "^5.4.1",
     "puppeteer-core": "^5.5.0",
     "tar": "^4.4.4",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.21",
+    "@celljs/component": "3.7.0",
     "@types/puppeteer-core": "^2.0.0"
   },
   "publishConfig": {

@@ -1,6 +1,6 @@
 {
   "name": "@celljs/antd",
-  "version": "3.6.21",
+  "version": "3.7.0",
   "description": "",
   "keywords": [
     "cell-component"
@@ -30,15 +30,15 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.6.21",
-    "@celljs/react": "3.6.21",
+    "@celljs/core": "3.7.0",
+    "@celljs/react": "3.7.0",
     "antd": "^4.22.6",
     "dayjs": "^1.8.22",
     "react": "^18.2.0",
     "tslib": "^2.8.0"
   },
   "devDependencies": {
-    "@celljs/component": "3.6.21"
+    "@celljs/component": "3.7.0"
   },
   "publishConfig": {
     "access": "public"
