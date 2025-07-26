@@ -27,6 +27,8 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.21"
+    "@celljs/cli": "3.6.21",
+    "@celljs/dev-server": "3.6.21"
+
   }
 }

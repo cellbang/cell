@@ -1,0 +1,16 @@
+{
+  "extends": "@celljs/style-guide/typescript",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../cli-service"
+    }
+  ]
+}

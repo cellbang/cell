@@ -33,6 +33,9 @@
       "path": "../../dev-packages/cli"
     },
     {
+      "path": "../../dev-packages/dev-server"
+    },
+    {
       "path": "../../packages/core"
     },
     {

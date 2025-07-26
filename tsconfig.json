@@ -64,6 +64,9 @@
       "path": "dev-packages/compression"
     },
     {
+      "path": "dev-packages/dev-server"
+    },
+    {
       "path": "dev-packages/eslint"
     },
     {

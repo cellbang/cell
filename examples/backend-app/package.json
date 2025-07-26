@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@celljs/cli": "3.6.21",
+    "@celljs/dev-server": "3.6.21",
     "@celljs/component": "3.6.21",
     "@celljs/testing": "3.6.21",
     "@types/supertest": "^2.0.12",

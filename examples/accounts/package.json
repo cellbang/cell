@@ -45,6 +45,7 @@
     "typeorm": "^0.3.7"
   },
   "devDependencies": {
-    "@celljs/cli": "3.6.21"
+    "@celljs/cli": "3.6.21",
+    "@celljs/dev-server": "3.6.21"
   }
 }
