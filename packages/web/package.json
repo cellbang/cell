@@ -1,6 +1,6 @@
 {
   "name": "@celljs/web",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "description": "",
   "keywords": [
     "cell-component"
@@ -29,8 +29,8 @@
     "watch": "cell-component watch"
   },
   "dependencies": {
-    "@celljs/core": "3.7.0",
-    "@celljs/http": "3.7.0",
+    "@celljs/core": "3.7.1",
+    "@celljs/http": "3.7.1",
     "@types/express": "^4.17.9",
     "body-parser": "^1.20.0",
     "class-transformer": "^0.5.1",
@@ -44,8 +44,8 @@
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {
-    "@celljs/cli-service": "3.7.0",
-    "@celljs/component": "3.7.0",
+    "@celljs/cli-service": "3.7.1",
+    "@celljs/component": "3.7.1",
     "@types/cors": "^2.8.6"
   },
   "publishConfig": {
