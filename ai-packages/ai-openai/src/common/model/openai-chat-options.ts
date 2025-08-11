@@ -1,4 +1,4 @@
-import { FunctionCallback, FunctionCallingOptions } from '@celljs/ai-core';
+import { FunctionCallback, FunctionCallingOptions, Prediction } from '@celljs/ai-core';
 import { Expose, Exclude, Type } from 'class-transformer';
 import { OpenAIModel } from '../api/openai-model';
 import { Constant } from '@celljs/core';
@@ -146,6 +146,13 @@ export class OpenAIChatOptions implements FunctionCallingOptions {
      */
     @Expose({ name: 'parallel_tool_calls' })
     parallelToolCalls?: boolean;
+
+    /**
+     * Static predicted output content, such as the content of a text file that is
+     * being regenerated.
+     */
+    @Expose()
+    prediction?: Prediction | null;
 
     /**
      * Tool Function Callbacks to register with the ChatModel.
@@ -325,6 +332,11 @@ export class OpenAIOptionsBuilder {
         } else {
             Object.assign(this.options.toolContext, context);
         }
+        return this;
+    }
+
+    withPrediction(prediction: Prediction | null): OpenAIOptionsBuilder {
+        this.options.prediction = prediction;
         return this;
     }
 
