@@ -1,6 +1,7 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import { ChatCompletionMessage } from './message';
 import { ResponseFormat } from './response-format';
+import { Prediction } from '@celljs/ai-core';
 
 export class StreamOptions {
     static INCLUDE_USAGE = new StreamOptions(true);
@@ -279,6 +280,13 @@ export class ChatCompletionRequest {
      */
     @Expose()
     user?: string;
+
+    /**
+     * Static predicted output content, such as the content of a text file that is
+     * being regenerated.
+     */
+    @Expose()
+    prediction?: Prediction | null;
 
     /**
      * An optional signal to abort the request.
